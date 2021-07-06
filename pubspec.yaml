@@ -5,7 +5,7 @@ author: smeup spa
 homepage: "https://github.com/smeup/mobile-components-library"
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.11.0 <3.0.0"
 
 dependencies:
   flutter:
