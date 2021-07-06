@@ -1,0 +1,1 @@
+# Smeup repository template
