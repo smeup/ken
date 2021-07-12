@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_interface.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
@@ -65,15 +65,20 @@ class SmeupRadioButtonsModel extends SmeupComponentModel
   SmeupRadioButtonsModel.fromMap(Map<String, dynamic> jsonMap)
       : super.fromMap(jsonMap) {
     title = jsonMap['title'] ?? '';
-    padding = getDouble(optionsDefault['padding']) ?? defaultPadding;
-    rightPadding = getDouble(optionsDefault['rightPadding']) ?? defaultPadding;
-    leftPadding = getDouble(optionsDefault['leftPadding']) ?? defaultPadding;
-    topPadding = getDouble(optionsDefault['topPadding']) ?? defaultPadding;
-    bottomPadding =
-        getDouble(optionsDefault['bottomPadding']) ?? defaultPadding;
+    padding =
+        SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
+    rightPadding = SmeupUtilities.getDouble(optionsDefault['rightPadding']) ??
+        defaultPadding;
+    leftPadding = SmeupUtilities.getDouble(optionsDefault['leftPadding']) ??
+        defaultPadding;
+    topPadding = SmeupUtilities.getDouble(optionsDefault['topPadding']) ??
+        defaultPadding;
+    bottomPadding = SmeupUtilities.getDouble(optionsDefault['bottomPadding']) ??
+        defaultPadding;
 
-    width = getDouble(optionsDefault['width']) ?? defaultWidth;
-    height = getDouble(optionsDefault['height']) ?? defaultHeight;
+    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+    height =
+        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
 
     valueField = optionsDefault['valueField'] ?? defaultValueField;
     displayedField = optionsDefault['displayedField'] ?? defaultDisplayedField;
@@ -83,7 +88,8 @@ class SmeupRadioButtonsModel extends SmeupComponentModel
 
     align = getAlignmentGeometry(optionsDefault['align']);
 
-    fontsize = getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
+    fontsize =
+        SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
 
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);

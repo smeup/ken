@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/tree_view.dart';
 
-import 'package:mobile_components_library/smeup/models_components/smeup_component_interface.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
@@ -85,22 +85,27 @@ class SmeupButtonsModel extends SmeupComponentModel
   SmeupButtonsModel.fromMap(Map<String, dynamic> jsonMap)
       : super.fromMap(jsonMap) {
     title = jsonMap['title'] ?? '';
-    padding = getDouble(optionsDefault['padding']) ?? defaultPadding;
-    width = getDouble(optionsDefault['width']) ?? defaultWidth;
-    height = getDouble(optionsDefault['height']) ?? defaultHeight;
+    padding =
+        SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
+    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+    height =
+        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     valueField = optionsDefault['valueField'] ?? '';
     position = getMainAxisAlignment(optionsDefault['position']);
-    iconSize = getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
+    iconSize =
+        SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
     if (optionsDefault['icon'] != null)
       iconData = int.tryParse(optionsDefault['icon']) ?? 0;
     else
       iconData = 0;
     align = getAlignmentGeometry(optionsDefault['align']);
 
-    fontsize = getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
-    borderRadius =
-        getDouble(optionsDefault['borderRadius']) ?? defaultBorderRadius;
-    elevation = getDouble(optionsDefault['elevation']) ?? defaultElevation;
+    fontsize =
+        SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
+    borderRadius = SmeupUtilities.getDouble(optionsDefault['borderRadius']) ??
+        defaultBorderRadius;
+    elevation = SmeupUtilities.getDouble(optionsDefault['elevation']) ??
+        defaultElevation;
 
     bold = optionsDefault['bold'] ?? true;
 

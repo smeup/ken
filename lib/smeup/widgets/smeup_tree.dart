@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/tree_view.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_tree_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_tree_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_tree_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';

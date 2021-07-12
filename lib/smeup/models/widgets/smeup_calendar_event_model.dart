@@ -15,7 +15,7 @@ class SmeupCalentarEventModel {
 
   SmeupCalentarEventModel(this.day, this.description, this.branchCode);
 
-  SmeupCalentarEventModel.fromJson(
+  SmeupCalentarEventModel.fromMap(
       dynamic fields, String titcol, String datcol, String styleColumnName) {
     this.day = DateTime.parse('${fields[datcol]} 12:00:00.000Z');
     this.description = fields['codice'];

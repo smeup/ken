@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:mobile_components_library/smeup/models_components/smeup_chart_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupChartColumn.dart';
 import 'package:mobile_components_library/smeup/models/smeupChartRow.dart';
 
@@ -10,7 +10,7 @@ class SmeupChartDatasource {
   String chartType;
   int refreshMilliseconds = -1;
 
-  SmeupChartDatasource.fromJson(
+  SmeupChartDatasource.fromMap(
       SmeupChartModel smeupChartModel, dynamic script) {
     setOptions(smeupChartModel);
 
@@ -18,11 +18,11 @@ class SmeupChartDatasource {
 
     columns = List<SmeupChartColumn>.empty(growable: true);
     jsonData['columns']
-        .forEach((c) => columns.add(SmeupChartColumn.fromJson(c)));
+        .forEach((c) => columns.add(SmeupChartColumn.fromMap(c)));
 
     rows = List<SmeupChartRow>.empty(growable: true);
     jsonData['rows']
-        .forEach((r) => rows.add(SmeupChartRow.fromJson(r, columns)));
+        .forEach((r) => rows.add(SmeupChartRow.fromMap(r, columns)));
   }
 
   SmeupChartDatasource.fromInfluxDB(

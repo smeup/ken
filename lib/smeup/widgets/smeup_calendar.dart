@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_calendar_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_calendar_event_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_event_model.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_calendar_notifier.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_widgets_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
@@ -169,7 +169,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
         if (rows != null) {
           for (final row in rows) {
             //Map fields = row['fields'];
-            final smeupEventModel = SmeupCalentarEventModel.fromJson(
+            final smeupEventModel = SmeupCalentarEventModel.fromMap(
                 row, titcol, datcol, styleColumnName);
             list.add(smeupEventModel);
           }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_calendar_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_model.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_calendar.dart';
 
 class SmeupCalendarNotifier with ChangeNotifier {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_text_field_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_text_field_model.dart';
 
 class SmeupTextNotifier with ChangeNotifier {
   List<dynamic> classes = List<dynamic>.empty(growable: true);

@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupLineModel extends SmeupComponentModel {
@@ -13,7 +13,7 @@ class SmeupLineModel extends SmeupComponentModel {
 
   SmeupLineModel.fromMap(Map<String, dynamic> jsonMap)
       : super.fromMap(jsonMap) {
-    thickness = getDouble(optionsDefault['thickness']) ?? 0;
+    thickness = SmeupUtilities.getDouble(optionsDefault['thickness']) ?? 0;
     if (optionsDefault['color'] != null) {
       color = SmeupUtilities.getColorFromRGB(optionsDefault['color']);
     }

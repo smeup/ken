@@ -1,33 +1,156 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_label_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_label_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_label_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_label_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:provider/provider.dart';
 import '../notifiers/smeup_widgets_notifier.dart';
 
+// ignore: must_be_immutable
 class SmeupLabel extends StatefulWidget {
-  final SmeupLabelModel smeupLabelModel;
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
+  SmeupLabelModel smeupLabelModel;
+  GlobalKey<ScaffoldState> scaffoldKey;
+  GlobalKey<FormState> formKey;
 
-  SmeupLabel(
+  double padding;
+  double fontSize;
+  double iconSize;
+  Alignment align;
+  bool fontbold;
+  double width;
+  double height;
+  dynamic clientData;
+  String valueColName;
+  String colorColName;
+  String colorFontColName;
+  int iconData;
+  String iconColname;
+  Color backColor;
+  Color fontColor;
+  String title;
+
+  SmeupLabel.withController(
     this.smeupLabelModel,
     this.scaffoldKey,
     this.formKey,
-  );
+  ) {
+    setUIProperties();
+  }
+
+  SmeupLabel(this.scaffoldKey, this.formKey,
+      {this.valueColName = '',
+      this.padding = SmeupLabelModel.defaultPadding,
+      this.fontSize = SmeupLabelModel.defaultFontSize,
+      this.align = SmeupLabelModel.defaultAlign,
+      this.fontbold = SmeupLabelModel.defaultFontbold,
+      this.width = SmeupLabelModel.defaultWidth,
+      this.height = SmeupLabelModel.defaultHeight,
+      this.clientData,
+      this.colorColName = '',
+      this.backColor,
+      this.fontColor,
+      this.iconData = 0,
+      this.iconColname = '',
+      this.colorFontColName = '',
+      this.iconSize = SmeupLabelModel.defaultIconSize,
+      this.title = ''}) {
+    this.smeupLabelModel = SmeupLabelModel(
+        valueColName: valueColName,
+        padding: padding,
+        fontSize: fontSize,
+        align: align,
+        fontbold: fontbold,
+        width: width,
+        height: height,
+        clientData: clientData,
+        colorColName: colorColName,
+        backColor: backColor,
+        fontColor: fontColor,
+        iconData: iconData,
+        iconColname: iconColname,
+        colorFontColName: colorFontColName,
+        iconSize: iconSize,
+        title: title);
+  }
+
+  setUIProperties() {
+    smeupLabelModel.valueColName =
+        smeupLabelModel.optionsDefault['valueColName'] ?? '';
+    smeupLabelModel.colorColName =
+        smeupLabelModel.optionsDefault['colorColName'] ?? '';
+    smeupLabelModel.colorFontColName =
+        smeupLabelModel.optionsDefault['colorFontColName'] ?? '';
+    smeupLabelModel.padding =
+        SmeupUtilities.getDouble(smeupLabelModel.optionsDefault['padding']) ??
+            SmeupLabelModel.defaultPadding;
+    smeupLabelModel.fontSize =
+        SmeupUtilities.getDouble(smeupLabelModel.optionsDefault['fontSize']) ??
+            SmeupLabelModel.defaultFontSize;
+    smeupLabelModel.iconSize =
+        SmeupUtilities.getDouble(smeupLabelModel.optionsDefault['iconSize']) ??
+            SmeupLabelModel.defaultIconSize;
+    smeupLabelModel.align = smeupLabelModel
+        .getAlignmentGeometry(smeupLabelModel.optionsDefault['align']);
+    smeupLabelModel.width =
+        SmeupUtilities.getDouble(smeupLabelModel.optionsDefault['width']) ??
+            SmeupLabelModel.defaultWidth;
+    smeupLabelModel.height =
+        SmeupUtilities.getDouble(smeupLabelModel.optionsDefault['height']) ??
+            SmeupLabelModel.defaultHeight;
+    smeupLabelModel.title = smeupLabelModel.jsonMap['title'] ?? '';
+    if (smeupLabelModel.optionsDefault['backColor'] != null) {
+      smeupLabelModel.backColor = SmeupUtilities.getColorFromRGB(
+          smeupLabelModel.optionsDefault['backColor']);
+    }
+    if (smeupLabelModel.optionsDefault['fontColor'] != null) {
+      smeupLabelModel.fontColor = SmeupUtilities.getColorFromRGB(
+          smeupLabelModel.optionsDefault['fontColor']);
+    }
+    if (smeupLabelModel.optionsDefault['icon'] != null)
+      smeupLabelModel.iconData =
+          int.tryParse(smeupLabelModel.optionsDefault['icon']) ?? 0;
+    else
+      smeupLabelModel.iconData = 0;
+    smeupLabelModel.iconColname =
+        smeupLabelModel.optionsDefault['iconColName'] ?? '';
+    if (smeupLabelModel.optionsDefault['fontBold'] == null) {
+      smeupLabelModel.fontbold = SmeupLabelModel.defaultFontbold;
+    } else {
+      if (smeupLabelModel.optionsDefault['fontBold'] is bool)
+        smeupLabelModel.fontbold = smeupLabelModel.optionsDefault['fontBold'];
+      else if (smeupLabelModel.optionsDefault['fontBold'] == 'Yes')
+        smeupLabelModel.fontbold = true;
+      else
+        smeupLabelModel.fontbold = false;
+    }
+  }
 
   @override
   _SmeupLabelState createState() => _SmeupLabelState();
 }
 
 class _SmeupLabelState extends State<SmeupLabel> {
+  SmeupLabelModel smeupLabelModel;
+
+  @override
+  void initState() {
+    smeupLabelModel = widget.smeupLabelModel;
+
+    Future.delayed(Duration(seconds: 0), () async {
+      smeupLabelModel.data = await SmeupLabelDao.getData(smeupLabelModel);
+    });
+
+    super.initState();
+  }
+
   @override
   void dispose() {
     SmeupWidgetsNotifier.removeWidget(
-        widget.scaffoldKey.hashCode, widget.smeupLabelModel.id);
+        widget.scaffoldKey.hashCode, smeupLabelModel.id);
     super.dispose();
   }
 
@@ -38,7 +161,7 @@ class _SmeupLabelState extends State<SmeupLabel> {
         Provider.of<SmeupLabelNotifier>(context);
 
     var label = FutureBuilder<SmeupWidgetBuilderResponse>(
-      future: _getLabelComponent(widget.smeupLabelModel),
+      future: _getLabelComponent(smeupLabelModel),
       builder: (BuildContext context,
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -48,7 +171,7 @@ class _SmeupLabelState extends State<SmeupLabel> {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupLabel: ${snapshot.error}',
                 logType: LogType.error);
-            widget.smeupLabelModel.notifyError(context, snapshot.error);
+            smeupLabelModel.notifyError(context, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;
@@ -58,7 +181,7 @@ class _SmeupLabelState extends State<SmeupLabel> {
     );
 
     SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
-        widget.smeupLabelModel.id, widget.smeupLabelModel.type, notifier);
+        smeupLabelModel.id, smeupLabelModel.type, notifier);
     return label;
   }
 
@@ -66,7 +189,8 @@ class _SmeupLabelState extends State<SmeupLabel> {
       SmeupLabelModel smeupLabelModel) async {
     Widget children;
 
-    await smeupLabelModel.setData();
+    //await smeupLabelModel.setData();
+    await new Future.delayed(const Duration(seconds: 1));
 
     if (!smeupLabelModel.hasData()) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -228,19 +352,4 @@ class _SmeupLabelState extends State<SmeupLabel> {
 
     return SmeupWidgetBuilderResponse(smeupLabelModel, SmeupNotAvailable());
   }
-
-  // MainAxisAlignment _maxAlignFromAlignment(Alignment alignment) {
-  //   switch (alignment.toString()) {
-  //     case "centerLeft":
-  //       return MainAxisAlignment.end;
-  //     case "centerRight":
-  //       return MainAxisAlignment.start;
-  //     case "centerRight":
-  //       return MainAxisAlignment.start;
-  //     case "centerRight":
-  //       return MainAxisAlignment.start;
-  //     default:
-  //       return MainAxisAlignment.center;
-  //   }
-  // }
 }

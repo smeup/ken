@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_buttons_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 
 class SmeupButton extends StatelessWidget {
   final IconData icon;

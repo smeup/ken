@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
 
 class SmeupDrawerModel extends SmeupComponentModel {
   static const double defaultWidth = 40;

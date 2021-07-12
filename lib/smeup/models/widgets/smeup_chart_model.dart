@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:mobile_components_library/smeup/models_components/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
 
 class SmeupChartModel extends SmeupComponentModel {
   SmeupChartModel({title = ''}) : super(title: title) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_line_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_line_model.dart';
 
 class SmeupLine extends StatelessWidget {
   final SmeupLineModel smeupLineModel;

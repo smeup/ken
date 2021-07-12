@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:mobile_components_library/smeup/models_components/smeup_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 
 class SmeupBaseNotifier {

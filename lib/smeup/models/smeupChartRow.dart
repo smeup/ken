@@ -23,7 +23,7 @@ class SmeupChartRow {
     }
   }
 
-  SmeupChartRow.fromJson(Map<String, dynamic> jsonMap, this._columns) {
+  SmeupChartRow.fromMap(Map<String, dynamic> jsonMap, this._columns) {
     cells = List<dynamic>.empty(growable: true);
     for (SmeupChartColumn col in _columns) {
       cells.add(

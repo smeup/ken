@@ -1,21 +1,21 @@
-import 'package:mobile_components_library/smeup/models_components/smeup_buttons_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_calendar_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_chart_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_dashboard_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_form_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_gauge_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_image_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_input_field_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_label_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_line_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_list_box_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_model_mixin.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_qrcode_reader_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_radio_buttons_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_text_field_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_timepicker_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_tree_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_dashboard_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_form_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_gauge_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_image_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_input_field_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_label_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_line_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_list_box_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model_mixin.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_qrcode_reader_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_text_field_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_tree_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 
@@ -28,7 +28,7 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
   int selectedTabIndex;
   String selectedTabColName;
 
-  SmeupSectionModel.fromJson(Map<String, dynamic> jsonMap)
+  SmeupSectionModel.fromMap(Map<String, dynamic> jsonMap)
       : super.fromMap(jsonMap) {
     String tmp = jsonMap['dim'] ?? '';
     tmp = tmp.replaceAll('%', '');

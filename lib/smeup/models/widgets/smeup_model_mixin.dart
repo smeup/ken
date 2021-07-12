@@ -1,4 +1,4 @@
-import 'package:mobile_components_library/smeup/models_components/smeup_section_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 
 class SmeupModelMixin {
   List<SmeupSectionModel> getSections(jsonMap, sectionName) {
@@ -11,7 +11,7 @@ class SmeupModelMixin {
 
     if (sectionsJson != null)
       sectionsJson.forEach((v) {
-        SmeupSectionModel smeupSectionModel = SmeupSectionModel.fromJson(v);
+        SmeupSectionModel smeupSectionModel = SmeupSectionModel.fromMap(v);
         smeupSectionsModels.add(smeupSectionModel);
       });
 

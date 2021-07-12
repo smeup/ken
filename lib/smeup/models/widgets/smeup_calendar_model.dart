@@ -1,6 +1,7 @@
 import 'dart:math';
 
-import 'package:mobile_components_library/smeup/models_components/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupCalendarModel extends SmeupComponentModel {
   static const double defaultWidth = 0;
@@ -34,11 +35,12 @@ class SmeupCalendarModel extends SmeupComponentModel {
     titcol = optionsDefault['titcol'] ?? '';
     datcol = optionsDefault['datcol'] ?? '';
     showPeriodButtons = optionsDefault['showPeriodButtons'] ?? false;
-    width = getDouble(optionsDefault['width']) ?? defaultWidth;
-    height = getDouble(optionsDefault['height']) ?? defaultHeight;
-    eventFontSize =
-        getDouble(optionsDefault['eventFontSize']) ?? defaultEventFontSize;
-    titleFontSize =
-        getDouble(optionsDefault['titleFontSize']) ?? defaultTitleFontSize;
+    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+    height =
+        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+    eventFontSize = SmeupUtilities.getDouble(optionsDefault['eventFontSize']) ??
+        defaultEventFontSize;
+    titleFontSize = SmeupUtilities.getDouble(optionsDefault['titleFontSize']) ??
+        defaultTitleFontSize;
   }
 }

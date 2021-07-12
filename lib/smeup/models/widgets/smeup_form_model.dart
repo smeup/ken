@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_interface.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_model.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_model_mixin.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_section_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model_mixin.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
@@ -36,11 +36,16 @@ class SmeupFormModel extends SmeupModel
   SmeupFormModel.fromMap(response) : super.fromMap(response) {
     Map<String, dynamic> jsonMap = response;
 
-    padding = getDouble(optionsType['padding']) ?? defaultPadding;
-    rightPadding = getDouble(optionsType['rightPadding']) ?? defaultPadding;
-    leftPadding = getDouble(optionsType['leftPadding']) ?? defaultPadding;
-    topPadding = getDouble(optionsType['topPadding']) ?? defaultPadding;
-    bottomPadding = getDouble(optionsType['bottomPadding']) ?? defaultPadding;
+    padding =
+        SmeupUtilities.getDouble(optionsType['padding']) ?? defaultPadding;
+    rightPadding =
+        SmeupUtilities.getDouble(optionsType['rightPadding']) ?? defaultPadding;
+    leftPadding =
+        SmeupUtilities.getDouble(optionsType['leftPadding']) ?? defaultPadding;
+    topPadding =
+        SmeupUtilities.getDouble(optionsType['topPadding']) ?? defaultPadding;
+    bottomPadding = SmeupUtilities.getDouble(optionsType['bottomPadding']) ??
+        defaultPadding;
     if (optionsType['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsType['backColor']);
     } else {

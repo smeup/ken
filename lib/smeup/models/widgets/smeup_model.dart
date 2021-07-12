@@ -6,6 +6,7 @@ import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 abstract class SmeupModel {
   static const int defaultRefresh = 0;
 
+  dynamic jsonMap;
   dynamic data;
   String type;
   String id;
@@ -28,6 +29,7 @@ abstract class SmeupModel {
   }
 
   SmeupModel.fromMap(Map<String, dynamic> jsonMap) {
+    this.jsonMap = jsonMap;
     type = jsonMap['type'];
     dynamisms = jsonMap['dynamisms'];
     if (type != null) {
@@ -55,18 +57,6 @@ abstract class SmeupModel {
 
   bool hasData() {
     return data != null;
-  }
-
-  double getDouble(dynamic value) {
-    if (value is double) {
-      return value;
-    } else if (value is String) {
-      return double.tryParse(value);
-    }
-    if (value is int) {
-      return value.toDouble();
-    }
-    return value;
   }
 
   int getInt(dynamic value) {

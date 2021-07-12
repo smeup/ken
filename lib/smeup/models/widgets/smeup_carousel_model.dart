@@ -1,9 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_interface.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupCaurouselModel extends SmeupComponentModel
     implements SmeupDataInterface {
@@ -24,7 +25,8 @@ class SmeupCaurouselModel extends SmeupComponentModel
   }
 
   SmeupCaurouselModel.fromMap(Map jsonMap) : super.fromMap(jsonMap) {
-    height = getDouble(optionsDefault['height']) ?? defaultHeight;
+    height =
+        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     autoPlay = optionsDefault['autoPlay'] ?? false;
     SmeupDataService.incrementDataFetch(id);
   }

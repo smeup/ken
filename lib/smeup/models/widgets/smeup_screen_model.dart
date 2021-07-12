@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_interface.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 
 class SmeupScreenModel extends SmeupModel implements SmeupDataInterface {
@@ -10,8 +10,6 @@ class SmeupScreenModel extends SmeupModel implements SmeupDataInterface {
   SmeupScreenModel(this.context, SmeupFun smeupFun) {
     this.smeupFun = smeupFun;
   }
-
-  //SmeupRootModel.fromJson(response) : super.fromMap(response);
 
   @override
   setData() async {

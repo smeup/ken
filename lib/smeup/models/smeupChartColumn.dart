@@ -6,7 +6,7 @@ class SmeupChartColumn {
 
   SmeupChartColumn.fromInfluxDB(this.name, this.title, this.size);
 
-  SmeupChartColumn.fromJson(Map<String, dynamic> jsonMap) {
+  SmeupChartColumn.fromMap(Map<String, dynamic> jsonMap) {
     fill = jsonMap['fill'];
     name = jsonMap['code'];
     title = jsonMap['text'];

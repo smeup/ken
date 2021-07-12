@@ -1,13 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_interface.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_model.dart';
+import 'package:flutter_treeview/tree_view.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
-class SmeupInputFieldModel extends SmeupComponentModel
+class SmeupTextFieldModel extends SmeupComponentModel
     implements SmeupDataInterface {
   static const double defaultFontsize = 16.0;
   static const String defaultLabel = '';
@@ -28,7 +29,7 @@ class SmeupInputFieldModel extends SmeupComponentModel
   bool showUnderline;
   bool autoFocus;
 
-  SmeupInputFieldModel(
+  SmeupTextFieldModel(
       {this.backColor,
       this.fontsize = defaultFontsize,
       this.label = defaultLabel,
@@ -47,16 +48,19 @@ class SmeupInputFieldModel extends SmeupComponentModel
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupInputFieldModel.fromMap(Map<String, dynamic> jsonMap)
+  SmeupTextFieldModel.fromMap(Map<String, dynamic> jsonMap)
       : super.fromMap(jsonMap) {
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
     }
-    fontsize = getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
+    fontsize =
+        SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
     label = optionsDefault['label'] ?? defaultLabel;
-    padding = getDouble(optionsDefault['padding']) ?? defaultPadding;
-    width = getDouble(optionsDefault['width']) ?? defaultWidth;
-    height = getDouble(optionsDefault['height']) ?? defaultHeight;
+    padding =
+        SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
+    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+    height =
+        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     showUnderline = optionsDefault['showUnderline'] ?? true;
     autoFocus = optionsDefault['autoFocus'] ?? false;
     if (optionsDefault['showborder'] == null) {
@@ -79,7 +83,15 @@ class SmeupInputFieldModel extends SmeupComponentModel
         return;
       }
 
-      data = smeupServiceResponse.result.data;
+      List rows = smeupServiceResponse.result.data['rows'];
+      if (smeupFun.fun['fun']['component'] == 'TRE') {
+        final String fieldName = 'codice';
+        optionsDefault['valueField'] = fieldName;
+        String value = (rows[0] as Node).data[fieldName];
+        data = _getClientDataStructure(value, fieldName: fieldName);
+      } else {
+        data = smeupServiceResponse.result.data;
+      }
     }
 
     if (clientData != null) {
@@ -88,8 +100,8 @@ class SmeupInputFieldModel extends SmeupComponentModel
     SmeupDataService.decrementDataFetch(id);
   }
 
-  SmeupInputFieldModel clone() {
-    return SmeupInputFieldModel(
+  SmeupTextFieldModel clone() {
+    return SmeupTextFieldModel(
         backColor: backColor,
         fontsize: fontsize,
         label: label,
@@ -101,12 +113,13 @@ class SmeupInputFieldModel extends SmeupComponentModel
         showUnderline: showUnderline);
   }
 
-  dynamic _getClientDataStructure(data) {
+  dynamic _getClientDataStructure(String fieldData,
+      {String fieldName = 'value'}) {
     if (optionsDefault == null) {
       return {
         "rows": [
           {
-            'value': data,
+            fieldName: fieldData,
           }
         ],
       };
@@ -116,7 +129,7 @@ class SmeupInputFieldModel extends SmeupComponentModel
           return {
             "rows": [
               {
-                'value': data,
+                fieldName: fieldData,
               }
             ],
           };

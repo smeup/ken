@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speedometer/flutter_speedometer.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_gauge_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_gauge_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_gauge_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';

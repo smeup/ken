@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_chart_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_model.dart';
 import 'package:mobile_components_library/smeup/models/smeup_graph_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupChartDatasource.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
@@ -79,7 +79,7 @@ class _SmeupChartState extends State<SmeupChart> {
 
     var smeupChartDatasource;
 
-    smeupChartDatasource = SmeupChartDatasource.fromJson(
+    smeupChartDatasource = SmeupChartDatasource.fromMap(
         smeupChartModel, smeupServiceResponse.result.data);
 
     // TODOO: refresh

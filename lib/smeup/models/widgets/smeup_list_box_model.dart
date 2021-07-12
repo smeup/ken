@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_interface.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 enum SmeupListType { simple, oriented, wheel }
 
@@ -68,12 +69,17 @@ class SmeupListBoxModel extends SmeupComponentModel
       portraitColumns = 0;
       landscapeColumns = 0;
     }
-    padding = getDouble(optionsDefault['padding']) ?? defaultPadding;
-    paddingRight = getDouble(optionsDefault['paddingRight']) ?? defaultPadding;
-    paddingLeft = getDouble(optionsDefault['paddingLeft']) ?? defaultPadding;
-    width = getDouble(optionsDefault['width']) ?? defaultWidth;
-    height = getDouble(optionsDefault['height']) ?? defaultHeight;
-    listHeight = getDouble(optionsDefault['listHeight']) ?? defaultListHeight;
+    padding =
+        SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
+    paddingRight = SmeupUtilities.getDouble(optionsDefault['paddingRight']) ??
+        defaultPadding;
+    paddingLeft = SmeupUtilities.getDouble(optionsDefault['paddingLeft']) ??
+        defaultPadding;
+    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+    height =
+        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+    listHeight = SmeupUtilities.getDouble(optionsDefault['listHeight']) ??
+        defaultListHeight;
     listType = decodeListType(optionsDefault['listType']);
     orientation = response['orientation'] == 'horizontal'
         ? Axis.horizontal

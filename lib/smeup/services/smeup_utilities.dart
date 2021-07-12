@@ -54,4 +54,16 @@ class SmeupUtilities {
     }
     return (int.tryParse(s) ?? null) != null;
   }
+
+  static double getDouble(dynamic value) {
+    if (value is double) {
+      return value;
+    } else if (value is String) {
+      return double.tryParse(value);
+    }
+    if (value is int) {
+      return value.toDouble();
+    }
+    return value;
+  }
 }

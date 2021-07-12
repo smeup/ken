@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_interface.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
@@ -52,12 +52,15 @@ class SmeupDashboardModel extends SmeupComponentModel
     valueColName = optionsDefault['valueColName'] ?? '';
     forceText = optionsDefault['forceText'] ?? '';
     forceValue = optionsDefault['forceValue'] ?? 0;
-    width = getDouble(optionsDefault['width']) ?? defaultWidth;
-    height = getDouble(optionsDefault['height']) ?? defaultHeight;
-    fontsize = getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
-    iconSize = getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
-    labelFontsize =
-        getDouble(optionsDefault['labelFontSize']) ?? defaultLabelFontsize;
+    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+    height =
+        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+    fontsize =
+        SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
+    iconSize =
+        SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
+    labelFontsize = SmeupUtilities.getDouble(optionsDefault['labelFontSize']) ??
+        defaultLabelFontsize;
     if (optionsDefault['forceIcon'] != null)
       forceIcon = int.tryParse(optionsDefault['forceIcon']) ?? 0;
     else

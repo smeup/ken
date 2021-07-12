@@ -1,7 +1,8 @@
 import 'dart:math';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_interface.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupQRCodeReaderModel extends SmeupComponentModel
     implements SmeupDataInterface {
@@ -30,8 +31,9 @@ class SmeupQRCodeReaderModel extends SmeupComponentModel
 
   SmeupQRCodeReaderModel.fromMap(Map<String, dynamic> jsonMap)
       : super.fromMap(jsonMap) {
-    padding = getDouble(optionsDefault['padding']) ?? defaultPadding;
-    size = getDouble(optionsDefault['height']) ?? defaultSize;
+    padding =
+        SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
+    size = SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultSize;
     title = jsonMap['title'] ?? '';
 
     SmeupDataService.incrementDataFetch(id);

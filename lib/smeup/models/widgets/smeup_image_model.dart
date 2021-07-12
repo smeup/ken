@@ -1,8 +1,9 @@
 import 'dart:math';
 
-import 'package:mobile_components_library/smeup/models_components/smeup_component_interface.dart';
-import 'package:mobile_components_library/smeup/models_components/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupImageModel extends SmeupComponentModel
     implements SmeupDataInterface {
@@ -36,13 +37,17 @@ class SmeupImageModel extends SmeupComponentModel
 
   SmeupImageModel.fromMap(Map<String, dynamic> jsonMap)
       : super.fromMap(jsonMap) {
-    width = getDouble(jsonMap['width']) ?? defaultWidth;
-    height = getDouble(jsonMap['height']) ?? defaultHeight;
-    padding = getDouble(jsonMap['padding']) ?? defaultPadding;
-    rightPadding = getDouble(jsonMap['rightPadding']) ?? defaultPadding;
-    leftPadding = getDouble(jsonMap['leftPadding']) ?? defaultPadding;
-    topPadding = getDouble(jsonMap['topPadding']) ?? defaultPadding;
-    bottomPadding = getDouble(jsonMap['bottomPadding']) ?? defaultPadding;
+    width = SmeupUtilities.getDouble(jsonMap['width']) ?? defaultWidth;
+    height = SmeupUtilities.getDouble(jsonMap['height']) ?? defaultHeight;
+    padding = SmeupUtilities.getDouble(jsonMap['padding']) ?? defaultPadding;
+    rightPadding =
+        SmeupUtilities.getDouble(jsonMap['rightPadding']) ?? defaultPadding;
+    leftPadding =
+        SmeupUtilities.getDouble(jsonMap['leftPadding']) ?? defaultPadding;
+    topPadding =
+        SmeupUtilities.getDouble(jsonMap['topPadding']) ?? defaultPadding;
+    bottomPadding =
+        SmeupUtilities.getDouble(jsonMap['bottomPadding']) ?? defaultPadding;
     title = jsonMap['title'] ?? '';
     SmeupDataService.incrementDataFetch(id);
   }
