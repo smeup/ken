@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_label_dao.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_label_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_label_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 import '../notifiers/smeup_widgets_notifier.dart';
 
 // ignore: must_be_immutable
-class SmeupLabel extends StatefulWidget {
+class SmeupLabel extends StatefulWidget
+    with SmeupWidgetMixin
+    implements SmeupWidgetInterface {
   SmeupLabelModel smeupLabelModel;
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
@@ -38,7 +43,7 @@ class SmeupLabel extends StatefulWidget {
     this.scaffoldKey,
     this.formKey,
   ) {
-    setUIProperties();
+    runControllerActivities();
   }
 
   SmeupLabel(this.scaffoldKey, this.formKey,
@@ -77,7 +82,9 @@ class SmeupLabel extends StatefulWidget {
         title: title);
   }
 
-  setUIProperties() {
+  @override
+  runControllerActivities() {
+    //print('setUIProperties in label');
     smeupLabelModel.valueColName =
         smeupLabelModel.optionsDefault['valueColName'] ?? '';
     smeupLabelModel.colorColName =
@@ -133,17 +140,14 @@ class SmeupLabel extends StatefulWidget {
   _SmeupLabelState createState() => _SmeupLabelState();
 }
 
-class _SmeupLabelState extends State<SmeupLabel> {
+class _SmeupLabelState extends State<SmeupLabel>
+    with SmeupWidgetStateMixin
+    implements SmeupWidgetStateInterface {
   SmeupLabelModel smeupLabelModel;
 
   @override
   void initState() {
     smeupLabelModel = widget.smeupLabelModel;
-
-    Future.delayed(Duration(seconds: 0), () async {
-      smeupLabelModel.data = await SmeupLabelDao.getData(smeupLabelModel);
-    });
-
     super.initState();
   }
 
@@ -160,49 +164,25 @@ class _SmeupLabelState extends State<SmeupLabel> {
     final SmeupLabelNotifier notifier =
         Provider.of<SmeupLabelNotifier>(context);
 
-    var label = FutureBuilder<SmeupWidgetBuilderResponse>(
-      future: _getLabelComponent(smeupLabelModel),
-      builder: (BuildContext context,
-          AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Container();
-        } else {
-          if (snapshot.hasError) {
-            SmeupLogService.writeDebugMessage(
-                'Error SmeupLabel: ${snapshot.error}',
-                logType: LogType.error);
-            smeupLabelModel.notifyError(context, snapshot.error);
-            return SmeupNotAvailable();
-          } else {
-            return snapshot.data.children;
-          }
-        }
-      },
-    );
+    Widget label = runBuild(context, smeupLabelModel);
 
     SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
         smeupLabelModel.id, smeupLabelModel.type, notifier);
     return label;
   }
 
-  Future<SmeupWidgetBuilderResponse> _getLabelComponent(
-      SmeupLabelModel smeupLabelModel) async {
-    Widget children;
-
+  Future<SmeupWidgetBuilderResponse> getChildren() async {
     //await smeupLabelModel.setData();
-    await new Future.delayed(const Duration(seconds: 1));
+    if (!smeupLabelModel.loaded) {
+      smeupLabelModel.data = await SmeupLabelDao.getData(smeupLabelModel);
+      smeupLabelModel.loaded = true;
+    }
 
     if (!smeupLabelModel.hasData()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-              'Dati non disponibili.  (${smeupLabelModel.smeupFun.fun['fun']['function']})'),
-          backgroundColor: SmeupOptions.theme.errorColor,
-        ),
-      );
-
-      return SmeupWidgetBuilderResponse(smeupLabelModel, SmeupNotAvailable());
+      return getFunErrorResponse(context, smeupLabelModel);
     }
+
+    Widget children;
 
     List<Align> alignes = List<Align>.empty(growable: true);
     double padding = smeupLabelModel.padding;

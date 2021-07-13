@@ -26,7 +26,7 @@ class SmeupDynamicScreen extends StatefulWidget {
   static Function onPop =
       (String formId, GlobalKey<ScaffoldState> scaffoldKey) {
     SmeupDynamismService.currentScaffoldKey = scaffoldKey;
-    print('ci');
+    //print('ci');
     return;
   };
   static Function onBuild = (String formId) {
