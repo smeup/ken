@@ -3,8 +3,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_model
 import 'package:mobile_components_library/smeup/models/smeup_graph_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupChartDatasource.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_chart_notifier.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_widgets_notifier.dart';
+import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_service_response.dart';
@@ -27,16 +26,16 @@ class SmeupChart extends StatefulWidget {
 class _SmeupChartState extends State<SmeupChart> {
   @override
   void dispose() {
-    SmeupWidgetsNotifier.removeWidget(
-        widget.scaffoldKey.hashCode, widget.smeupChartModel.id);
+    // SmeupWidgetsNotifier.removeWidget(
+    //     widget.scaffoldKey.hashCode, widget.smeupChartModel.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final SmeupChartNotifier notifier =
-        Provider.of<SmeupChartNotifier>(context);
+    final SmeupWidgetNotifier notifier =
+        Provider.of<SmeupWidgetNotifier>(context);
 
     final chart = FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getChartComponent(widget.smeupChartModel),
@@ -58,8 +57,8 @@ class _SmeupChartState extends State<SmeupChart> {
       },
     );
 
-    SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
-        widget.smeupChartModel.id, widget.smeupChartModel.type, notifier);
+    // SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
+    //     widget.smeupChartModel.id, widget.smeupChartModel.type, notifier);
     return chart;
   }
 

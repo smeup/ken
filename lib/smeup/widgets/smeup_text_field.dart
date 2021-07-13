@@ -4,13 +4,12 @@ import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_field_model.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_text_notifier.dart';
+import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_buttons.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:provider/provider.dart';
-import '../notifiers/smeup_widgets_notifier.dart';
 import 'smeup_not_available.dart';
 
 class SmeupTextField extends StatefulWidget {
@@ -37,26 +36,23 @@ class SmeupTextField extends StatefulWidget {
 class _SmeupTextFieldState extends State<SmeupTextField> {
   @override
   void dispose() {
-    SmeupWidgetsNotifier.removeWidget(
-        widget.scaffoldKey.hashCode, widget.smeupInputFieldModel.id);
+    // SmeupWidgetsNotifier.removeWidget(
+    //     widget.scaffoldKey.hashCode, widget.smeupInputFieldModel.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final SmeupTextNotifier notifier = Provider.of<SmeupTextNotifier>(context);
-    notifier.classes.removeWhere(
+    final SmeupWidgetNotifier notifier =
+        Provider.of<SmeupWidgetNotifier>(context);
+    notifier.objects.removeWhere(
         (element) => element['id'] == widget.smeupInputFieldModel.id);
-    notifier.classes.add({
+    notifier.objects.add({
       'id': widget.smeupInputFieldModel.id,
       'model': widget.smeupInputFieldModel,
       'notifierFunction': () {
-        setState(() {
-          SmeupLogService.writeDebugMessage(
-              'notified ${widget.smeupInputFieldModel.type}: ${widget.smeupInputFieldModel.id}',
-              logType: LogType.info);
-        });
+        setState(() {});
       }
     });
 
@@ -82,11 +78,11 @@ class _SmeupTextFieldState extends State<SmeupTextField> {
       },
     );
 
-    SmeupWidgetsNotifier.addWidget(
-        widget.scaffoldKey.hashCode,
-        widget.smeupInputFieldModel.id,
-        widget.smeupInputFieldModel.type,
-        notifier);
+    // SmeupWidgetsNotifier.addWidget(
+    //     widget.scaffoldKey.hashCode,
+    //     widget.smeupInputFieldModel.id,
+    //     widget.smeupInputFieldModel.type,
+    //     notifier);
 
     return input;
   }

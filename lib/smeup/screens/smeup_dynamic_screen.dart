@@ -6,8 +6,6 @@ import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_form_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_screen_model.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_error_notifier.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_screen_notifier.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_widgets_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
@@ -64,8 +62,8 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen> {
   @override
   void dispose() {
     if (smeupFormModel != null) SmeupDynamicScreen.onDispose(smeupFormModel.id);
-    SmeupWidgetsNotifier.removeWidget(
-        widget._scaffoldKey.hashCode, widget._scaffoldKey.hashCode.toString());
+    // SmeupWidgetsNotifier.removeWidget(
+    //     widget._scaffoldKey.hashCode, widget._scaffoldKey.hashCode.toString());
     super.dispose();
   }
 
@@ -73,8 +71,8 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen> {
   Widget build(BuildContext context) {
     SmeupDynamismService.currentScaffoldKey = widget._scaffoldKey;
 
-    final SmeupScreenNotifier notifier =
-        Provider.of<SmeupScreenNotifier>(context);
+    // final SmeupScreenNotifier notifier =
+    //     Provider.of<SmeupScreenNotifier>(context);
     final SmeupErrorNotifier errorNotifier =
         Provider.of<SmeupErrorNotifier>(context);
 
@@ -115,8 +113,8 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen> {
       },
     );
 
-    SmeupWidgetsNotifier.addWidget(widget._scaffoldKey.hashCode,
-        widget._scaffoldKey.hashCode.toString(), 'SCREEN', notifier);
+    // SmeupWidgetsNotifier.addWidget(widget._scaffoldKey.hashCode,
+    //     widget._scaffoldKey.hashCode.toString(), 'SCREEN', notifier);
 
     return screen;
   }

@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_input_field_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_field_notifier.dart';
+import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:provider/provider.dart';
-import '../notifiers/smeup_widgets_notifier.dart';
 import 'smeup_not_available.dart';
 
 class SmeupProgressBar extends StatefulWidget {
@@ -27,16 +26,16 @@ class SmeupProgressBar extends StatefulWidget {
 class _SmeupProgressBarState extends State<SmeupProgressBar> {
   @override
   void dispose() {
-    SmeupWidgetsNotifier.removeWidget(
-        widget.scaffoldKey.hashCode, widget.smeupInputFieldModel.id);
+    // SmeupWidgetsNotifier.removeWidget(
+    //     widget.scaffoldKey.hashCode, widget.smeupInputFieldModel.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final SmeupFieldNotifier notifier =
-        Provider.of<SmeupFieldNotifier>(context);
+    final SmeupWidgetNotifier notifier =
+        Provider.of<SmeupWidgetNotifier>(context);
 
     final input = FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getProgressBarComponent(widget.smeupInputFieldModel),
@@ -60,11 +59,11 @@ class _SmeupProgressBarState extends State<SmeupProgressBar> {
       },
     );
 
-    SmeupWidgetsNotifier.addWidget(
-        widget.scaffoldKey.hashCode,
-        widget.smeupInputFieldModel.id,
-        widget.smeupInputFieldModel.type,
-        notifier);
+    // SmeupWidgetsNotifier.addWidget(
+    //     widget.scaffoldKey.hashCode,
+    //     widget.smeupInputFieldModel.id,
+    //     widget.smeupInputFieldModel.type,
+    //     notifier);
 
     return input;
   }

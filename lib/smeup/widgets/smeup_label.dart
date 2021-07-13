@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_label_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_label_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_label_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
@@ -10,8 +9,6 @@ import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.d
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
-import 'package:provider/provider.dart';
-import '../notifiers/smeup_widgets_notifier.dart';
 
 // ignore: must_be_immutable
 class SmeupLabel extends StatefulWidget
@@ -153,21 +150,17 @@ class _SmeupLabelState extends State<SmeupLabel>
 
   @override
   void dispose() {
-    SmeupWidgetsNotifier.removeWidget(
-        widget.scaffoldKey.hashCode, smeupLabelModel.id);
+    runDispose(widget.scaffoldKey, smeupLabelModel);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    final SmeupLabelNotifier notifier =
-        Provider.of<SmeupLabelNotifier>(context);
+    Widget label = runBuild(context, smeupLabelModel, widget.scaffoldKey,
+        notifierFunction: () {
+      setState(() {});
+    });
 
-    Widget label = runBuild(context, smeupLabelModel);
-
-    SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
-        smeupLabelModel.id, smeupLabelModel.type, notifier);
     return label;
   }
 

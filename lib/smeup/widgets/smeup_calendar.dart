@@ -5,8 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_event_model.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_calendar_notifier.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_widgets_notifier.dart';
+import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
@@ -71,8 +70,8 @@ class SmeupCalendarState extends State<SmeupCalendar>
 
   @override
   void dispose() {
-    SmeupWidgetsNotifier.removeWidget(
-        widget.scaffoldKey.hashCode, widget.smeupCalendarModel.id);
+    // SmeupWidgetsNotifier.removeWidget(
+    //     widget.scaffoldKey.hashCode, widget.smeupCalendarModel.id);
     _animationController.dispose();
     _calendarController.dispose();
     _events = null;
@@ -269,20 +268,16 @@ class SmeupCalendarState extends State<SmeupCalendar>
     }
 
     // ignore: unused_local_variable
-    final SmeupCalendarNotifier notifier =
-        Provider.of<SmeupCalendarNotifier>(context);
+    final SmeupWidgetNotifier notifier =
+        Provider.of<SmeupWidgetNotifier>(context);
 
-    notifier.classes.removeWhere(
+    notifier.objects.removeWhere(
         (element) => element['id'] == widget.smeupCalendarModel.id);
-    notifier.classes.add({
+    notifier.objects.add({
       'id': widget.smeupCalendarModel.id,
       'model': widget.smeupCalendarModel,
       'notifierFunction': () {
-        setState(() {
-          SmeupLogService.writeDebugMessage(
-              'notified ${widget.smeupCalendarModel.type}: ${widget.smeupCalendarModel.id}',
-              logType: LogType.info);
-        });
+        setState(() {});
       }
     });
 
@@ -304,8 +299,8 @@ class SmeupCalendarState extends State<SmeupCalendar>
             ],
           );
 
-    SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
-        widget.smeupCalendarModel.id, widget.smeupCalendarModel.type, notifier);
+    // SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
+    //     widget.smeupCalendarModel.id, widget.smeupCalendarModel.type, notifier);
     return calendar;
   }
 

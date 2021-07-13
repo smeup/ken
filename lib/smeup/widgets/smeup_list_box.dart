@@ -1,18 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_box_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_list_box_model.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_box_notifier.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_widgets_notifier.dart';
+import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_box.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:provider/provider.dart';
 
 class SmeupListBox extends StatefulWidget {
   final SmeupListBoxModel smeupListModel;
@@ -33,8 +32,8 @@ class _SmeupListBoxState extends State<SmeupListBox> {
 
   @override
   void dispose() {
-    SmeupWidgetsNotifier.removeWidget(
-        widget.scaffoldKey.hashCode, widget.smeupListModel.id);
+    // SmeupWidgetsNotifier.removeWidget(
+    //     widget.scaffoldKey.hashCode, widget.smeupListModel.id);
     super.dispose();
   }
 
@@ -51,25 +50,21 @@ class _SmeupListBoxState extends State<SmeupListBox> {
       widget.smeupListModel.isNotified = false;
     }
 
-    final SmeupBoxNotifier notifier = Provider.of<SmeupBoxNotifier>(context,
-        listen: widget.smeupListModel.notificationEnabled);
-    notifier.classes
+    final SmeupWidgetNotifier notifier =
+        Provider.of<SmeupWidgetNotifier>(context);
+    notifier.objects
         .removeWhere((element) => element['id'] == widget.smeupListModel.id);
-    notifier.classes.add({
+    notifier.objects.add({
       'id': widget.smeupListModel.id,
       'model': widget.smeupListModel,
       'notifierFunction': () {
-        setState(() {
-          SmeupLogService.writeDebugMessage(
-              'notified ${widget.smeupListModel.type}: ${widget.smeupListModel.id}',
-              logType: LogType.info);
-        });
+        setState(() {});
       }
     });
 
     if (widget.scaffoldKey.hashCode ==
         SmeupDynamismService.currentScaffoldKey.hashCode)
-      notifier.setRefresh(widget.smeupListModel.id);
+      notifier.setTimerRefresh(widget.smeupListModel.id);
 
     var boxes = widget.smeupListModel.load == 'D'
         ? Container()
@@ -94,10 +89,10 @@ class _SmeupListBoxState extends State<SmeupListBox> {
             },
           );
 
-    if (widget.smeupListModel.notificationEnabled) {
-      SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
-          widget.smeupListModel.id, widget.smeupListModel.type, notifier);
-    }
+    // if (widget.smeupListModel.notificationEnabled) {
+    //   SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
+    //       widget.smeupListModel.id, widget.smeupListModel.type, notifier);
+    // }
 
     return boxes;
   }

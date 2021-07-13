@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_widgets_notifier.dart';
+import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/screens/smeup_dynamic_screen.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
@@ -157,7 +157,7 @@ class SmeupDynamismService {
           (dynamism['targets'] as List).length > 0) {
         List<String> targets =
             (dynamism['targets'] as List).map((e) => e.toString()).toList();
-        SmeupWidgetsNotifier.notifyWidgets(
+        SmeupWidgetNotifier.notifyWidgets(
             targets, context, scaffoldKey.hashCode);
       }
     });
@@ -223,7 +223,7 @@ class SmeupDynamismService {
     if (notify != null && notify.isNotEmpty) {
       var widgetsIds = notify.toString().split('\\');
       if (widgetsIds.length > 0) {
-        SmeupWidgetsNotifier.notifyWidgets(
+        SmeupWidgetNotifier.notifyWidgets(
             widgetsIds, context, scaffoldHashCode);
       }
     }

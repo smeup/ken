@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_timepicker_notifier.dart';
+import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker_button.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:provider/provider.dart';
-import '../notifiers/smeup_widgets_notifier.dart';
 import 'smeup_not_available.dart';
 
 class SmeupTimePicker extends StatefulWidget {
@@ -33,16 +32,16 @@ class SmeupTimePicker extends StatefulWidget {
 class _SmeupTimePickerState extends State<SmeupTimePicker> {
   @override
   void dispose() {
-    SmeupWidgetsNotifier.removeWidget(
-        widget.scaffoldKey.hashCode, widget.smeupTimePickerModel.id);
+    // SmeupWidgetsNotifier.removeWidget(
+    //     widget.scaffoldKey.hashCode, widget.smeupTimePickerModel.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final SmeupTimePickerNotifier notifier =
-        Provider.of<SmeupTimePickerNotifier>(context);
+    final SmeupWidgetNotifier notifier =
+        Provider.of<SmeupWidgetNotifier>(context);
 
     final input = FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getTimePickerComponent(widget.smeupTimePickerModel),
@@ -66,11 +65,11 @@ class _SmeupTimePickerState extends State<SmeupTimePicker> {
       },
     );
 
-    SmeupWidgetsNotifier.addWidget(
-        widget.scaffoldKey.hashCode,
-        widget.smeupTimePickerModel.id,
-        widget.smeupTimePickerModel.type,
-        notifier);
+    // SmeupWidgetsNotifier.addWidget(
+    //     widget.scaffoldKey.hashCode,
+    //     widget.smeupTimePickerModel.id,
+    //     widget.smeupTimePickerModel.type,
+    //     notifier);
 
     return input;
   }

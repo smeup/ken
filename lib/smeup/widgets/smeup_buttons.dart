@@ -3,8 +3,7 @@ import 'package:flutter_treeview/tree_view.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_buttons_notifier.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_widgets_notifier.dart';
+import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_button.dart';
@@ -38,8 +37,8 @@ class SmeupButtonsState extends State<SmeupButtons> {
 
   @override
   void dispose() {
-    SmeupWidgetsNotifier.removeWidget(
-        widget.scaffoldKey.hashCode, widget.smeupButtonsModel.id);
+    // SmeupWidgetsNotifier.removeWidget(
+    //     widget.scaffoldKey.hashCode, widget.smeupButtonsModel.id);
     super.dispose();
   }
 
@@ -56,26 +55,21 @@ class SmeupButtonsState extends State<SmeupButtons> {
       widget.smeupButtonsModel.isNotified = false;
     }
 
-    // ignore: unused_local_variable
-    final SmeupButtonsNotifier notifier =
-        Provider.of<SmeupButtonsNotifier>(context);
-    notifier.classes
+    final SmeupWidgetNotifier notifier =
+        Provider.of<SmeupWidgetNotifier>(context);
+    notifier.objects
         .removeWhere((element) => element['id'] == widget.smeupButtonsModel.id);
-    notifier.classes.add({
+    notifier.objects.add({
       'id': widget.smeupButtonsModel.id,
       'model': widget.smeupButtonsModel,
       'notifierFunction': () {
-        setState(() {
-          SmeupLogService.writeDebugMessage(
-              'notified ${widget.smeupButtonsModel.type}: ${widget.smeupButtonsModel.id}',
-              logType: LogType.info);
-        });
+        setState(() {});
       }
     });
 
     if (widget.scaffoldKey.hashCode ==
         SmeupDynamismService.currentScaffoldKey.hashCode)
-      notifier.setRefresh(widget.smeupButtonsModel.id);
+      notifier.setTimerRefresh(widget.smeupButtonsModel.id);
 
     final buttons = widget.smeupButtonsModel.load == 'D'
         ? Container()
@@ -101,8 +95,8 @@ class SmeupButtonsState extends State<SmeupButtons> {
             },
           );
 
-    SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
-        widget.smeupButtonsModel.id, widget.smeupButtonsModel.type, notifier);
+    // SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
+    //     widget.smeupButtonsModel.id, widget.smeupButtonsModel.type, notifier);
     return buttons;
   }
 

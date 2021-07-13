@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_radio_buttons_notifier.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_widgets_notifier.dart';
+import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
@@ -36,16 +35,16 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons> {
 
   @override
   void dispose() {
-    SmeupWidgetsNotifier.removeWidget(
-        widget.scaffoldKey.hashCode, widget.smeupRadioButtonsModel.id);
+    // SmeupWidgetsNotifier.removeWidget(
+    //     widget.scaffoldKey.hashCode, widget.smeupRadioButtonsModel.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final SmeupRadioButtonsNotifier notifier =
-        Provider.of<SmeupRadioButtonsNotifier>(context);
+    final SmeupWidgetNotifier notifier =
+        Provider.of<SmeupWidgetNotifier>(context);
 
     final buttons = FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getButtonsComponent(widget.smeupRadioButtonsModel),
@@ -69,11 +68,11 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons> {
       },
     );
 
-    SmeupWidgetsNotifier.addWidget(
-        widget.scaffoldKey.hashCode,
-        widget.smeupRadioButtonsModel.id,
-        widget.smeupRadioButtonsModel.type,
-        notifier);
+    // SmeupWidgetsNotifier.addWidget(
+    //     widget.scaffoldKey.hashCode,
+    //     widget.smeupRadioButtonsModel.id,
+    //     widget.smeupRadioButtonsModel.type,
+    //     notifier);
     return buttons;
   }
 

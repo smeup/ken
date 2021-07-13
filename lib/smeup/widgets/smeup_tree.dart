@@ -3,13 +3,12 @@ import 'package:flutter_treeview/tree_view.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_tree_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_tree_notifier.dart';
+import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:provider/provider.dart';
-import '../notifiers/smeup_widgets_notifier.dart';
 
 class SmeupTree extends StatefulWidget {
   final SmeupTreeModel smeupTreeModel;
@@ -50,15 +49,16 @@ class _SmeupTreeState extends State<SmeupTree> {
 
   @override
   void dispose() {
-    SmeupWidgetsNotifier.removeWidget(
-        widget.scaffoldKey.hashCode, widget.smeupTreeModel.id);
+    // SmeupWidgetsNotifier.removeWidget(
+    //     widget.scaffoldKey.hashCode, widget.smeupTreeModel.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final SmeupTreeNotifier notifier = Provider.of<SmeupTreeNotifier>(context);
+    final SmeupWidgetNotifier notifier =
+        Provider.of<SmeupWidgetNotifier>(context);
 
     final tree = FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getTreeComponent(widget.smeupTreeModel),
@@ -80,8 +80,8 @@ class _SmeupTreeState extends State<SmeupTree> {
       },
     );
 
-    SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
-        widget.smeupTreeModel.id, widget.smeupTreeModel.type, notifier);
+    // SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
+    //     widget.smeupTreeModel.id, widget.smeupTreeModel.type, notifier);
 
     return tree;
   }

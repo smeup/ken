@@ -7,7 +7,6 @@ import 'package:mobile_components_library/smeup/services/smeup_log_service.dart'
 import 'package:mobile_components_library/smeup/widgets/smeup_drawer_item.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
-import '../notifiers/smeup_widgets_notifier.dart';
 
 class SmeupDrawer extends StatefulWidget {
   final SmeupDrawerModel smeupDrawerModel;
@@ -29,8 +28,8 @@ class _SmeupDrawerState extends State<SmeupDrawer> {
 
   @override
   void dispose() {
-    SmeupWidgetsNotifier.removeWidget(
-        widget.scaffoldKey.hashCode, widget.smeupDrawerModel.id);
+    // SmeupWidgetsNotifier.removeWidget(
+    //     widget.scaffoldKey.hashCode, widget.smeupDrawerModel.id);
     super.dispose();
   }
 

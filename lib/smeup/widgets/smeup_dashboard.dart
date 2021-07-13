@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_dashboard_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_dashboard_notifier.dart';
+import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:provider/provider.dart';
-import '../notifiers/smeup_widgets_notifier.dart';
 
 class SmeupDashboard extends StatefulWidget {
   final SmeupDashboardModel smeupDashboardModel;
@@ -23,15 +22,15 @@ class SmeupDashboard extends StatefulWidget {
 class _SmeupDashboardState extends State<SmeupDashboard> {
   @override
   void dispose() {
-    SmeupWidgetsNotifier.removeWidget(
-        widget.scaffoldKey.hashCode, widget.smeupDashboardModel.id);
+    // SmeupWidgetsNotifier.removeWidget(
+    //     widget.scaffoldKey.hashCode, widget.smeupDashboardModel.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final SmeupDashboardNotifier notifier = Provider.of<SmeupDashboardNotifier>(
+    final SmeupWidgetNotifier notifier = Provider.of<SmeupWidgetNotifier>(
         context,
         listen: widget.smeupDashboardModel.notificationEnabled);
 
@@ -57,13 +56,13 @@ class _SmeupDashboardState extends State<SmeupDashboard> {
       },
     );
 
-    if (widget.smeupDashboardModel.notificationEnabled) {
-      SmeupWidgetsNotifier.addWidget(
-          widget.scaffoldKey.hashCode,
-          widget.smeupDashboardModel.id,
-          widget.smeupDashboardModel.type,
-          notifier);
-    }
+    // if (widget.smeupDashboardModel.notificationEnabled) {
+    //   SmeupWidgetsNotifier.addWidget(
+    //       widget.scaffoldKey.hashCode,
+    //       widget.smeupDashboardModel.id,
+    //       widget.smeupDashboardModel.type,
+    //       notifier);
+    // }
 
     return dash;
   }
