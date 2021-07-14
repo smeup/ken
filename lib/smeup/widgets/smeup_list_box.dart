@@ -11,6 +11,7 @@ import 'package:mobile_components_library/smeup/services/smeup_log_service.dart'
 import 'package:mobile_components_library/smeup/widgets/smeup_box.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 
 class SmeupListBox extends StatefulWidget {
@@ -27,7 +28,8 @@ class SmeupListBox extends StatefulWidget {
   _SmeupListBoxState createState() => _SmeupListBoxState();
 }
 
-class _SmeupListBoxState extends State<SmeupListBox> {
+class _SmeupListBoxState extends State<SmeupListBox>
+    with SmeupWidgetStateMixin {
   List<Widget> cells;
 
   @override
@@ -80,7 +82,7 @@ class _SmeupListBoxState extends State<SmeupListBox> {
                   SmeupLogService.writeDebugMessage(
                       'Error SmeupListBox: ${snapshot.error}',
                       logType: LogType.error);
-                  widget.smeupListModel.notifyError(context, snapshot.error);
+                  notifyError(context, widget.smeupListModel, snapshot.error);
                   return SmeupNotAvailable();
                 } else {
                   return snapshot.data.children;

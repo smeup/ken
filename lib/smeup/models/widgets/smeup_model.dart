@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 
 abstract class SmeupModel {
   static const int defaultRefresh = 0;
@@ -23,6 +24,10 @@ abstract class SmeupModel {
   bool isNotified = false;
   int serviceStatusCode = 0;
   int refresh;
+
+  bool loaded = false;
+
+  List<SmeupSectionModel> smeupSectionsModels;
 
   SmeupModel({this.title}) {
     showLoader = SmeupOptions.showLoader;
@@ -53,6 +58,10 @@ abstract class SmeupModel {
       notificationEnabled = jsonMap['notification'] ?? true;
       refresh = getInt(optionsDefault['refresh']) ?? defaultRefresh;
     }
+
+    loaded = jsonMap['loaded'];
+    data = jsonMap['data'];
+    layout = jsonMap['layout'];
   }
 
   bool hasData() {

@@ -9,6 +9,7 @@ import 'package:mobile_components_library/smeup/services/smeup_log_service.dart'
 import 'package:mobile_components_library/smeup/services/smeup_service_response.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
@@ -23,7 +24,7 @@ class SmeupChart extends StatefulWidget {
   _SmeupChartState createState() => _SmeupChartState();
 }
 
-class _SmeupChartState extends State<SmeupChart> {
+class _SmeupChartState extends State<SmeupChart> with SmeupWidgetStateMixin {
   @override
   void dispose() {
     // SmeupWidgetsNotifier.removeWidget(
@@ -48,7 +49,7 @@ class _SmeupChartState extends State<SmeupChart> {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupChart: ${snapshot.error}',
                 logType: LogType.error);
-            widget.smeupChartModel.notifyError(context, snapshot.error);
+            notifyError(context, widget.smeupChartModel, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return Center(child: snapshot.data.children);

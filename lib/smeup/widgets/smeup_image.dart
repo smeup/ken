@@ -5,8 +5,9 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_image_model
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 
-class SmeupImage extends StatelessWidget {
+class SmeupImage extends StatelessWidget with SmeupWidgetStateMixin {
   final SmeupImageModel smeupImageModel;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
@@ -30,7 +31,7 @@ class SmeupImage extends StatelessWidget {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupImage: ${snapshot.error}',
                 logType: LogType.error);
-            smeupImageModel.notifyError(context, snapshot.error);
+            notifyError(context, smeupImageModel, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

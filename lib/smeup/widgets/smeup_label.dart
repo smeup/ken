@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_label_dao.dart';
+import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_label_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
@@ -82,6 +85,12 @@ class SmeupLabel extends StatefulWidget
   @override
   runControllerActivities() {
     //print('setUIProperties in label');
+
+    if (fontColor == null)
+      fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
+    if (smeupLabelModel.id.isEmpty)
+      smeupLabelModel.id = 'LAB' + Random().nextInt(100).toString();
+
     smeupLabelModel.valueColName =
         smeupLabelModel.optionsDefault['valueColName'] ?? '';
     smeupLabelModel.colorColName =
@@ -97,8 +106,8 @@ class SmeupLabel extends StatefulWidget
     smeupLabelModel.iconSize =
         SmeupUtilities.getDouble(smeupLabelModel.optionsDefault['iconSize']) ??
             SmeupLabelModel.defaultIconSize;
-    smeupLabelModel.align = smeupLabelModel
-        .getAlignmentGeometry(smeupLabelModel.optionsDefault['align']);
+    smeupLabelModel.align = SmeupUtilities.getAlignmentGeometry(
+        smeupLabelModel.optionsDefault['align']);
     smeupLabelModel.width =
         SmeupUtilities.getDouble(smeupLabelModel.optionsDefault['width']) ??
             SmeupLabelModel.defaultWidth;

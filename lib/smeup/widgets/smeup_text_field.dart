@@ -9,6 +9,7 @@ import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_buttons.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 import 'smeup_not_available.dart';
 
@@ -33,7 +34,8 @@ class SmeupTextField extends StatefulWidget {
   _SmeupTextFieldState createState() => _SmeupTextFieldState();
 }
 
-class _SmeupTextFieldState extends State<SmeupTextField> {
+class _SmeupTextFieldState extends State<SmeupTextField>
+    with SmeupWidgetStateMixin {
   @override
   void dispose() {
     // SmeupWidgetsNotifier.removeWidget(
@@ -69,7 +71,7 @@ class _SmeupTextFieldState extends State<SmeupTextField> {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupInputField: ${snapshot.error}',
                 logType: LogType.error);
-            widget.smeupInputFieldModel.notifyError(context, snapshot.error);
+            notifyError(context, widget.smeupInputFieldModel, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

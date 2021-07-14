@@ -7,6 +7,7 @@ import 'package:mobile_components_library/smeup/services/smeup_log_service.dart'
 import 'package:mobile_components_library/smeup/widgets/smeup_drawer_item.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 
 class SmeupDrawer extends StatefulWidget {
   final SmeupDrawerModel smeupDrawerModel;
@@ -23,7 +24,7 @@ class SmeupDrawer extends StatefulWidget {
   _SmeupDrawerState createState() => _SmeupDrawerState();
 }
 
-class _SmeupDrawerState extends State<SmeupDrawer> {
+class _SmeupDrawerState extends State<SmeupDrawer> with SmeupWidgetStateMixin {
   dynamic data;
 
   @override
@@ -50,7 +51,7 @@ class _SmeupDrawerState extends State<SmeupDrawer> {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupDrawer: ${snapshot.error}',
                 logType: LogType.error);
-            widget.smeupDrawerModel.notifyError(context, snapshot.error);
+            notifyError(context, widget.smeupDrawerModel, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

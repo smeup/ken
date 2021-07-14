@@ -8,6 +8,7 @@ import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 
 class SmeupTree extends StatefulWidget {
@@ -21,7 +22,7 @@ class SmeupTree extends StatefulWidget {
   _SmeupTreeState createState() => _SmeupTreeState();
 }
 
-class _SmeupTreeState extends State<SmeupTree> {
+class _SmeupTreeState extends State<SmeupTree> with SmeupWidgetStateMixin {
   // TreeViewTheme _treeViewTheme = TreeViewTheme(
   //   expanderTheme: ExpanderThemeData(
   //     type: ExpanderType.caret,
@@ -71,7 +72,7 @@ class _SmeupTreeState extends State<SmeupTree> {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupTree: ${snapshot.error}',
                 logType: LogType.error);
-            widget.smeupTreeModel.notifyError(context, snapshot.error);
+            notifyError(context, widget.smeupTreeModel, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

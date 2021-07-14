@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_carousel_model.dart';
@@ -25,7 +26,8 @@ class SmeupCarousel extends StatefulWidget {
   _SmeupCarouselState createState() => _SmeupCarouselState();
 }
 
-class _SmeupCarouselState extends State<SmeupCarousel> {
+class _SmeupCarouselState extends State<SmeupCarousel>
+    with SmeupWidgetStateMixin {
   int _initialIndex = 0;
 
   @override
@@ -48,7 +50,7 @@ class _SmeupCarouselState extends State<SmeupCarousel> {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupCarousel: ${snapshot.error}',
                 logType: LogType.error);
-            widget.smeupCaurouselModel.notifyError(context, snapshot.error);
+            notifyError(context, widget.smeupCaurouselModel, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

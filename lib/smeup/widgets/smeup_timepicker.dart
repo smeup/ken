@@ -7,6 +7,7 @@ import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker_button.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 import 'smeup_not_available.dart';
 
@@ -29,7 +30,8 @@ class SmeupTimePicker extends StatefulWidget {
   _SmeupTimePickerState createState() => _SmeupTimePickerState();
 }
 
-class _SmeupTimePickerState extends State<SmeupTimePicker> {
+class _SmeupTimePickerState extends State<SmeupTimePicker>
+    with SmeupWidgetStateMixin {
   @override
   void dispose() {
     // SmeupWidgetsNotifier.removeWidget(
@@ -56,7 +58,7 @@ class _SmeupTimePickerState extends State<SmeupTimePicker> {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupTimePicker: ${snapshot.error}',
                 logType: LogType.error);
-            widget.smeupTimePickerModel.notifyError(context, snapshot.error);
+            notifyError(context, widget.smeupTimePickerModel, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
@@ -21,7 +22,8 @@ class SmeupQRCodeReader extends StatefulWidget {
   _SmeupQRCodeReaderState createState() => _SmeupQRCodeReaderState();
 }
 
-class _SmeupQRCodeReaderState extends State<SmeupQRCodeReader> {
+class _SmeupQRCodeReaderState extends State<SmeupQRCodeReader>
+    with SmeupWidgetStateMixin {
   @override
   void dispose() {
     // SmeupWidgetsNotifier.removeWidget(
@@ -48,7 +50,7 @@ class _SmeupQRCodeReaderState extends State<SmeupQRCodeReader> {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupQRCodeReader: ${snapshot.error}',
                 logType: LogType.error);
-            widget.smeupQRCodeReaderModel.notifyError(context, snapshot.error);
+            notifyError(context, widget.smeupQRCodeReaderModel, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

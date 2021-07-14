@@ -91,14 +91,14 @@ class SmeupButtonsModel extends SmeupComponentModel
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     valueField = optionsDefault['valueField'] ?? '';
-    position = getMainAxisAlignment(optionsDefault['position']);
+    position = SmeupUtilities.getMainAxisAlignment(optionsDefault['position']);
     iconSize =
         SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
     if (optionsDefault['icon'] != null)
       iconData = int.tryParse(optionsDefault['icon']) ?? 0;
     else
       iconData = 0;
-    align = getAlignmentGeometry(optionsDefault['align']);
+    align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']);
 
     fontsize =
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontsize;

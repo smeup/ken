@@ -6,6 +6,7 @@ import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 import 'smeup_not_available.dart';
 
@@ -23,7 +24,8 @@ class SmeupProgressBar extends StatefulWidget {
   _SmeupProgressBarState createState() => _SmeupProgressBarState();
 }
 
-class _SmeupProgressBarState extends State<SmeupProgressBar> {
+class _SmeupProgressBarState extends State<SmeupProgressBar>
+    with SmeupWidgetStateMixin {
   @override
   void dispose() {
     // SmeupWidgetsNotifier.removeWidget(
@@ -50,7 +52,7 @@ class _SmeupProgressBarState extends State<SmeupProgressBar> {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupProgressbar: ${snapshot.error}',
                 logType: LogType.error);
-            widget.smeupInputFieldModel.notifyError(context, snapshot.error);
+            notifyError(context, widget.smeupInputFieldModel, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

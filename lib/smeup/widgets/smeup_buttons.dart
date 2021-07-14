@@ -9,6 +9,7 @@ import 'package:mobile_components_library/smeup/services/smeup_log_service.dart'
 import 'package:mobile_components_library/smeup/widgets/smeup_button.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 
 class SmeupButtons extends StatefulWidget {
@@ -26,7 +27,7 @@ class SmeupButtons extends StatefulWidget {
   SmeupButtonsState createState() => SmeupButtonsState();
 }
 
-class SmeupButtonsState extends State<SmeupButtons> {
+class SmeupButtonsState extends State<SmeupButtons> with SmeupWidgetStateMixin {
   bool _isBusy;
 
   @override
@@ -86,7 +87,8 @@ class SmeupButtonsState extends State<SmeupButtons> {
                   SmeupLogService.writeDebugMessage(
                       'Error SmeupButtons: ${snapshot.error} - ${snapshot.stackTrace}',
                       logType: LogType.error);
-                  widget.smeupButtonsModel.notifyError(context, snapshot.error);
+                  notifyError(
+                      context, widget.smeupButtonsModel, snapshot.error);
                   return SmeupNotAvailable();
                 } else {
                   return snapshot.data.children;

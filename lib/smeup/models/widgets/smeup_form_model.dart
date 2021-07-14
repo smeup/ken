@@ -74,10 +74,6 @@ class SmeupFormModel extends SmeupModel
     }
   }
 
-  bool hasSections() {
-    return smeupSectionsModels != null && smeupSectionsModels.length > 0;
-  }
-
   bool hasVariables() {
     return formVariables != null && formVariables.length > 0;
   }

@@ -1,9 +1,7 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 
 class SmeupLabelModel extends SmeupComponentModel
     implements SmeupDataInterface {
@@ -50,9 +48,7 @@ class SmeupLabelModel extends SmeupComponentModel
       title = ''})
       : super(title: title) {
     //if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
-    if (fontColor == null)
-      fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
-    id = 'LAB' + Random().nextInt(100).toString();
+
     SmeupDataService.incrementDataFetch(id);
   }
 

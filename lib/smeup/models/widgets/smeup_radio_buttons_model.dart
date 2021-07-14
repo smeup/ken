@@ -84,9 +84,9 @@ class SmeupRadioButtonsModel extends SmeupComponentModel
     displayedField = optionsDefault['displayedField'] ?? defaultDisplayedField;
     selectedValue = _replaceSelectedValue(jsonMap) ?? '';
 
-    position = getMainAxisAlignment(optionsDefault['position']);
+    position = SmeupUtilities.getMainAxisAlignment(optionsDefault['position']);
 
-    align = getAlignmentGeometry(optionsDefault['align']);
+    align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']);
 
     fontsize =
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontsize;

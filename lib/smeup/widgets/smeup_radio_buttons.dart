@@ -8,6 +8,7 @@ import 'package:mobile_components_library/smeup/services/smeup_log_service.dart'
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_radio_button.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 
 class SmeupRadioButtons extends StatefulWidget {
@@ -25,7 +26,8 @@ class SmeupRadioButtons extends StatefulWidget {
   _SmeupRadioButtonsState createState() => _SmeupRadioButtonsState();
 }
 
-class _SmeupRadioButtonsState extends State<SmeupRadioButtons> {
+class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
+    with SmeupWidgetStateMixin {
   @override
   void initState() {
     SmeupDynamismService.variables[widget.smeupRadioButtonsModel.id] =
@@ -59,7 +61,7 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons> {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupRadioButtons: ${snapshot.error}',
                 logType: LogType.error);
-            widget.smeupRadioButtonsModel.notifyError(context, snapshot.error);
+            notifyError(context, widget.smeupRadioButtonsModel, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

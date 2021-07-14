@@ -3,6 +3,7 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/notifiers/smeup_error_notifier.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
@@ -46,7 +47,7 @@ class SmeupWidgetStateMixin {
                   SmeupLogService.writeDebugMessage(
                       'Error ${model.type}: ${snapshot.error}',
                       logType: LogType.error);
-                  model.notifyError(context, snapshot.error);
+                  notifyError(context, model, snapshot.error);
                   return SmeupNotAvailable();
                 } else {
                   return snapshot.data.children;
@@ -61,6 +62,20 @@ class SmeupWidgetStateMixin {
     return Future(() {
       return SmeupWidgetBuilderResponse(null, SmeupNotAvailable());
     });
+  }
+
+  void notifyError(context, SmeupComponentModel model, Object error) {
+    final SmeupErrorNotifier errorNotifier =
+        Provider.of<SmeupErrorNotifier>(context, listen: false);
+
+    if (!errorNotifier.isError()) {
+      errorNotifier.setError(true);
+      SmeupLogService.writeDebugMessage('Notified error: ${model.id}',
+          logType: LogType.error);
+      Future.delayed(Duration(seconds: 1), () async {
+        errorNotifier.notifyError();
+      });
+    }
   }
 
   Future<SmeupWidgetBuilderResponse> getFunErrorResponse(
@@ -80,5 +95,10 @@ class SmeupWidgetStateMixin {
   void runDispose(
       GlobalKey<ScaffoldState> scaffoldKey, SmeupComponentModel model) {
     SmeupWidgetNotifier.removeWidget(scaffoldKey.hashCode, model.id);
+  }
+
+  bool hasSections(SmeupModel model) {
+    return model.smeupSectionsModels != null &&
+        model.smeupSectionsModels.length > 0;
   }
 }

@@ -6,6 +6,7 @@ import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'smeup_section.dart';
 
 class SmeupForm extends StatefulWidget {
@@ -19,7 +20,7 @@ class SmeupForm extends StatefulWidget {
   _SmeupFormState createState() => _SmeupFormState();
 }
 
-class _SmeupFormState extends State<SmeupForm> {
+class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
   @override
   Widget build(BuildContext context) {
     //MediaQueryData deviceInfo = MediaQuery.of(context);
@@ -59,7 +60,7 @@ class _SmeupFormState extends State<SmeupForm> {
       return SmeupWidgetBuilderResponse(smeupFormModel, SmeupNotAvailable());
     }
 
-    if (!smeupFormModel.hasSections()) {
+    if (!hasSections(smeupFormModel)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Non sono presenti sezioni nel form.'),

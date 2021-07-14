@@ -7,6 +7,7 @@ import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 
 class SmeupGauge extends StatefulWidget {
@@ -20,7 +21,7 @@ class SmeupGauge extends StatefulWidget {
   _SmeupGaugeState createState() => _SmeupGaugeState();
 }
 
-class _SmeupGaugeState extends State<SmeupGauge> {
+class _SmeupGaugeState extends State<SmeupGauge> with SmeupWidgetStateMixin {
   @override
   void dispose() {
     // SmeupWidgetsNotifier.removeWidget(
@@ -45,7 +46,7 @@ class _SmeupGaugeState extends State<SmeupGauge> {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupGauge: ${snapshot.error}',
                 logType: LogType.error);
-            widget.smeupGaugeModel.notifyError(context, snapshot.error);
+            notifyError(context, widget.smeupGaugeModel, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;
