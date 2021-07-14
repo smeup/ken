@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
@@ -43,7 +44,8 @@ class SmeupDynamicScreen extends StatefulWidget {
   _SmeupDynamicScreenState createState() => _SmeupDynamicScreenState();
 }
 
-class _SmeupDynamicScreenState extends State<SmeupDynamicScreen> {
+class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
+    with SmeupWidgetStateMixin {
   SmeupFormModel smeupFormModel;
 
   @override
@@ -126,7 +128,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen> {
     SmeupDataService.setDataFetch(0);
     await smeupscreenModel.setData();
 
-    if (!smeupscreenModel.hasData()) {
+    if (!hasData(smeupscreenModel)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

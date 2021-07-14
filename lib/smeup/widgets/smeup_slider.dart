@@ -6,6 +6,7 @@ import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 import 'smeup_not_available.dart';
 
@@ -23,7 +24,7 @@ class SmeupSlider extends StatefulWidget {
   _SmeupSliderState createState() => _SmeupSliderState();
 }
 
-class _SmeupSliderState extends State<SmeupSlider> {
+class _SmeupSliderState extends State<SmeupSlider> with SmeupWidgetStateMixin {
   @override
   void dispose() {
     // SmeupWidgetsNotifier.removeWidget(
@@ -73,7 +74,7 @@ class _SmeupSliderState extends State<SmeupSlider> {
 
     await smeupInputFieldModel.setData();
 
-    if (!smeupInputFieldModel.hasData()) {
+    if (!hasData(smeupInputFieldModel)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

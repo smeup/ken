@@ -93,7 +93,7 @@ class _SmeupTreeState extends State<SmeupTree> with SmeupWidgetStateMixin {
 
     await smeupTreeModel.setData();
 
-    if (!smeupTreeModel.hasData()) {
+    if (!hasData(smeupTreeModel)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

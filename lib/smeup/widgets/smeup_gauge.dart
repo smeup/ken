@@ -67,7 +67,7 @@ class _SmeupGaugeState extends State<SmeupGauge> with SmeupWidgetStateMixin {
 
     await smeupGaugeModel.setData();
 
-    if (!smeupGaugeModel.hasData()) {
+    if (!hasData(smeupGaugeModel)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

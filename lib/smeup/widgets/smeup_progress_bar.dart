@@ -76,7 +76,7 @@ class _SmeupProgressBarState extends State<SmeupProgressBar>
 
     await smeupInputFieldModel.setData();
 
-    if (!smeupInputFieldModel.hasData()) {
+    if (!hasData(smeupInputFieldModel)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

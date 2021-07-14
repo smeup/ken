@@ -74,7 +74,7 @@ class _SmeupQRCodeReaderState extends State<SmeupQRCodeReader>
 
     await smeupQRCodeReaderModel.setData();
 
-    if (!smeupQRCodeReaderModel.hasData()) {
+    if (!hasData(smeupQRCodeReaderModel)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

@@ -82,7 +82,7 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
       SmeupRadioButtonsModel smeupRadioButtonsModel) async {
     await smeupRadioButtonsModel.setData();
 
-    if (!smeupRadioButtonsModel.hasData()) {
+    if (!hasData(smeupRadioButtonsModel)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

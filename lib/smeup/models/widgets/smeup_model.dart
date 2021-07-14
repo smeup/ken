@@ -35,43 +35,39 @@ abstract class SmeupModel {
   }
 
   SmeupModel.fromMap(Map<String, dynamic> jsonMap) {
-    //this.jsonMap = jsonMap; //TODO: to remove
+    this.jsonMap = jsonMap; //TODO: to remove
     type = jsonMap['type'];
-    //dynamisms = jsonMap['dynamisms']; //TODO: to remove
+    dynamisms = jsonMap['dynamisms']; //TODO: to remove
 
     //TODO: to remove
-    // if (type != null) {
-    //   id = jsonMap['id'] ?? jsonMap['type'] + Random().nextInt(100).toString();
+    if (type != null && (id == null || id.isEmpty)) {
+      id = jsonMap['id'] ?? jsonMap['type'] + Random().nextInt(100).toString();
 
-    //   smeupFun = SmeupFun(jsonMap['fun']);
-    //   load = jsonMap['load'] ?? '';
+      smeupFun = SmeupFun(jsonMap['fun']);
+      load = jsonMap['load'] ?? '';
 
-    //   options = jsonMap['options'] ?? Map<String, dynamic>();
+      options = jsonMap['options'] ?? Map<String, dynamic>();
 
-    //   if (options[jsonMap['type']] == null)
-    //     options[jsonMap['type']] = Map<String, dynamic>();
+      if (options[jsonMap['type']] == null)
+        options[jsonMap['type']] = Map<String, dynamic>();
 
-    //   optionsType = options[jsonMap['type']];
+      optionsType = options[jsonMap['type']];
 
-    //   if (optionsType['default'] == null)
-    //     optionsType['default'] = Map<String, dynamic>();
+      if (optionsType['default'] == null)
+        optionsType['default'] = Map<String, dynamic>();
 
-    //   optionsDefault = optionsType['default'] ?? Map<String, dynamic>();
-    //   showLoader = jsonMap['showLoader'] ?? SmeupOptions.showLoader;
-    //   notificationEnabled = jsonMap['notification'] ?? true;
-    //   refresh =
-    //       SmeupUtilities.getInt(optionsDefault['refresh']) ?? defaultRefresh;
-    // }
+      optionsDefault = optionsType['default'] ?? Map<String, dynamic>();
+      showLoader = jsonMap['showLoader'] ?? SmeupOptions.showLoader;
+      notificationEnabled = jsonMap['notification'] ?? true;
+      refresh =
+          SmeupUtilities.getInt(optionsDefault['refresh']) ?? defaultRefresh;
+    }
 
     //TODO: to remove
-    //loaded = jsonMap['loaded'];
+    loaded = jsonMap['loaded'];
     //TODO: to remove
-    //data = jsonMap['data'];
+    data = jsonMap['data'];
     //TODO: to remove
-    //layout = jsonMap['layout'];
-  }
-
-  bool hasData() {
-    return data != null;
+    layout = jsonMap['layout'];
   }
 }

@@ -106,7 +106,7 @@ class SmeupButtonsState extends State<SmeupButtons> with SmeupWidgetStateMixin {
       SmeupButtonsModel smeupButtonsModel) async {
     await smeupButtonsModel.setData();
 
-    if (!smeupButtonsModel.hasData()) {
+    if (!hasData(smeupButtonsModel)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

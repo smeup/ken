@@ -75,7 +75,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
 
     await smeupBoxModel.setData();
 
-    if (!smeupBoxModel.hasData()) {
+    if (!hasData(smeupBoxModel)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

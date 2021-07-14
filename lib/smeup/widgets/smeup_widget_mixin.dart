@@ -14,7 +14,7 @@ class SmeupWidgetMixin {
     //this.jsonMap = jsonMap;
     //type = model.jsonMap['type'];
     model.dynamisms = model.jsonMap['dynamisms'];
-    if (model.type != null && model.id.isEmpty) {
+    if (model.type != null && (model.id == null || model.id.isEmpty)) {
       model.id = model.jsonMap['id'] ??
           model.jsonMap['type'] + Random().nextInt(100).toString();
 

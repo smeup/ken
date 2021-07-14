@@ -135,7 +135,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
   Future<void> _loadData() async {
     await widget.smeupListModel.setData();
 
-    if (!widget.smeupListModel.hasData()) {
+    if (!hasData(widget.smeupListModel)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

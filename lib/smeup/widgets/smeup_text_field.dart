@@ -95,7 +95,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
 
     await smeupInputFieldModel.setData();
 
-    if (!smeupInputFieldModel.hasData()) {
+    if (!hasData(smeupInputFieldModel)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

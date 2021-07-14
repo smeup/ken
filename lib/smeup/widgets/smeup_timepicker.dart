@@ -82,7 +82,7 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
 
     await smeupTimePickerModel.setData();
 
-    if (!smeupTimePickerModel.hasData()) {
+    if (!hasData(smeupTimePickerModel)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

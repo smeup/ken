@@ -76,7 +76,7 @@ class _SmeupDashboardState extends State<SmeupDashboard>
 
     await smeupDashboardModel.setData();
 
-    if (!smeupDashboardModel.hasData()) {
+    if (!hasData(smeupDashboardModel)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

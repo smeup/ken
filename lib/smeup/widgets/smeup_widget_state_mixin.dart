@@ -99,4 +99,8 @@ class SmeupWidgetStateMixin {
     return model.smeupSectionsModels != null &&
         model.smeupSectionsModels.length > 0;
   }
+
+  bool hasData(SmeupModel model) {
+    return model.data != null;
+  }
 }

@@ -69,7 +69,7 @@ class _SmeupDrawerState extends State<SmeupDrawer> with SmeupWidgetStateMixin {
       SmeupDrawerModel smeupDrawerModel) async {
     if (smeupDrawerModel.clientData != null) data = smeupDrawerModel.clientData;
 
-    if (smeupDrawerModel.hasData()) {
+    if (hasData(smeupDrawerModel)) {
       data = smeupDrawerModel.data;
     }
 

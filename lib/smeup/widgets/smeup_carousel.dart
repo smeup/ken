@@ -66,7 +66,7 @@ class _SmeupCarouselState extends State<SmeupCarousel>
       SmeupCaurouselModel smeupCaurouselModel) async {
     await smeupCaurouselModel.setData();
 
-    if (!smeupCaurouselModel.hasData()) {
+    if (!hasData(smeupCaurouselModel)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

@@ -178,7 +178,7 @@ class _SmeupLabelState extends State<SmeupLabel>
       smeupLabelModel.loaded = true;
     }
 
-    if (!smeupLabelModel.hasData()) {
+    if (!hasData(smeupLabelModel)) {
       return getFunErrorResponse(context, smeupLabelModel);
     }
 

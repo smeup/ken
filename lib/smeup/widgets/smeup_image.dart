@@ -50,7 +50,7 @@ class SmeupImage extends StatelessWidget with SmeupWidgetStateMixin {
     try {
       await smeupImageModel.setData();
 
-      if (!smeupImageModel.hasData()) {
+      if (!hasData(smeupImageModel)) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
