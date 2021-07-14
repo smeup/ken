@@ -171,6 +171,7 @@ class _SmeupLabelState extends State<SmeupLabel>
     return label;
   }
 
+  @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     //await smeupLabelModel.setData();
     if (!smeupLabelModel.loaded) {
