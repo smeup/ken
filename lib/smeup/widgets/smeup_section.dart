@@ -6,6 +6,7 @@ import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'smeup_component.dart';
 
 class SmeupSection extends StatefulWidget {
@@ -20,7 +21,7 @@ class SmeupSection extends StatefulWidget {
 }
 
 class _SmeupSectionState extends State<SmeupSection>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, SmeupWidgetStateMixin {
   var _tabController;
 
   @override
@@ -73,14 +74,13 @@ class _SmeupSectionState extends State<SmeupSection>
 
   Future<SmeupWidgetBuilderResponse> _getSectionChildren(
       SmeupSectionModel smeupSectionModel) async {
-    if (!smeupSectionModel.hasSections() &&
-        !smeupSectionModel.hasComponents()) {
+    if (!hasSections(smeupSectionModel) && !smeupSectionModel.hasComponents()) {
       return SmeupWidgetBuilderResponse(smeupSectionModel, Container());
     }
 
     Widget children;
 
-    if (smeupSectionModel.hasSections()) {
+    if (hasSections(smeupSectionModel)) {
       var sections = List<Widget>.empty(growable: true);
       double maxDim = 100;
       double totalDim = 0;

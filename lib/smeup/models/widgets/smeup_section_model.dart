@@ -52,10 +52,6 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
     if (selectedTabIndex == null) selectedTabIndex = 0;
   }
 
-  bool hasSections() {
-    return smeupSectionsModels != null && smeupSectionsModels.length > 0;
-  }
-
   bool hasComponents() {
     return components != null && components.length > 0;
   }

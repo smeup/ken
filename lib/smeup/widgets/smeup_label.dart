@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_label_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
@@ -84,12 +82,12 @@ class SmeupLabel extends StatefulWidget
 
   @override
   runControllerActivities() {
-    //print('setUIProperties in label');
+    smeupLabelModel = parseCommonProperties(smeupLabelModel);
 
     if (fontColor == null)
       fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
-    if (smeupLabelModel.id.isEmpty)
-      smeupLabelModel.id = 'LAB' + Random().nextInt(100).toString();
+    //if (smeupLabelModel.id.isEmpty)
+    //  smeupLabelModel.id = 'LAB' + Random().nextInt(100).toString();
 
     smeupLabelModel.valueColName =
         smeupLabelModel.optionsDefault['valueColName'] ?? '';
