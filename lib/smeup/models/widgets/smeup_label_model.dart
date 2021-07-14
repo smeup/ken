@@ -46,8 +46,6 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
       this.iconSize = defaultIconSize,
       title = ''})
       : super(title: title) {
-    //if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
-
     SmeupDataService.incrementDataFetch(id);
   }
 
@@ -57,5 +55,5 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
   }
 
   @override
-  setData() async {}
+  setData() async {} // TODO: to remove
 }
