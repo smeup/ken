@@ -1,12 +1,11 @@
 import 'dart:math';
 
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
-class SmeupImageModel extends SmeupComponentModel
-    implements SmeupDataInterface {
+class SmeupImageModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 40;
   static const double defaultHeight = 40;
   static const double defaultPadding = 0.0;

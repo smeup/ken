@@ -2,12 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
-class SmeupCaurouselModel extends SmeupComponentModel
-    implements SmeupDataInterface {
+class SmeupCaurouselModel extends SmeupModel implements SmeupDataInterface {
   List<Map> clientData;
   static const double defaultHeight = 100;
 

@@ -1,9 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
-class SmeupLineModel extends SmeupComponentModel {
+class SmeupLineModel extends SmeupModel {
   Color color = Colors.white;
   double thickness = 0;
 

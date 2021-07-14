@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_error_notifier.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
@@ -11,7 +10,7 @@ import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart
 import 'package:provider/provider.dart';
 
 class SmeupWidgetStateMixin {
-  Widget runBuild(BuildContext context, SmeupComponentModel model,
+  Widget runBuild(BuildContext context, SmeupModel model,
       GlobalKey<ScaffoldState> scaffoldKey,
       {Function notifierFunction}) {
     //
@@ -64,7 +63,7 @@ class SmeupWidgetStateMixin {
     });
   }
 
-  void notifyError(context, SmeupComponentModel model, Object error) {
+  void notifyError(context, SmeupModel model, Object error) {
     final SmeupErrorNotifier errorNotifier =
         Provider.of<SmeupErrorNotifier>(context, listen: false);
 
@@ -92,8 +91,7 @@ class SmeupWidgetStateMixin {
     });
   }
 
-  void runDispose(
-      GlobalKey<ScaffoldState> scaffoldKey, SmeupComponentModel model) {
+  void runDispose(GlobalKey<ScaffoldState> scaffoldKey, SmeupModel model) {
     SmeupWidgetNotifier.removeWidget(scaffoldKey.hashCode, model.id);
   }
 

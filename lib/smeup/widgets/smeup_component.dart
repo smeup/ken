@@ -27,11 +27,11 @@ import 'smeup_form.dart';
 import 'smeup_label.dart';
 
 class SmeupComponent extends StatefulWidget {
-  final SmeupModel smeupComponentModel;
+  final SmeupModel smeupModel;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
 
-  SmeupComponent(this.smeupComponentModel, this.scaffoldKey, this.formKey);
+  SmeupComponent(this.smeupModel, this.scaffoldKey, this.formKey);
 
   @override
   _SmeupComponentState createState() => _SmeupComponentState();
@@ -43,13 +43,11 @@ class _SmeupComponentState extends State<SmeupComponent> {
     //MediaQueryData deviceInfo = MediaQuery.of(context);
 
     return FutureBuilder<SmeupWidgetBuilderResponse>(
-      future: _getComponentChildren(widget.smeupComponentModel),
+      future: _getComponentChildren(widget.smeupModel),
       builder: (BuildContext context,
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return widget.smeupComponentModel.showLoader
-              ? SmeupWait()
-              : Container();
+          return widget.smeupModel.showLoader ? SmeupWait() : Container();
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(
@@ -65,21 +63,19 @@ class _SmeupComponentState extends State<SmeupComponent> {
   }
 
   Future<SmeupWidgetBuilderResponse> _getComponentChildren(
-      SmeupModel smeupComponentModel) async {
+      SmeupModel smeupModel) async {
     var children;
 
-    switch (smeupComponentModel.type) {
+    switch (smeupModel.type) {
       case 'LAB':
         children = SmeupLabel.withController(
-            smeupComponentModel, widget.scaffoldKey, widget.formKey);
+            smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'GAU':
-        children =
-            SmeupGauge(smeupComponentModel, widget.scaffoldKey, widget.formKey);
+        children = SmeupGauge(smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'TRE':
-        children =
-            SmeupTree(smeupComponentModel, widget.scaffoldKey, widget.formKey);
+        children = SmeupTree(smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'CAL':
         DateTime initialFirstWork;
@@ -89,63 +85,58 @@ class _SmeupComponentState extends State<SmeupComponent> {
         initialLastWork =
             DateTime(DateTime.now().year, DateTime.now().month + 1, 0);
 
-        children = SmeupCalendar(smeupComponentModel, widget.scaffoldKey,
-            widget.formKey, initialFirstWork, initialLastWork);
+        children = SmeupCalendar(smeupModel, widget.scaffoldKey, widget.formKey,
+            initialFirstWork, initialLastWork);
         break;
       case 'CHA':
-        children =
-            SmeupChart(smeupComponentModel, widget.scaffoldKey, widget.formKey);
+        children = SmeupChart(smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'BTN':
-        children = SmeupButtons(
-            smeupComponentModel, widget.scaffoldKey, widget.formKey);
+        children = SmeupButtons(smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'BOX':
-        children = SmeupListBox(
-            smeupComponentModel, widget.scaffoldKey, widget.formKey);
+        children = SmeupListBox(smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'LIN':
-        children =
-            SmeupLine(smeupComponentModel, widget.scaffoldKey, widget.formKey);
+        children = SmeupLine(smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'DSH':
-        children = SmeupDashboard(
-            smeupComponentModel, widget.scaffoldKey, widget.formKey);
+        children =
+            SmeupDashboard(smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'IMG':
-        children =
-            SmeupImage(smeupComponentModel, widget.scaffoldKey, widget.formKey);
+        children = SmeupImage(smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'FLD':
-        switch (smeupComponentModel.options['FLD']['default']['type']) {
+        switch (smeupModel.options['FLD']['default']['type']) {
           case 'itx':
-            children = SmeupTextField(
-                smeupComponentModel, widget.scaffoldKey, widget.formKey);
+            children =
+                SmeupTextField(smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
           case 'sld':
-            children = SmeupSlider(
-                smeupComponentModel, widget.scaffoldKey, widget.formKey);
+            children =
+                SmeupSlider(smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
           case 'pgb':
             children = SmeupProgressBar(
-                smeupComponentModel, widget.scaffoldKey, widget.formKey);
+                smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
           case 'rad':
             children = SmeupRadioButtons(
-                smeupComponentModel, widget.scaffoldKey, widget.formKey);
+                smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
           case 'tpk':
-            children = SmeupTimePicker(
-                smeupComponentModel, widget.scaffoldKey, widget.formKey);
+            children =
+                SmeupTimePicker(smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
           case 'qrc':
             children = SmeupQRCodeReader(
-                smeupComponentModel, widget.scaffoldKey, widget.formKey);
+                smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
           default:
@@ -154,7 +145,7 @@ class _SmeupComponentState extends State<SmeupComponent> {
 
       case 'SCH':
         final smeupServiceResponse =
-            await SmeupDataService.invoke(smeupComponentModel.smeupFun);
+            await SmeupDataService.invoke(smeupModel.smeupFun);
 
         if (!smeupServiceResponse.succeded) {
           children = SmeupNotAvailable();
@@ -186,6 +177,6 @@ class _SmeupComponentState extends State<SmeupComponent> {
             logType: LogType.error);
     }
 
-    return SmeupWidgetBuilderResponse(smeupComponentModel, children);
+    return SmeupWidgetBuilderResponse(smeupModel, children);
   }
 }

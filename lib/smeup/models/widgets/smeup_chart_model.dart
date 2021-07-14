@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 
-class SmeupChartModel extends SmeupComponentModel {
+class SmeupChartModel extends SmeupModel {
   SmeupChartModel({title = ''}) : super(title: title) {
     id = 'CHA' + Random().nextInt(100).toString();
   }

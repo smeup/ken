@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
-class SmeupCalendarModel extends SmeupComponentModel {
+class SmeupCalendarModel extends SmeupModel {
   static const double defaultWidth = 0;
   static const double defaultHeight = 0;
   static const double defaultEventFontSize = 12.0;

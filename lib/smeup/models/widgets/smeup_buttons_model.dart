@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_treeview/tree_view.dart';
 
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
-class SmeupButtonsModel extends SmeupComponentModel
-    implements SmeupDataInterface {
+class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 0;
   static const double defaultHeight = 60;
   static const MainAxisAlignment defaultPosition = MainAxisAlignment.center;

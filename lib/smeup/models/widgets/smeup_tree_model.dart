@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 
-class SmeupTreeModel extends SmeupComponentModel implements SmeupDataInterface {
+class SmeupTreeModel extends SmeupModel implements SmeupDataInterface {
   dynamic clientData;
 
   SmeupTreeModel({this.clientData, title = ''}) : super(title: title) {

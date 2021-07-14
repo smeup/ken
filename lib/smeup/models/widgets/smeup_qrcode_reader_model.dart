@@ -1,11 +1,10 @@
 import 'dart:math';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_component_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
-class SmeupQRCodeReaderModel extends SmeupComponentModel
-    implements SmeupDataInterface {
+class SmeupQRCodeReaderModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultPadding = 5.0;
   static const double defaultSize = 200;
 

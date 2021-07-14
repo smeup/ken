@@ -66,7 +66,6 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
     if (jsonMap.containsKey(componentName)) {
       List<dynamic> componentsJson = jsonMap[componentName];
       componentsJson.forEach((v) {
-        //SmeupComponentModel smeupComponent = SmeupComponentModel.fromMap(v);
         dynamic model;
 
         try {
