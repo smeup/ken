@@ -13,7 +13,6 @@ class SmeupWidgetStateMixin {
   Widget runBuild(BuildContext context, SmeupModel model,
       GlobalKey<ScaffoldState> scaffoldKey,
       {Function notifierFunction}) {
-    //
     if (notifierFunction != null) {
       final SmeupWidgetNotifier notifier =
           Provider.of<SmeupWidgetNotifier>(context, listen: false);
@@ -91,8 +90,8 @@ class SmeupWidgetStateMixin {
     });
   }
 
-  void runDispose(GlobalKey<ScaffoldState> scaffoldKey, SmeupModel model) {
-    SmeupWidgetNotifier.removeWidget(scaffoldKey.hashCode, model.id);
+  void runDispose(GlobalKey<ScaffoldState> scaffoldKey, String id) {
+    SmeupWidgetNotifier.removeWidget(scaffoldKey.hashCode, id);
   }
 
   bool hasSections(SmeupModel model) {

@@ -9,5 +9,5 @@ abstract class SmeupWidgetStateInterface {
   Future<SmeupWidgetBuilderResponse> getChildren();
   Future<SmeupWidgetBuilderResponse> getFunErrorResponse(
       BuildContext context, SmeupModel model);
-  void runDispose(GlobalKey<ScaffoldState> scaffoldKey, SmeupModel model);
+  void runDispose(GlobalKey<ScaffoldState> scaffoldKey, String id);
 }

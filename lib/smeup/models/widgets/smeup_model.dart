@@ -35,11 +35,10 @@ abstract class SmeupModel {
   }
 
   SmeupModel.fromMap(Map<String, dynamic> jsonMap) {
-    this.jsonMap = jsonMap; //TODO: to remove
+    this.jsonMap = jsonMap;
     type = jsonMap['type'];
-    dynamisms = jsonMap['dynamisms']; //TODO: to remove
+    dynamisms = jsonMap['dynamisms'];
 
-    //TODO: to remove
     if (type != null && (id == null || id.isEmpty)) {
       id = jsonMap['id'] ?? jsonMap['type'] + Random().nextInt(100).toString();
 
@@ -63,11 +62,10 @@ abstract class SmeupModel {
           SmeupUtilities.getInt(optionsDefault['refresh']) ?? defaultRefresh;
     }
 
-    //TODO: to remove
     loaded = jsonMap['loaded'];
-    //TODO: to remove
+
     data = jsonMap['data'];
-    //TODO: to remove
+
     layout = jsonMap['layout'];
   }
 }

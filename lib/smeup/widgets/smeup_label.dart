@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_label_dao.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_label_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
@@ -41,7 +40,7 @@ class SmeupLabel extends StatefulWidget
     this.scaffoldKey,
     this.formKey,
   ) {
-    runControllerActivities();
+    runControllerActivities(smeupLabelModel);
   }
 
   SmeupLabel(this.scaffoldKey, this.formKey,
@@ -81,63 +80,25 @@ class SmeupLabel extends StatefulWidget
   }
 
   @override
-  runControllerActivities() {
-    smeupLabelModel = parseCommonProperties(smeupLabelModel);
+  runControllerActivities(SmeupModel model) {
+    SmeupLabelModel m = model;
 
-    if (fontColor == null)
-      fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
-    //if (smeupLabelModel.id.isEmpty)
-    //  smeupLabelModel.id = 'LAB' + Random().nextInt(100).toString();
-
-    smeupLabelModel.valueColName =
-        smeupLabelModel.optionsDefault['valueColName'] ?? '';
-    smeupLabelModel.colorColName =
-        smeupLabelModel.optionsDefault['colorColName'] ?? '';
-    smeupLabelModel.colorFontColName =
-        smeupLabelModel.optionsDefault['colorFontColName'] ?? '';
-    smeupLabelModel.padding =
-        SmeupUtilities.getDouble(smeupLabelModel.optionsDefault['padding']) ??
-            SmeupLabelModel.defaultPadding;
-    smeupLabelModel.fontSize =
-        SmeupUtilities.getDouble(smeupLabelModel.optionsDefault['fontSize']) ??
-            SmeupLabelModel.defaultFontSize;
-    smeupLabelModel.iconSize =
-        SmeupUtilities.getDouble(smeupLabelModel.optionsDefault['iconSize']) ??
-            SmeupLabelModel.defaultIconSize;
-    smeupLabelModel.align = SmeupUtilities.getAlignmentGeometry(
-        smeupLabelModel.optionsDefault['align']);
-    smeupLabelModel.width =
-        SmeupUtilities.getDouble(smeupLabelModel.optionsDefault['width']) ??
-            SmeupLabelModel.defaultWidth;
-    smeupLabelModel.height =
-        SmeupUtilities.getDouble(smeupLabelModel.optionsDefault['height']) ??
-            SmeupLabelModel.defaultHeight;
-    smeupLabelModel.title = smeupLabelModel.jsonMap['title'] ?? '';
-    if (smeupLabelModel.optionsDefault['backColor'] != null) {
-      smeupLabelModel.backColor = SmeupUtilities.getColorFromRGB(
-          smeupLabelModel.optionsDefault['backColor']);
-    }
-    if (smeupLabelModel.optionsDefault['fontColor'] != null) {
-      smeupLabelModel.fontColor = SmeupUtilities.getColorFromRGB(
-          smeupLabelModel.optionsDefault['fontColor']);
-    }
-    if (smeupLabelModel.optionsDefault['icon'] != null)
-      smeupLabelModel.iconData =
-          int.tryParse(smeupLabelModel.optionsDefault['icon']) ?? 0;
-    else
-      smeupLabelModel.iconData = 0;
-    smeupLabelModel.iconColname =
-        smeupLabelModel.optionsDefault['iconColName'] ?? '';
-    if (smeupLabelModel.optionsDefault['fontBold'] == null) {
-      smeupLabelModel.fontbold = SmeupLabelModel.defaultFontbold;
-    } else {
-      if (smeupLabelModel.optionsDefault['fontBold'] is bool)
-        smeupLabelModel.fontbold = smeupLabelModel.optionsDefault['fontBold'];
-      else if (smeupLabelModel.optionsDefault['fontBold'] == 'Yes')
-        smeupLabelModel.fontbold = true;
-      else
-        smeupLabelModel.fontbold = false;
-    }
+    valueColName = m.valueColName;
+    padding = m.padding;
+    fontSize = m.fontSize;
+    align = m.align;
+    fontbold = m.fontbold;
+    width = m.width;
+    height = m.height;
+    clientData = m.clientData;
+    colorColName = m.colorColName;
+    backColor = m.backColor;
+    fontColor = m.fontColor;
+    iconData = m.iconData;
+    iconColname = m.iconColname;
+    colorFontColName = m.colorFontColName;
+    iconSize = m.iconSize;
+    title = m.title;
   }
 
   @override
@@ -157,7 +118,7 @@ class _SmeupLabelState extends State<SmeupLabel>
 
   @override
   void dispose() {
-    runDispose(widget.scaffoldKey, smeupLabelModel);
+    runDispose(widget.scaffoldKey, smeupLabelModel.id);
     super.dispose();
   }
 
@@ -171,6 +132,19 @@ class _SmeupLabelState extends State<SmeupLabel>
     return label;
   }
 
+  /// Label's structure:
+  ///
+  /// Container (widget)
+  ///     Row
+  ///         Container (label)
+  ///               Padding (children)
+  ///                   Column (col)
+  ///                       List<Align> (alignes)
+  ///                             Align (align)
+  ///                                 Text
+  ///
+  ///         Icon (icon)
+  ///
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     //await smeupLabelModel.setData();
@@ -186,32 +160,30 @@ class _SmeupLabelState extends State<SmeupLabel>
     Widget children;
 
     List<Align> alignes = List<Align>.empty(growable: true);
-    double padding = smeupLabelModel.padding;
-    double fontSize = smeupLabelModel.fontSize;
+    double padding = widget.padding;
+    double fontSize = widget.fontSize;
 
-    Color backColor = smeupLabelModel.backColor;
-    if (smeupLabelModel.colorColName.isNotEmpty &&
-        smeupLabelModel.data[0][smeupLabelModel.colorColName] != null) {
-      backColor = smeupLabelModel.data[0][smeupLabelModel.colorColName];
+    Color backColor = widget.backColor;
+    if (widget.colorColName.isNotEmpty &&
+        smeupLabelModel.data[0][widget.colorColName] != null) {
+      backColor = smeupLabelModel.data[0][widget.colorColName];
     }
 
-    Color fontColor = smeupLabelModel.fontColor;
-    if (smeupLabelModel.colorFontColName.isNotEmpty &&
-        smeupLabelModel.data[0][smeupLabelModel.colorFontColName] != null) {
-      fontColor = smeupLabelModel.data[0][smeupLabelModel.colorFontColName];
+    Color fontColor = widget.fontColor;
+    if (widget.colorFontColName.isNotEmpty &&
+        smeupLabelModel.data[0][widget.colorFontColName] != null) {
+      fontColor = smeupLabelModel.data[0][widget.colorFontColName];
     }
 
     (smeupLabelModel.data as List).forEach((l) {
       var map = (l as Map);
       final align = Align(
-        alignment: smeupLabelModel.align,
+        alignment: widget.align,
         child: Text(
           map['value'],
           style: TextStyle(
               color: fontColor,
-              fontWeight: smeupLabelModel.fontbold
-                  ? FontWeight.bold
-                  : FontWeight.normal,
+              fontWeight: widget.fontbold ? FontWeight.bold : FontWeight.normal,
               fontSize: fontSize),
         ),
       );
@@ -231,21 +203,21 @@ class _SmeupLabelState extends State<SmeupLabel>
       );
 
       double labelHeight =
-          smeupLabelModel.height * alignes.length + padding * (fontSize / 5);
+          widget.height * alignes.length + padding * (fontSize / 5);
 
       final label =
           Container(color: backColor, height: labelHeight, child: children);
 
       int iconData = 0;
-      if (smeupLabelModel.iconData != 0) {
-        iconData = smeupLabelModel.iconData;
+      if (widget.iconData != 0) {
+        iconData = widget.iconData;
       }
-      if (smeupLabelModel.iconColname.isNotEmpty &&
-          smeupLabelModel.data[0][smeupLabelModel.iconColname] != null) {
-        iconData = smeupLabelModel.data[0][smeupLabelModel.iconColname];
+      if (widget.iconColname.isNotEmpty &&
+          smeupLabelModel.data[0][widget.iconColname] != null) {
+        iconData = smeupLabelModel.data[0][widget.iconColname];
       }
 
-      double iconHeight = smeupLabelModel.iconSize;
+      double iconHeight = widget.iconSize;
 
       if (iconData == 0) {
         return SmeupWidgetBuilderResponse(smeupLabelModel, label);
@@ -253,13 +225,13 @@ class _SmeupLabelState extends State<SmeupLabel>
         final icon = Icon(
           IconData(iconData, fontFamily: 'MaterialIcons'),
           color: fontColor,
-          size: smeupLabelModel.iconSize,
+          size: iconHeight,
         );
 
         var widget;
         double widgetHeight = labelHeight + iconHeight;
 
-        switch (smeupLabelModel.align.toString()) {
+        switch (widget.align.toString()) {
           case 'centerLeft': // text on the left icon on the right
             widget = Container(
               child: Row(
