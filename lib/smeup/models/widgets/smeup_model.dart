@@ -26,7 +26,7 @@ abstract class SmeupModel {
   int serviceStatusCode = 0;
   int refresh;
 
-  bool loaded = false;
+  bool dataLoaded = false;
 
   List<SmeupSectionModel> smeupSectionsModels;
 
@@ -62,7 +62,7 @@ abstract class SmeupModel {
           SmeupUtilities.getInt(optionsDefault['refresh']) ?? defaultRefresh;
     }
 
-    loaded = jsonMap['loaded'];
+    dataLoaded = jsonMap['loaded'];
 
     data = jsonMap['data'];
 

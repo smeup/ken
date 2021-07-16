@@ -94,9 +94,9 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
         fontbold = false;
     }
 
-    if (!loaded) {
+    if (!dataLoaded) {
       data = SmeupLabelDao.getData(this);
-      loaded = true;
+      dataLoaded = true;
     }
 
     SmeupDataService.incrementDataFetch(id);
