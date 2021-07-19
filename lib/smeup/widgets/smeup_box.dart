@@ -144,7 +144,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                       cols.forEach((col) {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']];
+                          String rowData = data[col['code']].toString();
 
                           if (col['ogg'] == 'D8*YYMD') {
                             rowData = DateFormat("dd/MM/yyyy")
@@ -212,7 +212,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                       cols.forEach((col) {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']];
+                          String rowData = data[col['code']].toString();
 
                           if (col['ogg'] == 'D8*YYMD') {
                             rowData = DateFormat("dd/MM/yyyy")
@@ -283,7 +283,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                       cols.forEach((col) {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']];
+                          String rowData = data[col['code']].toString();
 
                           if (col['ogg'] == 'D8*YYMD') {
                             rowData = DateFormat("dd/MM/yyyy")
@@ -346,7 +346,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                       cols.forEach((col) {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']];
+                          String rowData = data[col['code']].toString();
 
                           if (col['ogg'] == 'D8*YYMD') {
                             rowData = DateFormat("dd/MM/yyyy")
@@ -438,7 +438,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                       cols.forEach((col) {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']];
+                          String rowData = data[col['code']].toString();
 
                           if (col['ogg'] == 'D8*YYMD') {
                             rowData = DateFormat("dd/MM/yyyy")
