@@ -153,19 +153,27 @@ class _SmeupListBoxState extends State<SmeupListBox>
   Widget _getSimpleList(List<Widget> cells, EdgeInsets padding) {
     var list;
     if (widget.smeupListModel.orientation == Axis.vertical) {
-      list = SingleChildScrollView(
-        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: cells,
+      list = RefreshIndicator(
+        onRefresh: _refreshList,
+        child: SingleChildScrollView(
+          physics:
+              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: cells,
+          ),
         ),
       );
     } else {
-      list = SingleChildScrollView(
-        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: cells,
+      list = RefreshIndicator(
+        onRefresh: _refreshList,
+        child: SingleChildScrollView(
+          physics:
+              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: cells,
+          ),
         ),
       );
     }
@@ -195,7 +203,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
           col = widget.smeupListModel.landscapeColumns;
         }
         return RefreshIndicator(
-          onRefresh: _refreshRandomNumbers,
+          onRefresh: _refreshList,
           child: GridView.count(
             physics:
                 BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
@@ -223,7 +231,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
     return container;
   }
 
-  Future<void> _refreshRandomNumbers() async {
+  Future<void> _refreshList() async {
     //await _loadData();
     setState(() {});
   }
