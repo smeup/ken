@@ -95,8 +95,10 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
     }
 
     if (!dataLoaded) {
-      data = SmeupLabelDao.getData(this);
-      dataLoaded = true;
+      SmeupLabelDao.getData(this).then((value) {
+        data = value;
+        dataLoaded = true;
+      });
     }
 
     SmeupDataService.incrementDataFetch(id);

@@ -234,9 +234,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
     data['rows'].forEach((dataElement) {
       var boxModel = SmeupBoxModel(
           layout: widget.smeupListModel.boxLayout,
-          clientColumns: data['columns'] != null
-              ? data['columns']
-              : widget.smeupListModel.boxColumnNames,
+          columns: data['columns'],
           height: widget.smeupListModel.height,
           width: widget.smeupListModel.width,
           title: widget.smeupListModel.title,

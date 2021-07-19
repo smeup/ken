@@ -14,7 +14,7 @@ class SmeupBoxModel extends SmeupModel implements SmeupDataInterface {
   double height;
   double fontsize;
   String layout;
-  List<dynamic> clientColumns;
+  List<dynamic> columns;
   //Function clientOnTap;
   dynamic clientRow;
 
@@ -23,7 +23,7 @@ class SmeupBoxModel extends SmeupModel implements SmeupDataInterface {
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.layout = defaultLayout,
-      this.clientColumns,
+      this.columns,
       title = '',
       this.clientRow})
       : super(title: title) {

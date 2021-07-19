@@ -62,7 +62,7 @@ abstract class SmeupModel {
           SmeupUtilities.getInt(optionsDefault['refresh']) ?? defaultRefresh;
     }
 
-    dataLoaded = jsonMap['loaded'];
+    dataLoaded = jsonMap['loaded'] ?? false;
 
     data = jsonMap['data'];
 

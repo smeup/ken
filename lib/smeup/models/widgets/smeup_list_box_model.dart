@@ -15,7 +15,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
 
   int portraitColumns;
   int landscapeColumns;
-  List<String> boxColumnNames;
+  //List<String> boxColumnNames;
   double width;
   double height;
   double listHeight;
@@ -31,7 +31,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       {this.portraitColumns,
       this.landscapeColumns,
       this.boxLayout,
-      this.boxColumnNames,
+      //this.boxColumnNames,
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.listHeight = defaultHeight,
@@ -45,12 +45,13 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupListBoxModel.fromMap(response,
-      {this.portraitColumns,
-      this.landscapeColumns,
-      this.boxLayout,
-      this.boxColumnNames})
-      : super.fromMap(response) {
+  SmeupListBoxModel.fromMap(
+    response, {
+    this.portraitColumns,
+    this.landscapeColumns,
+    this.boxLayout,
+    //this.boxColumnNames
+  }) : super.fromMap(response) {
     //boxLayout = response['layout'] ?? 'default1';
     boxLayout = '';
     if (response['layout'] != null) {

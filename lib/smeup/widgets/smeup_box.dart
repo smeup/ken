@@ -37,6 +37,8 @@ class SmeupBox extends StatefulWidget {
 }
 
 class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
+  List<dynamic> _columns;
+
   @override
   void dispose() {
     // SmeupWidgetsNotifier.removeWidget(
@@ -87,32 +89,6 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     }
 
     switch (widget.smeupBoxModel.layout) {
-      // layout iotready
-
-      // case '1':
-      //   children = _getLayout1(smeupBoxModel.data, context);
-      //   break;
-      // case '2':
-      //   children = _getLayout2(smeupBoxModel.data, context);
-      //   break;
-      // case '3':
-      //   children = _getLayout3(smeupBoxModel.data, context);
-      //   break;
-      // case '4':
-      //   children = _getLayout4(smeupBoxModel.data, context);
-      //   break;
-      // case '5':
-      //   children = _getLayout5(smeupBoxModel.data, context);
-      //   break;
-      // case '6':
-      //   children = _getLayout6(smeupBoxModel.data, context);
-      //   break;
-      // case 'test':
-      //   children = _getLayoutTest(smeupBoxModel.data, context);
-      //   break;
-      // case 'empty':
-      //   children = _getLayoutEmpty(context);
-      //   break;
 
       // layouts Smeup
       case '1':
@@ -131,11 +107,6 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
         children = _getLayout5(smeupBoxModel.data, context);
         break;
       default:
-        // SmeupLogService.writeDebugMessage(
-        //     'Error SmeupBox layout not available: \'${widget.smeupBoxModel.layout}\'',
-        //     logType: LogType.error);
-        // children = SmeupNotAvailable();
-
         SmeupLogService.writeDebugMessage(
             'No layout received. Used default layout',
             logType: LogType.warning);
@@ -147,539 +118,8 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     return SmeupWidgetBuilderResponse(smeupBoxModel, children);
   }
 
-  // Widget _getLayoutEmpty(BuildContext context) {
-  //   return SizedBox(
-  //     height: widget.smeupBoxModel.height,
-  //   );
-  // }
-
-  // /// Layout1:
-  // /// Column:
-  // ///   Column:
-  // ///     Row:
-  // ///       Column
-  // ///         data-2
-  // ///         data-3
-  // ///         data-4
-  // ///       Icon
-  // ///         data-0
-  // ///         data-1
-  // ///   Row:
-  // ///     data-5
-  // ///     data-6
-  // Widget _getLayout1(dynamic data, BuildContext context) {
-  //   final cols = _getColumns(data);
-
-  //   Color cardColor =
-  //       SmeupUtilities.getColorFromRGB(data[cols[7]], opacity: data[cols[9]]);
-
-  //   if (data.length > 0) {
-  //     return GestureDetector(
-  //       onTap: () {
-  //         _manageTap(data);
-  //       },
-  //       child: Card(
-  //           color: cardColor,
-  //           child: Padding(
-  //             padding: const EdgeInsets.all(10.0),
-  //             child: Container(
-  //               height: widget.smeupBoxModel.height,
-  //               child: Column(
-  //                 children: [
-  //                   Expanded(
-  //                     flex: 3,
-  //                     child: Container(
-  //                       child: Column(
-  //                         children: [
-  //                           Expanded(
-  //                             child: Container(
-  //                               child: Row(
-  //                                 children: [
-  //                                   Expanded(
-  //                                     child: Container(
-  //                                       child: Column(
-  //                                         mainAxisAlignment:
-  //                                             MainAxisAlignment.spaceEvenly,
-  //                                         children: [
-  //                                           Align(
-  //                                             alignment: Alignment.centerLeft,
-  //                                             child: Text(
-  //                                               data[cols[2]],
-  //                                               style: TextStyle(
-  //                                                   fontSize: 16,
-  //                                                   fontWeight:
-  //                                                       FontWeight.bold),
-  //                                             ),
-  //                                           ),
-  //                                           Align(
-  //                                             alignment: Alignment.centerLeft,
-  //                                             child: Text(
-  //                                               data[cols[3]],
-  //                                               style: TextStyle(fontSize: 14),
-  //                                             ),
-  //                                           ),
-  //                                           Align(
-  //                                             alignment: Alignment.centerLeft,
-  //                                             child: Text(data[cols[4]],
-  //                                                 style: TextStyle(
-  //                                                     fontSize: 12,
-  //                                                     color: Colors.black38)),
-  //                                           ),
-  //                                         ],
-  //                                       ),
-  //                                     ),
-  //                                   ),
-  //                                   Container(
-  //                                     padding: EdgeInsets.only(top: 10),
-  //                                     child: Align(
-  //                                       alignment: Alignment.topCenter,
-  //                                       child: Icon(
-  //                                         IconData(data[cols[0]],
-  //                                             fontFamily: 'MaterialIcons'),
-  //                                         color: SmeupUtilities.getColorFromRGB(
-  //                                             data[cols[1]]),
-  //                                         size: 25,
-  //                                       ),
-  //                                     ),
-  //                                   )
-  //                                 ],
-  //                               ),
-  //                             ),
-  //                           )
-  //                         ],
-  //                       ),
-  //                     ),
-  //                   ),
-  //                   Expanded(
-  //                     flex: 1,
-  //                     child: Container(
-  //                       child: Padding(
-  //                         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-  //                         child: Row(
-  //                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                           children: [
-  //                             Column(
-  //                               children: [
-  //                                 Text(
-  //                                     data[widget
-  //                                         .smeupBoxModel.clientColumns[5]],
-  //                                     style: TextStyle(fontSize: 16)),
-  //                                 Text(cols[5], style: TextStyle(fontSize: 10)),
-  //                               ],
-  //                             ),
-  //                             Column(
-  //                               children: [
-  //                                 Text(
-  //                                     data[widget
-  //                                         .smeupBoxModel.clientColumns[6]],
-  //                                     style: TextStyle(fontSize: 16)),
-  //                                 Text(cols[6], style: TextStyle(fontSize: 10)),
-  //                               ],
-  //                             ),
-  //                           ],
-  //                         ),
-  //                       ),
-  //                     ),
-  //                   )
-  //                 ],
-  //               ),
-  //             ),
-  //           )),
-  //     );
-  //   }
-
-  //   SmeupLogService.writeDebugMessage('Error SmeupBox widget not created',
-  //       logType: LogType.error);
-
-  //   return SmeupNotAvailable();
-  // }
-
-  // /// Layout2:
-  // /// Column
-  // ///   Column:
-  // ///         data-1
-  // ///         data-2
-  // ///   Row:
-  // ///    column
-  // ///     data-3
-  // ///     data-4
-  // ///     Icon
-  // ///       data-5
-  // ///       data-6
-  // Widget _getLayout2(dynamic data, BuildContext context) {
-  //   final cols = _getColumns(data);
-
-  //   if (data.length > 0) {
-  //     return GestureDetector(
-  //       onTap: () {
-  //         _manageTap(data);
-  //       },
-  //       child: Card(
-  //           child: Padding(
-  //         padding: const EdgeInsets.all(10.0),
-  //         child: Container(
-  //           child: Column(
-  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //             children: [
-  //               Expanded(
-  //                 child: Container(
-  //                   padding: EdgeInsets.only(top: 10),
-  //                   child: Column(
-  //                     children: [
-  //                       Padding(
-  //                         padding: const EdgeInsets.only(left: 10.0),
-  //                         child: Align(
-  //                           alignment: Alignment.centerLeft,
-  //                           child: Text(
-  //                             data[cols[0]],
-  //                             style: TextStyle(
-  //                                 fontSize: 16, fontWeight: FontWeight.bold),
-  //                           ),
-  //                         ),
-  //                       ),
-  //                       SizedBox(height: 10),
-  //                       Padding(
-  //                         padding: const EdgeInsets.only(left: 10.0),
-  //                         child: Align(
-  //                           alignment: Alignment.centerLeft,
-  //                           child: Text(
-  //                             data[cols[1]],
-  //                             style: TextStyle(
-  //                                 fontSize: 12, color: Colors.black38),
-  //                           ),
-  //                         ),
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 ),
-  //               ),
-  //               Expanded(
-  //                 child: Container(
-  //                   padding: EdgeInsets.only(top: 20),
-  //                   child: Row(
-  //                     children: [
-  //                       Expanded(
-  //                         flex: 2,
-  //                         child: Container(
-  //                           padding: EdgeInsets.only(left: 10),
-  //                           child: Align(
-  //                             alignment: Alignment.centerLeft,
-  //                             child: Column(
-  //                               children: [
-  //                                 Text(data[cols[2]],
-  //                                     style: TextStyle(fontSize: 16)),
-  //                                 Text(cols[2], style: TextStyle(fontSize: 10)),
-  //                               ],
-  //                             ),
-  //                           ),
-  //                         ),
-  //                       ),
-  //                       Expanded(
-  //                           flex: 1,
-  //                           child: Container(
-  //                             padding: EdgeInsets.only(top: 5),
-  //                             child: Align(
-  //                               alignment: Alignment.topCenter,
-  //                               child: Align(
-  //                                 alignment: Alignment.topRight,
-  //                                 child: Icon(
-  //                                   IconData(data[cols[3]],
-  //                                       fontFamily: 'MaterialIcons'),
-  //                                   color: SmeupUtilities.getColorFromRGB(
-  //                                       data[cols[4]]),
-  //                                   size: 25,
-  //                                 ),
-  //                               ),
-  //                             ),
-  //                           ))
-  //                     ],
-  //                   ),
-  //                 ),
-  //               )
-  //             ],
-  //           ),
-  //         ),
-  //       )),
-  //     );
-  //   }
-
-  //   SmeupLogService.writeDebugMessage('Error SmeupBox widget not created',
-  //       logType: LogType.error);
-
-  //   return SmeupNotAvailable();
-  // }
-
-  // /// Layout3:
-  // ///   Row:
-  // ///    column
-  // ///     data-3
-  // ///     data-4
-  // ///    Icon
-  // ///     data-5
-  // ///     data-6
-  // Widget _getLayout3(dynamic data, BuildContext context) {
-  //   final cols = _getColumns(data);
-
-  //   if (data.length > 0) {
-  //     return GestureDetector(
-  //       onTap: () {
-  //         _manageTap(data);
-  //       },
-  //       child: Card(
-  //           child: Padding(
-  //               padding: const EdgeInsets.all(10.0),
-  //               child: Container(
-  //                 child: Row(
-  //                   children: [
-  //                     Expanded(
-  //                       child: Container(
-  //                         padding: EdgeInsets.only(top: 10),
-  //                         child: Column(
-  //                           children: [
-  //                             if (cols[0].isNotEmpty)
-  //                               Align(
-  //                                 alignment: Alignment.centerLeft,
-  //                                 child: Text(cols[0],
-  //                                     style: TextStyle(
-  //                                         fontSize: 12, color: Colors.black38)),
-  //                               ),
-  //                             if (cols[0].isNotEmpty) SizedBox(height: 5),
-  //                             Align(
-  //                               alignment: Alignment.centerLeft,
-  //                               child: Text(data[cols[0]],
-  //                                   style: TextStyle(fontSize: 16)),
-  //                             ),
-  //                           ],
-  //                         ),
-  //                       ),
-  //                     ),
-  //                     Expanded(
-  //                         child: Container(
-  //                             child: Container(
-  //                       padding: EdgeInsets.only(top: 15),
-  //                       child: Align(
-  //                         alignment: Alignment.topCenter,
-  //                         child: Align(
-  //                           alignment: Alignment.topRight,
-  //                           child: Icon(
-  //                             IconData(data[cols[1]],
-  //                                 fontFamily: 'MaterialIcons'),
-  //                             color: SmeupUtilities.getColorFromRGB(
-  //                                 data[cols[2]],
-  //                                 opacity: data[cols[3]]),
-  //                             size: data[cols[4]],
-  //                           ),
-  //                         ),
-  //                       ),
-  //                     )))
-  //                   ],
-  //                 ),
-  //               ))),
-  //     );
-  //   }
-
-  //   SmeupLogService.writeDebugMessage('Error SmeupBox widget not created',
-  //       logType: LogType.error);
-
-  //   return SmeupNotAvailable();
-  // }
-
-  // ///   Row:
-  // ///    column
-  // ///     data-3
-  // ///     data-4
-  // ///    Icon
-  // ///     data-5
-  // ///     data-6
-  // Widget _getLayout4(dynamic data, BuildContext context) {
-  //   final cols = _getColumns(data);
-
-  //   if (data.length > 0) {
-  //     return GestureDetector(
-  //       onTap: () {
-  //         _manageTap(data);
-  //       },
-  //       child: Card(
-  //           child: Padding(
-  //               padding: const EdgeInsets.all(10.0),
-  //               child: Container(
-  //                 child: Row(
-  //                   children: [
-  //                     Expanded(
-  //                       child: Container(
-  //                         padding: EdgeInsets.only(top: 10),
-  //                         child: Column(
-  //                           children: [
-  //                             Align(
-  //                               alignment: Alignment.centerLeft,
-  //                               child: Text(data[cols[0]],
-  //                                   style: TextStyle(fontSize: 16)),
-  //                             ),
-  //                           ],
-  //                         ),
-  //                       ),
-  //                     ),
-  //                     Expanded(
-  //                         child: Container(
-  //                             child: Container(
-  //                       padding: EdgeInsets.only(top: 15),
-  //                       child: Align(
-  //                         alignment: Alignment.topCenter,
-  //                         child: Align(
-  //                           alignment: Alignment.topRight,
-  //                           child: Icon(
-  //                             IconData(data[cols[1]],
-  //                                 fontFamily: 'MaterialIcons'),
-  //                             color: SmeupUtilities.getColorFromRGB(
-  //                                 data[cols[2]],
-  //                                 opacity: data[cols[3]]),
-  //                             size: data[cols[4]],
-  //                           ),
-  //                         ),
-  //                       ),
-  //                     )))
-  //                   ],
-  //                 ),
-  //               ))),
-  //     );
-  //   }
-
-  //   SmeupLogService.writeDebugMessage('Error SmeupBox widget not created',
-  //       logType: LogType.error);
-
-  //   return SmeupNotAvailable();
-  // }
-
-  // /// Layout5:
-  // ///   Row:
-  // ///    Icon
-  // ///     data-5
-  // ///     data-6
-  // ///    column
-  // ///     data-3
-  // ///     data-4
-
-  // Widget _getLayout5(dynamic data, BuildContext context) {
-  //   final cols = _getColumns(data);
-
-  //   if (data.length > 0) {
-  //     return GestureDetector(
-  //       onTap: () {
-  //         _manageTap(data);
-  //       },
-  //       child: Card(
-  //           child: Padding(
-  //               padding: const EdgeInsets.all(5.0),
-  //               child: Container(
-  //                 child: Row(
-  //                   children: [
-  //                     Padding(
-  //                       padding: EdgeInsets.only(right: 5),
-  //                       child: Icon(
-  //                         IconData(data[cols[0]], fontFamily: 'MaterialIcons'),
-  //                         color: Colors.black38,
-  //                       ),
-  //                     ),
-  //                     Expanded(
-  //                       child: Container(
-  //                         padding: EdgeInsets.all(5.0),
-  //                         child: Column(
-  //                           children: [
-  //                             Align(
-  //                               alignment: Alignment.centerLeft,
-  //                               child: Text(data[cols[1]],
-  //                                   style: TextStyle(
-  //                                       fontSize: 14,
-  //                                       fontWeight: FontWeight.bold)),
-  //                             ),
-  //                             Align(
-  //                               alignment: Alignment.centerLeft,
-  //                               child: Text(data[cols[2]],
-  //                                   style: TextStyle(
-  //                                       fontSize: 12, color: Colors.black38)),
-  //                             ),
-  //                           ],
-  //                         ),
-  //                       ),
-  //                     ),
-  //                   ],
-  //                 ),
-  //               ))),
-  //     );
-  //   }
-
-  //   SmeupLogService.writeDebugMessage('Error SmeupBox widget not created',
-  //       logType: LogType.error);
-
-  //   return SmeupNotAvailable();
-  // }
-
-  // /// Layout6:
-  // ///   Row:
-  // ///    Icon
-  // ///     data-1
-  // ///     data-2
-  // ///    data-3
-
-  // Widget _getLayout6(dynamic data, BuildContext context) {
-  //   final cols = _getColumns(data);
-
-  //   if (data.length > 0) {
-  //     return GestureDetector(
-  //       onTap: () {
-  //         _manageTap(data);
-  //       },
-  //       child: Card(
-  //           child: Padding(
-  //               padding: const EdgeInsets.all(5.0),
-  //               child: Container(
-  //                 child: Row(
-  //                   children: [
-  //                     Padding(
-  //                       padding: EdgeInsets.only(right: 5),
-  //                       child: Icon(
-  //                         IconData(data[cols[0]], fontFamily: 'MaterialIcons'),
-  //                         color: Colors.black38,
-  //                       ),
-  //                     ),
-  //                     Expanded(
-  //                       child: Container(
-  //                         padding: EdgeInsets.all(5.0),
-  //                         child: Align(
-  //                           alignment: Alignment.centerLeft,
-  //                           child: Text(data[cols[1]],
-  //                               style: TextStyle(
-  //                                   fontSize: 16, fontWeight: FontWeight.bold)),
-  //                         ),
-  //                       ),
-  //                     ),
-  //                   ],
-  //                 ),
-  //               ))),
-  //     );
-  //   }
-
-  //   SmeupLogService.writeDebugMessage('Error SmeupBox widget not created',
-  //       logType: LogType.error);
-
-  //   return SmeupNotAvailable();
-  // }
-
-  // /// LayoutTest:
-  // /// row:
-  // Widget _getLayoutTest(dynamic data, BuildContext context) {
-  //   return Container(
-  //     child: Text(data['test']),
-  //   );
-  // }
-
-  /// Layout1:
-  ///   Row:
-  ///    column
-  ///     data-0
-  ///     data-1
   Widget _getLayout1(dynamic data, BuildContext context) {
-    final cols = widget.smeupBoxModel.clientColumns;
+    final cols = _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -746,7 +186,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
   }
 
   Widget _getLayout2(dynamic data, BuildContext context) {
-    final cols = widget.smeupBoxModel.clientColumns;
+    final cols = _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -823,7 +263,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
   }
 
   Widget _getLayout3(dynamic data, BuildContext context) {
-    final cols = widget.smeupBoxModel.clientColumns;
+    final cols = _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -880,7 +320,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
   }
 
   Widget _getLayout4(dynamic data, BuildContext context) {
-    final cols = widget.smeupBoxModel.clientColumns;
+    final cols = _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -972,7 +412,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
   }
 
   Widget _getLayout5(dynamic data, BuildContext context) {
-    final cols = widget.smeupBoxModel.clientColumns;
+    final cols = _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -1049,7 +489,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
   }
 
   Widget _getLayoutDefault(dynamic data, BuildContext context) {
-    final cols = widget.smeupBoxModel.clientColumns;
+    final cols = _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -1074,7 +514,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                       cols.forEach((col) {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']];
+                          String rowData = data[col['code']].toString();
 
                           if (col['ogg'] == 'D8*YYMD') {
                             rowData = DateFormat("dd/MM/yyyy")
@@ -1110,20 +550,9 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     return SmeupNotAvailable();
   }
 
-  // List<String> _getColumns(dynamic data) {
-  //   var cols = widget.smeupBoxModel.clientColumns;
-  //   if (cols == null && data != null && (data as Map).length > 0) {
-  //     cols = List<String>.empty(growable: true);
-  //     (data as Map).keys.forEach((element) {
-  //       cols.add(element);
-  //     });
-  //   }
-  //   return cols;
-  // }
-
   Widget _getImage(dynamic data) {
     Widget widgetImg;
-    var colImg = widget.smeupBoxModel.clientColumns.firstWhere(
+    var colImg = _getColumns(data).firstWhere(
         (col) => col['ogg'] == 'J4IMG' && col['IO'] != 'H',
         orElse: () => null);
     if (colImg != null) {
@@ -1145,7 +574,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
   List<Widget> _getButtons(dynamic data) {
     var widgetBtns = List<Widget>.empty(growable: true);
 
-    var buttonCols = widget.smeupBoxModel.clientColumns
+    var buttonCols = _getColumns(data)
         .where((col) => col['ogg'] == 'J4BTN' && col['IO'] != 'H');
 
     buttonCols.forEach((col) {
@@ -1231,5 +660,41 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
       SmeupDynamismService.storeDynamicVariables(data);
       widget.onServerPressed();
     }
+  }
+
+  List<dynamic> _getColumns(dynamic data) {
+    if (_columns == null) {
+      if (widget.smeupBoxModel.columns != null)
+        _columns = widget.smeupBoxModel.columns;
+      else {
+        _columns = List<dynamic>.empty(growable: true);
+        (data as Map).keys.forEach((element) {
+          _columns.add({
+            "code": element,
+            "fieldNameForDecode": null,
+            "text": element,
+            "tip": null,
+            "dpy": null,
+            "aut": null,
+            "lun": null,
+            "lunNum": null,
+            "fill": null,
+            "ogg": null,
+            "obb": null,
+            "eTxt": null,
+            "grp": null,
+            "extension": null,
+            "formula": null,
+            "tfk": null,
+            "pfk": null,
+            "sfk": null,
+            "sortMode": null,
+            "filterValue": null,
+            "IO": "O"
+          });
+        });
+      }
+    }
+    return _columns;
   }
 }
