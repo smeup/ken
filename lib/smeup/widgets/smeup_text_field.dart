@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
@@ -112,7 +113,16 @@ class _SmeupTextFieldState extends State<SmeupTextField>
             smeupInputFieldModel.optionsDefault['valueField'] == null
         ? 'value'
         : smeupInputFieldModel.optionsDefault['valueField'];
-    String value = smeupInputFieldModel.data['rows'][0][valueField];
+    String value = smeupInputFieldModel.data['rows'][0][valueField].toString();
+
+    final List<Map> cols = smeupInputFieldModel.data['columns'];
+    if (cols != null) {
+      final col = cols.firstWhere((element) => element['code'] == valueField,
+          orElse: () => null);
+      if (col['ogg'] == 'D8*YYMD') {
+        value = DateFormat("dd/MM/yyyy").format(DateTime.tryParse(value));
+      }
+    }
 
     SmeupDynamismService.variables[smeupInputFieldModel.id] = value;
 

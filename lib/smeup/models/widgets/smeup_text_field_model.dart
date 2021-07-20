@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_treeview/tree_view.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
@@ -82,15 +81,15 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
         return;
       }
 
-      List rows = smeupServiceResponse.result.data['rows'];
-      if (smeupFun.fun['fun']['component'] == 'TRE') {
-        final String fieldName = 'codice';
-        optionsDefault['valueField'] = fieldName;
-        String value = (rows[0] as Node).data[fieldName];
-        data = _getClientDataStructure(value, fieldName: fieldName);
-      } else {
-        data = smeupServiceResponse.result.data;
-      }
+      // List rows = smeupServiceResponse.result.data['rows'];
+      // if (smeupFun.fun['fun']['component'] == 'TRE') {
+      //   final String fieldName = 'codice';
+      //   optionsDefault['valueField'] = fieldName;
+      //   String value = (rows[0] as Node).data[fieldName];
+      //   data = _getClientDataStructure(value, fieldName: fieldName);
+      // } else {
+      data = smeupServiceResponse.result.data;
+      // }
     }
 
     if (clientData != null) {
