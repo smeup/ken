@@ -52,7 +52,11 @@ class SmeupUtilities {
     if (s == null) {
       return false;
     }
-    return (int.tryParse(s) ?? null) != null;
+
+    if (((int.tryParse(s) ?? null) != null) ||
+        ((double.tryParse(s) ?? null) != null)) return true;
+
+    return false;
   }
 
   static int getInt(dynamic value) {

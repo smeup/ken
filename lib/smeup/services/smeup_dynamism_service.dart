@@ -68,7 +68,9 @@ class SmeupDynamismService {
         dynamisms.where((element) => element['event'] == event).toList();
     if (selectedDynamisms == null) return;
 
-    selectedDynamisms.forEach((dynamism) async {
+    for (var i = 0; i < selectedDynamisms.length; i++) {
+      final dynamism = selectedDynamisms[i];
+
       if (dynamism == null) return;
 
       if (dynamism['variables'] != null) {
@@ -139,14 +141,17 @@ class SmeupDynamismService {
             break;
 
           case 'FBK':
-            await SmeupDataService.invoke(smeupFunExec)
-                .then((smeupServiceResponse) async {
-              await _manageResponseMessage(
-                  context, smeupServiceResponse.result, scaffoldKey);
-              if (smeupServiceResponse.succeded) {
-                _manageNotify(notify, context, scaffoldKey.hashCode);
-              }
-            });
+            final smeupServiceResponse =
+                await SmeupDataService.invoke(smeupFunExec);
+
+            await _manageResponseMessage(
+                context, smeupServiceResponse.result, scaffoldKey);
+            if (smeupServiceResponse.succeded) {
+              _manageNotify(notify, context, scaffoldKey.hashCode);
+            } else {
+              return;
+            }
+
             break;
           default:
         }
@@ -160,7 +165,7 @@ class SmeupDynamismService {
         SmeupWidgetNotifier.notifyWidgets(
             targets, context, scaffoldKey.hashCode);
       }
-    });
+    }
   }
 
   static _showDialog(SmeupFun smeupFunExec, BuildContext context, String notify,
