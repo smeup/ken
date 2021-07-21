@@ -199,6 +199,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
           return dismissEnabled
               ? Dismissible(
                   key: item.key,
+                  direction: DismissDirection.endToStart,
                   onDismissed: (direction) {
                     setState(() {
                       cells.removeAt(index);
@@ -208,7 +209,19 @@ class _SmeupListBoxState extends State<SmeupListBox>
                     ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(content: Text('item deleted')));
                   },
-                  background: Container(color: Colors.red),
+                  background: Container(
+                    color: Colors.red,
+                    margin: EdgeInsets.symmetric(horizontal: 15),
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Icon(
+                        Icons.delete,
+                        color: Colors.white,
+                        size: 40,
+                      ),
+                    ),
+                  ),
                   child: item,
                 )
               : item;
