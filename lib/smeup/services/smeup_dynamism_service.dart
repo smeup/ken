@@ -141,9 +141,9 @@ class SmeupDynamismService {
           case 'FBK':
             await SmeupDataService.invoke(smeupFunExec)
                 .then((smeupServiceResponse) async {
+              await _manageResponseMessage(
+                  context, smeupServiceResponse.result, scaffoldKey);
               if (smeupServiceResponse.succeded) {
-                await _manageResponseMessage(
-                    context, smeupServiceResponse.result, scaffoldKey);
                 _manageNotify(notify, context, scaffoldKey.hashCode);
               }
             });
@@ -236,29 +236,36 @@ class SmeupDynamismService {
         List messages = response.data['messages'];
         if (messages.length > 0) {
           messages.forEach((message) {
-            String mode = message['mode'];
-            String severity = message['gravity'];
+            MessagesPromptMode mode =
+                message['mode'] ?? MessagesPromptMode.snackbar;
+            LogType severity = message['gravity'] ?? LogType.info;
             String text = message['message'];
 
             Color color;
             switch (severity) {
-              case 'ERROR':
+              case LogType.error:
                 color = SmeupOptions.theme.errorColor;
                 break;
-              case 'WARNING':
+              case LogType.warning:
                 color = Colors.amberAccent;
                 break;
               default:
                 color = Colors.green;
             }
 
-            if (mode.isNotEmpty && severity.isNotEmpty && text.isNotEmpty) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(text),
-                  backgroundColor: color,
-                ),
-              );
+            if (text.isNotEmpty) {
+              switch (mode) {
+                case MessagesPromptMode.snackbar:
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(text),
+                      backgroundColor: color,
+                    ),
+                  );
+
+                  break;
+                default:
+              }
             }
           });
           await new Future.delayed(const Duration(seconds: 1));

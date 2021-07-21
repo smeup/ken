@@ -5,6 +5,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 
 enum LogType { info, warning, error }
+enum MessagesPromptMode { snackbar }
 
 class SmeupLogService {
   static File _logFile;
