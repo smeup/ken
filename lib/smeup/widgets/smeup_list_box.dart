@@ -152,31 +152,69 @@ class _SmeupListBoxState extends State<SmeupListBox>
 
   Widget _getSimpleList(List<Widget> cells, EdgeInsets padding) {
     var list;
-    if (widget.smeupListModel.orientation == Axis.vertical) {
-      list = RefreshIndicator(
-        onRefresh: _refreshList,
-        child: SingleChildScrollView(
-          physics:
-              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: cells,
-          ),
-        ),
-      );
-    } else {
-      list = RefreshIndicator(
-        onRefresh: _refreshList,
-        child: SingleChildScrollView(
-          physics:
-              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: cells,
-          ),
-        ),
-      );
+    // if (widget.smeupListModel.orientation == Axis.vertical) {
+    //   list = RefreshIndicator(
+    //     onRefresh: _refreshList,
+    //     child:
+    //     SingleChildScrollView(
+    //       physics:
+    //           BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+    //       scrollDirection: Axis.vertical,
+    //       child: Column(
+    //         children: cells,
+    //       ),
+    //     ),
+    //   );
+    // } else {
+    //   list = RefreshIndicator(
+    //     onRefresh: _refreshList,
+    //     child: SingleChildScrollView(
+    //       physics:
+    //           BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+    //       scrollDirection: Axis.horizontal,
+    //       child: Row(
+    //         children: cells,
+    //       ),
+    //     ),
+    //   );
+    // }
+
+    bool dismissEnabled = false;
+
+    if ((widget.smeupListModel.dynamisms as List<dynamic>).firstWhere(
+            (element) => element['event'] == 'delete',
+            orElse: () => null) !=
+        null) {
+      dismissEnabled = true;
     }
+
+    list = RefreshIndicator(
+      onRefresh: _refreshList,
+      child: ListView.builder(
+        scrollDirection: widget.smeupListModel.orientation,
+        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        itemCount: cells.length,
+        itemBuilder: (context, index) {
+          final item = cells[index];
+          return dismissEnabled
+              ? Dismissible(
+                  key: item.key,
+                  onDismissed: (direction) {
+                    setState(() {
+                      cells.removeAt(index);
+                    });
+
+                    // Then show a snackbar.
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text('item deleted')));
+                  },
+                  background: Container(color: Colors.red),
+                  child: item,
+                )
+              : item;
+        },
+      ),
+    );
 
     // double height = 0;
     // if (widget.smeupListModel.orientation == Axis.vertical) {
@@ -239,7 +277,9 @@ class _SmeupListBoxState extends State<SmeupListBox>
   List<Widget> _getListWidget(BuildContext context, dynamic data) {
     final widgets = List<Widget>.empty(growable: true);
 
+    int counter = 0;
     data['rows'].forEach((dataElement) {
+      counter += 1;
       var boxModel = SmeupBoxModel(
           layout: widget.smeupListModel.boxLayout,
           columns: data['columns'],
@@ -250,6 +290,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
           clientRow: dataElement);
 
       final container = Container(
+          key: Key('${widget.formKey.toString()}_${counter.toString()}'),
           padding: const EdgeInsets.all(5.0),
           color: Colors.transparent,
           height: widget.smeupListModel.height == 0
