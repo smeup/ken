@@ -22,20 +22,17 @@ class SmeupBox extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final Function onServerPressed;
   final Function onClientPressed;
+  final Function onRefresh;
   final Color cardColor;
   final Color fontColor;
   final List<String> _excludedColumns = ['J4BTN', 'J4IMG'];
 
-  SmeupBox(
-    this.smeupListModel,
-    this.smeupBoxModel,
-    this.scaffoldKey,
-    this.formKey, {
-    this.onServerPressed,
-    this.onClientPressed,
-    this.cardColor,
-    this.fontColor,
-  });
+  SmeupBox(this.smeupListModel, this.smeupBoxModel, this.onRefresh,
+      this.scaffoldKey, this.formKey,
+      {this.onServerPressed,
+      this.onClientPressed,
+      this.cardColor,
+      this.fontColor});
 
   @override
   _SmeupBoxState createState() => _SmeupBoxState();
@@ -171,9 +168,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                   backgroundColor: SmeupOptions.theme.primaryColor,
                 ));
               }
-              setState(() {
-                //cells.removeAt(index);
-              });
+              widget.onRefresh();
             },
             background: Container(
               color: Colors.red,

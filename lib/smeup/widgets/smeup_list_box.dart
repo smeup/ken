@@ -229,9 +229,9 @@ class _SmeupListBoxState extends State<SmeupListBox>
           width: widget.smeupListModel.width == 0
               ? double.infinity
               : widget.smeupListModel.width,
-          child: SmeupBox(widget.smeupListModel, boxModel, widget.scaffoldKey,
-              widget.formKey, onClientPressed: widget.onClientPressed,
-              onServerPressed: () {
+          child: SmeupBox(widget.smeupListModel, boxModel, _refreshList,
+              widget.scaffoldKey, widget.formKey,
+              onClientPressed: widget.onClientPressed, onServerPressed: () {
             SmeupDynamismService.storeDynamicVariables(boxModel.data);
 
             SmeupDynamismService.run(widget.smeupListModel.dynamisms, context,
