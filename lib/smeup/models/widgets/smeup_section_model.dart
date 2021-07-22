@@ -13,6 +13,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart'
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model_mixin.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_qrcode_reader_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_text_autocomplete_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_field_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_tree_model.dart';
@@ -100,6 +101,9 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
               switch (v['options']['FLD']['default']['type']) {
                 case 'itx':
                   model = SmeupTextFieldModel.fromMap(v);
+                  break;
+                case 'acp':
+                  model = SmeupTextAutocompleteModel.fromMap(v);
                   break;
                 case 'sld':
                 case 'pgb':

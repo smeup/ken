@@ -12,6 +12,7 @@ import 'package:mobile_components_library/smeup/widgets/smeup_dashboard.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_image.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_line.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_qrcode_reader.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_text_autocomplete.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_gauge.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_radio_buttons.dart';
@@ -112,6 +113,11 @@ class _SmeupComponentState extends State<SmeupComponent> {
           case 'itx':
             children =
                 SmeupTextField(smeupModel, widget.scaffoldKey, widget.formKey);
+            break;
+
+          case 'acp':
+            children = SmeupTextAutocomplete(
+                smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
           case 'sld':
