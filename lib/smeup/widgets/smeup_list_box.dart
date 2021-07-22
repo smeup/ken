@@ -151,90 +151,17 @@ class _SmeupListBoxState extends State<SmeupListBox>
   }
 
   Widget _getSimpleList(List<Widget> cells, EdgeInsets padding) {
-    var list;
-    // if (widget.smeupListModel.orientation == Axis.vertical) {
-    //   list = RefreshIndicator(
-    //     onRefresh: _refreshList,
-    //     child:
-    //     SingleChildScrollView(
-    //       physics:
-    //           BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-    //       scrollDirection: Axis.vertical,
-    //       child: Column(
-    //         children: cells,
-    //       ),
-    //     ),
-    //   );
-    // } else {
-    //   list = RefreshIndicator(
-    //     onRefresh: _refreshList,
-    //     child: SingleChildScrollView(
-    //       physics:
-    //           BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-    //       scrollDirection: Axis.horizontal,
-    //       child: Row(
-    //         children: cells,
-    //       ),
-    //     ),
-    //   );
-    // }
-
-    bool dismissEnabled = false;
-
-    if ((widget.smeupListModel.dynamisms as List<dynamic>).firstWhere(
-            (element) => element['event'] == 'delete',
-            orElse: () => null) !=
-        null) {
-      dismissEnabled = true;
-    }
-
-    list = RefreshIndicator(
+    var list = RefreshIndicator(
       onRefresh: _refreshList,
       child: ListView.builder(
         scrollDirection: widget.smeupListModel.orientation,
         physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         itemCount: cells.length,
         itemBuilder: (context, index) {
-          final item = cells[index];
-          return dismissEnabled
-              ? Dismissible(
-                  key: item.key,
-                  direction: DismissDirection.endToStart,
-                  onDismissed: (direction) {
-                    setState(() {
-                      cells.removeAt(index);
-                    });
-
-                    // Then show a snackbar.
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(SnackBar(content: Text('item deleted')));
-                  },
-                  background: Container(
-                    color: Colors.red,
-                    margin: EdgeInsets.symmetric(horizontal: 15),
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Icon(
-                        Icons.delete,
-                        color: Colors.white,
-                        size: 40,
-                      ),
-                    ),
-                  ),
-                  child: item,
-                )
-              : item;
+          return cells[index];
         },
       ),
     );
-
-    // double height = 0;
-    // if (widget.smeupListModel.orientation == Axis.vertical) {
-    //   height = cells.length * widget.smeupListModel.height;
-    // } else {
-    //   height = widget.smeupListModel.height;
-    // }
 
     final container = Container(
         padding: padding,
@@ -266,13 +193,6 @@ class _SmeupListBoxState extends State<SmeupListBox>
       },
     );
 
-    // double height = 0;
-    // if (widget.smeupListModel.orientation == Axis.vertical) {
-    //   height = cells.length * widget.smeupListModel.height;
-    // } else {
-    //   height = widget.smeupListModel.height;
-    // }
-
     final container = Container(
         padding: padding,
         color: Colors.transparent,
@@ -290,9 +210,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
   List<Widget> _getListWidget(BuildContext context, dynamic data) {
     final widgets = List<Widget>.empty(growable: true);
 
-    int counter = 0;
     data['rows'].forEach((dataElement) {
-      counter += 1;
       var boxModel = SmeupBoxModel(
           layout: widget.smeupListModel.boxLayout,
           columns: data['columns'],
@@ -303,7 +221,6 @@ class _SmeupListBoxState extends State<SmeupListBox>
           clientRow: dataElement);
 
       final container = Container(
-          key: Key('${widget.formKey.toString()}_${counter.toString()}'),
           padding: const EdgeInsets.all(5.0),
           color: Colors.transparent,
           height: widget.smeupListModel.height == 0
@@ -312,8 +229,9 @@ class _SmeupListBoxState extends State<SmeupListBox>
           width: widget.smeupListModel.width == 0
               ? double.infinity
               : widget.smeupListModel.width,
-          child: SmeupBox(boxModel, widget.scaffoldKey, widget.formKey,
-              onClientPressed: widget.onClientPressed, onServerPressed: () {
+          child: SmeupBox(widget.smeupListModel, boxModel, widget.scaffoldKey,
+              widget.formKey, onClientPressed: widget.onClientPressed,
+              onServerPressed: () {
             SmeupDynamismService.storeDynamicVariables(boxModel.data);
 
             SmeupDynamismService.run(widget.smeupListModel.dynamisms, context,

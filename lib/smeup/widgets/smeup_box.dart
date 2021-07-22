@@ -5,6 +5,9 @@ import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_box_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_list_box_model.dart';
+import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
+import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_button.dart';
@@ -13,6 +16,7 @@ import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 
 class SmeupBox extends StatefulWidget {
+  final SmeupListBoxModel smeupListModel;
   final SmeupBoxModel smeupBoxModel;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
@@ -23,6 +27,7 @@ class SmeupBox extends StatefulWidget {
   final List<String> _excludedColumns = ['J4BTN', 'J4IMG'];
 
   SmeupBox(
+    this.smeupListModel,
     this.smeupBoxModel,
     this.scaffoldKey,
     this.formKey, {
@@ -73,7 +78,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
 
   Future<SmeupWidgetBuilderResponse> _getBoxComponent(
       SmeupBoxModel smeupBoxModel) async {
-    Widget children;
+    Widget box;
 
     await smeupBoxModel.setData();
 
@@ -92,30 +97,102 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
 
       // layouts Smeup
       case '1':
-        children = _getLayout1(smeupBoxModel.data, context);
+        box = _getLayout1(smeupBoxModel.data, context);
         break;
       case '2':
-        children = _getLayout2(smeupBoxModel.data, context);
+        box = _getLayout2(smeupBoxModel.data, context);
         break;
       case '3':
-        children = _getLayout3(smeupBoxModel.data, context);
+        box = _getLayout3(smeupBoxModel.data, context);
         break;
       case '4':
-        children = _getLayout4(smeupBoxModel.data, context);
+        box = _getLayout4(smeupBoxModel.data, context);
         break;
       case '5':
-        children = _getLayout5(smeupBoxModel.data, context);
+        box = _getLayout5(smeupBoxModel.data, context);
         break;
       default:
         SmeupLogService.writeDebugMessage(
             'No layout received. Used default layout',
             logType: LogType.warning);
 
-        children = _getLayoutDefault(smeupBoxModel.data, context);
+        box = _getLayoutDefault(smeupBoxModel.data, context);
         break;
     }
 
-    return SmeupWidgetBuilderResponse(smeupBoxModel, children);
+    bool dismissEnabled = false;
+    dynamic deleteDynamism = (widget.smeupListModel.dynamisms as List<dynamic>)
+        .firstWhere((element) => element['event'] == 'delete',
+            orElse: () => null);
+
+    if (deleteDynamism != null) {
+      dismissEnabled = true;
+    }
+
+    Widget res = dismissEnabled
+        ? Dismissible(
+            key: Key('${widget.formKey.toString()}_${widget.smeupBoxModel.id}'),
+            direction: DismissDirection.endToStart,
+            confirmDismiss: (DismissDirection direction) async {
+              SmeupDynamismService.storeDynamicVariables(smeupBoxModel.data);
+              return await showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text(SmeupLocalizationService.of(context)
+                        .getLocalString('confirm')),
+                    content: Text(SmeupLocalizationService.of(context)
+                        .getLocalString(('areYouSureDelete'))),
+                    actions: <Widget>[
+                      ElevatedButton(
+                        onPressed: () => Navigator.of(context).pop(true),
+                        child: Text(SmeupLocalizationService.of(context)
+                            .getLocalString('delete')),
+                      ),
+                      ElevatedButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: Text(SmeupLocalizationService.of(context)
+                            .getLocalString('cancel')),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            onDismissed: (direction) async {
+              var smeupFun = SmeupFun(deleteDynamism['exec']);
+              var smeupServiceResponse =
+                  await SmeupDataService.invoke(smeupFun);
+              if (smeupServiceResponse != null &&
+                  smeupServiceResponse.succeded) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(SmeupLocalizationService.of(context)
+                      .getLocalString('elementDeleted')),
+                  backgroundColor: SmeupOptions.theme.primaryColor,
+                ));
+              }
+              setState(() {
+                //cells.removeAt(index);
+              });
+            },
+            background: Container(
+              color: Colors.red,
+              margin: EdgeInsets.symmetric(horizontal: 15),
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Icon(
+                  Icons.delete,
+                  color: Colors.white,
+                  size: 40,
+                ),
+              ),
+            ),
+            child: box,
+          )
+        : box;
+
+    return SmeupWidgetBuilderResponse(smeupBoxModel, res);
   }
 
   Widget _getLayout1(dynamic data, BuildContext context) {
