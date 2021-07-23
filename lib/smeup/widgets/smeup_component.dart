@@ -116,7 +116,7 @@ class _SmeupComponentState extends State<SmeupComponent> {
             break;
 
           case 'acp':
-            children = SmeupTextAutocomplete(
+            children = SmeupTextAutocomplete.withController(
                 smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 

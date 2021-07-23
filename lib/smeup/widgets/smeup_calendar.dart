@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_event_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
@@ -85,7 +86,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
 
     _events = Map<DateTime, List>();
 
-    if (widget.smeupCalendarModel.load != 'D')
+    if (widget.smeupCalendarModel.widgetLoadType != LoadType.Delay)
       _loadEvents().then((value) {
         _calendarController.setSelectedDay(firstWork);
       });
@@ -281,7 +282,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
       }
     });
 
-    final calendar = widget.smeupCalendarModel.load == 'D'
+    final calendar = widget.smeupCalendarModel.widgetLoadType == LoadType.Delay
         ? Container()
         : Column(
             children: <Widget>[

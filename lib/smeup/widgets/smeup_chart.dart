@@ -49,7 +49,7 @@ class _SmeupChartState extends State<SmeupChart> with SmeupWidgetStateMixin {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupChart: ${snapshot.error}',
                 logType: LogType.error);
-            notifyError(context, widget.smeupChartModel, snapshot.error);
+            notifyError(context, widget.smeupChartModel.id, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return Center(child: snapshot.data.children);

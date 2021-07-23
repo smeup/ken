@@ -52,7 +52,8 @@ class _SmeupProgressBarState extends State<SmeupProgressBar>
             SmeupLogService.writeDebugMessage(
                 'Error SmeupProgressbar: ${snapshot.error}',
                 logType: LogType.error);
-            notifyError(context, widget.smeupInputFieldModel, snapshot.error);
+            notifyError(
+                context, widget.smeupInputFieldModel.id, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

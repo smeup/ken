@@ -72,7 +72,7 @@ class _SmeupTreeState extends State<SmeupTree> with SmeupWidgetStateMixin {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupTree: ${snapshot.error}',
                 logType: LogType.error);
-            notifyError(context, widget.smeupTreeModel, snapshot.error);
+            notifyError(context, widget.smeupTreeModel.id, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

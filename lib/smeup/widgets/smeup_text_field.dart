@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_field_model.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
@@ -72,7 +73,8 @@ class _SmeupTextFieldState extends State<SmeupTextField>
             SmeupLogService.writeDebugMessage(
                 'Error SmeupInputField: ${snapshot.error}',
                 logType: LogType.error);
-            notifyError(context, widget.smeupInputFieldModel, snapshot.error);
+            notifyError(
+                context, widget.smeupInputFieldModel.id, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;
@@ -133,7 +135,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
     Color focusColor =
         smeupInputFieldModel.showUnderline ? Colors.blue : Colors.transparent;
 
-    textField = smeupInputFieldModel.load == 'D'
+    textField = smeupInputFieldModel.widgetLoadType == LoadType.Delay
         ? Container()
         : Container(
             padding: EdgeInsets.only(left: 10, right: 10),

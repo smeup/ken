@@ -49,7 +49,7 @@ class _SmeupDashboardState extends State<SmeupDashboard>
             SmeupLogService.writeDebugMessage(
                 'Error SmeupDashboard: ${snapshot.error}',
                 logType: LogType.error);
-            notifyError(context, widget.smeupDashboardModel, snapshot.error);
+            notifyError(context, widget.smeupDashboardModel.id, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

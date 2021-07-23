@@ -61,7 +61,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupBox: ${snapshot.error} ${snapshot.stackTrace}',
                 logType: LogType.error);
-            notifyError(context, widget.smeupBoxModel, snapshot.error);
+            notifyError(context, widget.smeupBoxModel.id, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

@@ -5,6 +5,7 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_box_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_list_box_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
@@ -68,7 +69,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
         SmeupDynamismService.currentScaffoldKey.hashCode)
       notifier.setTimerRefresh(widget.smeupListModel.id);
 
-    var boxes = widget.smeupListModel.load == 'D'
+    var boxes = widget.smeupListModel.widgetLoadType == LoadType.Delay
         ? Container()
         : FutureBuilder(
             future: _getListComponents(widget.smeupListModel),
@@ -82,7 +83,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
                   SmeupLogService.writeDebugMessage(
                       'Error SmeupListBox: ${snapshot.error}',
                       logType: LogType.error);
-                  notifyError(context, widget.smeupListModel, snapshot.error);
+                  notifyError(
+                      context, widget.smeupListModel.id, snapshot.error);
                   return SmeupNotAvailable();
                 } else {
                   return snapshot.data.children;

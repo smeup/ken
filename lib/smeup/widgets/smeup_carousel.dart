@@ -50,7 +50,7 @@ class _SmeupCarouselState extends State<SmeupCarousel>
             SmeupLogService.writeDebugMessage(
                 'Error SmeupCarousel: ${snapshot.error}',
                 logType: LogType.error);
-            notifyError(context, widget.smeupCaurouselModel, snapshot.error);
+            notifyError(context, widget.smeupCaurouselModel.id, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

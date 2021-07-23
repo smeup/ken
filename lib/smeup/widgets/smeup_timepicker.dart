@@ -58,7 +58,8 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
             SmeupLogService.writeDebugMessage(
                 'Error SmeupTimePicker: ${snapshot.error}',
                 logType: LogType.error);
-            notifyError(context, widget.smeupTimePickerModel, snapshot.error);
+            notifyError(
+                context, widget.smeupTimePickerModel.id, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

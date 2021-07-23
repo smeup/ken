@@ -5,9 +5,10 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_image_model
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 
-class SmeupImage extends StatelessWidget with SmeupWidgetStateMixin {
+class SmeupImage extends StatefulWidget with SmeupWidgetMixin {
   final SmeupImageModel smeupImageModel;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
@@ -19,19 +20,26 @@ class SmeupImage extends StatelessWidget with SmeupWidgetStateMixin {
   );
 
   @override
+  _SmeupImageState createState() => _SmeupImageState();
+}
+
+class _SmeupImageState extends State<SmeupImage> with SmeupWidgetStateMixin {
+  @override
   Widget build(BuildContext context) {
     final box = FutureBuilder<SmeupWidgetBuilderResponse>(
-      future: _getUserImage(this.smeupImageModel, context),
+      future: _getUserImage(this.widget.smeupImageModel, context),
       builder: (BuildContext context,
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return this.smeupImageModel.showLoader ? SmeupWait() : Container();
+          return this.widget.smeupImageModel.showLoader
+              ? SmeupWait()
+              : Container();
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupImage: ${snapshot.error}',
                 logType: LogType.error);
-            notifyError(context, smeupImageModel, snapshot.error);
+            notifyError(context, widget.smeupImageModel.id, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

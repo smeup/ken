@@ -3,7 +3,7 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 
 abstract class SmeupWidgetStateInterface {
-  Widget runBuild(BuildContext context, SmeupModel model,
+  Widget runBuild(BuildContext context, String id, String type,
       GlobalKey<ScaffoldState> scaffoldKey,
       {Function notifierFunction});
   Future<SmeupWidgetBuilderResponse> getChildren();

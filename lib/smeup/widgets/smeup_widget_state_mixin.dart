@@ -10,29 +10,31 @@ import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart
 import 'package:provider/provider.dart';
 
 class SmeupWidgetStateMixin {
-  Widget runBuild(BuildContext context, SmeupModel model,
+  LoadType widgetLoadType = LoadType.Immediate;
+  bool dataLoaded = true;
+
+  Widget runBuild(BuildContext context, String id, String type,
       GlobalKey<ScaffoldState> scaffoldKey,
       {Function notifierFunction}) {
     if (notifierFunction != null) {
       final SmeupWidgetNotifier notifier =
           Provider.of<SmeupWidgetNotifier>(context, listen: false);
 
-      notifier.objects.removeWhere((element) => element['id'] == model.id);
+      notifier.objects.removeWhere((element) => element['id'] == id);
       notifier.objects.add({
-        'id': model.id,
-        'model': model,
+        'id': id,
+        //'model': model,
         'notifierFunction': notifierFunction
       });
 
       if (scaffoldKey.hashCode ==
           SmeupDynamismService.currentScaffoldKey.hashCode)
-        notifier.setTimerRefresh(model.id);
+        notifier.setTimerRefresh(id);
 
-      SmeupWidgetNotifier.addWidget(
-          scaffoldKey.hashCode, model.id, model.type, notifier);
+      SmeupWidgetNotifier.addWidget(scaffoldKey.hashCode, id, type, notifier);
     }
 
-    return model.load == 'D'
+    return widgetLoadType == LoadType.Delay
         ? Container()
         : FutureBuilder<SmeupWidgetBuilderResponse>(
             future: getChildren(),
@@ -43,9 +45,9 @@ class SmeupWidgetStateMixin {
               } else {
                 if (snapshot.hasError) {
                   SmeupLogService.writeDebugMessage(
-                      'Error ${model.type}: ${snapshot.error}',
+                      'Error $type: ${snapshot.error}',
                       logType: LogType.error);
-                  notifyError(context, model, snapshot.error);
+                  notifyError(context, id, snapshot.error);
                   return SmeupNotAvailable();
                 } else {
                   return snapshot.data.children;
@@ -62,13 +64,13 @@ class SmeupWidgetStateMixin {
     });
   }
 
-  void notifyError(context, SmeupModel model, Object error) {
+  void notifyError(context, String id, Object error) {
     final SmeupErrorNotifier errorNotifier =
         Provider.of<SmeupErrorNotifier>(context, listen: false);
 
     if (!errorNotifier.isError()) {
       errorNotifier.setError(true);
-      SmeupLogService.writeDebugMessage('Notified error: ${model.id}',
+      SmeupLogService.writeDebugMessage('Notified error: $id',
           logType: LogType.error);
       Future.delayed(Duration(seconds: 1), () async {
         errorNotifier.notifyError();
@@ -94,11 +96,13 @@ class SmeupWidgetStateMixin {
     SmeupWidgetNotifier.removeWidget(scaffoldKey.hashCode, id);
   }
 
+  // TODO: pass the section instead
   bool hasSections(SmeupModel model) {
     return model.smeupSectionsModels != null &&
         model.smeupSectionsModels.length > 0;
   }
 
+  // TODO: pass the data instead
   bool hasData(SmeupModel model) {
     return model.data != null;
   }

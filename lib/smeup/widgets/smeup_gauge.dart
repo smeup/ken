@@ -46,7 +46,7 @@ class _SmeupGaugeState extends State<SmeupGauge> with SmeupWidgetStateMixin {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupGauge: ${snapshot.error}',
                 logType: LogType.error);
-            notifyError(context, widget.smeupGaugeModel, snapshot.error);
+            notifyError(context, widget.smeupGaugeModel.id, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

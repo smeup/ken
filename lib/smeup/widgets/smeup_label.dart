@@ -14,10 +14,11 @@ import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin
 class SmeupLabel extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupLabelModel smeupLabelModel;
+  SmeupLabelModel model;
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
 
+  // graphic properties
   double padding;
   double fontSize;
   double iconSize;
@@ -35,12 +36,14 @@ class SmeupLabel extends StatefulWidget
   Color fontColor;
   String title;
 
+  // other properties
+
   SmeupLabel.withController(
-    this.smeupLabelModel,
+    this.model,
     this.scaffoldKey,
     this.formKey,
   ) {
-    runControllerActivities(smeupLabelModel);
+    runControllerActivities(model);
   }
 
   SmeupLabel(this.scaffoldKey, this.formKey,
@@ -60,7 +63,7 @@ class SmeupLabel extends StatefulWidget
       this.colorFontColName = '',
       this.iconSize = SmeupLabelModel.defaultIconSize,
       this.title = ''}) {
-    this.smeupLabelModel = SmeupLabelModel(
+    this.model = SmeupLabelModel(
         valueColName: valueColName,
         padding: padding,
         fontSize: fontSize,
@@ -108,25 +111,29 @@ class SmeupLabel extends StatefulWidget
 class _SmeupLabelState extends State<SmeupLabel>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupLabelModel smeupLabelModel;
+  SmeupLabelModel _model;
 
   @override
   void initState() {
-    smeupLabelModel = widget.smeupLabelModel;
+    _model = widget.model;
+    widgetLoadType = _model.widgetLoadType;
+    dataLoaded = _model.dataLoaded;
     super.initState();
   }
 
   @override
   void dispose() {
-    runDispose(widget.scaffoldKey, smeupLabelModel.id);
+    runDispose(widget.scaffoldKey, _model.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget label = runBuild(context, smeupLabelModel, widget.scaffoldKey,
+    Widget label = runBuild(context, _model.id, _model.type, widget.scaffoldKey,
         notifierFunction: () {
-      setState(() {});
+      setState(() {
+        widgetLoadType = LoadType.Immediate;
+      });
     });
 
     return label;
@@ -148,13 +155,13 @@ class _SmeupLabelState extends State<SmeupLabel>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     //await smeupLabelModel.setData();
-    if (!smeupLabelModel.dataLoaded) {
-      smeupLabelModel.data = await SmeupLabelDao.getData(smeupLabelModel);
-      smeupLabelModel.dataLoaded = true;
+    if (!dataLoaded && widgetLoadType != LoadType.Delay) {
+      _model.data = await SmeupLabelDao.getData(_model);
+      dataLoaded = true;
     }
 
-    if (!hasData(smeupLabelModel)) {
-      return getFunErrorResponse(context, smeupLabelModel);
+    if (!hasData(_model)) {
+      return getFunErrorResponse(context, _model);
     }
 
     Widget children;
@@ -165,17 +172,17 @@ class _SmeupLabelState extends State<SmeupLabel>
 
     Color backColor = widget.backColor;
     if (widget.colorColName.isNotEmpty &&
-        smeupLabelModel.data[0][widget.colorColName] != null) {
-      backColor = smeupLabelModel.data[0][widget.colorColName];
+        _model.data[0][widget.colorColName] != null) {
+      backColor = _model.data[0][widget.colorColName];
     }
 
     Color fontColor = widget.fontColor;
     if (widget.colorFontColName.isNotEmpty &&
-        smeupLabelModel.data[0][widget.colorFontColName] != null) {
-      fontColor = smeupLabelModel.data[0][widget.colorFontColName];
+        _model.data[0][widget.colorFontColName] != null) {
+      fontColor = _model.data[0][widget.colorFontColName];
     }
 
-    (smeupLabelModel.data as List).forEach((l) {
+    (_model.data as List).forEach((l) {
       var map = (l as Map);
       final align = Align(
         alignment: widget.align,
@@ -213,14 +220,14 @@ class _SmeupLabelState extends State<SmeupLabel>
         iconData = widget.iconData;
       }
       if (widget.iconColname.isNotEmpty &&
-          smeupLabelModel.data[0][widget.iconColname] != null) {
-        iconData = smeupLabelModel.data[0][widget.iconColname];
+          _model.data[0][widget.iconColname] != null) {
+        iconData = _model.data[0][widget.iconColname];
       }
 
       double iconHeight = widget.iconSize;
 
       if (iconData == 0) {
-        return SmeupWidgetBuilderResponse(smeupLabelModel, label);
+        return SmeupWidgetBuilderResponse(_model, label);
       } else {
         final icon = Icon(
           IconData(iconData, fontFamily: 'MaterialIcons'),
@@ -296,13 +303,13 @@ class _SmeupLabelState extends State<SmeupLabel>
             break;
         }
 
-        return SmeupWidgetBuilderResponse(smeupLabelModel, widget);
+        return SmeupWidgetBuilderResponse(_model, widget);
       }
     }
 
     SmeupLogService.writeDebugMessage('Error SmeupLabel not created',
         logType: LogType.error);
 
-    return SmeupWidgetBuilderResponse(smeupLabelModel, SmeupNotAvailable());
+    return SmeupWidgetBuilderResponse(_model, SmeupNotAvailable());
   }
 }

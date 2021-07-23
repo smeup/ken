@@ -3,6 +3,7 @@ import 'package:flutter_treeview/tree_view.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
@@ -72,7 +73,7 @@ class SmeupButtonsState extends State<SmeupButtons> with SmeupWidgetStateMixin {
         SmeupDynamismService.currentScaffoldKey.hashCode)
       notifier.setTimerRefresh(widget.smeupButtonsModel.id);
 
-    final buttons = widget.smeupButtonsModel.load == 'D'
+    final buttons = widget.smeupButtonsModel.widgetLoadType == LoadType.Delay
         ? Container()
         : FutureBuilder<SmeupWidgetBuilderResponse>(
             future: _getButtonsComponent(widget.smeupButtonsModel),
@@ -88,7 +89,7 @@ class SmeupButtonsState extends State<SmeupButtons> with SmeupWidgetStateMixin {
                       'Error SmeupButtons: ${snapshot.error} - ${snapshot.stackTrace}',
                       logType: LogType.error);
                   notifyError(
-                      context, widget.smeupButtonsModel, snapshot.error);
+                      context, widget.smeupButtonsModel.id, snapshot.error);
                   return SmeupNotAvailable();
                 } else {
                   return snapshot.data.children;

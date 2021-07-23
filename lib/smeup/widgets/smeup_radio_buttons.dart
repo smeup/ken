@@ -61,7 +61,8 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
             SmeupLogService.writeDebugMessage(
                 'Error SmeupRadioButtons: ${snapshot.error}',
                 logType: LogType.error);
-            notifyError(context, widget.smeupRadioButtonsModel, snapshot.error);
+            notifyError(
+                context, widget.smeupRadioButtonsModel.id, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;

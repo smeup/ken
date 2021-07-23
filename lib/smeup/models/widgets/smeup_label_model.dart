@@ -94,7 +94,8 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
         fontbold = false;
     }
 
-    if (!dataLoaded) {
+    // TODO: there should be only one property !!!
+    if (!dataLoaded && widgetLoadType != LoadType.Delay) {
       SmeupLabelDao.getData(this).then((value) {
         data = value;
         dataLoaded = true;

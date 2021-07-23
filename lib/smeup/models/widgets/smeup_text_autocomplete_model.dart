@@ -1,10 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_text_autocomplete_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupTextAutocompleteModel extends SmeupModel
@@ -27,6 +25,8 @@ class SmeupTextAutocompleteModel extends SmeupModel
   dynamic clientData;
   bool showUnderline;
   bool autoFocus;
+  String defaultValue;
+  String valueField;
 
   SmeupTextAutocompleteModel(
       {this.backColor,
@@ -40,10 +40,12 @@ class SmeupTextAutocompleteModel extends SmeupModel
       this.clientData,
       this.showUnderline = true,
       this.autoFocus = defaultAutoFocus,
-      id})
+      this.defaultValue = '',
+      this.valueField = ''})
       : super(title: title) {
-    if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
-    if (id == null) id = 'FLD' + Random().nextInt(100).toString();
+    //if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
+    // if (id == null) id = 'FLD' + Random().nextInt(100).toString();
+
     SmeupDataService.incrementDataFetch(id);
   }
 
@@ -70,34 +72,22 @@ class SmeupTextAutocompleteModel extends SmeupModel
       else
         showborder = false;
     }
+    defaultValue = jsonMap['defaultValue'] ?? '';
+    valueField = optionsDefault['valueField'] ?? '';
+
+    // TODO: there should be only one property !!!
+    if (!dataLoaded && widgetLoadType != LoadType.Delay) {
+      SmeupTextAutocompleteDao.getData(this).then((value) {
+        data = value;
+        dataLoaded = true;
+      });
+    }
+
     SmeupDataService.incrementDataFetch(id);
   }
 
   @override
-  setData() async {
-    if (smeupFun != null && smeupFun.isFunValid()) {
-      final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
-
-      if (!smeupServiceResponse.succeded) {
-        return;
-      }
-
-      // List rows = smeupServiceResponse.result.data['rows'];
-      // if (smeupFun.fun['fun']['component'] == 'TRE') {
-      //   final String fieldName = 'codice';
-      //   optionsDefault['valueField'] = fieldName;
-      //   String value = (rows[0] as Node).data[fieldName];
-      //   data = _getClientDataStructure(value, fieldName: fieldName);
-      // } else {
-      data = smeupServiceResponse.result.data;
-      // }
-    }
-
-    if (clientData != null) {
-      data = _getClientDataStructure(clientData);
-    }
-    SmeupDataService.decrementDataFetch(id);
-  }
+  setData() async {} // TODO: to remove
 
   SmeupTextAutocompleteModel clone() {
     return SmeupTextAutocompleteModel(
@@ -110,34 +100,5 @@ class SmeupTextAutocompleteModel extends SmeupModel
         showborder: showborder,
         clientData: clientData,
         showUnderline: showUnderline);
-  }
-
-  dynamic _getClientDataStructure(String fieldData,
-      {String fieldName = 'value'}) {
-    if (optionsDefault == null) {
-      return {
-        "rows": [
-          {
-            fieldName: fieldData,
-          }
-        ],
-      };
-    } else {
-      switch (optionsDefault['type']) {
-        case 'itx':
-          return {
-            "rows": [
-              {
-                fieldName: fieldData,
-              }
-            ],
-          };
-
-          break;
-
-        default:
-          return data;
-      }
-    }
   }
 }

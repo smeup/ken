@@ -5,6 +5,8 @@ import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
+enum LoadType { Immediate, Delay }
+
 abstract class SmeupModel {
   static const int defaultRefresh = 0;
 
@@ -13,7 +15,7 @@ abstract class SmeupModel {
   String type;
   String id;
   SmeupFun smeupFun;
-  String load = '';
+  LoadType widgetLoadType = LoadType.Immediate;
   Map<String, dynamic> options;
   dynamic optionsType;
   Map<String, dynamic> optionsDefault;
@@ -43,7 +45,14 @@ abstract class SmeupModel {
       id = jsonMap['id'] ?? jsonMap['type'] + Random().nextInt(100).toString();
 
       smeupFun = SmeupFun(jsonMap['fun']);
-      load = jsonMap['load'] ?? '';
+
+      switch (jsonMap['load']) {
+        case 'D':
+          widgetLoadType = LoadType.Delay;
+          break;
+        default:
+          widgetLoadType = LoadType.Immediate;
+      }
 
       options = jsonMap['options'] ?? Map<String, dynamic>();
 

@@ -68,8 +68,8 @@ class SmeupWidgetNotifier with ChangeNotifier {
     final sel = objects.firstWhere((element) => element['id'] == widgetId,
         orElse: () => null);
     if (sel == null) return;
-    SmeupModel smeupModel = sel['model'];
-    smeupModel.load = '';
+    // SmeupModel smeupModel = sel['model'];
+    // smeupModel.load = '';
 
     Function notifierFunction = sel['notifierFunction'];
     if (notifierFunction != null) notifierFunction();
