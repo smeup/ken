@@ -1,6 +1,6 @@
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
-class SmeupCustomPicker extends CommonPickerModel {
+class SmeupTimePickerCustomization extends CommonPickerModel {
   bool showSecondsColumn;
   List<String> minutesList;
 
@@ -8,7 +8,7 @@ class SmeupCustomPicker extends CommonPickerModel {
     return '$value'.padLeft(length, "0");
   }
 
-  SmeupCustomPicker(
+  SmeupTimePickerCustomization(
       {DateTime currentTime,
       LocaleType locale,
       this.showSecondsColumn = true,

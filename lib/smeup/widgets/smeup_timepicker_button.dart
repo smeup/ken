@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_custom_picker.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_timepicker_customization.dart';
 
 class SmeupTimePickerButton extends StatefulWidget {
   final DateTime value;
@@ -47,7 +47,7 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
                 ),
                 onPressed: () {
                   DatePicker.showPicker(context,
-                      pickerModel: SmeupCustomPicker(
+                      pickerModel: SmeupTimePickerCustomization(
                           currentTime: _currentValue,
                           showSecondsColumn: false,
                           minutesList: widget.smeupTimePickerModel.minutesList),

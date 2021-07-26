@@ -20,6 +20,8 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_tree_model.
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 
+import 'smeup_datepicker_model.dart';
+
 class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
   double dim;
   //int size;
@@ -99,24 +101,29 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
               break;
             case 'FLD':
               switch (v['options']['FLD']['default']['type']) {
-                case 'itx':
-                  model = SmeupTextFieldModel.fromMap(v);
-                  break;
                 case 'acp':
                   model = SmeupTextAutocompleteModel.fromMap(v);
                   break;
-                case 'sld':
+                case 'cal':
+                  model = SmeupDatePickerModel.fromMap(v);
+                  break;
+                case 'itx':
+                  model = SmeupTextFieldModel.fromMap(v);
+                  break;
                 case 'pgb':
                   model = SmeupInputFieldModel.fromMap(v);
+                  break;
+                case 'qrc':
+                  model = SmeupQRCodeReaderModel.fromMap(v);
                   break;
                 case 'rad':
                   model = SmeupRadioButtonsModel.fromMap(v);
                   break;
+                case 'sld':
+                  model = SmeupInputFieldModel.fromMap(v);
+                  break;
                 case 'tpk':
                   model = SmeupTimePickerModel.fromMap(v);
-                  break;
-                case 'qrc':
-                  model = SmeupQRCodeReaderModel.fromMap(v);
                   break;
 
                 default:

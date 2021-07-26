@@ -9,6 +9,7 @@ import 'package:mobile_components_library/smeup/services/smeup_log_service.dart'
 import 'package:mobile_components_library/smeup/widgets/smeup_buttons.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_calendar.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_dashboard.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_datepicker.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_image.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_line.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_qrcode_reader.dart';
@@ -110,23 +111,28 @@ class _SmeupComponentState extends State<SmeupComponent> {
         break;
       case 'FLD':
         switch (smeupModel.options['FLD']['default']['type']) {
-          case 'itx':
-            children =
-                SmeupTextField(smeupModel, widget.scaffoldKey, widget.formKey);
-            break;
-
           case 'acp':
             children = SmeupTextAutocomplete.withController(
                 smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
-          case 'sld':
+          case 'cal':
             children =
-                SmeupSlider(smeupModel, widget.scaffoldKey, widget.formKey);
+                SmeupDatePicker(smeupModel, widget.scaffoldKey, widget.formKey);
+            break;
+
+          case 'itx':
+            children =
+                SmeupTextField(smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
           case 'pgb':
             children = SmeupProgressBar(
+                smeupModel, widget.scaffoldKey, widget.formKey);
+            break;
+
+          case 'qrc':
+            children = SmeupQRCodeReader(
                 smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
@@ -135,14 +141,14 @@ class _SmeupComponentState extends State<SmeupComponent> {
                 smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
+          case 'sld':
+            children =
+                SmeupSlider(smeupModel, widget.scaffoldKey, widget.formKey);
+            break;
+
           case 'tpk':
             children =
                 SmeupTimePicker(smeupModel, widget.scaffoldKey, widget.formKey);
-            break;
-
-          case 'qrc':
-            children = SmeupQRCodeReader(
-                smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
           default:
