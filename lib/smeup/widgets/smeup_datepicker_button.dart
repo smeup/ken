@@ -24,6 +24,8 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
   void initState() {
     _currentValue = widget.value;
     _currentDisplay = widget.display;
+    SmeupDynamismService.variables[widget.smeupDatePickerModel.id] =
+        widget.display;
     super.initState();
   }
 
