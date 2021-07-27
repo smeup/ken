@@ -10,14 +10,13 @@ class SmeupButton extends StatelessWidget {
   final dynamic data;
   final bool isBusy;
   const SmeupButton(
-      {Key key,
+      {String id,
       this.smeupButtonsModel,
       this.icon,
       this.onServerPressed,
       this.onClientPressed,
       this.data,
-      this.isBusy = false})
-      : super(key: key);
+      this.isBusy = false});
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +38,7 @@ class SmeupButton extends StatelessWidget {
             ? double.infinity
             : smeupButtonsModel.width,
         child: ElevatedButton(
+          key: Key(smeupButtonsModel.id),
           style: ElevatedButton.styleFrom(
             primary: backgroundColor,
             onPrimary: SmeupOptions.theme.primaryColor,
