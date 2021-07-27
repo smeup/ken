@@ -73,7 +73,7 @@ class SmeupNavigationAppBar extends AppBar {
                         onTap: () async {
                           SmeupFun smeupFun = SmeupFun(button);
                           if (smeupFun.isDinamismAsync(
-                              smeupFun.fun['dynamisms'], 'click')) {
+                              smeupFun.fun['fun']['dynamisms'], 'click')) {
                             SmeupDynamismService.run(
                                 smeupFun.fun['fun']['dynamisms'],
                                 myContext,

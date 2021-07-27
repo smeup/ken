@@ -160,14 +160,8 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
               var smeupFun = SmeupFun(deleteDynamism['exec']);
               var smeupServiceResponse =
                   await SmeupDataService.invoke(smeupFun);
-              if (smeupServiceResponse != null &&
-                  smeupServiceResponse.succeded) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text(SmeupLocalizationService.of(context)
-                      .getLocalString('elementDeleted')),
-                  backgroundColor: SmeupOptions.theme.primaryColor,
-                ));
-              }
+              SmeupDynamismService.manageResponseMessage(
+                  context, smeupServiceResponse.result, widget.scaffoldKey);
               widget.onRefresh();
             },
             background: Container(

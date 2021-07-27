@@ -144,7 +144,7 @@ class SmeupDynamismService {
             final smeupServiceResponse =
                 await SmeupDataService.invoke(smeupFunExec);
 
-            await _manageResponseMessage(
+            await manageResponseMessage(
                 context, smeupServiceResponse.result, scaffoldKey);
             if (smeupServiceResponse.succeded) {
               _manageNotify(notify, context, scaffoldKey.hashCode);
@@ -234,7 +234,7 @@ class SmeupDynamismService {
     }
   }
 
-  static _manageResponseMessage(BuildContext context, dynamic response,
+  static manageResponseMessage(BuildContext context, dynamic response,
       GlobalKey<ScaffoldState> scaffoldKey) async {
     try {
       if (response.data['messages'] != null) {
