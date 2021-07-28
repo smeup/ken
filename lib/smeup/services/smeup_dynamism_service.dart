@@ -82,7 +82,7 @@ class SmeupDynamismService {
                 .trim()
                 .replaceAll('[', '')
                 .replaceAll(']', '');
-            value = variables[varName];
+            value = variables[varName].toString();
           } else {
             value = element['value'];
           }
