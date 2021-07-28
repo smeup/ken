@@ -133,6 +133,7 @@ class _SmeupLabelState extends State<SmeupLabel>
         notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
+        dataLoaded = false;
       });
     });
 

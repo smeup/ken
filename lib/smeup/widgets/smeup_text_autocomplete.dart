@@ -146,6 +146,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
             notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
+        dataLoaded = false;
       });
     });
 
@@ -176,23 +177,6 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
 
       return SmeupWidgetBuilderResponse(_model, SmeupNotAvailable());
     }
-
-    // String valueField = _model.optionsDefault == null ||
-    //         _model.optionsDefault['valueField'] == null
-    //     ? 'value'
-    //     : _model.optionsDefault['valueField'];
-    // String value = _model.data['rows'][0][valueField].toString();
-
-    // final List<Map> cols = _model.data['columns'];
-    // if (cols != null) {
-    //   final col = cols.firstWhere((element) => element['code'] == valueField,
-    //       orElse: () => null);
-    //   if (col['ogg'] == 'D8*YYMD') {
-    //     value = DateFormat("dd/MM/yyyy").format(DateTime.tryParse(value));
-    //   }
-    // }
-
-    // SmeupDynamismService.variables[_model.id] = value;
 
     Color underlineColor = _model.showUnderline
         ? SmeupOptions.theme.primaryColor
@@ -237,45 +221,66 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                   }
                 }
 
-                return TextFormField(
-                  controller: textEditingController,
-                  focusNode: focusNode,
-                  onFieldSubmitted: (String value) {
-                    onFieldSubmitted();
-                  },
-                  inputFormatters: widget.inputFormatters,
-                  autofocus: _model.autoFocus,
-                  maxLines: 1,
-                  //initialValue: value,
-                  key: ValueKey(_model.id),
-                  autocorrect: false,
-                  textCapitalization: TextCapitalization.none,
-                  textInputAction: TextInputAction.next,
-                  enableSuggestions: true,
-                  validator: widget.clientValidator,
-                  keyboardType: widget.keyboard,
-                  obscureText: widget.keyboard == TextInputType.visiblePassword
-                      ? true
-                      : false,
-                  onChanged: (value) {
-                    if (widget.clientOnChange != null)
-                      widget.clientOnChange(value);
-                    SmeupDynamismService.variables[_model.id] = value;
-                  },
-                  decoration: InputDecoration(
-                    labelStyle: TextStyle(
-                        fontSize: _model.fontsize,
-                        color: SmeupOptions.theme.primaryColor),
-                    labelText: _model.label,
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: underlineColor),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: focusColor),
+                return Row(children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: textEditingController,
+                      focusNode: focusNode,
+                      onFieldSubmitted: (String value) {
+                        onFieldSubmitted();
+                      },
+                      inputFormatters: widget.inputFormatters,
+                      autofocus: _model.autoFocus,
+                      maxLines: 1,
+                      //initialValue: value,
+                      key: ValueKey(_model.id),
+                      autocorrect: false,
+                      textCapitalization: TextCapitalization.none,
+                      textInputAction: TextInputAction.next,
+                      enableSuggestions: true,
+                      validator: widget.clientValidator,
+                      keyboardType: widget.keyboard,
+                      obscureText:
+                          widget.keyboard == TextInputType.visiblePassword
+                              ? true
+                              : false,
+                      onChanged: (value) {
+                        if (widget.clientOnChange != null)
+                          widget.clientOnChange(value);
+                        SmeupDynamismService.variables[_model.id] = value;
+                        SmeupDynamismService.run(_model.dynamisms, context,
+                            'change', widget.scaffoldKey);
+                      },
+                      decoration: InputDecoration(
+                        labelStyle: TextStyle(
+                            fontSize: _model.fontsize,
+                            color: SmeupOptions.theme.primaryColor),
+                        labelText: _model.label,
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: underlineColor),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: focusColor),
+                        ),
+                      ),
+                      onSaved: widget.clientOnSave,
                     ),
                   ),
-                  onSaved: widget.clientOnSave,
-                );
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: GestureDetector(
+                      child: Icon(Icons.close, color: Colors.black38),
+                      onTap: () {
+                        setState(() {
+                          SmeupDynamismService.variables[widget.defaultValue] =
+                              '';
+                          SmeupDynamismService.run(_model.dynamisms, context,
+                              'change', widget.scaffoldKey);
+                        });
+                      },
+                    ),
+                  )
+                ]);
               },
               optionsViewBuilder: (BuildContext context,
                   AutocompleteOnSelected<dynamic> onSelected,
@@ -296,6 +301,8 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                               onSelected(option['description']);
                               SmeupDynamismService.variables[_model.id] =
                                   option['code'];
+                              SmeupDynamismService.run(_model.dynamisms,
+                                  context, 'change', widget.scaffoldKey);
                             },
                             child: ListTile(
                               title: Text(option['description']),
