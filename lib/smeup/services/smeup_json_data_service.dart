@@ -42,6 +42,31 @@ class SmeupJsonDataService implements SmeupDataServiceInterface {
                 '*** http request \'SmeupJsonDataService\': $jsonFilePath');
 
             String jsonString = await rootBundle.loadString(jsonFilePath);
+
+            if (SmeupOptions.appDictionary != null) {
+              String workString = await rootBundle.loadString(jsonFilePath);
+              RegExp re = RegExp(r'\{\{.*\}\}');
+              re.allMatches(jsonString).forEach((match) {
+                final placeHolder =
+                    jsonString.substring(match.start, match.end);
+                if (placeHolder != null && placeHolder.isNotEmpty) {
+                  final dictionaryKey =
+                      placeHolder.replaceFirst('{{', '').replaceFirst('}}', '');
+
+                  if (dictionaryKey != null &&
+                      SmeupOptions.appDictionary
+                              .getLocalString(dictionaryKey) !=
+                          null) {
+                    workString = workString.replaceAll(
+                        placeHolder,
+                        SmeupOptions.appDictionary
+                            .getLocalString(dictionaryKey));
+                  }
+                }
+              });
+              jsonString = workString;
+            }
+
             data = jsonDecode(jsonString);
           }
 

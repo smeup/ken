@@ -3,14 +3,19 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_datepicker_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_line_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_line.dart';
 
 class SmeupDatePickerButton extends StatefulWidget {
   final DateTime value;
   final String display;
   final SmeupDatePickerModel smeupDatePickerModel;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<FormState> formKey;
 
-  SmeupDatePickerButton(this.smeupDatePickerModel, this.value, this.display);
+  SmeupDatePickerButton(this.smeupDatePickerModel, this.scaffoldKey,
+      this.formKey, this.value, this.display);
 
   @override
   _SmeupDatePickerButtonState createState() => _SmeupDatePickerButtonState();
@@ -43,6 +48,7 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
         color: SmeupOptions.theme.scaffoldBackgroundColor,
         padding: EdgeInsets.all(widget.smeupDatePickerModel.padding),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Align(
               alignment: Alignment.bottomLeft,
@@ -55,7 +61,9 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
               ),
             ),
             ConstrainedBox(
-              constraints: BoxConstraints.tightFor(width: double.infinity),
+              constraints: BoxConstraints.tightFor(
+                  width: double.infinity,
+                  height: widget.smeupDatePickerModel.height),
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(0.0),
@@ -86,6 +94,11 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
                               ? SmeupOptions.theme.textTheme.bodyText1.color
                               : widget.smeupDatePickerModel.fontColor))),
             ),
+            SmeupLine(
+                SmeupLineModel(
+                    color: SmeupOptions.theme.primaryColor, thickness: 0.5),
+                widget.scaffoldKey,
+                widget.formKey)
           ],
         ));
 

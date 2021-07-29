@@ -25,6 +25,13 @@ class SmeupLocalizationService {
       'delete': 'ELIMINA',
       'elementDeleted': 'L\'elemento è stato eliminato'
     },
+    'fr': {
+      'confirm': 'CONFIRMATION',
+      'cancel': 'ANNULER',
+      'areYouSureDelete': 'Est-il sûr de vouloir supprimer cet élément?',
+      'delete': 'SUPPRIMER',
+      'elementDeleted': 'L\'élément a été supprimé'
+    },
   };
 
   String getLocalString(stringCode) {

@@ -138,6 +138,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
     textField = smeupInputFieldModel.widgetLoadType == LoadType.Delay
         ? Container()
         : Container(
+            alignment: Alignment.centerLeft,
             padding: EdgeInsets.only(left: 10, right: 10),
             decoration: smeupInputFieldModel.showborder
                 ? BoxDecoration(

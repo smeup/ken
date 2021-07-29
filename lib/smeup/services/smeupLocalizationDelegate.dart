@@ -8,7 +8,8 @@ class SmeupLocalizationDelegate
   const SmeupLocalizationDelegate();
 
   @override
-  bool isSupported(Locale locale) => ['en', 'it'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      ['en', 'it', 'fr'].contains(locale.languageCode);
 
   @override
   Future<SmeupLocalizationService> load(Locale locale) {

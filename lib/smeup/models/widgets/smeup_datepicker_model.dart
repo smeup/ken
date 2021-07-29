@@ -11,7 +11,7 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultFontsize = 16.0;
   static const String defaultLabel = '';
   static const double defaultWidth = 100;
-  static const double defaultHeight = 100;
+  static const double defaultHeight = 20;
   static const double defaultPadding = 10.0;
   static const bool defaultShowBorder = false;
   static const double defaultElevation = 0.0;

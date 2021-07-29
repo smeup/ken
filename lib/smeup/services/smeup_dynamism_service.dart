@@ -255,7 +255,7 @@ class SmeupDynamismService {
                 color = Colors.amberAccent;
                 break;
               default:
-                color = Colors.green;
+              //color = Colors.green;
             }
 
             if (text.isNotEmpty) {

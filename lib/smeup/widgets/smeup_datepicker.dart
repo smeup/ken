@@ -106,8 +106,8 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
 
     SmeupDynamismService.variables[smeupDatePickerModel.id] = valueString;
 
-    timepicker =
-        SmeupDatePickerButton(widget.smeupDatePickerModel, value, display);
+    timepicker = SmeupDatePickerButton(widget.smeupDatePickerModel,
+        widget.scaffoldKey, widget.formKey, value, display);
 
     return SmeupWidgetBuilderResponse(smeupDatePickerModel, timepicker);
   }
