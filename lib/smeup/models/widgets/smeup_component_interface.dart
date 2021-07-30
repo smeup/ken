@@ -1,3 +1,1 @@
-abstract class SmeupDataInterface {
-  setData();
-}
+abstract class SmeupDataInterface {}

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:mobile_components_library/smeup/daos/smeup_image_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
@@ -48,38 +49,14 @@ class SmeupImageModel extends SmeupModel implements SmeupDataInterface {
     bottomPadding =
         SmeupUtilities.getDouble(jsonMap['bottomPadding']) ?? defaultPadding;
     title = jsonMap['title'] ?? '';
+
+    if (!dataLoaded && widgetLoadType != LoadType.Delay) {
+      SmeupImageDao.getData(this).then((value) {
+        data = value;
+        dataLoaded = true;
+      });
+    }
+
     SmeupDataService.incrementDataFetch(id);
-  }
-
-  @override
-  setData() async {
-    if (smeupFun != null && smeupFun.isFunValid()) {
-      final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
-
-      if (!smeupServiceResponse.succeded) {
-        return;
-      }
-
-      data = smeupServiceResponse.result;
-    }
-
-    if (data == null && clientData != null) {
-      data = clientData;
-    }
-
-    // data could contain:
-    // data['imageLocalPath'] --> for local images (assets/images)
-    // data['imageRemotePath'] = data[0]['k'] --> for remote images (url)
-    if (data is List && (data as List).length > 0 && data[0]['k'] != null) {
-      String obj = data[0]['k'];
-      List<String> split = obj.split(';');
-      if (split.length > 2) {
-        String url = split.getRange(2, split.length).join('');
-        data = Map();
-        data['imageRemotePath'] = url;
-      }
-    }
-
-    SmeupDataService.decrementDataFetch(id);
   }
 }

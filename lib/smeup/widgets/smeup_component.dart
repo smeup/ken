@@ -107,7 +107,8 @@ class _SmeupComponentState extends State<SmeupComponent> {
             SmeupDashboard(smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'IMG':
-        children = SmeupImage(smeupModel, widget.scaffoldKey, widget.formKey);
+        children = SmeupImage.withController(
+            smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'FLD':
         switch (smeupModel.options['FLD']['default']['type']) {

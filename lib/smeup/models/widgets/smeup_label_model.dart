@@ -94,7 +94,6 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
         fontbold = false;
     }
 
-    // TODO: there should be only one property !!!
     if (!dataLoaded && widgetLoadType != LoadType.Delay) {
       SmeupLabelDao.getData(this).then((value) {
         data = value;
@@ -104,7 +103,4 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
 
     SmeupDataService.incrementDataFetch(id);
   }
-
-  @override
-  setData() async {} // TODO: to remove
 }

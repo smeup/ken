@@ -1,108 +1,154 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_image_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_image_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 
-class SmeupImage extends StatefulWidget with SmeupWidgetMixin {
-  final SmeupImageModel smeupImageModel;
+// ignore: must_be_immutable
+class SmeupImage extends StatefulWidget
+    with SmeupWidgetMixin
+    implements SmeupWidgetInterface {
+  SmeupImageModel model;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
 
-  SmeupImage(
-    this.smeupImageModel,
+  // graphic properties
+  double width;
+  double height;
+  double padding;
+  double rightPadding;
+  double leftPadding;
+  double topPadding;
+  double bottomPadding;
+  dynamic clientData;
+  String title;
+
+  SmeupImage.withController(
+    this.model,
     this.scaffoldKey,
     this.formKey,
-  );
+  ) {
+    runControllerActivities(model);
+  }
+
+  SmeupImage(this.scaffoldKey, this.formKey,
+      {this.width = SmeupImageModel.defaultWidth,
+      this.height = SmeupImageModel.defaultHeight,
+      this.padding = SmeupImageModel.defaultPadding,
+      this.rightPadding = SmeupImageModel.defaultPadding,
+      this.leftPadding = SmeupImageModel.defaultPadding,
+      this.topPadding = SmeupImageModel.defaultPadding,
+      this.bottomPadding = SmeupImageModel.defaultPadding,
+      title = '',
+      this.clientData}) {
+    this.model = SmeupImageModel(
+        height: height,
+        padding: padding,
+        rightPadding: rightPadding,
+        leftPadding: leftPadding,
+        topPadding: topPadding,
+        width: width,
+        bottomPadding: bottomPadding,
+        clientData: clientData,
+        title: title);
+  }
+
+  @override
+  runControllerActivities(SmeupModel model) {
+    SmeupImageModel m = model;
+    padding = m.padding;
+    rightPadding = m.rightPadding;
+    leftPadding = m.leftPadding;
+    topPadding = m.topPadding;
+    width = m.width;
+    bottomPadding = m.bottomPadding;
+    clientData = m.clientData;
+    title = m.title;
+  }
 
   @override
   _SmeupImageState createState() => _SmeupImageState();
 }
 
-class _SmeupImageState extends State<SmeupImage> with SmeupWidgetStateMixin {
+class _SmeupImageState extends State<SmeupImage>
+    with SmeupWidgetStateMixin
+    implements SmeupWidgetStateInterface {
+  SmeupImageModel _model;
+
+  @override
+  void initState() {
+    _model = widget.model;
+    widgetLoadType = _model.widgetLoadType;
+    dataLoaded = _model.dataLoaded;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    runDispose(widget.scaffoldKey, _model.id);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final box = FutureBuilder<SmeupWidgetBuilderResponse>(
-      future: _getUserImage(this.widget.smeupImageModel, context),
-      builder: (BuildContext context,
-          AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return this.widget.smeupImageModel.showLoader
-              ? SmeupWait()
-              : Container();
-        } else {
-          if (snapshot.hasError) {
-            SmeupLogService.writeDebugMessage(
-                'Error SmeupImage: ${snapshot.error}',
-                logType: LogType.error);
-            notifyError(context, widget.smeupImageModel.id, snapshot.error);
-            return SmeupNotAvailable();
-          } else {
-            return snapshot.data.children;
-          }
-        }
-      },
-    );
-
+    final box = runBuild(context, _model.id, _model.type, widget.scaffoldKey,
+        notifierFunction: () {
+      setState(() {
+        widgetLoadType = LoadType.Immediate;
+        dataLoaded = false;
+      });
+    });
     return box;
   }
 
-  Future<SmeupWidgetBuilderResponse> _getUserImage(
-      SmeupImageModel smeupImageModel, BuildContext context) async {
-    Widget container;
-
-    try {
-      await smeupImageModel.setData();
-
-      if (!hasData(smeupImageModel)) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-                'Dati non disponibili.  (${smeupImageModel.smeupFun.fun['fun']['function']})'),
-            backgroundColor: SmeupOptions.theme.errorColor,
-          ),
-        );
-
-        return SmeupWidgetBuilderResponse(smeupImageModel, SmeupNotAvailable());
-      }
-
-      var image;
-      if (smeupImageModel.data['imageLocalPath'] != null) {
-        image = Image.asset(
-          smeupImageModel.data['imageLocalPath'],
-          height: smeupImageModel.height,
-          width: smeupImageModel.width,
-        );
-      } else {
-        image = Image.network(
-          smeupImageModel.data['imageRemotePath'],
-          height: smeupImageModel.height,
-          width: smeupImageModel.width,
-        );
-      }
-      container = Container(
-        padding: getPadding(smeupImageModel),
-        child: image,
-      );
-    } catch (e) {
-      container = SmeupNotAvailable(
-          height: smeupImageModel.height, width: smeupImageModel.width);
+  /// Label's structure:
+  /// TODO: define the structure ...
+  @override
+  Future<SmeupWidgetBuilderResponse> getChildren() async {
+    if (!dataLoaded && widgetLoadType != LoadType.Delay) {
+      _model.data = await SmeupImageDao.getData(_model);
+      dataLoaded = true;
     }
 
-    return SmeupWidgetBuilderResponse(smeupImageModel, container);
+    if (!hasData(_model)) {
+      return getFunErrorResponse(context, _model);
+    }
+
+    Widget children;
+
+    var image;
+    if (_model.data['imageLocalPath'] != null) {
+      image = Image.asset(
+        _model.data['imageLocalPath'],
+        height: widget.height,
+        width: widget.width,
+      );
+    } else {
+      image = Image.network(
+        _model.data['imageRemotePath'],
+        height: widget.height,
+        width: widget.width,
+      );
+    }
+    children = Container(
+      padding: _getPadding(),
+      child: image,
+    );
+
+    return SmeupWidgetBuilderResponse(_model, children);
   }
 
-  EdgeInsets getPadding(SmeupImageModel smeupImageModel) {
-    return smeupImageModel.padding > 0
-        ? EdgeInsets.all(smeupImageModel.padding)
+  EdgeInsets _getPadding() {
+    return widget.padding > 0
+        ? EdgeInsets.all(widget.padding)
         : EdgeInsets.only(
-            top: smeupImageModel.topPadding,
-            bottom: smeupImageModel.bottomPadding,
-            right: smeupImageModel.rightPadding,
-            left: smeupImageModel.leftPadding);
+            top: widget.topPadding,
+            bottom: widget.bottomPadding,
+            right: widget.rightPadding,
+            left: widget.leftPadding);
   }
 }

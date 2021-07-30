@@ -178,7 +178,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
                   borderSide: BorderSide(color: focusColor),
                 ),
               ),
-              onSaved: widget.clientOnSave,
+              onSaved: widget.clientOnSave, // lostfocus
             ));
 
     if (smeupInputFieldModel.options != null &&
