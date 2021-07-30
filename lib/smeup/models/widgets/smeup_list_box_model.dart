@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_list_box_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
@@ -11,11 +12,11 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultHeight = 100;
   static const double defaultListHeight = 100;
   static const double defaultPadding = 0.0;
-  static const SmeupListType defaultListType = SmeupListType.simple;
+  static const SmeupListType defaultListType = SmeupListType.oriented;
+  static const int defaultPortraitColumns = 1;
+  static const int defaultLandscapeColumns = 1;
+  static const String defaultLayout = '1';
 
-  int portraitColumns;
-  int landscapeColumns;
-  //List<String> boxColumnNames;
   double width;
   double height;
   double listHeight;
@@ -24,14 +25,11 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   double paddingRight;
   double paddingLeft;
   SmeupListType listType;
-
-  String boxLayout;
+  int portraitColumns;
+  int landscapeColumns;
 
   SmeupListBoxModel(
-      {this.portraitColumns,
-      this.landscapeColumns,
-      this.boxLayout,
-      //this.boxColumnNames,
+      {layout = defaultLayout,
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.listHeight = defaultHeight,
@@ -40,35 +38,31 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       this.paddingRight = defaultPadding,
       this.paddingLeft = defaultPadding,
       this.listType = defaultListType,
+      this.portraitColumns = defaultPortraitColumns,
+      this.landscapeColumns = defaultLandscapeColumns,
       title = ''})
       : super(title: title) {
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupListBoxModel.fromMap(
-    response, {
-    this.portraitColumns,
-    this.landscapeColumns,
-    this.boxLayout,
-    //this.boxColumnNames
-  }) : super.fromMap(response) {
-    //boxLayout = response['layout'] ?? 'default1';
-    boxLayout = '';
-    if (response['layout'] != null) {
-      final String layout = response['layout'].toString();
+  SmeupListBoxModel.fromMap(Map<String, dynamic> jsonMap)
+      : super.fromMap(jsonMap) {
+    layout = defaultLayout;
+    if (jsonMap['layout'] != null) {
+      layout = jsonMap['layout'].toString();
       if (layout != null && layout.length > 0) {
-        boxLayout = layout.substring(layout.length - 1);
+        layout = layout.substring(layout.length - 1);
       }
     }
 
-    title = response['title'] ?? '';
-    if (optionsDefault['Cols'] != null) {
-      portraitColumns = optionsDefault['Cols'];
-      landscapeColumns = optionsDefault['Cols'];
-    } else {
-      portraitColumns = 0;
-      landscapeColumns = 0;
-    }
+    title = jsonMap['title'] ?? '';
+    portraitColumns =
+        SmeupUtilities.getInt(optionsDefault['portraitColumns']) ??
+            defaultPortraitColumns;
+    landscapeColumns =
+        SmeupUtilities.getInt(optionsDefault['landscapeColumns']) ??
+            defaultLandscapeColumns;
+
     padding =
         SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
     paddingRight = SmeupUtilities.getDouble(optionsDefault['paddingRight']) ??
@@ -81,9 +75,17 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     listHeight = SmeupUtilities.getDouble(optionsDefault['listHeight']) ??
         defaultListHeight;
     listType = decodeListType(optionsDefault['listType']);
-    orientation = response['orientation'] == 'horizontal'
+    orientation = jsonMap['orientation'] == 'horizontal'
         ? Axis.horizontal
         : Axis.vertical;
+
+    if (!dataLoaded && widgetLoadType != LoadType.Delay) {
+      SmeupListBoxDao.getData(this).then((value) {
+        data = value;
+        dataLoaded = true;
+      });
+    }
+
     SmeupDataService.incrementDataFetch(id);
   }
 
@@ -96,21 +98,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       case 'wheel':
         return SmeupListType.wheel;
       default:
-        return SmeupListType.simple;
+        return defaultListType;
     }
-  }
-
-  @override
-  setData() async {
-    if (smeupFun != null && smeupFun.isFunValid()) {
-      final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
-
-      if (!smeupServiceResponse.succeded) {
-        return;
-      }
-
-      data = smeupServiceResponse.result.data;
-    }
-    SmeupDataService.decrementDataFetch(id);
   }
 }

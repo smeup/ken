@@ -36,8 +36,6 @@ class SmeupLabel extends StatefulWidget
   Color fontColor;
   String title;
 
-  // other properties
-
   SmeupLabel.withController(
     this.model,
     this.scaffoldKey,
@@ -155,7 +153,6 @@ class _SmeupLabelState extends State<SmeupLabel>
   ///
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    //await smeupLabelModel.setData();
     if (!dataLoaded && widgetLoadType != LoadType.Delay) {
       _model.data = await SmeupLabelDao.getData(_model);
       dataLoaded = true;

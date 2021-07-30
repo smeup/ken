@@ -181,7 +181,18 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           )
         : box;
 
-    return SmeupWidgetBuilderResponse(smeupBoxModel, res);
+    final container = Container(
+        padding: const EdgeInsets.all(5.0),
+        color: Colors.transparent,
+        height: widget.smeupBoxModel.height == 0
+            ? double.infinity
+            : widget.smeupBoxModel.height,
+        width: widget.smeupBoxModel.width == 0
+            ? double.infinity
+            : widget.smeupBoxModel.width,
+        child: res);
+
+    return SmeupWidgetBuilderResponse(smeupBoxModel, container);
   }
 
   Widget _getLayout1(dynamic data, BuildContext context) {
@@ -720,10 +731,10 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
       widget.smeupBoxModel.dynamisms = [
         {"event": "click", "exec": ""}
       ];
-      SmeupDynamismService.storeDynamicVariables(data);
+      //SmeupDynamismService.storeDynamicVariables(data);
       widget.onClientPressed();
     } else {
-      SmeupDynamismService.storeDynamicVariables(data);
+      //SmeupDynamismService.storeDynamicVariables(data);
       widget.onServerPressed();
     }
   }

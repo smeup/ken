@@ -11,7 +11,6 @@ import 'package:mobile_components_library/smeup/widgets/smeup_buttons.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
-import 'smeup_not_available.dart';
 import 'smeup_widget_state_interface.dart';
 
 // ignore: must_be_immutable
@@ -110,25 +109,14 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
   SmeupTextAutocompleteModel _model;
-  //TextEditingController _controller;
 
   List<dynamic> _options;
-
-  // <AutocompleteModel>[
-  //   'aardvark',
-  //   'bobcat',
-  //   'chameleon',
-  //   ''
-  // ];
 
   @override
   void initState() {
     _model = widget.model;
     widgetLoadType = _model.widgetLoadType;
     dataLoaded = _model.dataLoaded;
-
-    // _controller = new TextEditingController(
-    //     text: SmeupDynamismService.variables['customerName']);
     _options = _model.data['rows'];
     super.initState();
   }
@@ -154,12 +142,11 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
   }
 
   /// Label's structure:
-  /// TODO: define the structure ...
+  /// define the structure ...
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     Widget textField;
 
-    //await smeupInputFieldModel.setData();
     if (!dataLoaded && widgetLoadType != LoadType.Delay) {
       _model.data = await SmeupTextAutocompleteDao.getData(_model);
       _options = _model.data['rows'];
@@ -167,15 +154,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
     }
 
     if (!hasData(_model)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-              'Dati non disponibili.  (${_model.smeupFun.fun['fun']['function']})'),
-          backgroundColor: SmeupOptions.theme.errorColor,
-        ),
-      );
-
-      return SmeupWidgetBuilderResponse(_model, SmeupNotAvailable());
+      return getFunErrorResponse(context, _model);
     }
 
     Color underlineColor = _model.showUnderline

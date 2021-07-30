@@ -1,42 +1,123 @@
+import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:mobile_components_library/smeup/daos/smeup_list_box_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_box_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_list_box_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_box.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
-import 'package:provider/provider.dart';
 
-class SmeupListBox extends StatefulWidget {
-  final SmeupListBoxModel smeupListModel;
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
-  final Function onServerPressed;
-  final Function onClientPressed;
+// ignore: must_be_immutable
+class SmeupListBox extends StatefulWidget
+    with SmeupWidgetMixin
+    implements SmeupWidgetInterface {
+  SmeupListBoxModel model;
+  GlobalKey<ScaffoldState> scaffoldKey;
+  GlobalKey<FormState> formKey;
 
-  SmeupListBox(this.smeupListModel, this.scaffoldKey, this.formKey,
-      {this.onServerPressed, this.onClientPressed});
+  // graphic properties
+  double width;
+  double height;
+  double listHeight;
+  Axis orientation;
+  double padding;
+  double paddingRight;
+  double paddingLeft;
+  SmeupListType listType;
+  String layout;
+  String title;
+  int portraitColumns;
+  int landscapeColumns;
+
+  // dynamisms functions
+  //Function onServerPressed;
+  Function onClientPressed;
+
+  SmeupListBox.withController(this.model, this.scaffoldKey, this.formKey) {
+    runControllerActivities(model);
+  }
+
+  SmeupListBox(this.scaffoldKey, this.formKey,
+      {
+      //   this.portraitColumns,
+      // this.landscapeColumns,
+      layout,
+      this.width = SmeupListBoxModel.defaultWidth,
+      this.height = SmeupListBoxModel.defaultHeight,
+      this.listHeight = SmeupListBoxModel.defaultHeight,
+      this.orientation,
+      this.padding = SmeupListBoxModel.defaultPadding,
+      this.paddingRight = SmeupListBoxModel.defaultPadding,
+      this.paddingLeft = SmeupListBoxModel.defaultPadding,
+      this.listType = SmeupListBoxModel.defaultListType,
+      this.portraitColumns = SmeupListBoxModel.defaultPortraitColumns,
+      this.landscapeColumns = SmeupListBoxModel.defaultLandscapeColumns,
+      title = '',
+      //this.onServerPressed,
+      this.onClientPressed}) {
+    this.model = SmeupListBoxModel(
+        layout: layout,
+        width: width,
+        height: height,
+        listHeight: listHeight,
+        orientation: orientation,
+        padding: padding,
+        paddingRight: paddingRight,
+        paddingLeft: paddingLeft,
+        listType: listType,
+        portraitColumns: portraitColumns,
+        landscapeColumns: landscapeColumns,
+        title: title);
+  }
+
+  @override
+  runControllerActivities(SmeupModel model) {
+    SmeupListBoxModel m = model;
+
+    layout = m.layout;
+    width = m.width;
+    height = m.height;
+    listHeight = m.listHeight;
+    orientation = m.orientation;
+    padding = m.padding;
+    paddingRight = m.paddingRight;
+    paddingLeft = m.paddingLeft;
+    listType = m.listType;
+    portraitColumns = m.portraitColumns;
+    landscapeColumns = m.landscapeColumns;
+    title = m.title;
+  }
 
   @override
   _SmeupListBoxState createState() => _SmeupListBoxState();
 }
 
 class _SmeupListBoxState extends State<SmeupListBox>
-    with SmeupWidgetStateMixin {
+    with SmeupWidgetStateMixin
+    implements SmeupWidgetStateInterface {
   List<Widget> cells;
+  SmeupListBoxModel _model;
+  final _scrollController = FixedExtentScrollController();
+
+  @override
+  void initState() {
+    _model = widget.model;
+    widgetLoadType = _model.widgetLoadType;
+    dataLoaded = _model.dataLoaded;
+    super.initState();
+  }
 
   @override
   void dispose() {
-    // SmeupWidgetsNotifier.removeWidget(
-    //     widget.scaffoldKey.hashCode, widget.smeupListModel.id);
+    runDispose(widget.scaffoldKey, _model.id);
     super.dispose();
   }
 
@@ -49,80 +130,43 @@ class _SmeupListBoxState extends State<SmeupListBox>
 
   @override
   Widget build(BuildContext context) {
-    if (widget.smeupListModel.isNotified) {
-      widget.smeupListModel.isNotified = false;
-    }
-
-    final SmeupWidgetNotifier notifier =
-        Provider.of<SmeupWidgetNotifier>(context);
-    notifier.objects
-        .removeWhere((element) => element['id'] == widget.smeupListModel.id);
-    notifier.objects.add({
-      'id': widget.smeupListModel.id,
-      'model': widget.smeupListModel,
-      'notifierFunction': () {
-        setState(() {});
-      }
+    var listbox = runBuild(context, _model.id, _model.type, widget.scaffoldKey,
+        notifierFunction: () {
+      setState(() {
+        widgetLoadType = LoadType.Immediate;
+        dataLoaded = false;
+      });
     });
 
-    if (widget.scaffoldKey.hashCode ==
-        SmeupDynamismService.currentScaffoldKey.hashCode)
-      notifier.setTimerRefresh(widget.smeupListModel.id);
-
-    SmeupWidgetNotifier.addWidget(widget.scaffoldKey.hashCode,
-        widget.smeupListModel.id, widget.smeupListModel.type, notifier);
-
-    var boxes = widget.smeupListModel.widgetLoadType == LoadType.Delay
-        ? Container()
-        : FutureBuilder(
-            future: _getListComponents(widget.smeupListModel),
-            builder: (ctx, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return widget.smeupListModel.showLoader
-                    ? SmeupWait()
-                    : Container();
-              } else {
-                if (snapshot.hasError) {
-                  SmeupLogService.writeDebugMessage(
-                      'Error SmeupListBox: ${snapshot.error}',
-                      logType: LogType.error);
-                  notifyError(
-                      context, widget.smeupListModel.id, snapshot.error);
-                  return SmeupNotAvailable();
-                } else {
-                  return snapshot.data.children;
-                }
-              }
-            },
-          );
-
-    // if (widget.smeupListModel.notificationEnabled) {
-    //   SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
-    //       widget.smeupListModel.id, widget.smeupListModel.type, notifier);
-    // }
-
-    return boxes;
+    return listbox;
   }
 
-  Future<SmeupWidgetBuilderResponse> _getListComponents(
-      SmeupListBoxModel smeupListModel) async {
+  /// Label's structure:
+  /// define the structure ...
+  Future<SmeupWidgetBuilderResponse> getChildren() async {
+    if (!dataLoaded && widgetLoadType != LoadType.Delay) {
+      _model.data = await SmeupListBoxDao.getData(_model);
+      dataLoaded = true;
+    }
+
+    if (!hasData(_model)) {
+      return getFunErrorResponse(context, _model);
+    }
+
     Widget children;
 
-    await _loadData();
+    cells = _getCells();
     if (cells == null) {
-      return SmeupWidgetBuilderResponse(smeupListModel, SmeupNotAvailable());
+      return SmeupWidgetBuilderResponse(_model, SmeupNotAvailable());
     }
 
     var padding = EdgeInsets.zero;
-    if (widget.smeupListModel.padding > 0)
-      padding = EdgeInsets.all(widget.smeupListModel.padding);
-    if (widget.smeupListModel.paddingRight > 0 ||
-        widget.smeupListModel.paddingLeft > 0)
-      padding = EdgeInsets.only(
-          right: widget.smeupListModel.paddingRight,
-          left: widget.smeupListModel.paddingLeft);
+    if (widget.padding > 0) padding = EdgeInsets.all(widget.padding);
+    if (widget.paddingRight > 0 || widget.paddingLeft > 0)
+      padding =
+          EdgeInsets.only(right: widget.paddingRight, left: widget.paddingLeft);
 
-    switch (smeupListModel.listType) {
+    switch (widget.listType) {
       case SmeupListType.simple:
         children = _getSimpleList(cells, padding);
         break;
@@ -130,36 +174,19 @@ class _SmeupListBoxState extends State<SmeupListBox>
         children = _getOrientedList(cells, padding);
         break;
       case SmeupListType.wheel:
+        children = _getWheelList(cells, padding);
         break;
       default:
     }
 
-    return SmeupWidgetBuilderResponse(smeupListModel, children);
-  }
-
-  Future<void> _loadData() async {
-    await widget.smeupListModel.setData();
-
-    if (!hasData(widget.smeupListModel)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-              'Dati non disponibili.  (${widget.smeupListModel.smeupFun.fun['fun']['function']})'),
-          backgroundColor: SmeupOptions.theme.errorColor,
-        ),
-      );
-
-      return;
-    }
-
-    cells = _getListWidget(context, widget.smeupListModel.data);
+    return SmeupWidgetBuilderResponse(_model, children);
   }
 
   Widget _getSimpleList(List<Widget> cells, EdgeInsets padding) {
     var list = RefreshIndicator(
       onRefresh: _refreshList,
       child: ListView.builder(
-        scrollDirection: widget.smeupListModel.orientation,
+        scrollDirection: widget.orientation,
         physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         itemCount: cells.length,
         itemBuilder: (context, index) {
@@ -171,7 +198,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
     final container = Container(
         padding: padding,
         color: Colors.transparent,
-        height: widget.smeupListModel.listHeight,
+        height: widget.listHeight,
         child: list);
 
     return container;
@@ -179,18 +206,23 @@ class _SmeupListBoxState extends State<SmeupListBox>
 
   Widget _getOrientedList(List<Widget> cells, EdgeInsets padding) {
     var list;
+
+    double childAspectRatio =
+        widget.height == 0 ? 9 : SmeupOptions.deviceHeight / widget.height;
+
     list = OrientationBuilder(
       builder: (context, orientation) {
-        int col = widget.smeupListModel.portraitColumns;
+        int col = widget.portraitColumns;
         if (SmeupOptions.orientation == Orientation.landscape) {
-          col = widget.smeupListModel.landscapeColumns;
+          col = widget.landscapeColumns;
         }
         return RefreshIndicator(
           onRefresh: _refreshList,
           child: GridView.count(
+            childAspectRatio: childAspectRatio,
             physics:
                 BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-            scrollDirection: widget.smeupListModel.orientation,
+            scrollDirection: widget.orientation,
             crossAxisCount: col,
             children: cells,
           ),
@@ -201,51 +233,97 @@ class _SmeupListBoxState extends State<SmeupListBox>
     final container = Container(
         padding: padding,
         color: Colors.transparent,
-        height: widget.smeupListModel.listHeight,
+        height: widget.listHeight,
+        child: list);
+
+    return container;
+  }
+
+  Widget _getWheelList(List<Widget> cells, EdgeInsets padding) {
+    var list;
+    // if (widget.listBoxModel.orientation == Axis.vertical) {
+
+    // } else {
+
+    // }
+    list = ClickableListWheelScrollView(
+        scrollController: _scrollController,
+        itemHeight: widget.height,
+        itemCount: cells.length,
+        onItemTapCallback: (index) {
+          //print("onItemTapCallback index: $index");
+          if (widget.onClientPressed != null) {
+            widget.onClientPressed();
+          } else {
+            //widget.onServerPressed();
+            (cells[index] as SmeupBox).onServerPressed();
+          }
+        },
+        child: ListWheelScrollView.useDelegate(
+          physics:
+              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          controller: _scrollController,
+          itemExtent: widget.height,
+          //physics: FixedExtentScrollPhysics(),
+          //overAndUnderCenterOpacity: 0.5,
+          //perspective: 0.002,
+          onSelectedItemChanged: (index) {
+            print("onSelectedItemChanged index: $index");
+          },
+          childDelegate: ListWheelChildBuilderDelegate(
+            builder: (context, index) => cells[index],
+            childCount: cells.length,
+          ),
+        ));
+
+    final container = Container(
+        padding: padding,
+        color: Colors.transparent,
+        height: widget.listHeight,
         child: list);
 
     return container;
   }
 
   Future<void> _refreshList() async {
-    //await _loadData();
     setState(() {});
   }
 
-  List<Widget> _getListWidget(BuildContext context, dynamic data) {
-    final widgets = List<Widget>.empty(growable: true);
+  List<Widget> _getCells() {
+    final cells = List<Widget>.empty(growable: true);
 
-    data['rows'].forEach((dataElement) {
+    _model.data['rows'].forEach((dataElement) {
       var boxModel = SmeupBoxModel(
-          layout: widget.smeupListModel.boxLayout,
-          columns: data['columns'],
-          height: widget.smeupListModel.height,
-          width: widget.smeupListModel.width,
-          title: widget.smeupListModel.title,
-          //clientOnTap: widget.smeupListModel.boxOnTap,
+          layout: widget.layout,
+          columns: _model.data['columns'],
+          height: widget.height,
+          width: widget.width,
+          title: widget.title,
           clientRow: dataElement);
 
-      final container = Container(
-          padding: const EdgeInsets.all(5.0),
-          color: Colors.transparent,
-          height: widget.smeupListModel.height == 0
-              ? double.infinity
-              : widget.smeupListModel.height,
-          width: widget.smeupListModel.width == 0
-              ? double.infinity
-              : widget.smeupListModel.width,
-          child: SmeupBox(widget.smeupListModel, boxModel, _refreshList,
-              widget.scaffoldKey, widget.formKey,
-              onClientPressed: widget.onClientPressed, onServerPressed: () {
-            SmeupDynamismService.storeDynamicVariables(boxModel.data);
+      // final container = Container(
+      //     padding: const EdgeInsets.all(5.0),
+      //     color: Colors.transparent,
+      //     height: widget.height == 0 ? double.infinity : widget.height,
+      //     width: widget.width == 0 ? double.infinity : widget.width,
+      //     child: SmeupBox(_model, boxModel, _refreshList, widget.scaffoldKey,
+      //         widget.formKey, onClientPressed: widget.onClientPressed,
+      //         onServerPressed: () {
+      //       SmeupDynamismService.storeDynamicVariables(boxModel.data);
+      //       SmeupDynamismService.run(
+      //           _model.dynamisms, context, 'click', widget.scaffoldKey);
+      //     }));
+      final cell = SmeupBox(
+          _model, boxModel, _refreshList, widget.scaffoldKey, widget.formKey,
+          onClientPressed: widget.onClientPressed, onServerPressed: () {
+        SmeupDynamismService.storeDynamicVariables(boxModel.data);
+        SmeupDynamismService.run(
+            _model.dynamisms, context, 'click', widget.scaffoldKey);
+      });
 
-            SmeupDynamismService.run(widget.smeupListModel.dynamisms, context,
-                'click', widget.scaffoldKey);
-          }));
-
-      widgets.add(container);
+      cells.add(cell);
     });
 
-    return widgets;
+    return cells;
   }
 }

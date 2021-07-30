@@ -106,7 +106,7 @@ class _SmeupImageState extends State<SmeupImage>
   }
 
   /// Label's structure:
-  /// TODO: define the structure ...
+  /// define the structure ...
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!dataLoaded && widgetLoadType != LoadType.Delay) {
