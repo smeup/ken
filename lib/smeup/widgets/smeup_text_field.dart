@@ -163,6 +163,8 @@ class _SmeupTextFieldState extends State<SmeupTextField>
               onChanged: (value) {
                 if (widget.clientOnChange != null) widget.clientOnChange(value);
                 SmeupDynamismService.variables[smeupInputFieldModel.id] = value;
+                SmeupDynamismService.run(smeupInputFieldModel.dynamisms,
+                    context, 'change', widget.scaffoldKey);
               },
               decoration: InputDecoration(
                 labelStyle: TextStyle(
