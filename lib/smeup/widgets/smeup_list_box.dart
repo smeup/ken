@@ -69,6 +69,9 @@ class _SmeupListBoxState extends State<SmeupListBox>
         SmeupDynamismService.currentScaffoldKey.hashCode)
       notifier.setTimerRefresh(widget.smeupListModel.id);
 
+    SmeupWidgetNotifier.addWidget(widget.scaffoldKey.hashCode,
+        widget.smeupListModel.id, widget.smeupListModel.type, notifier);
+
     var boxes = widget.smeupListModel.widgetLoadType == LoadType.Delay
         ? Container()
         : FutureBuilder(
