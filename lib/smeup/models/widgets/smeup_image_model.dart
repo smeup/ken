@@ -50,10 +50,9 @@ class SmeupImageModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getDouble(jsonMap['bottomPadding']) ?? defaultPadding;
     title = jsonMap['title'] ?? '';
 
-    if (!dataLoaded && widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.Delay) {
       SmeupImageDao.getData(this).then((value) {
         data = value;
-        dataLoaded = true;
       });
     }
 

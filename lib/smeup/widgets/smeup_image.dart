@@ -83,7 +83,6 @@ class _SmeupImageState extends State<SmeupImage>
   void initState() {
     _model = widget.model;
     widgetLoadType = _model.widgetLoadType;
-    dataLoaded = _model.dataLoaded;
     super.initState();
   }
 
@@ -99,7 +98,7 @@ class _SmeupImageState extends State<SmeupImage>
         notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
-        dataLoaded = false;
+        setDataLoad(_model.id, false);
       });
     });
     return box;
@@ -109,9 +108,9 @@ class _SmeupImageState extends State<SmeupImage>
   /// define the structure ...
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!dataLoaded && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(_model.id) && widgetLoadType != LoadType.Delay) {
       _model.data = await SmeupImageDao.getData(_model);
-      dataLoaded = true;
+      setDataLoad(_model.id, true);
     }
 
     if (!hasData(_model)) {

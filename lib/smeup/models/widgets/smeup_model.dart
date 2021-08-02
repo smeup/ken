@@ -28,8 +28,6 @@ abstract class SmeupModel {
   int serviceStatusCode = 0;
   int refresh;
 
-  bool dataLoaded = false;
-
   List<SmeupSectionModel> smeupSectionsModels;
 
   SmeupModel({this.title}) {
@@ -70,8 +68,6 @@ abstract class SmeupModel {
       refresh =
           SmeupUtilities.getInt(optionsDefault['refresh']) ?? defaultRefresh;
     }
-
-    dataLoaded = jsonMap['loaded'] ?? false;
 
     data = jsonMap['data'];
 

@@ -115,7 +115,6 @@ class _SmeupLabelState extends State<SmeupLabel>
   void initState() {
     _model = widget.model;
     widgetLoadType = _model.widgetLoadType;
-    dataLoaded = _model.dataLoaded;
     super.initState();
   }
 
@@ -131,7 +130,7 @@ class _SmeupLabelState extends State<SmeupLabel>
         notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
-        dataLoaded = false;
+        setDataLoad(_model.id, false);
       });
     });
 
@@ -153,9 +152,9 @@ class _SmeupLabelState extends State<SmeupLabel>
   ///
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!dataLoaded && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(_model.id) && widgetLoadType != LoadType.Delay) {
       _model.data = await SmeupLabelDao.getData(_model);
-      dataLoaded = true;
+      setDataLoad(_model.id, true);
     }
 
     if (!hasData(_model)) {

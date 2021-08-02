@@ -1,37 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_error_notifier.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:provider/provider.dart';
 
 class SmeupWidgetStateMixin {
   LoadType widgetLoadType = LoadType.Immediate;
-  bool dataLoaded = true;
+
+  SmeupWidgetNotifier notifier;
 
   Widget runBuild(BuildContext context, String id, String type,
       GlobalKey<ScaffoldState> scaffoldKey,
       {Function notifierFunction}) {
-    if (notifierFunction != null) {
-      final SmeupWidgetNotifier notifier =
-          Provider.of<SmeupWidgetNotifier>(context, listen: false);
+    notifier = Provider.of<SmeupWidgetNotifier>(context, listen: false);
 
+    var sel = notifier.objects
+        .firstWhere((element) => element['id'] == id, orElse: () => null);
+    if (sel == null) {
+      notifier.objects.add(
+          {'id': id, 'dataLoaded': true, 'notifierFunction': notifierFunction});
+    } else {
+      bool exLoaded = sel['dataLoaded'];
       notifier.objects.removeWhere((element) => element['id'] == id);
       notifier.objects.add({
         'id': id,
-        //'model': model,
+        'dataLoaded': exLoaded,
         'notifierFunction': notifierFunction
       });
-
-      if (scaffoldKey.hashCode ==
-          SmeupDynamismService.currentScaffoldKey.hashCode)
-        notifier.setTimerRefresh(id);
-
-      SmeupWidgetNotifier.addWidget(scaffoldKey.hashCode, id, type, notifier);
     }
 
     return widgetLoadType == LoadType.Delay
@@ -55,6 +53,20 @@ class SmeupWidgetStateMixin {
               }
             },
           );
+  }
+
+  bool getDataLoaded(id) {
+    final sel = notifier.objects
+        .firstWhere((element) => element['id'] == id, orElse: () => null);
+    return sel['dataLoaded'];
+  }
+
+  void setDataLoad(String id, bool value) {
+    var sel = notifier.objects
+        .firstWhere((element) => element['id'] == id, orElse: () => null);
+    sel['dataLoaded'] = value;
+    notifier.objects.removeWhere((element) => element['id'] == id);
+    notifier.objects.add(sel);
   }
 
   Future<SmeupWidgetBuilderResponse> getChildren() {
@@ -81,19 +93,20 @@ class SmeupWidgetStateMixin {
   Future<SmeupWidgetBuilderResponse> getFunErrorResponse(
       BuildContext context, SmeupModel model) {
     return Future(() {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-              'Dati non disponibili.  (${model.smeupFun.fun['fun']['function']})'),
-          backgroundColor: SmeupOptions.theme.errorColor,
-        ),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text(
+      //         'Dati non disponibili.  (${model.smeupFun.fun['fun']['function']})'),
+      //     backgroundColor: SmeupOptions.theme.errorColor,
+      //   ),
+      // );
       return SmeupWidgetBuilderResponse(model, SmeupNotAvailable());
     });
   }
 
   void runDispose(GlobalKey<ScaffoldState> scaffoldKey, String id) {
-    SmeupWidgetNotifier.removeWidget(scaffoldKey.hashCode, id);
+    //SmeupWidgetNotifier.removeWidget(scaffoldKey.hashCode, id);
+    //notifier.objects.removeWhere((element) => element['id'] == id);
   }
 
   // TODO: pass the section instead

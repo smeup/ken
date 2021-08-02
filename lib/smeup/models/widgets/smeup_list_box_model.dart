@@ -79,10 +79,9 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
         ? Axis.horizontal
         : Axis.vertical;
 
-    if (!dataLoaded && widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.Delay) {
       SmeupListBoxDao.getData(this).then((value) {
         data = value;
-        dataLoaded = true;
       });
     }
 

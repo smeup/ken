@@ -3,31 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:provider/provider.dart';
 
 class SmeupWidgetNotifier with ChangeNotifier {
   List<dynamic> objects = List<dynamic>.empty(growable: true);
 
-  static var widgets = Map<String, dynamic>();
-
-  static void addWidget(
-      int scaffoldHashCode, String componentId, String type, dynamic notifier) {
-    if (type == null) return;
-    final notifierKey = _getNotifierKey(scaffoldHashCode, componentId);
-    SmeupWidgetNotifier.widgets[notifierKey] = notifier;
-  }
-
-  static void removeWidget(int scaffoldHashCode, String componentId) {
-    final notifierKey = _getNotifierKey(scaffoldHashCode, componentId);
-    SmeupWidgetNotifier.widgets.removeWhere((key, value) => key == notifierKey);
-  }
-
-  static String _getNotifierKey(int scaffoldHashCode, String componentId) {
-    return '${scaffoldHashCode}_$componentId'.toLowerCase();
-  }
-
   static void notifyWidgets(
       List<String> widgetsIds, BuildContext context, int scaffoldHashCode) {
-    widgetsIds.forEach((widgetId) {
+    for (var i = 0; i < widgetsIds.length; i++) {
+      final widgetId = widgetsIds[i];
+
       if (widgetId.toLowerCase().contains('close(')) {
         String routeName = '';
 
@@ -52,29 +37,23 @@ class SmeupWidgetNotifier with ChangeNotifier {
         else
           Navigator.of(context).pop();
       } else if (widgetId.toLowerCase() == 'yes') {
-        final notifierKey =
-            _getNotifierKey(scaffoldHashCode, scaffoldHashCode.toString());
-        final notifier = SmeupWidgetNotifier.widgets[notifierKey];
-        notifier.changeWidgets(widgetId);
+        var notifier = Provider.of<SmeupWidgetNotifier>(context, listen: false);
+        notifier.changeWidgets(scaffoldHashCode.toString());
       } else {
-        final notifierKey = _getNotifierKey(scaffoldHashCode, widgetId);
-        final notifier = SmeupWidgetNotifier.widgets[notifierKey];
+        var notifier = Provider.of<SmeupWidgetNotifier>(context, listen: false);
         if (notifier != null) notifier.changeWidgets(widgetId);
       }
-    });
+    }
   }
 
   void changeWidgets(widgetId) {
     final sel = objects.firstWhere((element) => element['id'] == widgetId,
         orElse: () => null);
     if (sel == null) return;
-    // SmeupModel smeupModel = sel['model'];
-    // smeupModel.load = '';
+    sel['dataLoaded'] = false;
 
     Function notifierFunction = sel['notifierFunction'];
     if (notifierFunction != null) notifierFunction();
-
-    //notifyListeners();
   }
 
   void setTimerRefresh(widgetId) {

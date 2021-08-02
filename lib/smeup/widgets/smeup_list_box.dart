@@ -111,7 +111,6 @@ class _SmeupListBoxState extends State<SmeupListBox>
   void initState() {
     _model = widget.model;
     widgetLoadType = _model.widgetLoadType;
-    dataLoaded = _model.dataLoaded;
     super.initState();
   }
 
@@ -134,7 +133,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
         notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
-        dataLoaded = false;
+        setDataLoad(_model.id, false);
       });
     });
 
@@ -144,9 +143,9 @@ class _SmeupListBoxState extends State<SmeupListBox>
   /// Label's structure:
   /// define the structure ...
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!dataLoaded && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(_model.id) && widgetLoadType != LoadType.Delay) {
       _model.data = await SmeupListBoxDao.getData(_model);
-      dataLoaded = true;
+      setDataLoad(_model.id, true);
     }
 
     if (!hasData(_model)) {
@@ -246,35 +245,37 @@ class _SmeupListBoxState extends State<SmeupListBox>
     // } else {
 
     // }
-    list = ClickableListWheelScrollView(
-        scrollController: _scrollController,
-        itemHeight: widget.height,
-        itemCount: cells.length,
-        onItemTapCallback: (index) {
-          //print("onItemTapCallback index: $index");
-          if (widget.onClientPressed != null) {
-            widget.onClientPressed();
-          } else {
-            //widget.onServerPressed();
-            (cells[index] as SmeupBox).onServerPressed();
-          }
-        },
-        child: ListWheelScrollView.useDelegate(
-          physics:
-              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-          controller: _scrollController,
-          itemExtent: widget.height,
-          //physics: FixedExtentScrollPhysics(),
-          //overAndUnderCenterOpacity: 0.5,
-          //perspective: 0.002,
-          onSelectedItemChanged: (index) {
-            print("onSelectedItemChanged index: $index");
-          },
-          childDelegate: ListWheelChildBuilderDelegate(
-            builder: (context, index) => cells[index],
-            childCount: cells.length,
-          ),
-        ));
+    list = RefreshIndicator(
+        onRefresh: _refreshList,
+        child: ClickableListWheelScrollView(
+            scrollController: _scrollController,
+            itemHeight: widget.height,
+            itemCount: cells.length,
+            onItemTapCallback: (index) {
+              //print("onItemTapCallback index: $index");
+              if (widget.onClientPressed != null) {
+                widget.onClientPressed();
+              } else {
+                //widget.onServerPressed();
+                (cells[index] as SmeupBox).onServerPressed();
+              }
+            },
+            child: ListWheelScrollView.useDelegate(
+              physics: BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
+              controller: _scrollController,
+              itemExtent: widget.height,
+              //physics: FixedExtentScrollPhysics(),
+              //overAndUnderCenterOpacity: 0.5,
+              //perspective: 0.002,
+              onSelectedItemChanged: (index) {
+                print("onSelectedItemChanged index: $index");
+              },
+              childDelegate: ListWheelChildBuilderDelegate(
+                builder: (context, index) => cells[index],
+                childCount: cells.length,
+              ),
+            )));
 
     final container = Container(
         padding: padding,
@@ -286,6 +287,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
   }
 
   Future<void> _refreshList() async {
+    setDataLoad(_model.id, false);
     setState(() {});
   }
 

@@ -116,7 +116,6 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
   void initState() {
     _model = widget.model;
     widgetLoadType = _model.widgetLoadType;
-    dataLoaded = _model.dataLoaded;
     _options = _model.data['rows'];
     super.initState();
   }
@@ -134,7 +133,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
             notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
-        dataLoaded = false;
+        setDataLoad(_model.id, false);
       });
     });
 
@@ -147,10 +146,10 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     Widget textField;
 
-    if (!dataLoaded && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(_model.id) && widgetLoadType != LoadType.Delay) {
       _model.data = await SmeupTextAutocompleteDao.getData(_model);
       _options = _model.data['rows'];
-      dataLoaded = true;
+      setDataLoad(_model.id, true);
     }
 
     if (!hasData(_model)) {

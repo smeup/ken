@@ -75,10 +75,9 @@ class SmeupTextAutocompleteModel extends SmeupModel
     defaultValue = jsonMap['defaultValue'] ?? '';
     valueField = optionsDefault['valueField'] ?? '';
 
-    if (!dataLoaded && widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.Delay) {
       SmeupTextAutocompleteDao.getData(this).then((value) {
         data = value;
-        dataLoaded = true;
       });
     }
 
