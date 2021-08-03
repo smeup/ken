@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
@@ -24,7 +23,7 @@ class SmeupQRCodeReaderModel extends SmeupModel implements SmeupDataInterface {
       this.maxReads = 1,
       this.delayInMillis = 0})
       : super(title: title) {
-    id = 'FLD' + Random().nextInt(100).toString();
+    id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
   }
 

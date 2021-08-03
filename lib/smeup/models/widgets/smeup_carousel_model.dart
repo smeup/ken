@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
@@ -19,7 +17,7 @@ class SmeupCaurouselModel extends SmeupModel implements SmeupDataInterface {
       this.autoPlay = false,
       title = ''})
       : super(title: title) {
-    id = 'CAU' + Random().nextInt(100).toString();
+    id = SmeupUtilities.getWidgetId('CAU', id);
     SmeupDataService.incrementDataFetch(id);
   }
 

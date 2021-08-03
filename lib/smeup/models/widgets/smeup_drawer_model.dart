@@ -1,7 +1,7 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupDrawerModel extends SmeupModel {
   static const double defaultWidth = 40;
@@ -23,7 +23,7 @@ class SmeupDrawerModel extends SmeupModel {
       : super(title: title) {
     if (navbarBackcolor == null)
       navbarBackcolor = SmeupOptions.theme.appBarTheme.color;
-    id = 'DWR' + Random().nextInt(100).toString();
+    id = SmeupUtilities.getWidgetId('DWR', id);
   }
 
   SmeupDrawerModel.fromMap(Map<String, dynamic> jsonMap)

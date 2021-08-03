@@ -3,13 +3,11 @@ import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_datepicker_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_datepicker_button.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
-import 'package:provider/provider.dart';
 import 'smeup_not_available.dart';
 
 class SmeupDatePicker extends StatefulWidget {
@@ -35,17 +33,11 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
     with SmeupWidgetStateMixin {
   @override
   void dispose() {
-    // SmeupWidgetsNotifier.removeWidget(
-    //     widget.scaffoldKey.hashCode, widget.smeupDatePickerModel.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    final SmeupWidgetNotifier notifier =
-        Provider.of<SmeupWidgetNotifier>(context);
-
     final input = FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getTimePickerComponent(widget.smeupDatePickerModel),
       builder: (BuildContext context,

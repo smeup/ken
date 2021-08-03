@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
@@ -27,7 +25,7 @@ class SmeupCalendarModel extends SmeupModel {
     this.eventFontSize = defaultEventFontSize,
     this.titleFontSize = defaultTitleFontSize,
   }) : super(title: title) {
-    id = 'CAL' + Random().nextInt(100).toString();
+    id = SmeupUtilities.getWidgetId('CAL', id);
   }
 
   SmeupCalendarModel.fromMap(Map<String, dynamic> jsonMap)

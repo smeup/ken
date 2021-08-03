@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/tree_view.dart';
 
@@ -57,7 +55,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     this.iconData = 0,
     this.iconSize = defaultIconSize,
   }) : super(title: title) {
-    id = 'BTN' + Random().nextInt(100).toString();
+    id = SmeupUtilities.getWidgetId('BTN', id);
     SmeupDataService.incrementDataFetch(id);
   }
 

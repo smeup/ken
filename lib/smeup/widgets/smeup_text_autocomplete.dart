@@ -7,6 +7,7 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_autocomplete_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_buttons.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
@@ -70,7 +71,7 @@ class SmeupTextAutocomplete extends StatefulWidget
       this.inputFormatters,
       this.defaultValue,
       this.valueField}) {
-    id = setId(type, id);
+    id = SmeupUtilities.getWidgetId(type, id);
 
     model = SmeupTextAutocompleteModel(
         id: id,

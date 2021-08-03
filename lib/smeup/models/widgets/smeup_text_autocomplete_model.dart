@@ -45,9 +45,6 @@ class SmeupTextAutocompleteModel extends SmeupModel
       this.defaultValue = '',
       this.valueField = ''})
       : super(title: title, id: id, type: type) {
-    //if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
-    // if (id == null) id = 'FLD' + Random().nextInt(100).toString();
-
     SmeupDataService.incrementDataFetch(id);
   }
 

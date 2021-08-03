@@ -3,10 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:provider/provider.dart';
 
-class SmeupWidgetNotifier with ChangeNotifier {
-  List<dynamic> objects = List<dynamic>.empty(growable: true);
+class SmeupWidgetNotificationService {
+  static List<dynamic> objects = List<dynamic>.empty(growable: true);
 
   static void notifyWidgets(
       List<String> widgetsIds, BuildContext context, int scaffoldHashCode) {
@@ -37,26 +36,30 @@ class SmeupWidgetNotifier with ChangeNotifier {
         else
           Navigator.of(context).pop();
       } else if (widgetId.toLowerCase() == 'yes') {
-        var notifier = Provider.of<SmeupWidgetNotifier>(context, listen: false);
-        notifier.changeWidgets(scaffoldHashCode.toString());
+        SmeupWidgetNotificationService._invokeFunction(
+            scaffoldHashCode.toString());
       } else {
-        var notifier = Provider.of<SmeupWidgetNotifier>(context, listen: false);
-        if (notifier != null) notifier.changeWidgets(widgetId);
+        SmeupWidgetNotificationService._invokeFunction(widgetId);
       }
     }
   }
 
-  void changeWidgets(widgetId) {
-    final sel = objects.firstWhere((element) => element['id'] == widgetId,
-        orElse: () => null);
-    if (sel == null) return;
-    sel['dataLoaded'] = false;
+  static void _invokeFunction(widgetId) {
+    final sels = SmeupWidgetNotificationService.objects
+        .where((element) => element['id'] == widgetId)
+        .toList();
+    if (sels == null) return;
 
-    Function notifierFunction = sel['notifierFunction'];
-    if (notifierFunction != null) notifierFunction();
+    for (var i = 0; i < sels.length; i++) {
+      var sel = sels[i];
+      sel['dataLoaded'] = false;
+
+      Function notifierFunction = sel['notifierFunction'];
+      if (notifierFunction != null) notifierFunction();
+    }
   }
 
-  void setTimerRefresh(widgetId) {
+  static void setTimerRefresh(widgetId) {
     final sel = objects.firstWhere((element) => element['id'] == widgetId,
         orElse: () => null);
     if (sel == null) return;

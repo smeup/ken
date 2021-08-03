@@ -3,7 +3,7 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_error_notifier.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
+import 'package:mobile_components_library/smeup/services/smeup_widget_notification_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:provider/provider.dart';
@@ -11,17 +11,13 @@ import 'package:provider/provider.dart';
 class SmeupWidgetStateMixin {
   LoadType widgetLoadType = LoadType.Immediate;
 
-  SmeupWidgetNotifier notifier;
-
   Widget runBuild(BuildContext context, String id, String type,
       GlobalKey<ScaffoldState> scaffoldKey,
       {Function notifierFunction}) {
-    notifier = Provider.of<SmeupWidgetNotifier>(context, listen: false);
-
-    var sel = notifier.objects
+    var sel = SmeupWidgetNotificationService.objects
         .firstWhere((element) => element['id'] == id, orElse: () => null);
     if (sel == null) {
-      notifier.objects.add({
+      SmeupWidgetNotificationService.objects.add({
         'id': id,
         'dataLoaded': false,
         'scaffoldKey': scaffoldKey.hashCode,
@@ -29,8 +25,9 @@ class SmeupWidgetStateMixin {
       });
     } else {
       bool exLoaded = sel['dataLoaded'];
-      notifier.objects.removeWhere((element) => element['id'] == id);
-      notifier.objects.add({
+      SmeupWidgetNotificationService.objects
+          .removeWhere((element) => element['id'] == id);
+      SmeupWidgetNotificationService.objects.add({
         'id': id,
         'dataLoaded': exLoaded,
         'scaffoldKey': scaffoldKey.hashCode,
@@ -62,17 +59,18 @@ class SmeupWidgetStateMixin {
   }
 
   bool getDataLoaded(id) {
-    final sel = notifier.objects
+    final sel = SmeupWidgetNotificationService.objects
         .firstWhere((element) => element['id'] == id, orElse: () => null);
     return sel['dataLoaded'];
   }
 
   void setDataLoad(String id, bool value) {
-    var sel = notifier.objects
+    var sel = SmeupWidgetNotificationService.objects
         .firstWhere((element) => element['id'] == id, orElse: () => null);
     sel['dataLoaded'] = value;
-    notifier.objects.removeWhere((element) => element['id'] == id);
-    notifier.objects.add(sel);
+    SmeupWidgetNotificationService.objects
+        .removeWhere((element) => element['id'] == id);
+    SmeupWidgetNotificationService.objects.add(sel);
   }
 
   Future<SmeupWidgetBuilderResponse> getChildren() {

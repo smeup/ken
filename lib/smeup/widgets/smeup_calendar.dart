@@ -6,13 +6,12 @@ import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_event_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
+import 'package:mobile_components_library/smeup/services/smeup_widget_notification_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_service_response.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_progress_indicator.dart';
-import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 // Example holidays
@@ -268,13 +267,9 @@ class SmeupCalendarState extends State<SmeupCalendar>
       widget.smeupCalendarModel.isNotified = false;
     }
 
-    // ignore: unused_local_variable
-    final SmeupWidgetNotifier notifier =
-        Provider.of<SmeupWidgetNotifier>(context);
-
-    notifier.objects.removeWhere(
+    SmeupWidgetNotificationService.objects.removeWhere(
         (element) => element['id'] == widget.smeupCalendarModel.id);
-    notifier.objects.add({
+    SmeupWidgetNotificationService.objects.add({
       'id': widget.smeupCalendarModel.id,
       'model': widget.smeupCalendarModel,
       'notifierFunction': () {

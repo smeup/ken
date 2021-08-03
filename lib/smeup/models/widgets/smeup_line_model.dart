@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
@@ -8,7 +7,7 @@ class SmeupLineModel extends SmeupModel {
   double thickness = 0;
 
   SmeupLineModel({this.color, this.thickness}) : super(title: '') {
-    id = 'LIN' + Random().nextInt(100).toString();
+    id = SmeupUtilities.getWidgetId('LIN', id);
   }
 
   SmeupLineModel.fromMap(Map<String, dynamic> jsonMap)

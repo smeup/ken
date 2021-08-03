@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_radio_button.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
-import 'package:provider/provider.dart';
 
 class SmeupRadioButtons extends StatefulWidget {
   final SmeupRadioButtonsModel smeupRadioButtonsModel;
@@ -37,17 +35,11 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
 
   @override
   void dispose() {
-    // SmeupWidgetsNotifier.removeWidget(
-    //     widget.scaffoldKey.hashCode, widget.smeupRadioButtonsModel.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    final SmeupWidgetNotifier notifier =
-        Provider.of<SmeupWidgetNotifier>(context);
-
     final buttons = FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getButtonsComponent(widget.smeupRadioButtonsModel),
       builder: (BuildContext context,

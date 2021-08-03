@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
@@ -40,7 +38,7 @@ abstract class SmeupModel {
     dynamisms = jsonMap['dynamisms'];
 
     if (type != null && (id == null || id.isEmpty)) {
-      id = jsonMap['id'] ?? jsonMap['type'] + Random().nextInt(100).toString();
+      id = SmeupUtilities.getWidgetId(jsonMap['type'], jsonMap['id']);
 
       smeupFun = SmeupFun(jsonMap['fun']);
 

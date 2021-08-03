@@ -6,13 +6,12 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_mod
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_field_model.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
+import 'package:mobile_components_library/smeup/services/smeup_widget_notification_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_buttons.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
-import 'package:provider/provider.dart';
 import 'smeup_not_available.dart';
 
 class SmeupTextField extends StatefulWidget {
@@ -40,19 +39,14 @@ class _SmeupTextFieldState extends State<SmeupTextField>
     with SmeupWidgetStateMixin {
   @override
   void dispose() {
-    // SmeupWidgetsNotifier.removeWidget(
-    //     widget.scaffoldKey.hashCode, widget.smeupInputFieldModel.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    final SmeupWidgetNotifier notifier =
-        Provider.of<SmeupWidgetNotifier>(context);
-    notifier.objects.removeWhere(
+    SmeupWidgetNotificationService.objects.removeWhere(
         (element) => element['id'] == widget.smeupInputFieldModel.id);
-    notifier.objects.add({
+    SmeupWidgetNotificationService.objects.add({
       'id': widget.smeupInputFieldModel.id,
       'model': widget.smeupInputFieldModel,
       'notifierFunction': () {

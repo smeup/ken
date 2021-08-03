@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
+import 'package:mobile_components_library/smeup/services/smeup_widget_notification_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
@@ -48,7 +48,7 @@ class SmeupDynamicScreen extends StatefulWidget {
 class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     with SmeupWidgetStateMixin {
   SmeupFormModel smeupFormModel;
-  var notifier;
+  //var notifier;
 
   @override
   void initState() {
@@ -58,7 +58,6 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
       final SmeupErrorNotifier errorNotifier =
           Provider.of<SmeupErrorNotifier>(context, listen: false);
       errorNotifier.reset();
-      notifier = Provider.of<SmeupWidgetNotifier>(context, listen: false);
     });
 
     super.initState();
@@ -67,10 +66,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
   @override
   void dispose() {
     if (smeupFormModel != null) SmeupDynamicScreen.onDispose(smeupFormModel.id);
-    // SmeupWidgetsNotifier.removeWidget(
-    //     widget._scaffoldKey.hashCode, widget._scaffoldKey.hashCode.toString());
-
-    notifier.objects.removeWhere(
+    SmeupWidgetNotificationService.objects.removeWhere(
         (element) => element['scaffoldKey'] == widget._scaffoldKey.hashCode);
 
     super.dispose();
@@ -80,8 +76,6 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
   Widget build(BuildContext context) {
     SmeupDynamismService.currentScaffoldKey = widget._scaffoldKey;
 
-    // final SmeupScreenNotifier notifier =
-    //     Provider.of<SmeupScreenNotifier>(context);
     final SmeupErrorNotifier errorNotifier =
         Provider.of<SmeupErrorNotifier>(context);
 

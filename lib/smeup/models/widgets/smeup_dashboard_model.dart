@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
@@ -42,7 +40,7 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       title = ''})
       : super(title: title) {
     if (iconColor == null) iconColor = SmeupOptions.theme.iconTheme.color;
-    id = 'DSH' + Random().nextInt(100).toString();
+    id = SmeupUtilities.getWidgetId('DSH', id);
     SmeupDataService.incrementDataFetch(id);
   }
 

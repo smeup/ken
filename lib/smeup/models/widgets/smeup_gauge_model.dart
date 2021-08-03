@@ -1,14 +1,13 @@
-import 'dart:math';
-
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupGaugeModel extends SmeupModel implements SmeupDataInterface {
   dynamic clientData;
 
   SmeupGaugeModel({this.clientData, title = ''}) : super(title: title) {
-    id = 'GAU' + Random().nextInt(100).toString();
+    id = SmeupUtilities.getWidgetId('GAU', id);
     SmeupDataService.incrementDataFetch(id);
   }
 

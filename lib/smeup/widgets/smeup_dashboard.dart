@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_dashboard_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
-import 'package:provider/provider.dart';
 
 class SmeupDashboard extends StatefulWidget {
   final SmeupDashboardModel smeupDashboardModel;
@@ -24,18 +22,11 @@ class _SmeupDashboardState extends State<SmeupDashboard>
     with SmeupWidgetStateMixin {
   @override
   void dispose() {
-    // SmeupWidgetsNotifier.removeWidget(
-    //     widget.scaffoldKey.hashCode, widget.smeupDashboardModel.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    final SmeupWidgetNotifier notifier = Provider.of<SmeupWidgetNotifier>(
-        context,
-        listen: widget.smeupDashboardModel.notificationEnabled);
-
     final dash = FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getDashboardComponent(widget.smeupDashboardModel),
       builder: (BuildContext context,

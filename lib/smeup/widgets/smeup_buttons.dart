@@ -4,14 +4,13 @@ import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_widget_notifier.dart';
+import 'package:mobile_components_library/smeup/services/smeup_widget_notification_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_button.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
-import 'package:provider/provider.dart';
 
 class SmeupButtons extends StatefulWidget {
   final SmeupButtonsModel smeupButtonsModel;
@@ -57,11 +56,9 @@ class SmeupButtonsState extends State<SmeupButtons> with SmeupWidgetStateMixin {
       widget.smeupButtonsModel.isNotified = false;
     }
 
-    final SmeupWidgetNotifier notifier =
-        Provider.of<SmeupWidgetNotifier>(context);
-    notifier.objects
+    SmeupWidgetNotificationService.objects
         .removeWhere((element) => element['id'] == widget.smeupButtonsModel.id);
-    notifier.objects.add({
+    SmeupWidgetNotificationService.objects.add({
       'id': widget.smeupButtonsModel.id,
       'model': widget.smeupButtonsModel,
       'notifierFunction': () {
@@ -71,7 +68,8 @@ class SmeupButtonsState extends State<SmeupButtons> with SmeupWidgetStateMixin {
 
     if (widget.scaffoldKey.hashCode ==
         SmeupDynamismService.currentScaffoldKey.hashCode)
-      notifier.setTimerRefresh(widget.smeupButtonsModel.id);
+      SmeupWidgetNotificationService.setTimerRefresh(
+          widget.smeupButtonsModel.id);
 
     final buttons = widget.smeupButtonsModel.widgetLoadType == LoadType.Delay
         ? Container()

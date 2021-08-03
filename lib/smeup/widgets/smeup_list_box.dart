@@ -7,6 +7,7 @@ import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_list_box_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_box.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
@@ -65,7 +66,7 @@ class SmeupListBox extends StatefulWidget
       title = '',
       this.onClientPressed,
       this.dismissEnabled = true}) {
-    id = setId(type, id);
+    id = SmeupUtilities.getWidgetId(type, id);
 
     this.model = SmeupListBoxModel(
         id: id,

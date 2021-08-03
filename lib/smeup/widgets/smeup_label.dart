@@ -4,6 +4,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_label_model
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
@@ -64,8 +65,9 @@ class SmeupLabel extends StatefulWidget
       this.iconColname = '',
       this.colorFontColName = '',
       this.iconSize = SmeupLabelModel.defaultIconSize,
-      this.title = ''}) {
-    id = setId(type, id);
+      this.title = ''})
+      : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
+    id = SmeupUtilities.getWidgetId(type, id);
 
     this.model = SmeupLabelModel(
         id: id,
@@ -194,6 +196,7 @@ class _SmeupLabelState extends State<SmeupLabel>
         alignment: widget.align,
         child: Text(
           map['value'],
+          // key: Key('pippo'),
           style: TextStyle(
               color: fontColor,
               fontWeight: widget.fontbold ? FontWeight.bold : FontWeight.normal,
@@ -218,9 +221,6 @@ class _SmeupLabelState extends State<SmeupLabel>
       double labelHeight =
           widget.height * alignes.length + padding * (fontSize / 5);
 
-      final label =
-          Container(color: backColor, height: labelHeight, child: children);
-
       int iconData = 0;
       if (widget.iconData != 0) {
         iconData = widget.iconData;
@@ -233,8 +233,12 @@ class _SmeupLabelState extends State<SmeupLabel>
       double iconHeight = widget.iconSize;
 
       if (iconData == 0) {
-        return SmeupWidgetBuilderResponse(_model, label);
+        return SmeupWidgetBuilderResponse(_model,
+            Container(color: backColor, height: labelHeight, child: children));
       } else {
+        final label =
+            Container(color: backColor, height: labelHeight, child: children);
+
         final icon = Icon(
           IconData(iconData, fontFamily: 'MaterialIcons'),
           color: fontColor,

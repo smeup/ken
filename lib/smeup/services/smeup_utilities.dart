@@ -1,7 +1,10 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+
+import 'smeup_widget_notification_service.dart';
 
 class SmeupUtilities {
   static String extractValueFromType(
@@ -122,5 +125,25 @@ class SmeupUtilities {
       default:
         return MainAxisAlignment.center;
     }
+  }
+
+  static String getWidgetId(String type, String id) {
+    if (type == null || type.isEmpty) type = '';
+    if (id == null || id.isEmpty) id = '';
+    String newId = id;
+
+    if (newId.isEmpty) {
+      newId = id.isNotEmpty ? id : type + Random().nextInt(100).toString();
+      while (SmeupWidgetNotificationService.objects.firstWhere(
+              (element) => element['id'] == newId,
+              orElse: () => null) !=
+          null) {
+        newId = id.isNotEmpty
+            ? id + Random().nextInt(100).toString()
+            : type + Random().nextInt(100).toString();
+      }
+    }
+
+    return newId;
   }
 }
