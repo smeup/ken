@@ -39,6 +39,7 @@ class SmeupQRCodeReaderModel extends SmeupModel implements SmeupDataInterface {
   }
 
   @override
+  // ignore: override_on_non_overriding_member
   setData() async {
     if (smeupFun != null && smeupFun.isFunValid()) {
       var count = 0;

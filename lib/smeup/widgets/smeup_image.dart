@@ -26,6 +26,8 @@ class SmeupImage extends StatefulWidget
   double bottomPadding;
   dynamic clientData;
   String title;
+  String id;
+  String type;
 
   SmeupImage.withController(
     this.model,
@@ -36,7 +38,9 @@ class SmeupImage extends StatefulWidget
   }
 
   SmeupImage(this.scaffoldKey, this.formKey,
-      {this.width = SmeupImageModel.defaultWidth,
+      {this.id = '',
+      this.type = 'IMG',
+      this.width = SmeupImageModel.defaultWidth,
       this.height = SmeupImageModel.defaultHeight,
       this.padding = SmeupImageModel.defaultPadding,
       this.rightPadding = SmeupImageModel.defaultPadding,
@@ -45,7 +49,11 @@ class SmeupImage extends StatefulWidget
       this.bottomPadding = SmeupImageModel.defaultPadding,
       title = '',
       this.clientData}) {
+    id = setId(type, id);
+
     this.model = SmeupImageModel(
+        id: id,
+        type: type,
         height: height,
         padding: padding,
         rightPadding: rightPadding,
@@ -60,6 +68,8 @@ class SmeupImage extends StatefulWidget
   @override
   runControllerActivities(SmeupModel model) {
     SmeupImageModel m = model;
+    id = m.id;
+    type = m.type;
     padding = m.padding;
     rightPadding = m.rightPadding;
     leftPadding = m.leftPadding;
@@ -88,17 +98,17 @@ class _SmeupImageState extends State<SmeupImage>
 
   @override
   void dispose() {
-    runDispose(widget.scaffoldKey, _model.id);
+    runDispose(widget.scaffoldKey, widget.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final box = runBuild(context, _model.id, _model.type, widget.scaffoldKey,
+    final box = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
         notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
-        setDataLoad(_model.id, false);
+        setDataLoad(widget.id, false);
       });
     });
     return box;
@@ -108,9 +118,9 @@ class _SmeupImageState extends State<SmeupImage>
   /// define the structure ...
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(_model.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
       _model.data = await SmeupImageDao.getData(_model);
-      setDataLoad(_model.id, true);
+      setDataLoad(widget.id, true);
     }
 
     if (!hasData(_model)) {

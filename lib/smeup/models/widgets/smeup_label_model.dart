@@ -33,7 +33,9 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
   Color fontColor;
 
   SmeupLabelModel(
-      {this.valueColName = '',
+      {id,
+      type,
+      this.valueColName = '',
       this.padding = defaultPadding,
       this.fontSize = defaultFontSize,
       this.align = defaultAlign,
@@ -49,7 +51,7 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
       this.colorFontColName = '',
       this.iconSize = defaultIconSize,
       title = ''})
-      : super(title: title) {
+      : super(title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
   }
 

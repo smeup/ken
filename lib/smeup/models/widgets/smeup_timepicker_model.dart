@@ -82,6 +82,7 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   }
 
   @override
+  // ignore: override_on_non_overriding_member
   setData() async {
     if (smeupFun != null && smeupFun.isFunValid()) {
       final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);

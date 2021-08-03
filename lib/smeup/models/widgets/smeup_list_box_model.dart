@@ -16,6 +16,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   static const int defaultPortraitColumns = 1;
   static const int defaultLandscapeColumns = 1;
   static const String defaultLayout = '1';
+  static const double defaultFontsize = 16.0;
 
   double width;
   double height;
@@ -27,9 +28,13 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   SmeupListType listType;
   int portraitColumns;
   int landscapeColumns;
+  double fontsize;
 
   SmeupListBoxModel(
-      {layout = defaultLayout,
+      {id,
+      type,
+      layout = defaultLayout,
+      this.fontsize = defaultFontsize,
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.listHeight = defaultHeight,
@@ -41,7 +46,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       this.portraitColumns = defaultPortraitColumns,
       this.landscapeColumns = defaultLandscapeColumns,
       title = ''})
-      : super(title: title) {
+      : super(title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
   }
 
@@ -62,7 +67,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     landscapeColumns =
         SmeupUtilities.getInt(optionsDefault['landscapeColumns']) ??
             defaultLandscapeColumns;
-
+    fontsize = optionsDefault['fontSize'] ?? defaultFontsize;
     padding =
         SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
     paddingRight = SmeupUtilities.getDouble(optionsDefault['paddingRight']) ??

@@ -35,6 +35,8 @@ class SmeupLabel extends StatefulWidget
   Color backColor;
   Color fontColor;
   String title;
+  String id;
+  String type;
 
   SmeupLabel.withController(
     this.model,
@@ -45,7 +47,9 @@ class SmeupLabel extends StatefulWidget
   }
 
   SmeupLabel(this.scaffoldKey, this.formKey,
-      {this.valueColName = '',
+      {this.id = '',
+      this.type = 'LAB',
+      this.valueColName = '',
       this.padding = SmeupLabelModel.defaultPadding,
       this.fontSize = SmeupLabelModel.defaultFontSize,
       this.align = SmeupLabelModel.defaultAlign,
@@ -61,7 +65,11 @@ class SmeupLabel extends StatefulWidget
       this.colorFontColName = '',
       this.iconSize = SmeupLabelModel.defaultIconSize,
       this.title = ''}) {
+    id = setId(type, id);
+
     this.model = SmeupLabelModel(
+        id: id,
+        type: type,
         valueColName: valueColName,
         padding: padding,
         fontSize: fontSize,
@@ -83,7 +91,8 @@ class SmeupLabel extends StatefulWidget
   @override
   runControllerActivities(SmeupModel model) {
     SmeupLabelModel m = model;
-
+    id = m.id;
+    type = m.type;
     valueColName = m.valueColName;
     padding = m.padding;
     fontSize = m.fontSize;
@@ -120,17 +129,17 @@ class _SmeupLabelState extends State<SmeupLabel>
 
   @override
   void dispose() {
-    runDispose(widget.scaffoldKey, _model.id);
+    runDispose(widget.scaffoldKey, widget.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget label = runBuild(context, _model.id, _model.type, widget.scaffoldKey,
+    Widget label = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
         notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
-        setDataLoad(_model.id, false);
+        setDataLoad(widget.id, false);
       });
     });
 
@@ -152,9 +161,9 @@ class _SmeupLabelState extends State<SmeupLabel>
   ///
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(_model.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
       _model.data = await SmeupLabelDao.getData(_model);
-      setDataLoad(_model.id, true);
+      setDataLoad(widget.id, true);
     }
 
     if (!hasData(_model)) {

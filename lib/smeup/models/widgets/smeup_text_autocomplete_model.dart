@@ -29,7 +29,9 @@ class SmeupTextAutocompleteModel extends SmeupModel
   String valueField;
 
   SmeupTextAutocompleteModel(
-      {this.backColor,
+      {id,
+      type,
+      this.backColor,
       this.fontsize = defaultFontsize,
       this.label = defaultLabel,
       this.width = defaultWidth,
@@ -42,7 +44,7 @@ class SmeupTextAutocompleteModel extends SmeupModel
       this.autoFocus = defaultAutoFocus,
       this.defaultValue = '',
       this.valueField = ''})
-      : super(title: title) {
+      : super(title: title, id: id, type: type) {
     //if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
     // if (id == null) id = 'FLD' + Random().nextInt(100).toString();
 

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:mobile_components_library/smeup/daos/smeup_image_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
@@ -21,7 +19,9 @@ class SmeupImageModel extends SmeupModel implements SmeupDataInterface {
   dynamic clientData;
 
   SmeupImageModel(
-      {this.width = defaultWidth,
+      {id,
+      type,
+      this.width = defaultWidth,
       this.height = defaultHeight,
       this.padding = defaultPadding,
       this.rightPadding = defaultPadding,
@@ -30,8 +30,7 @@ class SmeupImageModel extends SmeupModel implements SmeupDataInterface {
       this.bottomPadding = defaultPadding,
       title = '',
       this.clientData})
-      : super(title: title) {
-    id = 'IMG' + Random().nextInt(100).toString();
+      : super(title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
   }
 

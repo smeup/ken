@@ -30,7 +30,7 @@ abstract class SmeupModel {
 
   List<SmeupSectionModel> smeupSectionsModels;
 
-  SmeupModel({this.title}) {
+  SmeupModel({this.title, this.id, this.type}) {
     showLoader = SmeupOptions.showLoader;
   }
 
