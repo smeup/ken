@@ -79,8 +79,10 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     final SmeupErrorNotifier errorNotifier =
         Provider.of<SmeupErrorNotifier>(context);
 
-    final routeArgs =
-        ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
+    var routeArgs;
+    if (routeArgs != null)
+      routeArgs =
+          ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
 
     SmeupFun smeupFun =
         widget.initialFun != null ? widget.initialFun : routeArgs['smeupFun'];

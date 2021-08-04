@@ -43,7 +43,7 @@ class SmeupLabel extends StatefulWidget
     this.model,
     this.scaffoldKey,
     this.formKey,
-  ) {
+  ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model);
   }
 
