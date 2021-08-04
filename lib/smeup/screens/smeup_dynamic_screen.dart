@@ -80,7 +80,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
         Provider.of<SmeupErrorNotifier>(context);
 
     var routeArgs;
-    if (routeArgs != null)
+    if (ModalRoute.of(context) != null)
       routeArgs =
           ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
 
