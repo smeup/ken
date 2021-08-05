@@ -38,12 +38,12 @@ class SmeupTextField extends StatefulWidget
   String type;
   String valueField;
   bool showSubmit;
+  TextInputType keyboard;
 
   Function clientValidator;
   Function clientOnSave;
   Function clientOnChange;
 
-  TextInputType keyboard;
   List<TextInputFormatter> inputFormatters;
 
   SmeupTextField.withController(this.model, this.scaffoldKey, this.formKey)
@@ -66,10 +66,10 @@ class SmeupTextField extends StatefulWidget
       this.autoFocus = SmeupTextFieldModel.defaultAutoFocus,
       this.valueField = SmeupTextFieldModel.defaultValueField,
       this.showSubmit = SmeupTextFieldModel.defaultShowSubmit,
+      this.keyboard,
       this.clientValidator, // ?
-      this.clientOnSave, // ?
-      this.clientOnChange, // ?
-      this.keyboard, // ?
+      this.clientOnSave,
+      this.clientOnChange,
       this.inputFormatters // ?
       })
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
@@ -89,7 +89,8 @@ class SmeupTextField extends StatefulWidget
         clientData: clientData,
         showUnderline: showUnderline,
         autoFocus: autoFocus,
-        valueField: valueField);
+        valueField: valueField,
+        keyboard: keyboard);
   }
 
   @override
@@ -112,6 +113,7 @@ class SmeupTextField extends StatefulWidget
     showUnderline = m.showUnderline;
     autoFocus = m.autoFocus;
     valueField = m.valueField;
+    keyboard = m.keyboard;
   }
 }
 
@@ -224,7 +226,12 @@ class _SmeupTextFieldState extends State<SmeupTextField>
               borderSide: BorderSide(color: focusColor),
             ),
           ),
-          onSaved: widget.clientOnSave, // lostfocus
+          onSaved: (value) {
+            if (widget.clientOnSave != null) widget.clientOnSave(value);
+            SmeupDynamismService.variables[widget.id] = value;
+            SmeupDynamismService.run(
+                _model.dynamisms, context, 'lostfocus', widget.scaffoldKey);
+          }, // lostfocus
         ));
 
     if (widget.showSubmit) {

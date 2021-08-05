@@ -30,6 +30,7 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
   bool autoFocus;
   String valueField;
   bool showSubmit;
+  TextInputType keyboard;
 
   SmeupTextFieldModel(
       {id,
@@ -46,7 +47,8 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
       this.clientData,
       this.showUnderline = defaultShowUnderline,
       this.autoFocus = defaultAutoFocus,
-      this.valueField})
+      this.valueField,
+      this.keyboard})
       : super(title: title, id: id, type: type) {
     if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
     id = SmeupUtilities.getWidgetId('FLD', id);
@@ -78,6 +80,7 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
       else
         showborder = false;
     }
+    keyboard = SmeupUtilities.getKeyboard(optionsDefault['keyboard']);
 
     if (widgetLoadType != LoadType.Delay) {
       SmeupTextFieldDao.getData(this).then((value) {
