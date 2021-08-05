@@ -124,8 +124,8 @@ class _SmeupComponentState extends State<SmeupComponent> {
             break;
 
           case 'itx':
-            children =
-                SmeupTextField(smeupModel, widget.scaffoldKey, widget.formKey);
+            children = SmeupTextField.withController(
+                smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
           case 'pgb':

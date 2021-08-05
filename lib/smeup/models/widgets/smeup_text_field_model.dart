@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_text_field_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
@@ -13,6 +14,9 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultPadding = 0.0;
   static const bool defaultShowBorder = false;
   static const bool defaultAutoFocus = false;
+  static const String defaultValueField = 'value';
+  static const bool defaultShowSubmit = false;
+  static const bool defaultShowUnderline = true;
 
   Color backColor;
   double fontsize;
@@ -24,21 +28,26 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
   dynamic clientData;
   bool showUnderline;
   bool autoFocus;
+  String valueField;
+  bool showSubmit;
 
   SmeupTextFieldModel(
-      {this.backColor,
+      {id,
+      type,
+      this.backColor,
       this.fontsize = defaultFontsize,
       this.label = defaultLabel,
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.padding = defaultPadding,
       this.showborder = defaultShowBorder,
+      this.showSubmit = defaultShowSubmit,
       title = '',
       this.clientData,
-      this.showUnderline = true,
+      this.showUnderline = defaultShowUnderline,
       this.autoFocus = defaultAutoFocus,
-      id})
-      : super(title: title) {
+      this.valueField})
+      : super(title: title, id: id, type: type) {
     if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
@@ -52,6 +61,8 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
     fontsize =
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
     label = optionsDefault['label'] ?? defaultLabel;
+    valueField = optionsDefault['valueField'] ?? defaultValueField;
+    showSubmit = optionsDefault['showSubmit'] ?? defaultShowSubmit;
     padding =
         SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
@@ -67,34 +78,14 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
       else
         showborder = false;
     }
+
+    if (widgetLoadType != LoadType.Delay) {
+      SmeupTextFieldDao.getData(this).then((value) {
+        data = value;
+      });
+    }
+
     SmeupDataService.incrementDataFetch(id);
-  }
-
-  @override
-  // ignore: override_on_non_overriding_member
-  setData() async {
-    if (smeupFun != null && smeupFun.isFunValid()) {
-      final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
-
-      if (!smeupServiceResponse.succeded) {
-        return;
-      }
-
-      // List rows = smeupServiceResponse.result.data['rows'];
-      // if (smeupFun.fun['fun']['component'] == 'TRE') {
-      //   final String fieldName = 'codice';
-      //   optionsDefault['valueField'] = fieldName;
-      //   String value = (rows[0] as Node).data[fieldName];
-      //   data = _getClientDataStructure(value, fieldName: fieldName);
-      // } else {
-      data = smeupServiceResponse.result.data;
-      // }
-    }
-
-    if (clientData != null) {
-      data = _getClientDataStructure(clientData);
-    }
-    SmeupDataService.decrementDataFetch(id);
   }
 
   SmeupTextFieldModel clone() {
@@ -108,34 +99,5 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
         showborder: showborder,
         clientData: clientData,
         showUnderline: showUnderline);
-  }
-
-  dynamic _getClientDataStructure(String fieldData,
-      {String fieldName = 'value'}) {
-    if (optionsDefault == null) {
-      return {
-        "rows": [
-          {
-            fieldName: fieldData,
-          }
-        ],
-      };
-    } else {
-      switch (optionsDefault['type']) {
-        case 'itx':
-          return {
-            "rows": [
-              {
-                fieldName: fieldData,
-              }
-            ],
-          };
-
-          break;
-
-        default:
-          return data;
-      }
-    }
   }
 }
