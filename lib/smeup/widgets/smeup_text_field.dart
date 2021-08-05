@@ -156,9 +156,9 @@ class _SmeupTextFieldState extends State<SmeupTextField>
       setDataLoad(widget.id, true);
     }
 
-    if (!hasData(_model)) {
-      return getFunErrorResponse(context, _model);
-    }
+    // if (!hasData(_model)) {
+    //   return getFunErrorResponse(context, _model);
+    // }
 
     Widget textField;
 
@@ -166,15 +166,18 @@ class _SmeupTextFieldState extends State<SmeupTextField>
     //         _model.optionsDefault['valueField'] == null
     //     ? 'value'
     //     : _model.optionsDefault['valueField'];
-    String value = _model.data['rows'][0][widget.valueField].toString();
+    String value = '';
+    if (hasData(_model)) {
+      value = _model.data['rows'][0][widget.valueField].toString();
 
-    final List<Map> cols = _model.data['columns'];
-    if (cols != null) {
-      final col = cols.firstWhere(
-          (element) => element['code'] == widget.valueField,
-          orElse: () => null);
-      if (col['ogg'] == 'D8*YYMD') {
-        value = DateFormat("dd/MM/yyyy").format(DateTime.tryParse(value));
+      final List<Map> cols = _model.data['columns'];
+      if (cols != null) {
+        final col = cols.firstWhere(
+            (element) => element['code'] == widget.valueField,
+            orElse: () => null);
+        if (col['ogg'] == 'D8*YYMD') {
+          value = DateFormat("dd/MM/yyyy").format(DateTime.tryParse(value));
+        }
       }
     }
 
