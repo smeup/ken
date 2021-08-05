@@ -34,7 +34,7 @@ class SmeupImage extends StatefulWidget
     this.model,
     this.scaffoldKey,
     this.formKey,
-  ) {
+  ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model);
   }
 
@@ -49,7 +49,8 @@ class SmeupImage extends StatefulWidget
       this.topPadding = SmeupImageModel.defaultPadding,
       this.bottomPadding = SmeupImageModel.defaultPadding,
       title = '',
-      this.clientData}) {
+      this.clientData})
+      : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
 
     this.model = SmeupImageModel(

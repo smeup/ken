@@ -47,7 +47,8 @@ class SmeupTextAutocomplete extends StatefulWidget
   List<TextInputFormatter> inputFormatters;
 
   SmeupTextAutocomplete.withController(
-      this.model, this.scaffoldKey, this.formKey) {
+      this.model, this.scaffoldKey, this.formKey)
+      : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model);
   }
 
@@ -70,7 +71,8 @@ class SmeupTextAutocomplete extends StatefulWidget
       this.keyboard,
       this.inputFormatters,
       this.defaultValue,
-      this.valueField}) {
+      this.valueField})
+      : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
 
     model = SmeupTextAutocompleteModel(

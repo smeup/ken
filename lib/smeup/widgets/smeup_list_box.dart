@@ -44,7 +44,8 @@ class SmeupListBox extends StatefulWidget
   // dynamisms functions
   Function onClientPressed;
 
-  SmeupListBox.withController(this.model, this.scaffoldKey, this.formKey) {
+  SmeupListBox.withController(this.model, this.scaffoldKey, this.formKey)
+      : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model);
   }
 
@@ -65,7 +66,8 @@ class SmeupListBox extends StatefulWidget
       this.landscapeColumns = SmeupListBoxModel.defaultLandscapeColumns,
       title = '',
       this.onClientPressed,
-      this.dismissEnabled = true}) {
+      this.dismissEnabled = true})
+      : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
 
     this.model = SmeupListBoxModel(
