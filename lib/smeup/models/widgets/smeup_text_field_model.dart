@@ -93,6 +93,8 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupTextFieldModel clone() {
     return SmeupTextFieldModel(
+        id: id,
+        type: type,
         backColor: backColor,
         fontsize: fontsize,
         label: label,

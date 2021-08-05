@@ -202,7 +202,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
           autofocus: widget.autoFocus,
           maxLines: 1,
           initialValue: value,
-          key: ValueKey(widget.id),
+          key: Key('${widget.id}_text'),
           autocorrect: false,
           textCapitalization: TextCapitalization.none,
           textInputAction: TextInputAction.next,
