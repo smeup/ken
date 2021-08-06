@@ -34,6 +34,7 @@ class SmeupNavigationAppBar extends AppBar {
                       Center(
                           child: Text(
                         data['title'] ?? '',
+                        key: Key('appbar_text'),
                         style: TextStyle(color: Colors.black87),
                       )),
                       // Divider(
