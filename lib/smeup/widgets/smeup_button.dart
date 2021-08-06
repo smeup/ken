@@ -1,17 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupButton extends StatelessWidget {
+  final int buttonIndex;
+  final Color backColor;
+  final Color borderColor;
+  final double width;
+  final double height;
+  final MainAxisAlignment position;
+  final Alignment align;
+  final Color fontColor;
+  final double fontsize;
+  final double padding;
+  final String clientData;
+  final String valueField;
+  final double borderRadius;
+  final double elevation;
+  final bool bold;
+  final double iconSize;
+  final int iconData;
+
   final IconData icon;
   final Function onServerPressed;
   final Function onClientPressed;
-  final SmeupButtonsModel smeupButtonsModel;
+
   final dynamic data;
   final bool isBusy;
+  final String id;
+  final String type;
+  final String title;
+
   const SmeupButton(
-      {String id,
-      this.smeupButtonsModel,
+      {this.id = '',
+      this.type = 'BTN',
+      this.title = '',
+      this.clientData = '',
+      this.backColor,
+      this.borderColor,
+      this.width = SmeupButtonsModel.defaultWidth,
+      this.height = SmeupButtonsModel.defaultHeight,
+      this.position = SmeupButtonsModel.defaultPosition,
+      this.align = SmeupButtonsModel.defaultAlign,
+      this.fontColor,
+      this.fontsize = SmeupButtonsModel.defaultFontsize,
+      this.padding = SmeupButtonsModel.defaultPadding,
+      this.valueField,
+      this.borderRadius = SmeupButtonsModel.defaultBorderRadius,
+      this.elevation = SmeupButtonsModel.defaultElevation,
+      this.bold = SmeupButtonsModel.defaultBold,
+      this.iconData = 0,
+      this.iconSize = SmeupButtonsModel.defaultIconSize,
+      this.buttonIndex,
       this.icon,
       this.onServerPressed,
       this.onClientPressed,
@@ -20,144 +61,134 @@ class SmeupButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = smeupButtonsModel.backColor == null
-        ? SmeupOptions.theme.buttonColor
-        : smeupButtonsModel.backColor;
+    final backgroundColor =
+        backColor == null ? SmeupOptions.theme.buttonColor : backColor;
 
-    final borderColor = smeupButtonsModel.borderColor != null
-        ? smeupButtonsModel.borderColor
-        : SmeupOptions.theme.primaryColor;
+    final _borderColor =
+        borderColor != null ? borderColor : SmeupOptions.theme.primaryColor;
 
     return Container(
       color: Color.fromRGBO(0, 0, 0,
           0), // SmeupOptions.theme.canvasColor, // Color.fromRGBO(250, 250, 250, 1),
-      padding: EdgeInsets.all(smeupButtonsModel.padding),
+      padding: EdgeInsets.all(padding),
       child: SizedBox(
-        height: smeupButtonsModel.height,
-        width: smeupButtonsModel.width == 0
-            ? double.infinity
-            : smeupButtonsModel.width,
+        height: height,
+        width: width == 0 ? double.infinity : width,
         child: ElevatedButton(
-          key: Key(smeupButtonsModel.id),
+          key: Key(
+              '${SmeupUtilities.getWidgetId(type, id)}_${buttonIndex.toString()}'),
           style: ElevatedButton.styleFrom(
             primary: backgroundColor,
             onPrimary: SmeupOptions.theme.primaryColor,
-            elevation: smeupButtonsModel.elevation,
+            elevation: elevation,
             // focusColor: backgroundColor,
 
             padding: EdgeInsets.all(0),
             shape: RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(smeupButtonsModel.borderRadius),
+                borderRadius: BorderRadius.circular(borderRadius),
                 side: BorderSide(
-                    width: smeupButtonsModel.borderColor == null ? 2 : 2,
-                    color: borderColor)),
+                    width: borderColor == null ? 2 : 2, color: _borderColor)),
           ),
           onPressed:
               onClientPressed != null ? onClientPressed : onServerPressed,
-          child: Column(
-              mainAxisAlignment: smeupButtonsModel.position,
-              children: <Widget>[
-                isBusy
-                    ? CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                            smeupButtonsModel.fontColor == null
-                                ? SmeupOptions.loaderColor
-                                : smeupButtonsModel.fontColor),
-                      )
-                    : () {
-                        //Row(children: [],)
-                        final icon = smeupButtonsModel.iconData == 0
-                            ? Container()
-                            : Icon(
-                                IconData(smeupButtonsModel.iconData,
-                                    fontFamily: 'MaterialIcons'),
-                                color: smeupButtonsModel.fontColor,
-                                size: smeupButtonsModel.iconSize,
-                              );
-                        var text = Align(
-                            alignment: smeupButtonsModel.align,
-                            child: Text(smeupButtonsModel.clientData,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: smeupButtonsModel.bold
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
-                                    fontSize: smeupButtonsModel.fontsize,
-                                    color: smeupButtonsModel.fontColor == null
-                                        ? SmeupOptions.theme.primaryColor
-                                        : smeupButtonsModel.fontColor)));
+          child: Column(mainAxisAlignment: position, children: <Widget>[
+            isBusy
+                ? CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(fontColor == null
+                        ? SmeupOptions.loaderColor
+                        : fontColor),
+                  )
+                : () {
+                    //Row(children: [],)
+                    final icon = iconData == 0
+                        ? Container()
+                        : Icon(
+                            IconData(iconData, fontFamily: 'MaterialIcons'),
+                            color: fontColor,
+                            size: iconSize,
+                          );
+                    var text = Align(
+                        alignment: align,
+                        child: Text(clientData,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight:
+                                    bold ? FontWeight.bold : FontWeight.normal,
+                                fontSize: fontsize,
+                                color: fontColor == null
+                                    ? SmeupOptions.theme.primaryColor
+                                    : fontColor)));
 
-                        var widget;
-                        switch (smeupButtonsModel.align.toString()) {
-                          case 'centerLeft': // text on the left icon on the right
-                            widget = Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  text,
-                                  icon,
-                                ],
-                              ),
-                              color: smeupButtonsModel.backColor,
-                            );
-                            break;
-                          case 'centerRight': // text on the right icon on the left
-                            widget = Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  icon,
-                                  text,
-                                ],
-                              ),
-                              color: smeupButtonsModel.backColor,
-                            );
-                            break;
-                          case 'topCenter': // text at the top icon at the bottom
-                            widget = Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  text,
-                                  icon,
-                                ],
-                              ),
-                              color: smeupButtonsModel.backColor,
-                            );
-                            break;
-                          case 'bottomCenter': // text at the bottom icon at the top
-                            widget = Container(
-                              height: smeupButtonsModel.height,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(child: icon),
-                                  text,
-                                ],
-                              ),
-                              color: smeupButtonsModel.backColor,
-                            );
+                    var widget;
+                    switch (align.toString()) {
+                      case 'centerLeft': // text on the left icon on the right
+                        widget = Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              text,
+                              icon,
+                            ],
+                          ),
+                          color: backColor,
+                        );
+                        break;
+                      case 'centerRight': // text on the right icon on the left
+                        widget = Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              icon,
+                              text,
+                            ],
+                          ),
+                          color: backColor,
+                        );
+                        break;
+                      case 'topCenter': // text at the top icon at the bottom
+                        widget = Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              text,
+                              icon,
+                            ],
+                          ),
+                          color: backColor,
+                        );
+                        break;
+                      case 'bottomCenter': // text at the bottom icon at the top
+                        widget = Container(
+                          height: height,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(child: icon),
+                              text,
+                            ],
+                          ),
+                          color: backColor,
+                        );
 
-                            break;
-                          default:
-                            widget = Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  icon,
-                                  const SizedBox(width: 5),
-                                  text,
-                                ],
-                              ),
-                              color: smeupButtonsModel.backColor,
-                            );
-                            break;
-                        }
+                        break;
+                      default:
+                        widget = Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              icon,
+                              const SizedBox(width: 5),
+                              text,
+                            ],
+                          ),
+                          color: backColor,
+                        );
+                        break;
+                    }
 
-                        return widget;
-                      }()
-              ]),
+                    return widget;
+                  }()
+          ]),
         ),
       ),
     );

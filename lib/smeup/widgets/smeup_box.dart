@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
@@ -678,21 +677,19 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
               }
             }(),
             child: SmeupButton(
-              smeupButtonsModel: SmeupButtonsModel(
-                height: 50,
-                width: buttonText.isEmpty ? 50 : 0,
-                backColor: buttonText.isEmpty
-                    ? Theme.of(context).scaffoldBackgroundColor
-                    : Theme.of(context).primaryColor,
-                borderColor: buttonText.isEmpty
-                    ? Theme.of(context).scaffoldBackgroundColor
-                    : Theme.of(context).primaryColor,
-                fontColor: buttonText.isEmpty
-                    ? Theme.of(context).primaryColor
-                    : Theme.of(context).scaffoldBackgroundColor,
-                iconData: int.tryParse(buttonIcon) ?? 0,
-                clientData: buttonText,
-              ),
+              height: 50,
+              width: buttonText.isEmpty ? 50 : 0,
+              backColor: buttonText.isEmpty
+                  ? Theme.of(context).scaffoldBackgroundColor
+                  : Theme.of(context).primaryColor,
+              borderColor: buttonText.isEmpty
+                  ? Theme.of(context).scaffoldBackgroundColor
+                  : Theme.of(context).primaryColor,
+              fontColor: buttonText.isEmpty
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).scaffoldBackgroundColor,
+              iconData: int.tryParse(buttonIcon) ?? 0,
+              clientData: buttonText,
               onClientPressed: () {
                 //SmeupDynamismService.storeDynamicVariables(_child['content']);
 

@@ -178,26 +178,46 @@ class SmeupButtonsState extends State<SmeupButtons>
 
     var buttons = List<SmeupButton>.empty(growable: true);
 
-    _model.data.forEach((child) {
-      dynamic _child = child;
-      SmeupButtonsModel _modelClone = _model;
+    int buttonIndex = 0;
+    _model.data.forEach((buttonData) {
+      // dynamic _buttonData = buttonData;
+      //SmeupButtonsModel _modelClone = _model;
 
-      if (child is Node) {
-        _child = {"p": "", "t": "", "k": child.label};
-        _modelClone = SmeupButtonsModel.clone(_model);
-        _modelClone.clientData = child.label;
-        _modelClone.dynamisms = [
-          {"event": "click", "exec": child.data["exec"] ?? ""}
-        ];
-      }
-
+      // if (buttonData is Node) {
+      //   _buttonData = {"p": "", "t": "", "k": buttonData.label};
+      //   _modelClone = SmeupButtonsModel.clone(_model);
+      //   _modelClone.clientData = buttonData.label;
+      //   _modelClone.dynamisms = [
+      //     {"event": "click", "exec": buttonData.data["exec"] ?? ""}
+      //   ];
+      // }
+      buttonIndex += 1;
       final button = SmeupButton(
-          smeupButtonsModel: _modelClone,
-          data: _child,
+          id: widget.id,
+          type: widget.type,
+          buttonIndex: buttonIndex,
+          title: widget.title,
+          clientData: widget.clientData,
+          backColor: widget.backColor,
+          borderColor: widget.borderColor,
+          width: widget.width,
+          height: widget.height,
+          position: widget.position,
+          align: widget.align,
+          fontColor: widget.fontColor,
+          fontsize: widget.fontsize,
+          padding: widget.padding,
+          valueField: widget.valueField,
+          borderRadius: widget.borderRadius,
+          elevation: widget.elevation,
+          bold: widget.bold,
+          iconData: widget.iconData,
+          iconSize: widget.iconSize,
+          data: buttonData,
           icon: null,
           isBusy: _isBusy,
           onServerPressed: () {
-            runDynamism(_modelClone, context, child);
+            runDynamism(_model, context, buttonData);
           });
 
       buttons.add(button);
