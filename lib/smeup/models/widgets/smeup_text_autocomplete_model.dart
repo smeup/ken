@@ -45,6 +45,7 @@ class SmeupTextAutocompleteModel extends SmeupModel
       this.defaultValue = '',
       this.valueField = ''})
       : super(title: title, id: id, type: type) {
+    if (optionsDefault['type'] == null) optionsDefault['type'] = 'acp';
     SmeupDataService.incrementDataFetch(id);
   }
 
@@ -75,9 +76,7 @@ class SmeupTextAutocompleteModel extends SmeupModel
     valueField = optionsDefault['valueField'] ?? '';
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupTextAutocompleteDao.getData(this).then((value) {
-        data = value;
-      });
+      SmeupTextAutocompleteDao.getData(this);
     }
 
     SmeupDataService.incrementDataFetch(id);

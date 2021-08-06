@@ -121,7 +121,7 @@ class _SmeupImageState extends State<SmeupImage>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      _model.data = await SmeupImageDao.getData(_model);
+      await SmeupImageDao.getData(_model);
       setDataLoad(widget.id, true);
     }
 

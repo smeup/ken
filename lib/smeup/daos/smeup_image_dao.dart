@@ -4,40 +4,38 @@ import 'package:mobile_components_library/smeup/services/smeup_data_service.dart
 import 'smeup_dao.dart';
 
 class SmeupImageDao extends SmeupDao {
-  static Future<dynamic> getData(SmeupImageModel smeupImageModel) async {
-    dynamic data = smeupImageModel.data;
-
-    if (smeupImageModel.smeupFun != null &&
-        smeupImageModel.smeupFun.isFunValid()) {
+  static Future<void> getData(SmeupImageModel model) async {
+    if (model.smeupFun != null && model.smeupFun.isFunValid()) {
       final smeupServiceResponse =
-          await SmeupDataService.invoke(smeupImageModel.smeupFun);
+          await SmeupDataService.invoke(model.smeupFun);
 
       if (!smeupServiceResponse.succeded) {
-        SmeupDataService.decrementDataFetch(smeupImageModel.id);
-        return data;
+        SmeupDataService.decrementDataFetch(model.id);
+        return model.data;
       }
 
-      data = smeupServiceResponse.result;
+      model.data = smeupServiceResponse.result;
     }
 
-    if (data == null && smeupImageModel.clientData != null) {
-      data = smeupImageModel.clientData;
+    if (model.data == null && model.clientData != null) {
+      model.data = model.clientData;
     }
 
     // data could contain:
     // data['imageLocalPath'] --> for local images (assets/images)
     // data['imageRemotePath'] = data[0]['k'] --> for remote images (url)
-    if (data is List && data.length > 0 && data[0]['k'] != null) {
-      String obj = data[0]['k'];
+    if (model.data is List &&
+        model.data.length > 0 &&
+        model.data[0]['k'] != null) {
+      String obj = model.data[0]['k'];
       List<String> split = obj.split(';');
       if (split.length > 2) {
         String url = split.getRange(2, split.length).join('');
-        data = Map();
-        data['imageRemotePath'] = url;
+        model.data = Map();
+        model.data['imageRemotePath'] = url;
       }
     }
 
-    SmeupDataService.decrementDataFetch(smeupImageModel.id);
-    return data;
+    SmeupDataService.decrementDataFetch(model.id);
   }
 }

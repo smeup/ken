@@ -30,6 +30,10 @@ abstract class SmeupModel {
 
   SmeupModel({this.title, this.id, this.type}) {
     showLoader = SmeupOptions.showLoader;
+    if (optionsDefault == null)
+      optionsDefault = {
+        "$type": {"default": {}}
+      };
   }
 
   SmeupModel.fromMap(Map<String, dynamic> jsonMap) {

@@ -4,23 +4,19 @@ import 'package:mobile_components_library/smeup/services/smeup_data_service.dart
 import 'smeup_dao.dart';
 
 class SmeupListBoxDao extends SmeupDao {
-  static Future<dynamic> getData(SmeupListBoxModel smeupListBoxModel) async {
-    dynamic data = smeupListBoxModel.data;
-
-    if (smeupListBoxModel.smeupFun != null &&
-        smeupListBoxModel.smeupFun.isFunValid()) {
+  static Future<void> getData(SmeupListBoxModel model) async {
+    if (model.smeupFun != null && model.smeupFun.isFunValid()) {
       final smeupServiceResponse =
-          await SmeupDataService.invoke(smeupListBoxModel.smeupFun);
+          await SmeupDataService.invoke(model.smeupFun);
 
       if (!smeupServiceResponse.succeded) {
-        SmeupDataService.decrementDataFetch(smeupListBoxModel.id);
-        return data;
+        SmeupDataService.decrementDataFetch(model.id);
+        return model.data;
       }
 
-      data = smeupServiceResponse.result.data;
+      model.data = smeupServiceResponse.result.data;
     }
 
-    SmeupDataService.decrementDataFetch(smeupListBoxModel.id);
-    return data;
+    SmeupDataService.decrementDataFetch(model.id);
   }
 }

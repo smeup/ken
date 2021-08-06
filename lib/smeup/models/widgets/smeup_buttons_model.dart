@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/tree_view.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_buttons_dao.dart';
 
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
@@ -37,6 +38,8 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   int iconData;
 
   SmeupButtonsModel({
+    id,
+    type,
     title = '',
     this.clientData = '',
     this.backColor,
@@ -55,7 +58,6 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     this.iconData = 0,
     this.iconSize = defaultIconSize,
   }) : super(title: title) {
-    id = SmeupUtilities.getWidgetId('BTN', id);
     SmeupDataService.incrementDataFetch(id);
   }
 
@@ -116,6 +118,11 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     if (optionsDefault['fontColor'] != null) {
       fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']);
     }
+
+    if (widgetLoadType != LoadType.Delay) {
+      SmeupButtonsDao.getData(this);
+    }
+
     SmeupDataService.incrementDataFetch(id);
   }
 

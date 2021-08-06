@@ -4,27 +4,21 @@ import 'package:mobile_components_library/smeup/services/smeup_data_service.dart
 import 'smeup_dao.dart';
 
 class SmeupTextAutocompleteDao extends SmeupDao {
-  static Future<dynamic> getData(
-      SmeupTextAutocompleteModel smeupLabelModel) async {
-    dynamic data = smeupLabelModel.data;
-
-    if (smeupLabelModel.smeupFun != null &&
-        smeupLabelModel.smeupFun.isFunValid()) {
+  static Future<void> getData(SmeupTextAutocompleteModel model) async {
+    if (model.smeupFun != null && model.smeupFun.isFunValid()) {
       final smeupServiceResponse =
-          await SmeupDataService.invoke(smeupLabelModel.smeupFun);
+          await SmeupDataService.invoke(model.smeupFun);
 
       if (!smeupServiceResponse.succeded) {
         return;
       }
 
-      data = smeupServiceResponse.result.data;
+      model.data = smeupServiceResponse.result.data;
     }
 
-    if (smeupLabelModel.clientData != null) {
-      data = SmeupDao.getClientDataStructure(
-          smeupLabelModel.clientData, smeupLabelModel.optionsDefault, data);
+    if (model.clientData != null) {
+      model.data = SmeupDao.getClientDataStructure(model);
     }
-    SmeupDataService.decrementDataFetch(smeupLabelModel.id);
-    return data;
+    SmeupDataService.decrementDataFetch(model.id);
   }
 }

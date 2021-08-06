@@ -5,47 +5,43 @@ import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'smeup_dao.dart';
 
 class SmeupLabelDao extends SmeupDao {
-  static Future<dynamic> getData(SmeupLabelModel smeupLabelModel) async {
-    dynamic data = smeupLabelModel.data;
-
-    if (smeupLabelModel.smeupFun != null &&
-        smeupLabelModel.smeupFun.isFunValid()) {
+  static Future<void> getData(SmeupLabelModel model) async {
+    if (model.smeupFun != null && model.smeupFun.isFunValid()) {
       final smeupServiceResponse =
-          await SmeupDataService.invoke(smeupLabelModel.smeupFun);
+          await SmeupDataService.invoke(model.smeupFun);
 
       if (!smeupServiceResponse.succeded) {
-        SmeupDataService.decrementDataFetch(smeupLabelModel.id);
-        return data;
+        SmeupDataService.decrementDataFetch(model.id);
+        return model.data;
       }
 
       var newList = List.empty(growable: true);
       (smeupServiceResponse.result.data['rows'] as List).forEach((element) {
         var newEl = {
-          "value": element[smeupLabelModel.optionsDefault['valueColName']],
-          smeupLabelModel.optionsDefault['iconColName']:
-              element[smeupLabelModel.optionsDefault['iconColName']],
-          if (smeupLabelModel.colorColName != null &&
-              smeupLabelModel.colorColName.isNotEmpty)
-            smeupLabelModel.optionsDefault['colorColName']:
+          "value": element[model.optionsDefault['valueColName']],
+          model.optionsDefault['iconColName']:
+              element[model.optionsDefault['iconColName']],
+          if (model.colorColName != null && model.colorColName.isNotEmpty)
+            model.optionsDefault['colorColName']:
                 SmeupUtilities.getColorFromRGB(
-                    element[smeupLabelModel.optionsDefault['colorColName']]),
-          if (smeupLabelModel.colorFontColName != null &&
-              smeupLabelModel.colorFontColName.isNotEmpty)
-            smeupLabelModel.optionsDefault['colorFontColName']:
-                SmeupUtilities.getColorFromRGB(element[
-                    smeupLabelModel.optionsDefault['colorFontColName']]),
+                    element[model.optionsDefault['colorColName']]),
+          if (model.colorFontColName != null &&
+              model.colorFontColName.isNotEmpty)
+            model.optionsDefault['colorFontColName']:
+                SmeupUtilities.getColorFromRGB(
+                    element[model.optionsDefault['colorFontColName']]),
         };
         newList.add(newEl);
       });
 
-      data = newList;
+      model.data = newList;
     }
 
-    if (data == null && smeupLabelModel.clientData != null) {
-      data = smeupLabelModel.clientData;
+    if (model.data == null && model.clientData != null) {
+      model.data = model.clientData;
+      model.data = SmeupDao.getClientDataStructure(model);
     }
 
-    SmeupDataService.decrementDataFetch(smeupLabelModel.id);
-    return data;
+    SmeupDataService.decrementDataFetch(model.id);
   }
 }

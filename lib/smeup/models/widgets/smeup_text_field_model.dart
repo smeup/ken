@@ -51,6 +51,7 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
       this.keyboard})
       : super(title: title, id: id, type: type) {
     if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
+    if (optionsDefault['type'] == null) optionsDefault['type'] = 'itx';
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
   }
@@ -83,9 +84,7 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
     keyboard = SmeupUtilities.getKeyboard(optionsDefault['keyboard']);
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupTextFieldDao.getData(this).then((value) {
-        data = value;
-      });
+      SmeupTextFieldDao.getData(this);
     }
 
     SmeupDataService.incrementDataFetch(id);

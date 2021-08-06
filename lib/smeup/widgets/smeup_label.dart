@@ -164,7 +164,7 @@ class _SmeupLabelState extends State<SmeupLabel>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      _model.data = await SmeupLabelDao.getData(_model);
+      await SmeupLabelDao.getData(_model);
       setDataLoad(widget.id, true);
     }
 

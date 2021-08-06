@@ -1,31 +1,35 @@
 class SmeupDao {
-  static dynamic getClientDataStructure(
-      dynamic clientData, dynamic optionsDefault, dynamic data,
-      {String fieldName = 'value'}) {
-    if (optionsDefault == null) {
-      return {
-        "rows": [
-          {
-            fieldName: clientData,
-          }
-        ],
-      };
-    } else {
-      switch (optionsDefault['type']) {
-        case 'acp':
-          return {
-            "rows": [
-              {
-                fieldName: clientData,
-              }
-            ],
-          };
+  static dynamic getClientDataStructure(dynamic model) {
+    switch (model.type) {
+      case 'LAB':
+        var newList = List.empty(growable: true);
+        (model.clientData as List).forEach((element) {
+          newList.add({
+            'value': element,
+          });
+        });
+        return newList;
+        break;
 
-          break;
+      case 'FLD':
+        switch (model.optionsDefault['type']) {
+          case 'itx':
+          case 'acp':
+            return {
+              "rows": [
+                {
+                  'value': model.clientData,
+                }
+              ],
+            };
 
-        default:
-          return data;
-      }
+          default:
+            return model.clientData;
+        }
+        break;
+
+      default:
+        return {"rows": model.clientData};
     }
   }
 }

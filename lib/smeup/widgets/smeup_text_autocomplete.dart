@@ -157,7 +157,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      _model.data = await SmeupTextAutocompleteDao.getData(_model);
+      await SmeupTextAutocompleteDao.getData(_model);
       _options = _model.data['rows'];
       setDataLoad(widget.id, true);
     }
@@ -312,7 +312,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
         ],
         "dynamisms": _model.dynamisms
       };
-      final button = SmeupButtons(
+      final button = SmeupButtons.withController(
           SmeupButtonsModel.fromMap(json), widget.scaffoldKey, widget.formKey);
       final column = Column(
         //mainAxisSize: MainAxisSize.min,

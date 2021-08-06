@@ -152,7 +152,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      _model.data = await SmeupTextFieldDao.getData(_model);
+      await SmeupTextFieldDao.getData(_model);
       setDataLoad(widget.id, true);
     }
 
@@ -245,7 +245,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
         ],
         "dynamisms": _model.dynamisms
       };
-      final button = SmeupButtons(
+      final button = SmeupButtons.withController(
           SmeupButtonsModel.fromMap(
             json,
           ),

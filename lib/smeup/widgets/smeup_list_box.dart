@@ -166,7 +166,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
   /// define the structure ...
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      _model.data = await SmeupListBoxDao.getData(_model);
+      await SmeupListBoxDao.getData(_model);
       setDataLoad(widget.id, true);
     }
 
