@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupButton extends StatelessWidget {
   final int buttonIndex;
@@ -26,7 +25,7 @@ class SmeupButton extends StatelessWidget {
   final Function onServerPressed;
   final Function onClientPressed;
 
-  final dynamic data;
+  //final dynamic data;
   final bool isBusy;
   final String id;
   final String type;
@@ -56,7 +55,7 @@ class SmeupButton extends StatelessWidget {
       this.icon,
       this.onServerPressed,
       this.onClientPressed,
-      this.data,
+      //this.data,
       this.isBusy = false});
 
   @override
@@ -75,8 +74,7 @@ class SmeupButton extends StatelessWidget {
         height: height,
         width: width == 0 ? double.infinity : width,
         child: ElevatedButton(
-          key: Key(
-              '${SmeupUtilities.getWidgetId(type, id)}_${buttonIndex.toString()}'),
+          key: Key(id),
           style: ElevatedButton.styleFrom(
             primary: backgroundColor,
             onPrimary: SmeupOptions.theme.primaryColor,

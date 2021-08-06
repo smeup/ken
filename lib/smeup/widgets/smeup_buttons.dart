@@ -193,11 +193,11 @@ class SmeupButtonsState extends State<SmeupButtons>
       // }
       buttonIndex += 1;
       final button = SmeupButton(
-          id: widget.id,
+          id: '${SmeupUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
           type: widget.type,
           buttonIndex: buttonIndex,
           title: widget.title,
-          clientData: widget.clientData,
+          clientData: buttonData['value'],
           backColor: widget.backColor,
           borderColor: widget.borderColor,
           width: widget.width,
@@ -213,7 +213,7 @@ class SmeupButtonsState extends State<SmeupButtons>
           bold: widget.bold,
           iconData: widget.iconData,
           iconSize: widget.iconSize,
-          data: buttonData,
+          //data: buttonData,
           icon: null,
           isBusy: _isBusy,
           onServerPressed: () {
