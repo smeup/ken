@@ -170,7 +170,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
     if (hasData(_model)) {
       value = _model.data['rows'][0][widget.valueField].toString();
 
-      final List<Map> cols = _model.data['columns'];
+      final List cols = _model.data['columns'];
       if (cols != null) {
         final col = cols.firstWhere(
             (element) => element['code'] == widget.valueField,
