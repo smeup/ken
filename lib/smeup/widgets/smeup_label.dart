@@ -195,7 +195,7 @@ class _SmeupLabelState extends State<SmeupLabel>
       final align = Align(
         alignment: widget.align,
         child: Text(
-          map['value'],
+          map['value'].toString(),
           // key: Key('pippo'),
           style: TextStyle(
               color: fontColor,

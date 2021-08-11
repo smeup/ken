@@ -128,7 +128,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
   void initState() {
     _model = widget.model;
     widgetLoadType = _model.widgetLoadType;
-    _options = _model.data['rows'];
+    _options = _model.data == null ? [] : _model.data['rows'];
     super.initState();
   }
 
