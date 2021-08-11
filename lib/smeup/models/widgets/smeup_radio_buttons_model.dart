@@ -34,7 +34,9 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
   String selectedValue;
 
   SmeupRadioButtonsModel(
-      {title = '',
+      {id,
+      type,
+      title = '',
       this.clientData = '',
       this.backColor,
       this.width = defaultWidth,
@@ -55,7 +57,7 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
     if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
     if (fontColor == null)
       fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
-    id = SmeupUtilities.getWidgetId('FLD', id);
+
     SmeupDataService.incrementDataFetch(id);
   }
 
