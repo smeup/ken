@@ -235,8 +235,8 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                     if (widget.clientOnChange != null)
                       widget.clientOnChange(value);
                     SmeupDynamismService.variables[widget.id] = value;
-                    SmeupDynamismService.run(_model.dynamisms, context,
-                        'change', widget.scaffoldKey);
+                    // SmeupDynamismService.run(_model.dynamisms, context,
+                    //     'change', widget.scaffoldKey);
                   },
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
