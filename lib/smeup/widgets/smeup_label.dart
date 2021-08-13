@@ -27,7 +27,7 @@ class SmeupLabel extends StatefulWidget
   bool fontbold;
   double width;
   double height;
-  dynamic clientData;
+  List<String> data;
   String valueColName;
   String colorColName;
   String colorFontColName;
@@ -50,6 +50,7 @@ class SmeupLabel extends StatefulWidget
   SmeupLabel(this.scaffoldKey, this.formKey,
       {this.id = '',
       this.type = 'LAB',
+      this.data,
       this.valueColName = '',
       this.padding = SmeupLabelModel.defaultPadding,
       this.fontSize = SmeupLabelModel.defaultFontSize,
@@ -57,7 +58,6 @@ class SmeupLabel extends StatefulWidget
       this.fontbold = SmeupLabelModel.defaultFontbold,
       this.width = SmeupLabelModel.defaultWidth,
       this.height = SmeupLabelModel.defaultHeight,
-      this.clientData,
       this.colorColName = '',
       this.backColor,
       this.fontColor,
@@ -79,7 +79,6 @@ class SmeupLabel extends StatefulWidget
         fontbold: fontbold,
         width: width,
         height: height,
-        clientData: clientData,
         colorColName: colorColName,
         backColor: backColor,
         fontColor: fontColor,
@@ -92,6 +91,8 @@ class SmeupLabel extends StatefulWidget
 
   @override
   runControllerActivities(SmeupModel model) {
+    isWithController = true;
+
     SmeupLabelModel m = model;
     id = m.id;
     type = m.type;
@@ -102,7 +103,6 @@ class SmeupLabel extends StatefulWidget
     fontbold = m.fontbold;
     width = m.width;
     height = m.height;
-    clientData = m.clientData;
     colorColName = m.colorColName;
     backColor = m.backColor;
     fontColor = m.fontColor;
@@ -111,6 +111,14 @@ class SmeupLabel extends StatefulWidget
     colorFontColName = m.colorFontColName;
     iconSize = m.iconSize;
     title = m.title;
+
+    if (m.data != null) {
+      var newList = List<String>.empty(growable: true);
+      (m.data['rows'] as List).forEach((element) {
+        newList.add(element[m.valueColName].toString());
+      });
+      data = newList;
+    }
   }
 
   @override
@@ -138,6 +146,7 @@ class _SmeupLabelState extends State<SmeupLabel>
   @override
   Widget build(BuildContext context) {
     Widget label = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
+        getInitialdataLoaded(widget.isWithController, _model),
         notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
@@ -163,7 +172,9 @@ class _SmeupLabelState extends State<SmeupLabel>
   ///
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (widget.isWithController &&
+        !getDataLoaded(widget.id) &&
+        widgetLoadType != LoadType.Delay) {
       await SmeupLabelDao.getData(_model);
       setDataLoad(widget.id, true);
     }
@@ -179,23 +190,22 @@ class _SmeupLabelState extends State<SmeupLabel>
     double fontSize = widget.fontSize;
 
     Color backColor = widget.backColor;
-    if (widget.colorColName.isNotEmpty &&
-        _model.data[0][widget.colorColName] != null) {
-      backColor = _model.data[0][widget.colorColName];
-    }
+    // if (widget.colorColName.isNotEmpty &&
+    //     widget.data[0][widget.colorColName] != null) {
+    //   backColor = widget.data[0][widget.colorColName];
+    // }
 
     Color fontColor = widget.fontColor;
-    if (widget.colorFontColName.isNotEmpty &&
-        _model.data[0][widget.colorFontColName] != null) {
-      fontColor = _model.data[0][widget.colorFontColName];
-    }
+    // if (widget.colorFontColName.isNotEmpty &&
+    //     widget.data[0][widget.colorFontColName] != null) {
+    //   fontColor = widget.data[0][widget.colorFontColName];
+    // }
 
-    (_model.data as List).forEach((l) {
-      var map = (l as Map);
+    widget.data.forEach((text) {
       final align = Align(
         alignment: widget.align,
         child: Text(
-          map['value'].toString(),
+          text,
           // key: Key('pippo'),
           style: TextStyle(
               color: fontColor,
@@ -225,10 +235,10 @@ class _SmeupLabelState extends State<SmeupLabel>
       if (widget.iconData != 0) {
         iconData = widget.iconData;
       }
-      if (widget.iconColname.isNotEmpty &&
-          _model.data[0][widget.iconColname] != null) {
-        iconData = _model.data[0][widget.iconColname];
-      }
+      // if (widget.iconColname.isNotEmpty &&
+      //     widget.data[0][widget.iconColname] != null) {
+      //   iconData = widget.data[0][widget.iconColname];
+      // }
 
       double iconHeight = widget.iconSize;
 

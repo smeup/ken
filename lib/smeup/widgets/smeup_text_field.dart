@@ -138,6 +138,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
   @override
   Widget build(BuildContext context) {
     final input = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
+        getInitialdataLoaded(widget.isWithController, _model),
         notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;

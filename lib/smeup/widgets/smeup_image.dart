@@ -107,6 +107,7 @@ class _SmeupImageState extends State<SmeupImage>
   @override
   Widget build(BuildContext context) {
     final box = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
+        getInitialdataLoaded(widget.isWithController, _model),
         notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;

@@ -15,32 +15,34 @@ class SmeupLabelDao extends SmeupDao {
         return model.data;
       }
 
-      var newList = List.empty(growable: true);
-      (smeupServiceResponse.result.data['rows'] as List).forEach((element) {
-        var newEl = {
-          "value": element[model.optionsDefault['valueColName']],
-          model.optionsDefault['iconColName']:
-              element[model.optionsDefault['iconColName']],
-          if (model.colorColName != null && model.colorColName.isNotEmpty)
-            model.optionsDefault['colorColName']:
-                SmeupUtilities.getColorFromRGB(
-                    element[model.optionsDefault['colorColName']]),
-          if (model.colorFontColName != null &&
-              model.colorFontColName.isNotEmpty)
-            model.optionsDefault['colorFontColName']:
-                SmeupUtilities.getColorFromRGB(
-                    element[model.optionsDefault['colorFontColName']]),
-        };
-        newList.add(newEl);
-      });
+      model.data = smeupServiceResponse.result.data;
 
-      model.data = newList;
+      var firstElement =
+          (smeupServiceResponse.result.data['rows'] as List).first;
+      if (firstElement != null) {
+        // overrides model properties
+        if (firstElement[model.optionsDefault['iconColName']] != null) {
+          model.iconData =
+              int.tryParse(firstElement[model.optionsDefault['iconColName']]) ??
+                  0;
+        }
+
+        if (firstElement[model.optionsDefault['colorColName']] != null) {
+          model.backColor = SmeupUtilities.getColorFromRGB(
+              firstElement[model.optionsDefault['colorColName']]);
+        }
+
+        if (firstElement[model.optionsDefault['colorFontColName']] != null) {
+          model.fontColor = SmeupUtilities.getColorFromRGB(
+              firstElement[model.optionsDefault['colorFontColName']]);
+        }
+      }
     }
 
-    if (model.data == null && model.clientData != null) {
-      model.data = model.clientData;
-      model.data = SmeupDao.getClientDataStructure(model);
-    }
+    // if (model.data == null && model.clientData != null) {
+    //   model.data = model.clientData;
+    //   model.data = SmeupDao.getClientDataStructure(model);
+    // }
 
     SmeupDataService.decrementDataFetch(model.id);
   }
