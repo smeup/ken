@@ -12,14 +12,14 @@ class SmeupWidgetStateMixin {
   LoadType widgetLoadType = LoadType.Immediate;
 
   Widget runBuild(BuildContext context, String id, String type,
-      GlobalKey<ScaffoldState> scaffoldKey,
+      GlobalKey<ScaffoldState> scaffoldKey, bool initialDataLoad,
       {Function notifierFunction}) {
     var sel = SmeupWidgetNotificationService.objects
         .firstWhere((element) => element['id'] == id, orElse: () => null);
     if (sel == null) {
       SmeupWidgetNotificationService.objects.add({
         'id': id,
-        'dataLoaded': false,
+        'dataLoaded': initialDataLoad,
         'scaffoldKey': scaffoldKey.hashCode,
         'notifierFunction': notifierFunction
       });
@@ -117,5 +117,9 @@ class SmeupWidgetStateMixin {
 
   bool hasData(SmeupModel model) {
     return model.data != null;
+  }
+
+  bool getInitialdataLoaded(bool isWithController, SmeupModel model) {
+    return isWithController && model.data != null;
   }
 }

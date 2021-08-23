@@ -153,9 +153,13 @@ class SmeupButtonsState extends State<SmeupButtons>
 
   @override
   Widget build(BuildContext context) {
-    final buttons =
-        runBuild(context, widget.id, widget.type, widget.scaffoldKey,
-            notifierFunction: () {
+    final buttons = runBuild(
+        context,
+        widget.id,
+        widget.type,
+        widget.scaffoldKey,
+        getInitialdataLoaded(widget.isWithController, _model),
+        notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);

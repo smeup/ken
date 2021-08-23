@@ -140,9 +140,13 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
 
   @override
   Widget build(BuildContext context) {
-    Widget autocomplete =
-        runBuild(context, widget.id, widget.type, widget.scaffoldKey,
-            notifierFunction: () {
+    Widget autocomplete = runBuild(
+        context,
+        widget.id,
+        widget.type,
+        widget.scaffoldKey,
+        getInitialdataLoaded(widget.isWithController, _model),
+        notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
@@ -234,9 +238,9 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                   onChanged: (value) {
                     if (widget.clientOnChange != null)
                       widget.clientOnChange(value);
-                    SmeupDynamismService.variables[widget.id] = value;
-                    SmeupDynamismService.run(_model.dynamisms, context,
-                        'change', widget.scaffoldKey);
+                    // SmeupDynamismService.variables[widget.id] = value;
+                    // SmeupDynamismService.run(_model.dynamisms, context,
+                    //     'change', widget.scaffoldKey);
                   },
                   decoration: InputDecoration(
                     labelStyle: TextStyle(

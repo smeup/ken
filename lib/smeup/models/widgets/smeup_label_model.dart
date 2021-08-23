@@ -23,7 +23,6 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
   bool fontbold;
   double width;
   double height;
-  dynamic clientData;
   String valueColName;
   String colorColName;
   String colorFontColName;
@@ -42,7 +41,6 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
       this.fontbold = defaultFontbold,
       this.width = defaultWidth,
       this.height = defaultHeight,
-      this.clientData,
       this.colorColName = '',
       this.backColor,
       this.fontColor,
@@ -60,7 +58,7 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
     if (fontColor == null)
       fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
 
-    valueColName = optionsDefault['valueColName'] ?? '';
+    valueColName = optionsDefault['valueColName'] ?? 'value';
     colorColName = optionsDefault['colorColName'] ?? '';
     colorFontColName = optionsDefault['colorFontColName'] ?? '';
     padding =
