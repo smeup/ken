@@ -21,8 +21,8 @@ class SmeupDynamismService {
     });
   }
 
-  static void storeDynamicVariables(Map data) {
-    if (data != null) {
+  static void storeDynamicVariables(dynamic data) {
+    if (data != null && data is Map) {
       data.entries.forEach((element) {
         if (element.value != null) {
           String key = element.key;
