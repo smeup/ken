@@ -240,9 +240,11 @@ class _SmeupTextFieldState extends State<SmeupTextField>
     if (widget.showSubmit) {
       var json = {
         "type": "BTN",
-        "data": [
-          {'value': _model.options['FLD']['default']["submitLabel"]},
-        ],
+        "data": {
+          "rows": [
+            {'value': _model.options['FLD']['default']["submitLabel"]},
+          ]
+        },
         "dynamisms": _model.dynamisms
       };
       final button = SmeupButtons.withController(
