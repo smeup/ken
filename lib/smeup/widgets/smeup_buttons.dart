@@ -30,7 +30,7 @@ class SmeupButtons extends StatefulWidget
   Color fontColor;
   double fontsize;
   double padding;
-  String clientData;
+  List<String> data;
   String valueField;
   double borderRadius;
   double elevation;
@@ -55,7 +55,7 @@ class SmeupButtons extends StatefulWidget
     this.id = '',
     this.type = 'BTN',
     this.title = '',
-    this.clientData = '',
+    this.data,
     this.backColor,
     this.borderColor,
     this.width = SmeupButtonsModel.defaultWidth,
@@ -74,11 +74,12 @@ class SmeupButtons extends StatefulWidget
   }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
 
+    if (data == null) data = List<String>.empty(growable: true);
+
     this.model = SmeupButtonsModel(
         id: id,
         type: type,
         title: title,
-        clientData: clientData,
         backColor: backColor,
         borderColor: borderColor,
         width: width,
@@ -102,7 +103,6 @@ class SmeupButtons extends StatefulWidget
     id = m.id;
     type = m.type;
     title = m.title;
-    clientData = m.clientData;
     backColor = m.backColor;
     borderColor = m.borderColor;
     width = m.width;
@@ -118,6 +118,19 @@ class SmeupButtons extends StatefulWidget
     bold = m.bold;
     iconData = m.iconData;
     iconSize = m.iconSize;
+
+    // mettere funzione del mixin di conversione (esempio data)
+    var workData = formatDataFields(m);
+
+    // set the widget data
+    if (workData != null) {
+      var newList = List<String>.empty(growable: true);
+      for (var i = 0; i < (workData['rows'] as List).length; i++) {
+        final element = workData['rows'][i];
+        newList.add(element[m.valueField].toString());
+      }
+      data = newList;
+    }
   }
 
   @override
@@ -153,13 +166,8 @@ class SmeupButtonsState extends State<SmeupButtons>
 
   @override
   Widget build(BuildContext context) {
-    final buttons = runBuild(
-        context,
-        widget.id,
-        widget.type,
-        widget.scaffoldKey,
-        getInitialdataLoaded(widget.isWithController, _model),
-        notifierFunction: () {
+    final buttons = runBuild(context, widget.id, widget.type,
+        widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
@@ -183,7 +191,7 @@ class SmeupButtonsState extends State<SmeupButtons>
     var buttons = List<SmeupButton>.empty(growable: true);
 
     int buttonIndex = 0;
-    _model.data.forEach((buttonData) {
+    widget.data.forEach((buttonData) {
       // dynamic _buttonData = buttonData;
       //SmeupButtonsModel _modelClone = _model;
 
@@ -201,7 +209,7 @@ class SmeupButtonsState extends State<SmeupButtons>
           type: widget.type,
           buttonIndex: buttonIndex,
           title: widget.title,
-          clientData: buttonData['value'],
+          data: buttonData,
           backColor: widget.backColor,
           borderColor: widget.borderColor,
           width: widget.width,

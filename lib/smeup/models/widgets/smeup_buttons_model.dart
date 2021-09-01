@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_treeview/tree_view.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_buttons_dao.dart';
 
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
@@ -29,7 +27,6 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   Color fontColor;
   double fontsize;
   double padding;
-  String clientData;
   String valueField;
   double borderRadius;
   double elevation;
@@ -41,7 +38,6 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     id,
     type,
     title = '',
-    this.clientData = '',
     this.backColor,
     this.borderColor,
     this.width = defaultWidth,
@@ -64,7 +60,6 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   SmeupButtonsModel.clone(SmeupButtonsModel other)
       : this(
             title: other.title,
-            clientData: other.clientData,
             backColor: other.backColor,
             borderColor: other.borderColor,
             width: other.width,
@@ -89,7 +84,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
-    valueField = optionsDefault['valueField'] ?? '';
+    valueField = optionsDefault['valueField'] ?? 'value';
     position = SmeupUtilities.getMainAxisAlignment(optionsDefault['position']);
     iconSize =
         SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
@@ -124,34 +119,5 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     }
 
     SmeupDataService.incrementDataFetch(id);
-  }
-
-  @override
-  // ignore: override_on_non_overriding_member
-  setData() async {
-    if (smeupFun != null && smeupFun.isFunValid()) {
-      final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
-
-      if (!smeupServiceResponse.succeded) {
-        return;
-      }
-
-      data = smeupServiceResponse.result.data['rows'];
-      if ((data as List).length > 0) {
-        if (valueField.isNotEmpty) {
-          clientData = data[0][valueField];
-        } else {
-          clientData = (data[0] as Node).label;
-        }
-      }
-    } else if (data != null) {
-      clientData = data[0]['value'];
-    }
-
-    if (clientData == null) {
-      SmeupLogService.writeDebugMessage('SmeupButtonsModel clientData is null',
-          logType: LogType.error);
-    }
-    SmeupDataService.decrementDataFetch(id);
   }
 }

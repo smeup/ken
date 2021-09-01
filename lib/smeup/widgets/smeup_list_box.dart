@@ -152,8 +152,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
   @override
   Widget build(BuildContext context) {
     var listbox = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
-        getInitialdataLoaded(widget.isWithController, _model),
-        notifierFunction: () {
+        getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
@@ -171,7 +170,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
       setDataLoad(widget.id, true);
     }
 
-    if (!hasData(_model)) {
+    if (_model.data == null) {
       return getFunErrorResponse(context, _model);
     }
 

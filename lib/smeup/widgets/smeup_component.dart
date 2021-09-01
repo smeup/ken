@@ -53,7 +53,7 @@ class _SmeupComponentState extends State<SmeupComponent> {
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(
-                'Error SmeupComponent: ${snapshot.error}',
+                'Error SmeupComponent ( type: ${widget.smeupModel.type} , id: ${widget.smeupModel.id} ) : ${snapshot.error}',
                 logType: LogType.error);
             return SmeupNotAvailable();
           } else {

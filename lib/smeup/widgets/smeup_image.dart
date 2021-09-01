@@ -107,8 +107,7 @@ class _SmeupImageState extends State<SmeupImage>
   @override
   Widget build(BuildContext context) {
     final box = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
-        getInitialdataLoaded(widget.isWithController, _model),
-        notifierFunction: () {
+        getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
@@ -126,7 +125,7 @@ class _SmeupImageState extends State<SmeupImage>
       setDataLoad(widget.id, true);
     }
 
-    if (!hasData(_model)) {
+    if (_model.data == null) {
       return getFunErrorResponse(context, _model);
     }
 

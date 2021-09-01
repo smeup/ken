@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_text_field_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
@@ -138,8 +137,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
   @override
   Widget build(BuildContext context) {
     final input = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
-        getInitialdataLoaded(widget.isWithController, _model),
-        notifierFunction: () {
+        getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
@@ -167,19 +165,20 @@ class _SmeupTextFieldState extends State<SmeupTextField>
     //         _model.optionsDefault['valueField'] == null
     //     ? 'value'
     //     : _model.optionsDefault['valueField'];
+
     String value = '';
-    if (hasData(_model)) {
+    if (_model.data != null) {
       value = _model.data['rows'][0][widget.valueField].toString();
 
-      final List cols = _model.data['columns'];
-      if (cols != null) {
-        final col = cols.firstWhere(
-            (element) => element['code'] == widget.valueField,
-            orElse: () => null);
-        if (col['ogg'] == 'D8*YYMD') {
-          value = DateFormat("dd/MM/yyyy").format(DateTime.tryParse(value));
-        }
-      }
+      // final List cols = _model.data['columns'];
+      // if (cols != null) {
+      //   final col = cols.firstWhere(
+      //       (element) => element['code'] == widget.valueField,
+      //       orElse: () => null);
+      //   if (col['ogg'] == 'D8*YYMD') {
+      //     value = DateFormat("dd/MM/yyyy").format(DateTime.tryParse(value));
+      //   }
+      // }
     }
 
     SmeupDynamismService.variables[widget.id] = value;

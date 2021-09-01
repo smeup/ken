@@ -689,7 +689,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                   ? Theme.of(context).primaryColor
                   : Theme.of(context).scaffoldBackgroundColor,
               iconData: int.tryParse(buttonIcon) ?? 0,
-              clientData: buttonText,
+              data: buttonText,
               onClientPressed: () {
                 //SmeupDynamismService.storeDynamicVariables(_child['content']);
 

@@ -119,7 +119,10 @@ class SmeupWidgetStateMixin {
     return model.data != null;
   }
 
-  bool getInitialdataLoaded(bool isWithController, SmeupModel model) {
-    return isWithController && model.data != null;
+  /// return the information if data has been loaded
+  /// static constructor: always false (because in this case the widget will receive the data directly)
+  /// dynamic constrctor: true if the model is not null and contains data
+  bool getInitialdataLoaded(SmeupModel model) {
+    return (model != null && model.data != null) || model == null;
   }
 }

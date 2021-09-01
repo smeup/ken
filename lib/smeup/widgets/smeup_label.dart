@@ -91,8 +91,6 @@ class SmeupLabel extends StatefulWidget
 
   @override
   runControllerActivities(SmeupModel model) {
-    isWithController = true;
-
     SmeupLabelModel m = model;
     id = m.id;
     type = m.type;
@@ -112,11 +110,16 @@ class SmeupLabel extends StatefulWidget
     iconSize = m.iconSize;
     title = m.title;
 
-    if (m.data != null) {
+    // mettere funzione del mixin di conversione (esempio data)
+    var workData = formatDataFields(m);
+
+    // set the widget data
+    if (workData != null) {
       var newList = List<String>.empty(growable: true);
-      (m.data['rows'] as List).forEach((element) {
+      for (var i = 0; i < (workData['rows'] as List).length; i++) {
+        final element = workData['rows'][i];
         newList.add(element[m.valueColName].toString());
-      });
+      }
       data = newList;
     }
   }
@@ -146,8 +149,7 @@ class _SmeupLabelState extends State<SmeupLabel>
   @override
   Widget build(BuildContext context) {
     Widget label = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
-        getInitialdataLoaded(widget.isWithController, _model),
-        notifierFunction: () {
+        getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
@@ -172,14 +174,12 @@ class _SmeupLabelState extends State<SmeupLabel>
   ///
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (widget.isWithController &&
-        !getDataLoaded(widget.id) &&
-        widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
       await SmeupLabelDao.getData(_model);
       setDataLoad(widget.id, true);
     }
 
-    if (!hasData(_model)) {
+    if (widget.data == null) {
       return getFunErrorResponse(context, _model);
     }
 

@@ -13,7 +13,7 @@ class SmeupButton extends StatelessWidget {
   final Color fontColor;
   final double fontsize;
   final double padding;
-  final String clientData;
+  final String data;
   final String valueField;
   final double borderRadius;
   final double elevation;
@@ -35,7 +35,7 @@ class SmeupButton extends StatelessWidget {
       {this.id = '',
       this.type = 'BTN',
       this.title = '',
-      this.clientData = '',
+      this.data = '',
       this.backColor,
       this.borderColor,
       this.width = SmeupButtonsModel.defaultWidth,
@@ -107,7 +107,7 @@ class SmeupButton extends StatelessWidget {
                           );
                     var text = Align(
                         alignment: align,
-                        child: Text(clientData,
+                        child: Text(data,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontWeight:

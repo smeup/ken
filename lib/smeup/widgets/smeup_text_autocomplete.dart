@@ -140,13 +140,8 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
 
   @override
   Widget build(BuildContext context) {
-    Widget autocomplete = runBuild(
-        context,
-        widget.id,
-        widget.type,
-        widget.scaffoldKey,
-        getInitialdataLoaded(widget.isWithController, _model),
-        notifierFunction: () {
+    Widget autocomplete = runBuild(context, widget.id, widget.type,
+        widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
@@ -166,7 +161,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
       setDataLoad(widget.id, true);
     }
 
-    if (!hasData(_model)) {
+    if (_model.data == null) {
       return getFunErrorResponse(context, _model);
     }
 
