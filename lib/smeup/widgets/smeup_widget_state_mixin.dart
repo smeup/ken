@@ -3,6 +3,7 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_error_notifier.dart';
+import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/services/smeup_widget_notification_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
@@ -100,7 +101,7 @@ class SmeupWidgetStateMixin {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-              'Dati non disponibili.  (${model.smeupFun.fun['fun']['function']})'),
+              '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${model.smeupFun.fun['fun']['function']})'),
           backgroundColor: SmeupOptions.theme.errorColor,
         ),
       );

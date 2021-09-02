@@ -16,21 +16,24 @@ class SmeupLocalizationService {
       'cancel': 'CANCEL',
       'areYouSureDelete': 'Are you sure you wish to delete this item?',
       'delete': 'DELETE',
-      'elementDeleted': 'The item has been deleted'
+      'elementDeleted': 'The item has been deleted',
+      'dataNotAvailable': 'Data not available',
     },
     'it': {
       'confirm': 'CONFERMA',
       'cancel': 'ANNULLA',
       'areYouSureDelete': 'Sicuro di vole eliminare questo elemento?',
       'delete': 'ELIMINA',
-      'elementDeleted': 'L\'elemento è stato eliminato'
+      'elementDeleted': 'L\'elemento è stato eliminato',
+      'dataNotAvailable': 'Dati non disponibili',
     },
     'fr': {
       'confirm': 'CONFIRMATION',
       'cancel': 'ANNULER',
       'areYouSureDelete': 'Est-il sûr de vouloir supprimer cet élément?',
       'delete': 'SUPPRIMER',
-      'elementDeleted': 'L\'élément a été supprimé'
+      'elementDeleted': 'L\'élément a été supprimé',
+      'dataNotAvailable': 'Données non disponibles',
     },
   };
 

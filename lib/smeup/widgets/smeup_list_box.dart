@@ -132,7 +132,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
   @override
   void initState() {
     _model = widget.model;
-    widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
 

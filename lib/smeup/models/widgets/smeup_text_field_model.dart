@@ -99,7 +99,6 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
         height: height,
         padding: padding,
         showborder: showborder,
-        //clientData: clientData,
         showUnderline: showUnderline);
   }
 }

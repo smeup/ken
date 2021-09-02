@@ -74,26 +74,6 @@ class SmeupButtons extends StatefulWidget
     id = SmeupUtilities.getWidgetId(type, id);
 
     if (data == null) data = List<String>.empty(growable: true);
-
-    this.model = SmeupButtonsModel(
-        id: id,
-        type: type,
-        title: title,
-        backColor: backColor,
-        borderColor: borderColor,
-        width: width,
-        height: height,
-        position: position,
-        align: align,
-        fontColor: fontColor,
-        fontsize: fontsize,
-        padding: padding,
-        valueField: valueField,
-        borderRadius: borderRadius,
-        elevation: elevation,
-        bold: bold,
-        iconData: iconData,
-        iconSize: iconSize);
   }
 
   @override
@@ -146,7 +126,7 @@ class SmeupButtonsState extends State<SmeupButtons>
   void initState() {
     _isBusy = false;
     _model = widget.model;
-    widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
 

@@ -22,7 +22,6 @@ class SmeupTextAutocompleteModel extends SmeupModel
   double height;
   double padding;
   bool showborder;
-  dynamic clientData;
   bool showUnderline;
   bool autoFocus;
   String defaultValue;
@@ -39,11 +38,10 @@ class SmeupTextAutocompleteModel extends SmeupModel
       this.padding = defaultPadding,
       this.showborder = defaultShowBorder,
       title = '',
-      this.clientData,
       this.showUnderline = true,
       this.autoFocus = defaultAutoFocus,
       this.defaultValue = '',
-      this.valueField = ''})
+      this.valueField = 'value'})
       : super(title: title, id: id, type: type) {
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'acp';
     SmeupDataService.incrementDataFetch(id);
@@ -73,7 +71,7 @@ class SmeupTextAutocompleteModel extends SmeupModel
         showborder = false;
     }
     defaultValue = jsonMap['defaultValue'] ?? '';
-    valueField = optionsDefault['valueField'] ?? '';
+    valueField = optionsDefault['valueField'] ?? 'value';
 
     if (widgetLoadType != LoadType.Delay) {
       SmeupTextAutocompleteDao.getData(this);
@@ -91,7 +89,6 @@ class SmeupTextAutocompleteModel extends SmeupModel
         height: height,
         padding: padding,
         showborder: showborder,
-        clientData: clientData,
         showUnderline: showUnderline);
   }
 }

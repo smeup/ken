@@ -68,25 +68,6 @@ class SmeupLabel extends StatefulWidget
       this.title = ''})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
-
-    this.model = SmeupLabelModel(
-        id: id,
-        type: type,
-        valueColName: valueColName,
-        padding: padding,
-        fontSize: fontSize,
-        align: align,
-        fontbold: fontbold,
-        width: width,
-        height: height,
-        colorColName: colorColName,
-        backColor: backColor,
-        fontColor: fontColor,
-        iconData: iconData,
-        iconColname: iconColname,
-        colorFontColName: colorFontColName,
-        iconSize: iconSize,
-        title: title);
   }
 
   @override
@@ -136,7 +117,7 @@ class _SmeupLabelState extends State<SmeupLabel>
   @override
   void initState() {
     _model = widget.model;
-    widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
 

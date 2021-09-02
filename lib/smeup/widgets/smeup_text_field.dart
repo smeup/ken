@@ -73,22 +73,6 @@ class SmeupTextField extends StatefulWidget
       })
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
-
-    this.model = SmeupTextFieldModel(
-        id: id,
-        type: type,
-        backColor: backColor,
-        fontsize: fontsize,
-        label: label,
-        width: width,
-        height: height,
-        padding: padding,
-        showborder: showborder,
-        showSubmit: showSubmit,
-        showUnderline: showUnderline,
-        autoFocus: autoFocus,
-        valueField: valueField,
-        keyboard: keyboard);
   }
 
   @override
@@ -132,7 +116,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
   @override
   void initState() {
     _model = widget.model;
-    widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
 
