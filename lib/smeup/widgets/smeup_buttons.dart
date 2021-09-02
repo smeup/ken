@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_treeview/tree_view.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_buttons_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
@@ -119,7 +118,7 @@ class SmeupButtons extends StatefulWidget
     iconData = m.iconData;
     iconSize = m.iconSize;
 
-    // mettere funzione del mixin di conversione (esempio data)
+    // change data format
     var workData = formatDataFields(m);
 
     // set the widget data

@@ -110,7 +110,7 @@ class SmeupLabel extends StatefulWidget
     iconSize = m.iconSize;
     title = m.title;
 
-    // mettere funzione del mixin di conversione (esempio data)
+    // change data format
     var workData = formatDataFields(m);
 
     // set the widget data

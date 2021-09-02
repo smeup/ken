@@ -3,7 +3,7 @@ class SmeupDao {
     switch (model.type) {
       case 'LAB':
         var newList = List.empty(growable: true);
-        (model.clientData as List).forEach((element) {
+        (model.data as List).forEach((element) {
           newList.add({
             'value': element,
           });
@@ -18,18 +18,18 @@ class SmeupDao {
             return {
               "rows": [
                 {
-                  'value': model.clientData,
+                  'value': model.data,
                 }
               ],
             };
 
           default:
-            return model.clientData;
+            return model.data;
         }
         break;
 
       default:
-        return {"rows": model.clientData};
+        return {"rows": model.data};
     }
   }
 }

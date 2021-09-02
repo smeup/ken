@@ -30,7 +30,7 @@ class SmeupTextField extends StatefulWidget
   double height;
   double padding;
   bool showborder;
-  dynamic clientData;
+  String data;
   bool showUnderline;
   bool autoFocus;
   String id;
@@ -60,7 +60,7 @@ class SmeupTextField extends StatefulWidget
       this.height = SmeupTextFieldModel.defaultHeight,
       this.padding = SmeupTextFieldModel.defaultPadding,
       this.showborder = SmeupTextFieldModel.defaultShowBorder,
-      this.clientData,
+      this.data,
       this.showUnderline = SmeupTextFieldModel.defaultShowUnderline,
       this.autoFocus = SmeupTextFieldModel.defaultAutoFocus,
       this.valueField = SmeupTextFieldModel.defaultValueField,
@@ -85,7 +85,6 @@ class SmeupTextField extends StatefulWidget
         padding: padding,
         showborder: showborder,
         showSubmit: showSubmit,
-        clientData: clientData,
         showUnderline: showUnderline,
         autoFocus: autoFocus,
         valueField: valueField,
@@ -108,11 +107,20 @@ class SmeupTextField extends StatefulWidget
     padding = m.padding;
     showborder = m.showborder;
     showSubmit = m.showSubmit;
-    clientData = m.clientData;
     showUnderline = m.showUnderline;
     autoFocus = m.autoFocus;
     valueField = m.valueField;
     keyboard = m.keyboard;
+
+    // change data format
+    var workData = formatDataFields(m);
+
+    // set the widget data
+    if (workData != null &&
+        (workData['rows'] as List).length > 0 &&
+        workData['rows'][0][m.valueField] != null) {
+      data = workData['rows'][0][m.valueField].toString();
+    }
   }
 }
 
@@ -155,33 +163,9 @@ class _SmeupTextFieldState extends State<SmeupTextField>
       setDataLoad(widget.id, true);
     }
 
-    // if (!hasData(_model)) {
-    //   return getFunErrorResponse(context, _model);
-    // }
-
     Widget textField;
 
-    // String valueField = _model.optionsDefault == null ||
-    //         _model.optionsDefault['valueField'] == null
-    //     ? 'value'
-    //     : _model.optionsDefault['valueField'];
-
-    String value = '';
-    if (_model.data != null) {
-      value = _model.data['rows'][0][widget.valueField].toString();
-
-      // final List cols = _model.data['columns'];
-      // if (cols != null) {
-      //   final col = cols.firstWhere(
-      //       (element) => element['code'] == widget.valueField,
-      //       orElse: () => null);
-      //   if (col['ogg'] == 'D8*YYMD') {
-      //     value = DateFormat("dd/MM/yyyy").format(DateTime.tryParse(value));
-      //   }
-      // }
-    }
-
-    SmeupDynamismService.variables[widget.id] = value;
+    SmeupDynamismService.variables[widget.id] = widget.data;
 
     Color underlineColor = widget.showUnderline
         ? SmeupOptions.theme.primaryColor
@@ -201,7 +185,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
           inputFormatters: widget.inputFormatters,
           autofocus: widget.autoFocus,
           maxLines: 1,
-          initialValue: value,
+          initialValue: widget.data,
           key: Key('${widget.id}_text'),
           autocorrect: false,
           textCapitalization: TextCapitalization.none,

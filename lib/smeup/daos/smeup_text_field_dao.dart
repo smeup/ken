@@ -16,9 +16,9 @@ class SmeupTextFieldDao extends SmeupDao {
       model.data = smeupServiceResponse.result.data;
     }
 
-    if (model.clientData != null) {
-      model.data = SmeupDao.getClientDataStructure(model);
-    }
+    // if (model.clientData != null) {
+    //   model.data = SmeupDao.getClientDataStructure(model);
+    // }
 
     SmeupDataService.decrementDataFetch(model.id);
   }
