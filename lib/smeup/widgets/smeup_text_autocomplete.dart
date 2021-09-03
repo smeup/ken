@@ -43,6 +43,7 @@ class SmeupTextAutocomplete extends StatefulWidget
   Function clientValidator;
   Function clientOnSave;
   Function clientOnChange;
+  Function clientOnSelected;
   TextInputType keyboard;
   List<TextInputFormatter> inputFormatters;
 
@@ -61,13 +62,14 @@ class SmeupTextAutocomplete extends StatefulWidget
       this.width,
       this.height,
       this.padding,
-      this.showborder,
+      this.showborder = false,
       this.data,
-      this.showUnderline,
-      this.autoFocus,
+      this.showUnderline = false,
+      this.autoFocus = false,
       this.clientValidator,
       this.clientOnSave,
       this.clientOnChange,
+      this.clientOnSelected,
       this.keyboard,
       this.inputFormatters,
       this.defaultValue,
@@ -251,8 +253,9 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                   onTap: () {
                     setState(() {
                       SmeupDynamismService.variables[widget.defaultValue] = '';
-                      SmeupDynamismService.run(_model.dynamisms, context,
-                          'change', widget.scaffoldKey);
+                      if (_model != null)
+                        SmeupDynamismService.run(_model.dynamisms, context,
+                            'change', widget.scaffoldKey);
                     });
                   },
                 ),
@@ -278,8 +281,11 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                           onSelected(option['value']);
                           SmeupDynamismService.variables[widget.id] =
                               option['code'];
-                          SmeupDynamismService.run(_model.dynamisms, context,
-                              'change', widget.scaffoldKey);
+                          if (_model != null)
+                            SmeupDynamismService.run(_model.dynamisms, context,
+                                'change', widget.scaffoldKey);
+                          if (widget.clientOnSelected != null)
+                            widget.clientOnSelected(option);
                         },
                         child: ListTile(
                           title: Text(option['value']),
