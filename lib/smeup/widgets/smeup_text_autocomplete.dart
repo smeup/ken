@@ -217,7 +217,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                   inputFormatters: widget.inputFormatters,
                   autofocus: widget.autoFocus,
                   maxLines: 1,
-                  key: ValueKey(widget.id),
+                  key: Key('${widget.id}_text'),
                   autocorrect: false,
                   textCapitalization: TextCapitalization.none,
                   textInputAction: TextInputAction.next,
