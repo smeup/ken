@@ -25,10 +25,11 @@ class SmeupImage extends StatefulWidget
   double leftPadding;
   double topPadding;
   double bottomPadding;
-  dynamic clientData;
+  String data;
   String title;
   String id;
   String type;
+  bool isRemote;
 
   SmeupImage.withController(
     this.model,
@@ -48,23 +49,11 @@ class SmeupImage extends StatefulWidget
       this.leftPadding = SmeupImageModel.defaultPadding,
       this.topPadding = SmeupImageModel.defaultPadding,
       this.bottomPadding = SmeupImageModel.defaultPadding,
+      this.isRemote = true,
       title = '',
-      this.clientData})
+      this.data})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
-
-    this.model = SmeupImageModel(
-        id: id,
-        type: type,
-        height: height,
-        padding: padding,
-        rightPadding: rightPadding,
-        leftPadding: leftPadding,
-        topPadding: topPadding,
-        width: width,
-        bottomPadding: bottomPadding,
-        clientData: clientData,
-        title: title);
   }
 
   @override
@@ -77,9 +66,29 @@ class SmeupImage extends StatefulWidget
     leftPadding = m.leftPadding;
     topPadding = m.topPadding;
     width = m.width;
+    height = m.height;
     bottomPadding = m.bottomPadding;
-    clientData = m.clientData;
     title = m.title;
+
+    // set the widget data
+    isRemote = true;
+    if (m.data != null &&
+        (m.data['rows'] as List).length > 0 &&
+        m.data['rows'][0]['code'] != null) {
+      String code = m.data['rows'][0]['code'].toString();
+      List<String> split = code.split(';');
+      if (split.length == 3) {
+        String url = split.getRange(2, split.length).join('');
+        data = url;
+        if (split[0].toString() == 'J1' && split[1].toString() == 'URL')
+          isRemote = true;
+        else
+          isRemote = false;
+      } else {
+        isRemote = true;
+        data = code;
+      }
+    }
   }
 
   @override
@@ -125,22 +134,22 @@ class _SmeupImageState extends State<SmeupImage>
       setDataLoad(widget.id, true);
     }
 
-    if (_model.data == null) {
-      return getFunErrorResponse(context, _model);
-    }
+    // if (_model.data == null) {
+    //   return getFunErrorResponse(context, _model);
+    // }
 
     Widget children;
 
     var image;
-    if (_model.data['imageLocalPath'] != null) {
-      image = Image.asset(
-        _model.data['imageLocalPath'],
+    if (widget.isRemote) {
+      image = Image.network(
+        widget.data,
         height: widget.height,
         width: widget.width,
       );
     } else {
-      image = Image.network(
-        _model.data['imageRemotePath'],
+      image = Image.asset(
+        widget.data,
         height: widget.height,
         width: widget.width,
       );
