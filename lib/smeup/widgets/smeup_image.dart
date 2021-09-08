@@ -39,7 +39,7 @@ class SmeupImage extends StatefulWidget
     runControllerActivities(model);
   }
 
-  SmeupImage(this.scaffoldKey, this.formKey,
+  SmeupImage(this.scaffoldKey, this.formKey, this.data,
       {this.id = '',
       this.type = 'IMG',
       this.width = SmeupImageModel.defaultWidth,
@@ -50,8 +50,7 @@ class SmeupImage extends StatefulWidget
       this.topPadding = SmeupImageModel.defaultPadding,
       this.bottomPadding = SmeupImageModel.defaultPadding,
       this.isRemote = true,
-      title = '',
-      this.data})
+      title = ''})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
   }
@@ -130,7 +129,7 @@ class _SmeupImageState extends State<SmeupImage>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      await SmeupImageDao.getData(_model);
+      if (_model != null) await SmeupImageDao.getData(_model);
       setDataLoad(widget.id, true);
     }
 

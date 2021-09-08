@@ -15,8 +15,7 @@ import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin
 class SmeupBox extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
-  final Function onServerPressed;
-  final Function onClientPressed;
+  final Function onItemTap;
   final Function onRefresh;
   final Color cardColor;
   final Color fontColor;
@@ -39,8 +38,7 @@ class SmeupBox extends StatefulWidget {
       this.dynamisms,
       this.showLoader,
       this.layout,
-      this.onServerPressed,
-      this.onClientPressed,
+      this.onItemTap,
       this.cardColor,
       this.fontColor,
       this.width,
@@ -82,7 +80,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
   Future<SmeupWidgetBuilderResponse> _getBoxComponent() async {
     Widget box;
 
-    switch (widget.layout) {
+    switch (widget.layout ?? '') {
 
       // layouts Smeup
       case '1':
@@ -110,9 +108,11 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     }
 
     // bool dismissEnabled = false;
-    dynamic deleteDynamism = (widget.dynamisms as List<dynamic>).firstWhere(
-        (element) => element['event'] == 'delete',
-        orElse: () => null);
+    dynamic deleteDynamism;
+    if (widget.dynamisms != null)
+      deleteDynamism = (widget.dynamisms as List<dynamic>).firstWhere(
+          (element) => element['event'] == 'delete',
+          orElse: () => null);
 
     // if (deleteDynamism != null) {
     //   dismissEnabled = true;
@@ -690,7 +690,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                   : Theme.of(context).scaffoldBackgroundColor,
               iconData: int.tryParse(buttonIcon) ?? 0,
               data: buttonText,
-              onClientPressed: () {
+              clientOnPressed: () {
                 //SmeupDynamismService.storeDynamicVariables(_child['content']);
 
                 List<dynamic> dynamisms = [
@@ -713,15 +713,8 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
   }
 
   void _manageTap(data) {
-    if (widget.onClientPressed != null) {
-      // widget.dynamisms = [
-      //   {"event": "click", "exec": ""}
-      // ];
-      //SmeupDynamismService.storeDynamicVariables(data);
-      widget.onClientPressed();
-    } else {
-      //SmeupDynamismService.storeDynamicVariables(data);
-      widget.onServerPressed();
+    if (widget.onItemTap != null) {
+      widget.onItemTap(data);
     }
   }
 

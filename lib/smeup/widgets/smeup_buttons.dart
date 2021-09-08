@@ -159,7 +159,7 @@ class SmeupButtonsState extends State<SmeupButtons>
   /// Buttons' structure:
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      await SmeupButtonsDao.getData(_model);
+      if (_model != null) await SmeupButtonsDao.getData(_model);
       setDataLoad(widget.id, true);
     }
 
@@ -207,7 +207,7 @@ class SmeupButtonsState extends State<SmeupButtons>
           //data: buttonData,
           icon: null,
           isBusy: _isBusy,
-          onServerPressed: () {
+          clientOnPressed: () {
             runDynamism(_model, context, buttonData);
           });
 

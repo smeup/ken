@@ -22,8 +22,7 @@ class SmeupButton extends StatelessWidget {
   final int iconData;
 
   final IconData icon;
-  final Function onServerPressed;
-  final Function onClientPressed;
+  final Function clientOnPressed;
 
   //final dynamic data;
   final bool isBusy;
@@ -53,8 +52,7 @@ class SmeupButton extends StatelessWidget {
       this.iconSize = SmeupButtonsModel.defaultIconSize,
       this.buttonIndex,
       this.icon,
-      this.onServerPressed,
-      this.onClientPressed,
+      this.clientOnPressed,
       //this.data,
       this.isBusy = false});
 
@@ -87,8 +85,7 @@ class SmeupButton extends StatelessWidget {
                 side: BorderSide(
                     width: borderColor == null ? 2 : 2, color: _borderColor)),
           ),
-          onPressed:
-              onClientPressed != null ? onClientPressed : onServerPressed,
+          onPressed: clientOnPressed,
           child: Column(mainAxisAlignment: position, children: <Widget>[
             isBusy
                 ? CircularProgressIndicator(

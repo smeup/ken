@@ -38,18 +38,20 @@ class SmeupListBox extends StatefulWidget
   int landscapeColumns;
   String id;
   String type;
-  bool dismissEnabled = true;
+  bool dismissEnabled = false;
   double fontsize;
+  dynamic data;
+  bool showLoader = false;
 
   // dynamisms functions
-  Function onClientPressed;
+  Function clientOnItemTap;
 
   SmeupListBox.withController(this.model, this.scaffoldKey, this.formKey)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model);
   }
 
-  SmeupListBox(this.scaffoldKey, this.formKey,
+  SmeupListBox(this.scaffoldKey, this.formKey, this.data,
       {this.id = '',
       this.type = 'BOX',
       layout,
@@ -57,7 +59,7 @@ class SmeupListBox extends StatefulWidget
       this.height = SmeupListBoxModel.defaultHeight,
       this.listHeight = SmeupListBoxModel.defaultHeight,
       this.fontsize = SmeupListBoxModel.defaultFontsize,
-      this.orientation,
+      this.orientation = SmeupListBoxModel.defaultOrientation,
       this.padding = SmeupListBoxModel.defaultPadding,
       this.paddingRight = SmeupListBoxModel.defaultPadding,
       this.paddingLeft = SmeupListBoxModel.defaultPadding,
@@ -65,27 +67,11 @@ class SmeupListBox extends StatefulWidget
       this.portraitColumns = SmeupListBoxModel.defaultPortraitColumns,
       this.landscapeColumns = SmeupListBoxModel.defaultLandscapeColumns,
       title = '',
-      this.onClientPressed,
-      this.dismissEnabled = true})
+      showLoader: false,
+      this.clientOnItemTap,
+      this.dismissEnabled = false})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
-
-    this.model = SmeupListBoxModel(
-        id: id,
-        type: type,
-        layout: layout,
-        width: width,
-        height: height,
-        listHeight: listHeight,
-        fontsize: fontsize,
-        orientation: orientation,
-        padding: padding,
-        paddingRight: paddingRight,
-        paddingLeft: paddingLeft,
-        listType: listType,
-        portraitColumns: portraitColumns,
-        landscapeColumns: landscapeColumns,
-        title: title);
   }
 
   @override
@@ -106,6 +92,7 @@ class SmeupListBox extends StatefulWidget
     portraitColumns = m.portraitColumns;
     landscapeColumns = m.landscapeColumns;
     title = m.title;
+    showLoader = m.showLoader;
 
     dynamic deleteDynamism = (m.dynamisms as List<dynamic>).firstWhere(
         (element) => element['event'] == 'delete',
@@ -116,6 +103,10 @@ class SmeupListBox extends StatefulWidget
     } else {
       dismissEnabled = false;
     }
+
+    // change data format
+    // set the widget data
+    data = formatDataFields(m);
   }
 
   @override
@@ -166,11 +157,11 @@ class _SmeupListBoxState extends State<SmeupListBox>
   /// define the structure ...
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      await SmeupListBoxDao.getData(_model);
+      if (_model != null) await SmeupListBoxDao.getData(_model);
       setDataLoad(widget.id, true);
     }
 
-    if (_model.data == null) {
+    if (widget.data == null) {
       return getFunErrorResponse(context, _model);
     }
 
@@ -270,11 +261,11 @@ class _SmeupListBoxState extends State<SmeupListBox>
             itemHeight: widget.height,
             itemCount: cells.length,
             onItemTapCallback: (index) {
-              if (widget.onClientPressed != null) {
-                widget.onClientPressed();
-              } else {
-                (cells[index] as SmeupBox).onServerPressed();
-              }
+              // if (widget.clientOnItemTap != null) {
+              //   widget.clientOnItemTap();
+              // } else {
+              (cells[index] as SmeupBox).onItemTap();
+              //}
             },
             child: ListWheelScrollView.useDelegate(
               physics: BouncingScrollPhysics(
@@ -307,32 +298,23 @@ class _SmeupListBoxState extends State<SmeupListBox>
   List<Widget> _getCells() {
     final cells = List<Widget>.empty(growable: true);
 
-    _model.data['rows'].forEach((dataElement) {
-      //var boxModel = SmeupBoxModel(
-      //layout: widget.layout,
-      //columns: _model.data['columns'],
-      //height: widget.height,
-      //width: widget.width,
-      //title: widget.title,
-      //clientRow: dataElement
-      //);
-
+    widget.data['rows'].forEach((dataElement) {
       final cell = SmeupBox(widget.scaffoldKey, widget.formKey,
           onRefresh: _refreshList,
-          showLoader: _model.showLoader,
+          showLoader: widget.showLoader,
           id: widget.id,
           layout: widget.layout,
-          columns: _model.data['columns'],
+          columns: widget.data['columns'],
           data: dataElement,
-          dynamisms: _model.dynamisms,
+          dynamisms: _model?.dynamisms,
           height: widget.height,
           width: widget.width,
-          dismissEnabled: widget.dismissEnabled,
-          onClientPressed: widget.onClientPressed, onServerPressed: () {
-        //SmeupDynamismService.storeDynamicVariables(boxModel.data);
-        SmeupDynamismService.storeDynamicVariables(dataElement);
-        SmeupDynamismService.run(
-            _model.dynamisms, context, 'click', widget.scaffoldKey);
+          dismissEnabled: widget.dismissEnabled, onItemTap: (dynamic data) {
+        if (widget.clientOnItemTap != null) widget.clientOnItemTap(data);
+        SmeupDynamismService.storeDynamicVariables(data);
+        if (_model != null)
+          SmeupDynamismService.run(
+              _model.dynamisms, context, 'click', widget.scaffoldKey);
       });
 
       cells.add(cell);

@@ -156,7 +156,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      await SmeupTextAutocompleteDao.getData(_model);
+      if (_model != null) await SmeupTextAutocompleteDao.getData(_model);
       _options = _model.data['rows'];
       setDataLoad(widget.id, true);
     }

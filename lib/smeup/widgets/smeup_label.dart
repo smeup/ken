@@ -47,10 +47,9 @@ class SmeupLabel extends StatefulWidget
     runControllerActivities(model);
   }
 
-  SmeupLabel(this.scaffoldKey, this.formKey,
+  SmeupLabel(this.scaffoldKey, this.formKey, this.data,
       {this.id = '',
       this.type = 'LAB',
-      this.data,
       this.valueColName = '',
       this.padding = SmeupLabelModel.defaultPadding,
       this.fontSize = SmeupLabelModel.defaultFontSize,
@@ -156,7 +155,7 @@ class _SmeupLabelState extends State<SmeupLabel>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      await SmeupLabelDao.getData(_model);
+      if (_model != null) await SmeupLabelDao.getData(_model);
       setDataLoad(widget.id, true);
     }
 

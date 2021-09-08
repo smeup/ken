@@ -143,7 +143,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      await SmeupTextFieldDao.getData(_model);
+      if (_model != null) await SmeupTextFieldDao.getData(_model);
       setDataLoad(widget.id, true);
     }
 
@@ -182,8 +182,9 @@ class _SmeupTextFieldState extends State<SmeupTextField>
           onChanged: (value) {
             if (widget.clientOnChange != null) widget.clientOnChange(value);
             SmeupDynamismService.variables[widget.id] = value;
-            SmeupDynamismService.run(
-                _model.dynamisms, context, 'change', widget.scaffoldKey);
+            if (_model != null)
+              SmeupDynamismService.run(
+                  _model.dynamisms, context, 'change', widget.scaffoldKey);
           },
           decoration: InputDecoration(
             labelStyle: TextStyle(
