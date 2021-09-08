@@ -94,9 +94,11 @@ class SmeupListBox extends StatefulWidget
     title = m.title;
     showLoader = m.showLoader;
 
-    dynamic deleteDynamism = (m.dynamisms as List<dynamic>).firstWhere(
-        (element) => element['event'] == 'delete',
-        orElse: () => null);
+    dynamic deleteDynamism;
+    if (m.dynamisms != null)
+      deleteDynamism = (m.dynamisms as List<dynamic>).firstWhere(
+          (element) => element['event'] == 'delete',
+          orElse: () => null);
 
     if (deleteDynamism != null) {
       dismissEnabled = true;
