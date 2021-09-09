@@ -96,6 +96,13 @@ class SmeupTextField extends StatefulWidget
     valueField = m.valueField;
     keyboard = m.keyboard;
 
+    data = treatData(m);
+  }
+
+  @override
+  dynamic treatData(SmeupModel model) {
+    SmeupTextFieldModel m = model;
+
     // change data format
     var workData = formatDataFields(m);
 
@@ -103,7 +110,9 @@ class SmeupTextField extends StatefulWidget
     if (workData != null &&
         (workData['rows'] as List).length > 0 &&
         workData['rows'][0][m.valueField] != null) {
-      data = workData['rows'][0][m.valueField].toString();
+      return workData['rows'][0][m.valueField].toString();
+    } else {
+      return m.data;
     }
   }
 }
@@ -112,10 +121,12 @@ class _SmeupTextFieldState extends State<SmeupTextField>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
   SmeupTextFieldModel _model;
+  dynamic _data;
 
   @override
   void initState() {
     _model = widget.model;
+    _data = widget.data;
     if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
@@ -143,13 +154,17 @@ class _SmeupTextFieldState extends State<SmeupTextField>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      if (_model != null) await SmeupTextFieldDao.getData(_model);
+      if (_model != null) {
+        await SmeupTextFieldDao.getData(_model);
+        _data = widget.treatData(_model);
+      }
+
       setDataLoad(widget.id, true);
     }
 
     Widget textField;
 
-    SmeupDynamismService.variables[widget.id] = widget.data;
+    SmeupDynamismService.variables[widget.id] = _data;
 
     Color underlineColor = widget.showUnderline
         ? SmeupOptions.theme.primaryColor
@@ -169,7 +184,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
           inputFormatters: widget.inputFormatters,
           autofocus: widget.autoFocus,
           maxLines: 1,
-          initialValue: widget.data,
+          initialValue: _data,
           key: Key('${widget.id}_text'),
           autocorrect: false,
           textCapitalization: TextCapitalization.none,

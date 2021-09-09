@@ -96,6 +96,13 @@ class SmeupTextAutocomplete extends StatefulWidget
     defaultValue = m.defaultValue;
     valueField = m.valueField;
 
+    data = treatData(m);
+  }
+
+  @override
+  dynamic treatData(SmeupModel model) {
+    SmeupTextAutocompleteModel m = model;
+
     // change data format
     var workData = formatDataFields(m);
 
@@ -109,7 +116,9 @@ class SmeupTextAutocomplete extends StatefulWidget
           'value': element['value'].toString()
         });
       }
-      data = newList;
+      return newList;
+    } else {
+      return model.data;
     }
   }
 
@@ -121,14 +130,16 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
   SmeupTextAutocompleteModel _model;
+  dynamic _data;
 
   List<dynamic> _options;
 
   @override
   void initState() {
     _model = widget.model;
+    _data = widget.data;
     if (_model != null) widgetLoadType = _model.widgetLoadType;
-    _options = widget.data == null ? [] : widget.data;
+    _options = _data == null ? [] : _data;
     super.initState();
   }
 
@@ -156,12 +167,16 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      if (_model != null) await SmeupTextAutocompleteDao.getData(_model);
-      _options = _model.data['rows'];
+      if (_model != null) {
+        await SmeupTextAutocompleteDao.getData(_model);
+        _data = widget.treatData(_model);
+        _options = _model.data['rows'];
+      }
+
       setDataLoad(widget.id, true);
     }
 
-    // if (widget.data == null) {
+    // if (_data == null) {
     //   return getFunErrorResponse(context, _model);
     // }
 
@@ -197,8 +212,8 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                 SmeupDynamismService.variables[widget.defaultValue] ?? '';
             SmeupDynamismService.variables[widget.id] = code;
 
-            if (code.isNotEmpty && widget.data != null) {
-              var currel = widget.data.firstWhere(
+            if (code.isNotEmpty && _data != null) {
+              var currel = _data.firstWhere(
                   (element) => element['code'].toString() == code,
                   orElse: () => null);
               if (currel != null) {

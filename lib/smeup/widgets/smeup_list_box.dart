@@ -106,9 +106,14 @@ class SmeupListBox extends StatefulWidget
       dismissEnabled = false;
     }
 
+    data = treatData(m);
+  }
+
+  @override
+  dynamic treatData(SmeupModel model) {
     // change data format
     // set the widget data
-    data = formatDataFields(m);
+    return formatDataFields(model);
   }
 
   @override
@@ -120,11 +125,14 @@ class _SmeupListBoxState extends State<SmeupListBox>
     implements SmeupWidgetStateInterface {
   List<Widget> cells;
   SmeupListBoxModel _model;
+  dynamic _data;
+
   final _scrollController = FixedExtentScrollController();
 
   @override
   void initState() {
     _model = widget.model;
+    _data = widget.data;
     if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
@@ -159,11 +167,15 @@ class _SmeupListBoxState extends State<SmeupListBox>
   /// define the structure ...
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      if (_model != null) await SmeupListBoxDao.getData(_model);
+      if (_model != null) {
+        await SmeupListBoxDao.getData(_model);
+        _data = widget.treatData(_model);
+      }
+
       setDataLoad(widget.id, true);
     }
 
-    if (widget.data == null) {
+    if (_data == null) {
       return getFunErrorResponse(context, _model);
     }
 
@@ -300,13 +312,13 @@ class _SmeupListBoxState extends State<SmeupListBox>
   List<Widget> _getCells() {
     final cells = List<Widget>.empty(growable: true);
 
-    widget.data['rows'].forEach((dataElement) {
+    _data['rows'].forEach((dataElement) {
       final cell = SmeupBox(widget.scaffoldKey, widget.formKey,
           onRefresh: _refreshList,
           showLoader: widget.showLoader,
           id: widget.id,
           layout: widget.layout,
-          columns: widget.data['columns'],
+          columns: _data['columns'],
           data: dataElement,
           dynamisms: _model?.dynamisms,
           height: widget.height,

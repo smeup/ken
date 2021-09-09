@@ -69,8 +69,18 @@ class SmeupImage extends StatefulWidget
     bottomPadding = m.bottomPadding;
     title = m.title;
 
+    var res = treatData(m);
+    data = res['data'];
+    isRemote = res['isRemote'];
+  }
+
+  @override
+  dynamic treatData(SmeupModel model) {
+    SmeupImageModel m = model;
+
     // set the widget data
-    isRemote = true;
+    bool isRemote = true;
+    dynamic data;
     if (m.data != null &&
         (m.data['rows'] as List).length > 0 &&
         m.data['rows'][0]['code'] != null) {
@@ -88,6 +98,8 @@ class SmeupImage extends StatefulWidget
         data = code;
       }
     }
+
+    return {"data": data, "isRemote": isRemote};
   }
 
   @override
@@ -98,10 +110,12 @@ class _SmeupImageState extends State<SmeupImage>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
   SmeupImageModel _model;
+  dynamic _data;
 
   @override
   void initState() {
     _model = widget.model;
+    _data = widget.data;
     if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
@@ -129,7 +143,14 @@ class _SmeupImageState extends State<SmeupImage>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      if (_model != null) await SmeupImageDao.getData(_model);
+      if (_model != null) {
+        await SmeupImageDao.getData(_model);
+        var res = widget.treatData(_model);
+        _data = res['data'];
+        //isRemote = res['isRemote'];
+
+      }
+
       setDataLoad(widget.id, true);
     }
 
@@ -142,13 +163,13 @@ class _SmeupImageState extends State<SmeupImage>
     var image;
     if (widget.isRemote) {
       image = Image.network(
-        widget.data,
+        _data,
         height: widget.height,
         width: widget.width,
       );
     } else {
       image = Image.asset(
-        widget.data,
+        _data,
         height: widget.height,
         width: widget.width,
       );

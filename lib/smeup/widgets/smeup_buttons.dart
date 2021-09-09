@@ -98,6 +98,13 @@ class SmeupButtons extends StatefulWidget
     iconData = m.iconData;
     iconSize = m.iconSize;
 
+    data = treatData(m);
+  }
+
+  @override
+  dynamic treatData(SmeupModel model) {
+    SmeupButtonsModel m = model;
+
     // change data format
     var workData = formatDataFields(m);
 
@@ -108,7 +115,9 @@ class SmeupButtons extends StatefulWidget
         final element = workData['rows'][i];
         newList.add(element[m.valueField].toString());
       }
-      data = newList;
+      return newList;
+    } else {
+      return model.data;
     }
   }
 
@@ -121,11 +130,13 @@ class SmeupButtonsState extends State<SmeupButtons>
     implements SmeupWidgetStateInterface {
   bool _isBusy;
   SmeupButtonsModel _model;
+  dynamic _data;
 
   @override
   void initState() {
     _isBusy = false;
     _model = widget.model;
+    _data = widget.data;
     if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
@@ -159,7 +170,11 @@ class SmeupButtonsState extends State<SmeupButtons>
   /// Buttons' structure:
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      if (_model != null) await SmeupButtonsDao.getData(_model);
+      if (_model != null) {
+        await SmeupButtonsDao.getData(_model);
+        _data = widget.treatData(_model);
+      }
+
       setDataLoad(widget.id, true);
     }
 
@@ -170,7 +185,7 @@ class SmeupButtonsState extends State<SmeupButtons>
     var buttons = List<SmeupButton>.empty(growable: true);
 
     int buttonIndex = 0;
-    widget.data.forEach((buttonData) {
+    _data.forEach((buttonData) {
       // dynamic _buttonData = buttonData;
       //SmeupButtonsModel _modelClone = _model;
 
