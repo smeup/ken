@@ -67,9 +67,12 @@ class SmeupNavigationAppBar extends AppBar {
                         child: Padding(
                           padding: const EdgeInsets.only(right: 18.0),
                           //child: Icon(Icons.home),
-                          child: Icon(IconData(
-                              int.tryParse(button['icon']) ?? 0,
-                              fontFamily: 'MaterialIcons')),
+                          child: Icon(
+                            IconData(int.tryParse(button['icon']) ?? 0,
+                                fontFamily: 'MaterialIcons'),
+                            key: Key(
+                                'appbar_icon_${int.tryParse(button['icon']) ?? 0}'),
+                          ),
                         ),
                         onTap: () async {
                           SmeupFun smeupFun = SmeupFun(button);
