@@ -30,7 +30,7 @@ class SmeupTextAutocomplete extends StatefulWidget
   double height;
   double padding;
   bool showborder;
-  dynamic clientData;
+  List<dynamic> data;
   bool showUnderline;
   bool autoFocus;
   String title;
@@ -43,6 +43,7 @@ class SmeupTextAutocomplete extends StatefulWidget
   Function clientValidator;
   Function clientOnSave;
   Function clientOnChange;
+  Function clientOnSelected;
   TextInputType keyboard;
   List<TextInputFormatter> inputFormatters;
 
@@ -61,36 +62,20 @@ class SmeupTextAutocomplete extends StatefulWidget
       this.width,
       this.height,
       this.padding,
-      this.showborder,
-      this.clientData,
-      this.showUnderline,
-      this.autoFocus,
+      this.showborder = false,
+      this.data,
+      this.showUnderline = false,
+      this.autoFocus = false,
       this.clientValidator,
       this.clientOnSave,
       this.clientOnChange,
+      this.clientOnSelected,
       this.keyboard,
       this.inputFormatters,
       this.defaultValue,
       this.valueField})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
-
-    model = SmeupTextAutocompleteModel(
-        id: id,
-        type: type,
-        backColor: backColor,
-        fontsize: fontsize,
-        label: label,
-        width: width,
-        height: height,
-        padding: padding,
-        showborder: showborder,
-        title: title,
-        clientData: clientData,
-        showUnderline: showUnderline,
-        autoFocus: autoFocus,
-        defaultValue: defaultValue,
-        valueField: valueField);
   }
 
   @override
@@ -106,11 +91,35 @@ class SmeupTextAutocomplete extends StatefulWidget
     padding = m.padding;
     showborder = m.showborder;
     title = m.title;
-    clientData = m.clientData;
     showUnderline = m.showUnderline;
     autoFocus = m.autoFocus;
     defaultValue = m.defaultValue;
     valueField = m.valueField;
+
+    data = treatData(m);
+  }
+
+  @override
+  dynamic treatData(SmeupModel model) {
+    SmeupTextAutocompleteModel m = model;
+
+    // change data format
+    var workData = formatDataFields(m);
+
+    // set the widget data
+    if (workData != null) {
+      var newList = List<dynamic>.empty(growable: true);
+      for (var i = 0; i < (workData['rows'] as List).length; i++) {
+        final element = workData['rows'][i];
+        newList.add({
+          'code': element['code'].toString(),
+          'value': element['value'].toString()
+        });
+      }
+      return newList;
+    } else {
+      return model.data;
+    }
   }
 
   @override
@@ -121,14 +130,16 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
   SmeupTextAutocompleteModel _model;
+  dynamic _data;
 
   List<dynamic> _options;
 
   @override
   void initState() {
     _model = widget.model;
-    widgetLoadType = _model.widgetLoadType;
-    _options = _model.data == null ? [] : _model.data['rows'];
+    _data = widget.data;
+    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    _options = _data == null ? [] : _data;
     super.initState();
   }
 
@@ -140,13 +151,8 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
 
   @override
   Widget build(BuildContext context) {
-    Widget autocomplete = runBuild(
-        context,
-        widget.id,
-        widget.type,
-        widget.scaffoldKey,
-        getInitialdataLoaded(widget.isWithController, _model),
-        notifierFunction: () {
+    Widget autocomplete = runBuild(context, widget.id, widget.type,
+        widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
@@ -161,14 +167,18 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      await SmeupTextAutocompleteDao.getData(_model);
-      _options = _model.data['rows'];
+      if (_model != null) {
+        await SmeupTextAutocompleteDao.getData(_model);
+        _data = widget.treatData(_model);
+        _options = _model.data['rows'];
+      }
+
       setDataLoad(widget.id, true);
     }
 
-    if (!hasData(_model)) {
-      return getFunErrorResponse(context, _model);
-    }
+    // if (_data == null) {
+    //   return getFunErrorResponse(context, _model);
+    // }
 
     Widget children;
 
@@ -188,7 +198,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
         child: RawAutocomplete<dynamic>(
           optionsBuilder: (TextEditingValue textEditingValue) {
             return _options.where((dynamic option) {
-              return option['description']
+              return option['value']
                   .toString()
                   .toLowerCase()
                   .contains(textEditingValue.text.toLowerCase());
@@ -202,14 +212,12 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                 SmeupDynamismService.variables[widget.defaultValue] ?? '';
             SmeupDynamismService.variables[widget.id] = code;
 
-            if (code.isNotEmpty &&
-                _model.data != null &&
-                _model.data['rows'] != null) {
-              var currel = (_model.data['rows'] as List).firstWhere(
+            if (code.isNotEmpty && _data != null) {
+              var currel = _data.firstWhere(
                   (element) => element['code'].toString() == code,
                   orElse: () => null);
               if (currel != null) {
-                textEditingController.text = currel['description'];
+                textEditingController.text = currel['value'];
               }
             }
 
@@ -224,8 +232,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                   inputFormatters: widget.inputFormatters,
                   autofocus: widget.autoFocus,
                   maxLines: 1,
-                  //initialValue: value,
-                  key: ValueKey(widget.id),
+                  key: Key('${widget.id}_text'),
                   autocorrect: false,
                   textCapitalization: TextCapitalization.none,
                   textInputAction: TextInputAction.next,
@@ -238,9 +245,6 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                   onChanged: (value) {
                     if (widget.clientOnChange != null)
                       widget.clientOnChange(value);
-                    // SmeupDynamismService.variables[widget.id] = value;
-                    // SmeupDynamismService.run(_model.dynamisms, context,
-                    //     'change', widget.scaffoldKey);
                   },
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
@@ -264,8 +268,9 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                   onTap: () {
                     setState(() {
                       SmeupDynamismService.variables[widget.defaultValue] = '';
-                      SmeupDynamismService.run(_model.dynamisms, context,
-                          'change', widget.scaffoldKey);
+                      if (_model != null)
+                        SmeupDynamismService.run(_model.dynamisms, context,
+                            'change', widget.scaffoldKey);
                     });
                   },
                 ),
@@ -288,14 +293,17 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                       final dynamic option = options.elementAt(index);
                       return GestureDetector(
                         onTap: () {
-                          onSelected(option['description']);
+                          onSelected(option['value']);
                           SmeupDynamismService.variables[widget.id] =
                               option['code'];
-                          SmeupDynamismService.run(_model.dynamisms, context,
-                              'change', widget.scaffoldKey);
+                          if (_model != null)
+                            SmeupDynamismService.run(_model.dynamisms, context,
+                                'change', widget.scaffoldKey);
+                          if (widget.clientOnSelected != null)
+                            widget.clientOnSelected(option);
                         },
                         child: ListTile(
-                          title: Text(option['description']),
+                          title: Text(option['value']),
                         ),
                       );
                     },
@@ -306,14 +314,17 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
           },
         ));
 
-    if (_model.options != null &&
+    if (_model != null &&
+        _model.options != null &&
         _model.options['FLD']['default']['showSubmit'] != null &&
         _model.options['FLD']['default']['showSubmit']) {
       var json = {
         "type": "BTN",
-        "data": [
-          {'value': _model.options['FLD']['default']["submitLabel"]},
-        ],
+        "data": {
+          "rows": [
+            {'value': _model.options['FLD']['default']["submitLabel"]},
+          ]
+        },
         "dynamisms": _model.dynamisms
       };
       final button = SmeupButtons.withController(

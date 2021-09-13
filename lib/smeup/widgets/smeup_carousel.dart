@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
@@ -70,7 +71,7 @@ class _SmeupCarouselState extends State<SmeupCarousel>
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-              'Dati non disponibili.  (${smeupCaurouselModel.smeupFun.fun['fun']['function']})'),
+              '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupCaurouselModel.smeupFun.fun['fun']['function']})'),
           backgroundColor: SmeupOptions.theme.errorColor,
         ),
       );

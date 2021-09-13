@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_text_field_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
@@ -31,7 +30,7 @@ class SmeupTextField extends StatefulWidget
   double height;
   double padding;
   bool showborder;
-  dynamic clientData;
+  String data;
   bool showUnderline;
   bool autoFocus;
   String id;
@@ -61,7 +60,7 @@ class SmeupTextField extends StatefulWidget
       this.height = SmeupTextFieldModel.defaultHeight,
       this.padding = SmeupTextFieldModel.defaultPadding,
       this.showborder = SmeupTextFieldModel.defaultShowBorder,
-      this.clientData,
+      this.data,
       this.showUnderline = SmeupTextFieldModel.defaultShowUnderline,
       this.autoFocus = SmeupTextFieldModel.defaultAutoFocus,
       this.valueField = SmeupTextFieldModel.defaultValueField,
@@ -74,23 +73,6 @@ class SmeupTextField extends StatefulWidget
       })
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
-
-    this.model = SmeupTextFieldModel(
-        id: id,
-        type: type,
-        backColor: backColor,
-        fontsize: fontsize,
-        label: label,
-        width: width,
-        height: height,
-        padding: padding,
-        showborder: showborder,
-        showSubmit: showSubmit,
-        clientData: clientData,
-        showUnderline: showUnderline,
-        autoFocus: autoFocus,
-        valueField: valueField,
-        keyboard: keyboard);
   }
 
   @override
@@ -109,11 +91,29 @@ class SmeupTextField extends StatefulWidget
     padding = m.padding;
     showborder = m.showborder;
     showSubmit = m.showSubmit;
-    clientData = m.clientData;
     showUnderline = m.showUnderline;
     autoFocus = m.autoFocus;
     valueField = m.valueField;
     keyboard = m.keyboard;
+
+    data = treatData(m);
+  }
+
+  @override
+  dynamic treatData(SmeupModel model) {
+    SmeupTextFieldModel m = model;
+
+    // change data format
+    var workData = formatDataFields(m);
+
+    // set the widget data
+    if (workData != null &&
+        (workData['rows'] as List).length > 0 &&
+        workData['rows'][0][m.valueField] != null) {
+      return workData['rows'][0][m.valueField].toString();
+    } else {
+      return m.data;
+    }
   }
 }
 
@@ -121,11 +121,13 @@ class _SmeupTextFieldState extends State<SmeupTextField>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
   SmeupTextFieldModel _model;
+  dynamic _data;
 
   @override
   void initState() {
     _model = widget.model;
-    widgetLoadType = _model.widgetLoadType;
+    _data = widget.data;
+    if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
 
@@ -138,8 +140,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
   @override
   Widget build(BuildContext context) {
     final input = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
-        getInitialdataLoaded(widget.isWithController, _model),
-        notifierFunction: () {
+        getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
@@ -153,36 +154,17 @@ class _SmeupTextFieldState extends State<SmeupTextField>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      await SmeupTextFieldDao.getData(_model);
+      if (_model != null) {
+        await SmeupTextFieldDao.getData(_model);
+        _data = widget.treatData(_model);
+      }
+
       setDataLoad(widget.id, true);
     }
 
-    // if (!hasData(_model)) {
-    //   return getFunErrorResponse(context, _model);
-    // }
-
     Widget textField;
 
-    // String valueField = _model.optionsDefault == null ||
-    //         _model.optionsDefault['valueField'] == null
-    //     ? 'value'
-    //     : _model.optionsDefault['valueField'];
-    String value = '';
-    if (hasData(_model)) {
-      value = _model.data['rows'][0][widget.valueField].toString();
-
-      final List cols = _model.data['columns'];
-      if (cols != null) {
-        final col = cols.firstWhere(
-            (element) => element['code'] == widget.valueField,
-            orElse: () => null);
-        if (col['ogg'] == 'D8*YYMD') {
-          value = DateFormat("dd/MM/yyyy").format(DateTime.tryParse(value));
-        }
-      }
-    }
-
-    SmeupDynamismService.variables[widget.id] = value;
+    SmeupDynamismService.variables[widget.id] = _data;
 
     Color underlineColor = widget.showUnderline
         ? SmeupOptions.theme.primaryColor
@@ -202,7 +184,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
           inputFormatters: widget.inputFormatters,
           autofocus: widget.autoFocus,
           maxLines: 1,
-          initialValue: value,
+          initialValue: _data,
           key: Key('${widget.id}_text'),
           autocorrect: false,
           textCapitalization: TextCapitalization.none,
@@ -215,8 +197,9 @@ class _SmeupTextFieldState extends State<SmeupTextField>
           onChanged: (value) {
             if (widget.clientOnChange != null) widget.clientOnChange(value);
             SmeupDynamismService.variables[widget.id] = value;
-            SmeupDynamismService.run(
-                _model.dynamisms, context, 'change', widget.scaffoldKey);
+            if (_model != null)
+              SmeupDynamismService.run(
+                  _model.dynamisms, context, 'change', widget.scaffoldKey);
           },
           decoration: InputDecoration(
             labelStyle: TextStyle(
@@ -241,9 +224,11 @@ class _SmeupTextFieldState extends State<SmeupTextField>
     if (widget.showSubmit) {
       var json = {
         "type": "BTN",
-        "data": [
-          {'value': _model.options['FLD']['default']["submitLabel"]},
-        ],
+        "data": {
+          "rows": [
+            {'value': _model.options['FLD']['default']["submitLabel"]},
+          ]
+        },
         "dynamisms": _model.dynamisms
       };
       final button = SmeupButtons.withController(

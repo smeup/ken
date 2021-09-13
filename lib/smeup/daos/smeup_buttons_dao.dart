@@ -1,4 +1,4 @@
-import 'package:flutter_treeview/tree_view.dart';
+// import 'package:flutter_treeview/tree_view.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 
@@ -11,19 +11,11 @@ class SmeupButtonsDao extends SmeupDao {
           await SmeupDataService.invoke(model.smeupFun);
 
       if (!smeupServiceResponse.succeded) {
+        SmeupDataService.decrementDataFetch(model.id);
         return;
       }
 
-      model.data = smeupServiceResponse.result.data['rows'];
-      if ((model.data as List).length > 0) {
-        if (model.valueField.isNotEmpty) {
-          model.clientData = model.data[0][model.valueField];
-        } else {
-          model.clientData = (model.data[0] as Node).label;
-        }
-      }
-    } else if (model.data != null) {
-      model.clientData = model.data[0]['value'];
+      model.data = smeupServiceResponse.result.data;
     }
 
     SmeupDataService.decrementDataFetch(model.id);

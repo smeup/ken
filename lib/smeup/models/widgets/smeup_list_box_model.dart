@@ -17,6 +17,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   static const int defaultLandscapeColumns = 1;
   static const String defaultLayout = '1';
   static const double defaultFontsize = 16.0;
+  static const Axis defaultOrientation = Axis.vertical;
 
   double width;
   double height;
@@ -38,7 +39,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.listHeight = defaultHeight,
-      this.orientation,
+      this.orientation = defaultOrientation,
       this.padding = defaultPadding,
       this.paddingRight = defaultPadding,
       this.paddingLeft = defaultPadding,

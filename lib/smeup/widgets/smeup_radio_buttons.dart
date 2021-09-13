@@ -4,6 +4,7 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
+import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
@@ -164,7 +165,11 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
+<<<<<<< HEAD
               'Dati non disponibili.  (${_model.smeupFun.fun['fun']['function']})'),
+=======
+              '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupRadioButtonsModel.smeupFun.fun['fun']['function']})'),
+>>>>>>> origin/new-data-structure
           backgroundColor: SmeupOptions.theme.errorColor,
         ),
       );

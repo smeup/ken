@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/services/smeup_widget_notification_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
@@ -135,7 +136,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-              'Dati non disponibili.  (${smeupscreenModel.smeupFun.fun['fun']['function']})'),
+              '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupscreenModel.smeupFun.fun['fun']['function']})'),
           backgroundColor: SmeupOptions.theme.errorColor,
         ),
       );

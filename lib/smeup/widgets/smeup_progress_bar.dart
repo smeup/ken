@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_input_field_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
@@ -73,7 +74,7 @@ class _SmeupProgressBarState extends State<SmeupProgressBar>
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-              'Dati non disponibili.  (${smeupInputFieldModel.smeupFun.fun['fun']['function']})'),
+              '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupInputFieldModel.smeupFun.fun['fun']['function']})'),
           backgroundColor: SmeupOptions.theme.errorColor,
         ),
       );

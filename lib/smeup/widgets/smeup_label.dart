@@ -47,10 +47,9 @@ class SmeupLabel extends StatefulWidget
     runControllerActivities(model);
   }
 
-  SmeupLabel(this.scaffoldKey, this.formKey,
+  SmeupLabel(this.scaffoldKey, this.formKey, this.data,
       {this.id = '',
       this.type = 'LAB',
-      this.data,
       this.valueColName = '',
       this.padding = SmeupLabelModel.defaultPadding,
       this.fontSize = SmeupLabelModel.defaultFontSize,
@@ -68,31 +67,10 @@ class SmeupLabel extends StatefulWidget
       this.title = ''})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
-
-    this.model = SmeupLabelModel(
-        id: id,
-        type: type,
-        valueColName: valueColName,
-        padding: padding,
-        fontSize: fontSize,
-        align: align,
-        fontbold: fontbold,
-        width: width,
-        height: height,
-        colorColName: colorColName,
-        backColor: backColor,
-        fontColor: fontColor,
-        iconData: iconData,
-        iconColname: iconColname,
-        colorFontColName: colorFontColName,
-        iconSize: iconSize,
-        title: title);
   }
 
   @override
   runControllerActivities(SmeupModel model) {
-    isWithController = true;
-
     SmeupLabelModel m = model;
     id = m.id;
     type = m.type;
@@ -112,12 +90,26 @@ class SmeupLabel extends StatefulWidget
     iconSize = m.iconSize;
     title = m.title;
 
-    if (m.data != null) {
+    data = treatData(m);
+  }
+
+  @override
+  dynamic treatData(SmeupModel model) {
+    SmeupLabelModel m = model;
+
+    // change data format
+    var workData = formatDataFields(m);
+
+    // set the widget data
+    if (workData != null) {
       var newList = List<String>.empty(growable: true);
-      (m.data['rows'] as List).forEach((element) {
+      for (var i = 0; i < (workData['rows'] as List).length; i++) {
+        final element = workData['rows'][i];
         newList.add(element[m.valueColName].toString());
-      });
-      data = newList;
+      }
+      return newList;
+    } else {
+      return model.data;
     }
   }
 
@@ -129,11 +121,13 @@ class _SmeupLabelState extends State<SmeupLabel>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
   SmeupLabelModel _model;
+  dynamic _data;
 
   @override
   void initState() {
     _model = widget.model;
-    widgetLoadType = _model.widgetLoadType;
+    _data = widget.data;
+    if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
 
@@ -146,8 +140,7 @@ class _SmeupLabelState extends State<SmeupLabel>
   @override
   Widget build(BuildContext context) {
     Widget label = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
-        getInitialdataLoaded(widget.isWithController, _model),
-        notifierFunction: () {
+        getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
@@ -172,14 +165,15 @@ class _SmeupLabelState extends State<SmeupLabel>
   ///
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (widget.isWithController &&
-        !getDataLoaded(widget.id) &&
-        widgetLoadType != LoadType.Delay) {
-      await SmeupLabelDao.getData(_model);
+    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+      if (_model != null) {
+        await SmeupLabelDao.getData(_model);
+        _data = widget.treatData(_model);
+      }
       setDataLoad(widget.id, true);
     }
 
-    if (!hasData(_model)) {
+    if (_data == null) {
       return getFunErrorResponse(context, _model);
     }
 
@@ -191,17 +185,17 @@ class _SmeupLabelState extends State<SmeupLabel>
 
     Color backColor = widget.backColor;
     // if (widget.colorColName.isNotEmpty &&
-    //     widget.data[0][widget.colorColName] != null) {
-    //   backColor = widget.data[0][widget.colorColName];
+    //     _data[0][widget.colorColName] != null) {
+    //   backColor = _data[0][widget.colorColName];
     // }
 
     Color fontColor = widget.fontColor;
     // if (widget.colorFontColName.isNotEmpty &&
-    //     widget.data[0][widget.colorFontColName] != null) {
-    //   fontColor = widget.data[0][widget.colorFontColName];
+    //     _data[0][widget.colorFontColName] != null) {
+    //   fontColor = _data[0][widget.colorFontColName];
     // }
 
-    widget.data.forEach((text) {
+    _data.forEach((text) {
       final align = Align(
         alignment: widget.align,
         child: Text(
@@ -236,8 +230,8 @@ class _SmeupLabelState extends State<SmeupLabel>
         iconData = widget.iconData;
       }
       // if (widget.iconColname.isNotEmpty &&
-      //     widget.data[0][widget.iconColname] != null) {
-      //   iconData = widget.data[0][widget.iconColname];
+      //     _data[0][widget.iconColname] != null) {
+      //   iconData = _data[0][widget.iconColname];
       // }
 
       double iconHeight = widget.iconSize;

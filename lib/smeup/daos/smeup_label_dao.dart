@@ -12,7 +12,7 @@ class SmeupLabelDao extends SmeupDao {
 
       if (!smeupServiceResponse.succeded) {
         SmeupDataService.decrementDataFetch(model.id);
-        return model.data;
+        return;
       }
 
       model.data = smeupServiceResponse.result.data;

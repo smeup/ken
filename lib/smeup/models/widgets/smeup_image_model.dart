@@ -16,7 +16,6 @@ class SmeupImageModel extends SmeupModel implements SmeupDataInterface {
   double leftPadding;
   double topPadding;
   double bottomPadding;
-  dynamic clientData;
 
   SmeupImageModel(
       {id,
@@ -28,8 +27,7 @@ class SmeupImageModel extends SmeupModel implements SmeupDataInterface {
       this.leftPadding = defaultPadding,
       this.topPadding = defaultPadding,
       this.bottomPadding = defaultPadding,
-      title = '',
-      this.clientData})
+      title = ''})
       : super(title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
   }

@@ -25,7 +25,6 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
   double height;
   double padding;
   bool showborder;
-  dynamic clientData;
   bool showUnderline;
   bool autoFocus;
   String valueField;
@@ -44,7 +43,6 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
       this.showborder = defaultShowBorder,
       this.showSubmit = defaultShowSubmit,
       title = '',
-      this.clientData,
       this.showUnderline = defaultShowUnderline,
       this.autoFocus = defaultAutoFocus,
       this.valueField,
@@ -101,7 +99,6 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
         height: height,
         padding: padding,
         showborder: showborder,
-        clientData: clientData,
         showUnderline: showUnderline);
   }
 }
