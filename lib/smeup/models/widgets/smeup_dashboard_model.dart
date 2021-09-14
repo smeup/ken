@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_dashboard_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
@@ -12,11 +12,9 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 100;
   static const double defaultHeight = 100;
   static const double defaultIconSize = 40.0;
+  static const String defaultValueColName = 'value';
 
   String valueColName = '';
-  String forceText = '';
-  int forceValue = 0;
-  int forceIcon = 0;
   Color iconColor;
   String selectLayout = '';
   double fontsize;
@@ -26,10 +24,9 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   double iconSize;
 
   SmeupDashboardModel(
-      {this.valueColName = '',
-      this.forceText = '',
-      this.forceValue,
-      this.forceIcon,
+      {id,
+      type,
+      this.valueColName = defaultValueColName,
       this.iconColor,
       this.selectLayout,
       this.width = defaultWidth,
@@ -38,7 +35,7 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       this.labelFontsize = defaultLabelFontsize,
       this.iconSize = defaultIconSize,
       title = ''})
-      : super(title: title) {
+      : super(title: title, id: id, type: type) {
     if (iconColor == null) iconColor = SmeupOptions.theme.iconTheme.color;
     id = SmeupUtilities.getWidgetId('DSH', id);
     SmeupDataService.incrementDataFetch(id);
@@ -46,9 +43,7 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupDashboardModel.fromMap(Map<String, dynamic> jsonMap)
       : super.fromMap(jsonMap) {
-    valueColName = optionsDefault['valueColName'] ?? '';
-    forceText = optionsDefault['forceText'] ?? '';
-    forceValue = optionsDefault['forceValue'] ?? 0;
+    valueColName = optionsDefault['valueColName'] ?? defaultValueColName;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
@@ -58,30 +53,15 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
     labelFontsize = SmeupUtilities.getDouble(optionsDefault['labelFontSize']) ??
         defaultLabelFontsize;
-    if (optionsDefault['forceIcon'] != null)
-      forceIcon = int.tryParse(optionsDefault['forceIcon']) ?? 0;
-    else
-      forceIcon = 0;
-
     if (optionsDefault['iconColor'] != null) {
       iconColor = SmeupUtilities.getColorFromRGB(optionsDefault['iconColor']);
     }
     selectLayout = optionsDefault['selectLayout'] ?? '';
-    SmeupDataService.incrementDataFetch(id);
-  }
 
-  @override
-  // ignore: override_on_non_overriding_member
-  setData() async {
-    if (smeupFun != null && smeupFun.isFunValid()) {
-      final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
-
-      if (!smeupServiceResponse.succeded) {
-        return;
-      }
-      data = smeupServiceResponse.result.data;
-      SmeupDynamismService.storeDynamicVariables(data['rows'][0]);
+    if (widgetLoadType != LoadType.Delay) {
+      SmeupDashboardDao.getData(this);
     }
-    SmeupDataService.decrementDataFetch(id);
+
+    SmeupDataService.incrementDataFetch(id);
   }
 }
