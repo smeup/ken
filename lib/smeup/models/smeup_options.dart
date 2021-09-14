@@ -27,7 +27,7 @@ class SmeupOptions {
   static PackageInfo _packageInfo;
   static double deviceHeight;
   static double deviceWidth;
-  static Orientation orientation;
+
   static dynamic appDictionary;
 
   static void setPackageInfo(PackageInfo packageInfo) {

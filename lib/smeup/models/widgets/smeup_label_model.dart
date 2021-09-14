@@ -8,7 +8,7 @@ import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import '../smeup_options.dart';
 
 class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
-  static const double defaultPadding = 5.0;
+  static const double defaultPadding = 0.0;
   static const double defaultFontSize = 16.0;
   static const double defaultIconSize = 16.0;
   static const Alignment defaultAlign = Alignment.center;

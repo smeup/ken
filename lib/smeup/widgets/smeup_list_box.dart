@@ -233,15 +233,23 @@ class _SmeupListBoxState extends State<SmeupListBox>
   Widget _getOrientedList(List<Widget> cells, EdgeInsets padding) {
     var list;
 
-    double childAspectRatio =
-        widget.height == 0 ? 9 : SmeupOptions.deviceHeight / widget.height;
-
     list = OrientationBuilder(
       builder: (context, orientation) {
         int col = widget.portraitColumns;
-        if (SmeupOptions.orientation == Orientation.landscape) {
+        if (orientation == Orientation.landscape) {
           col = widget.landscapeColumns;
         }
+
+        double childAspectRatio = 0;
+        double boxHeight = 0;
+
+        if (cells.length > 0)
+          boxHeight = (cells[0] as SmeupBox).height;
+        else
+          boxHeight = 1;
+
+        childAspectRatio = SmeupOptions.deviceWidth / boxHeight;
+
         return RefreshIndicator(
           onRefresh: _refreshList,
           child: GridView.count(
