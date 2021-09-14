@@ -4,7 +4,6 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
-import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
@@ -36,7 +35,7 @@ class SmeupRadioButtons extends StatefulWidget
   double leftPadding;
   double topPadding;
   double bottomPadding;
-  String clientData;
+  List<String> data;
   String valueField;
   String displayedField;
   String selectedValue;
@@ -56,7 +55,8 @@ class SmeupRadioButtons extends StatefulWidget
   SmeupRadioButtons(this.scaffoldKey, this.formKey,
       {this.id = '',
       this.type = 'FLD',
-      this.clientData = '',
+      this.title = '',
+      this.data,
       this.backColor,
       this.width = SmeupRadioButtonsModel.defaultWidth,
       this.height = SmeupRadioButtonsModel.defaultHeight,
@@ -75,32 +75,15 @@ class SmeupRadioButtons extends StatefulWidget
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
 
-    this.model = SmeupRadioButtonsModel(
-        id: id,
-        type: type,
-        title: title,
-        clientData: clientData,
-        backColor: backColor,
-        width: width,
-        height: height,
-        position: position,
-        align: align,
-        fontColor: fontColor,
-        fontsize: fontsize,
-        padding: padding,
-        leftPadding: leftPadding,
-        rightPadding: rightPadding,
-        topPadding: topPadding,
-        bottomPadding: bottomPadding,
-        valueField: valueField,
-        displayedField: displayedField,
-        selectedValue: selectedValue);
+    if (data == null) data = List<String>.empty(growable: true);
   }
 
   @override
   runControllerActivities(SmeupModel model) {
     SmeupRadioButtonsModel m = model;
-    clientData = m.clientData;
+    id = m.id;
+    type = m.type;
+    title = m.title;
     backColor = m.backColor;
     width = m.width;
     height = m.height;
@@ -116,6 +99,28 @@ class SmeupRadioButtons extends StatefulWidget
     valueField = m.valueField;
     displayedField = m.displayedField;
     selectedValue = m.selectedValue;
+
+    data = treatData(m);
+  }
+
+  @override
+  dynamic treatData(SmeupModel model) {
+    SmeupRadioButtonsModel m = model;
+
+    // change data format
+    var workData = formatDataFields(m);
+
+    // set the widget data
+    if (workData != null) {
+      var newList = List<String>.empty(growable: true);
+      for (var i = 0; i < (workData['rows'] as List).length; i++) {
+        final element = workData['rows'][i];
+        newList.add(element[m.valueField].toString());
+      }
+      return newList;
+    } else {
+      return model.data;
+    }
   }
 
   @override
@@ -125,6 +130,7 @@ class SmeupRadioButtons extends StatefulWidget
 class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
+  dynamic _data;
   SmeupRadioButtonsModel _model;
 
   @override
@@ -132,7 +138,8 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
     SmeupDynamismService.variables[widget.smeupRadioButtonsModel.id] =
         widget.smeupRadioButtonsModel.selectedValue;
     _model = widget.model;
-    widgetLoadType = _model.widgetLoadType;
+    _data = widget.data;
+    if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
 
@@ -143,38 +150,33 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
   }
 
   @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    Widget label = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
-        notifierFunction: () {
+    final radioButtons = runBuild(context, widget.id, widget.type,
+        widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
       });
     });
 
-    return label;
+    return radioButtons;
   }
 
   Future<SmeupWidgetBuilderResponse> getChildrens() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      await SmeupRadioButtonsDao.getData(_model);
+      if (_model != null) {
+        await SmeupRadioButtonsDao.getData(_model);
+        _data = widget.treatData(_model);
+      }
+
       setDataLoad(widget.id, true);
-    }
-
-    if (!hasData(_model)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-<<<<<<< HEAD
-              'Dati non disponibili.  (${_model.smeupFun.fun['fun']['function']})'),
-=======
-              '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupRadioButtonsModel.smeupFun.fun['fun']['function']})'),
->>>>>>> origin/new-data-structure
-          backgroundColor: SmeupOptions.theme.errorColor,
-        ),
-      );
-
-      return SmeupWidgetBuilderResponse(_model, SmeupNotAvailable());
     }
 
     var buttons = List<Widget>.empty(growable: true);
@@ -188,48 +190,49 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
                 TextStyle(fontSize: widget.fontsize, color: widget.fontColor),
           )));
     }
+
     int buttonIndex = 0;
-    _model.data.forEach((child) {
+    _data.forEach((radioButtonData) {
       buttonIndex += 1;
 
       final button = SmeupRadioButton(
-        id: '${SmeupUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
-        type: widget.type,
-        title: widget.title,
-        clientData: widget.clientData,
-        backColor: widget.backColor,
-        width: widget.width,
-        height: widget.height,
-        position: widget.position,
-        align: widget.align,
-        fontColor: widget.fontColor,
-        fontsize: widget.fontsize,
-        padding: widget.padding,
-        leftPadding: widget.leftPadding,
-        rightPadding: widget.rightPadding,
-        topPadding: widget.topPadding,
-        bottomPadding: widget.bottomPadding,
-        valueField: widget.valueField,
-        displayedField: widget.displayedField,
-        selectedValue: SmeupDynamismService.variables[widget.id],
-        icon: null,
-        onServerPressed: (value) {
-          setState(() {
-            dynamic selData = (_model.data as List).firstWhere(
-                (element) => element['k'] == value,
-                orElse: () => null);
-            if (selData != null) {
-              SmeupDynamismService.storeDynamicVariables(selData);
-              SmeupDynamismService.variables[widget.id] = value;
-              SmeupDynamismService.run(
-                  _model.dynamisms, context, 'change', widget.scaffoldKey);
-            }
+          id: '${SmeupUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
+          type: widget.type,
+          title: widget.title,
+          data: radioButtonData,
+          backColor: widget.backColor,
+          width: widget.width,
+          height: widget.height,
+          position: widget.position,
+          align: widget.align,
+          fontColor: widget.fontColor,
+          fontsize: widget.fontsize,
+          padding: widget.padding,
+          leftPadding: widget.leftPadding,
+          rightPadding: widget.rightPadding,
+          topPadding: widget.topPadding,
+          bottomPadding: widget.bottomPadding,
+          valueField: widget.valueField,
+          displayedField: widget.displayedField,
+          selectedValue: SmeupDynamismService.variables[widget.id],
+          icon: null,
+          serverOnPressed: (value) {
+            setState(() {
+              dynamic selData = (_model.data as List).firstWhere(
+                  (element) => element['k'] == value,
+                  orElse: () => null);
+              if (selData != null) {
+                SmeupDynamismService.storeDynamicVariables(selData);
+                SmeupDynamismService.variables[widget.id] = value;
+                SmeupDynamismService.run(
+                    _model.dynamisms, context, 'change', widget.scaffoldKey);
+              }
+            });
           });
-        },
-        data: child,
-      );
+
       SmeupDynamismService.run(
           _model.dynamisms, context, 'change', widget.scaffoldKey);
+
       buttons.add(button);
     });
 

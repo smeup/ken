@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_radio_buttons_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
@@ -28,7 +29,6 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
   double leftPadding;
   double topPadding;
   double bottomPadding;
-  String clientData;
   String valueField;
   String displayedField;
   String selectedValue;
@@ -37,7 +37,6 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
       {id,
       type,
       title = '',
-      this.clientData = '',
       this.backColor,
       this.width = defaultWidth,
       this.height = defaultHeight,
@@ -60,6 +59,24 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
 
     SmeupDataService.incrementDataFetch(id);
   }
+
+  SmeupRadioButtonsModel.clone(SmeupRadioButtonsModel other)
+      : this(
+            title: other.title,
+            backColor: other.backColor,
+            width: other.width,
+            height: other.height,
+            position: other.position,
+            align: other.align,
+            fontColor: other.fontColor,
+            fontsize: other.fontsize,
+            padding: other.padding,
+            leftPadding: other.leftPadding,
+            rightPadding: other.rightPadding,
+            topPadding: other.topPadding,
+            bottomPadding: other.bottomPadding,
+            valueField: other.valueField,
+            displayedField: other.displayedField);
 
   SmeupRadioButtonsModel.fromMap(Map<String, dynamic> jsonMap)
       : super.fromMap(jsonMap) {
@@ -105,24 +122,5 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
       return SmeupDynamismService.replaceFunVariables(
           optionsDefault['selectedValue']);
     }
-  }
-
-  @override
-  // ignore: override_on_non_overriding_member
-  setData() async {
-    if (smeupFun != null && smeupFun.isFunValid()) {
-      final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
-
-      if (!smeupServiceResponse.succeded) {
-        return;
-      }
-
-      data = smeupServiceResponse.result.data;
-    }
-
-    if (data == null && clientData != null) {
-      data = clientData;
-    }
-    SmeupDataService.decrementDataFetch(id);
   }
 }

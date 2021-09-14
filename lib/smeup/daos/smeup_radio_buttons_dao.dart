@@ -14,7 +14,10 @@ class SmeupRadioButtonsDao extends SmeupDao {
         return;
       }
 
-      model.data = smeupServiceResponse.result.data['rows'];
+      //TODO: controllare questa parte
+
+      /*
+     model.data = smeupServiceResponse.result.data['rows'];
       if ((model.data as List).length > 0) {
         if (model.valueField.isNotEmpty) {
           model.clientData = model.data[0][model.valueField];
@@ -24,6 +27,10 @@ class SmeupRadioButtonsDao extends SmeupDao {
       }
     } else if (model.data != null) {
       model.clientData = model.data[0]['value'];
+    }
+    */
+
+      model.data = smeupServiceResponse.result.data;
     }
 
     SmeupDataService.decrementDataFetch(model.id);

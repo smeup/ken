@@ -4,9 +4,9 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_butto
 
 class SmeupRadioButton extends StatelessWidget {
   final IconData icon;
-  final Function onServerPressed;
-  final Function onClientPressed;
-  final dynamic data;
+  final Function serverOnPressed;
+  final Function clientOnPressed;
+  //final dynamic data;
 
   final Color backColor;
   final double width;
@@ -16,6 +16,7 @@ class SmeupRadioButton extends StatelessWidget {
   final Color fontColor;
   final double fontsize;
   final double padding;
+  final String data;
   final double rightPadding;
   final double leftPadding;
   final double topPadding;
@@ -33,6 +34,7 @@ class SmeupRadioButton extends StatelessWidget {
       {this.id = '',
       this.type = 'FLD',
       this.title = '',
+      this.data = '',
       this.clientData = '',
       this.backColor,
       this.width = SmeupRadioButtonsModel.defaultWidth,
@@ -50,9 +52,8 @@ class SmeupRadioButton extends StatelessWidget {
       this.displayedField = SmeupRadioButtonsModel.defaultDisplayedField,
       this.selectedValue,
       this.icon,
-      this.onServerPressed,
-      this.onClientPressed,
-      this.data});
+      this.serverOnPressed,
+      this.clientOnPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -63,15 +64,15 @@ class SmeupRadioButton extends StatelessWidget {
           child: Row(
             children: [
               Radio(
-                value: data[valueField],
+                value: data,
                 groupValue: selectedValue,
                 onChanged:
-                    onClientPressed != null ? onClientPressed : onServerPressed,
+                    clientOnPressed != null ? clientOnPressed : serverOnPressed,
                 activeColor: SmeupOptions.theme.primaryColor,
               ),
               Align(
                   alignment: align,
-                  child: Text(data[displayedField],
+                  child: Text(data,
                       style: TextStyle(
                           fontSize: fontsize,
                           fontWeight: FontWeight.bold,
