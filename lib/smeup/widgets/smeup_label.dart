@@ -224,7 +224,6 @@ class _SmeupLabelState extends State<SmeupLabel>
 
       // double labelHeight =
       //     widget.height * alignes.length + padding * (fontSize / 5);
-      // TODO
       double labelHeight = widget.height * alignes.length * (fontSize / 5);
 
       int iconData = 0;

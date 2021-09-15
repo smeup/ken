@@ -28,7 +28,7 @@ class SmeupTextAutocomplete extends StatefulWidget
   String label;
   double width;
   double height;
-  double padding;
+  EdgeInsetsGeometry padding;
   bool showborder;
   List<dynamic> data;
   bool showUnderline;
@@ -57,15 +57,15 @@ class SmeupTextAutocomplete extends StatefulWidget
       {this.id = '',
       this.type = 'FLD',
       this.backColor,
-      this.fontsize,
-      this.label,
-      this.width,
-      this.height,
-      this.padding,
-      this.showborder = false,
+      this.fontsize = SmeupTextAutocompleteModel.defaultFontsize,
+      this.label = SmeupTextAutocompleteModel.defaultLabel,
+      this.width = SmeupTextAutocompleteModel.defaultWidth,
+      this.height = SmeupTextAutocompleteModel.defaultHeight,
+      this.padding = SmeupTextAutocompleteModel.defaultPadding,
+      this.showborder = SmeupTextAutocompleteModel.defaultShowBorder,
       this.data,
       this.showUnderline = false,
-      this.autoFocus = false,
+      this.autoFocus = SmeupTextAutocompleteModel.defaultAutoFocus,
       this.clientValidator,
       this.clientOnSave,
       this.clientOnChange,
@@ -189,7 +189,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
     Color focusColor = widget.showUnderline ? Colors.blue : Colors.transparent;
 
     children = Container(
-        padding: EdgeInsets.only(left: 10, right: 10),
+        padding: widget.padding,
         decoration: widget.showborder
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(12.0),
