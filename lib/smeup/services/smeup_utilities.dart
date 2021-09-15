@@ -83,6 +83,46 @@ class SmeupUtilities {
     return value;
   }
 
+  static EdgeInsetsGeometry getPadding(dynamic value) {
+    if (value == null)
+      return EdgeInsets.all(SmeupUtilities.getPaddingValue(value));
+    else if (value is double) {
+      return EdgeInsets.all(SmeupUtilities.getPaddingValue(value));
+    } else if (value is int) {
+      return EdgeInsets.all(SmeupUtilities.getPaddingValue(value));
+    } else if (value is String) {
+      return EdgeInsets.all(SmeupUtilities.getPaddingValue(value));
+    } else {
+      double left = 0;
+      double right = 0;
+      double top = 0;
+      double bottom = 0;
+      if (value['left'] != null)
+        left = SmeupUtilities.getPaddingValue(value['left']);
+      if (value['right'] != null)
+        right = SmeupUtilities.getPaddingValue(value['right']);
+      if (value['top'] != null)
+        top = SmeupUtilities.getPaddingValue(value['top']);
+      if (value['bottom'] != null)
+        bottom = SmeupUtilities.getPaddingValue(value['bottom']);
+      return EdgeInsets.only(
+          top: top, bottom: bottom, left: left, right: right);
+    }
+  }
+
+  static double getPaddingValue(dynamic value) {
+    if (value == null)
+      return 0;
+    else if (value is double) {
+      return value;
+    } else if (value is int) {
+      return value.toDouble();
+    } else if (value is String) {
+      return double.parse(value);
+    } else
+      return 0;
+  }
+
   static Alignment getAlignmentGeometry(String alignment) {
     switch (alignment) {
       case "left":

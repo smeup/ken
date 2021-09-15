@@ -8,7 +8,7 @@ import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import '../smeup_options.dart';
 
 class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
-  static const double defaultPadding = 0.0;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const double defaultFontSize = 16.0;
   static const double defaultIconSize = 16.0;
   static const Alignment defaultAlign = Alignment.center;
@@ -16,7 +16,7 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 0;
   static const double defaultHeight = 40;
 
-  double padding;
+  EdgeInsetsGeometry padding;
   double fontSize;
   double iconSize;
   Alignment align;
@@ -61,8 +61,8 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
     valueColName = optionsDefault['valueColName'] ?? 'value';
     colorColName = optionsDefault['colorColName'] ?? '';
     colorFontColName = optionsDefault['colorFontColName'] ?? '';
-    padding =
-        SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
+    padding = SmeupUtilities.getPadding(optionsDefault['padding']);
+    //SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
     fontSize =
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontSize;
     iconSize =
