@@ -28,9 +28,7 @@ class SmeupListBox extends StatefulWidget
   double height;
   double listHeight;
   Axis orientation;
-  double padding;
-  double paddingRight;
-  double paddingLeft;
+  EdgeInsetsGeometry padding;
   SmeupListType listType;
   String layout;
   String title;
@@ -61,8 +59,6 @@ class SmeupListBox extends StatefulWidget
       this.fontsize = SmeupListBoxModel.defaultFontsize,
       this.orientation = SmeupListBoxModel.defaultOrientation,
       this.padding = SmeupListBoxModel.defaultPadding,
-      this.paddingRight = SmeupListBoxModel.defaultPadding,
-      this.paddingLeft = SmeupListBoxModel.defaultPadding,
       this.listType = SmeupListBoxModel.defaultListType,
       this.portraitColumns = SmeupListBoxModel.defaultPortraitColumns,
       this.landscapeColumns = SmeupListBoxModel.defaultLandscapeColumns,
@@ -86,8 +82,6 @@ class SmeupListBox extends StatefulWidget
     fontsize = m.fontsize;
     orientation = m.orientation;
     padding = m.padding;
-    paddingRight = m.paddingRight;
-    paddingLeft = m.paddingLeft;
     listType = m.listType;
     portraitColumns = m.portraitColumns;
     landscapeColumns = m.landscapeColumns;
@@ -186,21 +180,15 @@ class _SmeupListBoxState extends State<SmeupListBox>
       return SmeupWidgetBuilderResponse(_model, SmeupNotAvailable());
     }
 
-    var padding = EdgeInsets.zero;
-    if (widget.padding > 0) padding = EdgeInsets.all(widget.padding);
-    if (widget.paddingRight > 0 || widget.paddingLeft > 0)
-      padding =
-          EdgeInsets.only(right: widget.paddingRight, left: widget.paddingLeft);
-
     switch (widget.listType) {
       case SmeupListType.simple:
-        children = _getSimpleList(cells, padding);
+        children = _getSimpleList(cells);
         break;
       case SmeupListType.oriented:
-        children = _getOrientedList(cells, padding);
+        children = _getOrientedList(cells);
         break;
       case SmeupListType.wheel:
-        children = _getWheelList(cells, padding);
+        children = _getWheelList(cells);
         break;
       default:
     }
@@ -208,7 +196,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
     return SmeupWidgetBuilderResponse(_model, children);
   }
 
-  Widget _getSimpleList(List<Widget> cells, EdgeInsets padding) {
+  Widget _getSimpleList(List<Widget> cells) {
     var list = RefreshIndicator(
       onRefresh: _refreshList,
       child: ListView.builder(
@@ -222,7 +210,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
     );
 
     final container = Container(
-        padding: padding,
+        padding: widget.padding,
         color: Colors.transparent,
         height: widget.listHeight,
         child: list);
@@ -230,7 +218,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
     return container;
   }
 
-  Widget _getOrientedList(List<Widget> cells, EdgeInsets padding) {
+  Widget _getOrientedList(List<Widget> cells) {
     var list;
 
     list = OrientationBuilder(
@@ -265,7 +253,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
     );
 
     final container = Container(
-        padding: padding,
+        padding: widget.padding,
         color: Colors.transparent,
         height: widget.listHeight,
         child: list);
@@ -273,7 +261,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
     return container;
   }
 
-  Widget _getWheelList(List<Widget> cells, EdgeInsets padding) {
+  Widget _getWheelList(List<Widget> cells) {
     var list;
 
     list = RefreshIndicator(
@@ -304,7 +292,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
             )));
 
     final container = Container(
-        padding: padding,
+        padding: widget.padding,
         color: Colors.transparent,
         height: widget.listHeight,
         child: list);
