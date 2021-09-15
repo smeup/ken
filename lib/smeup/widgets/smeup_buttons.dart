@@ -28,7 +28,7 @@ class SmeupButtons extends StatefulWidget
   Alignment align;
   Color fontColor;
   double fontsize;
-  double padding;
+  EdgeInsetsGeometry padding;
   List<String> data;
   String valueField;
   double borderRadius;
