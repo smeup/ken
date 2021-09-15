@@ -11,7 +11,7 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultLabel = '';
   static const double defaultWidth = 100;
   static const double defaultHeight = 100;
-  static const double defaultPadding = 0.0;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const bool defaultShowBorder = false;
   static const bool defaultAutoFocus = false;
   static const String defaultValueField = 'value';
@@ -23,7 +23,7 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
   String label;
   double width;
   double height;
-  double padding;
+  EdgeInsetsGeometry padding;
   bool showborder;
   bool showUnderline;
   bool autoFocus;
@@ -64,8 +64,7 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
     label = optionsDefault['label'] ?? defaultLabel;
     valueField = optionsDefault['valueField'] ?? defaultValueField;
     showSubmit = optionsDefault['showSubmit'] ?? defaultShowSubmit;
-    padding =
-        SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
+    padding = SmeupUtilities.getPadding(optionsDefault['padding']);
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;

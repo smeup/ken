@@ -28,7 +28,7 @@ class SmeupTextField extends StatefulWidget
   String label;
   double width;
   double height;
-  double padding;
+  EdgeInsetsGeometry padding;
   bool showborder;
   String data;
   bool showUnderline;
@@ -174,7 +174,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
 
     textField = Container(
         alignment: Alignment.centerLeft,
-        padding: EdgeInsets.only(left: 10, right: 10),
+        padding: widget.padding,
         decoration: widget.showborder
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(12.0),
