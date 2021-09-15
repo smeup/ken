@@ -62,7 +62,6 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
     colorColName = optionsDefault['colorColName'] ?? '';
     colorFontColName = optionsDefault['colorFontColName'] ?? '';
     padding = SmeupUtilities.getPadding(optionsDefault['padding']);
-    //SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
     fontSize =
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontSize;
     iconSize =
