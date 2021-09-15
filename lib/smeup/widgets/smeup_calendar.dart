@@ -304,6 +304,9 @@ class SmeupCalendarState extends State<SmeupCalendar>
   //Widget _buildTableCalendarWithBuilders(bool isLandscape) {
   Widget _buildTableCalendarWithBuilders() {
     //MediaQueryData deviceInfo = MediaQuery.of(context);
+    MediaQueryData deviceInfo = MediaQuery.of(context);
+    SmeupOptions.deviceWidth = deviceInfo.size.width;
+    SmeupOptions.deviceHeight = deviceInfo.size.height;
     double deviceHeight = SmeupOptions.deviceHeight - 70;
     double deviceWidth = SmeupOptions.deviceWidth;
 

@@ -123,6 +123,9 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
               ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
           bool isDialog =
               routeArgs == null ? false : routeArgs['isDialog'] ?? false;
+          MediaQueryData deviceInfo = MediaQuery.of(context);
+          SmeupOptions.deviceWidth = deviceInfo.size.width;
+          SmeupOptions.deviceHeight = deviceInfo.size.height;
           final formHeight = isDialog ? 300 : SmeupOptions.deviceHeight;
 
           return Container(

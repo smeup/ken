@@ -171,6 +171,10 @@ class _SmeupSectionState extends State<SmeupSection>
       );
     }).toList();
 
+    MediaQueryData deviceInfo = MediaQuery.of(context);
+    SmeupOptions.deviceWidth = deviceInfo.size.width;
+    SmeupOptions.deviceHeight = deviceInfo.size.height;
+
     return Container(
       height: SmeupOptions.deviceHeight,
       child: Theme(

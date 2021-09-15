@@ -216,8 +216,9 @@ class _SmeupTextFieldState extends State<SmeupTextField>
           onSaved: (value) {
             if (widget.clientOnSave != null) widget.clientOnSave(value);
             SmeupDynamismService.variables[widget.id] = value;
-            SmeupDynamismService.run(
-                _model.dynamisms, context, 'lostfocus', widget.scaffoldKey);
+            if (_model != null)
+              SmeupDynamismService.run(
+                  _model.dynamisms, context, 'lostfocus', widget.scaffoldKey);
           }, // lostfocus
         ));
 

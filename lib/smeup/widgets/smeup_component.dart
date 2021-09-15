@@ -165,6 +165,9 @@ class _SmeupComponentState extends State<SmeupComponent> {
         if (!smeupServiceResponse.succeded) {
           children = SmeupNotAvailable();
         } else {
+          MediaQueryData deviceInfo = MediaQuery.of(context);
+          SmeupOptions.deviceWidth = deviceInfo.size.width;
+          SmeupOptions.deviceHeight = deviceInfo.size.height;
           double deviceHeight = SmeupOptions.deviceHeight;
           double deviceWidth = SmeupOptions.deviceWidth;
 
