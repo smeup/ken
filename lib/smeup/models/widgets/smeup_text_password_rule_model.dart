@@ -19,17 +19,17 @@ class SmeupTextPasswordRuleModel with ChangeNotifier {
     passwordRules += '.*\$';
   }
 
-  static bool isPasswordValid(String s) {
-    if (s == null) {
+  static bool isPasswordValid(String password) {
+    if (password == null) {
       return false;
     }
-    if (s.isEmpty) {
+    if (password.isEmpty) {
       return false;
     }
 
     RegExp re = RegExp(passwordRules);
 
-    Match firstMatch = re.firstMatch(s);
+    Match firstMatch = re.firstMatch(password);
 
     if (firstMatch == null) return false;
 

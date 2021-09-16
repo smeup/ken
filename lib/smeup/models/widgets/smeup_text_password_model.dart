@@ -19,6 +19,7 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
   static const bool defaultShowUnderline = true;
   static const bool defaultShowRules = true;
   static const bool defaultShowRulesIcon = true;
+  static const bool defaultCheckRules = true;
 
   Color backColor;
   double fontsize;
@@ -33,6 +34,7 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
   bool showSubmit;
   bool showRules;
   bool showRulesIcon;
+  bool checkRules;
 
   SmeupTextPasswordModel(
       {id,
@@ -50,7 +52,8 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
       this.showUnderline = defaultShowUnderline,
       this.autoFocus = defaultAutoFocus,
       this.valueField,
-      this.showRules})
+      this.showRules = defaultShowRules,
+      this.checkRules = defaultCheckRules})
       : super(title: title, id: id, type: type) {
     if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'pwd';
@@ -99,6 +102,15 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
         showRulesIcon = true;
       else
         showRulesIcon = false;
+    }
+
+    if (optionsDefault['checkRules'] == null) {
+      checkRules = defaultCheckRules;
+    } else {
+      if (optionsDefault['checkRules'] == 'Yes')
+        checkRules = true;
+      else
+        checkRules = false;
     }
 
     if (widgetLoadType != LoadType.Delay) {

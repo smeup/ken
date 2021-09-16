@@ -38,6 +38,7 @@ class SmeupTextPassword extends StatefulWidget
   bool showSubmit;
   bool showRules;
   bool showRulesIcon;
+  bool checkRules;
 
   Function clientValidator;
   Function clientOnSave;
@@ -67,6 +68,7 @@ class SmeupTextPassword extends StatefulWidget
       this.showSubmit = SmeupTextPasswordModel.defaultShowSubmit,
       this.showRules = SmeupTextPasswordModel.defaultShowRules,
       this.showRulesIcon = SmeupTextPasswordModel.defaultShowRulesIcon,
+      this.checkRules = SmeupTextPasswordModel.defaultCheckRules,
       this.clientValidator, // ?
       this.clientOnSave,
       this.clientOnChange,
@@ -89,6 +91,7 @@ class SmeupTextPassword extends StatefulWidget
     padding = m.padding;
     showborder = m.showborder;
     showRules = m.showRules;
+    checkRules = m.checkRules;
     showRulesIcon = m.showRulesIcon;
     showSubmit = m.showSubmit;
     showUnderline = m.showUnderline;
