@@ -18,11 +18,17 @@ class _SmeupTextPasswordIndicatorsState
     extends State<SmeupTextPasswordIndicators> {
   @override
   Widget build(BuildContext context) {
+    return Column(children: getColumns());
+  }
+
+  List<Widget> getColumns() {
+    var list = List<Widget>.empty(growable: true);
+
     final passwordModel =
         Provider.of<SmeupTextPasswordRuleModel>(context, listen: true);
 
-    return Column(children: [
-      Padding(
+    if (passwordModel.rules.length > 0) {
+      list.add(Padding(
         padding: const EdgeInsets.only(top: 10.0, bottom: 10),
         child: LinearProgressIndicator(
           minHeight: 10,
@@ -31,29 +37,19 @@ class _SmeupTextPasswordIndicatorsState
           valueColor:
               AlwaysStoppedAnimation<Color>(_getIndicatorColor(passwordModel)),
         ),
-      ),
-      //Divider(),
-      SmeupTextPasswordRule(
-          'Almeno 8 caratteri',
-          _getRuleColor(passwordModel.isCharsRule ?? false),
-          _getRuleIcon(passwordModel.isCharsRule ?? false),
-          widget.showRulesIcon),
-      // UpickPasswordRule(
-      //     'Almeno 1 lettera minuscola',
-      //     _getRuleColor(passwordModel.isLowerCaseRule),
-      //     _getRuleIcon(passwordModel.isLowerCaseRule),
-      //     widget.showRulesIcon),
-      // UpickPasswordRule(
-      //     'Almeno 1 lettera maiuscola',
-      //     _getRuleColor(passwordModel.isUpperCaseRule),
-      //     _getRuleIcon(passwordModel.isUpperCaseRule),
-      //     widget.showRulesIcon),
-      SmeupTextPasswordRule(
-          'Almeno 1 un numero',
-          _getRuleColor(passwordModel.isNumberRule ?? false),
-          _getRuleIcon(passwordModel.isNumberRule ?? false),
-          widget.showRulesIcon),
-    ]);
+      ));
+
+      passwordModel.rules.forEach((rule) {
+        final ruleWidget = SmeupTextPasswordRule(
+            rule['description'],
+            _getRuleColor(rule['isValid'] ?? false),
+            _getRuleIcon(rule['isValid'] ?? false),
+            widget.showRulesIcon);
+        list.add(ruleWidget);
+      });
+    }
+
+    return list;
   }
 
   Color _getRuleColor(bool value) {
@@ -65,18 +61,15 @@ class _SmeupTextPasswordIndicatorsState
   }
 
   Color _getIndicatorColor(SmeupTextPasswordRuleModel passwordModel) {
-    switch (passwordModel.satisfiedRules) {
-      case 0:
-      case 1:
-        return Colors.red;
-      case 2:
-        //   return Colors.orange;
-        // case 3:
-        //   return Colors.yellow;
-        // case 4:
-        return Colors.green;
-      default:
-        return Colors.green;
+    double perc = passwordModel.satisfiedRules / passwordModel.totalRules * 100;
+    if (perc <= 50.0) {
+      return Colors.red;
+    } else if (perc <= 75.0) {
+      return Colors.orange;
+    } else if (perc <= 99.0) {
+      return Colors.yellow;
+    } else {
+      return Colors.green;
     }
   }
 

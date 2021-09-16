@@ -3,28 +3,21 @@ import 'package:flutter/material.dart';
 class SmeupTextPasswordRuleModel with ChangeNotifier {
   int satisfiedRules;
   int totalRules;
-  //bool isLowerCaseRule;
-  //bool isUpperCaseRule;
-  bool isNumberRule;
-  bool isCharsRule;
+  static String passwordRules = '';
 
-  //static String lowerCaseRule = '(?=.*[a-z])';
-  //static String upperCaseRule = '(?=.*[A-Z])';
-  static String numberRule = '(?=.*[0-9])';
-  static String charsRule = '(?=.{8,})';
+  List<dynamic> rules;
 
-  // static String passwordRules =
-  //     '$lowerCaseRule$upperCaseRule$numberRule$charsRule.*\$';
-  static String passwordRules = '$numberRule$charsRule.*\$';
-
-  SmeupTextPasswordRuleModel({
-    this.totalRules = 2,
-    this.satisfiedRules = 0,
-    this.isCharsRule,
-    //this.isLowerCaseRule,
-    this.isNumberRule,
-    //this.isUpperCaseRule
-  });
+  SmeupTextPasswordRuleModel(
+    this.rules,
+  ) {
+    this.totalRules = rules.length;
+    this.satisfiedRules = 0;
+    passwordRules = '';
+    rules.forEach((rule) {
+      passwordRules += "${rule['regex'].toString()}";
+    });
+    passwordRules += '.*\$';
+  }
 
   static bool isPasswordValid(String s) {
     if (s == null) {
@@ -44,10 +37,10 @@ class SmeupTextPasswordRuleModel with ChangeNotifier {
   }
 
   checkProgress(String password) {
-    //isLowerCaseRule = false;
-    //isUpperCaseRule = false;
-    isNumberRule = false;
-    isCharsRule = false;
+    rules.forEach((rule) {
+      rule['isValid'] = false;
+    });
+
     satisfiedRules = 0;
 
     if (password == null) {
@@ -59,15 +52,10 @@ class SmeupTextPasswordRuleModel with ChangeNotifier {
       return;
     }
 
-    //isLowerCaseRule = _isRuleSadisfied(lowerCaseRule, password);
-    //isUpperCaseRule = _isRuleSadisfied(upperCaseRule, password);
-    isNumberRule = _isRuleSadisfied(numberRule, password);
-    isCharsRule = _isRuleSadisfied(charsRule, password);
-
-    // if (isLowerCaseRule) satisfiedRules += 1;
-    // if (isUpperCaseRule) satisfiedRules += 1;
-    if (isNumberRule != null && isNumberRule == true) satisfiedRules += 1;
-    if (isCharsRule != null && isCharsRule == true) satisfiedRules += 1;
+    rules.forEach((rule) {
+      rule['isValid'] = _isRuleSadisfied(rule['regex'], password);
+      if (rule['isValid']) satisfiedRules += 1;
+    });
 
     notifyListeners();
   }
@@ -80,10 +68,9 @@ class SmeupTextPasswordRuleModel with ChangeNotifier {
 
   void reset() {
     satisfiedRules = 0;
-    isCharsRule = null;
-    //isLowerCaseRule = null;
-    isNumberRule = null;
-    //isUpperCaseRule = null;
+    rules.forEach((rule) {
+      rule['isValid'] = false;
+    });
     notifyListeners();
   }
 }
