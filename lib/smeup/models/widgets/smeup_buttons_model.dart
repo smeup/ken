@@ -12,7 +12,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   static const MainAxisAlignment defaultPosition = MainAxisAlignment.center;
   static const Alignment defaultAlign = Alignment.center;
   static const double defaultFontsize = 16.0;
-  static const double defaultPadding = 0.0;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const double defaultBorderRadius = 10.0;
   static const double defaultElevation = 0.0;
   static const bool defaultBold = true;
@@ -26,7 +26,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   Alignment align;
   Color fontColor;
   double fontsize;
-  double padding;
+  EdgeInsetsGeometry padding;
   String valueField;
   double borderRadius;
   double elevation;
@@ -79,8 +79,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   SmeupButtonsModel.fromMap(Map<String, dynamic> jsonMap)
       : super.fromMap(jsonMap) {
     title = jsonMap['title'] ?? '';
-    padding =
-        SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
+    padding = SmeupUtilities.getPadding(optionsDefault['padding']);
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;

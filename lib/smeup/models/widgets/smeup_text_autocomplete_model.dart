@@ -11,7 +11,7 @@ class SmeupTextAutocompleteModel extends SmeupModel
   static const String defaultLabel = '';
   static const double defaultWidth = 100;
   static const double defaultHeight = 100;
-  static const double defaultPadding = 0.0;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const bool defaultShowBorder = false;
   static const bool defaultAutoFocus = false;
 
@@ -20,7 +20,7 @@ class SmeupTextAutocompleteModel extends SmeupModel
   String label;
   double width;
   double height;
-  double padding;
+  EdgeInsetsGeometry padding;
   bool showborder;
   bool showUnderline;
   bool autoFocus;
@@ -55,8 +55,7 @@ class SmeupTextAutocompleteModel extends SmeupModel
     fontsize =
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
     label = optionsDefault['label'] ?? defaultLabel;
-    padding =
-        SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
+    padding = SmeupUtilities.getPadding(optionsDefault['padding']);
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;

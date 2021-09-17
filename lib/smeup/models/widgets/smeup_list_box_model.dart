@@ -11,7 +11,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 0;
   static const double defaultHeight = 100;
   static const double defaultListHeight = 100;
-  static const double defaultPadding = 0.0;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const SmeupListType defaultListType = SmeupListType.oriented;
   static const int defaultPortraitColumns = 1;
   static const int defaultLandscapeColumns = 1;
@@ -23,9 +23,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   double height;
   double listHeight;
   Axis orientation;
-  double padding;
-  double paddingRight;
-  double paddingLeft;
+  EdgeInsetsGeometry padding;
   SmeupListType listType;
   int portraitColumns;
   int landscapeColumns;
@@ -41,8 +39,6 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       this.listHeight = defaultHeight,
       this.orientation = defaultOrientation,
       this.padding = defaultPadding,
-      this.paddingRight = defaultPadding,
-      this.paddingLeft = defaultPadding,
       this.listType = defaultListType,
       this.portraitColumns = defaultPortraitColumns,
       this.landscapeColumns = defaultLandscapeColumns,
@@ -69,12 +65,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getInt(optionsDefault['landscapeColumns']) ??
             defaultLandscapeColumns;
     fontsize = optionsDefault['fontSize'] ?? defaultFontsize;
-    padding =
-        SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
-    paddingRight = SmeupUtilities.getDouble(optionsDefault['paddingRight']) ??
-        defaultPadding;
-    paddingLeft = SmeupUtilities.getDouble(optionsDefault['paddingLeft']) ??
-        defaultPadding;
+    padding = SmeupUtilities.getPadding(optionsDefault['padding']);
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;

@@ -24,14 +24,15 @@ class SmeupDashboard extends StatefulWidget
   String text = '';
   int icon = 0;
 
-  String valueColName = '';
+  String valueColName;
   Color iconColor;
-  String selectLayout = '';
+  String selectLayout;
   double fontsize;
   double labelFontsize;
   double width;
   double height;
   double iconSize;
+  EdgeInsetsGeometry padding;
   String title;
   String id;
   String type;
@@ -44,12 +45,13 @@ class SmeupDashboard extends StatefulWidget
       this.unitOfMeasure = '',
       this.icon,
       this.iconColor,
-      this.selectLayout,
+      this.selectLayout = SmeupDashboardModel.defaultSelectLayout,
       this.width = SmeupDashboardModel.defaultWidth,
       this.height = SmeupDashboardModel.defaultHeight,
       this.fontsize = SmeupDashboardModel.defaultFontsize,
       this.labelFontsize = SmeupDashboardModel.defaultLabelFontsize,
       this.iconSize = SmeupDashboardModel.defaultIconSize,
+      this.padding = SmeupDashboardModel.defaultPadding,
       this.title = ''})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
@@ -73,6 +75,7 @@ class SmeupDashboard extends StatefulWidget
     width = m.width;
     height = m.height;
     iconSize = m.iconSize;
+    padding = m.padding;
     title = m.title;
 
     dynamic workData = treatData(m);
@@ -157,6 +160,7 @@ class _SmeupDashboardState extends State<SmeupDashboard>
     children = Container(
       height: widget.height,
       width: widget.width,
+      padding: widget.padding,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

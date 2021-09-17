@@ -12,7 +12,7 @@ class SmeupButton extends StatelessWidget {
   final Alignment align;
   final Color fontColor;
   final double fontsize;
-  final double padding;
+  final EdgeInsetsGeometry padding;
   final String data;
   final String valueField;
   final double borderRadius;
@@ -65,9 +65,8 @@ class SmeupButton extends StatelessWidget {
         borderColor != null ? borderColor : SmeupOptions.theme.primaryColor;
 
     return Container(
-      color: Color.fromRGBO(0, 0, 0,
-          0), // SmeupOptions.theme.canvasColor, // Color.fromRGBO(250, 250, 250, 1),
-      padding: EdgeInsets.all(padding),
+      color: Color.fromRGBO(0, 0, 0, 0),
+      padding: padding,
       child: SizedBox(
         height: height,
         width: width == 0 ? double.infinity : width,

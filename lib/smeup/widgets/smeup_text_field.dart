@@ -8,6 +8,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart'
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_field_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_buttons.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
@@ -28,7 +29,7 @@ class SmeupTextField extends StatefulWidget
   String label;
   double width;
   double height;
-  double padding;
+  EdgeInsetsGeometry padding;
   bool showborder;
   String data;
   bool showUnderline;
@@ -164,7 +165,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
 
     Widget textField;
 
-    SmeupDynamismService.variables[widget.id] = _data;
+    SmeupVariablesService.setVariable(widget.id, _data);
 
     Color underlineColor = widget.showUnderline
         ? SmeupOptions.theme.primaryColor
@@ -174,7 +175,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
 
     textField = Container(
         alignment: Alignment.centerLeft,
-        padding: EdgeInsets.only(left: 10, right: 10),
+        padding: widget.padding,
         decoration: widget.showborder
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(12.0),
@@ -196,7 +197,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
               widget.keyboard == TextInputType.visiblePassword ? true : false,
           onChanged: (value) {
             if (widget.clientOnChange != null) widget.clientOnChange(value);
-            SmeupDynamismService.variables[widget.id] = value;
+            SmeupVariablesService.setVariable(widget.id, value);
             if (_model != null)
               SmeupDynamismService.run(
                   _model.dynamisms, context, 'change', widget.scaffoldKey);
@@ -215,9 +216,10 @@ class _SmeupTextFieldState extends State<SmeupTextField>
           ),
           onSaved: (value) {
             if (widget.clientOnSave != null) widget.clientOnSave(value);
-            SmeupDynamismService.variables[widget.id] = value;
-            SmeupDynamismService.run(
-                _model.dynamisms, context, 'lostfocus', widget.scaffoldKey);
+            SmeupVariablesService.setVariable(widget.id, value);
+            if (_model != null)
+              SmeupDynamismService.run(
+                  _model.dynamisms, context, 'lostfocus', widget.scaffoldKey);
           }, // lostfocus
         ));
 

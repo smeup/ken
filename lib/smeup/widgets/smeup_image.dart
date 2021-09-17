@@ -20,11 +20,7 @@ class SmeupImage extends StatefulWidget
   // graphic properties
   double width;
   double height;
-  double padding;
-  double rightPadding;
-  double leftPadding;
-  double topPadding;
-  double bottomPadding;
+  EdgeInsetsGeometry padding;
   String data;
   String title;
   String id;
@@ -45,10 +41,6 @@ class SmeupImage extends StatefulWidget
       this.width = SmeupImageModel.defaultWidth,
       this.height = SmeupImageModel.defaultHeight,
       this.padding = SmeupImageModel.defaultPadding,
-      this.rightPadding = SmeupImageModel.defaultPadding,
-      this.leftPadding = SmeupImageModel.defaultPadding,
-      this.topPadding = SmeupImageModel.defaultPadding,
-      this.bottomPadding = SmeupImageModel.defaultPadding,
       this.isRemote = true,
       title = ''})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
@@ -61,12 +53,8 @@ class SmeupImage extends StatefulWidget
     id = m.id;
     type = m.type;
     padding = m.padding;
-    rightPadding = m.rightPadding;
-    leftPadding = m.leftPadding;
-    topPadding = m.topPadding;
     width = m.width;
     height = m.height;
-    bottomPadding = m.bottomPadding;
     title = m.title;
 
     var res = treatData(m);
@@ -175,20 +163,10 @@ class _SmeupImageState extends State<SmeupImage>
       );
     }
     children = Container(
-      padding: _getPadding(),
+      padding: widget.padding,
       child: image,
     );
 
     return SmeupWidgetBuilderResponse(_model, children);
-  }
-
-  EdgeInsets _getPadding() {
-    return widget.padding > 0
-        ? EdgeInsets.all(widget.padding)
-        : EdgeInsets.only(
-            top: widget.topPadding,
-            bottom: widget.bottomPadding,
-            right: widget.rightPadding,
-            left: widget.leftPadding);
   }
 }

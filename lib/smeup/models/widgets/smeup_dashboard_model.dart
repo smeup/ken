@@ -7,16 +7,19 @@ import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const double defaultFontsize = 60.0;
   static const double defaultLabelFontsize = 10.0;
   static const double defaultWidth = 100;
   static const double defaultHeight = 100;
   static const double defaultIconSize = 40.0;
   static const String defaultValueColName = 'value';
+  static const String defaultSelectLayout = '';
 
-  String valueColName = '';
+  EdgeInsetsGeometry padding;
+  String valueColName;
   Color iconColor;
-  String selectLayout = '';
+  String selectLayout;
   double fontsize;
   double labelFontsize;
   double width;
@@ -27,8 +30,9 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       {id,
       type,
       this.valueColName = defaultValueColName,
+      this.padding = defaultPadding,
       this.iconColor,
-      this.selectLayout,
+      this.selectLayout = defaultSelectLayout,
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.fontsize = defaultFontsize,
@@ -44,6 +48,7 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   SmeupDashboardModel.fromMap(Map<String, dynamic> jsonMap)
       : super.fromMap(jsonMap) {
     valueColName = optionsDefault['valueColName'] ?? defaultValueColName;
+    padding = SmeupUtilities.getPadding(optionsDefault['padding']);
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;

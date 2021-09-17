@@ -6,7 +6,11 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart'
 import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+<<<<<<< HEAD
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
+=======
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
+>>>>>>> origin/new-data-structure
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_radio_button.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
@@ -135,10 +139,15 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
 
   @override
   void initState() {
+<<<<<<< HEAD
     SmeupDynamismService.variables[widget.id] = widget.selectedValue;
     _model = widget.model;
     _data = widget.data;
     if (_model != null) widgetLoadType = _model.widgetLoadType;
+=======
+    SmeupVariablesService.setVariable(widget.smeupRadioButtonsModel.id,
+        widget.smeupRadioButtonsModel.selectedValue);
+>>>>>>> origin/new-data-structure
     super.initState();
   }
 
@@ -195,6 +204,7 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
       buttonIndex += 1;
 
       final button = SmeupRadioButton(
+<<<<<<< HEAD
           id: '${SmeupUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
           type: widget.type,
           title: widget.title,
@@ -234,6 +244,30 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
         SmeupDynamismService.run(
             _model.dynamisms, context, 'change', widget.scaffoldKey);
 
+=======
+        smeupRadioButtonsModel: smeupRadioButtonsModel,
+        data: child,
+        icon: null,
+        onServerPressed: (value) {
+          setState(() {
+            dynamic selData = (smeupRadioButtonsModel.data as List).firstWhere(
+                (element) => element['k'] == value,
+                orElse: () => null);
+            if (selData != null) {
+              SmeupDynamismService.storeDynamicVariables(selData);
+              SmeupVariablesService.setVariable(
+                  smeupRadioButtonsModel.id, value);
+              SmeupDynamismService.run(smeupRadioButtonsModel.dynamisms,
+                  context, 'change', widget.scaffoldKey);
+            }
+          });
+        },
+        selectedValue:
+            SmeupVariablesService.getVariable(widget.smeupRadioButtonsModel.id),
+      );
+      SmeupDynamismService.run(smeupRadioButtonsModel.dynamisms, context,
+          'change', widget.scaffoldKey);
+>>>>>>> origin/new-data-structure
       buttons.add(button);
     });
 
@@ -252,8 +286,16 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
                   border: Border.all(color: SmeupOptions.theme.primaryColor)),
               child: Column(children: buttons)));
 
+<<<<<<< HEAD
       dynamic selData = (_data as List).firstWhere(
           (element) => element == SmeupDynamismService.variables[widget.id],
+=======
+      dynamic selData = (smeupRadioButtonsModel.data as List).firstWhere(
+          (element) =>
+              element['k'] ==
+              SmeupVariablesService.getVariable(
+                  widget.smeupRadioButtonsModel.id),
+>>>>>>> origin/new-data-structure
           orElse: () => null);
       if (selData != null) {
         SmeupDynamismService.storeDynamicVariables(selData);

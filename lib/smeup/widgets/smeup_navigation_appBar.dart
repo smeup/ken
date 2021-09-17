@@ -3,6 +3,7 @@ import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 
 List<Widget> _debugAction;
 List<Widget> _getDebugAction() {
@@ -12,7 +13,7 @@ List<Widget> _getDebugAction() {
     _debugAction = [
       IconButton(
           icon: Icon(Icons.developer_mode),
-          onPressed: () => SmeupDynamismService.dumpVariables())
+          onPressed: () => SmeupVariablesService.dumpVariables())
     ];
   }
   return _debugAction;

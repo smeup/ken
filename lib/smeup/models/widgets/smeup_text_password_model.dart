@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/daos/smeup_text_field_dao.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_text_password_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
-class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
+class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultFontsize = 16.0;
   static const String defaultLabel = '';
   static const double defaultWidth = 100;
@@ -17,6 +17,9 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultValueField = 'value';
   static const bool defaultShowSubmit = false;
   static const bool defaultShowUnderline = true;
+  static const bool defaultShowRules = true;
+  static const bool defaultShowRulesIcon = true;
+  static const bool defaultCheckRules = true;
 
   Color backColor;
   double fontsize;
@@ -29,9 +32,11 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
   bool autoFocus;
   String valueField;
   bool showSubmit;
-  TextInputType keyboard;
+  bool showRules;
+  bool showRulesIcon;
+  bool checkRules;
 
-  SmeupTextFieldModel(
+  SmeupTextPasswordModel(
       {id,
       type,
       this.backColor,
@@ -42,19 +47,21 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
       this.padding = defaultPadding,
       this.showborder = defaultShowBorder,
       this.showSubmit = defaultShowSubmit,
+      this.showRulesIcon = defaultShowRulesIcon,
       title = '',
       this.showUnderline = defaultShowUnderline,
       this.autoFocus = defaultAutoFocus,
       this.valueField,
-      this.keyboard})
+      this.showRules = defaultShowRules,
+      this.checkRules = defaultCheckRules})
       : super(title: title, id: id, type: type) {
     if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
-    if (optionsDefault['type'] == null) optionsDefault['type'] = 'itx';
+    if (optionsDefault['type'] == null) optionsDefault['type'] = 'pwd';
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupTextFieldModel.fromMap(Map<String, dynamic> jsonMap)
+  SmeupTextPasswordModel.fromMap(Map<String, dynamic> jsonMap)
       : super.fromMap(jsonMap) {
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
@@ -78,26 +85,38 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
       else
         showborder = false;
     }
-    keyboard = SmeupUtilities.getKeyboard(optionsDefault['keyboard']);
+
+    if (optionsDefault['showRules'] == null) {
+      showRules = defaultShowRules;
+    } else {
+      if (optionsDefault['showRules'] == 'Yes')
+        showRules = true;
+      else
+        showRules = false;
+    }
+
+    if (optionsDefault['showRulesIcon'] == null) {
+      showRulesIcon = defaultShowRulesIcon;
+    } else {
+      if (optionsDefault['showRulesIcon'] == 'Yes')
+        showRulesIcon = true;
+      else
+        showRulesIcon = false;
+    }
+
+    if (optionsDefault['checkRules'] == null) {
+      checkRules = defaultCheckRules;
+    } else {
+      if (optionsDefault['checkRules'] == 'Yes')
+        checkRules = true;
+      else
+        checkRules = false;
+    }
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupTextFieldDao.getData(this);
+      SmeupTextPasswordDao.getData(this);
     }
 
     SmeupDataService.incrementDataFetch(id);
-  }
-
-  SmeupTextFieldModel clone() {
-    return SmeupTextFieldModel(
-        id: id,
-        type: type,
-        backColor: backColor,
-        fontsize: fontsize,
-        label: label,
-        width: width,
-        height: height,
-        padding: padding,
-        showborder: showborder,
-        showUnderline: showUnderline);
   }
 }

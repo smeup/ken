@@ -115,19 +115,25 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       useDim = false;
     }
 
-    final routeArgs =
-        ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
-    bool isDialog = routeArgs == null ? false : routeArgs['isDialog'] ?? false;
-    final formHeight = isDialog ? 300 : SmeupOptions.deviceHeight;
-
     smeupFormModel.smeupSectionsModels.forEach((s) {
       var section;
       if (useDim && totalDim > 0) {
-        section = Container(
-            height: smeupFormModel.layout == 'column'
-                ? (formHeight - 70) / totalDim * s.dim
-                : formHeight,
-            child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
+        section = OrientationBuilder(builder: (context, orientation) {
+          final routeArgs =
+              ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
+          bool isDialog =
+              routeArgs == null ? false : routeArgs['isDialog'] ?? false;
+          MediaQueryData deviceInfo = MediaQuery.of(context);
+          SmeupOptions.deviceWidth = deviceInfo.size.width;
+          SmeupOptions.deviceHeight = deviceInfo.size.height;
+          final formHeight = isDialog ? 300 : SmeupOptions.deviceHeight;
+
+          return Container(
+              height: smeupFormModel.layout == 'column'
+                  ? (formHeight - 70) / totalDim * s.dim
+                  : formHeight,
+              child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
+        });
       } else {
         section = Container(
             child: SmeupSection(s, widget.scaffoldKey, widget.formKey));

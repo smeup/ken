@@ -20,7 +20,7 @@ class SmeupLabel extends StatefulWidget
   GlobalKey<FormState> formKey;
 
   // graphic properties
-  double padding;
+  EdgeInsetsGeometry padding;
   double fontSize;
   double iconSize;
   Alignment align;
@@ -177,10 +177,10 @@ class _SmeupLabelState extends State<SmeupLabel>
       return getFunErrorResponse(context, _model);
     }
 
-    Widget children;
+    //Widget children;
 
     List<Align> alignes = List<Align>.empty(growable: true);
-    double padding = widget.padding;
+
     double fontSize = widget.fontSize;
 
     Color backColor = widget.backColor;
@@ -217,13 +217,14 @@ class _SmeupLabelState extends State<SmeupLabel>
         children: alignes);
 
     if (alignes.length > 0) {
-      children = Padding(
-        padding: EdgeInsets.all(padding),
-        child: col,
-      );
+      // children = Padding(
+      //   padding: widget.padding,
+      //   child: col,
+      // );
 
-      double labelHeight =
-          widget.height * alignes.length + padding * (fontSize / 5);
+      // double labelHeight =
+      //     widget.height * alignes.length + padding * (fontSize / 5);
+      double labelHeight = widget.height * alignes.length * (fontSize / 5);
 
       int iconData = 0;
       if (widget.iconData != 0) {
@@ -237,11 +238,16 @@ class _SmeupLabelState extends State<SmeupLabel>
       double iconHeight = widget.iconSize;
 
       if (iconData == 0) {
-        return SmeupWidgetBuilderResponse(_model,
-            Container(color: backColor, height: labelHeight, child: children));
+        return SmeupWidgetBuilderResponse(
+            _model,
+            Container(
+                padding: widget.padding,
+                color: backColor,
+                height: labelHeight,
+                child: col));
       } else {
         final label =
-            Container(color: backColor, height: labelHeight, child: children);
+            Container(color: backColor, height: labelHeight, child: col);
 
         final icon = Icon(
           IconData(iconData, fontFamily: 'MaterialIcons'),
@@ -255,6 +261,7 @@ class _SmeupLabelState extends State<SmeupLabel>
         switch (widget.align.toString()) {
           case 'centerLeft': // text on the left icon on the right
             widget = Container(
+              padding: widget.padding,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -267,6 +274,7 @@ class _SmeupLabelState extends State<SmeupLabel>
             break;
           case 'centerRight': // text on the right icon on the left
             widget = Container(
+              padding: widget.padding,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -279,6 +287,7 @@ class _SmeupLabelState extends State<SmeupLabel>
             break;
           case 'topCenter': // text at the top icon at the bottom
             widget = Container(
+              padding: widget.padding,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -291,6 +300,7 @@ class _SmeupLabelState extends State<SmeupLabel>
             break;
           case 'bottomCenter': // text at the bottom icon at the top
             widget = Container(
+              padding: widget.padding,
               height: widgetHeight,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -305,6 +315,7 @@ class _SmeupLabelState extends State<SmeupLabel>
             break;
           default:
             widget = Container(
+              padding: widget.padding,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
