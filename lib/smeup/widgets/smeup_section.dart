@@ -4,6 +4,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_section_mod
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
@@ -218,9 +219,8 @@ class _SmeupSectionState extends State<SmeupSection>
   }
 
   void _onTabChanged(int index) {
-    SmeupDynamismService
-            .variables[widget.smeupSectionModel.selectedTabColName] =
-        index.toString();
+    SmeupVariablesService.setVariable(
+        widget.smeupSectionModel.selectedTabColName, index.toString());
 
     SmeupDynamismService.run(widget.smeupSectionModel.dynamisms, context,
         'change', widget.scaffoldKey);

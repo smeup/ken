@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_widget_notification_service.dart';
 import 'package:mobile_components_library/smeup/screens/smeup_dynamic_screen.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
@@ -9,17 +10,8 @@ import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SmeupDynamismService {
-  static Map variables = Map();
   static const loggerId = "SmeupDynamismService";
   static GlobalKey<ScaffoldState> currentScaffoldKey;
-
-  static void dumpVariables() {
-    variables.forEach((key, value) {
-      SmeupLogService.writeDebugMessage(
-          "$loggerId - Variables status: $key=\"$value\"",
-          logType: LogType.info);
-    });
-  }
 
   static void storeDynamicVariables(dynamic data) {
     if (data != null && data is Map) {
@@ -38,7 +30,7 @@ class SmeupDynamismService {
           } else {
             value = element.value.toString();
           }
-          variables[key] = value;
+          SmeupVariablesService.setVariable(key, value);
           if (SmeupOptions.isVariablesChangingLogEnabled) {
             SmeupLogService.writeDebugMessage(
                 "$loggerId - Settings variable $key=\"$value\" by data $data",
@@ -51,7 +43,7 @@ class SmeupDynamismService {
 
   static void storeFormVariables(Map data) {
     if (data != null && data['name'] != null) {
-      variables[data['name']] = data['value'] ?? '';
+      SmeupVariablesService.setVariable(data['name'], data['value'] ?? '');
       if (SmeupOptions.isVariablesChangingLogEnabled) {
         SmeupLogService.writeDebugMessage(
             "$loggerId - Settings variable ${data['name']}=\"${data['value']}\" by data $data",
@@ -82,7 +74,7 @@ class SmeupDynamismService {
                 .trim()
                 .replaceAll('[', '')
                 .replaceAll(']', '');
-            value = variables[varName].toString();
+            value = SmeupVariablesService.getVariable(varName).toString();
           } else {
             value = element['value'];
           }
@@ -190,7 +182,7 @@ class SmeupDynamismService {
   }
 
   static String replaceFunVariables(String fun) {
-    SmeupDynamismService.variables.entries.forEach((element) {
+    SmeupVariablesService.getVariables().entries.forEach((element) {
       if (element.value is String) {
         fun =
             fun.replaceAll('[${element.key}]', element.value.toString() ?? '');

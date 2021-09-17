@@ -3,8 +3,8 @@ import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker_button.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
@@ -104,7 +104,7 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
         : smeupTimePickerModel.optionsDefault['displayedField'];
     String display = smeupTimePickerModel.data['rows'][0][displayedField];
 
-    SmeupDynamismService.variables[smeupTimePickerModel.id] = valueString;
+    SmeupVariablesService.setVariable(smeupTimePickerModel.id, valueString);
 
     timepicker =
         SmeupTimePickerButton(widget.smeupTimePickerModel, value, display);

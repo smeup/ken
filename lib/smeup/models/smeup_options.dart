@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:package_info/package_info.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 
 class SmeupOptions {
   static const double STATIC_BUTTON_ROUNDNESS = 0.0;
@@ -32,8 +32,8 @@ class SmeupOptions {
 
   static void setPackageInfo(PackageInfo packageInfo) {
     _packageInfo = packageInfo;
-    SmeupDynamismService.variables['*VERSION'] =
-        _packageInfo != null ? _packageInfo.version : '';
+    SmeupVariablesService.setVariable(
+        '*VERSION', _packageInfo != null ? _packageInfo.version : '');
   }
 
   static PackageInfo getPackageInfo() {

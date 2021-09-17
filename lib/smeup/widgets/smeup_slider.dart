@@ -3,8 +3,8 @@ import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_input_field_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'smeup_not_available.dart';
@@ -94,7 +94,7 @@ class _SmeupSliderState extends State<SmeupSlider> with SmeupWidgetStateMixin {
             ? double.tryParse(tmp)
             : 0;
 
-    SmeupDynamismService.variables[smeupInputFieldModel.id] = value;
+    SmeupVariablesService.setVariable(smeupInputFieldModel.id, value);
 
     children = Center(
       child: Container(
@@ -103,7 +103,7 @@ class _SmeupSliderState extends State<SmeupSlider> with SmeupWidgetStateMixin {
             key: ValueKey(smeupInputFieldModel.id),
             onChanged: (value) {
               if (widget.clientOnChange != null) widget.clientOnChange(value);
-              SmeupDynamismService.variables[smeupInputFieldModel.id] = value;
+              SmeupVariablesService.setVariable(smeupInputFieldModel.id, value);
             },
             value: value,
             onChangeEnd: widget.clientOnChange,

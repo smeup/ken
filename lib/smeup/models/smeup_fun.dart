@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 
 class SmeupFun {
   dynamic fun;
@@ -90,7 +90,7 @@ class SmeupFun {
               .replaceFirst('(', '')
               .replaceFirst(')', '');
           if (key != null && key.isNotEmpty) {
-            SmeupDynamismService.variables[key] = value;
+            SmeupVariablesService.setVariable(key, value);
           }
         });
       });

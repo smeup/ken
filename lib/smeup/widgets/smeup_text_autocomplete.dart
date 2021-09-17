@@ -8,6 +8,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart'
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_autocomplete_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_buttons.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
@@ -209,8 +210,8 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
               FocusNode focusNode,
               VoidCallback onFieldSubmitted) {
             String code =
-                SmeupDynamismService.variables[widget.defaultValue] ?? '';
-            SmeupDynamismService.variables[widget.id] = code;
+                SmeupVariablesService.getVariable(widget.defaultValue) ?? '';
+            SmeupVariablesService.setVariable(widget.id, code);
 
             if (code.isNotEmpty && _data != null) {
               var currel = _data.firstWhere(
@@ -267,7 +268,8 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                   child: Icon(Icons.close, color: Colors.black38),
                   onTap: () {
                     setState(() {
-                      SmeupDynamismService.variables[widget.defaultValue] = '';
+                      SmeupVariablesService.setVariable(
+                          widget.defaultValue, '');
                       if (_model != null)
                         SmeupDynamismService.run(_model.dynamisms, context,
                             'change', widget.scaffoldKey);
@@ -294,8 +296,8 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                       return GestureDetector(
                         onTap: () {
                           onSelected(option['value']);
-                          SmeupDynamismService.variables[widget.id] =
-                              option['code'];
+                          SmeupVariablesService.setVariable(
+                              widget.id, option['code']);
                           if (_model != null)
                             SmeupDynamismService.run(_model.dynamisms, context,
                                 'change', widget.scaffoldKey);

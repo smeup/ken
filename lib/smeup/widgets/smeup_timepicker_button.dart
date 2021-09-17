@@ -3,7 +3,7 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker_customization.dart';
 
 class SmeupTimePickerButton extends StatefulWidget {
@@ -56,8 +56,8 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
                       final newTime = DateFormat('HH:mm').format(date);
                       _currentDisplay = newTime;
                       _currentValue = date;
-                      SmeupDynamismService
-                          .variables[widget.smeupTimePickerModel.id] = newTime;
+                      SmeupVariablesService.setVariable(
+                          widget.smeupTimePickerModel.id, newTime);
                     });
                   });
                 },

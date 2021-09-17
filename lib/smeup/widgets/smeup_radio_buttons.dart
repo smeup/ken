@@ -5,6 +5,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_butto
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_radio_button.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
@@ -29,8 +30,8 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
     with SmeupWidgetStateMixin {
   @override
   void initState() {
-    SmeupDynamismService.variables[widget.smeupRadioButtonsModel.id] =
-        widget.smeupRadioButtonsModel.selectedValue;
+    SmeupVariablesService.setVariable(widget.smeupRadioButtonsModel.id,
+        widget.smeupRadioButtonsModel.selectedValue);
     super.initState();
   }
 
@@ -114,14 +115,15 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
                 orElse: () => null);
             if (selData != null) {
               SmeupDynamismService.storeDynamicVariables(selData);
-              SmeupDynamismService.variables[smeupRadioButtonsModel.id] = value;
+              SmeupVariablesService.setVariable(
+                  smeupRadioButtonsModel.id, value);
               SmeupDynamismService.run(smeupRadioButtonsModel.dynamisms,
                   context, 'change', widget.scaffoldKey);
             }
           });
         },
         selectedValue:
-            SmeupDynamismService.variables[widget.smeupRadioButtonsModel.id],
+            SmeupVariablesService.getVariable(widget.smeupRadioButtonsModel.id),
       );
       SmeupDynamismService.run(smeupRadioButtonsModel.dynamisms, context,
           'change', widget.scaffoldKey);
@@ -147,7 +149,8 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
       dynamic selData = (smeupRadioButtonsModel.data as List).firstWhere(
           (element) =>
               element['k'] ==
-              SmeupDynamismService.variables[widget.smeupRadioButtonsModel.id],
+              SmeupVariablesService.getVariable(
+                  widget.smeupRadioButtonsModel.id),
           orElse: () => null);
       if (selData != null) {
         SmeupDynamismService.storeDynamicVariables(selData);
