@@ -135,8 +135,7 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
 
   @override
   void initState() {
-    SmeupDynamismService.variables[widget.smeupRadioButtonsModel.id] =
-        widget.smeupRadioButtonsModel.selectedValue;
+    SmeupDynamismService.variables[widget.id] = widget.selectedValue;
     _model = widget.model;
     _data = widget.data;
     if (_model != null) widgetLoadType = _model.widgetLoadType;
@@ -169,7 +168,7 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
     return radioButtons;
   }
 
-  Future<SmeupWidgetBuilderResponse> getChildrens() async {
+  Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
         await SmeupRadioButtonsDao.getData(_model);
@@ -218,26 +217,27 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
           icon: null,
           serverOnPressed: (value) {
             setState(() {
-              dynamic selData = (_model.data as List).firstWhere(
-                  (element) => element['k'] == value,
+              dynamic selData = (_data as List).firstWhere(
+                  (element) => element == value,
                   orElse: () => null);
               if (selData != null) {
                 SmeupDynamismService.storeDynamicVariables(selData);
                 SmeupDynamismService.variables[widget.id] = value;
-                SmeupDynamismService.run(
-                    _model.dynamisms, context, 'change', widget.scaffoldKey);
+                if (_model != null)
+                  SmeupDynamismService.run(
+                      _model.dynamisms, context, 'change', widget.scaffoldKey);
               }
             });
           });
 
-      SmeupDynamismService.run(
-          _model.dynamisms, context, 'change', widget.scaffoldKey);
+      if (_model != null)
+        SmeupDynamismService.run(
+            _model.dynamisms, context, 'change', widget.scaffoldKey);
 
       buttons.add(button);
     });
 
     if (buttons.length > 0) {
-      final listView = ListView(children: buttons);
       final container = Container(
           padding: widget.padding > 0
               ? EdgeInsets.all(widget.padding)
@@ -250,11 +250,10 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.0),
                   border: Border.all(color: SmeupOptions.theme.primaryColor)),
-              child: listView));
+              child: Column(children: buttons)));
 
-      dynamic selData = (_model.data as List).firstWhere(
-          (element) =>
-              element['k'] == SmeupDynamismService.variables[widget.id],
+      dynamic selData = (_data as List).firstWhere(
+          (element) => element == SmeupDynamismService.variables[widget.id],
           orElse: () => null);
       if (selData != null) {
         SmeupDynamismService.storeDynamicVariables(selData);
@@ -263,7 +262,7 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
       return SmeupWidgetBuilderResponse(_model, container);
     } else {
       SmeupLogService.writeDebugMessage(
-          'Error SmeupRadioButtons no children \'button\' created',
+          'Error SmeupRadioButtons no children \'radio button\' created',
           logType: LogType.error);
       return SmeupWidgetBuilderResponse(_model, SmeupNotAvailable());
     }

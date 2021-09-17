@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_radio_buttons_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
@@ -51,10 +52,12 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
       this.valueField = defaultValueField,
       this.displayedField = defaultDisplayedField,
       this.selectedValue})
-      : super(title: title) {
+      : super(title: title, id: id, type: type) {
     if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
     if (fontColor == null)
       fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
+
+    if (optionsDefault['type'] == null) optionsDefault['type'] = 'rad';
 
     SmeupDataService.incrementDataFetch(id);
   }
@@ -113,6 +116,11 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
     if (optionsDefault['fontColor'] != null) {
       fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']);
     }
+
+    if (widgetLoadType != LoadType.Delay) {
+      SmeupRadioButtonsDao.getData(this);
+    }
+
     SmeupDataService.incrementDataFetch(id);
   }
 

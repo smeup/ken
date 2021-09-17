@@ -32,7 +32,7 @@ class SmeupRadioButton extends StatelessWidget {
 
   const SmeupRadioButton(
       {this.id = '',
-      this.type = 'FLD',
+      this.type = 'rad',
       this.title = '',
       this.data = '',
       this.clientData = '',
@@ -57,6 +57,7 @@ class SmeupRadioButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _selectedValue = selectedValue;
     return Container(
       child: SizedBox(
           height: height,
@@ -65,9 +66,10 @@ class SmeupRadioButton extends StatelessWidget {
             children: [
               Radio(
                 value: data,
-                groupValue: selectedValue,
-                onChanged:
-                    clientOnPressed != null ? clientOnPressed : serverOnPressed,
+                groupValue: _selectedValue,
+                onChanged: (value) {
+                  serverOnPressed(value);
+                },
                 activeColor: SmeupOptions.theme.primaryColor,
               ),
               Align(

@@ -13,8 +13,6 @@ class SmeupRadioButtonsDao extends SmeupDao {
         return;
       }
 
-      //TODO: controllare questa parte
-
       /*
      model.data = smeupServiceResponse.result.data['rows'];
       if ((model.data as List).length > 0) {
