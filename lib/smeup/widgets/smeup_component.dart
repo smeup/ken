@@ -140,7 +140,7 @@ class _SmeupComponentState extends State<SmeupComponent> {
             break;
 
           case 'rad':
-            children = SmeupRadioButtons(
+            children = SmeupRadioButtons.withController(
                 smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 

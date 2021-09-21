@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_radio_buttons_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
@@ -28,14 +29,14 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
   double leftPadding;
   double topPadding;
   double bottomPadding;
-  String clientData;
   String valueField;
   String displayedField;
   String selectedValue;
 
   SmeupRadioButtonsModel(
-      {title = '',
-      this.clientData = '',
+      {id,
+      type,
+      title = '',
       this.backColor,
       this.width = defaultWidth,
       this.height = defaultHeight,
@@ -51,13 +52,33 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
       this.valueField = defaultValueField,
       this.displayedField = defaultDisplayedField,
       this.selectedValue})
-      : super(title: title) {
+      : super(title: title, id: id, type: type) {
     if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
     if (fontColor == null)
       fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
-    id = SmeupUtilities.getWidgetId('FLD', id);
+
+    if (optionsDefault['type'] == null) optionsDefault['type'] = 'rad';
+
     SmeupDataService.incrementDataFetch(id);
   }
+
+  SmeupRadioButtonsModel.clone(SmeupRadioButtonsModel other)
+      : this(
+            title: other.title,
+            backColor: other.backColor,
+            width: other.width,
+            height: other.height,
+            position: other.position,
+            align: other.align,
+            fontColor: other.fontColor,
+            fontsize: other.fontsize,
+            padding: other.padding,
+            leftPadding: other.leftPadding,
+            rightPadding: other.rightPadding,
+            topPadding: other.topPadding,
+            bottomPadding: other.bottomPadding,
+            valueField: other.valueField,
+            displayedField: other.displayedField);
 
   SmeupRadioButtonsModel.fromMap(Map<String, dynamic> jsonMap)
       : super.fromMap(jsonMap) {
@@ -95,6 +116,11 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
     if (optionsDefault['fontColor'] != null) {
       fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']);
     }
+
+    if (widgetLoadType != LoadType.Delay) {
+      SmeupRadioButtonsDao.getData(this);
+    }
+
     SmeupDataService.incrementDataFetch(id);
   }
 
@@ -103,24 +129,5 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
       return SmeupDynamismService.replaceFunVariables(
           optionsDefault['selectedValue']);
     }
-  }
-
-  @override
-  // ignore: override_on_non_overriding_member
-  setData() async {
-    if (smeupFun != null && smeupFun.isFunValid()) {
-      final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
-
-      if (!smeupServiceResponse.succeded) {
-        return;
-      }
-
-      data = smeupServiceResponse.result.data;
-    }
-
-    if (data == null && clientData != null) {
-      data = clientData;
-    }
-    SmeupDataService.decrementDataFetch(id);
   }
 }
