@@ -16,11 +16,11 @@ import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin
 class SmeupDatePicker extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  final SmeupDatePickerModel model;
+  SmeupDatePickerModel model;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
 
-  String data;
+  List<dynamic> data;
   String title;
   String id;
   String type;
@@ -36,6 +36,11 @@ class SmeupDatePicker extends StatefulWidget
   bool showborder;
   double elevation;
 
+  //Functions
+  Function clientValidator;
+  Function clientOnSave;
+  Function clientOnChange;
+
   SmeupDatePicker.withController(
     this.model,
     this.scaffoldKey,
@@ -44,21 +49,26 @@ class SmeupDatePicker extends StatefulWidget
     runControllerActivities(model);
   }
 
-  SmeupDatePicker(this.scaffoldKey, this.formKey, this.data,
-      {this.id = '',
-      this.type = 'cal',
-      this.title = '',
-      this.backColor,
-      this.fontsize = SmeupDatePickerModel.defaultFontsize,
-      this.fontColor,
-      this.label = SmeupDatePickerModel.defaultLabel,
-      this.width = SmeupDatePickerModel.defaultWidth,
-      this.height = SmeupDatePickerModel.defaultHeight,
-      this.padding = SmeupDatePickerModel.defaultPadding,
-      this.showborder = SmeupDatePickerModel.defaultShowBorder,
-      this.elevation = SmeupDatePickerModel.defaultElevation,
-      this.model})
-      : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
+  SmeupDatePicker(
+    this.scaffoldKey,
+    this.formKey, {
+    this.id = '',
+    this.type = 'cal',
+    this.title = '',
+    this.data,
+    this.backColor,
+    this.fontsize = SmeupDatePickerModel.defaultFontsize,
+    this.fontColor,
+    this.label = SmeupDatePickerModel.defaultLabel,
+    this.width = SmeupDatePickerModel.defaultWidth,
+    this.height = SmeupDatePickerModel.defaultHeight,
+    this.padding = SmeupDatePickerModel.defaultPadding,
+    this.showborder = SmeupDatePickerModel.defaultShowBorder,
+    this.elevation = SmeupDatePickerModel.defaultElevation,
+    this.clientValidator,
+    this.clientOnSave,
+    this.clientOnChange,
+  }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
   }
 
@@ -89,10 +99,13 @@ class SmeupDatePicker extends StatefulWidget
 
     // set the widget data
     if (workData != null) {
-      var newList = List<String>.empty(growable: true);
+      var newList = List<dynamic>.empty(growable: true);
       for (var i = 0; i < (workData['rows'] as List).length; i++) {
         final element = workData['rows'][i];
-        newList.add(element['value'].toString());
+        newList.add({
+          'value': element['value'].toString(),
+          'display': element['display'].toString()
+        });
       }
       return newList;
     } else {
@@ -150,20 +163,25 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
       return getFunErrorResponse(context, _model);
     }
 
+    /*
     String valueField = _data.optionsDefault == null
         ? 'value'
         : _data.optionsDefault['valueField'];
-    final valueString = _data.data['rows'][0][valueField];
+    */
+    final valueString = _data[0]['value'];
 
     final value = DateTime.tryParse(valueString);
 
+    /*
     String displayedField = _data.optionsDefault == null
         ? 'display'
         : _data.optionsDefault['displayedField'];
-    String display = DateFormat("dd/MM/yyyy")
-        .format(DateTime.tryParse(_data['rows'][0][displayedField]));
+    */
 
-    SmeupVariablesService.setVariable(_data.id, valueString);
+    String display =
+        DateFormat("dd/MM/yyyy").format(DateTime.tryParse(_data[0]['display']));
+
+    SmeupVariablesService.setVariable(widget.id, valueString);
 
     var timepicker = SmeupDatePickerButton(
         widget.model, widget.scaffoldKey, widget.formKey, value, display);
