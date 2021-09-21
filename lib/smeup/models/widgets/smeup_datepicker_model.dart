@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_datepicker_dao.dart';
+import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
@@ -22,13 +23,14 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
   double height;
   double padding;
   bool showborder;
-  dynamic clientData;
   double elevation;
 
   List<String> minutesList;
 
   SmeupDatePickerModel(
-      {this.backColor,
+      {id,
+      type,
+      this.backColor,
       this.fontsize = defaultFontsize,
       this.fontColor,
       this.label = defaultLabel,
@@ -38,9 +40,8 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
       this.showborder = defaultShowBorder,
       this.elevation = defaultElevation,
       title = '',
-      this.clientData,
       this.minutesList})
-      : super(title: title) {
+      : super(id: id, type: type, title: title) {
     if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
     if (fontColor == null)
       fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
@@ -82,47 +83,11 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
       else
         showborder = false;
     }
+
+    if (widgetLoadType != LoadType.Delay) {
+      SmeupDatePickerDao.getData(this);
+    }
+
     SmeupDataService.incrementDataFetch(id);
-  }
-
-  @override
-  // ignore: override_on_non_overriding_member
-  setData() async {
-    if (smeupFun != null && smeupFun.isFunValid()) {
-      final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
-
-      if (!smeupServiceResponse.succeded) {
-        return;
-      }
-
-      data = smeupServiceResponse.result.data;
-    }
-
-    if (clientData != null) {
-      data = _getClientDataStructure(clientData);
-    }
-    SmeupDataService.decrementDataFetch(id);
-  }
-
-  dynamic _getClientDataStructure(clientData) {
-    if (optionsDefault == null) {
-      return {
-        "rows": [
-          {
-            'value': clientData['value'],
-            'display': clientData['display'],
-          }
-        ],
-      };
-    } else {
-      return {
-        "rows": [
-          {
-            'value': clientData['value'],
-            'display': clientData['display'],
-          }
-        ],
-      };
-    }
   }
 }
