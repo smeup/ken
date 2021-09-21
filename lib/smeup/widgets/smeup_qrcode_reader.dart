@@ -53,12 +53,6 @@ class _SmeupQRCodeReaderState extends State<SmeupQRCodeReader>
       },
     );
 
-    // SmeupWidgetsNotifier.addWidget(
-    //     widget.scaffoldKey.hashCode,
-    //     widget.smeupQRCodeReaderModel.id,
-    //     widget.smeupQRCodeReaderModel.type,
-    //     notifier);
-
     return input;
   }
 

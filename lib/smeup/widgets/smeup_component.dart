@@ -171,10 +171,9 @@ class _SmeupComponentState extends State<SmeupComponent> {
           double deviceHeight = SmeupOptions.deviceHeight;
           double deviceWidth = SmeupOptions.deviceWidth;
 
-          var smeupJsonForm =
-              SmeupFormModel.fromMap(smeupServiceResponse.result.data);
-          final form =
-              SmeupForm(smeupJsonForm, widget.scaffoldKey, widget.formKey);
+          var smeupJsonForm = SmeupFormModel.fromMap(
+              smeupServiceResponse.result.data, widget.formKey);
+          final form = SmeupForm(smeupJsonForm, widget.scaffoldKey);
 
           if (smeupJsonForm.layout == 'column') {
             children = Container(

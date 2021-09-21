@@ -37,9 +37,10 @@ class SmeupDataService {
     var newSmeupFun;
     if (smeupFun != null && smeupFun.fun != null) {
       String funString = jsonEncode(smeupFun.fun);
-      funString = SmeupDynamismService.replaceFunVariables(funString);
+      funString =
+          SmeupDynamismService.replaceFunVariables(funString, smeupFun.formKey);
       final fun = jsonDecode(funString);
-      newSmeupFun = SmeupFun(fun);
+      newSmeupFun = SmeupFun(fun, smeupFun.formKey);
     }
 
     if (smeupDataService is SmeupDefaultDataService)

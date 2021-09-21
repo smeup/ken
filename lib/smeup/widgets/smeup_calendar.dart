@@ -53,7 +53,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
   set firstWork(DateTime firstWork) {
     _firstWork = firstWork;
     SmeupDynamismService.storeDynamicVariables(
-        {'*CAL.INI': DateFormat('yyyyMMdd').format(firstWork)});
+        {'*CAL.INI': DateFormat('yyyyMMdd').format(firstWork)}, widget.formKey);
   }
 
   DateTime _lastWork;
@@ -63,15 +63,13 @@ class SmeupCalendarState extends State<SmeupCalendar>
   set lastWork(DateTime lastWork) {
     _lastWork = lastWork;
     SmeupDynamismService.storeDynamicVariables(
-        {'*CAL.END': DateFormat('yyyyMMdd').format(lastWork)});
+        {'*CAL.END': DateFormat('yyyyMMdd').format(lastWork)}, widget.formKey);
   }
 
   SmeupServiceResponse _smeupServiceResponse;
 
   @override
   void dispose() {
-    // SmeupWidgetsNotifier.removeWidget(
-    //     widget.scaffoldKey.hashCode, widget.smeupCalendarModel.id);
     _animationController.dispose();
     _calendarController.dispose();
     _events = null;
@@ -219,10 +217,10 @@ class SmeupCalendarState extends State<SmeupCalendar>
       return;
     }
 
-    SmeupDynamismService.storeDynamicVariables(data);
+    SmeupDynamismService.storeDynamicVariables(data, widget.formKey);
 
     SmeupDynamismService.run(widget.smeupCalendarModel.dynamisms, context,
-        'click', widget.scaffoldKey);
+        'click', widget.scaffoldKey, widget.formKey);
 
     setState(() {
       _isLoading = false;
@@ -241,7 +239,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
     lastWork = last;
 
     SmeupDynamismService.run(widget.smeupCalendarModel.dynamisms, context,
-        'changemonth', widget.scaffoldKey);
+        'changemonth', widget.scaffoldKey, widget.formKey);
 
     await _loadEvents();
   }
@@ -295,8 +293,6 @@ class SmeupCalendarState extends State<SmeupCalendar>
             ],
           );
 
-    // SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
-    //     widget.smeupCalendarModel.id, widget.smeupCalendarModel.type, notifier);
     return calendar;
   }
 

@@ -31,7 +31,8 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
   @override
   void initState() {
     SmeupVariablesService.setVariable(widget.smeupRadioButtonsModel.id,
-        widget.smeupRadioButtonsModel.selectedValue);
+        widget.smeupRadioButtonsModel.selectedValue,
+        formKey: widget.formKey);
     super.initState();
   }
 
@@ -65,11 +66,6 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
       },
     );
 
-    // SmeupWidgetsNotifier.addWidget(
-    //     widget.scaffoldKey.hashCode,
-    //     widget.smeupRadioButtonsModel.id,
-    //     widget.smeupRadioButtonsModel.type,
-    //     notifier);
     return buttons;
   }
 
@@ -114,19 +110,22 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
                 (element) => element['k'] == value,
                 orElse: () => null);
             if (selData != null) {
-              SmeupDynamismService.storeDynamicVariables(selData);
+              SmeupDynamismService.storeDynamicVariables(
+                  selData, widget.formKey);
               SmeupVariablesService.setVariable(
-                  smeupRadioButtonsModel.id, value);
+                  smeupRadioButtonsModel.id, value,
+                  formKey: widget.formKey);
               SmeupDynamismService.run(smeupRadioButtonsModel.dynamisms,
-                  context, 'change', widget.scaffoldKey);
+                  context, 'change', widget.scaffoldKey, widget.formKey);
             }
           });
         },
-        selectedValue:
-            SmeupVariablesService.getVariable(widget.smeupRadioButtonsModel.id),
+        selectedValue: SmeupVariablesService.getVariable(
+            widget.smeupRadioButtonsModel.id,
+            formKey: widget.formKey),
       );
       SmeupDynamismService.run(smeupRadioButtonsModel.dynamisms, context,
-          'change', widget.scaffoldKey);
+          'change', widget.scaffoldKey, widget.formKey);
       buttons.add(button);
     });
 
@@ -150,10 +149,11 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
           (element) =>
               element['k'] ==
               SmeupVariablesService.getVariable(
-                  widget.smeupRadioButtonsModel.id),
+                  widget.smeupRadioButtonsModel.id,
+                  formKey: widget.formKey),
           orElse: () => null);
       if (selData != null) {
-        SmeupDynamismService.storeDynamicVariables(selData);
+        SmeupDynamismService.storeDynamicVariables(selData, widget.formKey);
       }
 
       return SmeupWidgetBuilderResponse(smeupRadioButtonsModel, container);

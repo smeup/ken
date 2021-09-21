@@ -10,8 +10,10 @@ class SmeupTimePickerButton extends StatefulWidget {
   final DateTime value;
   final String display;
   final SmeupTimePickerModel smeupTimePickerModel;
+  final GlobalKey<FormState> formKey;
 
-  SmeupTimePickerButton(this.smeupTimePickerModel, this.value, this.display);
+  SmeupTimePickerButton(
+      this.smeupTimePickerModel, this.formKey, this.value, this.display);
 
   @override
   _SmeupTimePickerButtonState createState() => _SmeupTimePickerButtonState();
@@ -57,7 +59,8 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
                       _currentDisplay = newTime;
                       _currentValue = date;
                       SmeupVariablesService.setVariable(
-                          widget.smeupTimePickerModel.id, newTime);
+                          widget.smeupTimePickerModel.id, newTime,
+                          formKey: widget.formKey);
                     });
                   });
                 },

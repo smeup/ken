@@ -11,13 +11,17 @@ import 'package:url_launcher/url_launcher.dart';
 
 class SmeupDynamismService {
   static const loggerId = "SmeupDynamismService";
-  static GlobalKey<ScaffoldState> currentScaffoldKey;
+  //static GlobalKey<ScaffoldState> currentScaffoldKey;
 
-  static void storeDynamicVariables(dynamic data) {
+  static void storeDynamicVariables(
+      dynamic data, GlobalKey<FormState> formKey) {
     if (data != null && data is Map) {
-      data.entries.forEach((element) {
+      for (var i = 0; i < data.entries.length; i++) {
+        final element = data.entries.elementAt(i);
         if (element.value != null) {
           String key = element.key;
+          if (formKey != null)
+            key = key.replaceAll('${formKey.hashCode.toString()}_', '');
           if (key == 'tipo' || key == 't') key = 'T1';
           if (key == 'parametro' || key == 'p') key = 'P1';
           if (key == 'codice' || key == 'k') key = 'K1';
@@ -30,30 +34,31 @@ class SmeupDynamismService {
           } else {
             value = element.value.toString();
           }
-          SmeupVariablesService.setVariable(key, value);
-          if (SmeupOptions.isVariablesChangingLogEnabled) {
-            SmeupLogService.writeDebugMessage(
-                "$loggerId - Settings variable $key=\"$value\" by data $data",
-                logType: LogType.info);
-          }
+          SmeupVariablesService.setVariable(key, value, formKey: formKey);
         }
-      });
-    }
-  }
-
-  static void storeFormVariables(Map data) {
-    if (data != null && data['name'] != null) {
-      SmeupVariablesService.setVariable(data['name'], data['value'] ?? '');
-      if (SmeupOptions.isVariablesChangingLogEnabled) {
-        SmeupLogService.writeDebugMessage(
-            "$loggerId - Settings variable ${data['name']}=\"${data['value']}\" by data $data",
-            logType: LogType.info);
       }
     }
   }
 
-  static Future<void> run(List dynamisms, BuildContext context, String event,
-      GlobalKey<ScaffoldState> scaffoldKey) async {
+  static void storeFormVariables(Map data, GlobalKey<FormState> formKey) {
+    if (data != null && data['name'] != null) {
+      String type = data['type'];
+      if (type == null || type.toString() != 'sch') {
+        SmeupVariablesService.setVariable(data['name'], data['value'] ?? '',
+            formKey: null);
+      } else {
+        SmeupVariablesService.setVariable(data['name'], data['value'] ?? '',
+            formKey: formKey);
+      }
+    }
+  }
+
+  static Future<void> run(
+      List dynamisms,
+      BuildContext context,
+      String event,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      GlobalKey<FormState> formKey) async {
     if (dynamisms == null) return;
 
     List selectedDynamisms =
@@ -74,7 +79,8 @@ class SmeupDynamismService {
                 .trim()
                 .replaceAll('[', '')
                 .replaceAll(']', '');
-            value = SmeupVariablesService.getVariable(varName).toString();
+            value = SmeupVariablesService.getVariable(varName, formKey: formKey)
+                .toString();
           } else {
             value = element['value'];
           }
@@ -83,7 +89,7 @@ class SmeupDynamismService {
             "type": element['type'],
             "value": value
           };
-          SmeupDynamismService.storeFormVariables(newEl);
+          SmeupDynamismService.storeFormVariables(newEl, formKey);
         });
       }
 
@@ -95,7 +101,7 @@ class SmeupDynamismService {
           return;
         }
 
-        SmeupFun smeupFunExec = SmeupFun(exec);
+        SmeupFun smeupFunExec = SmeupFun(exec, formKey);
         String notify = smeupFunExec.fun['fun']['NOTIFY'];
 
         switch (smeupFunExec.fun['fun']['component']) {
@@ -181,22 +187,29 @@ class SmeupDynamismService {
     });
   }
 
-  static String replaceFunVariables(String fun) {
-    SmeupVariablesService.getVariables().entries.forEach((element) {
+  static String replaceFunVariables(
+      String funString, GlobalKey<FormState> formKey) {
+    SmeupVariablesService.getVariables(formKey: formKey)
+        .entries
+        .forEach((element) {
+      String key = element.key;
+      if (formKey != null)
+        key = key.replaceAll('${formKey.hashCode.toString()}_', '');
+
       if (element.value is String) {
-        fun =
-            fun.replaceAll('[${element.key}]', element.value.toString() ?? '');
+        funString =
+            funString.replaceAll('[$key]', element.value.toString() ?? '');
       } else {
-        fun = fun.replaceAll(
-            '\"[${element.key}]\"', element.value.toString() ?? '');
+        funString =
+            funString.replaceAll('\"[$key]\"', element.value.toString() ?? '');
       }
     });
     try {
       // remove not replacable variable
       RegExp re = RegExp(r'\[[^\]]*\]');
-      String newFun = fun;
-      re.allMatches(fun).forEach((match) {
-        final value = fun
+      String newFun = funString;
+      re.allMatches(funString).forEach((match) {
+        final value = funString
             .substring(match.start, match.end)
             .replaceFirst('[', '')
             .replaceFirst(']', '');
@@ -207,12 +220,13 @@ class SmeupDynamismService {
               logType: LogType.warning);
         }
       });
-      fun = newFun;
+      funString = newFun;
     } catch (e) {
-      SmeupLogService.writeDebugMessage('Error in replaceFunVariables: $fun ',
+      SmeupLogService.writeDebugMessage(
+          'Error in replaceFunVariables: $funString ',
           logType: LogType.error);
     }
-    return fun;
+    return funString;
   }
 
   static _manageNotify(

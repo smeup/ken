@@ -24,7 +24,7 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   dynamic clientData;
   List<String> minutesList;
 
-  SmeupTimePickerModel(
+  SmeupTimePickerModel(GlobalKey<FormState> formKey,
       {this.backColor,
       this.fontsize = defaultFontsize,
       this.fontColor,
@@ -36,7 +36,7 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
       title = '',
       this.clientData,
       this.minutesList})
-      : super(title: title) {
+      : super(formKey, title: title) {
     if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
     if (fontColor == null)
       fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
@@ -44,8 +44,9 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupTimePickerModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupTimePickerModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
     }

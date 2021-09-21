@@ -34,6 +34,7 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
   SmeupLabelModel(
       {id,
       type,
+      GlobalKey<FormState> formKey,
       this.valueColName = '',
       this.padding = defaultPadding,
       this.fontSize = defaultFontSize,
@@ -49,12 +50,13 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
       this.colorFontColName = '',
       this.iconSize = defaultIconSize,
       title = ''})
-      : super(title: title, id: id, type: type) {
+      : super(formKey, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupLabelModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupLabelModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     if (fontColor == null)
       fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
 

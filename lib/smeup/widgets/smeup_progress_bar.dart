@@ -55,12 +55,6 @@ class _SmeupProgressBarState extends State<SmeupProgressBar>
       },
     );
 
-    // SmeupWidgetsNotifier.addWidget(
-    //     widget.scaffoldKey.hashCode,
-    //     widget.smeupInputFieldModel.id,
-    //     widget.smeupInputFieldModel.type,
-    //     notifier);
-
     return input;
   }
 
@@ -96,7 +90,8 @@ class _SmeupProgressBarState extends State<SmeupProgressBar>
             ? double.tryParse(tmp)
             : 0;
 
-    SmeupVariablesService.setVariable(smeupInputFieldModel.id, value);
+    SmeupVariablesService.setVariable(smeupInputFieldModel.id, value,
+        formKey: widget.formKey);
 
     children = Center(
       child: Container(

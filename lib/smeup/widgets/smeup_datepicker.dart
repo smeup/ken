@@ -97,7 +97,8 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
     String display = DateFormat("dd/MM/yyyy").format(DateTime.tryParse(
         smeupDatePickerModel.data['rows'][0][displayedField]));
 
-    SmeupVariablesService.setVariable(smeupDatePickerModel.id, valueString);
+    SmeupVariablesService.setVariable(smeupDatePickerModel.id, valueString,
+        formKey: widget.formKey);
 
     timepicker = SmeupDatePickerButton(widget.smeupDatePickerModel,
         widget.scaffoldKey, widget.formKey, value, display);

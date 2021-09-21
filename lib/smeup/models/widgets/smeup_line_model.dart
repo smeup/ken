@@ -6,12 +6,14 @@ class SmeupLineModel extends SmeupModel {
   Color color = Colors.white;
   double thickness = 0;
 
-  SmeupLineModel({this.color, this.thickness}) : super(title: '') {
+  SmeupLineModel(GlobalKey<FormState> formKey, {this.color, this.thickness})
+      : super(formKey, title: '') {
     id = SmeupUtilities.getWidgetId('LIN', id);
   }
 
-  SmeupLineModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupLineModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     thickness = SmeupUtilities.getDouble(optionsDefault['thickness']) ?? 0;
     if (optionsDefault['color'] != null) {
       color = SmeupUtilities.getColorFromRGB(optionsDefault['color']);

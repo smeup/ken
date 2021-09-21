@@ -39,6 +39,7 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
   SmeupTextPasswordModel(
       {id,
       type,
+      GlobalKey<FormState> formKey,
       this.backColor,
       this.fontsize = defaultFontsize,
       this.label = defaultLabel,
@@ -54,15 +55,16 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
       this.valueField,
       this.showRules = defaultShowRules,
       this.checkRules = defaultCheckRules})
-      : super(title: title, id: id, type: type) {
+      : super(formKey, title: title, id: id, type: type) {
     if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'pwd';
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupTextPasswordModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupTextPasswordModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
     }

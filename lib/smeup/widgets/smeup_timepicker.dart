@@ -61,12 +61,6 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
       },
     );
 
-    // SmeupWidgetsNotifier.addWidget(
-    //     widget.scaffoldKey.hashCode,
-    //     widget.smeupTimePickerModel.id,
-    //     widget.smeupTimePickerModel.type,
-    //     notifier);
-
     return input;
   }
 
@@ -104,10 +98,11 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
         : smeupTimePickerModel.optionsDefault['displayedField'];
     String display = smeupTimePickerModel.data['rows'][0][displayedField];
 
-    SmeupVariablesService.setVariable(smeupTimePickerModel.id, valueString);
+    SmeupVariablesService.setVariable(smeupTimePickerModel.id, valueString,
+        formKey: widget.formKey);
 
-    timepicker =
-        SmeupTimePickerButton(widget.smeupTimePickerModel, value, display);
+    timepicker = SmeupTimePickerButton(
+        widget.smeupTimePickerModel, widget.formKey, value, display);
 
     return SmeupWidgetBuilderResponse(smeupTimePickerModel, timepicker);
   }

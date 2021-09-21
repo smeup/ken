@@ -10,7 +10,6 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_form_model.
 import 'package:mobile_components_library/smeup/models/widgets/smeup_screen_model.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_error_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_form.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_navigation_appBar.dart';
@@ -26,8 +25,6 @@ class SmeupDynamicScreen extends StatefulWidget {
 
   static Function onPop =
       (String formId, GlobalKey<ScaffoldState> scaffoldKey) {
-    SmeupDynamismService.currentScaffoldKey = scaffoldKey;
-    //print('ci');
     return;
   };
   static Function onBuild = (String formId) {
@@ -49,7 +46,6 @@ class SmeupDynamicScreen extends StatefulWidget {
 class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     with SmeupWidgetStateMixin {
   SmeupFormModel smeupFormModel;
-  //var notifier;
 
   @override
   void initState() {
@@ -69,14 +65,12 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     if (smeupFormModel != null) SmeupDynamicScreen.onDispose(smeupFormModel.id);
     SmeupWidgetNotificationService.objects.removeWhere(
         (element) => element['scaffoldKey'] == widget._scaffoldKey.hashCode);
-
+    // SmeupVariablesService.removeFormVariables(widget._formKey);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    SmeupDynamismService.currentScaffoldKey = widget._scaffoldKey;
-
     final SmeupErrorNotifier errorNotifier =
         Provider.of<SmeupErrorNotifier>(context);
 
@@ -87,6 +81,8 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
 
     SmeupFun smeupFun =
         widget.initialFun != null ? widget.initialFun : routeArgs['smeupFun'];
+
+    smeupFun.saveParameters(widget._formKey);
 
     var screen = FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getScreenChildren(
@@ -119,9 +115,6 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
       },
     );
 
-    // SmeupWidgetsNotifier.addWidget(widget._scaffoldKey.hashCode,
-    //     widget._scaffoldKey.hashCode.toString(), 'SCREEN', notifier);
-
     return screen;
   }
 
@@ -145,10 +138,10 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
           serviceStatusCode: smeupscreenModel.serviceStatusCode);
     }
 
-    smeupFormModel = SmeupFormModel.fromMap(smeupscreenModel.data);
+    smeupFormModel =
+        SmeupFormModel.fromMap(smeupscreenModel.data, widget._formKey);
 
-    final smeupForm =
-        SmeupForm(smeupFormModel, widget._scaffoldKey, widget._formKey);
+    final smeupForm = SmeupForm(smeupFormModel, widget._scaffoldKey);
 
     bool isDialog = routeArgs == null ? false : routeArgs['isDialog'] ?? false;
     SmeupFun smeupFun =
@@ -167,11 +160,11 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
                     data: smeupscreenModel.data,
                     myContext: context,
                     scaffoldKey: widget._scaffoldKey,
+                    formKey: widget._formKey,
                   ),
                   body: errorNotifier.isError()
                       ? showErrorForm(context, smeupFun)
-                      : SmeupWaitFun(
-                          Form(key: widget._formKey, child: smeupForm)),
+                      : SmeupWaitFun(smeupForm),
                 ),
               )),
     );

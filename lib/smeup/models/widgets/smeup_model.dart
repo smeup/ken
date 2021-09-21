@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
@@ -25,10 +26,11 @@ abstract class SmeupModel {
   bool isNotified = false;
   int serviceStatusCode = 0;
   int refresh;
+  GlobalKey<FormState> formKey;
 
   List<SmeupSectionModel> smeupSectionsModels;
 
-  SmeupModel({this.title, this.id, this.type}) {
+  SmeupModel(this.formKey, {this.title, this.id, this.type}) {
     showLoader = SmeupOptions.showLoader;
     if (optionsDefault == null)
       optionsDefault = {
@@ -36,7 +38,7 @@ abstract class SmeupModel {
       };
   }
 
-  SmeupModel.fromMap(Map<String, dynamic> jsonMap) {
+  SmeupModel.fromMap(Map<String, dynamic> jsonMap, this.formKey) {
     this.jsonMap = jsonMap;
     type = jsonMap['type'];
     dynamisms = jsonMap['dynamisms'];
@@ -44,7 +46,7 @@ abstract class SmeupModel {
     if (type != null && (id == null || id.isEmpty)) {
       id = SmeupUtilities.getWidgetId(jsonMap['type'], jsonMap['id']);
 
-      smeupFun = SmeupFun(jsonMap['fun']);
+      smeupFun = SmeupFun(jsonMap['fun'], formKey);
 
       switch (jsonMap['load']) {
         case 'D':

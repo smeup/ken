@@ -11,15 +11,17 @@ class SmeupDataServicePoller {
   final String fun;
   final bool ignoreErrors;
   bool _canceled = false;
+  GlobalKey<FormState> formKey;
 
-  SmeupDataServicePoller({
+  SmeupDataServicePoller(
+    this.formKey, {
     @required this.interval,
     @required this.fun,
     this.ignoreErrors = true,
   });
 
   Future<dynamic> doPoll({@required UntilPredicate until}) async {
-    SmeupFun smeupFun = SmeupFun(fun);
+    SmeupFun smeupFun = SmeupFun(fun, formKey);
     while (!_canceled) {
       await Future.delayed(interval);
       if (!_canceled) {

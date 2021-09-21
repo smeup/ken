@@ -34,6 +34,7 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
   SmeupTextFieldModel(
       {id,
       type,
+      GlobalKey<FormState> formKey,
       this.backColor,
       this.fontsize = defaultFontsize,
       this.label = defaultLabel,
@@ -47,15 +48,16 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
       this.autoFocus = defaultAutoFocus,
       this.valueField,
       this.keyboard})
-      : super(title: title, id: id, type: type) {
+      : super(formKey, title: title, id: id, type: type) {
     if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'itx';
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupTextFieldModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupTextFieldModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
     }

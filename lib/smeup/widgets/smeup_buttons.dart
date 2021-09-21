@@ -279,23 +279,13 @@ class SmeupButtonsState extends State<SmeupButtons>
 
   Future<void> execDynamismActions(
       SmeupButtonsModel modelClone, dynamic child, bool isAsync) async {
-    // dynamic _child = child;
-    // if (child is Node) {
-    //   _child = {
-    //     "t": child.data["tipo"],
-    //     "p": child.data["parametro"],
-    //     "k": child.data["codice"]
-    //   };
-    // }
-
-    // SmeupDynamismService.storeDynamicVariables(_child['content']);
-    SmeupDynamismService.storeDynamicVariables(child);
+    SmeupDynamismService.storeDynamicVariables(child, widget.formKey);
 
     if (isAsync)
-      SmeupDynamismService.run(
-          modelClone.dynamisms, context, 'click', widget.scaffoldKey);
+      SmeupDynamismService.run(modelClone.dynamisms, context, 'click',
+          widget.scaffoldKey, widget.formKey);
     else
-      await SmeupDynamismService.run(
-          modelClone.dynamisms, context, 'click', widget.scaffoldKey);
+      await SmeupDynamismService.run(modelClone.dynamisms, context, 'click',
+          widget.scaffoldKey, widget.formKey);
   }
 }

@@ -1,11 +1,13 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 
 class SmeupFun {
   dynamic fun;
+  GlobalKey<FormState> formKey;
 
-  SmeupFun(dynamic dynamicFun) {
+  SmeupFun(dynamic dynamicFun, this.formKey) {
     // the object to parse is empty:
     // - return an empty SmeupFun
     if (dynamicFun == null || dynamicFun.toString().isEmpty) {
@@ -21,17 +23,13 @@ class SmeupFun {
       // - replace the variables
       // - convert it to json object
       if (dynamicFun.startsWith('F(')) {
-        // dynamicFun = SmeupDynamismService.replaceFunVariables(dynamicFun);
         _parseFromSmeupSyntax(dynamicFun);
       } else {
         // json string
         // - replace the variables
         // - parse it to json object
-        // dynamicFun = SmeupDynamismService.replaceFunVariables(dynamicFun);
         fun = jsonDecode(dynamicFun);
       }
-      //_saveParameters();
-      //return;
     } else {
       fun = dynamicFun;
     }
@@ -41,10 +39,7 @@ class SmeupFun {
     // - replace the variables
     // - parse it back to json object
     fun = _checkFunElement(fun);
-    //String funString = jsonEncode(fun);
-    // funString = SmeupDynamismService.replaceFunVariables(funString);
-    //fun = jsonDecode(funString);
-    _saveParameters();
+    saveParameters(formKey);
   }
 
   SmeupFun.fromServiceName(String service) {
@@ -69,15 +64,17 @@ class SmeupFun {
     return dynamicFun;
   }
 
-  void _saveParameters() {
-    if (fun['fun'] == null) return;
+  List<Map<String, dynamic>> getParameters() {
+    var list = List<Map<String, dynamic>>.empty(growable: true);
+
+    if (fun['fun'] == null) return list;
 
     final parms = fun['fun']['P'];
 
-    if (parms == null || parms.isEmpty) return;
+    if (parms == null || parms.isEmpty) return list;
 
     List<String> parmsSplit = parms.split(';');
-    if (parmsSplit.length == 0) return;
+    if (parmsSplit.length == 0) return list;
 
     try {
       parmsSplit.forEach((parm) {
@@ -85,12 +82,27 @@ class SmeupFun {
         RegExp re = RegExp(r'\([^)]*\)');
         re.allMatches(parm).forEach((match) {
           final key = parm.substring(0, parm.indexOf('('));
-          final value = parm
+          var value = parm
               .substring(match.start, match.end)
               .replaceFirst('(', '')
               .replaceFirst(')', '');
           if (key != null && key.isNotEmpty) {
-            SmeupVariablesService.setVariable(key, value);
+            if (value.toString().startsWith('[')) {
+              String varName = value
+                  .toString()
+                  .trim()
+                  .replaceAll('[', '')
+                  .replaceAll(']', '');
+              value =
+                  SmeupVariablesService.getVariable(varName, formKey: formKey)
+                      .toString();
+            } else {
+              value = value;
+            }
+
+            list.add({'key': key, 'value': value});
+
+            //SmeupVariablesService.setVariable(key, value, formKey: formKey);
           }
         });
       });
@@ -99,6 +111,16 @@ class SmeupFun {
           'Error in _parseFromSmeupSyntax while extracting P: $parms ',
           logType: LogType.error);
     }
+
+    return list;
+  }
+
+  void saveParameters(GlobalKey<FormState> formKey) {
+    List<Map<String, dynamic>> list = getParameters();
+    list.forEach((element) {
+      SmeupVariablesService.setVariable(element['key'], element['value'],
+          formKey: formKey);
+    });
   }
 
   _parseFromSmeupSyntax(String funString) {

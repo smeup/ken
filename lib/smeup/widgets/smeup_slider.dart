@@ -52,12 +52,6 @@ class _SmeupSliderState extends State<SmeupSlider> with SmeupWidgetStateMixin {
       },
     );
 
-    // SmeupWidgetsNotifier.addWidget(
-    //     widget.scaffoldKey.hashCode,
-    //     widget.smeupInputFieldModel.id,
-    //     widget.smeupInputFieldModel.type,
-    //     notifier);
-
     return input;
   }
 
@@ -94,7 +88,8 @@ class _SmeupSliderState extends State<SmeupSlider> with SmeupWidgetStateMixin {
             ? double.tryParse(tmp)
             : 0;
 
-    SmeupVariablesService.setVariable(smeupInputFieldModel.id, value);
+    SmeupVariablesService.setVariable(smeupInputFieldModel.id, value,
+        formKey: widget.formKey);
 
     children = Center(
       child: Container(
@@ -103,7 +98,8 @@ class _SmeupSliderState extends State<SmeupSlider> with SmeupWidgetStateMixin {
             key: ValueKey(smeupInputFieldModel.id),
             onChanged: (value) {
               if (widget.clientOnChange != null) widget.clientOnChange(value);
-              SmeupVariablesService.setVariable(smeupInputFieldModel.id, value);
+              SmeupVariablesService.setVariable(smeupInputFieldModel.id, value,
+                  formKey: widget.formKey);
             },
             value: value,
             onChangeEnd: widget.clientOnChange,

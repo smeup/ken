@@ -32,6 +32,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   SmeupListBoxModel(
       {id,
       type,
+      GlobalKey<FormState> formKey,
       layout = defaultLayout,
       this.fontsize = defaultFontsize,
       this.width = defaultWidth,
@@ -43,12 +44,13 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       this.portraitColumns = defaultPortraitColumns,
       this.landscapeColumns = defaultLandscapeColumns,
       title = ''})
-      : super(title: title, id: id, type: type) {
+      : super(formKey, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupListBoxModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupListBoxModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     layout = defaultLayout;
     if (jsonMap['layout'] != null) {
       layout = jsonMap['layout'].toString();

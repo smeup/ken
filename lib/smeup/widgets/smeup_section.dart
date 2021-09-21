@@ -220,9 +220,10 @@ class _SmeupSectionState extends State<SmeupSection>
 
   void _onTabChanged(int index) {
     SmeupVariablesService.setVariable(
-        widget.smeupSectionModel.selectedTabColName, index.toString());
+        widget.smeupSectionModel.selectedTabColName, index.toString(),
+        formKey: widget.formKey);
 
     SmeupDynamismService.run(widget.smeupSectionModel.dynamisms, context,
-        'change', widget.scaffoldKey);
+        'change', widget.scaffoldKey, widget.formKey);
   }
 }

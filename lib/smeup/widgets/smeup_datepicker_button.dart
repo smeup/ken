@@ -30,7 +30,8 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
     _currentValue = widget.value;
     _currentDisplay = widget.display;
     SmeupVariablesService.setVariable(
-        widget.smeupDatePickerModel.id, widget.display);
+        widget.smeupDatePickerModel.id, widget.display,
+        formKey: widget.formKey);
     super.initState();
   }
 
@@ -82,7 +83,8 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
                         _currentDisplay = newTime;
                         _currentValue = date;
                         SmeupVariablesService.setVariable(
-                            widget.smeupDatePickerModel.id, newTime);
+                            widget.smeupDatePickerModel.id, newTime,
+                            formKey: widget.formKey);
                       });
                     });
                   },
@@ -94,7 +96,7 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
                               : widget.smeupDatePickerModel.fontColor))),
             ),
             SmeupLine(
-                SmeupLineModel(
+                SmeupLineModel(widget.formKey,
                     color: SmeupOptions.theme.primaryColor, thickness: 0.5),
                 widget.scaffoldKey,
                 widget.formKey)
