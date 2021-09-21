@@ -16,16 +16,14 @@ class SmeupRadioButton extends StatelessWidget {
   final Color fontColor;
   final double fontsize;
   final double padding;
-  final String data;
+  final Map<String, String> data;
   final double rightPadding;
   final double leftPadding;
   final double topPadding;
   final double bottomPadding;
-  final String clientData;
   final String valueField;
   final String displayedField;
   final String selectedValue;
-
   final String id;
   final String type;
   final String title;
@@ -34,8 +32,7 @@ class SmeupRadioButton extends StatelessWidget {
       {this.id = '',
       this.type = 'rad',
       this.title = '',
-      this.data = '',
-      this.clientData = '',
+      this.data,
       this.backColor,
       this.width = SmeupRadioButtonsModel.defaultWidth,
       this.height = SmeupRadioButtonsModel.defaultHeight,
@@ -65,7 +62,7 @@ class SmeupRadioButton extends StatelessWidget {
           child: Row(
             children: [
               Radio(
-                value: data,
+                value: data['code'],
                 groupValue: _selectedValue,
                 onChanged: (value) {
                   serverOnPressed(value);
@@ -74,7 +71,7 @@ class SmeupRadioButton extends StatelessWidget {
               ),
               Align(
                   alignment: align,
-                  child: Text(data,
+                  child: Text(data['value'],
                       style: TextStyle(
                           fontSize: fontsize,
                           fontWeight: FontWeight.bold,
