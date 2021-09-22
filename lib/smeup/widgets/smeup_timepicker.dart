@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_timepicker_dao.dart';
+import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_model.dart';
-import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker_button.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
-import 'smeup_not_available.dart';
 import 'smeup_widget_interface.dart';
 import 'smeup_widget_mixin.dart';
 
@@ -35,6 +32,8 @@ class SmeupTimePicker extends StatefulWidget
   double padding;
   bool showborder;
   List<String> minutesList;
+  String valueField;
+  String displayField;
 
   // Data injected through static constructor
   dynamic data;
@@ -52,7 +51,9 @@ class SmeupTimePicker extends StatefulWidget
     this.data, {
     id = '',
     type = 'tpk',
-    this.backColor,
+    this.valueField = '',
+    this.displayField = '',
+    @required this.backColor,
     this.fontsize = SmeupTimePickerModel.defaultFontsize,
     this.fontColor,
     this.label = SmeupTimePickerModel.defaultLabel,
@@ -80,7 +81,8 @@ class SmeupTimePicker extends StatefulWidget
     SmeupTimePickerModel m = model;
     id = m.id;
     type = m.type;
-
+    valueField = m.valueField;
+    displayField = m.displayedField;
     backColor = m.backColor;
     fontsize = m.fontsize;
     fontColor = m.fontColor;
@@ -96,22 +98,8 @@ class SmeupTimePicker extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupTimePickerModel m = model;
-
     // change data format
-    var workData = formatDataFields(m);
-
-    // set the widget data
-    // if (workData != null) {
-    //   var newList = List<String>.empty(growable: true);
-    //   for (var i = 0; i < (workData['rows'] as List).length; i++) {
-    //     final element = workData['rows'][i];
-    //     newList.add(element[m.valueColName].toString());
-    //   }
-    //   return newList;
-    // } else {
-    //   return model.data;
-    // }
+    return formatDataFields(model);
   }
 
   @override
@@ -119,82 +107,67 @@ class SmeupTimePicker extends StatefulWidget
 }
 
 class _SmeupTimePickerState extends State<SmeupTimePicker>
-    with SmeupWidgetStateMixin {
+    with SmeupWidgetStateMixin
+    implements SmeupWidgetStateInterface {
+  SmeupTimePickerModel _model;
+  dynamic _data;
+
+  @override
+  void initState() {
+    _model = widget.model;
+    _data = widget.data;
+    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    super.initState();
+  }
+
   @override
   void dispose() {
+    runDispose(widget.scaffoldKey, widget.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final input = FutureBuilder<SmeupWidgetBuilderResponse>(
-      future: _getTimePickerComponent(widget.model),
-      builder: (BuildContext context,
-          AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return widget.model.showLoader ? SmeupWait() : Container();
-        } else {
-          if (snapshot.hasError) {
-            SmeupLogService.writeDebugMessage(
-                'Error SmeupTimePicker: ${snapshot.error}',
-                logType: LogType.error);
-            notifyError(context, widget.model.id, snapshot.error);
-            return SmeupNotAvailable();
-          } else {
-            return snapshot.data.children;
-          }
-        }
-      },
-    );
+    Widget timePicker = runBuild(context, widget.id, widget.type,
+        widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
+      setState(() {
+        widgetLoadType = LoadType.Immediate;
+        setDataLoad(widget.id, false);
+      });
+    });
 
-    // SmeupWidgetsNotifier.addWidget(
-    //     widget.scaffoldKey.hashCode,
-    //     widget.smeupTimePickerModel.id,
-    //     widget.smeupTimePickerModel.type,
-    //     notifier);
-
-    return input;
+    return timePicker;
   }
 
-  Future<SmeupWidgetBuilderResponse> _getTimePickerComponent(
-      SmeupTimePickerModel smeupTimePickerModel) async {
-    Widget timepicker;
-
-    await smeupTimePickerModel.setData();
-
-    if (!hasData(smeupTimePickerModel)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-              '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupTimePickerModel.smeupFun.fun['fun']['function']})'),
-          backgroundColor: SmeupOptions.theme.errorColor,
-        ),
-      );
-
-      return SmeupWidgetBuilderResponse(
-          smeupTimePickerModel, SmeupNotAvailable());
+  @override
+  Future<SmeupWidgetBuilderResponse> getChildren() async {
+    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+      if (_model != null) {
+        await SmeupTimePickerDao.getData(_model);
+        _data = widget.treatData(_model);
+      }
+      setDataLoad(widget.id, true);
     }
 
-    String valueField = smeupTimePickerModel.optionsDefault == null
-        ? 'value'
-        : smeupTimePickerModel.optionsDefault['valueField'];
-    final valueString = smeupTimePickerModel.data['rows'][0][valueField];
+    Widget timepicker;
+
+    if (_data == null) {
+      return getFunErrorResponse(context, _model);
+    }
+
+    final valueString = _data['rows'][0][widget.valueField];
 
     final split = valueString.split(':');
     final now = DateTime.now();
     final value = DateTime.parse(
         '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')} ${split[0]}:${split[1]}:00');
 
-    String displayedField = smeupTimePickerModel.optionsDefault == null
-        ? 'display'
-        : smeupTimePickerModel.optionsDefault['displayedField'];
-    String display = smeupTimePickerModel.data['rows'][0][displayedField];
+    String display = _data['rows'][0][widget.displayField];
 
-    SmeupDynamismService.variables[smeupTimePickerModel.id] = valueString;
+    SmeupDynamismService.variables[_model.id] = valueString;
 
-    timepicker =
-        SmeupTimePickerButton(widget.smeupTimePickerModel, value, display);
+    timepicker = SmeupTimePickerButton(_model, value, display);
 
-    return SmeupWidgetBuilderResponse(smeupTimePickerModel, timepicker);
+    return SmeupWidgetBuilderResponse(_model, timepicker);
   }
 }

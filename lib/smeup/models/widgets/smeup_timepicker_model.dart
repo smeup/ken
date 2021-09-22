@@ -6,8 +6,6 @@ import 'package:mobile_components_library/smeup/services/smeup_data_service.dart
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
-class GraphProp {}
-
 class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultFontsize = 16.0;
   static const String defaultLabel = '';
@@ -16,13 +14,14 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultPadding = 0.0;
   static const bool defaultShowBorder = false;
 
-  @GraphProp()
   Color backColor;
   double fontsize;
   Color fontColor;
   String label;
   double width;
   double height;
+  String valueField;
+  String displayedField;
   double padding;
   bool showborder;
   List<String> minutesList;
@@ -30,6 +29,8 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   SmeupTimePickerModel(
       {id,
       type,
+      this.valueField = '',
+      this.displayedField = '',
       this.backColor,
       this.fontsize = defaultFontsize,
       this.fontColor,
@@ -50,6 +51,9 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupTimePickerModel.fromMap(Map<String, dynamic> jsonMap)
       : super.fromMap(jsonMap) {
+    valueField = optionsDefault['valueField'] ?? 'value';
+    displayedField = optionsDefault['displayedField'] ?? 'display';
+
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
     }
