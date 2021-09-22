@@ -13,6 +13,8 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultHeight = 100;
   static const double defaultPadding = 0.0;
   static const bool defaultShowBorder = false;
+  static const Color defaultBackColor = Colors.amber;
+  static const Color defaultFontColor = Colors.black87;
 
   Color backColor;
   double fontsize;
@@ -29,11 +31,12 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   SmeupTimePickerModel(
       {id,
       type,
+      GlobalKey<FormState> formKey,
       this.valueField = '',
       this.displayedField = '',
-      this.backColor,
+      this.backColor = defaultBackColor,
       this.fontsize = defaultFontsize,
-      this.fontColor,
+      this.fontColor = defaultFontColor,
       this.label = defaultLabel,
       this.width = defaultWidth,
       this.height = defaultHeight,
@@ -41,7 +44,7 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
       this.showborder = defaultShowBorder,
       title = '',
       this.minutesList})
-      : super(title: title, id: id, type: type) {
+      : super(formKey, title: title, id: id, type: type) {
     if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
     if (fontColor == null)
       fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
@@ -49,8 +52,9 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupTimePickerModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupTimePickerModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     valueField = optionsDefault['valueField'] ?? 'value';
     displayedField = optionsDefault['displayedField'] ?? 'display';
 
@@ -90,27 +94,5 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
     }
 
     SmeupDataService.incrementDataFetch(id);
-  }
-
-  dynamic _getClientDataStructure(clientData) {
-    if (optionsDefault == null) {
-      return {
-        "rows": [
-          {
-            'value': clientData['value'],
-            'display': clientData['display'],
-          }
-        ],
-      };
-    } else {
-      return {
-        "rows": [
-          {
-            'value': clientData['value'],
-            'display': clientData['display'],
-          }
-        ],
-      };
-    }
   }
 }

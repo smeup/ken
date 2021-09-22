@@ -4,16 +4,42 @@ import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_timepicker.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker_customization.dart';
 
 class SmeupTimePickerButton extends StatefulWidget {
-  final DateTime value;
-  final String display;
-  final SmeupTimePickerModel smeupTimePickerModel;
   final GlobalKey<FormState> formKey;
+  final String id;
+
+  final Color backColor;
+  final double fontsize;
+  final Color fontColor;
+  final String label;
+  final double width;
+  final double height;
+  final double padding;
+  final bool showborder;
+  final List<String> minutesList;
+
+  final SmeupTimePickerData data;
+
+  final Function clientOnChange;
 
   SmeupTimePickerButton(
-      this.smeupTimePickerModel, this.formKey, this.value, this.display);
+    this.formKey,
+    this.data, {
+    this.id = '',
+    this.backColor = SmeupTimePickerModel.defaultBackColor,
+    this.fontsize = SmeupTimePickerModel.defaultFontsize,
+    this.fontColor = SmeupTimePickerModel.defaultFontColor,
+    this.label = SmeupTimePickerModel.defaultLabel,
+    this.width = SmeupTimePickerModel.defaultWidth,
+    this.height = SmeupTimePickerModel.defaultHeight,
+    this.padding = SmeupTimePickerModel.defaultPadding,
+    this.showborder = SmeupTimePickerModel.defaultShowBorder,
+    this.minutesList,
+    this.clientOnChange,
+  });
 
   @override
   _SmeupTimePickerButtonState createState() => _SmeupTimePickerButtonState();
@@ -25,8 +51,8 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
 
   @override
   void initState() {
-    _currentValue = widget.value;
-    _currentDisplay = widget.display;
+    _currentValue = widget.data.time;
+    _currentDisplay = widget.data.formattedTime;
     super.initState();
   }
 
@@ -35,31 +61,34 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
     final button = Container(
         color:
             SmeupOptions.theme.canvasColor, // Color.fromRGBO(250, 250, 250, 1),
-        padding: EdgeInsets.all(widget.smeupTimePickerModel.padding),
+        padding: EdgeInsets.all(widget.padding),
         child: SizedBox(
-            height: widget.smeupTimePickerModel.height,
-            width: widget.smeupTimePickerModel.width == 0
-                ? double.infinity
-                : widget.smeupTimePickerModel.width,
+            height: widget.height,
+            width: widget.width == 0 ? double.infinity : widget.width,
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: widget.smeupTimePickerModel.backColor == null
+                  primary: widget.backColor == null
                       ? SmeupOptions.theme.buttonColor
-                      : widget.smeupTimePickerModel.backColor,
+                      : widget.backColor,
                 ),
                 onPressed: () {
                   DatePicker.showPicker(context,
                       pickerModel: SmeupTimePickerCustomization(
                           currentTime: _currentValue,
                           showSecondsColumn: false,
-                          minutesList: widget.smeupTimePickerModel.minutesList),
+                          minutesList: widget.minutesList),
                       showTitleActions: true, onConfirm: (date) {
                     setState(() {
                       final newTime = DateFormat('HH:mm').format(date);
                       _currentDisplay = newTime;
                       _currentValue = date;
-                      SmeupVariablesService.setVariable(
-                          widget.smeupTimePickerModel.id, newTime,
+                      if (widget.clientOnChange != null) {
+                        widget.clientOnChange(SmeupTimePickerData(
+                          time: _currentValue,
+                          formattedTime: _currentDisplay,
+                        ));
+                      }
+                      SmeupVariablesService.setVariable(widget.id, newTime,
                           formKey: widget.formKey);
                     });
                   });
@@ -67,20 +96,11 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
                 child: Text(_currentDisplay,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontSize: widget.smeupTimePickerModel.fontsize,
+                        fontSize: widget.fontsize,
                         //fontWeight: FontWeight.bold,
-                        color: widget.smeupTimePickerModel.fontColor == null
+                        color: widget.fontColor == null
                             ? SmeupOptions.theme.textTheme.bodyText1.color
-                            : widget.smeupTimePickerModel.fontColor)))));
-
-    // var containerBackground = SmeupOptions.theme.primaryColor;
-    // if (widget.smeupTimePickerModel.backColor != null)
-    //   containerBackground = widget.smeupTimePickerModel.backColor;
-
-    // final container = Container(
-    //   color: containerBackground,
-    //   child: button,
-    // );
+                            : widget.fontColor)))));
 
     return button;
   }
