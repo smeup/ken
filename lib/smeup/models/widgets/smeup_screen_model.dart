@@ -7,7 +7,7 @@ import 'package:mobile_components_library/smeup/services/smeup_data_service.dart
 class SmeupScreenModel extends SmeupModel implements SmeupDataInterface {
   BuildContext context;
 
-  SmeupScreenModel(this.context, SmeupFun smeupFun) {
+  SmeupScreenModel(this.context, SmeupFun smeupFun) : super(null) {
     this.smeupFun = smeupFun;
   }
 

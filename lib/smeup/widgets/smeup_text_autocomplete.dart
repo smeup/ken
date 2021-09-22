@@ -8,6 +8,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart'
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_autocomplete_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_buttons.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
@@ -208,9 +209,11 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
               TextEditingController textEditingController,
               FocusNode focusNode,
               VoidCallback onFieldSubmitted) {
-            String code =
-                SmeupDynamismService.variables[widget.defaultValue] ?? '';
-            SmeupDynamismService.variables[widget.id] = code;
+            String code = SmeupVariablesService.getVariable(widget.defaultValue,
+                    formKey: widget.formKey) ??
+                '';
+            SmeupVariablesService.setVariable(widget.id, code,
+                formKey: widget.formKey);
 
             if (code.isNotEmpty && _data != null) {
               var currel = _data.firstWhere(
@@ -267,10 +270,11 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                   child: Icon(Icons.close, color: Colors.black38),
                   onTap: () {
                     setState(() {
-                      SmeupDynamismService.variables[widget.defaultValue] = '';
+                      SmeupVariablesService.setVariable(widget.defaultValue, '',
+                          formKey: widget.formKey);
                       if (_model != null)
                         SmeupDynamismService.run(_model.dynamisms, context,
-                            'change', widget.scaffoldKey);
+                            'change', widget.scaffoldKey, widget.formKey);
                     });
                   },
                 ),
@@ -294,11 +298,12 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                       return GestureDetector(
                         onTap: () {
                           onSelected(option['value']);
-                          SmeupDynamismService.variables[widget.id] =
-                              option['code'];
+                          SmeupVariablesService.setVariable(
+                              widget.id, option['code'],
+                              formKey: widget.formKey);
                           if (_model != null)
                             SmeupDynamismService.run(_model.dynamisms, context,
-                                'change', widget.scaffoldKey);
+                                'change', widget.scaffoldKey, widget.formKey);
                           if (widget.clientOnSelected != null)
                             widget.clientOnSelected(option);
                         },
@@ -328,7 +333,9 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
         "dynamisms": _model.dynamisms
       };
       final button = SmeupButtons.withController(
-          SmeupButtonsModel.fromMap(json), widget.scaffoldKey, widget.formKey);
+          SmeupButtonsModel.fromMap(json, widget.formKey),
+          widget.scaffoldKey,
+          widget.formKey);
       final column = Column(
         //mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,

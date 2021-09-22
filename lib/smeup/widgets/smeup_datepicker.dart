@@ -4,8 +4,8 @@ import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_datepicker_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_datepicker_button.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
@@ -97,7 +97,8 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
     String display = DateFormat("dd/MM/yyyy").format(DateTime.tryParse(
         smeupDatePickerModel.data['rows'][0][displayedField]));
 
-    SmeupDynamismService.variables[smeupDatePickerModel.id] = valueString;
+    SmeupVariablesService.setVariable(smeupDatePickerModel.id, valueString,
+        formKey: widget.formKey);
 
     timepicker = SmeupDatePickerButton(widget.smeupDatePickerModel,
         widget.scaffoldKey, widget.formKey, value, display);

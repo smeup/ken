@@ -48,9 +48,6 @@ class _SmeupGaugeState extends State<SmeupGauge> with SmeupWidgetStateMixin {
       },
     );
 
-    // SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
-    //     widget.smeupGaugeModel.id, widget.smeupGaugeModel.type, notifier);
-
     return gauge;
   }
 

@@ -324,10 +324,10 @@ class _SmeupListBoxState extends State<SmeupListBox>
           width: widget.width,
           dismissEnabled: widget.dismissEnabled, onItemTap: (dynamic data) {
         if (widget.clientOnItemTap != null) widget.clientOnItemTap(data);
-        SmeupDynamismService.storeDynamicVariables(data);
+        SmeupDynamismService.storeDynamicVariables(data, widget.formKey);
         if (_model != null)
-          SmeupDynamismService.run(
-              _model.dynamisms, context, 'click', widget.scaffoldKey);
+          SmeupDynamismService.run(_model.dynamisms, context, 'click',
+              widget.scaffoldKey, widget.formKey);
       });
 
       cells.add(cell);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
@@ -15,6 +14,8 @@ class SmeupFormModel extends SmeupModel
   List<SmeupSectionModel> smeupSectionsModels;
   List<dynamic> formVariables;
 
+  final GlobalKey<FormState> formKey;
+
   static const double defaultPadding = 0.0;
   static const String defaultLayout = '1';
 
@@ -27,13 +28,14 @@ class SmeupFormModel extends SmeupModel
   BuildContext context;
   Color backColor;
 
-  SmeupFormModel(this.context, SmeupFun smeupFun) {
-    this.smeupFun = smeupFun;
-    if (backColor == null)
-      backColor = SmeupOptions.theme.scaffoldBackgroundColor;
-  }
+  // SmeupFormModel(this.context, SmeupFun smeupFun) {
+  //   this.smeupFun = smeupFun;
+  //   if (backColor == null)
+  //     backColor = SmeupOptions.theme.scaffoldBackgroundColor;
+  // }
 
-  SmeupFormModel.fromMap(response) : super.fromMap(response) {
+  SmeupFormModel.fromMap(response, this.formKey)
+      : super.fromMap(response, formKey) {
     Map<String, dynamic> jsonMap = response;
 
     padding =
@@ -56,12 +58,13 @@ class SmeupFormModel extends SmeupModel
     _replaceFormTitle(jsonMap);
     formVariables = _getFormVariables(jsonMap);
 
-    smeupSectionsModels = getSections(jsonMap, 'sections');
+    smeupSectionsModels = getSections(jsonMap, 'sections', formKey);
   }
 
   void _replaceFormTitle(dynamic jsonMap) {
     if (jsonMap['title'] != null) {
-      title = SmeupDynamismService.replaceFunVariables(jsonMap['title']);
+      title =
+          SmeupDynamismService.replaceFunVariables(jsonMap['title'], formKey);
       jsonMap['title'] = title;
     }
   }
@@ -90,7 +93,7 @@ class SmeupFormModel extends SmeupModel
 
       data = smeupServiceResponse.result.data;
 
-      smeupSectionsModels = getSections(data, 'sections');
+      smeupSectionsModels = getSections(data, 'sections', formKey);
     }
   }
 }

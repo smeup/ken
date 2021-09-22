@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
@@ -14,7 +15,7 @@ class SmeupQRCodeReaderModel extends SmeupModel implements SmeupDataInterface {
   int maxReads;
   int delayInMillis;
 
-  SmeupQRCodeReaderModel(
+  SmeupQRCodeReaderModel(GlobalKey<FormState> formKey,
       {this.padding = defaultPadding,
       this.size = defaultSize,
       this.clientData,
@@ -22,13 +23,14 @@ class SmeupQRCodeReaderModel extends SmeupModel implements SmeupDataInterface {
       this.onDataRead,
       this.maxReads = 1,
       this.delayInMillis = 0})
-      : super(title: title) {
+      : super(formKey, title: title) {
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupQRCodeReaderModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupQRCodeReaderModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     padding =
         SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
     size = SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultSize;

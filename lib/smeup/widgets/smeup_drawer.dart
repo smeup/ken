@@ -29,17 +29,11 @@ class _SmeupDrawerState extends State<SmeupDrawer> with SmeupWidgetStateMixin {
 
   @override
   void dispose() {
-    // SmeupWidgetsNotifier.removeWidget(
-    //     widget.scaffoldKey.hashCode, widget.smeupDrawerModel.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    // final SmeupDrawerNotifier notifier =
-    //     Provider.of<SmeupDrawerNotifier>(context);
-
     var drawer = FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getDrawerComponent(widget.smeupDrawerModel),
       builder: (BuildContext context,

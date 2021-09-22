@@ -123,7 +123,8 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
             key: Key('${widget.formKey.toString()}_${widget.id}'),
             direction: DismissDirection.endToStart,
             confirmDismiss: (DismissDirection direction) async {
-              SmeupDynamismService.storeDynamicVariables(widget.data);
+              SmeupDynamismService.storeDynamicVariables(
+                  widget.data, widget.formKey);
               return await showDialog(
                 context: context,
                 builder: (BuildContext context) {
@@ -149,7 +150,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
               );
             },
             onDismissed: (direction) async {
-              var smeupFun = SmeupFun(deleteDynamism['exec']);
+              var smeupFun = SmeupFun(deleteDynamism['exec'], widget.formKey);
               var smeupServiceResponse =
                   await SmeupDataService.invoke(smeupFun);
               SmeupDynamismService.manageResponseMessage(
@@ -691,16 +692,14 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
               iconData: int.tryParse(buttonIcon) ?? 0,
               data: buttonText,
               clientOnPressed: () {
-                //SmeupDynamismService.storeDynamicVariables(_child['content']);
-
                 List<dynamic> dynamisms = [
                   {
                     "event": "click",
                     "exec": buttonFun,
                   }
                 ];
-                SmeupDynamismService.run(
-                    dynamisms, context, "click", widget.scaffoldKey);
+                SmeupDynamismService.run(dynamisms, context, "click",
+                    widget.scaffoldKey, widget.formKey);
               },
             ),
           ),

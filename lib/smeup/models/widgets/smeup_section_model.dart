@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_model.dart';
@@ -31,8 +32,9 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
   int selectedTabIndex;
   String selectedTabColName;
 
-  SmeupSectionModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupSectionModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     String tmp = jsonMap['dim'] ?? '';
     tmp = tmp.replaceAll('%', '');
     dim = double.tryParse(tmp) ?? 0;
@@ -44,13 +46,13 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
     _replaceSelectedTabIndex(jsonMap);
 
     components = getComponents(jsonMap, 'components');
-    smeupSectionsModels = getSections(jsonMap, 'sections');
+    smeupSectionsModels = getSections(jsonMap, 'sections', formKey);
   }
 
   void _replaceSelectedTabIndex(dynamic jsonMap) {
     if (jsonMap['selectedTabColName'] != null) {
       selectedTabIndex = int.tryParse(SmeupDynamismService.replaceFunVariables(
-          '[${jsonMap['selectedTabColName']}]'));
+          '[${jsonMap['selectedTabColName']}]', formKey));
     }
     if (selectedTabIndex == null) selectedTabIndex = 0;
   }
@@ -70,60 +72,60 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
         try {
           switch (v['type']) {
             case 'LAB': // ok
-              model = SmeupLabelModel.fromMap(v);
+              model = SmeupLabelModel.fromMap(v, formKey);
               break;
             case 'GAU':
-              model = SmeupGaugeModel.fromMap(v);
+              model = SmeupGaugeModel.fromMap(v, formKey);
               break;
             case 'TRE':
-              model = SmeupTreeModel.fromMap(v);
+              model = SmeupTreeModel.fromMap(v, formKey);
               break;
             case 'CAL':
-              model = SmeupCalendarModel.fromMap(v);
+              model = SmeupCalendarModel.fromMap(v, formKey);
               break;
             case 'CHA':
-              model = SmeupChartModel.fromMap(v);
+              model = SmeupChartModel.fromMap(v, formKey);
               break;
-            case 'BTN': // ok
-              model = SmeupButtonsModel.fromMap(v);
+            case 'BTN':
+              model = SmeupButtonsModel.fromMap(v, formKey);
               break;
             case 'BOX':
-              model = SmeupListBoxModel.fromMap(v);
+              model = SmeupListBoxModel.fromMap(v, formKey);
               break;
             case 'DSH':
-              model = SmeupDashboardModel.fromMap(v);
+              model = SmeupDashboardModel.fromMap(v, formKey);
               break;
             case 'LIN':
-              model = SmeupLineModel.fromMap(v);
+              model = SmeupLineModel.fromMap(v, formKey);
               break;
             case 'IMG':
-              model = SmeupImageModel.fromMap(v);
+              model = SmeupImageModel.fromMap(v, formKey);
               break;
             case 'FLD':
               switch (v['options']['FLD']['default']['type']) {
                 case 'acp':
-                  model = SmeupTextAutocompleteModel.fromMap(v);
+                  model = SmeupTextAutocompleteModel.fromMap(v, formKey);
                   break;
                 case 'cal':
-                  model = SmeupDatePickerModel.fromMap(v);
+                  model = SmeupDatePickerModel.fromMap(v, formKey);
                   break;
                 case 'itx':
-                  model = SmeupTextFieldModel.fromMap(v);
+                  model = SmeupTextFieldModel.fromMap(v, formKey);
                   break;
                 case 'pgb':
-                  model = SmeupInputFieldModel.fromMap(v);
+                  model = SmeupInputFieldModel.fromMap(v, formKey);
                   break;
                 case 'qrc':
-                  model = SmeupQRCodeReaderModel.fromMap(v);
+                  model = SmeupQRCodeReaderModel.fromMap(v, formKey);
                   break;
                 case 'rad':
-                  model = SmeupRadioButtonsModel.fromMap(v);
+                  model = SmeupRadioButtonsModel.fromMap(v, formKey);
                   break;
                 case 'sld':
-                  model = SmeupInputFieldModel.fromMap(v);
+                  model = SmeupInputFieldModel.fromMap(v, formKey);
                   break;
                 case 'tpk':
-                  model = SmeupTimePickerModel.fromMap(v);
+                  model = SmeupTimePickerModel.fromMap(v, formKey);
                   break;
 
                 default:
@@ -131,7 +133,7 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
 
               break;
             case 'SCH':
-              model = SmeupFormModel.fromMap(v);
+              model = SmeupFormModel.fromMap(v, formKey);
               break;
             default:
               SmeupLogService.writeDebugMessage(

@@ -3,8 +3,8 @@ import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_input_field_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'smeup_not_available.dart';
@@ -55,12 +55,6 @@ class _SmeupProgressBarState extends State<SmeupProgressBar>
       },
     );
 
-    // SmeupWidgetsNotifier.addWidget(
-    //     widget.scaffoldKey.hashCode,
-    //     widget.smeupInputFieldModel.id,
-    //     widget.smeupInputFieldModel.type,
-    //     notifier);
-
     return input;
   }
 
@@ -96,7 +90,8 @@ class _SmeupProgressBarState extends State<SmeupProgressBar>
             ? double.tryParse(tmp)
             : 0;
 
-    SmeupDynamismService.variables[smeupInputFieldModel.id] = value;
+    SmeupVariablesService.setVariable(smeupInputFieldModel.id, value,
+        formKey: widget.formKey);
 
     children = Center(
       child: Container(

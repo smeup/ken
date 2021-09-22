@@ -3,6 +3,7 @@ import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 
 List<Widget> _debugAction;
 List<Widget> _getDebugAction() {
@@ -12,7 +13,7 @@ List<Widget> _getDebugAction() {
     _debugAction = [
       IconButton(
           icon: Icon(Icons.developer_mode),
-          onPressed: () => SmeupDynamismService.dumpVariables())
+          onPressed: () => SmeupVariablesService.dumpVariables())
     ];
   }
   return _debugAction;
@@ -21,10 +22,11 @@ List<Widget> _getDebugAction() {
 class SmeupNavigationAppBar extends AppBar {
   final BuildContext myContext;
   final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<FormState> formKey;
   static bool _isBusy = false;
 
   SmeupNavigationAppBar(bool isDialog,
-      {Key key, Map data, this.myContext, this.scaffoldKey})
+      {Key key, Map data, this.myContext, this.scaffoldKey, this.formKey})
       : super(
             key: key,
             automaticallyImplyLeading: !isDialog,
@@ -75,14 +77,15 @@ class SmeupNavigationAppBar extends AppBar {
                           ),
                         ),
                         onTap: () async {
-                          SmeupFun smeupFun = SmeupFun(button);
+                          SmeupFun smeupFun = SmeupFun(button, formKey);
                           if (smeupFun.isDinamismAsync(
                               smeupFun.fun['fun']['dynamisms'], 'click')) {
                             SmeupDynamismService.run(
                                 smeupFun.fun['fun']['dynamisms'],
                                 myContext,
                                 'click',
-                                scaffoldKey);
+                                scaffoldKey,
+                                formKey);
 
                             SmeupLogService.writeDebugMessage(
                                 '********************* ASYNC = TRUE',
@@ -104,7 +107,8 @@ class SmeupNavigationAppBar extends AppBar {
                                   smeupFun.fun['fun']['dynamisms'],
                                   myContext,
                                   'click',
-                                  scaffoldKey);
+                                  scaffoldKey,
+                                  formKey);
                               SmeupNavigationAppBar._isBusy = false;
                             }
                           }

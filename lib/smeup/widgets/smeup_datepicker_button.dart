@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_datepicker_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_line_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_line.dart';
 
 class SmeupDatePickerButton extends StatefulWidget {
@@ -29,8 +29,9 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
   void initState() {
     _currentValue = widget.value;
     _currentDisplay = widget.display;
-    SmeupDynamismService.variables[widget.smeupDatePickerModel.id] =
-        widget.display;
+    SmeupVariablesService.setVariable(
+        widget.smeupDatePickerModel.id, widget.display,
+        formKey: widget.formKey);
     super.initState();
   }
 
@@ -81,9 +82,9 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
                         final newTime = DateFormat('dd/MM/yyyy').format(date);
                         _currentDisplay = newTime;
                         _currentValue = date;
-                        SmeupDynamismService
-                                .variables[widget.smeupDatePickerModel.id] =
-                            newTime;
+                        SmeupVariablesService.setVariable(
+                            widget.smeupDatePickerModel.id, newTime,
+                            formKey: widget.formKey);
                       });
                     });
                   },
@@ -95,7 +96,7 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
                               : widget.smeupDatePickerModel.fontColor))),
             ),
             SmeupLine(
-                SmeupLineModel(
+                SmeupLineModel(widget.formKey,
                     color: SmeupOptions.theme.primaryColor, thickness: 0.5),
                 widget.scaffoldKey,
                 widget.formKey)

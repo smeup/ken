@@ -12,9 +12,8 @@ import 'smeup_section.dart';
 class SmeupForm extends StatefulWidget {
   final SmeupFormModel smeupFormModel;
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
 
-  SmeupForm(this.smeupFormModel, this.scaffoldKey, this.formKey);
+  SmeupForm(this.smeupFormModel, this.scaffoldKey);
 
   @override
   _SmeupFormState createState() => _SmeupFormState();
@@ -23,8 +22,6 @@ class SmeupForm extends StatefulWidget {
 class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
   @override
   Widget build(BuildContext context) {
-    //MediaQueryData deviceInfo = MediaQuery.of(context);
-
     return FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getFormChildren(widget.smeupFormModel),
       builder: (BuildContext context,
@@ -73,11 +70,12 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
 
     if (smeupFormModel.hasVariables()) {
       smeupFormModel.formVariables.forEach((element) {
-        SmeupDynamismService.storeFormVariables(element);
+        SmeupDynamismService.storeFormVariables(
+            element, smeupFormModel.formKey);
       });
     }
 
-    Widget children;
+    Widget form;
     var sections = List<Widget>.empty(growable: true);
     double maxDim = 100;
 
@@ -132,17 +130,20 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
               height: smeupFormModel.layout == 'column'
                   ? (formHeight - 70) / totalDim * s.dim
                   : formHeight,
-              child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
+              child: SmeupSection(
+                  s, widget.scaffoldKey, widget.smeupFormModel.formKey));
         });
       } else {
         section = Container(
-            child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
+            child: SmeupSection(
+                s, widget.scaffoldKey, widget.smeupFormModel.formKey));
       }
       sections.add(section);
     });
 
+    Widget container;
     if (smeupFormModel.layout == 'column') {
-      children = Container(
+      container = Container(
         padding: getPadding(smeupFormModel),
         child: SingleChildScrollView(
           child: Column(
@@ -151,7 +152,7 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
         ),
       );
     } else {
-      children = Container(
+      container = Container(
         padding: getPadding(smeupFormModel),
         child: SingleChildScrollView(
           child: Row(children: sections),
@@ -159,7 +160,9 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       );
     }
 
-    return SmeupWidgetBuilderResponse(smeupFormModel, children);
+    form = Form(key: widget.smeupFormModel.formKey, child: container);
+
+    return SmeupWidgetBuilderResponse(smeupFormModel, form);
   }
 
   EdgeInsets getPadding(SmeupFormModel smeupFormModel) {

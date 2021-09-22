@@ -8,6 +8,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart'
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_field_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_buttons.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
@@ -164,7 +165,8 @@ class _SmeupTextFieldState extends State<SmeupTextField>
 
     Widget textField;
 
-    SmeupDynamismService.variables[widget.id] = _data;
+    SmeupVariablesService.setVariable(widget.id, _data,
+        formKey: widget.formKey);
 
     Color underlineColor = widget.showUnderline
         ? SmeupOptions.theme.primaryColor
@@ -196,10 +198,11 @@ class _SmeupTextFieldState extends State<SmeupTextField>
               widget.keyboard == TextInputType.visiblePassword ? true : false,
           onChanged: (value) {
             if (widget.clientOnChange != null) widget.clientOnChange(value);
-            SmeupDynamismService.variables[widget.id] = value;
+            SmeupVariablesService.setVariable(widget.id, value,
+                formKey: widget.formKey);
             if (_model != null)
-              SmeupDynamismService.run(
-                  _model.dynamisms, context, 'change', widget.scaffoldKey);
+              SmeupDynamismService.run(_model.dynamisms, context, 'change',
+                  widget.scaffoldKey, widget.formKey);
           },
           decoration: InputDecoration(
             labelStyle: TextStyle(
@@ -215,10 +218,11 @@ class _SmeupTextFieldState extends State<SmeupTextField>
           ),
           onSaved: (value) {
             if (widget.clientOnSave != null) widget.clientOnSave(value);
-            SmeupDynamismService.variables[widget.id] = value;
+            SmeupVariablesService.setVariable(widget.id, value,
+                formKey: widget.formKey);
             if (_model != null)
-              SmeupDynamismService.run(
-                  _model.dynamisms, context, 'lostfocus', widget.scaffoldKey);
+              SmeupDynamismService.run(_model.dynamisms, context, 'lostfocus',
+                  widget.scaffoldKey, widget.formKey);
           }, // lostfocus
         ));
 
@@ -233,9 +237,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
         "dynamisms": _model.dynamisms
       };
       final button = SmeupButtons.withController(
-          SmeupButtonsModel.fromMap(
-            json,
-          ),
+          SmeupButtonsModel.fromMap(json, widget.formKey),
           widget.scaffoldKey,
           widget.formKey);
       final column = Column(
