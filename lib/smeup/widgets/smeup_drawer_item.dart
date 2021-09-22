@@ -39,7 +39,7 @@ class SmeupDrawerItem extends StatelessWidget {
           ListTile(
             leading: Icon(
               IconData(iconCode, fontFamily: 'MaterialIcons'),
-              color: SmeupOptions.theme.primaryColor,
+              color: SmeupConfigurationService.getTheme().primaryColor,
             ),
             title: title,
             onTap: function,

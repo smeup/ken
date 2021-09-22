@@ -31,7 +31,7 @@ class SmeupFormModel extends SmeupModel
   // SmeupFormModel(this.context, SmeupFun smeupFun) {
   //   this.smeupFun = smeupFun;
   //   if (backColor == null)
-  //     backColor = SmeupOptions.theme.scaffoldBackgroundColor;
+  //     backColor = SmeupOptions.getTheme().scaffoldBackgroundColor;
   // }
 
   SmeupFormModel.fromMap(response, this.formKey)
@@ -51,7 +51,7 @@ class SmeupFormModel extends SmeupModel
     if (optionsType['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsType['backColor']);
     } else {
-      backColor = SmeupOptions.theme.scaffoldBackgroundColor;
+      backColor = SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
     }
 
     layout = jsonMap['layout'] ?? defaultLayout;

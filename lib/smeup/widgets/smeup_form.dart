@@ -50,7 +50,7 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Il form deve essere di tipo EXD.'),
-          backgroundColor: SmeupOptions.theme.errorColor,
+          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
         ),
       );
 
@@ -61,7 +61,7 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Non sono presenti sezioni nel form.'),
-          backgroundColor: SmeupOptions.theme.errorColor,
+          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
         ),
       );
 
@@ -122,9 +122,10 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
           bool isDialog =
               routeArgs == null ? false : routeArgs['isDialog'] ?? false;
           MediaQueryData deviceInfo = MediaQuery.of(context);
-          SmeupOptions.deviceWidth = deviceInfo.size.width;
-          SmeupOptions.deviceHeight = deviceInfo.size.height;
-          final formHeight = isDialog ? 300 : SmeupOptions.deviceHeight;
+          SmeupConfigurationService.deviceWidth = deviceInfo.size.width;
+          SmeupConfigurationService.deviceHeight = deviceInfo.size.height;
+          final formHeight =
+              isDialog ? 300 : SmeupConfigurationService.deviceHeight;
 
           return Container(
               height: smeupFormModel.layout == 'column'

@@ -184,7 +184,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
     Widget children;
 
     Color underlineColor = widget.showUnderline
-        ? SmeupOptions.theme.primaryColor
+        ? SmeupConfigurationService.getTheme().primaryColor
         : Colors.transparent;
 
     Color focusColor = widget.showUnderline ? Colors.blue : Colors.transparent;
@@ -194,7 +194,8 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
         decoration: widget.showborder
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(12.0),
-                border: Border.all(color: SmeupOptions.theme.primaryColor))
+                border: Border.all(
+                    color: SmeupConfigurationService.getTheme().primaryColor))
             : null,
         child: RawAutocomplete<dynamic>(
           optionsBuilder: (TextEditingValue textEditingValue) {
@@ -252,7 +253,8 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         fontSize: widget.fontsize,
-                        color: SmeupOptions.theme.primaryColor),
+                        color:
+                            SmeupConfigurationService.getTheme().primaryColor),
                     labelText: widget.label,
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: underlineColor),

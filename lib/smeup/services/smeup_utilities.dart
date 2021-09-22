@@ -42,7 +42,7 @@ class SmeupUtilities {
   static Color getColorFromRGB(String color, {double opacity = 1.0}) {
     final split = color.split(RegExp(r"(?=[A-Z])"));
     if (split == null || split.length != 3)
-      return SmeupOptions.theme.textTheme.headline6.color;
+      return SmeupConfigurationService.getTheme().textTheme.headline6.color;
 
     int r = int.parse(split[0].substring(1));
     int g = int.parse(split[1].substring(1));

@@ -56,7 +56,8 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
       this.showRules = defaultShowRules,
       this.checkRules = defaultCheckRules})
       : super(formKey, title: title, id: id, type: type) {
-    if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
+    if (backColor == null)
+      backColor = SmeupConfigurationService.getTheme().backgroundColor;
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'pwd';
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);

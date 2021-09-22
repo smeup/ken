@@ -67,7 +67,7 @@ class _SmeupQRCodeReaderState extends State<SmeupQRCodeReader>
         SnackBar(
           content: Text(
               '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupQRCodeReaderModel.smeupFun?.fun['fun']['function']})'),
-          backgroundColor: SmeupOptions.theme.errorColor,
+          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
         ),
       );
 

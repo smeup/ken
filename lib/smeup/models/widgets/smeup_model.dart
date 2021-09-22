@@ -31,7 +31,7 @@ abstract class SmeupModel {
   List<SmeupSectionModel> smeupSectionsModels;
 
   SmeupModel(this.formKey, {this.title, this.id, this.type}) {
-    showLoader = SmeupOptions.showLoader;
+    showLoader = SmeupConfigurationService.getAppConfiguration().showLoader;
     if (optionsDefault == null)
       optionsDefault = {
         "$type": {"default": {}}
@@ -67,7 +67,8 @@ abstract class SmeupModel {
         optionsType['default'] = Map<String, dynamic>();
 
       optionsDefault = optionsType['default'] ?? Map<String, dynamic>();
-      showLoader = jsonMap['showLoader'] ?? SmeupOptions.showLoader;
+      showLoader = jsonMap['showLoader'] ??
+          SmeupConfigurationService.getAppConfiguration().showLoader;
       notificationEnabled = jsonMap['notification'] ?? true;
       refresh =
           SmeupUtilities.getInt(optionsDefault['refresh']) ?? defaultRefresh;

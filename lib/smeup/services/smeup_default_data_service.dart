@@ -23,27 +23,6 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
       receiveTimeout: DEFAULD_TIMEOUT,
     );
     dio = Dio(options);
-
-    // rootBundle.loadString('assets/certs/smeup.com-2020-2022.crt').then((key) {
-    //   (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-    //       (client) {
-    //     client.badCertificateCallback =
-    //         (X509Certificate cert, String host, int port) {
-    //       if (cert.pem == key) {
-    //         return true;
-    //       }
-    //       return false;
-    //     };
-    //     return client;
-    //   };
-    // });
-
-    // (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-    //     (HttpClient client) {
-    //   client.badCertificateCallback =
-    //       (X509Certificate cert, String host, int port) => true;
-    //   return client;
-    // };
   }
 
   @override
@@ -54,7 +33,7 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
       String url;
       String contentType;
 
-      url = '${SmeupOptions.defaultServiceEndpoint}/jfun';
+      url = '${SmeupConfigurationService.getDefaultServiceEndpoint()}/jfun';
       contentType = 'application/json';
       data = smeupFun.fun;
 
@@ -115,7 +94,7 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
       dio.options.headers['content-type'] = contentType;
 
       dio.options.headers['Authorization'] =
-          '${SmeupOptions.defaultServiceToken}';
+          '${SmeupConfigurationService.defaultServiceToken}';
 
       Response response;
 

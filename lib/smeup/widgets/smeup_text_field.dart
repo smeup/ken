@@ -169,7 +169,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
         formKey: widget.formKey);
 
     Color underlineColor = widget.showUnderline
-        ? SmeupOptions.theme.primaryColor
+        ? SmeupConfigurationService.getTheme().primaryColor
         : Colors.transparent;
 
     Color focusColor = widget.showUnderline ? Colors.blue : Colors.transparent;
@@ -180,7 +180,8 @@ class _SmeupTextFieldState extends State<SmeupTextField>
         decoration: widget.showborder
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(12.0),
-                border: Border.all(color: SmeupOptions.theme.primaryColor))
+                border: Border.all(
+                    color: SmeupConfigurationService.getTheme().primaryColor))
             : null,
         child: TextFormField(
           inputFormatters: widget.inputFormatters,
@@ -207,7 +208,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
           decoration: InputDecoration(
             labelStyle: TextStyle(
                 fontSize: widget.fontsize,
-                color: SmeupOptions.theme.primaryColor),
+                color: SmeupConfigurationService.getTheme().primaryColor),
             labelText: widget.label,
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: underlineColor),

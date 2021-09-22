@@ -41,7 +41,8 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       this.iconSize = defaultIconSize,
       title = ''})
       : super(formKey, title: title, id: id, type: type) {
-    if (iconColor == null) iconColor = SmeupOptions.theme.iconTheme.color;
+    if (iconColor == null)
+      iconColor = SmeupConfigurationService.getTheme().iconTheme.color;
     id = SmeupUtilities.getWidgetId('DSH', id);
     SmeupDataService.incrementDataFetch(id);
   }

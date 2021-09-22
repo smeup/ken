@@ -20,8 +20,9 @@ class SmeupWaitFun extends StatelessWidget {
           return Stack(
             children: [
               target,
-              SmeupSplash(SmeupOptions.appSplashColor),
-              SmeupProgressIndicator(SmeupOptions.loaderColor),
+              SmeupSplash(),
+              SmeupProgressIndicator(
+                  SmeupConfigurationService.defaultLoaderColor),
             ],
           );
         } else {

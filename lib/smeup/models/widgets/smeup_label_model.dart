@@ -58,7 +58,8 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
     if (fontColor == null)
-      fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
+      fontColor =
+          SmeupConfigurationService.getTheme().textTheme.bodyText1.color;
 
     valueColName = optionsDefault['valueColName'] ?? 'value';
     colorColName = optionsDefault['colorColName'] ?? '';

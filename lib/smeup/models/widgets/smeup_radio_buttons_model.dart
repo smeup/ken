@@ -54,9 +54,11 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
       this.displayedField = defaultDisplayedField,
       this.selectedValue})
       : super(formKey, title: title, id: id, type: type) {
-    if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
+    if (backColor == null)
+      backColor = SmeupConfigurationService.getTheme().backgroundColor;
     if (fontColor == null)
-      fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
+      fontColor =
+          SmeupConfigurationService.getTheme().textTheme.bodyText1.color;
 
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'rad';
 

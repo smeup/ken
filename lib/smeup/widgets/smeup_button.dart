@@ -58,11 +58,13 @@ class SmeupButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor =
-        backColor == null ? SmeupOptions.theme.buttonColor : backColor;
+    final backgroundColor = backColor == null
+        ? SmeupConfigurationService.getTheme().buttonColor
+        : backColor;
 
-    final _borderColor =
-        borderColor != null ? borderColor : SmeupOptions.theme.primaryColor;
+    final _borderColor = borderColor != null
+        ? borderColor
+        : SmeupConfigurationService.getTheme().primaryColor;
 
     return Container(
       color: Color.fromRGBO(0, 0, 0, 0),
@@ -74,7 +76,7 @@ class SmeupButton extends StatelessWidget {
           key: Key(id),
           style: ElevatedButton.styleFrom(
             primary: backgroundColor,
-            onPrimary: SmeupOptions.theme.primaryColor,
+            onPrimary: SmeupConfigurationService.getTheme().primaryColor,
             elevation: elevation,
             // focusColor: backgroundColor,
 
@@ -89,7 +91,7 @@ class SmeupButton extends StatelessWidget {
             isBusy
                 ? CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(fontColor == null
-                        ? SmeupOptions.loaderColor
+                        ? SmeupConfigurationService.defaultLoaderColor
                         : fontColor),
                   )
                 : () {
@@ -110,7 +112,8 @@ class SmeupButton extends StatelessWidget {
                                     bold ? FontWeight.bold : FontWeight.normal,
                                 fontSize: fontsize,
                                 color: fontColor == null
-                                    ? SmeupOptions.theme.primaryColor
+                                    ? SmeupConfigurationService.getTheme()
+                                        .primaryColor
                                     : fontColor)));
 
                     var widget;

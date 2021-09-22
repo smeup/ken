@@ -237,9 +237,9 @@ class _SmeupListBoxState extends State<SmeupListBox>
           boxHeight = 1;
 
         MediaQueryData deviceInfo = MediaQuery.of(context);
-        SmeupOptions.deviceWidth = deviceInfo.size.width;
-        SmeupOptions.deviceHeight = deviceInfo.size.height;
-        childAspectRatio = SmeupOptions.deviceWidth / boxHeight;
+        SmeupConfigurationService.deviceWidth = deviceInfo.size.width;
+        SmeupConfigurationService.deviceHeight = deviceInfo.size.height;
+        childAspectRatio = SmeupConfigurationService.deviceWidth / boxHeight;
 
         return RefreshIndicator(
           onRefresh: _refreshList,

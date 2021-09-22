@@ -166,10 +166,10 @@ class _SmeupComponentState extends State<SmeupComponent> {
           children = SmeupNotAvailable();
         } else {
           MediaQueryData deviceInfo = MediaQuery.of(context);
-          SmeupOptions.deviceWidth = deviceInfo.size.width;
-          SmeupOptions.deviceHeight = deviceInfo.size.height;
-          double deviceHeight = SmeupOptions.deviceHeight;
-          double deviceWidth = SmeupOptions.deviceWidth;
+          SmeupConfigurationService.deviceWidth = deviceInfo.size.width;
+          SmeupConfigurationService.deviceHeight = deviceInfo.size.height;
+          double deviceHeight = SmeupConfigurationService.deviceHeight;
+          double deviceWidth = SmeupConfigurationService.deviceWidth;
 
           var smeupJsonForm = SmeupFormModel.fromMap(
               smeupServiceResponse.result.data, widget.formKey);

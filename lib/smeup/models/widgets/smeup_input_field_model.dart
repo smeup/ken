@@ -39,7 +39,8 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
       this.autoFocus = defaultAutoFocus,
       id})
       : super(formKey, title: title) {
-    if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
+    if (backColor == null)
+      backColor = SmeupConfigurationService.getTheme().backgroundColor;
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
   }

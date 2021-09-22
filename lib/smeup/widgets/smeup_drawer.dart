@@ -114,7 +114,7 @@ class _SmeupDrawerState extends State<SmeupDrawer> with SmeupWidgetStateMixin {
             header: ListTile(
               leading: Icon(
                 IconData(e['groupIcon'], fontFamily: 'MaterialIcons'),
-                color: SmeupOptions.theme.primaryColor,
+                color: SmeupConfigurationService.getTheme().primaryColor,
               ),
               title: Text(e['group'],
                   style: TextStyle(fontSize: e['groupFontSize'])),

@@ -17,7 +17,7 @@ class SmeupImageDataService implements SmeupDataServiceInterface {
           '*** \'SmeupImageDataService\': ${smeupFun.fun['fun']['obj1']['k']}');
 
       final imageLocalPath =
-          '${SmeupOptions.imagesPath}/${smeupFun.fun['fun']['obj1']['k']}';
+          '${SmeupConfigurationService.imagesPath}/${smeupFun.fun['fun']['obj1']['k']}';
 
       return SmeupServiceResponse(true, {"imageLocalPath": imageLocalPath});
     } catch (e) {

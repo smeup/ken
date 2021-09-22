@@ -49,7 +49,8 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
       this.valueField,
       this.keyboard})
       : super(formKey, title: title, id: id, type: type) {
-    if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
+    if (backColor == null)
+      backColor = SmeupConfigurationService.getTheme().backgroundColor;
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'itx';
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);

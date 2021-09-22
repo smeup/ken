@@ -252,7 +252,9 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
           child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.0),
-                  border: Border.all(color: SmeupOptions.theme.primaryColor)),
+                  border: Border.all(
+                      color:
+                          SmeupConfigurationService.getTheme().primaryColor)),
               child: Column(children: buttons)));
 
       dynamic selData = (_data as List).firstWhere(

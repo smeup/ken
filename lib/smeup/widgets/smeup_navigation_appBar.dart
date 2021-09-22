@@ -7,7 +7,7 @@ import 'package:mobile_components_library/smeup/services/smeup_variables_service
 
 List<Widget> _debugAction;
 List<Widget> _getDebugAction() {
-  if (!SmeupOptions.isVariablesChangingLogEnabled) return null;
+  if (!SmeupConfigurationService.isVariablesChangingLogEnabled) return null;
 
   if (_debugAction == null) {
     _debugAction = [

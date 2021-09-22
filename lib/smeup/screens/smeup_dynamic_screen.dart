@@ -102,9 +102,9 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
             if (smeupFormModel != null)
               SmeupDynamicScreen.onBuild(smeupFormModel.id);
             if (snapshot.data.children is SmeupNotAvailable) {
-              if (SmeupOptions.logoutFunction != null &&
+              if (SmeupConfigurationService.logoutFunction != null &&
                   snapshot.data.serviceStatusCode == 511)
-                SmeupOptions.logoutFunction();
+                SmeupConfigurationService.logoutFunction();
               else
                 showErrorForm(context, smeupFun);
             }
@@ -130,7 +130,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
         SnackBar(
           content: Text(
               '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupscreenModel.smeupFun.fun['fun']['function']})'),
-          backgroundColor: SmeupOptions.theme.errorColor,
+          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
         ),
       );
 
@@ -148,7 +148,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
         widget.initialFun != null ? widget.initialFun : routeArgs['smeupFun'];
 
     var screen = Theme(
-      data: SmeupOptions.theme,
+      data: SmeupConfigurationService.getTheme(),
       child: Builder(
           builder: (BuildContext context) => WillPopScope(
                 onWillPop: _onWillPop,
@@ -186,10 +186,11 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
         barrierDismissible: false,
         context: context,
         builder: (context) => Theme(
-            data: SmeupOptions.theme,
+            data: SmeupConfigurationService.getTheme(),
             child: SimpleDialog(
               //contentPadding: EdgeInsets.only(top: 20, bottom: 20),
-              backgroundColor: SmeupOptions.theme.scaffoldBackgroundColor,
+              backgroundColor:
+                  SmeupConfigurationService.getTheme().scaffoldBackgroundColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
@@ -221,7 +222,8 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
                             primary: Colors.white,
-                            onPrimary: SmeupOptions.theme.primaryColor,
+                            onPrimary: SmeupConfigurationService.getTheme()
+                                .primaryColor,
                           ),
                           onPressed: () {
                             Navigator.of(context).pushNamedAndRemoveUntil(

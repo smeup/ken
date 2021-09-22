@@ -70,7 +70,7 @@ class SmeupRadioButton extends StatelessWidget {
                 onChanged: (value) {
                   serverOnPressed(value);
                 },
-                activeColor: SmeupOptions.theme.primaryColor,
+                activeColor: SmeupConfigurationService.getTheme().primaryColor,
               ),
               Align(
                   alignment: align,

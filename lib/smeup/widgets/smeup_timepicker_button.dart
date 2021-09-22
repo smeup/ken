@@ -33,8 +33,8 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
   @override
   Widget build(BuildContext context) {
     final button = Container(
-        color:
-            SmeupOptions.theme.canvasColor, // Color.fromRGBO(250, 250, 250, 1),
+        color: SmeupConfigurationService.getTheme()
+            .canvasColor, // Color.fromRGBO(250, 250, 250, 1),
         padding: EdgeInsets.all(widget.smeupTimePickerModel.padding),
         child: SizedBox(
             height: widget.smeupTimePickerModel.height,
@@ -44,7 +44,7 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: widget.smeupTimePickerModel.backColor == null
-                      ? SmeupOptions.theme.buttonColor
+                      ? SmeupConfigurationService.getTheme().buttonColor
                       : widget.smeupTimePickerModel.backColor,
                 ),
                 onPressed: () {
@@ -70,10 +70,13 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
                         fontSize: widget.smeupTimePickerModel.fontsize,
                         //fontWeight: FontWeight.bold,
                         color: widget.smeupTimePickerModel.fontColor == null
-                            ? SmeupOptions.theme.textTheme.bodyText1.color
+                            ? SmeupConfigurationService.getTheme()
+                                .textTheme
+                                .bodyText1
+                                .color
                             : widget.smeupTimePickerModel.fontColor)))));
 
-    // var containerBackground = SmeupOptions.theme.primaryColor;
+    // var containerBackground = SmeupOptions.getTheme().primaryColor;
     // if (widget.smeupTimePickerModel.backColor != null)
     //   containerBackground = widget.smeupTimePickerModel.backColor;
 
