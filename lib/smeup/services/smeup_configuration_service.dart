@@ -40,8 +40,8 @@ class SmeupConfigurationService {
   static Map<DateTime, List> _holidays;
   static dynamic appDictionary;
   static ConfigurationModel _appConfiguration;
-  static const Color defaultSplashColor = Color(0xff313131);
-  static const Color defaultLoaderColor = Color(0xff313131);
+  static const Color defaultSplashColor = Color(0xffffffff);
+  static const Color defaultLoaderColor = Color(0xffffffff);
 
   static PackageInfo packageInfoModel = PackageInfo(
     appName: 'Unknown',
