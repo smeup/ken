@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_datepicker_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_line_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';

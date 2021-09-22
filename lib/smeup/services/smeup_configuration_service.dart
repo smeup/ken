@@ -11,7 +11,7 @@ import 'package:package_info/package_info.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'configuration_model.dart';
+import '../models/configuration_model.dart';
 
 enum ALT_SERVICE_ENDPOINTS { DEFAULT, HTTP }
 

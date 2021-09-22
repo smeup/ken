@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_error_notifier.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';

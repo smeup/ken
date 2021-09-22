@@ -5,7 +5,7 @@ import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin
 import 'package:provider/provider.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_form_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_screen_model.dart';
 import 'package:mobile_components_library/smeup/notifiers/smeup_error_notifier.dart';
