@@ -114,7 +114,7 @@ class SmeupDataService {
   }
 
   static void printRequestDuration(DateTime start) {
-    if (SmeupConfigurationService.isDebug) {
+    if (SmeupConfigurationService.logLevel == LogType.debug) {
       DateTime end = DateTime.now();
       final diff = end.difference(start);
       SmeupLogService.writeDebugMessage(

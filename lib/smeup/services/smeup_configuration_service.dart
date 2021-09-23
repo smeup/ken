@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:json_theme/json_theme.dart';
+import 'package:mobile_components_library/smeup/services/smeup_cache_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service_interface.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
@@ -17,13 +18,12 @@ enum ALT_SERVICE_ENDPOINTS { DEFAULT, HTTP }
 
 class SmeupConfigurationService {
   static const double STATIC_BUTTON_ROUNDNESS = 0.0;
-  static bool isDebug = false;
+  static LogType logLevel;
   static bool isLoginEnabled = false;
   static bool isOfflineEnabled = false;
   static bool isCacheEnabled = false;
   static bool isLogEnabled = false;
   static bool isLandscapeEnabled = true;
-  static bool isVariablesChangingLogEnabled = true;
   static SharedPreferences _localStorge;
   static ThemeData _theme;
   static String jsonsPath;
@@ -51,15 +51,14 @@ class SmeupConfigurationService {
   );
 
   static Future<void> init(BuildContext context,
-      {bool isDebug,
+      {LogType logLevel = LogType.none,
       dynamic localizationService,
       Map<String, SmeupDataServiceInterface> customDataServices,
+      bool enableCache = false,
       Function logoutFunction}) async {
     await SmeupConfigurationService.setAppConfiguration();
 
-    SmeupConfigurationService.isDebug = isDebug;
-    SmeupConfigurationService.isVariablesChangingLogEnabled =
-        isVariablesChangingLogEnabled;
+    SmeupConfigurationService.logLevel = logLevel;
 
     await SmeupConfigurationService.setTheme(
         SmeupConfigurationService.getAppConfiguration().theme);
@@ -69,7 +68,7 @@ class SmeupConfigurationService {
     SmeupConfigurationService.setDefaultServiceEndpoint();
     SmeupConfigurationService.setHttpServiceEndpoint();
 
-    SmeupConfigurationService.jsonsPath = 'assets/jsons/forms';
+    SmeupConfigurationService.jsonsPath = 'assets/jsons';
     SmeupConfigurationService.imagesPath = 'assets/images';
 
     SmeupDataService.initInternalService();
@@ -85,7 +84,8 @@ class SmeupConfigurationService {
 
     SmeupConfigurationService.logoutFunction = logoutFunction;
     SmeupConfigurationService.setPackageInfo(packageInfoModel);
-    SmeupConfigurationService.setHolidays(context);
+    if (context != null) SmeupConfigurationService.setHolidays(context);
+    if (enableCache) SmeupCacheService.init();
   }
 
   static void setPackageInfo(PackageInfo packageInfo) {
@@ -199,7 +199,11 @@ class SmeupConfigurationService {
   }
 
   static setLocalStorage() async {
-    _localStorge = await SharedPreferences.getInstance();
+    try {
+      _localStorge = await SharedPreferences.getInstance();
+    } catch (e) {
+      SmeupLogService.writeDebugMessage('setLocalStorage failed: $e');
+    }
   }
 
   static SharedPreferences getLocalStorage() {
