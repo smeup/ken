@@ -36,7 +36,7 @@ class SmeupRadioButtons extends StatefulWidget
   double leftPadding;
   double topPadding;
   double bottomPadding;
-  List<Map<String, String>> data;
+  List<dynamic> data;
   String valueField;
   String displayedField;
   String selectedValue;
@@ -76,7 +76,7 @@ class SmeupRadioButtons extends StatefulWidget
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
 
-    if (data == null) data = List<Map<String, String>>.empty(growable: true);
+    //if (data == null) data = List<Map<String, String>>.empty(growable: true);
   }
 
   @override
@@ -113,10 +113,13 @@ class SmeupRadioButtons extends StatefulWidget
 
     // set the widget data
     if (workData != null) {
-      var newList = List<Map<String, String>>.empty(growable: true);
+      var newList = List<dynamic>.empty(growable: true);
       for (var i = 0; i < (workData['rows'] as List).length; i++) {
         final element = workData['rows'][i];
-        newList.add({'code': element['k'], 'value': element['value']});
+        newList.add({
+          'code': element['k'].toString(),
+          'value': element['value'].toString()
+        });
       }
       return newList;
     } else {
