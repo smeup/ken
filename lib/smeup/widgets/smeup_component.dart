@@ -87,8 +87,8 @@ class _SmeupComponentState extends State<SmeupComponent> {
         initialLastWork =
             DateTime(DateTime.now().year, DateTime.now().month + 1, 0);
 
-        children = SmeupCalendar(smeupModel, widget.scaffoldKey, widget.formKey,
-            initialFirstWork, initialLastWork);
+        children = SmeupCalendar.withController(smeupModel, widget.scaffoldKey,
+            widget.formKey, initialFirstWork, initialLastWork);
         break;
       case 'CHA':
         children = SmeupChart(smeupModel, widget.scaffoldKey, widget.formKey);
