@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupLocalizationService {
   SmeupLocalizationService(this.locale);
@@ -57,7 +60,7 @@ class SmeupLocalizationService {
     var holidays = Map<DateTime, List>();
 
     final listPublic = await _getPublicHolidaysFromNager(year, country);
-    final listCustom = _getCustomHolidays();
+    final listCustom = await _getCustomHolidays();
 
     return holidays;
   }
@@ -93,8 +96,18 @@ class SmeupLocalizationService {
     return list;
   }
 
-  static Map<DateTime, List> _getCustomHolidays() {
+  static Future<Map<DateTime, List>> _getCustomHolidays() async {
     var custom = Map<DateTime, List>();
+
+    String jsonFilePath =
+        '${SmeupConfigurationService.jsonsPath}/custom_holidays.json';
+
+    SmeupLogService.writeDebugMessage(
+        '*** http request \'SmeupJsonDataService\': $jsonFilePath');
+
+    String jsonString = await rootBundle.loadString(jsonFilePath);
+
+    jsonString = SmeupUtilities.replaceDictionaryPlaceHolders(jsonString);
 
     return custom;
   }
