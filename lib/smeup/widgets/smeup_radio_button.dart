@@ -60,6 +60,7 @@ class SmeupRadioButton extends StatelessWidget {
           height: height,
           width: width == 0 ? double.infinity : width,
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Radio(
                 value: data['code'],
