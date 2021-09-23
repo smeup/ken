@@ -24,7 +24,7 @@ class SmeupJsonDataService implements SmeupDataServiceInterface {
             data = jsons[smeupFun.fun['fun']['obj2']['k']];
           } else {
             String jsonFilePath =
-                '${SmeupConfigurationService.jsonsPath}/${smeupFun.fun['fun']['obj2']['k']}.json';
+                '${SmeupConfigurationService.jsonsPath}/forms/${smeupFun.fun['fun']['obj2']['k']}.json';
 
             SmeupLogService.writeDebugMessage(
                 '*** http request \'SmeupJsonDataService\': $jsonFilePath');
