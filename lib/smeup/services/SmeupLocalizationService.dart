@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'dart:io';
 
@@ -58,10 +60,34 @@ class SmeupLocalizationService {
 
   Future<Map<DateTime, List>> getHolidays(int year, String country) async {
     var holidays = Map<DateTime, List>();
+    Function addHoliday = (DateTime date, String description) {
+      List holidayList;
+
+      if (holidays[date] == null)
+        holidayList = List<String>.empty(growable: true);
+      else
+        holidayList = holidays[date];
+
+      holidayList.add(description);
+      holidays[date] = holidayList;
+    };
 
     final listPublic = await _getPublicHolidaysFromNager(year, country);
-    final listCustom = await _getCustomHolidays();
+    listPublic.forEach((holiday) {
+      DateTime date = DateTime.tryParse(holiday['date']);
+      String description = holiday['localName'];
+      addHoliday(date, description);
+    });
 
+    final listCustom = await _getCustomHolidays();
+    listCustom.forEach((holiday) {
+      DateTime date = DateTime.tryParse(holiday['date']);
+      String description = holiday['description'];
+      addHoliday(date, description);
+    });
+
+    //print(listPublic);
+    //print(listCustom);
     return holidays;
   }
 
@@ -86,28 +112,47 @@ class SmeupLocalizationService {
             statusCode: HttpStatus.badRequest,
             requestOptions: null);
       }
+    } finally {
+      dio.close();
+      dio = null;
     }
 
     bool isValid = SmeupDataService.isValid(response.statusCode);
     if (isValid) {
       list = response.data;
+      SmeupLogService.writeDebugMessage(
+          'Loaded public holidays from Nager.date website');
+    } else {
+      SmeupLogService.writeDebugMessage(
+          'error loding public holidays from Nager.date website',
+          logType: LogType.error);
     }
 
     return list;
   }
 
-  static Future<Map<DateTime, List>> _getCustomHolidays() async {
-    var custom = Map<DateTime, List>();
-
+  static Future<List> _getCustomHolidays() async {
+    var custom = List.empty(growable: true);
     String jsonFilePath =
         '${SmeupConfigurationService.jsonsPath}/custom_holidays.json';
 
-    SmeupLogService.writeDebugMessage(
-        '*** http request \'SmeupJsonDataService\': $jsonFilePath');
+    try {
+      String jsonString = await rootBundle.loadString(jsonFilePath);
 
-    String jsonString = await rootBundle.loadString(jsonFilePath);
+      jsonString = SmeupUtilities.replaceDictionaryPlaceHolders(jsonString);
 
-    jsonString = SmeupUtilities.replaceDictionaryPlaceHolders(jsonString);
+      custom = jsonDecode(jsonString);
+
+      SmeupLogService.writeDebugMessage(
+          'Loaded custom holidays from $jsonFilePath file');
+    } catch (e) {
+      SmeupLogService.writeDebugMessage(
+          '_getCustomHolidays error: $e (${e.message != null ? e.message : ''})',
+          logType: LogType.error);
+      SmeupLogService.writeDebugMessage(
+          'error loding custom holidays from $jsonFilePath file',
+          logType: LogType.error);
+    }
 
     return custom;
   }
