@@ -68,7 +68,7 @@ class SmeupConfigurationService {
     SmeupConfigurationService.setDefaultServiceEndpoint();
     SmeupConfigurationService.setHttpServiceEndpoint();
 
-    SmeupConfigurationService.jsonsPath = 'assets/jsons/forms';
+    SmeupConfigurationService.jsonsPath = 'assets/jsons';
     SmeupConfigurationService.imagesPath = 'assets/images';
 
     SmeupDataService.initInternalService();
