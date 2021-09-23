@@ -30,6 +30,7 @@ class SmeupTextAutocompleteModel extends SmeupModel
   SmeupTextAutocompleteModel(
       {id,
       type,
+      GlobalKey<FormState> formKey,
       this.backColor,
       this.fontsize = defaultFontsize,
       this.label = defaultLabel,
@@ -42,13 +43,14 @@ class SmeupTextAutocompleteModel extends SmeupModel
       this.autoFocus = defaultAutoFocus,
       this.defaultValue = '',
       this.valueField = 'value'})
-      : super(title: title, id: id, type: type) {
+      : super(formKey, title: title, id: id, type: type) {
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'acp';
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupTextAutocompleteModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupTextAutocompleteModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
     }

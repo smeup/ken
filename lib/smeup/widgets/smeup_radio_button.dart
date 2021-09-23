@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
 
 class SmeupRadioButton extends StatelessWidget {
@@ -70,7 +70,7 @@ class SmeupRadioButton extends StatelessWidget {
                 onChanged: (value) {
                   serverOnPressed(value);
                 },
-                activeColor: SmeupOptions.theme.primaryColor,
+                activeColor: SmeupConfigurationService.getTheme().primaryColor,
               ),
               Align(
                   alignment: align,

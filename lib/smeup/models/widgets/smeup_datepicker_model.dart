@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_datepicker_dao.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
@@ -44,13 +43,15 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
       : super(id: id, type: type, title: title) {
     if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
     if (fontColor == null)
-      fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
+      fontColor =
+          SmeupConfigurationService.getTheme().textTheme.bodyText1.color;
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupDatePickerModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupDatePickerModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
     }

@@ -50,8 +50,6 @@ class _SmeupChartState extends State<SmeupChart> with SmeupWidgetStateMixin {
       },
     );
 
-    // SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
-    //     widget.smeupChartModel.id, widget.smeupChartModel.type, notifier);
     return chart;
   }
 

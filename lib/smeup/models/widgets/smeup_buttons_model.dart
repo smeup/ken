@@ -38,6 +38,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     id,
     type,
     title = '',
+    GlobalKey<FormState> formKey,
     this.backColor,
     this.borderColor,
     this.width = defaultWidth,
@@ -53,12 +54,13 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     this.bold = defaultBold,
     this.iconData = 0,
     this.iconSize = defaultIconSize,
-  }) : super(title: title) {
+  }) : super(formKey, title: title) {
     SmeupDataService.incrementDataFetch(id);
   }
 
   SmeupButtonsModel.clone(SmeupButtonsModel other)
       : this(
+            formKey: other.formKey,
             title: other.title,
             backColor: other.backColor,
             borderColor: other.borderColor,
@@ -76,8 +78,9 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
             iconData: other.iconData,
             iconSize: other.iconSize);
 
-  SmeupButtonsModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupButtonsModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     title = jsonMap['title'] ?? '';
     padding = SmeupUtilities.getPadding(optionsDefault['padding']);
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;

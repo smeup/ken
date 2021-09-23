@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
@@ -61,12 +61,6 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
       },
     );
 
-    // SmeupWidgetsNotifier.addWidget(
-    //     widget.scaffoldKey.hashCode,
-    //     widget.smeupTimePickerModel.id,
-    //     widget.smeupTimePickerModel.type,
-    //     notifier);
-
     return input;
   }
 
@@ -81,7 +75,7 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
         SnackBar(
           content: Text(
               '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupTimePickerModel.smeupFun.fun['fun']['function']})'),
-          backgroundColor: SmeupOptions.theme.errorColor,
+          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
         ),
       );
 
@@ -104,10 +98,11 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
         : smeupTimePickerModel.optionsDefault['displayedField'];
     String display = smeupTimePickerModel.data['rows'][0][displayedField];
 
-    SmeupVariablesService.setVariable(smeupTimePickerModel.id, valueString);
+    SmeupVariablesService.setVariable(smeupTimePickerModel.id, valueString,
+        formKey: widget.formKey);
 
-    timepicker =
-        SmeupTimePickerButton(widget.smeupTimePickerModel, value, display);
+    timepicker = SmeupTimePickerButton(
+        widget.smeupTimePickerModel, widget.formKey, value, display);
 
     return SmeupWidgetBuilderResponse(smeupTimePickerModel, timepicker);
   }

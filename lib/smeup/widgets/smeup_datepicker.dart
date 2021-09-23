@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+<<<<<<< HEAD
 import 'package:mobile_components_library/smeup/daos/smeup_datepicker_dao.dart';
+=======
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_datepicker_model.dart';
+>>>>>>> new-data-structure
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_datepicker_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
@@ -150,6 +155,7 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
     return datePicker;
   }
 
+<<<<<<< HEAD
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
@@ -158,6 +164,22 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
       }
       setDataLoad(widget.id, true);
     }
+=======
+  Future<SmeupWidgetBuilderResponse> _getTimePickerComponent(
+      SmeupDatePickerModel smeupDatePickerModel) async {
+    Widget timepicker;
+
+    await smeupDatePickerModel.setData();
+
+    if (!hasData(smeupDatePickerModel)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+              '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupDatePickerModel.smeupFun.fun['fun']['function']})'),
+          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
+        ),
+      );
+>>>>>>> new-data-structure
 
     if (_data == null) {
       return getFunErrorResponse(context, _model);
@@ -181,7 +203,12 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
     String display =
         DateFormat("dd/MM/yyyy").format(DateTime.tryParse(_data[0]['display']));
 
+<<<<<<< HEAD
     SmeupVariablesService.setVariable(widget.id, valueString);
+=======
+    SmeupVariablesService.setVariable(smeupDatePickerModel.id, valueString,
+        formKey: widget.formKey);
+>>>>>>> new-data-structure
 
     var timepicker = SmeupDatePickerButton(
         widget.model, widget.scaffoldKey, widget.formKey, value, display);

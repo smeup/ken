@@ -3,7 +3,7 @@ import 'package:mobile_components_library/smeup/daos/smeup_dashboard_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
@@ -29,6 +29,7 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   SmeupDashboardModel(
       {id,
       type,
+      formKey,
       this.valueColName = defaultValueColName,
       this.padding = defaultPadding,
       this.iconColor,
@@ -39,14 +40,16 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       this.labelFontsize = defaultLabelFontsize,
       this.iconSize = defaultIconSize,
       title = ''})
-      : super(title: title, id: id, type: type) {
-    if (iconColor == null) iconColor = SmeupOptions.theme.iconTheme.color;
+      : super(formKey, title: title, id: id, type: type) {
+    if (iconColor == null)
+      iconColor = SmeupConfigurationService.getTheme().iconTheme.color;
     id = SmeupUtilities.getWidgetId('DSH', id);
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupDashboardModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupDashboardModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     valueColName = optionsDefault['valueColName'] ?? defaultValueColName;
     padding = SmeupUtilities.getPadding(optionsDefault['padding']);
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;

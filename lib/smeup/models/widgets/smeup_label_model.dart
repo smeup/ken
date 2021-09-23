@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_label_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
-
-import '../smeup_options.dart';
 
 class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
@@ -34,6 +33,7 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
   SmeupLabelModel(
       {id,
       type,
+      GlobalKey<FormState> formKey,
       this.valueColName = '',
       this.padding = defaultPadding,
       this.fontSize = defaultFontSize,
@@ -49,14 +49,16 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
       this.colorFontColName = '',
       this.iconSize = defaultIconSize,
       title = ''})
-      : super(title: title, id: id, type: type) {
+      : super(formKey, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupLabelModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupLabelModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     if (fontColor == null)
-      fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
+      fontColor =
+          SmeupConfigurationService.getTheme().textTheme.bodyText1.color;
 
     valueColName = optionsDefault['valueColName'] ?? 'value';
     colorColName = optionsDefault['colorColName'] ?? '';

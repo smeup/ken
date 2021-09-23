@@ -12,16 +12,18 @@ class SmeupCaurouselModel extends SmeupModel implements SmeupDataInterface {
   double height;
 
   SmeupCaurouselModel(
-      {this.clientData,
+      {GlobalKey<FormState> formKey,
+      this.clientData,
       this.height = defaultHeight,
       this.autoPlay = false,
       title = ''})
-      : super(title: title) {
+      : super(formKey, title: title) {
     id = SmeupUtilities.getWidgetId('CAU', id);
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupCaurouselModel.fromMap(Map jsonMap) : super.fromMap(jsonMap) {
+  SmeupCaurouselModel.fromMap(Map jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     autoPlay = optionsDefault['autoPlay'] ?? false;

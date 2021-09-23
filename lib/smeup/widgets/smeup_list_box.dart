@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_list_box_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_list_box_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
@@ -237,9 +237,9 @@ class _SmeupListBoxState extends State<SmeupListBox>
           boxHeight = 1;
 
         MediaQueryData deviceInfo = MediaQuery.of(context);
-        SmeupOptions.deviceWidth = deviceInfo.size.width;
-        SmeupOptions.deviceHeight = deviceInfo.size.height;
-        childAspectRatio = SmeupOptions.deviceWidth / boxHeight;
+        SmeupConfigurationService.deviceWidth = deviceInfo.size.width;
+        SmeupConfigurationService.deviceHeight = deviceInfo.size.height;
+        childAspectRatio = SmeupConfigurationService.deviceWidth / boxHeight;
 
         return RefreshIndicator(
           onRefresh: _refreshList,
@@ -324,10 +324,10 @@ class _SmeupListBoxState extends State<SmeupListBox>
           width: widget.width,
           dismissEnabled: widget.dismissEnabled, onItemTap: (dynamic data) {
         if (widget.clientOnItemTap != null) widget.clientOnItemTap(data);
-        SmeupDynamismService.storeDynamicVariables(data);
+        SmeupDynamismService.storeDynamicVariables(data, widget.formKey);
         if (_model != null)
-          SmeupDynamismService.run(
-              _model.dynamisms, context, 'click', widget.scaffoldKey);
+          SmeupDynamismService.run(_model.dynamisms, context, 'click',
+              widget.scaffoldKey, widget.formKey);
       });
 
       cells.add(cell);

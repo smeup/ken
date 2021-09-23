@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_radio_buttons_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
@@ -136,7 +136,9 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
 
   @override
   void initState() {
-    SmeupVariablesService.setVariable(widget.id, widget.selectedValue);
+    SmeupVariablesService.setVariable(widget.smeupRadioButtonsModel.id,
+        widget.smeupRadioButtonsModel.selectedValue,
+        formKey: widget.formKey);
     _model = widget.model;
     _data = widget.data;
     if (_model != null) widgetLoadType = _model.widgetLoadType;
@@ -222,19 +224,19 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
                   (element) => element == value,
                   orElse: () => null);
               if (selData != null) {
-                SmeupDynamismService.storeDynamicVariables(selData);
+                SmeupDynamismService.storeDynamicVariables(
+                    selData, widget.formKey);
                 SmeupVariablesService.setVariable(widget.id, value);
                 if (_model != null)
-                  SmeupDynamismService.run(
-                      _model.dynamisms, context, 'change', widget.scaffoldKey);
+                  SmeupDynamismService.run(_model.dynamisms, context, 'change',
+                      widget.scaffoldKey, widget.formKey);
               }
             });
           });
 
       if (_model != null)
-        SmeupDynamismService.run(
-            _model.dynamisms, context, 'change', widget.scaffoldKey);
-
+        SmeupDynamismService.run(_model.dynamisms, context, 'change',
+            widget.scaffoldKey, widget.formKey);
       buttons.add(button);
     });
 
@@ -250,14 +252,16 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
           child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.0),
-                  border: Border.all(color: SmeupOptions.theme.primaryColor)),
+                  border: Border.all(
+                      color:
+                          SmeupConfigurationService.getTheme().primaryColor)),
               child: Column(children: buttons)));
 
       dynamic selData = (_data as List).firstWhere(
           (element) => element == SmeupVariablesService.getVariable(widget.id),
           orElse: () => null);
       if (selData != null) {
-        SmeupDynamismService.storeDynamicVariables(selData);
+        SmeupDynamismService.storeDynamicVariables(selData, widget.formKey);
       }
 
       return SmeupWidgetBuilderResponse(_model, container);

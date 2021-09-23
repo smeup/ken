@@ -1,6 +1,6 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_drawer_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
@@ -29,17 +29,11 @@ class _SmeupDrawerState extends State<SmeupDrawer> with SmeupWidgetStateMixin {
 
   @override
   void dispose() {
-    // SmeupWidgetsNotifier.removeWidget(
-    //     widget.scaffoldKey.hashCode, widget.smeupDrawerModel.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    // final SmeupDrawerNotifier notifier =
-    //     Provider.of<SmeupDrawerNotifier>(context);
-
     var drawer = FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getDrawerComponent(widget.smeupDrawerModel),
       builder: (BuildContext context,
@@ -120,7 +114,7 @@ class _SmeupDrawerState extends State<SmeupDrawer> with SmeupWidgetStateMixin {
             header: ListTile(
               leading: Icon(
                 IconData(e['groupIcon'], fontFamily: 'MaterialIcons'),
-                color: SmeupOptions.theme.primaryColor,
+                color: SmeupConfigurationService.getTheme().primaryColor,
               ),
               title: Text(e['group'],
                   style: TextStyle(fontSize: e['groupFontSize'])),

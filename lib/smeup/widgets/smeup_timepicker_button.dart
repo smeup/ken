@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker_customization.dart';
@@ -10,8 +10,10 @@ class SmeupTimePickerButton extends StatefulWidget {
   final DateTime value;
   final String display;
   final SmeupTimePickerModel smeupTimePickerModel;
+  final GlobalKey<FormState> formKey;
 
-  SmeupTimePickerButton(this.smeupTimePickerModel, this.value, this.display);
+  SmeupTimePickerButton(
+      this.smeupTimePickerModel, this.formKey, this.value, this.display);
 
   @override
   _SmeupTimePickerButtonState createState() => _SmeupTimePickerButtonState();
@@ -31,8 +33,8 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
   @override
   Widget build(BuildContext context) {
     final button = Container(
-        color:
-            SmeupOptions.theme.canvasColor, // Color.fromRGBO(250, 250, 250, 1),
+        color: SmeupConfigurationService.getTheme()
+            .canvasColor, // Color.fromRGBO(250, 250, 250, 1),
         padding: EdgeInsets.all(widget.smeupTimePickerModel.padding),
         child: SizedBox(
             height: widget.smeupTimePickerModel.height,
@@ -42,7 +44,7 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: widget.smeupTimePickerModel.backColor == null
-                      ? SmeupOptions.theme.buttonColor
+                      ? SmeupConfigurationService.getTheme().buttonColor
                       : widget.smeupTimePickerModel.backColor,
                 ),
                 onPressed: () {
@@ -57,7 +59,8 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
                       _currentDisplay = newTime;
                       _currentValue = date;
                       SmeupVariablesService.setVariable(
-                          widget.smeupTimePickerModel.id, newTime);
+                          widget.smeupTimePickerModel.id, newTime,
+                          formKey: widget.formKey);
                     });
                   });
                 },
@@ -67,10 +70,13 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
                         fontSize: widget.smeupTimePickerModel.fontsize,
                         //fontWeight: FontWeight.bold,
                         color: widget.smeupTimePickerModel.fontColor == null
-                            ? SmeupOptions.theme.textTheme.bodyText1.color
+                            ? SmeupConfigurationService.getTheme()
+                                .textTheme
+                                .bodyText1
+                                .color
                             : widget.smeupTimePickerModel.fontColor)))));
 
-    // var containerBackground = SmeupOptions.theme.primaryColor;
+    // var containerBackground = SmeupOptions.getTheme().primaryColor;
     // if (widget.smeupTimePickerModel.backColor != null)
     //   containerBackground = widget.smeupTimePickerModel.backColor;
 

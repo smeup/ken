@@ -3,7 +3,7 @@ import 'package:mobile_components_library/smeup/daos/smeup_text_password_dao.dar
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
@@ -39,6 +39,7 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
   SmeupTextPasswordModel(
       {id,
       type,
+      GlobalKey<FormState> formKey,
       this.backColor,
       this.fontsize = defaultFontsize,
       this.label = defaultLabel,
@@ -54,15 +55,17 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
       this.valueField,
       this.showRules = defaultShowRules,
       this.checkRules = defaultCheckRules})
-      : super(title: title, id: id, type: type) {
-    if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
+      : super(formKey, title: title, id: id, type: type) {
+    if (backColor == null)
+      backColor = SmeupConfigurationService.getTheme().backgroundColor;
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'pwd';
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupTextPasswordModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupTextPasswordModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
     }

@@ -3,7 +3,7 @@ import 'package:mobile_components_library/smeup/daos/smeup_text_field_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
@@ -34,6 +34,7 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
   SmeupTextFieldModel(
       {id,
       type,
+      GlobalKey<FormState> formKey,
       this.backColor,
       this.fontsize = defaultFontsize,
       this.label = defaultLabel,
@@ -47,15 +48,17 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
       this.autoFocus = defaultAutoFocus,
       this.valueField,
       this.keyboard})
-      : super(title: title, id: id, type: type) {
-    if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
+      : super(formKey, title: title, id: id, type: type) {
+    if (backColor == null)
+      backColor = SmeupConfigurationService.getTheme().backgroundColor;
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'itx';
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupTextFieldModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupTextFieldModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
     }

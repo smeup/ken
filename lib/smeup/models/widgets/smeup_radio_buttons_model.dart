@@ -3,7 +3,7 @@ import 'package:mobile_components_library/smeup/daos/smeup_radio_buttons_dao.dar
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
@@ -34,7 +34,8 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
   String selectedValue;
 
   SmeupRadioButtonsModel(
-      {id,
+      {GlobalKey<FormState> formKey,
+      id,
       type,
       title = '',
       this.backColor,
@@ -52,10 +53,12 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
       this.valueField = defaultValueField,
       this.displayedField = defaultDisplayedField,
       this.selectedValue})
-      : super(title: title, id: id, type: type) {
-    if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
+      : super(formKey, title: title, id: id, type: type) {
+    if (backColor == null)
+      backColor = SmeupConfigurationService.getTheme().backgroundColor;
     if (fontColor == null)
-      fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
+      fontColor =
+          SmeupConfigurationService.getTheme().textTheme.bodyText1.color;
 
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'rad';
 
@@ -80,8 +83,9 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
             valueField: other.valueField,
             displayedField: other.displayedField);
 
-  SmeupRadioButtonsModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupRadioButtonsModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     title = jsonMap['title'] ?? '';
     padding =
         SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
@@ -127,7 +131,7 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
   _replaceSelectedValue(dynamic jsonMap) {
     if (optionsDefault['selectedValue'] != null) {
       return SmeupDynamismService.replaceFunVariables(
-          optionsDefault['selectedValue']);
+          optionsDefault['selectedValue'], formKey);
     }
   }
 }

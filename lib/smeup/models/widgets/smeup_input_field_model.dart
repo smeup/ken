@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
@@ -25,7 +25,7 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
   bool showUnderline;
   bool autoFocus;
 
-  SmeupInputFieldModel(
+  SmeupInputFieldModel(GlobalKey<FormState> formKey,
       {this.backColor,
       this.fontsize = defaultFontsize,
       this.label = defaultLabel,
@@ -38,14 +38,16 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
       this.showUnderline = true,
       this.autoFocus = defaultAutoFocus,
       id})
-      : super(title: title) {
-    if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
+      : super(formKey, title: title) {
+    if (backColor == null)
+      backColor = SmeupConfigurationService.getTheme().backgroundColor;
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupInputFieldModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupInputFieldModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
     }
@@ -90,7 +92,7 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
   }
 
   SmeupInputFieldModel clone() {
-    return SmeupInputFieldModel(
+    return SmeupInputFieldModel(formKey,
         backColor: backColor,
         fontsize: fontsize,
         label: label,

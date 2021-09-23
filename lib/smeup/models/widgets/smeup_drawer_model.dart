@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
@@ -14,18 +14,20 @@ class SmeupDrawerModel extends SmeupModel {
   Color navbarBackcolor;
 
   SmeupDrawerModel(
-      {title,
+      {GlobalKey<FormState> formKey,
+      title,
       this.clientData,
       this.image,
       this.imageWidth = defaultWidth,
       this.imageHeight = defaultHeight,
       this.navbarBackcolor})
-      : super(title: title) {
+      : super(formKey, title: title) {
     if (navbarBackcolor == null)
-      navbarBackcolor = SmeupOptions.theme.appBarTheme.color;
+      navbarBackcolor = SmeupConfigurationService.getTheme().appBarTheme.color;
     id = SmeupUtilities.getWidgetId('DWR', id);
   }
 
-  SmeupDrawerModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap);
+  SmeupDrawerModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey);
 }

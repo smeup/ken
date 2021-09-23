@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
@@ -16,6 +17,7 @@ class SmeupCalendarModel extends SmeupModel {
   bool showPeriodButtons = false;
 
   SmeupCalendarModel({
+    GlobalKey<FormState> formKey,
     this.titcol = '',
     this.datcol = '',
     title = '',
@@ -24,12 +26,13 @@ class SmeupCalendarModel extends SmeupModel {
     this.width = defaultWidth,
     this.eventFontSize = defaultEventFontSize,
     this.titleFontSize = defaultTitleFontSize,
-  }) : super(title: title) {
+  }) : super(formKey, title: title) {
     id = SmeupUtilities.getWidgetId('CAL', id);
   }
 
-  SmeupCalendarModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
+  SmeupCalendarModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
     titcol = optionsDefault['titcol'] ?? '';
     datcol = optionsDefault['datcol'] ?? '';
     showPeriodButtons = optionsDefault['showPeriodButtons'] ?? false;

@@ -73,7 +73,9 @@ class SmeupMemoryService {
         SmeupDataService.isValid(responseProperties.statusCode);
 
     var memoryDevice;
-    if (SmeupVariablesService.getVariable('productId') == '108') {
+    if (SmeupVariablesService.getVariable('productId',
+            formKey: smeupFun.formKey) ==
+        '108') {
       final urlZones = 'devices/${smeupFun.fun['fun']['obj1']['k']}/zones';
       var responseZones =
           await dataFunction(smeupFun, urlZones, 'get', 'application/json');

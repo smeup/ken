@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/tree_view.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_tree_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
@@ -49,8 +49,6 @@ class _SmeupTreeState extends State<SmeupTree> with SmeupWidgetStateMixin {
 
   @override
   void dispose() {
-    // SmeupWidgetsNotifier.removeWidget(
-    //     widget.scaffoldKey.hashCode, widget.smeupTreeModel.id);
     super.dispose();
   }
 
@@ -76,9 +74,6 @@ class _SmeupTreeState extends State<SmeupTree> with SmeupWidgetStateMixin {
       },
     );
 
-    // SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
-    //     widget.smeupTreeModel.id, widget.smeupTreeModel.type, notifier);
-
     return tree;
   }
 
@@ -93,7 +88,7 @@ class _SmeupTreeState extends State<SmeupTree> with SmeupWidgetStateMixin {
         SnackBar(
           content: Text(
               '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupTreeModel.smeupFun.fun['fun']['function']})'),
-          backgroundColor: SmeupOptions.theme.errorColor,
+          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
         ),
       );
 
@@ -115,9 +110,10 @@ class _SmeupTreeState extends State<SmeupTree> with SmeupWidgetStateMixin {
             // var node = (smeupTreeModel.data['rows'] as List<Node>)
             //     .firstWhere((element) => element.key == key);
             Node selectedNode = _treeViewController.getNode(key);
-            SmeupDynamismService.storeDynamicVariables(selectedNode.data);
-            SmeupDynamismService.run(
-                smeupTreeModel.dynamisms, context, 'click', widget.scaffoldKey);
+            SmeupDynamismService.storeDynamicVariables(
+                selectedNode.data, widget.formKey);
+            SmeupDynamismService.run(smeupTreeModel.dynamisms, context, 'click',
+                widget.scaffoldKey, widget.formKey);
 
             // setState(() {
             //   _treeViewController =

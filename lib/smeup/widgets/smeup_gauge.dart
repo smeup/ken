@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speedometer/flutter_speedometer.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_gauge_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
@@ -48,9 +48,6 @@ class _SmeupGaugeState extends State<SmeupGauge> with SmeupWidgetStateMixin {
       },
     );
 
-    // SmeupWidgetsNotifier.addWidget(widget.scaffoldKey.hashCode,
-    //     widget.smeupGaugeModel.id, widget.smeupGaugeModel.type, notifier);
-
     return gauge;
   }
 
@@ -65,7 +62,7 @@ class _SmeupGaugeState extends State<SmeupGauge> with SmeupWidgetStateMixin {
         SnackBar(
           content: Text(
               '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupGaugeModel.smeupFun.fun['fun']['function']})'),
-          backgroundColor: SmeupOptions.theme.errorColor,
+          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
         ),
       );
 

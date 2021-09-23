@@ -1,5 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
@@ -25,18 +26,19 @@ abstract class SmeupModel {
   bool isNotified = false;
   int serviceStatusCode = 0;
   int refresh;
+  GlobalKey<FormState> formKey;
 
   List<SmeupSectionModel> smeupSectionsModels;
 
-  SmeupModel({this.title, this.id, this.type}) {
-    showLoader = SmeupOptions.showLoader;
+  SmeupModel(this.formKey, {this.title, this.id, this.type}) {
+    showLoader = SmeupConfigurationService.getAppConfiguration().showLoader;
     if (optionsDefault == null)
       optionsDefault = {
         "$type": {"default": {}}
       };
   }
 
-  SmeupModel.fromMap(Map<String, dynamic> jsonMap) {
+  SmeupModel.fromMap(Map<String, dynamic> jsonMap, this.formKey) {
     this.jsonMap = jsonMap;
     type = jsonMap['type'];
     dynamisms = jsonMap['dynamisms'];
@@ -44,7 +46,7 @@ abstract class SmeupModel {
     if (type != null && (id == null || id.isEmpty)) {
       id = SmeupUtilities.getWidgetId(jsonMap['type'], jsonMap['id']);
 
-      smeupFun = SmeupFun(jsonMap['fun']);
+      smeupFun = SmeupFun(jsonMap['fun'], formKey);
 
       switch (jsonMap['load']) {
         case 'D':
@@ -65,7 +67,8 @@ abstract class SmeupModel {
         optionsType['default'] = Map<String, dynamic>();
 
       optionsDefault = optionsType['default'] ?? Map<String, dynamic>();
-      showLoader = jsonMap['showLoader'] ?? SmeupOptions.showLoader;
+      showLoader = jsonMap['showLoader'] ??
+          SmeupConfigurationService.getAppConfiguration().showLoader;
       notificationEnabled = jsonMap['notification'] ?? true;
       refresh =
           SmeupUtilities.getInt(optionsDefault['refresh']) ?? defaultRefresh;
