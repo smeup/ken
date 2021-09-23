@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 
 class SmeupVariablesService {
@@ -20,7 +20,7 @@ class SmeupVariablesService {
     if (formKey == null) {
       _globalVariables[workKey] = value;
 
-      if (SmeupOptions.isVariablesChangingLogEnabled) {
+      if (SmeupConfigurationService.isVariablesChangingLogEnabled) {
         if (_globalVariables[workKey] == null) {
           SmeupLogService.writeDebugMessage(
               "Added the global variable : $workKey, value: $value",
@@ -36,7 +36,7 @@ class SmeupVariablesService {
 
       _formVariables[workKey] = value;
 
-      if (SmeupOptions.isVariablesChangingLogEnabled) {
+      if (SmeupConfigurationService.isVariablesChangingLogEnabled) {
         if (_formVariables[workKey] == null) {
           SmeupLogService.writeDebugMessage(
               "Added the form variable : $workKey, value: $value",
@@ -67,7 +67,7 @@ class SmeupVariablesService {
       SmeupVariablesService._formVariables.removeWhere((key, value) =>
           key.toString().startsWith(formKey.hashCode.toString()));
 
-      if (SmeupOptions.isVariablesChangingLogEnabled) {
+      if (SmeupConfigurationService.isVariablesChangingLogEnabled) {
         SmeupLogService.writeDebugMessage(
             "Removed all form variables : ${formKey.hashCode}",
             logType: LogType.info);
@@ -79,13 +79,13 @@ class SmeupVariablesService {
     if (formKey == null) {
       _globalVariables.remove(key);
 
-      if (SmeupOptions.isVariablesChangingLogEnabled) {
+      if (SmeupConfigurationService.isVariablesChangingLogEnabled) {
         SmeupLogService.writeDebugMessage("Removed the global variable : $key",
             logType: LogType.info);
       }
     } else {
       _formVariables.remove(key);
-      if (SmeupOptions.isVariablesChangingLogEnabled) {
+      if (SmeupConfigurationService.isVariablesChangingLogEnabled) {
         SmeupLogService.writeDebugMessage("Removed the form variable : $key",
             logType: LogType.info);
       }

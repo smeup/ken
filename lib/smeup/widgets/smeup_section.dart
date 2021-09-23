@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
@@ -159,11 +159,11 @@ class _SmeupSectionState extends State<SmeupSection>
           //padding: const EdgeInsets.only(bottom: 8.0),
           //child:
           Container(
-        color: SmeupOptions.theme.scaffoldBackgroundColor,
+        color: SmeupConfigurationService.getTheme().scaffoldBackgroundColor,
         width: 120,
         height: 30,
         // decoration: BoxDecoration(
-        //   color: SmeupOptions.theme.scaffoldBackgroundColor,
+        //   color: SmeupOptions.getTheme().scaffoldBackgroundColor,
         // ),
         child: Tab(
           text: e.title,
@@ -173,13 +173,13 @@ class _SmeupSectionState extends State<SmeupSection>
     }).toList();
 
     MediaQueryData deviceInfo = MediaQuery.of(context);
-    SmeupOptions.deviceWidth = deviceInfo.size.width;
-    SmeupOptions.deviceHeight = deviceInfo.size.height;
+    SmeupConfigurationService.deviceWidth = deviceInfo.size.width;
+    SmeupConfigurationService.deviceHeight = deviceInfo.size.height;
 
     return Container(
-      height: SmeupOptions.deviceHeight,
+      height: SmeupConfigurationService.deviceHeight,
       child: Theme(
-        data: SmeupOptions.theme,
+        data: SmeupConfigurationService.getTheme(),
         child: Scaffold(
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(60),
@@ -187,17 +187,21 @@ class _SmeupSectionState extends State<SmeupSection>
               elevation: 0,
               shape: Border(
                   bottom: BorderSide(
-                      color: SmeupOptions.theme.scaffoldBackgroundColor)),
+                      color: SmeupConfigurationService.getTheme()
+                          .scaffoldBackgroundColor)),
               backgroundColor: Color.fromRGBO(255, 255, 255, 0),
               automaticallyImplyLeading: false,
               bottom: TabBar(
                 indicator: UnderlineTabIndicator(
                   borderSide: BorderSide(
-                      width: 5.0, color: SmeupOptions.theme.primaryColor),
+                      width: 5.0,
+                      color: SmeupConfigurationService.getTheme().primaryColor),
                 ),
-                labelColor: SmeupOptions.theme.primaryColor,
-                unselectedLabelColor:
-                    SmeupOptions.theme.textTheme.bodyText1.color,
+                labelColor: SmeupConfigurationService.getTheme().primaryColor,
+                unselectedLabelColor: SmeupConfigurationService.getTheme()
+                    .textTheme
+                    .bodyText1
+                    .color,
                 controller: _tabController,
                 isScrollable: true,
                 onTap: (index) {

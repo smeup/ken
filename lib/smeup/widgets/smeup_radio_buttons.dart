@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_radio_buttons_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
@@ -251,7 +251,9 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
           child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.0),
-                  border: Border.all(color: SmeupOptions.theme.primaryColor)),
+                  border: Border.all(
+                      color:
+                          SmeupConfigurationService.getTheme().primaryColor)),
               child: Column(children: buttons)));
 
       dynamic selData = (_data as List).firstWhere(

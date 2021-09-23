@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service_interface.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_http_data_service.dart';
@@ -18,8 +18,8 @@ class SmeupDataService {
   static int timeout = DEFAULD_TIMEOUT;
   static int _activeDataFetch = 0;
 
-  static initInternalService({List<String> preloadedJsons}) {
-    SmeupDataService.services['*JSN'] = SmeupJsonDataService(preloadedJsons);
+  static initInternalService() {
+    SmeupDataService.services['*JSN'] = SmeupJsonDataService();
     SmeupDataService.services['*IMAGE'] = SmeupImageDataService();
     SmeupDataService.services['*HTTP'] = SmeupHttpDataService();
   }
@@ -114,7 +114,7 @@ class SmeupDataService {
   }
 
   static void printRequestDuration(DateTime start) {
-    if (SmeupOptions.isDebug) {
+    if (SmeupConfigurationService.isDebug) {
       DateTime end = DateTime.now();
       final diff = end.difference(start);
       SmeupLogService.writeDebugMessage(

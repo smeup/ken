@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_datepicker_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
@@ -76,7 +76,7 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
         SnackBar(
           content: Text(
               '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupDatePickerModel.smeupFun.fun['fun']['function']})'),
-          backgroundColor: SmeupOptions.theme.errorColor,
+          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
         ),
       );
 

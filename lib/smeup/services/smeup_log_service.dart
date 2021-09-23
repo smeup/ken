@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 
 enum LogType { info, warning, error }
 enum MessagesPromptMode { snackbar }
@@ -12,7 +12,7 @@ class SmeupLogService {
 
   static void writeDebugMessage(String message,
       {LogType logType = LogType.info}) async {
-    if (SmeupOptions.isDebug) {
+    if (SmeupConfigurationService.isDebug) {
       String color = '\u001b[32m';
       switch (logType) {
         case LogType.info:
@@ -30,7 +30,7 @@ class SmeupLogService {
       print(color + message + '\x1B[0m');
     }
 
-    if (SmeupOptions.isLogEnabled) {
+    if (SmeupConfigurationService.isLogEnabled) {
       if (_logFile != null) {
         _logFile.writeAsString('${DateTime.now().toString()}: $message \n',
             mode: FileMode.append);
