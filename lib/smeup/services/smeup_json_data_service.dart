@@ -8,6 +8,7 @@ import 'package:mobile_components_library/smeup/services/smeup_data_service.dart
 import 'package:mobile_components_library/smeup/services/smeup_data_service_interface.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_service_response.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupJsonDataService implements SmeupDataServiceInterface {
   Map<String, Map<String, dynamic>> jsons = Map();
@@ -31,29 +32,8 @@ class SmeupJsonDataService implements SmeupDataServiceInterface {
 
             String jsonString = await rootBundle.loadString(jsonFilePath);
 
-            if (SmeupConfigurationService.appDictionary != null) {
-              String workString = await rootBundle.loadString(jsonFilePath);
-              RegExp re = RegExp(r'\{\{.*\}\}');
-              re.allMatches(jsonString).forEach((match) {
-                final placeHolder =
-                    jsonString.substring(match.start, match.end);
-                if (placeHolder != null && placeHolder.isNotEmpty) {
-                  final dictionaryKey =
-                      placeHolder.replaceFirst('{{', '').replaceFirst('}}', '');
-
-                  if (dictionaryKey != null &&
-                      SmeupConfigurationService.appDictionary
-                              .getLocalString(dictionaryKey) !=
-                          null) {
-                    workString = workString.replaceAll(
-                        placeHolder,
-                        SmeupConfigurationService.appDictionary
-                            .getLocalString(dictionaryKey));
-                  }
-                }
-              });
-              jsonString = workString;
-            }
+            jsonString =
+                SmeupUtilities.replaceDictionaryPlaceHolders(jsonString);
 
             data = jsonDecode(jsonString);
           }

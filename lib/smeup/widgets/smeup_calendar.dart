@@ -14,7 +14,6 @@ import 'package:mobile_components_library/smeup/services/smeup_service_response.
 import 'package:mobile_components_library/smeup/widgets/smeup_progress_indicator.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-// Example holidays
 final Map<DateTime, List> _holidays = SmeupConfigurationService.getHolidays();
 
 class SmeupCalendar extends StatefulWidget {
