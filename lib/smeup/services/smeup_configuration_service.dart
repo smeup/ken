@@ -153,7 +153,7 @@ class SmeupConfigurationService {
     final savedDefaultServiceEndpoint =
         _loadAltServiceEndpoint(ALT_SERVICE_ENDPOINTS.DEFAULT);
 
-    if (savedDefaultServiceEndpoint != null)
+    if (savedDefaultServiceEndpoint.isNotEmpty)
       _defaultServiceEndpoint = savedDefaultServiceEndpoint;
     else
       _defaultServiceEndpoint = SmeupConfigurationService.getAppConfiguration()
@@ -168,7 +168,7 @@ class SmeupConfigurationService {
     final savedHttpServiceEndpoint =
         _loadAltServiceEndpoint(ALT_SERVICE_ENDPOINTS.HTTP);
 
-    if (savedHttpServiceEndpoint != null)
+    if (savedHttpServiceEndpoint.isNotEmpty)
       _httpServiceEndpoint = savedHttpServiceEndpoint;
     else
       _httpServiceEndpoint =
