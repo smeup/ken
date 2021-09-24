@@ -70,7 +70,10 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
                     padding: const EdgeInsets.all(0.0),
                     elevation: widget.smeupDatePickerModel.elevation,
                     primary: widget.smeupDatePickerModel.backColor == null
-                        ? SmeupConfigurationService.getTheme().buttonColor
+                        ? SmeupConfigurationService.getTheme()
+                            .buttonTheme
+                            .colorScheme
+                            .background
                         : widget.smeupDatePickerModel.backColor,
                     alignment: Alignment.centerLeft,
                   ),

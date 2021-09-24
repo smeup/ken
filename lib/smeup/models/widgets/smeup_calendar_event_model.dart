@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupCalentarEventModel {
   DateTime day;
@@ -17,12 +16,7 @@ class SmeupCalentarEventModel {
     this.day = DateTime.parse('${fields[dataColumnName]} 12:00:00.000Z');
     this.description = fields[titleColumnName];
 
-    dynamic styleCol = fields[styleColumnName];
-    String styleColValue = '';
-
-    if (styleCol != null)
-      styleColValue =
-          SmeupUtilities.extractValueFromName(fields[styleColumnName]);
+    dynamic styleColValue = fields[styleColumnName];
 
     switch (styleColValue) {
       case '50G00':
