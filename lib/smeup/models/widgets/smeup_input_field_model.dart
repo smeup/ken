@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
@@ -39,7 +39,8 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
       this.autoFocus = defaultAutoFocus,
       id})
       : super(formKey, title: title) {
-    if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
+    if (backColor == null)
+      backColor = SmeupConfigurationService.getTheme().backgroundColor;
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
   }

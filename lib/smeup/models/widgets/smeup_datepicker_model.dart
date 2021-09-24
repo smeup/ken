@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
@@ -42,9 +42,11 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
       this.clientData,
       this.minutesList})
       : super(formKey, title: title) {
-    if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
+    if (backColor == null)
+      backColor = SmeupConfigurationService.getTheme().backgroundColor;
     if (fontColor == null)
-      fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
+      fontColor =
+          SmeupConfigurationService.getTheme().textTheme.bodyText1.color;
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
   }

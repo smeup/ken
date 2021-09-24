@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_qrcode_reader_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
@@ -67,7 +67,7 @@ class _SmeupQRCodeReaderState extends State<SmeupQRCodeReader>
         SnackBar(
           content: Text(
               '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupQRCodeReaderModel.smeupFun?.fun['fun']['function']})'),
-          backgroundColor: SmeupOptions.theme.errorColor,
+          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
         ),
       );
 

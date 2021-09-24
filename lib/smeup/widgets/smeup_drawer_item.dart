@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 
 class SmeupDrawerItem extends StatelessWidget {
   final String text;
@@ -39,7 +39,7 @@ class SmeupDrawerItem extends StatelessWidget {
           ListTile(
             leading: Icon(
               IconData(iconCode, fontFamily: 'MaterialIcons'),
-              color: SmeupOptions.theme.primaryColor,
+              color: SmeupConfigurationService.getTheme().primaryColor,
             ),
             title: title,
             onTap: function,

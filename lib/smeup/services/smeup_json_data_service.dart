@@ -3,26 +3,15 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service_interface.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_service_response.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupJsonDataService implements SmeupDataServiceInterface {
   Map<String, Map<String, dynamic>> jsons = Map();
-
-  SmeupJsonDataService(List<String> preloadedJsons) {
-    if (preloadedJsons != null) {
-      preloadedJsons.forEach((jsonFile) {
-        String jsonFilePath = '${SmeupOptions.jsonsPath}/$jsonFile.json';
-        rootBundle.loadString(jsonFilePath).then((jsonString) {
-          Map<String, dynamic> data = jsonDecode(jsonString);
-          jsons[jsonFile] = data;
-        });
-      });
-    }
-  }
 
   @override
   Future<SmeupServiceResponse> invoke(smeupFun) async {
@@ -36,36 +25,15 @@ class SmeupJsonDataService implements SmeupDataServiceInterface {
             data = jsons[smeupFun.fun['fun']['obj2']['k']];
           } else {
             String jsonFilePath =
-                '${SmeupOptions.jsonsPath}/${smeupFun.fun['fun']['obj2']['k']}.json';
+                '${SmeupConfigurationService.jsonsPath}/forms/${smeupFun.fun['fun']['obj2']['k']}.json';
 
             SmeupLogService.writeDebugMessage(
                 '*** http request \'SmeupJsonDataService\': $jsonFilePath');
 
             String jsonString = await rootBundle.loadString(jsonFilePath);
 
-            if (SmeupOptions.appDictionary != null) {
-              String workString = await rootBundle.loadString(jsonFilePath);
-              RegExp re = RegExp(r'\{\{.*\}\}');
-              re.allMatches(jsonString).forEach((match) {
-                final placeHolder =
-                    jsonString.substring(match.start, match.end);
-                if (placeHolder != null && placeHolder.isNotEmpty) {
-                  final dictionaryKey =
-                      placeHolder.replaceFirst('{{', '').replaceFirst('}}', '');
-
-                  if (dictionaryKey != null &&
-                      SmeupOptions.appDictionary
-                              .getLocalString(dictionaryKey) !=
-                          null) {
-                    workString = workString.replaceAll(
-                        placeHolder,
-                        SmeupOptions.appDictionary
-                            .getLocalString(dictionaryKey));
-                  }
-                }
-              });
-              jsonString = workString;
-            }
+            jsonString =
+                SmeupUtilities.replaceDictionaryPlaceHolders(jsonString);
 
             data = jsonDecode(jsonString);
           }

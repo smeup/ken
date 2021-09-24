@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_datepicker_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_line_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
@@ -46,7 +46,7 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
         width: widget.smeupDatePickerModel.width == 0
             ? double.infinity
             : widget.smeupDatePickerModel.width,
-        color: SmeupOptions.theme.scaffoldBackgroundColor,
+        color: SmeupConfigurationService.getTheme().scaffoldBackgroundColor,
         padding: EdgeInsets.all(widget.smeupDatePickerModel.padding),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -56,7 +56,7 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
               child: Text(
                 widget.smeupDatePickerModel.label,
                 style: TextStyle(
-                  color: SmeupOptions.theme.primaryColor,
+                  color: SmeupConfigurationService.getTheme().primaryColor,
                   fontSize: labelSize,
                 ),
               ),
@@ -70,7 +70,7 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
                     padding: const EdgeInsets.all(0.0),
                     elevation: widget.smeupDatePickerModel.elevation,
                     primary: widget.smeupDatePickerModel.backColor == null
-                        ? SmeupOptions.theme.buttonColor
+                        ? SmeupConfigurationService.getTheme().buttonColor
                         : widget.smeupDatePickerModel.backColor,
                     alignment: Alignment.centerLeft,
                   ),
@@ -92,12 +92,16 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
                       style: TextStyle(
                           fontSize: widget.smeupDatePickerModel.fontsize,
                           color: widget.smeupDatePickerModel.fontColor == null
-                              ? SmeupOptions.theme.textTheme.bodyText1.color
+                              ? SmeupConfigurationService.getTheme()
+                                  .textTheme
+                                  .bodyText1
+                                  .color
                               : widget.smeupDatePickerModel.fontColor))),
             ),
             SmeupLine(
                 SmeupLineModel(widget.formKey,
-                    color: SmeupOptions.theme.primaryColor, thickness: 0.5),
+                    color: SmeupConfigurationService.getTheme().primaryColor,
+                    thickness: 0.5),
                 widget.scaffoldKey,
                 widget.formKey)
           ],

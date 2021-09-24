@@ -3,7 +3,7 @@ import 'package:mobile_components_library/smeup/daos/smeup_text_field_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
@@ -49,7 +49,8 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
       this.valueField,
       this.keyboard})
       : super(formKey, title: title, id: id, type: type) {
-    if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
+    if (backColor == null)
+      backColor = SmeupConfigurationService.getTheme().backgroundColor;
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'itx';
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
