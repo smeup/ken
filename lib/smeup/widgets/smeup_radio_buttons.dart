@@ -36,7 +36,7 @@ class SmeupRadioButtons extends StatefulWidget
   double leftPadding;
   double topPadding;
   double bottomPadding;
-  List<String> data;
+  List<dynamic> data;
   String valueField;
   String displayedField;
   String selectedValue;
@@ -76,7 +76,7 @@ class SmeupRadioButtons extends StatefulWidget
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
 
-    if (data == null) data = List<String>.empty(growable: true);
+    //if (data == null) data = List<Map<String, String>>.empty(growable: true);
   }
 
   @override
@@ -113,10 +113,13 @@ class SmeupRadioButtons extends StatefulWidget
 
     // set the widget data
     if (workData != null) {
-      var newList = List<String>.empty(growable: true);
+      var newList = List<dynamic>.empty(growable: true);
       for (var i = 0; i < (workData['rows'] as List).length; i++) {
         final element = workData['rows'][i];
-        newList.add(element[m.valueField].toString());
+        newList.add({
+          'code': element['k'].toString(),
+          'value': element['value'].toString()
+        });
       }
       return newList;
     } else {
@@ -136,8 +139,7 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
 
   @override
   void initState() {
-    SmeupVariablesService.setVariable(widget.smeupRadioButtonsModel.id,
-        widget.smeupRadioButtonsModel.selectedValue,
+    SmeupVariablesService.setVariable(widget.id, widget.selectedValue,
         formKey: widget.formKey);
     _model = widget.model;
     _data = widget.data;
@@ -220,8 +222,8 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
           icon: null,
           serverOnPressed: (value) {
             setState(() {
-              dynamic selData = (_data as List).firstWhere(
-                  (element) => element == value,
+              dynamic selData = _data.firstWhere(
+                  (element) => element['code'] == value,
                   orElse: () => null);
               if (selData != null) {
                 SmeupDynamismService.storeDynamicVariables(
