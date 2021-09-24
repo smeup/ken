@@ -186,17 +186,6 @@ class SmeupButtonsState extends State<SmeupButtons>
 
     int buttonIndex = 0;
     _data.forEach((buttonData) {
-      // dynamic _buttonData = buttonData;
-      //SmeupButtonsModel _modelClone = _model;
-
-      // if (buttonData is Node) {
-      //   _buttonData = {"p": "", "t": "", "k": buttonData.label};
-      //   _modelClone = SmeupButtonsModel.clone(_model);
-      //   _modelClone.clientData = buttonData.label;
-      //   _modelClone.dynamisms = [
-      //     {"event": "click", "exec": buttonData.data["exec"] ?? ""}
-      //   ];
-      // }
       buttonIndex += 1;
       final button = SmeupButton(
           id: '${SmeupUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',

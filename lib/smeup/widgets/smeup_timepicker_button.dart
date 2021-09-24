@@ -68,7 +68,10 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: widget.backColor == null
-                      ? SmeupConfigurationService.getTheme().buttonColor
+                      ? SmeupConfigurationService.getTheme()
+                          .buttonTheme
+                          .colorScheme
+                          .background
                       : widget.backColor,
                 ),
                 onPressed: () {
