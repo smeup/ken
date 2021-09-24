@@ -25,6 +25,9 @@ class SmeupDatePicker extends StatefulWidget
   String id;
   String type;
 
+  String valueField;
+  String displayField;
+
   //Graphics properties
   Color backColor;
   double fontsize;
@@ -51,14 +54,18 @@ class SmeupDatePicker extends StatefulWidget
 
   SmeupDatePicker(
     this.scaffoldKey,
-    this.formKey, {
+    this.formKey,
+    this.data, {
     this.id = '',
     this.type = 'cal',
     this.title = '',
-    this.data,
-    this.backColor,
+
+    // TODO is it required in static constructor ?
+    // this.valueField = SmeupTimePickerModel.defaultValueField,
+    // this.displayField = SmeupTimePickerModel.defaultdisplayedField,
+    this.backColor = SmeupDatePickerModel.defaultBackColor,
     this.fontsize = SmeupDatePickerModel.defaultFontsize,
-    this.fontColor,
+    this.fontColor = SmeupDatePickerModel.defaultFontColor,
     this.label = SmeupDatePickerModel.defaultLabel,
     this.width = SmeupDatePickerModel.defaultWidth,
     this.height = SmeupDatePickerModel.defaultHeight,
@@ -77,6 +84,8 @@ class SmeupDatePicker extends StatefulWidget
     id = m.id;
     type = m.type;
     title = m.title;
+    valueField = m.valueField;
+    displayField = m.displayedField;
     backColor = m.backColor;
     fontsize = m.fontsize;
     fontColor = m.fontColor;
@@ -103,8 +112,8 @@ class SmeupDatePicker extends StatefulWidget
       for (var i = 0; i < (workData['rows'] as List).length; i++) {
         final element = workData['rows'][i];
         newList.add({
-          'value': element['value'].toString(),
-          'display': element['display'].toString()
+          'value': element[valueField].toString(),
+          'display': element[displayField].toString()
         });
       }
       return newList;
@@ -170,7 +179,7 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
     */
     final valueString = _data[0]['value'];
 
-    final value = DateTime.tryParse(valueString);
+    final value = new DateFormat('dd/MM/yyyy').parse(valueString);
 
     /*
     String displayedField = _data.optionsDefault == null
@@ -178,17 +187,27 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
         : _data.optionsDefault['displayedField'];
     */
 
-    String display =
-        DateFormat("dd/MM/yyyy").format(DateTime.tryParse(_data[0]['display']));
+    final displayDate = new DateFormat('dd/MM/yyyy').parse(_data[0]['display']);
+
+    String display = DateFormat("dd/MM/yyyy").format(displayDate);
 
     SmeupVariablesService.setVariable(widget.id, valueString);
 
-    var timepicker = SmeupDatePickerButton(widget.id,
+    var datepicker = SmeupDatePickerButton(widget.id,
         scaffoldKey: widget.scaffoldKey,
         formKey: widget.formKey,
         value: value,
-        display: display);
+        display: display,
+        backColor: widget.backColor,
+        fontsize: widget.fontsize,
+        fontColor: widget.fontColor,
+        label: widget.label,
+        width: widget.width,
+        height: widget.height,
+        padding: widget.padding,
+        showborder: widget.showborder,
+        elevation: widget.elevation);
 
-    return SmeupWidgetBuilderResponse(_model, timepicker);
+    return SmeupWidgetBuilderResponse(_model, datepicker);
   }
 }

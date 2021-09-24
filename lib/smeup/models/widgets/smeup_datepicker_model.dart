@@ -10,10 +10,17 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultFontsize = 16.0;
   static const String defaultLabel = '';
   static const double defaultWidth = 100;
-  static const double defaultHeight = 20;
+  static const double defaultHeight = 100;
   static const double defaultPadding = 10.0;
   static const bool defaultShowBorder = false;
   static const double defaultElevation = 0.0;
+  static const Color defaultBackColor = Colors.amber;
+  static const Color defaultFontColor = Colors.black87;
+  static const String defaultValueField = 'value';
+  static const String defaultdisplayedField = 'display';
+
+  String valueField;
+  String displayedField;
 
   Color backColor;
   double fontsize;
@@ -31,9 +38,11 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
       {GlobalKey<FormState> formKey,
       id,
       type,
-      this.backColor,
+      this.valueField = defaultValueField,
+      this.displayedField = defaultdisplayedField,
+      this.backColor = defaultBackColor,
       this.fontsize = defaultFontsize,
-      this.fontColor,
+      this.fontColor = defaultFontColor,
       this.label = defaultLabel,
       this.width = defaultWidth,
       this.height = defaultHeight,
@@ -55,6 +64,8 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
   SmeupDatePickerModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
+    valueField = optionsDefault['valueField'] ?? defaultValueField;
+    displayedField = optionsDefault['displayedField'] ?? defaultdisplayedField;
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
     }
