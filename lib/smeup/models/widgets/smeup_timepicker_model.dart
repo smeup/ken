@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_timepicker_dao.dart';
+import 'package:mobile_components_library/smeup/models/smeupChartColumn.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
@@ -47,7 +48,8 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
       title = '',
       this.minutesList})
       : super(formKey, title: title, id: id, type: type) {
-    if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
+    if (backColor == null)
+      backColor = SmeupConfigurationService.getTheme().backgroundColor;
     if (fontColor == null)
       fontColor =
           SmeupConfigurationService.getTheme().textTheme.bodyText1.color;

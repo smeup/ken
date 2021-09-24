@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker_customization.dart';
@@ -59,8 +59,8 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
   @override
   Widget build(BuildContext context) {
     final button = Container(
-        color:
-            SmeupOptions.theme.canvasColor, // Color.fromRGBO(250, 250, 250, 1),
+        color: SmeupConfigurationService.getTheme()
+            .canvasColor, // Color.fromRGBO(250, 250, 250, 1),
         padding: EdgeInsets.all(widget.padding),
         child: SizedBox(
             height: widget.height,
@@ -68,7 +68,7 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: widget.backColor == null
-                      ? SmeupOptions.theme.buttonColor
+                      ? SmeupConfigurationService.getTheme().buttonColor
                       : widget.backColor,
                 ),
                 onPressed: () {
@@ -99,7 +99,10 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
                         fontSize: widget.fontsize,
                         //fontWeight: FontWeight.bold,
                         color: widget.fontColor == null
-                            ? SmeupOptions.theme.textTheme.bodyText1.color
+                            ? SmeupConfigurationService.getTheme()
+                                .textTheme
+                                .bodyText1
+                                .color
                             : widget.fontColor)))));
 
     return button;
