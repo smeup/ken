@@ -9,13 +9,39 @@ import 'package:mobile_components_library/smeup/widgets/smeup_line.dart';
 
 class SmeupDatePickerButton extends StatefulWidget {
   final DateTime value;
-  final String display;
-  final SmeupDatePickerModel smeupDatePickerModel;
+  String display;
+  final String id;
+
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
 
-  SmeupDatePickerButton(this.smeupDatePickerModel, this.scaffoldKey,
-      this.formKey, this.value, this.display);
+  //Graphics properties
+  Color backColor;
+  double fontsize;
+  Color fontColor;
+  String label;
+  double width;
+  double height;
+  double padding;
+  bool showborder;
+  double elevation;
+
+  SmeupDatePickerButton(
+    this.id, {
+    this.scaffoldKey,
+    this.formKey,
+    this.value,
+    this.display,
+    this.backColor,
+    this.fontsize = SmeupDatePickerModel.defaultFontsize,
+    this.fontColor,
+    this.label = SmeupDatePickerModel.defaultLabel,
+    this.width = SmeupDatePickerModel.defaultWidth,
+    this.height = SmeupDatePickerModel.defaultHeight,
+    this.padding = SmeupDatePickerModel.defaultPadding,
+    this.showborder = SmeupDatePickerModel.defaultShowBorder,
+    this.elevation = SmeupDatePickerModel.defaultElevation,
+  });
 
   @override
   _SmeupDatePickerButtonState createState() => _SmeupDatePickerButtonState();
@@ -29,32 +55,28 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
   void initState() {
     _currentValue = widget.value;
     _currentDisplay = widget.display;
-    SmeupVariablesService.setVariable(
-        widget.smeupDatePickerModel.id, widget.display,
+    SmeupVariablesService.setVariable(widget.id, widget.display,
         formKey: widget.formKey);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    double labelSize = widget.smeupDatePickerModel.fontsize > 2
-        ? widget.smeupDatePickerModel.fontsize - 2
-        : widget.smeupDatePickerModel.fontsize;
+    double labelSize =
+        widget.fontsize > 2 ? widget.fontsize - 2 : widget.fontsize;
 
     final button = Container(
-        height: widget.smeupDatePickerModel.height,
-        width: widget.smeupDatePickerModel.width == 0
-            ? double.infinity
-            : widget.smeupDatePickerModel.width,
+        height: widget.height,
+        width: widget.width == 0 ? double.infinity : widget.width,
         color: SmeupConfigurationService.getTheme().scaffoldBackgroundColor,
-        padding: EdgeInsets.all(widget.smeupDatePickerModel.padding),
+        padding: EdgeInsets.all(widget.padding),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Align(
               alignment: Alignment.bottomLeft,
               child: Text(
-                widget.smeupDatePickerModel.label,
+                widget.label,
                 style: TextStyle(
                   color: SmeupConfigurationService.getTheme().primaryColor,
                   fontSize: labelSize,
@@ -63,15 +85,15 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
             ),
             ConstrainedBox(
               constraints: BoxConstraints.tightFor(
-                  width: double.infinity,
-                  height: widget.smeupDatePickerModel.height),
+                  width: double.infinity, height: widget.height),
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(0.0),
-                    elevation: widget.smeupDatePickerModel.elevation,
-                    primary: widget.smeupDatePickerModel.backColor == null
+                    elevation: widget.elevation,
+                    primary: widget.backColor == null
+                        // ignore: deprecated_member_use
                         ? SmeupConfigurationService.getTheme().buttonColor
-                        : widget.smeupDatePickerModel.backColor,
+                        : widget.backColor,
                     alignment: Alignment.centerLeft,
                   ),
                   onPressed: () {
@@ -82,21 +104,20 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
                         final newTime = DateFormat('dd/MM/yyyy').format(date);
                         _currentDisplay = newTime;
                         _currentValue = date;
-                        SmeupVariablesService.setVariable(
-                            widget.smeupDatePickerModel.id, newTime,
+                        SmeupVariablesService.setVariable(widget.id, newTime,
                             formKey: widget.formKey);
                       });
                     });
                   },
                   child: Text(_currentDisplay,
                       style: TextStyle(
-                          fontSize: widget.smeupDatePickerModel.fontsize,
-                          color: widget.smeupDatePickerModel.fontColor == null
+                          fontSize: widget.fontsize,
+                          color: widget.fontColor == null
                               ? SmeupConfigurationService.getTheme()
                                   .textTheme
                                   .bodyText1
                                   .color
-                              : widget.smeupDatePickerModel.fontColor))),
+                              : widget.fontColor))),
             ),
             SmeupLine(
                 SmeupLineModel(widget.formKey,

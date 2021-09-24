@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_datepicker_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
@@ -27,7 +28,8 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
   List<String> minutesList;
 
   SmeupDatePickerModel(
-      {id,
+      {GlobalKey<FormState> formKey,
+      id,
       type,
       this.backColor,
       this.fontsize = defaultFontsize,
@@ -40,8 +42,9 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
       this.elevation = defaultElevation,
       title = '',
       this.minutesList})
-      : super(id: id, type: type, title: title) {
-    if (backColor == null) backColor = SmeupOptions.theme.backgroundColor;
+      : super(formKey, id: id, type: type, title: title) {
+    if (backColor == null)
+      backColor = SmeupConfigurationService.getTheme().backgroundColor;
     if (fontColor == null)
       fontColor =
           SmeupConfigurationService.getTheme().textTheme.bodyText1.color;

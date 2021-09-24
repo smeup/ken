@@ -23,6 +23,7 @@ class SmeupDrawerModel extends SmeupModel {
       this.navbarBackcolor})
       : super(formKey, title: title) {
     if (navbarBackcolor == null)
+      // ignore: deprecated_member_use
       navbarBackcolor = SmeupConfigurationService.getTheme().appBarTheme.color;
     id = SmeupUtilities.getWidgetId('DWR', id);
   }

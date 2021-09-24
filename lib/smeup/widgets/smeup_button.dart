@@ -59,6 +59,7 @@ class SmeupButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final backgroundColor = backColor == null
+        // ignore: deprecated_member_use
         ? SmeupConfigurationService.getTheme().buttonColor
         : backColor;
 

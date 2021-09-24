@@ -54,6 +54,7 @@ class SmeupNavigationAppBar extends AppBar {
                       ),
             backgroundColor: isDialog
                 ? Theme.of(myContext).scaffoldBackgroundColor
+                // ignore: deprecated_member_use
                 : Theme.of(myContext).appBarTheme.color,
             // shape: isDialog
             //     ? RoundedRectangleBorder(

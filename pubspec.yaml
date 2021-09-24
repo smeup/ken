@@ -1,7 +1,6 @@
 name: mobile_components_library
 description: A new Flutter package project.
 version: 0.0.1+1
-author: smeup spa
 homepage: "https://github.com/smeup/mobile-components-library"
 
 environment:
