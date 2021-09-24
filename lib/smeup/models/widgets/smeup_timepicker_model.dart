@@ -15,6 +15,8 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   static const bool defaultShowBorder = false;
   static const Color defaultBackColor = Colors.amber;
   static const Color defaultFontColor = Colors.black87;
+  static const String defaultValueField = 'value';
+  static const String defaultdisplayedField = 'display';
 
   Color backColor;
   double fontsize;
@@ -32,8 +34,8 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
       {id,
       type,
       GlobalKey<FormState> formKey,
-      this.valueField = '',
-      this.displayedField = '',
+      this.valueField = defaultValueField,
+      this.displayedField = defaultdisplayedField,
       this.backColor = defaultBackColor,
       this.fontsize = defaultFontsize,
       this.fontColor = defaultFontColor,
@@ -55,8 +57,8 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   SmeupTimePickerModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
-    valueField = optionsDefault['valueField'] ?? 'value';
-    displayedField = optionsDefault['displayedField'] ?? 'display';
+    valueField = optionsDefault['valueField'] ?? defaultValueField;
+    displayedField = optionsDefault['displayedField'] ?? defaultdisplayedField;
 
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
