@@ -150,8 +150,8 @@ class _SmeupComponentState extends State<SmeupComponent> {
             break;
 
           case 'tpk':
-            children =
-                SmeupTimePicker(smeupModel, widget.scaffoldKey, widget.formKey);
+            children = SmeupTimePicker.withController(
+                smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
           default:

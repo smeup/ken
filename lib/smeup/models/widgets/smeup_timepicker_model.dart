@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_timepicker_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
@@ -12,6 +13,10 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultHeight = 100;
   static const double defaultPadding = 0.0;
   static const bool defaultShowBorder = false;
+  static const Color defaultBackColor = Colors.amber;
+  static const Color defaultFontColor = Colors.black87;
+  static const String defaultValueField = 'value';
+  static const String defaultdisplayedField = 'display';
 
   Color backColor;
   double fontsize;
@@ -19,24 +24,29 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   String label;
   double width;
   double height;
+  String valueField;
+  String displayedField;
   double padding;
   bool showborder;
-  dynamic clientData;
   List<String> minutesList;
 
-  SmeupTimePickerModel(GlobalKey<FormState> formKey,
-      {this.backColor,
+  SmeupTimePickerModel(
+      {id,
+      type,
+      GlobalKey<FormState> formKey,
+      this.valueField = defaultValueField,
+      this.displayedField = defaultdisplayedField,
+      this.backColor = defaultBackColor,
       this.fontsize = defaultFontsize,
-      this.fontColor,
+      this.fontColor = defaultFontColor,
       this.label = defaultLabel,
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.padding = defaultPadding,
       this.showborder = defaultShowBorder,
       title = '',
-      this.clientData,
       this.minutesList})
-      : super(formKey, title: title) {
+      : super(formKey, title: title, id: id, type: type) {
     if (backColor == null)
       backColor = SmeupConfigurationService.getTheme().backgroundColor;
     if (fontColor == null)
@@ -49,6 +59,9 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   SmeupTimePickerModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
+    valueField = optionsDefault['valueField'] ?? defaultValueField;
+    displayedField = optionsDefault['displayedField'] ?? defaultdisplayedField;
+
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
     }
@@ -79,47 +92,11 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
       else
         showborder = false;
     }
+
+    if (widgetLoadType != LoadType.Delay) {
+      SmeupTimePickerDao.getData(this);
+    }
+
     SmeupDataService.incrementDataFetch(id);
-  }
-
-  @override
-  // ignore: override_on_non_overriding_member
-  setData() async {
-    if (smeupFun != null && smeupFun.isFunValid()) {
-      final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
-
-      if (!smeupServiceResponse.succeded) {
-        return;
-      }
-
-      data = smeupServiceResponse.result.data;
-    }
-
-    if (clientData != null) {
-      data = _getClientDataStructure(clientData);
-    }
-    SmeupDataService.decrementDataFetch(id);
-  }
-
-  dynamic _getClientDataStructure(clientData) {
-    if (optionsDefault == null) {
-      return {
-        "rows": [
-          {
-            'value': clientData['value'],
-            'display': clientData['display'],
-          }
-        ],
-      };
-    } else {
-      return {
-        "rows": [
-          {
-            'value': clientData['value'],
-            'display': clientData['display'],
-          }
-        ],
-      };
-    }
   }
 }
