@@ -120,8 +120,8 @@ class _SmeupComponentState extends State<SmeupComponent> {
             break;
 
           case 'cal':
-            children =
-                SmeupDatePicker(smeupModel, widget.scaffoldKey, widget.formKey);
+            children = SmeupDatePicker.withController(
+                smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
           case 'itx':
