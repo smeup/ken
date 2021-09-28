@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_widget_notification_service.dart';
 import 'package:mobile_components_library/smeup/screens/smeup_dynamic_screen.dart';
@@ -175,7 +175,8 @@ class SmeupDynamismService {
         context: context,
         builder: (_) => SimpleDialog(
               contentPadding: EdgeInsets.only(top: 20, bottom: 20),
-              backgroundColor: SmeupOptions.theme.scaffoldBackgroundColor,
+              backgroundColor:
+                  SmeupConfigurationService.getTheme().scaffoldBackgroundColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
@@ -255,7 +256,7 @@ class SmeupDynamismService {
             Color color;
             switch (severity) {
               case LogType.error:
-                color = SmeupOptions.theme.errorColor;
+                color = SmeupConfigurationService.getTheme().errorColor;
                 break;
               case LogType.warning:
                 color = Colors.amberAccent;

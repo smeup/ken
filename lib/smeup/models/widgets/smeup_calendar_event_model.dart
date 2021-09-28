@@ -1,31 +1,22 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupCalentarEventModel {
   DateTime day;
   String description;
-  String branchCode;
-  String branchDescription;
-  bool iAmIncluded;
   Color backgroundColor = Color.fromRGBO(224, 226, 109, 1);
   Color foreColor = Colors.black;
   FontWeight fontWeight = FontWeight.normal;
 
-  SmeupCalentarEventModel(this.day, this.description, this.branchCode);
+  SmeupCalentarEventModel(this.day, this.description);
 
-  SmeupCalentarEventModel.fromMap(
-      dynamic fields, String titcol, String datcol, String styleColumnName) {
-    this.day = DateTime.parse('${fields[datcol]} 12:00:00.000Z');
-    this.description = fields['codice'];
+  SmeupCalentarEventModel.fromMap(dynamic fields, String titleColumnName,
+      String dataColumnName, String styleColumnName) {
+    this.day = DateTime.parse('${fields[dataColumnName]} 12:00:00.000Z');
+    this.description = fields[titleColumnName];
 
-    dynamic styleCol = fields[styleColumnName];
-    String styleColValue = '';
-
-    if (styleCol != null)
-      styleColValue =
-          SmeupUtilities.extractValueFromName(fields[styleColumnName]);
+    dynamic styleColValue = fields[styleColumnName];
 
     switch (styleColValue) {
       case '50G00':
@@ -50,10 +41,5 @@ class SmeupCalentarEventModel {
         break;
       default:
     }
-
-    // if (description.contains(currentSpots.toString()))
-    //   iAmIncluded = false;
-    // else
-    //   iAmIncluded = true;
   }
 }

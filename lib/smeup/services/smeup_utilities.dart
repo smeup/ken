@@ -2,7 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 
 import 'smeup_widget_notification_service.dart';
 
@@ -42,7 +42,7 @@ class SmeupUtilities {
   static Color getColorFromRGB(String color, {double opacity = 1.0}) {
     final split = color.split(RegExp(r"(?=[A-Z])"));
     if (split == null || split.length != 3)
-      return SmeupOptions.theme.textTheme.headline6.color;
+      return SmeupConfigurationService.getTheme().textTheme.headline6.color;
 
     int r = int.parse(split[0].substring(1));
     int g = int.parse(split[1].substring(1));
@@ -197,5 +197,31 @@ class SmeupUtilities {
     }
 
     return newId;
+  }
+
+  static String replaceDictionaryPlaceHolders(String source) {
+    String workString = source;
+    if (SmeupConfigurationService.appDictionary != null) {
+      RegExp re = RegExp(r'\{\{.*\}\}');
+      re.allMatches(source).forEach((match) {
+        final placeHolder = source.substring(match.start, match.end);
+        if (placeHolder != null && placeHolder.isNotEmpty) {
+          final dictionaryKey =
+              placeHolder.replaceFirst('{{', '').replaceFirst('}}', '');
+
+          if (dictionaryKey != null &&
+              SmeupConfigurationService.appDictionary
+                      .getLocalString(dictionaryKey) !=
+                  null) {
+            workString = workString.replaceAll(
+                placeHolder,
+                SmeupConfigurationService.appDictionary
+                    .getLocalString(dictionaryKey));
+          }
+        }
+      });
+    }
+
+    return workString;
   }
 }

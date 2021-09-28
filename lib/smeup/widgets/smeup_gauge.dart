@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speedometer/flutter_speedometer.dart';
+<<<<<<< HEAD
 import 'package:mobile_components_library/smeup/daos/smeup_gauge_dao.dart';
+=======
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
+>>>>>>> new-data-structure
 import 'package:mobile_components_library/smeup/models/widgets/smeup_gauge_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
@@ -130,9 +134,25 @@ class _SmeupGaugeState extends State<SmeupGauge>
     }
     Widget children;
 
+<<<<<<< HEAD
     //if (_data == null) {
     //return getFunErrorResponse(context, _model);
     //}
+=======
+    await smeupGaugeModel.setData();
+
+    if (!hasData(smeupGaugeModel)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+              '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupGaugeModel.smeupFun.fun['fun']['function']})'),
+          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
+        ),
+      );
+
+      return SmeupWidgetBuilderResponse(smeupGaugeModel, SmeupNotAvailable());
+    }
+>>>>>>> new-data-structure
 
     //int maxValue = int.parse(_data['Elemento']['Max']);
     //int value = int.parse(_data['Elemento']['Valore']);

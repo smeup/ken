@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
 
 class SmeupRadioButton extends StatelessWidget {
@@ -16,16 +16,14 @@ class SmeupRadioButton extends StatelessWidget {
   final Color fontColor;
   final double fontsize;
   final double padding;
-  final String data;
+  final Map<String, String> data;
   final double rightPadding;
   final double leftPadding;
   final double topPadding;
   final double bottomPadding;
-  final String clientData;
   final String valueField;
   final String displayedField;
   final String selectedValue;
-
   final String id;
   final String type;
   final String title;
@@ -34,8 +32,7 @@ class SmeupRadioButton extends StatelessWidget {
       {this.id = '',
       this.type = 'rad',
       this.title = '',
-      this.data = '',
-      this.clientData = '',
+      this.data,
       this.backColor,
       this.width = SmeupRadioButtonsModel.defaultWidth,
       this.height = SmeupRadioButtonsModel.defaultHeight,
@@ -63,18 +60,20 @@ class SmeupRadioButton extends StatelessWidget {
           height: height,
           width: width == 0 ? double.infinity : width,
           child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Radio(
-                value: data,
+                value: data['code'],
                 groupValue: _selectedValue,
                 onChanged: (value) {
                   serverOnPressed(value);
                 },
-                activeColor: SmeupOptions.theme.primaryColor,
+                activeColor: SmeupConfigurationService.getTheme().primaryColor,
               ),
               Align(
                   alignment: align,
-                  child: Text(data,
+                  child: Text(data['value'],
                       style: TextStyle(
                           fontSize: fontsize,
                           fontWeight: FontWeight.bold,

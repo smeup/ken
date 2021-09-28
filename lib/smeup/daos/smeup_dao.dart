@@ -1,3 +1,6 @@
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
+
 class SmeupDao {
   static dynamic getClientDataStructure(dynamic model) {
     switch (model.type) {
@@ -31,5 +34,19 @@ class SmeupDao {
       default:
         return {"rows": model.data};
     }
+  }
+
+  static Future<void> getData(SmeupModel model) async {
+    if (model.smeupFun != null && model.smeupFun.isFunValid()) {
+      final smeupServiceResponse =
+          await SmeupDataService.invoke(model.smeupFun);
+
+      if (!smeupServiceResponse.succeded) {
+        return;
+      }
+
+      model.data = smeupServiceResponse.result.data;
+    }    
+    SmeupDataService.decrementDataFetch(model.id);
   }
 }

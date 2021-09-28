@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'smeup_progress_indicator.dart';
 import 'smeup_splash.dart';
@@ -20,8 +20,9 @@ class SmeupWaitFun extends StatelessWidget {
           return Stack(
             children: [
               target,
-              SmeupSplash(SmeupOptions.appSplashColor),
-              SmeupProgressIndicator(SmeupOptions.loaderColor),
+              SmeupSplash(),
+              SmeupProgressIndicator(
+                  SmeupConfigurationService.defaultLoaderColor),
             ],
           );
         } else {

@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+//import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
+//import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 
-List<Widget> _debugAction;
-List<Widget> _getDebugAction() {
-  if (!SmeupOptions.isVariablesChangingLogEnabled) return null;
+// List<Widget> _debugAction;
+// List<Widget> _getDebugAction() {
+//   //if (!SmeupConfigurationService.isVariablesChangingLogEnabled) return null;
 
-  if (_debugAction == null) {
-    _debugAction = [
-      IconButton(
-          icon: Icon(Icons.developer_mode),
-          onPressed: () => SmeupVariablesService.dumpVariables())
-    ];
-  }
-  return _debugAction;
-}
+//   if (_debugAction == null) {
+//     _debugAction = [
+//       IconButton(
+//           icon: Icon(Icons.developer_mode),
+//           onPressed: () => SmeupVariablesService.dumpVariables())
+//     ];
+//   }
+//   return _debugAction;
+// }
 
 class SmeupNavigationAppBar extends AppBar {
   final BuildContext myContext;
@@ -54,7 +54,7 @@ class SmeupNavigationAppBar extends AppBar {
                       ),
             backgroundColor: isDialog
                 ? Theme.of(myContext).scaffoldBackgroundColor
-                : Theme.of(myContext).appBarTheme.color,
+                : Theme.of(myContext).appBarTheme.backgroundColor,
             // shape: isDialog
             //     ? RoundedRectangleBorder(
             //         borderRadius: BorderRadius.circular(20.0),
@@ -116,11 +116,13 @@ class SmeupNavigationAppBar extends AppBar {
                       );
                       list.add(action);
                     });
-                    if (_getDebugAction() != null)
-                      list.addAll(_getDebugAction());
+                    // if (_getDebugAction() != null)
+                    //   list.addAll(_getDebugAction());
                     return list;
                   }()
-                : _getDebugAction() != null
-                    ? _getDebugAction()
-                    : null);
+                : null
+            // : _getDebugAction() != null
+            //     ? _getDebugAction()
+            //     : null
+            );
 }

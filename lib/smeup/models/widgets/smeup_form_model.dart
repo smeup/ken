@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model_mixin.dart';
@@ -31,7 +31,7 @@ class SmeupFormModel extends SmeupModel
   // SmeupFormModel(this.context, SmeupFun smeupFun) {
   //   this.smeupFun = smeupFun;
   //   if (backColor == null)
-  //     backColor = SmeupOptions.theme.scaffoldBackgroundColor;
+  //     backColor = SmeupOptions.getTheme().scaffoldBackgroundColor;
   // }
 
   SmeupFormModel.fromMap(response, this.formKey)
@@ -51,7 +51,7 @@ class SmeupFormModel extends SmeupModel
     if (optionsType['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsType['backColor']);
     } else {
-      backColor = SmeupOptions.theme.scaffoldBackgroundColor;
+      backColor = SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
     }
 
     layout = jsonMap['layout'] ?? defaultLayout;
