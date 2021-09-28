@@ -106,7 +106,9 @@ class SmeupConfigurationService {
           .then((holidays) {
         SmeupConfigurationService._holidays = holidays;
       });
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 
   static Map<DateTime, List<dynamic>> getHolidays() {
