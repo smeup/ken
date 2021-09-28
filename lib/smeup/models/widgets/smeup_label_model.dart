@@ -15,6 +15,7 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
   static const bool defaultFontbold = false;
   static const double defaultWidth = 0;
   static const double defaultHeight = 40;
+  static const String defaultValColName = 'value';
 
   EdgeInsetsGeometry padding;
   double fontSize;
@@ -35,7 +36,7 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
       {id,
       type,
       GlobalKey<FormState> formKey,
-      this.valueColName = '',
+      this.valueColName = defaultValColName,
       this.padding = defaultPadding,
       this.fontSize = defaultFontSize,
       this.align = defaultAlign,
@@ -60,7 +61,7 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
     if (fontColor == null)
       fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
 
-    valueColName = optionsDefault['valueColName'] ?? 'value';
+    valueColName = optionsDefault['valueColName'] ?? defaultValColName;
     colorColName = optionsDefault['colorColName'] ?? '';
     colorFontColName = optionsDefault['colorFontColName'] ?? '';
     padding = SmeupUtilities.getPadding(optionsDefault['padding']);
