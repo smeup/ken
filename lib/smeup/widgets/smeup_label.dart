@@ -50,7 +50,7 @@ class SmeupLabel extends StatefulWidget
   SmeupLabel(this.scaffoldKey, this.formKey, this.data,
       {this.id = '',
       this.type = 'LAB',
-      this.valueColName = '',
+      this.valueColName = SmeupLabelModel.defaultValColName,
       this.padding = SmeupLabelModel.defaultPadding,
       this.fontSize = SmeupLabelModel.defaultFontSize,
       this.align = SmeupLabelModel.defaultAlign,

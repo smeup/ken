@@ -74,7 +74,8 @@ class _SmeupComponentState extends State<SmeupComponent> {
             smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'GAU':
-        children = SmeupGauge(smeupModel, widget.scaffoldKey, widget.formKey);
+        children = SmeupGauge.whitController(
+            smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'TRE':
         children = SmeupTree(smeupModel, widget.scaffoldKey, widget.formKey);
@@ -120,8 +121,8 @@ class _SmeupComponentState extends State<SmeupComponent> {
             break;
 
           case 'cal':
-            children =
-                SmeupDatePicker(smeupModel, widget.scaffoldKey, widget.formKey);
+            children = SmeupDatePicker.withController(
+                smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
           case 'itx':
