@@ -177,8 +177,8 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     final container = Container(
         padding: const EdgeInsets.all(5.0),
         color: Colors.transparent,
-        height: widget.height == 0 ? double.infinity : widget.height,
-        width: widget.width == 0 ? double.infinity : widget.width,
+        height: widget.height,
+        width: widget.width,
         child: res);
 
     return SmeupWidgetBuilderResponse(null, container);
