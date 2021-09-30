@@ -1,4 +1,4 @@
-import 'package:mobile_components_library/smeup/models/smeupChartColumn.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_column.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupChartRow {
