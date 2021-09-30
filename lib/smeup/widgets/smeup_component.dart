@@ -8,6 +8,7 @@ import 'package:mobile_components_library/smeup/services/smeup_data_service.dart
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_buttons.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_calendar.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_carousel.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_dashboard.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_datepicker.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_image.dart';
@@ -75,6 +76,10 @@ class _SmeupComponentState extends State<SmeupComponent> {
         break;
       case 'GAU':
         children = SmeupGauge(smeupModel, widget.scaffoldKey, widget.formKey);
+        break;
+      case 'CAU':
+        children = SmeupCarousel.withController(
+            smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'TRE':
         children = SmeupTree(smeupModel, widget.scaffoldKey, widget.formKey);
