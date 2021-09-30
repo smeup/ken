@@ -13,7 +13,7 @@ class SmeupCalentarEventModel {
 
   SmeupCalentarEventModel.fromMap(dynamic fields, String titleColumnName,
       String dataColumnName, String styleColumnName) {
-    this.day = DateTime.parse('${fields[dataColumnName]} 12:00:00.000Z');
+    this.day = DateTime.parse('${fields[dataColumnName]} 00:00:00.000Z');
     this.description = fields[titleColumnName];
 
     dynamic styleColValue = fields[styleColumnName];
