@@ -1,8 +1,9 @@
 import 'dart:convert';
 
+import 'package:mobile_components_library/smeup/models/widgets/smeup_char_series_data.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_column.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_model.dart';
-import 'package:mobile_components_library/smeup/models/smeupChartColumn.dart';
-import 'package:mobile_components_library/smeup/models/smeupChartRow.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_row.dart';
 
 class SmeupChartDatasource {
   List<SmeupChartColumn> columns;
@@ -48,10 +49,10 @@ class SmeupChartDatasource {
     });
   }
 
-  List<SmeupGraphData> getDataTable(int xCol, int yCol, int filterCol,
+  List<SmeupChartSeriesData> getDataTable(int xCol, int yCol, int filterCol,
       Function filterFunction, String filterValue) {
-    List<SmeupGraphData> datatable;
-    datatable = List<SmeupGraphData>.empty(growable: true);
+    List<SmeupChartSeriesData> seriesData;
+    seriesData = List<SmeupChartSeriesData>.empty(growable: true);
 
     rows.forEach((f) {
       double x = 0;
@@ -73,10 +74,10 @@ class SmeupChartDatasource {
           filterCol >= 0 &&
               filterFunction != null &&
               filterFunction(valueToTest, filterValue))
-        datatable.add(SmeupGraphData(x, y));
+        seriesData.add(SmeupChartSeriesData(x, y));
     });
 
-    return datatable;
+    return seriesData;
   }
 
   void setOptions(SmeupChartModel smeupChartModel) {
@@ -92,11 +93,4 @@ class SmeupChartDatasource {
       }
     }
   }
-}
-
-class SmeupGraphData {
-  double x;
-  double y;
-
-  SmeupGraphData(this.x, this.y);
 }

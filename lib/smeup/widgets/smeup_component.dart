@@ -92,7 +92,8 @@ class _SmeupComponentState extends State<SmeupComponent> {
             widget.formKey, initialFirstWork, initialLastWork);
         break;
       case 'CHA':
-        children = SmeupChart(smeupModel, widget.scaffoldKey, widget.formKey);
+        children = SmeupChart.withController(
+            smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'BTN':
         children = SmeupButtons.withController(
