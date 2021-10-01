@@ -11,11 +11,13 @@ class SmeupChartModel extends SmeupModel {
   static const int defaultRefresh = -1;
   static const double defaultWidth = 0;
   static const double defaultHeight = 0;
+  static const bool defaultLegend = true;
 
   ChartType chartType;
   int refresh;
   double width;
   double height;
+  bool legend;
 
   SmeupChartModel({
     id,
@@ -26,6 +28,7 @@ class SmeupChartModel extends SmeupModel {
     this.refresh = defaultRefresh,
     this.height = defaultHeight,
     this.width = defaultWidth,
+    this.legend = defaultLegend,
   }) : super(formKey, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
   }
@@ -38,6 +41,7 @@ class SmeupChartModel extends SmeupModel {
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+    legend = optionsDefault['leg'] ?? defaultLegend;
 
     if (widgetLoadType != LoadType.Delay) {
       SmeupChartDao.getData(this);

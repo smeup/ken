@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_chart_dao.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_char_series_data.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_column.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_series.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_datasource.dart';
@@ -33,6 +32,7 @@ class SmeupChart extends StatefulWidget
   double height;
   ChartType chartType;
   int refresh;
+  bool legend;
 
   SmeupChartDatasource data;
 
@@ -44,6 +44,7 @@ class SmeupChart extends StatefulWidget
       this.refresh = SmeupChartModel.defaultRefresh,
       this.height = SmeupChartModel.defaultHeight,
       this.width = SmeupChartModel.defaultWidth,
+      this.legend = SmeupChartModel.defaultLegend,
       this.data})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
@@ -63,6 +64,7 @@ class SmeupChart extends StatefulWidget
     refresh = m.refresh;
     width = m.width;
     height = m.height;
+    legend = m.legend;
 
     data = treatData(m);
   }
@@ -148,12 +150,10 @@ class _SmeupChartState extends State<SmeupChart>
       //   children = _getTimeChartComponent(_data, deviceHeight, deviceWidth);
       //   break;
       case ChartType.Bar:
-        children =
-            _getBarChartComponent(_data, deviceHeight, deviceWidth, _model);
+        children = _getBarChartComponent(_data, deviceHeight, deviceWidth);
         break;
       case ChartType.Pie:
-        children =
-            _getPieChartComponent(_data, deviceHeight, deviceWidth, _model);
+        children = _getPieChartComponent(_data, deviceHeight, deviceWidth);
         break;
       default:
         SmeupLogService.writeDebugMessage(
@@ -246,8 +246,8 @@ class _SmeupChartState extends State<SmeupChart>
 
   /// colAxes = the column which contains the X axes values
   /// colSeries = the column which contains the Y axes values
-  Widget _getBarChartComponent(SmeupChartDatasource _data, double deviceHeight,
-      double deviceWidth, SmeupChartModel _model) {
+  Widget _getBarChartComponent(
+      SmeupChartDatasource _data, double deviceHeight, double deviceWidth) {
     var seriesList = _getSeriesList(
         _data, _model, (SmeupChartSeries seriesData, _) => seriesData.color);
     if (seriesList == null) {
@@ -269,12 +269,13 @@ class _SmeupChartState extends State<SmeupChart>
           // But don't draw anything else.
           // renderSpec: new charts.NoneRenderSpec()
         ),
+        behaviors: widget.legend ? [new charts.SeriesLegend()] : null,
       ),
     );
   }
 
-  Widget _getPieChartComponent(SmeupChartDatasource _data, double deviceHeight,
-      double deviceWidth, SmeupChartModel _model) {
+  Widget _getPieChartComponent(
+      SmeupChartDatasource _data, double deviceHeight, double deviceWidth) {
     var seriesList = _getSeriesList(_data, _model, null);
     if (seriesList == null) {
       SmeupLogService.writeDebugMessage(
