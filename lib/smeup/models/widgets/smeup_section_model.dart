@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_carousel_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_dashboard_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_form_model.dart';
@@ -76,6 +77,9 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
               break;
             case 'GAU':
               model = SmeupGaugeModel.fromMap(v, formKey);
+              break;
+            case 'CAU':
+              model = SmeupCarouselModel.fromMap(v, formKey);
               break;
             case 'TRE':
               model = SmeupTreeModel.fromMap(v, formKey);

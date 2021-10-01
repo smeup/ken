@@ -1,57 +1,141 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
-import 'package:provider/provider.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_carousel_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_carousel_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_carousel_indicator.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_carousel_item.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
+import 'package:provider/provider.dart';
 
-class SmeupCarousel extends StatefulWidget {
-  final SmeupCaurouselModel smeupCaurouselModel;
+// ignore: must_be_immutable
+class SmeupCarousel extends StatefulWidget
+    with SmeupWidgetMixin
+    implements SmeupWidgetInterface {
+  SmeupCarouselModel model;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
 
-  SmeupCarousel(
-    this.smeupCaurouselModel,
+  List<Map> data;
+  String id;
+  String type;
+  double height;
+  bool autoPlay;
+  String title;
+
+  SmeupCarousel.withController(
+    this.model,
     this.scaffoldKey,
     this.formKey,
-  );
+  ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
+    runControllerActivities(model);
+  }
+
+  SmeupCarousel(this.scaffoldKey, this.formKey, this.data,
+      {this.id = '',
+      this.type = 'CAU',
+      this.height = SmeupCarouselModel.defaultHeight,
+      this.autoPlay = false,
+      this.title = ''})
+      : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
+    id = SmeupUtilities.getWidgetId(type, id);
+  }
+
+  @override
+  runControllerActivities(SmeupModel model) {
+    SmeupCarouselModel m = model;
+    id = m.id;
+    type = m.type;
+    height = m.height;
+    autoPlay = m.autoPlay;
+    title = m.title;
+
+    data = treatData(m);
+  }
+
+  @override
+  dynamic treatData(SmeupModel model) {
+    SmeupCarouselModel m = model;
+
+    // change data format
+    var workData = formatDataFields(m);
+
+    // set the widget data
+    if (workData != null) {
+      var newList = List<Map>.empty(growable: true);
+      for (var i = 0; i < (workData['rows'] as List).length; i++) {
+        final element = workData['rows'][i];
+        newList.add({
+          'imageFile': element['imageFile'].toString(),
+          'text': element['text'].toString()
+        });
+      }
+      return newList;
+    } else {
+      return model.data;
+    }
+  }
 
   @override
   _SmeupCarouselState createState() => _SmeupCarouselState();
 }
 
 class _SmeupCarouselState extends State<SmeupCarousel>
-    with SmeupWidgetStateMixin {
+    with SmeupWidgetStateMixin
+    implements SmeupWidgetStateInterface {
   int _initialIndex = 0;
+
+  SmeupCarouselModel _model;
+  dynamic _data;
+
+  @override
+  void initState() {
+    _model = widget.model;
+    _data = widget.data;
+    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    super.initState();
+  }
 
   @override
   void dispose() {
+    runDispose(widget.scaffoldKey, widget.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget label = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
+        getInitialdataLoaded(_model), notifierFunction: () {
+      setState(() {
+        widgetLoadType = LoadType.Immediate;
+        setDataLoad(widget.id, false);
+      });
+    });
+
+    return label;
+  }
+
+  @override
+  Future<SmeupWidgetBuilderResponse> getChildren() async {
     final buttons = FutureBuilder<SmeupWidgetBuilderResponse>(
-      future: _getButtonsComponent(widget.smeupCaurouselModel),
+      future: _getButtonsComponent(),
       builder: (BuildContext context,
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return widget.smeupCaurouselModel.showLoader
-              ? SmeupWait()
-              : Container();
+          return _model.showLoader ? SmeupWait() : Container();
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(
                 'Error SmeupCarousel: ${snapshot.error}',
                 logType: LogType.error);
-            notifyError(context, widget.smeupCaurouselModel.id, snapshot.error);
+            notifyError(context, widget.id, snapshot.error);
             return SmeupNotAvailable();
           } else {
             return snapshot.data.children;
@@ -60,49 +144,31 @@ class _SmeupCarouselState extends State<SmeupCarousel>
       },
     );
 
-    return buttons;
+    return SmeupWidgetBuilderResponse(_model, buttons);
   }
 
-  Future<SmeupWidgetBuilderResponse> _getButtonsComponent(
-      SmeupCaurouselModel smeupCaurouselModel) async {
-    await smeupCaurouselModel.setData();
-
-    if (!hasData(smeupCaurouselModel)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-              '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupCaurouselModel.smeupFun.fun['fun']['function']})'),
-          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
-        ),
-      );
-
-      return SmeupWidgetBuilderResponse(
-          smeupCaurouselModel, SmeupNotAvailable());
-    }
-
+  Future<SmeupWidgetBuilderResponse> _getButtonsComponent() async {
     final SmeupCaurouselModelIndicator notifier =
         Provider.of<SmeupCaurouselModelIndicator>(context, listen: false);
     notifier.setIndex(_initialIndex);
 
     var carousel = CarouselSlider.builder(
-      itemCount: smeupCaurouselModel.data.length,
+      itemCount: _data.length,
       options: CarouselOptions(
           initialPage: _initialIndex,
-          height: smeupCaurouselModel.height,
-          autoPlay: smeupCaurouselModel.autoPlay,
+          height: widget.height,
+          autoPlay: widget.autoPlay,
           onPageChanged: (index, reason) {
             notifier.setIndex(index);
           }),
       itemBuilder: (context, index) {
-        return SmeupCarouselItem(smeupCaurouselModel.data[index]['imageFile'],
-            smeupCaurouselModel.data[index]['text']);
+        return SmeupCarouselItem(
+            _data[index]['imageFile'], _data[index]['text']);
       },
     );
 
-    var column = Column(children: [
-      carousel,
-      SmeupCarouselIndicator(_initialIndex, smeupCaurouselModel)
-    ]);
-    return SmeupWidgetBuilderResponse(smeupCaurouselModel, column);
+    var column = Column(
+        children: [carousel, SmeupCarouselIndicator(_initialIndex, _data)]);
+    return SmeupWidgetBuilderResponse(_model, column);
   }
 }
