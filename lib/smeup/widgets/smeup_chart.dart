@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_chart_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_char_series_data.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_column.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_series.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_datasource.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_model.dart';
@@ -14,6 +15,7 @@ import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart'
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'dart:math';
 
 // ignore: must_be_immutable
 class SmeupChart extends StatefulWidget
@@ -143,7 +145,7 @@ class _SmeupChartState extends State<SmeupChart>
         children = SmeupNotAvailable();
     }
 
-    children = _getBarChartComponent(_data);
+    //children = _getBarChartComponent(_data);
 
     return SmeupWidgetBuilderResponse(_model, children);
   }
@@ -223,43 +225,85 @@ class _SmeupChartState extends State<SmeupChart>
     return container;
   }
 
+  /// colAxes = the column which contains the X axes values
+  /// colSeries = the column which contains the Y axes values
   Widget _getBarChartComponent(SmeupChartDatasource smeupChartDatasource) {
-    var graphSeriesList = List<SmeupChartSeries>.empty(growable: true);
+    int colAxes = -1;
+    int colSeries = -1;
+    int noAxes = 0;
+    int noSeries = 0;
 
-    int colAxes = smeupChartDatasource.columns
-        .indexWhere((element) => element.fill == 'ASSE');
-    int colSeries = smeupChartDatasource.columns
-        .indexWhere((element) => element.fill == 'SERIE');
+    // only 1 axes and at least 1 series
+    try {
+      noAxes = smeupChartDatasource.columns
+          .where((element) => element.type == ColumnType.Axes)
+          .length;
+      noSeries = smeupChartDatasource.columns
+          .where((element) => element.type == ColumnType.Series)
+          .length;
+    } catch (e) {
+      return _getError('colAxes or colSeries error: $e');
+    }
+    if (noAxes != 1) {
+      return _getError('there must be just one axes column');
+    }
+    if (noSeries < 1) {
+      return _getError('there must be at least one series column');
+    }
 
-    smeupChartDatasource.rows.forEach((weekBooking) {
-      String code = weekBooking.cells[colAxes] ?? '';
-      int value = int.parse(weekBooking.cells[colSeries].trim()) ?? 0;
+    try {
+      colAxes = smeupChartDatasource.columns
+          .indexWhere((element) => element.type == ColumnType.Axes);
+      colSeries = smeupChartDatasource.columns
+          .indexWhere((element) => element.type == ColumnType.Series);
+    } catch (e) {
+      return _getError('colAxes or colSeries not specified: $e');
+    }
 
-      var graphSeries = SmeupChartSeries(code, value);
-      graphSeriesList.add(graphSeries);
-    });
+    // colAxes or colSeries not specified
+    if (colAxes < 0 || colSeries < 0) {
+      return _getError('colAxes or colSeries not found');
+    }
 
-    final serie = [
-      new charts.Series<SmeupChartSeries, String>(
-        id: 'Series1',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (SmeupChartSeries booking, _) => booking.code,
-        measureFn: (SmeupChartSeries booking, _) => booking.value,
-        data: graphSeriesList,
-      )
-    ];
+    var seriesList =
+        List<charts.Series<SmeupChartSeries, String>>.empty(growable: true);
+
+    for (var i = 0; i < smeupChartDatasource.columns.length; i++) {
+      final column = smeupChartDatasource.columns[i];
+      if (column.type != ColumnType.Series) continue;
+
+      var color = _getRandomColor(i);
+
+      var series = List<SmeupChartSeries>.empty(growable: true);
+
+      smeupChartDatasource.rows.forEach((row) {
+        String code = row.cells[colAxes] ?? '';
+        double value = SmeupUtilities.getDouble(row.cells[i]) ?? 0;
+        var graphSeries = SmeupChartSeries(code, value, color);
+        series.add(graphSeries);
+      });
+
+      seriesList.add(charts.Series<SmeupChartSeries, String>(
+        id: 'Series',
+        colorFn: (SmeupChartSeries seriesData, _) => seriesData.color,
+        domainFn: (SmeupChartSeries seriesData, _) => seriesData.code,
+        measureFn: (SmeupChartSeries seriesData, _) => seriesData.value,
+        data: series,
+      ));
+    }
 
     return SizedBox(
       width: 400.0,
       height: 200.0,
       child: charts.BarChart(
-        serie,
+        seriesList,
         animate: false,
         domainAxis: new charts.OrdinalAxisSpec(
-            // Make sure that we draw the domain axis line.
-            showAxisLine: true,
-            // But don't draw anything else.
-            renderSpec: new charts.NoneRenderSpec()),
+          // Make sure that we draw the domain axis line.
+          showAxisLine: true,
+          // But don't draw anything else.
+          // renderSpec: new charts.NoneRenderSpec()
+        ),
       ),
     );
   }
@@ -293,5 +337,26 @@ class _SmeupChartState extends State<SmeupChart>
     });
 
     return seriesData;
+  }
+
+  Widget _getError(String message) {
+    SmeupLogService.writeDebugMessage(message, logType: LogType.error);
+    return SmeupNotAvailable();
+  }
+
+  dynamic _getRandomColor(index) {
+    Random random = Random();
+
+    // if (index == 1) {
+    //   return charts.ColorUtil.fromDartColor(Colors.blue);
+    // } else {
+    //   return charts.ColorUtil.fromDartColor(Colors.red);
+    // }
+
+    return charts.Color(
+        a: 255,
+        r: random.nextInt(256),
+        g: random.nextInt(256),
+        b: random.nextInt(256));
   }
 }
