@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 
 class SmeupWidgetNotificationService {
@@ -59,26 +56,26 @@ class SmeupWidgetNotificationService {
     }
   }
 
-  static void setTimerRefresh(widgetId) {
-    final sel = objects.firstWhere((element) => element['id'] == widgetId,
-        orElse: () => null);
-    if (sel == null) return;
-    SmeupModel smeupModel = sel['model'];
-    if (smeupModel == null) return;
-    if (smeupModel.refresh > 0 && sel['notifierFunction'] != null) {
-      Timer(Duration(seconds: smeupModel.refresh), () {
-        Function notifierFunction = sel['notifierFunction'];
-        try {
-          notifierFunction();
-          SmeupLogService.writeDebugMessage(
-              'notified ${smeupModel.type}: ${smeupModel.id}',
-              logType: LogType.info);
-        } catch (e) {
-          SmeupLogService.writeDebugMessage(
-              'Error widgetId refresh: ${e.toString()}',
-              logType: LogType.error);
-        }
-      });
-    }
-  }
+  // static void setTimerRefresh(widgetId) {
+  //   final sel = objects.firstWhere((element) => element['id'] == widgetId,
+  //       orElse: () => null);
+  //   if (sel == null) return;
+  //   SmeupModel smeupModel = sel['model'];
+  //   if (smeupModel == null) return;
+  //   if (smeupModel.refresh > 0 && sel['notifierFunction'] != null) {
+  //     Timer(Duration(seconds: smeupModel.refresh), () {
+  //       Function notifierFunction = sel['notifierFunction'];
+  //       try {
+  //         notifierFunction();
+  //         SmeupLogService.writeDebugMessage(
+  //             'notified ${smeupModel.type}: ${smeupModel.id}',
+  //             logType: LogType.info);
+  //       } catch (e) {
+  //         SmeupLogService.writeDebugMessage(
+  //             'Error widgetId refresh: ${e.toString()}',
+  //             logType: LogType.error);
+  //       }
+  //     });
+  //   }
+  // }
 }

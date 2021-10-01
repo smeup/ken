@@ -5,6 +5,16 @@ class SmeupChartRow {
   List<dynamic> cells;
   List<SmeupChartColumn> _columns;
 
+  SmeupChartRow(this.cells);
+
+  SmeupChartRow.fromMap(Map<String, dynamic> jsonData, this._columns) {
+    cells = List<dynamic>.empty(growable: true);
+    for (SmeupChartColumn col in _columns) {
+      cells.add(
+          SmeupUtilities.extractValueFromName(jsonData['fields'][col.name]));
+    }
+  }
+
   SmeupChartRow.fromInfluxDB(List<dynamic> jsonMap, this._columns) {
     cells = List<dynamic>.empty(growable: true);
     for (var i = 0; i < _columns.length; i++) {
@@ -20,14 +30,6 @@ class SmeupChartRow {
         cellValue = double.parse(jsonValue);
 
       cells.add(cellValue);
-    }
-  }
-
-  SmeupChartRow.fromMap(Map<String, dynamic> jsonMap, this._columns) {
-    cells = List<dynamic>.empty(growable: true);
-    for (SmeupChartColumn col in _columns) {
-      cells.add(
-          SmeupUtilities.extractValueFromName(jsonMap['fields'][col.name]));
     }
   }
 }

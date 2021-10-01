@@ -26,10 +26,19 @@ class SmeupChart extends StatefulWidget
   String id;
   String type;
   String title;
-  dynamic data;
+
+  ChartType chartType;
+  int refresh;
+
+  SmeupChartDatasource data;
 
   SmeupChart(this.scaffoldKey, this.formKey,
-      {this.id = '', this.type = 'CHA', this.title = ''})
+      {this.id = '',
+      this.type = 'CHA',
+      this.title = '',
+      this.chartType = SmeupChartModel.defaultChartType,
+      this.refresh = SmeupChartModel.defaultRefresh,
+      this.data})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
   }
@@ -44,6 +53,8 @@ class SmeupChart extends StatefulWidget
     id = m.id;
     type = m.type;
     title = m.title;
+    chartType = m.chartType;
+    refresh = m.refresh;
 
     data = treatData(m);
   }
@@ -53,7 +64,10 @@ class SmeupChart extends StatefulWidget
     SmeupChartModel m = model;
 
     // change data format
-    return formatDataFields(m);
+    var workData = formatDataFields(m);
+
+    final smeupChartDatasource = SmeupChartDatasource.fromMap(workData);
+    return smeupChartDatasource;
   }
 
   @override
@@ -64,7 +78,7 @@ class _SmeupChartState extends State<SmeupChart>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
   SmeupChartModel _model;
-  dynamic _data;
+  SmeupChartDatasource _data;
 
   @override
   void initState() {
@@ -102,12 +116,9 @@ class _SmeupChartState extends State<SmeupChart>
     }
 
     var children;
-    var smeupChartDatasource;
-
-    smeupChartDatasource = SmeupChartDatasource.fromMap(_model, _data);
 
     // TODOO: refresh
-    // if(smeupChartDatasource.refreshMilliseconds > 0)
+    // if(_model.refreshMilliseconds > 0)
     // {
     //   var duration = Duration(milliseconds: smeupChartDatasource.refreshMilliseconds);
     //   new Timer.periodic(duration, (Timer t) async =>
@@ -115,15 +126,15 @@ class _SmeupChartState extends State<SmeupChart>
     //   );
     // }
 
-    switch (smeupChartDatasource.chartType) {
-      case 'Area':
-        children = _getAreaChartComponent(smeupChartDatasource);
+    switch (widget.chartType) {
+      case ChartType.Area:
+        children = _getAreaChartComponent(_data);
         break;
-      case 'Line':
-        children = _getTimeChartComponent(smeupChartDatasource);
+      case ChartType.Line:
+        children = _getTimeChartComponent(_data);
         break;
-      case 'Line':
-        children = _getBarChartComponent(smeupChartDatasource);
+      case ChartType.Bar:
+        children = _getBarChartComponent(_data);
         break;
       default:
         SmeupLogService.writeDebugMessage(
@@ -132,7 +143,7 @@ class _SmeupChartState extends State<SmeupChart>
         children = SmeupNotAvailable();
     }
 
-    children = _getBarChartComponent(smeupChartDatasource);
+    children = _getBarChartComponent(_data);
 
     return SmeupWidgetBuilderResponse(_model, children);
   }
@@ -149,8 +160,7 @@ class _SmeupChartState extends State<SmeupChart>
         colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
         domainFn: (SmeupChartSeriesData seriesData, _) => seriesData.x,
         measureFn: (SmeupChartSeriesData seriesData, _) => seriesData.y,
-        //data: smeupChartDatasource.getDataTable(0, 1, (k, z) { return k == z;}, '1'),
-        data: smeupChartDatasource.getDataTable(0, 1, -1, null, null),
+        data: getDataTable(0, 1, -1, null, null),
       )..setAttribute(charts.rendererIdKey, 'customArea'),
     );
 
@@ -160,8 +170,7 @@ class _SmeupChartState extends State<SmeupChart>
         colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
         domainFn: (SmeupChartSeriesData seriesData, _) => seriesData.x,
         measureFn: (SmeupChartSeriesData seriesData, _) => seriesData.y,
-        //data: smeupChartDatasource.getDataTable((k, z) { return k != z;}, '1'),
-        data: smeupChartDatasource.getDataTable(0, 2, -1, null, null),
+        data: getDataTable(0, 2, -1, null, null),
       ),
     );
 
@@ -196,8 +205,7 @@ class _SmeupChartState extends State<SmeupChart>
         domainFn: (SmeupChartSeriesData seriesData, _) =>
             new DateTime.fromMillisecondsSinceEpoch(seriesData.x.truncate()),
         measureFn: (SmeupChartSeriesData seriesData, _) => seriesData.y,
-        //data: smeupChartDatasource.getDataTable((k, z) { return k != z;}, '1'),
-        data: smeupChartDatasource.getDataTable(0, 1, -1, null, null),
+        data: getDataTable(0, 1, -1, null, null),
       ),
     );
 
@@ -233,7 +241,7 @@ class _SmeupChartState extends State<SmeupChart>
 
     final serie = [
       new charts.Series<SmeupChartSeries, String>(
-        id: 'Persone',
+        id: 'Series1',
         colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
         domainFn: (SmeupChartSeries booking, _) => booking.code,
         measureFn: (SmeupChartSeries booking, _) => booking.value,
@@ -254,5 +262,36 @@ class _SmeupChartState extends State<SmeupChart>
             renderSpec: new charts.NoneRenderSpec()),
       ),
     );
+  }
+
+  List<SmeupChartSeriesData> getDataTable(int xCol, int yCol, int filterCol,
+      Function filterFunction, String filterValue) {
+    List<SmeupChartSeriesData> seriesData;
+    seriesData = List<SmeupChartSeriesData>.empty(growable: true);
+
+    _data.rows.forEach((f) {
+      double x = 0;
+      if (f.cells[xCol] is double)
+        x = f.cells[xCol];
+      else
+        x = double.parse(f.cells[xCol].toString());
+
+      double y = 0;
+      if (f.cells[yCol] is double)
+        y = f.cells[yCol];
+      else
+        y = double.parse(f.cells[yCol].toString());
+
+      String valueToTest;
+      if (filterCol >= 0) valueToTest = f.cells[filterCol].toString();
+
+      if (filterFunction == null ||
+          filterCol >= 0 &&
+              filterFunction != null &&
+              filterFunction(valueToTest, filterValue))
+        seriesData.add(SmeupChartSeriesData(x, y));
+    });
+
+    return seriesData;
   }
 }
