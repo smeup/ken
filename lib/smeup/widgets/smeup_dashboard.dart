@@ -161,28 +161,31 @@ class _SmeupDashboardState extends State<SmeupDashboard>
       height: widget.height,
       width: widget.width,
       padding: widget.padding,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            if (widget.icon != null && widget.icon != 0)
-              Padding(
-                  padding: EdgeInsets.only(left: 10, right: 10),
-                  child: Icon(
-                    IconData(widget.icon, fontFamily: 'MaterialIcons'),
-                    color: widget.iconColor,
-                    size: widget.iconSize,
-                  )),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              if (widget.icon != null && widget.icon != 0)
+                Padding(
+                    padding: EdgeInsets.only(left: 10, right: 10),
+                    child: Icon(
+                      IconData(widget.icon, fontFamily: 'MaterialIcons'),
+                      color: widget.iconColor,
+                      size: widget.iconSize,
+                    )),
+              Text(
+                _data.toString(),
+                style: TextStyle(fontSize: widget.fontsize),
+              )
+            ]),
             Text(
-              _data.toString(),
-              style: TextStyle(fontSize: widget.fontsize),
+              widget.text,
+              style: TextStyle(fontSize: widget.labelFontsize),
             )
-          ]),
-          Text(
-            widget.text,
-            style: TextStyle(fontSize: widget.labelFontsize),
-          )
-        ],
+          ],
+        ),
       ),
     );
 
