@@ -7,6 +7,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_datas
 import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
@@ -28,7 +29,8 @@ class SmeupChart extends StatefulWidget
   String id;
   String type;
   String title;
-
+  double width;
+  double height;
   ChartType chartType;
   int refresh;
 
@@ -40,6 +42,8 @@ class SmeupChart extends StatefulWidget
       this.title = '',
       this.chartType = SmeupChartModel.defaultChartType,
       this.refresh = SmeupChartModel.defaultRefresh,
+      this.height = SmeupChartModel.defaultHeight,
+      this.width = SmeupChartModel.defaultWidth,
       this.data})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
@@ -57,6 +61,8 @@ class SmeupChart extends StatefulWidget
     title = m.title;
     chartType = m.chartType;
     refresh = m.refresh;
+    width = m.width;
+    height = m.height;
 
     data = treatData(m);
   }
@@ -128,15 +134,26 @@ class _SmeupChartState extends State<SmeupChart>
     //   );
     // }
 
+    MediaQueryData deviceInfo = MediaQuery.of(context);
+    SmeupConfigurationService.deviceWidth = deviceInfo.size.width;
+    SmeupConfigurationService.deviceHeight = deviceInfo.size.height;
+    double deviceHeight = SmeupConfigurationService.deviceHeight;
+    double deviceWidth = SmeupConfigurationService.deviceWidth;
+
     switch (widget.chartType) {
-      case ChartType.Area:
-        children = _getAreaChartComponent(_data);
-        break;
-      case ChartType.Line:
-        children = _getTimeChartComponent(_data);
-        break;
+      // case ChartType.Area:
+      //   children = _getAreaChartComponent(_data, deviceHeight, deviceWidth);
+      //   break;
+      // case ChartType.Time:
+      //   children = _getTimeChartComponent(_data, deviceHeight, deviceWidth);
+      //   break;
       case ChartType.Bar:
-        children = _getBarChartComponent(_data);
+        children =
+            _getBarChartComponent(_data, deviceHeight, deviceWidth, _model);
+        break;
+      case ChartType.Pie:
+        children =
+            _getPieChartComponent(_data, deviceHeight, deviceWidth, _model);
         break;
       default:
         SmeupLogService.writeDebugMessage(
@@ -150,151 +167,99 @@ class _SmeupChartState extends State<SmeupChart>
     return SmeupWidgetBuilderResponse(_model, children);
   }
 
-  Widget _getAreaChartComponent(SmeupChartDatasource smeupChartDatasource) {
-    bool animate = true;
+  // Widget _getAreaChartComponent(SmeupChartDatasource smeupChartDatasource,
+  //     double deviceHeight, double deviceWidth) {
+  //   bool animate = true;
 
-    var seriesList =
-        List<charts.Series<SmeupChartSeriesData, double>>.empty(growable: true);
+  //   var seriesList =
+  //       List<charts.Series<SmeupChartSeriesData, double>>.empty(growable: true);
 
-    seriesList.add(
-      new charts.Series<SmeupChartSeriesData, double>(
-        id: "firstGroup",
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (SmeupChartSeriesData seriesData, _) => seriesData.x,
-        measureFn: (SmeupChartSeriesData seriesData, _) => seriesData.y,
-        data: getDataTable(0, 1, -1, null, null),
-      )..setAttribute(charts.rendererIdKey, 'customArea'),
-    );
+  //   seriesList.add(
+  //     new charts.Series<SmeupChartSeriesData, double>(
+  //       id: "firstGroup",
+  //       colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+  //       domainFn: (SmeupChartSeriesData seriesData, _) => seriesData.x,
+  //       measureFn: (SmeupChartSeriesData seriesData, _) => seriesData.y,
+  //       data: _getDataTable(0, 1, -1, null, null),
+  //     )..setAttribute(charts.rendererIdKey, 'customArea'),
+  //   );
 
-    seriesList.add(
-      new charts.Series<SmeupChartSeriesData, double>(
-        id: "secondGRoup",
-        colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
-        domainFn: (SmeupChartSeriesData seriesData, _) => seriesData.x,
-        measureFn: (SmeupChartSeriesData seriesData, _) => seriesData.y,
-        data: getDataTable(0, 2, -1, null, null),
-      ),
-    );
+  //   seriesList.add(
+  //     new charts.Series<SmeupChartSeriesData, double>(
+  //       id: "secondGRoup",
+  //       colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
+  //       domainFn: (SmeupChartSeriesData seriesData, _) => seriesData.x,
+  //       measureFn: (SmeupChartSeriesData seriesData, _) => seriesData.y,
+  //       data: _getDataTable(0, 2, -1, null, null),
+  //     ),
+  //   );
 
-    final chart =
-        charts.LineChart(seriesList, animate: animate, customSeriesRenderers: [
-      new charts.LineRendererConfig(
-          // ID used to link series to this renderer.
-          customRendererId: 'customArea',
-          includeArea: true,
-          stacked: true),
-    ]);
+  //   final chart =
+  //       charts.LineChart(seriesList, animate: animate, customSeriesRenderers: [
+  //     new charts.LineRendererConfig(
+  //         // ID used to link series to this renderer.
+  //         customRendererId: 'customArea',
+  //         includeArea: true,
+  //         stacked: true),
+  //   ]);
 
-    var container = Container(
-      child: chart,
-      width: 200,
-      height: 200,
-    );
+  //   var container = Container(
+  //     child: chart,
+  //     height: widget.height == 0 ? deviceHeight : widget.height,
+  //     width: widget.width == 0 ? deviceWidth : widget.width,
+  //   );
 
-    return container;
-  }
+  //   return container;
+  // }
 
-  Widget _getTimeChartComponent(SmeupChartDatasource smeupChartDatasource) {
-    bool animate = true;
+  // Widget _getTimeChartComponent(SmeupChartDatasource smeupChartDatasource,
+  //     double deviceHeight, double deviceWidth) {
+  //   bool animate = true;
 
-    var seriesList = List<charts.Series<SmeupChartSeriesData, DateTime>>.empty(
-        growable: true);
+  //   var seriesList = List<charts.Series<SmeupChartSeriesData, DateTime>>.empty(
+  //       growable: true);
 
-    seriesList.add(
-      new charts.Series<SmeupChartSeriesData, DateTime>(
-        id: "secondGRoup",
-        colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
-        domainFn: (SmeupChartSeriesData seriesData, _) =>
-            new DateTime.fromMillisecondsSinceEpoch(seriesData.x.truncate()),
-        measureFn: (SmeupChartSeriesData seriesData, _) => seriesData.y,
-        data: getDataTable(0, 1, -1, null, null),
-      ),
-    );
+  //   seriesList.add(
+  //     new charts.Series<SmeupChartSeriesData, DateTime>(
+  //       id: "secondGRoup",
+  //       colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
+  //       domainFn: (SmeupChartSeriesData seriesData, _) =>
+  //           new DateTime.fromMillisecondsSinceEpoch(seriesData.x.truncate()),
+  //       measureFn: (SmeupChartSeriesData seriesData, _) => seriesData.y,
+  //       data: _getDataTable(0, 1, -1, null, null),
+  //     ),
+  //   );
 
-    final chart = charts.TimeSeriesChart(
-      seriesList,
-      animate: animate,
-    );
+  //   final chart = charts.TimeSeriesChart(
+  //     seriesList,
+  //     animate: animate,
+  //   );
 
-    final container = Container(
-      child: chart,
-      width: 200,
-      height: 200,
-    );
+  //   final container = Container(
+  //     child: chart,
+  //     height: widget.height == 0 ? deviceHeight : widget.height,
+  //     width: widget.width == 0 ? deviceWidth : widget.width,
+  //   );
 
-    return container;
-  }
+  //   return container;
+  // }
 
   /// colAxes = the column which contains the X axes values
   /// colSeries = the column which contains the Y axes values
-  Widget _getBarChartComponent(SmeupChartDatasource smeupChartDatasource) {
-    int colAxes = -1;
-    int colSeries = -1;
-    int noAxes = 0;
-    int noSeries = 0;
-
-    // only 1 axes and at least 1 series
-    try {
-      noAxes = smeupChartDatasource.columns
-          .where((element) => element.type == ColumnType.Axes)
-          .length;
-      noSeries = smeupChartDatasource.columns
-          .where((element) => element.type == ColumnType.Series)
-          .length;
-    } catch (e) {
-      return _getError('colAxes or colSeries error: $e');
-    }
-    if (noAxes != 1) {
-      return _getError('there must be just one axes column');
-    }
-    if (noSeries < 1) {
-      return _getError('there must be at least one series column');
-    }
-
-    try {
-      colAxes = smeupChartDatasource.columns
-          .indexWhere((element) => element.type == ColumnType.Axes);
-      colSeries = smeupChartDatasource.columns
-          .indexWhere((element) => element.type == ColumnType.Series);
-    } catch (e) {
-      return _getError('colAxes or colSeries not specified: $e');
-    }
-
-    // colAxes or colSeries not specified
-    if (colAxes < 0 || colSeries < 0) {
-      return _getError('colAxes or colSeries not found');
-    }
-
-    var seriesList =
-        List<charts.Series<SmeupChartSeries, String>>.empty(growable: true);
-
-    for (var i = 0; i < smeupChartDatasource.columns.length; i++) {
-      final column = smeupChartDatasource.columns[i];
-      if (column.type != ColumnType.Series) continue;
-
-      var color = _getRandomColor(i);
-
-      var series = List<SmeupChartSeries>.empty(growable: true);
-
-      smeupChartDatasource.rows.forEach((row) {
-        String code = row.cells[colAxes] ?? '';
-        double value = SmeupUtilities.getDouble(row.cells[i]) ?? 0;
-        var graphSeries = SmeupChartSeries(code, value, color);
-        series.add(graphSeries);
-      });
-
-      seriesList.add(charts.Series<SmeupChartSeries, String>(
-        id: 'Series',
-        colorFn: (SmeupChartSeries seriesData, _) => seriesData.color,
-        domainFn: (SmeupChartSeries seriesData, _) => seriesData.code,
-        measureFn: (SmeupChartSeries seriesData, _) => seriesData.value,
-        data: series,
-      ));
+  Widget _getBarChartComponent(SmeupChartDatasource _data, double deviceHeight,
+      double deviceWidth, SmeupChartModel _model) {
+    var seriesList = _getSeriesList(
+        _data, _model, (SmeupChartSeries seriesData, _) => seriesData.color);
+    if (seriesList == null) {
+      SmeupLogService.writeDebugMessage(
+          'error in colAxes or colSeries definition',
+          logType: LogType.error);
+      return SmeupNotAvailable();
     }
 
     return SizedBox(
-      width: 400.0,
-      height: 200.0,
+      height: widget.height == 0 ? deviceHeight : widget.height,
+      width: widget.width == 0 ? deviceWidth : widget.width,
       child: charts.BarChart(
         seriesList,
         animate: false,
@@ -308,50 +273,134 @@ class _SmeupChartState extends State<SmeupChart>
     );
   }
 
-  List<SmeupChartSeriesData> getDataTable(int xCol, int yCol, int filterCol,
-      Function filterFunction, String filterValue) {
-    List<SmeupChartSeriesData> seriesData;
-    seriesData = List<SmeupChartSeriesData>.empty(growable: true);
+  Widget _getPieChartComponent(SmeupChartDatasource _data, double deviceHeight,
+      double deviceWidth, SmeupChartModel _model) {
+    var seriesList = _getSeriesList(_data, _model, null);
+    if (seriesList == null) {
+      SmeupLogService.writeDebugMessage(
+          'error in colAxes or colSeries definition',
+          logType: LogType.error);
+      return SmeupNotAvailable();
+    }
 
-    _data.rows.forEach((f) {
-      double x = 0;
-      if (f.cells[xCol] is double)
-        x = f.cells[xCol];
-      else
-        x = double.parse(f.cells[xCol].toString());
-
-      double y = 0;
-      if (f.cells[yCol] is double)
-        y = f.cells[yCol];
-      else
-        y = double.parse(f.cells[yCol].toString());
-
-      String valueToTest;
-      if (filterCol >= 0) valueToTest = f.cells[filterCol].toString();
-
-      if (filterFunction == null ||
-          filterCol >= 0 &&
-              filterFunction != null &&
-              filterFunction(valueToTest, filterValue))
-        seriesData.add(SmeupChartSeriesData(x, y));
-    });
-
-    return seriesData;
+    return SizedBox(
+      height: widget.height == 0 ? deviceHeight : widget.height,
+      width: widget.width == 0 ? deviceWidth : widget.width,
+      child: charts.PieChart(
+        seriesList,
+        animate: false,
+        // domainAxis: new charts.OrdinalAxisSpec(
+        //   // Make sure that we draw the domain axis line.
+        //   showAxisLine: true,
+        //   // But don't draw anything else.
+        //   // renderSpec: new charts.NoneRenderSpec()
+        // ),
+      ),
+    );
   }
 
-  Widget _getError(String message) {
-    SmeupLogService.writeDebugMessage(message, logType: LogType.error);
-    return SmeupNotAvailable();
+  // List<SmeupChartSeriesData> _getDataTable(int xCol, int yCol, int filterCol,
+  //     Function filterFunction, String filterValue) {
+  //   List<SmeupChartSeriesData> seriesData;
+  //   seriesData = List<SmeupChartSeriesData>.empty(growable: true);
+
+  //   _data.rows.forEach((f) {
+  //     double x = 0;
+  //     if (f.cells[xCol] is double)
+  //       x = f.cells[xCol];
+  //     else
+  //       x = double.parse(f.cells[xCol].toString());
+
+  //     double y = 0;
+  //     if (f.cells[yCol] is double)
+  //       y = f.cells[yCol];
+  //     else
+  //       y = double.parse(f.cells[yCol].toString());
+
+  //     String valueToTest;
+  //     if (filterCol >= 0) valueToTest = f.cells[filterCol].toString();
+
+  //     if (filterFunction == null ||
+  //         filterCol >= 0 &&
+  //             filterFunction != null &&
+  //             filterFunction(valueToTest, filterValue))
+  //       seriesData.add(SmeupChartSeriesData(x, y));
+  //   });
+
+  //   return seriesData;
+  // }
+
+  List<charts.Series<SmeupChartSeries, String>> _getSeriesList(
+      SmeupChartDatasource _data, SmeupChartModel _model, Function getColor) {
+    int colAxes = -1;
+    int colSeries = -1;
+    int noAxes = 0;
+    int noSeries = 0;
+
+    // only 1 axes and at least 1 series
+    try {
+      noAxes = _data.columns
+          .where((element) => element.type == ColumnType.Axes)
+          .length;
+      noSeries = _data.columns
+          .where((element) => element.type == ColumnType.Series)
+          .length;
+    } catch (e) {
+      return null;
+    }
+    if (noAxes != 1) {
+      return null;
+    }
+    if (noSeries < 1) {
+      return null;
+    }
+
+    try {
+      colAxes = _data.columns
+          .indexWhere((element) => element.type == ColumnType.Axes);
+      colSeries = _data.columns
+          .indexWhere((element) => element.type == ColumnType.Series);
+    } catch (e) {
+      return null;
+    }
+
+    // colAxes or colSeries not specified
+    if (colAxes < 0 || colSeries < 0) {
+      return null;
+    }
+
+    var seriesList =
+        List<charts.Series<SmeupChartSeries, String>>.empty(growable: true);
+
+    for (var i = 0; i < _data.columns.length; i++) {
+      final column = _data.columns[i];
+      if (column.type != ColumnType.Series) continue;
+
+      var color = _getRandomColor(i);
+
+      var series = List<SmeupChartSeries>.empty(growable: true);
+
+      _data.rows.forEach((row) {
+        String code = row.cells[colAxes] ?? '';
+        double value = SmeupUtilities.getDouble(row.cells[i]) ?? 0;
+        var graphSeries = SmeupChartSeries(code, value, color);
+        series.add(graphSeries);
+      });
+
+      seriesList.add(charts.Series<SmeupChartSeries, String>(
+        id: 'Series',
+        colorFn: getColor,
+        domainFn: (SmeupChartSeries seriesData, _) => seriesData.code,
+        measureFn: (SmeupChartSeries seriesData, _) => seriesData.value,
+        data: series,
+      ));
+    }
+
+    return seriesList;
   }
 
   dynamic _getRandomColor(index) {
     Random random = Random();
-
-    // if (index == 1) {
-    //   return charts.ColorUtil.fromDartColor(Colors.blue);
-    // } else {
-    //   return charts.ColorUtil.fromDartColor(Colors.red);
-    // }
 
     return charts.Color(
         a: 255,
