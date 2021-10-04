@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_carousel_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_carousel_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
@@ -124,27 +125,19 @@ class _SmeupCarouselState extends State<SmeupCarousel>
 
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    final buttons = FutureBuilder<SmeupWidgetBuilderResponse>(
-      future: _getButtonsComponent(),
-      builder: (BuildContext context,
-          AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return _model.showLoader ? SmeupWait() : Container();
-        } else {
-          if (snapshot.hasError) {
-            SmeupLogService.writeDebugMessage(
-                'Error SmeupCarousel: ${snapshot.error}',
-                logType: LogType.error);
-            notifyError(context, widget.id, snapshot.error);
-            return SmeupNotAvailable();
-          } else {
-            return snapshot.data.children;
-          }
-        }
-      },
-    );
+    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+      if (_model != null) {
+        await SmeupCarouselDao.getData(_model);
+        _data = widget.treatData(_model);
+      }
+      setDataLoad(widget.id, true);
+    }
 
-    return SmeupWidgetBuilderResponse(_model, buttons);
+    if (_data == null) {
+      return getFunErrorResponse(context, _model);
+    }
+
+    return _getButtonsComponent();
   }
 
   Future<SmeupWidgetBuilderResponse> _getButtonsComponent() async {
