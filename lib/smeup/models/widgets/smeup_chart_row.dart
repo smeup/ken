@@ -1,5 +1,4 @@
 import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_column.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupChartRow {
   List<dynamic> cells;
@@ -10,8 +9,7 @@ class SmeupChartRow {
   SmeupChartRow.fromMap(Map<String, dynamic> jsonData, this._columns) {
     cells = List<dynamic>.empty(growable: true);
     for (SmeupChartColumn col in _columns) {
-      cells.add(
-          SmeupUtilities.extractValueFromName(jsonData['fields'][col.name]));
+      cells.add(jsonData[col.name]);
     }
   }
 

@@ -30,7 +30,7 @@ class SmeupChartDatasource {
 
     columns = List<SmeupChartColumn>.empty(growable: true);
     jsonColumns.forEach((c) {
-      columns.add(SmeupChartColumn.fromInfluxDB(c, c, ''));
+      columns.add(SmeupChartColumn.fromInfluxDB(c, c, 0));
     });
 
     rows = List<SmeupChartRow>.empty(growable: true);

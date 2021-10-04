@@ -389,7 +389,7 @@ class _SmeupChartState extends State<SmeupChart>
       });
 
       seriesList.add(charts.Series<SmeupChartSeries, String>(
-        id: 'Series',
+        id: column.title,
         colorFn: getColor,
         domainFn: (SmeupChartSeries seriesData, _) => seriesData.code,
         measureFn: (SmeupChartSeries seriesData, _) => seriesData.value,
