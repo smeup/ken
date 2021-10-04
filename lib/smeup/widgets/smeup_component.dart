@@ -50,7 +50,9 @@ class _SmeupComponentState extends State<SmeupComponent> {
       builder: (BuildContext context,
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return widget.smeupModel.showLoader ? SmeupWait() : Container();
+          return widget.smeupModel.showLoader
+              ? SmeupWait(widget.scaffoldKey, widget.formKey)
+              : Container();
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(
@@ -137,7 +139,7 @@ class _SmeupComponentState extends State<SmeupComponent> {
             break;
 
           case 'pgb':
-            children = SmeupProgressBar(
+            children = SmeupProgressBar.withController(
                 smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
@@ -180,7 +182,8 @@ class _SmeupComponentState extends State<SmeupComponent> {
 
           var smeupJsonForm = SmeupFormModel.fromMap(
               smeupServiceResponse.result.data, widget.formKey);
-          final form = SmeupForm(smeupJsonForm, widget.scaffoldKey);
+          final form =
+              SmeupForm(smeupJsonForm, widget.scaffoldKey, widget.formKey);
 
           if (smeupJsonForm.layout == 'column') {
             children = Container(

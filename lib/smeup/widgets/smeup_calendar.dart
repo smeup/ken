@@ -244,8 +244,8 @@ class SmeupCalendarState extends State<SmeupCalendar>
           children: <Widget>[
             _buildTableCalendarWithBuilders(),
             if (_isLoading)
-              SmeupProgressIndicator(
-                  SmeupConfigurationService.getTheme().primaryColor)
+              SmeupProgressIndicator(widget.scaffoldKey, widget.formKey,
+                  color: SmeupConfigurationService.getTheme().primaryColor)
           ],
           //     )
         ),

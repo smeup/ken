@@ -37,7 +37,7 @@ class _SmeupSliderState extends State<SmeupSlider> with SmeupWidgetStateMixin {
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return widget.smeupInputFieldModel.showLoader
-              ? SmeupWait()
+              ? SmeupWait(widget.scaffoldKey, widget.formKey)
               : Container();
         } else {
           if (snapshot.hasError) {

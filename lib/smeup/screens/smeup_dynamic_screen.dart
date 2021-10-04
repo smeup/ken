@@ -90,7 +90,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
       builder: (BuildContext context,
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return SmeupWait();
+          return SmeupWait(widget._scaffoldKey, widget._formKey);
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(
@@ -141,7 +141,8 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     smeupFormModel =
         SmeupFormModel.fromMap(smeupscreenModel.data, widget._formKey);
 
-    final smeupForm = SmeupForm(smeupFormModel, widget._scaffoldKey);
+    final smeupForm =
+        SmeupForm(smeupFormModel, widget._scaffoldKey, widget._formKey);
 
     bool isDialog = routeArgs == null ? false : routeArgs['isDialog'] ?? false;
     SmeupFun smeupFun =
@@ -164,7 +165,8 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
                   ),
                   body: errorNotifier.isError()
                       ? showErrorForm(context, smeupFun)
-                      : SmeupWaitFun(smeupForm),
+                      : SmeupWaitFun(
+                          widget._scaffoldKey, widget._formKey, smeupForm),
                 ),
               )),
     );
