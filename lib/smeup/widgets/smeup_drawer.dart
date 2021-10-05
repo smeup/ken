@@ -39,7 +39,9 @@ class _SmeupDrawerState extends State<SmeupDrawer> with SmeupWidgetStateMixin {
       builder: (BuildContext context,
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return widget.smeupDrawerModel.showLoader ? SmeupWait() : Container();
+          return widget.smeupDrawerModel.showLoader
+              ? SmeupWait(widget.scaffoldKey, widget.formKey)
+              : Container();
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(

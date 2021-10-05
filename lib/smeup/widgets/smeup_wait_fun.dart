@@ -6,8 +6,10 @@ import 'smeup_splash.dart';
 
 class SmeupWaitFun extends StatelessWidget {
   final Widget target;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<FormState> formKey;
 
-  SmeupWaitFun(this.target);
+  SmeupWaitFun(this.scaffoldKey, this.formKey, this.target);
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +23,8 @@ class SmeupWaitFun extends StatelessWidget {
             children: [
               target,
               SmeupSplash(),
-              SmeupProgressIndicator(
-                  SmeupConfigurationService.defaultLoaderColor),
+              SmeupProgressIndicator(scaffoldKey, formKey,
+                  color: SmeupConfigurationService.defaultLoaderColor),
             ],
           );
         } else {
