@@ -40,8 +40,8 @@ class SmeupConfigurationService {
   static Map<DateTime, List> _holidays;
   static dynamic appDictionary;
   static ConfigurationModel _appConfiguration;
-  static const Color defaultSplashColor = Color(0xffffffff);
-  static const Color defaultLoaderColor = Color(0xffffffff);
+  static Color defaultSplashColor;
+  static Color defaultLoaderColor;
 
   static PackageInfo packageInfoModel = PackageInfo(
     appName: 'Unknown',
@@ -55,10 +55,14 @@ class SmeupConfigurationService {
       dynamic localizationService,
       Map<String, SmeupDataServiceInterface> customDataServices,
       bool enableCache = false,
-      Function logoutFunction}) async {
+      Function logoutFunction,
+      Color defaultSplashColor = Colors.white,
+      Color defaultLoaderColor = Colors.white}) async {
     await SmeupConfigurationService.setAppConfiguration();
 
     SmeupConfigurationService.logLevel = logLevel;
+    SmeupConfigurationService.defaultSplashColor = defaultSplashColor;
+    SmeupConfigurationService.defaultLoaderColor = defaultLoaderColor;
 
     await SmeupConfigurationService.setTheme(
         SmeupConfigurationService.getAppConfiguration().theme);

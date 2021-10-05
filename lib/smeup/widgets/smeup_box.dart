@@ -690,14 +690,15 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
               height: 50,
               width: buttonText.isEmpty ? 50 : 0,
               backColor: buttonText.isEmpty
-                  ? Theme.of(context).scaffoldBackgroundColor
-                  : Theme.of(context).primaryColor,
+                  ? SmeupConfigurationService.getTheme().scaffoldBackgroundColor
+                  : SmeupConfigurationService.getTheme().primaryColor,
               borderColor: buttonText.isEmpty
-                  ? Theme.of(context).scaffoldBackgroundColor
-                  : Theme.of(context).primaryColor,
+                  ? SmeupConfigurationService.getTheme().scaffoldBackgroundColor
+                  : SmeupConfigurationService.getTheme().primaryColor,
               fontColor: buttonText.isEmpty
-                  ? Theme.of(context).primaryColor
-                  : Theme.of(context).scaffoldBackgroundColor,
+                  ? SmeupConfigurationService.getTheme().primaryColor
+                  : SmeupConfigurationService.getTheme()
+                      .scaffoldBackgroundColor,
               iconData: int.tryParse(buttonIcon) ?? 0,
               data: buttonText,
               clientOnPressed: () {

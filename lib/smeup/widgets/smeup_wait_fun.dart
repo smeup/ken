@@ -22,7 +22,7 @@ class SmeupWaitFun extends StatelessWidget {
           return Stack(
             children: [
               target,
-              SmeupSplash(),
+              SmeupSplash(scaffoldKey, formKey),
               SmeupProgressIndicator(scaffoldKey, formKey,
                   color: SmeupConfigurationService.defaultLoaderColor),
             ],
