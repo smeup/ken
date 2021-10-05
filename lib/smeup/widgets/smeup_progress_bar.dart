@@ -30,8 +30,6 @@ class SmeupProgressBar extends StatefulWidget
 
   double data;
 
-  Function clientOnChange;
-
   SmeupProgressBar.withController(
     this.model,
     this.scaffoldKey,
@@ -40,19 +38,20 @@ class SmeupProgressBar extends StatefulWidget
     runControllerActivities(model);
   }
 
-  SmeupProgressBar(this.scaffoldKey, this.formKey,
-      {this.id = '',
-      this.type = 'FLD',
-      this.valueField = SmeupProgressBarModel.defaultValueField,
-      this.color = SmeupProgressBarModel.defaultColor,
-      this.title = '',
-      this.height = SmeupProgressBarModel.defaultHeight,
-      this.data = 0,
-      this.padding = SmeupProgressBarModel.defaultPadding,
-      this.progressBarMinimun = SmeupProgressBarModel.defaultProgressBarMinimun,
-      this.progressBarMaximun = SmeupProgressBarModel.defaultProgressBarMaximun,
-      this.clientOnChange})
-      : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
+  SmeupProgressBar(
+    this.scaffoldKey,
+    this.formKey, {
+    this.id = '',
+    this.type = 'FLD',
+    this.valueField = SmeupProgressBarModel.defaultValueField,
+    this.color = SmeupProgressBarModel.defaultColor,
+    this.title = '',
+    this.height = SmeupProgressBarModel.defaultHeight,
+    this.data = 0,
+    this.padding = SmeupProgressBarModel.defaultPadding,
+    this.progressBarMinimun = SmeupProgressBarModel.defaultProgressBarMinimun,
+    this.progressBarMaximun = SmeupProgressBarModel.defaultProgressBarMaximun,
+  }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
   }
 
