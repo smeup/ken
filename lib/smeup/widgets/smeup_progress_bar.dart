@@ -25,6 +25,8 @@ class SmeupProgressBar extends StatefulWidget
   String valueField;
   double progressBarMinimun;
   double progressBarMaximun;
+  double height;
+  EdgeInsetsGeometry padding;
 
   double data;
 
@@ -40,11 +42,13 @@ class SmeupProgressBar extends StatefulWidget
 
   SmeupProgressBar(this.scaffoldKey, this.formKey,
       {this.id = '',
-      this.type = 'PGB',
+      this.type = 'FLD',
       this.valueField = SmeupProgressBarModel.defaultValueField,
       this.color = SmeupProgressBarModel.defaultColor,
       this.title = '',
+      this.height = SmeupProgressBarModel.defaultHeight,
       this.data = 0,
+      this.padding = SmeupProgressBarModel.defaultPadding,
       this.progressBarMinimun = SmeupProgressBarModel.defaultProgressBarMinimun,
       this.progressBarMaximun = SmeupProgressBarModel.defaultProgressBarMaximun,
       this.clientOnChange})
@@ -62,6 +66,8 @@ class SmeupProgressBar extends StatefulWidget
     valueField = m.valueField;
     progressBarMinimun = m.progressBarMinimun;
     progressBarMaximun = m.progressBarMaximun;
+    height = m.height;
+    padding = m.padding;
 
     data = treatData(m);
   }
@@ -70,7 +76,7 @@ class SmeupProgressBar extends StatefulWidget
   dynamic treatData(SmeupModel model) {
     SmeupProgressBarModel m = model;
 
-    return m.data['rows'][0][m.valueField];
+    return SmeupUtilities.getDouble(m.data['rows'][0][m.valueField]);
   }
 
   @override
@@ -127,11 +133,13 @@ class _SmeupProgressBarState extends State<SmeupProgressBar>
 
     children = Center(
       child: Container(
-          padding: EdgeInsets.all(10),
+          padding: widget.padding,
           child: LinearProgressIndicator(
-            minHeight: 10,
+            minHeight: widget.height,
             key: ValueKey(widget.id),
-            value: _data / widget.progressBarMaximun,
+            value: widget.progressBarMaximun == 0
+                ? 0
+                : _data / widget.progressBarMaximun,
           )),
     );
 

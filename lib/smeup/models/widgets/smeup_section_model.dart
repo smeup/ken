@@ -13,6 +13,8 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_line_model.
 import 'package:mobile_components_library/smeup/models/widgets/smeup_list_box_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model_mixin.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_progress_bar_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_progress_indicator_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_qrcode_reader_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_autocomplete_model.dart';
@@ -117,7 +119,10 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
                   model = SmeupTextFieldModel.fromMap(v, formKey);
                   break;
                 case 'pgb':
-                  model = SmeupInputFieldModel.fromMap(v, formKey);
+                  model = SmeupProgressBarModel.fromMap(v, formKey);
+                  break;
+                case 'pgi':
+                  model = SmeupProgressIndicatorModel.fromMap(v, formKey);
                   break;
                 case 'qrc':
                   model = SmeupQRCodeReaderModel.fromMap(v, formKey);
