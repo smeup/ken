@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 //import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
@@ -53,8 +54,8 @@ class SmeupNavigationAppBar extends AppBar {
                         child: Text(data['title'] ?? ''),
                       ),
             backgroundColor: isDialog
-                ? Theme.of(myContext).scaffoldBackgroundColor
-                : Theme.of(myContext).appBarTheme.backgroundColor,
+                ? SmeupConfigurationService.getTheme().scaffoldBackgroundColor
+                : SmeupConfigurationService.getTheme().primaryColor,
             // shape: isDialog
             //     ? RoundedRectangleBorder(
             //         borderRadius: BorderRadius.circular(20.0),
