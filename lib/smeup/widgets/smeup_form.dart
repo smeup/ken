@@ -12,8 +12,9 @@ import 'smeup_section.dart';
 class SmeupForm extends StatefulWidget {
   final SmeupFormModel smeupFormModel;
   final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<FormState> formKey;
 
-  SmeupForm(this.smeupFormModel, this.scaffoldKey);
+  SmeupForm(this.smeupFormModel, this.scaffoldKey, this.formKey);
 
   @override
   _SmeupFormState createState() => _SmeupFormState();
@@ -27,7 +28,9 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       builder: (BuildContext context,
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return widget.smeupFormModel.showLoader ? SmeupWait() : Container();
+          return widget.smeupFormModel.showLoader
+              ? SmeupWait(widget.scaffoldKey, widget.formKey)
+              : Container();
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(

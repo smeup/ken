@@ -36,7 +36,7 @@ class _SmeupQRCodeReaderState extends State<SmeupQRCodeReader>
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return widget.smeupQRCodeReaderModel.showLoader
-              ? SmeupWait()
+              ? SmeupWait(widget.scaffoldKey, widget.formKey)
               : Container();
         } else {
           if (snapshot.hasError) {

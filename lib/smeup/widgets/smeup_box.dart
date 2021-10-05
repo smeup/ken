@@ -59,7 +59,9 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
       builder: (BuildContext context,
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return widget.showLoader ? SmeupWait() : Container();
+          return widget.showLoader
+              ? SmeupWait(widget.scaffoldKey, widget.formKey)
+              : Container();
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(

@@ -7,7 +7,7 @@ import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 enum LoadType { Immediate, Delay }
 
 abstract class SmeupModel {
-  static const int defaultRefresh = 0;
+  //static const int defaultRefresh = 0;
 
   dynamic jsonMap;
   dynamic data;
@@ -25,7 +25,7 @@ abstract class SmeupModel {
   bool notificationEnabled = true;
   bool isNotified = false;
   int serviceStatusCode = 0;
-  int refresh;
+  //int refresh;
   GlobalKey<FormState> formKey;
 
   List<SmeupSectionModel> smeupSectionsModels;
@@ -70,8 +70,8 @@ abstract class SmeupModel {
       showLoader = jsonMap['showLoader'] ??
           SmeupConfigurationService.getAppConfiguration().showLoader;
       notificationEnabled = jsonMap['notification'] ?? true;
-      refresh =
-          SmeupUtilities.getInt(optionsDefault['refresh']) ?? defaultRefresh;
+      // refresh =
+      //     SmeupUtilities.getInt(optionsDefault['refresh']) ?? defaultRefresh;
     }
 
     data = jsonMap['data'];

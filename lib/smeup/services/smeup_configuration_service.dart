@@ -100,12 +100,14 @@ class SmeupConfigurationService {
 
   static setHolidays(context) {
     try {
-      SmeupLocalizationService.of(context)
-          .getHolidays(
-              DateTime.now().year, Localizations.localeOf(context).countryCode)
-          .then((holidays) {
-        SmeupConfigurationService._holidays = holidays;
-      });
+      if (SmeupLocalizationService.of(context) != null) {
+        SmeupLocalizationService.of(context)
+            .getHolidays(DateTime.now().year,
+                Localizations.localeOf(context).countryCode)
+            .then((holidays) {
+          SmeupConfigurationService._holidays = holidays;
+        });
+      }
     } catch (e) {
       print(e);
     }

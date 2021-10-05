@@ -39,6 +39,7 @@ class SmeupUtilities {
     return fieldValue;
   }
 
+  // TODO it should return null if the color string is not parsable
   static Color getColorFromRGB(String color, {double opacity = 1.0}) {
     final split = color.split(RegExp(r"(?=[A-Z])"));
     if (split == null || split.length != 3)

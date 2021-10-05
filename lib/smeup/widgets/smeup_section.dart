@@ -57,7 +57,7 @@ class _SmeupSectionState extends State<SmeupSection>
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return widget.smeupSectionModel.showLoader
-              ? SmeupWait()
+              ? SmeupWait(widget.scaffoldKey, widget.formKey)
               : Container();
         } else {
           if (snapshot.hasError) {

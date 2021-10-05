@@ -1,6 +1,9 @@
+import 'package:charts_flutter/flutter.dart';
+
 class SmeupChartSeries {
   String code;
-  int value;
+  double value;
+  Color color;
 
-  SmeupChartSeries(this.code, this.value);
+  SmeupChartSeries(this.code, this.value, this.color);
 }
