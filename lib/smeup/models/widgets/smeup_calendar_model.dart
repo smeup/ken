@@ -59,10 +59,13 @@ class SmeupCalendarModel extends SmeupModel {
         defaultEventFontSize;
     titleFontSize = SmeupUtilities.getDouble(optionsDefault['titleFontSize']) ??
         defaultTitleFontSize;
-    initialFirstWork = optionsDefault['initialFirstWork'] ??
-        DateTime(DateTime.now().year, DateTime.now().month, 1);
-    initialLastWork = optionsDefault['initialLastWork'] ??
-        DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    initialFirstWork = optionsDefault['initialFirstWork'] == null
+        ? DateTime(DateTime.now().year, DateTime.now().month, 1)
+        : DateTime.parse(optionsDefault['initialFirstWork']);
+    initialLastWork = optionsDefault['initialLastWork'] == null
+        ? DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day)
+        : DateTime.parse(optionsDefault['initialLastWork']);
 
     if (widgetLoadType != LoadType.Delay) {
       SmeupCalendarDao.getData(this);

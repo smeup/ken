@@ -110,7 +110,7 @@ class SmeupCalendar extends StatefulWidget
 
     // change data format
     var workData = formatDataFields(m);
-    styleColumnName = _getStyleColumnName(workData);
+    //styleColumnName = _getStyleColumnName(workData);
 
     // set the widget data
     if (workData != null) {
@@ -129,21 +129,21 @@ class SmeupCalendar extends StatefulWidget
     }
   }
 
-  _getStyleColumnName(dynamic data) {
-    String styleColumnName;
+  // _getStyleColumnName(dynamic data) {
+  //   String styleColumnName;
 
-    try {
-      dynamic styleColumn = (data['columns'] as List)
-          .firstWhere((element) => element['IO'] == 'G', orElse: () => null);
-      if (styleColumn != null) styleColumnName = styleColumn['code'];
-    } catch (e) {
-      SmeupLogService.writeDebugMessage(
-          'calendar style\'s column not found: $e',
-          logType: LogType.error);
-    }
+  //   try {
+  //     dynamic styleColumn = (data['columns'] as List)
+  //         .firstWhere((element) => element['IO'] == 'G', orElse: () => null);
+  //     if (styleColumn != null) styleColumnName = styleColumn['code'];
+  //   } catch (e) {
+  //     SmeupLogService.writeDebugMessage(
+  //         'calendar style\'s column not found: $e',
+  //         logType: LogType.error);
+  //   }
 
-    return styleColumnName;
-  }
+  //   return styleColumnName;
+  // }
 
   @override
   SmeupCalendarState createState() => SmeupCalendarState();
