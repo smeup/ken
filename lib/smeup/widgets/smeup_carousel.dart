@@ -4,12 +4,9 @@ import 'package:mobile_components_library/smeup/daos/smeup_carousel_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_carousel_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_carousel_indicator.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_carousel_item.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
@@ -112,15 +109,15 @@ class _SmeupCarouselState extends State<SmeupCarousel>
 
   @override
   Widget build(BuildContext context) {
-    Widget label = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
-        getInitialdataLoaded(_model), notifierFunction: () {
+    Widget carousel = runBuild(context, widget.id, widget.type,
+        widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
       });
     });
 
-    return label;
+    return carousel;
   }
 
   @override
