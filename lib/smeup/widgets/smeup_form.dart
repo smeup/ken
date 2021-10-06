@@ -34,7 +34,7 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(
-                'Error SmeupForm: ${snapshot.error}',
+                'Error SmeupForm: ${snapshot.error}. StackTrace: ${snapshot.stackTrace}',
                 logType: LogType.error);
             return SmeupNotAvailable();
           } else {

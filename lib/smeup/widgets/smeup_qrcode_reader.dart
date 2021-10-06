@@ -41,7 +41,7 @@ class _SmeupQRCodeReaderState extends State<SmeupQRCodeReader>
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(
-                'Error SmeupQRCodeReader: ${snapshot.error}',
+                'Error SmeupQRCodeReader: ${snapshot.error}. StackTrace: ${snapshot.stackTrace}',
                 logType: LogType.error);
             notifyError(
                 context, widget.smeupQRCodeReaderModel.id, snapshot.error);

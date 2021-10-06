@@ -94,7 +94,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(
-                'Error SmeupScreen: ${snapshot.error}',
+                'Error SmeupScreen: ${snapshot.error}. StackTrace: ${snapshot.stackTrace}',
                 logType: LogType.error);
             showErrorForm(context, smeupFun);
             return SmeupNotAvailable();

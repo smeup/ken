@@ -45,7 +45,7 @@ class _SmeupDrawerState extends State<SmeupDrawer> with SmeupWidgetStateMixin {
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(
-                'Error SmeupDrawer: ${snapshot.error}',
+                'Error SmeupDrawer: ${snapshot.error}. StackTrace: ${snapshot.stackTrace}',
                 logType: LogType.error);
             notifyError(context, widget.smeupDrawerModel.id, snapshot.error);
             return SmeupNotAvailable();
