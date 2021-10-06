@@ -134,13 +134,13 @@ class _SmeupCarouselState extends State<SmeupCarousel>
       return getFunErrorResponse(context, _model);
     }
 
-    return _getButtonsComponent();
+    return await _getButtonsComponent();
   }
 
   Future<SmeupWidgetBuilderResponse> _getButtonsComponent() async {
     final SmeupCaurouselModelIndicator notifier =
         Provider.of<SmeupCaurouselModelIndicator>(context, listen: false);
-    notifier.setIndex(_initialIndex);
+    //notifier.setIndex(_initialIndex);
 
     var carousel = CarouselSlider.builder(
       itemCount: _data.length,
