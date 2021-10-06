@@ -24,6 +24,9 @@ class SmeupRadioButtons extends StatefulWidget
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
 
+  Function clientOnPressed;
+
+  EdgeInsetsGeometry padding;
   Color backColor;
   double width;
   double height;
@@ -31,11 +34,6 @@ class SmeupRadioButtons extends StatefulWidget
   Alignment align;
   Color fontColor;
   double fontsize;
-  double padding;
-  double rightPadding;
-  double leftPadding;
-  double topPadding;
-  double bottomPadding;
   List<dynamic> data;
   String valueField;
   String displayedField;
@@ -66,13 +64,10 @@ class SmeupRadioButtons extends StatefulWidget
       this.fontColor,
       this.fontsize = SmeupRadioButtonsModel.defaultFontsize,
       this.padding = SmeupRadioButtonsModel.defaultPadding,
-      this.leftPadding = SmeupRadioButtonsModel.defaultPadding,
-      this.rightPadding = SmeupRadioButtonsModel.defaultPadding,
-      this.topPadding = SmeupRadioButtonsModel.defaultPadding,
-      this.bottomPadding = SmeupRadioButtonsModel.defaultPadding,
       this.valueField = SmeupRadioButtonsModel.defaultValueField,
       this.displayedField = SmeupRadioButtonsModel.defaultDisplayedField,
-      this.selectedValue})
+      this.selectedValue,
+      this.clientOnPressed(String value)})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
 
@@ -93,10 +88,6 @@ class SmeupRadioButtons extends StatefulWidget
     fontColor = m.fontColor;
     fontsize = m.fontsize;
     padding = m.padding;
-    leftPadding = m.leftPadding;
-    rightPadding = m.rightPadding;
-    topPadding = m.topPadding;
-    bottomPadding = m.bottomPadding;
     valueField = m.valueField;
     displayedField = m.displayedField;
     selectedValue = m.selectedValue;
@@ -200,7 +191,8 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
       buttonIndex += 1;
 
       final button = SmeupRadioButton(
-          id: '${SmeupUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
+          id:
+              '${SmeupUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
           type: widget.type,
           title: widget.title,
           data: radioButtonData,
@@ -212,14 +204,12 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
           fontColor: widget.fontColor,
           fontsize: widget.fontsize,
           padding: widget.padding,
-          leftPadding: widget.leftPadding,
-          rightPadding: widget.rightPadding,
-          topPadding: widget.topPadding,
-          bottomPadding: widget.bottomPadding,
           valueField: widget.valueField,
           displayedField: widget.displayedField,
-          selectedValue: SmeupVariablesService.getVariable(widget.id),
+          selectedValue: SmeupVariablesService.getVariable(widget.id,
+              formKey: widget.formKey),
           icon: null,
+          clientOnPressed: widget.clientOnPressed,
           serverOnPressed: (value) {
             setState(() {
               dynamic selData = _data.firstWhere(
@@ -228,7 +218,8 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
               if (selData != null) {
                 SmeupDynamismService.storeDynamicVariables(
                     selData, widget.formKey);
-                SmeupVariablesService.setVariable(widget.id, value);
+                SmeupVariablesService.setVariable(widget.id, value,
+                    formKey: widget.formKey);
                 if (_model != null)
                   SmeupDynamismService.run(_model.dynamisms, context, 'change',
                       widget.scaffoldKey, widget.formKey);
@@ -244,13 +235,7 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
 
     if (buttons.length > 0) {
       final container = Container(
-          padding: widget.padding > 0
-              ? EdgeInsets.all(widget.padding)
-              : EdgeInsets.only(
-                  top: widget.topPadding,
-                  bottom: widget.bottomPadding,
-                  right: widget.rightPadding,
-                  left: widget.leftPadding),
+          padding: widget.padding,
           child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.0),

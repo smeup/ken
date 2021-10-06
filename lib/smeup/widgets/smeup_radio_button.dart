@@ -8,6 +8,7 @@ class SmeupRadioButton extends StatelessWidget {
   final Function clientOnPressed;
   //final dynamic data;
 
+  final EdgeInsetsGeometry padding;
   final Color backColor;
   final double width;
   final double height;
@@ -15,12 +16,7 @@ class SmeupRadioButton extends StatelessWidget {
   final Alignment align;
   final Color fontColor;
   final double fontsize;
-  final double padding;
   final Map<String, String> data;
-  final double rightPadding;
-  final double leftPadding;
-  final double topPadding;
-  final double bottomPadding;
   final String valueField;
   final String displayedField;
   final String selectedValue;
@@ -41,10 +37,6 @@ class SmeupRadioButton extends StatelessWidget {
       this.fontColor,
       this.fontsize = SmeupRadioButtonsModel.defaultFontsize,
       this.padding = SmeupRadioButtonsModel.defaultPadding,
-      this.leftPadding = SmeupRadioButtonsModel.defaultPadding,
-      this.rightPadding = SmeupRadioButtonsModel.defaultPadding,
-      this.topPadding = SmeupRadioButtonsModel.defaultPadding,
-      this.bottomPadding = SmeupRadioButtonsModel.defaultPadding,
       this.valueField = SmeupRadioButtonsModel.defaultValueField,
       this.displayedField = SmeupRadioButtonsModel.defaultDisplayedField,
       this.selectedValue,
@@ -61,12 +53,12 @@ class SmeupRadioButton extends StatelessWidget {
           width: width == 0 ? double.infinity : width,
           child: Row(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Radio(
                 value: data['code'],
                 groupValue: _selectedValue,
                 onChanged: (value) {
+                  clientOnPressed(value);
                   serverOnPressed(value);
                 },
                 activeColor: SmeupConfigurationService.getTheme().primaryColor,
@@ -74,6 +66,7 @@ class SmeupRadioButton extends StatelessWidget {
               Align(
                   alignment: align,
                   child: Text(data['value'],
+                      textAlign: TextAlign.left,
                       style: TextStyle(
                           fontSize: fontsize,
                           fontWeight: FontWeight.bold,
