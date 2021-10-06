@@ -109,15 +109,15 @@ class _SmeupCarouselState extends State<SmeupCarousel>
 
   @override
   Widget build(BuildContext context) {
-    Widget label = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
-        getInitialdataLoaded(_model), notifierFunction: () {
+    Widget carousel = runBuild(context, widget.id, widget.type,
+        widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
       });
     });
 
-    return label;
+    return carousel;
   }
 
   @override
@@ -140,7 +140,7 @@ class _SmeupCarouselState extends State<SmeupCarousel>
   Future<SmeupWidgetBuilderResponse> _getButtonsComponent() async {
     final SmeupCaurouselModelIndicator notifier =
         Provider.of<SmeupCaurouselModelIndicator>(context, listen: false);
-    notifier.setIndex(_initialIndex);
+    //notifier.setIndex(_initialIndex);
 
     var carousel = CarouselSlider.builder(
       itemCount: _data.length,
