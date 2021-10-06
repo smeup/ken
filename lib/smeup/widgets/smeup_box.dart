@@ -65,7 +65,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(
-                'Error SmeupBox: ${snapshot.error} ${snapshot.stackTrace}',
+                'Error SmeupBox: ${snapshot.error} ${snapshot.stackTrace}. StackTrace: ${snapshot.stackTrace}',
                 logType: LogType.error);
             notifyError(context, widget.id, snapshot.error);
             return SmeupNotAvailable();
@@ -215,11 +215,6 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                             !widget._excludedColumns.contains(col['ogg'])) {
                           String rowData = data[col['code']].toString();
 
-                          if (col['ogg'] == 'D8*YYMD') {
-                            rowData = DateFormat("dd/MM/yyyy")
-                                .format(DateTime.tryParse(rowData));
-                          }
-
                           final colWidget = Expanded(
                             child: Align(
                               alignment: Alignment.center,
@@ -283,11 +278,6 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
                           String rowData = data[col['code']].toString();
-
-                          if (col['ogg'] == 'D8*YYMD') {
-                            rowData = DateFormat("dd/MM/yyyy")
-                                .format(DateTime.tryParse(rowData));
-                          }
 
                           final colWidget = Container(
                               padding: EdgeInsets.all(1),
@@ -355,11 +345,6 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                             !widget._excludedColumns.contains(col['ogg'])) {
                           String rowData = data[col['code']].toString();
 
-                          if (col['ogg'] == 'D8*YYMD') {
-                            rowData = DateFormat("dd/MM/yyyy")
-                                .format(DateTime.tryParse(rowData));
-                          }
-
                           final colWidget = Expanded(
                             child: Align(
                               alignment: Alignment.center,
@@ -419,11 +404,6 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
                           String rowData = data[col['code']].toString();
-
-                          if (col['ogg'] == 'D8*YYMD') {
-                            rowData = DateFormat("dd/MM/yyyy")
-                                .format(DateTime.tryParse(rowData));
-                          }
 
                           final textWidget = Container(
                             padding: EdgeInsets.all(1),
@@ -513,11 +493,6 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                             !widget._excludedColumns.contains(col['ogg'])) {
                           String rowData = data[col['code']].toString();
 
-                          if (col['ogg'] == 'D8*YYMD') {
-                            rowData = DateFormat("dd/MM/yyyy")
-                                .format(DateTime.tryParse(rowData));
-                          }
-
                           final colWidget = Container(
                               padding: EdgeInsets.all(1),
                               child: Row(children: [
@@ -589,11 +564,6 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
                           String rowData = data[col['code']].toString();
-
-                          if (col['ogg'] == 'D8*YYMD') {
-                            rowData = DateFormat("dd/MM/yyyy")
-                                .format(DateTime.tryParse(rowData));
-                          }
 
                           final colWidget = Expanded(
                             child: Align(
@@ -690,14 +660,15 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
               height: 50,
               width: buttonText.isEmpty ? 50 : 0,
               backColor: buttonText.isEmpty
-                  ? Theme.of(context).scaffoldBackgroundColor
-                  : Theme.of(context).primaryColor,
+                  ? SmeupConfigurationService.getTheme().scaffoldBackgroundColor
+                  : SmeupConfigurationService.getTheme().primaryColor,
               borderColor: buttonText.isEmpty
-                  ? Theme.of(context).scaffoldBackgroundColor
-                  : Theme.of(context).primaryColor,
+                  ? SmeupConfigurationService.getTheme().scaffoldBackgroundColor
+                  : SmeupConfigurationService.getTheme().primaryColor,
               fontColor: buttonText.isEmpty
-                  ? Theme.of(context).primaryColor
-                  : Theme.of(context).scaffoldBackgroundColor,
+                  ? SmeupConfigurationService.getTheme().primaryColor
+                  : SmeupConfigurationService.getTheme()
+                      .scaffoldBackgroundColor,
               iconData: int.tryParse(buttonIcon) ?? 0,
               data: buttonText,
               clientOnPressed: () {

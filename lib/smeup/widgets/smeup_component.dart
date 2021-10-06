@@ -15,6 +15,7 @@ import 'package:mobile_components_library/smeup/widgets/smeup_image.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_line.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_progress_indicator.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_qrcode_reader.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_splash.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_text_autocomplete.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_gauge.dart';
@@ -57,7 +58,7 @@ class _SmeupComponentState extends State<SmeupComponent> {
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(
-                'Error SmeupComponent ( type: ${widget.smeupModel.type} , id: ${widget.smeupModel.id} ) : ${snapshot.error}',
+                'Error SmeupComponent ( type: ${widget.smeupModel.type} , id: ${widget.smeupModel.id} ) : ${snapshot.error}. StackTrace: ${snapshot.stackTrace}',
                 logType: LogType.error);
             return SmeupNotAvailable();
           } else {
@@ -162,6 +163,11 @@ class _SmeupComponentState extends State<SmeupComponent> {
           case 'sld':
             children =
                 SmeupSlider(smeupModel, widget.scaffoldKey, widget.formKey);
+            break;
+
+          case 'spl':
+            children = SmeupSplash.withController(
+                smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
           case 'tpk':

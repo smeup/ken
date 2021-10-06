@@ -62,7 +62,7 @@ class _SmeupSectionState extends State<SmeupSection>
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(
-                'Error SmeupSection: ${snapshot.error}',
+                'Error SmeupSection: ${snapshot.error}. StackTrace: ${snapshot.stackTrace}',
                 logType: LogType.error);
             return SmeupNotAvailable();
           } else {

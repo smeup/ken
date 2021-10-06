@@ -17,6 +17,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_progress_ba
 import 'package:mobile_components_library/smeup/models/widgets/smeup_progress_indicator_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_qrcode_reader_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_splash_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_autocomplete_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_field_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_model.dart';
@@ -132,6 +133,9 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
                   break;
                 case 'sld':
                   model = SmeupInputFieldModel.fromMap(v, formKey);
+                  break;
+                case 'spl':
+                  model = SmeupSplashModel.fromMap(v, formKey);
                   break;
                 case 'tpk':
                   model = SmeupTimePickerModel.fromMap(v, formKey);
