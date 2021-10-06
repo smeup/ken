@@ -42,7 +42,7 @@ class _SmeupSliderState extends State<SmeupSlider> with SmeupWidgetStateMixin {
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(
-                'Error SmeupSlider: ${snapshot.error}',
+                'Error SmeupSlider: ${snapshot.error}. StackTrace: ${snapshot.stackTrace}',
                 logType: LogType.error);
             return SmeupNotAvailable();
           } else {

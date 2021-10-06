@@ -47,7 +47,7 @@ class SmeupWidgetStateMixin {
               } else {
                 if (snapshot.hasError) {
                   SmeupLogService.writeDebugMessage(
-                      'Error $type: ${snapshot.error}',
+                      'Error $type: ${snapshot.error}. StackTrace: ${snapshot.stackTrace}',
                       logType: LogType.error);
                   notifyError(context, id, snapshot.error);
                   return SmeupNotAvailable();
