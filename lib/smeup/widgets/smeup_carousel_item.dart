@@ -9,6 +9,7 @@ class SmeupCarouselItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       width: 250.0,
+      height: 250.0,
       child: Column(
         children: [
           Image.asset(

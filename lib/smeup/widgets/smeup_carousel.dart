@@ -134,7 +134,7 @@ class _SmeupCarouselState extends State<SmeupCarousel>
       return getFunErrorResponse(context, _model);
     }
 
-    return await _getButtonsComponent();
+    return _getButtonsComponent();
   }
 
   Future<SmeupWidgetBuilderResponse> _getButtonsComponent() async {
