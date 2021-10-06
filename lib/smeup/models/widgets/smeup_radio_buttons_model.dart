@@ -13,7 +13,7 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
   static const MainAxisAlignment defaultPosition = MainAxisAlignment.center;
   static const Alignment defaultAlign = Alignment.center;
   static const double defaultFontsize = 16.0;
-  static const double defaultPadding = 10.0;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const String defaultValueField = 'k';
   static const String defaultDisplayedField = 'value';
 
@@ -24,11 +24,7 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
   Alignment align;
   Color fontColor;
   double fontsize;
-  double padding;
-  double rightPadding;
-  double leftPadding;
-  double topPadding;
-  double bottomPadding;
+  EdgeInsetsGeometry padding;
   String valueField;
   String displayedField;
   String selectedValue;
@@ -46,10 +42,6 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
       this.fontColor,
       this.fontsize = defaultFontsize,
       this.padding = defaultPadding,
-      this.leftPadding = defaultPadding,
-      this.rightPadding = defaultPadding,
-      this.topPadding = defaultPadding,
-      this.bottomPadding = defaultPadding,
       this.valueField = defaultValueField,
       this.displayedField = defaultDisplayedField,
       this.selectedValue})
@@ -76,10 +68,6 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
             fontColor: other.fontColor,
             fontsize: other.fontsize,
             padding: other.padding,
-            leftPadding: other.leftPadding,
-            rightPadding: other.rightPadding,
-            topPadding: other.topPadding,
-            bottomPadding: other.bottomPadding,
             valueField: other.valueField,
             displayedField: other.displayedField);
 
@@ -88,15 +76,7 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
       : super.fromMap(jsonMap, formKey) {
     title = jsonMap['title'] ?? '';
     padding =
-        SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
-    rightPadding = SmeupUtilities.getDouble(optionsDefault['rightPadding']) ??
-        defaultPadding;
-    leftPadding = SmeupUtilities.getDouble(optionsDefault['leftPadding']) ??
-        defaultPadding;
-    topPadding = SmeupUtilities.getDouble(optionsDefault['topPadding']) ??
-        defaultPadding;
-    bottomPadding = SmeupUtilities.getDouble(optionsDefault['bottomPadding']) ??
-        defaultPadding;
+        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
 
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
