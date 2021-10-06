@@ -16,6 +16,7 @@ import 'package:mobile_components_library/smeup/widgets/smeup_line.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_progress_indicator.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_qrcode_reader.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_splash.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_switch.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_text_autocomplete.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_gauge.dart';
@@ -167,6 +168,11 @@ class _SmeupComponentState extends State<SmeupComponent> {
 
           case 'spl':
             children = SmeupSplash.withController(
+                smeupModel, widget.scaffoldKey, widget.formKey);
+            break;
+
+          case 'swt':
+            children = SmeupSwitch.withController(
                 smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
