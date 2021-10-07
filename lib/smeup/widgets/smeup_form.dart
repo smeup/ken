@@ -148,7 +148,7 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
     Widget container;
     if (smeupFormModel.layout == 'column') {
       container = Container(
-        padding: getPadding(smeupFormModel),
+        padding: smeupFormModel.padding,
         child: SingleChildScrollView(
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -157,7 +157,7 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       );
     } else {
       container = Container(
-        padding: getPadding(smeupFormModel),
+        padding: smeupFormModel.padding,
         child: SingleChildScrollView(
           child: Row(children: sections),
         ),
@@ -167,15 +167,5 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
     form = Form(key: widget.smeupFormModel.formKey, child: container);
 
     return SmeupWidgetBuilderResponse(smeupFormModel, form);
-  }
-
-  EdgeInsets getPadding(SmeupFormModel smeupFormModel) {
-    return smeupFormModel.padding > 0
-        ? EdgeInsets.all(smeupFormModel.padding)
-        : EdgeInsets.only(
-            top: smeupFormModel.topPadding,
-            bottom: smeupFormModel.bottomPadding,
-            right: smeupFormModel.rightPadding,
-            left: smeupFormModel.leftPadding);
   }
 }

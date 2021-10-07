@@ -21,7 +21,7 @@ class SmeupDatePickerButton extends StatefulWidget {
   String label;
   double width;
   double height;
-  double padding;
+  EdgeInsetsGeometry padding;
   bool showborder;
   double elevation;
 
@@ -63,7 +63,7 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
   Widget build(BuildContext context) {
     final button = Container(
       color: SmeupConfigurationService.getTheme().canvasColor,
-      padding: EdgeInsets.all(widget.padding),
+      padding: widget.padding,
       child: SizedBox(
         height: widget.height,
         width: widget.width == 0 ? double.infinity : widget.width,

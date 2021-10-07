@@ -17,7 +17,7 @@ class SmeupTimePickerButton extends StatefulWidget {
   final String label;
   final double width;
   final double height;
-  final double padding;
+  final EdgeInsetsGeometry padding;
   final bool showborder;
   final List<String> minutesList;
 
@@ -61,7 +61,7 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
     final button = Container(
         color: SmeupConfigurationService.getTheme()
             .canvasColor, // Color.fromRGBO(250, 250, 250, 1),
-        padding: EdgeInsets.all(widget.padding),
+        padding: widget.padding,
         child: SizedBox(
             height: widget.height,
             width: widget.width == 0 ? double.infinity : widget.width,

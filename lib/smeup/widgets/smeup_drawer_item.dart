@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 
@@ -10,9 +8,9 @@ class SmeupDrawerItem extends StatelessWidget {
   final Function action;
   final double fontSize;
   final Alignment align;
-  final bool executePop;
+
   SmeupDrawerItem(this.text, this.route, this.iconCode, this.action,
-      this.fontSize, this.align, this.executePop);
+      this.fontSize, this.align);
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +18,6 @@ class SmeupDrawerItem extends StatelessWidget {
         alignment: align,
         child: Text(text, style: TextStyle(fontSize: fontSize)));
     Function function = () {
-      if (executePop) {
-        Navigator.of(context).pop();
-        sleep(Duration(milliseconds: 50));
-      }
       if (action != null) {
         action();
       } else {

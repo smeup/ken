@@ -11,7 +11,7 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultLabel = '';
   static const double defaultWidth = 100;
   static const double defaultHeight = 100;
-  static const double defaultPadding = 10.0;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const bool defaultShowBorder = false;
   static const double defaultElevation = 0.0;
   static const Color defaultBackColor = Colors.amber;
@@ -28,7 +28,7 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
   String label;
   double width;
   double height;
-  double padding;
+  EdgeInsetsGeometry padding;
   bool showborder;
   double elevation;
 
@@ -76,7 +76,7 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
     }
     label = optionsDefault['label'] ?? defaultLabel;
     padding =
-        SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
+        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;

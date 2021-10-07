@@ -16,14 +16,10 @@ class SmeupFormModel extends SmeupModel
 
   final GlobalKey<FormState> formKey;
 
-  static const double defaultPadding = 0.0;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const String defaultLayout = '1';
 
-  double padding;
-  double rightPadding;
-  double leftPadding;
-  double topPadding;
-  double bottomPadding;
+  EdgeInsetsGeometry padding;
   String layout;
   BuildContext context;
   Color backColor;
@@ -39,15 +35,8 @@ class SmeupFormModel extends SmeupModel
     Map<String, dynamic> jsonMap = response;
 
     padding =
-        SmeupUtilities.getDouble(optionsType['padding']) ?? defaultPadding;
-    rightPadding =
-        SmeupUtilities.getDouble(optionsType['rightPadding']) ?? defaultPadding;
-    leftPadding =
-        SmeupUtilities.getDouble(optionsType['leftPadding']) ?? defaultPadding;
-    topPadding =
-        SmeupUtilities.getDouble(optionsType['topPadding']) ?? defaultPadding;
-    bottomPadding = SmeupUtilities.getDouble(optionsType['bottomPadding']) ??
-        defaultPadding;
+        SmeupUtilities.getPadding(optionsType['padding']) ?? defaultPadding;
+
     if (optionsType['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsType['backColor']);
     } else {
