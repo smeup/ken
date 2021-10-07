@@ -11,7 +11,7 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultLabel = '';
   static const double defaultWidth = 100;
   static const double defaultHeight = 100;
-  static const double defaultPadding = 0.0;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const bool defaultShowBorder = false;
   static const Color defaultBackColor = Colors.amber;
   static const Color defaultFontColor = Colors.black87;
@@ -26,7 +26,7 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   double height;
   String valueField;
   String displayedField;
-  double padding;
+  EdgeInsetsGeometry padding;
   bool showborder;
   List<String> minutesList;
 
@@ -72,7 +72,7 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
     }
     label = optionsDefault['label'] ?? defaultLabel;
     padding =
-        SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
+        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;

@@ -35,7 +35,7 @@ class SmeupDatePicker extends StatefulWidget
   String label;
   double width;
   double height;
-  double padding;
+  EdgeInsetsGeometry padding;
   bool showborder;
   double elevation;
 
