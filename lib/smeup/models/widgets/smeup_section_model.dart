@@ -152,6 +152,8 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
             case 'SCH':
               model = SmeupFormModel.fromMap(v, formKey);
               break;
+            case 'DRW':
+              break;
             default:
               SmeupLogService.writeDebugMessage(
                   'component not defined: ${v['type']}',

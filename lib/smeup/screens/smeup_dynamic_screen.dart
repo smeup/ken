@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_drawer_model.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/services/smeup_widget_notification_service.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_drawer.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
@@ -156,6 +158,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
                 child: Scaffold(
                   backgroundColor: smeupFormModel.backColor,
                   key: widget._scaffoldKey,
+                  drawer: _getDrawer(smeupscreenModel),
                   appBar: SmeupNavigationAppBar(
                     isDialog,
                     data: smeupscreenModel.data,
@@ -172,6 +175,29 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     );
 
     return SmeupWidgetBuilderResponse(smeupscreenModel, screen);
+  }
+
+  SmeupDrawer _getDrawer(SmeupScreenModel smeupScreenModel) {
+    SmeupDrawer smeupDrawer;
+    if (smeupScreenModel.data != null &&
+        smeupScreenModel.data['sections'] != null &&
+        (smeupScreenModel.data['sections'] as List).length > 0) {
+      var smeupDrawerModel;
+      var smeupDrawerJson;
+      (smeupScreenModel.data['sections'] as List).forEach((section) {
+        smeupDrawerJson = (section['components'] as List).firstWhere(
+            (element) => element['type'] == 'DRW',
+            orElse: () => null);
+      });
+
+      if (smeupDrawerJson != null) {
+        smeupDrawerModel =
+            SmeupDrawerModel.fromMap(smeupDrawerJson, widget._formKey);
+        smeupDrawer = SmeupDrawer.withController(
+            smeupDrawerModel, widget._scaffoldKey, widget._formKey);
+      }
+    }
+    return smeupDrawer;
   }
 
   Future<bool> _onWillPop() async {

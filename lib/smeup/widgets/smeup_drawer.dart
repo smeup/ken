@@ -1,8 +1,10 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_drawer_dao.dart';
+import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_drawer_data_element.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/screens/smeup_dynamic_screen.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_drawer_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
@@ -32,7 +34,7 @@ class SmeupDrawer extends StatefulWidget
 
   SmeupDrawer(this.scaffoldKey, this.formKey,
       {this.id = '',
-      this.type = 'DWR',
+      this.type = 'DRW',
       this.title = '',
       this.imageUrl = '',
       this.data,
@@ -57,6 +59,7 @@ class SmeupDrawer extends StatefulWidget
     id = m.id;
     type = m.type;
     title = m.title;
+    imageUrl = m.imageUrl;
     imageWidth = m.imageWidth;
     imageHeight = m.imageHeight;
     navbarBackcolor = m.navbarBackcolor;
@@ -77,13 +80,22 @@ class SmeupDrawer extends StatefulWidget
       for (var i = 0; i < (workData['rows'] as List).length; i++) {
         final element = workData['rows'][i];
         newList.add(SmeupDrawerDataElement(element['text'], element['route'],
-            iconCode: element['iconCode'],
-            fontSize: element['fontSize'],
+            iconCode: SmeupUtilities.getInt(element['iconCode']) ?? 0,
+            fontSize: SmeupUtilities.getDouble(element['fontSize']) ?? 0.0,
             align: SmeupUtilities.getAlignmentGeometry(element['align']),
-            action: element['action'],
-            group: element['group'],
-            groupFontSize: element['groupFontSize'],
-            groupIcon: element['groupIcon']));
+            action: element['route'] == null
+                ? null
+                : (context) {
+                    final smeupFun = SmeupFun(element['route'], formKey);
+
+                    Navigator.of(context).pushNamed(
+                        SmeupDynamicScreen.routeName,
+                        arguments: {'isDialog': false, 'smeupFun': smeupFun});
+                  },
+            group: element['group'] ?? '',
+            groupFontSize:
+                SmeupUtilities.getDouble(element['groupFontSize']) ?? 0.0,
+            groupIcon: SmeupUtilities.getInt(element['groupIcon']) ?? 0));
       }
       return newList;
     } else {

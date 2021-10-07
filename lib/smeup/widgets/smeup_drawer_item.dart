@@ -19,7 +19,7 @@ class SmeupDrawerItem extends StatelessWidget {
         child: Text(text, style: TextStyle(fontSize: fontSize)));
     Function function = () {
       if (action != null) {
-        action();
+        action(context);
       } else {
         Navigator.of(context).pushNamed(route);
       }
