@@ -83,7 +83,7 @@ class _SmeupTreeState extends State<SmeupTree> with SmeupWidgetStateMixin {
       SmeupTreeModel smeupTreeModel) async {
     Widget children;
 
-    await smeupTreeModel.setData();
+    //await smeupTreeModel.setData();
 
     if (!hasData(smeupTreeModel)) {
       ScaffoldMessenger.of(context).showSnackBar(
