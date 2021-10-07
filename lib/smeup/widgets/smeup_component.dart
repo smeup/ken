@@ -152,7 +152,7 @@ class _SmeupComponentState extends State<SmeupComponent> {
             break;
 
           case 'qrc':
-            children = SmeupQRCodeReader(
+            children = SmeupQRCodeReader.withController(
                 smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
