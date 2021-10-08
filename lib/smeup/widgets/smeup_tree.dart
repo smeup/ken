@@ -206,6 +206,7 @@ class _SmeupTreeState extends State<SmeupTree>
               widget.onClientClick(selectedNode);
           },
           theme: TreeViewTheme().copyWith(
+              iconTheme: IconThemeData().copyWith(size: widget.parentFontSize),
               labelStyle: TextStyle(
                   fontSize: widget.labelFontSize,
                   color: widget.labelFontColor,
