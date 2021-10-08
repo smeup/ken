@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_calendar_dao.dart';
@@ -155,7 +154,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
   SmeupCalendarModel _model;
   List<Map<String, dynamic>> _data;
 
-  Map<DateTime, List> _events;
+  Map<DateTime, List<SmeupCalentarEventModel>> _events;
   AnimationController _animationController;
   List<SmeupCalentarEventModel> _smeupCalendarEvents;
   bool _isLoading = false;
@@ -189,7 +188,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
     _firstWork = widget.initialFirstWork;
     _lastWork = widget.initialLastWork;
     //_selectedDay = widget.initialLastWork;
-    _events = Map<DateTime, List>();
+    _events = Map<DateTime, List<SmeupCalentarEventModel>>();
     _focusDay = _firstWork;
     _calendarFormat = CalendarFormat.month;
 
@@ -265,7 +264,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
     return Container(
       height: widget.height == 0 ? deviceHeight : widget.height,
       width: widget.width == 0 ? deviceWidth : widget.width,
-      child: TableCalendar(
+      child: TableCalendar<SmeupCalentarEventModel>(
         firstDay: _firstWork,
         focusedDay: _focusDay,
         lastDay: _lastWork,
@@ -346,7 +345,6 @@ class SmeupCalendarState extends State<SmeupCalendar>
           },
           markerBuilder: (context, date, events) {
             final children = <Widget>[];
-
             if (events.isNotEmpty) {
               children.add(
                 Positioned(
@@ -479,29 +477,35 @@ class SmeupCalendarState extends State<SmeupCalendar>
     }
   }
 
-  Widget _buildEventsMarker(DateTime date, List events) {
+  Widget _buildEventsMarker(
+      DateTime date, List<SmeupCalentarEventModel> events) {
     String eventText = '${events[0]}';
 
-    final SmeupCalentarEventModel _booking = _smeupCalendarEvents
-        .firstWhere((element) => element.day == date, orElse: null);
+    // final SmeupCalentarEventModel _booking = _smeupCalendarEvents
+    //     .firstWhere((element) => element.day == date, orElse: null);
 
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      decoration: BoxDecoration(
-          shape: BoxShape.rectangle, color: _booking.backgroundColor),
-      width: Platform.isAndroid ? 56.0 : 50.0,
-      height: 16.0,
-      child: Align(
-        alignment: Alignment.center,
-        child: Text(
-          eventText,
-          style: const TextStyle().copyWith(
-              color: _booking.foreColor,
-              fontSize: Platform.isAndroid ? 12.0 : 10.0,
-              fontWeight: _booking.fontWeight),
-        ),
-      ),
-    );
+    return Column(
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisSize: MainAxisSize.min,
+        children: events
+            .map((booking) => Container(
+                  decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      color: booking.backgroundColor),
+                  width: Platform.isAndroid ? 56.0 : 50.0,
+                  height: 16.0,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      booking.description,
+                      style: const TextStyle().copyWith(
+                          color: booking.foreColor,
+                          fontSize: Platform.isAndroid ? 12.0 : 10.0,
+                          fontWeight: booking.fontWeight),
+                    ),
+                  ),
+                ))
+            .toList());
   }
 
   Widget _buildHolidaysMarker() {
@@ -567,9 +571,12 @@ class SmeupCalendarState extends State<SmeupCalendar>
       _smeupCalendarEvents = _extractSmeupCalendarEvents();
 
       for (final booking in _smeupCalendarEvents) {
-        final eventsList = List.empty(growable: true);
-        eventsList.add(booking.description);
-        _events[booking.day] = eventsList;
+        List<SmeupCalentarEventModel> eventsList = _events[booking.day];
+        if (eventsList == null) {
+          _events[booking.day] =
+              eventsList = List<SmeupCalentarEventModel>.empty(growable: true);
+        }
+        eventsList.add(booking);
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
