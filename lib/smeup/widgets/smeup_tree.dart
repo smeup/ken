@@ -25,6 +25,18 @@ class SmeupTree extends StatefulWidget
   Function onClientClick;
   double width;
   double height;
+  double labelFontSize;
+  Color labelBackColor;
+  Color labelFontColor;
+  bool labelFontbold;
+  double labelVerticalSpacing;
+  double labelHeight;
+  double parentFontSize;
+  Color parentBackColor;
+  Color parentFontColor;
+  bool parentFontbold;
+  double parentVerticalSpacing;
+  double parentHeight;
 
   SmeupTree.withController(this.model, this.scaffoldKey, this.formKey)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
@@ -41,8 +53,23 @@ class SmeupTree extends StatefulWidget
     this.onClientClick,
     this.width = SmeupTreeModel.defaultWidth,
     this.height = SmeupTreeModel.defaultHeight,
+    this.labelFontSize = SmeupTreeModel.defaultLabelFontSize,
+    this.labelBackColor = SmeupTreeModel.defaultLabelBackColor,
+    this.labelFontColor = SmeupTreeModel.defaultLabelFontColor,
+    this.labelFontbold = SmeupTreeModel.defaultLabelFontbold,
+    this.labelVerticalSpacing = SmeupTreeModel.defaultLabelVerticalSpacing,
+    this.labelHeight = SmeupTreeModel.defaultLabelHeight,
+    this.parentFontSize = SmeupTreeModel.defaultParentFontSize,
+    this.parentBackColor = SmeupTreeModel.defaultParentBackColor,
+    this.parentFontColor = SmeupTreeModel.defaultParentFontColor,
+    this.parentFontbold = SmeupTreeModel.defaultParentFontbold,
+    this.parentVerticalSpacing = SmeupTreeModel.defaultParentVerticalSpacing,
+    this.parentHeight = SmeupTreeModel.defaultParentHeight,
   }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
+    if (data == null) {
+      data = List<Node>.empty(growable: true);
+    }
   }
 
   @override
@@ -53,6 +80,16 @@ class SmeupTree extends StatefulWidget
     title = m.title;
     width = m.width;
     height = m.height;
+    labelFontSize = m.labelFontSize;
+    labelBackColor = m.labelBackColor;
+    labelFontColor = m.labelFontColor;
+    labelFontbold = m.labelFontbold;
+    labelVerticalSpacing = m.labelVerticalSpacing;
+    parentFontSize = m.parentFontSize;
+    parentBackColor = m.parentBackColor;
+    parentFontColor = m.parentFontColor;
+    parentFontbold = m.parentFontbold;
+    parentVerticalSpacing = m.parentVerticalSpacing;
 
     data = treatData(m);
   }
@@ -139,14 +176,19 @@ class _SmeupTreeState extends State<SmeupTree>
     return tree;
   }
 
+  @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     Widget children;
+
+    MediaQueryData deviceInfo = MediaQuery.of(context);
+    double deviceHeight = deviceInfo.size.width;
+    double deviceWidth = deviceInfo.size.height;
 
     TreeViewController _treeViewController =
         TreeViewController(children: _data);
     children = Container(
-        width: widget.width,
-        height: widget.height,
+        width: widget.width == 0 ? deviceWidth : widget.width,
+        height: widget.height == 0 ? deviceHeight : widget.height,
         //color: Colors.red,
         child: TreeView(
           controller: _treeViewController,
@@ -154,25 +196,33 @@ class _SmeupTreeState extends State<SmeupTree>
           supportParentDoubleTap: false,
           //onExpansionChanged: _expandNodeHandler,
           onNodeTap: (key) {
-            // var node = (smeupTreeModel.data['rows'] as List<Node>)
-            //     .firstWhere((element) => element.key == key);
             Node selectedNode = _treeViewController.getNode(key);
             SmeupDynamismService.storeDynamicVariables(
                 selectedNode.data, widget.formKey);
             if (_model != null)
               SmeupDynamismService.run(_model.dynamisms, context, 'click',
                   widget.scaffoldKey, widget.formKey);
-            if (widget.onClientClick != null) widget.onClientClick();
-
-            // setState(() {
-            //   _treeViewController =
-            //       _treeViewController.copyWith(selectedKey: key);
-            // });
+            if (widget.onClientClick != null)
+              widget.onClientClick(selectedNode);
           },
           theme: TreeViewTheme().copyWith(
-              // labelStyle:
-              //     TextStyle(color: Colors.yellow, backgroundColor: Colors.red),
-              verticalSpacing: 2),
+              labelStyle: TextStyle(
+                  fontSize: widget.labelFontSize,
+                  color: widget.labelFontColor,
+                  backgroundColor: widget.labelBackColor,
+                  fontWeight: widget.labelFontbold
+                      ? FontWeight.bold
+                      : FontWeight.normal),
+              parentLabelStyle: TextStyle(
+                  fontSize: widget.parentFontSize,
+                  color: widget.parentFontColor,
+                  backgroundColor: widget.parentBackColor,
+                  fontWeight: widget.parentFontbold
+                      ? FontWeight.bold
+                      : FontWeight.normal),
+              labelOverflow: TextOverflow.fade,
+              parentLabelOverflow: TextOverflow.fade,
+              verticalSpacing: widget.parentVerticalSpacing),
         ));
 
     //return SmeupWidgetBuilderResponse(smeupTreeModel, Container());
