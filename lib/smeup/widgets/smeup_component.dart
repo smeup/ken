@@ -125,6 +125,10 @@ class _SmeupComponentState extends State<SmeupComponent> {
         children = SmeupImage.withController(
             smeupModel, widget.scaffoldKey, widget.formKey);
         break;
+      case 'IMG':
+        children = SmeupListBox.withController(
+            smeupModel, widget.scaffoldKey, widget.formKey);
+        break;
       case 'FLD':
         switch (smeupModel.options['FLD']['default']['type']) {
           case 'acp':

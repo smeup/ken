@@ -99,6 +99,9 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
       case '5':
         box = _getLayout5(widget.data, context);
         break;
+      case 'imageList':
+        box = _getLayoutImageList(widget.data, context);
+        break;
       default:
         SmeupLogService.writeDebugMessage(
             'No layout received. Used default layout',
@@ -523,6 +526,73 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                       });
 
                       return [Expanded(child: Column(children: listOfRows))];
+                    }(),
+                  ),
+                ))),
+      );
+    }
+
+    SmeupLogService.writeDebugMessage('Error SmeupBox widget not created',
+        logType: LogType.error);
+
+    return SmeupNotAvailable();
+  }
+
+  Widget _getLayoutImageList(dynamic data, BuildContext context) {
+    final cols = _getColumns(data);
+
+    if (data.length > 0) {
+      return GestureDetector(
+        onTap: () {
+          _manageTap(data);
+        },
+        child: Card(
+            color: widget.cardColor ?? null,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                  color: SmeupConfigurationService.getTheme().primaryColor,
+                  width: 2),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: Container(
+                  height: widget.height,
+                  child: Column(
+                    children: () {
+                      var listOfRows = List<Widget>.empty(growable: true);
+
+                      cols.forEach((col) {
+                        if (col['IO'] != 'H' &&
+                            !widget._excludedColumns.contains(col['ogg'])) {
+                          String rowData = data[col['code']].toString();
+
+                          final colWidget = Expanded(
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(rowData,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: widget.fontColor ??
+                                          SmeupConfigurationService.getTheme()
+                                              .primaryColor,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                          );
+
+                          listOfRows.add(colWidget);
+                        }
+                      });
+
+                      Widget widgetImg = Image.network(
+                        data['code'],
+                        fit: BoxFit.contain,
+                      );
+
+                      return [
+                        if (widgetImg != null) widgetImg,
+                        Expanded(child: Column(children: listOfRows))
+                      ];
                     }(),
                   ),
                 ))),

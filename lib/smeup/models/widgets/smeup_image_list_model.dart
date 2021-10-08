@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_list_box_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_list_box_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
-enum SmeupListType { simple, oriented, wheel }
-
-class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
+class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 0;
   static const double defaultHeight = 100;
   static const double defaultListHeight = 100;
@@ -29,7 +28,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   int landscapeColumns;
   double fontsize;
 
-  SmeupListBoxModel(
+  SmeupImageListModel(
       {id,
       type,
       GlobalKey<FormState> formKey,
@@ -48,7 +47,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupListBoxModel.fromMap(
+  SmeupImageListModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
     layout = defaultLayout;
@@ -73,7 +72,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     listHeight = SmeupUtilities.getDouble(optionsDefault['listHeight']) ??
         defaultListHeight;
-    listType = decodeListType(optionsDefault['listType']);
+    listType = SmeupListBoxModel.decodeListType(optionsDefault['listType']);
     orientation = jsonMap['orientation'] == 'horizontal'
         ? Axis.horizontal
         : Axis.vertical;
@@ -83,18 +82,5 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     }
 
     SmeupDataService.incrementDataFetch(id);
-  }
-
-  static SmeupListType decodeListType(String type) {
-    switch (type) {
-      case 'simple':
-        return SmeupListType.simple;
-      case 'oriented':
-        return SmeupListType.oriented;
-      case 'wheel':
-        return SmeupListType.wheel;
-      default:
-        return defaultListType;
-    }
   }
 }

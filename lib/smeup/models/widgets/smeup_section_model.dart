@@ -6,6 +6,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_model
 import 'package:mobile_components_library/smeup/models/widgets/smeup_dashboard_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_form_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_gauge_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_image_list_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_image_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_input_field_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_label_model.dart';
@@ -108,6 +109,9 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
               break;
             case 'IMG':
               model = SmeupImageModel.fromMap(v, formKey);
+              break;
+            case 'IML':
+              model = SmeupImageListModel.fromMap(v, formKey);
               break;
             case 'FLD':
               switch (v['options']['FLD']['default']['type']) {
