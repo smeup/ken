@@ -1,27 +1,129 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/tree_view.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_tree_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 
-class SmeupTree extends StatefulWidget {
-  final SmeupTreeModel smeupTreeModel;
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
+// ignore: must_be_immutable
+class SmeupTree extends StatefulWidget
+    with SmeupWidgetMixin
+    implements SmeupWidgetInterface {
+  SmeupTreeModel model;
+  GlobalKey<ScaffoldState> scaffoldKey;
+  GlobalKey<FormState> formKey;
 
-  SmeupTree(this.smeupTreeModel, this.scaffoldKey, this.formKey);
+  List<Node> data;
+  String title;
+  String id;
+  String type;
+  Function onClientClick;
+  double width;
+  double height;
+  double labelFontSize;
+  Color labelBackColor;
+  Color labelFontColor;
+  bool labelFontbold;
+  double labelVerticalSpacing;
+  double labelHeight;
+  double parentFontSize;
+  Color parentBackColor;
+  Color parentFontColor;
+  bool parentFontbold;
+  double parentVerticalSpacing;
+  double parentHeight;
+
+  SmeupTree.withController(this.model, this.scaffoldKey, this.formKey)
+      : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
+    runControllerActivities(model);
+  }
+
+  SmeupTree(
+    this.scaffoldKey,
+    this.formKey, {
+    this.id = '',
+    this.type = 'TRE',
+    this.title = '',
+    this.data,
+    this.onClientClick,
+    this.width = SmeupTreeModel.defaultWidth,
+    this.height = SmeupTreeModel.defaultHeight,
+    this.labelFontSize = SmeupTreeModel.defaultLabelFontSize,
+    this.labelBackColor = SmeupTreeModel.defaultLabelBackColor,
+    this.labelFontColor = SmeupTreeModel.defaultLabelFontColor,
+    this.labelFontbold = SmeupTreeModel.defaultLabelFontbold,
+    this.labelVerticalSpacing = SmeupTreeModel.defaultLabelVerticalSpacing,
+    this.labelHeight = SmeupTreeModel.defaultLabelHeight,
+    this.parentFontSize = SmeupTreeModel.defaultParentFontSize,
+    this.parentBackColor = SmeupTreeModel.defaultParentBackColor,
+    this.parentFontColor = SmeupTreeModel.defaultParentFontColor,
+    this.parentFontbold = SmeupTreeModel.defaultParentFontbold,
+    this.parentVerticalSpacing = SmeupTreeModel.defaultParentVerticalSpacing,
+    this.parentHeight = SmeupTreeModel.defaultParentHeight,
+  }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
+    id = SmeupUtilities.getWidgetId(type, id);
+    if (data == null) {
+      data = List<Node>.empty(growable: true);
+    }
+  }
+
+  @override
+  runControllerActivities(SmeupModel model) {
+    SmeupTreeModel m = model;
+    id = m.id;
+    type = m.type;
+    title = m.title;
+    width = m.width;
+    height = m.height;
+    labelFontSize = m.labelFontSize;
+    labelBackColor = m.labelBackColor;
+    labelFontColor = m.labelFontColor;
+    labelFontbold = m.labelFontbold;
+    labelVerticalSpacing = m.labelVerticalSpacing;
+    parentFontSize = m.parentFontSize;
+    parentBackColor = m.parentBackColor;
+    parentFontColor = m.parentFontColor;
+    parentFontbold = m.parentFontbold;
+    parentVerticalSpacing = m.parentVerticalSpacing;
+
+    data = treatData(m);
+  }
+
+  @override
+  dynamic treatData(SmeupModel model) {
+    SmeupTreeModel m = model;
+
+    // change data format
+    var workData = formatDataFields(m);
+
+    // set the widget data
+    // if (workData != null) {
+    //   var newList = List<String>.empty(growable: true);
+    //   for (var i = 0; i < (workData['rows'] as List).length; i++) {
+    //     final element = workData['rows'][i];
+    //     newList.add(element[m.valueColName].toString());
+    //   }
+    //   return newList;
+    // } else {
+    //   return model.data;
+    // }
+  }
 
   @override
   _SmeupTreeState createState() => _SmeupTreeState();
 }
 
-class _SmeupTreeState extends State<SmeupTree> with SmeupWidgetStateMixin {
+class _SmeupTreeState extends State<SmeupTree>
+    with SmeupWidgetStateMixin
+    implements SmeupWidgetStateInterface {
+  SmeupTreeModel _model;
+  List<Node> _data;
+
   // TreeViewTheme _treeViewTheme = TreeViewTheme(
   //   expanderTheme: ExpanderThemeData(
   //     type: ExpanderType.caret,
@@ -48,60 +150,45 @@ class _SmeupTreeState extends State<SmeupTree> with SmeupWidgetStateMixin {
   // );
 
   @override
+  void initState() {
+    _model = widget.model;
+    _data = widget.data;
+    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    super.initState();
+  }
+
+  @override
   void dispose() {
+    runDispose(widget.scaffoldKey, widget.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final tree = FutureBuilder<SmeupWidgetBuilderResponse>(
-      future: _getTreeComponent(widget.smeupTreeModel),
-      builder: (BuildContext context,
-          AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return widget.smeupTreeModel.showLoader
-              ? SmeupWait(widget.scaffoldKey, widget.formKey)
-              : Container();
-        } else {
-          if (snapshot.hasError) {
-            SmeupLogService.writeDebugMessage(
-                'Error SmeupTree: ${snapshot.error}. StackTrace: ${snapshot.stackTrace}',
-                logType: LogType.error);
-            notifyError(context, widget.smeupTreeModel.id, snapshot.error);
-            return SmeupNotAvailable();
-          } else {
-            return snapshot.data.children;
-          }
-        }
-      },
-    );
+    Widget tree = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
+        getInitialdataLoaded(_model), notifierFunction: () {
+      setState(() {
+        widgetLoadType = LoadType.Immediate;
+        setDataLoad(widget.id, false);
+      });
+    });
 
     return tree;
   }
 
-  Future<SmeupWidgetBuilderResponse> _getTreeComponent(
-      SmeupTreeModel smeupTreeModel) async {
+  @override
+  Future<SmeupWidgetBuilderResponse> getChildren() async {
     Widget children;
 
-    await smeupTreeModel.setData();
+    MediaQueryData deviceInfo = MediaQuery.of(context);
+    double deviceHeight = deviceInfo.size.width;
+    double deviceWidth = deviceInfo.size.height;
 
-    if (!hasData(smeupTreeModel)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-              '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupTreeModel.smeupFun.fun['fun']['function']})'),
-          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
-        ),
-      );
-
-      return SmeupWidgetBuilderResponse(smeupTreeModel, SmeupNotAvailable());
-    }
-
-    TreeViewController _treeViewController = TreeViewController(
-        children: (smeupTreeModel.data['rows'] as List<Node>));
+    TreeViewController _treeViewController =
+        TreeViewController(children: _data);
     children = Container(
-        width: 100,
-        height: 200,
+        width: widget.width == 0 ? deviceWidth : widget.width,
+        height: widget.height == 0 ? deviceHeight : widget.height,
         //color: Colors.red,
         child: TreeView(
           controller: _treeViewController,
@@ -109,27 +196,38 @@ class _SmeupTreeState extends State<SmeupTree> with SmeupWidgetStateMixin {
           supportParentDoubleTap: false,
           //onExpansionChanged: _expandNodeHandler,
           onNodeTap: (key) {
-            // var node = (smeupTreeModel.data['rows'] as List<Node>)
-            //     .firstWhere((element) => element.key == key);
             Node selectedNode = _treeViewController.getNode(key);
             SmeupDynamismService.storeDynamicVariables(
                 selectedNode.data, widget.formKey);
-            SmeupDynamismService.run(smeupTreeModel.dynamisms, context, 'click',
-                widget.scaffoldKey, widget.formKey);
-
-            // setState(() {
-            //   _treeViewController =
-            //       _treeViewController.copyWith(selectedKey: key);
-            // });
+            if (_model != null)
+              SmeupDynamismService.run(_model.dynamisms, context, 'click',
+                  widget.scaffoldKey, widget.formKey);
+            if (widget.onClientClick != null)
+              widget.onClientClick(selectedNode);
           },
           theme: TreeViewTheme().copyWith(
-              // labelStyle:
-              //     TextStyle(color: Colors.yellow, backgroundColor: Colors.red),
-              verticalSpacing: 2),
+              iconTheme: IconThemeData().copyWith(size: widget.parentFontSize),
+              labelStyle: TextStyle(
+                  fontSize: widget.labelFontSize,
+                  color: widget.labelFontColor,
+                  backgroundColor: widget.labelBackColor,
+                  fontWeight: widget.labelFontbold
+                      ? FontWeight.bold
+                      : FontWeight.normal),
+              parentLabelStyle: TextStyle(
+                  fontSize: widget.parentFontSize,
+                  color: widget.parentFontColor,
+                  backgroundColor: widget.parentBackColor,
+                  fontWeight: widget.parentFontbold
+                      ? FontWeight.bold
+                      : FontWeight.normal),
+              labelOverflow: TextOverflow.fade,
+              parentLabelOverflow: TextOverflow.fade,
+              verticalSpacing: widget.parentVerticalSpacing),
         ));
 
     //return SmeupWidgetBuilderResponse(smeupTreeModel, Container());
-    return SmeupWidgetBuilderResponse(smeupTreeModel, children);
+    return SmeupWidgetBuilderResponse(_model, children);
   }
 
   // dynamic _expandNodeHandler(String text, bool exe) {

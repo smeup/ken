@@ -185,9 +185,11 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
       var smeupDrawerModel;
       var smeupDrawerJson;
       (smeupScreenModel.data['sections'] as List).forEach((section) {
-        smeupDrawerJson = (section['components'] as List).firstWhere(
-            (element) => element['type'] == 'DRW',
-            orElse: () => null);
+        if (section['components'] != null) {
+          smeupDrawerJson = (section['components'] as List).firstWhere(
+              (element) => element['type'] == 'DRW',
+              orElse: () => null);
+        }
       });
 
       if (smeupDrawerJson != null) {

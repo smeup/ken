@@ -40,13 +40,12 @@ class SmeupDao {
     if (model.smeupFun != null && model.smeupFun.isFunValid()) {
       final smeupServiceResponse =
           await SmeupDataService.invoke(model.smeupFun);
-
       if (!smeupServiceResponse.succeded) {
+        SmeupDataService.decrementDataFetch(model.id);
         return;
       }
-
       model.data = smeupServiceResponse.result.data;
-    }    
+    }
     SmeupDataService.decrementDataFetch(model.id);
   }
 }
