@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_treeview/tree_view.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_tree_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
@@ -180,15 +181,20 @@ class _SmeupTreeState extends State<SmeupTree>
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     Widget children;
 
-    MediaQueryData deviceInfo = MediaQuery.of(context);
-    double deviceHeight = deviceInfo.size.width;
-    double deviceWidth = deviceInfo.size.height;
+    double treeHeight = widget.height;
+    double treeWidth = widget.width;
+    if (_model != null && _model.parent != null) {
+      if (treeHeight == 0)
+        treeHeight = (_model.parent as SmeupSectionModel).height;
+      if (treeWidth == 0)
+        treeWidth = (_model.parent as SmeupSectionModel).width;
+    }
 
     TreeViewController _treeViewController =
         TreeViewController(children: _data);
     children = Container(
-        width: widget.width == 0 ? deviceWidth : widget.width,
-        height: widget.height == 0 ? deviceHeight : widget.height,
+        width: treeWidth,
+        height: treeHeight,
         //color: Colors.red,
         child: TreeView(
           controller: _treeViewController,

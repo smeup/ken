@@ -3,6 +3,7 @@ import 'package:mobile_components_library/smeup/daos/smeup_buttons_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
@@ -184,6 +185,15 @@ class SmeupButtonsState extends State<SmeupButtons>
 
     var buttons = List<SmeupButton>.empty(growable: true);
 
+    double buttonHeight = widget.height;
+    double buttonWidth = widget.width;
+    if (_model != null && _model.parent != null) {
+      if (buttonHeight == 0)
+        buttonHeight = (_model.parent as SmeupSectionModel).height;
+      if (buttonWidth == 0)
+        buttonWidth = (_model.parent as SmeupSectionModel).width;
+    }
+
     int buttonIndex = 0;
     _data.forEach((buttonData) {
       buttonIndex += 1;
@@ -195,8 +205,8 @@ class SmeupButtonsState extends State<SmeupButtons>
           data: buttonData,
           backColor: widget.backColor,
           borderColor: widget.borderColor,
-          width: widget.width,
-          height: widget.height,
+          width: buttonWidth,
+          height: buttonHeight,
           position: widget.position,
           align: widget.align,
           fontColor: widget.fontColor,

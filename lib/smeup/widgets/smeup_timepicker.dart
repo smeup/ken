@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_timepicker_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
@@ -190,6 +191,15 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
       SmeupVariablesService.setVariable(_model.id, _data.formattedTime);
     }
 
+    double timePickerHeight = widget.height;
+    double timePickerWidth = widget.width;
+    if (_model != null && _model.parent != null) {
+      if (timePickerHeight == 0)
+        timePickerHeight = (_model.parent as SmeupSectionModel).height;
+      if (timePickerWidth == 0)
+        timePickerWidth = (_model.parent as SmeupSectionModel).width;
+    }
+
     timepicker = SmeupTimePickerButton(
       widget.formKey,
       _data,
@@ -198,8 +208,8 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
       fontsize: widget.fontsize,
       fontColor: widget.fontColor,
       label: widget.label,
-      width: widget.width,
-      height: widget.height,
+      width: timePickerWidth,
+      height: timePickerHeight,
       padding: widget.padding,
       showborder: widget.showborder,
       minutesList: widget.minutesList,

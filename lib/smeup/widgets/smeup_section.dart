@@ -108,9 +108,18 @@ class _SmeupSectionState extends State<SmeupSection>
 
       smeupSectionModel.smeupSectionsModels.forEach((s) {
         var section;
+        MediaQueryData deviceInfo = MediaQuery.of(context);
         if (s.dim <= 0) {
+          s.height = deviceInfo.size.height;
+          s.width = deviceInfo.size.width;
           section = SmeupSection(s, widget.scaffoldKey, widget.formKey);
         } else {
+          s.height = smeupSectionModel.layout == 'column'
+              ? smeupSectionModel.height / totalDim * s.dim
+              : smeupSectionModel.height;
+          s.width = smeupSectionModel.layout == 'row'
+              ? smeupSectionModel.width / totalDim * s.dim
+              : smeupSectionModel.width;
           section = Expanded(
               flex: s.dim.floor(),
               child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
@@ -173,11 +182,9 @@ class _SmeupSectionState extends State<SmeupSection>
     }).toList();
 
     MediaQueryData deviceInfo = MediaQuery.of(context);
-    SmeupConfigurationService.deviceWidth = deviceInfo.size.width;
-    SmeupConfigurationService.deviceHeight = deviceInfo.size.height;
 
     return Container(
-      height: SmeupConfigurationService.deviceHeight,
+      height: deviceInfo.size.height,
       child: Theme(
         data: SmeupConfigurationService.getTheme(),
         child: Scaffold(

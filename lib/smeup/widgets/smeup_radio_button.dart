@@ -46,11 +46,13 @@ class SmeupRadioButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData deviceInfo = MediaQuery.of(context);
+
     var _selectedValue = selectedValue;
     return Container(
       child: SizedBox(
           height: height,
-          width: width == 0 ? double.infinity : width,
+          width: width == 0 ? deviceInfo.size.width : width,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [

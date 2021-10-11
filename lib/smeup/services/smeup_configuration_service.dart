@@ -35,8 +35,8 @@ class SmeupConfigurationService {
   static String _httpServiceEndpoint;
   static Function logoutFunction;
   static PackageInfo _packageInfo;
-  static double deviceHeight;
-  static double deviceWidth;
+  // static double deviceHeight;
+  // static double deviceWidth;
   static Map<DateTime, List> _holidays;
   static dynamic appDictionary;
   static ConfigurationModel _appConfiguration;

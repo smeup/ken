@@ -19,6 +19,7 @@ abstract class SmeupModel {
   dynamic optionsType;
   Map<String, dynamic> optionsDefault;
   String title = '';
+  SmeupModel parent;
 
   dynamic dynamisms;
   bool showLoader = false;
