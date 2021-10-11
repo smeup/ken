@@ -19,7 +19,7 @@ abstract class SmeupModel {
   dynamic optionsType;
   Map<String, dynamic> optionsDefault;
   String title = '';
-  String layout = '';
+
   dynamic dynamisms;
   bool showLoader = false;
   bool notificationEnabled = true;
@@ -75,7 +75,5 @@ abstract class SmeupModel {
     }
 
     data = jsonMap['data'];
-
-    layout = jsonMap['layout'];
   }
 }

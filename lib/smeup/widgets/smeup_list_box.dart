@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_list_box_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_list_box_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
@@ -52,7 +51,7 @@ class SmeupListBox extends StatefulWidget
   SmeupListBox(this.scaffoldKey, this.formKey, this.data,
       {this.id = '',
       this.type = 'BOX',
-      layout,
+      this.layout,
       this.width = SmeupListBoxModel.defaultWidth,
       this.height = SmeupListBoxModel.defaultHeight,
       this.listHeight = SmeupListBoxModel.defaultHeight,
@@ -197,6 +196,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
   }
 
   Widget _getSimpleList(List<Widget> cells) {
+    MediaQueryData deviceInfo = MediaQuery.of(context);
+
     var list = RefreshIndicator(
       onRefresh: _refreshList,
       child: ListView.builder(
@@ -212,7 +213,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
     final container = Container(
         padding: widget.padding,
         color: Colors.transparent,
-        height: widget.listHeight,
+        height:
+            widget.listHeight == 0 ? deviceInfo.size.height : widget.listHeight,
         child: list);
 
     return container;
@@ -220,6 +222,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
 
   Widget _getOrientedList(List<Widget> cells) {
     var list;
+
+    MediaQueryData deviceInfo = MediaQuery.of(context);
 
     list = OrientationBuilder(
       builder: (context, orientation) {
@@ -236,10 +240,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
         else
           boxHeight = 1;
 
-        MediaQueryData deviceInfo = MediaQuery.of(context);
-        SmeupConfigurationService.deviceWidth = deviceInfo.size.width;
-        SmeupConfigurationService.deviceHeight = deviceInfo.size.height;
-        childAspectRatio = SmeupConfigurationService.deviceWidth / boxHeight;
+        childAspectRatio = deviceInfo.size.width / (boxHeight * (col * 5 / 5));
+        // 500;
 
         return RefreshIndicator(
           onRefresh: _refreshList,
@@ -258,7 +260,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
     final container = Container(
         padding: widget.padding,
         color: Colors.transparent,
-        height: widget.listHeight,
+        height:
+            widget.listHeight == 0 ? deviceInfo.size.height : widget.listHeight,
         child: list);
 
     return container;
@@ -266,6 +269,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
 
   Widget _getWheelList(List<Widget> cells) {
     var list;
+
+    MediaQueryData deviceInfo = MediaQuery.of(context);
 
     list = RefreshIndicator(
         onRefresh: _refreshList,
@@ -297,7 +302,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
     final container = Container(
         padding: widget.padding,
         color: Colors.transparent,
-        height: widget.listHeight,
+        height:
+            widget.listHeight == 0 ? deviceInfo.size.height : widget.listHeight,
         child: list);
 
     return container;

@@ -6,7 +6,9 @@ import 'package:mobile_components_library/smeup/services/SmeupLocalizationServic
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_button.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_image.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
@@ -98,6 +100,9 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
         break;
       case '5':
         box = _getLayout5(widget.data, context);
+        break;
+      case 'imageList':
+        box = _getLayoutImageList(widget.data, context);
         break;
       default:
         SmeupLogService.writeDebugMessage(
@@ -523,6 +528,97 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                       });
 
                       return [Expanded(child: Column(children: listOfRows))];
+                    }(),
+                  ),
+                ))),
+      );
+    }
+
+    SmeupLogService.writeDebugMessage('Error SmeupBox widget not created',
+        logType: LogType.error);
+
+    return SmeupNotAvailable();
+  }
+
+  Widget _getLayoutImageList(dynamic data, BuildContext context) {
+    final cols = _getColumns(data);
+
+    if (data.length > 0) {
+      return GestureDetector(
+        onTap: () {
+          _manageTap(data);
+        },
+        child: Card(
+            color: widget.cardColor ?? null,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                  color: SmeupConfigurationService.getTheme().primaryColor,
+                  width: 2),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: Container(
+                  height: widget.height,
+                  child: Column(
+                    children: () {
+                      var listOfRows = List<Widget>.empty(growable: true);
+
+                      cols.forEach((col) {
+                        if (col['IO'] != 'H') {
+                          String rowData = data[col['code']].toString();
+                          if (rowData.isNotEmpty) {
+                            final colWidget = Expanded(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(rowData,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: widget.fontColor ??
+                                            SmeupConfigurationService.getTheme()
+                                                .primaryColor,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            );
+
+                            listOfRows.add(colWidget);
+                          }
+                        }
+                      });
+
+                      Widget widgetImg;
+                      bool isRemote;
+                      double imageHeight;
+                      double imageWidth;
+                      EdgeInsetsGeometry imagePadding;
+                      if (data['isRemote'] != null) {
+                        isRemote = data['isRemote'];
+                      }
+                      if (data['height'] != null) {
+                        imageHeight = SmeupUtilities.getDouble(data['height']);
+                      }
+                      if (data['width'] != null) {
+                        imageWidth = SmeupUtilities.getDouble(data['width']);
+                      }
+                      if (data['padding'] != null) {
+                        imagePadding =
+                            SmeupUtilities.getPadding(data['padding']);
+                      }
+
+                      widgetImg = SmeupImage(
+                        widget.scaffoldKey,
+                        widget.formKey,
+                        data['code'],
+                        isRemote: isRemote,
+                        height: imageHeight,
+                        width: imageWidth,
+                        padding: imagePadding,
+                      );
+
+                      return [
+                        if (widgetImg != null) widgetImg,
+                        Expanded(child: Column(children: listOfRows))
+                      ];
                     }(),
                   ),
                 ))),
