@@ -27,6 +27,7 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
   int portraitColumns;
   int landscapeColumns;
   double fontsize;
+  String layout = '';
 
   SmeupImageListModel(
       {id,

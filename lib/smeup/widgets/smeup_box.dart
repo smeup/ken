@@ -6,7 +6,9 @@ import 'package:mobile_components_library/smeup/services/SmeupLocalizationServic
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_button.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_image.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
@@ -563,30 +565,54 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                       var listOfRows = List<Widget>.empty(growable: true);
 
                       cols.forEach((col) {
-                        if (col['IO'] != 'H' &&
-                            !widget._excludedColumns.contains(col['ogg'])) {
+                        if (col['IO'] != 'H') {
                           String rowData = data[col['code']].toString();
+                          if (rowData.isNotEmpty) {
+                            final colWidget = Expanded(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(rowData,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: widget.fontColor ??
+                                            SmeupConfigurationService.getTheme()
+                                                .primaryColor,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            );
 
-                          final colWidget = Expanded(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(rowData,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      color: widget.fontColor ??
-                                          SmeupConfigurationService.getTheme()
-                                              .primaryColor,
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                          );
-
-                          listOfRows.add(colWidget);
+                            listOfRows.add(colWidget);
+                          }
                         }
                       });
 
-                      Widget widgetImg = Image.network(
+                      Widget widgetImg;
+                      bool isRemote;
+                      double imageHeight;
+                      double imageWidth;
+                      EdgeInsetsGeometry imagePadding;
+                      if (data['isRemote'] != null) {
+                        isRemote = data['isRemote'];
+                      }
+                      if (data['height'] != null) {
+                        imageHeight = SmeupUtilities.getDouble(data['height']);
+                      }
+                      if (data['width'] != null) {
+                        imageWidth = SmeupUtilities.getDouble(data['width']);
+                      }
+                      if (data['padding'] != null) {
+                        imagePadding =
+                            SmeupUtilities.getPadding(data['padding']);
+                      }
+
+                      widgetImg = SmeupImage(
+                        widget.scaffoldKey,
+                        widget.formKey,
                         data['code'],
-                        fit: BoxFit.contain,
+                        isRemote: isRemote,
+                        height: imageHeight,
+                        width: imageWidth,
+                        padding: imagePadding,
                       );
 
                       return [

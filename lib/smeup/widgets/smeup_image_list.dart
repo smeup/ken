@@ -47,7 +47,7 @@ class SmeupImageList extends StatefulWidget
 
   SmeupImageList(this.scaffoldKey, this.formKey, this.data,
       {this.id = '',
-      this.type = 'BOX',
+      this.type = 'IML',
       layout,
       this.width = SmeupImageListModel.defaultWidth,
       this.height = SmeupImageListModel.defaultHeight,
@@ -117,8 +117,6 @@ class _SmeupImageListState extends State<SmeupImageList>
   SmeupImageListModel _model;
   dynamic _data;
 
-  final _scrollController = FixedExtentScrollController();
-
   @override
   void initState() {
     _model = widget.model;
@@ -155,6 +153,7 @@ class _SmeupImageListState extends State<SmeupImageList>
 
   /// Label's structure:
   /// define the structure ...
+  @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
@@ -202,6 +201,7 @@ class _SmeupImageListState extends State<SmeupImageList>
           title: widget.title,
           formKey: widget.formKey);
       _modelListBox.dynamisms = _model.dynamisms;
+      _modelListBox.data = _data;
       children = SmeupListBox.withController(
           _modelListBox, widget.scaffoldKey, widget.formKey);
     }

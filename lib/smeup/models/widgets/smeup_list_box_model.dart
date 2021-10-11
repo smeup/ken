@@ -28,12 +28,13 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   int portraitColumns;
   int landscapeColumns;
   double fontsize;
+  String layout = '';
 
   SmeupListBoxModel(
       {id,
       type,
       GlobalKey<FormState> formKey,
-      layout = defaultLayout,
+      this.layout = defaultLayout,
       this.fontsize = defaultFontsize,
       this.width = defaultWidth,
       this.height = defaultHeight,
@@ -60,6 +61,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     }
 
     title = jsonMap['title'] ?? '';
+    layout = jsonMap['layout'];
     portraitColumns =
         SmeupUtilities.getInt(optionsDefault['portraitColumns']) ??
             defaultPortraitColumns;

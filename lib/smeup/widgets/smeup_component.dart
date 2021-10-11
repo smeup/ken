@@ -12,6 +12,7 @@ import 'package:mobile_components_library/smeup/widgets/smeup_carousel.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_dashboard.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_datepicker.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_image.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_image_list.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_line.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_progress_indicator.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_qrcode_reader.dart';
@@ -125,8 +126,8 @@ class _SmeupComponentState extends State<SmeupComponent> {
         children = SmeupImage.withController(
             smeupModel, widget.scaffoldKey, widget.formKey);
         break;
-      case 'IMG':
-        children = SmeupListBox.withController(
+      case 'IML':
+        children = SmeupImageList.withController(
             smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'FLD':
