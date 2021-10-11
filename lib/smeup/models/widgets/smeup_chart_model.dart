@@ -9,8 +9,8 @@ enum ChartType { Pie, Bar }
 class SmeupChartModel extends SmeupModel {
   static const ChartType defaultChartType = ChartType.Bar;
   static const int defaultRefresh = -1;
-  static const double defaultWidth = 0;
-  static const double defaultHeight = 0;
+  static const double defaultWidth = 100;
+  static const double defaultHeight = 100;
   static const bool defaultLegend = true;
 
   ChartType chartType;
