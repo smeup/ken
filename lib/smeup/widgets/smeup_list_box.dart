@@ -240,7 +240,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
         else
           boxHeight = 1;
 
-        childAspectRatio = deviceInfo.size.width / boxHeight;
+        childAspectRatio = deviceInfo.size.width / (boxHeight * (col * 5 / 5));
+        // 500;
 
         return RefreshIndicator(
           onRefresh: _refreshList,
