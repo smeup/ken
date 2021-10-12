@@ -28,7 +28,7 @@ class SmeupButtons extends StatefulWidget
   MainAxisAlignment position;
   Alignment align;
   Color fontColor;
-  double fontsize;
+  double fontSize;
   EdgeInsetsGeometry padding;
   List<String> data;
   String valueField;
@@ -40,6 +40,10 @@ class SmeupButtons extends StatefulWidget
   String id;
   String type;
   String title;
+  WidgetOrientation orientation;
+  bool isLink;
+  bool underline;
+  double innerSpace;
 
   SmeupButtons.withController(
     this.model,
@@ -49,29 +53,31 @@ class SmeupButtons extends StatefulWidget
     runControllerActivities(model);
   }
 
-  SmeupButtons(
-    this.scaffoldKey,
-    this.formKey, {
-    this.id = '',
-    this.type = 'BTN',
-    this.title = '',
-    this.data,
-    this.backColor,
-    this.borderColor,
-    this.width = SmeupButtonsModel.defaultWidth,
-    this.height = SmeupButtonsModel.defaultHeight,
-    this.position = SmeupButtonsModel.defaultPosition,
-    this.align = SmeupButtonsModel.defaultAlign,
-    this.fontColor,
-    this.fontsize = SmeupButtonsModel.defaultFontsize,
-    this.padding = SmeupButtonsModel.defaultPadding,
-    this.valueField,
-    this.borderRadius = SmeupButtonsModel.defaultBorderRadius,
-    this.elevation = SmeupButtonsModel.defaultElevation,
-    this.bold = SmeupButtonsModel.defaultBold,
-    this.iconData = 0,
-    this.iconSize = SmeupButtonsModel.defaultIconSize,
-  }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
+  SmeupButtons(this.scaffoldKey, this.formKey,
+      {this.id = '',
+      this.type = 'BTN',
+      this.title = '',
+      this.data,
+      this.backColor = SmeupButtonsModel.defaultBackColor,
+      this.borderColor = SmeupButtonsModel.defaultBorderColor,
+      this.width = SmeupButtonsModel.defaultWidth,
+      this.height = SmeupButtonsModel.defaultHeight,
+      this.position = SmeupButtonsModel.defaultPosition,
+      this.align = SmeupButtonsModel.defaultAlign,
+      this.fontColor = SmeupButtonsModel.defaultFontColor,
+      this.fontSize = SmeupButtonsModel.defaultFontsize,
+      this.padding = SmeupButtonsModel.defaultPadding,
+      this.valueField,
+      this.borderRadius = SmeupButtonsModel.defaultBorderRadius,
+      this.elevation = SmeupButtonsModel.defaultElevation,
+      this.bold = SmeupButtonsModel.defaultBold,
+      this.iconData = 0,
+      this.iconSize = SmeupButtonsModel.defaultIconSize,
+      this.orientation = SmeupButtonsModel.defaultOrientation,
+      this.isLink = SmeupButtonsModel.defaultIsLink,
+      this.underline = SmeupButtonsModel.defaultUnderline,
+      this.innerSpace = SmeupButtonsModel.defaultInnerSpace})
+      : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
 
     if (data == null) data = List<String>.empty(growable: true);
@@ -90,7 +96,7 @@ class SmeupButtons extends StatefulWidget
     position = m.position;
     align = m.align;
     fontColor = m.fontColor;
-    fontsize = m.fontsize;
+    fontSize = m.fontSize;
     padding = m.padding;
     valueField = m.valueField;
     borderRadius = m.borderRadius;
@@ -98,6 +104,10 @@ class SmeupButtons extends StatefulWidget
     bold = m.bold;
     iconData = m.iconData;
     iconSize = m.iconSize;
+    orientation = m.orientation;
+    isLink = m.isLink;
+    underline = m.underline;
+    innerSpace = m.innerSpace;
 
     data = treatData(m);
   }
@@ -210,7 +220,7 @@ class SmeupButtonsState extends State<SmeupButtons>
           position: widget.position,
           align: widget.align,
           fontColor: widget.fontColor,
-          fontsize: widget.fontsize,
+          fontSize: widget.fontSize,
           padding: widget.padding,
           valueField: widget.valueField,
           borderRadius: widget.borderRadius,
@@ -221,16 +231,23 @@ class SmeupButtonsState extends State<SmeupButtons>
           //data: buttonData,
           icon: null,
           isBusy: _isBusy,
+          underline: widget.underline,
           clientOnPressed: () {
             runDynamism(_model, context, buttonData);
-          });
+          },
+          isLink: widget.isLink);
 
       buttons.add(button);
     });
 
     if (buttons.length > 0) {
-      final column = Column(children: buttons);
-      return SmeupWidgetBuilderResponse(_model, column);
+      var widgets;
+      if (widget.orientation == WidgetOrientation.Vertical)
+        widgets = Column(children: buttons);
+      else
+        widgets = Row(children: buttons);
+
+      return SmeupWidgetBuilderResponse(_model, widgets);
     } else {
       SmeupLogService.writeDebugMessage(
           'Error SmeupButtons no children \'button\' created',
