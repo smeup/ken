@@ -149,10 +149,10 @@ class SmeupButton extends StatelessWidget {
                                   .primaryColor
                               : fontColor)));
 
-              var widget;
+              var children;
 
               if (align == Alignment.centerLeft) {
-                widget = Container(
+                children = Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -164,7 +164,7 @@ class SmeupButton extends StatelessWidget {
                   color: backColor,
                 );
               } else if (align == Alignment.centerRight) {
-                widget = Container(
+                children = Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -176,7 +176,7 @@ class SmeupButton extends StatelessWidget {
                   color: backColor,
                 );
               } else if (align == Alignment.topCenter) {
-                widget = Container(
+                children = Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -188,7 +188,7 @@ class SmeupButton extends StatelessWidget {
                   color: backColor,
                 );
               } else if (align == Alignment.bottomCenter) {
-                widget = Container(
+                children = Container(
                   height: height,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -201,7 +201,7 @@ class SmeupButton extends StatelessWidget {
                 );
               } else // center
               {
-                widget = Container(
+                children = Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -214,7 +214,7 @@ class SmeupButton extends StatelessWidget {
                 );
               }
 
-              return widget;
+              return children;
             }()
     ]);
   }
