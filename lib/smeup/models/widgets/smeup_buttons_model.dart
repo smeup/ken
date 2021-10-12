@@ -17,6 +17,14 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultElevation = 0.0;
   static const bool defaultBold = true;
   static const double defaultIconSize = 20.0;
+  static const WidgetOrientation defaultOrientation =
+      WidgetOrientation.Vertical;
+  static const bool defaultIsLink = false;
+  static const Color defaultBackColor = Colors.white;
+  static const Color defaultBorderColor = Colors.black;
+  static const Color defaultFontColor = Colors.black;
+  static const bool defaultUnderline = false;
+  static const double defaultInnerSpace = 10.0;
 
   Color backColor;
   Color borderColor;
@@ -25,7 +33,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   MainAxisAlignment position;
   Alignment align;
   Color fontColor;
-  double fontsize;
+  double fontSize;
   EdgeInsetsGeometry padding;
   String valueField;
   double borderRadius;
@@ -33,28 +41,36 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   bool bold;
   double iconSize;
   int iconData;
+  WidgetOrientation orientation;
+  bool isLink;
+  bool underline;
+  double innerSpace;
 
-  SmeupButtonsModel({
-    id,
-    type,
-    title = '',
-    GlobalKey<FormState> formKey,
-    this.backColor,
-    this.borderColor,
-    this.width = defaultWidth,
-    this.height = defaultHeight,
-    this.position = defaultPosition,
-    this.align = defaultAlign,
-    this.fontColor,
-    this.fontsize = defaultFontsize,
-    this.padding = defaultPadding,
-    this.valueField,
-    this.borderRadius = defaultBorderRadius,
-    this.elevation = defaultElevation,
-    this.bold = defaultBold,
-    this.iconData = 0,
-    this.iconSize = defaultIconSize,
-  }) : super(formKey, title: title) {
+  SmeupButtonsModel(
+      {id,
+      type,
+      title = '',
+      GlobalKey<FormState> formKey,
+      this.backColor = defaultBackColor,
+      this.borderColor = defaultBorderColor,
+      this.width = defaultWidth,
+      this.height = defaultHeight,
+      this.position = defaultPosition,
+      this.align = defaultAlign,
+      this.fontColor = defaultFontColor,
+      this.fontSize = defaultFontsize,
+      this.padding = defaultPadding,
+      this.valueField,
+      this.borderRadius = defaultBorderRadius,
+      this.elevation = defaultElevation,
+      this.bold = defaultBold,
+      this.iconData = 0,
+      this.iconSize = defaultIconSize,
+      this.orientation = defaultOrientation,
+      this.isLink = defaultIsLink,
+      this.underline = defaultUnderline,
+      this.innerSpace = defaultInnerSpace})
+      : super(formKey, title: title) {
     SmeupDataService.incrementDataFetch(id);
   }
 
@@ -69,7 +85,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
             position: other.position,
             align: other.align,
             fontColor: other.fontColor,
-            fontsize: other.fontsize,
+            fontSize: other.fontSize,
             padding: other.padding,
             valueField: other.valueField,
             borderRadius: other.borderRadius,
@@ -84,19 +100,44 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     title = jsonMap['title'] ?? '';
     padding = SmeupUtilities.getPadding(optionsDefault['padding']);
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+    if (optionsDefault['fillSpace'] != null &&
+        optionsDefault['fillSpace'].toString().toLowerCase() == 'yes') {
+      width = 0;
+    }
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+    innerSpace = SmeupUtilities.getDouble(optionsDefault['innerSpace']) ??
+        defaultInnerSpace;
+    if (optionsDefault['horiz'] != null &&
+        optionsDefault['horiz'].toString().toLowerCase() == 'yes') {
+      orientation = WidgetOrientation.Horizontal;
+    } else {
+      orientation = defaultOrientation;
+    }
+    if (optionsDefault['underline'] != null &&
+        optionsDefault['underline'].toString().toLowerCase() == 'yes') {
+      underline = true;
+    } else {
+      underline = defaultUnderline;
+    }
+    if (optionsDefault['flat'] != null &&
+        optionsDefault['flat'].toString().toLowerCase() == 'yes') {
+      isLink = true;
+      underline = true;
+    } else {
+      isLink = defaultIsLink;
+    }
     valueField = optionsDefault['valueField'] ?? 'value';
     position = SmeupUtilities.getMainAxisAlignment(optionsDefault['position']);
     iconSize =
         SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
     if (optionsDefault['icon'] != null)
-      iconData = int.tryParse(optionsDefault['icon']) ?? 0;
+      iconData = SmeupUtilities.getInt(optionsDefault['icon']) ?? 0;
     else
       iconData = 0;
     align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']);
 
-    fontsize =
+    fontSize =
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
     borderRadius = SmeupUtilities.getDouble(optionsDefault['borderRadius']) ??
         defaultBorderRadius;
@@ -107,13 +148,19 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
 
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
+    } else {
+      backColor = defaultBackColor;
     }
     if (optionsDefault['borderColor'] != null) {
       borderColor =
           SmeupUtilities.getColorFromRGB(optionsDefault['borderColor']);
+    } else {
+      borderColor = defaultBorderColor;
     }
     if (optionsDefault['fontColor'] != null) {
       fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']);
+    } else {
+      fontColor = isLink ? Colors.blue : defaultFontColor;
     }
 
     if (widgetLoadType != LoadType.Delay) {
