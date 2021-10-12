@@ -37,6 +37,8 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
   List<SmeupSectionModel> smeupSectionsModels;
   int selectedTabIndex;
   String selectedTabColName;
+  double width;
+  double height;
 
   SmeupSectionModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
@@ -44,9 +46,6 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
     String tmp = jsonMap['dim'] ?? '';
     tmp = tmp.replaceAll('%', '');
     dim = double.tryParse(tmp) ?? 0;
-    // if (dim != 0) {
-    //   dim = (dim / 10);
-    // }
     layout = jsonMap['layout'];
     selectedTabColName = jsonMap['selectedTabColName'];
     _replaceSelectedTabIndex(jsonMap);
@@ -73,7 +72,7 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
     if (jsonMap.containsKey(componentName)) {
       List<dynamic> componentsJson = jsonMap[componentName];
       componentsJson.forEach((v) {
-        dynamic model;
+        SmeupModel model;
 
         try {
           switch (v['type']) {
@@ -170,7 +169,10 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
           throw (msg);
         }
 
-        if (model != null) components.add(model);
+        if (model != null) {
+          model.parent = this;
+          components.add(model);
+        }
       });
     }
 

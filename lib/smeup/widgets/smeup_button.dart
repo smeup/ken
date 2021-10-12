@@ -71,7 +71,7 @@ class SmeupButton extends StatelessWidget {
       padding: padding,
       child: SizedBox(
         height: height,
-        width: width == 0 ? double.infinity : width,
+        width: width,
         child: ElevatedButton(
           key: Key(id),
           style: ElevatedButton.styleFrom(

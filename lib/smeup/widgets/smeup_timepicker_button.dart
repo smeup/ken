@@ -64,7 +64,7 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
         padding: widget.padding,
         child: SizedBox(
             height: widget.height,
-            width: widget.width == 0 ? double.infinity : widget.width,
+            width: widget.width,
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: widget.backColor == null

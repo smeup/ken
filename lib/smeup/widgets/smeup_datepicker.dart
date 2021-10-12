@@ -4,6 +4,7 @@ import 'package:mobile_components_library/smeup/daos/smeup_datepicker_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_datepicker_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_datepicker_button.dart';
@@ -193,6 +194,15 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
 
     SmeupVariablesService.setVariable(widget.id, valueString);
 
+    double datePickerHeight = widget.height;
+    double datePickerWidth = widget.width;
+    if (_model != null && _model.parent != null) {
+      if (datePickerHeight == 0)
+        datePickerHeight = (_model.parent as SmeupSectionModel).height;
+      if (datePickerWidth == 0)
+        datePickerWidth = (_model.parent as SmeupSectionModel).width;
+    }
+
     var datepicker = SmeupDatePickerButton(widget.id,
         scaffoldKey: widget.scaffoldKey,
         formKey: widget.formKey,
@@ -202,8 +212,8 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
         fontsize: widget.fontsize,
         fontColor: widget.fontColor,
         label: widget.label,
-        width: widget.width,
-        height: widget.height,
+        width: datePickerWidth,
+        height: datePickerHeight,
         padding: widget.padding,
         showborder: widget.showborder,
         elevation: widget.elevation);

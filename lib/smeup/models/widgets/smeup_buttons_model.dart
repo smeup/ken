@@ -7,7 +7,7 @@ import 'package:mobile_components_library/smeup/services/smeup_data_service.dart
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
-  static const double defaultWidth = 0;
+  static const double defaultWidth = 200;
   static const double defaultHeight = 60;
   static const MainAxisAlignment defaultPosition = MainAxisAlignment.center;
   static const Alignment defaultAlign = Alignment.center;

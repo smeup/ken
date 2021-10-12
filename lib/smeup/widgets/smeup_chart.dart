@@ -6,7 +6,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_datas
 import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
@@ -136,12 +136,6 @@ class _SmeupChartState extends State<SmeupChart>
     //   );
     // }
 
-    MediaQueryData deviceInfo = MediaQuery.of(context);
-    SmeupConfigurationService.deviceWidth = deviceInfo.size.width;
-    SmeupConfigurationService.deviceHeight = deviceInfo.size.height;
-    double deviceHeight = SmeupConfigurationService.deviceHeight;
-    double deviceWidth = SmeupConfigurationService.deviceWidth;
-
     switch (widget.chartType) {
       // case ChartType.Area:
       //   children = _getAreaChartComponent(_data, deviceHeight, deviceWidth);
@@ -150,10 +144,10 @@ class _SmeupChartState extends State<SmeupChart>
       //   children = _getTimeChartComponent(_data, deviceHeight, deviceWidth);
       //   break;
       case ChartType.Bar:
-        children = _getBarChartComponent(_data, deviceHeight, deviceWidth);
+        children = _getBarChartComponent(_data);
         break;
       case ChartType.Pie:
-        children = _getPieChartComponent(_data, deviceHeight, deviceWidth);
+        children = _getPieChartComponent(_data);
         break;
       default:
         SmeupLogService.writeDebugMessage(
@@ -246,8 +240,7 @@ class _SmeupChartState extends State<SmeupChart>
 
   /// colAxes = the column which contains the X axes values
   /// colSeries = the column which contains the Y axes values
-  Widget _getBarChartComponent(
-      SmeupChartDatasource _data, double deviceHeight, double deviceWidth) {
+  Widget _getBarChartComponent(SmeupChartDatasource _data) {
     var seriesList = _getSeriesList(
         _data, _model, (SmeupChartSeries seriesData, _) => seriesData.color);
     if (seriesList == null) {
@@ -257,9 +250,18 @@ class _SmeupChartState extends State<SmeupChart>
       return SmeupNotAvailable();
     }
 
+    double chartHeight = widget.height;
+    double chartWidth = widget.width;
+    if (_model != null && _model.parent != null) {
+      if (chartHeight == 0)
+        chartHeight = (_model.parent as SmeupSectionModel).height;
+      if (chartWidth == 0)
+        chartWidth = (_model.parent as SmeupSectionModel).width;
+    }
+
     return SizedBox(
-      height: widget.height == 0 ? deviceHeight : widget.height,
-      width: widget.width == 0 ? deviceWidth : widget.width,
+      height: chartHeight,
+      width: chartWidth,
       child: charts.BarChart(
         seriesList,
         animate: false,
@@ -274,8 +276,7 @@ class _SmeupChartState extends State<SmeupChart>
     );
   }
 
-  Widget _getPieChartComponent(
-      SmeupChartDatasource _data, double deviceHeight, double deviceWidth) {
+  Widget _getPieChartComponent(SmeupChartDatasource _data) {
     var seriesList = _getSeriesList(_data, _model, null);
     if (seriesList == null) {
       SmeupLogService.writeDebugMessage(
@@ -284,9 +285,18 @@ class _SmeupChartState extends State<SmeupChart>
       return SmeupNotAvailable();
     }
 
+    double chartHeight = widget.height;
+    double chartWidth = widget.width;
+    if (_model != null && _model.parent != null) {
+      if (chartHeight == 0)
+        chartHeight = (_model.parent as SmeupSectionModel).height;
+      if (chartWidth == 0)
+        chartWidth = (_model.parent as SmeupSectionModel).width;
+    }
+
     return SizedBox(
-      height: widget.height == 0 ? deviceHeight : widget.height,
-      width: widget.width == 0 ? deviceWidth : widget.width,
+      height: chartHeight,
+      width: chartWidth,
       child: charts.PieChart(
         seriesList,
         animate: false,

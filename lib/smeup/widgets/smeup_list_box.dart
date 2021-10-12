@@ -5,6 +5,7 @@ import 'package:mobile_components_library/smeup/daos/smeup_list_box_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_list_box_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_box.dart';
@@ -196,8 +197,6 @@ class _SmeupListBoxState extends State<SmeupListBox>
   }
 
   Widget _getSimpleList(List<Widget> cells) {
-    MediaQueryData deviceInfo = MediaQuery.of(context);
-
     var list = RefreshIndicator(
       onRefresh: _refreshList,
       child: ListView.builder(
@@ -210,11 +209,19 @@ class _SmeupListBoxState extends State<SmeupListBox>
       ),
     );
 
+    double listboxHeight = widget.height;
+    double listboxWidth = widget.width;
+    if (_model != null && _model.parent != null) {
+      if (listboxHeight == 0)
+        listboxHeight = (_model.parent as SmeupSectionModel).height;
+      if (listboxWidth == 0)
+        listboxWidth = (_model.parent as SmeupSectionModel).width;
+    }
+
     final container = Container(
         padding: widget.padding,
         color: Colors.transparent,
-        height:
-            widget.listHeight == 0 ? deviceInfo.size.height : widget.listHeight,
+        height: listboxHeight,
         child: list);
 
     return container;
