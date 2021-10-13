@@ -40,6 +40,7 @@ class SmeupListBox extends StatefulWidget
   double fontsize;
   dynamic data;
   bool showLoader = false;
+  List<String> columns = new List<String>.empty(growable: true);
 
   // dynamisms functions
   Function clientOnItemTap;
@@ -62,6 +63,7 @@ class SmeupListBox extends StatefulWidget
       this.listType = SmeupListBoxModel.defaultListType,
       this.portraitColumns = SmeupListBoxModel.defaultPortraitColumns,
       this.landscapeColumns = SmeupListBoxModel.defaultLandscapeColumns,
+      this.columns,
       title = '',
       showLoader: false,
       this.clientOnItemTap,
@@ -85,6 +87,7 @@ class SmeupListBox extends StatefulWidget
     listType = m.listType;
     portraitColumns = m.portraitColumns;
     landscapeColumns = m.landscapeColumns;
+    columns = m.columns;
     title = m.title;
     showLoader = m.showLoader;
 
@@ -331,6 +334,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
           id: widget.id,
           layout: widget.layout,
           columns: _data['columns'],
+          visibleColumns: widget.columns,
           data: dataElement,
           dynamisms: _model?.dynamisms,
           height: widget.height,

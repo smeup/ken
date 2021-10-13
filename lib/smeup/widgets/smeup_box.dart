@@ -30,6 +30,7 @@ class SmeupBox extends StatefulWidget {
   final double width;
   final double height;
   final bool dismissEnabled;
+  List<String> visibleColumns = new List<String>.empty();
 
   SmeupBox(this.scaffoldKey, this.formKey,
       {this.id,
@@ -44,7 +45,8 @@ class SmeupBox extends StatefulWidget {
       this.fontColor,
       this.width,
       this.height,
-      this.dismissEnabled});
+      this.dismissEnabled,
+      this.visibleColumns});
 
   @override
   _SmeupBoxState createState() => _SmeupBoxState();
@@ -825,6 +827,15 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
         });
       }
     }
-    return _columns;
+
+    // Filter list by visibleColumns
+    if (widget.visibleColumns != null && widget.visibleColumns.isNotEmpty) {
+      List _filteredColumns = _columns
+          .where((o) => widget.visibleColumns.contains(o['code']))
+          .toList();
+      return _filteredColumns;
+    } else {
+      return _columns;
+    }
   }
 }
