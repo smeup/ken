@@ -69,7 +69,8 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontSize;
     iconSize =
         SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
-    align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']);
+    align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']) ??
+        defaultAlign;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;

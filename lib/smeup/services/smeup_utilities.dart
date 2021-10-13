@@ -130,7 +130,7 @@ class SmeupUtilities {
       case "bottom":
         return Alignment.bottomCenter;
       default:
-        return Alignment.center;
+        return null;
     }
   }
 

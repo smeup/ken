@@ -8,14 +8,15 @@ import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
-  static const double defaultWidth = 0;
+  static const double defaultWidth = 100;
   static const double defaultHeight = 50;
   static const MainAxisAlignment defaultPosition = MainAxisAlignment.center;
-  static const Alignment defaultAlign = Alignment.center;
+  static const Alignment defaultAlign = Alignment.centerLeft;
   static const double defaultFontsize = 16.0;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
-  static const String defaultValueField = 'k';
+  static const String defaultValueField = 'code';
   static const String defaultDisplayedField = 'value';
+  static const int defaultColumns = 1;
 
   Color backColor;
   double width;
@@ -28,6 +29,7 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
   String valueField;
   String displayedField;
   String selectedValue;
+  int columns;
 
   SmeupRadioButtonsModel(
       {GlobalKey<FormState> formKey,
@@ -44,17 +46,23 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
       this.padding = defaultPadding,
       this.valueField = defaultValueField,
       this.displayedField = defaultDisplayedField,
-      this.selectedValue})
+      this.selectedValue,
+      this.columns = defaultColumns})
       : super(formKey, title: title, id: id, type: type) {
-    if (backColor == null)
-      backColor = SmeupConfigurationService.getTheme().backgroundColor;
-    if (fontColor == null)
-      fontColor =
-          SmeupConfigurationService.getTheme().textTheme.bodyText1.color;
+    if (backColor == null) backColor = getDefaultBackColor();
+    if (fontColor == null) fontColor = getDefaultFontColor();
 
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'rad';
 
     SmeupDataService.incrementDataFetch(id);
+  }
+
+  static Color getDefaultBackColor() {
+    return SmeupConfigurationService.getTheme().canvasColor;
+  }
+
+  static Color getDefaultFontColor() {
+    return SmeupConfigurationService.getTheme().textTheme.bodyText1.color;
   }
 
   SmeupRadioButtonsModel.clone(SmeupRadioButtonsModel other)
@@ -88,17 +96,26 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
 
     position = SmeupUtilities.getMainAxisAlignment(optionsDefault['position']);
 
-    align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']);
+    align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']) ??
+        defaultAlign;
 
     fontsize =
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
 
+    columns = SmeupUtilities.getInt(optionsDefault['radCol']) ?? defaultColumns;
+
     if (optionsDefault['backColor'] != null) {
-      backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
+      backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??
+          getDefaultBackColor();
+    } else {
+      backColor = getDefaultBackColor();
     }
 
     if (optionsDefault['fontColor'] != null) {
-      fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']);
+      fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']) ??
+          getDefaultFontColor();
+    } else {
+      fontColor = getDefaultFontColor();
     }
 
     if (widgetLoadType != LoadType.Delay) {

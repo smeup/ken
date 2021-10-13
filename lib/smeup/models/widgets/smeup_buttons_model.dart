@@ -135,7 +135,8 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
       iconData = SmeupUtilities.getInt(optionsDefault['icon']) ?? 0;
     else
       iconData = 0;
-    align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']);
+    align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']) ??
+        defaultAlign;
 
     fontSize =
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
