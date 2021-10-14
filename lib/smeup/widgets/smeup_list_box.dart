@@ -40,6 +40,7 @@ class SmeupListBox extends StatefulWidget
   double fontsize;
   dynamic data;
   bool showLoader = false;
+  String defaultSort;
 
   // dynamisms functions
   Function clientOnItemTap;
@@ -65,7 +66,8 @@ class SmeupListBox extends StatefulWidget
       title = '',
       showLoader: false,
       this.clientOnItemTap,
-      this.dismissEnabled = false})
+      this.dismissEnabled = false,
+      this.defaultSort = SmeupListBoxModel.defaultDefaultSort})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
   }
@@ -87,6 +89,7 @@ class SmeupListBox extends StatefulWidget
     landscapeColumns = m.landscapeColumns;
     title = m.title;
     showLoader = m.showLoader;
+    defaultSort = m.defaultSort;
 
     dynamic deleteDynamism;
     if (m.dynamisms != null)
@@ -342,6 +345,15 @@ class _SmeupListBoxState extends State<SmeupListBox>
 
   List<Widget> _getCells() {
     final cells = List<Widget>.empty(growable: true);
+
+    List _rows = _data['rows'];
+
+    if (widget.defaultSort.isNotEmpty) {
+      //Manage defaultSort setup parameter
+      _rows.sort(
+          (a, b) => (a[widget.defaultSort]).compareTo(b[widget.defaultSort]));
+      _data['rows'] = _rows;
+    }
 
     _data['rows'].forEach((dataElement) {
       final cell = SmeupBox(widget.scaffoldKey, widget.formKey,

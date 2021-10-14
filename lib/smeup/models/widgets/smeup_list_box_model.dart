@@ -18,6 +18,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultLayout = '1';
   static const double defaultFontsize = 16.0;
   static const Axis defaultOrientation = Axis.vertical;
+  static const String defaultDefaultSort = '';
 
   double width;
   double height;
@@ -30,6 +31,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   double fontsize;
   String layout = '';
   List<String> visibleColumns = List<String>.empty();
+  String defaultSort = '';
 
   SmeupListBoxModel(
       {id,
@@ -46,6 +48,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       this.portraitColumns = defaultPortraitColumns,
       this.landscapeColumns = defaultLandscapeColumns,
       this.visibleColumns,
+      this.defaultSort = defaultDefaultSort,
       title = ''})
       : super(formKey, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
