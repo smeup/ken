@@ -23,6 +23,8 @@ class SmeupDrawer extends StatefulWidget
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
 
+  static const Alignment defaultAlign = Alignment.center;
+
   double imageWidth;
   double imageHeight;
   String imageUrl;
@@ -82,7 +84,8 @@ class SmeupDrawer extends StatefulWidget
         newList.add(SmeupDrawerDataElement(element['text'], element['route'],
             iconCode: SmeupUtilities.getInt(element['iconCode']) ?? 0,
             fontSize: SmeupUtilities.getDouble(element['fontSize']) ?? 0.0,
-            align: SmeupUtilities.getAlignmentGeometry(element['align']),
+            align: SmeupUtilities.getAlignmentGeometry(element['align']) ??
+                defaultAlign,
             action: element['route'] == null
                 ? null
                 : (context) {
