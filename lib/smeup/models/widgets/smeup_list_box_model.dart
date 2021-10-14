@@ -29,7 +29,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   int landscapeColumns;
   double fontsize;
   String layout = '';
-  List<String> columns = new List<String>.empty();
+  List<String> visibleColumns = List<String>.empty();
 
   SmeupListBoxModel(
       {id,
@@ -45,7 +45,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       this.listType = defaultListType,
       this.portraitColumns = defaultPortraitColumns,
       this.landscapeColumns = defaultLandscapeColumns,
-      this.columns,
+      this.visibleColumns,
       title = ''})
       : super(formKey, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
@@ -83,7 +83,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
         : Axis.vertical;
 
     if (optionsDefault['columns'] != null) {
-      columns = optionsDefault['columns'].split('|');
+      visibleColumns = optionsDefault['columns'].split('|');
     }
 
     if (widgetLoadType != LoadType.Delay) {

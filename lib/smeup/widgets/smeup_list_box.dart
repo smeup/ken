@@ -40,7 +40,6 @@ class SmeupListBox extends StatefulWidget
   double fontsize;
   dynamic data;
   bool showLoader = false;
-  List<String> columns = new List<String>.empty(growable: true);
 
   // dynamisms functions
   Function clientOnItemTap;
@@ -63,7 +62,6 @@ class SmeupListBox extends StatefulWidget
       this.listType = SmeupListBoxModel.defaultListType,
       this.portraitColumns = SmeupListBoxModel.defaultPortraitColumns,
       this.landscapeColumns = SmeupListBoxModel.defaultLandscapeColumns,
-      this.columns,
       title = '',
       showLoader: false,
       this.clientOnItemTap,
@@ -87,7 +85,6 @@ class SmeupListBox extends StatefulWidget
     listType = m.listType;
     portraitColumns = m.portraitColumns;
     landscapeColumns = m.landscapeColumns;
-    columns = m.columns;
     title = m.title;
     showLoader = m.showLoader;
 
@@ -108,9 +105,28 @@ class SmeupListBox extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
+    SmeupListBoxModel m = model;
+
     // change data format
+    var workData = formatDataFields(m);
+
     // set the widget data
-    return formatDataFields(model);
+    if (workData != null) {
+      // Manage columns setup field: hide column if isn't in the set of columns
+      if (m.visibleColumns.isNotEmpty) {
+        for (var i = 0; i < (workData['columns'] as List).length; i++) {
+          final column = workData['columns'][i];
+          if (m.visibleColumns.contains(column['code']) == false) {
+            column['IO'] = 'H';
+          }
+        }
+        return workData;
+      } else {
+        return workData;
+      }
+    } else {
+      return model.data;
+    }
   }
 
   @override
@@ -334,7 +350,6 @@ class _SmeupListBoxState extends State<SmeupListBox>
           id: widget.id,
           layout: widget.layout,
           columns: _data['columns'],
-          visibleColumns: widget.columns,
           data: dataElement,
           dynamisms: _model?.dynamisms,
           height: widget.height,
