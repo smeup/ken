@@ -23,13 +23,11 @@ class SmeupImageList extends StatefulWidget
   double width;
   double height;
   double listHeight;
-  Axis orientation;
   EdgeInsetsGeometry padding;
-  SmeupListType listType;
   String layout;
   String title;
-  int portraitColumns;
-  int landscapeColumns;
+  int columns;
+  int rows;
   String id;
   String type;
   bool dismissEnabled = false;
@@ -45,7 +43,8 @@ class SmeupImageList extends StatefulWidget
     runControllerActivities(model);
   }
 
-  SmeupImageList(this.scaffoldKey, this.formKey, this.data,
+  SmeupImageList(
+      this.scaffoldKey, this.formKey, this.data, this.columns, this.rows,
       {this.id = '',
       this.type = 'IML',
       layout,
@@ -53,11 +52,7 @@ class SmeupImageList extends StatefulWidget
       this.height = SmeupImageListModel.defaultHeight,
       this.listHeight = SmeupImageListModel.defaultHeight,
       this.fontsize = SmeupImageListModel.defaultFontsize,
-      this.orientation = SmeupImageListModel.defaultOrientation,
       this.padding = SmeupImageListModel.defaultPadding,
-      this.listType = SmeupImageListModel.defaultListType,
-      this.portraitColumns = SmeupImageListModel.defaultPortraitColumns,
-      this.landscapeColumns = SmeupImageListModel.defaultLandscapeColumns,
       title = '',
       showLoader: false,
       this.clientOnItemTap,
@@ -76,11 +71,9 @@ class SmeupImageList extends StatefulWidget
     height = m.height;
     listHeight = m.listHeight;
     fontsize = m.fontsize;
-    orientation = m.orientation;
     padding = m.padding;
-    listType = m.listType;
-    portraitColumns = m.portraitColumns;
-    landscapeColumns = m.landscapeColumns;
+    columns = m.columns;
+    rows = m.rows;
     title = m.title;
     showLoader = m.showLoader;
 
@@ -170,19 +163,30 @@ class _SmeupImageListState extends State<SmeupImageList>
 
     Widget children;
 
+    int noColl = widget.columns;
+    Axis orientation = Axis.vertical;
+    if (noColl == null || noColl == 0) {
+      noColl = widget.rows;
+      orientation = Axis.horizontal;
+    }
+
+    if (noColl == null || noColl == 0) {
+      return getFunErrorResponse(context, _model);
+    }
+
     if (_model == null) {
       children = SmeupListBox(widget.scaffoldKey, widget.formKey, _data,
           clientOnItemTap: widget.clientOnItemTap,
           dismissEnabled: widget.dismissEnabled,
           fontsize: widget.fontsize,
           height: widget.height,
-          landscapeColumns: widget.landscapeColumns,
           layout: 'imageList',
           listHeight: widget.listHeight,
           listType: SmeupListType.oriented,
-          orientation: widget.orientation,
+          orientation: orientation,
           padding: widget.padding,
-          portraitColumns: widget.portraitColumns,
+          portraitColumns: noColl,
+          landscapeColumns: noColl,
           width: widget.width,
           showLoader: widget.showLoader,
           title: widget.title);
@@ -190,13 +194,13 @@ class _SmeupImageListState extends State<SmeupImageList>
       final _modelListBox = SmeupListBoxModel(
           fontsize: widget.fontsize,
           height: widget.height,
-          landscapeColumns: widget.landscapeColumns,
           layout: 'imageList',
           listHeight: widget.listHeight,
           listType: SmeupListType.oriented,
-          orientation: widget.orientation,
+          orientation: orientation,
           padding: widget.padding,
-          portraitColumns: widget.portraitColumns,
+          portraitColumns: noColl,
+          landscapeColumns: noColl,
           width: widget.width,
           title: widget.title,
           formKey: widget.formKey);
