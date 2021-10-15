@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_calendar_dao.dart';
@@ -45,9 +44,15 @@ class SmeupCalendar extends StatefulWidget
   List<Map<String, dynamic>> data;
   DateTime initialFirstWork;
   DateTime initialLastWork;
+  DateTime initialDate;
+  bool showAsWeek;
+  bool showNavigation;
+  String initTimeColumnName;
+  String endTimeColumnName;
 
   Function clientOnDaySelected;
   Function clientOnChangeMonth;
+  Function clientOnEventClick;
 
   SmeupCalendar(this.scaffoldKey, this.formKey,
       {this.id = '',
@@ -55,8 +60,11 @@ class SmeupCalendar extends StatefulWidget
       this.data,
       this.initialFirstWork,
       this.initialLastWork,
+      this.initialDate,
       this.titleColumnName = SmeupCalendarModel.defaultTitleColumnName,
       this.dataColumnName = SmeupCalendarModel.defaultDataColumnName,
+      this.initTimeColumnName = SmeupCalendarModel.defaultInitTimeColumnName,
+      this.endTimeColumnName = SmeupCalendarModel.defaultEndTimeColumnName,
       this.styleColumnName = SmeupCalendarModel.defaultStyleColumnName,
       title = '',
       this.showPeriodButtons = SmeupCalendarModel.defaultShowPeriodButtons,
@@ -64,8 +72,11 @@ class SmeupCalendar extends StatefulWidget
       this.width = SmeupCalendarModel.defaultWidth,
       this.eventFontSize = SmeupCalendarModel.defaultEventFontSize,
       this.titleFontSize = SmeupCalendarModel.defaultTitleFontSize,
+      this.showAsWeek = SmeupCalendarModel.defaultShowAsWeek,
+      this.showNavigation = SmeupCalendarModel.defaultShowNavigation,
       this.clientOnDaySelected,
-      this.clientOnChangeMonth})
+      this.clientOnChangeMonth,
+      this.clientOnEventClick})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
 
@@ -93,6 +104,8 @@ class SmeupCalendar extends StatefulWidget
     title = m.title;
     titleColumnName = m.titleColumnName;
     dataColumnName = m.dataColumnName;
+    initTimeColumnName = m.initTimeColumnName;
+    endTimeColumnName = m.endTimeColumnName;
     styleColumnName = m.styleColumnName;
     width = m.width;
     height = m.height;
@@ -101,6 +114,9 @@ class SmeupCalendar extends StatefulWidget
     showPeriodButtons = m.showPeriodButtons;
     initialFirstWork = m.initialFirstWork;
     initialLastWork = m.initialLastWork;
+    initialDate = m.initialDate;
+    showAsWeek = m.showAsWeek;
+    showNavigation = m.showNavigation;
 
     data = treatData(m);
   }
@@ -120,6 +136,8 @@ class SmeupCalendar extends StatefulWidget
         final element = workData['rows'][i];
         newList.add({
           m.dataColumnName: element[m.dataColumnName],
+          m.initTimeColumnName: element[m.initTimeColumnName],
+          m.endTimeColumnName: element[m.endTimeColumnName],
           m.titleColumnName: element[m.titleColumnName],
           m.styleColumnName: element[m.styleColumnName]
         });
@@ -156,7 +174,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
   SmeupCalendarModel _model;
   List<Map<String, dynamic>> _data;
 
-  Map<DateTime, List> _events;
+  Map<DateTime, List<SmeupCalentarEventModel>> _events;
   AnimationController _animationController;
   List<SmeupCalentarEventModel> _smeupCalendarEvents;
   bool _isLoading = false;
@@ -164,7 +182,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
   DateTime _lastWork;
   DateTime _focusDay;
   CalendarFormat _calendarFormat;
-  //DateTime _selectedDay;
+  ValueNotifier<List<SmeupCalentarEventModel>> _selectedEvents;
 
   DateTime get firstWork => _firstWork;
   set firstWork(DateTime firstWork) {
@@ -189,10 +207,10 @@ class SmeupCalendarState extends State<SmeupCalendar>
     _data = widget.data;
     _firstWork = widget.initialFirstWork;
     _lastWork = widget.initialLastWork;
-    //_selectedDay = widget.initialLastWork;
-    _events = Map<DateTime, List>();
-    _focusDay = _firstWork;
-    _calendarFormat = CalendarFormat.month;
+    _events = Map<DateTime, List<SmeupCalentarEventModel>>();
+    _focusDay = widget.initialDate ?? DateTime.now();
+    _calendarFormat =
+        widget.showAsWeek ? CalendarFormat.week : CalendarFormat.month;
 
     if (widgetLoadType != LoadType.Delay) _loadEvents();
 
@@ -207,7 +225,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
   @override
   void dispose() {
     _animationController.dispose();
-
+    _selectedEvents?.dispose();
     _events = null;
     _smeupCalendarEvents = null;
     super.dispose();
@@ -269,122 +287,195 @@ class SmeupCalendarState extends State<SmeupCalendar>
     return Container(
       height: calendarHeight,
       width: calendarWidth,
-      child: TableCalendar(
-        firstDay: _firstWork,
-        focusedDay: _focusDay,
-        lastDay: _lastWork,
-        locale:
-            '${Localizations.localeOf(context).languageCode}_${Localizations.localeOf(context).countryCode}',
-        selectedDayPredicate: (date) => date == widget.initialFirstWork,
-        eventLoader: (day) {
-          return _events[day];
-        },
-        holidayPredicate: (date) =>
-            _holidays != null &&
-            _holidays.length > 0 &&
-            _holidays.keys.contains(date),
+      child: Column(
+        children: [
+          TableCalendar<SmeupCalentarEventModel>(
+            firstDay: _firstWork,
+            focusedDay: _focusDay,
+            lastDay: _lastWork,
+            locale:
+                '${Localizations.localeOf(context).languageCode}_${Localizations.localeOf(context).countryCode}',
+            selectedDayPredicate: (date) => date == widget.initialFirstWork,
+            eventLoader: (day) {
+              return _getEventsForDay(day);
+            },
+            holidayPredicate: (date) =>
+                _holidays != null &&
+                _holidays.length > 0 &&
+                _holidays.keys.contains(date),
 
-        calendarFormat: _calendarFormat,
-        //formatAnimation: FormatAnimation.slide,
-        startingDayOfWeek: StartingDayOfWeek.sunday,
-        availableGestures: AvailableGestures.all,
-        availableCalendarFormats: const {
-          CalendarFormat.month: '',
-          CalendarFormat.week: '',
-          CalendarFormat.twoWeeks: '',
-        },
-        calendarStyle: CalendarStyle(
-          outsideDaysVisible: false,
-          weekendTextStyle: const TextStyle().copyWith(color: Colors.red[800]),
-          holidayTextStyle: const TextStyle().copyWith(color: Colors.red[800]),
-        ),
-        daysOfWeekStyle: DaysOfWeekStyle(
-          weekendStyle: const TextStyle().copyWith(color: Colors.red[600]),
-        ),
-        headerStyle: HeaderStyle(
-          titleTextStyle: TextStyle(
-              color: Colors.white,
-              fontSize: widget.titleFontSize,
-              fontWeight: FontWeight.bold),
-          titleCentered: true,
-          formatButtonVisible: false,
-          decoration: BoxDecoration(
-              color: SmeupConfigurationService.getTheme().primaryColor),
-          leftChevronIcon:
-              const Icon(Icons.arrow_back_ios, color: Colors.white),
-          rightChevronIcon:
-              const Icon(Icons.arrow_forward_ios, color: Colors.white),
-        ),
-        calendarBuilders: CalendarBuilders(
-          selectedBuilder: (context, date, _) {
-            return FadeTransition(
-              opacity:
-                  Tween(begin: 0.5, end: 1.0).animate(_animationController),
-              child: Container(
-                margin: const EdgeInsets.all(4.0),
-                padding: const EdgeInsets.only(top: 5.0, left: 6.0),
-                color:
-                    Color.fromRGBO(6, 138, 156, 0.6), // Colors.deepOrange[300],
-                width: 100,
-                height: 100,
-                child: Text(
-                  '${date.day}',
-                  style: TextStyle().copyWith(fontSize: widget.eventFontSize),
-                ),
-              ),
-            );
-          },
-          todayBuilder: (context, date, _) {
-            return Container(
-              margin: const EdgeInsets.all(4.0),
-              padding: const EdgeInsets.only(top: 5.0, left: 6.0),
-              color: Color.fromRGBO(6, 138, 156, 0.6), //Colors.amber[400],
-              width: 100,
-              height: 100,
-              child: Text(
-                '${date.day}',
-                style:
-                    const TextStyle().copyWith(fontSize: widget.eventFontSize),
-              ),
-            );
-          },
-          markerBuilder: (context, date, events) {
-            final children = <Widget>[];
+            calendarFormat: _calendarFormat,
+            //formatAnimation: FormatAnimation.slide,
+            startingDayOfWeek: StartingDayOfWeek.monday,
+            availableGestures: AvailableGestures.all,
+            availableCalendarFormats: const {
+              CalendarFormat.month: '',
+              CalendarFormat.week: '',
+              CalendarFormat.twoWeeks: '',
+            },
 
-            if (events.isNotEmpty) {
-              children.add(
-                Positioned(
-                  right: 1,
-                  bottom: 1,
-                  child: _buildEventsMarker(date, events),
-                ),
-              );
-            }
+            calendarStyle: CalendarStyle(
+              outsideDaysVisible: false,
+              weekendTextStyle:
+                  const TextStyle().copyWith(color: Colors.red[800]),
+              holidayTextStyle:
+                  const TextStyle().copyWith(color: Colors.red[800]),
+            ),
+            daysOfWeekStyle: DaysOfWeekStyle(
+              weekendStyle: const TextStyle().copyWith(color: Colors.red[600]),
+            ),
+            headerVisible: widget.showNavigation,
+            headerStyle: HeaderStyle(
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: widget.titleFontSize,
+                  fontWeight: FontWeight.bold),
+              titleCentered: true,
+              formatButtonVisible: false,
+              decoration: BoxDecoration(
+                  color: SmeupConfigurationService.getTheme().primaryColor),
+              leftChevronIcon:
+                  const Icon(Icons.arrow_back_ios, color: Colors.white),
+              rightChevronIcon:
+                  const Icon(Icons.arrow_forward_ios, color: Colors.white),
+            ),
+            calendarBuilders: CalendarBuilders(
+              selectedBuilder: (context, date, _) {
+                return FadeTransition(
+                  opacity:
+                      Tween(begin: 0.5, end: 1.0).animate(_animationController),
+                  child: Container(
+                    margin: const EdgeInsets.all(4.0),
+                    padding: const EdgeInsets.only(top: 5.0, left: 6.0),
+                    color: Color.fromRGBO(
+                        6, 138, 156, 0.6), // Colors.deepOrange[300],
+                    width: 100,
+                    height: 100,
+                    child: Text(
+                      '${date.day}',
+                      style:
+                          TextStyle().copyWith(fontSize: widget.eventFontSize),
+                    ),
+                  ),
+                );
+              },
+              todayBuilder: (context, date, _) {
+                return Container(
+                  margin: const EdgeInsets.all(4.0),
+                  padding: const EdgeInsets.only(top: 5.0, left: 6.0),
+                  color: Color.fromRGBO(6, 138, 156, 0.6), //Colors.amber[400],
+                  width: 100,
+                  height: 100,
+                  child: Text(
+                    '${date.day}',
+                    style: const TextStyle()
+                        .copyWith(fontSize: widget.eventFontSize),
+                  ),
+                );
+              },
+              markerBuilder: (context, date, events) {
+                final children = <Widget>[];
+                if (events.isNotEmpty) {
+                  children.add(
+                    Positioned(
+                      right: 1,
+                      bottom: 1,
+                      child: _buildEventsMarker(date, events),
+                    ),
+                  );
+                }
 
-            if (_holidays != null && _holidays.isNotEmpty) {
-              children.add(
-                Positioned(
-                  right: -2,
-                  top: -2,
-                  child: _buildHolidaysMarker(),
-                ),
-              );
-            }
+                if (_holidays != null && _holidays.isNotEmpty) {
+                  children.add(
+                    Positioned(
+                      right: -2,
+                      top: -2,
+                      child: _buildHolidaysMarker(),
+                    ),
+                  );
+                }
 
-            return Stack(children: children);
-          },
-        ),
-        onDaySelected: (selectedDay, focusedDay) {
-          _onDaySelected(selectedDay, focusedDay);
-          _animationController.forward(from: 0.0);
-        },
-        // onVisibleDaysChanged: _onVisibleDaysChanged,
-        onPageChanged: (focusedDay) {
-          _focusDay = focusedDay;
-          _onVisibleDaysChanged(focusedDay);
-        },
+                return Stack(children: children);
+              },
+            ),
+            onDaySelected: (selectedDay, focusedDay) {
+              _onDaySelected(selectedDay, focusedDay);
+              _animationController.forward(from: 0.0);
+            },
+            // onVisibleDaysChanged: _onVisibleDaysChanged,
+            onPageChanged: (focusedDay) {
+              _focusDay = focusedDay;
+              _onVisibleDaysChanged(focusedDay);
+            },
+          ),
+          const SizedBox(height: 8.0),
+          Expanded(
+            child: ValueListenableBuilder<List<SmeupCalentarEventModel>>(
+              valueListenable: _selectedEvents,
+              builder: (context, event, _) {
+                return ListView.builder(
+                  itemCount: event.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 12.0,
+                        vertical: 4.0,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: event[index].backgroundColor),
+                        borderRadius: BorderRadius.circular(12.0),
+                        shape: BoxShape.rectangle,
+                        color: event[index].backgroundColor,
+                      ),
+                      child: ListTile(
+                        visualDensity:
+                            VisualDensity(horizontal: -3, vertical: -3),
+                        onTap: () => _fireDynamism(event[index].day, _focusDay,
+                            event: event[index]),
+                        title: _getListTileWidget(event[index]),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
+  }
+
+  Column _getListTileWidget(SmeupCalentarEventModel event) {
+    final style = const TextStyle().copyWith(
+        color: event.foreColor,
+        fontSize: Platform.isAndroid ? 12.0 : 10.0,
+        fontWeight: event.fontWeight);
+
+    final initTimeStr = event.initTime != null
+        ? DateFormat("HH:mm").format(event.initTime)
+        : null;
+    final endTimeStr = event.endTime != null
+        ? DateFormat("HH:mm").format(event.endTime)
+        : null;
+
+    var period = initTimeStr != null ? initTimeStr : null;
+
+    if (period != null && endTimeStr != null) {
+      period += " - $endTimeStr";
+    }
+
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(
+        '${event.description}',
+        style: style,
+      ),
+      period != null
+          ? Text(
+              period,
+              style: style,
+            )
+          : Container(),
+    ]);
   }
 
   List<SmeupCalentarEventModel> _extractSmeupCalendarEvents() {
@@ -397,11 +488,14 @@ class SmeupCalendarState extends State<SmeupCalendar>
               row,
               widget.titleColumnName,
               widget.dataColumnName,
-              widget.styleColumnName);
+              widget.styleColumnName,
+              widget.initTimeColumnName,
+              widget.endTimeColumnName);
           list.add(smeupEventModel);
         }
       }
     } catch (e) {
+      debugPrint(e);
       return list;
     }
 
@@ -409,35 +503,54 @@ class SmeupCalendarState extends State<SmeupCalendar>
   }
 
   Future<void> _onDaySelected(DateTime selectedDay, DateTime focusedDay) async {
+    SmeupLogService.writeDebugMessage('CALLBACK: _onDaySelected');
     if (_isLoading) return;
+    _selectedEvents.value = _getEventsForDay(selectedDay);
+    _fireDynamism(selectedDay, focusedDay);
+  }
 
+  Future<void> _fireDynamism(DateTime selectedDay, DateTime focusedDay,
+      {SmeupCalentarEventModel event}) async {
+    dynamic data;
+    String title;
+    String initTime;
+    String endTime;
     try {
-      SmeupLogService.writeDebugMessage('CALLBACK: _onDaySelected');
-
-      setState(() {
-        _isLoading = true;
-      });
-
       String dayString = DateFormat('yyyy-MM-dd').format(selectedDay);
+      title = event?.description;
+      initTime = event?.initTime != null
+          ? DateFormat("HHmmss").format(event.initTime)
+          : null;
+      endTime = event?.endTime != null
+          ? DateFormat("HHmmss").format(event.endTime)
+          : null;
 
-      final data = _data.firstWhere(
-          (element) => element[widget.dataColumnName] == dayString,
-          orElse: () => null);
-
-      if (widget.clientOnDaySelected != null)
-        widget.clientOnDaySelected(selectedDay);
-
-      if (data == null) {
-        return;
+      if (event == null) {
+        data = _data.firstWhere(
+            (element) => element[widget.dataColumnName] == dayString,
+            orElse: () => null);
+        if (widget.clientOnDaySelected != null)
+          widget.clientOnDaySelected(selectedDay);
+      } else {
+        data = _data.firstWhere((element) {
+          debugPrint(element.toString());
+          return element[widget.dataColumnName] == dayString &&
+              element[widget.titleColumnName] == title &&
+              element[widget.initTimeColumnName] == initTime &&
+              element[widget.endTimeColumnName] == endTime;
+        }, orElse: () => null);
+        widget.clientOnEventClick?.call(event);
       }
 
-      SmeupDynamismService.storeDynamicVariables(data, widget.formKey);
+      if (data != null) {
+        SmeupDynamismService.storeDynamicVariables(data, widget.formKey);
 
-      if (widget.model != null)
-        SmeupDynamismService.run(widget.model.dynamisms, context, 'click',
-            widget.scaffoldKey, widget.formKey);
+        if (widget.model != null)
+          SmeupDynamismService.run(widget.model.dynamisms, context, 'click',
+              widget.scaffoldKey, widget.formKey);
+      }
     } catch (e) {
-      SmeupLogService.writeDebugMessage('Error on calendar _daySelected: $e',
+      SmeupLogService.writeDebugMessage('Error on calendar _fireDynamism: $e',
           logType: LogType.error);
     } finally {
       setState(() {
@@ -483,29 +596,16 @@ class SmeupCalendarState extends State<SmeupCalendar>
     }
   }
 
-  Widget _buildEventsMarker(DateTime date, List events) {
-    String eventText = '${events[0]}';
-
-    final SmeupCalentarEventModel _booking = _smeupCalendarEvents
-        .firstWhere((element) => element.day == date, orElse: null);
-
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      decoration: BoxDecoration(
-          shape: BoxShape.rectangle, color: _booking.backgroundColor),
-      width: Platform.isAndroid ? 56.0 : 50.0,
-      height: 16.0,
-      child: Align(
-        alignment: Alignment.center,
+  Widget _buildEventsMarker(
+      DateTime date, List<SmeupCalentarEventModel> events) {
+    return Container(
+        constraints: BoxConstraints(minWidth: 13, minHeight: 13),
+        decoration: BoxDecoration(color: Colors.blue),
         child: Text(
-          eventText,
-          style: const TextStyle().copyWith(
-              color: _booking.foreColor,
-              fontSize: Platform.isAndroid ? 12.0 : 10.0,
-              fontWeight: _booking.fontWeight),
-        ),
-      ),
-    );
+          events.length.toString(),
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.white, fontSize: 11),
+        ));
   }
 
   Widget _buildHolidaysMarker() {
@@ -569,12 +669,17 @@ class SmeupCalendarState extends State<SmeupCalendar>
       _removeEvents(firstWork, lastWork);
 
       _smeupCalendarEvents = _extractSmeupCalendarEvents();
-
-      for (final booking in _smeupCalendarEvents) {
-        final eventsList = List.empty(growable: true);
-        eventsList.add(booking.description);
-        _events[booking.day] = eventsList;
+      _events?.clear();
+      for (final _event in _smeupCalendarEvents) {
+        List<SmeupCalentarEventModel> eventsList = _events[_event.day];
+        if (eventsList == null) {
+          _events[_event.day] =
+              eventsList = List<SmeupCalentarEventModel>.empty(growable: true);
+        }
+        eventsList.add(_event);
       }
+      //_selectedEvents = ValueNotifier(_getEventsForDay(this._focusDay));
+      _selectedEvents = ValueNotifier([]);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -586,6 +691,14 @@ class SmeupCalendarState extends State<SmeupCalendar>
       setState(() {
         _isLoading = false;
       });
+    }
+  }
+
+  List<SmeupCalentarEventModel> _getEventsForDay(DateTime day) {
+    if (day == null) {
+      return [];
+    } else {
+      return _events[day] ?? [];
     }
   }
 }
