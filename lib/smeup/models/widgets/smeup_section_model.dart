@@ -6,6 +6,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_model
 import 'package:mobile_components_library/smeup/models/widgets/smeup_dashboard_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_form_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_gauge_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_image_list_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_image_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_input_field_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_label_model.dart';
@@ -36,6 +37,8 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
   List<SmeupSectionModel> smeupSectionsModels;
   int selectedTabIndex;
   String selectedTabColName;
+  double width;
+  double height;
 
   SmeupSectionModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
@@ -43,9 +46,6 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
     String tmp = jsonMap['dim'] ?? '';
     tmp = tmp.replaceAll('%', '');
     dim = double.tryParse(tmp) ?? 0;
-    // if (dim != 0) {
-    //   dim = (dim / 10);
-    // }
     layout = jsonMap['layout'];
     selectedTabColName = jsonMap['selectedTabColName'];
     _replaceSelectedTabIndex(jsonMap);
@@ -72,7 +72,7 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
     if (jsonMap.containsKey(componentName)) {
       List<dynamic> componentsJson = jsonMap[componentName];
       componentsJson.forEach((v) {
-        dynamic model;
+        SmeupModel model;
 
         try {
           switch (v['type']) {
@@ -108,6 +108,9 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
               break;
             case 'IMG':
               model = SmeupImageModel.fromMap(v, formKey);
+              break;
+            case 'IML':
+              model = SmeupImageListModel.fromMap(v, formKey);
               break;
             case 'FLD':
               switch (v['options']['FLD']['default']['type']) {
@@ -166,7 +169,10 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
           throw (msg);
         }
 
-        if (model != null) components.add(model);
+        if (model != null) {
+          model.parent = this;
+          components.add(model);
+        }
       });
     }
 

@@ -4,8 +4,8 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_butto
 
 class SmeupRadioButton extends StatelessWidget {
   final IconData icon;
-  final Function serverOnPressed;
-  final Function clientOnPressed;
+  final Function onPressed;
+
   //final dynamic data;
 
   final EdgeInsetsGeometry padding;
@@ -41,16 +41,16 @@ class SmeupRadioButton extends StatelessWidget {
       this.displayedField = SmeupRadioButtonsModel.defaultDisplayedField,
       this.selectedValue,
       this.icon,
-      this.serverOnPressed,
-      this.clientOnPressed});
+      this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     var _selectedValue = selectedValue;
     return Container(
+      height: height,
       child: SizedBox(
           height: height,
-          width: width == 0 ? double.infinity : width,
+          width: width,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -58,19 +58,20 @@ class SmeupRadioButton extends StatelessWidget {
                 value: data['code'],
                 groupValue: _selectedValue,
                 onChanged: (value) {
-                  clientOnPressed(value);
-                  serverOnPressed(value);
+                  onPressed(value);
                 },
                 activeColor: SmeupConfigurationService.getTheme().primaryColor,
               ),
-              Align(
-                  alignment: align,
-                  child: Text(data['value'],
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontSize: fontsize,
-                          fontWeight: FontWeight.bold,
-                          color: fontColor)))
+              Expanded(
+                child: Align(
+                    alignment: align,
+                    child: Text(data['value'],
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            fontSize: fontsize,
+                            fontWeight: FontWeight.bold,
+                            color: fontColor))),
+              )
             ],
           )),
     );

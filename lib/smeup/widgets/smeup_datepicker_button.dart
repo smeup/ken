@@ -66,7 +66,7 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
       padding: widget.padding,
       child: SizedBox(
         height: widget.height,
-        width: widget.width == 0 ? double.infinity : widget.width,
+        width: widget.width,
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(0.0),

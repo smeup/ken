@@ -5,51 +5,44 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart'
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
-enum SmeupListType { simple, oriented, wheel }
-
-class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
+class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 0;
   static const double defaultHeight = 100;
   static const double defaultListHeight = 100;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
-  static const SmeupListType defaultListType = SmeupListType.oriented;
-  static const int defaultPortraitColumns = 1;
-  static const int defaultLandscapeColumns = 1;
+  static const int defaultColumns = 0;
+  static const int defaultRows = 0;
   static const String defaultLayout = '1';
   static const double defaultFontsize = 16.0;
-  static const Axis defaultOrientation = Axis.vertical;
 
   double width;
   double height;
   double listHeight;
   Axis orientation;
   EdgeInsetsGeometry padding;
-  SmeupListType listType;
-  int portraitColumns;
-  int landscapeColumns;
+  int columns;
+  int rows;
   double fontsize;
   String layout = '';
 
-  SmeupListBoxModel(
+  SmeupImageListModel(
       {id,
       type,
       GlobalKey<FormState> formKey,
-      this.layout = defaultLayout,
+      layout = defaultLayout,
       this.fontsize = defaultFontsize,
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.listHeight = defaultHeight,
-      this.orientation = defaultOrientation,
       this.padding = defaultPadding,
-      this.listType = defaultListType,
-      this.portraitColumns = defaultPortraitColumns,
-      this.landscapeColumns = defaultLandscapeColumns,
+      this.columns = defaultColumns,
+      this.rows = defaultRows,
       title = ''})
       : super(formKey, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupListBoxModel.fromMap(
+  SmeupImageListModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
     layout = defaultLayout;
@@ -61,13 +54,9 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     }
 
     title = jsonMap['title'] ?? '';
-    layout = jsonMap['layout'];
-    portraitColumns =
-        SmeupUtilities.getInt(optionsDefault['portraitColumns']) ??
-            defaultPortraitColumns;
-    landscapeColumns =
-        SmeupUtilities.getInt(optionsDefault['landscapeColumns']) ??
-            defaultLandscapeColumns;
+    columns =
+        SmeupUtilities.getInt(optionsDefault['columns']) ?? defaultColumns;
+    rows = SmeupUtilities.getInt(optionsDefault['rows']) ?? defaultRows;
     fontsize = optionsDefault['fontSize'] ?? defaultFontsize;
     padding = SmeupUtilities.getPadding(optionsDefault['padding']);
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
@@ -75,7 +64,6 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     listHeight = SmeupUtilities.getDouble(optionsDefault['listHeight']) ??
         defaultListHeight;
-    listType = decodeListType(optionsDefault['listType']);
     orientation = jsonMap['orientation'] == 'horizontal'
         ? Axis.horizontal
         : Axis.vertical;
@@ -85,18 +73,5 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     }
 
     SmeupDataService.incrementDataFetch(id);
-  }
-
-  static SmeupListType decodeListType(String type) {
-    switch (type) {
-      case 'simple':
-        return SmeupListType.simple;
-      case 'oriented':
-        return SmeupListType.oriented;
-      case 'wheel':
-        return SmeupListType.wheel;
-      default:
-        return defaultListType;
-    }
   }
 }

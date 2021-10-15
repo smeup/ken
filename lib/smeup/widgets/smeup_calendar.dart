@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_calendar_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_event_model.dart';
@@ -272,15 +273,18 @@ class SmeupCalendarState extends State<SmeupCalendar>
   }
 
   Widget _buildTableCalendarWithBuilders() {
-    MediaQueryData deviceInfo = MediaQuery.of(context);
-    SmeupConfigurationService.deviceWidth = deviceInfo.size.width;
-    SmeupConfigurationService.deviceHeight = deviceInfo.size.height;
-    double deviceHeight = SmeupConfigurationService.deviceHeight - 70;
-    double deviceWidth = SmeupConfigurationService.deviceWidth;
+    double calendarHeight = widget.height;
+    double calendarWidth = widget.width;
+    if (_model != null && _model.parent != null) {
+      if (calendarHeight == 0)
+        calendarHeight = (_model.parent as SmeupSectionModel).height;
+      if (calendarWidth == 0)
+        calendarWidth = (_model.parent as SmeupSectionModel).width;
+    }
 
     return Container(
-      height: widget.height == 0 ? deviceHeight : widget.height,
-      width: widget.width == 0 ? deviceWidth : widget.width,
+      height: calendarHeight,
+      width: calendarWidth,
       child: Column(
         children: [
           TableCalendar<SmeupCalentarEventModel>(

@@ -5,6 +5,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_section_mod
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 enum LoadType { Immediate, Delay }
+enum WidgetOrientation { Vertical, Horizontal }
 
 abstract class SmeupModel {
   //static const int defaultRefresh = 0;
@@ -19,7 +20,8 @@ abstract class SmeupModel {
   dynamic optionsType;
   Map<String, dynamic> optionsDefault;
   String title = '';
-  String layout = '';
+  SmeupModel parent;
+
   dynamic dynamisms;
   bool showLoader = false;
   bool notificationEnabled = true;
@@ -75,7 +77,5 @@ abstract class SmeupModel {
     }
 
     data = jsonMap['data'];
-
-    layout = jsonMap['layout'];
   }
 }

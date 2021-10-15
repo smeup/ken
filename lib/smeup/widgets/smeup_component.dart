@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_form_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
@@ -12,6 +11,7 @@ import 'package:mobile_components_library/smeup/widgets/smeup_carousel.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_dashboard.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_datepicker.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_image.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_image_list.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_line.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_progress_indicator.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_qrcode_reader.dart';
@@ -115,7 +115,8 @@ class _SmeupComponentState extends State<SmeupComponent> {
             smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'LIN':
-        children = SmeupLine(smeupModel, widget.scaffoldKey, widget.formKey);
+        children = SmeupLine.withController(
+            smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'DSH':
         children = SmeupDashboard.withController(
@@ -123,6 +124,10 @@ class _SmeupComponentState extends State<SmeupComponent> {
         break;
       case 'IMG':
         children = SmeupImage.withController(
+            smeupModel, widget.scaffoldKey, widget.formKey);
+        break;
+      case 'IML':
+        children = SmeupImageList.withController(
             smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'FLD':
@@ -194,10 +199,8 @@ class _SmeupComponentState extends State<SmeupComponent> {
           children = SmeupNotAvailable();
         } else {
           MediaQueryData deviceInfo = MediaQuery.of(context);
-          SmeupConfigurationService.deviceWidth = deviceInfo.size.width;
-          SmeupConfigurationService.deviceHeight = deviceInfo.size.height;
-          double deviceHeight = SmeupConfigurationService.deviceHeight;
-          double deviceWidth = SmeupConfigurationService.deviceWidth;
+          double deviceHeight = deviceInfo.size.height;
+          double deviceWidth = deviceInfo.size.width;
 
           var smeupJsonForm = SmeupFormModel.fromMap(
               smeupServiceResponse.result.data, widget.formKey);

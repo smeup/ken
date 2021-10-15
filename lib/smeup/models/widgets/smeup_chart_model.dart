@@ -9,12 +9,12 @@ enum ChartType { Pie, Bar }
 class SmeupChartModel extends SmeupModel {
   static const ChartType defaultChartType = ChartType.Bar;
   static const int defaultRefresh = -1;
-  static const double defaultWidth = 0;
-  static const double defaultHeight = 0;
+  static const double defaultWidth = 100;
+  static const double defaultHeight = 100;
   static const bool defaultLegend = true;
 
   ChartType chartType;
-  int refresh;
+  //int refresh;
   double width;
   double height;
   bool legend;
@@ -25,7 +25,7 @@ class SmeupChartModel extends SmeupModel {
     GlobalKey<FormState> formKey,
     title = '',
     this.chartType = defaultChartType,
-    this.refresh = defaultRefresh,
+    //this.refresh = defaultRefresh,
     this.height = defaultHeight,
     this.width = defaultWidth,
     this.legend = defaultLegend,
@@ -37,7 +37,7 @@ class SmeupChartModel extends SmeupModel {
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
     chartType = _getChartType(optionsDefault['types'][0]) ?? defaultChartType;
-    refresh = optionsDefault['refresh'] ?? defaultRefresh;
+    //refresh = optionsDefault['refresh'] ?? defaultRefresh;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;

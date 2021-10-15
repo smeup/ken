@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_switch_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_switch_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
@@ -149,19 +149,20 @@ class _SmeupSwitchState extends State<SmeupSwitch>
       setDataLoad(widget.id, true);
     }
 
-    MediaQueryData deviceInfo = MediaQuery.of(context);
-    SmeupConfigurationService.deviceWidth = deviceInfo.size.width;
-    SmeupConfigurationService.deviceHeight = deviceInfo.size.height;
+    double switchHeight = widget.height;
+    double switchWidth = widget.width;
+    if (_model != null && _model.parent != null) {
+      if (switchHeight == 0)
+        switchHeight = (_model.parent as SmeupSectionModel).height;
+      if (switchWidth == 0)
+        switchWidth = (_model.parent as SmeupSectionModel).width;
+    }
 
     final children = Center(
         child: Container(
       padding: widget.padding,
-      width: widget.width == 0
-          ? SmeupConfigurationService.deviceWidth
-          : widget.width,
-      height: widget.height == 0
-          ? SmeupConfigurationService.deviceHeight
-          : widget.height,
+      width: switchWidth,
+      height: switchHeight,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

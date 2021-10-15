@@ -7,7 +7,7 @@ import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupTreeModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 100;
-  static const double defaultHeight = 0;
+  static const double defaultHeight = 100;
 
   static const double defaultLabelFontSize = 16;
   static const Color defaultLabelBackColor = Colors.white;
