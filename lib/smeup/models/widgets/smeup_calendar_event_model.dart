@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_model.dart';
 
 class SmeupCalentarEventModel {
   DateTime day;
@@ -64,5 +63,10 @@ class SmeupCalentarEventModel {
     } else {
       return null;
     }
+  }
+
+  @override
+  String toString() {
+    return "{day:$day, description:$description, initTime:$initTime, endTime:$endTime}";
   }
 }

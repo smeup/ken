@@ -52,6 +52,7 @@ class SmeupCalendar extends StatefulWidget
 
   Function clientOnDaySelected;
   Function clientOnChangeMonth;
+  Function clientOnEventClick;
 
   SmeupCalendar(this.scaffoldKey, this.formKey,
       {this.id = '',
@@ -74,7 +75,8 @@ class SmeupCalendar extends StatefulWidget
       this.showAsWeek = SmeupCalendarModel.defaultShowAsWeek,
       this.showNavigation = SmeupCalendarModel.defaultShowNavigation,
       this.clientOnDaySelected,
-      this.clientOnChangeMonth})
+      this.clientOnChangeMonth,
+      this.clientOnEventClick})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
 
@@ -206,7 +208,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
     _firstWork = widget.initialFirstWork;
     _lastWork = widget.initialLastWork;
     _events = Map<DateTime, List<SmeupCalentarEventModel>>();
-    _focusDay = widget.initialDate;
+    _focusDay = widget.initialDate ?? DateTime.now();
     _calendarFormat =
         widget.showAsWeek ? CalendarFormat.week : CalendarFormat.month;
 
@@ -527,6 +529,8 @@ class SmeupCalendarState extends State<SmeupCalendar>
         data = _data.firstWhere(
             (element) => element[widget.dataColumnName] == dayString,
             orElse: () => null);
+        if (widget.clientOnDaySelected != null)
+          widget.clientOnDaySelected(selectedDay);
       } else {
         data = _data.firstWhere((element) {
           debugPrint(element.toString());
@@ -535,10 +539,8 @@ class SmeupCalendarState extends State<SmeupCalendar>
               element[widget.initTimeColumnName] == initTime &&
               element[widget.endTimeColumnName] == endTime;
         }, orElse: () => null);
+        widget.clientOnEventClick?.call(event);
       }
-
-      if (widget.clientOnDaySelected != null)
-        widget.clientOnDaySelected(selectedDay);
 
       if (data != null) {
         SmeupDynamismService.storeDynamicVariables(data, widget.formKey);
