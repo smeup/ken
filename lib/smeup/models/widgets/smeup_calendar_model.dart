@@ -12,9 +12,15 @@ class SmeupCalendarModel extends SmeupModel {
   static const String defaultTitleColumnName = 'title';
   static const String defaultDataColumnName = 'value';
   static const String defaultStyleColumnName = 'style';
+  static const String defaultInitTimeColumnName = 'init';
+  static const String defaultEndTimeColumnName = 'end';
+  static const bool defaultShowAsWeek = false;
+  static const bool defaultShowNavigation = true;
 
   String titleColumnName;
   String dataColumnName;
+  String initTimeColumnName;
+  String endTimeColumnName;
   String styleColumnName;
   double width;
   double height;
@@ -23,6 +29,8 @@ class SmeupCalendarModel extends SmeupModel {
   bool showPeriodButtons;
   DateTime initialFirstWork;
   DateTime initialLastWork;
+  bool showAsWeek;
+  bool showNavigation;
 
   SmeupCalendarModel(
       {id,
@@ -30,6 +38,8 @@ class SmeupCalendarModel extends SmeupModel {
       GlobalKey<FormState> formKey,
       this.titleColumnName = defaultTitleColumnName,
       this.dataColumnName = defaultDataColumnName,
+      this.initTimeColumnName = defaultInitTimeColumnName,
+      this.endTimeColumnName = defaultEndTimeColumnName,
       this.styleColumnName = defaultStyleColumnName,
       title = '',
       this.showPeriodButtons = defaultShowPeriodButtons,
@@ -38,7 +48,9 @@ class SmeupCalendarModel extends SmeupModel {
       this.eventFontSize = defaultEventFontSize,
       this.titleFontSize = defaultTitleFontSize,
       this.initialFirstWork,
-      this.initialLastWork})
+      this.initialLastWork,
+      this.showAsWeek,
+      this.showNavigation})
       : super(formKey, title: title, id: id, type: type) {
     id = SmeupUtilities.getWidgetId('CAL', id);
   }
@@ -49,6 +61,10 @@ class SmeupCalendarModel extends SmeupModel {
     titleColumnName =
         optionsDefault['titleColumnName'] ?? defaultTitleColumnName;
     dataColumnName = optionsDefault['dataColumnName'] ?? defaultDataColumnName;
+    initTimeColumnName =
+        optionsDefault['initTimeColumnName'] ?? defaultInitTimeColumnName;
+    endTimeColumnName =
+        optionsDefault['endTimeColumnName'] ?? defaultEndTimeColumnName;
     styleColumnName =
         optionsDefault['styleColumnName'] ?? defaultStyleColumnName;
     showPeriodButtons = optionsDefault['showPeriodButtons'] ?? false;
@@ -66,6 +82,14 @@ class SmeupCalendarModel extends SmeupModel {
         ? DateTime(
             DateTime.now().year, DateTime.now().month, DateTime.now().day)
         : DateTime.parse(optionsDefault['initialLastWork']);
+
+    showAsWeek = optionsDefault['showAsWeek'] == null
+        ? defaultShowAsWeek
+        : optionsDefault['showAsWeek'].toString().toLowerCase() == "true";
+
+    showNavigation = optionsDefault['showNavigation'] == null
+        ? defaultShowNavigation
+        : optionsDefault['showNavigation'].toString().toLowerCase() == "true";
 
     if (widgetLoadType != LoadType.Delay) {
       SmeupCalendarDao.getData(this);
