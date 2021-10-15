@@ -58,6 +58,7 @@ class SmeupCalendar extends StatefulWidget
       this.data,
       this.initialFirstWork,
       this.initialLastWork,
+      this.initialDate,
       this.titleColumnName = SmeupCalendarModel.defaultTitleColumnName,
       this.dataColumnName = SmeupCalendarModel.defaultDataColumnName,
       this.initTimeColumnName = SmeupCalendarModel.defaultInitTimeColumnName,
@@ -110,6 +111,7 @@ class SmeupCalendar extends StatefulWidget
     showPeriodButtons = m.showPeriodButtons;
     initialFirstWork = m.initialFirstWork;
     initialLastWork = m.initialLastWork;
+    initialDate = m.initialDate;
     showAsWeek = m.showAsWeek;
     showNavigation = m.showNavigation;
 
@@ -203,7 +205,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
     _firstWork = widget.initialFirstWork;
     _lastWork = widget.initialLastWork;
     _events = Map<DateTime, List<SmeupCalentarEventModel>>();
-    _focusDay = _firstWork;
+    _focusDay = widget.initialDate;
     _calendarFormat =
         widget.showAsWeek ? CalendarFormat.week : CalendarFormat.month;
 
@@ -420,10 +422,10 @@ class SmeupCalendarState extends State<SmeupCalendar>
                         color: event[index].backgroundColor,
                       ),
                       child: ListTile(
-                        // TODO: Supporting event handling on single event
                         visualDensity:
                             VisualDensity(horizontal: -3, vertical: -3),
-                        onTap: () => print('${event[index].description}'),
+                        onTap: () => _fireDynamism(event[index].day, _focusDay,
+                            event: event[index]),
                         title: _getListTileWidget(event[index]),
                       ),
                     );
@@ -495,21 +497,41 @@ class SmeupCalendarState extends State<SmeupCalendar>
   }
 
   Future<void> _onDaySelected(DateTime selectedDay, DateTime focusedDay) async {
+    SmeupLogService.writeDebugMessage('CALLBACK: _onDaySelected');
+    if (_isLoading) return;
+    _selectedEvents.value = _getEventsForDay(selectedDay);
+    _fireDynamism(selectedDay, focusedDay);
+  }
+
+  Future<void> _fireDynamism(DateTime selectedDay, DateTime focusedDay,
+      {SmeupCalentarEventModel event}) async {
+    dynamic data;
+    String title;
+    String initTime;
+    String endTime;
     try {
-      SmeupLogService.writeDebugMessage('CALLBACK: _onDaySelected');
-      if (_isLoading) return;
-
-      _selectedEvents.value = _getEventsForDay(selectedDay);
-
-      setState(() {
-        _isLoading = true;
-      });
-
       String dayString = DateFormat('yyyy-MM-dd').format(selectedDay);
+      title = event?.description;
+      initTime = event?.initTime != null
+          ? DateFormat("HHmmss").format(event.initTime)
+          : null;
+      endTime = event?.endTime != null
+          ? DateFormat("HHmmss").format(event.endTime)
+          : null;
 
-      final data = _data.firstWhere(
-          (element) => element[widget.dataColumnName] == dayString,
-          orElse: () => null);
+      if (event == null) {
+        data = _data.firstWhere(
+            (element) => element[widget.dataColumnName] == dayString,
+            orElse: () => null);
+      } else {
+        data = _data.firstWhere((element) {
+          debugPrint(element.toString());
+          return element[widget.dataColumnName] == dayString &&
+              element[widget.titleColumnName] == title &&
+              element[widget.initTimeColumnName] == initTime &&
+              element[widget.endTimeColumnName] == endTime;
+        }, orElse: () => null);
+      }
 
       if (widget.clientOnDaySelected != null)
         widget.clientOnDaySelected(selectedDay);
@@ -522,7 +544,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
               widget.scaffoldKey, widget.formKey);
       }
     } catch (e) {
-      SmeupLogService.writeDebugMessage('Error on calendar _daySelected: $e',
+      SmeupLogService.writeDebugMessage('Error on calendar _fireDynamism: $e',
           logType: LogType.error);
     } finally {
       setState(() {

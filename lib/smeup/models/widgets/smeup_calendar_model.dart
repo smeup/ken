@@ -29,6 +29,7 @@ class SmeupCalendarModel extends SmeupModel {
   bool showPeriodButtons;
   DateTime initialFirstWork;
   DateTime initialLastWork;
+  DateTime initialDate;
   bool showAsWeek;
   bool showNavigation;
 
@@ -49,6 +50,7 @@ class SmeupCalendarModel extends SmeupModel {
       this.titleFontSize = defaultTitleFontSize,
       this.initialFirstWork,
       this.initialLastWork,
+      this.initialDate,
       this.showAsWeek,
       this.showNavigation})
       : super(formKey, title: title, id: id, type: type) {
@@ -82,6 +84,9 @@ class SmeupCalendarModel extends SmeupModel {
         ? DateTime(
             DateTime.now().year, DateTime.now().month, DateTime.now().day)
         : DateTime.parse(optionsDefault['initialLastWork']);
+    initialDate = optionsDefault['initialDay'] == null
+        ? DateTime.now()
+        : DateTime.parse(optionsDefault['initialDay']);
 
     showAsWeek = optionsDefault['showAsWeek'] == null
         ? defaultShowAsWeek
