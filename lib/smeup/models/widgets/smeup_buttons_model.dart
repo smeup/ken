@@ -25,6 +25,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   static const Color defaultFontColor = Colors.black;
   static const bool defaultUnderline = false;
   static const double defaultInnerSpace = 10.0;
+  static const String defaultValueField = 'testo';
 
   Color backColor;
   Color borderColor;
@@ -127,7 +128,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     } else {
       isLink = defaultIsLink;
     }
-    valueField = optionsDefault['valueField'] ?? 'value';
+    valueField = optionsDefault['valueField'] ?? defaultValueField;
     position = SmeupUtilities.getMainAxisAlignment(optionsDefault['position']);
     iconSize =
         SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;

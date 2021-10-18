@@ -67,7 +67,7 @@ class SmeupButtons extends StatefulWidget
       this.fontColor = SmeupButtonsModel.defaultFontColor,
       this.fontSize = SmeupButtonsModel.defaultFontsize,
       this.padding = SmeupButtonsModel.defaultPadding,
-      this.valueField,
+      this.valueField = SmeupButtonsModel.defaultValueField,
       this.borderRadius = SmeupButtonsModel.defaultBorderRadius,
       this.elevation = SmeupButtonsModel.defaultElevation,
       this.bold = SmeupButtonsModel.defaultBold,
