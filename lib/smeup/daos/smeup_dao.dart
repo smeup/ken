@@ -46,6 +46,11 @@ class SmeupDao {
       }
       model.data = smeupServiceResponse.result.data;
     }
+    if (!SmeupDataService.isDataStructure(model.data)) {
+      dynamic res = SmeupDataService.getEmptyDataStructure();
+      res['rows'] = model.data;
+      model.data = res;
+    }
     SmeupDataService.decrementDataFetch(model.id);
   }
 }

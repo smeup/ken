@@ -96,6 +96,15 @@ class SmeupDataService {
     return {"messages": [], "columns": null, "rows": null, "type": ""};
   }
 
+  static bool isDataStructure(dynamic data) {
+    if (data == null) return false;
+    if (data is List) return false;
+    if (data['rows'] == null) {
+      return false;
+    }
+    return true;
+  }
+
   static void incrementDataFetch(String id) {
     _activeDataFetch += 1;
   }

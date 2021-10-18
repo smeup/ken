@@ -100,6 +100,7 @@ class SmeupTree extends StatefulWidget
     SmeupTreeModel m = model;
 
     // change data format
+    // ignore: unused_local_variable
     var workData = formatDataFields(m);
 
     // set the widget data
