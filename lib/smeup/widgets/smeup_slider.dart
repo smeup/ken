@@ -1,29 +1,106 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_input_field_model.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_slider_dao.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_slider_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
-import 'smeup_not_available.dart';
 
-class SmeupSlider extends StatefulWidget {
-  final SmeupInputFieldModel smeupInputFieldModel;
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
-  final Function clientOnChange;
-  final TextInputType keyboard;
+// ignore: must_be_immutable
+class SmeupSlider extends StatefulWidget
+    with SmeupWidgetMixin
+    implements SmeupWidgetInterface {
+  GlobalKey<ScaffoldState> scaffoldKey;
+  GlobalKey<FormState> formKey;
+  Function clientOnChange;
+  SmeupSliderModel model;
 
-  SmeupSlider(this.smeupInputFieldModel, this.scaffoldKey, this.formKey,
-      {this.clientOnChange, this.keyboard});
+  EdgeInsetsGeometry padding;
+  double value;
+  double sldMin;
+  double sldMax;
+  String id;
+  String type;
+  String title;
+
+  SmeupSlider(this.scaffoldKey, this.formKey,
+      {this.padding = SmeupSliderModel.defaultPadding,
+      this.title,
+      this.id = '',
+      this.type = 'SLD',
+      this.value = SmeupSliderModel.defaultValue,
+      this.sldMax = SmeupSliderModel.defaultSldMax,
+      this.sldMin = SmeupSliderModel.defaultSldMin})
+      : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
+    id = SmeupUtilities.getWidgetId(type, id);
+  }
+
+  SmeupSlider.withController(
+    this.model,
+    this.scaffoldKey,
+    this.formKey,
+  ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
+    runControllerActivities(model);
+  }
+
+  @override
+  runControllerActivities(SmeupModel model) {
+    SmeupSliderModel m = model;
+    id = m.id;
+    type = m.type;
+    value = m.value;
+    sldMin = m.sldMin;
+    sldMax = m.sldMax;
+    title = m.title;
+    padding = m.padding;
+
+    value = treatData(m);
+  }
+
+  @override
+  dynamic treatData(SmeupModel model) {
+    SmeupSliderModel m = model;
+
+    // change data format
+    var workData = formatDataFields(m);
+
+    if (workData != null) {
+      double retValue = 0;
+      var firstElement = (workData['rows'] as List).first;
+      if (firstElement != null) {
+        if (firstElement[m.optionsDefault['value']] != null) {
+          retValue = SmeupUtilities.getDouble(
+                  firstElement[m.optionsDefault['value']]) ??
+              0;
+        }
+      }
+      return retValue;
+    }
+  }
 
   @override
   _SmeupSliderState createState() => _SmeupSliderState();
 }
 
-class _SmeupSliderState extends State<SmeupSlider> with SmeupWidgetStateMixin {
+class _SmeupSliderState extends State<SmeupSlider>
+    with SmeupWidgetStateMixin
+    implements SmeupWidgetStateInterface {
+  SmeupSliderModel _model;
+  dynamic _value;
+
+  @override
+  void initState() {
+    _model = widget.model;
+    _value = widget.value;
+    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    super.initState();
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -31,83 +108,59 @@ class _SmeupSliderState extends State<SmeupSlider> with SmeupWidgetStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final input = FutureBuilder<SmeupWidgetBuilderResponse>(
-      future: _getSliderComponent(widget.smeupInputFieldModel),
-      builder: (BuildContext context,
-          AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return widget.smeupInputFieldModel.showLoader
-              ? SmeupWait(widget.scaffoldKey, widget.formKey)
-              : Container();
-        } else {
-          if (snapshot.hasError) {
-            SmeupLogService.writeDebugMessage(
-                'Error SmeupSlider: ${snapshot.error}. StackTrace: ${snapshot.stackTrace}',
-                logType: LogType.error);
-            return SmeupNotAvailable();
-          } else {
-            return snapshot.data.children;
-          }
-        }
-      },
-    );
+    Widget slider = runBuild(context, widget.id, widget.type,
+        widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
+      setState(() {
+        widgetLoadType = LoadType.Immediate;
+        setDataLoad(widget.id, false);
+      });
+    });
 
-    return input;
+    return slider;
   }
 
-  Future<SmeupWidgetBuilderResponse> _getSliderComponent(
-      SmeupInputFieldModel smeupInputFieldModel) async {
-    Widget children;
-
-    await smeupInputFieldModel.setData();
-
-    if (!hasData(smeupInputFieldModel)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-              '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupInputFieldModel.smeupFun.fun['fun']['function']})'),
-          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
-        ),
-      );
-
-      return SmeupWidgetBuilderResponse(
-          smeupInputFieldModel, SmeupNotAvailable());
+  @override
+  Future<SmeupWidgetBuilderResponse> getChildren() async {
+    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+      if (_model != null) {
+        await SmeupSliderDao.getData(_model);
+        _value = widget.treatData(_model);
+      }
+      setDataLoad(widget.id, true);
     }
 
-    double value = double.tryParse(smeupInputFieldModel.data[0]['value']) ?? 0;
-    var tmp = smeupInputFieldModel.optionsDefault['extensions']['sldMin'];
-    double min = (tmp is int)
-        ? tmp.toDouble()
-        : (tmp is String)
-            ? double.tryParse(tmp)
-            : 0;
-    tmp = smeupInputFieldModel.optionsDefault['extensions']['sldMax'];
-    double max = (tmp is int)
-        ? tmp.toDouble()
-        : (tmp is String)
-            ? double.tryParse(tmp)
-            : 0;
+    if (_value == null) {
+      return getFunErrorResponse(context, _model);
+    }
 
-    SmeupVariablesService.setVariable(smeupInputFieldModel.id, value,
+    SmeupVariablesService.setVariable(widget.id, _value,
         formKey: widget.formKey);
 
-    children = Center(
+    //final children = Divider(
+    //sldMin: widget.sldMin,
+    //sldMax: widget.sldMin,
+    //);
+
+    final children = Center(
       child: Container(
           padding: EdgeInsets.only(left: 10, right: 10),
           child: Slider(
-            key: ValueKey(smeupInputFieldModel.id),
+            key: ValueKey(widget.id),
             onChanged: (value) {
               if (widget.clientOnChange != null) widget.clientOnChange(value);
-              SmeupVariablesService.setVariable(smeupInputFieldModel.id, value,
+              SmeupVariablesService.setVariable(widget.id, value,
                   formKey: widget.formKey);
             },
-            value: value,
+            value: _value,
             onChangeEnd: widget.clientOnChange,
-            min: min,
-            max: max,
+            min: widget.sldMin,
+            max: widget.sldMax,
           )),
     );
 
-    return SmeupWidgetBuilderResponse(smeupInputFieldModel, children);
+    SmeupLogService.writeDebugMessage('Error SmeupLabel not created',
+        logType: LogType.error);
+
+    return SmeupWidgetBuilderResponse(_model, children);
   }
 }
