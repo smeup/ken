@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_radio_buttons_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
@@ -38,7 +39,7 @@ class SmeupRadioButtons extends StatefulWidget
   String valueField;
   String displayedField;
   String selectedValue;
-
+  int columns;
   String id;
   String type;
   String title;
@@ -51,27 +52,32 @@ class SmeupRadioButtons extends StatefulWidget
     runControllerActivities(model);
   }
 
-  SmeupRadioButtons(this.scaffoldKey, this.formKey,
-      {this.id = '',
-      this.type = 'FLD',
-      this.title = '',
-      this.data,
-      this.backColor,
-      this.width = SmeupRadioButtonsModel.defaultWidth,
-      this.height = SmeupRadioButtonsModel.defaultHeight,
-      this.position = SmeupRadioButtonsModel.defaultPosition,
-      this.align = SmeupRadioButtonsModel.defaultAlign,
-      this.fontColor,
-      this.fontsize = SmeupRadioButtonsModel.defaultFontsize,
-      this.padding = SmeupRadioButtonsModel.defaultPadding,
-      this.valueField = SmeupRadioButtonsModel.defaultValueField,
-      this.displayedField = SmeupRadioButtonsModel.defaultDisplayedField,
-      this.selectedValue,
-      this.clientOnPressed(String value)})
-      : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
+  SmeupRadioButtons(
+    this.scaffoldKey,
+    this.formKey, {
+    this.id = '',
+    this.type = 'FLD',
+    this.title = '',
+    this.data,
+    this.backColor,
+    this.width = SmeupRadioButtonsModel.defaultWidth,
+    this.height = SmeupRadioButtonsModel.defaultHeight,
+    this.position = SmeupRadioButtonsModel.defaultPosition,
+    this.align = SmeupRadioButtonsModel.defaultAlign,
+    this.fontColor,
+    this.fontsize = SmeupRadioButtonsModel.defaultFontsize,
+    this.padding = SmeupRadioButtonsModel.defaultPadding,
+    this.valueField = SmeupRadioButtonsModel.defaultValueField,
+    this.displayedField = SmeupRadioButtonsModel.defaultDisplayedField,
+    this.selectedValue,
+    this.clientOnPressed(String value),
+    this.columns = SmeupRadioButtonsModel.defaultColumns,
+  }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
-
-    //if (data == null) data = List<Map<String, String>>.empty(growable: true);
+    if (backColor == null)
+      backColor = SmeupRadioButtonsModel.getDefaultBackColor();
+    if (fontColor == null)
+      fontColor = SmeupRadioButtonsModel.getDefaultFontColor();
   }
 
   @override
@@ -91,6 +97,7 @@ class SmeupRadioButtons extends StatefulWidget
     valueField = m.valueField;
     displayedField = m.displayedField;
     selectedValue = m.selectedValue;
+    columns = m.columns;
 
     data = treatData(m);
   }
@@ -108,8 +115,8 @@ class SmeupRadioButtons extends StatefulWidget
       for (var i = 0; i < (workData['rows'] as List).length; i++) {
         final element = workData['rows'][i];
         newList.add({
-          'code': element['k'].toString(),
-          'value': element['value'].toString()
+          'code': element[m.valueField].toString(),
+          'value': element[m.displayedField].toString()
         });
       }
       return newList;
@@ -187,6 +194,15 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
     }
 
     int buttonIndex = 0;
+    double radioHeight = widget.height;
+    double radioWidth = widget.width;
+    if (_model != null && _model.parent != null) {
+      if (radioHeight == 0)
+        radioHeight = (_model.parent as SmeupSectionModel).height;
+      if (radioWidth == 0)
+        radioWidth = (_model.parent as SmeupSectionModel).width;
+    }
+
     _data.forEach((radioButtonData) {
       buttonIndex += 1;
 
@@ -197,8 +213,8 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
           title: widget.title,
           data: radioButtonData,
           backColor: widget.backColor,
-          width: widget.width,
-          height: widget.height,
+          width: radioWidth,
+          height: radioHeight,
           position: widget.position,
           align: widget.align,
           fontColor: widget.fontColor,
@@ -209,13 +225,14 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
           selectedValue: SmeupVariablesService.getVariable(widget.id,
               formKey: widget.formKey),
           icon: null,
-          clientOnPressed: widget.clientOnPressed,
-          serverOnPressed: (value) {
+          onPressed: (value) {
             setState(() {
               dynamic selData = _data.firstWhere(
                   (element) => element['code'] == value,
                   orElse: () => null);
               if (selData != null) {
+                if (widget.clientOnPressed != null)
+                  widget.clientOnPressed(selData);
                 SmeupDynamismService.storeDynamicVariables(
                     selData, widget.formKey);
                 SmeupVariablesService.setVariable(widget.id, value,
@@ -234,15 +251,23 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
     });
 
     if (buttons.length > 0) {
+      double childAspectRatio = 0;
+      childAspectRatio =
+          (radioWidth / radioHeight * buttons.length * 3) / widget.columns;
+
       final container = Container(
+          height: radioHeight * buttons.length,
           padding: widget.padding,
-          child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
-                  border: Border.all(
-                      color:
-                          SmeupConfigurationService.getTheme().primaryColor)),
-              child: Column(children: buttons)));
+          decoration: BoxDecoration(
+              color: widget.backColor,
+              borderRadius: BorderRadius.circular(12.0),
+              border: Border.all(
+                  color: SmeupConfigurationService.getTheme().primaryColor)),
+          child: GridView.count(
+            childAspectRatio: childAspectRatio,
+            crossAxisCount: widget.columns,
+            children: buttons,
+          ));
 
       dynamic selData = (_data as List).firstWhere(
           (element) => element == SmeupVariablesService.getVariable(widget.id),

@@ -115,7 +115,8 @@ class _SmeupComponentState extends State<SmeupComponent> {
             smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'LIN':
-        children = SmeupLine(smeupModel, widget.scaffoldKey, widget.formKey);
+        children = SmeupLine.withController(
+            smeupModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'DSH':
         children = SmeupDashboard.withController(
@@ -167,8 +168,8 @@ class _SmeupComponentState extends State<SmeupComponent> {
             break;
 
           case 'sld':
-            children =
-                SmeupSlider(smeupModel, widget.scaffoldKey, widget.formKey);
+            children = SmeupSlider.withController(
+                smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 
           case 'spl':
