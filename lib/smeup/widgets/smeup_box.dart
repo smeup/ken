@@ -793,14 +793,14 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
         var smeupFun = SmeupFun.fromServiceName('*HTTP');
         final smeupServiceResponse = await SmeupDataService.invoke(smeupFun,
             httpServiceMethod: 'get',
-            httpServiceUrl: imgList[i].data['codice'],
+            httpServiceUrl: imgList[i]['codice'],
             //httpServiceContentType: 'application/x-www-form-urlencoded',
             httpServiceBody: null);
         if (smeupServiceResponse.succeded) {
           return Padding(
             padding: const EdgeInsets.all(5.0),
             child: Image.network(
-              imgList[i].data['codice'],
+              imgList[i]['codice'],
               fit: BoxFit.contain,
             ),
           );
