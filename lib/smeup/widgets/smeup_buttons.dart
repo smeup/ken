@@ -243,9 +243,11 @@ class SmeupButtonsState extends State<SmeupButtons>
     if (buttons.length > 0) {
       var widgets;
       if (widget.orientation == WidgetOrientation.Vertical)
-        widgets = Column(children: buttons);
+        widgets = SingleChildScrollView(
+            scrollDirection: Axis.vertical, child: Column(children: buttons));
       else
-        widgets = Row(children: buttons);
+        widgets = SingleChildScrollView(
+            scrollDirection: Axis.horizontal, child: Row(children: buttons));
 
       return SmeupWidgetBuilderResponse(_model, widgets);
     } else {
