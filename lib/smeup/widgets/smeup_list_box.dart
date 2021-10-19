@@ -44,6 +44,8 @@ class SmeupListBox extends StatefulWidget
   Color fontColor;
   Color backColor;
   String backgroundColName;
+  bool showSelection = false;
+  int selectedRow = -1;
 
   // dynamisms functions
   Function clientOnItemTap;
@@ -69,6 +71,8 @@ class SmeupListBox extends StatefulWidget
       this.backgroundColName = SmeupListBoxModel.defaultBackgroundColName,
       this.fontColor,
       this.backColor,
+      this.showSelection = false,
+      this.selectedRow = -1,
       title = '',
       showLoader: false,
       this.clientOnItemTap,
@@ -99,6 +103,8 @@ class SmeupListBox extends StatefulWidget
     fontColor = m.fontColor;
     backColor = m.backColor;
     backgroundColName = m.backgroundColName;
+    showSelection = m.showSelection;
+    selectedRow = m.selectedRow;
 
     dynamic deleteDynamism;
     if (m.dynamisms != null)
@@ -364,7 +370,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
       _data['rows'] = _rows;
     }
 
-    _data['rows'].forEach((dataElement) {
+    _data['rows'].asMap().forEach((i, dataElement) {
       var _cardColor = widget.backColor;
       if (widget.backgroundColName != null &&
           widget.backgroundColName.isNotEmpty) {
@@ -372,25 +378,40 @@ class _SmeupListBoxState extends State<SmeupListBox>
             dataElement[widget.backgroundColName]);
       }
 
-      final cell = SmeupBox(widget.scaffoldKey, widget.formKey,
-          onRefresh: _refreshList,
-          showLoader: widget.showLoader,
-          id: widget.id,
-          layout: widget.layout,
-          columns: _data['columns'],
-          data: dataElement,
-          dynamisms: _model?.dynamisms,
-          height: widget.height,
-          width: widget.width,
-          fontColor: widget.fontColor,
-          cardColor: _cardColor,
-          dismissEnabled: widget.dismissEnabled, onItemTap: (dynamic data) {
+      Function _onItemTap = (int index, dynamic data) {
         if (widget.clientOnItemTap != null) widget.clientOnItemTap(data);
         SmeupDynamismService.storeDynamicVariables(data, widget.formKey);
         if (_model != null)
           SmeupDynamismService.run(_model.dynamisms, context, 'click',
               widget.scaffoldKey, widget.formKey);
-      });
+
+        if (widget.showSelection && widget.selectedRow != index) {
+          setState(() {
+            widget.selectedRow = index;
+          });
+        }
+      };
+
+      final cell = SmeupBox(
+        widget.scaffoldKey,
+        widget.formKey,
+        i,
+        selectedRow: widget.selectedRow,
+        onRefresh: _refreshList,
+        showLoader: widget.showLoader,
+        id: widget.id,
+        layout: widget.layout,
+        columns: _data['columns'],
+        data: dataElement,
+        dynamisms: _model?.dynamisms,
+        height: widget.height,
+        width: widget.width,
+        fontColor: widget.fontColor,
+        cardColor: _cardColor,
+        showSelection: widget.showSelection,
+        dismissEnabled: widget.dismissEnabled,
+        onItemTap: _onItemTap,
+      );
 
       cells.add(cell);
     });
