@@ -9,9 +9,9 @@ enum SmeupListType { simple, oriented, wheel }
 
 class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 0;
-  static const double defaultHeight = 100;
-  static const double defaultListHeight = 100;
-  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const double defaultHeight = 200;
+  static const double defaultListHeight = 200;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(5);
   static const SmeupListType defaultListType = SmeupListType.oriented;
   static const int defaultPortraitColumns = 1;
   static const int defaultLandscapeColumns = 1;
@@ -69,7 +69,8 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getInt(optionsDefault['landscapeColumns']) ??
             defaultLandscapeColumns;
     fontsize = optionsDefault['fontSize'] ?? defaultFontsize;
-    padding = SmeupUtilities.getPadding(optionsDefault['padding']);
+    padding =
+        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;

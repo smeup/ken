@@ -31,7 +31,8 @@ class SmeupImageModel extends SmeupModel implements SmeupDataInterface {
       : super.fromMap(jsonMap, formKey) {
     width = SmeupUtilities.getDouble(jsonMap['width']) ?? defaultWidth;
     height = SmeupUtilities.getDouble(jsonMap['height']) ?? defaultHeight;
-    padding = SmeupUtilities.getPadding(optionsDefault['padding']);
+    padding =
+        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     title = jsonMap['title'] ?? '';
 
     if (widgetLoadType != LoadType.Delay) {

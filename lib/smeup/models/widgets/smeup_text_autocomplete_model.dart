@@ -57,7 +57,8 @@ class SmeupTextAutocompleteModel extends SmeupModel
     fontsize =
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
     label = optionsDefault['label'] ?? defaultLabel;
-    padding = SmeupUtilities.getPadding(optionsDefault['padding']);
+    padding =
+        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;

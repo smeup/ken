@@ -7,12 +7,12 @@ import 'package:mobile_components_library/smeup/services/smeup_data_service.dart
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
-  static const double defaultWidth = 200;
-  static const double defaultHeight = 60;
+  static const double defaultWidth = 0;
+  static const double defaultHeight = 100;
   static const MainAxisAlignment defaultPosition = MainAxisAlignment.center;
   static const Alignment defaultAlign = Alignment.center;
   static const double defaultFontsize = 16.0;
-  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(5);
   static const double defaultBorderRadius = 10.0;
   static const double defaultElevation = 0.0;
   static const bool defaultBold = true;
@@ -99,7 +99,8 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
     title = jsonMap['title'] ?? '';
-    padding = SmeupUtilities.getPadding(optionsDefault['padding']);
+    padding =
+        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     if (optionsDefault['fillSpace'] != null &&
         optionsDefault['fillSpace'].toString().toLowerCase() == 'yes') {

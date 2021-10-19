@@ -36,7 +36,8 @@ class SmeupSliderModel extends SmeupModel {
         SmeupUtilities.getDouble(optionsDefault['sldMin']) ?? defaultSldMin;
     sldMax =
         SmeupUtilities.getDouble(optionsDefault['sldMax']) ?? defaultSldMax;
-    padding = SmeupUtilities.getPadding(optionsDefault['padding']);
+    padding =
+        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
 
     if (widgetLoadType != LoadType.Delay) {
       SmeupSliderDao.getData(this);
