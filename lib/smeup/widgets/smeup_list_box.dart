@@ -40,6 +40,10 @@ class SmeupListBox extends StatefulWidget
   double fontsize;
   dynamic data;
   bool showLoader = false;
+  String defaultSort;
+  Color fontColor;
+  Color backColor;
+  String backgroundColName;
 
   // dynamisms functions
   Function clientOnItemTap;
@@ -62,10 +66,14 @@ class SmeupListBox extends StatefulWidget
       this.listType = SmeupListBoxModel.defaultListType,
       this.portraitColumns = SmeupListBoxModel.defaultPortraitColumns,
       this.landscapeColumns = SmeupListBoxModel.defaultLandscapeColumns,
+      this.backgroundColName = SmeupListBoxModel.defaultBackgroundColName,
+      this.fontColor,
+      this.backColor,
       title = '',
       showLoader: false,
       this.clientOnItemTap,
-      this.dismissEnabled = false})
+      this.dismissEnabled = false,
+      this.defaultSort = SmeupListBoxModel.defaultDefaultSort})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
   }
@@ -87,6 +95,10 @@ class SmeupListBox extends StatefulWidget
     landscapeColumns = m.landscapeColumns;
     title = m.title;
     showLoader = m.showLoader;
+    defaultSort = m.defaultSort;
+    fontColor = m.fontColor;
+    backColor = m.backColor;
+    backgroundColName = m.backgroundColName;
 
     dynamic deleteDynamism;
     if (m.dynamisms != null)
@@ -105,9 +117,28 @@ class SmeupListBox extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
+    SmeupListBoxModel m = model;
+
     // change data format
+    var workData = formatDataFields(m);
+
     // set the widget data
-    return formatDataFields(model);
+    if (workData != null) {
+      // Manage columns setup field: hide column if isn't in the set of columns
+      if (m.visibleColumns.isNotEmpty) {
+        for (var i = 0; i < (workData['columns'] as List).length; i++) {
+          final column = workData['columns'][i];
+          if (m.visibleColumns.contains(column['code']) == false) {
+            column['IO'] = 'H';
+          }
+        }
+        return workData;
+      } else {
+        return workData;
+      }
+    } else {
+      return model.data;
+    }
   }
 
   @override
@@ -324,7 +355,23 @@ class _SmeupListBoxState extends State<SmeupListBox>
   List<Widget> _getCells() {
     final cells = List<Widget>.empty(growable: true);
 
+    List _rows = _data['rows'];
+
+    if (widget.defaultSort.isNotEmpty) {
+      //Manage defaultSort setup parameter
+      _rows.sort(
+          (a, b) => (a[widget.defaultSort]).compareTo(b[widget.defaultSort]));
+      _data['rows'] = _rows;
+    }
+
     _data['rows'].forEach((dataElement) {
+      var _cardColor = widget.backColor;
+      if (widget.backgroundColName != null &&
+          widget.backgroundColName.isNotEmpty) {
+        _cardColor = SmeupUtilities.getColorFromRGB(
+            dataElement[widget.backgroundColName]);
+      }
+
       final cell = SmeupBox(widget.scaffoldKey, widget.formKey,
           onRefresh: _refreshList,
           showLoader: widget.showLoader,
@@ -335,6 +382,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
           dynamisms: _model?.dynamisms,
           height: widget.height,
           width: widget.width,
+          fontColor: widget.fontColor,
+          cardColor: _cardColor,
           dismissEnabled: widget.dismissEnabled, onItemTap: (dynamic data) {
         if (widget.clientOnItemTap != null) widget.clientOnItemTap(data);
         SmeupDynamismService.storeDynamicVariables(data, widget.formKey);

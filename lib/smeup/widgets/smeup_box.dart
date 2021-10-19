@@ -825,6 +825,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
         });
       }
     }
+
     return _columns;
   }
 }
