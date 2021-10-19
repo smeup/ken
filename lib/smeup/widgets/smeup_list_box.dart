@@ -41,6 +41,9 @@ class SmeupListBox extends StatefulWidget
   dynamic data;
   bool showLoader = false;
   String defaultSort;
+  Color fontColor;
+  Color backColor;
+  String backgroundColName;
 
   // dynamisms functions
   Function clientOnItemTap;
@@ -63,6 +66,9 @@ class SmeupListBox extends StatefulWidget
       this.listType = SmeupListBoxModel.defaultListType,
       this.portraitColumns = SmeupListBoxModel.defaultPortraitColumns,
       this.landscapeColumns = SmeupListBoxModel.defaultLandscapeColumns,
+      this.backgroundColName = SmeupListBoxModel.defaultBackgroundColName,
+      this.fontColor,
+      this.backColor,
       title = '',
       showLoader: false,
       this.clientOnItemTap,
@@ -90,6 +96,9 @@ class SmeupListBox extends StatefulWidget
     title = m.title;
     showLoader = m.showLoader;
     defaultSort = m.defaultSort;
+    fontColor = m.fontColor;
+    backColor = m.backColor;
+    backgroundColName = m.backgroundColName;
 
     dynamic deleteDynamism;
     if (m.dynamisms != null)
@@ -356,6 +365,13 @@ class _SmeupListBoxState extends State<SmeupListBox>
     }
 
     _data['rows'].forEach((dataElement) {
+      var _cardColor = widget.backColor;
+      if (widget.backgroundColName != null &&
+          widget.backgroundColName.isNotEmpty) {
+        _cardColor = SmeupUtilities.getColorFromRGB(
+            dataElement[widget.backgroundColName]);
+      }
+
       final cell = SmeupBox(widget.scaffoldKey, widget.formKey,
           onRefresh: _refreshList,
           showLoader: widget.showLoader,
@@ -366,6 +382,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
           dynamisms: _model?.dynamisms,
           height: widget.height,
           width: widget.width,
+          fontColor: widget.fontColor,
+          cardColor: _cardColor,
           dismissEnabled: widget.dismissEnabled, onItemTap: (dynamic data) {
         if (widget.clientOnItemTap != null) widget.clientOnItemTap(data);
         SmeupDynamismService.storeDynamicVariables(data, widget.formKey);

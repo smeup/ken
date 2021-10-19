@@ -19,6 +19,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultFontsize = 16.0;
   static const Axis defaultOrientation = Axis.vertical;
   static const String defaultDefaultSort = '';
+  static const String defaultBackgroundColName = '';
 
   double width;
   double height;
@@ -32,6 +33,9 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   String layout = '';
   List<String> visibleColumns = List<String>.empty();
   String defaultSort = '';
+  Color backColor;
+  Color fontColor;
+  String backgroundColName;
 
   SmeupListBoxModel(
       {id,
@@ -49,6 +53,9 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       this.landscapeColumns = defaultLandscapeColumns,
       this.visibleColumns,
       this.defaultSort = defaultDefaultSort,
+      this.fontColor,
+      this.backColor,
+      this.backgroundColName = defaultBackgroundColName,
       title = ''})
       : super(formKey, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
@@ -88,6 +95,15 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     if (optionsDefault['columns'] != null) {
       visibleColumns = optionsDefault['columns'].split('|');
     }
+
+    if (optionsDefault['fontColor'] != null) {
+      fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']);
+    }
+    if (optionsDefault['backColor'] != null) {
+      backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
+    }
+
+    backgroundColName = optionsDefault['backgroundColName'];
 
     if (widgetLoadType != LoadType.Delay) {
       SmeupListBoxDao.getData(this);
