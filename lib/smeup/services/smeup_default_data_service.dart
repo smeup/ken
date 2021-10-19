@@ -249,19 +249,25 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
         });
 
         res['rows'] = rows;
-        res['type'] = 'SmeupTable';
+        res['type'] = 'SmeupDataTable';
         return res;
 
       case 'TRE':
         dynamic res = SmeupDataService.getEmptyDataStructure();
-        List<Node> rows = List<Node>.empty(growable: true);
+        List rows = List.empty(growable: true);
         (response.data['children'] as List).forEach((child) {
-          var newRow = Node(
-              children: _loadTreeChildren(child['children']),
-              icon: IconData(59251, fontFamily: 'MaterialIcons'),
-              data: child['content'],
-              key: child['content']['codice'],
-              label: child['content']['testo']);
+          final tipo = child['content']['tipo'];
+          final parametro = child['content']['parametro'];
+          final codice = child['content']['codice'];
+          final testo = child['content']['testo'];
+
+          var newRow = {
+            'tipo': tipo,
+            'parametro': parametro,
+            'codice': codice,
+            'value': testo
+          };
+
           rows.add(newRow);
         });
         res['rows'] = rows;
@@ -273,17 +279,5 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
       default:
         return response.data;
     }
-  }
-
-  List<Node> _loadTreeChildren(parent) {
-    List<Node> rows = List<Node>.empty(growable: true);
-    (parent as List).forEach((child) {
-      var newRow = Node(
-          children: _loadTreeChildren(child),
-          key: child['content']['codice'],
-          label: child['content']['testo']);
-      rows.add(newRow);
-    });
-    return rows;
   }
 }
