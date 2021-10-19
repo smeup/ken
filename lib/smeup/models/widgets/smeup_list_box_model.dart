@@ -61,7 +61,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     }
 
     title = jsonMap['title'] ?? '';
-    layout = jsonMap['layout'];
+    layout = optionsDefault['Layout'] ?? defaultLayout;
     portraitColumns =
         SmeupUtilities.getInt(optionsDefault['portraitColumns']) ??
             defaultPortraitColumns;

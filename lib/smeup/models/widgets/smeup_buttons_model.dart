@@ -25,7 +25,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   static const Color defaultFontColor = Colors.black;
   static const bool defaultUnderline = false;
   static const double defaultInnerSpace = 10.0;
-  static const String defaultValueField = 'testo';
+  static const String defaultValueField = 'value';
 
   Color backColor;
   Color borderColor;

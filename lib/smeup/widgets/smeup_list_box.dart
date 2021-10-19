@@ -52,7 +52,7 @@ class SmeupListBox extends StatefulWidget
   SmeupListBox(this.scaffoldKey, this.formKey, this.data,
       {this.id = '',
       this.type = 'BOX',
-      this.layout,
+      this.layout = SmeupListBoxModel.defaultLayout,
       this.width = SmeupListBoxModel.defaultWidth,
       this.height = SmeupListBoxModel.defaultHeight,
       this.listHeight = SmeupListBoxModel.defaultHeight,
@@ -159,6 +159,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
 
   /// Label's structure:
   /// define the structure ...
+  @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
@@ -324,6 +325,14 @@ class _SmeupListBoxState extends State<SmeupListBox>
   List<Widget> _getCells() {
     final cells = List<Widget>.empty(growable: true);
 
+    double boxHeight = widget.height;
+    double boxWidth = widget.width;
+    if (_model != null && _model.parent != null) {
+      if (boxHeight == 0)
+        boxHeight = (_model.parent as SmeupSectionModel).height;
+      if (boxWidth == 0) boxWidth = (_model.parent as SmeupSectionModel).width;
+    }
+
     _data['rows'].forEach((dataElement) {
       final cell = SmeupBox(widget.scaffoldKey, widget.formKey,
           onRefresh: _refreshList,
@@ -333,8 +342,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
           columns: _data['columns'],
           data: dataElement,
           dynamisms: _model?.dynamisms,
-          height: widget.height,
-          width: widget.width,
+          height: boxHeight,
+          width: boxWidth,
           dismissEnabled: widget.dismissEnabled, onItemTap: (dynamic data) {
         if (widget.clientOnItemTap != null) widget.clientOnItemTap(data);
         SmeupDynamismService.storeDynamicVariables(data, widget.formKey);
