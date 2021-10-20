@@ -20,6 +20,8 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   static const Axis defaultOrientation = Axis.vertical;
   static const String defaultDefaultSort = '';
   static const String defaultBackgroundColName = '';
+  static const bool defaultShowSelection = false;
+  static const int defaultSelectedRow = -1;
 
   double width;
   double height;
@@ -36,6 +38,8 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   Color backColor;
   Color fontColor;
   String backgroundColName;
+  bool showSelection;
+  int selectedRow;
 
   SmeupListBoxModel(
       {id,
@@ -56,6 +60,8 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       this.fontColor,
       this.backColor,
       this.backgroundColName = defaultBackgroundColName,
+      this.showSelection = defaultShowSelection,
+      this.selectedRow = defaultSelectedRow,
       title = ''})
       : super(formKey, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
@@ -104,6 +110,18 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     }
 
     backgroundColName = optionsDefault['backgroundColName'];
+
+    showSelection = false;
+    if (optionsDefault['showSelection'] != null) {
+      if (optionsDefault['showSelection'] is bool)
+        showSelection = optionsDefault['showSelection'];
+      else if (optionsDefault['showSelection'] == 'Yes') showSelection = true;
+    }
+
+    selectedRow = -1;
+    if (optionsDefault['selectRow'] != null) {
+      selectedRow = SmeupUtilities.getInt(optionsDefault['selectRow']);
+    }
 
     if (widgetLoadType != LoadType.Delay) {
       SmeupListBoxDao.getData(this);
