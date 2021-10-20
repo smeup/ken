@@ -24,20 +24,24 @@ class SmeupGauge extends StatefulWidget
   String valueColName;
   String warningColName;
   String maxColName;
+  String minColName;
 
   //dynamic data;
+  int minValue;
   int maxValue;
   int value;
   int warning;
 
   SmeupGauge(this.scaffoldKey, this.formKey,
-      {this.value = 0,
-      this.maxValue = 0,
-      this.warning = 0,
+      {this.value = SmeupGaugeModel.defaultValue,
+      this.maxValue = SmeupGaugeModel.defaultMaxValue,
+      this.minValue = SmeupGaugeModel.defaultMinValue,
+      this.warning = SmeupGaugeModel.defaultWarning,
       id = '',
       type = 'GAU',
       this.valueColName = SmeupGaugeModel.defaultValColName,
       this.maxColName = SmeupGaugeModel.defaultMaxColName,
+      this.minColName = SmeupGaugeModel.defaultMinColName,
       this.warningColName = SmeupGaugeModel.defaultWarningColName,
       this.title = ''})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
@@ -57,6 +61,7 @@ class SmeupGauge extends StatefulWidget
     title = m.title;
     valueColName = m.valueColName;
     maxColName = m.maxColName;
+    minColName = m.minColName;
     warningColName = m.warningColName;
 
     treatData(m);
@@ -73,6 +78,7 @@ class SmeupGauge extends StatefulWidget
     if (workData != null && (workData['rows'] as List).length > 0) {
       value = workData['rows'][0][m.valueColName];
       maxValue = workData['rows'][0][m.maxColName];
+      minValue = workData['rows'][0][m.minColName];
       warning = workData['rows'][0][m.warningColName];
     }
   }
@@ -86,6 +92,7 @@ class _SmeupGaugeState extends State<SmeupGauge>
     implements SmeupWidgetStateInterface {
   SmeupGaugeModel _model;
   int _maxValue;
+  int _minValue;
   int _value;
   int _warning;
 
@@ -94,6 +101,7 @@ class _SmeupGaugeState extends State<SmeupGauge>
     _model = widget.model;
     _value = widget.value;
     _maxValue = widget.maxValue;
+    _minValue = widget.minValue;
     _warning = widget.warning;
     if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
@@ -124,6 +132,7 @@ class _SmeupGaugeState extends State<SmeupGauge>
         widget.treatData(_model);
         _value = widget.value;
         _maxValue = widget.maxValue;
+        _minValue = widget.minValue;
         _warning = widget.warning;
       }
       setDataLoad(widget.id, true);
@@ -137,7 +146,7 @@ class _SmeupGaugeState extends State<SmeupGauge>
     children = Center(
       child: Speedometer(
         size: 100,
-        minValue: 0,
+        minValue: _minValue,
         maxValue: _maxValue,
         currentValue: _value,
         warningValue: _warning,
