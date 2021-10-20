@@ -253,7 +253,8 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
       case 'TRE':
         dynamic res = SmeupDataService.getEmptyDataStructure();
         List rows = List.empty(growable: true);
-        (response.data['children'] as List).forEach((child) {
+        for (var i = 0; i < (response.data['children'] as List).length; i++) {
+          final child = (response.data['children'] as List)[i];
           final tipo = child['content']['tipo'];
           final parametro = child['content']['parametro'];
           final codice = child['content']['codice'];
@@ -263,11 +264,13 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
             'tipo': tipo,
             'parametro': parametro,
             'codice': codice,
-            'value': testo
+            'value': testo,
+            //'${child['content']['codice']}': testo
           };
 
           rows.add(newRow);
-        });
+        }
+
         res['rows'] = rows;
         res['type'] = 'SmeupTreeNode';
         return res;
