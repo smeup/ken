@@ -36,12 +36,15 @@ class SmeupChartModel extends SmeupModel {
   SmeupChartModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
-    chartType = _getChartType(optionsDefault['types'][0]) ?? defaultChartType;
+    chartType = _getChartType(optionsDefault['Typ'][0]) ?? defaultChartType;
     //refresh = optionsDefault['refresh'] ?? defaultRefresh;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
-    legend = optionsDefault['leg'] ?? defaultLegend;
+    if (optionsDefault['ShowMarks'] == 'Si')
+      legend = true;
+    else
+      legend = false;
 
     if (widgetLoadType != LoadType.Delay) {
       SmeupChartDao.getData(this);
@@ -52,7 +55,7 @@ class SmeupChartModel extends SmeupModel {
 
   ChartType _getChartType(String type) {
     switch (type) {
-      case 'bar':
+      case 'VBAR':
         return ChartType.Bar;
         break;
       case 'pie':
