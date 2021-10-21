@@ -18,6 +18,10 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultLayout = '1';
   static const double defaultFontsize = 16.0;
   static const Axis defaultOrientation = Axis.vertical;
+  static const String defaultDefaultSort = '';
+  static const String defaultBackgroundColName = '';
+  static const bool defaultShowSelection = false;
+  static const int defaultSelectedRow = -1;
 
   double width;
   double height;
@@ -29,6 +33,13 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   int landscapeColumns;
   double fontsize;
   String layout = '';
+  List<String> visibleColumns = List<String>.empty();
+  String defaultSort = '';
+  Color backColor;
+  Color fontColor;
+  String backgroundColName;
+  bool showSelection;
+  int selectedRow;
 
   SmeupListBoxModel(
       {id,
@@ -44,6 +55,13 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       this.listType = defaultListType,
       this.portraitColumns = defaultPortraitColumns,
       this.landscapeColumns = defaultLandscapeColumns,
+      this.visibleColumns,
+      this.defaultSort = defaultDefaultSort,
+      this.fontColor,
+      this.backColor,
+      this.backgroundColName = defaultBackgroundColName,
+      this.showSelection = defaultShowSelection,
+      this.selectedRow = defaultSelectedRow,
       title = ''})
       : super(formKey, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
@@ -80,6 +98,31 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     orientation = jsonMap['orientation'] == 'horizontal'
         ? Axis.horizontal
         : Axis.vertical;
+
+    if (optionsDefault['columns'] != null) {
+      visibleColumns = optionsDefault['columns'].split('|');
+    }
+
+    if (optionsDefault['fontColor'] != null) {
+      fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']);
+    }
+    if (optionsDefault['backColor'] != null) {
+      backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
+    }
+
+    backgroundColName = optionsDefault['backgroundColName'];
+
+    showSelection = false;
+    if (optionsDefault['showSelection'] != null) {
+      if (optionsDefault['showSelection'] is bool)
+        showSelection = optionsDefault['showSelection'];
+      else if (optionsDefault['showSelection'] == 'Yes') showSelection = true;
+    }
+
+    selectedRow = -1;
+    if (optionsDefault['selectRow'] != null) {
+      selectedRow = SmeupUtilities.getInt(optionsDefault['selectRow']);
+    }
 
     if (widgetLoadType != LoadType.Delay) {
       SmeupListBoxDao.getData(this);

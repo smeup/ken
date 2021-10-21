@@ -30,9 +30,14 @@ class SmeupBox extends StatefulWidget {
   final double width;
   final double height;
   final bool dismissEnabled;
+  final bool showSelection;
+  final int index;
+  final int selectedRow;
+  double borderSize;
 
-  SmeupBox(this.scaffoldKey, this.formKey,
+  SmeupBox(this.scaffoldKey, this.formKey, this.index,
       {this.id,
+      this.selectedRow,
       this.columns,
       this.data,
       this.onRefresh,
@@ -44,7 +49,9 @@ class SmeupBox extends StatefulWidget {
       this.fontColor,
       this.width,
       this.height,
-      this.dismissEnabled});
+      this.dismissEnabled,
+      this.showSelection,
+      this.borderSize});
 
   @override
   _SmeupBoxState createState() => _SmeupBoxState();
@@ -82,6 +89,12 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
 
   Future<SmeupWidgetBuilderResponse> _getBoxComponent() async {
     Widget box;
+
+    if (widget.showSelection && widget.index == widget.selectedRow) {
+      widget.borderSize = 4;
+    } else {
+      widget.borderSize = 2;
+    }
 
     switch (widget.layout ?? '') {
 
@@ -196,14 +209,14 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     if (data.length > 0) {
       return GestureDetector(
         onTap: () {
-          _manageTap(data);
+          _manageTap(widget.index, data);
         },
         child: Card(
             color: widget.cardColor ?? null,
             shape: RoundedRectangleBorder(
               side: BorderSide(
                   color: SmeupConfigurationService.getTheme().primaryColor,
-                  width: 2),
+                  width: widget.borderSize),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -275,7 +288,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     if (data.length > 0) {
       return GestureDetector(
         onTap: () {
-          _manageTap(data);
+          _manageTap(widget.index, data);
         },
         child: Card(
             color: widget.cardColor ?? null,
@@ -347,7 +360,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     if (data.length > 0) {
       return GestureDetector(
         onTap: () {
-          _manageTap(data);
+          _manageTap(widget.index, data);
         },
         child: Card(
             color: widget.cardColor ?? null,
@@ -400,14 +413,14 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     if (data.length > 0) {
       return GestureDetector(
         onTap: () {
-          _manageTap(data);
+          _manageTap(widget.index, data);
         },
         child: Card(
             color: widget.cardColor ?? null,
             shape: RoundedRectangleBorder(
               side: BorderSide(
                   color: SmeupConfigurationService.getTheme().primaryColor,
-                  width: 2),
+                  width: widget.borderSize),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -488,14 +501,14 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     if (data.length > 0) {
       return GestureDetector(
         onTap: () {
-          _manageTap(data);
+          _manageTap(widget.index, data);
         },
         child: Card(
             color: widget.cardColor ?? null,
             shape: RoundedRectangleBorder(
               side: BorderSide(
                   color: SmeupConfigurationService.getTheme().primaryColor,
-                  width: 2),
+                  width: widget.borderSize),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -561,14 +574,14 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     if (data.length > 0) {
       return GestureDetector(
         onTap: () {
-          _manageTap(data);
+          _manageTap(widget.index, data);
         },
         child: Card(
             color: widget.cardColor ?? null,
             shape: RoundedRectangleBorder(
               side: BorderSide(
                   color: SmeupConfigurationService.getTheme().primaryColor,
-                  width: 2),
+                  width: widget.borderSize),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -652,14 +665,14 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     if (data.length > 0) {
       return GestureDetector(
         onTap: () {
-          _manageTap(data);
+          _manageTap(widget.index, data);
         },
         child: Card(
             color: widget.cardColor ?? null,
             shape: RoundedRectangleBorder(
               side: BorderSide(
                   color: SmeupConfigurationService.getTheme().primaryColor,
-                  width: 2),
+                  width: widget.borderSize),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -886,9 +899,9 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     return widgetBtns;
   }
 
-  void _manageTap(data) {
+  void _manageTap(index, data) {
     if (widget.onItemTap != null) {
-      widget.onItemTap(data);
+      widget.onItemTap(index, data);
     }
   }
 
@@ -925,6 +938,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
         });
       }
     }
+
     return _columns;
   }
 }

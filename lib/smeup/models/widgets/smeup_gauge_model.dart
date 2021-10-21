@@ -13,11 +13,17 @@ class SmeupGaugeModel extends SmeupModel implements SmeupDataInterface {
 
   static const String defaultValColName = 'value';
   static const String defaultMaxColName = 'maxValue';
+  static const String defaultMinColName = 'minValue';
   static const String defaultWarningColName = 'warning';
+  static const int defaultMaxValue = 100;
+  static const int defaultMinValue = 0;
+  static const int defaultWarning = 50;
+  static const int defaultValue = 0;
 
   String valueColName;
   String warningColName;
   String maxColName;
+  String minColName;
 
   SmeupGaugeModel(
       {id,
@@ -26,6 +32,7 @@ class SmeupGaugeModel extends SmeupModel implements SmeupDataInterface {
       this.valueColName = defaultValColName,
       this.warningColName = defaultWarningColName,
       this.maxColName = defaultMaxColName,
+      this.minColName = defaultMinColName,
       title = ''})
       : super(formKey, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
@@ -40,6 +47,7 @@ class SmeupGaugeModel extends SmeupModel implements SmeupDataInterface {
     title = jsonMap['title'] ?? '';
     valueColName = optionsDefault['valueColName'] ?? defaultValColName;
     maxColName = optionsDefault['maxColName'] ?? defaultMaxColName;
+    minColName = optionsDefault['minColName'] ?? defaultMinColName;
     warningColName = optionsDefault['warningColName'] ?? defaultWarningColName;
     SmeupDataService.incrementDataFetch(id);
   }

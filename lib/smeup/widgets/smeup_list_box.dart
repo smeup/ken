@@ -40,6 +40,12 @@ class SmeupListBox extends StatefulWidget
   double fontsize;
   dynamic data;
   bool showLoader = false;
+  String defaultSort;
+  Color fontColor;
+  Color backColor;
+  String backgroundColName;
+  bool showSelection = false;
+  int selectedRow = -1;
 
   // dynamisms functions
   Function clientOnItemTap;
@@ -62,10 +68,16 @@ class SmeupListBox extends StatefulWidget
       this.listType = SmeupListBoxModel.defaultListType,
       this.portraitColumns = SmeupListBoxModel.defaultPortraitColumns,
       this.landscapeColumns = SmeupListBoxModel.defaultLandscapeColumns,
+      this.backgroundColName = SmeupListBoxModel.defaultBackgroundColName,
+      this.fontColor,
+      this.backColor,
+      this.showSelection = false,
+      this.selectedRow = -1,
       title = '',
       showLoader: false,
       this.clientOnItemTap,
-      this.dismissEnabled = false})
+      this.dismissEnabled = false,
+      this.defaultSort = SmeupListBoxModel.defaultDefaultSort})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
   }
@@ -87,6 +99,12 @@ class SmeupListBox extends StatefulWidget
     landscapeColumns = m.landscapeColumns;
     title = m.title;
     showLoader = m.showLoader;
+    defaultSort = m.defaultSort;
+    fontColor = m.fontColor;
+    backColor = m.backColor;
+    backgroundColName = m.backgroundColName;
+    showSelection = m.showSelection;
+    selectedRow = m.selectedRow;
 
     dynamic deleteDynamism;
     if (m.dynamisms != null)
@@ -105,9 +123,28 @@ class SmeupListBox extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
+    SmeupListBoxModel m = model;
+
     // change data format
+    var workData = formatDataFields(m);
+
     // set the widget data
-    return formatDataFields(model);
+    if (workData != null) {
+      // Manage columns setup field: hide column if isn't in the set of columns
+      if (m.visibleColumns.isNotEmpty) {
+        for (var i = 0; i < (workData['columns'] as List).length; i++) {
+          final column = workData['columns'][i];
+          if (m.visibleColumns.contains(column['code']) == false) {
+            column['IO'] = 'H';
+          }
+        }
+        return workData;
+      } else {
+        return workData;
+      }
+    } else {
+      return model.data;
+    }
   }
 
   @override
@@ -333,24 +370,57 @@ class _SmeupListBoxState extends State<SmeupListBox>
       if (boxWidth == 0) boxWidth = (_model.parent as SmeupSectionModel).width;
     }
 
-    _data['rows'].forEach((dataElement) {
-      final cell = SmeupBox(widget.scaffoldKey, widget.formKey,
-          onRefresh: _refreshList,
-          showLoader: widget.showLoader,
-          id: widget.id,
-          layout: widget.layout,
-          columns: _data['columns'],
-          data: dataElement,
-          dynamisms: _model?.dynamisms,
-          height: boxHeight,
-          width: boxWidth,
-          dismissEnabled: widget.dismissEnabled, onItemTap: (dynamic data) {
+    List _rows = _data['rows'];
+
+    if (widget.defaultSort.isNotEmpty) {
+      //Manage defaultSort setup parameter
+      _rows.sort(
+          (a, b) => (a[widget.defaultSort]).compareTo(b[widget.defaultSort]));
+      _data['rows'] = _rows;
+    }
+
+    _data['rows'].asMap().forEach((i, dataElement) {
+      var _cardColor = widget.backColor;
+      if (widget.backgroundColName != null &&
+          widget.backgroundColName.isNotEmpty) {
+        _cardColor = SmeupUtilities.getColorFromRGB(
+            dataElement[widget.backgroundColName]);
+      }
+
+      Function _onItemTap = (int index, dynamic data) {
         if (widget.clientOnItemTap != null) widget.clientOnItemTap(data);
         SmeupDynamismService.storeDynamicVariables(data, widget.formKey);
         if (_model != null)
           SmeupDynamismService.run(_model.dynamisms, context, 'click',
               widget.scaffoldKey, widget.formKey);
-      });
+
+        if (widget.showSelection && widget.selectedRow != index) {
+          setState(() {
+            widget.selectedRow = index;
+          });
+        }
+      };
+
+      final cell = SmeupBox(
+        widget.scaffoldKey,
+        widget.formKey,
+        i,
+        selectedRow: widget.selectedRow,
+        onRefresh: _refreshList,
+        showLoader: widget.showLoader,
+        id: widget.id,
+        layout: widget.layout,
+        columns: _data['columns'],
+        data: dataElement,
+        dynamisms: _model?.dynamisms,
+        height: widget.height,
+        width: widget.width,
+        fontColor: widget.fontColor,
+        cardColor: _cardColor,
+        showSelection: widget.showSelection,
+        dismissEnabled: widget.dismissEnabled,
+        onItemTap: _onItemTap,
+      );
 
       cells.add(cell);
     });
