@@ -249,7 +249,22 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                         }
                       });
 
-                      Widget widgetImg = _getImage(data);
+                      Widget widgetImg = FutureBuilder<Widget>(
+                          future: _getImage(data),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<Widget> snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return SmeupWait(
+                                  widget.scaffoldKey, widget.formKey);
+                            } else {
+                              if (snapshot.hasError) {
+                                return SmeupNotAvailable();
+                              } else {
+                                return snapshot.data;
+                              }
+                            }
+                          });
 
                       return [
                         if (widgetImg != null) widgetImg,
@@ -690,7 +705,30 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                         }
                       });
 
-                      return [Expanded(child: Column(children: listOfRows))];
+                      //return [Expanded(child: Column(children: listOfRows))];
+                      Widget widgetImg = FutureBuilder<Widget>(
+                          future: _getImage(data),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<Widget> snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return SmeupWait(
+                                  widget.scaffoldKey, widget.formKey);
+                            } else {
+                              if (snapshot.hasError) {
+                                return SmeupNotAvailable();
+                              } else {
+                                return snapshot.data;
+                              }
+                            }
+                          });
+
+                      //await _getImage(data);
+
+                      return [
+                        if (widgetImg != null) widgetImg,
+                        Expanded(child: Column(children: listOfRows))
+                      ];
                     }(),
                   ),
                 ))),
@@ -703,7 +741,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     return SmeupNotAvailable();
   }
 
-  Widget _getImage(dynamic data) {
+  Future<Widget> _getImage(dynamic data) async {
     Widget widgetImg;
     var colImg = _getColumns(data).firstWhere(
         (col) => col['ogg'] == 'J4IMG' && col['IO'] != 'H',
@@ -712,16 +750,78 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
       final String imageColName = colImg['code'];
       final String ogg = data[imageColName];
       final List split = ogg.split(';');
-      if (split.length == 3)
-        widgetImg = Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Image.network(
-            split[2],
-            fit: BoxFit.contain,
-          ),
-        );
+      if (split.length == 3) {
+        String type = split[0];
+        String parameter = split[1];
+        String code = split[2];
+        bool validURL = Uri.parse(code).isAbsolute;
+        if (validURL) {
+          widgetImg = Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Image.network(
+              code,
+              fit: BoxFit.contain,
+            ),
+          );
+        } else {
+          final fun = {
+            "fun": {
+              "component": "TRE",
+              "service": "JASER_12",
+              "function": "IMG.LIS",
+              "obj1": {"t": "$type", "p": "$parameter", "k": "$code"},
+              "obj2": {"t": "", "p": "", "k": ""},
+              "obj3": {"t": "", "p": "", "k": ""},
+              "obj4": {"t": "", "p": "", "k": ""},
+              "obj5": {"t": "", "p": "", "k": ""},
+              "obj6": {"t": "", "p": "", "k": ""},
+              "P": "",
+              "SG": {'cache': 60, 'forceCache': false},
+              "INPUT": ""
+            }
+          };
+
+          final smeupFun = SmeupFun(fun, null);
+
+          final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
+          if (!smeupServiceResponse.succeded) {
+            SmeupLogService.writeDebugMessage(
+                "_getImage error in SmeupBox: ${smeupServiceResponse.result} - Try to retry",
+                logType: LogType.error);
+            return SmeupNotAvailable();
+          } else {
+            final imgList = smeupServiceResponse.result.data['rows'];
+
+            widgetImg = await _fetchAvailableLinks(imgList);
+          }
+        }
+      }
     }
     return widgetImg;
+  }
+
+  Future<Widget> _fetchAvailableLinks(imgList) async {
+    if (imgList != null && imgList.length != 0) {
+      for (var i = 0; i < imgList.length; i++) {
+        var smeupFun = SmeupFun.fromServiceName('*HTTP');
+        final smeupServiceResponse = await SmeupDataService.invoke(smeupFun,
+            httpServiceMethod: 'get',
+            httpServiceUrl: imgList[i]['codice'],
+            //httpServiceContentType: 'application/x-www-form-urlencoded',
+            httpServiceBody: null);
+        if (smeupServiceResponse.succeded) {
+          return Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Image.network(
+              imgList[i]['codice'],
+              fit: BoxFit.contain,
+            ),
+          );
+        }
+      }
+    }
+
+    return SmeupNotAvailable();
   }
 
   List<Widget> _getButtons(dynamic data) {

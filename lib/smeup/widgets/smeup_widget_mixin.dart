@@ -10,7 +10,8 @@ class SmeupWidgetMixin {
   /// this function will format each field in the "data.rows"
   /// by checking the corresponing "data.columns"
   dynamic formatDataFields(SmeupModel model) {
-    if (model.data == null) return null;
+    if (!SmeupDataService.isDataStructure(model.data)) return null;
+
     dynamic res = SmeupDataService.getEmptyDataStructure();
     res['messages'] = model.data['messages'];
     res['columns'] = model.data['columns'];

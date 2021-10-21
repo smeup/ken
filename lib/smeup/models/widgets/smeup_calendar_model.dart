@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_calendar_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupCalendarModel extends SmeupModel {
-  static const double defaultWidth = 400;
-  static const double defaultHeight = 400;
+  static const double defaultWidth = 0;
+  static const double defaultHeight = 0;
   static const double defaultEventFontSize = 12.0;
   static const double defaultTitleFontSize = 20.0;
   static const bool defaultShowPeriodButtons = false;
-  static const String defaultTitleColumnName = 'title';
-  static const String defaultDataColumnName = 'value';
-  static const String defaultStyleColumnName = 'style';
+  static const String defaultTitleColumnName = 'XXDDAT';
+  static const String defaultDataColumnName = 'XXDAT1';
+  static const String defaultStyleColumnName = 'XXGRAF';
   static const String defaultInitTimeColumnName = 'init';
   static const String defaultEndTimeColumnName = 'end';
   static const bool defaultShowAsWeek = false;
@@ -55,6 +57,13 @@ class SmeupCalendarModel extends SmeupModel {
       this.showNavigation})
       : super(formKey, title: title, id: id, type: type) {
     id = SmeupUtilities.getWidgetId('CAL', id);
+    if (initialDate == null) initialDate = DateTime.now();
+    if (initialFirstWork == null) {
+      this.initialFirstWork = getInitialFirstWork(initialDate);
+    }
+    if (initialLastWork == null) {
+      this.initialLastWork = getInitialFirstWork(initialDate);
+    }
   }
 
   SmeupCalendarModel.fromMap(
@@ -77,16 +86,18 @@ class SmeupCalendarModel extends SmeupModel {
         defaultEventFontSize;
     titleFontSize = SmeupUtilities.getDouble(optionsDefault['titleFontSize']) ??
         defaultTitleFontSize;
-    initialFirstWork = optionsDefault['initialFirstWork'] == null
-        ? DateTime(DateTime.now().year, DateTime.now().month, 1)
-        : DateTime.parse(optionsDefault['initialFirstWork']);
-    initialLastWork = optionsDefault['initialLastWork'] == null
-        ? DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day)
-        : DateTime.parse(optionsDefault['initialLastWork']);
+
     initialDate = optionsDefault['initialDay'] == null
         ? DateTime.now()
         : DateTime.parse(optionsDefault['initialDay']);
+
+    initialFirstWork = optionsDefault['initialFirstWork'] == null
+        ? getInitialFirstWork(initialDate)
+        : DateTime.parse(optionsDefault['initialFirstWork']);
+
+    initialLastWork = optionsDefault['initialLastWork'] == null
+        ? getInitialLastWork(initialDate)
+        : DateTime.parse(optionsDefault['initialLastWork']);
 
     showAsWeek = optionsDefault['showAsWeek'] == null
         ? defaultShowAsWeek
@@ -96,8 +107,38 @@ class SmeupCalendarModel extends SmeupModel {
         ? defaultShowNavigation
         : optionsDefault['showNavigation'].toString().toLowerCase() == "true";
 
-    if (widgetLoadType != LoadType.Delay) {
-      SmeupCalendarDao.getData(this);
-    }
+    widgetLoadType = LoadType.Immediate;
+
+    // if (widgetLoadType != LoadType.Delay) {
+    //   SmeupDynamismService.storeDynamicVariables({
+    //     '*CAL.INI': DateFormat('yyyyMMdd').format(getStartFunDate(initialDate))
+    //   }, null);
+    //   SmeupDynamismService.storeDynamicVariables({
+    //     '*CAL.END': DateFormat('yyyyMMdd').format(getEndFunDate(initialDate))
+    //   }, null);
+    //   SmeupCalendarDao.getData(this);
+    // }
+  }
+
+  static DateTime getInitialFirstWork(DateTime focusedDay) {
+    var dt = DateTime(focusedDay.year, focusedDay.month - 2);
+    return dt;
+  }
+
+  static DateTime getInitialLastWork(DateTime focusedDay) {
+    var dt = DateTime(focusedDay.year, focusedDay.month + 2, 0);
+
+    return dt;
+  }
+
+  static DateTime getStartFunDate(DateTime focusedDay) {
+    var dt = DateTime(focusedDay.year, focusedDay.month);
+    return dt;
+  }
+
+  static DateTime getEndFunDate(DateTime focusedDay) {
+    var dt = DateTime(focusedDay.year, focusedDay.month + 1, 0);
+
+    return dt;
   }
 }

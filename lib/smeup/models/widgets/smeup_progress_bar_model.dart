@@ -50,7 +50,8 @@ class SmeupProgressBarModel extends SmeupModel implements SmeupDataInterface {
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
 
-    padding = SmeupUtilities.getPadding(optionsDefault['padding']);
+    padding =
+        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
 
     if (optionsDefault['color'] != null) {
       color = SmeupUtilities.getColorFromRGB(optionsDefault['color']) ??

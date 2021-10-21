@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_treeview/tree_view.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_tree_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
@@ -19,7 +17,7 @@ class SmeupTree extends StatefulWidget
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
 
-  List<Node> data;
+  List<dynamic> data;
   String title;
   String id;
   String type;
@@ -69,7 +67,7 @@ class SmeupTree extends StatefulWidget
   }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
     if (data == null) {
-      data = List<Node>.empty(growable: true);
+      data = List<dynamic>.empty(growable: true);
     }
   }
 
@@ -100,6 +98,7 @@ class SmeupTree extends StatefulWidget
     SmeupTreeModel m = model;
 
     // change data format
+    // ignore: unused_local_variable
     var workData = formatDataFields(m);
 
     // set the widget data
@@ -123,7 +122,7 @@ class _SmeupTreeState extends State<SmeupTree>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
   SmeupTreeModel _model;
-  List<Node> _data;
+  // List<dynamic> _data;
 
   // TreeViewTheme _treeViewTheme = TreeViewTheme(
   //   expanderTheme: ExpanderThemeData(
@@ -153,7 +152,7 @@ class _SmeupTreeState extends State<SmeupTree>
   @override
   void initState() {
     _model = widget.model;
-    _data = widget.data;
+    //_data = widget.data;
     if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
@@ -190,47 +189,47 @@ class _SmeupTreeState extends State<SmeupTree>
         treeWidth = (_model.parent as SmeupSectionModel).width;
     }
 
-    TreeViewController _treeViewController =
-        TreeViewController(children: _data);
-    children = Container(
-        width: treeWidth,
-        height: treeHeight,
-        //color: Colors.red,
-        child: TreeView(
-          controller: _treeViewController,
-          allowParentSelect: true,
-          supportParentDoubleTap: false,
-          //onExpansionChanged: _expandNodeHandler,
-          onNodeTap: (key) {
-            Node selectedNode = _treeViewController.getNode(key);
-            SmeupDynamismService.storeDynamicVariables(
-                selectedNode.data, widget.formKey);
-            if (_model != null)
-              SmeupDynamismService.run(_model.dynamisms, context, 'click',
-                  widget.scaffoldKey, widget.formKey);
-            if (widget.onClientClick != null)
-              widget.onClientClick(selectedNode);
-          },
-          theme: TreeViewTheme().copyWith(
-              iconTheme: IconThemeData().copyWith(size: widget.parentFontSize),
-              labelStyle: TextStyle(
-                  fontSize: widget.labelFontSize,
-                  color: widget.labelFontColor,
-                  backgroundColor: widget.labelBackColor,
-                  fontWeight: widget.labelFontbold
-                      ? FontWeight.bold
-                      : FontWeight.normal),
-              parentLabelStyle: TextStyle(
-                  fontSize: widget.parentFontSize,
-                  color: widget.parentFontColor,
-                  backgroundColor: widget.parentBackColor,
-                  fontWeight: widget.parentFontbold
-                      ? FontWeight.bold
-                      : FontWeight.normal),
-              labelOverflow: TextOverflow.fade,
-              parentLabelOverflow: TextOverflow.fade,
-              verticalSpacing: widget.parentVerticalSpacing),
-        ));
+    // TreeViewController _treeViewController =
+    //     TreeViewController(children: _data);
+    // children = Container(
+    //     width: treeWidth,
+    //     height: treeHeight,
+    //     //color: Colors.red,
+    //     child: TreeView(
+    //       controller: _treeViewController,
+    //       allowParentSelect: true,
+    //       supportParentDoubleTap: false,
+    //       //onExpansionChanged: _expandNodeHandler,
+    //       onNodeTap: (key) {
+    //         Node selectedNode = _treeViewController.getNode(key);
+    //         SmeupDynamismService.storeDynamicVariables(
+    //             selectedNode.data, widget.formKey);
+    //         if (_model != null)
+    //           SmeupDynamismService.run(_model.dynamisms, context, 'click',
+    //               widget.scaffoldKey, widget.formKey);
+    //         if (widget.onClientClick != null)
+    //           widget.onClientClick(selectedNode);
+    //       },
+    //       theme: TreeViewTheme().copyWith(
+    //           iconTheme: IconThemeData().copyWith(size: widget.parentFontSize),
+    //           labelStyle: TextStyle(
+    //               fontSize: widget.labelFontSize,
+    //               color: widget.labelFontColor,
+    //               backgroundColor: widget.labelBackColor,
+    //               fontWeight: widget.labelFontbold
+    //                   ? FontWeight.bold
+    //                   : FontWeight.normal),
+    //           parentLabelStyle: TextStyle(
+    //               fontSize: widget.parentFontSize,
+    //               color: widget.parentFontColor,
+    //               backgroundColor: widget.parentBackColor,
+    //               fontWeight: widget.parentFontbold
+    //                   ? FontWeight.bold
+    //                   : FontWeight.normal),
+    //           labelOverflow: TextOverflow.fade,
+    //           parentLabelOverflow: TextOverflow.fade,
+    //           verticalSpacing: widget.parentVerticalSpacing),
+    //     ));
 
     //return SmeupWidgetBuilderResponse(smeupTreeModel, Container());
     return SmeupWidgetBuilderResponse(_model, children);

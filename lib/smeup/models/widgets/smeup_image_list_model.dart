@@ -58,7 +58,8 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getInt(optionsDefault['columns']) ?? defaultColumns;
     rows = SmeupUtilities.getInt(optionsDefault['rows']) ?? defaultRows;
     fontsize = optionsDefault['fontSize'] ?? defaultFontsize;
-    padding = SmeupUtilities.getPadding(optionsDefault['padding']);
+    padding =
+        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;

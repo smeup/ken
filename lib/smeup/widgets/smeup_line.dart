@@ -71,6 +71,7 @@ class _SmeupLineState extends State<SmeupLine>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
   SmeupLineModel _model;
+  // ignore: unused_field
   dynamic _data;
 
   @override

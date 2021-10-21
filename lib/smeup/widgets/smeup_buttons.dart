@@ -30,7 +30,7 @@ class SmeupButtons extends StatefulWidget
   Color fontColor;
   double fontSize;
   EdgeInsetsGeometry padding;
-  List<String> data;
+  dynamic data;
   String valueField;
   double borderRadius;
   double elevation;
@@ -67,7 +67,7 @@ class SmeupButtons extends StatefulWidget
       this.fontColor = SmeupButtonsModel.defaultFontColor,
       this.fontSize = SmeupButtonsModel.defaultFontsize,
       this.padding = SmeupButtonsModel.defaultPadding,
-      this.valueField,
+      this.valueField = SmeupButtonsModel.defaultValueField,
       this.borderRadius = SmeupButtonsModel.defaultBorderRadius,
       this.elevation = SmeupButtonsModel.defaultElevation,
       this.bold = SmeupButtonsModel.defaultBold,
@@ -117,19 +117,19 @@ class SmeupButtons extends StatefulWidget
     SmeupButtonsModel m = model;
 
     // change data format
-    var workData = formatDataFields(m);
+    return formatDataFields(m);
 
     // set the widget data
-    if (workData != null) {
-      var newList = List<String>.empty(growable: true);
-      for (var i = 0; i < (workData['rows'] as List).length; i++) {
-        final element = workData['rows'][i];
-        newList.add(element[m.valueField].toString());
-      }
-      return newList;
-    } else {
-      return model.data;
-    }
+    // if (workData != null) {
+    //   var newList = List<String>.empty(growable: true);
+    //   for (var i = 0; i < (workData['rows'] as List).length; i++) {
+    //     final element = workData['rows'][i];
+    //     newList.add(element[m.valueField].toString());
+    //   }
+    //   return newList;
+    // } else {
+    //   return model.data;
+    // }
   }
 
   @override
@@ -205,14 +205,15 @@ class SmeupButtonsState extends State<SmeupButtons>
     }
 
     int buttonIndex = 0;
-    _data.forEach((buttonData) {
+    List array = _model == null ? _data : _data['rows'];
+    array.forEach((buttonData) {
       buttonIndex += 1;
       final button = SmeupButton(
           id: '${SmeupUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
           type: widget.type,
           buttonIndex: buttonIndex,
           title: widget.title,
-          data: buttonData,
+          data: _model == null ? buttonData : buttonData['value'],
           backColor: widget.backColor,
           borderColor: widget.borderColor,
           width: buttonWidth,
@@ -228,7 +229,6 @@ class SmeupButtonsState extends State<SmeupButtons>
           bold: widget.bold,
           iconData: widget.iconData,
           iconSize: widget.iconSize,
-          //data: buttonData,
           icon: null,
           isBusy: _isBusy,
           underline: widget.underline,
@@ -243,9 +243,11 @@ class SmeupButtonsState extends State<SmeupButtons>
     if (buttons.length > 0) {
       var widgets;
       if (widget.orientation == WidgetOrientation.Vertical)
-        widgets = Column(children: buttons);
+        widgets = SingleChildScrollView(
+            scrollDirection: Axis.vertical, child: Column(children: buttons));
       else
-        widgets = Row(children: buttons);
+        widgets = SingleChildScrollView(
+            scrollDirection: Axis.horizontal, child: Row(children: buttons));
 
       return SmeupWidgetBuilderResponse(_model, widgets);
     } else {

@@ -74,7 +74,8 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
     label = optionsDefault['label'] ?? defaultLabel;
     valueField = optionsDefault['valueField'] ?? defaultValueField;
     showSubmit = optionsDefault['showSubmit'] ?? defaultShowSubmit;
-    padding = SmeupUtilities.getPadding(optionsDefault['padding']);
+    padding =
+        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;

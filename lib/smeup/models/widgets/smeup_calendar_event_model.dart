@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class SmeupCalentarEventModel {
   DateTime day;
@@ -21,7 +22,8 @@ class SmeupCalentarEventModel {
       String styleColumnName,
       String initColumnName,
       String endColumnName) {
-    this.day = DateTime.parse('${fields[dataColumnName]} 00:00:00.000Z');
+    this.day = DateFormat('dd/MM/yyyy')
+        .parse('${fields[dataColumnName].toString()} 00:00:00.000Z');
     this.initTime = _toTime(fields[initColumnName]);
     this.endTime = _toTime(fields[endColumnName]);
     this.description = fields[titleColumnName];

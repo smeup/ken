@@ -51,7 +51,8 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
     valueColName = optionsDefault['valueColName'] ?? defaultValueColName;
-    padding = SmeupUtilities.getPadding(optionsDefault['padding']);
+    padding =
+        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;

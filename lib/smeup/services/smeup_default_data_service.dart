@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_treeview/tree_view.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_cache_service.dart';
@@ -249,21 +247,30 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
         });
 
         res['rows'] = rows;
-        res['type'] = 'SmeupTable';
+        res['type'] = 'SmeupDataTable';
         return res;
 
       case 'TRE':
         dynamic res = SmeupDataService.getEmptyDataStructure();
-        List<Node> rows = List<Node>.empty(growable: true);
-        (response.data['children'] as List).forEach((child) {
-          var newRow = Node(
-              children: _loadTreeChildren(child['children']),
-              icon: IconData(59251, fontFamily: 'MaterialIcons'),
-              data: child['content'],
-              key: child['content']['codice'],
-              label: child['content']['testo']);
+        List rows = List.empty(growable: true);
+        for (var i = 0; i < (response.data['children'] as List).length; i++) {
+          final child = (response.data['children'] as List)[i];
+          final tipo = child['content']['tipo'];
+          final parametro = child['content']['parametro'];
+          final codice = child['content']['codice'];
+          final testo = child['content']['testo'];
+
+          var newRow = {
+            'tipo': tipo,
+            'parametro': parametro,
+            'codice': codice,
+            'value': testo,
+            //'${child['content']['codice']}': testo
+          };
+
           rows.add(newRow);
-        });
+        }
+
         res['rows'] = rows;
         res['type'] = 'SmeupTreeNode';
         return res;
@@ -273,17 +280,5 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
       default:
         return response.data;
     }
-  }
-
-  List<Node> _loadTreeChildren(parent) {
-    List<Node> rows = List<Node>.empty(growable: true);
-    (parent as List).forEach((child) {
-      var newRow = Node(
-          children: _loadTreeChildren(child),
-          key: child['content']['codice'],
-          label: child['content']['testo']);
-      rows.add(newRow);
-    });
-    return rows;
   }
 }

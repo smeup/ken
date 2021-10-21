@@ -85,18 +85,22 @@ class _SmeupSectionState extends State<SmeupSection>
       var sections = List<Widget>.empty(growable: true);
       double maxDim = 100;
       double totalDim = 0;
-      smeupSectionModel.smeupSectionsModels.forEach((section) {
-        totalDim += section.dim;
-      });
-      if (totalDim == 0 && smeupSectionModel.smeupSectionsModels.length > 0) {
-        double singleDim =
-            (maxDim / smeupSectionModel.smeupSectionsModels.length)
-                .ceil()
-                .toDouble();
-        double spareDim =
-            maxDim - (singleDim * smeupSectionModel.smeupSectionsModels.length);
+      int sectionWithNoDim = 0;
+
+      for (var i = 0; i < smeupSectionModel.smeupSectionsModels.length; i++) {
+        var s = smeupSectionModel.smeupSectionsModels[i];
+        totalDim += s.dim;
+        if (s.dim == 0) sectionWithNoDim += 1;
+      }
+
+      double dimToSplit = 100 - totalDim;
+
+      if (totalDim < 100 && sectionWithNoDim > 0 && dimToSplit > 0) {
+        double singleDim = (dimToSplit / sectionWithNoDim).ceil().toDouble();
+        double spareDim = dimToSplit - (singleDim * sectionWithNoDim);
         for (var i = 0; i < smeupSectionModel.smeupSectionsModels.length; i++) {
           var s = smeupSectionModel.smeupSectionsModels[i];
+          if (s.dim != 0) continue;
           if (i == 0) {
             s.dim = singleDim + spareDim;
           } else {

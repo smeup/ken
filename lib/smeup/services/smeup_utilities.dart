@@ -86,7 +86,7 @@ class SmeupUtilities {
 
   static EdgeInsetsGeometry getPadding(dynamic value) {
     if (value == null)
-      return EdgeInsets.all(0);
+      return null;
     else if (value is double) {
       return EdgeInsets.all(SmeupUtilities.getDouble(value));
     } else if (value is int) {
