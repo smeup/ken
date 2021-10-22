@@ -27,19 +27,24 @@ class SmeupInputPanelValue {
 class SmeupInputPanelField {
   SmeupInputPanelSupportedComp component;
   String id;
-  String label = "";
-  bool visible = true;
+  String label;
+  bool visible;
+  int position;
   SmeupInputPanelValue value;
+  List<SmeupInputPanelValue> items;
   String fun;
 
   SmeupInputPanelField({
     this.label = "",
     @required this.id,
-    @required this.value,
+    this.value,
+    this.items,
     this.component = SmeupInputPanelSupportedComp.Itx,
     this.visible = true,
+    this.position = 0,
   })  : assert(id != null),
-        assert(value != null);
+        assert(value != null),
+        assert(position >= 0);
 
   SmeupInputPanelField.fromMap(dynamic dataList) {
     // assert((dataList as List).length > 0);
@@ -54,6 +59,7 @@ class SmeupInputPanelField {
 
   void update(XmlNode fieldFromLayout, int position) {
     this.visible = true;
+    this.position = position;
     if (fieldFromLayout.getAttribute("Cmp") != null) {
       SmeupInputPanelSupportedComp.values.forEach((comp) {
         String name = comp.toString().split('.').last;

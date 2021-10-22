@@ -5,20 +5,19 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/widgets/input_panel/smeup_input_panel_field.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_inputpanel_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_button.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_buttons.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_label.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_qrcode_reader.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_radio_button.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_radio_buttons.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_text_field.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
+import 'package:xml/xml.dart';
 
 // ignore: must_be_immutable
 class SmeupInputPanel extends StatefulWidget
@@ -70,18 +69,61 @@ class SmeupInputPanel extends StatefulWidget
   dynamic treatData(SmeupModel model) {
     SmeupInputPanelModel m = model;
 
+    List<SmeupInputPanelField> fields;
+
     // change data format
     var workData = formatDataFields(m);
 
     // set the widget data
     if (workData != null) {
-      var newList = List<String>.empty(growable: true);
+      List columns = workData["columns"];
+      Map rowFields = workData["rows"][0]["fields"];
 
-      // overrides model properties from data
-      var firstElement = (workData['rows'] as List).first;
+      // Process data containing the fields list and values
+      fields = _createFields(columns, rowFields);
 
-      return model.data;
+      // TODO Layout MUST be read with loser_09 service
+      // For developing purpose layout xml data was inserted in a
+      // dummy option layoutData
+      var layoutData = model.options["INP"]["default"]["layoutData"];
+      if (layoutData != null) {
+        _applyLayout(fields, layoutData["data"]);
+      }
+
+      return fields;
     }
+  }
+
+  List<SmeupInputPanelField> _createFields(List columns, Map rowFields) {
+    List<SmeupInputPanelField> fields = columns
+        .map((column) => SmeupInputPanelField(
+            id: column["code"],
+            label: column["text"],
+            value: SmeupInputPanelValue(),
+            visible: column["IO"] != 'H'))
+        .toList();
+    fields.forEach((field) {
+      dynamic rowField = rowFields[field.id];
+      if (field != null) {
+        String code = rowField["smeupObject"]["codice"];
+        field.value = SmeupInputPanelValue(code: code, descr: code);
+      }
+    });
+    return fields;
+  }
+
+  _applyLayout(List<SmeupInputPanelField> fields, String layoutData) {
+    int position = 0;
+    XmlDocument doc = XmlDocument.parse(layoutData);
+    fields.forEach((field) => field.visible = false);
+    doc.findAllElements("Fld").forEach((node) {
+      fields.forEach((field) {
+        if (field.id == node.getAttribute("Nam")) {
+          field.update(node, position++);
+        }
+      });
+    });
+    fields.sort((a, b) => a.position.compareTo(b.position));
   }
 }
 
@@ -161,23 +203,21 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
         .map((field) => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _getComponent(field),
+                _getInputFieldWidget(field),
                 SizedBox(
-                  height: 8,
-                ),
-                SmeupButton(
-                  data: "Confirm",
+                  height: 16,
                 ),
               ],
             ))
         .toList();
     return Column(
+      key: Key("mycol"),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: fields,
     );
   }
 
-  Widget _getComponent(SmeupInputPanelField field) {
+  Widget _getInputFieldWidget(SmeupInputPanelField field) {
     switch (field.component) {
       case SmeupInputPanelSupportedComp.Rad:
         return SmeupRadioButtons(
@@ -186,8 +226,8 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
           id: field.id,
           title: field.label,
           data: [
-            {"code": "0", "value": "Si"},
-            {"code": "1", "value": "No"},
+            {"code": "0", "value": "No"},
+            {"code": "1", "value": "Si"},
           ],
           selectedValue: field.value.code,
           clientOnPressed: (value) {
@@ -198,6 +238,42 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
       case SmeupInputPanelSupportedComp.Bcd:
         return SmeupQRCodeReader(widget.scaffoldKey, widget.formKey,
             id: field.id, data: field.value.code);
+
+      case SmeupInputPanelSupportedComp.Cmb:
+        // TODO remove, when i'll use smeup combo the filling logic is inside
+        // of component
+        if (field.items == null) field.items = [];
+        // TODO using SmeUP official component
+        return Column(
+          children: <Widget>[
+            SmeupLabel(
+              widget.scaffoldKey,
+              widget.formKey,
+              [field.label],
+              align: Alignment.bottomLeft,
+              height: 8,
+            ),
+            DropdownButton<SmeupInputPanelValue>(
+              isExpanded: true,
+              onChanged: (newValue) {
+                setState(() {
+                  field.value = newValue;
+                });
+              },
+              value: field.value.code == "" ? null : field.value,
+              icon: const Icon(Icons.arrow_downward),
+              iconSize: 24,
+              elevation: 16,
+              items: field.items
+                  .map<DropdownMenuItem<SmeupInputPanelValue>>((value) {
+                return DropdownMenuItem<SmeupInputPanelValue>(
+                  value: value,
+                  child: Text(value.descr),
+                );
+              }).toList(),
+            ),
+          ],
+        );
 
       default:
         return SmeupTextField(
@@ -225,5 +301,10 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     if (widget.onSubmit != null) {
       widget.onSubmit(widget.data);
     }
+    widget.data.forEach((field) => SmeupVariablesService.setVariable(
+        field.id, field.value.code,
+        formKey: widget.formKey));
+    SmeupDynamismService.run(
+        _model.dynamisms, context, "click", widget.scaffoldKey, widget.formKey);
   }
 }

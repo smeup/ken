@@ -6,7 +6,7 @@ import 'package:mobile_components_library/smeup/services/smeup_data_service.dart
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
-  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(16);
 
   EdgeInsetsGeometry padding;
 

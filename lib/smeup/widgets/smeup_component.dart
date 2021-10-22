@@ -12,6 +12,7 @@ import 'package:mobile_components_library/smeup/widgets/smeup_dashboard.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_datepicker.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_image.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_image_list.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_inputpanel.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_line.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_progress_indicator.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_qrcode_reader.dart';
@@ -74,6 +75,7 @@ class _SmeupComponentState extends State<SmeupComponent> {
       SmeupModel smeupModel) async {
     var children;
 
+    debugPrint("smeupModel.type: ${smeupModel.type}");
     switch (smeupModel.type) {
       case 'LAB':
         children = SmeupLabel.withController(
@@ -191,6 +193,11 @@ class _SmeupComponentState extends State<SmeupComponent> {
         }
         break;
 
+      case 'INP':
+        children = SmeupInputPanel.withController(
+            smeupModel, widget.scaffoldKey, widget.formKey);
+        break;
+
       case 'SCH':
         final smeupServiceResponse =
             await SmeupDataService.invoke(smeupModel.smeupFun);
@@ -219,8 +226,8 @@ class _SmeupComponentState extends State<SmeupComponent> {
                 child: Row(children: [form]));
           }
         }
-
         break;
+
       default:
         SmeupLogService.writeDebugMessage('component not defined',
             logType: LogType.error);
