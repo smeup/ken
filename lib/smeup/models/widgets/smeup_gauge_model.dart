@@ -41,14 +41,16 @@ class SmeupGaugeModel extends SmeupModel implements SmeupDataInterface {
   SmeupGaugeModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
-    if (widgetLoadType != LoadType.Delay) {
-      SmeupGaugeDao.getData(this);
-    }
     title = jsonMap['title'] ?? '';
     valueColName = optionsDefault['valueColName'] ?? defaultValColName;
     maxColName = optionsDefault['maxColName'] ?? defaultMaxColName;
     minColName = optionsDefault['minColName'] ?? defaultMinColName;
     warningColName = optionsDefault['warningColName'] ?? defaultWarningColName;
+
+    if (widgetLoadType != LoadType.Delay) {
+      SmeupGaugeDao.getData(this);
+    }
+
     SmeupDataService.incrementDataFetch(id);
   }
 }

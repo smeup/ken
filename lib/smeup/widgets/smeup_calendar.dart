@@ -127,7 +127,8 @@ class SmeupCalendar extends StatefulWidget
     SmeupCalendarModel m = model;
 
     // change data format
-    var workData = formatDataFields(m);
+    var workData = m.data;
+    // formatDataFields(m);
 
     // set the widget data
     if (workData != null) {
@@ -139,7 +140,8 @@ class SmeupCalendar extends StatefulWidget
           m.initTimeColumnName: element[m.initTimeColumnName],
           m.endTimeColumnName: element[m.endTimeColumnName],
           m.titleColumnName: element[m.titleColumnName],
-          m.styleColumnName: element[m.styleColumnName]
+          m.styleColumnName: element[m.styleColumnName],
+          "datarow": element
         });
       }
       return newList;
@@ -524,7 +526,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
     String initTime;
     String endTime;
     try {
-      String dayString = DateFormat('dd/MM/yyyy').format(selectedDay);
+      String dayString = DateFormat('yyyyMMdd').format(selectedDay);
       title = event?.description;
       initTime = event?.initTime != null
           ? DateFormat("HHmmss").format(event.initTime)
@@ -540,13 +542,17 @@ class SmeupCalendarState extends State<SmeupCalendar>
         if (widget.clientOnDaySelected != null)
           widget.clientOnDaySelected(selectedDay);
       } else {
-        data = _data.firstWhere((element) {
+        final sel = _data.firstWhere((element) {
           //debugPrint(element.toString());
           return element[widget.dataColumnName] == dayString &&
               element[widget.titleColumnName] == title &&
               element[widget.initTimeColumnName] == initTime &&
               element[widget.endTimeColumnName] == endTime;
         }, orElse: () => null);
+
+        if (sel != null) {
+          data = sel['datarow'] != null ? sel['datarow'] : sel;
+        }
         widget.clientOnEventClick?.call(event);
       }
 

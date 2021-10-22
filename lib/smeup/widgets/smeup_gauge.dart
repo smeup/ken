@@ -125,6 +125,7 @@ class _SmeupGaugeState extends State<SmeupGauge>
     return gauge;
   }
 
+  @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
