@@ -50,14 +50,14 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   SmeupDashboardModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
-    valueColName = optionsDefault['valueColName'] ?? defaultValueColName;
+    valueColName = optionsDefault['ValueColName'] ?? defaultValueColName;
     padding =
         SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     fontsize =
-        SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
+        SmeupUtilities.getDouble(optionsDefault['FontSize']) ?? defaultFontsize;
     iconSize =
         SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
     labelFontsize = SmeupUtilities.getDouble(optionsDefault['labelFontSize']) ??

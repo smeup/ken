@@ -84,9 +84,9 @@ class SmeupDashboard extends StatefulWidget
     if (workData != null &&
         (workData['rows'] as List).length > 0 &&
         workData['rows'][0][m.valueColName] != null) {
-      data = workData['rows'][0][m.valueColName];
+      data = SmeupUtilities.getDouble(workData['rows'][0][m.valueColName]);
       unitOfMeasure = workData['rows'][0]['um'];
-      text = workData['rows'][0]['description'];
+      text = workData['rows'][0]['XXDESC'];
       icon = workData['rows'][0]['icon'];
     }
   }
@@ -135,6 +135,7 @@ class _SmeupDashboardState extends State<SmeupDashboard>
     return dashboard;
   }
 
+  @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
@@ -180,10 +181,11 @@ class _SmeupDashboardState extends State<SmeupDashboard>
                 style: TextStyle(fontSize: widget.fontsize),
               )
             ]),
-            Text(
-              widget.text,
-              style: TextStyle(fontSize: widget.labelFontsize),
-            )
+            if (widget.text != null)
+              Text(
+                widget.text,
+                style: TextStyle(fontSize: widget.labelFontsize),
+              )
           ],
         ),
       ),

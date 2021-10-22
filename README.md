@@ -1,6 +1,15 @@
 # mobile-components-library
 Smeup mobile widgets' library 
 
+## icons
+
+- Images and icons generator for ios
+    https://easyappicon.com/   
+
+- IconData codes
+    https://api.flutter.dev/flutter/material/Icons-class.html#constants
+    https://raw.githubusercontent.com/flutter/flutter/flutter-1.22-candidate.13/packages/flutter/lib/src/material/icons.dart
+    
 ## dependencies:
 - dio:                      https://pub.dev/packages/dio
 - provider:                 https://pub.dev/packages/provider
