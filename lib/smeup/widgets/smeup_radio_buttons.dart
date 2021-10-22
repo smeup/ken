@@ -232,7 +232,7 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
                   orElse: () => null);
               if (selData != null) {
                 if (widget.clientOnPressed != null)
-                  widget.clientOnPressed(selData);
+                  widget.clientOnPressed(value);
                 SmeupDynamismService.storeDynamicVariables(
                     selData, widget.formKey);
                 SmeupVariablesService.setVariable(widget.id, value,
