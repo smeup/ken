@@ -23,7 +23,7 @@ class SmeupCalentarEventModel {
       String initColumnName,
       String endColumnName) {
     this.day = DateFormat('dd/MM/yyyy')
-        .parse('${fields[dataColumnName].toString()} 00:00:00.000Z');
+        .parse('${fields[dataColumnName].toString()} 00:00:00.000');
     this.initTime = _toTime(fields[initColumnName]);
     this.endTime = _toTime(fields[endColumnName]);
     this.description = fields[titleColumnName];

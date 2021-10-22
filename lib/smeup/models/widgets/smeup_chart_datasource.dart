@@ -11,12 +11,15 @@ class SmeupChartDatasource {
 
   SmeupChartDatasource.fromMap(Map<String, dynamic> jsonData) {
     columns = List<SmeupChartColumn>.empty(growable: true);
-    jsonData['columns']
-        .forEach((c) => columns.add(SmeupChartColumn.fromMap(c)));
-
     rows = List<SmeupChartRow>.empty(growable: true);
-    jsonData['rows']
-        .forEach((r) => rows.add(SmeupChartRow.fromMap(r, columns)));
+
+    if (jsonData['columns'] != null &&
+        (jsonData['columns'] as List).length > 0) {
+      jsonData['columns']
+          .forEach((c) => columns.add(SmeupChartColumn.fromMap(c)));
+      jsonData['rows']
+          .forEach((r) => rows.add(SmeupChartRow.fromMap(r, columns)));
+    }
   }
 
   SmeupChartDatasource.fromInfluxDB(String script) {
