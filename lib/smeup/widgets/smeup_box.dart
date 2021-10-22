@@ -33,7 +33,6 @@ class SmeupBox extends StatefulWidget {
   final bool showSelection;
   final int index;
   final int selectedRow;
-  double borderSize;
 
   SmeupBox(this.scaffoldKey, this.formKey, this.index,
       {this.id,
@@ -50,8 +49,7 @@ class SmeupBox extends StatefulWidget {
       this.width,
       this.height,
       this.dismissEnabled,
-      this.showSelection,
-      this.borderSize});
+      this.showSelection});
 
   @override
   _SmeupBoxState createState() => _SmeupBoxState();
@@ -59,6 +57,7 @@ class SmeupBox extends StatefulWidget {
 
 class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
   List<dynamic> _columns;
+  double borderSize;
 
   @override
   Widget build(BuildContext context) {
@@ -91,9 +90,9 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     Widget box;
 
     if (widget.showSelection && widget.index == widget.selectedRow) {
-      widget.borderSize = 4;
+      borderSize = 4;
     } else {
-      widget.borderSize = 2;
+      borderSize = 2;
     }
 
     switch (widget.layout ?? '') {
@@ -216,7 +215,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
             shape: RoundedRectangleBorder(
               side: BorderSide(
                   color: SmeupConfigurationService.getTheme().primaryColor,
-                  width: widget.borderSize),
+                  width: borderSize),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -420,7 +419,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
             shape: RoundedRectangleBorder(
               side: BorderSide(
                   color: SmeupConfigurationService.getTheme().primaryColor,
-                  width: widget.borderSize),
+                  width: borderSize),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -508,7 +507,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
             shape: RoundedRectangleBorder(
               side: BorderSide(
                   color: SmeupConfigurationService.getTheme().primaryColor,
-                  width: widget.borderSize),
+                  width: borderSize),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -581,7 +580,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
             shape: RoundedRectangleBorder(
               side: BorderSide(
                   color: SmeupConfigurationService.getTheme().primaryColor,
-                  width: widget.borderSize),
+                  width: borderSize),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -672,7 +671,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
             shape: RoundedRectangleBorder(
               side: BorderSide(
                   color: SmeupConfigurationService.getTheme().primaryColor,
-                  width: widget.borderSize),
+                  width: borderSize),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -797,7 +796,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
         }
       }
     }
-    return widgetImg;
+    return widgetImg ?? Container();
   }
 
   Future<Widget> _fetchAvailableLinks(imgList) async {
