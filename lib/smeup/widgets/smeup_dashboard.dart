@@ -93,13 +93,27 @@ class SmeupDashboard extends StatefulWidget
         (workData['rows'] as List).length > 0 &&
         workData['rows'][0][m.valueColName] != null) {
       data = SmeupUtilities.getDouble(workData['rows'][0][m.valueColName]);
-      unitOfMeasure = workData['rows'][0]['um'];
-      text = workData['rows'][0]['XXDESC'];
-      icon = workData['rows'][0]['icon'];
+      unitOfMeasure =
+          SmeupUtilities.getDouble(workData['rows'][0][m.uMColName]).toString();
+      text = SmeupUtilities.getDouble(workData['rows'][0][m.textColName])
+          .toString();
+      icon = SmeupUtilities.getInt(workData['rows'][0][m.iconColName]);
     }
 
     if (m.forceText.isNotEmpty) {
       text = m.forceText;
+    }
+
+    if (m.forceIcon.isNotEmpty) {
+      icon = m.forceIcon as int;
+    }
+
+    if (m.forceUm.isNotEmpty) {
+      unitOfMeasure = m.forceUm;
+    }
+
+    if (m.forceValue.isNotEmpty) {
+      data = m.forceValue as double;
     }
 
     return data;
