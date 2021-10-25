@@ -118,7 +118,9 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
     }
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupTextPasswordDao.getData(this);
+      onReady = () async {
+        await SmeupTextPasswordDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

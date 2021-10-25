@@ -69,7 +69,9 @@ class SmeupTreeModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupTreeDao.getData(this);
+      onReady = () async {
+        await SmeupTreeDao.getData(this);
+      };
     }
     SmeupDataService.incrementDataFetch(id);
   }

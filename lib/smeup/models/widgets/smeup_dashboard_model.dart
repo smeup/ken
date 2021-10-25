@@ -10,14 +10,15 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const double defaultFontsize = 60.0;
   static const double defaultLabelFontsize = 10.0;
-  static const double defaultWidth = 100;
-  static const double defaultHeight = 100;
+  static const double defaultWidth = 120;
+  static const double defaultHeight = 120;
   static const double defaultIconSize = 40.0;
   static const String defaultValueColName = 'value';
   static const String defaultSelectLayout = '';
 
   EdgeInsetsGeometry padding;
   String valueColName;
+  String forceText;
   Color iconColor;
   String selectLayout;
   double fontsize;
@@ -39,6 +40,7 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       this.fontsize = defaultFontsize,
       this.labelFontsize = defaultLabelFontsize,
       this.iconSize = defaultIconSize,
+      this.forceText = '',
       title = ''})
       : super(formKey, title: title, id: id, type: type) {
     if (iconColor == null)
@@ -56,8 +58,9 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
-    fontsize =
-        SmeupUtilities.getDouble(optionsDefault['FontSize']) ?? defaultFontsize;
+    fontsize = SmeupUtilities.getDouble(
+            optionsDefault['FontSize'].toString().replaceAll("%", "")) ??
+        defaultFontsize;
     iconSize =
         SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
     labelFontsize = SmeupUtilities.getDouble(optionsDefault['labelFontSize']) ??
@@ -66,9 +69,12 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       iconColor = SmeupUtilities.getColorFromRGB(optionsDefault['iconColor']);
     }
     selectLayout = optionsDefault['selectLayout'] ?? '';
+    forceText = optionsDefault['ForceText'] ?? '';
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupDashboardDao.getData(this);
+      onReady = () async {
+        await SmeupDashboardDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

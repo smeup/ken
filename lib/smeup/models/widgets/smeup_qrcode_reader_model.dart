@@ -38,7 +38,9 @@ class SmeupQRCodeReaderModel extends SmeupModel implements SmeupDataInterface {
     title = jsonMap['title'] ?? '';
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupQRCodeReaderDao.getData(this);
+      onReady = () async {
+        await SmeupQRCodeReaderDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

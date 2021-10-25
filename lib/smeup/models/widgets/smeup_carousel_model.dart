@@ -29,7 +29,9 @@ class SmeupCarouselModel extends SmeupModel implements SmeupDataInterface {
     autoPlay = optionsDefault['autoPlay'] ?? false;
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupCarouselDao.getData(this);
+      onReady = () async {
+        await SmeupCarouselDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

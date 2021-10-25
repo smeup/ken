@@ -36,7 +36,9 @@ class SmeupImageModel extends SmeupModel implements SmeupDataInterface {
     title = jsonMap['title'] ?? '';
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupImageDao.getData(this);
+      onReady = () async {
+        await SmeupImageDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

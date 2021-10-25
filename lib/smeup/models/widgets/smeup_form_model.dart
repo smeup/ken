@@ -85,4 +85,12 @@ class SmeupFormModel extends SmeupModel
       smeupSectionsModels = getSections(data, 'sections', formKey);
     }
   }
+
+  Future<void> getSectionsData() async {
+    if (smeupSectionsModels != null)
+      for (var i = 0; i < smeupSectionsModels.length; i++) {
+        var section = smeupSectionsModels[i];
+        await section.getSectionData();
+      }
+  }
 }

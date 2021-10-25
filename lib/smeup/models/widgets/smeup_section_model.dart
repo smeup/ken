@@ -66,12 +66,16 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
     return components != null && components.length > 0;
   }
 
+  bool hasSections() {
+    return smeupSectionsModels != null && smeupSectionsModels.length > 0;
+  }
+
   List<SmeupModel> getComponents(jsonMap, componentName) {
     final components = List<SmeupModel>.empty(growable: true);
 
     if (jsonMap.containsKey(componentName)) {
       List<dynamic> componentsJson = jsonMap[componentName];
-      componentsJson.forEach((v) {
+      componentsJson.forEach((v) async {
         SmeupModel model;
 
         try {
@@ -177,5 +181,20 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
     }
 
     return components;
+  }
+
+  Future<void> getSectionData() async {
+    if (hasSections()) {
+      for (var i = 0; i < smeupSectionsModels.length; i++) {
+        var section = smeupSectionsModels[i];
+        await section.getSectionData();
+      }
+    }
+    if (hasComponents()) {
+      for (var i = 0; i < components.length; i++) {
+        var componentModel = components[i];
+        if (componentModel.onReady != null) await componentModel.onReady();
+      }
+    }
   }
 }
