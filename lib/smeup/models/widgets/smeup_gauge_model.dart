@@ -48,7 +48,9 @@ class SmeupGaugeModel extends SmeupModel implements SmeupDataInterface {
     warningColName = optionsDefault['warningColName'] ?? defaultWarningColName;
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupGaugeDao.getData(this);
+      onReady = () async {
+        await SmeupGaugeDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

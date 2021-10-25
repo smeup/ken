@@ -143,6 +143,8 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     smeupFormModel =
         SmeupFormModel.fromMap(smeupscreenModel.data, widget._formKey);
 
+    await smeupFormModel.getSectionsData();
+
     final smeupForm =
         SmeupForm(smeupFormModel, widget._scaffoldKey, widget._formKey);
 

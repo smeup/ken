@@ -85,7 +85,9 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
     keyboard = SmeupUtilities.getKeyboard(optionsDefault['keyboard']);
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupTextFieldDao.getData(this);
+      onReady = () async {
+        await SmeupTextFieldDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

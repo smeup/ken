@@ -70,7 +70,9 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
         : Axis.vertical;
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupListBoxDao.getData(this);
+      onReady = () async {
+        await SmeupListBoxDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

@@ -167,7 +167,9 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     }
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupButtonsDao.getData(this);
+      onReady = () async {
+        await SmeupButtonsDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

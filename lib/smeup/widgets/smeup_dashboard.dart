@@ -78,7 +78,15 @@ class SmeupDashboard extends StatefulWidget
     padding = m.padding;
     title = m.title;
 
-    dynamic workData = treatData(m);
+    data = treatData(m);
+  }
+
+  @override
+  dynamic treatData(SmeupModel model) {
+    SmeupDashboardModel m = model;
+
+    // change data format
+    var workData = formatDataFields(m);
 
     // set the widget data
     if (workData != null &&
@@ -89,14 +97,12 @@ class SmeupDashboard extends StatefulWidget
       text = workData['rows'][0]['XXDESC'];
       icon = workData['rows'][0]['icon'];
     }
-  }
 
-  @override
-  dynamic treatData(SmeupModel model) {
-    SmeupDashboardModel m = model;
+    if (m.forceText.isNotEmpty) {
+      text = m.forceText;
+    }
 
-    // change data format
-    return formatDataFields(m);
+    return data;
   }
 
   @override
@@ -147,9 +153,9 @@ class _SmeupDashboardState extends State<SmeupDashboard>
 
     Widget children;
 
-    if (_data == null) {
-      return getFunErrorResponse(context, _model);
-    }
+    // if (_data == null) {
+    //   return getFunErrorResponse(context, _model);
+    // }
 
     if (widget.valueColName.isEmpty) {
       SmeupLogService.writeDebugMessage(

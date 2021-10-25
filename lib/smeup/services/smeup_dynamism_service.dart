@@ -94,7 +94,8 @@ class SmeupDynamismService {
       }
 
       if (dynamism['exec'] != null) {
-        String exec = dynamism['exec'];
+        String exec =
+            SmeupDynamismService.replaceFunVariables(dynamism['exec'], formKey);
 
         if (exec.toLowerCase() == 'close') {
           Navigator.of(context).pop();

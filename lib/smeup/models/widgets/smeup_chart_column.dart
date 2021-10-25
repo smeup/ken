@@ -12,17 +12,17 @@ class SmeupChartColumn {
 
   SmeupChartColumn.fromMap(Map<String, dynamic> jsonMap) {
     type = _getColumnType(jsonMap['fill']);
-    name = jsonMap['value'];
+    name = jsonMap['code'];
     title = jsonMap['text'];
     size = SmeupUtilities.getInt(jsonMap['lun']);
   }
 
   _getColumnType(String fill) {
     switch (fill) {
-      case 'axes':
+      case 'ASSE':
         return ColumnType.Axes;
         break;
-      case 'series':
+      case 'SERIE':
         return ColumnType.Series;
         break;
       default:

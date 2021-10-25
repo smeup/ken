@@ -47,7 +47,9 @@ class SmeupChartModel extends SmeupModel {
       legend = false;
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupChartDao.getData(this);
+      onReady = () async {
+        await SmeupChartDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

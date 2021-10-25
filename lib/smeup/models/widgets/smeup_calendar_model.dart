@@ -108,16 +108,6 @@ class SmeupCalendarModel extends SmeupModel {
         : optionsDefault['showNavigation'].toString().toLowerCase() == "true";
 
     widgetLoadType = LoadType.Immediate;
-
-    // if (widgetLoadType != LoadType.Delay) {
-    //   SmeupDynamismService.storeDynamicVariables({
-    //     '*CAL.INI': DateFormat('yyyyMMdd').format(getStartFunDate(initialDate))
-    //   }, null);
-    //   SmeupDynamismService.storeDynamicVariables({
-    //     '*CAL.END': DateFormat('yyyyMMdd').format(getEndFunDate(initialDate))
-    //   }, null);
-    //   SmeupCalendarDao.getData(this);
-    // }
   }
 
   static DateTime getInitialFirstWork(DateTime focusedDay) {

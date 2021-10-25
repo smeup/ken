@@ -119,7 +119,9 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
     }
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupRadioButtonsDao.getData(this);
+      onReady = () async {
+        await SmeupRadioButtonsDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);
