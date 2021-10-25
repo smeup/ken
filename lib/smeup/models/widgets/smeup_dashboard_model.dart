@@ -13,12 +13,21 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 120;
   static const double defaultHeight = 120;
   static const double defaultIconSize = 40.0;
-  static const String defaultValueColName = 'value';
+  static const String defaultValueColName = 'VALUE';
+  static const String defaultIconColName = 'ICON';
+  static const String defaultTextColName = 'DESC';
+  static const String defaultUmColName = 'UM';
   static const String defaultSelectLayout = '';
 
   EdgeInsetsGeometry padding;
   String valueColName;
+  String iconColName;
+  String uMColName;
+  String textColName;
   String forceText;
+  String forceUm;
+  String forceValue;
+  String forceIcon;
   Color iconColor;
   String selectLayout;
   double fontsize;
@@ -32,6 +41,9 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       type,
       formKey,
       this.valueColName = defaultValueColName,
+      this.uMColName = defaultUmColName,
+      this.textColName = defaultTextColName,
+      this.iconColName = defaultIconColName,
       this.padding = defaultPadding,
       this.iconColor,
       this.selectLayout = defaultSelectLayout,
@@ -41,6 +53,9 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       this.labelFontsize = defaultLabelFontsize,
       this.iconSize = defaultIconSize,
       this.forceText = '',
+      this.forceValue = '',
+      this.forceUm = '',
+      this.forceIcon = '',
       title = ''})
       : super(formKey, title: title, id: id, type: type) {
     if (iconColor == null)
@@ -53,6 +68,9 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
     valueColName = optionsDefault['ValueColName'] ?? defaultValueColName;
+    iconColName = optionsDefault['ValueColName'] ?? defaultIconColName;
+    textColName = optionsDefault['ValueColName'] ?? defaultTextColName;
+    uMColName = optionsDefault['ValueColName'] ?? defaultUmColName;
     padding =
         SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
@@ -70,6 +88,9 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
     }
     selectLayout = optionsDefault['selectLayout'] ?? '';
     forceText = optionsDefault['ForceText'] ?? '';
+    forceUm = optionsDefault['ForceUm'] ?? '';
+    forceIcon = optionsDefault['ForceIcon'] ?? '';
+    forceValue = optionsDefault['ForceValue'] ?? '';
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
