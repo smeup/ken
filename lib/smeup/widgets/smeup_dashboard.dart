@@ -36,10 +36,18 @@ class SmeupDashboard extends StatefulWidget
   String title;
   String id;
   String type;
+  String forceText;
+  String forceUm;
+  String forceValue;
+  String forceIcon;
 
   SmeupDashboard(this.scaffoldKey, this.formKey, this.data,
       {id = '',
       type = 'DSH',
+      this.forceIcon,
+      this.forceText,
+      this.forceUm,
+      this.forceValue,
       this.valueColName = SmeupDashboardModel.defaultValueColName,
       this.text = '',
       this.unitOfMeasure = '',
@@ -77,6 +85,10 @@ class SmeupDashboard extends StatefulWidget
     iconSize = m.iconSize;
     padding = m.padding;
     title = m.title;
+    forceValue = m.forceValue;
+    forceIcon = m.forceIcon;
+    forceUm = m.forceUm;
+    forceText = m.forceText;
 
     data = treatData(m);
   }
@@ -93,10 +105,8 @@ class SmeupDashboard extends StatefulWidget
         (workData['rows'] as List).length > 0 &&
         workData['rows'][0][m.valueColName] != null) {
       data = SmeupUtilities.getDouble(workData['rows'][0][m.valueColName]);
-      unitOfMeasure =
-          SmeupUtilities.getDouble(workData['rows'][0][m.uMColName]).toString();
-      text = SmeupUtilities.getDouble(workData['rows'][0][m.textColName])
-          .toString();
+      unitOfMeasure = workData['rows'][0][m.umColName];
+      text = workData['rows'][0][m.textColName];
       icon = SmeupUtilities.getInt(workData['rows'][0][m.iconColName]);
     }
 
