@@ -13,16 +13,20 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 120;
   static const double defaultHeight = 120;
   static const double defaultIconSize = 40.0;
-  static const String defaultValueColName = 'VALUE';
-  static const String defaultIconColName = 'ICON';
-  static const String defaultTextColName = 'DESC';
-  static const String defaultUmColName = 'UM';
+  static const String defaultValueColName = 'value';
+  static const String defaultIconColName = 'icon';
+  static const String defaultTextColName = 'description';
+  static const String defaultUmColName = 'um';
   static const String defaultSelectLayout = '';
+  static const String defaultForceText = '';
+  static const String defaultForceIcon = '';
+  static const String defaultForceValue = '';
+  static const String defaultForceUm = '';
 
   EdgeInsetsGeometry padding;
   String valueColName;
   String iconColName;
-  String uMColName;
+  String umColName;
   String textColName;
   String forceText;
   String forceUm;
@@ -41,7 +45,7 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       type,
       formKey,
       this.valueColName = defaultValueColName,
-      this.uMColName = defaultUmColName,
+      this.umColName = defaultUmColName,
       this.textColName = defaultTextColName,
       this.iconColName = defaultIconColName,
       this.padding = defaultPadding,
@@ -52,10 +56,10 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       this.fontsize = defaultFontsize,
       this.labelFontsize = defaultLabelFontsize,
       this.iconSize = defaultIconSize,
-      this.forceText = '',
-      this.forceValue = '',
-      this.forceUm = '',
-      this.forceIcon = '',
+      this.forceText = defaultForceText,
+      this.forceValue = defaultForceValue,
+      this.forceUm = defaultForceUm,
+      this.forceIcon = defaultForceIcon,
       title = ''})
       : super(formKey, title: title, id: id, type: type) {
     if (iconColor == null)
@@ -67,10 +71,10 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   SmeupDashboardModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
-    valueColName = optionsDefault['ValueColName'] ?? defaultValueColName;
-    iconColName = optionsDefault['ValueColName'] ?? defaultIconColName;
-    textColName = optionsDefault['ValueColName'] ?? defaultTextColName;
-    uMColName = optionsDefault['ValueColName'] ?? defaultUmColName;
+    valueColName = optionsDefault['valueColName'] ?? defaultValueColName;
+    iconColName = optionsDefault['iconColName'] ?? defaultIconColName;
+    textColName = optionsDefault['textColName'] ?? defaultTextColName;
+    umColName = optionsDefault['umColName'] ?? defaultUmColName;
     padding =
         SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
@@ -87,10 +91,10 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       iconColor = SmeupUtilities.getColorFromRGB(optionsDefault['iconColor']);
     }
     selectLayout = optionsDefault['selectLayout'] ?? '';
-    forceText = optionsDefault['ForceText'] ?? '';
-    forceUm = optionsDefault['ForceUm'] ?? '';
-    forceIcon = optionsDefault['ForceIcon'] ?? '';
-    forceValue = optionsDefault['ForceValue'] ?? '';
+    forceText = optionsDefault['forceText'] ?? '';
+    forceUm = optionsDefault['forceUm'] ?? '';
+    forceIcon = optionsDefault['forceIcon'] ?? '';
+    forceValue = optionsDefault['forceValue'] ?? '';
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
