@@ -3,6 +3,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_mod
 import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_carousel_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_combo_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_dashboard_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_form_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_gauge_model.dart';
@@ -123,6 +124,9 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
                   break;
                 case 'cal':
                   model = SmeupDatePickerModel.fromMap(v, formKey);
+                  break;
+                case 'cmb':
+                  model = SmeupComboModel.fromMap(v, formKey);
                   break;
                 case 'itx':
                   model = SmeupTextFieldModel.fromMap(v, formKey);
