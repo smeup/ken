@@ -29,6 +29,7 @@ dependencies:
   package_info: ^2.0.0
   clickable_list_wheel_view: ^0.0.4
   shared_preferences: ^2.0.5
+  json_theme: ^3.0.1
 
 dev_dependencies:
   flutter_test:
