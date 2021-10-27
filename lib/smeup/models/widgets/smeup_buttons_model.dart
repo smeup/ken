@@ -152,18 +152,28 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
     } else {
-      backColor = defaultBackColor;
+      //TODO: temporary fix
+      //backColor = defaultBackColor;
+      backColor = const Color(0xff068a9c);
     }
     if (optionsDefault['borderColor'] != null) {
       borderColor =
           SmeupUtilities.getColorFromRGB(optionsDefault['borderColor']);
     } else {
-      borderColor = defaultBorderColor;
+      //TODO: temporary fix
+      //borderColor = defaultBorderColor;
+      borderColor = const Color(0xff068a9c);
     }
     if (optionsDefault['fontColor'] != null) {
       fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']);
     } else {
-      fontColor = isLink ? Colors.blue : defaultFontColor;
+      //fontColor = isLink ? Colors.blue : defaultFontColor;
+      //TODO: temporary fix
+      if (isLink) {
+        fontColor = Colors.blue;
+      } else {
+        fontColor = Colors.white;
+      }
     }
 
     if (widgetLoadType != LoadType.Delay) {
