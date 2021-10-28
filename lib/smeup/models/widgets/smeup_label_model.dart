@@ -8,8 +8,8 @@ import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
-  static const double defaultFontSize = 16.0;
-  static const double defaultIconSize = 16.0;
+  static const double defaultFontSize = 20.0;
+  static const double defaultIconSize = 20.0;
   static const Alignment defaultAlign = Alignment.center;
   static const bool defaultFontbold = false;
   static const double defaultWidth = 0;
@@ -99,7 +99,9 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
     }
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupLabelDao.getData(this);
+      onReady = () async {
+        await SmeupLabelDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

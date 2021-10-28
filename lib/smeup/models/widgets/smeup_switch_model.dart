@@ -49,7 +49,9 @@ class SmeupSwitchModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupSwitchDao.getData(this);
+      onReady = () async {
+        await SmeupSwitchDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

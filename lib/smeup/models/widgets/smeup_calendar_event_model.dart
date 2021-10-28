@@ -1,7 +1,5 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class SmeupCalentarEventModel {
   DateTime day;
@@ -11,19 +9,19 @@ class SmeupCalentarEventModel {
   FontWeight fontWeight = FontWeight.normal;
   DateTime initTime;
   DateTime endTime;
+  dynamic fields;
 
   SmeupCalentarEventModel(
       this.day, this.description, this.initTime, this.endTime);
 
   SmeupCalentarEventModel.fromMap(
-      dynamic fields,
+      this.fields,
       String titleColumnName,
       String dataColumnName,
       String styleColumnName,
       String initColumnName,
       String endColumnName) {
-    this.day = DateFormat('dd/MM/yyyy')
-        .parse('${fields[dataColumnName].toString()} 00:00:00.000Z');
+    this.day = DateTime.parse(fields[dataColumnName].toString());
     this.initTime = _toTime(fields[initColumnName]);
     this.endTime = _toTime(fields[endColumnName]);
     this.description = fields[titleColumnName];

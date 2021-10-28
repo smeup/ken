@@ -23,7 +23,9 @@ class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
     title = jsonMap['title'] ?? '';
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupInputPanelDao.getData(this);
+      onReady = () async {
+        await SmeupInputPanelDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

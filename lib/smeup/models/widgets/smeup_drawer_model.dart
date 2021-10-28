@@ -44,7 +44,9 @@ class SmeupDrawerModel extends SmeupModel {
     }
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupDrawerDao.getData(this);
+      onReady = () async {
+        await SmeupDrawerDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

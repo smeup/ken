@@ -29,6 +29,7 @@ abstract class SmeupModel {
   int serviceStatusCode = 0;
   //int refresh;
   GlobalKey<FormState> formKey;
+  Function onReady;
 
   List<SmeupSectionModel> smeupSectionsModels;
 

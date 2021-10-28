@@ -36,10 +36,18 @@ class SmeupDashboard extends StatefulWidget
   String title;
   String id;
   String type;
+  String forceText;
+  String forceUm;
+  String forceValue;
+  String forceIcon;
 
   SmeupDashboard(this.scaffoldKey, this.formKey, this.data,
       {id = '',
       type = 'DSH',
+      this.forceIcon,
+      this.forceText,
+      this.forceUm,
+      this.forceValue,
       this.valueColName = SmeupDashboardModel.defaultValueColName,
       this.text = '',
       this.unitOfMeasure = '',
@@ -77,18 +85,12 @@ class SmeupDashboard extends StatefulWidget
     iconSize = m.iconSize;
     padding = m.padding;
     title = m.title;
+    forceValue = m.forceValue;
+    forceIcon = m.forceIcon;
+    forceUm = m.forceUm;
+    forceText = m.forceText;
 
-    dynamic workData = treatData(m);
-
-    // set the widget data
-    if (workData != null &&
-        (workData['rows'] as List).length > 0 &&
-        workData['rows'][0][m.valueColName] != null) {
-      data = workData['rows'][0][m.valueColName];
-      unitOfMeasure = workData['rows'][0]['um'];
-      text = workData['rows'][0]['description'];
-      icon = workData['rows'][0]['icon'];
-    }
+    data = treatData(m);
   }
 
   @override
@@ -96,7 +98,35 @@ class SmeupDashboard extends StatefulWidget
     SmeupDashboardModel m = model;
 
     // change data format
-    return formatDataFields(m);
+    var workData = formatDataFields(m);
+
+    // set the widget data
+    if (workData != null &&
+        (workData['rows'] as List).length > 0 &&
+        workData['rows'][0][m.valueColName] != null) {
+      data = SmeupUtilities.getDouble(workData['rows'][0][m.valueColName]);
+      unitOfMeasure = workData['rows'][0][m.umColName];
+      text = workData['rows'][0][m.textColName];
+      icon = SmeupUtilities.getInt(workData['rows'][0][m.iconColName]);
+    }
+
+    if (m.forceText.isNotEmpty) {
+      text = m.forceText;
+    }
+
+    if (m.forceIcon.isNotEmpty) {
+      icon = m.forceIcon as int;
+    }
+
+    if (m.forceUm.isNotEmpty) {
+      unitOfMeasure = m.forceUm;
+    }
+
+    if (m.forceValue.isNotEmpty) {
+      data = m.forceValue as double;
+    }
+
+    return data;
   }
 
   @override
@@ -135,6 +165,7 @@ class _SmeupDashboardState extends State<SmeupDashboard>
     return dashboard;
   }
 
+  @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
@@ -146,9 +177,9 @@ class _SmeupDashboardState extends State<SmeupDashboard>
 
     Widget children;
 
-    if (_data == null) {
-      return getFunErrorResponse(context, _model);
-    }
+    // if (_data == null) {
+    //   return getFunErrorResponse(context, _model);
+    // }
 
     if (widget.valueColName.isEmpty) {
       SmeupLogService.writeDebugMessage(
@@ -180,10 +211,11 @@ class _SmeupDashboardState extends State<SmeupDashboard>
                 style: TextStyle(fontSize: widget.fontsize),
               )
             ]),
-            Text(
-              widget.text,
-              style: TextStyle(fontSize: widget.labelFontsize),
-            )
+            if (widget.text != null)
+              Text(
+                widget.text,
+                style: TextStyle(fontSize: widget.labelFontsize),
+              )
           ],
         ),
       ),

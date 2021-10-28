@@ -40,7 +40,9 @@ class SmeupSliderModel extends SmeupModel {
         SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupSliderDao.getData(this);
+      onReady = () async {
+        await SmeupSliderDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

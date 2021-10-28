@@ -6,7 +6,7 @@ class SmeupChartRow {
 
   SmeupChartRow(this.cells);
 
-  SmeupChartRow.fromMap(Map<String, dynamic> jsonData, this._columns) {
+  SmeupChartRow.fromMap(Map jsonData, this._columns) {
     cells = List<dynamic>.empty(growable: true);
     for (SmeupChartColumn col in _columns) {
       cells.add(jsonData[col.name]);

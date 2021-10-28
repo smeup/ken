@@ -160,12 +160,12 @@ class _SmeupChartState extends State<SmeupChart>
   Widget _getBarChartComponent(SmeupChartDatasource _data) {
     var seriesList = _getSeriesList(
         _data, _model, (SmeupChartSeries seriesData, _) => seriesData.color);
-    if (seriesList == null) {
-      SmeupLogService.writeDebugMessage(
-          'error in colAxes or colSeries definition',
-          logType: LogType.error);
-      return SmeupNotAvailable();
-    }
+    // if (seriesList == null) {
+    //   SmeupLogService.writeDebugMessage(
+    //       'error in colAxes or colSeries definition',
+    //       logType: LogType.error);
+    //   return SmeupNotAvailable();
+    // }
 
     double chartHeight = widget.height;
     double chartWidth = widget.width;
@@ -225,6 +225,9 @@ class _SmeupChartState extends State<SmeupChart>
     int noAxes = 0;
     int noSeries = 0;
 
+    var seriesList =
+        List<charts.Series<SmeupChartSeries, String>>.empty(growable: true);
+
     // only 1 axes and at least 1 series
     try {
       noAxes = _data.columns
@@ -234,13 +237,13 @@ class _SmeupChartState extends State<SmeupChart>
           .where((element) => element.type == ColumnType.Series)
           .length;
     } catch (e) {
-      return null;
+      return seriesList;
     }
     if (noAxes != 1) {
-      return null;
+      return seriesList;
     }
     if (noSeries < 1) {
-      return null;
+      return seriesList;
     }
 
     try {
@@ -249,16 +252,13 @@ class _SmeupChartState extends State<SmeupChart>
       colSeries = _data.columns
           .indexWhere((element) => element.type == ColumnType.Series);
     } catch (e) {
-      return null;
+      return seriesList;
     }
 
     // colAxes or colSeries not specified
     if (colAxes < 0 || colSeries < 0) {
-      return null;
+      return seriesList;
     }
-
-    var seriesList =
-        List<charts.Series<SmeupChartSeries, String>>.empty(growable: true);
 
     for (var i = 0; i < _data.columns.length; i++) {
       final column = _data.columns[i];

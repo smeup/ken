@@ -76,7 +76,9 @@ class SmeupTextAutocompleteModel extends SmeupModel
     valueField = optionsDefault['valueField'] ?? 'value';
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupTextAutocompleteDao.getData(this);
+      onReady = () async {
+        await SmeupTextAutocompleteDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

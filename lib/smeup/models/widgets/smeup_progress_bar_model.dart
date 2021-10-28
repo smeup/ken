@@ -59,7 +59,9 @@ class SmeupProgressBarModel extends SmeupModel implements SmeupDataInterface {
     }
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupProgressBarDao.getData(this);
+      onReady = () async {
+        await SmeupProgressBarDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

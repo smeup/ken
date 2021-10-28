@@ -32,7 +32,9 @@ class SmeupLineModel extends SmeupModel {
       color = defaultColor;
     }
     if (widgetLoadType != LoadType.Delay) {
-      SmeupLineDao.getData(this);
+      onReady = () async {
+        await SmeupLineDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);

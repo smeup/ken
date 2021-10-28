@@ -100,7 +100,9 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
     }
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupDatePickerDao.getData(this);
+      onReady = () async {
+        await SmeupDatePickerDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);
