@@ -85,7 +85,7 @@ class SmeupInputPanelDao extends SmeupDao {
           fields[i].update(elements[j], position++);
           if (fields[i].component == SmeupInputPanelSupportedComp.Cmb &&
               fields[i].fun != null) {
-            fields[i].items = await getComboData(fields[i], formKey);
+            fields[i].items = await _getComboData(fields[i], formKey);
           }
         }
       }
@@ -93,7 +93,7 @@ class SmeupInputPanelDao extends SmeupDao {
     fields.sort((a, b) => a.position.compareTo(b.position));
   }
 
-  static Future<List<SmeupInputPanelValue>> getComboData(
+  static Future<List<SmeupInputPanelValue>> _getComboData(
       SmeupInputPanelField field, GlobalKey<FormState> formKey) async {
     field.items = [];
     if (field.fun != null) {
