@@ -54,10 +54,12 @@ class SmeupLogService {
         logLevel = 0;
     }
 
-    if (messageLevel <= logLevel) {
+    // Errors must be always written in log
+
+    if (messageLevel <= logLevel || logType == LogType.error) {
       print(color + message + '\x1B[0m');
 
-      if (SmeupConfigurationService.isLogEnabled) {
+      if (SmeupConfigurationService.isLogEnabled || logType == LogType.error) {
         if (_logFile != null) {
           _logFile.writeAsString('${DateTime.now().toString()}: $message \n',
               mode: FileMode.append);

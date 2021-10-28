@@ -17,7 +17,7 @@ class SmeupCombo extends StatefulWidget
     implements SmeupWidgetInterface {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
-  Function clientOnChange;
+  void Function(String newValue) clientOnChange;
   SmeupComboModel model;
 
   EdgeInsetsGeometry padding;
@@ -48,6 +48,7 @@ class SmeupCombo extends StatefulWidget
     this.fontColor = SmeupComboModel.defaultFontColor,
     this.iconSize = SmeupComboModel.defaultIconSize,
     this.data,
+    this.clientOnChange,
   }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
   }
@@ -166,6 +167,9 @@ class _SmeupComboState extends State<SmeupCombo>
             onChanged: (String newValue) {
               setState(() {
                 _selectedValue = newValue;
+                if (widget.clientOnChange != null) {
+                  widget.clientOnChange(newValue);
+                }
                 SmeupVariablesService.setVariable(widget.id, newValue,
                     formKey: widget.formKey);
               });

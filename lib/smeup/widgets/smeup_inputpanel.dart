@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_combo_dao.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_inputpanel_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/models/widgets/input_panel/smeup_input_panel_field.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_combo_item_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_combo_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_inputpanel_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_button.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_combo.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_label.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_qrcode_reader.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_radio_buttons.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_text_field.dart';
@@ -58,8 +65,7 @@ class SmeupInputPanel extends StatefulWidget
     id = m.id;
     type = m.type;
     title = m.title;
-
-    data = treatData(m);
+    data = treatData(model);
   }
 
   @override
@@ -67,63 +73,7 @@ class SmeupInputPanel extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupInputPanelModel m = model;
-
-    List<SmeupInputPanelField> fields;
-
-    // change data format
-    var workData = formatDataFields(m);
-
-    // set the widget data
-    if (workData != null) {
-      List columns = workData["columns"];
-      Map rowFields = workData["rows"][0]["fields"];
-
-      // Process data containing the fields list and values
-      fields = _createFields(columns, rowFields);
-
-      // TODO Layout MUST be read with loser_09 service
-      // For developing purpose layout xml data was inserted in a
-      // dummy option layoutData
-      var layoutData = model.options["INP"]["default"]["layoutData"];
-      if (layoutData != null) {
-        _applyLayout(fields, layoutData["data"]);
-      }
-
-      return fields;
-    }
-  }
-
-  List<SmeupInputPanelField> _createFields(List columns, Map rowFields) {
-    List<SmeupInputPanelField> fields = columns
-        .map((column) => SmeupInputPanelField(
-            id: column["code"],
-            label: column["text"],
-            value: SmeupInputPanelValue(),
-            visible: column["IO"] != 'H'))
-        .toList();
-    fields.forEach((field) {
-      dynamic rowField = rowFields[field.id];
-      if (field != null) {
-        String code = rowField["smeupObject"]["codice"];
-        field.value = SmeupInputPanelValue(code: code, descr: code);
-      }
-    });
-    return fields;
-  }
-
-  _applyLayout(List<SmeupInputPanelField> fields, String layoutData) {
-    int position = 0;
-    XmlDocument doc = XmlDocument.parse(layoutData);
-    fields.forEach((field) => field.visible = false);
-    doc.findAllElements("Fld").forEach((node) {
-      fields.forEach((field) {
-        if (field.id == node.getAttribute("Nam")) {
-          field.update(node, position++);
-        }
-      });
-    });
-    fields.sort((a, b) => a.position.compareTo(b.position));
+    return (model as SmeupInputPanelModel).fields;
   }
 }
 
@@ -164,7 +114,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupInputPanelDao.getData(_model);
+        await SmeupInputPanelDao.getData(_model, widget.formKey);
         _data = widget.treatData(_model);
       }
       setDataLoad(widget.id, true);
@@ -190,28 +140,21 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
 
       return SmeupWidgetBuilderResponse(_model, children);
     }
-
-    // SmeupLogService.writeDebugMessage('Error SmeupLabel not created',
-    //     logType: LogType.error);
-
-    // return SmeupWidgetBuilderResponse(_model, SmeupNotAvailable());
   }
 
   Widget _getFields() {
-    List<Widget> fields = _data
-        .where((field) => field.visible)
-        .map((field) => Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _getInputFieldWidget(field),
-                SizedBox(
-                  height: 16,
-                ),
-              ],
-            ))
-        .toList();
+    List<Widget> fields = _data.where((field) => field.visible).map((field) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _getInputFieldWidget(field),
+          SizedBox(
+            height: 16,
+          ),
+        ],
+      );
+    }).toList();
     return Column(
-      key: Key("mycol"),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: fields,
     );
@@ -240,40 +183,10 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
             id: field.id, data: field.value.code);
 
       case SmeupInputPanelSupportedComp.Cmb:
-        // TODO remove, when i'll use smeup combo the filling logic is inside
-        // of component
-        if (field.items == null) field.items = [];
-        // TODO using SmeUP official component
-        return Column(
-          children: <Widget>[
-            SmeupLabel(
-              widget.scaffoldKey,
-              widget.formKey,
-              [field.label],
-              align: Alignment.bottomLeft,
-              height: 8,
-            ),
-            DropdownButton<SmeupInputPanelValue>(
-              isExpanded: true,
-              onChanged: (newValue) {
-                setState(() {
-                  field.value = newValue;
-                });
-              },
-              value: field.value.code == "" ? null : field.value,
-              icon: const Icon(Icons.arrow_downward),
-              iconSize: 24,
-              elevation: 16,
-              items: field.items
-                  .map<DropdownMenuItem<SmeupInputPanelValue>>((value) {
-                return DropdownMenuItem<SmeupInputPanelValue>(
-                  value: value,
-                  child: Text(value.descr),
-                );
-              }).toList(),
-            ),
-          ],
-        );
+        if (field.items == null) {
+          field.items = [];
+        }
+        return _getComboWidget(field);
 
       default:
         return SmeupTextField(
@@ -289,11 +202,88 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     }
   }
 
+  // Widget _getComboWidget(SmeupInputPanelField field) {
+  //   return FutureBuilder<List<SmeupInputPanelValue>>(
+  //     future: field.items == null
+  //         ? SmeupInputPanelDao.getComboData(field, widget.formKey)
+  //         : Future.value(field.items),
+  //     initialData: field.items,
+  //     builder: (context, snapshot) {
+  //       final List<SmeupComboItemModel> items = snapshot.hasData
+  //           ? snapshot.data
+  //               .map((e) => SmeupComboItemModel(e.code, e.descr))
+  //               .toList()
+  //           : [];
+  //       final String selectedValue = snapshot.hasData
+  //           ? field.value.code == ""
+  //               ? null
+  //               : field.value.code
+  //           : null;
+  //       if (snapshot.hasError) {
+  //         SmeupLogService.writeDebugMessage(
+  //             'Error INP: ${snapshot.error}. StackTrace: ${snapshot.stackTrace}',
+  //             logType: LogType.error);
+  //         return SmeupNotAvailable();
+  //       }
+  //       return Column(
+  //         children: <Widget>[
+  //           SmeupLabel(
+  //             widget.scaffoldKey,
+  //             widget.formKey,
+  //             [field.label],
+  //             align: Alignment.bottomLeft,
+  //             height: 8,
+  //           ),
+  //           SmeupCombo(
+  //             widget.scaffoldKey,
+  //             widget.formKey,
+  //             id: field.id,
+  //             selectedValue: selectedValue,
+  //             data: items,
+  //             clientOnChange: (newValue) =>
+  //                 field.value.code = field.value.descr = newValue,
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
+
+  Widget _getComboWidget(SmeupInputPanelField field) {
+    return Column(
+      children: <Widget>[
+        SmeupLabel(
+          widget.scaffoldKey,
+          widget.formKey,
+          [field.label],
+          align: Alignment.bottomLeft,
+          height: 8,
+        ),
+        SmeupCombo(
+          widget.scaffoldKey,
+          widget.formKey,
+          id: field.id,
+          selectedValue: field.value.code == "" ? null : field.value.code,
+          data: field.items
+              .map((e) => SmeupComboItemModel(e.code, e.descr))
+              .toList(),
+          clientOnChange: (newValue) =>
+              field.value.code = field.value.descr = newValue,
+        ),
+      ],
+    );
+  }
+
   Widget _getConfirmButton() {
-    return SmeupButton(
-      width: double.infinity,
-      data: "Confirm",
-      clientOnPressed: () => _fireDynamism(),
+    return Row(
+      children: [
+        Expanded(
+          child: SmeupButton(
+            data: "Confirm",
+            clientOnPressed: () => _fireDynamism(),
+          ),
+        ),
+      ],
     );
   }
 
