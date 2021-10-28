@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_drawer_model.dart';
-import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/services/smeup_widget_notification_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_drawer.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
@@ -128,13 +127,15 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     await smeupscreenModel.setData();
 
     if (!hasData(smeupscreenModel)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-              '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupscreenModel.smeupFun.fun['fun']['function']})'),
-          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
-        ),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text(
+      //         '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupscreenModel.smeupFun.fun['fun']['function']})'),
+      //     backgroundColor: SmeupConfigurationService.getTheme().errorColor,
+      //   ),
+      // );
+
+      showErrorForm(context, smeupscreenModel.smeupFun);
 
       return SmeupWidgetBuilderResponse(smeupscreenModel, SmeupNotAvailable(),
           serviceStatusCode: smeupscreenModel.serviceStatusCode);
@@ -213,6 +214,8 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
   }
 
   Widget showErrorForm(BuildContext context, SmeupFun smeupFun) {
+    SmeupConfigurationService.getLocalStorage().setString('authorization', '');
+
     Future.delayed(Duration(milliseconds: 300), () async {
       showDialog(
         barrierDismissible: false,
