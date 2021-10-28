@@ -92,7 +92,8 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
       dio.options.headers['content-type'] = contentType;
 
       dio.options.headers['Authorization'] =
-          '${SmeupConfigurationService.defaultServiceToken}';
+          SmeupConfigurationService.getLocalStorage()
+              .getString('authorization');
 
       Response response;
 
