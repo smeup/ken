@@ -17,7 +17,7 @@ class SmeupInputPanelDao extends SmeupDao {
     await SmeupDao.getData(model);
 
     List columns = model.data["columns"];
-    Map rowFields = model.data["rows"][0]["fields"];
+    Map rowFields = model.data["rows"][0];
 
     model.fields = _createFields(columns, rowFields);
 
@@ -47,7 +47,7 @@ class SmeupInputPanelDao extends SmeupDao {
           "F(EXD;LOSER_09;LAY) 2(;;${optionsDefault["layout"]})", formKey);
       SmeupServiceResponse response = await SmeupDataService.invoke(smeupFun);
       if (response.succeded) {
-        return response.result.data["data"];
+        return response.result.data;
       } else {
         return Future.error(response.result);
       }
@@ -64,9 +64,8 @@ class SmeupInputPanelDao extends SmeupDao {
             visible: column["IO"] != 'H'))
         .toList();
     fields.forEach((field) {
-      dynamic rowField = rowFields[field.id];
       if (field != null) {
-        String code = rowField["smeupObject"]["codice"];
+        String code = rowFields[field.id];
         field.value = SmeupInputPanelValue(code: code, descr: code);
       }
     });
@@ -96,17 +95,20 @@ class SmeupInputPanelDao extends SmeupDao {
 
   static Future<List<SmeupInputPanelValue>> getComboData(
       SmeupInputPanelField field, GlobalKey<FormState> formKey) async {
-    SmeupModel model = SmeupComboModel(id: field.id);
     field.items = [];
     if (field.fun != null) {
-      model.smeupFun = SmeupFun(field.fun, formKey);
-      await SmeupDao.getData(model);
-      List rows = model.data["rows"];
+      final fun = SmeupFun(field.fun, formKey);
+      SmeupServiceResponse response = await SmeupDataService.invoke(fun);
+      List rows;
+      if (response.succeded) {
+        rows = response.result.data["rows"];
+      } else {
+        return Future.error(response.result);
+      }
       if (rows != null) {
         rows.forEach((row) {
-          Map smeupObject = row["fields"]["ID_DE"]["smeupObject"];
-          field.items.add(SmeupInputPanelValue(
-              code: smeupObject["codice"], descr: smeupObject["testo"]));
+          field.items.add(
+              SmeupInputPanelValue(code: row["codice"], descr: row["testo"]));
         });
       }
     }
