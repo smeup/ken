@@ -9,6 +9,7 @@ class SmeupImageModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 40;
   static const double defaultHeight = 40;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const bool defaultIsRemote = false;
 
   double width;
   double height;
