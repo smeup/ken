@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
@@ -10,15 +12,14 @@ enum WidgetOrientation { Vertical, Horizontal }
 abstract class SmeupModel {
   //static const int defaultRefresh = 0;
 
-  dynamic jsonMap;
   dynamic data;
   String type;
   String id;
   SmeupFun smeupFun;
   LoadType widgetLoadType = LoadType.Immediate;
-  Map<String, dynamic> options;
+  LinkedHashMap<String, dynamic> options;
   dynamic optionsType;
-  Map<String, dynamic> optionsDefault;
+  LinkedHashMap<String, dynamic> optionsDefault;
   String title = '';
   SmeupModel parent;
 
@@ -35,48 +36,67 @@ abstract class SmeupModel {
 
   SmeupModel(this.formKey, {this.title, this.id, this.type}) {
     showLoader = SmeupConfigurationService.getAppConfiguration().showLoader;
-    if (optionsDefault == null)
-      optionsDefault = {
-        "$type": {"default": {}}
-      };
+    if (optionsDefault == null) {
+      optionsDefault = _getNewLinkedHashMap();
+      options = _getNewLinkedHashMap();
+      optionsType = _getNewLinkedHashMap();
+    }
   }
 
   SmeupModel.fromMap(Map<String, dynamic> jsonMap, this.formKey) {
-    this.jsonMap = jsonMap;
-    type = jsonMap['type'];
-    dynamisms = jsonMap['dynamisms'];
+    var myJsonMap = _getNewLinkedHashMap();
+    _setLinkedHashMap(jsonMap, myJsonMap);
 
-    if (type != null && (id == null || id.isEmpty)) {
-      id = SmeupUtilities.getWidgetId(jsonMap['type'], jsonMap['id']);
+    type = myJsonMap['type'];
+    dynamisms = myJsonMap['dynamisms'];
+    smeupFun = SmeupFun(myJsonMap['fun'], formKey);
 
-      smeupFun = SmeupFun(jsonMap['fun'], formKey);
-
-      switch (jsonMap['load']) {
-        case 'D':
-          widgetLoadType = LoadType.Delay;
-          break;
-        default:
-          widgetLoadType = LoadType.Immediate;
-      }
-
-      options = jsonMap['options'] ?? Map<String, dynamic>();
-
-      if (options[jsonMap['type']] == null)
-        options[jsonMap['type']] = Map<String, dynamic>();
-
-      optionsType = options[jsonMap['type']];
-
-      if (optionsType['default'] == null)
-        optionsType['default'] = Map<String, dynamic>();
-
-      optionsDefault = optionsType['default'] ?? Map<String, dynamic>();
-      showLoader = jsonMap['showLoader'] ??
-          SmeupConfigurationService.getAppConfiguration().showLoader;
-      notificationEnabled = jsonMap['notification'] ?? true;
-      // refresh =
-      //     SmeupUtilities.getInt(optionsDefault['refresh']) ?? defaultRefresh;
+    switch (myJsonMap['load']) {
+      case 'D':
+        widgetLoadType = LoadType.Delay;
+        break;
+      default:
+        widgetLoadType = LoadType.Immediate;
     }
 
-    data = jsonMap['data'];
+    showLoader = myJsonMap['showLoader'] ??
+        SmeupConfigurationService.getAppConfiguration().showLoader;
+    notificationEnabled = myJsonMap['notification'] ?? true;
+
+    if (type != null && (id == null || id.isEmpty)) {
+      id = SmeupUtilities.getWidgetId(myJsonMap['type'], myJsonMap['id']);
+
+      optionsDefault = _getNewLinkedHashMap();
+      options = _getNewLinkedHashMap();
+      optionsType = _getNewLinkedHashMap();
+
+      if (myJsonMap['options'] != null) {
+        _setLinkedHashMap(myJsonMap['options'], options);
+
+        if (myJsonMap['options'][type] != null) {
+          _setLinkedHashMap(myJsonMap['options'][type], optionsType);
+
+          if (myJsonMap['options'][type]['default'] != null) {
+            _setLinkedHashMap(
+                myJsonMap['options'][type]['default'], optionsDefault);
+          }
+        }
+      }
+    }
+
+    data = myJsonMap['data'];
+  }
+
+  LinkedHashMap<String, dynamic> _getNewLinkedHashMap() {
+    return LinkedHashMap<String, dynamic>(
+        equals: (a, b) => a.toLowerCase() == b.toLowerCase(),
+        hashCode: (key) => key.toLowerCase().hashCode);
+  }
+
+  _setLinkedHashMap(
+      Map<String, dynamic> map, LinkedHashMap<String, dynamic> linkedHashMap) {
+    map.entries.forEach((element) {
+      linkedHashMap[element.key] = element.value;
+    });
   }
 }
