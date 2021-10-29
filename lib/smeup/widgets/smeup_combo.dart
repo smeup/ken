@@ -151,10 +151,12 @@ class _SmeupComboState extends State<SmeupCombo>
     SmeupVariablesService.setVariable(widget.id, _selectedValue,
         formKey: widget.formKey);
 
-    final children = Center(
+    final children = Align(
+      alignment: Alignment.centerLeft,
       child: Container(
           padding: widget.padding,
           child: DropdownButton<String>(
+            //isExpanded: true,
             value: _selectedValue,
             icon: Icon(Icons.arrow_downward, color: widget.fontColor),
             iconSize: widget.iconSize,
