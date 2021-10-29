@@ -34,6 +34,7 @@ class SmeupImageList extends StatefulWidget
   double fontsize;
   dynamic data;
   bool showLoader = false;
+  Axis orientation;
 
   // dynamisms functions
   Function clientOnItemTap;
@@ -53,7 +54,8 @@ class SmeupImageList extends StatefulWidget
       this.listHeight = SmeupImageListModel.defaultHeight,
       this.fontsize = SmeupImageListModel.defaultFontsize,
       this.padding = SmeupImageListModel.defaultPadding,
-      title = '',
+      this.orientation = SmeupImageListModel.defaultOrientation,
+      this.title = '',
       showLoader: false,
       this.clientOnItemTap,
       this.dismissEnabled = false})
@@ -76,6 +78,7 @@ class SmeupImageList extends StatefulWidget
     rows = m.rows;
     title = m.title;
     showLoader = m.showLoader;
+    orientation = m.orientation;
 
     dynamic deleteDynamism;
     if (m.dynamisms != null)
@@ -164,10 +167,8 @@ class _SmeupImageListState extends State<SmeupImageList>
     Widget children;
 
     int noColl = widget.columns;
-    Axis orientation = Axis.vertical;
-    if (noColl == null || noColl == 0) {
+    if (noColl == 0) {
       noColl = widget.rows;
-      orientation = Axis.horizontal;
     }
 
     if (noColl == null || noColl == 0) {
@@ -183,7 +184,7 @@ class _SmeupImageListState extends State<SmeupImageList>
           layout: 'imageList',
           listHeight: widget.listHeight,
           listType: SmeupListType.oriented,
-          orientation: orientation,
+          orientation: widget.orientation,
           padding: widget.padding,
           portraitColumns: noColl,
           landscapeColumns: noColl,
@@ -197,7 +198,7 @@ class _SmeupImageListState extends State<SmeupImageList>
           layout: 'imageList',
           listHeight: widget.listHeight,
           listType: SmeupListType.oriented,
-          orientation: orientation,
+          orientation: widget.orientation,
           padding: widget.padding,
           portraitColumns: noColl,
           landscapeColumns: noColl,

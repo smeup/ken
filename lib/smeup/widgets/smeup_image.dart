@@ -41,7 +41,7 @@ class SmeupImage extends StatefulWidget
       this.width = SmeupImageModel.defaultWidth,
       this.height = SmeupImageModel.defaultHeight,
       this.padding = SmeupImageModel.defaultPadding,
-      this.isRemote = true,
+      this.isRemote = SmeupImageModel.defaultIsRemote,
       title = ''})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
@@ -67,7 +67,7 @@ class SmeupImage extends StatefulWidget
     SmeupImageModel m = model;
 
     // set the widget data
-    bool isRemote = true;
+    bool isRemote = SmeupImageModel.defaultIsRemote;
     dynamic data;
     if (m.data != null &&
         (m.data['rows'] as List).length > 0 &&
