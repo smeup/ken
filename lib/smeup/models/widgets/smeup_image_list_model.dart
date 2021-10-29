@@ -14,6 +14,7 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
   static const int defaultRows = 0;
   static const String defaultLayout = '1';
   static const double defaultFontsize = 16.0;
+  static const Axis defaultOrientation = Axis.vertical;
 
   double width;
   double height;
@@ -36,6 +37,7 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
       this.listHeight = defaultHeight,
       this.padding = defaultPadding,
       this.columns = defaultColumns,
+      this.orientation = defaultOrientation,
       this.rows = defaultRows,
       title = ''})
       : super(formKey, title: title, id: id, type: type) {
@@ -57,6 +59,9 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
     columns =
         SmeupUtilities.getInt(optionsDefault['columns']) ?? defaultColumns;
     rows = SmeupUtilities.getInt(optionsDefault['rows']) ?? defaultRows;
+    if (columns == 0 && rows == 0) {
+      columns = 1;
+    }
     fontsize = optionsDefault['fontSize'] ?? defaultFontsize;
     padding =
         SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;

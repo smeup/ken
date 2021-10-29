@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_image_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
@@ -614,10 +615,11 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                       });
 
                       Widget widgetImg;
-                      bool isRemote;
-                      double imageHeight;
-                      double imageWidth;
-                      EdgeInsetsGeometry imagePadding;
+                      bool isRemote = SmeupImageModel.defaultIsRemote;
+                      double imageHeight = SmeupImageModel.defaultHeight;
+                      double imageWidth = SmeupImageModel.defaultWidth;
+                      EdgeInsetsGeometry imagePadding =
+                          SmeupImageModel.defaultPadding;
                       if (data['isRemote'] != null) {
                         isRemote = data['isRemote'];
                       }
@@ -632,15 +634,31 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                             SmeupUtilities.getPadding(data['padding']);
                       }
 
-                      widgetImg = SmeupImage(
-                        widget.scaffoldKey,
-                        widget.formKey,
-                        data['code'],
-                        isRemote: isRemote,
-                        height: imageHeight,
-                        width: imageWidth,
-                        padding: imagePadding,
-                      );
+                      // widgetImg = SmeupImage(
+                      //   widget.scaffoldKey,
+                      //   widget.formKey,
+                      //   data['code'] ?? data['codice'],
+                      //   isRemote: isRemote,
+                      //   height: imageHeight,
+                      //   width: imageWidth,
+                      //   padding: imagePadding,
+                      // );
+                      widgetImg = FutureBuilder<Widget>(
+                          future: _getImage(data),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<Widget> snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return SmeupWait(
+                                  widget.scaffoldKey, widget.formKey);
+                            } else {
+                              if (snapshot.hasError) {
+                                return SmeupNotAvailable();
+                              } else {
+                                return snapshot.data;
+                              }
+                            }
+                          });
 
                       return [
                         if (widgetImg != null) widgetImg,

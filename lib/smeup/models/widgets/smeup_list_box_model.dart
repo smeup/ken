@@ -22,6 +22,8 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultBackgroundColName = '';
   static const bool defaultShowSelection = false;
   static const int defaultSelectedRow = -1;
+  static const Color defaultBackColor = Colors.white;
+  static const Color defaultFontColor = Colors.black;
 
   double width;
   double height;
@@ -33,8 +35,8 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   int landscapeColumns;
   double fontsize;
   String layout = '';
-  List<String> visibleColumns = List<String>.empty();
-  String defaultSort = '';
+  List<String> visibleColumns;
+  String defaultSort;
   Color backColor;
   Color fontColor;
   String backgroundColName;
@@ -57,14 +59,16 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       this.landscapeColumns = defaultLandscapeColumns,
       this.visibleColumns,
       this.defaultSort = defaultDefaultSort,
-      this.fontColor,
-      this.backColor,
+      this.fontColor = defaultFontColor,
+      this.backColor = defaultBackColor,
       this.backgroundColName = defaultBackgroundColName,
       this.showSelection = defaultShowSelection,
       this.selectedRow = defaultSelectedRow,
       title = ''})
       : super(formKey, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
+    if (visibleColumns == null)
+      visibleColumns = List<String>.empty(growable: true);
   }
 
   SmeupListBoxModel.fromMap(
@@ -101,6 +105,8 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
 
     if (optionsDefault['columns'] != null) {
       visibleColumns = optionsDefault['columns'].split('|');
+    } else {
+      visibleColumns = List<String>.empty(growable: true);
     }
 
     if (optionsDefault['fontColor'] != null) {
@@ -111,6 +117,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     }
 
     backgroundColName = optionsDefault['backgroundColName'];
+    defaultSort = optionsDefault['defaultSort'] ?? defaultDefaultSort;
 
     showSelection = false;
     if (optionsDefault['showSelection'] != null) {
