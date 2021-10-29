@@ -614,36 +614,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                         }
                       });
 
-                      Widget widgetImg;
-                      bool isRemote = SmeupImageModel.defaultIsRemote;
-                      double imageHeight = SmeupImageModel.defaultHeight;
-                      double imageWidth = SmeupImageModel.defaultWidth;
-                      EdgeInsetsGeometry imagePadding =
-                          SmeupImageModel.defaultPadding;
-                      if (data['isRemote'] != null) {
-                        isRemote = data['isRemote'];
-                      }
-                      if (data['height'] != null) {
-                        imageHeight = SmeupUtilities.getDouble(data['height']);
-                      }
-                      if (data['width'] != null) {
-                        imageWidth = SmeupUtilities.getDouble(data['width']);
-                      }
-                      if (data['padding'] != null) {
-                        imagePadding =
-                            SmeupUtilities.getPadding(data['padding']);
-                      }
-
-                      // widgetImg = SmeupImage(
-                      //   widget.scaffoldKey,
-                      //   widget.formKey,
-                      //   data['code'] ?? data['codice'],
-                      //   isRemote: isRemote,
-                      //   height: imageHeight,
-                      //   width: imageWidth,
-                      //   padding: imagePadding,
-                      // );
-                      widgetImg = FutureBuilder<Widget>(
+                      Widget widgetImg = FutureBuilder<Widget>(
                           future: _getImage(data),
                           builder: (BuildContext context,
                               AsyncSnapshot<Widget> snapshot) {
@@ -812,6 +783,35 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
             widgetImg = await _fetchAvailableLinks(imgList);
           }
         }
+      }
+    } else {
+      if (data['isRemote'] != null) {
+        bool isRemote = SmeupImageModel.defaultIsRemote;
+        double imageHeight = SmeupImageModel.defaultHeight;
+        double imageWidth = SmeupImageModel.defaultWidth;
+        EdgeInsetsGeometry imagePadding = SmeupImageModel.defaultPadding;
+        if (data['isRemote'] != null) {
+          isRemote = data['isRemote'];
+        }
+        if (data['height'] != null) {
+          imageHeight = SmeupUtilities.getDouble(data['height']);
+        }
+        if (data['width'] != null) {
+          imageWidth = SmeupUtilities.getDouble(data['width']);
+        }
+        if (data['padding'] != null) {
+          imagePadding = SmeupUtilities.getPadding(data['padding']);
+        }
+
+        widgetImg = SmeupImage(
+          widget.scaffoldKey,
+          widget.formKey,
+          data['code'],
+          isRemote: isRemote,
+          height: imageHeight,
+          width: imageWidth,
+          padding: imagePadding,
+        );
       }
     }
     return widgetImg ?? Container();
