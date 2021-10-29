@@ -207,7 +207,7 @@ class SmeupButton extends StatelessWidget {
                     children: [
                       icon,
                       SizedBox(width: innerSpace),
-                      text,
+                      Expanded(child: text),
                     ],
                   ),
                   color: backColor,
