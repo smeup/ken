@@ -243,6 +243,8 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
                 row['fields'][column['code']]['smeupObject']['parametro'];
             newRow['codice'] =
                 row['fields'][column['code']]['smeupObject']['codice'];
+            newRow['testo'] =
+                row['fields'][column['code']]['smeupObject']['testo'];
           });
           rows.add(newRow);
         });
