@@ -11,7 +11,7 @@ class SmeupCalendarModel extends SmeupModel {
   static const double defaultEventFontSize = 12.0;
   static const double defaultTitleFontSize = 20.0;
   static const bool defaultShowPeriodButtons = false;
-  static const String defaultTitleColumnName = 'XXDDAT';
+  static const String defaultTitleColumnName = 'XXDESC';
   static const String defaultDataColumnName = 'XXDAT1';
   static const String defaultStyleColumnName = 'XXGRAF';
   static const String defaultInitTimeColumnName = 'init';

@@ -34,9 +34,11 @@ class SmeupBox extends StatefulWidget {
   final bool showSelection;
   final int index;
   final int selectedRow;
+  final bool isDynamic;
 
   SmeupBox(this.scaffoldKey, this.formKey, this.index,
       {this.id,
+      this.isDynamic = false,
       this.selectedRow,
       this.columns,
       this.data,
@@ -76,7 +78,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                 'Error SmeupBox: ${snapshot.error} ${snapshot.stackTrace}. StackTrace: ${snapshot.stackTrace}',
                 logType: LogType.error);
             notifyError(context, widget.id, snapshot.error);
-            return SmeupNotAvailable();
+            return Container();
           } else {
             return snapshot.data.children;
           }
@@ -731,18 +733,31 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
 
   Future<Widget> _getImage(dynamic data) async {
     Widget widgetImg;
-    var colImg = _getColumns(data).firstWhere(
-        (col) => col['ogg'] == 'J4IMG' && col['IO'] != 'H',
-        orElse: () => null);
-    if (colImg != null) {
-      final String imageColName = colImg['code'];
-      final String ogg = data[imageColName];
-      final List split = ogg.split(';');
-      if (split.length == 3) {
-        String type = split[0];
-        String parameter = split[1];
-        String code = split[2];
+    if (widget.isDynamic) {
+      var colImg = _getColumns(data).firstWhere(
+          (col) => col['ogg'] == 'J4IMG' && col['IO'] != 'H',
+          orElse: () => null);
+      String code = '';
+      String type = '';
+      String parameter = '';
+      if (colImg != null) {
+        final String imageColName = colImg['code'];
+        final String ogg = data[imageColName];
+        final List split = ogg.split(';');
+        if (split.length == 3) {
+          type = split[0];
+          parameter = split[1];
+          code = split[2];
+        }
+      } else {
+        type = data['tipo'] ?? data['type'];
+        parameter = data['parametro'] ?? data['parameter'];
+        code = data['codice'] ?? data['code'];
+      }
+
+      if (type != null && parameter != null && code != null) {
         bool validURL = Uri.parse(code).isAbsolute;
+
         if (validURL) {
           widgetImg = Padding(
             padding: const EdgeInsets.all(5.0),
@@ -776,45 +791,53 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
             SmeupLogService.writeDebugMessage(
                 "_getImage error in SmeupBox: ${smeupServiceResponse.result} - Try to retry",
                 logType: LogType.error);
-            return SmeupNotAvailable();
+            //return Container();
           } else {
             final imgList = smeupServiceResponse.result.data['rows'];
 
             widgetImg = await _fetchAvailableLinks(imgList);
           }
         }
+      } else {
+        widgetImg = _getSmeupImage(data);
       }
     } else {
-      if (data['isRemote'] != null) {
-        bool isRemote = SmeupImageModel.defaultIsRemote;
-        double imageHeight = SmeupImageModel.defaultHeight;
-        double imageWidth = SmeupImageModel.defaultWidth;
-        EdgeInsetsGeometry imagePadding = SmeupImageModel.defaultPadding;
-        if (data['isRemote'] != null) {
-          isRemote = data['isRemote'];
-        }
-        if (data['height'] != null) {
-          imageHeight = SmeupUtilities.getDouble(data['height']);
-        }
-        if (data['width'] != null) {
-          imageWidth = SmeupUtilities.getDouble(data['width']);
-        }
-        if (data['padding'] != null) {
-          imagePadding = SmeupUtilities.getPadding(data['padding']);
-        }
-
-        widgetImg = SmeupImage(
-          widget.scaffoldKey,
-          widget.formKey,
-          data['code'],
-          isRemote: isRemote,
-          height: imageHeight,
-          width: imageWidth,
-          padding: imagePadding,
-        );
-      }
+      widgetImg = _getSmeupImage(data);
     }
     return widgetImg ?? Container();
+  }
+
+  Widget _getSmeupImage(data) {
+    Widget widgetImg;
+    if (data['isRemote'] != null) {
+      bool isRemote = SmeupImageModel.defaultIsRemote;
+      double imageHeight = SmeupImageModel.defaultHeight;
+      double imageWidth = SmeupImageModel.defaultWidth;
+      EdgeInsetsGeometry imagePadding = SmeupImageModel.defaultPadding;
+      if (data['isRemote'] != null) {
+        isRemote = data['isRemote'];
+      }
+      if (data['height'] != null) {
+        imageHeight = SmeupUtilities.getDouble(data['height']);
+      }
+      if (data['width'] != null) {
+        imageWidth = SmeupUtilities.getDouble(data['width']);
+      }
+      if (data['padding'] != null) {
+        imagePadding = SmeupUtilities.getPadding(data['padding']);
+      }
+
+      widgetImg = SmeupImage(
+        widget.scaffoldKey,
+        widget.formKey,
+        data['code'],
+        isRemote: isRemote,
+        height: imageHeight,
+        width: imageWidth,
+        padding: imagePadding,
+      );
+    }
+    return widgetImg;
   }
 
   Future<Widget> _fetchAvailableLinks(imgList) async {
@@ -838,7 +861,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
       }
     }
 
-    return SmeupNotAvailable();
+    return Container();
   }
 
   List<Widget> _getButtons(dynamic data) {

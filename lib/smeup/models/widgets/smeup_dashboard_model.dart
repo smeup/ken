@@ -80,13 +80,14 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
-    fontsize = SmeupUtilities.getDouble(
+    double perc = SmeupUtilities.getDouble(
             optionsDefault['FontSize'].toString().replaceAll("%", "")) ??
         defaultFontsize;
-    iconSize =
-        SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
+    fontsize = defaultFontsize * perc / 100;
+    iconSize = SmeupUtilities.getDouble(optionsDefault['iconSize']) ??
+        defaultIconSize * perc / 100;
     labelFontsize = SmeupUtilities.getDouble(optionsDefault['labelFontSize']) ??
-        defaultLabelFontsize;
+        defaultLabelFontsize * perc / 100;
     if (optionsDefault['iconColor'] != null) {
       iconColor = SmeupUtilities.getColorFromRGB(optionsDefault['iconColor']);
     }
