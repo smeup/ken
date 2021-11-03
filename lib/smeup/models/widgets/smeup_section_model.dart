@@ -9,7 +9,6 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_form_model.
 import 'package:mobile_components_library/smeup/models/widgets/smeup_gauge_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_image_list_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_image_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_input_field_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_inputpanel_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_label_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_line_model.dart';
