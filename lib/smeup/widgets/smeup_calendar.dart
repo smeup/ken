@@ -286,7 +286,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
     }
 
     return Container(
-      height: 800, //calendarHeight,
+      height: calendarHeight,
       width: calendarWidth,
       child: Column(
         children: [
@@ -606,9 +606,9 @@ class SmeupCalendarState extends State<SmeupCalendar>
       children: <Widget>[
         Flexible(
           child: ElevatedButton(
-            child: const Text(
+            child: Text(
               'Mese',
-              style: const TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: widget.eventFontSize),
             ),
             onPressed: () {
               setState(() {
@@ -619,8 +619,8 @@ class SmeupCalendarState extends State<SmeupCalendar>
         ),
         Flexible(
           child: ElevatedButton(
-            child:
-                const Text('2 Settimane', style: const TextStyle(fontSize: 12)),
+            child: Text('2 Settimane',
+                style: TextStyle(fontSize: widget.eventFontSize)),
             onPressed: () {
               setState(() {
                 _calendarFormat = CalendarFormat.twoWeeks;
@@ -630,8 +630,8 @@ class SmeupCalendarState extends State<SmeupCalendar>
         ),
         Flexible(
           child: ElevatedButton(
-            child:
-                const Text('Settimana', style: const TextStyle(fontSize: 12)),
+            child: Text('Settimana',
+                style: TextStyle(fontSize: widget.eventFontSize)),
             onPressed: () {
               setState(() {
                 _calendarFormat = CalendarFormat.week;

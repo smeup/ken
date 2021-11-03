@@ -405,6 +405,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
         widget.scaffoldKey,
         widget.formKey,
         i,
+        isDynamic: _model != null,
         selectedRow: widget.selectedRow,
         onRefresh: _refreshList,
         showLoader: widget.showLoader,
