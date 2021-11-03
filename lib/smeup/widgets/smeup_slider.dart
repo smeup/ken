@@ -3,7 +3,6 @@ import 'package:mobile_components_library/smeup/daos/smeup_slider_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_slider_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
@@ -33,7 +32,7 @@ class SmeupSlider extends StatefulWidget
       this.title,
       this.id = '',
       this.type = 'SLD',
-      this.value = SmeupSliderModel.defaultValue,
+      this.value = 0,
       this.sldMax = SmeupSliderModel.defaultSldMax,
       this.sldMin = SmeupSliderModel.defaultSldMin})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
@@ -53,7 +52,6 @@ class SmeupSlider extends StatefulWidget
     SmeupSliderModel m = model;
     id = m.id;
     type = m.type;
-    value = m.value;
     sldMin = m.sldMin;
     sldMax = m.sldMax;
     title = m.title;
@@ -73,10 +71,8 @@ class SmeupSlider extends StatefulWidget
       double retValue = 0;
       var firstElement = (workData['rows'] as List).first;
       if (firstElement != null) {
-        if (firstElement[m.optionsDefault['value']] != null) {
-          retValue = SmeupUtilities.getDouble(
-                  firstElement[m.optionsDefault['value']]) ??
-              0;
+        if (firstElement['value'] != null) {
+          retValue = SmeupUtilities.getDouble(firstElement['value']) ?? 0;
         }
       }
       return retValue;
@@ -136,11 +132,6 @@ class _SmeupSliderState extends State<SmeupSlider>
     SmeupVariablesService.setVariable(widget.id, _value,
         formKey: widget.formKey);
 
-    //final children = Divider(
-    //sldMin: widget.sldMin,
-    //sldMax: widget.sldMin,
-    //);
-
     final children = Center(
       child: Container(
           padding: EdgeInsets.only(left: 10, right: 10),
@@ -150,6 +141,9 @@ class _SmeupSliderState extends State<SmeupSlider>
               if (widget.clientOnChange != null) widget.clientOnChange(value);
               SmeupVariablesService.setVariable(widget.id, value,
                   formKey: widget.formKey);
+              setState(() {
+                _value = value;
+              });
             },
             value: _value,
             onChangeEnd: widget.clientOnChange,
@@ -157,9 +151,6 @@ class _SmeupSliderState extends State<SmeupSlider>
             max: widget.sldMax,
           )),
     );
-
-    SmeupLogService.writeDebugMessage('Error SmeupLabel not created',
-        logType: LogType.error);
 
     return SmeupWidgetBuilderResponse(_model, children);
   }

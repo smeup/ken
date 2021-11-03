@@ -500,7 +500,8 @@ class SmeupCalendarState extends State<SmeupCalendar>
         }
       }
     } catch (e) {
-      //debugPrint(e);
+      SmeupLogService.writeDebugMessage("smeupModel.type: $e",
+          logType: LogType.error);
       return list;
     }
 
@@ -543,7 +544,6 @@ class SmeupCalendarState extends State<SmeupCalendar>
           widget.clientOnDaySelected(selectedDay);
       } else {
         final sel = _data.firstWhere((element) {
-          //debugPrint(element.toString());
           return element[widget.dataColumnName] == dayString &&
               element[widget.titleColumnName] == title &&
               element[widget.initTimeColumnName] == initTime &&

@@ -76,7 +76,8 @@ class _SmeupComponentState extends State<SmeupComponent> {
       SmeupModel smeupModel) async {
     var children;
 
-    debugPrint("smeupModel.type: ${smeupModel.type}");
+    // SmeupLogService.writeDebugMessage("smeupModel.type: ${smeupModel.type}",
+    //     logType: LogType.debug);
     switch (smeupModel.type) {
       case 'LAB':
         children = SmeupLabel.withController(

@@ -64,9 +64,12 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
   @override
   void dispose() {
     if (smeupFormModel != null) SmeupDynamicScreen.onDispose(smeupFormModel.id);
+    int currObj = SmeupWidgetNotificationService.objects.length;
     SmeupWidgetNotificationService.objects.removeWhere(
         (element) => element['scaffoldKey'] == widget._scaffoldKey.hashCode);
-    // SmeupVariablesService.removeFormVariables(widget._formKey);
+    SmeupLogService.writeDebugMessage(
+        'Dispose dynamic screen. Removed objects: ${currObj - SmeupWidgetNotificationService.objects.length}',
+        logType: LogType.debug);
     super.dispose();
   }
 

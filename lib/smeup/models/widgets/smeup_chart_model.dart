@@ -36,7 +36,16 @@ class SmeupChartModel extends SmeupModel {
   SmeupChartModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
-    chartType = _getChartType(optionsDefault['Typ'][0]) ?? defaultChartType;
+    if (optionsDefault['Typ'] == null) {
+      chartType = defaultChartType;
+    } else {
+      if (optionsDefault['Typ'] is List) {
+        chartType = _getChartType(optionsDefault['Typ'][0]);
+      } else {
+        chartType = _getChartType(optionsDefault['Typ']);
+      }
+    }
+    if (chartType == null) chartType = defaultChartType;
     //refresh = optionsDefault['refresh'] ?? defaultRefresh;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
