@@ -20,6 +20,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_progress_ba
 import 'package:mobile_components_library/smeup/models/widgets/smeup_progress_indicator_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_qrcode_reader_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_slider_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_splash_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_switch_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_autocomplete_model.dart';
@@ -145,7 +146,7 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
                   model = SmeupRadioButtonsModel.fromMap(v, formKey);
                   break;
                 case 'sld':
-                  model = SmeupInputFieldModel.fromMap(v, formKey);
+                  model = SmeupSliderModel.fromMap(v, formKey);
                   break;
                 case 'spl':
                   model = SmeupSplashModel.fromMap(v, formKey);

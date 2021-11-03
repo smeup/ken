@@ -7,12 +7,10 @@ import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 class SmeupSliderModel extends SmeupModel {
   static const EdgeInsetsGeometry defaultPadding =
       EdgeInsets.only(left: 10, right: 10);
-  static const double defaultValue = 0;
   static const double defaultSldMin = 0;
   static const double defaultSldMax = 100;
 
   EdgeInsetsGeometry padding;
-  double value;
   double sldMin;
   double sldMax;
 
@@ -23,15 +21,14 @@ class SmeupSliderModel extends SmeupModel {
     this.padding = defaultPadding,
     this.sldMin = defaultSldMin,
     this.sldMax = defaultSldMax,
-    this.value = defaultValue,
   }) : super(formKey, title: '', id: id, type: type) {
-    id = SmeupUtilities.getWidgetId('SLD', id);
+    if (optionsDefault['type'] == null) optionsDefault['type'] = 'sld';
+    id = SmeupUtilities.getWidgetId('FLD', id);
   }
 
   SmeupSliderModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
-    value = SmeupUtilities.getDouble(optionsDefault['value']) ?? defaultValue;
     sldMin =
         SmeupUtilities.getDouble(optionsDefault['sldMin']) ?? defaultSldMin;
     sldMax =
