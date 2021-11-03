@@ -195,8 +195,8 @@ class SmeupUtilities {
               orElse: () => null) !=
           null) {
         newId = id.isNotEmpty
-            ? id + Random().nextInt(100).toString()
-            : type + Random().nextInt(100).toString();
+            ? id + Random().nextInt(1000).toString()
+            : type + Random().nextInt(1000).toString();
       }
     }
 
