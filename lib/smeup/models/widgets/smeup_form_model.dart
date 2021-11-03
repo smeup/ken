@@ -16,7 +16,7 @@ class SmeupFormModel extends SmeupModel
 
   final GlobalKey<FormState> formKey;
 
-  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(8);
   static const String defaultLayout = '1';
 
   EdgeInsetsGeometry padding;
