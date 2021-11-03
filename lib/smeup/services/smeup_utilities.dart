@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 
 import 'smeup_widget_notification_service.dart';
 
@@ -186,7 +187,9 @@ class SmeupUtilities {
     String newId = id;
 
     if (newId.isEmpty) {
-      newId = id.isNotEmpty ? id : type + Random().nextInt(100).toString();
+      SmeupLogService.writeDebugMessage('getWidgetId. type: $type',
+          logType: LogType.debug);
+      newId = id.isNotEmpty ? id : type + Random().nextInt(1000).toString();
       while (SmeupWidgetNotificationService.objects.firstWhere(
               (element) => element['id'] == newId,
               orElse: () => null) !=

@@ -106,13 +106,12 @@ class _SmeupWaitState extends State<SmeupWait>
 
     children = Stack(
       children: [
-        SmeupSplash(
-          widget.scaffoldKey,
-          widget.formKey,
-          color: widget.splashColor,
-        ),
+        SmeupSplash(widget.scaffoldKey, widget.formKey,
+            color: widget.splashColor,
+            id: 'SmeupSplash_${widget.scaffoldKey.hashCode.toString()}'),
         SmeupProgressIndicator(this.widget.scaffoldKey, this.widget.formKey,
-            color: widget.loaderColor)
+            color: widget.loaderColor,
+            id: 'SmeupProgressIndicator_${widget.scaffoldKey.hashCode.toString()}')
       ],
     );
 
