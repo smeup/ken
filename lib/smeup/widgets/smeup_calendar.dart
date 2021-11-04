@@ -197,8 +197,8 @@ class SmeupCalendarState extends State<SmeupCalendar>
     _data = widget.data;
     _firstWork = widget.initialFirstWork;
     _lastWork = widget.initialLastWork;
-    startFunDate = SmeupCalendarModel.getStartFunDate(_model.initialDate);
-    endFunDate = SmeupCalendarModel.getEndFunDate(_model.initialDate);
+    startFunDate = SmeupCalendarModel.getStartFunDate(widget.initialDate);
+    endFunDate = SmeupCalendarModel.getEndFunDate(widget.initialDate);
     _events = Map<DateTime, List<SmeupCalentarEventModel>>();
     _focusDay = widget.initialDate ?? DateTime.now();
     _selectedDay = widget.initialDate ?? DateTime.now();
