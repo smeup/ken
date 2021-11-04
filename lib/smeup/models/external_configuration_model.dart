@@ -1,4 +1,4 @@
-class ConfigurationModel {
+class ExternalConfigurationModel {
   String organizationId;
   String description;
   String theme;
@@ -11,7 +11,7 @@ class ConfigurationModel {
   bool enableCheckWiFi;
   bool enableCheckDataService;
 
-  ConfigurationModel.fromMap(dynamic json) {
+  ExternalConfigurationModel.fromMap(dynamic json) {
     organizationId = json['organizationId'] ?? '';
     description = json['description'] ?? '';
     theme = json['theme'] ?? 'tony_blue.json';

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_drawer_data_element.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_drawer_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_widget_notification_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_drawer.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
@@ -20,7 +22,8 @@ import 'package:mobile_components_library/smeup/widgets/smeup_wait_fun.dart';
 
 class SmeupDynamicScreen extends StatefulWidget {
   final SmeupFun initialFun;
-  SmeupDynamicScreen({this.initialFun});
+  final bool backButtonVisible;
+  SmeupDynamicScreen({this.initialFun, this.backButtonVisible = true});
 
   static const routeName = '/dynamic-screen';
 
@@ -88,9 +91,10 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
 
     smeupFun.saveParameters(widget._formKey);
 
+    var smeupScreenModel = SmeupScreenModel(context, smeupFun);
+
     var screen = FutureBuilder<SmeupWidgetBuilderResponse>(
-      future: _getScreenChildren(
-          SmeupScreenModel(context, smeupFun), errorNotifier, routeArgs),
+      future: _getScreenChildren(smeupScreenModel, errorNotifier, routeArgs),
       builder: (BuildContext context,
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -106,9 +110,13 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
             if (smeupFormModel != null)
               SmeupDynamicScreen.onBuild(smeupFormModel.id);
             if (snapshot.data.children is SmeupNotAvailable) {
-              if (SmeupConfigurationService.logoutFunction != null &&
+              if (SmeupConfigurationService.authenticationModel.managed &&
+                  SmeupConfigurationService
+                          .authenticationModel.logoutFunction !=
+                      null &&
                   snapshot.data.serviceStatusCode == 511)
-                SmeupConfigurationService.logoutFunction();
+                SmeupConfigurationService.authenticationModel
+                    .logoutFunction(context);
               else
                 showErrorForm(context, smeupFun);
             }
@@ -123,29 +131,20 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
   }
 
   Future<SmeupWidgetBuilderResponse> _getScreenChildren(
-      SmeupScreenModel smeupscreenModel,
+      SmeupScreenModel smeupScreenModel,
       SmeupErrorNotifier errorNotifier,
       routeArgs) async {
     SmeupDataService.setDataFetch(0);
-    await smeupscreenModel.setData();
+    await smeupScreenModel.setData();
 
-    if (!hasData(smeupscreenModel)) {
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Text(
-      //         '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${smeupscreenModel.smeupFun.fun['fun']['function']})'),
-      //     backgroundColor: SmeupConfigurationService.getTheme().errorColor,
-      //   ),
-      // );
-
-      showErrorForm(context, smeupscreenModel.smeupFun);
-
-      return SmeupWidgetBuilderResponse(smeupscreenModel, SmeupNotAvailable(),
-          serviceStatusCode: smeupscreenModel.serviceStatusCode);
+    if (!hasData(smeupScreenModel)) {
+      showErrorForm(context, smeupScreenModel.smeupFun);
+      return SmeupWidgetBuilderResponse(smeupScreenModel, SmeupNotAvailable(),
+          serviceStatusCode: smeupScreenModel.serviceStatusCode);
     }
 
     smeupFormModel =
-        SmeupFormModel.fromMap(smeupscreenModel.data, widget._formKey);
+        SmeupFormModel.fromMap(smeupScreenModel.data, widget._formKey);
 
     await smeupFormModel.getSectionsData();
 
@@ -164,14 +163,14 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
                 child: Scaffold(
                   backgroundColor: smeupFormModel.backColor,
                   key: widget._scaffoldKey,
-                  drawer: _getDrawer(smeupscreenModel),
-                  appBar: SmeupNavigationAppBar(
-                    isDialog,
-                    data: smeupscreenModel.data,
-                    myContext: context,
-                    scaffoldKey: widget._scaffoldKey,
-                    formKey: widget._formKey,
-                  ),
+                  endDrawer: _getDrawer(smeupScreenModel),
+                  appBar: SmeupNavigationAppBar(isDialog,
+                      barTitle: smeupScreenModel.data['title'] ?? '',
+                      appBarActions: _getActions(smeupScreenModel.data),
+                      myContext: context,
+                      scaffoldKey: widget._scaffoldKey,
+                      formKey: widget._formKey,
+                      backButtonVisible: widget.backButtonVisible),
                   body: errorNotifier.isError()
                       ? showErrorForm(context, smeupFun)
                       : SmeupWaitFun(
@@ -180,30 +179,56 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
               )),
     );
 
-    return SmeupWidgetBuilderResponse(smeupscreenModel, screen);
+    return SmeupWidgetBuilderResponse(smeupScreenModel, screen);
+  }
+
+  Future<SmeupDrawer> _getDrawerAsync(SmeupScreenModel smeupScreenModel) async {
+    await Future.delayed(const Duration(seconds: 2), () {});
+    return _getDrawer(smeupScreenModel);
   }
 
   SmeupDrawer _getDrawer(SmeupScreenModel smeupScreenModel) {
     SmeupDrawer smeupDrawer;
+    Function getNewDrawer = () {
+      var newList = List<SmeupDrawerDataElement>.empty(growable: true);
+      SmeupDrawer.addInternalDrawerElements(newList);
+      smeupDrawer = SmeupDrawer(
+        widget._scaffoldKey,
+        widget._formKey,
+        data: newList,
+        navbarBackcolor: SmeupConfigurationService.getTheme().primaryColor,
+        title: 'MENU',
+      );
+      return smeupDrawer;
+    };
+
     if (smeupScreenModel.data != null &&
         smeupScreenModel.data['sections'] != null &&
         (smeupScreenModel.data['sections'] as List).length > 0) {
       var smeupDrawerModel;
       var smeupDrawerJson;
-      (smeupScreenModel.data['sections'] as List).forEach((section) {
+
+      for (var i = 0;
+          i < (smeupScreenModel.data['sections'] as List).length;
+          i++) {
+        final section = (smeupScreenModel.data['sections'] as List)[i];
         if (section['components'] != null) {
           smeupDrawerJson = (section['components'] as List).firstWhere(
               (element) => element['type'] == 'DRW',
               orElse: () => null);
         }
-      });
+      }
 
       if (smeupDrawerJson != null) {
         smeupDrawerModel =
             SmeupDrawerModel.fromMap(smeupDrawerJson, widget._formKey);
         smeupDrawer = SmeupDrawer.withController(
             smeupDrawerModel, widget._scaffoldKey, widget._formKey);
+      } else {
+        smeupDrawer = getNewDrawer();
       }
+    } else {
+      smeupDrawer = getNewDrawer();
     }
     return smeupDrawer;
   }
@@ -226,7 +251,6 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
         builder: (context) => Theme(
             data: SmeupConfigurationService.getTheme(),
             child: SimpleDialog(
-              //contentPadding: EdgeInsets.only(top: 20, bottom: 20),
               backgroundColor:
                   SmeupConfigurationService.getTheme().scaffoldBackgroundColor,
               shape: RoundedRectangleBorder(
@@ -276,5 +300,61 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     });
 
     return Container();
+  }
+
+  List<Widget> _getActions(data) {
+    return data['buttons'] != null
+        ? () {
+            var list = List<Widget>.empty(growable: true);
+            data['buttons'].forEach((button) {
+              final action = GestureDetector(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 18.0),
+                  child: Icon(
+                    IconData(int.tryParse(button['icon']) ?? 0,
+                        fontFamily: 'MaterialIcons'),
+                    key:
+                        Key('appbar_icon_${int.tryParse(button['icon']) ?? 0}'),
+                  ),
+                ),
+                onTap: () async {
+                  SmeupFun smeupFun = SmeupFun(button, widget._formKey);
+                  if (smeupFun.isDinamismAsync(
+                      smeupFun.fun['fun']['dynamisms'], 'click')) {
+                    SmeupDynamismService.run(smeupFun.fun['fun']['dynamisms'],
+                        context, 'click', widget._scaffoldKey, widget._formKey);
+
+                    SmeupLogService.writeDebugMessage(
+                        '********************* ASYNC = TRUE',
+                        logType: LogType.info);
+                  } else {
+                    SmeupLogService.writeDebugMessage(
+                        '********************* ASYNC = FALSE',
+                        logType: LogType.info);
+
+                    if (SmeupNavigationAppBar.isBusy) {
+                      SmeupLogService.writeDebugMessage(
+                          '********************* SKIPPED DOUBLE CLICK',
+                          logType: LogType.warning);
+                      return;
+                    } else {
+                      SmeupNavigationAppBar.isBusy = true;
+
+                      await SmeupDynamismService.run(
+                          smeupFun.fun['fun']['dynamisms'],
+                          context,
+                          'click',
+                          widget._scaffoldKey,
+                          widget._formKey);
+                      SmeupNavigationAppBar.isBusy = false;
+                    }
+                  }
+                },
+              );
+              list.add(action);
+            });
+            return list;
+          }()
+        : null;
   }
 }
