@@ -23,7 +23,8 @@ import 'package:mobile_components_library/smeup/widgets/smeup_wait_fun.dart';
 class SmeupDynamicScreen extends StatefulWidget {
   final SmeupFun initialFun;
   final bool backButtonVisible;
-  SmeupDynamicScreen({this.initialFun, this.backButtonVisible = true});
+  final bool isDialog;
+  SmeupDynamicScreen({this.initialFun, this.backButtonVisible, this.isDialog});
 
   static const routeName = '/dynamic-screen';
 
@@ -151,7 +152,14 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     final smeupForm =
         SmeupForm(smeupFormModel, widget._scaffoldKey, widget._formKey);
 
-    bool isDialog = routeArgs == null ? false : routeArgs['isDialog'] ?? false;
+    bool isDialog = widget.isDialog ?? false;
+    bool backButtonVisible = widget.backButtonVisible ?? true;
+    if (routeArgs != null) {
+      if (routeArgs['isDialog'] != null) isDialog = routeArgs['isDialog'];
+      if (routeArgs['backButtonVisible'] != null)
+        backButtonVisible = routeArgs['backButtonVisible'];
+    }
+
     SmeupFun smeupFun =
         widget.initialFun != null ? widget.initialFun : routeArgs['smeupFun'];
 
@@ -170,7 +178,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
                       myContext: context,
                       scaffoldKey: widget._scaffoldKey,
                       formKey: widget._formKey,
-                      backButtonVisible: widget.backButtonVisible),
+                      backButtonVisible: backButtonVisible),
                   body: errorNotifier.isError()
                       ? showErrorForm(context, smeupFun)
                       : SmeupWaitFun(
