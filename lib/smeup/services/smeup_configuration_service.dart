@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:json_theme/json_theme.dart';
+import 'package:mobile_components_library/smeup/models/authentication_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_cache_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service_interface.dart';
@@ -12,7 +13,7 @@ import 'package:package_info/package_info.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/configuration_model.dart';
+import '../models/external_configuration_model.dart';
 
 enum ALT_SERVICE_ENDPOINTS { DEFAULT, HTTP }
 
@@ -28,20 +29,15 @@ class SmeupConfigurationService {
   static ThemeData _theme;
   static String jsonsPath;
   static String imagesPath;
-  // static String defaultServiceToken = '';
-  // static String defaultServiceUserName;
-  // static String defaultServicePassword;
   static String _defaultServiceEndpoint;
   static String _httpServiceEndpoint;
-  static Function logoutFunction;
   static PackageInfo _packageInfo;
-  // static double deviceHeight;
-  // static double deviceWidth;
   static Map<DateTime, List> _holidays;
   static dynamic appDictionary;
-  static ConfigurationModel _appConfiguration;
+  static ExternalConfigurationModel _appConfiguration;
   static Color defaultSplashColor;
   static Color defaultLoaderColor;
+  static AuthenticationModel authenticationModel;
 
   static PackageInfo packageInfoModel = PackageInfo(
     appName: 'Unknown',
@@ -55,7 +51,7 @@ class SmeupConfigurationService {
       dynamic localizationService,
       Map<String, SmeupDataServiceInterface> customDataServices,
       bool enableCache = false,
-      Function logoutFunction,
+      AuthenticationModel authenticationModel,
       Color defaultSplashColor = Colors.white,
       Color defaultLoaderColor = Colors.white}) async {
     await SmeupConfigurationService.setAppConfiguration();
@@ -86,7 +82,9 @@ class SmeupConfigurationService {
     if (SmeupConfigurationService.isLogEnabled)
       await SmeupLogService.setLogFile();
 
-    SmeupConfigurationService.logoutFunction = logoutFunction;
+    SmeupConfigurationService.authenticationModel =
+        authenticationModel ?? AuthenticationModel();
+
     SmeupConfigurationService.setPackageInfo(packageInfoModel);
     if (context != null) SmeupConfigurationService.setHolidays(context);
     if (enableCache) SmeupCacheService.init();
@@ -144,7 +142,8 @@ class SmeupConfigurationService {
     try {
       String jsonString =
           await rootBundle.loadString('assets/jsons/config.json');
-      _appConfiguration = ConfigurationModel.fromMap(jsonDecode(jsonString));
+      _appConfiguration =
+          ExternalConfigurationModel.fromMap(jsonDecode(jsonString));
       SmeupLogService.writeDebugMessage('Loaded config.json');
     } catch (e) {
       SmeupLogService.writeDebugMessage('Error in getAppConfig: $e',
@@ -152,7 +151,7 @@ class SmeupConfigurationService {
     }
   }
 
-  static ConfigurationModel getAppConfiguration() {
+  static ExternalConfigurationModel getAppConfiguration() {
     return _appConfiguration;
   }
 

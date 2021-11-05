@@ -75,13 +75,14 @@ class SmeupDrawer extends StatefulWidget
 
     // change data format
     var workData = formatDataFields(m);
+    var newList = List<SmeupDrawerDataElement>.empty(growable: true);
 
     // set the widget data
     if (workData != null) {
-      var newList = List<SmeupDrawerDataElement>.empty(growable: true);
       for (var i = 0; i < (workData['rows'] as List).length; i++) {
         final element = workData['rows'][i];
-        newList.add(SmeupDrawerDataElement(element['text'], element['route'],
+        newList.add(SmeupDrawerDataElement(element['text'],
+            route: element['route'],
             iconCode: SmeupUtilities.getInt(element['iconCode']) ?? 0,
             fontSize: SmeupUtilities.getDouble(element['fontSize']) ?? 0.0,
             align: SmeupUtilities.getAlignmentGeometry(element['align']) ??
@@ -100,9 +101,32 @@ class SmeupDrawer extends StatefulWidget
                 SmeupUtilities.getDouble(element['groupFontSize']) ?? 0.0,
             groupIcon: SmeupUtilities.getInt(element['groupIcon']) ?? 0));
       }
-      return newList;
-    } else {
-      return model.data;
+    }
+
+    addInternalDrawerElements(newList);
+
+    return newList;
+  }
+
+  static addInternalDrawerElements(newList) {
+    if (SmeupConfigurationService.authenticationModel.managed) {
+      newList.addAll([
+        SmeupDrawerDataElement(
+          'Logout',
+          action: (context) async {
+            bool loggedOut = await SmeupConfigurationService.authenticationModel
+                .logoutFunction();
+            if (loggedOut)
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/MainScreen', (Route<dynamic> route) => false);
+          },
+          iconCode: 58291,
+          group: 'IMPOSTAZIONI',
+          fontSize: 15,
+          groupIcon: 58751,
+          groupFontSize: 20,
+        )
+      ]);
     }
   }
 

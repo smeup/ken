@@ -11,10 +11,11 @@ class SmeupDrawerDataElement {
   Alignment align;
   Function action;
 
-  SmeupDrawerDataElement(this.text, this.route,
+  SmeupDrawerDataElement(this.text,
       {this.iconCode = 0,
       this.fontSize = 10,
       this.align = Alignment.center,
+      this.route,
       this.action,
       this.group = '',
       this.groupIcon = 0,
