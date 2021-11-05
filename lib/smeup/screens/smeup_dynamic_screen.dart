@@ -182,10 +182,10 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     return SmeupWidgetBuilderResponse(smeupScreenModel, screen);
   }
 
-  Future<SmeupDrawer> _getDrawerAsync(SmeupScreenModel smeupScreenModel) async {
-    await Future.delayed(const Duration(seconds: 2), () {});
-    return _getDrawer(smeupScreenModel);
-  }
+  // Future<SmeupDrawer> _getDrawerAsync(SmeupScreenModel smeupScreenModel) async {
+  //   await Future.delayed(const Duration(seconds: 2), () {});
+  //   return _getDrawer(smeupScreenModel);
+  // }
 
   SmeupDrawer _getDrawer(SmeupScreenModel smeupScreenModel) {
     SmeupDrawer smeupDrawer;
