@@ -28,6 +28,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_
 import 'package:mobile_components_library/smeup/models/widgets/smeup_tree_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 import 'smeup_datepicker_model.dart';
 
@@ -41,6 +42,7 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
   String selectedTabColName;
   double width;
   double height;
+  bool autoAdaptHeight;
 
   SmeupSectionModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
@@ -50,10 +52,12 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
     dim = double.tryParse(tmp) ?? 0;
     layout = jsonMap['layout'];
     selectedTabColName = jsonMap['selectedTabColName'];
+    autoAdaptHeight = SmeupFormModel.defaultAutoAdaptHeight;
     _replaceSelectedTabIndex(jsonMap);
 
     components = getComponents(jsonMap, 'components');
-    smeupSectionsModels = getSections(jsonMap, 'sections', formKey);
+    smeupSectionsModels =
+        getSections(jsonMap, 'sections', formKey, autoAdaptHeight);
   }
 
   void _replaceSelectedTabIndex(dynamic jsonMap) {

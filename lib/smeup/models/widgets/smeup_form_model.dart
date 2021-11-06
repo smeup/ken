@@ -4,31 +4,24 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_component_i
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model_mixin.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupFormModel extends SmeupModel
     with SmeupModelMixin
     implements SmeupDataInterface {
-  List<SmeupSectionModel> smeupSectionsModels;
-  List<dynamic> formVariables;
-
-  final GlobalKey<FormState> formKey;
-
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(8);
   static const String defaultLayout = '1';
+  static const bool defaultAutoAdaptHeight = true;
 
+  final GlobalKey<FormState> formKey;
+  List<SmeupSectionModel> smeupSectionsModels;
+  List<dynamic> formVariables;
   EdgeInsetsGeometry padding;
   String layout;
   BuildContext context;
   Color backColor;
-
-  // SmeupFormModel(this.context, SmeupFun smeupFun) {
-  //   this.smeupFun = smeupFun;
-  //   if (backColor == null)
-  //     backColor = SmeupOptions.getTheme().scaffoldBackgroundColor;
-  // }
+  bool autoAdaptHeight;
 
   SmeupFormModel.fromMap(response, this.formKey)
       : super.fromMap(response, formKey) {
@@ -43,11 +36,14 @@ class SmeupFormModel extends SmeupModel
       backColor = SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
     }
 
+    autoAdaptHeight = defaultAutoAdaptHeight;
+
     layout = jsonMap['layout'] ?? defaultLayout;
     _replaceFormTitle(jsonMap);
     formVariables = _getFormVariables(jsonMap);
 
-    smeupSectionsModels = getSections(jsonMap, 'sections', formKey);
+    smeupSectionsModels =
+        getSections(jsonMap, 'sections', formKey, autoAdaptHeight);
   }
 
   void _replaceFormTitle(dynamic jsonMap) {
@@ -70,21 +66,21 @@ class SmeupFormModel extends SmeupModel
     return formVariables != null && formVariables.length > 0;
   }
 
-  @override
-  // ignore: override_on_non_overriding_member
-  setData() async {
-    if (smeupFun != null && smeupFun.isFunValid()) {
-      final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
+  // @override
+  // // ignore: override_on_non_overriding_member
+  // setData() async {
+  //   if (smeupFun != null && smeupFun.isFunValid()) {
+  //     final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
 
-      if (!smeupServiceResponse.succeded) {
-        return;
-      }
+  //     if (!smeupServiceResponse.succeded) {
+  //       return;
+  //     }
 
-      data = smeupServiceResponse.result.data;
+  //     data = smeupServiceResponse.result.data;
 
-      smeupSectionsModels = getSections(data, 'sections', formKey);
-    }
-  }
+  //     smeupSectionsModels = getSections(data, 'sections', formKey);
+  //   }
+  // }
 
   Future<void> getSectionsData() async {
     if (smeupSectionsModels != null)
