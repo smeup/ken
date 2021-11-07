@@ -28,7 +28,6 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_
 import 'package:mobile_components_library/smeup/models/widgets/smeup_tree_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 import 'smeup_datepicker_model.dart';
 
