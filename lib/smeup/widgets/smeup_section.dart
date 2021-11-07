@@ -84,10 +84,54 @@ class _SmeupSectionState extends State<SmeupSection>
     if (hasSections(smeupSectionModel)) {
       var sections = List<Widget>.empty(growable: true);
 
+      double maxDim = 100;
+      double totalDim = 0;
+      int sectionWithNoDim = 0;
+
+      for (var i = 0; i < smeupSectionModel.smeupSectionsModels.length; i++) {
+        var s = smeupSectionModel.smeupSectionsModels[i];
+        totalDim += s.dim;
+        if (s.dim == 0) sectionWithNoDim += 1;
+      }
+
+      double dimToSplit = 100 - totalDim;
+
+      if (totalDim < 100 && sectionWithNoDim > 0 && dimToSplit > 0) {
+        double singleDim = (dimToSplit / sectionWithNoDim).ceil().toDouble();
+        double spareDim = dimToSplit - (singleDim * sectionWithNoDim);
+        for (var i = 0; i < smeupSectionModel.smeupSectionsModels.length; i++) {
+          var s = smeupSectionModel.smeupSectionsModels[i];
+          if (s.dim != 0) continue;
+          if (i == 0) {
+            s.dim = singleDim + spareDim;
+          } else {
+            s.dim = singleDim;
+          }
+        }
+        totalDim = maxDim;
+      }
+
+      smeupSectionModel.smeupSectionsModels.forEach((s) {
+        MediaQueryData deviceInfo = MediaQuery.of(context);
+        if (s.dim <= 0) {
+          s.height = deviceInfo.size.height;
+          s.width = deviceInfo.size.width;
+        } else {
+          s.height = smeupSectionModel.layout == 'column'
+              ? smeupSectionModel.height / totalDim * s.dim
+              : smeupSectionModel.height;
+          s.width = smeupSectionModel.layout == 'row'
+              ? smeupSectionModel.width / totalDim * s.dim
+              : smeupSectionModel.width;
+        }
+      });
+
       if (smeupSectionModel.autoAdaptHeight) {
         smeupSectionModel.smeupSectionsModels.forEach((s) {
           var section;
-          section = SmeupSection(s, widget.scaffoldKey, widget.formKey);
+          section = Expanded(
+              flex: s.dim.floor(),
+              child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
           sections.add(section);
         });
         if (smeupSectionModel.layout == 'column') {
@@ -106,49 +150,12 @@ class _SmeupSectionState extends State<SmeupSection>
           );
         }
       } else {
-        double maxDim = 100;
-        double totalDim = 0;
-        int sectionWithNoDim = 0;
-
-        for (var i = 0; i < smeupSectionModel.smeupSectionsModels.length; i++) {
-          var s = smeupSectionModel.smeupSectionsModels[i];
-          totalDim += s.dim;
-          if (s.dim == 0) sectionWithNoDim += 1;
-        }
-
-        double dimToSplit = 100 - totalDim;
-
-        if (totalDim < 100 && sectionWithNoDim > 0 && dimToSplit > 0) {
-          double singleDim = (dimToSplit / sectionWithNoDim).ceil().toDouble();
-          double spareDim = dimToSplit - (singleDim * sectionWithNoDim);
-          for (var i = 0;
-              i < smeupSectionModel.smeupSectionsModels.length;
-              i++) {
-            var s = smeupSectionModel.smeupSectionsModels[i];
-            if (s.dim != 0) continue;
-            if (i == 0) {
-              s.dim = singleDim + spareDim;
-            } else {
-              s.dim = singleDim;
-            }
-          }
-          totalDim = maxDim;
-        }
-
         smeupSectionModel.smeupSectionsModels.forEach((s) {
           var section;
-          MediaQueryData deviceInfo = MediaQuery.of(context);
+
           if (s.dim <= 0) {
-            s.height = deviceInfo.size.height;
-            s.width = deviceInfo.size.width;
             section = SmeupSection(s, widget.scaffoldKey, widget.formKey);
           } else {
-            s.height = smeupSectionModel.layout == 'column'
-                ? smeupSectionModel.height / totalDim * s.dim
-                : smeupSectionModel.height;
-            s.width = smeupSectionModel.layout == 'row'
-                ? smeupSectionModel.width / totalDim * s.dim
-                : smeupSectionModel.width;
             section = Expanded(
                 flex: s.dim.floor(),
                 child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
