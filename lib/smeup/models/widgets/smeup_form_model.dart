@@ -66,22 +66,6 @@ class SmeupFormModel extends SmeupModel
     return formVariables != null && formVariables.length > 0;
   }
 
-  // @override
-  // // ignore: override_on_non_overriding_member
-  // setData() async {
-  //   if (smeupFun != null && smeupFun.isFunValid()) {
-  //     final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
-
-  //     if (!smeupServiceResponse.succeded) {
-  //       return;
-  //     }
-
-  //     data = smeupServiceResponse.result.data;
-
-  //     smeupSectionsModels = getSections(data, 'sections', formKey);
-  //   }
-  // }
-
   Future<void> getSectionsData() async {
     if (smeupSectionsModels != null)
       for (var i = 0; i < smeupSectionsModels.length; i++) {

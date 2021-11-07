@@ -134,21 +134,6 @@ class _SmeupSectionState extends State<SmeupSection>
               child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
           sections.add(section);
         });
-        if (smeupSectionModel.layout == 'column') {
-          children = Container(
-            constraints: BoxConstraints(minHeight: 0),
-            child: SingleChildScrollView(
-              child: Column(children: sections),
-            ),
-          );
-        } else {
-          children = Container(
-            constraints: BoxConstraints(minHeight: 0),
-            child: SingleChildScrollView(
-              child: Row(children: sections),
-            ),
-          );
-        }
       } else {
         smeupSectionModel.smeupSectionsModels.forEach((s) {
           var section;
@@ -162,20 +147,26 @@ class _SmeupSectionState extends State<SmeupSection>
           }
           sections.add(section);
         });
+      }
 
-        if (smeupSectionModel.layout == 'column') {
-          children = Container(
-            child: SingleChildScrollView(
-              child: Column(children: sections),
-            ),
-          );
-        } else {
-          children = Container(
-            child: SingleChildScrollView(
-              child: Row(children: sections),
-            ),
-          );
-        }
+      if (smeupSectionModel.layout == 'column') {
+        children = Container(
+          constraints: smeupSectionModel.autoAdaptHeight
+              ? BoxConstraints(minHeight: 0)
+              : null,
+          child: SingleChildScrollView(
+            child: Column(children: sections),
+          ),
+        );
+      } else {
+        children = Container(
+          constraints: smeupSectionModel.autoAdaptHeight
+              ? BoxConstraints(minHeight: 0)
+              : null,
+          child: SingleChildScrollView(
+            child: Row(children: sections),
+          ),
+        );
       }
     }
 

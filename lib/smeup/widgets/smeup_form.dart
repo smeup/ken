@@ -142,58 +142,18 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       }
     });
 
-    // if (smeupFormModel.layout == 'column') {
-    //   container = Container(
-    //     padding: smeupFormModel.padding,
-    //     child: SingleChildScrollView(
-    //       child: Column(
-    //           crossAxisAlignment: CrossAxisAlignment.stretch,
-    //           children: sections),
-    //     ),
-    //   );
-    // } else {
-    //   container = Container(
-    //     padding: smeupFormModel.padding,
-    //     child: SingleChildScrollView(
-    //       child: Row(children: sections),
-    //     ),
-    //   );
-    // }
-
     if (smeupFormModel.autoAdaptHeight) {
       smeupFormModel.smeupSectionsModels.forEach((s) {
         var section;
-
         section =
             SmeupSection(s, widget.scaffoldKey, widget.smeupFormModel.formKey);
         sections.add(section);
       });
-
-      if (smeupFormModel.layout == 'column') {
-        container = Container(
-          constraints: BoxConstraints(minHeight: 0),
-          padding: smeupFormModel.padding,
-          child: SingleChildScrollView(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: sections),
-          ),
-        );
-      } else {
-        container = Container(
-          constraints: BoxConstraints(minHeight: 0),
-          padding: smeupFormModel.padding,
-          child: SingleChildScrollView(
-            child: Row(children: sections),
-          ),
-        );
-      }
     } else {
       smeupFormModel.smeupSectionsModels.forEach((s) {
         var section;
-
         if (useDim && totalDim > 0) {
-          return Container(
+          section = Container(
               height: s.height,
               width: s.width,
               child: SmeupSection(
@@ -205,24 +165,30 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
         }
         sections.add(section);
       });
+    }
 
-      if (smeupFormModel.layout == 'column') {
-        container = Container(
-          padding: smeupFormModel.padding,
-          child: SingleChildScrollView(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: sections),
-          ),
-        );
-      } else {
-        container = Container(
-          padding: smeupFormModel.padding,
-          child: SingleChildScrollView(
-            child: Row(children: sections),
-          ),
-        );
-      }
+    if (smeupFormModel.layout == 'column') {
+      container = Container(
+        constraints: smeupFormModel.autoAdaptHeight
+            ? BoxConstraints(minHeight: 0)
+            : null,
+        padding: smeupFormModel.padding,
+        child: SingleChildScrollView(
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: sections),
+        ),
+      );
+    } else {
+      container = Container(
+        constraints: smeupFormModel.autoAdaptHeight
+            ? BoxConstraints(minHeight: 0)
+            : null,
+        padding: smeupFormModel.padding,
+        child: SingleChildScrollView(
+          child: Row(children: sections),
+        ),
+      );
     }
 
     form = Form(key: widget.smeupFormModel.formKey, child: container);

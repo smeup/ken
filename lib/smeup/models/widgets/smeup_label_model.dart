@@ -13,7 +13,7 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
   static const Alignment defaultAlign = Alignment.center;
   static const bool defaultFontbold = false;
   static const double defaultWidth = 0;
-  static const double defaultHeight = 40;
+  static const double defaultHeight = 10;
   static const String defaultValColName = 'value';
 
   EdgeInsetsGeometry padding;
