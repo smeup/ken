@@ -20,7 +20,7 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
   double fontSize;
   double iconSize;
   Alignment align;
-  bool fontbold;
+  bool fontBold;
   double width;
   double height;
   String valueColName;
@@ -39,7 +39,7 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
       this.padding = defaultPadding,
       this.fontSize = defaultFontSize,
       this.align = defaultAlign,
-      this.fontbold = defaultFontbold,
+      this.fontBold = defaultFontbold,
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.backColorColName = '',
@@ -87,16 +87,8 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
     else
       iconData = 0;
     iconColname = optionsDefault['iconColName'] ?? '';
-    if (optionsDefault['fontBold'] == null) {
-      fontbold = defaultFontbold;
-    } else {
-      if (optionsDefault['fontBold'] is bool)
-        fontbold = optionsDefault['fontBold'];
-      else if (optionsDefault['fontBold'] == 'Yes')
-        fontbold = true;
-      else
-        fontbold = false;
-    }
+    fontBold =
+        SmeupUtilities.getBool(optionsDefault['fontBold']) ?? defaultFontbold;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {

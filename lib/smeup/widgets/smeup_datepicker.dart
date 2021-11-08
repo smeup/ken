@@ -94,7 +94,7 @@ class SmeupDatePicker extends StatefulWidget
     width = m.width;
     height = m.height;
     padding = m.padding;
-    showborder = m.showborder;
+    showborder = m.showBorder;
     elevation = m.elevation;
 
     data = treatData(m);

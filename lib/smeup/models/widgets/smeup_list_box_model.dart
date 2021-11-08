@@ -119,12 +119,8 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     backgroundColName = optionsDefault['backgroundColName'];
     defaultSort = optionsDefault['defaultSort'] ?? defaultDefaultSort;
 
-    showSelection = false;
-    if (optionsDefault['showSelection'] != null) {
-      if (optionsDefault['showSelection'] is bool)
-        showSelection = optionsDefault['showSelection'];
-      else if (optionsDefault['showSelection'] == 'Yes') showSelection = true;
-    }
+    showSelection =
+        SmeupUtilities.getBool(optionsDefault['showSelection']) ?? false;
 
     selectedRow = -1;
     if (optionsDefault['selectRow'] != null) {
