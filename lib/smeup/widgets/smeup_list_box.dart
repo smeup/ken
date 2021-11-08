@@ -300,14 +300,14 @@ class _SmeupListBoxState extends State<SmeupListBox>
     double listboxHeight = ((_data['rows'] as List).length * widget.height) +
         widget.padding.vertical;
     if (_model != null && _model.parent != null) {
-      if (listboxHeight == 0)
+      if (listboxHeight > (_model.parent as SmeupSectionModel).height)
         listboxHeight = (_model.parent as SmeupSectionModel).height;
     }
 
     final container = Container(
         padding: widget.padding,
         color: Colors.transparent,
-        height: listboxHeight == 0 ? deviceInfo.size.height : listboxHeight,
+        height: listboxHeight,
         child: list);
 
     return container;
@@ -316,7 +316,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
   Widget _getWheelList(List<Widget> cells) {
     var list;
 
-    MediaQueryData deviceInfo = MediaQuery.of(context);
+    //MediaQueryData deviceInfo = MediaQuery.of(context);
 
     list = RefreshIndicator(
         onRefresh: _refreshList,
@@ -355,7 +355,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
     final container = Container(
         padding: widget.padding,
         color: Colors.transparent,
-        height: listboxHeight == 0 ? deviceInfo.size.height : listboxHeight,
+        height: listboxHeight,
         child: list);
 
     return container;
