@@ -26,7 +26,6 @@ class SmeupListBox extends StatefulWidget
   // graphic properties
   double width;
   double height;
-  double listHeight;
   Axis orientation;
   EdgeInsetsGeometry padding;
   SmeupListType listType;
@@ -61,7 +60,6 @@ class SmeupListBox extends StatefulWidget
       this.layout = SmeupListBoxModel.defaultLayout,
       this.width = SmeupListBoxModel.defaultWidth,
       this.height = SmeupListBoxModel.defaultHeight,
-      this.listHeight = SmeupListBoxModel.defaultHeight,
       this.fontsize = SmeupListBoxModel.defaultFontsize,
       this.orientation = SmeupListBoxModel.defaultOrientation,
       this.padding = SmeupListBoxModel.defaultPadding,
@@ -90,7 +88,6 @@ class SmeupListBox extends StatefulWidget
     layout = m.layout;
     width = m.width;
     height = m.height;
-    listHeight = m.listHeight;
     fontsize = m.fontsize;
     orientation = m.orientation;
     padding = m.padding;
@@ -247,13 +244,11 @@ class _SmeupListBoxState extends State<SmeupListBox>
       ),
     );
 
-    double listboxHeight = widget.height;
-    double listboxWidth = widget.width;
+    double listboxHeight = ((_data['rows'] as List).length * widget.height) +
+        widget.padding.vertical;
     if (_model != null && _model.parent != null) {
       if (listboxHeight == 0)
         listboxHeight = (_model.parent as SmeupSectionModel).height;
-      if (listboxWidth == 0)
-        listboxWidth = (_model.parent as SmeupSectionModel).width;
     }
 
     final container = Container(
@@ -302,11 +297,17 @@ class _SmeupListBoxState extends State<SmeupListBox>
       },
     );
 
+    double listboxHeight = ((_data['rows'] as List).length * widget.height) +
+        widget.padding.vertical;
+    if (_model != null && _model.parent != null) {
+      if (listboxHeight == 0)
+        listboxHeight = (_model.parent as SmeupSectionModel).height;
+    }
+
     final container = Container(
         padding: widget.padding,
         color: Colors.transparent,
-        height:
-            widget.listHeight == 0 ? deviceInfo.size.height : widget.listHeight,
+        height: listboxHeight == 0 ? deviceInfo.size.height : listboxHeight,
         child: list);
 
     return container;
@@ -344,11 +345,17 @@ class _SmeupListBoxState extends State<SmeupListBox>
               ),
             )));
 
+    double listboxHeight = ((_data['rows'] as List).length * widget.height) +
+        widget.padding.vertical;
+    if (_model != null && _model.parent != null) {
+      if (listboxHeight == 0)
+        listboxHeight = (_model.parent as SmeupSectionModel).height;
+    }
+
     final container = Container(
         padding: widget.padding,
         color: Colors.transparent,
-        height:
-            widget.listHeight == 0 ? deviceInfo.size.height : widget.listHeight,
+        height: listboxHeight == 0 ? deviceInfo.size.height : listboxHeight,
         child: list);
 
     return container;

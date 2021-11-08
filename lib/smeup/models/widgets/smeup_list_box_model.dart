@@ -10,7 +10,6 @@ enum SmeupListType { simple, oriented, wheel }
 class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 0;
   static const double defaultHeight = 200;
-  static const double defaultListHeight = 200;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(5);
   static const SmeupListType defaultListType = SmeupListType.oriented;
   static const int defaultPortraitColumns = 1;
@@ -27,7 +26,6 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
 
   double width;
   double height;
-  double listHeight;
   Axis orientation;
   EdgeInsetsGeometry padding;
   SmeupListType listType;
@@ -51,7 +49,6 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       this.fontsize = defaultFontsize,
       this.width = defaultWidth,
       this.height = defaultHeight,
-      this.listHeight = defaultHeight,
       this.orientation = defaultOrientation,
       this.padding = defaultPadding,
       this.listType = defaultListType,
@@ -96,8 +93,6 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
-    listHeight = SmeupUtilities.getDouble(optionsDefault['listHeight']) ??
-        defaultListHeight;
     listType = decodeListType(optionsDefault['listType']);
     orientation = jsonMap['orientation'] == 'horizontal'
         ? Axis.horizontal

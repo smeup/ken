@@ -7,8 +7,7 @@ import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 0;
-  static const double defaultHeight = 100;
-  static const double defaultListHeight = 100;
+  static const double defaultHeight = 450;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const int defaultColumns = 0;
   static const int defaultRows = 0;
@@ -18,7 +17,6 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
 
   double width;
   double height;
-  double listHeight;
   Axis orientation;
   EdgeInsetsGeometry padding;
   int columns;
@@ -34,7 +32,6 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
       this.fontsize = defaultFontsize,
       this.width = defaultWidth,
       this.height = defaultHeight,
-      this.listHeight = defaultHeight,
       this.padding = defaultPadding,
       this.columns = defaultColumns,
       this.orientation = defaultOrientation,
@@ -68,8 +65,6 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
-    listHeight = SmeupUtilities.getDouble(optionsDefault['listHeight']) ??
-        defaultListHeight;
     orientation = jsonMap['orientation'] == 'horizontal'
         ? Axis.horizontal
         : Axis.vertical;

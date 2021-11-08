@@ -4,6 +4,7 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/widgets/smeup_image_list_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_list_box_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_list_box.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
@@ -22,7 +23,6 @@ class SmeupImageList extends StatefulWidget
   // graphic properties
   double width;
   double height;
-  double listHeight;
   EdgeInsetsGeometry padding;
   String layout;
   String title;
@@ -51,7 +51,6 @@ class SmeupImageList extends StatefulWidget
       layout,
       this.width = SmeupImageListModel.defaultWidth,
       this.height = SmeupImageListModel.defaultHeight,
-      this.listHeight = SmeupImageListModel.defaultHeight,
       this.fontsize = SmeupImageListModel.defaultFontsize,
       this.padding = SmeupImageListModel.defaultPadding,
       this.orientation = SmeupImageListModel.defaultOrientation,
@@ -71,7 +70,6 @@ class SmeupImageList extends StatefulWidget
     layout = m.layout;
     width = m.width;
     height = m.height;
-    listHeight = m.listHeight;
     fontsize = m.fontsize;
     padding = m.padding;
     columns = m.columns;
@@ -182,7 +180,6 @@ class _SmeupImageListState extends State<SmeupImageList>
           fontsize: widget.fontsize,
           height: widget.height,
           layout: 'imageList',
-          listHeight: widget.listHeight,
           listType: SmeupListType.oriented,
           orientation: widget.orientation,
           padding: widget.padding,
@@ -196,7 +193,6 @@ class _SmeupImageListState extends State<SmeupImageList>
           fontsize: widget.fontsize,
           height: widget.height,
           layout: 'imageList',
-          listHeight: widget.listHeight,
           listType: SmeupListType.oriented,
           orientation: widget.orientation,
           padding: widget.padding,

@@ -230,11 +230,18 @@ class SmeupButtonsState extends State<SmeupButtons>
       buttons.add(button);
     });
 
+    double buttonsHeight = ((_data['rows'] as List).length * buttonHeight) +
+        widget.padding.vertical +
+        widget.innerSpace;
+
     if (buttons.length > 0) {
       var widgets;
       if (widget.orientation == WidgetOrientation.Vertical)
-        widgets = SingleChildScrollView(
-            scrollDirection: Axis.vertical, child: Column(children: buttons));
+        widgets = Container(
+          height: buttonsHeight,
+          child: SingleChildScrollView(
+              scrollDirection: Axis.vertical, child: Column(children: buttons)),
+        );
       else
         widgets = SingleChildScrollView(
             scrollDirection: Axis.horizontal, child: Row(children: buttons));
