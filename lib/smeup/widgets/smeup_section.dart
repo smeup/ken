@@ -126,28 +126,13 @@ class _SmeupSectionState extends State<SmeupSection>
         }
       });
 
-      if (smeupSectionModel.autoAdaptHeight) {
-        smeupSectionModel.smeupSectionsModels.forEach((s) {
-          var section;
-          section = Expanded(
-              flex: s.dim.floor(),
-              child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
-          sections.add(section);
-        });
-      } else {
-        smeupSectionModel.smeupSectionsModels.forEach((s) {
-          var section;
-
-          if (s.dim <= 0) {
-            section = SmeupSection(s, widget.scaffoldKey, widget.formKey);
-          } else {
-            section = Expanded(
-                flex: s.dim.floor(),
-                child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
-          }
-          sections.add(section);
-        });
-      }
+      smeupSectionModel.smeupSectionsModels.forEach((s) {
+        var section;
+        section = Expanded(
+            flex: s.dim.floor(),
+            child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
+        sections.add(section);
+      });
 
       if (smeupSectionModel.layout == 'column') {
         children = Container(
@@ -160,9 +145,6 @@ class _SmeupSectionState extends State<SmeupSection>
         );
       } else {
         children = Container(
-          constraints: smeupSectionModel.autoAdaptHeight
-              ? BoxConstraints(minHeight: 0)
-              : null,
           child: SingleChildScrollView(
             child: Row(children: sections),
           ),
@@ -191,21 +173,13 @@ class _SmeupSectionState extends State<SmeupSection>
     }).toList();
 
     final tabsTitles = widget.smeupSectionModel.components.map((e) {
-      return
-          //Padding(
-          //padding: const EdgeInsets.only(bottom: 8.0),
-          //child:
-          Container(
+      return Container(
         color: SmeupConfigurationService.getTheme().scaffoldBackgroundColor,
         width: 120,
         height: 30,
-        // decoration: BoxDecoration(
-        //   color: SmeupOptions.getTheme().scaffoldBackgroundColor,
-        // ),
         child: Tab(
           text: e.title,
         ),
-        //),
       );
     }).toList();
 

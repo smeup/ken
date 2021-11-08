@@ -142,30 +142,21 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       }
     });
 
-    if (smeupFormModel.autoAdaptHeight) {
-      smeupFormModel.smeupSectionsModels.forEach((s) {
-        var section;
-        section =
-            SmeupSection(s, widget.scaffoldKey, widget.smeupFormModel.formKey);
-        sections.add(section);
-      });
-    } else {
-      smeupFormModel.smeupSectionsModels.forEach((s) {
-        var section;
-        if (useDim && totalDim > 0) {
-          section = Container(
-              height: s.height,
-              width: s.width,
-              child: SmeupSection(
-                  s, widget.scaffoldKey, widget.smeupFormModel.formKey));
-        } else {
-          section = Container(
-              child: SmeupSection(
-                  s, widget.scaffoldKey, widget.smeupFormModel.formKey));
-        }
-        sections.add(section);
-      });
-    }
+    smeupFormModel.smeupSectionsModels.forEach((s) {
+      var section;
+      if (!smeupFormModel.autoAdaptHeight && useDim && totalDim > 0) {
+        section = Container(
+            height: s.height,
+            width: s.width,
+            child: SmeupSection(
+                s, widget.scaffoldKey, widget.smeupFormModel.formKey));
+      } else {
+        section = Container(
+            child: SmeupSection(
+                s, widget.scaffoldKey, widget.smeupFormModel.formKey));
+      }
+      sections.add(section);
+    });
 
     if (smeupFormModel.layout == 'column') {
       container = Container(
@@ -181,9 +172,6 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       );
     } else {
       container = Container(
-        constraints: smeupFormModel.autoAdaptHeight
-            ? BoxConstraints(minHeight: 0)
-            : null,
         padding: smeupFormModel.padding,
         child: SingleChildScrollView(
           child: Row(children: sections),
