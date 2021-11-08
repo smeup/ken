@@ -205,8 +205,6 @@ class SmeupCalendarState extends State<SmeupCalendar>
     _calendarFormat =
         widget.showAsWeek ? CalendarFormat.week : CalendarFormat.month;
 
-    // if (widgetLoadType != LoadType.Delay) _loadEvents();
-
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
@@ -248,10 +246,10 @@ class SmeupCalendarState extends State<SmeupCalendar>
       if (_model != null) {
         await SmeupCalendarDao.getData(_model);
         _data = widget.treatData(_model);
-        //print('  ---- load data');
         await _loadEvents();
+      } else {
+        _loadEvents();
       }
-      //setDataLoad(widget.id, true);
     }
     setDataLoad(widget.id, false);
 
@@ -348,6 +346,12 @@ class SmeupCalendarState extends State<SmeupCalendar>
                 if (list != null && list.length > 0) {
                   color = list[0].backgroundColor;
                 }
+                bool isHoliday = _holidays != null &&
+                    _holidays.isNotEmpty &&
+                    _holidays[date] != null;
+                if (isHoliday) {
+                  color = Colors.grey;
+                }
                 return FadeTransition(
                   opacity:
                       Tween(begin: 0.5, end: 1.0).animate(_animationController),
@@ -380,10 +384,6 @@ class SmeupCalendarState extends State<SmeupCalendar>
                 );
               },
               markerBuilder: (context, date, events) {
-                // bool isHoliday = _holidays != null &&
-                //     _holidays.isNotEmpty &&
-                //     _holidays[date] != null;
-
                 var eventsInDay = _events[_nomalizeDateTime(date)];
                 if (eventsInDay == null) return null;
 
