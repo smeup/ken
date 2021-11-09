@@ -41,6 +41,7 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
   String selectedTabColName;
   double width;
   double height;
+  bool autoAdaptHeight;
 
   SmeupSectionModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
@@ -50,10 +51,12 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
     dim = double.tryParse(tmp) ?? 0;
     layout = jsonMap['layout'];
     selectedTabColName = jsonMap['selectedTabColName'];
+    autoAdaptHeight = SmeupFormModel.defaultAutoAdaptHeight;
     _replaceSelectedTabIndex(jsonMap);
 
     components = getComponents(jsonMap, 'components');
-    smeupSectionsModels = getSections(jsonMap, 'sections', formKey);
+    smeupSectionsModels =
+        getSections(jsonMap, 'sections', formKey, autoAdaptHeight);
   }
 
   void _replaceSelectedTabIndex(dynamic jsonMap) {

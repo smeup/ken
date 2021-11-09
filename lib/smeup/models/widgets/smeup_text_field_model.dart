@@ -24,7 +24,7 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
   double width;
   double height;
   EdgeInsetsGeometry padding;
-  bool showborder;
+  bool showBorder;
   bool showUnderline;
   bool autoFocus;
   String valueField;
@@ -41,7 +41,7 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.padding = defaultPadding,
-      this.showborder = defaultShowBorder,
+      this.showBorder = defaultShowBorder,
       this.showSubmit = defaultShowSubmit,
       title = '',
       this.showUnderline = defaultShowUnderline,
@@ -74,14 +74,8 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     showUnderline = optionsDefault['showUnderline'] ?? true;
     autoFocus = optionsDefault['autoFocus'] ?? false;
-    if (optionsDefault['showborder'] == null) {
-      showborder = defaultShowBorder;
-    } else {
-      if (optionsDefault['showborder'] == 'Yes')
-        showborder = true;
-      else
-        showborder = false;
-    }
+    showBorder = SmeupUtilities.getBool(optionsDefault['showborder']) ??
+        defaultShowBorder;
     keyboard = SmeupUtilities.getKeyboard(optionsDefault['keyboard']);
 
     if (widgetLoadType != LoadType.Delay) {
@@ -103,7 +97,7 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
         width: width,
         height: height,
         padding: padding,
-        showborder: showborder,
+        showBorder: showBorder,
         showUnderline: showUnderline);
   }
 }

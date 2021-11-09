@@ -83,6 +83,7 @@ class _SmeupSectionState extends State<SmeupSection>
 
     if (hasSections(smeupSectionModel)) {
       var sections = List<Widget>.empty(growable: true);
+
       double maxDim = 100;
       double totalDim = 0;
       int sectionWithNoDim = 0;
@@ -111,12 +112,10 @@ class _SmeupSectionState extends State<SmeupSection>
       }
 
       smeupSectionModel.smeupSectionsModels.forEach((s) {
-        var section;
         MediaQueryData deviceInfo = MediaQuery.of(context);
         if (s.dim <= 0) {
           s.height = deviceInfo.size.height;
           s.width = deviceInfo.size.width;
-          section = SmeupSection(s, widget.scaffoldKey, widget.formKey);
         } else {
           s.height = smeupSectionModel.layout == 'column'
               ? smeupSectionModel.height / totalDim * s.dim
@@ -124,15 +123,22 @@ class _SmeupSectionState extends State<SmeupSection>
           s.width = smeupSectionModel.layout == 'row'
               ? smeupSectionModel.width / totalDim * s.dim
               : smeupSectionModel.width;
-          section = Expanded(
-              flex: s.dim.floor(),
-              child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
         }
+      });
+
+      smeupSectionModel.smeupSectionsModels.forEach((s) {
+        var section;
+        section = Expanded(
+            flex: s.dim.floor(),
+            child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
         sections.add(section);
       });
 
       if (smeupSectionModel.layout == 'column') {
         children = Container(
+          constraints: smeupSectionModel.autoAdaptHeight
+              ? BoxConstraints(minHeight: 0)
+              : null,
           child: SingleChildScrollView(
             child: Column(children: sections),
           ),
@@ -167,21 +173,13 @@ class _SmeupSectionState extends State<SmeupSection>
     }).toList();
 
     final tabsTitles = widget.smeupSectionModel.components.map((e) {
-      return
-          //Padding(
-          //padding: const EdgeInsets.only(bottom: 8.0),
-          //child:
-          Container(
+      return Container(
         color: SmeupConfigurationService.getTheme().scaffoldBackgroundColor,
         width: 120,
         height: 30,
-        // decoration: BoxDecoration(
-        //   color: SmeupOptions.getTheme().scaffoldBackgroundColor,
-        // ),
         child: Tab(
           text: e.title,
         ),
-        //),
       );
     }).toList();
 

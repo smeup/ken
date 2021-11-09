@@ -29,7 +29,7 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
   double width;
   double height;
   EdgeInsetsGeometry padding;
-  bool showborder;
+  bool showBorder;
   double elevation;
 
   List<String> minutesList;
@@ -47,7 +47,7 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.padding = defaultPadding,
-      this.showborder = defaultShowBorder,
+      this.showBorder = defaultShowBorder,
       this.elevation = defaultElevation,
       title = '',
       this.minutesList})
@@ -90,14 +90,8 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
           .toList();
     }
 
-    if (optionsDefault['showborder'] == null) {
-      showborder = defaultShowBorder;
-    } else {
-      if (optionsDefault['showborder'] == 'Yes')
-        showborder = true;
-      else
-        showborder = false;
-    }
+    showBorder = SmeupUtilities.getBool(optionsDefault['showborder']) ??
+        defaultShowBorder;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {

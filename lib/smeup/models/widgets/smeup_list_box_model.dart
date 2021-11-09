@@ -9,8 +9,7 @@ enum SmeupListType { simple, oriented, wheel }
 
 class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 0;
-  static const double defaultHeight = 200;
-  static const double defaultListHeight = 200;
+  static const double defaultHeight = 170;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(5);
   static const SmeupListType defaultListType = SmeupListType.oriented;
   static const int defaultPortraitColumns = 1;
@@ -24,10 +23,10 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   static const int defaultSelectedRow = -1;
   static const Color defaultBackColor = Colors.white;
   static const Color defaultFontColor = Colors.black;
+  static const double defaultListHeight = 0;
 
   double width;
   double height;
-  double listHeight;
   Axis orientation;
   EdgeInsetsGeometry padding;
   SmeupListType listType;
@@ -42,6 +41,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   String backgroundColName;
   bool showSelection;
   int selectedRow;
+  double listHeight;
 
   SmeupListBoxModel(
       {id,
@@ -51,7 +51,6 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       this.fontsize = defaultFontsize,
       this.width = defaultWidth,
       this.height = defaultHeight,
-      this.listHeight = defaultHeight,
       this.orientation = defaultOrientation,
       this.padding = defaultPadding,
       this.listType = defaultListType,
@@ -61,6 +60,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       this.defaultSort = defaultDefaultSort,
       this.fontColor = defaultFontColor,
       this.backColor = defaultBackColor,
+      this.listHeight = defaultListHeight,
       this.backgroundColName = defaultBackgroundColName,
       this.showSelection = defaultShowSelection,
       this.selectedRow = defaultSelectedRow,
@@ -96,8 +96,6 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
-    listHeight = SmeupUtilities.getDouble(optionsDefault['listHeight']) ??
-        defaultListHeight;
     listType = decodeListType(optionsDefault['listType']);
     orientation = jsonMap['orientation'] == 'horizontal'
         ? Axis.horizontal
@@ -119,17 +117,16 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     backgroundColName = optionsDefault['backgroundColName'];
     defaultSort = optionsDefault['defaultSort'] ?? defaultDefaultSort;
 
-    showSelection = false;
-    if (optionsDefault['showSelection'] != null) {
-      if (optionsDefault['showSelection'] is bool)
-        showSelection = optionsDefault['showSelection'];
-      else if (optionsDefault['showSelection'] == 'Yes') showSelection = true;
-    }
+    showSelection =
+        SmeupUtilities.getBool(optionsDefault['showSelection']) ?? false;
 
     selectedRow = -1;
     if (optionsDefault['selectRow'] != null) {
       selectedRow = SmeupUtilities.getInt(optionsDefault['selectRow']);
     }
+
+    listHeight = SmeupUtilities.getDouble(optionsDefault['listHeight']) ??
+        defaultListHeight;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {

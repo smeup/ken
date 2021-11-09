@@ -27,7 +27,7 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   String valueField;
   String displayedField;
   EdgeInsetsGeometry padding;
-  bool showborder;
+  bool showBorder;
   List<String> minutesList;
 
   SmeupTimePickerModel(
@@ -43,7 +43,7 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.padding = defaultPadding,
-      this.showborder = defaultShowBorder,
+      this.showBorder = defaultShowBorder,
       title = '',
       this.minutesList})
       : super(formKey, title: title, id: id, type: type) {
@@ -84,14 +84,8 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
           .toList();
     }
 
-    if (optionsDefault['showborder'] == null) {
-      showborder = defaultShowBorder;
-    } else {
-      if (optionsDefault['showborder'] == 'Yes')
-        showborder = true;
-      else
-        showborder = false;
-    }
+    showBorder = SmeupUtilities.getBool(optionsDefault['showborder']) ??
+        defaultShowBorder;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {

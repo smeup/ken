@@ -22,7 +22,6 @@ class SmeupImageList extends StatefulWidget
   // graphic properties
   double width;
   double height;
-  double listHeight;
   EdgeInsetsGeometry padding;
   String layout;
   String title;
@@ -35,6 +34,7 @@ class SmeupImageList extends StatefulWidget
   dynamic data;
   bool showLoader = false;
   Axis orientation;
+  double listHeight;
 
   // dynamisms functions
   Function clientOnItemTap;
@@ -51,10 +51,10 @@ class SmeupImageList extends StatefulWidget
       layout,
       this.width = SmeupImageListModel.defaultWidth,
       this.height = SmeupImageListModel.defaultHeight,
-      this.listHeight = SmeupImageListModel.defaultHeight,
       this.fontsize = SmeupImageListModel.defaultFontsize,
       this.padding = SmeupImageListModel.defaultPadding,
       this.orientation = SmeupImageListModel.defaultOrientation,
+      this.listHeight = SmeupImageListModel.defaultListHeight,
       this.title = '',
       showLoader: false,
       this.clientOnItemTap,
@@ -71,7 +71,6 @@ class SmeupImageList extends StatefulWidget
     layout = m.layout;
     width = m.width;
     height = m.height;
-    listHeight = m.listHeight;
     fontsize = m.fontsize;
     padding = m.padding;
     columns = m.columns;
@@ -79,6 +78,7 @@ class SmeupImageList extends StatefulWidget
     title = m.title;
     showLoader = m.showLoader;
     orientation = m.orientation;
+    listHeight = m.listHeight;
 
     dynamic deleteDynamism;
     if (m.dynamisms != null)
@@ -181,8 +181,8 @@ class _SmeupImageListState extends State<SmeupImageList>
           dismissEnabled: widget.dismissEnabled,
           fontsize: widget.fontsize,
           height: widget.height,
-          layout: 'imageList',
           listHeight: widget.listHeight,
+          layout: 'imageList',
           listType: SmeupListType.oriented,
           orientation: widget.orientation,
           padding: widget.padding,
@@ -195,8 +195,8 @@ class _SmeupImageListState extends State<SmeupImageList>
       final _modelListBox = SmeupListBoxModel(
           fontsize: widget.fontsize,
           height: widget.height,
-          layout: 'imageList',
           listHeight: widget.listHeight,
+          layout: 'imageList',
           listType: SmeupListType.oriented,
           orientation: widget.orientation,
           padding: widget.padding,
