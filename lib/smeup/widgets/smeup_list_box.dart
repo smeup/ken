@@ -45,6 +45,7 @@ class SmeupListBox extends StatefulWidget
   String backgroundColName;
   bool showSelection = false;
   int selectedRow = -1;
+  double listHeight;
 
   // dynamisms functions
   Function clientOnItemTap;
@@ -69,6 +70,7 @@ class SmeupListBox extends StatefulWidget
       this.backgroundColName = SmeupListBoxModel.defaultBackgroundColName,
       this.fontColor = SmeupListBoxModel.defaultFontColor,
       this.backColor = SmeupListBoxModel.defaultBackColor,
+      this.listHeight = SmeupListBoxModel.defaultHeight,
       this.showSelection = false,
       this.selectedRow = -1,
       title = '',
@@ -102,6 +104,7 @@ class SmeupListBox extends StatefulWidget
     backgroundColName = m.backgroundColName;
     showSelection = m.showSelection;
     selectedRow = m.selectedRow;
+    listHeight = m.listHeight;
 
     dynamic deleteDynamism;
     if (m.dynamisms != null)
@@ -264,6 +267,11 @@ class _SmeupListBoxState extends State<SmeupListBox>
     var list;
 
     MediaQueryData deviceInfo = MediaQuery.of(context);
+    double boxHeight = 0;
+    if (cells.length > 0)
+      boxHeight = (cells[0] as SmeupBox).height;
+    else
+      boxHeight = 1;
 
     list = OrientationBuilder(
       builder: (context, orientation) {
@@ -273,13 +281,6 @@ class _SmeupListBoxState extends State<SmeupListBox>
         }
 
         double childAspectRatio = 0;
-        double boxHeight = 0;
-
-        if (cells.length > 0)
-          boxHeight = (cells[0] as SmeupBox).height;
-        else
-          boxHeight = 1;
-
         childAspectRatio = deviceInfo.size.width / boxHeight * col;
         // 500;
 
@@ -297,10 +298,9 @@ class _SmeupListBoxState extends State<SmeupListBox>
       },
     );
 
-    double listboxHeight = ((_data['rows'] as List).length * widget.height) +
-        widget.padding.vertical;
+    double listboxHeight = widget.listHeight;
     if (_model != null && _model.parent != null) {
-      if (listboxHeight > (_model.parent as SmeupSectionModel).height)
+      if (listboxHeight == 0)
         listboxHeight = (_model.parent as SmeupSectionModel).height;
     }
 

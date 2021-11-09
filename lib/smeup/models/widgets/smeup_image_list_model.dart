@@ -14,6 +14,7 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultLayout = '1';
   static const double defaultFontsize = 16.0;
   static const Axis defaultOrientation = Axis.vertical;
+  static const double defaultListHeight = 450;
 
   double width;
   double height;
@@ -23,6 +24,7 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
   int rows;
   double fontsize;
   String layout = '';
+  double listHeight;
 
   SmeupImageListModel(
       {id,
@@ -34,6 +36,7 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
       this.height = defaultHeight,
       this.padding = defaultPadding,
       this.columns = defaultColumns,
+      this.listHeight = defaultHeight,
       this.orientation = defaultOrientation,
       this.rows = defaultRows,
       title = ''})
@@ -68,6 +71,9 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
     orientation = jsonMap['orientation'] == 'horizontal'
         ? Axis.horizontal
         : Axis.vertical;
+
+    listHeight = SmeupUtilities.getDouble(optionsDefault['listHeight']) ??
+        defaultListHeight;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {

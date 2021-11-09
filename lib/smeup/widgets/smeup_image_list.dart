@@ -4,7 +4,6 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/widgets/smeup_image_list_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_list_box_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_list_box.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
@@ -35,6 +34,7 @@ class SmeupImageList extends StatefulWidget
   dynamic data;
   bool showLoader = false;
   Axis orientation;
+  double listHeight;
 
   // dynamisms functions
   Function clientOnItemTap;
@@ -54,6 +54,7 @@ class SmeupImageList extends StatefulWidget
       this.fontsize = SmeupImageListModel.defaultFontsize,
       this.padding = SmeupImageListModel.defaultPadding,
       this.orientation = SmeupImageListModel.defaultOrientation,
+      this.listHeight = SmeupImageListModel.defaultHeight,
       this.title = '',
       showLoader: false,
       this.clientOnItemTap,
@@ -77,6 +78,7 @@ class SmeupImageList extends StatefulWidget
     title = m.title;
     showLoader = m.showLoader;
     orientation = m.orientation;
+    listHeight = m.listHeight;
 
     dynamic deleteDynamism;
     if (m.dynamisms != null)
@@ -179,6 +181,7 @@ class _SmeupImageListState extends State<SmeupImageList>
           dismissEnabled: widget.dismissEnabled,
           fontsize: widget.fontsize,
           height: widget.height,
+          listHeight: widget.listHeight,
           layout: 'imageList',
           listType: SmeupListType.oriented,
           orientation: widget.orientation,
@@ -192,6 +195,7 @@ class _SmeupImageListState extends State<SmeupImageList>
       final _modelListBox = SmeupListBoxModel(
           fontsize: widget.fontsize,
           height: widget.height,
+          listHeight: widget.listHeight,
           layout: 'imageList',
           listType: SmeupListType.oriented,
           orientation: widget.orientation,
