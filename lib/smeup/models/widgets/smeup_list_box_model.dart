@@ -9,7 +9,7 @@ enum SmeupListType { simple, oriented, wheel }
 
 class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 0;
-  static const double defaultHeight = 450;
+  static const double defaultHeight = 170;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(5);
   static const SmeupListType defaultListType = SmeupListType.oriented;
   static const int defaultPortraitColumns = 1;
@@ -23,7 +23,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   static const int defaultSelectedRow = -1;
   static const Color defaultBackColor = Colors.white;
   static const Color defaultFontColor = Colors.black;
-  static const double defaultListHeight = 450;
+  static const double defaultListHeight = 0;
 
   double width;
   double height;
@@ -60,7 +60,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       this.defaultSort = defaultDefaultSort,
       this.fontColor = defaultFontColor,
       this.backColor = defaultBackColor,
-      this.listHeight = defaultHeight,
+      this.listHeight = defaultListHeight,
       this.backgroundColName = defaultBackgroundColName,
       this.showSelection = defaultShowSelection,
       this.selectedRow = defaultSelectedRow,

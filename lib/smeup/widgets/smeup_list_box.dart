@@ -70,7 +70,7 @@ class SmeupListBox extends StatefulWidget
       this.backgroundColName = SmeupListBoxModel.defaultBackgroundColName,
       this.fontColor = SmeupListBoxModel.defaultFontColor,
       this.backColor = SmeupListBoxModel.defaultBackColor,
-      this.listHeight = SmeupListBoxModel.defaultHeight,
+      this.listHeight = SmeupListBoxModel.defaultListHeight,
       this.showSelection = false,
       this.selectedRow = -1,
       title = '',
@@ -247,12 +247,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
       ),
     );
 
-    double listboxHeight = ((_data['rows'] as List).length * widget.height) +
-        widget.padding.vertical;
-    if (_model != null && _model.parent != null) {
-      if (listboxHeight == 0)
-        listboxHeight = (_model.parent as SmeupSectionModel).height;
-    }
+    double listboxHeight = _getListHeight();
 
     final container = Container(
         padding: widget.padding,
@@ -298,11 +293,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
       },
     );
 
-    double listboxHeight = widget.listHeight;
-    if (_model != null && _model.parent != null) {
-      if (listboxHeight == 0)
-        listboxHeight = (_model.parent as SmeupSectionModel).height;
-    }
+    double listboxHeight = _getListHeight();
 
     final container = Container(
         padding: widget.padding,
@@ -345,12 +336,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
               ),
             )));
 
-    double listboxHeight = ((_data['rows'] as List).length * widget.height) +
-        widget.padding.vertical;
-    if (_model != null && _model.parent != null) {
-      if (listboxHeight == 0)
-        listboxHeight = (_model.parent as SmeupSectionModel).height;
-    }
+    double listboxHeight = _getListHeight();
 
     final container = Container(
         padding: widget.padding,
@@ -434,5 +420,14 @@ class _SmeupListBoxState extends State<SmeupListBox>
     });
 
     return cells;
+  }
+
+  double _getListHeight() {
+    double listboxHeight = widget.listHeight;
+    if (_model != null && _model.parent != null) {
+      if (listboxHeight == 0)
+        listboxHeight = (_model.parent as SmeupSectionModel).height;
+    }
+    return listboxHeight;
   }
 }

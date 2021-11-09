@@ -54,7 +54,7 @@ class SmeupImageList extends StatefulWidget
       this.fontsize = SmeupImageListModel.defaultFontsize,
       this.padding = SmeupImageListModel.defaultPadding,
       this.orientation = SmeupImageListModel.defaultOrientation,
-      this.listHeight = SmeupImageListModel.defaultHeight,
+      this.listHeight = SmeupImageListModel.defaultListHeight,
       this.title = '',
       showLoader: false,
       this.clientOnItemTap,

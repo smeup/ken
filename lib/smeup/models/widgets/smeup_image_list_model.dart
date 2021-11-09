@@ -7,14 +7,14 @@ import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 0;
-  static const double defaultHeight = 450;
+  static const double defaultHeight = 200;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const int defaultColumns = 0;
   static const int defaultRows = 0;
   static const String defaultLayout = '1';
-  static const double defaultFontsize = 16.0;
+  static const double defaultFontsize = 12.0;
   static const Axis defaultOrientation = Axis.vertical;
-  static const double defaultListHeight = 450;
+  static const double defaultListHeight = 0;
 
   double width;
   double height;
@@ -36,7 +36,7 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
       this.height = defaultHeight,
       this.padding = defaultPadding,
       this.columns = defaultColumns,
-      this.listHeight = defaultHeight,
+      this.listHeight = defaultListHeight,
       this.orientation = defaultOrientation,
       this.rows = defaultRows,
       title = ''})
