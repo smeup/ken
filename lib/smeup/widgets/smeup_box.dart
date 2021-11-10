@@ -755,7 +755,13 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
         code = data['codice'] ?? data['code'];
       }
 
-      if (type != null && parameter != null && code != null) {
+      print('type: $type, parameter: $parameter, code: $code');
+      if (type != null &&
+          parameter != null &&
+          code != null &&
+          type.isNotEmpty &&
+          parameter.isNotEmpty &&
+          code.isNotEmpty) {
         bool validURL = Uri.parse(code).isAbsolute;
 
         if (validURL) {
