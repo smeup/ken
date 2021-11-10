@@ -173,7 +173,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
                   key: widget._scaffoldKey,
                   endDrawer: _getDrawer(smeupScreenModel),
                   appBar: SmeupNavigationAppBar(isDialog,
-                      barTitle: smeupScreenModel.data['title'] ?? '',
+                      appBarTitle: smeupScreenModel.data['title'] ?? '',
                       appBarActions: _getActions(smeupScreenModel.data),
                       myContext: context,
                       scaffoldKey: widget._scaffoldKey,

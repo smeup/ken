@@ -19,24 +19,27 @@ enum ALT_SERVICE_ENDPOINTS { DEFAULT, HTTP }
 
 class SmeupConfigurationService {
   static const double STATIC_BUTTON_ROUNDNESS = 0.0;
+
+  static SharedPreferences _localStorge;
+  static ThemeData _theme;
+  static String _defaultServiceEndpoint;
+  static String _httpServiceEndpoint;
+  static PackageInfo _packageInfo;
+  static Map<DateTime, List> _holidays;
+
   static LogType logLevel;
   static bool isLoginEnabled = false;
   static bool isOfflineEnabled = false;
   static bool isCacheEnabled = false;
   static bool isLogEnabled = false;
   static bool isLandscapeEnabled = true;
-  static SharedPreferences _localStorge;
-  static ThemeData _theme;
   static String jsonsPath;
   static String imagesPath;
-  static String _defaultServiceEndpoint;
-  static String _httpServiceEndpoint;
-  static PackageInfo _packageInfo;
-  static Map<DateTime, List> _holidays;
   static dynamic appDictionary;
   static ExternalConfigurationModel _appConfiguration;
   static Color defaultSplashColor;
   static Color defaultLoaderColor;
+  static String appBarImage;
   static AuthenticationModel authenticationModel;
 
   static PackageInfo packageInfoModel = PackageInfo(
@@ -53,12 +56,14 @@ class SmeupConfigurationService {
       bool enableCache = false,
       AuthenticationModel authenticationModel,
       Color defaultSplashColor = Colors.white,
-      Color defaultLoaderColor = Colors.white}) async {
+      Color defaultLoaderColor = Colors.white,
+      String appBarImage = ''}) async {
     await SmeupConfigurationService.setAppConfiguration();
 
     SmeupConfigurationService.logLevel = logLevel;
     SmeupConfigurationService.defaultSplashColor = defaultSplashColor;
     SmeupConfigurationService.defaultLoaderColor = defaultLoaderColor;
+    SmeupConfigurationService.appBarImage = appBarImage;
 
     await SmeupConfigurationService.setTheme(
         SmeupConfigurationService.getAppConfiguration().theme);
