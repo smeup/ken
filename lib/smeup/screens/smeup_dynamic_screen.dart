@@ -24,7 +24,8 @@ class SmeupDynamicScreen extends StatefulWidget {
   final SmeupFun initialFun;
   final bool backButtonVisible;
   final bool isDialog;
-  SmeupDynamicScreen({this.initialFun, this.backButtonVisible, this.isDialog});
+  SmeupDynamicScreen(
+      {this.initialFun, this.backButtonVisible = true, this.isDialog});
 
   static const routeName = '/dynamic-screen';
 
@@ -153,11 +154,11 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
         SmeupForm(smeupFormModel, widget._scaffoldKey, widget._formKey);
 
     bool isDialog = widget.isDialog ?? false;
-    bool backButtonVisible = widget.backButtonVisible ?? true;
+    bool backButtonVisible = widget.backButtonVisible;
     if (routeArgs != null) {
       if (routeArgs['isDialog'] != null) isDialog = routeArgs['isDialog'];
       if (routeArgs['backButtonVisible'] != null)
-        backButtonVisible = routeArgs['backButtonVisible'];
+        backButtonVisible = routeArgs['backButtonVisible'] ?? true;
     }
 
     SmeupFun smeupFun =
@@ -167,7 +168,9 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
       data: SmeupConfigurationService.getTheme(),
       child: Builder(
           builder: (BuildContext context) => WillPopScope(
-                onWillPop: _onWillPop,
+                onWillPop: () {
+                  return _onWillPop(backButtonVisible);
+                },
                 child: Scaffold(
                   backgroundColor: smeupFormModel.backColor,
                   key: widget._scaffoldKey,
@@ -241,7 +244,8 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     return smeupDrawer;
   }
 
-  Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop(backButtonVisible) async {
+    if (!backButtonVisible) return false;
     SmeupDynamicScreen.onPop(smeupFormModel.id, widget._scaffoldKey);
 
     Navigator.of(context).pop(false);
