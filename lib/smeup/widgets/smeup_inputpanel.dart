@@ -247,19 +247,21 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
   }
 
   Widget _getConfirmButton() {
-    return Row(
-      children: [
-        Expanded(
-          child: SmeupButton(
-            data: "Conferma",
-            backColor: SmeupConfigurationService.getTheme().primaryColor,
-            fontColor: Colors.white,
-            fontSize: widget.fontSize,
-            clientOnPressed: () => _fireDynamism(),
-          ),
-        ),
-      ],
-    );
+    return (_model.dynamisms as List).length > 0
+        ? Row(
+            children: [
+              Expanded(
+                child: SmeupButton(
+                  data: "Conferma",
+                  backColor: SmeupConfigurationService.getTheme().primaryColor,
+                  fontColor: Colors.white,
+                  fontSize: widget.fontSize,
+                  clientOnPressed: () => _fireDynamism(),
+                ),
+              ),
+            ],
+          )
+        : Container();
   }
 
   _fireDynamism() {
