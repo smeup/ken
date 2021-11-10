@@ -90,7 +90,7 @@ class SmeupTextField extends StatefulWidget
     width = m.width;
     height = m.height;
     padding = m.padding;
-    showborder = m.showborder;
+    showborder = m.showBorder;
     showSubmit = m.showSubmit;
     showUnderline = m.showUnderline;
     autoFocus = m.autoFocus;

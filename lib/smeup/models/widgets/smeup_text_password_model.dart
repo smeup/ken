@@ -27,7 +27,7 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
   double width;
   double height;
   EdgeInsetsGeometry padding;
-  bool showborder;
+  bool showBorder;
   bool showUnderline;
   bool autoFocus;
   String valueField;
@@ -46,7 +46,7 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.padding = defaultPadding,
-      this.showborder = defaultShowBorder,
+      this.showBorder = defaultShowBorder,
       this.showSubmit = defaultShowSubmit,
       this.showRulesIcon = defaultShowRulesIcon,
       title = '',
@@ -81,41 +81,17 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     showUnderline = optionsDefault['showUnderline'] ?? true;
     autoFocus = optionsDefault['autoFocus'] ?? false;
-    if (optionsDefault['showborder'] == null) {
-      showborder = defaultShowBorder;
-    } else {
-      if (optionsDefault['showborder'] == 'Yes')
-        showborder = true;
-      else
-        showborder = false;
-    }
+    showBorder = SmeupUtilities.getBool(optionsDefault['showborder']) ??
+        defaultShowBorder;
 
-    if (optionsDefault['showRules'] == null) {
-      showRules = defaultShowRules;
-    } else {
-      if (optionsDefault['showRules'] == 'Yes')
-        showRules = true;
-      else
-        showRules = false;
-    }
+    showRules =
+        SmeupUtilities.getBool(optionsDefault['showRules']) ?? defaultShowRules;
 
-    if (optionsDefault['showRulesIcon'] == null) {
-      showRulesIcon = defaultShowRulesIcon;
-    } else {
-      if (optionsDefault['showRulesIcon'] == 'Yes')
-        showRulesIcon = true;
-      else
-        showRulesIcon = false;
-    }
+    showRulesIcon = SmeupUtilities.getBool(optionsDefault['showRulesIcon']) ??
+        defaultShowRulesIcon;
 
-    if (optionsDefault['checkRules'] == null) {
-      checkRules = defaultCheckRules;
-    } else {
-      if (optionsDefault['checkRules'] == 'Yes')
-        checkRules = true;
-      else
-        checkRules = false;
-    }
+    checkRules = SmeupUtilities.getBool(optionsDefault['checkRules']) ??
+        defaultCheckRules;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {

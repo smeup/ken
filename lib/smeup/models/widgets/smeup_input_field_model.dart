@@ -20,7 +20,7 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
   double width;
   double height;
   EdgeInsetsGeometry padding;
-  bool showborder;
+  bool showBorder;
   dynamic clientData;
   bool showUnderline;
   bool autoFocus;
@@ -32,7 +32,7 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.padding = defaultPadding,
-      this.showborder = defaultShowBorder,
+      this.showBorder = defaultShowBorder,
       title = '',
       this.clientData,
       this.showUnderline = true,
@@ -61,14 +61,9 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     showUnderline = optionsDefault['showUnderline'] ?? true;
     autoFocus = optionsDefault['autoFocus'] ?? false;
-    if (optionsDefault['showborder'] == null) {
-      showborder = defaultShowBorder;
-    } else {
-      if (optionsDefault['showborder'] == 'Yes')
-        showborder = true;
-      else
-        showborder = false;
-    }
+    showBorder = SmeupUtilities.getBool(optionsDefault['showborder']) ??
+        defaultShowBorder;
+
     SmeupDataService.incrementDataFetch(id);
   }
 
@@ -99,7 +94,7 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
         width: width,
         height: height,
         padding: padding,
-        showborder: showborder,
+        showBorder: showBorder,
         clientData: clientData,
         showUnderline: showUnderline);
   }

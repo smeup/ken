@@ -21,7 +21,7 @@ class SmeupTextAutocompleteModel extends SmeupModel
   double width;
   double height;
   EdgeInsetsGeometry padding;
-  bool showborder;
+  bool showBorder;
   bool showUnderline;
   bool autoFocus;
   String defaultValue;
@@ -37,7 +37,7 @@ class SmeupTextAutocompleteModel extends SmeupModel
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.padding = defaultPadding,
-      this.showborder = defaultShowBorder,
+      this.showBorder = defaultShowBorder,
       title = '',
       this.showUnderline = true,
       this.autoFocus = defaultAutoFocus,
@@ -64,14 +64,8 @@ class SmeupTextAutocompleteModel extends SmeupModel
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     showUnderline = optionsDefault['showUnderline'] ?? true;
     autoFocus = optionsDefault['autoFocus'] ?? false;
-    if (optionsDefault['showborder'] == null) {
-      showborder = defaultShowBorder;
-    } else {
-      if (optionsDefault['showborder'] == 'Yes')
-        showborder = true;
-      else
-        showborder = false;
-    }
+    showBorder = SmeupUtilities.getBool(optionsDefault['showborder']) ??
+        defaultShowBorder;
     defaultValue = jsonMap['defaultValue'] ?? '';
     valueField = optionsDefault['valueField'] ?? 'value';
 
@@ -92,7 +86,7 @@ class SmeupTextAutocompleteModel extends SmeupModel
         width: width,
         height: height,
         padding: padding,
-        showborder: showborder,
+        showBorder: showBorder,
         showUnderline: showUnderline);
   }
 }

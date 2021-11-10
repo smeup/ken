@@ -103,7 +103,7 @@ class SmeupTimePicker extends StatefulWidget
     width = m.width;
     height = m.height;
     padding = m.padding;
-    showborder = m.showborder;
+    showborder = m.showBorder;
     minutesList = m.minutesList;
 
     data = treatData(m);

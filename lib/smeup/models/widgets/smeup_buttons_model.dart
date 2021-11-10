@@ -102,28 +102,24 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     padding =
         SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
-    if (optionsDefault['fillSpace'] != null &&
-        optionsDefault['fillSpace'].toString().toLowerCase() == 'yes') {
+    if (SmeupUtilities.getBool(optionsDefault['fillSpace']) ?? false) {
       width = 0;
     }
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     innerSpace = SmeupUtilities.getDouble(optionsDefault['innerSpace']) ??
         defaultInnerSpace;
-    if (optionsDefault['horiz'] != null &&
-        optionsDefault['horiz'].toString().toLowerCase() == 'yes') {
+    if (SmeupUtilities.getBool(optionsDefault['horiz']) ?? false) {
       orientation = WidgetOrientation.Horizontal;
     } else {
       orientation = defaultOrientation;
     }
-    if (optionsDefault['underline'] != null &&
-        optionsDefault['underline'].toString().toLowerCase() == 'yes') {
+    if (SmeupUtilities.getBool(optionsDefault['underline']) ?? false) {
       underline = true;
     } else {
       underline = defaultUnderline;
     }
-    if (optionsDefault['flat'] != null &&
-        optionsDefault['flat'].toString().toLowerCase() == 'yes') {
+    if (SmeupUtilities.getBool(optionsDefault['flat']) ?? false) {
       isLink = true;
       underline = true;
     } else {

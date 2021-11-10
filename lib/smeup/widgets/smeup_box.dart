@@ -684,7 +684,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                               child: Text(rowData,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 12,
                                       color: widget.fontColor ??
                                           SmeupConfigurationService.getTheme()
                                               .primaryColor,
@@ -842,24 +842,35 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
   }
 
   Future<Widget> _fetchAvailableLinks(imgList) async {
-    if (imgList != null && imgList.length != 0) {
-      for (var i = 0; i < imgList.length; i++) {
-        var smeupFun = SmeupFun.fromServiceName('*HTTP');
-        final smeupServiceResponse = await SmeupDataService.invoke(smeupFun,
-            httpServiceMethod: 'get',
-            httpServiceUrl: imgList[i]['codice'],
-            //httpServiceContentType: 'application/x-www-form-urlencoded',
-            httpServiceBody: null);
-        if (smeupServiceResponse.succeded) {
-          return Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Image.network(
-              imgList[i]['codice'],
-              fit: BoxFit.contain,
-            ),
-          );
+    bool check = false;
+    if (check) {
+      if (imgList != null && imgList.length != 0) {
+        for (var i = 0; i < imgList.length; i++) {
+          var smeupFun = SmeupFun.fromServiceName('*HTTP');
+          final smeupServiceResponse = await SmeupDataService.invoke(smeupFun,
+              httpServiceMethod: 'get',
+              httpServiceUrl: imgList[i]['codice'],
+              //httpServiceContentType: 'application/x-www-form-urlencoded',
+              httpServiceBody: null);
+          if (smeupServiceResponse.succeded) {
+            return Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Image.network(
+                imgList[i]['codice'],
+                fit: BoxFit.contain,
+              ),
+            );
+          }
         }
       }
+    } else {
+      return Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Image.network(
+          imgList[0]['codice'],
+          fit: BoxFit.contain,
+        ),
+      );
     }
 
     return Container();

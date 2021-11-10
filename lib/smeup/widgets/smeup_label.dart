@@ -78,7 +78,7 @@ class SmeupLabel extends StatefulWidget
     padding = m.padding;
     fontSize = m.fontSize;
     align = m.align;
-    fontbold = m.fontbold;
+    fontbold = m.fontBold;
     width = m.width;
     height = m.height;
     backColorColName = m.backColorColName;

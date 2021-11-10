@@ -90,7 +90,7 @@ class SmeupTextAutocomplete extends StatefulWidget
     width = m.width;
     height = m.height;
     padding = m.padding;
-    showborder = m.showborder;
+    showborder = m.showBorder;
     title = m.title;
     showUnderline = m.showUnderline;
     autoFocus = m.autoFocus;

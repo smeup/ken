@@ -47,7 +47,7 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
 
   Future<SmeupWidgetBuilderResponse> _getFormChildren(
       SmeupFormModel smeupFormModel) async {
-    await smeupFormModel.setData();
+    //await smeupFormModel.setData();
 
     if (smeupFormModel.type != null && smeupFormModel.type != 'EXD') {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -80,8 +80,9 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
 
     Widget form;
     var sections = List<Widget>.empty(growable: true);
-    double maxDim = 100;
+    Widget container;
 
+    double maxDim = 100;
     double totalDim = 0;
     bool useDim = true;
     int sectionWithNoDim = 0;
@@ -117,37 +118,39 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
     }
 
     smeupFormModel.smeupSectionsModels.forEach((s) {
-      var section;
       MediaQueryData deviceInfo = MediaQuery.of(context);
 
       if (useDim && totalDim > 0) {
-        section = OrientationBuilder(builder: (context, orientation) {
-          final routeArgs =
-              ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
-          bool isDialog =
-              routeArgs == null ? false : routeArgs['isDialog'] ?? false;
+        final routeArgs =
+            ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
+        bool isDialog =
+            routeArgs == null ? false : routeArgs['isDialog'] ?? false;
 
-          final formHeight = isDialog ? 300 : deviceInfo.size.height - 70;
-          final formWidth = isDialog ? 300 : deviceInfo.size.width;
+        final formHeight = isDialog ? 300 : deviceInfo.size.height - 70;
+        final formWidth = isDialog ? 300 : deviceInfo.size.width;
 
-          s.height = smeupFormModel.layout == 'column'
-              ? (formHeight) / totalDim * s.dim
-              : formHeight;
+        s.height = smeupFormModel.layout == 'column'
+            ? (formHeight) / totalDim * s.dim
+            : formHeight;
 
-          s.width = smeupFormModel.layout == 'row'
-              ? formWidth / totalDim * s.dim
-              : formWidth;
-
-          return Container(
-              height: s.height,
-              width: s.width,
-              child: SmeupSection(
-                  s, widget.scaffoldKey, widget.smeupFormModel.formKey));
-        });
+        s.width = smeupFormModel.layout == 'row'
+            ? formWidth / totalDim * s.dim
+            : formWidth;
       } else {
         s.height = deviceInfo.size.height;
         s.width = deviceInfo.size.width;
+      }
+    });
 
+    smeupFormModel.smeupSectionsModels.forEach((s) {
+      var section;
+      if (!smeupFormModel.autoAdaptHeight && useDim && totalDim > 0) {
+        section = Container(
+            height: s.height,
+            width: s.width,
+            child: SmeupSection(
+                s, widget.scaffoldKey, widget.smeupFormModel.formKey));
+      } else {
         section = Container(
             child: SmeupSection(
                 s, widget.scaffoldKey, widget.smeupFormModel.formKey));
@@ -155,9 +158,11 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       sections.add(section);
     });
 
-    Widget container;
     if (smeupFormModel.layout == 'column') {
       container = Container(
+        constraints: smeupFormModel.autoAdaptHeight
+            ? BoxConstraints(minHeight: 0)
+            : null,
         padding: smeupFormModel.padding,
         child: SingleChildScrollView(
           child: Column(
