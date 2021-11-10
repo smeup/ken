@@ -659,12 +659,12 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
         },
         child: Card(
             color: widget.cardColor ?? null,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                  color: SmeupConfigurationService.getTheme().primaryColor,
-                  width: borderSize),
-              borderRadius: BorderRadius.circular(10),
-            ),
+            // shape: RoundedRectangleBorder(
+            //   side: BorderSide(
+            //       color: SmeupConfigurationService.getTheme().primaryColor,
+            //       width: borderSize),
+            //   borderRadius: BorderRadius.circular(10),
+            //),
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
@@ -682,6 +682,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(rowData,
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 12,
                                       color: widget.fontColor ??
