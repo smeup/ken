@@ -30,8 +30,8 @@ class SmeupImageModel extends SmeupModel implements SmeupDataInterface {
   SmeupImageModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
-    width = SmeupUtilities.getDouble(jsonMap['width']) ?? defaultWidth;
-    height = SmeupUtilities.getDouble(jsonMap['height']) ?? defaultHeight;
+    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+    height = SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     padding =
         SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     title = jsonMap['title'] ?? '';
