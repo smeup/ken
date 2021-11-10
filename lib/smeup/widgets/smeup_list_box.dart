@@ -147,6 +147,15 @@ class SmeupListBox extends StatefulWidget
     }
   }
 
+  static double getListHeight(double widgetListHeight, SmeupModel model) {
+    double listboxHeight = widgetListHeight;
+    if (model != null && model.parent != null) {
+      if (listboxHeight == 0)
+        listboxHeight = (model.parent as SmeupSectionModel).height;
+    }
+    return listboxHeight;
+  }
+
   @override
   _SmeupListBoxState createState() => _SmeupListBoxState();
 }
@@ -247,7 +256,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
       ),
     );
 
-    double listboxHeight = _getListHeight();
+    double listboxHeight =
+        SmeupListBox.getListHeight(widget.listHeight, _model);
 
     final container = Container(
         padding: widget.padding,
@@ -293,7 +303,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
       },
     );
 
-    double listboxHeight = _getListHeight();
+    double listboxHeight =
+        SmeupListBox.getListHeight(widget.listHeight, _model);
 
     final container = Container(
         padding: widget.padding,
@@ -336,7 +347,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
               ),
             )));
 
-    double listboxHeight = _getListHeight();
+    double listboxHeight =
+        SmeupListBox.getListHeight(widget.listHeight, _model);
 
     final container = Container(
         padding: widget.padding,
@@ -420,14 +432,5 @@ class _SmeupListBoxState extends State<SmeupListBox>
     });
 
     return cells;
-  }
-
-  double _getListHeight() {
-    double listboxHeight = widget.listHeight;
-    if (_model != null && _model.parent != null) {
-      if (listboxHeight == 0)
-        listboxHeight = (_model.parent as SmeupSectionModel).height;
-    }
-    return listboxHeight;
   }
 }

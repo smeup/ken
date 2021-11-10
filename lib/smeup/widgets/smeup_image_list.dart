@@ -175,13 +175,16 @@ class _SmeupImageListState extends State<SmeupImageList>
       return getFunErrorResponse(context, _model);
     }
 
+    double listboxHeight =
+        SmeupListBox.getListHeight(widget.listHeight, _model);
+
     if (_model == null) {
       children = SmeupListBox(widget.scaffoldKey, widget.formKey, _data,
           clientOnItemTap: widget.clientOnItemTap,
           dismissEnabled: widget.dismissEnabled,
           fontsize: widget.fontsize,
           height: widget.height,
-          listHeight: widget.listHeight,
+          listHeight: listboxHeight,
           layout: 'imageList',
           listType: SmeupListType.oriented,
           orientation: widget.orientation,
@@ -195,7 +198,7 @@ class _SmeupImageListState extends State<SmeupImageList>
       final _modelListBox = SmeupListBoxModel(
           fontsize: widget.fontsize,
           height: widget.height,
-          listHeight: widget.listHeight,
+          listHeight: listboxHeight,
           layout: 'imageList',
           listType: SmeupListType.oriented,
           orientation: widget.orientation,
