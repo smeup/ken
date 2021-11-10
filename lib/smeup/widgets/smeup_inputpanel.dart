@@ -247,21 +247,24 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
   }
 
   Widget _getConfirmButton() {
-    return (_model.dynamisms as List).length > 0
-        ? Row(
-            children: [
-              Expanded(
-                child: SmeupButton(
-                  data: "Conferma",
-                  backColor: SmeupConfigurationService.getTheme().primaryColor,
-                  fontColor: Colors.white,
-                  fontSize: widget.fontSize,
-                  clientOnPressed: () => _fireDynamism(),
-                ),
-              ),
-            ],
-          )
-        : Container();
+    if ((_model != null && _model.dynamisms != null) ||
+        widget.onSubmit != null) {
+      return Row(
+        children: [
+          Expanded(
+            child: SmeupButton(
+              data: "Conferma",
+              backColor: SmeupConfigurationService.getTheme().primaryColor,
+              fontColor: Colors.white,
+              fontSize: widget.fontSize,
+              clientOnPressed: () => _fireDynamism(),
+            ),
+          ),
+        ],
+      );
+    } else {
+      return Container();
+    }
   }
 
   _fireDynamism() {
@@ -271,7 +274,8 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     widget.data.forEach((field) => SmeupVariablesService.setVariable(
         field.id, field.value.code,
         formKey: widget.formKey));
-    SmeupDynamismService.run(
-        _model.dynamisms, context, "click", widget.scaffoldKey, widget.formKey);
+    if (_model != null)
+      SmeupDynamismService.run(_model.dynamisms, context, "click",
+          widget.scaffoldKey, widget.formKey);
   }
 }
