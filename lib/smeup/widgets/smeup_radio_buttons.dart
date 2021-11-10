@@ -185,12 +185,10 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
 
     if (widget.title.isNotEmpty) {
       buttons.add(Container(
-          padding: EdgeInsets.only(right: 15.0, left: 15.0),
           child: Text(
-            widget.title,
-            style:
-                TextStyle(fontSize: widget.fontsize, color: widget.fontColor),
-          )));
+        widget.title,
+        style: TextStyle(fontSize: widget.fontsize, color: widget.fontColor),
+      )));
     }
 
     int buttonIndex = 0;
@@ -256,14 +254,15 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
           (radioWidth / radioHeight * buttons.length * 3) / widget.columns;
 
       final container = Container(
-          height: radioHeight * buttons.length,
+          //height: radioHeight * buttons.length,
           padding: widget.padding,
-          decoration: BoxDecoration(
-              color: widget.backColor,
-              borderRadius: BorderRadius.circular(12.0),
-              border: Border.all(
-                  color: SmeupConfigurationService.getTheme().primaryColor)),
+          // decoration: BoxDecoration(
+          //     color: widget.backColor,
+          //     borderRadius: BorderRadius.circular(12.0),
+          //     border: Border.all(
+          //         color: SmeupConfigurationService.getTheme().primaryColor)),
           child: GridView.count(
+            shrinkWrap: true,
             childAspectRatio: childAspectRatio,
             crossAxisCount: widget.columns,
             children: buttons,

@@ -9,7 +9,7 @@ import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 100;
-  static const double defaultHeight = 50;
+  static const double defaultHeight = 75;
   static const MainAxisAlignment defaultPosition = MainAxisAlignment.center;
   static const Alignment defaultAlign = Alignment.centerLeft;
   static const double defaultFontsize = 16.0;

@@ -682,8 +682,9 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(rowData,
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 14,
                                       color: widget.fontColor ??
                                           SmeupConfigurationService.getTheme()
                                               .primaryColor,
