@@ -247,7 +247,9 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
   }
 
   Widget _getConfirmButton() {
-    if ((_model != null && _model.dynamisms != null) ||
+    if ((_model != null &&
+            _model.dynamisms != null &&
+            (_model.dynamisms as List).length > 0) ||
         widget.onSubmit != null) {
       return Row(
         children: [
