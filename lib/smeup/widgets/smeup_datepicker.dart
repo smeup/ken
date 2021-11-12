@@ -13,6 +13,12 @@ import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart'
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
 
+class SmeupDatePickerData {
+  DateTime value;
+  String text;
+  SmeupDatePickerData({@required this.value, this.text});
+}
+
 // ignore: must_be_immutable
 class SmeupDatePicker extends StatefulWidget
     with SmeupWidgetMixin
@@ -21,7 +27,7 @@ class SmeupDatePicker extends StatefulWidget
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
 
-  List<dynamic> data;
+  SmeupDatePickerData data;
   String title;
   String id;
   String type;
@@ -60,10 +66,8 @@ class SmeupDatePicker extends StatefulWidget
     this.id = '',
     this.type = 'cal',
     this.title = '',
-
-    // TODO is it required in static constructor ?
-    // this.valueField = SmeupTimePickerModel.defaultValueField,
-    // this.displayField = SmeupTimePickerModel.defaultdisplayedField,
+    this.valueField = SmeupDatePickerModel.defaultValueField,
+    this.displayField = SmeupDatePickerModel.defaultdisplayedField,
     this.backColor = SmeupDatePickerModel.defaultBackColor,
     this.fontsize = SmeupDatePickerModel.defaultFontsize,
     this.fontColor = SmeupDatePickerModel.defaultFontColor,
@@ -78,6 +82,9 @@ class SmeupDatePicker extends StatefulWidget
     this.clientOnChange,
   }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
+    if (data != null && data.value != null && data.text == null) {
+      data.text = DateFormat("dd/MM/yyyy").format(data.value);
+    }
   }
 
   runControllerActivities(SmeupModel model) {
@@ -108,16 +115,16 @@ class SmeupDatePicker extends StatefulWidget
     var workData = formatDataFields(m);
 
     // set the widget data
-    if (workData != null) {
-      var newList = List<dynamic>.empty(growable: true);
-      for (var i = 0; i < (workData['rows'] as List).length; i++) {
-        final element = workData['rows'][i];
-        newList.add({
-          'value': element[valueField].toString(),
-          'display': element[displayField].toString()
-        });
+    if (workData != null && (workData['rows'] as List).length > 0) {
+      DateTime value;
+      String text;
+      if (workData['rows'][0][valueField] != null) {
+        value = DateFormat('dd/MM/yyyy').parse(workData['rows'][0][valueField]);
       }
-      return newList;
+      if (workData['rows'][0][displayField] != null) {
+        text = workData['rows'][0][displayField];
+      }
+      return SmeupDatePickerData(value: value, text: text);
     } else {
       return model.data;
     }
@@ -131,7 +138,7 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
   SmeupDatePickerModel _model;
-  dynamic _data;
+  SmeupDatePickerData _data;
 
   @override
   void initState() {
@@ -173,26 +180,8 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
       return getFunErrorResponse(context, _model);
     }
 
-    /*
-    String valueField = _data.optionsDefault == null
-        ? 'value'
-        : _data.optionsDefault['valueField'];
-    */
-    final valueString = _data[0]['value'];
-
-    final value = new DateFormat('dd/MM/yyyy').parse(valueString);
-
-    /*
-    String displayedField = _data.optionsDefault == null
-        ? 'display'
-        : _data.optionsDefault['displayedField'];
-    */
-
-    final displayDate = new DateFormat('dd/MM/yyyy').parse(_data[0]['display']);
-
-    String display = DateFormat("dd/MM/yyyy").format(displayDate);
-
-    SmeupVariablesService.setVariable(widget.id, valueString);
+    SmeupVariablesService.setVariable(
+        widget.id, DateFormat("yyyyMMdd").format(_data.value));
 
     double datePickerHeight = widget.height;
     double datePickerWidth = widget.width;
@@ -206,8 +195,8 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
     var datepicker = SmeupDatePickerButton(widget.id,
         scaffoldKey: widget.scaffoldKey,
         formKey: widget.formKey,
-        value: value,
-        display: display,
+        value: _data.value,
+        display: _data.text,
         backColor: widget.backColor,
         fontsize: widget.fontsize,
         fontColor: widget.fontColor,

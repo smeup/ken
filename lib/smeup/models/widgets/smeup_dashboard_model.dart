@@ -8,7 +8,7 @@ import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
-  static const double defaultFontsize = 60.0;
+  static const double defaultFontsize = 56.0;
   static const double defaultLabelFontsize = 10.0;
   static const double defaultWidth = 120;
   static const double defaultHeight = 120;
