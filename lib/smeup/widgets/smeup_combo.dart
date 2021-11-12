@@ -166,11 +166,11 @@ class _SmeupComboState extends State<SmeupCombo>
             fontSize: widget.fontSize,
             clientOnChange: (String newValue) {
               _selectedValue = newValue;
+              SmeupVariablesService.setVariable(widget.id, newValue,
+                  formKey: widget.formKey);
               if (widget.clientOnChange != null) {
                 widget.clientOnChange(newValue);
               }
-              SmeupVariablesService.setVariable(widget.id, newValue,
-                  formKey: widget.formKey);
             },
           )),
     );

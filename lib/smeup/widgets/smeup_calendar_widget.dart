@@ -38,7 +38,6 @@ class SmeupCalendarWidget extends StatefulWidget {
   final String endTimeColumnName;
   final String id;
   final Function setDataLoad;
-  final Function onVisibleDaysChanged;
 
   SmeupCalendarWidget(this.scaffoldKey, this.formKey,
       {this.id,
@@ -65,8 +64,7 @@ class SmeupCalendarWidget extends StatefulWidget {
       this.initTimeColumnName,
       this.styleColumnName,
       this.titleColumnName,
-      this.setDataLoad,
-      this.onVisibleDaysChanged});
+      this.setDataLoad});
 
   @override
   _SmeupCalendarWidgetState createState() => _SmeupCalendarWidgetState();
@@ -243,7 +241,7 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
               _animationController.forward(from: 0.0);
             },
             onPageChanged: (focusedDay) {
-              widget.onVisibleDaysChanged(focusedDay);
+              widget.clientOnChangeMonth(focusedDay);
             },
           ),
           const SizedBox(height: 8.0),
@@ -270,7 +268,7 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                         child: ListTile(
                           visualDensity:
                               VisualDensity(horizontal: -3, vertical: -3),
-                          onTap: () => _fireDynamism(
+                          onTap: () => _eventClicked(
                               event[index].day, _focusDay,
                               event: event[index]),
                           title: _getListTileWidget(event[index]),
@@ -303,14 +301,15 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
     //if (_isLoading) return;
     _selectedEvents.value = _getEventsForDay(selectedDay);
     widget.setDataLoad(widget.id, true);
+    if (widget.clientOnDaySelected != null)
+      widget.clientOnDaySelected(selectedDay);
     setState(() {
       _selectedDay = selectedDay;
       //   _isLoading = false;
     });
-    //_fireDynamism(selectedDay, focusedDay);
   }
 
-  Future<void> _fireDynamism(DateTime selectedDay, DateTime focusedDay,
+  Future<void> _eventClicked(DateTime selectedDay, DateTime focusedDay,
       {SmeupCalentarEventModel event}) async {
     dynamic data;
     String title;
@@ -330,8 +329,6 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
         data = _data.firstWhere(
             (element) => element[widget.dataColumnName] == dayString,
             orElse: () => null);
-        if (widget.clientOnDaySelected != null)
-          widget.clientOnDaySelected(selectedDay);
       } else {
         final sel = _data.firstWhere((element) {
           return element[widget.dataColumnName] == dayString &&
@@ -354,7 +351,7 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
               widget.scaffoldKey, widget.formKey);
       }
     } catch (e) {
-      SmeupLogService.writeDebugMessage('Error on calendar _fireDynamism: $e',
+      SmeupLogService.writeDebugMessage('Error on calendar _eventClicked: $e',
           logType: LogType.error);
     } finally {
       widget.setDataLoad(widget.id, true);

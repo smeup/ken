@@ -35,7 +35,8 @@ class SmeupSlider extends StatefulWidget
       this.type = 'SLD',
       this.value = 0,
       this.sldMax = SmeupSliderModel.defaultSldMax,
-      this.sldMin = SmeupSliderModel.defaultSldMin})
+      this.sldMin = SmeupSliderModel.defaultSldMin,
+      this.clientOnChange})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
   }
@@ -144,8 +145,12 @@ class _SmeupSliderState extends State<SmeupSlider>
             sldMin: widget.sldMin,
             value: _value,
             clientOnChange: (value) {
+              _value = value;
               SmeupVariablesService.setVariable(widget.id, value,
                   formKey: widget.formKey);
+              if (widget.clientOnChange != null) {
+                widget.clientOnChange(value);
+              }
             },
           )),
     );

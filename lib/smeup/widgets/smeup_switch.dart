@@ -171,6 +171,9 @@ class _SmeupSwitchState extends State<SmeupSwitch>
               _data = changedValue;
               SmeupVariablesService.setVariable(widget.id, _data,
                   formKey: widget.formKey);
+              if (widget.onClientChange != null) {
+                widget.onClientChange(changedValue);
+              }
               if (_model != null)
                 SmeupDynamismService.run(_model.dynamisms, context, 'click',
                     widget.scaffoldKey, widget.formKey);

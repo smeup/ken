@@ -249,36 +249,32 @@ class SmeupCalendarState extends State<SmeupCalendar>
         if (widget.showPeriodButtons) SizedBox(height: 8),
         Stack(
           children: <Widget>[
-            SmeupCalendarWidget(
-              widget.scaffoldKey,
-              widget.formKey,
-              id: widget.id,
-              events: _events,
-              firstWork: _firstWork,
-              focusDay: _focusDay,
-              height: widget.height,
-              width: widget.width,
-              lastWork: _lastWork,
-              selectedDay: _selectedDay,
-              model: _model,
-              holidays: _holidays,
-              showNavigation: widget.showNavigation,
-              calendarFormat: _calendarFormat,
-              eventFontSize: widget.eventFontSize,
-              titleFontSize: widget.titleFontSize,
-              clientOnChangeMonth: widget.clientOnChangeMonth,
-              clientOnDaySelected: widget.clientOnDaySelected,
-              clientOnEventClick: widget.clientOnEventClick,
-              data: _data,
-              selectedEvents: _selectedEvents,
-              dataColumnName: widget.dataColumnName,
-              endTimeColumnName: widget.endTimeColumnName,
-              initTimeColumnName: widget.initTimeColumnName,
-              setDataLoad: setDataLoad,
-              styleColumnName: widget.styleColumnName,
-              titleColumnName: widget.titleColumnName,
-              onVisibleDaysChanged: _onVisibleDaysChanged,
-            ),
+            SmeupCalendarWidget(widget.scaffoldKey, widget.formKey,
+                id: widget.id,
+                events: _events,
+                firstWork: _firstWork,
+                focusDay: _focusDay,
+                height: widget.height,
+                width: widget.width,
+                lastWork: _lastWork,
+                selectedDay: _selectedDay,
+                model: _model,
+                holidays: _holidays,
+                showNavigation: widget.showNavigation,
+                calendarFormat: _calendarFormat,
+                eventFontSize: widget.eventFontSize,
+                titleFontSize: widget.titleFontSize,
+                clientOnChangeMonth: _clientOnChangeMonth,
+                clientOnDaySelected: widget.clientOnDaySelected,
+                clientOnEventClick: widget.clientOnEventClick,
+                data: _data,
+                selectedEvents: _selectedEvents,
+                dataColumnName: widget.dataColumnName,
+                endTimeColumnName: widget.endTimeColumnName,
+                initTimeColumnName: widget.initTimeColumnName,
+                setDataLoad: setDataLoad,
+                styleColumnName: widget.styleColumnName,
+                titleColumnName: widget.titleColumnName),
             // if (_isLoading)
             //   SmeupProgressIndicator(widget.scaffoldKey, widget.formKey,
             //       color: SmeupConfigurationService.getTheme().primaryColor)
@@ -394,7 +390,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
     }
   }
 
-  Future<void> _onVisibleDaysChanged(DateTime focusedDay) async {
+  Future<void> _clientOnChangeMonth(DateTime focusedDay) async {
     _focusDay = focusedDay;
     _firstWork = SmeupCalendarModel.getInitialFirstWork(focusedDay);
     _lastWork = SmeupCalendarModel.getInitialLastWork(focusedDay);
@@ -402,7 +398,8 @@ class SmeupCalendarState extends State<SmeupCalendar>
     startFunDate = SmeupCalendarModel.getStartFunDate(focusedDay);
     endFunDate = SmeupCalendarModel.getEndFunDate(focusedDay);
 
-    if (widget.clientOnChangeMonth != null) widget.clientOnChangeMonth();
+    if (widget.clientOnChangeMonth != null)
+      widget.clientOnChangeMonth(focusedDay);
 
     if (widget.model != null)
       SmeupDynamismService.run(widget.model.dynamisms, context, 'changemonth',
