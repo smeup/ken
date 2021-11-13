@@ -327,10 +327,14 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
     widget.setDataLoad(widget.id, true);
     if (widget.clientOnDaySelected != null)
       widget.clientOnDaySelected(selectedDay);
-    setState(() {
-      _selectedDay = selectedDay;
-      //   _isLoading = false;
-    });
+    if (_selectedEvents.value.length == 1) {
+      _eventClicked(selectedDay, focusedDay, event: _selectedEvents.value[0]);
+    } else {
+      setState(() {
+        _selectedDay = selectedDay;
+        //   _isLoading = false;
+      });
+    }
   }
 
   Future<void> _eventClicked(DateTime selectedDay, DateTime focusedDay,
