@@ -240,8 +240,12 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
               _onDaySelected(selectedDay, focusedDay);
               _animationController.forward(from: 0.0);
             },
-            onPageChanged: (focusedDay) {
-              widget.clientOnChangeMonth(focusedDay);
+            onPageChanged: (focusedDay) async {
+              _focusDay = focusedDay;
+              final _res = await widget.clientOnChangeMonth(focusedDay);
+              _data = _res['data'];
+              _events = _res['events'];
+              setState(() {});
             },
           ),
           const SizedBox(height: 8.0),

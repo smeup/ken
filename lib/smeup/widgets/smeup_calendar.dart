@@ -221,10 +221,10 @@ class SmeupCalendarState extends State<SmeupCalendar>
         widget.scaffoldKey,
         //getInitialdataLoaded(_model),
         false, notifierFunction: () {
-      setState(() {
-        widgetLoadType = LoadType.Immediate;
-        setDataLoad(widget.id, false);
-      });
+      //setState(() {
+      widgetLoadType = LoadType.Immediate;
+      setDataLoad(widget.id, false);
+      //});
     });
 
     return calendar;
@@ -233,13 +233,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      if (_model != null) {
-        await SmeupCalendarDao.getData(_model);
-        _data = widget.treatData(_model);
-        await _loadEvents();
-      } else {
-        _loadEvents();
-      }
+      await _load();
     }
     setDataLoad(widget.id, false);
 
@@ -312,15 +306,6 @@ class SmeupCalendarState extends State<SmeupCalendar>
     return list;
   }
 
-  void _removeEvents(DateTime from, DateTime to) {
-    int diff = to.difference(from).inDays + 1;
-    DateTime ind = from;
-    for (var i = 0; i < diff; i++) {
-      _events.remove(ind);
-      ind = ind.add(new Duration(days: 1));
-    }
-  }
-
   Widget _buildButtons() {
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -367,7 +352,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
 
   Future<void> _loadEvents() async {
     try {
-      _removeEvents(_startFunDate, _endFunDate);
+      _events.clear();
 
       _smeupCalendarEvents = _extractSmeupCalendarEvents();
 
@@ -390,7 +375,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
     }
   }
 
-  Future<void> _clientOnChangeMonth(DateTime focusedDay) async {
+  Future<dynamic> _clientOnChangeMonth(DateTime focusedDay) async {
     _focusDay = focusedDay;
     _firstWork = SmeupCalendarModel.getInitialFirstWork(focusedDay);
     _lastWork = SmeupCalendarModel.getInitialLastWork(focusedDay);
@@ -404,9 +389,18 @@ class SmeupCalendarState extends State<SmeupCalendar>
     if (widget.model != null)
       SmeupDynamismService.run(widget.model.dynamisms, context, 'changemonth',
           widget.scaffoldKey, widget.formKey);
+    await _load();
 
-    setState(() {
-      //_isLoading = true;
-    });
+    return {"events": _events, "data": _data};
+  }
+
+  Future<void> _load() async {
+    if (_model != null) {
+      await SmeupCalendarDao.getData(_model);
+      _data = widget.treatData(_model);
+      await _loadEvents();
+    } else {
+      _loadEvents();
+    }
   }
 }
