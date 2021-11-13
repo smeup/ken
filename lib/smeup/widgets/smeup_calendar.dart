@@ -161,7 +161,6 @@ class SmeupCalendarState extends State<SmeupCalendar>
   Map<DateTime, List<SmeupCalentarEventModel>> _events;
 
   List<SmeupCalentarEventModel> _smeupCalendarEvents;
-  // bool _isLoading = false;
   DateTime _firstWork;
   DateTime _lastWork;
   DateTime _focusDay;
@@ -241,40 +240,32 @@ class SmeupCalendarState extends State<SmeupCalendar>
       children: <Widget>[
         if (widget.showPeriodButtons) _buildButtons(),
         if (widget.showPeriodButtons) SizedBox(height: 8),
-        Stack(
-          children: <Widget>[
-            SmeupCalendarWidget(widget.scaffoldKey, widget.formKey,
-                id: widget.id,
-                events: _events,
-                firstWork: _firstWork,
-                focusDay: _focusDay,
-                height: widget.height,
-                width: widget.width,
-                lastWork: _lastWork,
-                selectedDay: _selectedDay,
-                model: _model,
-                holidays: _holidays,
-                showNavigation: widget.showNavigation,
-                calendarFormat: _calendarFormat,
-                eventFontSize: widget.eventFontSize,
-                titleFontSize: widget.titleFontSize,
-                clientOnChangeMonth: _clientOnChangeMonth,
-                clientOnDaySelected: widget.clientOnDaySelected,
-                clientOnEventClick: widget.clientOnEventClick,
-                data: _data,
-                selectedEvents: _selectedEvents,
-                dataColumnName: widget.dataColumnName,
-                endTimeColumnName: widget.endTimeColumnName,
-                initTimeColumnName: widget.initTimeColumnName,
-                setDataLoad: setDataLoad,
-                styleColumnName: widget.styleColumnName,
-                titleColumnName: widget.titleColumnName),
-            // if (_isLoading)
-            //   SmeupProgressIndicator(widget.scaffoldKey, widget.formKey,
-            //       color: SmeupConfigurationService.getTheme().primaryColor)
-          ],
-          //     )
-        ),
+        SmeupCalendarWidget(widget.scaffoldKey, widget.formKey,
+            id: widget.id,
+            events: _events,
+            firstWork: _firstWork,
+            focusDay: _focusDay,
+            height: widget.height,
+            width: widget.width,
+            lastWork: _lastWork,
+            selectedDay: _selectedDay,
+            model: _model,
+            holidays: _holidays,
+            showNavigation: widget.showNavigation,
+            calendarFormat: _calendarFormat,
+            eventFontSize: widget.eventFontSize,
+            titleFontSize: widget.titleFontSize,
+            clientOnChangeMonth: _clientOnChangeMonth,
+            clientOnDaySelected: widget.clientOnDaySelected,
+            clientOnEventClick: widget.clientOnEventClick,
+            data: _data,
+            selectedEvents: _selectedEvents,
+            dataColumnName: widget.dataColumnName,
+            endTimeColumnName: widget.endTimeColumnName,
+            initTimeColumnName: widget.initTimeColumnName,
+            setDataLoad: setDataLoad,
+            styleColumnName: widget.styleColumnName,
+            titleColumnName: widget.titleColumnName),
       ],
     );
 
