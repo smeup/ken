@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
 
-class SmeupRadioButton extends StatelessWidget {
+// ignore: must_be_immutable
+class SmeupRadioButton extends StatefulWidget {
   final IconData icon;
   final Function onPressed;
 
@@ -23,8 +24,10 @@ class SmeupRadioButton extends StatelessWidget {
   final String id;
   final String type;
   final String title;
+  List<SmeupRadioButton> others;
+  Function changeState;
 
-  const SmeupRadioButton(
+  SmeupRadioButton(
       {this.id = '',
       this.type = 'rad',
       this.title = '',
@@ -44,33 +47,57 @@ class SmeupRadioButton extends StatelessWidget {
       this.onPressed});
 
   @override
+  State<SmeupRadioButton> createState() => _SmeupRadioButtonState();
+}
+
+class _SmeupRadioButtonState extends State<SmeupRadioButton> {
+  String _selectedValue = '';
+
+  @override
+  void initState() {
+    _selectedValue = widget.selectedValue;
+    widget.changeState = (value) {
+      setState(() {
+        _selectedValue = value;
+      });
+    };
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var _selectedValue = selectedValue;
     return Container(
-      height: height,
+      height: widget.height,
       child: SizedBox(
-          height: height,
-          width: width,
+          height: widget.height,
+          width: widget.width,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Radio(
-                value: data['code'],
+                value: widget.data['code'],
                 groupValue: _selectedValue,
                 onChanged: (value) {
-                  onPressed(value);
+                  widget.onPressed(value);
+                  _selectedValue = value;
+                  setState(() {});
+                  if (widget.others != null) {
+                    widget.others.forEach((element) {
+                      element.changeState(value);
+                    });
+                  }
                 },
                 activeColor: SmeupConfigurationService.getTheme().primaryColor,
               ),
               Expanded(
                 child: Align(
-                    alignment: align,
-                    child: Text(data['value'],
+                    alignment: widget.align,
+                    child: Text(widget.data['value'],
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            fontSize: fontsize,
+                            fontSize: widget.fontsize,
                             fontWeight: FontWeight.bold,
-                            color: fontColor))),
+                            color: widget.fontColor))),
               )
             ],
           )),

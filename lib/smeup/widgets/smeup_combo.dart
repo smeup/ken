@@ -6,6 +6,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart'
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_combo_widget.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
@@ -155,45 +156,25 @@ class _SmeupComboState extends State<SmeupCombo>
       alignment: Alignment.centerLeft,
       child: Container(
           padding: widget.padding,
-          child: DropdownButton<String>(
-            //isExpanded: true,
-            value: _selectedValue,
-            icon: Icon(Icons.arrow_downward, color: widget.fontColor),
+          child: SmeupComboWidget(
+            widget.scaffoldKey,
+            widget.formKey,
+            data: _data,
+            fontColor: widget.fontColor,
             iconSize: widget.iconSize,
-            elevation: 20,
-            style: const TextStyle(color: Colors.deepPurple),
-            underline: Container(
-              height: 3,
-              color: widget.fontColor,
-            ),
-            onChanged: (String newValue) {
-              setState(() {
-                _selectedValue = newValue;
-                if (widget.clientOnChange != null) {
-                  widget.clientOnChange(newValue);
-                }
-                SmeupVariablesService.setVariable(widget.id, newValue,
-                    formKey: widget.formKey);
-              });
+            selectedValue: _selectedValue,
+            fontSize: widget.fontSize,
+            clientOnChange: (String newValue) {
+              _selectedValue = newValue;
+              SmeupVariablesService.setVariable(widget.id, newValue,
+                  formKey: widget.formKey);
+              if (widget.clientOnChange != null) {
+                widget.clientOnChange(newValue);
+              }
             },
-            items: _getItems(_data),
           )),
     );
 
     return SmeupWidgetBuilderResponse(_model, children);
-  }
-
-  List<DropdownMenuItem<String>> _getItems(List<SmeupComboItemModel> _data) {
-    var items =
-        _data.map<DropdownMenuItem<String>>((SmeupComboItemModel element) {
-      return DropdownMenuItem<String>(
-        value: element.code,
-        child: Text(
-          element.value,
-          style: TextStyle(fontSize: widget.fontSize, color: widget.fontColor),
-        ),
-      );
-    }).toList();
-    return items;
   }
 }

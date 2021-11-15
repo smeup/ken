@@ -223,22 +223,20 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
               formKey: widget.formKey),
           icon: null,
           onPressed: (value) {
-            setState(() {
-              dynamic selData = _data.firstWhere(
-                  (element) => element['code'] == value,
-                  orElse: () => null);
-              if (selData != null) {
-                if (widget.clientOnPressed != null)
-                  widget.clientOnPressed(value);
-                SmeupDynamismService.storeDynamicVariables(
-                    selData, widget.formKey);
-                SmeupVariablesService.setVariable(widget.id, value,
-                    formKey: widget.formKey);
-                if (_model != null)
-                  SmeupDynamismService.run(_model.dynamisms, context, 'change',
-                      widget.scaffoldKey, widget.formKey);
+            dynamic selData = _data.firstWhere(
+                (element) => element['code'] == value,
+                orElse: () => null);
+            if (selData != null) {
+              SmeupDynamismService.storeDynamicVariables(
+                  selData, widget.formKey);
+              SmeupVariablesService.setVariable(widget.id, value,
+                  formKey: widget.formKey);
+              if (widget.clientOnPressed != null) widget.clientOnPressed(value);
+              if (_model != null) {
+                SmeupDynamismService.run(_model.dynamisms, context, 'change',
+                    widget.scaffoldKey, widget.formKey);
               }
-            });
+            }
           });
 
       if (_model != null)
@@ -248,6 +246,18 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
     });
 
     if (buttons.length > 0) {
+      for (var i = 0; i < buttons.length; i++) {
+        if (buttons[i] is SmeupRadioButton) {
+          var others = List<SmeupRadioButton>.empty(growable: true);
+          for (var k = 0; k < buttons.length; k++) {
+            if (i != k && buttons[k] is SmeupRadioButton) {
+              others.add(buttons[k]);
+            }
+          }
+          (buttons[i] as SmeupRadioButton).others = others;
+        }
+      }
+
       double childAspectRatio = 0;
       childAspectRatio =
           (radioWidth / radioHeight * buttons.length * 3) / widget.columns;

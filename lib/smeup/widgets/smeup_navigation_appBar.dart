@@ -42,7 +42,7 @@ class SmeupNavigationAppBar extends AppBar {
 
   static Widget _getImage(String appBarImage, String appBarTitle,
       GlobalKey<ScaffoldState> scaffoldKey, GlobalKey<FormState> formKey) {
-    double imageSize = 50.0;
+    double imageSize = 60.0;
     if (appBarImage.isNotEmpty) {
       return Center(
         child: SmeupImage(scaffoldKey, formKey, appBarImage,

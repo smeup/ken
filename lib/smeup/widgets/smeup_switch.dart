@@ -7,6 +7,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_switch_mode
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_switch_widget.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
@@ -119,13 +120,6 @@ class _SmeupSwitchState extends State<SmeupSwitch>
     super.dispose();
   }
 
-  // @override
-  // void setState(fn) {
-  //   if (mounted) {
-  //     super.setState(fn);
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     final radioButtons = runBuild(context, widget.id, widget.type,
@@ -170,19 +164,19 @@ class _SmeupSwitchState extends State<SmeupSwitch>
             widget.text,
             style: TextStyle(fontSize: widget.fontsize),
           ),
-          Switch(
-            value: _data,
-            onChanged: (changedValue) {
-              setState(() {
-                _data = changedValue;
-                SmeupVariablesService.setVariable(widget.id, _data,
-                    formKey: widget.formKey);
-                if (_model != null)
-                  SmeupDynamismService.run(_model.dynamisms, context, 'click',
-                      widget.scaffoldKey, widget.formKey);
-                if (widget.onClientChange != null)
-                  widget.onClientChange(changedValue);
-              });
+          SmeupSwitchWidget(
+            data: _data,
+            id: widget.id,
+            onClientChange: (changedValue) {
+              _data = changedValue;
+              SmeupVariablesService.setVariable(widget.id, _data,
+                  formKey: widget.formKey);
+              if (widget.onClientChange != null) {
+                widget.onClientChange(changedValue);
+              }
+              if (_model != null)
+                SmeupDynamismService.run(_model.dynamisms, context, 'click',
+                    widget.scaffoldKey, widget.formKey);
             },
           ),
         ],

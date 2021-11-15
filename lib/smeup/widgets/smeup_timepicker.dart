@@ -61,11 +61,6 @@ class SmeupTimePicker extends StatefulWidget
     this.data, {
     id = '',
     type = 'tpk',
-
-    // TODO is it required in static constructor ?
-    // this.valueField = SmeupTimePickerModel.defaultValueField,
-    // this.displayField = SmeupTimePickerModel.defaultdisplayedField,
-
     this.backColor = SmeupTimePickerModel.defaultBackColor,
     this.fontsize = SmeupTimePickerModel.defaultFontsize,
     this.fontColor = SmeupTimePickerModel.defaultFontColor,

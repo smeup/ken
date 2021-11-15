@@ -5,6 +5,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_slider_mode
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_slider_widget.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
@@ -34,7 +35,8 @@ class SmeupSlider extends StatefulWidget
       this.type = 'SLD',
       this.value = 0,
       this.sldMax = SmeupSliderModel.defaultSldMax,
-      this.sldMin = SmeupSliderModel.defaultSldMin})
+      this.sldMin = SmeupSliderModel.defaultSldMin,
+      this.clientOnChange})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
   }
@@ -135,20 +137,21 @@ class _SmeupSliderState extends State<SmeupSlider>
     final children = Center(
       child: Container(
           padding: EdgeInsets.only(left: 10, right: 10),
-          child: Slider(
-            key: ValueKey(widget.id),
-            onChanged: (value) {
-              if (widget.clientOnChange != null) widget.clientOnChange(value);
+          child: SmeupSliderWidget(
+            widget.scaffoldKey,
+            widget.formKey,
+            id: widget.id,
+            sldMax: widget.sldMax,
+            sldMin: widget.sldMin,
+            value: _value,
+            clientOnChange: (value) {
+              _value = value;
               SmeupVariablesService.setVariable(widget.id, value,
                   formKey: widget.formKey);
-              setState(() {
-                _value = value;
-              });
+              if (widget.clientOnChange != null) {
+                widget.clientOnChange(value);
+              }
             },
-            value: _value,
-            onChangeEnd: widget.clientOnChange,
-            min: widget.sldMin,
-            max: widget.sldMax,
           )),
     );
 
