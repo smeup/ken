@@ -40,6 +40,7 @@ class SmeupDashboard extends StatefulWidget
   String forceUm;
   String forceValue;
   String forceIcon;
+  String numberFormat;
 
   SmeupDashboard(this.scaffoldKey, this.formKey, this.data,
       {id = '',
@@ -60,6 +61,7 @@ class SmeupDashboard extends StatefulWidget
       this.labelFontsize = SmeupDashboardModel.defaultLabelFontsize,
       this.iconSize = SmeupDashboardModel.defaultIconSize,
       this.padding = SmeupDashboardModel.defaultPadding,
+      this.numberFormat = SmeupDashboardModel.defaultNumberFormat,
       this.title = ''})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
@@ -89,6 +91,7 @@ class SmeupDashboard extends StatefulWidget
     forceIcon = m.forceIcon;
     forceUm = m.forceUm;
     forceText = m.forceText;
+    numberFormat = m.numberFormat;
 
     data = treatData(m);
   }
@@ -192,6 +195,7 @@ class _SmeupDashboardState extends State<SmeupDashboard>
       height: widget.height,
       width: widget.width,
       padding: widget.padding,
+      alignment: Alignment.center,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Column(
@@ -207,7 +211,7 @@ class _SmeupDashboardState extends State<SmeupDashboard>
                       size: widget.iconSize,
                     )),
               Text(
-                _data.toString(),
+                _getValue(_data),
                 style: TextStyle(fontSize: widget.fontsize),
               )
             ]),
@@ -222,5 +226,26 @@ class _SmeupDashboardState extends State<SmeupDashboard>
     );
 
     return SmeupWidgetBuilderResponse(_model, children);
+  }
+
+  String _getValue(double data) {
+    String newValue = _data.toString();
+    try {
+      var split = widget.numberFormat.split(';');
+      //String integers = split[0]; not used
+      String decimals = split[1];
+      int precision = int.tryParse(decimals);
+      switch (precision) {
+        case 0:
+          newValue = SmeupUtilities.getInt(data).toString();
+          break;
+        default:
+          newValue = data.toStringAsFixed(precision);
+      }
+    } catch (e) {
+      SmeupLogService.writeDebugMessage('Error in dashboard _getValue: $e ',
+          logType: LogType.error);
+    }
+    return newValue;
   }
 }

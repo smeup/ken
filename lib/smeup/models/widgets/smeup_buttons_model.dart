@@ -3,6 +3,7 @@ import 'package:mobile_components_library/smeup/daos/smeup_buttons_dao.dart';
 
 import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
@@ -148,23 +149,17 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     if (optionsDefault['backColor'] != null) {
       backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
     } else {
-      //TODO: temporary fix
-      //backColor = defaultBackColor;
-      backColor = const Color(0xff068a9c);
+      backColor = SmeupConfigurationService.getTheme().primaryColor;
     }
     if (optionsDefault['borderColor'] != null) {
       borderColor =
           SmeupUtilities.getColorFromRGB(optionsDefault['borderColor']);
     } else {
-      //TODO: temporary fix
-      //borderColor = defaultBorderColor;
-      borderColor = const Color(0xff068a9c);
+      borderColor = SmeupConfigurationService.getTheme().primaryColor;
     }
     if (optionsDefault['fontColor'] != null) {
       fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']);
     } else {
-      //fontColor = isLink ? Colors.blue : defaultFontColor;
-      //TODO: temporary fix
       if (isLink) {
         fontColor = Colors.blue;
       } else {
