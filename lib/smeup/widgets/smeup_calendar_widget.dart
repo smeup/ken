@@ -138,10 +138,12 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
               eventLoader: (day) {
                 return _getEventsForDay(day);
               },
-              holidayPredicate: (date) =>
-                  widget.holidays != null &&
-                  widget.holidays.length > 0 &&
-                  widget.holidays.keys.contains(date),
+              holidayPredicate: (date) {
+                DateTime key = DateTime(date.year, date.month, date.day);
+                return widget.holidays != null &&
+                    widget.holidays.length > 0 &&
+                    widget.holidays.keys.contains(key);
+              },
 
               calendarFormat: _calendarFormat,
               //formatAnimation: FormatAnimation.slide,
@@ -186,12 +188,6 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                   if (list != null && list.length > 0) {
                     color = list[0].backgroundColor;
                   }
-                  bool isHoliday = widget.holidays != null &&
-                      widget.holidays.isNotEmpty &&
-                      widget.holidays[date] != null;
-                  if (isHoliday) {
-                    color = Colors.grey;
-                  }
                   return FadeTransition(
                     opacity: Tween(begin: 0.5, end: 1.0)
                         .animate(_animationController),
@@ -231,13 +227,19 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                   return Container(
                     padding: EdgeInsets.only(right: 5, left: 5),
                     child: Container(
+                        height: 16,
                         width: double.infinity,
                         decoration: BoxDecoration(color: Colors.blue),
                         child: Text(
-                          eventsInDay.length.toString(),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white),
-                        )),
+                            eventsInDay.length == 1
+                                ? eventsInDay[0].description
+                                : eventsInDay.length.toString(),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle().copyWith(
+                                color: eventsInDay[0].foreColor,
+                                fontSize: Platform.isAndroid ? 12.0 : 10.0,
+                                fontWeight: eventsInDay[0].fontWeight,
+                                overflow: TextOverflow.ellipsis))),
                   );
                 },
               ),

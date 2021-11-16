@@ -63,13 +63,15 @@ class SmeupLocalizationService {
     Function addHoliday = (DateTime date, String description) {
       List holidayList;
 
-      if (holidays[date] == null)
+      DateTime key = DateTime(date.year, date.month, date.day);
+
+      if (holidays[key] == null)
         holidayList = List<String>.empty(growable: true);
       else
-        holidayList = holidays[date];
+        holidayList = holidays[key];
 
       holidayList.add(description);
-      holidays[date] = holidayList;
+      holidays[key] = holidayList;
     };
 
     final listPublic = await _getPublicHolidaysFromNager(year, country);
