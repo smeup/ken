@@ -22,6 +22,7 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultForceIcon = '';
   static const String defaultForceValue = '';
   static const String defaultForceUm = '';
+  static const String defaultNumberFormat = '10;0';
 
   EdgeInsetsGeometry padding;
   String valueColName;
@@ -39,6 +40,7 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   double width;
   double height;
   double iconSize;
+  String numberFormat;
 
   SmeupDashboardModel(
       {id,
@@ -60,6 +62,7 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       this.forceValue = defaultForceValue,
       this.forceUm = defaultForceUm,
       this.forceIcon = defaultForceIcon,
+      this.numberFormat = defaultNumberFormat,
       title = ''})
       : super(formKey, title: title, id: id, type: type) {
     if (iconColor == null)
@@ -96,6 +99,8 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
     forceUm = optionsDefault['forceUm'] ?? '';
     forceIcon = optionsDefault['forceIcon'] ?? '';
     forceValue = optionsDefault['forceValue'] ?? '';
+
+    numberFormat = optionsDefault['numberFormat'] ?? defaultNumberFormat;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
