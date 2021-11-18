@@ -1,7 +1,7 @@
 # mobile-components-library
 Smeup mobile widgets' library 
 
-## icons
+## Icons
 
 - Images and icons generator for ios
     https://easyappicon.com/   
@@ -10,7 +10,7 @@ Smeup mobile widgets' library
     https://api.flutter.dev/flutter/material/Icons-class.html#constants
     https://raw.githubusercontent.com/flutter/flutter/flutter-1.22-candidate.13/packages/flutter/lib/src/material/icons.dart
     
-## dependencies:
+## Dependencies:
 - dio:                      https://pub.dev/packages/dio
 - provider:                 https://pub.dev/packages/provider
 - permission_handler:       https://pub.dev/packages/permission_handler
@@ -27,3 +27,19 @@ Smeup mobile widgets' library
 ## Permissions
 
 - storage
+
+## Widgets style 
+Follow the list of the json_theme's style supported by the smeup_components_library widgets.
+
+### SmeupButton
+    - backColor     :   elevatedButtonTheme.style.backgroundColor
+    - borderColor   :   elevatedButtonTheme.style.side.color
+    - borderWidth   :   elevatedButtonTheme.style.side.width
+    - borderRadius  :   elevatedButtonTheme.style.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
+    - elevation     :   elevatedButtonTheme.style.elevation         
+    - fontColor     :   textTheme.button.color
+    - fontColor     :   textTheme.button.fontSize
+    
+    
+    
+

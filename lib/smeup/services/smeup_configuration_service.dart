@@ -65,9 +65,11 @@ class SmeupConfigurationService {
     SmeupConfigurationService.defaultLoaderColor = defaultLoaderColor;
     SmeupConfigurationService.appBarImage = appBarImage;
 
+    await SmeupConfigurationService.setLocalStorage();
+
     await SmeupConfigurationService.setTheme(
         SmeupConfigurationService.getAppConfiguration().theme);
-    await SmeupConfigurationService.setLocalStorage();
+
     SmeupConfigurationService.appDictionary = localizationService;
 
     SmeupConfigurationService.setDefaultServiceEndpoint();
@@ -116,7 +118,8 @@ class SmeupConfigurationService {
         });
       }
     } catch (e) {
-      print(e);
+      SmeupLogService.writeDebugMessage('Error in getAppStructure: $e',
+          logType: LogType.error);
     }
   }
 
@@ -136,6 +139,14 @@ class SmeupConfigurationService {
     } catch (e) {
       SmeupLogService.writeDebugMessage('Error in getAppStructure: $e',
           logType: LogType.error);
+    } finally {
+      if (_theme == null) {
+        String themeStr = await rootBundle.loadString(
+            'packages/mobile_components_library/assets/jsons/themes/smeup_theme.json');
+        dynamic themeJson = json.decode(themeStr);
+        _theme = ThemeDecoder.decodeThemeData(themeJson);
+        print(_theme);
+      }
     }
   }
 

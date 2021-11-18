@@ -4,74 +4,75 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 
+// ignore: must_be_immutable
 class SmeupButton extends StatelessWidget {
   final int buttonIndex;
-  final Color backColor;
-  final Color borderColor;
+  Color backColor;
+  Color borderColor;
+  double borderWidth;
+  double borderRadius;
+  double elevation;
+  double fontSize;
+  Color fontColor;
+
   final double width;
   final double height;
   final MainAxisAlignment position;
   final Alignment align;
-  final Color fontColor;
-  final double fontSize;
   final EdgeInsetsGeometry padding;
   final String data;
   final String valueField;
-  final double borderRadius;
-  final double elevation;
   final bool bold;
   final double iconSize;
   final int iconData;
   final bool isLink;
-  final bool underline;
+  bool underline;
   final IconData icon;
   final Function clientOnPressed;
   final double innerSpace;
-
-  //final dynamic data;
   final bool isBusy;
   final String id;
   final String type;
   final String title;
 
-  const SmeupButton(
+  SmeupButton(
       {this.id = '',
       this.type = 'BTN',
       this.title = '',
       this.data = '',
       this.backColor,
       this.borderColor,
+      this.borderWidth,
+      this.borderRadius,
+      this.fontSize,
+      this.fontColor,
       this.width = SmeupButtonsModel.defaultWidth,
       this.height = SmeupButtonsModel.defaultHeight,
       this.position = SmeupButtonsModel.defaultPosition,
       this.align = SmeupButtonsModel.defaultAlign,
-      this.fontColor,
-      this.fontSize = SmeupButtonsModel.defaultFontsize,
       this.padding = SmeupButtonsModel.defaultPadding,
       this.valueField,
-      this.borderRadius = SmeupButtonsModel.defaultBorderRadius,
-      this.elevation = SmeupButtonsModel.defaultElevation,
+      this.elevation,
       this.bold = SmeupButtonsModel.defaultBold,
       this.iconData = 0,
       this.iconSize = SmeupButtonsModel.defaultIconSize,
       this.buttonIndex,
       this.icon,
       this.clientOnPressed,
-      //this.data,
       this.isBusy = false,
       this.isLink = SmeupButtonsModel.defaultIsLink,
       this.underline = SmeupButtonsModel.defaultUnderline,
-      this.innerSpace = SmeupButtonsModel.defaultInnerSpace});
+      this.innerSpace = SmeupButtonsModel.defaultInnerSpace}) {
+    SmeupButtonsModel.setDefaults(this);
+    if (isLink) {
+      underline = true;
+      borderColor = backColor;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final _backgroundColor = backColor == null
-        ? SmeupConfigurationService.getTheme().buttonTheme.colorScheme.onPrimary
-        : backColor;
-
-    final _borderColor = borderColor != null
-        ? borderColor
-        : SmeupConfigurationService.getTheme().primaryColor;
+    var elevatedButtonStyle = _getButtonStyle();
 
     return Container(
       color: Color.fromRGBO(0, 0, 0, 0),
@@ -80,37 +81,24 @@ class SmeupButton extends StatelessWidget {
           height: height,
           width: width,
           child: isLink
-              ? _getTextButton(_backgroundColor, _borderColor)
-              : _getElevatedButton(_backgroundColor, _borderColor)),
+              ? _getTextButton(elevatedButtonStyle)
+              : _getElevatedButton(elevatedButtonStyle)),
     );
   }
 
-  ElevatedButton _getElevatedButton(backgroundColor, borderColor) {
+  ElevatedButton _getElevatedButton(elevatedButtonStyle) {
     return ElevatedButton(
       key: Key(id),
-      style: ElevatedButton.styleFrom(
-        primary: backgroundColor,
-        onPrimary: SmeupConfigurationService.getTheme().primaryColor,
-        elevation: elevation,
-        // focusColor: backgroundColor,
-
-        padding: EdgeInsets.all(0),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius),
-            side: BorderSide(
-                width: borderColor == null ? 2 : 2, color: borderColor)),
-      ),
+      style: elevatedButtonStyle,
       onPressed: clientOnPressed,
       child: _getButtonChild(),
     );
   }
 
-  TextButton _getTextButton(backgroundColor, borderColor) {
+  TextButton _getTextButton(elevatedButtonStyle) {
     return TextButton(
       key: Key(id),
-      // style: TextButton.styleFrom(
-      //   textStyle: const TextStyle(fontSize: fontsize, background: backgroundColor, color: fontColor),
-      // ),
+      style: elevatedButtonStyle,
       onPressed: clientOnPressed,
       child: _getButtonChild(),
     );
@@ -125,7 +113,6 @@ class SmeupButton extends StatelessWidget {
                   : fontColor),
             )
           : () {
-              //Row(children: [],)
               final icon = iconData == 0
                   ? Container()
                   : Icon(
@@ -136,18 +123,7 @@ class SmeupButton extends StatelessWidget {
               var text = Align(
                   alignment: align,
                   child: Text(data,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          decoration: underline
-                              ? TextDecoration.underline
-                              : TextDecoration.none,
-                          fontWeight:
-                              bold ? FontWeight.bold : FontWeight.normal,
-                          fontSize: fontSize,
-                          color: fontColor == null
-                              ? SmeupConfigurationService.getTheme()
-                                  .primaryColor
-                              : fontColor)));
+                      textAlign: TextAlign.center, style: _getTextStile()));
 
               var children;
 
@@ -217,5 +193,47 @@ class SmeupButton extends StatelessWidget {
               return children;
             }()
     ]);
+  }
+
+  ButtonStyle _getButtonStyle() {
+    var elevatedButtonStyle = SmeupConfigurationService.getTheme()
+        .elevatedButtonTheme
+        .style
+        .copyWith(
+            backgroundColor: MaterialStateProperty.all<Color>(backColor),
+            elevation: MaterialStateProperty.all<double>(elevation),
+            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                EdgeInsets.all(0)),
+            shape: MaterialStateProperty.all<OutlinedBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(borderRadius))),
+            side: MaterialStateProperty.all<BorderSide>(
+                BorderSide(width: borderWidth, color: borderColor)));
+
+    return elevatedButtonStyle;
+  }
+
+  TextStyle _getTextStile() {
+    TextStyle style =
+        SmeupConfigurationService.getTheme().textTheme.copyWith().button;
+
+    if (isLink) {
+      style = style.copyWith(
+        decoration: TextDecoration.underline,
+      );
+    } else {
+      style = style.copyWith(
+        decoration: underline ? TextDecoration.underline : TextDecoration.none,
+      );
+    }
+
+    if (fontColor != null) {
+      style = style.copyWith(
+          color: fontColor,
+          fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+          fontSize: fontSize);
+    }
+
+    return style;
   }
 }

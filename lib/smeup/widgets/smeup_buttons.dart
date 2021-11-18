@@ -23,17 +23,19 @@ class SmeupButtons extends StatefulWidget
 
   Color backColor;
   Color borderColor;
+  double borderWidth;
+  double borderRadius;
+  double elevation;
+  double fontSize;
+  Color fontColor;
+
   double width;
   double height;
   MainAxisAlignment position;
   Alignment align;
-  Color fontColor;
-  double fontSize;
   EdgeInsetsGeometry padding;
   dynamic data;
   String valueField;
-  double borderRadius;
-  double elevation;
   bool bold;
   double iconSize;
   int iconData;
@@ -59,18 +61,19 @@ class SmeupButtons extends StatefulWidget
       this.type = 'BTN',
       this.title = '',
       this.data,
-      this.backColor = SmeupButtonsModel.defaultBackColor,
-      this.borderColor = SmeupButtonsModel.defaultBorderColor,
+      this.backColor,
+      this.borderColor,
+      this.borderRadius,
+      this.fontSize,
+      this.fontColor,
       this.width = SmeupButtonsModel.defaultWidth,
       this.height = SmeupButtonsModel.defaultHeight,
       this.position = SmeupButtonsModel.defaultPosition,
       this.align = SmeupButtonsModel.defaultAlign,
-      this.fontColor = SmeupButtonsModel.defaultFontColor,
-      this.fontSize = SmeupButtonsModel.defaultFontsize,
       this.padding = SmeupButtonsModel.defaultPadding,
       this.valueField = SmeupButtonsModel.defaultValueField,
-      this.borderRadius = SmeupButtonsModel.defaultBorderRadius,
-      this.elevation = SmeupButtonsModel.defaultElevation,
+      this.borderWidth,
+      this.elevation,
       this.bold = SmeupButtonsModel.defaultBold,
       this.iconData = 0,
       this.iconSize = SmeupButtonsModel.defaultIconSize,
@@ -81,7 +84,7 @@ class SmeupButtons extends StatefulWidget
       this.clientOnPressed})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
-
+    SmeupButtonsModel.setDefaults(this);
     if (data == null) data = List<String>.empty(growable: true);
   }
 
@@ -102,6 +105,7 @@ class SmeupButtons extends StatefulWidget
     padding = m.padding;
     valueField = m.valueField;
     borderRadius = m.borderRadius;
+    borderWidth = m.borderWidth;
     elevation = m.elevation;
     bold = m.bold;
     iconData = m.iconData;
@@ -212,6 +216,7 @@ class SmeupButtonsState extends State<SmeupButtons>
           padding: widget.padding,
           valueField: widget.valueField,
           borderRadius: widget.borderRadius,
+          borderWidth: widget.borderWidth,
           elevation: widget.elevation,
           bold: widget.bold,
           iconData: widget.iconData,

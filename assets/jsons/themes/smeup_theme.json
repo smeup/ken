@@ -1,0 +1,26 @@
+{
+  "_comment": "smeup_components_library: for further information about the supported styles read the document README.md",
+  "brightness": "light",
+  "primaryColor": "#068a9c",
+  "scaffoldBackgroundColor": "#ffffff",
+  "elevatedButtonTheme": {
+    "style": {
+      "backgroundColor": "#ffffff",
+      "side": {
+        "color" : "#068a9c",
+        "width" : 2.0
+      },
+      "shape": {
+        "type": "rectangle",
+        "borderRadius": 20.0
+      },
+      "elevation" : "0.0"
+    }
+  },
+  "textTheme": {
+    "button" : {
+      "color": "#068a9c",
+      "fontSize" : 16.0
+    }
+  }
+}
