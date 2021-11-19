@@ -756,7 +756,6 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
         code = data['codice'] ?? data['code'];
       }
 
-      print('type: $type, parameter: $parameter, code: $code');
       if (type != null &&
           parameter != null &&
           code != null &&

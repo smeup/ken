@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 
 import 'smeup_widget_notification_service.dart';
 
@@ -39,17 +40,24 @@ class SmeupUtilities {
     return fieldValue;
   }
 
-  // TODO it should return null if the color string is not parsable
   static Color getColorFromRGB(String color, {double opacity = 1.0}) {
+    if (color == null) return null;
+
     final split = color.split(RegExp(r"(?=[A-Z])"));
-    if (split == null || split.length != 3)
-      return SmeupConfigurationService.getTheme().textTheme.headline6.color;
+    if (split == null || split.length != 3) return null;
 
-    int r = int.parse(split[0].substring(1));
-    int g = int.parse(split[1].substring(1));
-    int b = int.parse(split[2].substring(1));
+    try {
+      int r = int.parse(split[0].substring(1));
+      int g = int.parse(split[1].substring(1));
+      int b = int.parse(split[2].substring(1));
 
-    return Color.fromRGBO(r, g, b, opacity);
+      return Color.fromRGBO(r, g, b, opacity);
+    } catch (e) {
+      SmeupLogService.writeDebugMessage(
+          'Error in getColorFromRGB while extracting color: $color ',
+          logType: LogType.error);
+      return null;
+    }
   }
 
   static bool isNumeric(String s) {

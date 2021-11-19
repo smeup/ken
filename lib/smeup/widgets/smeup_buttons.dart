@@ -23,26 +23,29 @@ class SmeupButtons extends StatefulWidget
 
   Color backColor;
   Color borderColor;
+  double borderWidth;
+  double borderRadius;
+  double elevation;
+  double fontSize;
+  Color fontColor;
+  bool bold;
+  double iconSize;
+  Color iconColor;
+  bool underline;
+
   double width;
   double height;
   MainAxisAlignment position;
   Alignment align;
-  Color fontColor;
-  double fontSize;
   EdgeInsetsGeometry padding;
   dynamic data;
   String valueField;
-  double borderRadius;
-  double elevation;
-  bool bold;
-  double iconSize;
   int iconData;
   String id;
   String type;
   String title;
   WidgetOrientation orientation;
   bool isLink;
-  bool underline;
   double innerSpace;
   Function clientOnPressed;
 
@@ -59,29 +62,31 @@ class SmeupButtons extends StatefulWidget
       this.type = 'BTN',
       this.title = '',
       this.data,
-      this.backColor = SmeupButtonsModel.defaultBackColor,
-      this.borderColor = SmeupButtonsModel.defaultBorderColor,
+      this.backColor,
+      this.borderColor,
+      this.borderRadius,
+      this.fontSize,
+      this.fontColor,
+      this.bold,
+      this.iconSize,
+      this.iconColor,
+      this.underline,
       this.width = SmeupButtonsModel.defaultWidth,
       this.height = SmeupButtonsModel.defaultHeight,
       this.position = SmeupButtonsModel.defaultPosition,
       this.align = SmeupButtonsModel.defaultAlign,
-      this.fontColor = SmeupButtonsModel.defaultFontColor,
-      this.fontSize = SmeupButtonsModel.defaultFontsize,
       this.padding = SmeupButtonsModel.defaultPadding,
       this.valueField = SmeupButtonsModel.defaultValueField,
-      this.borderRadius = SmeupButtonsModel.defaultBorderRadius,
-      this.elevation = SmeupButtonsModel.defaultElevation,
-      this.bold = SmeupButtonsModel.defaultBold,
+      this.borderWidth,
+      this.elevation,
       this.iconData = 0,
-      this.iconSize = SmeupButtonsModel.defaultIconSize,
       this.orientation = SmeupButtonsModel.defaultOrientation,
       this.isLink = SmeupButtonsModel.defaultIsLink,
-      this.underline = SmeupButtonsModel.defaultUnderline,
       this.innerSpace = SmeupButtonsModel.defaultInnerSpace,
       this.clientOnPressed})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
-
+    SmeupButtonsModel.setDefaults(this);
     if (data == null) data = List<String>.empty(growable: true);
   }
 
@@ -102,10 +107,12 @@ class SmeupButtons extends StatefulWidget
     padding = m.padding;
     valueField = m.valueField;
     borderRadius = m.borderRadius;
+    borderWidth = m.borderWidth;
     elevation = m.elevation;
     bold = m.bold;
     iconData = m.iconData;
     iconSize = m.iconSize;
+    iconColor = m.iconColor;
     orientation = m.orientation;
     isLink = m.isLink;
     underline = m.underline;
@@ -212,10 +219,12 @@ class SmeupButtonsState extends State<SmeupButtons>
           padding: widget.padding,
           valueField: widget.valueField,
           borderRadius: widget.borderRadius,
+          borderWidth: widget.borderWidth,
           elevation: widget.elevation,
           bold: widget.bold,
           iconData: widget.iconData,
           iconSize: widget.iconSize,
+          iconColor: widget.iconColor,
           icon: null,
           isBusy: _isBusy,
           underline: widget.underline,
