@@ -23,6 +23,12 @@
       "fontSize": 16.0,
       "fontWeight": "bold",
       "decoration": "none"
+    },
+    "bodyText2": {
+      "color": "#000000",
+      "fontSize": 18.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
     }
   },
   "iconTheme": {
