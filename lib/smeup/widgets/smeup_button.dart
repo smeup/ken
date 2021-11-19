@@ -14,7 +14,7 @@ class SmeupButton extends StatelessWidget {
   double elevation;
   double fontSize;
   Color fontColor;
-  bool bold;
+  bool fontBold;
   double iconSize;
   Color iconColor;
   bool underline;
@@ -47,7 +47,7 @@ class SmeupButton extends StatelessWidget {
       this.borderRadius,
       this.fontSize,
       this.fontColor,
-      this.bold,
+      this.fontBold,
       this.iconSize,
       this.iconColor,
       this.underline,
@@ -225,7 +225,7 @@ class SmeupButton extends StatelessWidget {
 
     style = style.copyWith(color: fontColor, fontSize: fontSize);
 
-    if (bold) {
+    if (fontBold) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );

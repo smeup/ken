@@ -39,9 +39,20 @@ Follow the list of the json_theme's style supported by the smeup_components_libr
     - elevation     :   elevatedButtonTheme.style.elevation
 
     - fontColor     :   textTheme.button.color
-    - fontColor     :   textTheme.button.fontSize
-    - bold          :   textTheme.button.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - fontSize      :   textTheme.button.fontSize
+    - fontBold      :   textTheme.button.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
     - underline     :   textTheme.button.decoration (values: ['lineThrough', 'none', 'overline', 'underline'])
 
     - iconSize      :   iconTheme.size
-    - iconColor      :   iconTheme.color
+    - iconColor     :   iconTheme.color
+
+### SmeupLabel
+    - fontColor     :   textTheme.bodyText2.color
+    - fontSize      :   textTheme.bodyText2.fontSize
+    - fontBold      :   textTheme.bodyText2.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - backColor     :   textTheme.bodyText2.backgroundColor
+
+    - iconSize      :   iconTheme.size
+    - iconColor     :   iconTheme.color
+
+    

@@ -109,7 +109,7 @@ class SmeupButtons extends StatefulWidget
     borderRadius = m.borderRadius;
     borderWidth = m.borderWidth;
     elevation = m.elevation;
-    bold = m.bold;
+    bold = m.fontBold;
     iconData = m.iconData;
     iconSize = m.iconSize;
     iconColor = m.iconColor;
@@ -221,7 +221,7 @@ class SmeupButtonsState extends State<SmeupButtons>
           borderRadius: widget.borderRadius,
           borderWidth: widget.borderWidth,
           elevation: widget.elevation,
-          bold: widget.bold,
+          fontBold: widget.bold,
           iconData: widget.iconData,
           iconSize: widget.iconSize,
           iconColor: widget.iconColor,

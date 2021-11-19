@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_buttons_dao.dart';
 
-import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_data_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
@@ -16,12 +16,12 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   static double defaultElevation;
   static double defaultFontSize;
   static Color defaultFontColor;
-  static bool defaultBold;
+  static bool defaultFontBold;
   static double defaultIconSize;
   static Color defaultIconColor;
   static bool defaultUnderline;
 
-  // not supported by json_theme
+  // unsupported by json_theme
   static const double defaultWidth = 0;
   static const double defaultHeight = 70;
   static const MainAxisAlignment defaultPosition = MainAxisAlignment.center;
@@ -40,7 +40,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   double elevation;
   double fontSize;
   Color fontColor;
-  bool bold;
+  bool fontBold;
   double iconSize;
   Color iconColor;
   bool underline;
@@ -68,7 +68,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
       this.elevation,
       this.fontSize,
       this.fontColor,
-      this.bold,
+      this.fontBold,
       this.iconSize,
       this.iconColor,
       this.underline,
@@ -103,7 +103,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
             valueField: other.valueField,
             borderRadius: other.borderRadius,
             elevation: other.elevation,
-            bold: other.bold,
+            fontBold: other.fontBold,
             iconData: other.iconData,
             iconSize: other.iconSize);
 
@@ -154,7 +154,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     elevation = SmeupUtilities.getDouble(optionsDefault['elevation']) ??
         defaultElevation;
 
-    bold = optionsDefault['bold'] ?? defaultBold;
+    fontBold = optionsDefault['bold'] ?? defaultFontBold;
 
     backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??
         defaultBackColor;
@@ -202,14 +202,14 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     var textStyle = SmeupConfigurationService.getTheme().textTheme.button;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
-    defaultBold = textStyle.fontWeight == FontWeight.bold;
+    defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultUnderline = textStyle.decoration == TextDecoration.underline;
 
     var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
     defaultIconSize = iconTheme.size;
     defaultIconColor = iconTheme.color;
 
-    // -----------------
+    // ----------------- set properties from default
 
     if (obj.backColor == null)
       obj.backColor = SmeupButtonsModel.defaultBackColor;
@@ -224,7 +224,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     if (obj.fontSize == null) obj.fontSize = SmeupButtonsModel.defaultFontSize;
     if (obj.fontColor == null)
       obj.fontColor = SmeupButtonsModel.defaultFontColor;
-    if (obj.bold == null) obj.bold = SmeupButtonsModel.defaultBold;
+    if (obj.fontBold == null) obj.fontBold = SmeupButtonsModel.defaultFontBold;
     if (obj.underline == null)
       obj.underline = SmeupButtonsModel.defaultUnderline;
     if (obj.iconSize == null) obj.iconSize = SmeupButtonsModel.defaultIconSize;

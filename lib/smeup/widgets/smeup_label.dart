@@ -3,6 +3,8 @@ import 'package:mobile_components_library/smeup/daos/smeup_label_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_label_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
@@ -20,11 +22,15 @@ class SmeupLabel extends StatefulWidget
   GlobalKey<FormState> formKey;
 
   // graphic properties
-  EdgeInsetsGeometry padding;
   double fontSize;
+  Color fontColor;
+  bool fontBold;
+  Color backColor;
   double iconSize;
+  Color iconColor;
+
+  EdgeInsetsGeometry padding;
   Alignment align;
-  bool fontbold;
   double width;
   double height;
   List<String> data;
@@ -33,8 +39,6 @@ class SmeupLabel extends StatefulWidget
   String fontColorColName;
   int iconData;
   String iconColname;
-  Color backColor;
-  Color fontColor;
   String title;
   String id;
   String type;
@@ -50,23 +54,25 @@ class SmeupLabel extends StatefulWidget
   SmeupLabel(this.scaffoldKey, this.formKey, this.data,
       {this.id = '',
       this.type = 'LAB',
+      this.fontSize,
+      this.fontBold,
+      this.fontColor,
+      this.backColor,
+      this.iconSize,
+      this.iconColor,
       this.valueColName = SmeupLabelModel.defaultValColName,
       this.padding = SmeupLabelModel.defaultPadding,
-      this.fontSize = SmeupLabelModel.defaultFontSize,
       this.align = SmeupLabelModel.defaultAlign,
-      this.fontbold = SmeupLabelModel.defaultFontbold,
       this.width = SmeupLabelModel.defaultWidth,
       this.height = SmeupLabelModel.defaultHeight,
       this.backColorColName = '',
-      this.backColor,
-      this.fontColor,
       this.iconData = 0,
       this.iconColname = '',
       this.fontColorColName = '',
-      this.iconSize = SmeupLabelModel.defaultIconSize,
       this.title = ''})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
+    SmeupLabelModel.setDefaults(this);
   }
 
   @override
@@ -78,7 +84,7 @@ class SmeupLabel extends StatefulWidget
     padding = m.padding;
     fontSize = m.fontSize;
     align = m.align;
-    fontbold = m.fontBold;
+    fontBold = m.fontBold;
     width = m.width;
     height = m.height;
     backColorColName = m.backColorColName;
@@ -88,6 +94,7 @@ class SmeupLabel extends StatefulWidget
     iconColname = m.iconColname;
     fontColorColName = m.fontColorColName;
     iconSize = m.iconSize;
+    iconColor = m.iconColor;
     title = m.title;
 
     data = treatData(m);
@@ -171,19 +178,6 @@ class _SmeupLabelState extends State<SmeupLabel>
     return label;
   }
 
-  /// Label's structure:
-  ///
-  /// Container (widget)
-  ///     Row
-  ///         Container (label)
-  ///               Padding (children)
-  ///                   Column (col)
-  ///                       List<Align> (alignes)
-  ///                             Align (align)
-  ///                                 Text
-  ///
-  ///         Icon (icon)
-  ///
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
@@ -205,10 +199,7 @@ class _SmeupLabelState extends State<SmeupLabel>
         alignment: widget.align,
         child: Text(
           text,
-          style: TextStyle(
-              color: widget.fontColor,
-              fontWeight: widget.fontbold ? FontWeight.bold : FontWeight.normal,
-              fontSize: widget.fontSize),
+          style: _getTextStile(),
         ),
       );
       alignes.add(align);
@@ -224,33 +215,42 @@ class _SmeupLabelState extends State<SmeupLabel>
       double labelHeight =
           widget.height * alignes.length * (widget.fontSize / 5);
 
+      double labelWidth = widget.width;
+      if (_model != null && _model.parent != null) {
+        if (labelWidth == 0)
+          labelWidth = (_model.parent as SmeupSectionModel).width;
+      }
+
       int iconData = 0;
       if (widget.iconData != 0) {
         iconData = widget.iconData;
       }
-
-      double iconHeight = widget.iconSize;
 
       if (iconData == 0) {
         return SmeupWidgetBuilderResponse(
             _model,
             Container(
                 padding: widget.padding,
-                color: widget.backColor,
+                //color: widget.backColor,
                 height: labelHeight,
+                width: labelWidth,
                 child: col));
       } else {
-        final label =
-            Container(color: widget.backColor, height: labelHeight, child: col);
+        final label = Container(
+            //color: widget.backColor,
+            height: labelHeight,
+            child: col);
+
+        IconThemeData iconTheme = _getIconTheme();
 
         final icon = Icon(
           IconData(iconData, fontFamily: 'MaterialIcons'),
-          color: widget.fontColor,
-          size: iconHeight,
+          color: iconTheme.color,
+          size: iconTheme.size,
         );
 
         var children;
-        double widgetHeight = labelHeight + iconHeight;
+        double widgetHeight = labelHeight + iconTheme.size;
 
         if (widget.align == Alignment.centerLeft) {
           children = Container(
@@ -262,7 +262,7 @@ class _SmeupLabelState extends State<SmeupLabel>
                 icon,
               ],
             ),
-            color: widget.backColor,
+            //color: widget.backColor,
           );
         } else if (widget.align == Alignment.centerRight) {
           children = Container(
@@ -274,7 +274,7 @@ class _SmeupLabelState extends State<SmeupLabel>
                 label,
               ],
             ),
-            color: widget.backColor,
+            //color: widget.backColor,
           );
         } else if (widget.align == Alignment.topCenter) {
           children = Container(
@@ -286,7 +286,7 @@ class _SmeupLabelState extends State<SmeupLabel>
                 icon,
               ],
             ),
-            color: widget.backColor,
+            //color: widget.backColor,
           );
         } else if (widget.align == Alignment.bottomCenter) {
           children = Container(
@@ -299,7 +299,7 @@ class _SmeupLabelState extends State<SmeupLabel>
                 label,
               ],
             ),
-            color: widget.backColor,
+            //color: widget.backColor,
           );
         } else // center
         {
@@ -312,7 +312,7 @@ class _SmeupLabelState extends State<SmeupLabel>
                 icon,
               ],
             ),
-            color: widget.backColor,
+            //color: widget.backColor,
           );
         }
 
@@ -324,5 +324,31 @@ class _SmeupLabelState extends State<SmeupLabel>
         logType: LogType.error);
 
     return SmeupWidgetBuilderResponse(_model, SmeupNotAvailable());
+  }
+
+  TextStyle _getTextStile() {
+    TextStyle style =
+        SmeupConfigurationService.getTheme().textTheme.copyWith().bodyText2;
+
+    style = style.copyWith(
+        color: widget.fontColor,
+        fontSize: widget.fontSize,
+        backgroundColor: widget.backColor);
+
+    if (widget.fontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
+  }
+
+  IconThemeData _getIconTheme() {
+    IconThemeData themeData = SmeupConfigurationService.getTheme()
+        .iconTheme
+        .copyWith(size: widget.iconSize, color: widget.iconColor);
+
+    return themeData;
   }
 }
