@@ -5,22 +5,28 @@
   "scaffoldBackgroundColor": "#ffffff",
   "elevatedButtonTheme": {
     "style": {
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "#068a9c",
       "side": {
-        "color" : "#068a9c",
-        "width" : 2.0
+        "color": "#068a9c",
+        "width": 2.0
       },
       "shape": {
         "type": "rectangle",
         "borderRadius": 20.0
       },
-      "elevation" : "0.0"
+      "elevation": "0.0"
     }
   },
   "textTheme": {
-    "button" : {
-      "color": "#068a9c",
-      "fontSize" : 16.0
+    "button": {
+      "color": "#ffffff",
+      "fontSize": 16.0,
+      "fontWeight": "bold",
+      "decoration": "none"
     }
+  },
+  "iconTheme": {
+    "size": 20.0,
+    "color": "#ffffff"
   }
 }

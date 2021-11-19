@@ -36,10 +36,12 @@ Follow the list of the json_theme's style supported by the smeup_components_libr
     - borderColor   :   elevatedButtonTheme.style.side.color
     - borderWidth   :   elevatedButtonTheme.style.side.width
     - borderRadius  :   elevatedButtonTheme.style.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
-    - elevation     :   elevatedButtonTheme.style.elevation         
+    - elevation     :   elevatedButtonTheme.style.elevation
+
     - fontColor     :   textTheme.button.color
     - fontColor     :   textTheme.button.fontSize
-    
-    
-    
+    - bold          :   textTheme.button.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - underline     :   textTheme.button.decoration (values: ['lineThrough', 'none', 'overline', 'underline'])
 
+    - iconSize      :   iconTheme.size
+    - iconColor      :   iconTheme.color

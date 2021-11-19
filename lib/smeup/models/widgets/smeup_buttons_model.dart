@@ -16,43 +16,44 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   static double defaultElevation;
   static double defaultFontSize;
   static Color defaultFontColor;
+  static bool defaultBold;
+  static double defaultIconSize;
+  static Color defaultIconColor;
+  static bool defaultUnderline;
 
   // not supported by json_theme
   static const double defaultWidth = 0;
   static const double defaultHeight = 70;
   static const MainAxisAlignment defaultPosition = MainAxisAlignment.center;
   static const Alignment defaultAlign = Alignment.center;
-
-  // TODO:
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(5);
-  static const bool defaultBold = true;
-  static const double defaultIconSize = 20.0;
+  static const String defaultValueField = 'value';
+  static const double defaultInnerSpace = 10.0;
+  static const bool defaultIsLink = false;
   static const WidgetOrientation defaultOrientation =
       WidgetOrientation.Vertical;
-  static const bool defaultIsLink = false;
-  static const bool defaultUnderline = false;
-  static const double defaultInnerSpace = 10.0;
-  static const String defaultValueField = 'value';
 
   Color backColor;
   Color borderColor;
-  double width;
-  double height;
-  MainAxisAlignment position;
-  Alignment align;
-  Color fontColor;
-  double fontSize;
-  EdgeInsetsGeometry padding;
-  String valueField;
-  double borderRadius;
   double borderWidth;
+  double borderRadius;
   double elevation;
+  double fontSize;
+  Color fontColor;
   bool bold;
   double iconSize;
+  Color iconColor;
+  bool underline;
+
+  MainAxisAlignment position;
+  Alignment align;
+  double width;
+  double height;
+  EdgeInsetsGeometry padding;
+  String valueField;
   int iconData;
   WidgetOrientation orientation;
   bool isLink;
-  bool underline;
   double innerSpace;
 
   SmeupButtonsModel(
@@ -67,18 +68,19 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
       this.elevation,
       this.fontSize,
       this.fontColor,
+      this.bold,
+      this.iconSize,
+      this.iconColor,
+      this.underline,
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.position = defaultPosition,
       this.align = defaultAlign,
       this.padding = defaultPadding,
       this.valueField,
-      this.bold = defaultBold,
       this.iconData = 0,
-      this.iconSize = defaultIconSize,
       this.orientation = defaultOrientation,
       this.isLink = defaultIsLink,
-      this.underline = defaultUnderline,
       this.innerSpace = defaultInnerSpace})
       : super(formKey, title: title) {
     SmeupDataService.incrementDataFetch(id);
@@ -121,16 +123,15 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     innerSpace = SmeupUtilities.getDouble(optionsDefault['innerSpace']) ??
         defaultInnerSpace;
+
     if (SmeupUtilities.getBool(optionsDefault['horiz']) ?? false) {
       orientation = WidgetOrientation.Horizontal;
     } else {
       orientation = defaultOrientation;
     }
-    if (SmeupUtilities.getBool(optionsDefault['underline']) ?? false) {
-      underline = true;
-    } else {
-      underline = defaultUnderline;
-    }
+
+    underline =
+        SmeupUtilities.getBool(optionsDefault['underline']) ?? defaultUnderline;
 
     valueField = optionsDefault['valueField'] ?? defaultValueField;
     position = SmeupUtilities.getMainAxisAlignment(optionsDefault['position']);
@@ -142,7 +143,8 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
       iconData = 0;
     align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']) ??
         defaultAlign;
-
+    iconColor = SmeupUtilities.getColorFromRGB(optionsDefault['iconColor']) ??
+        defaultIconColor;
     fontSize =
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontSize;
     borderRadius = SmeupUtilities.getDouble(optionsDefault['borderRadius']) ??
@@ -152,7 +154,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     elevation = SmeupUtilities.getDouble(optionsDefault['elevation']) ??
         defaultElevation;
 
-    bold = optionsDefault['bold'] ?? true;
+    bold = optionsDefault['bold'] ?? defaultBold;
 
     backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??
         defaultBackColor;
@@ -200,6 +202,12 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     var textStyle = SmeupConfigurationService.getTheme().textTheme.button;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
+    defaultBold = textStyle.fontWeight == FontWeight.bold;
+    defaultUnderline = textStyle.decoration == TextDecoration.underline;
+
+    var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
+    defaultIconSize = iconTheme.size;
+    defaultIconColor = iconTheme.color;
 
     // -----------------
 
@@ -216,5 +224,11 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     if (obj.fontSize == null) obj.fontSize = SmeupButtonsModel.defaultFontSize;
     if (obj.fontColor == null)
       obj.fontColor = SmeupButtonsModel.defaultFontColor;
+    if (obj.bold == null) obj.bold = SmeupButtonsModel.defaultBold;
+    if (obj.underline == null)
+      obj.underline = SmeupButtonsModel.defaultUnderline;
+    if (obj.iconSize == null) obj.iconSize = SmeupButtonsModel.defaultIconSize;
+    if (obj.iconColor == null)
+      obj.iconColor = SmeupButtonsModel.defaultIconColor;
   }
 }

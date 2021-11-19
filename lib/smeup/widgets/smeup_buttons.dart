@@ -28,6 +28,10 @@ class SmeupButtons extends StatefulWidget
   double elevation;
   double fontSize;
   Color fontColor;
+  bool bold;
+  double iconSize;
+  Color iconColor;
+  bool underline;
 
   double width;
   double height;
@@ -36,15 +40,12 @@ class SmeupButtons extends StatefulWidget
   EdgeInsetsGeometry padding;
   dynamic data;
   String valueField;
-  bool bold;
-  double iconSize;
   int iconData;
   String id;
   String type;
   String title;
   WidgetOrientation orientation;
   bool isLink;
-  bool underline;
   double innerSpace;
   Function clientOnPressed;
 
@@ -66,6 +67,10 @@ class SmeupButtons extends StatefulWidget
       this.borderRadius,
       this.fontSize,
       this.fontColor,
+      this.bold,
+      this.iconSize,
+      this.iconColor,
+      this.underline,
       this.width = SmeupButtonsModel.defaultWidth,
       this.height = SmeupButtonsModel.defaultHeight,
       this.position = SmeupButtonsModel.defaultPosition,
@@ -74,12 +79,9 @@ class SmeupButtons extends StatefulWidget
       this.valueField = SmeupButtonsModel.defaultValueField,
       this.borderWidth,
       this.elevation,
-      this.bold = SmeupButtonsModel.defaultBold,
       this.iconData = 0,
-      this.iconSize = SmeupButtonsModel.defaultIconSize,
       this.orientation = SmeupButtonsModel.defaultOrientation,
       this.isLink = SmeupButtonsModel.defaultIsLink,
-      this.underline = SmeupButtonsModel.defaultUnderline,
       this.innerSpace = SmeupButtonsModel.defaultInnerSpace,
       this.clientOnPressed})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
@@ -110,6 +112,7 @@ class SmeupButtons extends StatefulWidget
     bold = m.bold;
     iconData = m.iconData;
     iconSize = m.iconSize;
+    iconColor = m.iconColor;
     orientation = m.orientation;
     isLink = m.isLink;
     underline = m.underline;
@@ -221,6 +224,7 @@ class SmeupButtonsState extends State<SmeupButtons>
           bold: widget.bold,
           iconData: widget.iconData,
           iconSize: widget.iconSize,
+          iconColor: widget.iconColor,
           icon: null,
           isBusy: _isBusy,
           underline: widget.underline,

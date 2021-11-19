@@ -14,6 +14,10 @@ class SmeupButton extends StatelessWidget {
   double elevation;
   double fontSize;
   Color fontColor;
+  bool bold;
+  double iconSize;
+  Color iconColor;
+  bool underline;
 
   final double width;
   final double height;
@@ -22,11 +26,8 @@ class SmeupButton extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final String data;
   final String valueField;
-  final bool bold;
-  final double iconSize;
   final int iconData;
   final bool isLink;
-  bool underline;
   final IconData icon;
   final Function clientOnPressed;
   final double innerSpace;
@@ -46,6 +47,10 @@ class SmeupButton extends StatelessWidget {
       this.borderRadius,
       this.fontSize,
       this.fontColor,
+      this.bold,
+      this.iconSize,
+      this.iconColor,
+      this.underline,
       this.width = SmeupButtonsModel.defaultWidth,
       this.height = SmeupButtonsModel.defaultHeight,
       this.position = SmeupButtonsModel.defaultPosition,
@@ -53,20 +58,20 @@ class SmeupButton extends StatelessWidget {
       this.padding = SmeupButtonsModel.defaultPadding,
       this.valueField,
       this.elevation,
-      this.bold = SmeupButtonsModel.defaultBold,
       this.iconData = 0,
-      this.iconSize = SmeupButtonsModel.defaultIconSize,
       this.buttonIndex,
       this.icon,
       this.clientOnPressed,
       this.isBusy = false,
       this.isLink = SmeupButtonsModel.defaultIsLink,
-      this.underline = SmeupButtonsModel.defaultUnderline,
       this.innerSpace = SmeupButtonsModel.defaultInnerSpace}) {
     SmeupButtonsModel.setDefaults(this);
     if (isLink) {
       underline = true;
-      borderColor = backColor;
+      borderColor =
+          SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
+      fontColor = backColor;
+      backColor = SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
     }
   }
 
@@ -91,7 +96,7 @@ class SmeupButton extends StatelessWidget {
       key: Key(id),
       style: elevatedButtonStyle,
       onPressed: clientOnPressed,
-      child: _getButtonChild(),
+      child: _getButtonChildren(),
     );
   }
 
@@ -100,11 +105,12 @@ class SmeupButton extends StatelessWidget {
       key: Key(id),
       style: elevatedButtonStyle,
       onPressed: clientOnPressed,
-      child: _getButtonChild(),
+      child: _getButtonChildren(),
     );
   }
 
-  Widget _getButtonChild() {
+  Widget _getButtonChildren() {
+    IconThemeData iconTheme = _getIconTheme();
     return Column(mainAxisAlignment: position, children: <Widget>[
       isBusy
           ? CircularProgressIndicator(
@@ -117,8 +123,8 @@ class SmeupButton extends StatelessWidget {
                   ? Container()
                   : Icon(
                       IconData(iconData, fontFamily: 'MaterialIcons'),
-                      color: fontColor,
-                      size: iconSize,
+                      color: iconTheme.color,
+                      size: iconTheme.size,
                     );
               var text = Align(
                   alignment: align,
@@ -217,23 +223,26 @@ class SmeupButton extends StatelessWidget {
     TextStyle style =
         SmeupConfigurationService.getTheme().textTheme.copyWith().button;
 
-    if (isLink) {
+    style = style.copyWith(color: fontColor, fontSize: fontSize);
+
+    if (bold) {
       style = style.copyWith(
-        decoration: TextDecoration.underline,
-      );
-    } else {
-      style = style.copyWith(
-        decoration: underline ? TextDecoration.underline : TextDecoration.none,
+        fontWeight: FontWeight.bold,
       );
     }
 
-    if (fontColor != null) {
-      style = style.copyWith(
-          color: fontColor,
-          fontWeight: bold ? FontWeight.bold : FontWeight.normal,
-          fontSize: fontSize);
+    if (underline) {
+      style = style.copyWith(decoration: TextDecoration.underline);
     }
 
     return style;
+  }
+
+  IconThemeData _getIconTheme() {
+    IconThemeData themeData = SmeupConfigurationService.getTheme()
+        .iconTheme
+        .copyWith(size: iconSize, color: iconColor);
+
+    return themeData;
   }
 }
