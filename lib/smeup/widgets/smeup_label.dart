@@ -216,9 +216,12 @@ class _SmeupLabelState extends State<SmeupLabel>
           widget.height * alignes.length * (widget.fontSize / 5);
 
       double labelWidth = widget.width;
-      if (_model != null && _model.parent != null) {
-        if (labelWidth == 0)
+      if (labelWidth == 0) {
+        if (_model != null && _model.parent != null) {
           labelWidth = (_model.parent as SmeupSectionModel).width;
+        } else {
+          labelWidth = 100;
+        }
       }
 
       int iconData = 0;
