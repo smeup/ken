@@ -55,4 +55,14 @@ Follow the list of the json_theme's style supported by the smeup_components_libr
     - iconSize      :   iconTheme.size
     - iconColor     :   iconTheme.color
 
-    
+### SmeupDatePicker
+    - borderColor   :   timePickerThemeData.dayPeriodBorderSide.color
+    - borderWidth   :   timePickerThemeData.dayPeriodBorderSide.width
+    - borderRadius  :   timePickerThemeData.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
+    - backColor     :   timePickerThemeData.backgroundColor
+
+    - fontSize      :   textTheme.bodyText1.fontSize
+    - fontBold      :   textTheme.bodyText1.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - backColor     :   textTheme.bodyText1.backgroundColor
+
+    - elevation     :   elevatedButtonTheme.style.elevation

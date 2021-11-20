@@ -133,7 +133,7 @@ class SmeupConfigurationService {
         String themeStr =
             await rootBundle.loadString('assets/jsons/themes/$themeFile');
         dynamic themeJson = json.decode(themeStr);
-        _theme = ThemeDecoder.decodeThemeData(themeJson);
+        _theme = ThemeDecoder.decodeThemeData(themeJson, validate: true);
         SmeupLogService.writeDebugMessage('Loaded $themeFile theme file');
       }
     } catch (e) {

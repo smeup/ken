@@ -28,7 +28,7 @@ class SmeupButtons extends StatefulWidget
   double elevation;
   double fontSize;
   Color fontColor;
-  bool bold;
+  bool fontBold;
   double iconSize;
   Color iconColor;
   bool underline;
@@ -65,9 +65,11 @@ class SmeupButtons extends StatefulWidget
       this.backColor,
       this.borderColor,
       this.borderRadius,
+      this.borderWidth,
+      this.elevation,
       this.fontSize,
       this.fontColor,
-      this.bold,
+      this.fontBold,
       this.iconSize,
       this.iconColor,
       this.underline,
@@ -77,8 +79,6 @@ class SmeupButtons extends StatefulWidget
       this.align = SmeupButtonsModel.defaultAlign,
       this.padding = SmeupButtonsModel.defaultPadding,
       this.valueField = SmeupButtonsModel.defaultValueField,
-      this.borderWidth,
-      this.elevation,
       this.iconData = 0,
       this.orientation = SmeupButtonsModel.defaultOrientation,
       this.isLink = SmeupButtonsModel.defaultIsLink,
@@ -109,7 +109,7 @@ class SmeupButtons extends StatefulWidget
     borderRadius = m.borderRadius;
     borderWidth = m.borderWidth;
     elevation = m.elevation;
-    bold = m.fontBold;
+    fontBold = m.fontBold;
     iconData = m.iconData;
     iconSize = m.iconSize;
     iconColor = m.iconColor;
@@ -221,7 +221,7 @@ class SmeupButtonsState extends State<SmeupButtons>
           borderRadius: widget.borderRadius,
           borderWidth: widget.borderWidth,
           elevation: widget.elevation,
-          fontBold: widget.bold,
+          fontBold: widget.fontBold,
           iconData: widget.iconData,
           iconSize: widget.iconSize,
           iconColor: widget.iconColor,

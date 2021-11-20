@@ -5,9 +5,11 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/widgets/smeup_datepicker_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_datepicker_button.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_line.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
@@ -27,18 +29,23 @@ class SmeupDatePicker extends StatefulWidget
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
 
+  Color borderColor;
+  double borderWidth;
+  double borderRadius;
+  bool fontBold;
+  double fontSize;
+  Color fontColor;
+  Color backColor;
+
+  bool underline;
+  double innerSpace;
+  Alignment align;
   SmeupDatePickerData data;
   String title;
   String id;
   String type;
-
   String valueField;
   String displayField;
-
-  //Graphics properties
-  Color backColor;
-  double fontsize;
-  Color fontColor;
   String label;
   double width;
   double height;
@@ -66,22 +73,30 @@ class SmeupDatePicker extends StatefulWidget
     this.id = '',
     this.type = 'cal',
     this.title = '',
+    this.borderColor,
+    this.borderRadius,
+    this.borderWidth,
+    this.fontBold,
+    this.fontSize,
+    this.fontColor,
+    this.backColor,
+    this.elevation,
+    this.underline = SmeupDatePickerModel.defaultUnderline,
+    this.innerSpace = SmeupDatePickerModel.defaultInnerSpace,
+    this.align = SmeupDatePickerModel.defaultAlign,
     this.valueField = SmeupDatePickerModel.defaultValueField,
     this.displayField = SmeupDatePickerModel.defaultdisplayedField,
-    this.backColor = SmeupDatePickerModel.defaultBackColor,
-    this.fontsize = SmeupDatePickerModel.defaultFontsize,
-    this.fontColor = SmeupDatePickerModel.defaultFontColor,
     this.label = SmeupDatePickerModel.defaultLabel,
     this.width = SmeupDatePickerModel.defaultWidth,
     this.height = SmeupDatePickerModel.defaultHeight,
     this.padding = SmeupDatePickerModel.defaultPadding,
     this.showborder = SmeupDatePickerModel.defaultShowBorder,
-    this.elevation = SmeupDatePickerModel.defaultElevation,
     this.clientValidator,
     this.clientOnSave,
     this.clientOnChange,
   }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
+    SmeupDatePickerModel.setDefaults(this);
     if (data != null && data.value != null && data.text == null) {
       data.text = DateFormat("dd/MM/yyyy").format(data.value);
     }
@@ -95,7 +110,7 @@ class SmeupDatePicker extends StatefulWidget
     valueField = m.valueField;
     displayField = m.displayedField;
     backColor = m.backColor;
-    fontsize = m.fontsize;
+    fontSize = m.fontSize;
     fontColor = m.fontColor;
     label = m.label;
     width = m.width;
@@ -103,6 +118,13 @@ class SmeupDatePicker extends StatefulWidget
     padding = m.padding;
     showborder = m.showBorder;
     elevation = m.elevation;
+    borderRadius = m.borderRadius;
+    borderWidth = m.borderWidth;
+    borderColor = m.borderColor;
+    fontBold = m.fontBold;
+    underline = m.underline;
+    align = m.align;
+    innerSpace = m.innerSpace;
 
     data = treatData(m);
   }
@@ -192,21 +214,189 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
         datePickerWidth = (_model.parent as SmeupSectionModel).width;
     }
 
-    var datepicker = SmeupDatePickerButton(widget.id,
+    ButtonStyle buttonStyle = _getButtonStyle();
+    TextStyle textStyle = _getTextStile();
+    TextStyle captionStyle = _getCaptionStile();
+
+    var text = widget.label.isEmpty
+        ? Container()
+        : Text(widget.label, textAlign: TextAlign.center, style: captionStyle);
+
+    var datepicker = SmeupDatePickerButton(widget.id, buttonStyle, textStyle,
         scaffoldKey: widget.scaffoldKey,
         formKey: widget.formKey,
         value: _data.value,
         display: _data.text,
         backColor: widget.backColor,
-        fontsize: widget.fontsize,
+        fontSize: widget.fontSize,
         fontColor: widget.fontColor,
         label: widget.label,
         width: datePickerWidth,
         height: datePickerHeight,
         padding: widget.padding,
         showborder: widget.showborder,
+        borderRadius: widget.borderRadius,
+        borderWidth: widget.borderWidth,
+        borderColor: widget.borderColor,
+        fontBold: widget.fontBold,
+        align: widget.align,
+        underline: widget.underline,
         elevation: widget.elevation);
 
-    return SmeupWidgetBuilderResponse(_model, datepicker);
+    var line = widget.underline
+        ? SmeupLine(
+            widget.scaffoldKey,
+            widget.formKey,
+            thickness: 1,
+            color: captionStyle.color,
+          )
+        : Container();
+
+    var children;
+
+    if (widget.align == Alignment.centerLeft) {
+      children = Column(children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            text,
+            SizedBox(width: widget.innerSpace),
+            Expanded(child: Align(child: datepicker, alignment: widget.align)),
+          ],
+        ),
+        line
+      ]
+          //color: widget.backColor,
+          );
+    } else if (widget.align == Alignment.centerRight) {
+      children = Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                  child: Align(
+                child: datepicker,
+                alignment: widget.align,
+              )),
+              SizedBox(width: widget.innerSpace),
+              text,
+            ],
+          ),
+          line
+        ],
+        //color: widget.backColor,
+      );
+    } else if (widget.align == Alignment.topCenter) {
+      children = Container(
+        height: widget.height,
+        width: widget.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Align(
+              child: text,
+              alignment: Alignment.centerLeft,
+            ),
+            SizedBox(height: widget.innerSpace),
+            Align(
+              child: datepicker,
+              alignment: Alignment.centerLeft,
+            ),
+            line
+          ],
+        ),
+        //color: widget.backColor,
+      );
+    } else if (widget.align == Alignment.bottomCenter) {
+      children = Container(
+        height: widget.height,
+        width: widget.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Align(
+              child: datepicker,
+              alignment: Alignment.centerLeft,
+            ),
+            SizedBox(height: widget.innerSpace),
+            Align(
+              child: text,
+              alignment: Alignment.centerLeft,
+            ),
+            line
+          ],
+        ),
+        //color: widget.backColor,
+      );
+    } else // center
+    {
+      children = Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            datepicker,
+            SizedBox(width: widget.innerSpace),
+            Expanded(child: text),
+          ],
+        ),
+        //color: widget.backColor,
+      );
+    }
+
+// SizedBox(
+//         height: widget.height,
+//         width: widget.width,
+//         child:
+    return SmeupWidgetBuilderResponse(_model, children);
+  }
+
+  ButtonStyle _getButtonStyle() {
+    var timePickerTheme = SmeupConfigurationService.getTheme()
+        .timePickerTheme
+        .copyWith(
+            backgroundColor: widget.backColor,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(widget.borderRadius)),
+            dayPeriodBorderSide: BorderSide(
+                width: widget.borderWidth, color: widget.borderColor));
+
+    var elevatedButtonStyle = SmeupConfigurationService.getTheme()
+        .elevatedButtonTheme
+        .style
+        .copyWith(
+            backgroundColor: MaterialStateProperty.all<Color>(
+                timePickerTheme.backgroundColor),
+            elevation: MaterialStateProperty.all<double>(widget.elevation),
+            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                EdgeInsets.all(0)),
+            shape: MaterialStateProperty.all<OutlinedBorder>(
+                timePickerTheme.shape),
+            side: MaterialStateProperty.all<BorderSide>(
+                timePickerTheme.dayPeriodBorderSide));
+
+    return elevatedButtonStyle;
+  }
+
+  TextStyle _getTextStile() {
+    TextStyle style =
+        SmeupConfigurationService.getTheme().textTheme.copyWith().bodyText1;
+
+    style = style.copyWith(color: widget.fontColor, fontSize: widget.fontSize);
+
+    if (widget.fontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
+  }
+
+  TextStyle _getCaptionStile() {
+    TextStyle style =
+        SmeupConfigurationService.getTheme().textTheme.copyWith().caption;
+
+    return style;
   }
 }

@@ -183,21 +183,18 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
 
     defaultBackColor =
         buttonStyle.backgroundColor.resolve(Set<MaterialState>());
+    defaultElevation = buttonStyle.elevation.resolve(Set<MaterialState>());
 
     var side = buttonStyle.side.resolve(Set<MaterialState>());
-
     defaultBorderColor = side.color;
     defaultBorderWidth = side.width;
 
     var shape = buttonStyle.shape.resolve(Set<MaterialState>());
-
     defaultBorderRadius = (shape as ContinuousRectangleBorder)
         .borderRadius
         .resolve(TextDirection.ltr)
         .topLeft
         .x;
-
-    defaultElevation = buttonStyle.elevation.resolve(Set<MaterialState>());
 
     var textStyle = SmeupConfigurationService.getTheme().textTheme.button;
     defaultFontSize = textStyle.fontSize;
