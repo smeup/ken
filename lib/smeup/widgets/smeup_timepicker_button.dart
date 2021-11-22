@@ -7,6 +7,10 @@ import 'package:mobile_components_library/smeup/services/smeup_variables_service
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker_customization.dart';
 
+// TODO:
+// https://github.com/peiffer-innovations/json_theme/issues/29
+// Should be fixed in 3.1.2+1.
+
 class SmeupTimePickerButton extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final String id;

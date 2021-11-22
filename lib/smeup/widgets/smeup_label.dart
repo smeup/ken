@@ -220,7 +220,7 @@ class _SmeupLabelState extends State<SmeupLabel>
         if (_model != null && _model.parent != null) {
           labelWidth = (_model.parent as SmeupSectionModel).width;
         } else {
-          labelWidth = 100;
+          labelWidth = MediaQuery.of(context).size.width;
         }
       }
 
