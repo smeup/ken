@@ -1,6 +1,8 @@
 # mobile-components-library
 Smeup mobile widgets' library 
 
+[_TOC_]
+
 ## Icons
 
 - Images and icons generator for ios
@@ -28,41 +30,57 @@ Smeup mobile widgets' library
 
 - storage
 
-## Widgets style 
+## Widgets 
 Follow the list of the json_theme's style supported by the smeup_components_library widgets.
 
 ### SmeupButton
-    - backColor     :   elevatedButtonTheme.style.backgroundColor
-    - borderColor   :   elevatedButtonTheme.style.side.color
-    - borderWidth   :   elevatedButtonTheme.style.side.width
-    - borderRadius  :   elevatedButtonTheme.style.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
-    - elevation     :   elevatedButtonTheme.style.elevation
+    - backColor         :   elevatedButtonTheme.style.backgroundColor
+    - borderColor       :   elevatedButtonTheme.style.side.color
+    - borderWidth       :   elevatedButtonTheme.style.side.width
+    - borderRadius      :   elevatedButtonTheme.style.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
+    - elevation         :   elevatedButtonTheme.style.elevation
 
-    - fontColor     :   textTheme.button.color
-    - fontSize      :   textTheme.button.fontSize
-    - fontBold      :   textTheme.button.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
-    - underline     :   textTheme.button.decoration (values: ['lineThrough', 'none', 'overline', 'underline'])
+    - fontColor         :   textTheme.button.color
+    - fontSize          :   textTheme.button.fontSize
+    - fontBold          :   textTheme.button.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - underline         :   textTheme.button.decoration (values: ['lineThrough', 'none', 'overline', 'underline'])
 
-    - iconSize      :   iconTheme.size
-    - iconColor     :   iconTheme.color
+    - iconSize          :   iconTheme.size
+    - iconColor         :   iconTheme.color
 
 ### SmeupLabel
-    - fontColor     :   textTheme.bodyText2.color
-    - fontSize      :   textTheme.bodyText2.fontSize
-    - fontBold      :   textTheme.bodyText2.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
-    - backColor     :   textTheme.bodyText2.backgroundColor
+    - fontColor         :   textTheme.bodyText2.color
+    - fontSize          :   textTheme.bodyText2.fontSize
+    - fontBold          :   textTheme.bodyText2.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - backColor         :   textTheme.bodyText2.backgroundColor
 
-    - iconSize      :   iconTheme.size
-    - iconColor     :   iconTheme.color
+    - iconSize          :   iconTheme.size
+    - iconColor         :   iconTheme.color
 
 ### SmeupDatePicker
-    - borderColor   :   timePickerThemeData.dayPeriodBorderSide.color
-    - borderWidth   :   timePickerThemeData.dayPeriodBorderSide.width
-    - borderRadius  :   timePickerThemeData.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
-    - backColor     :   timePickerThemeData.backgroundColor
+    - borderColor       :   timePickerThemeData.dayPeriodBorderSide.color
+    - borderWidth       :   timePickerThemeData.dayPeriodBorderSide.width
+    - borderRadius      :   timePickerThemeData.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
+    - backColor         :   timePickerThemeData.backgroundColor
 
-    - fontSize      :   textTheme.bodyText1.fontSize
-    - fontBold      :   textTheme.bodyText1.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
-    - backColor     :   textTheme.bodyText1.backgroundColor
+    - fontSize          :   textTheme.bodyText1.fontSize
+    - fontBold          :   textTheme.bodyText1.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - backColor         :   textTheme.bodyText1.backgroundColor
 
-    - elevation     :   elevatedButtonTheme.style.elevation
+    - captionFontSize   :   textTheme.caption.fontSize
+    - captionFontBold   :   textTheme.caption.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - captionBackColor  :   textTheme.caption.backgroundColor
+
+    - elevation         :   elevatedButtonTheme.style.elevation
+
+    - underline         :   the underline attribute is a boolean and decides wheter or not a SmeupLine should be shown under the SmeupDatePicker. 
+
+   Notes:
+   See [SmeupLine](#SmeupLine) for further information about SmeupLine. 
+
+<a name="SmeupLine">
+### SmeupLine
+</a>
+
+    - color         :   textTheme.caption.color
+    

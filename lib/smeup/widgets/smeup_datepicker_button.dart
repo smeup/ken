@@ -17,6 +17,10 @@ class SmeupDatePickerButton extends StatefulWidget {
   Color fontColor;
   Color backColor;
   double elevation;
+  bool captionFontBold;
+  double captionFontSize;
+  Color captionFontColor;
+  Color captionBackColor;
 
   final bool underline;
   final DateTime value;
@@ -48,6 +52,10 @@ class SmeupDatePickerButton extends StatefulWidget {
     this.fontColor,
     this.backColor,
     this.elevation,
+    this.captionFontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.captionBackColor,
     this.underline = SmeupDatePickerModel.defaultUnderline,
     this.align = SmeupDatePickerModel.defaultAlign,
     this.label = SmeupDatePickerModel.defaultLabel,

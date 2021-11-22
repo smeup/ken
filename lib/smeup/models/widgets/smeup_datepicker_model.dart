@@ -15,6 +15,10 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
   static double defaultFontSize;
   static Color defaultFontColor;
   static Color defaultBackColor;
+  static bool defaultCaptionFontBold;
+  static double defaultCaptionFontSize;
+  static Color defaultCaptionFontColor;
+  static Color defaultCaptionBackColor;
   static double defaultElevation;
 
   // unsupported by json_theme
@@ -33,11 +37,15 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
   double borderWidth;
   double borderRadius;
   bool fontBold;
-  bool underline;
   double fontSize;
   Color fontColor;
   Color backColor;
+  bool captionFontBold;
+  double captionFontSize;
+  Color captionFontColor;
+  Color captionBackColor;
   double elevation;
+  bool underline;
   double innerSpace;
   Alignment align;
   String valueField;
@@ -58,10 +66,14 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
       this.borderWidth,
       this.borderRadius,
       this.fontBold,
-      this.underline,
       this.fontSize,
       this.fontColor,
       this.backColor,
+      this.captionFontBold,
+      this.captionFontSize,
+      this.captionFontColor,
+      this.captionBackColor,
+      this.underline,
       this.elevation,
       this.align = defaultAlign,
       this.valueField = defaultValueField,
@@ -93,6 +105,15 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontSize;
     fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']) ??
         defaultFontColor;
+    captionBackColor =
+        SmeupUtilities.getColorFromRGB(optionsDefault['captionBackColor']) ??
+            defaultCaptionBackColor;
+    captionFontSize =
+        SmeupUtilities.getDouble(optionsDefault['captionFontSize']) ??
+            defaultCaptionFontSize;
+    captionFontColor =
+        SmeupUtilities.getColorFromRGB(optionsDefault['captionFontColor']) ??
+            defaultCaptionFontColor;
     label = optionsDefault['label'] ?? defaultLabel;
     padding =
         SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
@@ -122,6 +143,7 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
             defaultBorderColor;
 
     fontBold = optionsDefault['bold'] ?? defaultFontBold;
+    captionFontBold = optionsDefault['captionBold'] ?? defaultCaptionFontBold;
     underline =
         SmeupUtilities.getBool(optionsDefault['underline']) ?? defaultUnderline;
 
@@ -159,6 +181,11 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
 
+    var captionStyle = SmeupConfigurationService.getTheme().textTheme.caption;
+    defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
+    defaultCaptionFontSize = captionStyle.fontSize;
+    defaultCaptionFontColor = captionStyle.color;
+
     // ----------------- set properties from default
     if (obj.backColor == null)
       obj.backColor = SmeupDatePickerModel.defaultBackColor;
@@ -176,5 +203,11 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
       obj.fontColor = SmeupDatePickerModel.defaultFontColor;
     if (obj.fontSize == null)
       obj.fontSize = SmeupDatePickerModel.defaultFontSize;
+    if (obj.captionFontBold == null)
+      obj.captionFontBold = SmeupDatePickerModel.defaultCaptionFontBold;
+    if (obj.captionFontColor == null)
+      obj.captionFontColor = SmeupDatePickerModel.defaultCaptionFontColor;
+    if (obj.captionFontSize == null)
+      obj.captionFontSize = SmeupDatePickerModel.defaultCaptionFontSize;
   }
 }

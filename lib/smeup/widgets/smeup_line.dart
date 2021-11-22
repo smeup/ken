@@ -3,6 +3,7 @@ import 'package:mobile_components_library/smeup/daos/smeup_line_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_line_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
@@ -29,10 +30,11 @@ class SmeupLine extends StatefulWidget
       {this.title,
       this.id = '',
       this.type = 'LIN',
-      this.color = SmeupLineModel.defaultColor,
+      this.color,
       this.thickness = SmeupLineModel.defaultThickness})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
+    SmeupLineModel.setDefaults(this);
   }
 
   SmeupLine.withController(
@@ -110,10 +112,22 @@ class _SmeupLineState extends State<SmeupLine>
       }
       setDataLoad(widget.id, true);
     }
+
+    TextStyle captionStyle = _getCaptionStile();
+
     final children = Divider(
-      color: widget.color,
+      color: captionStyle.color,
       thickness: widget.thickness,
     );
     return SmeupWidgetBuilderResponse(_model, children);
+  }
+
+  TextStyle _getCaptionStile() {
+    TextStyle style =
+        SmeupConfigurationService.getTheme().textTheme.copyWith().caption;
+
+    style = style.copyWith(color: widget.color);
+
+    return style;
   }
 }
