@@ -1,7 +1,5 @@
 # mobile-components-library
-Smeup mobile widgets' library 
-
-[_TOC_]
+Smeup mobile widgets' library is a set of widgets built on top of Flutter widgets.
 
 ## Icons
 
@@ -30,57 +28,111 @@ Smeup mobile widgets' library
 
 - storage
 
-## Widgets 
-Follow the list of the json_theme's style supported by the smeup_components_library widgets.
+## Widgets default values
+Follow the list of the attributes of the smeup_components_library widgets with their defaults.
 
+<a name="SmeupButton">
 ### SmeupButton
-    - backColor         :   elevatedButtonTheme.style.backgroundColor
-    - borderColor       :   elevatedButtonTheme.style.side.color
-    - borderWidth       :   elevatedButtonTheme.style.side.width
-    - borderRadius      :   elevatedButtonTheme.style.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
-    - elevation         :   elevatedButtonTheme.style.elevation
+</a>
 
-    - fontColor         :   textTheme.button.color
-    - fontSize          :   textTheme.button.fontSize
-    - fontBold          :   textTheme.button.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
-    - underline         :   textTheme.button.decoration (values: ['lineThrough', 'none', 'overline', 'underline'])
+    json_theme's supported attributes:
+    - backColor             :   elevatedButtonTheme.style.backgroundColor
+    - borderColor           :   elevatedButtonTheme.style.side.color
+    - borderWidth           :   elevatedButtonTheme.style.side.width
+    - borderRadius          :   elevatedButtonTheme.style.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
+    - elevation             :   elevatedButtonTheme.style.elevation
 
-    - iconSize          :   iconTheme.size
-    - iconColor         :   iconTheme.color
+    - fontColor             :   textTheme.button.color
+    - fontSize              :   textTheme.button.fontSize
+    - fontBold              :   textTheme.button.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - underline             :   textTheme.button.decoration (values: ['lineThrough', 'none', 'overline', 'underline'])
 
+    - iconSize              :   iconTheme.size
+    - iconColor             :   iconTheme.color
+
+    Others attributes:
+    - width                 :   0
+    - height                :   70
+    - position              :   MainAxisAlignment.center
+    - align                 :   Alignment.center
+    - padding               :   EdgeInsets.all(5)
+    - valueField            :   'value'
+    - innerSpace            :   10.0
+    - isLink                :   false
+    - orientation           :   WidgetOrientation.Vertical
+
+<a name="SmeupLabel">
 ### SmeupLabel
-    - fontColor         :   textTheme.bodyText2.color
-    - fontSize          :   textTheme.bodyText2.fontSize
-    - fontBold          :   textTheme.bodyText2.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
-    - backColor         :   textTheme.bodyText2.backgroundColor
+</a>
 
-    - iconSize          :   iconTheme.size
-    - iconColor         :   iconTheme.color
+    json_theme's supported attributes:
+    - fontColor             :   textTheme.bodyText2.color
+    - fontSize              :   textTheme.bodyText2.fontSize
+    - fontBold              :   textTheme.bodyText2.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - backColor             :   textTheme.bodyText2.backgroundColor
 
+    - iconSize              :   iconTheme.size
+    - iconColor             :   iconTheme.color
+
+    Others attributes:
+    - padding               :   EdgeInsets.all(0)
+    - align                 :   Alignment.center
+    - width                 :   0
+    - height                :   15
+    - valColName            :   'value'
+
+<a name="SmeupDatePicker">
 ### SmeupDatePicker
-    - borderColor       :   timePickerThemeData.dayPeriodBorderSide.color
-    - borderWidth       :   timePickerThemeData.dayPeriodBorderSide.width
-    - borderRadius      :   timePickerThemeData.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
-    - backColor         :   timePickerThemeData.backgroundColor
+</a>
 
-    - fontSize          :   textTheme.bodyText1.fontSize
-    - fontBold          :   textTheme.bodyText1.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
-    - backColor         :   textTheme.bodyText1.backgroundColor
+    json_theme's supported attributes:
+    - borderColor           :   timePickerThemeData.dayPeriodBorderSide.color
+    - borderWidth           :   timePickerThemeData.dayPeriodBorderSide.width
+    - borderRadius          :   timePickerThemeData.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
+    - backColor             :   timePickerThemeData.backgroundColor
 
-    - captionFontSize   :   textTheme.caption.fontSize
-    - captionFontBold   :   textTheme.caption.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
-    - captionBackColor  :   textTheme.caption.backgroundColor
+    - fontSize              :   textTheme.bodyText1.fontSize
+    - fontBold              :   textTheme.bodyText1.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - backColor             :   textTheme.bodyText1.backgroundColor
 
-    - elevation         :   elevatedButtonTheme.style.elevation
+    - captionFontSize       :   textTheme.caption.fontSize
+    - captionFontBold       :   textTheme.caption.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - captionBackColor      :   textTheme.caption.backgroundColor
 
-    - underline         :   the underline attribute is a boolean and decides wheter or not a SmeupLine should be shown under the SmeupDatePicker. 
+    - elevation             :   elevatedButtonTheme.style.elevation
+
+    - underline             :   the underline attribute is a boolean and decides wheter or not a SmeupLine should be shown under the SmeupDatePicker. 
 
    Notes:
-   See [SmeupLine](#SmeupLine) for further information about SmeupLine. 
+    See [SmeupLine](#SmeupLine) for further information about SmeupLine. 
+
+    Others attributes:
+    - underline             :   true
+    - label                 :   ''
+    - width                 :   100
+    - height                :   100
+    - padding               :   EdgeInsets.all(0)
+    - showBorder            :   false
+    - valueField            :   'value'
+    - displayedField        :   'display'
+    - align                 :   Alignment.topCenter
+    - innerSpace            :   10.0
 
 <a name="SmeupLine">
 ### SmeupLine
 </a>
 
-    - color         :   textTheme.caption.color
+    json_theme's supported attributes:
+    - color                 :   textTheme.caption.color
+
+    Others attributes:
+    - defaultThickness      :   1
     
+<a name="SmeupRadioButton">
+### SmeupRadioButton
+</a>
+
+    json_theme's supported attributes:
+    - color                 :   textTheme.caption.color
+
+    Others attributes:
