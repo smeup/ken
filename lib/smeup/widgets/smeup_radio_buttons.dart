@@ -4,6 +4,7 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
@@ -24,16 +25,21 @@ class SmeupRadioButtons extends StatefulWidget
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
 
-  Function clientOnPressed;
-
-  EdgeInsetsGeometry padding;
+  Color radioButtonColor;
+  Color fontColor;
+  double fontSize;
   Color backColor;
+  bool fontBold;
+  bool captionFontBold;
+  double captionFontSize;
+  Color captionFontColor;
+  Color captionBackColor;
+
+  Function clientOnPressed;
+  EdgeInsetsGeometry padding;
   double width;
   double height;
-  MainAxisAlignment position;
   Alignment align;
-  Color fontColor;
-  double fontsize;
   List<dynamic> data;
   String valueField;
   String displayedField;
@@ -57,14 +63,19 @@ class SmeupRadioButtons extends StatefulWidget
     this.id = '',
     this.type = 'FLD',
     this.title = '',
-    this.data,
+    this.radioButtonColor,
+    this.fontSize,
+    this.fontColor,
     this.backColor,
+    this.fontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.captionBackColor,
+    this.captionFontBold,
+    this.data,
     this.width = SmeupRadioButtonsModel.defaultWidth,
     this.height = SmeupRadioButtonsModel.defaultHeight,
-    this.position = SmeupRadioButtonsModel.defaultPosition,
     this.align = SmeupRadioButtonsModel.defaultAlign,
-    this.fontColor,
-    this.fontsize = SmeupRadioButtonsModel.defaultFontsize,
     this.padding = SmeupRadioButtonsModel.defaultPadding,
     this.valueField = SmeupRadioButtonsModel.defaultValueField,
     this.displayedField = SmeupRadioButtonsModel.defaultDisplayedField,
@@ -73,10 +84,7 @@ class SmeupRadioButtons extends StatefulWidget
     this.columns = SmeupRadioButtonsModel.defaultColumns,
   }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
-    if (backColor == null)
-      backColor = SmeupRadioButtonsModel.getDefaultBackColor();
-    if (fontColor == null)
-      fontColor = SmeupRadioButtonsModel.getDefaultFontColor();
+    SmeupRadioButtonsModel.setDefaults(this);
   }
 
   @override
@@ -88,15 +96,20 @@ class SmeupRadioButtons extends StatefulWidget
     backColor = m.backColor;
     width = m.width;
     height = m.height;
-    position = m.position;
     align = m.align;
     fontColor = m.fontColor;
-    fontsize = m.fontsize;
+    fontSize = m.fontSize;
     padding = m.padding;
     valueField = m.valueField;
     displayedField = m.displayedField;
     selectedValue = m.selectedValue;
     columns = m.columns;
+    radioButtonColor = m.radioButtonColor;
+    fontBold = m.fontBold;
+    captionBackColor = m.captionBackColor;
+    captionFontBold = m.captionFontBold;
+    captionFontColor = m.captionFontColor;
+    captionFontSize = m.captionFontSize;
 
     data = treatData(m);
   }
@@ -182,11 +195,13 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
 
     var buttons = List<Widget>.empty(growable: true);
 
+    TextStyle captionStyle = _getCaptionStile();
+
     if (widget.title.isNotEmpty) {
       buttons.add(Container(
           child: Text(
         widget.title,
-        style: TextStyle(fontSize: widget.fontsize, color: widget.fontColor),
+        style: captionStyle,
       )));
     }
 
@@ -212,13 +227,13 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
           backColor: widget.backColor,
           width: radioWidth,
           height: radioHeight,
-          position: widget.position,
           align: widget.align,
           fontColor: widget.fontColor,
-          fontsize: widget.fontsize,
+          fontSize: widget.fontSize,
           padding: widget.padding,
           valueField: widget.valueField,
           displayedField: widget.displayedField,
+          radioButtonColor: widget.radioButtonColor,
           selectedValue: SmeupVariablesService.getVariable(widget.id,
               formKey: widget.formKey),
           icon: null,
@@ -263,13 +278,7 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
           (radioWidth / radioHeight * buttons.length * 3) / widget.columns;
 
       final container = Container(
-          //height: radioHeight * buttons.length,
           padding: widget.padding,
-          // decoration: BoxDecoration(
-          //     color: widget.backColor,
-          //     borderRadius: BorderRadius.circular(12.0),
-          //     border: Border.all(
-          //         color: SmeupConfigurationService.getTheme().primaryColor)),
           child: GridView.count(
             shrinkWrap: true,
             childAspectRatio: childAspectRatio,
@@ -291,5 +300,23 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
           logType: LogType.error);
       return SmeupWidgetBuilderResponse(_model, SmeupNotAvailable());
     }
+  }
+
+  TextStyle _getCaptionStile() {
+    TextStyle style =
+        SmeupConfigurationService.getTheme().textTheme.copyWith().caption;
+
+    style = style.copyWith(
+        color: widget.captionFontColor,
+        fontSize: widget.captionFontSize,
+        backgroundColor: widget.captionBackColor);
+
+    if (widget.captionFontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
   }
 }

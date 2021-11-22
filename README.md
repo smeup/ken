@@ -133,6 +133,24 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 </a>
 
     json_theme's supported attributes:
-    - color                 :   textTheme.caption.color
+    - radioButtonColor      :   radioTheme.fillColor
+
+    - fontColor             :   textTheme.bodyText1.color
+    - fontSize              :   textTheme.bodyText1.fontSize
+    - fontBold              :   textTheme.bodyText1.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - backColor             :   textTheme.bodyText1.backgroundColor
+
+    - captionFontColor      :   textTheme.caption.color
+    - captionFontSize       :   textTheme.caption.fontSize
+    - captionFontBold       :   textTheme.caption.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - captionBackColor      :   textTheme.caption.backgroundColor
+
 
     Others attributes:
+    - defaultValueField     :   'code'
+    - defaultDisplayedField :   'value'
+    - defaultAlign          :   Alignment.centerLeft
+    - defaultWidth          :   100
+    - defaultHeight         :   75
+    - defaultPadding        :   EdgeInsets.all(0)
+    - defaultColumns        :   1

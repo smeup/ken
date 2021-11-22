@@ -87,6 +87,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     setDefaults(this);
   }
 
+  // TODO
   SmeupButtonsModel.clone(SmeupButtonsModel other)
       : this(
             formKey: other.formKey,

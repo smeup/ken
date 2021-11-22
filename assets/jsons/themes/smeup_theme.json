@@ -57,5 +57,8 @@
       "color": "#ffffff",
       "width": 2.0
     }
+  },
+  "radioTheme" : {
+    "fillColor" : "#068a9c"
   }
 }
