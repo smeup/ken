@@ -23,10 +23,39 @@
       "fontSize": 16.0,
       "fontWeight": "bold",
       "decoration": "none"
+    },
+    "caption": {
+      "color": "#068a9c",
+      "fontSize": 18.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
+    },
+    "bodyText1": {
+      "color": "#068a9c",
+      "fontSize": 18.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
+    },
+    "bodyText2": {
+      "color": "#000000",
+      "fontSize": 18.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
     }
   },
   "iconTheme": {
     "size": 20.0,
     "color": "#ffffff"
+  },
+  "timePickerThemeData":  {
+    "backgroundColor": "#ffffff",
+    "shape": {
+      "type": "rectangle",
+      "borderRadius": 10.0
+    },
+    "dayPeriodBorderSide": {
+      "color": "#ffffff",
+      "width": 2.0
+    }
   }
 }

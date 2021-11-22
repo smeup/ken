@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 
+// TODO:
+// https://github.com/peiffer-innovations/json_theme/issues/28
+// Should be fixed in 3.1.2+1.
+
 // ignore: must_be_immutable
 class SmeupButton extends StatelessWidget {
   final int buttonIndex;
@@ -14,7 +18,7 @@ class SmeupButton extends StatelessWidget {
   double elevation;
   double fontSize;
   Color fontColor;
-  bool bold;
+  bool fontBold;
   double iconSize;
   Color iconColor;
   bool underline;
@@ -47,7 +51,7 @@ class SmeupButton extends StatelessWidget {
       this.borderRadius,
       this.fontSize,
       this.fontColor,
-      this.bold,
+      this.fontBold,
       this.iconSize,
       this.iconColor,
       this.underline,
@@ -225,7 +229,7 @@ class SmeupButton extends StatelessWidget {
 
     style = style.copyWith(color: fontColor, fontSize: fontSize);
 
-    if (bold) {
+    if (fontBold) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );

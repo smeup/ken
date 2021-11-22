@@ -1,26 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_label_dao.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_data_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
+  // supported by json_theme
+  static double defaultFontSize;
+  static Color defaultFontColor;
+  static bool defaultFontBold;
+  static Color defaultBackColor;
+  static double defaultIconSize;
+  static Color defaultIconColor;
+
+  // unsupported by json_theme
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
-  static const double defaultFontSize = 18.0;
-  static const double defaultIconSize = 18.0;
   static const Alignment defaultAlign = Alignment.center;
-  static const bool defaultFontbold = false;
   static const double defaultWidth = 0;
   static const double defaultHeight = 15;
   static const String defaultValColName = 'value';
 
-  EdgeInsetsGeometry padding;
   double fontSize;
-  double iconSize;
-  Alignment align;
+  Color fontColor;
   bool fontBold;
+  Color backColor;
+  double iconSize;
+  Color iconColor;
+
+  EdgeInsetsGeometry padding;
+  Alignment align;
   double width;
   double height;
   String valueColName;
@@ -28,35 +38,37 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
   String fontColorColName;
   int iconData;
   String iconColname;
-  Color backColor;
-  Color fontColor;
 
   SmeupLabelModel(
       {id,
       type,
       GlobalKey<FormState> formKey,
+      this.fontSize,
+      this.fontColor,
+      this.fontBold,
+      this.backColor,
+      this.iconSize,
+      this.iconColor,
       this.valueColName = defaultValColName,
       this.padding = defaultPadding,
-      this.fontSize = defaultFontSize,
       this.align = defaultAlign,
-      this.fontBold = defaultFontbold,
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.backColorColName = '',
-      this.backColor,
-      this.fontColor,
       this.iconData = 0,
       this.iconColname = '',
       this.fontColorColName = '',
-      this.iconSize = defaultIconSize,
       title = ''})
       : super(formKey, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
+    setDefaults(this);
   }
 
   SmeupLabelModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
+    setDefaults(this);
+
     if (fontColor == null)
       fontColor =
           SmeupConfigurationService.getTheme().textTheme.bodyText1.color;
@@ -70,25 +82,25 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontSize;
     iconSize =
         SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
+    iconColor = SmeupUtilities.getColorFromRGB(optionsDefault['iconColor']) ??
+        defaultIconColor;
     align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']) ??
         defaultAlign;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     title = jsonMap['title'] ?? '';
-    if (optionsDefault['backColor'] != null) {
-      backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
-    }
-    if (optionsDefault['fontColor'] != null) {
-      fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']);
-    }
+    backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??
+        defaultBackColor;
+    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']) ??
+        defaultFontColor;
     if (optionsDefault['icon'] != null)
       iconData = SmeupUtilities.getInt(optionsDefault['icon']) ?? 0;
     else
       iconData = 0;
     iconColname = optionsDefault['iconColName'] ?? '';
     fontBold =
-        SmeupUtilities.getBool(optionsDefault['fontBold']) ?? defaultFontbold;
+        SmeupUtilities.getBool(optionsDefault['fontBold']) ?? defaultFontBold;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
@@ -97,5 +109,27 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
     }
 
     SmeupDataService.incrementDataFetch(id);
+  }
+
+  static setDefaults(dynamic obj) {
+    TextStyle textStyle =
+        SmeupConfigurationService.getTheme().textTheme.bodyText2;
+    defaultFontSize = textStyle.fontSize;
+    defaultFontColor = textStyle.color;
+    defaultBackColor = textStyle.backgroundColor;
+    defaultFontBold = textStyle.fontWeight == FontWeight.bold;
+
+    var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
+    defaultIconSize = iconTheme.size;
+    defaultIconColor = iconTheme.color;
+
+    // ----------------- set properties from default
+
+    if (obj.fontSize == null) obj.fontSize = SmeupLabelModel.defaultFontSize;
+    if (obj.fontColor == null) obj.fontColor = SmeupLabelModel.defaultFontColor;
+    if (obj.backColor == null) obj.backColor = SmeupLabelModel.defaultBackColor;
+    if (obj.fontBold == null) obj.fontBold = SmeupLabelModel.defaultFontBold;
+    if (obj.iconSize == null) obj.iconSize = SmeupLabelModel.defaultIconSize;
+    if (obj.iconColor == null) obj.iconColor = SmeupLabelModel.defaultIconColor;
   }
 }

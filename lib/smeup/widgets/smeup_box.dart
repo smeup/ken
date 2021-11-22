@@ -239,6 +239,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                               alignment: Alignment.center,
                               child: Text(rowData,
                                   style: TextStyle(
+                                      backgroundColor: widget.cardColor,
                                       fontSize: 20,
                                       color: widget.fontColor ??
                                           SmeupConfigurationService.getTheme()
@@ -323,6 +324,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                                       alignment: Alignment.centerLeft,
                                       child: Text(col['text'],
                                           style: TextStyle(
+                                            backgroundColor: widget.cardColor,
                                             fontSize: 16,
                                           )),
                                     ),
@@ -333,6 +335,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                                     alignment: Alignment.centerRight,
                                     child: Text(rowData,
                                         style: TextStyle(
+                                            backgroundColor: widget.cardColor,
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold)),
                                   ),
@@ -384,6 +387,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                               alignment: Alignment.center,
                               child: Text(rowData,
                                   style: TextStyle(
+                                      backgroundColor: widget.cardColor,
                                       fontSize: 20,
                                       color: widget.fontColor ??
                                           SmeupConfigurationService.getTheme()
@@ -449,6 +453,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                                     alignment: Alignment.centerLeft,
                                     child: Text(col['text'],
                                         style: TextStyle(
+                                          backgroundColor: widget.cardColor,
                                           fontSize: 16,
                                         )),
                                   ),
@@ -459,6 +464,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                                   alignment: Alignment.centerRight,
                                   child: Text(rowData,
                                       style: TextStyle(
+                                          backgroundColor: widget.cardColor,
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold)),
                                 ),
@@ -537,6 +543,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                                       alignment: Alignment.centerLeft,
                                       child: Text(col['text'],
                                           style: TextStyle(
+                                            backgroundColor: widget.cardColor,
                                             fontSize: 16,
                                           )),
                                     ),
@@ -547,6 +554,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                                     alignment: Alignment.centerRight,
                                     child: Text(rowData,
                                         style: TextStyle(
+                                            backgroundColor: widget.cardColor,
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold)),
                                   ),
@@ -603,6 +611,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                                 alignment: Alignment.center,
                                 child: Text(rowData,
                                     style: TextStyle(
+                                        backgroundColor: widget.cardColor,
                                         fontSize: 20,
                                         color: widget.fontColor ??
                                             SmeupConfigurationService.getTheme()
@@ -684,6 +693,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                               child: Text(rowData,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
+                                      backgroundColor: widget.cardColor,
                                       fontSize: 12,
                                       color: widget.fontColor ??
                                           SmeupConfigurationService.getTheme()

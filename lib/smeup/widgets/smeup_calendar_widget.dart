@@ -157,18 +157,30 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
 
               calendarStyle: CalendarStyle(
                 outsideDaysVisible: false,
-                weekendTextStyle:
-                    const TextStyle().copyWith(color: Colors.red[800]),
-                holidayTextStyle:
-                    const TextStyle().copyWith(color: Colors.red[800]),
+                weekendTextStyle: SmeupConfigurationService.getTheme()
+                    .textTheme
+                    .bodyText2
+                    .copyWith(color: Colors.red[800]),
+                holidayTextStyle: SmeupConfigurationService.getTheme()
+                    .textTheme
+                    .bodyText2
+                    .copyWith(color: Colors.red[800]),
               ),
               daysOfWeekStyle: DaysOfWeekStyle(
-                weekendStyle:
-                    const TextStyle().copyWith(color: Colors.red[600]),
+                weekendStyle: SmeupConfigurationService.getTheme()
+                    .textTheme
+                    .bodyText2
+                    .copyWith(color: Colors.red[600], fontSize: 16),
+                weekdayStyle: SmeupConfigurationService.getTheme()
+                    .textTheme
+                    .bodyText2
+                    .copyWith(fontSize: 16),
               ),
               headerVisible: widget.showNavigation,
               headerStyle: HeaderStyle(
                 titleTextStyle: TextStyle(
+                    backgroundColor:
+                        SmeupConfigurationService.getTheme().primaryColor,
                     color: Colors.white,
                     fontSize: widget.titleFontSize,
                     fontWeight: FontWeight.bold),
@@ -199,8 +211,12 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                       height: 100,
                       child: Text(
                         '${date.day}',
-                        style: TextStyle()
-                            .copyWith(fontSize: widget.eventFontSize),
+                        style: SmeupConfigurationService.getTheme()
+                            .textTheme
+                            .bodyText2
+                            .copyWith(
+                                fontSize: widget.eventFontSize,
+                                backgroundColor: color),
                       ),
                     ),
                   );
@@ -215,7 +231,9 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                     height: 100,
                     child: Text(
                       '${date.day}',
-                      style: const TextStyle()
+                      style: SmeupConfigurationService.getTheme()
+                          .textTheme
+                          .bodyText2
                           .copyWith(fontSize: widget.eventFontSize),
                     ),
                   );
@@ -235,11 +253,15 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                                 ? eventsInDay[0].description
                                 : eventsInDay.length.toString(),
                             textAlign: TextAlign.center,
-                            style: const TextStyle().copyWith(
-                                color: eventsInDay[0].foreColor,
-                                fontSize: Platform.isAndroid ? 12.0 : 10.0,
-                                fontWeight: eventsInDay[0].fontWeight,
-                                overflow: TextOverflow.ellipsis))),
+                            style: SmeupConfigurationService.getTheme()
+                                .textTheme
+                                .bodyText2
+                                .copyWith(
+                                    backgroundColor: Colors.blue,
+                                    color: eventsInDay[0].foreColor,
+                                    fontSize: Platform.isAndroid ? 12.0 : 10.0,
+                                    fontWeight: eventsInDay[0].fontWeight,
+                                    overflow: TextOverflow.ellipsis))),
                   );
                 },
               ),
@@ -392,10 +414,13 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
   }
 
   Column _getListTileWidget(SmeupCalentarEventModel event) {
-    final style = const TextStyle().copyWith(
-        color: event.foreColor,
-        fontSize: Platform.isAndroid ? 12.0 : 10.0,
-        fontWeight: event.fontWeight);
+    final style = SmeupConfigurationService.getTheme()
+        .textTheme
+        .bodyText2
+        .copyWith(
+            color: event.foreColor,
+            fontSize: Platform.isAndroid ? 12.0 : 10.0,
+            fontWeight: event.fontWeight);
 
     final initTimeStr = event.initTime != null
         ? DateFormat("HH:mm").format(event.initTime)
