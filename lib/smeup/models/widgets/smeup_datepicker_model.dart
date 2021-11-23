@@ -20,9 +20,9 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
   static Color defaultCaptionFontColor;
   static Color defaultCaptionBackColor;
   static double defaultElevation;
+  static bool defaultUnderline;
 
   // unsupported by json_theme
-  static const bool defaultUnderline = true;
   static const String defaultLabel = '';
   static const double defaultWidth = 100;
   static const double defaultHeight = 100;
@@ -105,6 +105,8 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontSize;
     fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']) ??
         defaultFontColor;
+    fontBold = optionsDefault['bold'] ?? defaultFontBold;
+
     captionBackColor =
         SmeupUtilities.getColorFromRGB(optionsDefault['captionBackColor']) ??
             defaultCaptionBackColor;
@@ -114,6 +116,8 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
     captionFontColor =
         SmeupUtilities.getColorFromRGB(optionsDefault['captionFontColor']) ??
             defaultCaptionFontColor;
+    captionFontBold = optionsDefault['captionBold'] ?? defaultCaptionFontBold;
+
     label = optionsDefault['label'] ?? defaultLabel;
     padding =
         SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
@@ -142,8 +146,6 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getColorFromRGB(optionsDefault['borderColor']) ??
             defaultBorderColor;
 
-    fontBold = optionsDefault['bold'] ?? defaultFontBold;
-    captionFontBold = optionsDefault['captionBold'] ?? defaultCaptionFontBold;
     underline =
         SmeupUtilities.getBool(optionsDefault['underline']) ?? defaultUnderline;
 
@@ -180,6 +182,7 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
+    defaultUnderline = textStyle.decoration == TextDecoration.underline;
 
     var captionStyle = SmeupConfigurationService.getTheme().textTheme.caption;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
@@ -209,5 +212,7 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
       obj.captionFontColor = SmeupDatePickerModel.defaultCaptionFontColor;
     if (obj.captionFontSize == null)
       obj.captionFontSize = SmeupDatePickerModel.defaultCaptionFontSize;
+    if (obj.underline == null)
+      obj.underline = SmeupDatePickerModel.defaultUnderline;
   }
 }

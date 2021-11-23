@@ -5,8 +5,10 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_line.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker_button.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
@@ -30,22 +32,30 @@ class SmeupTimePicker extends StatefulWidget
 
   String id;
   String type;
-
-  // Graphics properties
   Color backColor;
-  double fontsize;
+  double fontSize;
   Color fontColor;
   String label;
   double width;
   double height;
   EdgeInsetsGeometry padding;
   bool showborder;
-  List<String> minutesList;
-
   String valueField;
   String displayField;
-
-  // Data injected through static constructor
+  Color borderColor;
+  double borderWidth;
+  double borderRadius;
+  bool fontBold;
+  bool captionFontBold;
+  double captionFontSize;
+  Color captionFontColor;
+  Color captionBackColor;
+  bool underline;
+  double innerSpace;
+  Alignment align;
+  String title;
+  double elevation;
+  List<String> minutesList;
   SmeupTimePickerData data;
 
   // They have to be mapped with all the dynamisms
@@ -61,9 +71,21 @@ class SmeupTimePicker extends StatefulWidget
     this.data, {
     id = '',
     type = 'tpk',
-    this.backColor = SmeupTimePickerModel.defaultBackColor,
-    this.fontsize = SmeupTimePickerModel.defaultFontsize,
-    this.fontColor = SmeupTimePickerModel.defaultFontColor,
+    this.borderColor,
+    this.borderRadius,
+    this.borderWidth,
+    this.fontBold,
+    this.fontSize,
+    this.fontColor,
+    this.backColor,
+    this.elevation,
+    this.captionFontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.captionBackColor,
+    this.underline,
+    this.innerSpace = SmeupTimePickerModel.defaultInnerSpace,
+    this.align = SmeupTimePickerModel.defaultAlign,
     this.label = SmeupTimePickerModel.defaultLabel,
     this.width = SmeupTimePickerModel.defaultWidth,
     this.height = SmeupTimePickerModel.defaultHeight,
@@ -74,7 +96,10 @@ class SmeupTimePicker extends StatefulWidget
     //this.clientOnSave,
     this.clientOnChange,
     this.keyboard,
-  }) : super(key: Key(SmeupUtilities.getWidgetId(type, id)));
+  }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
+    id = SmeupUtilities.getWidgetId(type, id);
+    SmeupTimePickerModel.setDefaults(this);
+  }
 
   SmeupTimePicker.withController(
     this.model,
@@ -89,10 +114,11 @@ class SmeupTimePicker extends StatefulWidget
     SmeupTimePickerModel m = model;
     id = m.id;
     type = m.type;
+    title = m.title;
     valueField = m.valueField;
     displayField = m.displayedField;
     backColor = m.backColor;
-    fontsize = m.fontsize;
+    fontSize = m.fontSize;
     fontColor = m.fontColor;
     label = m.label;
     width = m.width;
@@ -100,6 +126,18 @@ class SmeupTimePicker extends StatefulWidget
     padding = m.padding;
     showborder = m.showBorder;
     minutesList = m.minutesList;
+    elevation = m.elevation;
+    borderRadius = m.borderRadius;
+    borderWidth = m.borderWidth;
+    borderColor = m.borderColor;
+    fontBold = m.fontBold;
+    underline = m.underline;
+    align = m.align;
+    innerSpace = m.innerSpace;
+    captionFontBold = m.captionFontBold;
+    captionFontSize = m.captionFontSize;
+    captionFontColor = m.captionFontColor;
+    captionBackColor = m.captionBackColor;
 
     data = treatData(m);
   }
@@ -195,13 +233,40 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
         timePickerWidth = (_model.parent as SmeupSectionModel).width;
     }
 
+    if (!widget.showborder) {
+      widget.borderColor =
+          SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
+    }
+
+    ButtonStyle buttonStyle = _getButtonStyle();
+    TextStyle textStyle = _getTextStile();
+    TextStyle captionStyle = _getCaptionStile();
+
+    var text = widget.label.isEmpty
+        ? Container()
+        : Text(widget.label, textAlign: TextAlign.center, style: captionStyle);
+
     timepicker = SmeupTimePickerButton(
-      widget.formKey,
       _data,
+      buttonStyle,
+      textStyle,
+      scaffoldKey: widget.scaffoldKey,
+      formKey: widget.formKey,
       id: widget.id,
       backColor: widget.backColor,
-      fontsize: widget.fontsize,
+      fontSize: widget.fontSize,
       fontColor: widget.fontColor,
+      borderRadius: widget.borderRadius,
+      borderWidth: widget.borderWidth,
+      borderColor: widget.borderColor,
+      fontBold: widget.fontBold,
+      align: widget.align,
+      underline: widget.underline,
+      elevation: widget.elevation,
+      captionFontBold: widget.captionFontBold,
+      captionFontSize: widget.captionFontSize,
+      captionFontColor: widget.captionFontColor,
+      captionBackColor: widget.captionBackColor,
       label: widget.label,
       width: timePickerWidth,
       height: timePickerHeight,
@@ -210,6 +275,161 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
       minutesList: widget.minutesList,
       clientOnChange: widget.clientOnChange,
     );
-    return SmeupWidgetBuilderResponse(_model, timepicker);
+
+    var line = widget.underline
+        ? SmeupLine(widget.scaffoldKey, widget.formKey)
+        : Container();
+
+    var children;
+
+    if (widget.align == Alignment.centerLeft) {
+      children = Column(children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            text,
+            SizedBox(width: widget.innerSpace),
+            Expanded(child: Align(child: timepicker, alignment: widget.align)),
+          ],
+        ),
+        line
+      ]
+          //color: widget.backColor,
+          );
+    } else if (widget.align == Alignment.centerRight) {
+      children = Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                  child: Align(
+                child: timepicker,
+                alignment: widget.align,
+              )),
+              SizedBox(width: widget.innerSpace),
+              text,
+            ],
+          ),
+          line
+        ],
+        //color: widget.backColor,
+      );
+    } else if (widget.align == Alignment.topCenter) {
+      children = Container(
+        height: widget.height,
+        width: widget.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Align(
+              child: text,
+              alignment: Alignment.centerLeft,
+            ),
+            SizedBox(height: widget.innerSpace),
+            Align(
+              child: timepicker,
+              alignment: Alignment.centerLeft,
+            ),
+            line
+          ],
+        ),
+        //color: widget.backColor,
+      );
+    } else if (widget.align == Alignment.bottomCenter) {
+      children = Container(
+        height: widget.height,
+        width: widget.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Align(
+              child: timepicker,
+              alignment: Alignment.centerLeft,
+            ),
+            SizedBox(height: widget.innerSpace),
+            Align(
+              child: text,
+              alignment: Alignment.centerLeft,
+            ),
+            line
+          ],
+        ),
+        //color: widget.backColor,
+      );
+    } else // center
+    {
+      children = Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            timepicker,
+            SizedBox(width: widget.innerSpace),
+            Expanded(child: text),
+          ],
+        ),
+        //color: widget.backColor,
+      );
+    }
+
+    return SmeupWidgetBuilderResponse(_model, children);
+  }
+
+  ButtonStyle _getButtonStyle() {
+    var timePickerTheme = SmeupConfigurationService.getTheme()
+        .timePickerTheme
+        .copyWith(
+            backgroundColor: widget.backColor,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(widget.borderRadius)),
+            dayPeriodBorderSide: BorderSide(
+                width: widget.borderWidth, color: widget.borderColor));
+
+    var elevatedButtonStyle = SmeupConfigurationService.getTheme()
+        .elevatedButtonTheme
+        .style
+        .copyWith(
+            backgroundColor: MaterialStateProperty.all<Color>(
+                timePickerTheme.backgroundColor),
+            elevation: MaterialStateProperty.all<double>(widget.elevation),
+            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                EdgeInsets.all(0)),
+            shape: MaterialStateProperty.all<OutlinedBorder>(
+                timePickerTheme.shape),
+            side: MaterialStateProperty.all<BorderSide>(
+                timePickerTheme.dayPeriodBorderSide));
+
+    return elevatedButtonStyle;
+  }
+
+  TextStyle _getTextStile() {
+    TextStyle style =
+        SmeupConfigurationService.getTheme().textTheme.copyWith().bodyText1;
+
+    style = style.copyWith(color: widget.fontColor, fontSize: widget.fontSize);
+
+    if (widget.fontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
+  }
+
+  TextStyle _getCaptionStile() {
+    TextStyle style =
+        SmeupConfigurationService.getTheme().textTheme.copyWith().caption;
+
+    style = style.copyWith(
+        color: widget.captionFontColor, fontSize: widget.captionFontSize);
+
+    if (widget.captionFontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
   }
 }

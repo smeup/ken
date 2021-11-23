@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_datepicker_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 
 // ignore: must_be_immutable
@@ -21,8 +22,8 @@ class SmeupDatePickerButton extends StatefulWidget {
   double captionFontSize;
   Color captionFontColor;
   Color captionBackColor;
+  bool underline;
 
-  final bool underline;
   final DateTime value;
   final String id;
   final String display;
@@ -56,7 +57,7 @@ class SmeupDatePickerButton extends StatefulWidget {
     this.captionFontSize,
     this.captionFontColor,
     this.captionBackColor,
-    this.underline = SmeupDatePickerModel.defaultUnderline,
+    this.underline,
     this.align = SmeupDatePickerModel.defaultAlign,
     this.label = SmeupDatePickerModel.defaultLabel,
     this.width = SmeupDatePickerModel.defaultWidth,
@@ -65,9 +66,6 @@ class SmeupDatePickerButton extends StatefulWidget {
     this.showborder = SmeupDatePickerModel.defaultShowBorder,
   }) {
     SmeupDatePickerModel.setDefaults(this);
-    if (!showborder) {
-      borderWidth = 0;
-    }
   }
 
   @override

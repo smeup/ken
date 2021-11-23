@@ -88,7 +88,7 @@ class SmeupDatePicker extends StatefulWidget
     this.captionFontSize,
     this.captionFontColor,
     this.captionBackColor,
-    this.underline = SmeupDatePickerModel.defaultUnderline,
+    this.underline,
     this.innerSpace = SmeupDatePickerModel.defaultInnerSpace,
     this.align = SmeupDatePickerModel.defaultAlign,
     this.valueField = SmeupDatePickerModel.defaultValueField,
@@ -223,6 +223,11 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
         datePickerHeight = (_model.parent as SmeupSectionModel).height;
       if (datePickerWidth == 0)
         datePickerWidth = (_model.parent as SmeupSectionModel).width;
+    }
+
+    if (!widget.showborder) {
+      widget.borderColor =
+          SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
     }
 
     ButtonStyle buttonStyle = _getButtonStyle();
