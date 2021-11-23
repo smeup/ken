@@ -4,6 +4,7 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_switch_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
@@ -21,18 +22,21 @@ class SmeupSwitch extends StatefulWidget
   GlobalKey<FormState> formKey;
   SmeupSwitchModel model;
 
+  double captionFontSize;
+  Color captionFontColor;
+  Color captionBackColor;
+  bool captionFontBold;
+  Color thumbColor;
+  Color trackColor;
+
   double width;
   double height;
-  double fontsize;
   EdgeInsetsGeometry padding;
   String text;
-
   String id;
   String type;
   String title;
-
   bool data;
-
   Function onClientChange;
 
   SmeupSwitch.withController(
@@ -48,16 +52,22 @@ class SmeupSwitch extends StatefulWidget
     this.formKey, {
     this.id = '',
     this.type = 'FLD',
+    this.captionFontSize,
+    this.captionFontColor,
+    this.captionBackColor,
+    this.captionFontBold,
+    this.thumbColor,
+    this.trackColor,
     this.title = '',
     this.onClientChange,
     this.data = false,
     this.text = '',
     this.width = SmeupSwitchModel.defaultWidth,
     this.height = SmeupSwitchModel.defaultHeight,
-    this.fontsize = SmeupSwitchModel.defaultFontsize,
     this.padding = SmeupSwitchModel.defaultPadding,
   }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
+    SmeupSwitchModel.setDefaults(this);
   }
 
   @override
@@ -68,7 +78,12 @@ class SmeupSwitch extends StatefulWidget
     title = m.title;
     width = m.width;
     height = m.height;
-    fontsize = m.fontsize;
+    captionFontSize = m.captionFontSize;
+    captionFontBold = m.captionFontBold;
+    captionFontColor = m.captionFontColor;
+    captionBackColor = m.captionBackColor;
+    thumbColor = m.thumbColor;
+    trackColor = m.trackColor;
     padding = m.padding;
 
     data = treatData(m);
@@ -152,6 +167,8 @@ class _SmeupSwitchState extends State<SmeupSwitch>
         switchWidth = (_model.parent as SmeupSectionModel).width;
     }
 
+    TextStyle captionStyle = _getCaptionStile();
+
     final children = Center(
         child: Container(
       padding: widget.padding,
@@ -162,7 +179,7 @@ class _SmeupSwitchState extends State<SmeupSwitch>
         children: [
           Text(
             widget.text,
-            style: TextStyle(fontSize: widget.fontsize),
+            style: captionStyle,
           ),
           SmeupSwitchWidget(
             data: _data,
@@ -184,5 +201,23 @@ class _SmeupSwitchState extends State<SmeupSwitch>
     ));
 
     return SmeupWidgetBuilderResponse(_model, children);
+  }
+
+  TextStyle _getCaptionStile() {
+    TextStyle style =
+        SmeupConfigurationService.getTheme().textTheme.copyWith().caption;
+
+    style = style.copyWith(
+        color: widget.captionFontColor,
+        fontSize: widget.captionFontSize,
+        backgroundColor: widget.captionBackColor);
+
+    if (widget.captionFontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
   }
 }

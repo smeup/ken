@@ -60,5 +60,9 @@
   },
   "radioTheme" : {
     "fillColor" : "#068a9c"
+  },
+  "switchTheme" : {
+    "thumbColor" : "#068a9c",
+    "trackColor": "#cef8fd"
   }
 }

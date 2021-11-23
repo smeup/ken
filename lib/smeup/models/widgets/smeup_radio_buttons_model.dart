@@ -77,20 +77,6 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
     SmeupDataService.incrementDataFetch(id);
   }
 
-  // TODO
-  SmeupRadioButtonsModel.clone(SmeupRadioButtonsModel other)
-      : this(
-            title: other.title,
-            backColor: other.backColor,
-            width: other.width,
-            height: other.height,
-            align: other.align,
-            fontColor: other.fontColor,
-            fontSize: other.fontSize,
-            padding: other.padding,
-            valueField: other.valueField,
-            displayedField: other.displayedField);
-
   SmeupRadioButtonsModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
@@ -122,6 +108,8 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
     fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']) ??
         defaultFontColor;
 
+    fontBold = optionsDefault['bold'] ?? defaultFontBold;
+
     captionBackColor =
         SmeupUtilities.getColorFromRGB(optionsDefault['captionBackColor']) ??
             defaultCaptionBackColor;
@@ -135,8 +123,6 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
     radioButtonColor =
         SmeupUtilities.getColorFromRGB(optionsDefault['radioButtonColor']) ??
             defaultRadioButtonColor;
-
-    fontBold = optionsDefault['bold'] ?? defaultFontBold;
 
     captionFontBold = optionsDefault['captionBold'] ?? defaultCaptionFontBold;
 

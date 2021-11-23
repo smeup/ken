@@ -147,7 +147,6 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - captionFontBold       :   textTheme.caption.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
     - captionBackColor      :   textTheme.caption.backgroundColor
 
-
     Others attributes:
     - defaultValueField     :   'code'
     - defaultDisplayedField :   'value'
@@ -193,3 +192,22 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - displayedField        :   'display'
     - align                 :   Alignment.topCenter
     - innerSpace            :   10.0
+
+<a name="SmeupSwitch">
+### SmeupSwitch
+</a>
+
+    json_theme's supported attributes:
+    - thumbColor            :   switchTheme.thumbColor
+    - trackColor            :   switchTheme.trackColor
+
+    - captionFontSize       :   textTheme.caption.fontSize
+    - captionFontBold       :   textTheme.caption.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - captionBackColor      :   textTheme.caption.backgroundColor
+    - captionFontColor      :   textTheme.caption.color
+
+    Others attributes:
+    - width                 :   100
+    - height                :   50
+    - align                 :   Alignment.center
+    - padding               :   EdgeInsets.all(0)
