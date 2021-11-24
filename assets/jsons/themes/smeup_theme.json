@@ -42,6 +42,18 @@
       "fontSize": 18.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
+    },
+    "headline1":{
+      "color": "#ffffff",
+      "fontSize": 18.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#068a9c"
+    },
+    "headline2":{
+      "color": "#068a9c",
+      "fontSize": 18.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
     }
   },
   "iconTheme": {
