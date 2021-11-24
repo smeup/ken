@@ -8,9 +8,9 @@ import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 class SmeupLineModel extends SmeupModel {
   // supported by json_theme
   static Color defaultColor;
+  static double defaultThickness;
 
   // unsupported by json_theme
-  static const double defaultThickness = 1;
 
   Color color;
   double thickness;
@@ -20,7 +20,7 @@ class SmeupLineModel extends SmeupModel {
     type,
     GlobalKey<FormState> formKey, {
     this.color,
-    this.thickness = defaultThickness,
+    this.thickness,
   }) : super(formKey, title: '', id: id, type: type) {
     id = SmeupUtilities.getWidgetId('LIN', id);
     SmeupLineModel.setDefaults(this);
@@ -30,13 +30,13 @@ class SmeupLineModel extends SmeupModel {
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
     SmeupLineModel.setDefaults(this);
+
     thickness = SmeupUtilities.getDouble(optionsDefault['thickness']) ??
         defaultThickness;
-    if (optionsDefault['color'] != null) {
-      color = SmeupUtilities.getColorFromRGB(optionsDefault['color']);
-    } else {
-      color = defaultColor;
-    }
+
+    color =
+        SmeupUtilities.getColorFromRGB(optionsDefault['color']) ?? defaultColor;
+
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         await SmeupLineDao.getData(this);
@@ -47,9 +47,14 @@ class SmeupLineModel extends SmeupModel {
   }
 
   static setDefaults(dynamic obj) {
-    TextStyle captionStyle =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().caption;
+    DividerThemeData dividerData =
+        SmeupConfigurationService.getTheme().dividerTheme;
 
-    defaultColor = captionStyle.color;
+    defaultColor = dividerData.color;
+    defaultThickness = dividerData.thickness;
+
+    // ----------------- set properties from default
+    if (obj.color == null) obj.color = defaultColor;
+    if (obj.thickness == null) obj.thickness = defaultThickness;
   }
 }

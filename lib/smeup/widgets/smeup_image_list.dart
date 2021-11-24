@@ -19,7 +19,11 @@ class SmeupImageList extends StatefulWidget
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
 
-  // graphic properties
+  double captionFontsize;
+  Color captionFontColor;
+  Color captionBackColor;
+  bool captionFontBold;
+
   double width;
   double height;
   EdgeInsetsGeometry padding;
@@ -30,7 +34,6 @@ class SmeupImageList extends StatefulWidget
   String id;
   String type;
   bool dismissEnabled = false;
-  double fontsize;
   dynamic data;
   bool showLoader = false;
   Axis orientation;
@@ -48,10 +51,13 @@ class SmeupImageList extends StatefulWidget
       this.scaffoldKey, this.formKey, this.data, this.columns, this.rows,
       {this.id = '',
       this.type = 'IML',
+      this.captionFontsize,
+      this.captionFontColor,
+      this.captionBackColor,
+      this.captionFontBold,
       layout,
       this.width = SmeupImageListModel.defaultWidth,
       this.height = SmeupImageListModel.defaultHeight,
-      this.fontsize = SmeupImageListModel.defaultFontsize,
       this.padding = SmeupImageListModel.defaultPadding,
       this.orientation = SmeupImageListModel.defaultOrientation,
       this.listHeight = SmeupImageListModel.defaultListHeight,
@@ -71,7 +77,10 @@ class SmeupImageList extends StatefulWidget
     layout = m.layout;
     width = m.width;
     height = m.height;
-    fontsize = m.fontsize;
+    captionFontsize = m.captionFontSize;
+    captionFontColor = m.captionFontColor;
+    captionFontBold = m.captionFontBold;
+    captionBackColor = m.captionBackColor;
     padding = m.padding;
     columns = m.columns;
     rows = m.rows;
@@ -182,7 +191,9 @@ class _SmeupImageListState extends State<SmeupImageList>
       children = SmeupListBox(widget.scaffoldKey, widget.formKey, _data,
           clientOnItemTap: widget.clientOnItemTap,
           dismissEnabled: widget.dismissEnabled,
-          fontsize: widget.fontsize,
+          fontsize: widget.captionFontsize,
+          backColor: widget.captionBackColor,
+          fontColor: widget.captionFontColor,
           height: widget.height,
           listHeight: listboxHeight,
           layout: 'imageList',
@@ -196,7 +207,9 @@ class _SmeupImageListState extends State<SmeupImageList>
           title: widget.title);
     } else {
       final _modelListBox = SmeupListBoxModel(
-          fontsize: widget.fontsize,
+          fontsize: widget.captionFontsize,
+          backColor: widget.captionBackColor,
+          fontColor: widget.captionFontColor,
           height: widget.height,
           listHeight: listboxHeight,
           layout: 'imageList',

@@ -27,11 +27,7 @@ class SmeupLine extends StatefulWidget
   dynamic data;
 
   SmeupLine(this.scaffoldKey, this.formKey,
-      {this.title,
-      this.id = '',
-      this.type = 'LIN',
-      this.color,
-      this.thickness = SmeupLineModel.defaultThickness})
+      {this.title, this.id = '', this.type = 'LIN', this.color, this.thickness})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
     SmeupLineModel.setDefaults(this);
@@ -113,21 +109,20 @@ class _SmeupLineState extends State<SmeupLine>
       setDataLoad(widget.id, true);
     }
 
-    TextStyle captionStyle = _getCaptionStile();
+    DividerThemeData captionStyle = _getCaptionStile();
 
     final children = Divider(
       color: captionStyle.color,
-      thickness: widget.thickness,
+      thickness: captionStyle.thickness,
     );
     return SmeupWidgetBuilderResponse(_model, children);
   }
 
-  TextStyle _getCaptionStile() {
-    TextStyle style =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().caption;
+  DividerThemeData _getCaptionStile() {
+    DividerThemeData dividerData = SmeupConfigurationService.getTheme()
+        .dividerTheme
+        .copyWith(color: widget.color, thickness: widget.thickness);
 
-    style = style.copyWith(color: widget.color);
-
-    return style;
+    return dividerData;
   }
 }

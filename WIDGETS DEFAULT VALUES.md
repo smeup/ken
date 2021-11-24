@@ -1,5 +1,6 @@
 Follow the list of the attributes of the smeup_components_library widgets with their defaults.
 
+
 <a name="SmeupButton">
 ### SmeupButton
 </a>
@@ -33,25 +34,58 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - isLink                :   false
     - orientation           :   WidgetOrientation.Vertical
 
-<a name="SmeupLabel">
-### SmeupLabel
+<a name="SmeupCalendar">
+### SmeupCalendar
 </a>
 
     json_theme's supported attributes:
-    - fontColor             :   textTheme.bodyText2.color
-    - fontSize              :   textTheme.bodyText2.fontSize
-    - fontBold              :   textTheme.bodyText2.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
-    - backColor             :   textTheme.bodyText2.backgroundColor
-
-    - iconSize              :   iconTheme.size
-    - iconColor             :   iconTheme.color
+        TODO
 
     Others attributes:
-    - padding               :   EdgeInsets.all(0)
-    - align                 :   Alignment.center
-    - width                 :   0
-    - height                :   15
-    - valColName            :   'value'
+        TODO
+
+<a name="SmeupCarousel">
+### SmeupCarousel
+</a>
+
+    json_theme's supported attributes:
+    
+    Others attributes:
+    height                  :   100
+    autoPlay                :   false
+
+<a name="SmeupChart">
+### SmeupChart
+</a>
+
+    json_theme's supported attributes:
+    
+    Others attributes:
+    - chartType             :   ChartType.Bar
+    - refresh               :   -1
+    - width                 :   100
+    - height                :   100
+    - legend                :   true
+
+<a name="SmeupDashboard">
+### SmeupDashboard
+</a>
+
+    json_theme's supported attributes:
+        TODO
+        
+    Others attributes:
+        TODO
+
+<a name="SmeupDrawer">
+### SmeupDrawer
+</a>
+
+    json_theme's supported attributes:
+        TODO
+        
+    Others attributes:
+        TODO
 
 <a name="SmeupDatePicker">
 ### SmeupDatePicker
@@ -89,16 +123,124 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - align                 :   Alignment.topCenter
     - innerSpace            :   10.0
 
+<a name="SmeupGauge">
+### SmeupGauge
+</a>
+
+    json_theme's supported attributes:
+    
+    Others attributes:
+    - valColName            :   'value'
+    - maxColName            :   'maxValue'
+    - minColName            :   'minValue'
+    - warningColName        :   'warning'
+    - maxValue              :   100
+    - minValue              :   0
+    - warning               :   50
+    - value                 :   0
+
+<a name="SmeupImage">
+### SmeupImage
+</a>
+
+    json_theme's supported attributes:
+    
+    
+    Others attributes:
+    - width                   :   40
+    - height                  :   40
+    - padding                 :   EdgeInsets.all(0)
+    - isRemote                :   false
+
+<a name="SmeupImageList">
+### SmeupImageList
+</a>
+
+    json_theme's supported attributes:
+        TODO
+        
+    Others attributes:
+        TODO
+
+<a name="SmeupLabel">
+### SmeupLabel
+</a>
+
+    json_theme's supported attributes:
+    - fontColor             :   textTheme.bodyText2.color
+    - fontSize              :   textTheme.bodyText2.fontSize
+    - fontBold              :   textTheme.bodyText2.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - backColor             :   textTheme.bodyText2.backgroundColor
+
+    - iconSize              :   iconTheme.size
+    - iconColor             :   iconTheme.color
+
+    Others attributes:
+    - padding               :   EdgeInsets.all(0)
+    - align                 :   Alignment.center
+    - width                 :   0
+    - height                :   15
+    - valColName            :   'value'
+
 <a name="SmeupLine">
 ### SmeupLine
 </a>
 
     json_theme's supported attributes:
-    - color                 :   textTheme.caption.color
+    - color                 :   dividerTheme.color
+    - thickness             :   dividerTheme.thickness
 
     Others attributes:
-    - defaultThickness      :   1
+
+<a name="SmeupListBox">
+### SmeupListBox
+</a>
+
+    json_theme's supported attributes:
+        TODO
+        
+    Others attributes:
+        TODO    
+
+<a name="SmeupProgressBar">
+### SmeupProgressBar
+</a>
+
+    json_theme's supported attributes:
+    - color                 :   progressIndicatorTheme.color
+    - linearTrackColor      :   progressIndicatorTheme.linearTrackColor
+
+    Others attributes:
+    - valueField            :   'value'
+    - progressBarMinimun    :   0
+    - progressBarMaximun    :   0
+    - height                :   10
+    - padding               :   EdgeInsets.all(0)
+
+<a name="SmeupProgressIndicator">
+### SmeupProgressIndicator
+</a>
+
+    json_theme's supported attributes:
+    - color                 :   progressIndicatorTheme.color
+    - circularTrackColor    :   progressIndicatorTheme.circularTrackColor
+
+    Others attributes:
+    - defaultSize           :   30
+
+<a name="SmeupQRCodeReader">
+### SmeupQRCodeReader
+</a>
+
+    json_theme's supported attributes:
     
+    
+    Others attributes:
+    - padding                :   5.0
+    - size                   :   200
+    - maxReads               :   1
+    - dealyInMillis          :   0
+
 <a name="SmeupRadioButton">
 ### SmeupRadioButton
 </a>
@@ -125,6 +267,77 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - defaultPadding        :   EdgeInsets.all(0)
     - defaultColumns        :   1
 
+<a name="SmeupSlider">
+### SmeupSlider
+</a>
+
+    json_theme's supported attributes:
+    - activeTrackColor      :   sliderTheme.activeTrackColor
+    - thumbColor            :   sliderTheme.thumbColor
+    - inactiveTrackColor    :   sliderTheme.inactiveTrackColor
+
+    Others attributes:
+    - defaultPadding        :   EdgeInsets.only(left: 10, right: 10)
+    - defaultSldMin         :   0
+    - defaultSldMax         :   100
+
+<a name="SmeupSplash">
+### SmeupSplash
+</a>
+
+    json_theme's supported attributes:
+    - color                 :   splashColor
+    
+    Others attributes:
+
+<a name="SmeupSwitch">
+### SmeupSwitch
+</a>
+
+    json_theme's supported attributes:
+    - thumbColor            :   switchTheme.thumbColor
+    - trackColor            :   switchTheme.trackColor
+
+    - captionFontSize       :   textTheme.caption.fontSize
+    - captionFontBold       :   textTheme.caption.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - captionBackColor      :   textTheme.caption.backgroundColor
+    - captionFontColor      :   textTheme.caption.color
+
+    Others attributes:
+    - width                 :   100
+    - height                :   50
+    - align                 :   Alignment.center
+    - padding               :   EdgeInsets.all(0)
+
+<a name="SmeupTextAutocomplete">
+### SmeupTextAutocomplete
+</a>
+
+    json_theme's supported attributes:
+        TODO
+
+    Others attributes:
+        TODO
+
+<a name="SmeupTextField">
+### SmeupTextField
+</a>
+
+    json_theme's supported attributes:
+        TODO
+
+    Others attributes:
+        TODO
+
+<a name="SmeupTextPassword">
+### SmeupTextPassword
+</a>
+
+    json_theme's supported attributes:
+        TODO
+
+    Others attributes:
+        TODO
 
 <a name="SmeupTimePicker">
 ### SmeupTimePicker
@@ -162,73 +375,6 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - align                 :   Alignment.topCenter
     - innerSpace            :   10.0
 
-<a name="SmeupSwitch">
-### SmeupSwitch
-</a>
-
-    json_theme's supported attributes:
-    - thumbColor            :   switchTheme.thumbColor
-    - trackColor            :   switchTheme.trackColor
-
-    - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
-    - captionBackColor      :   textTheme.caption.backgroundColor
-    - captionFontColor      :   textTheme.caption.color
-
-    Others attributes:
-    - width                 :   100
-    - height                :   50
-    - align                 :   Alignment.center
-    - padding               :   EdgeInsets.all(0)
-
-<a name="SmeupSlider">
-### SmeupSlider
-</a>
-
-    json_theme's supported attributes:
-    - activeTrackColor      :   sliderTheme.activeTrackColor
-    - thumbColor            :   sliderTheme.thumbColor
-    - inactiveTrackColor    :   sliderTheme.inactiveTrackColor
-
-    Others attributes:
-    - defaultPadding        :   EdgeInsets.only(left: 10, right: 10)
-    - defaultSldMin         :   0
-    - defaultSldMax         :   100
-
-<a name="SmeupProgressBar">
-### SmeupProgressBar
-</a>
-
-    json_theme's supported attributes:
-    - color                 :   progressIndicatorTheme.color
-    - linearTrackColor      :   progressIndicatorTheme.linearTrackColor
-
-    Others attributes:
-    - valueField            :   'value'
-    - progressBarMinimun    :   0
-    - progressBarMaximun    :   0
-    - height                :   10
-    - padding               :   EdgeInsets.all(0)
-
-<a name="SmeupProgressIndicator">
-### SmeupProgressIndicator
-</a>
-
-    json_theme's supported attributes:
-    - color                 :   progressIndicatorTheme.color
-    - circularTrackColor    :   progressIndicatorTheme.circularTrackColor
-
-    Others attributes:
-    - defaultSize           :   30
-
-<a name="SmeupSplash">
-### SmeupSplash
-</a>
-
-    json_theme's supported attributes:
-    - color                 :   splashColor
-    
-    
 <a name="SmeupWait">
 ### SmeupWait
 </a>
@@ -237,4 +383,5 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - [SmeupSplash](#SmeupSplash)
     - [SmeupProgressIndicator](#SmeupProgressIndicator)
 
-    
+
+
