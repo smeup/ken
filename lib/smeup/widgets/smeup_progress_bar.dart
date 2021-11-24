@@ -18,10 +18,11 @@ class SmeupProgressBar extends StatefulWidget
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
 
+  Color color;
+  Color linearTrackColor;
   String title;
   String id;
   String type;
-  Color color;
   String valueField;
   double progressBarMinimun;
   double progressBarMaximun;
@@ -41,10 +42,11 @@ class SmeupProgressBar extends StatefulWidget
   SmeupProgressBar(
     this.scaffoldKey,
     this.formKey, {
+    this.color,
+    this.linearTrackColor,
     this.id = '',
     this.type = 'FLD',
     this.valueField = SmeupProgressBarModel.defaultValueField,
-    this.color = SmeupProgressBarModel.defaultColor,
     this.title = '',
     this.height = SmeupProgressBarModel.defaultHeight,
     this.data = 0,
@@ -53,6 +55,7 @@ class SmeupProgressBar extends StatefulWidget
     this.progressBarMaximun = SmeupProgressBarModel.defaultProgressBarMaximun,
   }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
+    SmeupProgressBarModel.setDefaults(this);
   }
 
   @override
@@ -61,6 +64,7 @@ class SmeupProgressBar extends StatefulWidget
     id = m.id;
     type = m.type;
     color = m.color;
+    linearTrackColor = m.linearTrackColor;
     title = m.title;
     valueField = m.valueField;
     progressBarMinimun = m.progressBarMinimun;
@@ -134,6 +138,8 @@ class _SmeupProgressBarState extends State<SmeupProgressBar>
       child: Container(
           padding: widget.padding,
           child: LinearProgressIndicator(
+            color: widget.color,
+            backgroundColor: widget.linearTrackColor,
             minHeight: widget.height,
             key: ValueKey(widget.id),
             value: widget.progressBarMaximun == 0

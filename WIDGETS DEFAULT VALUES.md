@@ -181,8 +181,8 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - align                 :   Alignment.center
     - padding               :   EdgeInsets.all(0)
 
-<a name="SmeupSlide">
-### SmeupSlide
+<a name="SmeupSlider">
+### SmeupSlider
 </a>
 
     json_theme's supported attributes:
@@ -191,3 +191,21 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - inactiveTrackColor    :   sliderTheme.inactiveTrackColor
 
     Others attributes:
+    - defaultPadding        :   EdgeInsets.only(left: 10, right: 10)
+    - defaultSldMin         :   0
+    - defaultSldMax         :   100
+
+<a name="SmeupProgressBar">
+### SmeupProgressBar
+</a>
+
+    json_theme's supported attributes:
+    - color                 :   progressIndicatorTheme.color
+    - linearTrackColor      :   progressIndicatorTheme.linearTrackColor
+
+    Others attributes:
+    - valueField            :   'value'
+    - progressBarMinimun    :   0
+    - progressBarMaximun    :   0
+    - height                :   10
+    - padding               :   EdgeInsets.all(0)

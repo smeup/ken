@@ -69,5 +69,9 @@
     "activeTrackColor": "#068a9c",
     "thumbColor": "#068a9c",
     "inactiveTrackColor": "#cef8fd"
+  },
+  "progressIndicatorTheme" : {
+    "color" : "#068a9c",
+    "linearTrackColor" : "#cef8fd"
   }
 }
