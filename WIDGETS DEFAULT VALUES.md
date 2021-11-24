@@ -209,3 +209,32 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - progressBarMaximun    :   0
     - height                :   10
     - padding               :   EdgeInsets.all(0)
+
+<a name="SmeupProgressIndicator">
+### SmeupProgressIndicator
+</a>
+
+    json_theme's supported attributes:
+    - color                 :   progressIndicatorTheme.color
+    - circularTrackColor    :   progressIndicatorTheme.circularTrackColor
+
+    Others attributes:
+    - defaultSize           :   30
+
+<a name="SmeupSplash">
+### SmeupSplash
+</a>
+
+    json_theme's supported attributes:
+    - color                 :   splashColor
+    
+    
+<a name="SmeupWait">
+### SmeupWait
+</a>
+
+   The SmeupWait contains the following two widgets. Read their documentation for further information about their defaults:
+    - [SmeupSplash](#SmeupSplash)
+    - [SmeupProgressIndicator](#SmeupProgressIndicator)
+
+    

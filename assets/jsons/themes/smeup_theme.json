@@ -2,6 +2,7 @@
   "_comment": "smeup_components_library: for further information about the supported styles read the document README.md",
   "brightness": "light",
   "primaryColor": "#068a9c",
+  "splashColor": "#068a9c",
   "scaffoldBackgroundColor": "#ffffff",
   "elevatedButtonTheme": {
     "style": {
@@ -72,6 +73,7 @@
   },
   "progressIndicatorTheme" : {
     "color" : "#068a9c",
-    "linearTrackColor" : "#cef8fd"
+    "linearTrackColor" : "#cef8fd",
+    "circularTrackColor": "#cef8fd"
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_splash_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
@@ -25,8 +24,8 @@ class SmeupSplash extends StatefulWidget
   SmeupSplash(this.scaffoldKey, this.formKey,
       {this.id = '', this.type = 'FLD', this.color, this.title = ''})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
-    if (color == null) color = SmeupConfigurationService.defaultSplashColor;
     id = SmeupUtilities.getWidgetId(type, id);
+    SmeupSplashModel.setDefaults(this);
   }
 
   SmeupSplash.withController(

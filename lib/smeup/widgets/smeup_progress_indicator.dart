@@ -16,10 +16,11 @@ class SmeupProgressIndicator extends StatefulWidget
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
 
+  Color color;
+  Color circularTrackColor;
   String title;
   String id;
   String type;
-  Color color;
   double size;
 
   SmeupProgressIndicator.withController(
@@ -33,11 +34,13 @@ class SmeupProgressIndicator extends StatefulWidget
   SmeupProgressIndicator(this.scaffoldKey, this.formKey,
       {this.id = '',
       this.type = 'FLD',
-      this.color = SmeupProgressIndicatorModel.defaultColor,
+      this.color,
+      this.circularTrackColor,
       this.size = SmeupProgressIndicatorModel.defaultSize,
       this.title = ''})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
+    SmeupProgressIndicatorModel.setDefaults(this);
   }
 
   @override
@@ -46,6 +49,7 @@ class SmeupProgressIndicator extends StatefulWidget
     id = m.id;
     type = m.type;
     color = m.color;
+    circularTrackColor = m.circularTrackColor;
     title = m.title;
     size = m.size;
   }
@@ -102,7 +106,8 @@ class _SmeupProgressIndicatorState extends State<SmeupProgressIndicator>
         height: widget.size,
         width: widget.size,
         child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(widget.color),
+          color: widget.color,
+          backgroundColor: widget.circularTrackColor,
         ),
       ),
     );
