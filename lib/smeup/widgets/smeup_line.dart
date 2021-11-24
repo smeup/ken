@@ -3,6 +3,7 @@ import 'package:mobile_components_library/smeup/daos/smeup_line_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_line_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
@@ -26,13 +27,10 @@ class SmeupLine extends StatefulWidget
   dynamic data;
 
   SmeupLine(this.scaffoldKey, this.formKey,
-      {this.title,
-      this.id = '',
-      this.type = 'LIN',
-      this.color = SmeupLineModel.defaultColor,
-      this.thickness = SmeupLineModel.defaultThickness})
+      {this.title, this.id = '', this.type = 'LIN', this.color, this.thickness})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
+    SmeupLineModel.setDefaults(this);
   }
 
   SmeupLine.withController(
@@ -110,10 +108,21 @@ class _SmeupLineState extends State<SmeupLine>
       }
       setDataLoad(widget.id, true);
     }
+
+    DividerThemeData captionStyle = _getCaptionStile();
+
     final children = Divider(
-      color: widget.color,
-      thickness: widget.thickness,
+      color: captionStyle.color,
+      thickness: captionStyle.thickness,
     );
     return SmeupWidgetBuilderResponse(_model, children);
+  }
+
+  DividerThemeData _getCaptionStile() {
+    DividerThemeData dividerData = SmeupConfigurationService.getTheme()
+        .dividerTheme
+        .copyWith(color: widget.color, thickness: widget.thickness);
+
+    return dividerData;
   }
 }

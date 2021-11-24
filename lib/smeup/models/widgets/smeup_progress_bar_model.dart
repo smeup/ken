@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_progress_bar_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_data_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupProgressBarModel extends SmeupModel implements SmeupDataInterface {
-  static const Color defaultColor = Colors.blue;
+  // supported by json_theme
+  static Color defaultColor;
+  static Color defaultLinearTrackColor;
+
+  // unsupported by json_theme
   static const String defaultValueField = 'value';
   static const double defaultProgressBarMinimun = 0;
   static const double defaultProgressBarMaximun = 0;
@@ -14,6 +19,7 @@ class SmeupProgressBarModel extends SmeupModel implements SmeupDataInterface {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
 
   Color color;
+  Color linearTrackColor;
   String valueField;
   double progressBarMinimun;
   double progressBarMaximun;
@@ -24,7 +30,8 @@ class SmeupProgressBarModel extends SmeupModel implements SmeupDataInterface {
       {id,
       type,
       GlobalKey<FormState> formKey,
-      this.color = defaultColor,
+      this.color,
+      this.linearTrackColor,
       this.height = defaultHeight,
       this.valueField = defaultValueField,
       this.padding = defaultPadding,
@@ -34,11 +41,13 @@ class SmeupProgressBarModel extends SmeupModel implements SmeupDataInterface {
       : super(formKey, title: title, id: id, type: type) {
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'pgb';
     SmeupDataService.incrementDataFetch(id);
+    setDefaults(this);
   }
 
   SmeupProgressBarModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
+    setDefaults(this);
     title = jsonMap['title'] ?? '';
 
     valueField = optionsDefault['valueField'] ?? defaultValueField;
@@ -53,10 +62,12 @@ class SmeupProgressBarModel extends SmeupModel implements SmeupDataInterface {
     padding =
         SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
 
-    if (optionsDefault['color'] != null) {
-      color = SmeupUtilities.getColorFromRGB(optionsDefault['color']) ??
-          defaultColor;
-    }
+    color =
+        SmeupUtilities.getColorFromRGB(optionsDefault['color']) ?? defaultColor;
+
+    linearTrackColor =
+        SmeupUtilities.getColorFromRGB(optionsDefault['linearTrackColor']) ??
+            defaultLinearTrackColor;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
@@ -65,5 +76,18 @@ class SmeupProgressBarModel extends SmeupModel implements SmeupDataInterface {
     }
 
     SmeupDataService.incrementDataFetch(id);
+  }
+
+  static setDefaults(dynamic obj) {
+    ProgressIndicatorThemeData progressIndicatorThemeData =
+        SmeupConfigurationService.getTheme().progressIndicatorTheme;
+    defaultColor = progressIndicatorThemeData.color;
+    defaultLinearTrackColor = progressIndicatorThemeData.linearTrackColor;
+
+    // ----------------- set properties from default
+
+    if (obj.color == null) obj.color = SmeupProgressBarModel.defaultColor;
+    if (obj.linearTrackColor == null)
+      obj.linearTrackColor = SmeupProgressBarModel.defaultLinearTrackColor;
   }
 }

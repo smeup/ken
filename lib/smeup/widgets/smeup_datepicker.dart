@@ -36,7 +36,10 @@ class SmeupDatePicker extends StatefulWidget
   double fontSize;
   Color fontColor;
   Color backColor;
-
+  bool captionFontBold;
+  double captionFontSize;
+  Color captionFontColor;
+  Color captionBackColor;
   bool underline;
   double innerSpace;
   Alignment align;
@@ -81,7 +84,11 @@ class SmeupDatePicker extends StatefulWidget
     this.fontColor,
     this.backColor,
     this.elevation,
-    this.underline = SmeupDatePickerModel.defaultUnderline,
+    this.captionFontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.captionBackColor,
+    this.underline,
     this.innerSpace = SmeupDatePickerModel.defaultInnerSpace,
     this.align = SmeupDatePickerModel.defaultAlign,
     this.valueField = SmeupDatePickerModel.defaultValueField,
@@ -125,6 +132,10 @@ class SmeupDatePicker extends StatefulWidget
     underline = m.underline;
     align = m.align;
     innerSpace = m.innerSpace;
+    captionFontBold = m.captionFontBold;
+    captionFontSize = m.captionFontSize;
+    captionFontColor = m.captionFontColor;
+    captionBackColor = m.captionBackColor;
 
     data = treatData(m);
   }
@@ -214,6 +225,11 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
         datePickerWidth = (_model.parent as SmeupSectionModel).width;
     }
 
+    if (!widget.showborder) {
+      widget.borderColor =
+          SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
+    }
+
     ButtonStyle buttonStyle = _getButtonStyle();
     TextStyle textStyle = _getTextStile();
     TextStyle captionStyle = _getCaptionStile();
@@ -241,15 +257,14 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
         fontBold: widget.fontBold,
         align: widget.align,
         underline: widget.underline,
-        elevation: widget.elevation);
+        elevation: widget.elevation,
+        captionFontBold: widget.captionFontBold,
+        captionFontSize: widget.captionFontSize,
+        captionFontColor: widget.captionFontColor,
+        captionBackColor: widget.captionBackColor);
 
     var line = widget.underline
-        ? SmeupLine(
-            widget.scaffoldKey,
-            widget.formKey,
-            thickness: 1,
-            color: captionStyle.color,
-          )
+        ? SmeupLine(widget.scaffoldKey, widget.formKey)
         : Container();
 
     var children;
@@ -396,6 +411,15 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
   TextStyle _getCaptionStile() {
     TextStyle style =
         SmeupConfigurationService.getTheme().textTheme.copyWith().caption;
+
+    style = style.copyWith(
+        color: widget.captionFontColor, fontSize: widget.captionFontSize);
+
+    if (widget.captionFontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
 
     return style;
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_image.dart';
 
-class SmeupNavigationAppBar extends AppBar {
+class SmeupAppBar extends AppBar {
   final BuildContext myContext;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
@@ -12,7 +12,7 @@ class SmeupNavigationAppBar extends AppBar {
   final String appBarImage;
   static bool isBusy = false;
 
-  SmeupNavigationAppBar(bool isDialog,
+  SmeupAppBar(bool isDialog,
       {Key key,
       this.appBarActions,
       this.appBarTitle,
@@ -23,10 +23,12 @@ class SmeupNavigationAppBar extends AppBar {
       this.backButtonVisible = true})
       : super(
             key: key,
+            iconTheme: _getIconTheme(),
+            titleTextStyle: _getTextStile(isDialog),
             automaticallyImplyLeading: !isDialog,
             leading: _getLeadingButton(backButtonVisible, myContext),
-            title: _getImage(appBarImage, appBarTitle, scaffoldKey, formKey),
-            backgroundColor: _getBackColor(isDialog),
+            title: _getTitle(appBarImage, appBarTitle, scaffoldKey, formKey),
+            backgroundColor: _getTextStile(isDialog).backgroundColor,
             elevation: isDialog ? 0 : 10,
             actions: appBarActions);
 
@@ -40,9 +42,9 @@ class SmeupNavigationAppBar extends AppBar {
         : Container();
   }
 
-  static Widget _getImage(String appBarImage, String appBarTitle,
+  static Widget _getTitle(String appBarImage, String appBarTitle,
       GlobalKey<ScaffoldState> scaffoldKey, GlobalKey<FormState> formKey) {
-    double imageSize = 60.0;
+    double imageSize = 70.0;
     if (appBarImage.isNotEmpty) {
       return Center(
         child: SmeupImage(scaffoldKey, formKey, appBarImage,
@@ -63,9 +65,17 @@ class SmeupNavigationAppBar extends AppBar {
     }
   }
 
-  static Color _getBackColor(bool isDialog) {
-    return isDialog
-        ? SmeupConfigurationService.getTheme().scaffoldBackgroundColor
-        : SmeupConfigurationService.getTheme().primaryColor;
+  static TextStyle _getTextStile(isDialog) {
+    TextStyle style = isDialog
+        ? SmeupConfigurationService.getTheme().textTheme.headline2
+        : SmeupConfigurationService.getTheme().textTheme.headline1;
+
+    return style;
+  }
+
+  static IconThemeData _getIconTheme() {
+    IconThemeData themeData = SmeupConfigurationService.getTheme().iconTheme;
+
+    return themeData;
   }
 }

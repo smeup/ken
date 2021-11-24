@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_line_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupLineModel extends SmeupModel {
-  static const Color defaultColor = Colors.black;
-  static const double defaultThickness = 5;
+  // supported by json_theme
+  static Color defaultColor;
+  static double defaultThickness;
+
+  // unsupported by json_theme
 
   Color color;
   double thickness;
@@ -15,22 +19,24 @@ class SmeupLineModel extends SmeupModel {
     id,
     type,
     GlobalKey<FormState> formKey, {
-    this.color = defaultColor,
-    this.thickness = defaultThickness,
+    this.color,
+    this.thickness,
   }) : super(formKey, title: '', id: id, type: type) {
     id = SmeupUtilities.getWidgetId('LIN', id);
+    SmeupLineModel.setDefaults(this);
   }
 
   SmeupLineModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
+    SmeupLineModel.setDefaults(this);
+
     thickness = SmeupUtilities.getDouble(optionsDefault['thickness']) ??
         defaultThickness;
-    if (optionsDefault['color'] != null) {
-      color = SmeupUtilities.getColorFromRGB(optionsDefault['color']);
-    } else {
-      color = defaultColor;
-    }
+
+    color =
+        SmeupUtilities.getColorFromRGB(optionsDefault['color']) ?? defaultColor;
+
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         await SmeupLineDao.getData(this);
@@ -38,5 +44,17 @@ class SmeupLineModel extends SmeupModel {
     }
 
     SmeupDataService.incrementDataFetch(id);
+  }
+
+  static setDefaults(dynamic obj) {
+    DividerThemeData dividerData =
+        SmeupConfigurationService.getTheme().dividerTheme;
+
+    defaultColor = dividerData.color;
+    defaultThickness = dividerData.thickness;
+
+    // ----------------- set properties from default
+    if (obj.color == null) obj.color = defaultColor;
+    if (obj.thickness == null) obj.thickness = defaultThickness;
   }
 }

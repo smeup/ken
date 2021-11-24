@@ -4,19 +4,22 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_butto
 
 // ignore: must_be_immutable
 class SmeupRadioButton extends StatefulWidget {
+  Color radioButtonColor;
+  Color backColor;
+  Color fontColor;
+  double fontSize;
+  bool fontBold;
+  bool captionFontBold;
+  double captionFontSize;
+  Color captionFontColor;
+  Color captionBackColor;
+
   final IconData icon;
   final Function onPressed;
-
-  //final dynamic data;
-
   final EdgeInsetsGeometry padding;
-  final Color backColor;
   final double width;
   final double height;
-  final MainAxisAlignment position;
   final Alignment align;
-  final Color fontColor;
-  final double fontsize;
   final Map<String, String> data;
   final String valueField;
   final String displayedField;
@@ -31,20 +34,27 @@ class SmeupRadioButton extends StatefulWidget {
       {this.id = '',
       this.type = 'rad',
       this.title = '',
-      this.data,
+      this.radioButtonColor,
+      this.fontSize,
+      this.fontColor,
       this.backColor,
+      this.fontBold,
+      this.captionFontSize,
+      this.captionFontColor,
+      this.captionBackColor,
+      this.captionFontBold,
+      this.data,
       this.width = SmeupRadioButtonsModel.defaultWidth,
       this.height = SmeupRadioButtonsModel.defaultHeight,
-      this.position = SmeupRadioButtonsModel.defaultPosition,
       this.align = SmeupRadioButtonsModel.defaultAlign,
-      this.fontColor,
-      this.fontsize = SmeupRadioButtonsModel.defaultFontsize,
       this.padding = SmeupRadioButtonsModel.defaultPadding,
       this.valueField = SmeupRadioButtonsModel.defaultValueField,
       this.displayedField = SmeupRadioButtonsModel.defaultDisplayedField,
       this.selectedValue,
       this.icon,
-      this.onPressed});
+      this.onPressed}) {
+    SmeupRadioButtonsModel.setDefaults(this);
+  }
 
   @override
   State<SmeupRadioButton> createState() => _SmeupRadioButtonState();
@@ -66,6 +76,8 @@ class _SmeupRadioButtonState extends State<SmeupRadioButton> {
 
   @override
   Widget build(BuildContext context) {
+    RadioThemeData radioThemeData = _getRadioTheme();
+
     return Container(
       height: widget.height,
       child: SizedBox(
@@ -87,20 +99,45 @@ class _SmeupRadioButtonState extends State<SmeupRadioButton> {
                     });
                   }
                 },
-                activeColor: SmeupConfigurationService.getTheme().primaryColor,
+                activeColor:
+                    radioThemeData.fillColor.resolve(Set<MaterialState>()),
               ),
               Expanded(
                 child: Align(
                     alignment: widget.align,
                     child: Text(widget.data['value'],
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                            fontSize: widget.fontsize,
-                            fontWeight: FontWeight.bold,
-                            color: widget.fontColor))),
+                        textAlign: TextAlign.left, style: _getTextStile())),
               )
             ],
           )),
     );
+  }
+
+  RadioThemeData _getRadioTheme() {
+    RadioThemeData themeData = SmeupConfigurationService.getTheme()
+        .radioTheme
+        .copyWith(
+            fillColor:
+                MaterialStateProperty.all<Color>(widget.radioButtonColor));
+
+    return themeData;
+  }
+
+  TextStyle _getTextStile() {
+    TextStyle style =
+        SmeupConfigurationService.getTheme().textTheme.copyWith().bodyText1;
+
+    style = style.copyWith(
+        color: widget.fontColor,
+        fontSize: widget.fontSize,
+        backgroundColor: widget.backColor);
+
+    if (widget.fontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
   }
 }

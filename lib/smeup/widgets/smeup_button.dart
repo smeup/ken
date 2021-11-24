@@ -117,11 +117,7 @@ class SmeupButton extends StatelessWidget {
     IconThemeData iconTheme = _getIconTheme();
     return Column(mainAxisAlignment: position, children: <Widget>[
       isBusy
-          ? CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(fontColor == null
-                  ? SmeupConfigurationService.defaultLoaderColor
-                  : fontColor),
-            )
+          ? CircularProgressIndicator()
           : () {
               final icon = iconData == 0
                   ? Container()

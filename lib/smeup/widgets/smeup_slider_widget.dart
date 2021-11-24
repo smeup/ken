@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SmeupSliderWidget extends StatefulWidget {
+  final Color activeTrackColor;
+  final Color thumbColor;
+  final Color inactiveTrackColor;
   final String id;
   final double value;
   final double sldMin;
@@ -9,7 +12,14 @@ class SmeupSliderWidget extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final Function clientOnChange;
   const SmeupSliderWidget(this.scaffoldKey, this.formKey,
-      {this.id, this.value, this.sldMax, this.sldMin, this.clientOnChange});
+      {this.activeTrackColor,
+      this.thumbColor,
+      this.inactiveTrackColor,
+      this.id,
+      this.value,
+      this.sldMax,
+      this.sldMin,
+      this.clientOnChange});
 
   @override
   _SmeupSliderWidgetState createState() => _SmeupSliderWidgetState();
@@ -28,6 +38,9 @@ class _SmeupSliderWidgetState extends State<SmeupSliderWidget> {
   Widget build(BuildContext context) {
     return Slider(
       key: ValueKey(widget.id),
+      activeColor: widget.activeTrackColor,
+      thumbColor: widget.thumbColor,
+      inactiveColor: widget.inactiveTrackColor,
       onChanged: (value) {
         setState(() {
           _value = value;

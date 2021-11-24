@@ -17,9 +17,11 @@ class SmeupSlider extends StatefulWidget
     implements SmeupWidgetInterface {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
-  Function clientOnChange;
   SmeupSliderModel model;
 
+  Color activeTrackColor;
+  Color thumbColor;
+  Color inactiveTrackColor;
   EdgeInsetsGeometry padding;
   double value;
   double sldMin;
@@ -27,9 +29,13 @@ class SmeupSlider extends StatefulWidget
   String id;
   String type;
   String title;
+  Function clientOnChange;
 
   SmeupSlider(this.scaffoldKey, this.formKey,
-      {this.padding = SmeupSliderModel.defaultPadding,
+      {this.activeTrackColor,
+      this.thumbColor,
+      this.inactiveTrackColor,
+      this.padding = SmeupSliderModel.defaultPadding,
       this.title,
       this.id = '',
       this.type = 'SLD',
@@ -39,6 +45,7 @@ class SmeupSlider extends StatefulWidget
       this.clientOnChange})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
+    SmeupSliderModel.setDefaults(this);
   }
 
   SmeupSlider.withController(
@@ -58,6 +65,9 @@ class SmeupSlider extends StatefulWidget
     sldMax = m.sldMax;
     title = m.title;
     padding = m.padding;
+    activeTrackColor = m.activeTrackColor;
+    thumbColor = m.thumbColor;
+    inactiveTrackColor = m.inactiveTrackColor;
 
     value = treatData(m);
   }
@@ -141,6 +151,9 @@ class _SmeupSliderState extends State<SmeupSlider>
             widget.scaffoldKey,
             widget.formKey,
             id: widget.id,
+            activeTrackColor: widget.activeTrackColor,
+            thumbColor: widget.thumbColor,
+            inactiveTrackColor: widget.inactiveTrackColor,
             sldMax: widget.sldMax,
             sldMin: widget.sldMin,
             value: _value,

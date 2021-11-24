@@ -37,8 +37,6 @@ class SmeupConfigurationService {
   static String imagesPath;
   static dynamic appDictionary;
   static ExternalConfigurationModel _appConfiguration;
-  static Color defaultSplashColor;
-  static Color defaultLoaderColor;
   static String appBarImage;
   static AuthenticationModel authenticationModel;
 
@@ -55,14 +53,10 @@ class SmeupConfigurationService {
       Map<String, SmeupDataServiceInterface> customDataServices,
       bool enableCache = false,
       AuthenticationModel authenticationModel,
-      Color defaultSplashColor = Colors.white,
-      Color defaultLoaderColor = Colors.white,
       String appBarImage = ''}) async {
     await SmeupConfigurationService.setAppConfiguration();
 
     SmeupConfigurationService.logLevel = logLevel;
-    SmeupConfigurationService.defaultSplashColor = defaultSplashColor;
-    SmeupConfigurationService.defaultLoaderColor = defaultLoaderColor;
     SmeupConfigurationService.appBarImage = appBarImage;
 
     await SmeupConfigurationService.setLocalStorage();

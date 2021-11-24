@@ -288,8 +288,7 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                 padding: const EdgeInsets.only(top: 180.0),
                 child: SmeupProgressIndicator(
                     widget.scaffoldKey, widget.formKey,
-                    size: 60,
-                    color: SmeupConfigurationService.getTheme().primaryColor),
+                    size: 60),
               )
           ]),
           const SizedBox(height: 8.0),

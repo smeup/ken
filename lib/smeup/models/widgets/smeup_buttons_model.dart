@@ -87,26 +87,6 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     setDefaults(this);
   }
 
-  SmeupButtonsModel.clone(SmeupButtonsModel other)
-      : this(
-            formKey: other.formKey,
-            title: other.title,
-            backColor: other.backColor,
-            borderColor: other.borderColor,
-            width: other.width,
-            height: other.height,
-            position: other.position,
-            align: other.align,
-            fontColor: other.fontColor,
-            fontSize: other.fontSize,
-            padding: other.padding,
-            valueField: other.valueField,
-            borderRadius: other.borderRadius,
-            elevation: other.elevation,
-            fontBold: other.fontBold,
-            iconData: other.iconData,
-            iconSize: other.iconSize);
-
   SmeupButtonsModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {

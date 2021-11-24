@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_wait_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
@@ -24,18 +23,16 @@ class SmeupWait extends StatefulWidget
   String title;
   Color splashColor;
   Color loaderColor;
+  Color circularTrackColor;
 
   SmeupWait(this.scaffoldKey, this.formKey,
       {this.id = '',
       this.type = 'FLD',
       this.title = '',
       this.splashColor,
-      this.loaderColor})
+      this.loaderColor,
+      this.circularTrackColor})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
-    if (splashColor == null)
-      this.splashColor = SmeupConfigurationService.defaultSplashColor;
-    if (loaderColor == null)
-      this.loaderColor = SmeupConfigurationService.defaultLoaderColor;
     id = SmeupUtilities.getWidgetId(type, id);
   }
 
@@ -111,6 +108,7 @@ class _SmeupWaitState extends State<SmeupWait>
             id: 'SmeupSplash_${widget.scaffoldKey.hashCode.toString()}'),
         SmeupProgressIndicator(this.widget.scaffoldKey, this.widget.formKey,
             color: widget.loaderColor,
+            circularTrackColor: widget.circularTrackColor,
             id: 'SmeupProgressIndicator_${widget.scaffoldKey.hashCode.toString()}')
       ],
     );

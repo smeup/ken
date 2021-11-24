@@ -15,7 +15,7 @@ import 'package:mobile_components_library/smeup/notifiers/smeup_error_notifier.d
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_form.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_navigation_appBar.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_appBar.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait_fun.dart';
@@ -175,7 +175,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
                   backgroundColor: smeupFormModel.backColor,
                   key: widget._scaffoldKey,
                   endDrawer: _getDrawer(smeupScreenModel),
-                  appBar: SmeupNavigationAppBar(isDialog,
+                  appBar: SmeupAppBar(isDialog,
                       appBarTitle: smeupScreenModel.data['title'] ?? '',
                       appBarActions: _getActions(smeupScreenModel.data),
                       myContext: context,
@@ -344,13 +344,13 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
                         '********************* ASYNC = FALSE',
                         logType: LogType.info);
 
-                    if (SmeupNavigationAppBar.isBusy) {
+                    if (SmeupAppBar.isBusy) {
                       SmeupLogService.writeDebugMessage(
                           '********************* SKIPPED DOUBLE CLICK',
                           logType: LogType.warning);
                       return;
                     } else {
-                      SmeupNavigationAppBar.isBusy = true;
+                      SmeupAppBar.isBusy = true;
 
                       await SmeupDynamismService.run(
                           smeupFun.fun['fun']['dynamisms'],
@@ -358,7 +358,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
                           'click',
                           widget._scaffoldKey,
                           widget._formKey);
-                      SmeupNavigationAppBar.isBusy = false;
+                      SmeupAppBar.isBusy = false;
                     }
                   }
                 },

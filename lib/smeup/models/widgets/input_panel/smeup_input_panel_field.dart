@@ -70,7 +70,7 @@ class SmeupInputPanelField {
     }
 
     fun = _getAttributeFromLayout(fieldFromLayout, "PfK", fun);
-    // TODO Reload items
+    // TODOA Reload items
 
     value.descr = _getAttributeFromLayout(fieldFromLayout, "Txt", value.descr);
   }

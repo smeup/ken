@@ -169,7 +169,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
           widget.scaffoldKey,
           widget.formKey,
           id: field.id,
-          fontsize: widget.fontSize,
+          fontSize: widget.fontSize,
           title: field.label,
           data: [
             {"code": "0", "value": "No"},
