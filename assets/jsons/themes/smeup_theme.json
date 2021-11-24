@@ -64,5 +64,10 @@
   "switchTheme" : {
     "thumbColor" : "#068a9c",
     "trackColor": "#cef8fd"
+  },
+  "sliderTheme": {
+    "activeTrackColor": "#068a9c",
+    "thumbColor": "#068a9c",
+    "inactiveTrackColor": "#cef8fd"
   }
 }
