@@ -69,6 +69,38 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - height                :   100
     - legend                :   true
 
+
+<a name="SmeupCombo">
+### SmeupCombo
+</a>
+
+    json_theme's supported attributes:
+    - fontSize              :   textTheme.bodyText1.fontSize
+    - fontBold              :   textTheme.bodyText1.fontWeight 
+    - backColor             :   textTheme.bodyText1.backgroundColor
+
+    - iconSize              :   iconTheme.size
+    - iconColor             :   iconTheme.color
+
+    - captionFontSize       :   textTheme.caption.fontSize
+    - captionFontBold       :   textTheme.caption.fontWeight 
+    - captionBackColor      :   textTheme.caption.backgroundColor
+
+    - underline             :   the underline attribute is a boolean and decides wheter or not a SmeupLine should be shown under the SmeupDatePicker. 
+
+   Notes:
+    See [SmeupLine](#SmeupLine) for further information about SmeupLine. 
+
+    Others attributes:
+    - width                 :   100
+    - height                :   20
+    - valueField            :   'value'
+    - descriptionField      :   'description'
+    - padding               :   EdgeInsets.all(0)
+    - label                 :   ''
+    - align                 :   Alignment.centerLeft
+    - innerSpace            :   10.0
+
 <a name="SmeupDashboard">
 ### SmeupDashboard
 </a>
