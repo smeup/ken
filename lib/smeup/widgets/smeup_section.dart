@@ -49,8 +49,6 @@ class _SmeupSectionState extends State<SmeupSection>
 
   @override
   Widget build(BuildContext context) {
-    //MediaQueryData deviceInfo = MediaQuery.of(context);
-
     return FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getSectionChildren(widget.smeupSectionModel),
       builder: (BuildContext context,

@@ -185,7 +185,7 @@ class _SmeupImageListState extends State<SmeupImageList>
     }
 
     double listboxHeight =
-        SmeupListBox.getListHeight(widget.listHeight, _model);
+        SmeupListBox.getListHeight(widget.listHeight, _model, context);
 
     if (_model == null) {
       children = SmeupListBox(widget.scaffoldKey, widget.formKey, _data,

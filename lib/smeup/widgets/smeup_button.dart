@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 
@@ -39,6 +40,7 @@ class SmeupButton extends StatelessWidget {
   final String id;
   final String type;
   final String title;
+  final SmeupButtonsModel model;
 
   SmeupButton(
       {this.id = '',
@@ -68,7 +70,8 @@ class SmeupButton extends StatelessWidget {
       this.clientOnPressed,
       this.isBusy = false,
       this.isLink = SmeupButtonsModel.defaultIsLink,
-      this.innerSpace = SmeupButtonsModel.defaultInnerSpace}) {
+      this.innerSpace = SmeupButtonsModel.defaultInnerSpace,
+      this.model}) {
     SmeupButtonsModel.setDefaults(this);
     if (isLink) {
       underline = true;
@@ -83,37 +86,52 @@ class SmeupButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var elevatedButtonStyle = _getButtonStyle();
 
+    double buttonHeight = height;
+    double buttonWidth = width;
+    if (model != null && model.parent != null) {
+      if (buttonHeight == 0)
+        buttonHeight = (model.parent as SmeupSectionModel).height;
+      if (buttonWidth == 0)
+        buttonWidth = (model.parent as SmeupSectionModel).width;
+    } else {
+      if (buttonHeight == 0) buttonHeight = MediaQuery.of(context).size.height;
+      if (buttonWidth == 0) buttonWidth = MediaQuery.of(context).size.width;
+    }
+
     return Container(
       color: Color.fromRGBO(0, 0, 0, 0),
       padding: padding,
       child: SizedBox(
-          height: height,
-          width: width,
+          height: buttonHeight,
+          width: buttonWidth,
           child: isLink
-              ? _getTextButton(elevatedButtonStyle)
-              : _getElevatedButton(elevatedButtonStyle)),
+              ? _getTextButton(elevatedButtonStyle, buttonHeight, buttonWidth)
+              : _getElevatedButton(
+                  elevatedButtonStyle, buttonHeight, buttonWidth)),
     );
   }
 
-  ElevatedButton _getElevatedButton(elevatedButtonStyle) {
+  ElevatedButton _getElevatedButton(
+      elevatedButtonStyle, double buttonHeight, double buttonWidth) {
     return ElevatedButton(
       key: Key(id),
       style: elevatedButtonStyle,
       onPressed: clientOnPressed,
-      child: _getButtonChildren(),
+      child: _getButtonChildren(buttonHeight, buttonWidth),
     );
   }
 
-  TextButton _getTextButton(elevatedButtonStyle) {
+  TextButton _getTextButton(
+      elevatedButtonStyle, double buttonHeight, double buttonWidth) {
     return TextButton(
       key: Key(id),
       style: elevatedButtonStyle,
       onPressed: clientOnPressed,
-      child: _getButtonChildren(),
+      child: _getButtonChildren(buttonHeight, buttonWidth),
     );
   }
 
-  Widget _getButtonChildren() {
+  Widget _getButtonChildren(double buttonHeight, double buttonWidth) {
     IconThemeData iconTheme = _getIconTheme();
     return Column(mainAxisAlignment: position, children: <Widget>[
       isBusy
@@ -171,7 +189,7 @@ class SmeupButton extends StatelessWidget {
                 );
               } else if (align == Alignment.bottomCenter) {
                 children = Container(
-                  height: height,
+                  height: buttonHeight,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

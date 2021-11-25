@@ -48,8 +48,6 @@ class SmeupComponent extends StatefulWidget {
 class _SmeupComponentState extends State<SmeupComponent> {
   @override
   Widget build(BuildContext context) {
-    //MediaQueryData deviceInfo = MediaQuery.of(context);
-
     return FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getComponentChildren(widget.smeupModel),
       builder: (BuildContext context,

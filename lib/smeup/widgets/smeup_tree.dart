@@ -187,6 +187,9 @@ class _SmeupTreeState extends State<SmeupTree>
         treeHeight = (_model.parent as SmeupSectionModel).height;
       if (treeWidth == 0)
         treeWidth = (_model.parent as SmeupSectionModel).width;
+    } else {
+      if (treeHeight == 0) treeHeight = MediaQuery.of(context).size.height;
+      if (treeWidth == 0) treeWidth = MediaQuery.of(context).size.width;
     }
 
     // TreeViewController _treeViewController =

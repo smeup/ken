@@ -231,6 +231,11 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
         timePickerHeight = (_model.parent as SmeupSectionModel).height;
       if (timePickerWidth == 0)
         timePickerWidth = (_model.parent as SmeupSectionModel).width;
+    } else {
+      if (timePickerHeight == 0)
+        timePickerHeight = MediaQuery.of(context).size.height;
+      if (timePickerWidth == 0)
+        timePickerWidth = MediaQuery.of(context).size.width;
     }
 
     if (!widget.showborder) {

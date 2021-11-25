@@ -147,11 +147,15 @@ class SmeupListBox extends StatefulWidget
     }
   }
 
-  static double getListHeight(double widgetListHeight, SmeupModel model) {
+  static double getListHeight(
+      double widgetListHeight, SmeupModel model, BuildContext context) {
     double listboxHeight = widgetListHeight;
     if (model != null && model.parent != null) {
       if (listboxHeight == 0)
         listboxHeight = (model.parent as SmeupSectionModel).height;
+    } else {
+      if (listboxHeight == 0)
+        listboxHeight = MediaQuery.of(context).size.height;
     }
     return listboxHeight;
   }
@@ -257,7 +261,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
     );
 
     double listboxHeight =
-        SmeupListBox.getListHeight(widget.listHeight, _model);
+        SmeupListBox.getListHeight(widget.listHeight, _model, context);
 
     final container = Container(
         padding: widget.padding,
@@ -304,7 +308,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
     );
 
     double listboxHeight =
-        SmeupListBox.getListHeight(widget.listHeight, _model);
+        SmeupListBox.getListHeight(widget.listHeight, _model, context);
 
     final container = Container(
         padding: widget.padding,
@@ -317,8 +321,6 @@ class _SmeupListBoxState extends State<SmeupListBox>
 
   Widget _getWheelList(List<Widget> cells) {
     var list;
-
-    //MediaQueryData deviceInfo = MediaQuery.of(context);
 
     list = RefreshIndicator(
         onRefresh: _refreshList,
@@ -348,7 +350,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
             )));
 
     double listboxHeight =
-        SmeupListBox.getListHeight(widget.listHeight, _model);
+        SmeupListBox.getListHeight(widget.listHeight, _model, context);
 
     final container = Container(
         padding: widget.padding,
@@ -373,6 +375,9 @@ class _SmeupListBoxState extends State<SmeupListBox>
       if (boxHeight == 0)
         boxHeight = (_model.parent as SmeupSectionModel).height;
       if (boxWidth == 0) boxWidth = (_model.parent as SmeupSectionModel).width;
+    } else {
+      if (boxHeight == 0) boxHeight = MediaQuery.of(context).size.height;
+      if (boxWidth == 0) boxWidth = MediaQuery.of(context).size.width;
     }
 
     List _rows = _data['rows'];
