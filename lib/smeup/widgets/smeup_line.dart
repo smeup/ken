@@ -109,7 +109,7 @@ class _SmeupLineState extends State<SmeupLine>
       setDataLoad(widget.id, true);
     }
 
-    DividerThemeData captionStyle = _getCaptionStile();
+    DividerThemeData captionStyle = _getDividerStile();
 
     final children = Divider(
       color: captionStyle.color,
@@ -118,7 +118,7 @@ class _SmeupLineState extends State<SmeupLine>
     return SmeupWidgetBuilderResponse(_model, children);
   }
 
-  DividerThemeData _getCaptionStile() {
+  DividerThemeData _getDividerStile() {
     DividerThemeData dividerData = SmeupConfigurationService.getTheme()
         .dividerTheme
         .copyWith(color: widget.color, thickness: widget.thickness);

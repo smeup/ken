@@ -50,6 +50,7 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
   @override
   Widget build(BuildContext context) {
     IconThemeData iconTheme = _getIconTheme();
+    DividerThemeData dividerStyle = _getDividerStyle();
 
     return DropdownButton<String>(
       //isExpanded: true,
@@ -60,11 +61,11 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
         size: iconTheme.size,
       ),
       elevation: 20,
-      //style: const TextStyle(color: Colors.deepPurple),
-      // underline: Container(
-      //   height: 3,
-      //   color: widget.fontColor,
-      // ),
+      style: const TextStyle(color: Colors.deepPurple),
+      underline: Container(
+        height: dividerStyle.thickness,
+        color: dividerStyle.color,
+      ),
       onChanged: (String newValue) {
         setState(() {
           _selectedValue = newValue;
@@ -116,5 +117,13 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
     }
 
     return style;
+  }
+
+  DividerThemeData _getDividerStyle() {
+    DividerThemeData dividerData = SmeupConfigurationService.getTheme()
+        .dividerTheme
+        .copyWith(color: widget.fontColor);
+
+    return dividerData;
   }
 }
