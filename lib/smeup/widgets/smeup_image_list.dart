@@ -19,15 +19,20 @@ class SmeupImageList extends StatefulWidget
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
 
-  double captionFontsize;
-  Color captionFontColor;
-  Color captionBackColor;
+  Color backColor;
+  Color borderColor;
+  double borderWidth;
+  double borderRadius;
+  double fontSize;
+  Color fontColor;
+  bool fontBold;
   bool captionFontBold;
+  double captionFontSize;
+  Color captionFontColor;
 
   double width;
   double height;
   EdgeInsetsGeometry padding;
-  String layout;
   String title;
   int columns;
   int rows;
@@ -51,11 +56,16 @@ class SmeupImageList extends StatefulWidget
       this.scaffoldKey, this.formKey, this.data, this.columns, this.rows,
       {this.id = '',
       this.type = 'IML',
-      this.captionFontsize,
-      this.captionFontColor,
-      this.captionBackColor,
+      this.backColor,
+      this.borderColor,
+      this.borderWidth,
+      this.borderRadius,
+      this.fontSize,
+      this.fontColor,
+      this.fontBold,
       this.captionFontBold,
-      layout,
+      this.captionFontSize,
+      this.captionFontColor,
       this.width = SmeupImageListModel.defaultWidth,
       this.height = SmeupImageListModel.defaultHeight,
       this.padding = SmeupImageListModel.defaultPadding,
@@ -74,13 +84,15 @@ class SmeupImageList extends StatefulWidget
     SmeupImageListModel m = model;
     id = m.id;
     type = m.type;
-    layout = m.layout;
     width = m.width;
     height = m.height;
-    captionFontsize = m.captionFontSize;
-    captionFontColor = m.captionFontColor;
+    fontSize = m.fontSize;
+    fontColor = m.fontColor;
+    fontBold = m.fontBold;
+    backColor = m.backColor;
     captionFontBold = m.captionFontBold;
-    captionBackColor = m.captionBackColor;
+    captionFontSize = m.captionFontSize;
+    captionFontColor = m.captionFontColor;
     padding = m.padding;
     columns = m.columns;
     rows = m.rows;
@@ -191,9 +203,16 @@ class _SmeupImageListState extends State<SmeupImageList>
       children = SmeupListBox(widget.scaffoldKey, widget.formKey, _data,
           clientOnItemTap: widget.clientOnItemTap,
           dismissEnabled: widget.dismissEnabled,
-          fontSize: widget.captionFontsize,
-          backColor: widget.captionBackColor,
+          borderColor: widget.borderColor,
+          borderWidth: widget.borderWidth,
+          borderRadius: widget.borderRadius,
+          backColor: widget.backColor,
+          fontSize: widget.captionFontSize,
           fontColor: widget.captionFontColor,
+          fontBold: widget.fontBold,
+          captionFontBold: widget.captionFontBold,
+          captionFontSize: widget.captionFontSize,
+          captionFontColor: widget.captionFontColor,
           height: widget.height,
           listHeight: listboxHeight,
           layout: 'imageList',
@@ -207,9 +226,16 @@ class _SmeupImageListState extends State<SmeupImageList>
           title: widget.title);
     } else {
       final _modelListBox = SmeupListBoxModel(
-          fontSize: widget.captionFontsize,
-          backColor: widget.captionBackColor,
+          borderColor: widget.borderColor,
+          borderWidth: widget.borderWidth,
+          borderRadius: widget.borderRadius,
+          backColor: widget.backColor,
+          fontSize: widget.captionFontSize,
           fontColor: widget.captionFontColor,
+          fontBold: widget.fontBold,
+          captionFontBold: widget.captionFontBold,
+          captionFontSize: widget.captionFontSize,
+          captionFontColor: widget.captionFontColor,
           height: widget.height,
           listHeight: listboxHeight,
           layout: 'imageList',

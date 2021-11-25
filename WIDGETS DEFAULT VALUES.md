@@ -19,11 +19,8 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 
     - fontColor             :   textTheme.button.color
     - fontSize              :   textTheme.button.fontSize
-    - fontBold              :   textTheme.button.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
-    - underline             :   the underline attribute is a boolean and decides wheter or not a SmeupLine should be shown under the SmeupDatePicker. 
-
-   Notes:
-    See [SmeupLine](#SmeupLine) for further information about SmeupLine. 
+    - fontBold              :   textTheme.button.fontWeight 
+    - underline             :   textTheme.button.decoration
 
     - iconSize              :   iconTheme.size
     - iconColor             :   iconTheme.color
@@ -103,11 +100,11 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - backColor             :   timePickerThemeData.backgroundColor
 
     - fontSize              :   textTheme.bodyText1.fontSize
-    - fontBold              :   textTheme.bodyText1.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - fontBold              :   textTheme.bodyText1.fontWeight 
     - backColor             :   textTheme.bodyText1.backgroundColor
 
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - captionFontBold       :   textTheme.caption.fontWeight 
     - captionBackColor      :   textTheme.caption.backgroundColor
 
     - elevation             :   elevatedButtonTheme.style.elevation
@@ -162,10 +159,27 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 </a>
 
     json_theme's supported attributes:
-        TODO
+    - backColor             :   cardTheme.color
+    - borderColor           :   cardTheme.shape.side.color
+    - borderWidth           :   cardTheme.shape.side.width
+    - borderRadius          :   cardTheme.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
+    
+    - fontColor             :   textTheme.headline1.color
+    - fontSize              :   textTheme.headline1.fontSize
+    - fontBold              :   textTheme.headline1.fontWeight 
+
+    - captionFontColor      :   textTheme.headline2.color
+    - captionFontSize       :   textTheme.headline2.fontSize
+    - captionFontBold       :   textTheme.headline2.fontWeight 
         
     Others attributes:
-        TODO
+    - width                 :   0
+    - height                :   300
+    - padding               :   EdgeInsets.only(left: 5, right: 5)
+    - columns               :   0
+    - rows                  :   0
+    - orientation           :   Axis.vertical
+    - listHeight            :   0
 
 <a name="SmeupLabel">
 ### SmeupLabel
@@ -174,7 +188,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     json_theme's supported attributes:
     - fontColor             :   textTheme.bodyText2.color
     - fontSize              :   textTheme.bodyText2.fontSize
-    - fontBold              :   textTheme.bodyText2.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - fontBold              :   textTheme.bodyText2.fontWeight 
     - backColor             :   textTheme.bodyText2.backgroundColor
 
     - iconSize              :   iconTheme.size
@@ -210,16 +224,16 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     
     - fontColor             :   textTheme.headline1.color
     - fontSize              :   textTheme.headline1.fontSize
-    - fontBold              :   textTheme.headline1.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - fontBold              :   textTheme.headline1.fontWeight 
 
     - captionFontColor      :   textTheme.headline2.color
     - captionFontSize       :   textTheme.headline2.fontSize
-    - captionFontBold       :   textTheme.headline2.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - captionFontBold       :   textTheme.headline2.fontWeight 
 
     Others attributes:
     - width                 :   0
     - height                :   170
-    - padding               :   EdgeInsets.all(5)
+    - padding               :   EdgeInsets.only(left: 5, right: 5)
     - listType              :   SmeupListType.oriented
     - portraitColumns       :   1
     - landscapeColumns      :   1
@@ -279,12 +293,12 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 
     - fontColor             :   textTheme.bodyText1.color
     - fontSize              :   textTheme.bodyText1.fontSize
-    - fontBold              :   textTheme.bodyText1.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - fontBold              :   textTheme.bodyText1.fontWeight 
     - backColor             :   textTheme.bodyText1.backgroundColor
 
     - captionFontColor      :   textTheme.caption.color
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - captionFontBold       :   textTheme.caption.fontWeight 
     - captionBackColor      :   textTheme.caption.backgroundColor
 
     Others attributes:
@@ -328,7 +342,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - trackColor            :   switchTheme.trackColor
 
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - captionFontBold       :   textTheme.caption.fontWeight 
     - captionBackColor      :   textTheme.caption.backgroundColor
     - captionFontColor      :   textTheme.caption.color
 
@@ -379,11 +393,11 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - backColor             :   timePickerThemeData.backgroundColor
 
     - fontSize              :   textTheme.bodyText1.fontSize
-    - fontBold              :   textTheme.bodyText1.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - fontBold              :   textTheme.bodyText1.fontWeight 
     - backColor             :   textTheme.bodyText1.backgroundColor
 
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - captionFontBold       :   textTheme.caption.fontWeight 
     - captionBackColor      :   textTheme.caption.backgroundColor
 
     - elevation             :   elevatedButtonTheme.style.elevation

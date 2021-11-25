@@ -106,7 +106,6 @@ class SmeupListBox extends StatefulWidget
     layout = m.layout;
     width = m.width;
     height = m.height;
-    fontSize = m.fontSize;
     orientation = m.orientation;
     padding = m.padding;
     listType = m.listType;
@@ -115,6 +114,7 @@ class SmeupListBox extends StatefulWidget
     title = m.title;
     showLoader = m.showLoader;
     defaultSort = m.defaultSort;
+    fontSize = m.fontSize;
     fontColor = m.fontColor;
     fontBold = m.fontBold;
     backColor = m.backColor;

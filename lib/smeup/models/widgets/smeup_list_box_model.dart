@@ -24,7 +24,8 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   // unsupported by json_theme
   static const double defaultWidth = 0;
   static const double defaultHeight = 170;
-  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(5);
+  static const EdgeInsetsGeometry defaultPadding =
+      EdgeInsets.only(left: 5, right: 5);
   static const SmeupListType defaultListType = SmeupListType.oriented;
   static const int defaultPortraitColumns = 1;
   static const int defaultLandscapeColumns = 1;
@@ -206,10 +207,6 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     defaultBorderColor = side.color;
     defaultBorderWidth = side.width;
 
-    // var buttonStyle =
-    //     SmeupConfigurationService.getTheme().elevatedButtonTheme.style;
-    // defaultElevation = buttonStyle.elevation.resolve(Set<MaterialState>());
-
     var textStyle = SmeupConfigurationService.getTheme()
         .textTheme
         .headline1
@@ -238,9 +235,6 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     if (obj.fontColor == null)
       obj.fontColor = SmeupListBoxModel.defaultFontColor;
     if (obj.fontSize == null) obj.fontSize = SmeupListBoxModel.defaultFontSize;
-
-    // if (obj.elevation == null)
-    //   obj.elevation = SmeupListBoxModel.defaultElevation;
 
     if (obj.captionFontBold == null)
       obj.captionFontBold = SmeupListBoxModel.defaultCaptionFontBold;
