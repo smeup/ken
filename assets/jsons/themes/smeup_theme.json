@@ -42,6 +42,18 @@
       "fontSize": 18.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
+    },
+    "headline1": {
+      "color": "#068a9c",
+      "fontSize": 18.0,
+      "fontWeight": "bold",
+      "backgroundColor": "#ffffff"
+    },
+    "headline2": {
+      "color": "#068a9c",
+      "fontSize": 18.0,
+      "fontWeight": "bold",
+      "backgroundColor": "#ffffff"
     }
   },
   "iconTheme": {
@@ -95,5 +107,16 @@
     "centerTitle": true,
     "elevation": 0,
     "toolbarHeight": 70
+  },
+  "cardTheme": {
+    "color": "#ffffff",
+    "shape": {
+      "type": "rectangle",
+      "borderRadius": 20.0,
+      "side": {
+        "color": "#068a9c",
+        "width": 2.0
+      }
+    }
   }
 }

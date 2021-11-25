@@ -202,10 +202,34 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 </a>
 
     json_theme's supported attributes:
-        TODO
-        
+
+    - backColor             :   cardTheme.color
+    - borderColor           :   cardTheme.shape.side.color
+    - borderWidth           :   cardTheme.shape.side.width
+    - borderRadius          :   cardTheme.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
+    
+    - fontColor             :   textTheme.headline1.color
+    - fontSize              :   textTheme.headline1.fontSize
+    - fontBold              :   textTheme.headline1.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+
+    - captionFontColor      :   textTheme.headline2.color
+    - captionFontSize       :   textTheme.headline2.fontSize
+    - captionFontBold       :   textTheme.headline2.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+
     Others attributes:
-        TODO    
+    - width                 :   0
+    - height                :   170
+    - padding               :   EdgeInsets.all(5)
+    - listType              :   SmeupListType.oriented
+    - portraitColumns       :   1
+    - landscapeColumns      :   1
+    - layout                :   '1'
+    - orientation           :   Axis.vertical
+    - defaultSort           :   ''
+    - backgroundColName     :   ''
+    - showSelection         :   false
+    - selectedRow           :   -1
+    - listHeight            :   0    
 
 <a name="SmeupProgressBar">
 ### SmeupProgressBar

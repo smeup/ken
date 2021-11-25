@@ -191,7 +191,7 @@ class _SmeupImageListState extends State<SmeupImageList>
       children = SmeupListBox(widget.scaffoldKey, widget.formKey, _data,
           clientOnItemTap: widget.clientOnItemTap,
           dismissEnabled: widget.dismissEnabled,
-          fontsize: widget.captionFontsize,
+          fontSize: widget.captionFontsize,
           backColor: widget.captionBackColor,
           fontColor: widget.captionFontColor,
           height: widget.height,
@@ -207,7 +207,7 @@ class _SmeupImageListState extends State<SmeupImageList>
           title: widget.title);
     } else {
       final _modelListBox = SmeupListBoxModel(
-          fontsize: widget.captionFontsize,
+          fontSize: widget.captionFontsize,
           backColor: widget.captionBackColor,
           fontColor: widget.captionFontColor,
           height: widget.height,

@@ -6,6 +6,7 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/widgets/smeup_list_box_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_box.dart';
@@ -23,7 +24,17 @@ class SmeupListBox extends StatefulWidget
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
 
-  // graphic properties
+  Color backColor;
+  Color borderColor;
+  double borderWidth;
+  double borderRadius;
+  double fontSize;
+  Color fontColor;
+  bool fontBold;
+  bool captionFontBold;
+  double captionFontSize;
+  Color captionFontColor;
+
   double width;
   double height;
   Axis orientation;
@@ -36,12 +47,9 @@ class SmeupListBox extends StatefulWidget
   String id;
   String type;
   bool dismissEnabled = false;
-  double fontsize;
   dynamic data;
   bool showLoader = false;
   String defaultSort;
-  Color fontColor;
-  Color backColor;
   String backgroundColName;
   bool showSelection = false;
   int selectedRow = -1;
@@ -58,18 +66,25 @@ class SmeupListBox extends StatefulWidget
   SmeupListBox(this.scaffoldKey, this.formKey, this.data,
       {this.id = '',
       this.type = 'BOX',
+      this.borderColor,
+      this.borderWidth,
+      this.borderRadius,
+      this.backColor,
+      this.fontSize,
+      this.fontColor,
+      this.fontBold,
+      this.captionFontBold,
+      this.captionFontSize,
+      this.captionFontColor,
       this.layout = SmeupListBoxModel.defaultLayout,
       this.width = SmeupListBoxModel.defaultWidth,
       this.height = SmeupListBoxModel.defaultHeight,
-      this.fontsize = SmeupListBoxModel.defaultFontsize,
       this.orientation = SmeupListBoxModel.defaultOrientation,
       this.padding = SmeupListBoxModel.defaultPadding,
       this.listType = SmeupListBoxModel.defaultListType,
       this.portraitColumns = SmeupListBoxModel.defaultPortraitColumns,
       this.landscapeColumns = SmeupListBoxModel.defaultLandscapeColumns,
       this.backgroundColName = SmeupListBoxModel.defaultBackgroundColName,
-      this.fontColor = SmeupListBoxModel.defaultFontColor,
-      this.backColor = SmeupListBoxModel.defaultBackColor,
       this.listHeight = SmeupListBoxModel.defaultListHeight,
       this.showSelection = false,
       this.selectedRow = -1,
@@ -80,6 +95,7 @@ class SmeupListBox extends StatefulWidget
       this.defaultSort = SmeupListBoxModel.defaultDefaultSort})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
+    SmeupListBoxModel.setDefaults(this);
   }
 
   @override
@@ -90,7 +106,7 @@ class SmeupListBox extends StatefulWidget
     layout = m.layout;
     width = m.width;
     height = m.height;
-    fontsize = m.fontsize;
+    fontSize = m.fontSize;
     orientation = m.orientation;
     padding = m.padding;
     listType = m.listType;
@@ -100,11 +116,18 @@ class SmeupListBox extends StatefulWidget
     showLoader = m.showLoader;
     defaultSort = m.defaultSort;
     fontColor = m.fontColor;
+    fontBold = m.fontBold;
     backColor = m.backColor;
     backgroundColName = m.backgroundColName;
     showSelection = m.showSelection;
     selectedRow = m.selectedRow;
     listHeight = m.listHeight;
+    borderRadius = m.borderRadius;
+    borderWidth = m.borderWidth;
+    borderColor = m.borderColor;
+    captionFontBold = m.captionFontBold;
+    captionFontSize = m.captionFontSize;
+    captionFontColor = m.captionFontColor;
 
     dynamic deleteDynamism;
     if (m.dynamisms != null)
@@ -390,12 +413,16 @@ class _SmeupListBoxState extends State<SmeupListBox>
     }
 
     _data['rows'].asMap().forEach((i, dataElement) {
-      var _cardColor = widget.backColor;
+      var _backColor = widget.backColor;
       if (widget.backgroundColName != null &&
           widget.backgroundColName.isNotEmpty) {
-        _cardColor = SmeupUtilities.getColorFromRGB(
+        _backColor = SmeupUtilities.getColorFromRGB(
             dataElement[widget.backgroundColName]);
       }
+
+      CardTheme cardTheme = _getCardStyle(_backColor);
+      TextStyle textStyle = _getTextStile(_backColor);
+      TextStyle captionStyle = _getCaptionStile(_backColor);
 
       Function _onItemTap = (int index, dynamic data) {
         if (widget.clientOnItemTap != null) widget.clientOnItemTap(data);
@@ -411,31 +438,78 @@ class _SmeupListBoxState extends State<SmeupListBox>
         }
       };
 
-      final cell = SmeupBox(
-        widget.scaffoldKey,
-        widget.formKey,
-        i,
-        isDynamic: _model != null,
-        selectedRow: widget.selectedRow,
-        onRefresh: _refreshList,
-        showLoader: widget.showLoader,
-        id: widget.id,
-        layout: widget.layout,
-        columns: _data['columns'],
-        data: dataElement,
-        dynamisms: _model?.dynamisms,
-        height: widget.height,
-        width: widget.width,
-        fontColor: widget.fontColor,
-        cardColor: _cardColor,
-        showSelection: widget.showSelection,
-        dismissEnabled: widget.dismissEnabled,
-        onItemTap: _onItemTap,
-      );
+      final cell = SmeupBox(widget.scaffoldKey, widget.formKey, i,
+          isDynamic: _model != null,
+          selectedRow: widget.selectedRow,
+          onRefresh: _refreshList,
+          showLoader: widget.showLoader,
+          id: widget.id,
+          layout: widget.layout,
+          columns: _data['columns'],
+          data: dataElement,
+          dynamisms: _model?.dynamisms,
+          height: widget.height,
+          width: widget.width,
+          fontColor: widget.fontColor,
+          backColor: _backColor,
+          showSelection: widget.showSelection,
+          dismissEnabled: widget.dismissEnabled,
+          onItemTap: _onItemTap,
+          cardTheme: cardTheme,
+          textStyle: textStyle,
+          captionStyle: captionStyle);
 
       cells.add(cell);
     });
 
     return cells;
+  }
+
+  CardTheme _getCardStyle(Color backColor) {
+    var timeCardTheme = SmeupConfigurationService.getTheme().cardTheme.copyWith(
+          color: backColor,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius),
+              side: BorderSide(
+                  width: widget.borderWidth, color: widget.borderColor)),
+        );
+
+    return timeCardTheme;
+  }
+
+  TextStyle _getTextStile(Color backColor) {
+    TextStyle style =
+        SmeupConfigurationService.getTheme().textTheme.copyWith().headline1;
+
+    style = style.copyWith(
+        color: widget.fontColor,
+        fontSize: widget.fontSize,
+        backgroundColor: backColor);
+
+    if (widget.fontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
+  }
+
+  TextStyle _getCaptionStile(Color backColor) {
+    TextStyle style =
+        SmeupConfigurationService.getTheme().textTheme.copyWith().headline2;
+
+    style = style.copyWith(
+        color: widget.captionFontColor,
+        fontSize: widget.captionFontSize,
+        backgroundColor: backColor);
+
+    if (widget.captionFontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
   }
 }
