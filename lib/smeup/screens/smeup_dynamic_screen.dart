@@ -338,11 +338,11 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
 
                     SmeupLogService.writeDebugMessage(
                         '********************* ASYNC = TRUE',
-                        logType: LogType.info);
+                        logType: LogType.debug);
                   } else {
                     SmeupLogService.writeDebugMessage(
                         '********************* ASYNC = FALSE',
-                        logType: LogType.info);
+                        logType: LogType.debug);
 
                     if (SmeupAppBar.isBusy) {
                       SmeupLogService.writeDebugMessage(

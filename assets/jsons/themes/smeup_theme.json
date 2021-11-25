@@ -42,25 +42,13 @@
       "fontSize": 18.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
-    },
-    "headline1":{
-      "color": "#ffffff",
-      "fontSize": 18.0,
-      "fontWeight": "normal",
-      "backgroundColor": "#068a9c"
-    },
-    "headline2":{
-      "color": "#068a9c",
-      "fontSize": 18.0,
-      "fontWeight": "normal",
-      "backgroundColor": "#ffffff"
     }
   },
   "iconTheme": {
     "size": 20.0,
     "color": "#ffffff"
   },
-  "timePickerThemeData":  {
+  "timePickerThemeData": {
     "backgroundColor": "#ffffff",
     "shape": {
       "type": "rectangle",
@@ -71,11 +59,11 @@
       "width": 2.0
     }
   },
-  "radioTheme" : {
-    "fillColor" : "#068a9c"
+  "radioTheme": {
+    "fillColor": "#068a9c"
   },
-  "switchTheme" : {
-    "thumbColor" : "#068a9c",
+  "switchTheme": {
+    "thumbColor": "#068a9c",
     "trackColor": "#cef8fd"
   },
   "sliderTheme": {
@@ -83,13 +71,29 @@
     "thumbColor": "#068a9c",
     "inactiveTrackColor": "#cef8fd"
   },
-  "progressIndicatorTheme" : {
-    "color" : "#068a9c",
-    "linearTrackColor" : "#cef8fd",
+  "progressIndicatorTheme": {
+    "color": "#068a9c",
+    "linearTrackColor": "#cef8fd",
     "circularTrackColor": "#cef8fd"
   },
-  "dividerTheme" : {
-    "color" : "#068a9c",
-    "thickness" : 1
+  "dividerTheme": {
+    "color": "#068a9c",
+    "thickness": 1
+  },
+  "appBarTheme": {
+    "backgroundColor": "#068a9c",
+    "titleTextStyle": {
+      "color": "#ffffff",
+      "fontSize": 18.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#068a9c"
+    },
+    "iconTheme": {
+      "size": 20.0,
+      "color": "#ffffff"
+    },
+    "centerTitle": true,
+    "elevation": 0,
+    "toolbarHeight": 70
   }
 }

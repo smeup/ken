@@ -23,12 +23,9 @@ class SmeupAppBar extends AppBar {
       this.backButtonVisible = true})
       : super(
             key: key,
-            iconTheme: _getIconTheme(),
-            titleTextStyle: _getTextStile(isDialog),
             automaticallyImplyLeading: !isDialog,
             leading: _getLeadingButton(backButtonVisible, myContext),
             title: _getTitle(appBarImage, appBarTitle, scaffoldKey, formKey),
-            backgroundColor: _getTextStile(isDialog).backgroundColor,
             elevation: isDialog ? 0 : 10,
             actions: appBarActions);
 
@@ -63,19 +60,5 @@ class SmeupAppBar extends AppBar {
         key: Key('appbar_text'),
       ));
     }
-  }
-
-  static TextStyle _getTextStile(isDialog) {
-    TextStyle style = isDialog
-        ? SmeupConfigurationService.getTheme().textTheme.headline2
-        : SmeupConfigurationService.getTheme().textTheme.headline1;
-
-    return style;
-  }
-
-  static IconThemeData _getIconTheme() {
-    IconThemeData themeData = SmeupConfigurationService.getTheme().iconTheme;
-
-    return themeData;
   }
 }

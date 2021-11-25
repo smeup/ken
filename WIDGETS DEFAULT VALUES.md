@@ -4,9 +4,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 ### SmeupAppBar
 </a>
 
-    The SmeupAppBar does not have any default. Its style depend on following styles:
-    - title:    textTheme.headline1 (if it's a page) or textTheme.headline2 (if it's a dialog)
-    - icons:    iconTheme
+    The SmeupAppBar does not have any default. Its style depend on "appBarTheme"
         
 <a name="SmeupButton">
 ### SmeupButton
