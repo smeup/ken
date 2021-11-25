@@ -293,12 +293,6 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
                           child: Text('OK',
                               style: new TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 15)),
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            primary: Colors.white,
-                            onPrimary: SmeupConfigurationService.getTheme()
-                                .primaryColor,
-                          ),
                           onPressed: () {
                             Navigator.of(context).pushNamedAndRemoveUntil(
                                 '/MainScreen', (Route<dynamic> route) => false);
