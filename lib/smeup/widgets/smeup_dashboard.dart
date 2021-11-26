@@ -266,8 +266,7 @@ class _SmeupDashboardState extends State<SmeupDashboard>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().caption;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
 
     style = style.copyWith(
         color: widget.captionFontColor, fontSize: widget.captionFontSize);
@@ -282,8 +281,7 @@ class _SmeupDashboardState extends State<SmeupDashboard>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().headline3;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.headline3;
 
     style = style.copyWith(
       color: widget.fontColor,

@@ -238,8 +238,7 @@ class SmeupButton extends StatelessWidget {
   }
 
   TextStyle _getTextStile() {
-    TextStyle style =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().button;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.button;
 
     style = style.copyWith(color: fontColor, fontSize: fontSize);
 

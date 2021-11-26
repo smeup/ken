@@ -306,8 +306,7 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().caption;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
 
     style = style.copyWith(
         color: widget.captionFontColor,

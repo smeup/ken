@@ -202,12 +202,12 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     SmeupDrawer smeupDrawer;
     Function getNewDrawer = () {
       var newList = List<SmeupDrawerDataElement>.empty(growable: true);
-      SmeupDrawer.addInternalDrawerElements(newList);
+      SmeupDrawer.addInternalDrawerElements(newList, context);
       smeupDrawer = SmeupDrawer(
         widget._scaffoldKey,
         widget._formKey,
         data: newList,
-        navbarBackcolor: SmeupConfigurationService.getTheme().primaryColor,
+        appBarBackColor: SmeupConfigurationService.getTheme().primaryColor,
         title: 'MENU',
       );
       return smeupDrawer;

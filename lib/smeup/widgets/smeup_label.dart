@@ -330,8 +330,7 @@ class _SmeupLabelState extends State<SmeupLabel>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().bodyText2;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.bodyText2;
 
     style = style.copyWith(
         color: widget.fontColor,

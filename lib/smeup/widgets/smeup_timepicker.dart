@@ -408,8 +408,7 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().bodyText1;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.bodyText1;
 
     style = style.copyWith(color: widget.fontColor, fontSize: widget.fontSize);
 
@@ -423,8 +422,7 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().caption;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
 
     style = style.copyWith(
         color: widget.captionFontColor, fontSize: widget.captionFontSize);

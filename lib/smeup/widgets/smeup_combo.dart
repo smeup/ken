@@ -318,8 +318,7 @@ class _SmeupComboState extends State<SmeupCombo>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().caption;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
 
     style = style.copyWith(
         color: widget.captionFontColor, fontSize: widget.captionFontSize);

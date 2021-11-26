@@ -145,7 +145,16 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 </a>
 
     json_theme's supported attributes:
-        TODO
+
+    - defaultAppBarBackColor:   appBarTheme.backgroundColor
+
+    - titleFontColor        :   appBarTheme.titleTextStyle.color
+    - titleFontSize         :   appBarTheme.titleTextStyle.fontSize
+    - titleFontBold         :   appBarTheme.titleTextStyle.fontWeight 
+    
+    - elementFontColor      :   appBarTheme.toolbarTextStyle.color
+    - elementFontSize       :   appBarTheme.toolbarTextStyle.fontSize
+    - elementFontBold       :   appBarTheme.toolbarTextStyle.fontWeight 
         
     Others attributes:
         TODO

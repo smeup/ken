@@ -102,8 +102,7 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
   }
 
   TextStyle _getTextStile() {
-    TextStyle style =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().bodyText1;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.bodyText1;
 
     style = style.copyWith(
       color: widget.fontColor,
