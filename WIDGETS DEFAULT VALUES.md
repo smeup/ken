@@ -6,6 +6,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 
 - scaffoldBackgroundColor   :   color of the screen backgroundColor
 - primaryColor              :   main color of the application (convenient way to get the main color in static components)
+- errorColor                :   color of the SnackBar'sbackgroundColor in case of error
 
 
 <a name="SmeupAppBar">
