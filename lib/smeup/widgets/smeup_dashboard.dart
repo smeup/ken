@@ -3,6 +3,7 @@ import 'package:mobile_components_library/smeup/daos/smeup_dashboard_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_dashboard_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
@@ -19,19 +20,23 @@ class SmeupDashboard extends StatefulWidget
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
 
+  double fontSize;
+  Color fontColor;
+  bool fontBold;
+  double captionFontSize;
+  bool captionFontBold;
+  Color captionFontColor;
+  double iconSize;
+  Color iconColor;
+
   double data;
   String unitOfMeasure = '';
   String text = '';
   int icon = 0;
-
   String valueColName;
-  Color iconColor;
   String selectLayout;
-  double fontsize;
-  double labelFontsize;
   double width;
   double height;
-  double iconSize;
   EdgeInsetsGeometry padding;
   String title;
   String id;
@@ -45,6 +50,14 @@ class SmeupDashboard extends StatefulWidget
   SmeupDashboard(this.scaffoldKey, this.formKey, this.data,
       {id = '',
       type = 'DSH',
+      this.fontColor,
+      this.fontSize,
+      this.fontBold,
+      this.captionFontBold,
+      this.captionFontSize,
+      this.captionFontColor,
+      this.iconSize,
+      this.iconColor,
       this.forceIcon,
       this.forceText,
       this.forceUm,
@@ -53,18 +66,15 @@ class SmeupDashboard extends StatefulWidget
       this.text = '',
       this.unitOfMeasure = '',
       this.icon,
-      this.iconColor,
       this.selectLayout = SmeupDashboardModel.defaultSelectLayout,
       this.width = SmeupDashboardModel.defaultWidth,
       this.height = SmeupDashboardModel.defaultHeight,
-      this.fontsize = SmeupDashboardModel.defaultFontsize,
-      this.labelFontsize = SmeupDashboardModel.defaultLabelFontsize,
-      this.iconSize = SmeupDashboardModel.defaultIconSize,
       this.padding = SmeupDashboardModel.defaultPadding,
       this.numberFormat = SmeupDashboardModel.defaultNumberFormat,
       this.title = ''})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
+    SmeupDashboardModel.setDefaults(this);
   }
 
   SmeupDashboard.withController(this.model, this.scaffoldKey, this.formKey)
@@ -75,16 +85,20 @@ class SmeupDashboard extends StatefulWidget
   @override
   runControllerActivities(SmeupModel model) {
     SmeupDashboardModel m = model;
+    fontSize = m.fontSize;
+    fontColor = m.fontColor;
+    fontBold = m.fontBold;
+    captionFontSize = m.captionFontSize;
+    captionFontColor = m.captionFontColor;
+    captionFontBold = m.captionFontBold;
+    iconColor = m.iconColor;
+    iconSize = m.iconSize;
     id = m.id;
     type = m.type;
     valueColName = m.valueColName;
-    iconColor = m.iconColor;
     unitOfMeasure = m.selectLayout = m.selectLayout;
-    fontsize = m.fontsize;
-    labelFontsize = m.labelFontsize;
     width = m.width;
     height = m.height;
-    iconSize = m.iconSize;
     padding = m.padding;
     title = m.title;
     forceValue = m.forceValue;
@@ -191,6 +205,10 @@ class _SmeupDashboardState extends State<SmeupDashboard>
       return SmeupWidgetBuilderResponse(_model, SmeupNotAvailable());
     }
 
+    final iconTheme = _getIconTheme();
+    final captionStyle = _getCaptionStile();
+    final textStyle = _getTextStile();
+
     children = Container(
       height: widget.height,
       width: widget.width,
@@ -203,22 +221,20 @@ class _SmeupDashboardState extends State<SmeupDashboard>
           children: <Widget>[
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               if (widget.icon != null && widget.icon != 0)
-                Padding(
-                    padding: EdgeInsets.only(left: 10, right: 10),
-                    child: Icon(
-                      IconData(widget.icon, fontFamily: 'MaterialIcons'),
-                      color: widget.iconColor,
-                      size: widget.iconSize,
-                    )),
+                Icon(
+                  IconData(widget.icon, fontFamily: 'MaterialIcons'),
+                  color: iconTheme.color,
+                  size: iconTheme.size,
+                ),
               Text(
                 _getValue(_data),
-                style: TextStyle(fontSize: widget.fontsize),
+                style: textStyle,
               )
             ]),
             if (widget.text != null)
               Text(
                 widget.text,
-                style: TextStyle(fontSize: widget.labelFontsize),
+                style: captionStyle,
               )
           ],
         ),
@@ -232,7 +248,7 @@ class _SmeupDashboardState extends State<SmeupDashboard>
     String newValue = _data.toString();
     try {
       var split = widget.numberFormat.split(';');
-      //String integers = split[0]; not used
+      // String integers = split[0]; not used
       String decimals = split[1];
       int precision = int.tryParse(decimals);
       switch (precision) {
@@ -247,5 +263,47 @@ class _SmeupDashboardState extends State<SmeupDashboard>
           logType: LogType.error);
     }
     return newValue;
+  }
+
+  TextStyle _getCaptionStile() {
+    TextStyle style =
+        SmeupConfigurationService.getTheme().textTheme.copyWith().caption;
+
+    style = style.copyWith(
+        color: widget.captionFontColor, fontSize: widget.captionFontSize);
+
+    if (widget.captionFontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
+  }
+
+  TextStyle _getTextStile() {
+    TextStyle style =
+        SmeupConfigurationService.getTheme().textTheme.copyWith().headline3;
+
+    style = style.copyWith(
+      color: widget.fontColor,
+      fontSize: widget.fontSize,
+    );
+
+    if (widget.fontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
+  }
+
+  IconThemeData _getIconTheme() {
+    IconThemeData themeData = SmeupConfigurationService.getTheme()
+        .iconTheme
+        .copyWith(size: widget.iconSize, color: widget.iconColor);
+
+    return themeData;
   }
 }

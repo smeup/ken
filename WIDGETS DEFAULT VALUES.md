@@ -1,5 +1,13 @@
 Follow the list of the attributes of the smeup_components_library widgets with their defaults.
 
+<a name="Shared">
+### Shared
+</a>
+
+- scaffoldBackgroundColor   :   color of the screen backgroundColor
+- primaryColor              :   main color of the application (convenient way to get the main color in static components)
+
+
 <a name="SmeupAppBar">
 ### SmeupAppBar
 </a>
@@ -106,10 +114,31 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 </a>
 
     json_theme's supported attributes:
-        TODO
+    - fontColor             :   textTheme.headline3.color
+    - fontSize              :   textTheme.headline3.fontSize
+    - fontBold              :   textTheme.headline3.fontWeight 
+    
+    - captionFontColor      :   textTheme.caption.color
+    - captionFontSize       :   textTheme.caption.fontSize
+    - captionFontBold       :   textTheme.caption.fontWeight 
+
+    - iconSize              :   iconTheme.size
+    - iconColor             :   iconTheme.color
         
     Others attributes:
-        TODO
+    - padding               :   EdgeInsets.all(0)
+    - width                 :   120
+    - height                :   120
+    - valueColName          :   'value'
+    - iconColName           :   'icon'
+    - textColName           :   'description'
+    - umColName             :   'um'
+    - selectLayout          :   ''
+    - forceText             :   ''
+    - forceIcon             :   ''
+    - forceValue            :   ''
+    - forceUm               :   ''
+    - numberFormat          :   '*;0'
 
 <a name="SmeupDrawer">
 ### SmeupDrawer

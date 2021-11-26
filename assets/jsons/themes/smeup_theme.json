@@ -54,6 +54,12 @@
       "fontSize": 18.0,
       "fontWeight": "bold",
       "backgroundColor": "#ffffff"
+    },
+    "headline3": {
+      "color": "#068a9c",
+      "fontSize": 56.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
     }
   },
   "iconTheme": {
