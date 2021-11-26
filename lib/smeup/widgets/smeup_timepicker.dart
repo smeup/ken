@@ -231,6 +231,11 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
         timePickerHeight = (_model.parent as SmeupSectionModel).height;
       if (timePickerWidth == 0)
         timePickerWidth = (_model.parent as SmeupSectionModel).width;
+    } else {
+      if (timePickerHeight == 0)
+        timePickerHeight = MediaQuery.of(context).size.height;
+      if (timePickerWidth == 0)
+        timePickerWidth = MediaQuery.of(context).size.width;
     }
 
     if (!widget.showborder) {
@@ -403,8 +408,7 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().bodyText1;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.bodyText1;
 
     style = style.copyWith(color: widget.fontColor, fontSize: widget.fontSize);
 
@@ -418,8 +422,7 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().caption;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
 
     style = style.copyWith(
         color: widget.captionFontColor, fontSize: widget.captionFontSize);

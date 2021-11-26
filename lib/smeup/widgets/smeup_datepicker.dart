@@ -223,6 +223,11 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
         datePickerHeight = (_model.parent as SmeupSectionModel).height;
       if (datePickerWidth == 0)
         datePickerWidth = (_model.parent as SmeupSectionModel).width;
+    } else {
+      if (datePickerHeight == 0)
+        datePickerHeight = MediaQuery.of(context).size.height;
+      if (datePickerWidth == 0)
+        datePickerWidth = MediaQuery.of(context).size.width;
     }
 
     if (!widget.showborder) {
@@ -394,8 +399,7 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().bodyText1;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.bodyText1;
 
     style = style.copyWith(color: widget.fontColor, fontSize: widget.fontSize);
 
@@ -409,8 +413,7 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().caption;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
 
     style = style.copyWith(
         color: widget.captionFontColor, fontSize: widget.captionFontSize);

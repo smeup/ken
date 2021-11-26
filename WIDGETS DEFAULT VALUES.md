@@ -1,12 +1,19 @@
 Follow the list of the attributes of the smeup_components_library widgets with their defaults.
 
+<a name="Shared">
+### Shared
+</a>
+
+- scaffoldBackgroundColor   :   color of the screen backgroundColor
+- primaryColor              :   main color of the application (convenient way to get the main color in static components)
+- errorColor                :   color of the SnackBar'sbackgroundColor in case of error
+
+
 <a name="SmeupAppBar">
 ### SmeupAppBar
 </a>
 
-    The SmeupAppBar does not have any default. Its style depend on following styles:
-    - title:    textTheme.headline1 (if it's a page) or textTheme.headline2 (if it's a dialog)
-    - icons:    iconTheme
+    The SmeupAppBar does not have any default. Its style depend on "appBarTheme"
         
 <a name="SmeupButton">
 ### SmeupButton
@@ -21,11 +28,8 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 
     - fontColor             :   textTheme.button.color
     - fontSize              :   textTheme.button.fontSize
-    - fontBold              :   textTheme.button.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
-    - underline             :   the underline attribute is a boolean and decides wheter or not a SmeupLine should be shown under the SmeupDatePicker. 
-
-   Notes:
-    See [SmeupLine](#SmeupLine) for further information about SmeupLine. 
+    - fontBold              :   textTheme.button.fontWeight 
+    - underline             :   textTheme.button.decoration
 
     - iconSize              :   iconTheme.size
     - iconColor             :   iconTheme.color
@@ -74,22 +78,84 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - height                :   100
     - legend                :   true
 
+
+<a name="SmeupCombo">
+### SmeupCombo
+</a>
+
+    json_theme's supported attributes:
+    - fontSize              :   textTheme.bodyText1.fontSize
+    - fontBold              :   textTheme.bodyText1.fontWeight 
+    - backColor             :   textTheme.bodyText1.backgroundColor
+
+    - iconSize              :   iconTheme.size
+    - iconColor             :   iconTheme.color
+
+    - captionFontSize       :   textTheme.caption.fontSize
+    - captionFontBold       :   textTheme.caption.fontWeight 
+    - captionBackColor      :   textTheme.caption.backgroundColor
+
+    - underline             :   the underline attribute is a boolean and decides wheter or not a SmeupLine should be shown under the SmeupDatePicker. 
+
+   Notes:
+    See [SmeupLine](#SmeupLine) for further information about SmeupLine. 
+
+    Others attributes:
+    - width                 :   100
+    - height                :   20
+    - valueField            :   'value'
+    - descriptionField      :   'description'
+    - padding               :   EdgeInsets.all(0)
+    - label                 :   ''
+    - align                 :   Alignment.centerLeft
+    - innerSpace            :   10.0
+
 <a name="SmeupDashboard">
 ### SmeupDashboard
 </a>
 
     json_theme's supported attributes:
-        TODO
+    - fontColor             :   textTheme.headline3.color
+    - fontSize              :   textTheme.headline3.fontSize
+    - fontBold              :   textTheme.headline3.fontWeight 
+    
+    - captionFontColor      :   textTheme.caption.color
+    - captionFontSize       :   textTheme.caption.fontSize
+    - captionFontBold       :   textTheme.caption.fontWeight 
+
+    - iconSize              :   iconTheme.size
+    - iconColor             :   iconTheme.color
         
     Others attributes:
-        TODO
+    - padding               :   EdgeInsets.all(0)
+    - width                 :   120
+    - height                :   120
+    - valueColName          :   'value'
+    - iconColName           :   'icon'
+    - textColName           :   'description'
+    - umColName             :   'um'
+    - selectLayout          :   ''
+    - forceText             :   ''
+    - forceIcon             :   ''
+    - forceValue            :   ''
+    - forceUm               :   ''
+    - numberFormat          :   '*;0'
 
 <a name="SmeupDrawer">
 ### SmeupDrawer
 </a>
 
     json_theme's supported attributes:
-        TODO
+
+    - defaultAppBarBackColor:   appBarTheme.backgroundColor
+
+    - titleFontColor        :   appBarTheme.titleTextStyle.color
+    - titleFontSize         :   appBarTheme.titleTextStyle.fontSize
+    - titleFontBold         :   appBarTheme.titleTextStyle.fontWeight 
+    
+    - elementFontColor      :   appBarTheme.toolbarTextStyle.color
+    - elementFontSize       :   appBarTheme.toolbarTextStyle.fontSize
+    - elementFontBold       :   appBarTheme.toolbarTextStyle.fontWeight 
         
     Others attributes:
         TODO
@@ -105,11 +171,11 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - backColor             :   timePickerThemeData.backgroundColor
 
     - fontSize              :   textTheme.bodyText1.fontSize
-    - fontBold              :   textTheme.bodyText1.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - fontBold              :   textTheme.bodyText1.fontWeight 
     - backColor             :   textTheme.bodyText1.backgroundColor
 
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - captionFontBold       :   textTheme.caption.fontWeight 
     - captionBackColor      :   textTheme.caption.backgroundColor
 
     - elevation             :   elevatedButtonTheme.style.elevation
@@ -164,10 +230,27 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 </a>
 
     json_theme's supported attributes:
-        TODO
+    - backColor             :   cardTheme.color
+    - borderColor           :   cardTheme.shape.side.color
+    - borderWidth           :   cardTheme.shape.side.width
+    - borderRadius          :   cardTheme.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
+    
+    - fontColor             :   textTheme.headline1.color
+    - fontSize              :   textTheme.headline1.fontSize
+    - fontBold              :   textTheme.headline1.fontWeight 
+
+    - captionFontColor      :   textTheme.headline2.color
+    - captionFontSize       :   textTheme.headline2.fontSize
+    - captionFontBold       :   textTheme.headline2.fontWeight 
         
     Others attributes:
-        TODO
+    - width                 :   0
+    - height                :   300
+    - padding               :   EdgeInsets.only(left: 5, right: 5)
+    - columns               :   0
+    - rows                  :   0
+    - orientation           :   Axis.vertical
+    - listHeight            :   0
 
 <a name="SmeupLabel">
 ### SmeupLabel
@@ -176,7 +259,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     json_theme's supported attributes:
     - fontColor             :   textTheme.bodyText2.color
     - fontSize              :   textTheme.bodyText2.fontSize
-    - fontBold              :   textTheme.bodyText2.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - fontBold              :   textTheme.bodyText2.fontWeight 
     - backColor             :   textTheme.bodyText2.backgroundColor
 
     - iconSize              :   iconTheme.size
@@ -204,10 +287,34 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 </a>
 
     json_theme's supported attributes:
-        TODO
-        
+
+    - backColor             :   cardTheme.color
+    - borderColor           :   cardTheme.shape.side.color
+    - borderWidth           :   cardTheme.shape.side.width
+    - borderRadius          :   cardTheme.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
+    
+    - fontColor             :   textTheme.headline1.color
+    - fontSize              :   textTheme.headline1.fontSize
+    - fontBold              :   textTheme.headline1.fontWeight 
+
+    - captionFontColor      :   textTheme.headline2.color
+    - captionFontSize       :   textTheme.headline2.fontSize
+    - captionFontBold       :   textTheme.headline2.fontWeight 
+
     Others attributes:
-        TODO    
+    - width                 :   0
+    - height                :   170
+    - padding               :   EdgeInsets.only(left: 5, right: 5)
+    - listType              :   SmeupListType.oriented
+    - portraitColumns       :   1
+    - landscapeColumns      :   1
+    - layout                :   '1'
+    - orientation           :   Axis.vertical
+    - defaultSort           :   ''
+    - backgroundColName     :   ''
+    - showSelection         :   false
+    - selectedRow           :   -1
+    - listHeight            :   0    
 
 <a name="SmeupProgressBar">
 ### SmeupProgressBar
@@ -257,12 +364,12 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 
     - fontColor             :   textTheme.bodyText1.color
     - fontSize              :   textTheme.bodyText1.fontSize
-    - fontBold              :   textTheme.bodyText1.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - fontBold              :   textTheme.bodyText1.fontWeight 
     - backColor             :   textTheme.bodyText1.backgroundColor
 
     - captionFontColor      :   textTheme.caption.color
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - captionFontBold       :   textTheme.caption.fontWeight 
     - captionBackColor      :   textTheme.caption.backgroundColor
 
     Others attributes:
@@ -306,7 +413,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - trackColor            :   switchTheme.trackColor
 
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - captionFontBold       :   textTheme.caption.fontWeight 
     - captionBackColor      :   textTheme.caption.backgroundColor
     - captionFontColor      :   textTheme.caption.color
 
@@ -357,11 +464,11 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - backColor             :   timePickerThemeData.backgroundColor
 
     - fontSize              :   textTheme.bodyText1.fontSize
-    - fontBold              :   textTheme.bodyText1.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - fontBold              :   textTheme.bodyText1.fontWeight 
     - backColor             :   textTheme.bodyText1.backgroundColor
 
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight (values: ['bold','normal','w100','w200','w300','w400','w500','w600','w700','w800','w900'])
+    - captionFontBold       :   textTheme.caption.fontWeight 
     - captionBackColor      :   textTheme.caption.backgroundColor
 
     - elevation             :   elevatedButtonTheme.style.elevation

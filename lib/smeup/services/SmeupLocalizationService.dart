@@ -29,6 +29,7 @@ class SmeupLocalizationService {
       'delete': 'DELETE',
       'elementDeleted': 'The item has been deleted',
       'dataNotAvailable': 'Data not available',
+      'settings': 'SETTINGS'
     },
     'it': {
       'confirm': 'CONFERMA',
@@ -37,6 +38,7 @@ class SmeupLocalizationService {
       'delete': 'ELIMINA',
       'elementDeleted': 'L\'elemento è stato eliminato',
       'dataNotAvailable': 'Dati non disponibili',
+      'settings': 'IMPOSTAZIONI'
     },
     'fr': {
       'confirm': 'CONFIRMATION',
@@ -45,6 +47,7 @@ class SmeupLocalizationService {
       'delete': 'SUPPRIMER',
       'elementDeleted': 'L\'élément a été supprimé',
       'dataNotAvailable': 'Données non disponibles',
+      'settings': 'PARAMÈTRES'
     },
   };
 

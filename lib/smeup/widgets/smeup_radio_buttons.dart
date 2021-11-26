@@ -213,6 +213,9 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
         radioHeight = (_model.parent as SmeupSectionModel).height;
       if (radioWidth == 0)
         radioWidth = (_model.parent as SmeupSectionModel).width;
+    } else {
+      if (radioHeight == 0) radioHeight = MediaQuery.of(context).size.height;
+      if (radioWidth == 0) radioWidth = MediaQuery.of(context).size.width;
     }
 
     _data.forEach((radioButtonData) {
@@ -303,8 +306,7 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().caption;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
 
     style = style.copyWith(
         color: widget.captionFontColor,

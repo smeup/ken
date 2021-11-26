@@ -1,6 +1,5 @@
 {
   "_comment": "smeup_components_library: for further information about the supported styles read the document README.md",
-  "brightness": "light",
   "primaryColor": "#068a9c",
   "splashColor": "#068a9c",
   "scaffoldBackgroundColor": "#ffffff",
@@ -43,15 +42,21 @@
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
-    "headline1":{
-      "color": "#ffffff",
-      "fontSize": 18.0,
-      "fontWeight": "normal",
-      "backgroundColor": "#068a9c"
-    },
-    "headline2":{
+    "headline1": {
       "color": "#068a9c",
       "fontSize": 18.0,
+      "fontWeight": "bold",
+      "backgroundColor": "#ffffff"
+    },
+    "headline2": {
+      "color": "#068a9c",
+      "fontSize": 18.0,
+      "fontWeight": "bold",
+      "backgroundColor": "#ffffff"
+    },
+    "headline3": {
+      "color": "#068a9c",
+      "fontSize": 56.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     }
@@ -60,7 +65,7 @@
     "size": 20.0,
     "color": "#ffffff"
   },
-  "timePickerThemeData":  {
+  "timePickerThemeData": {
     "backgroundColor": "#ffffff",
     "shape": {
       "type": "rectangle",
@@ -71,11 +76,11 @@
       "width": 2.0
     }
   },
-  "radioTheme" : {
-    "fillColor" : "#068a9c"
+  "radioTheme": {
+    "fillColor": "#068a9c"
   },
-  "switchTheme" : {
-    "thumbColor" : "#068a9c",
+  "switchTheme": {
+    "thumbColor": "#068a9c",
     "trackColor": "#cef8fd"
   },
   "sliderTheme": {
@@ -83,13 +88,44 @@
     "thumbColor": "#068a9c",
     "inactiveTrackColor": "#cef8fd"
   },
-  "progressIndicatorTheme" : {
-    "color" : "#068a9c",
-    "linearTrackColor" : "#cef8fd",
+  "progressIndicatorTheme": {
+    "color": "#068a9c",
+    "linearTrackColor": "#cef8fd",
     "circularTrackColor": "#cef8fd"
   },
-  "dividerTheme" : {
-    "color" : "#068a9c",
-    "thickness" : 1
+  "dividerTheme": {
+    "color": "#068a9c",
+    "thickness": 1
+  },
+  "appBarTheme": {
+    "backgroundColor": "#068a9c",
+    "titleTextStyle": {
+      "color": "#ffffff",
+      "fontSize": 18.0,
+      "fontWeight": "normal"
+    },
+    "toolbarTextStyle": {
+      "color": "#ffffff",
+      "fontSize": 18.0,
+      "fontWeight": "normal"
+    },
+    "iconTheme": {
+      "size": 20.0,
+      "color": "#ffffff"
+    },
+    "centerTitle": true,
+    "elevation": 0,
+    "toolbarHeight": 70
+  },
+  "cardTheme": {
+    "color": "#ffffff",
+    "shape": {
+      "type": "rectangle",
+      "borderRadius": 20.0,
+      "side": {
+        "color": "#068a9c",
+        "width": 2.0
+      }
+    }
   }
 }

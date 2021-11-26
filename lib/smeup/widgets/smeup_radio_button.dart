@@ -124,8 +124,7 @@ class _SmeupRadioButtonState extends State<SmeupRadioButton> {
   }
 
   TextStyle _getTextStile() {
-    TextStyle style =
-        SmeupConfigurationService.getTheme().textTheme.copyWith().bodyText1;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.bodyText1;
 
     style = style.copyWith(
         color: widget.fontColor,

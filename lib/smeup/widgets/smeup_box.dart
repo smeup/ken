@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_image_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
@@ -19,7 +18,7 @@ class SmeupBox extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final Function onItemTap;
   final Function onRefresh;
-  final Color cardColor;
+  final Color backColor;
   final Color fontColor;
   final List<String> _excludedColumns = ['J4BTN', 'J4IMG'];
   final List<dynamic> columns;
@@ -35,6 +34,9 @@ class SmeupBox extends StatefulWidget {
   final int index;
   final int selectedRow;
   final bool isDynamic;
+  final CardTheme cardTheme;
+  final TextStyle textStyle;
+  final TextStyle captionStyle;
 
   SmeupBox(this.scaffoldKey, this.formKey, this.index,
       {this.id,
@@ -47,12 +49,15 @@ class SmeupBox extends StatefulWidget {
       this.showLoader,
       this.layout,
       this.onItemTap,
-      this.cardColor,
+      this.backColor,
       this.fontColor,
       this.width,
       this.height,
       this.dismissEnabled,
-      this.showSelection});
+      this.showSelection,
+      this.cardTheme,
+      this.textStyle,
+      this.captionStyle});
 
   @override
   _SmeupBoxState createState() => _SmeupBoxState();
@@ -214,13 +219,8 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardColor ?? null,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                  color: SmeupConfigurationService.getTheme().primaryColor,
-                  width: borderSize),
-              borderRadius: BorderRadius.circular(10),
-            ),
+            color: widget.cardTheme.color,
+            shape: widget.cardTheme.shape,
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
@@ -237,14 +237,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                           final colWidget = Expanded(
                             child: Align(
                               alignment: Alignment.center,
-                              child: Text(rowData,
-                                  style: TextStyle(
-                                      backgroundColor: widget.cardColor,
-                                      fontSize: 20,
-                                      color: widget.fontColor ??
-                                          SmeupConfigurationService.getTheme()
-                                              .primaryColor,
-                                      fontWeight: FontWeight.bold)),
+                              child: Text(rowData, style: widget.textStyle),
                             ),
                           );
 
@@ -294,12 +287,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardColor ?? null,
-            // shape: RoundedRectangleBorder(
-            //   side:
-            //       BorderSide(color: SmeupOptions.getTheme().primaryColor, width: 2),
-            //   borderRadius: BorderRadius.circular(10),
-            // ),
+            color: widget.cardTheme.color,
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
@@ -323,21 +311,15 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                                     child: Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(col['text'],
-                                          style: TextStyle(
-                                            backgroundColor: widget.cardColor,
-                                            fontSize: 16,
-                                          )),
+                                          style: widget.captionStyle),
                                     ),
                                   ),
                                 Expanded(
                                   flex: 2,
                                   child: Align(
                                     alignment: Alignment.centerRight,
-                                    child: Text(rowData,
-                                        style: TextStyle(
-                                            backgroundColor: widget.cardColor,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold)),
+                                    child:
+                                        Text(rowData, style: widget.textStyle),
                                   ),
                                 ),
                               ]));
@@ -368,7 +350,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardColor ?? null,
+            color: widget.cardTheme.color,
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
@@ -385,14 +367,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                           final colWidget = Expanded(
                             child: Align(
                               alignment: Alignment.center,
-                              child: Text(rowData,
-                                  style: TextStyle(
-                                      backgroundColor: widget.cardColor,
-                                      fontSize: 20,
-                                      color: widget.fontColor ??
-                                          SmeupConfigurationService.getTheme()
-                                              .primaryColor,
-                                      fontWeight: FontWeight.bold)),
+                              child: Text(rowData, style: widget.textStyle),
                             ),
                           );
 
@@ -422,13 +397,8 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardColor ?? null,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                  color: SmeupConfigurationService.getTheme().primaryColor,
-                  width: borderSize),
-              borderRadius: BorderRadius.circular(10),
-            ),
+            color: widget.cardTheme.color,
+            shape: widget.cardTheme.shape,
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
@@ -452,21 +422,14 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                                   child: Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(col['text'],
-                                        style: TextStyle(
-                                          backgroundColor: widget.cardColor,
-                                          fontSize: 16,
-                                        )),
+                                        style: widget.captionStyle),
                                   ),
                                 ),
                               Expanded(
                                 flex: 2,
                                 child: Align(
                                   alignment: Alignment.centerRight,
-                                  child: Text(rowData,
-                                      style: TextStyle(
-                                          backgroundColor: widget.cardColor,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold)),
+                                  child: Text(rowData, style: widget.textStyle),
                                 ),
                               ),
                             ]),
@@ -512,13 +475,8 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardColor ?? null,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                  color: SmeupConfigurationService.getTheme().primaryColor,
-                  width: borderSize),
-              borderRadius: BorderRadius.circular(10),
-            ),
+            color: widget.cardTheme.color,
+            shape: widget.cardTheme.shape,
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
@@ -542,21 +500,15 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                                     child: Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(col['text'],
-                                          style: TextStyle(
-                                            backgroundColor: widget.cardColor,
-                                            fontSize: 16,
-                                          )),
+                                          style: widget.captionStyle),
                                     ),
                                   ),
                                 Expanded(
                                   flex: 2,
                                   child: Align(
                                     alignment: Alignment.centerRight,
-                                    child: Text(rowData,
-                                        style: TextStyle(
-                                            backgroundColor: widget.cardColor,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold)),
+                                    child:
+                                        Text(rowData, style: widget.textStyle),
                                   ),
                                 ),
                               ]));
@@ -587,13 +539,9 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardColor ?? null,
-            // shape: RoundedRectangleBorder(
-            //   side: BorderSide(
-            //       color: SmeupConfigurationService.getTheme().primaryColor,
-            //       width: borderSize),
-            //   borderRadius: BorderRadius.circular(10),
-            // ),
+            color: widget.cardTheme.color,
+            shape: (widget.cardTheme.shape as RoundedRectangleBorder)
+                .copyWith(side: BorderSide(color: widget.cardTheme.color)),
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
@@ -609,14 +557,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                             final colWidget = Expanded(
                               child: Align(
                                 alignment: Alignment.center,
-                                child: Text(rowData,
-                                    style: TextStyle(
-                                        backgroundColor: widget.cardColor,
-                                        fontSize: 20,
-                                        color: widget.fontColor ??
-                                            SmeupConfigurationService.getTheme()
-                                                .primaryColor,
-                                        fontWeight: FontWeight.bold)),
+                                child: Text(rowData, style: widget.textStyle),
                               ),
                             );
 
@@ -667,13 +608,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardColor ?? null,
-            // shape: RoundedRectangleBorder(
-            //   side: BorderSide(
-            //       color: SmeupConfigurationService.getTheme().primaryColor,
-            //       width: borderSize),
-            //   borderRadius: BorderRadius.circular(10),
-            //),
+            color: widget.cardTheme.color,
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
@@ -692,13 +627,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                               alignment: Alignment.center,
                               child: Text(rowData,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      backgroundColor: widget.cardColor,
-                                      fontSize: 12,
-                                      color: widget.fontColor ??
-                                          SmeupConfigurationService.getTheme()
-                                              .primaryColor,
-                                      fontWeight: FontWeight.bold)),
+                                  style: widget.textStyle),
                             ),
                           );
 
@@ -934,16 +863,6 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
             child: SmeupButton(
               height: 50,
               width: buttonText.isEmpty ? 50 : 0,
-              backColor: buttonText.isEmpty
-                  ? SmeupConfigurationService.getTheme().scaffoldBackgroundColor
-                  : SmeupConfigurationService.getTheme().primaryColor,
-              borderColor: buttonText.isEmpty
-                  ? SmeupConfigurationService.getTheme().scaffoldBackgroundColor
-                  : SmeupConfigurationService.getTheme().primaryColor,
-              fontColor: buttonText.isEmpty
-                  ? SmeupConfigurationService.getTheme().primaryColor
-                  : SmeupConfigurationService.getTheme()
-                      .scaffoldBackgroundColor,
               iconData: int.tryParse(buttonIcon) ?? 0,
               data: buttonText,
               clientOnPressed: () {

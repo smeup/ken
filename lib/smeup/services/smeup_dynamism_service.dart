@@ -254,13 +254,13 @@ class SmeupDynamismService {
             LogType severity = message['gravity'] ?? LogType.info;
             String text = message['message'];
 
-            Color color;
+            Color backColor;
             switch (severity) {
               case LogType.error:
-                color = SmeupConfigurationService.getTheme().errorColor;
+                backColor = SmeupConfigurationService.getTheme().errorColor;
                 break;
               case LogType.warning:
-                color = Colors.amberAccent;
+                backColor = SmeupConfigurationService.getTheme().primaryColor;
                 break;
               default:
               //color = Colors.green;
@@ -271,8 +271,13 @@ class SmeupDynamismService {
                 case MessagesPromptMode.snackbar:
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(text),
-                      backgroundColor: color,
+                      content: Text(text,
+                          style: TextStyle(
+                              color: SmeupConfigurationService.getTheme()
+                                  .textTheme
+                                  .bodyText2
+                                  .color)),
+                      backgroundColor: backColor,
                     ),
                   );
 

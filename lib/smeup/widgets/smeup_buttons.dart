@@ -3,7 +3,6 @@ import 'package:mobile_components_library/smeup/daos/smeup_buttons_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
@@ -188,53 +187,46 @@ class SmeupButtonsState extends State<SmeupButtons>
 
     var buttons = List<SmeupButton>.empty(growable: true);
 
-    double buttonHeight = widget.height;
-    double buttonWidth = widget.width;
-    if (_model != null && _model.parent != null) {
-      if (buttonHeight == 0)
-        buttonHeight = (_model.parent as SmeupSectionModel).height;
-      if (buttonWidth == 0)
-        buttonWidth = (_model.parent as SmeupSectionModel).width;
-    }
-
     int buttonIndex = 0;
     List array = _model == null ? _data : _data['rows'];
     array.forEach((buttonData) {
       buttonIndex += 1;
       String buttonText = _model == null ? buttonData : buttonData['value'];
       final button = SmeupButton(
-          id: '${SmeupUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
-          type: widget.type,
-          buttonIndex: buttonIndex,
-          title: widget.title,
-          data: buttonText,
-          backColor: widget.backColor,
-          borderColor: widget.borderColor,
-          width: buttonWidth,
-          height: buttonHeight,
-          position: widget.position,
-          align: widget.align,
-          fontColor: widget.fontColor,
-          fontSize: widget.fontSize,
-          padding: widget.padding,
-          valueField: widget.valueField,
-          borderRadius: widget.borderRadius,
-          borderWidth: widget.borderWidth,
-          elevation: widget.elevation,
-          fontBold: widget.fontBold,
-          iconData: widget.iconData,
-          iconSize: widget.iconSize,
-          iconColor: widget.iconColor,
-          icon: null,
-          isBusy: _isBusy,
-          underline: widget.underline,
-          clientOnPressed: () {
-            if (widget.clientOnPressed != null) {
-              widget.clientOnPressed(buttonIndex, buttonText);
-            }
-            runDynamism(context, buttonData);
-          },
-          isLink: widget.isLink);
+        id: '${SmeupUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
+        type: widget.type,
+        buttonIndex: buttonIndex,
+        title: widget.title,
+        data: buttonText,
+        backColor: widget.backColor,
+        borderColor: widget.borderColor,
+        width: widget.width,
+        height: widget.height,
+        position: widget.position,
+        align: widget.align,
+        fontColor: widget.fontColor,
+        fontSize: widget.fontSize,
+        padding: widget.padding,
+        valueField: widget.valueField,
+        borderRadius: widget.borderRadius,
+        borderWidth: widget.borderWidth,
+        elevation: widget.elevation,
+        fontBold: widget.fontBold,
+        iconData: widget.iconData,
+        iconSize: widget.iconSize,
+        iconColor: widget.iconColor,
+        icon: null,
+        isBusy: _isBusy,
+        underline: widget.underline,
+        clientOnPressed: () {
+          if (widget.clientOnPressed != null) {
+            widget.clientOnPressed(buttonIndex, buttonText);
+          }
+          runDynamism(context, buttonData);
+        },
+        isLink: widget.isLink,
+        model: _model,
+      );
 
       buttons.add(button);
     });
