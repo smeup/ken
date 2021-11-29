@@ -56,7 +56,7 @@ class SmeupDatePickerButton extends StatefulWidget {
     this.captionFontSize,
     this.captionFontColor,
     this.captionBackColor,
-    this.underline,
+    this.underline = SmeupDatePickerModel.defaultUnderline,
     this.align = SmeupDatePickerModel.defaultAlign,
     this.label = SmeupDatePickerModel.defaultLabel,
     this.width = SmeupDatePickerModel.defaultWidth,
@@ -87,31 +87,30 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
   @override
   Widget build(BuildContext context) {
     final button = Container(
-      //color: SmeupConfigurationService.getTheme().canvasColor,
       height: 20,
       padding: widget.padding,
-      child:
-          // SizedBox(
-          //   height: widget.height,
-          //   width: widget.width,
-          //   child:
-          ElevatedButton(
-              style: widget.buttonStyle,
-              onPressed: () {
-                DatePicker.showDatePicker(context,
-                    currentTime: _currentValue,
-                    showTitleActions: true, onConfirm: (date) {
-                  setState(() {
-                    final newTime = DateFormat('dd/MM/yyyy').format(date);
-                    _currentDisplay = newTime;
-                    _currentValue = date;
-                    SmeupVariablesService.setVariable(widget.id, newTime,
-                        formKey: widget.formKey);
-                  });
-                });
-              },
-              child: Text(_currentDisplay, style: widget.textStyle)),
-      //),
+      child: ElevatedButton(
+          style: widget.buttonStyle,
+          onPressed: () {
+            DatePicker.showDatePicker(context,
+                theme: DatePickerTheme(
+                    backgroundColor: widget.backColor,
+                    headerColor: widget.textStyle.backgroundColor,
+                    doneStyle: widget.textStyle,
+                    cancelStyle: widget.textStyle,
+                    itemStyle: widget.textStyle),
+                currentTime: _currentValue,
+                showTitleActions: true, onConfirm: (date) {
+              setState(() {
+                final newTime = DateFormat('dd/MM/yyyy').format(date);
+                _currentDisplay = newTime;
+                _currentValue = date;
+                SmeupVariablesService.setVariable(widget.id, newTime,
+                    formKey: widget.formKey);
+              });
+            });
+          },
+          child: Text(_currentDisplay, style: widget.textStyle)),
     );
 
     return button;

@@ -88,7 +88,7 @@ class SmeupDatePicker extends StatefulWidget
     this.captionFontSize,
     this.captionFontColor,
     this.captionBackColor,
-    this.underline,
+    this.underline = SmeupDatePickerModel.defaultUnderline,
     this.innerSpace = SmeupDatePickerModel.defaultInnerSpace,
     this.align = SmeupDatePickerModel.defaultAlign,
     this.valueField = SmeupDatePickerModel.defaultValueField,

@@ -30,7 +30,6 @@ class SmeupButtons extends StatefulWidget
   bool fontBold;
   double iconSize;
   Color iconColor;
-  bool underline;
 
   double width;
   double height;
@@ -71,7 +70,6 @@ class SmeupButtons extends StatefulWidget
       this.fontBold,
       this.iconSize,
       this.iconColor,
-      this.underline,
       this.width = SmeupButtonsModel.defaultWidth,
       this.height = SmeupButtonsModel.defaultHeight,
       this.position = SmeupButtonsModel.defaultPosition,
@@ -114,7 +112,6 @@ class SmeupButtons extends StatefulWidget
     iconColor = m.iconColor;
     orientation = m.orientation;
     isLink = m.isLink;
-    underline = m.underline;
     innerSpace = m.innerSpace;
 
     data = treatData(m);
@@ -217,7 +214,6 @@ class SmeupButtonsState extends State<SmeupButtons>
         iconColor: widget.iconColor,
         icon: null,
         isBusy: _isBusy,
-        underline: widget.underline,
         clientOnPressed: () {
           if (widget.clientOnPressed != null) {
             widget.clientOnPressed(buttonIndex, buttonText);

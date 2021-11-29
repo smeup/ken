@@ -171,8 +171,11 @@ class SmeupDynamismService {
       GlobalKey<ScaffoldState> scaffoldKey) {
     showDialog(
         barrierDismissible: false,
-        routeSettings: RouteSettings(
-            arguments: {'smeupFun': smeupFunExec, 'isDialog': true}),
+        routeSettings: RouteSettings(arguments: {
+          'smeupFun': smeupFunExec,
+          'isDialog': true,
+          'backButtonVisible': false
+        }),
         context: context,
         builder: (_) => SimpleDialog(
               contentPadding: EdgeInsets.only(top: 20, bottom: 20),

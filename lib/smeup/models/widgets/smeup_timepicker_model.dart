@@ -20,7 +20,6 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   static double defaultCaptionFontSize;
   static Color defaultCaptionFontColor;
   static Color defaultCaptionBackColor;
-  static bool defaultUnderline;
 
   // unsupported by json_theme
   static const String defaultLabel = '';
@@ -32,6 +31,7 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultdisplayedField = 'display';
   static const Alignment defaultAlign = Alignment.topCenter;
   static const double defaultInnerSpace = 10.0;
+  static const bool defaultUnderline = true;
 
   Color backColor;
   double fontSize;
@@ -45,8 +45,8 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   double captionFontSize;
   Color captionFontColor;
   Color captionBackColor;
-  bool underline;
 
+  bool underline;
   String label;
   double width;
   double height;
@@ -74,7 +74,7 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
       this.captionFontSize,
       this.captionFontColor,
       this.captionBackColor,
-      this.underline,
+      this.underline = defaultUnderline,
       this.align = defaultAlign,
       this.innerSpace = defaultInnerSpace,
       this.valueField = defaultValueField,
@@ -188,7 +188,6 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
-    defaultUnderline = textStyle.decoration == TextDecoration.underline;
 
     var captionStyle = SmeupConfigurationService.getTheme().textTheme.caption;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
@@ -218,7 +217,5 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
       obj.captionFontColor = SmeupTimePickerModel.defaultCaptionFontColor;
     if (obj.captionFontSize == null)
       obj.captionFontSize = SmeupTimePickerModel.defaultCaptionFontSize;
-    if (obj.underline == null)
-      obj.underline = SmeupTimePickerModel.defaultUnderline;
   }
 }

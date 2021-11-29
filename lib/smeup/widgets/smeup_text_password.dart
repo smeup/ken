@@ -24,13 +24,14 @@ class SmeupTextPassword extends StatefulWidget
 
   Color backColor;
   double fontsize;
+
   String label;
   double width;
   double height;
   EdgeInsetsGeometry padding;
-  bool showborder;
+  bool showBorder;
   String data;
-  bool showUnderline;
+  bool underline;
   bool autoFocus;
   String id;
   String type;
@@ -60,9 +61,9 @@ class SmeupTextPassword extends StatefulWidget
       this.width = SmeupTextPasswordModel.defaultWidth,
       this.height = SmeupTextPasswordModel.defaultHeight,
       this.padding = SmeupTextPasswordModel.defaultPadding,
-      this.showborder = SmeupTextPasswordModel.defaultShowBorder,
+      this.showBorder = SmeupTextPasswordModel.defaultShowBorder,
       this.data,
-      this.showUnderline = SmeupTextPasswordModel.defaultShowUnderline,
+      this.underline = SmeupTextPasswordModel.defaultShowUnderline,
       this.autoFocus = SmeupTextPasswordModel.defaultAutoFocus,
       this.valueField = SmeupTextPasswordModel.defaultValueField,
       this.showSubmit = SmeupTextPasswordModel.defaultShowSubmit,
@@ -89,12 +90,12 @@ class SmeupTextPassword extends StatefulWidget
     width = m.width;
     height = m.height;
     padding = m.padding;
-    showborder = m.showBorder;
+    showBorder = m.showBorder;
     showRules = m.showRules;
     checkRules = m.checkRules;
     showRulesIcon = m.showRulesIcon;
     showSubmit = m.showSubmit;
-    showUnderline = m.showUnderline;
+    underline = m.showUnderline;
     autoFocus = m.autoFocus;
     valueField = m.valueField;
 
@@ -184,14 +185,14 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
                       label: widget.label,
                       autoFocus: widget.autoFocus,
                       backColor: widget.backColor,
-                      fontsize: widget.fontsize,
+                      fontSize: widget.fontsize,
                       height: widget.height,
                       inputFormatters: widget.inputFormatters,
                       padding: widget.padding,
                       showSubmit: widget.showSubmit,
-                      showborder: widget.showborder,
+                      showBorder: widget.showBorder,
                       width: widget.width,
-                      showUnderline: widget.showUnderline,
+                      underline: widget.underline,
                       data: _data,
                       clientValidator: widget.clientValidator,
                       clientOnSave: widget.clientOnSave,
@@ -236,7 +237,7 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
           ),
           Column(
             children: [
-              if (!widget.showUnderline)
+              if (!widget.underline)
                 Divider(
                   color: Colors.black38,
                   thickness: 1.5,

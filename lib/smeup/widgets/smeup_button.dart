@@ -22,7 +22,6 @@ class SmeupButton extends StatelessWidget {
   bool fontBold;
   double iconSize;
   Color iconColor;
-  bool underline;
 
   final double width;
   final double height;
@@ -56,7 +55,6 @@ class SmeupButton extends StatelessWidget {
       this.fontBold,
       this.iconSize,
       this.iconColor,
-      this.underline,
       this.width = SmeupButtonsModel.defaultWidth,
       this.height = SmeupButtonsModel.defaultHeight,
       this.position = SmeupButtonsModel.defaultPosition,
@@ -74,7 +72,6 @@ class SmeupButton extends StatelessWidget {
       this.model}) {
     SmeupButtonsModel.setDefaults(this);
     if (isLink) {
-      underline = true;
       borderColor =
           SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
       fontColor = backColor;
@@ -248,7 +245,7 @@ class SmeupButton extends StatelessWidget {
       );
     }
 
-    if (underline) {
+    if (isLink) {
       style = style.copyWith(decoration: TextDecoration.underline);
     }
 

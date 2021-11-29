@@ -20,7 +20,6 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
   static Color defaultCaptionFontColor;
   static Color defaultCaptionBackColor;
   static double defaultElevation;
-  static bool defaultUnderline;
 
   // unsupported by json_theme
   static const String defaultLabel = '';
@@ -32,6 +31,7 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultdisplayedField = 'display';
   static const Alignment defaultAlign = Alignment.topCenter;
   static const double defaultInnerSpace = 10.0;
+  static const bool defaultUnderline = true;
 
   Color borderColor;
   double borderWidth;
@@ -73,8 +73,8 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
       this.captionFontSize,
       this.captionFontColor,
       this.captionBackColor,
-      this.underline,
       this.elevation,
+      this.underline = defaultUnderline,
       this.align = defaultAlign,
       this.valueField = defaultValueField,
       this.displayedField = defaultdisplayedField,
@@ -182,7 +182,6 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
-    defaultUnderline = textStyle.decoration == TextDecoration.underline;
 
     var captionStyle = SmeupConfigurationService.getTheme().textTheme.caption;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
@@ -212,7 +211,5 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
       obj.captionFontColor = SmeupDatePickerModel.defaultCaptionFontColor;
     if (obj.captionFontSize == null)
       obj.captionFontSize = SmeupDatePickerModel.defaultCaptionFontSize;
-    if (obj.underline == null)
-      obj.underline = SmeupDatePickerModel.defaultUnderline;
   }
 }
