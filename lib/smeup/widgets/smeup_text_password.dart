@@ -5,6 +5,7 @@ import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderRespons
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_password_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_password_rule_model.dart';
+import 'package:mobile_components_library/smeup/notifiers/smeup_text_password_visibility_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_text_field.dart';
@@ -161,13 +162,12 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
     implements SmeupWidgetStateInterface {
   SmeupTextPasswordModel _model;
   dynamic _data;
-  bool _passwordVisible;
+  // bool _passwordVisible;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
-    _passwordVisible = false;
     if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
@@ -205,6 +205,9 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
 
     final passwordModel =
         Provider.of<SmeupTextPasswordRuleModel>(context, listen: false);
+    final passwordFieldModel = Provider.of<SmeupTextPasswordVisibilityNotifier>(
+        context,
+        listen: false);
 
     final iconTheme = _getIconTheme();
     final dividerStyle = _getDividerStyle();
@@ -217,58 +220,60 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
             child: Row(
               children: [
                 Expanded(
-                  child: SmeupTextField(widget.scaffoldKey, widget.formKey,
-                      id: widget.id,
-                      label: widget.label,
-                      autoFocus: widget.autoFocus,
-                      backColor: widget.backColor,
-                      fontSize: widget.fontSize,
-                      fontBold: widget.fontBold,
-                      fontColor: widget.fontColor,
-                      captionBackColor: widget.captionBackColor,
-                      captionFontBold: widget.captionFontBold,
-                      captionFontColor: widget.captionFontColor,
-                      captionFontSize: widget.captionFontSize,
-                      borderColor: widget.borderColor,
-                      borderRadius: widget.borderRadius,
-                      borderWidth: widget.borderWidth,
-                      submitLabel: widget.submitLabel,
-                      clientOnSubmit: widget.clientOnSubmit,
-                      height: widget.height,
-                      inputFormatters: widget.inputFormatters,
-                      padding: widget.padding,
-                      showSubmit: widget.showSubmit,
-                      showBorder: widget.showBorder,
-                      width: widget.width,
-                      underline: widget.underline,
-                      data: _data,
-                      clientValidator: widget.clientValidator,
-                      clientOnSave: widget.clientOnSave,
-                      clientOnChange: (value) {
-                    if (widget.clientOnChange != null)
-                      widget.clientOnChange(value);
-                    passwordModel.checkProgress(value);
-                    _data = value;
-                  },
-                      keyboard: _passwordVisible
-                          ? TextInputType.text
-                          : TextInputType.visiblePassword),
+                  child: Consumer<SmeupTextPasswordVisibilityNotifier>(
+                    builder: (context, fieldmodel, child) {
+                      return SmeupTextField(widget.scaffoldKey, widget.formKey,
+                          id: widget.id,
+                          label: widget.label,
+                          autoFocus: widget.autoFocus,
+                          backColor: widget.backColor,
+                          fontSize: widget.fontSize,
+                          fontBold: widget.fontBold,
+                          fontColor: widget.fontColor,
+                          captionBackColor: widget.captionBackColor,
+                          captionFontBold: widget.captionFontBold,
+                          captionFontColor: widget.captionFontColor,
+                          captionFontSize: widget.captionFontSize,
+                          borderColor: widget.borderColor,
+                          borderRadius: widget.borderRadius,
+                          borderWidth: widget.borderWidth,
+                          submitLabel: widget.submitLabel,
+                          clientOnSubmit: widget.clientOnSubmit,
+                          height: widget.height,
+                          inputFormatters: widget.inputFormatters,
+                          padding: widget.padding,
+                          showSubmit: widget.showSubmit,
+                          showBorder: widget.showBorder,
+                          width: widget.width,
+                          underline: widget.underline,
+                          data: _data,
+                          clientValidator: widget.clientValidator,
+                          clientOnSave: widget.clientOnSave,
+                          clientOnChange: (value) {
+                        if (widget.clientOnChange != null)
+                          widget.clientOnChange(value);
+                        passwordModel.checkProgress(value);
+                        _data = value;
+                      },
+                          keyboard: fieldmodel.passwordVisible
+                              ? TextInputType.text
+                              : TextInputType.visiblePassword);
+                    },
+                  ),
                 ),
                 Container(
                   color: Theme.of(context).primaryColor,
                   padding: EdgeInsets.all(iconTheme.size.toDouble()),
                   child: GestureDetector(
                     child: Icon(
-                      _passwordVisible
+                      passwordFieldModel.passwordVisible
                           ? Icons.visibility
                           : Icons.visibility_off,
                       color: iconTheme.color,
                       size: iconTheme.size,
                     ),
                     onTap: () {
-                      setState(() {
-                        _passwordVisible = !_passwordVisible;
-                      });
+                      passwordFieldModel.toggleVisible();
                     },
                   ),
                 ),

@@ -4,6 +4,7 @@ import 'package:mobile_components_library/smeup/daos/smeup_carousel_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_carousel_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/notifiers/smeup_carousel_indicator_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_carousel_indicator.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_carousel_item.dart';
@@ -138,8 +139,9 @@ class _SmeupCarouselState extends State<SmeupCarousel>
   }
 
   Future<SmeupWidgetBuilderResponse> _getButtonsComponent() async {
-    final SmeupCaurouselModelIndicator notifier =
-        Provider.of<SmeupCaurouselModelIndicator>(context, listen: false);
+    final SmeupCaurouselModelIndicatorNotifier notifier =
+        Provider.of<SmeupCaurouselModelIndicatorNotifier>(context,
+            listen: false);
     //notifier.setIndex(_initialIndex);
 
     var carousel = CarouselSlider.builder(

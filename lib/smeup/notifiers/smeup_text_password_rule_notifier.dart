@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SmeupTextPasswordRule extends StatelessWidget {
+class SmeupTextPasswordRuleNotifier extends StatelessWidget {
   final Color color;
   final String text;
   final IconData icon;
@@ -8,8 +8,8 @@ class SmeupTextPasswordRule extends StatelessWidget {
   final TextStyle captionStyle;
   final IconThemeData iconTheme;
 
-  SmeupTextPasswordRule(this.text, this.color, this.icon, this.showRulesIcon,
-      this.captionStyle, this.iconTheme);
+  SmeupTextPasswordRuleNotifier(this.text, this.color, this.icon,
+      this.showRulesIcon, this.captionStyle, this.iconTheme);
 
   @override
   Widget build(BuildContext context) {

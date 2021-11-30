@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_password_rule_model.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_text_password_rule.dart';
+import 'package:mobile_components_library/smeup/notifiers/smeup_text_password_rule_notifier.dart';
 
 import 'package:provider/provider.dart';
 
@@ -43,7 +43,7 @@ class _SmeupTextPasswordIndicatorsState
       ));
 
       passwordModel.rules.forEach((rule) {
-        final ruleWidget = SmeupTextPasswordRule(
+        final ruleWidget = SmeupTextPasswordRuleNotifier(
             rule['description'],
             _getRuleColor(rule['isValid'] ?? false),
             _getRuleIcon(rule['isValid'] ?? false),

@@ -235,6 +235,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
             if (_model != null)
               SmeupDynamismService.run(_model.dynamisms, context, 'change',
                   widget.scaffoldKey, widget.formKey);
+            _data = value;
           },
           decoration: InputDecoration(
             labelStyle: captionStyle,
