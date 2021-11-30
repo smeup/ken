@@ -89,13 +89,13 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
       : super(formKey, title: title, id: id, type: type) {
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
-    SmeupTimePickerModel.setDefaults(this);
+    setDefaults(this);
   }
 
   SmeupTimePickerModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
-    SmeupTimePickerModel.setDefaults(this);
+    setDefaults(this);
 
     valueField = optionsDefault['valueField'] ?? defaultValueField;
     displayedField = optionsDefault['displayedField'] ?? defaultdisplayedField;

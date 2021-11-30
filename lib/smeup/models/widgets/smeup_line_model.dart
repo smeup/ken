@@ -23,13 +23,13 @@ class SmeupLineModel extends SmeupModel {
     this.thickness,
   }) : super(formKey, title: '', id: id, type: type) {
     id = SmeupUtilities.getWidgetId('LIN', id);
-    SmeupLineModel.setDefaults(this);
+    setDefaults(this);
   }
 
   SmeupLineModel.fromMap(
       Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
       : super.fromMap(jsonMap, formKey) {
-    SmeupLineModel.setDefaults(this);
+    setDefaults(this);
 
     thickness = SmeupUtilities.getDouble(optionsDefault['thickness']) ??
         defaultThickness;
