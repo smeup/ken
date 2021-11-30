@@ -5,17 +5,26 @@ class SmeupTextPasswordRule extends StatelessWidget {
   final String text;
   final IconData icon;
   final bool showRulesIcon;
-  SmeupTextPasswordRule(this.text, this.color, this.icon, this.showRulesIcon);
+  final TextStyle captionStyle;
+  final IconThemeData iconTheme;
+
+  SmeupTextPasswordRule(this.text, this.color, this.icon, this.showRulesIcon,
+      this.captionStyle, this.iconTheme);
 
   @override
   Widget build(BuildContext context) {
     return Container(
         child: Row(
       children: [
-        if (showRulesIcon) Icon(icon),
+        if (showRulesIcon)
+          Icon(
+            icon,
+            color: iconTheme.color,
+            size: iconTheme.size,
+          ),
         Text(
           text,
-          style: TextStyle(color: color),
+          style: captionStyle.copyWith(color: color),
         )
       ],
     ));

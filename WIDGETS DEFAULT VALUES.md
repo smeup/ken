@@ -484,10 +484,34 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 </a>
 
     json_theme's supported attributes:
-        TODO
+    - fontSize              :   textTheme.bodyText1.fontSize
+    - fontBold              :   textTheme.bodyText1.fontWeight 
+    - backColor             :   textTheme.bodyText1.backgroundColor
+    - fontColor             :   textTheme.bodyText1.color
+
+    - captionFontSize       :   textTheme.caption.fontSize
+    - captionFontBold       :   textTheme.caption.fontWeight 
+    - captionBackColor      :   textTheme.caption.backgroundColor
+    - captionFontColor      :   textTheme.caption.color
+    
+    - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
+    - borderWidth           :   timePickerTheme.dayPeriodBorderSide.width
+    - borderRadius          :   timePickerTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
 
     Others attributes:
-        TODO
+    - label                 :   ''
+    - submitLabel           :   ''
+    - width                 :   100
+    - height                :   100
+    - padding               :   EdgeInsets.all(0)
+    - showBorder            :   false
+    - autoFocus             :   false
+    - valueField            :   'value'
+    - showSubmit            :   false
+    - underline             :   true
+    - showRules             :   true
+    - showRulesIcon         :   true
+    - checkRules            :   true
 
 <a name="SmeupTimePicker">
 ### SmeupTimePicker

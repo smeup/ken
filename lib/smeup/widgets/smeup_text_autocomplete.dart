@@ -217,6 +217,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
 
     TextStyle textStyle = _getTextStile();
     TextStyle captionStyle = _getCaptionStile();
+    IconThemeData iconTheme = _getIconTheme();
 
     Widget children;
 
@@ -301,10 +302,15 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                   onSaved: widget.clientOnSave,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
+              Container(
+                color: Theme.of(context).primaryColor,
+                padding: EdgeInsets.all(iconTheme.size.toDouble()),
                 child: GestureDetector(
-                  child: Icon(Icons.close, color: Colors.black38),
+                  child: Icon(
+                    Icons.close,
+                    color: iconTheme.color,
+                    size: iconTheme.size,
+                  ),
                   onTap: () {
                     setState(() {
                       SmeupVariablesService.setVariable(widget.defaultValue, '',
@@ -433,5 +439,11 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
     }
 
     return style;
+  }
+
+  IconThemeData _getIconTheme() {
+    IconThemeData themeData = SmeupConfigurationService.getTheme().iconTheme;
+
+    return themeData;
   }
 }

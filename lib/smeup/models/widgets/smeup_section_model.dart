@@ -24,6 +24,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_splash_mode
 import 'package:mobile_components_library/smeup/models/widgets/smeup_switch_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_autocomplete_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_field_model.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_text_password_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_timepicker_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_tree_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
@@ -140,6 +141,9 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
                   break;
                 case 'pgi':
                   model = SmeupProgressIndicatorModel.fromMap(v, formKey);
+                  break;
+                case 'pwd':
+                  model = SmeupTextPasswordModel.fromMap(v, formKey);
                   break;
                 case 'qrc':
                   model = SmeupQRCodeReaderModel.fromMap(v, formKey);

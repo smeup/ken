@@ -6,8 +6,11 @@ import 'package:provider/provider.dart';
 
 class SmeupTextPasswordIndicators extends StatefulWidget {
   final bool showRulesIcon;
+  final TextStyle captionStyle;
+  final IconThemeData iconTheme;
 
-  SmeupTextPasswordIndicators(this.showRulesIcon);
+  SmeupTextPasswordIndicators(
+      this.showRulesIcon, this.captionStyle, this.iconTheme);
 
   @override
   _SmeupTextPasswordIndicatorsState createState() =>
@@ -44,7 +47,9 @@ class _SmeupTextPasswordIndicatorsState
             rule['description'],
             _getRuleColor(rule['isValid'] ?? false),
             _getRuleIcon(rule['isValid'] ?? false),
-            widget.showRulesIcon);
+            widget.showRulesIcon,
+            widget.captionStyle,
+            widget.iconTheme);
         list.add(ruleWidget);
       });
     }
