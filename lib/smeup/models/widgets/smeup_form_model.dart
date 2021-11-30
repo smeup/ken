@@ -30,11 +30,8 @@ class SmeupFormModel extends SmeupModel
     padding =
         SmeupUtilities.getPadding(optionsType['padding']) ?? defaultPadding;
 
-    if (optionsType['backColor'] != null) {
-      backColor = SmeupUtilities.getColorFromRGB(optionsType['backColor']);
-    } else {
-      backColor = SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
-    }
+    backColor = SmeupUtilities.getColorFromRGB(optionsType['backColor']) ??
+        SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
 
     autoAdaptHeight = defaultAutoAdaptHeight;
 
