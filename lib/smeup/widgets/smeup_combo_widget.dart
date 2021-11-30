@@ -57,7 +57,6 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
     DividerThemeData dividerStyle = _getDividerStyle();
 
     return DropdownButton<String>(
-      //isExpanded: true,
       value: _selectedValue,
       dropdownColor: widget.backColor,
       style: _getTextStile(),
@@ -67,7 +66,6 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
         size: iconTheme.size,
       ),
       elevation: 20,
-      //style: const TextStyle(color: Colors.deepPurple),
       underline: Container(
         height: dividerStyle.thickness,
         color: dividerStyle.color,

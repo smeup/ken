@@ -43,8 +43,8 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
   Color borderColor;
   double borderWidth;
   double borderRadius;
-  bool underline;
 
+  bool underline;
   String label;
   String submitLabel;
   double width;

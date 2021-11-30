@@ -155,7 +155,9 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - elementFontBold       :   appBarTheme.toolbarTextStyle.fontWeight 
         
     Others attributes:
-        TODO
+    - imageWidth            :   40
+    - imageHeight           :   40
+    - showItemDivider       :   true
 
 <a name="SmeupDatePicker">
 ### SmeupDatePicker
@@ -421,10 +423,30 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 </a>
 
     json_theme's supported attributes:
-        TODO
+    - fontSize              :   textTheme.bodyText1.fontSize
+    - fontBold              :   textTheme.bodyText1.fontWeight 
+    - backColor             :   textTheme.bodyText1.backgroundColor
+    - fontColor             :   textTheme.bodyText1.color
+
+    - captionFontSize       :   textTheme.caption.fontSize
+    - captionFontBold       :   textTheme.caption.fontWeight 
+    - captionBackColor      :   textTheme.caption.backgroundColor
+    - captionFontColor      :   textTheme.caption.color
+    
+    - borderColor           :   timePickerThemeData.dayPeriodBorderSide.color
+    - borderWidth           :   timePickerThemeData.dayPeriodBorderSide.width
+    - borderRadius          :   timePickerThemeData.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
 
     Others attributes:
-        TODO
+    - label                 :   ''
+    - width                 :   100
+    - height                :   100
+    - padding               :   EdgeInsets.all(0)
+    - showBorder            :   false
+    - autoFocus             :   false
+    - underline             :   true
+    - submitLabel           :   ''
+    - showSubmit            :   false
 
 <a name="SmeupTextField">
 ### SmeupTextField

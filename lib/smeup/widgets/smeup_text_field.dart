@@ -35,8 +35,8 @@ class SmeupTextField extends StatefulWidget
   Color borderColor;
   double borderWidth;
   double borderRadius;
-  bool underline;
 
+  bool underline;
   String label;
   double width;
   double height;
@@ -203,12 +203,6 @@ class _SmeupTextFieldState extends State<SmeupTextField>
 
     SmeupVariablesService.setVariable(widget.id, _data,
         formKey: widget.formKey);
-
-    // Color underlineColor = widget.underline
-    //     ? SmeupConfigurationService.getTheme().primaryColor
-    //     : Colors.transparent;
-
-    // Color focusColor = widget.underline ? Colors.blue : Colors.transparent;
 
     textField = Container(
         alignment: Alignment.centerLeft,
