@@ -5,10 +5,6 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_section_mod
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 
-// TODO:
-// https://github.com/peiffer-innovations/json_theme/issues/28
-// Should be fixed in 3.1.2+1.
-
 // ignore: must_be_immutable
 class SmeupButton extends StatelessWidget {
   final int buttonIndex;

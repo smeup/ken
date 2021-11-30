@@ -14,7 +14,7 @@
         "type": "rectangle",
         "borderRadius": 20.0
       },
-      "elevation": "0.0"
+      "elevation": 0.0
     }
   },
   "textTheme": {
@@ -65,7 +65,7 @@
     "size": 20.0,
     "color": "#ffffff"
   },
-  "timePickerThemeData": {
+  "timePickerTheme": {
     "backgroundColor": "#ffffff",
     "shape": {
       "type": "rectangle",

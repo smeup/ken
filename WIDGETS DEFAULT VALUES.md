@@ -164,10 +164,10 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 </a>
 
     json_theme's supported attributes:
-    - borderColor           :   timePickerThemeData.dayPeriodBorderSide.color
-    - borderWidth           :   timePickerThemeData.dayPeriodBorderSide.width
-    - borderRadius          :   timePickerThemeData.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
-    - backColor             :   timePickerThemeData.backgroundColor
+    - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
+    - borderWidth           :   timePickerTheme.dayPeriodBorderSide.width
+    - borderRadius          :   timePickerTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
+    - backColor             :   timePickerTheme.backgroundColor
 
     - fontSize              :   textTheme.bodyText1.fontSize
     - fontBold              :   textTheme.bodyText1.fontWeight 
@@ -433,9 +433,9 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - captionBackColor      :   textTheme.caption.backgroundColor
     - captionFontColor      :   textTheme.caption.color
     
-    - borderColor           :   timePickerThemeData.dayPeriodBorderSide.color
-    - borderWidth           :   timePickerThemeData.dayPeriodBorderSide.width
-    - borderRadius          :   timePickerThemeData.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
+    - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
+    - borderWidth           :   timePickerTheme.dayPeriodBorderSide.width
+    - borderRadius          :   timePickerTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
 
     Others attributes:
     - label                 :   ''
@@ -463,9 +463,9 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - captionBackColor      :   textTheme.caption.backgroundColor
     - captionFontColor      :   textTheme.caption.color
     
-    - borderColor           :   timePickerThemeData.dayPeriodBorderSide.color
-    - borderWidth           :   timePickerThemeData.dayPeriodBorderSide.width
-    - borderRadius          :   timePickerThemeData.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
+    - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
+    - borderWidth           :   timePickerTheme.dayPeriodBorderSide.width
+    - borderRadius          :   timePickerTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
     
     Others attributes:
     - label                 :   ''
@@ -494,10 +494,10 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 </a>
 
     json_theme's supported attributes:
-    - borderColor           :   timePickerThemeData.dayPeriodBorderSide.color
-    - borderWidth           :   timePickerThemeData.dayPeriodBorderSide.width
-    - borderRadius          :   timePickerThemeData.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
-    - backColor             :   timePickerThemeData.backgroundColor
+    - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
+    - borderWidth           :   timePickerTheme.dayPeriodBorderSide.width
+    - borderRadius          :   timePickerTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
+    - backColor             :   timePickerTheme.backgroundColor
 
     - fontSize              :   textTheme.bodyText1.fontSize
     - fontBold              :   textTheme.bodyText1.fontWeight 
