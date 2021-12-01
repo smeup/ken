@@ -15,9 +15,8 @@ class SmeupCarouselIndicator extends StatefulWidget {
 class _SmeupCarouselIndicatorState extends State<SmeupCarouselIndicator> {
   @override
   Widget build(BuildContext context) {
-    final SmeupCaurouselModelIndicatorNotifier notifier =
-        Provider.of<SmeupCaurouselModelIndicatorNotifier>(context,
-            listen: true);
+    final SmeupCarouselIndicatorNotifier notifier =
+        Provider.of<SmeupCarouselIndicatorNotifier>(context, listen: true);
 
     var list = List<Widget>.empty(growable: true);
     (widget.data).forEach((element) {

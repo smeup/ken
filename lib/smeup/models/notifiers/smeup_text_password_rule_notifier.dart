@@ -1,32 +1,76 @@
 import 'package:flutter/material.dart';
 
-class SmeupTextPasswordRuleNotifier extends StatelessWidget {
-  final Color color;
-  final String text;
-  final IconData icon;
-  final bool showRulesIcon;
-  final TextStyle captionStyle;
-  final IconThemeData iconTheme;
+class SmeupTextPasswordRuleNotifier with ChangeNotifier {
+  int satisfiedRules;
+  int totalRules;
+  static String passwordRules = '';
 
-  SmeupTextPasswordRuleNotifier(this.text, this.color, this.icon,
-      this.showRulesIcon, this.captionStyle, this.iconTheme);
+  List<dynamic> rules;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        child: Row(
-      children: [
-        if (showRulesIcon)
-          Icon(
-            icon,
-            color: iconTheme.color,
-            size: iconTheme.size,
-          ),
-        Text(
-          text,
-          style: captionStyle.copyWith(color: color),
-        )
-      ],
-    ));
+  SmeupTextPasswordRuleNotifier(
+    this.rules,
+  ) {
+    this.totalRules = rules.length;
+    this.satisfiedRules = 0;
+    passwordRules = '';
+    rules.forEach((rule) {
+      passwordRules += "${rule['regex'].toString()}";
+    });
+    passwordRules += '.*\$';
+  }
+
+  static bool isPasswordValid(String password) {
+    if (password == null) {
+      return false;
+    }
+    if (password.isEmpty) {
+      return false;
+    }
+
+    RegExp re = RegExp(passwordRules);
+
+    Match firstMatch = re.firstMatch(password);
+
+    if (firstMatch == null) return false;
+
+    return true;
+  }
+
+  checkProgress(String password) {
+    rules.forEach((rule) {
+      rule['isValid'] = false;
+    });
+
+    satisfiedRules = 0;
+
+    if (password == null) {
+      notifyListeners();
+      return;
+    }
+    if (password.isEmpty) {
+      notifyListeners();
+      return;
+    }
+
+    rules.forEach((rule) {
+      rule['isValid'] = _isRuleSadisfied(rule['regex'], password);
+      if (rule['isValid']) satisfiedRules += 1;
+    });
+
+    notifyListeners();
+  }
+
+  bool _isRuleSadisfied(String rule, String password) {
+    RegExp re = RegExp(rule);
+    RegExpMatch match = re.firstMatch(password);
+    return match != null;
+  }
+
+  void reset() {
+    satisfiedRules = 0;
+    rules.forEach((rule) {
+      rule['isValid'] = false;
+    });
+    notifyListeners();
   }
 }

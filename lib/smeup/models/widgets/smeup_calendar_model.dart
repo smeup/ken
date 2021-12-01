@@ -6,10 +6,13 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart'
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupCalendarModel extends SmeupModel {
-  static const double defaultWidth = 0;
-  static const double defaultHeight = 0;
+  // supported by json_theme
   static const double defaultEventFontSize = 12.0;
   static const double defaultTitleFontSize = 20.0;
+
+  // unsupported by json_theme
+  static const double defaultWidth = 0;
+  static const double defaultHeight = 0;
   static const bool defaultShowPeriodButtons = false;
   static const String defaultTitleColumnName = 'XXDESC';
   static const String defaultDataColumnName = 'XXDAT1';

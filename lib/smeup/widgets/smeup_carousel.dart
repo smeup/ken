@@ -139,9 +139,8 @@ class _SmeupCarouselState extends State<SmeupCarousel>
   }
 
   Future<SmeupWidgetBuilderResponse> _getButtonsComponent() async {
-    final SmeupCaurouselModelIndicatorNotifier notifier =
-        Provider.of<SmeupCaurouselModelIndicatorNotifier>(context,
-            listen: false);
+    final SmeupCarouselIndicatorNotifier notifier =
+        Provider.of<SmeupCarouselIndicatorNotifier>(context, listen: false);
     //notifier.setIndex(_initialIndex);
 
     var carousel = CarouselSlider.builder(

@@ -5,7 +5,7 @@ import 'package:mobile_components_library/smeup/models/notifiers/smeup_text_pass
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_password_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_text_password_rule_model.dart';
+import 'package:mobile_components_library/smeup/models/notifiers/smeup_text_password_rule_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_text_field.dart';
@@ -204,7 +204,7 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
     }
 
     final passwordModel =
-        Provider.of<SmeupTextPasswordRuleModel>(context, listen: false);
+        Provider.of<SmeupTextPasswordRuleNotifier>(context, listen: false);
     final passwordFieldModel = Provider.of<SmeupTextPasswordVisibilityNotifier>(
         context,
         listen: false);

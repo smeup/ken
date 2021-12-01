@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_text_password_rule.dart';
 import 'package:mobile_components_library/smeup/models/notifiers/smeup_text_password_rule_notifier.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_text_password_rule_model.dart';
 
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,7 @@ class _SmeupTextPasswordIndicatorsState
     var list = List<Widget>.empty(growable: true);
 
     final passwordModel =
-        Provider.of<SmeupTextPasswordRuleModel>(context, listen: true);
+        Provider.of<SmeupTextPasswordRuleNotifier>(context, listen: true);
 
     if (passwordModel.rules.length > 0) {
       list.add(Padding(
@@ -43,7 +43,7 @@ class _SmeupTextPasswordIndicatorsState
       ));
 
       passwordModel.rules.forEach((rule) {
-        final ruleWidget = SmeupTextPasswordRuleNotifier(
+        final ruleWidget = SmeupTextPasswordRule(
             rule['description'],
             _getRuleColor(rule['isValid'] ?? false),
             _getRuleIcon(rule['isValid'] ?? false),
@@ -65,7 +65,7 @@ class _SmeupTextPasswordIndicatorsState
             : Colors.red;
   }
 
-  Color _getIndicatorColor(SmeupTextPasswordRuleModel passwordModel) {
+  Color _getIndicatorColor(SmeupTextPasswordRuleNotifier passwordModel) {
     double perc = passwordModel.satisfiedRules / passwordModel.totalRules * 100;
     if (perc <= 50.0) {
       return Colors.red;
