@@ -127,5 +127,24 @@
         "width": 2.0
       }
     }
-  }
+  },
+  "tabBarTheme": {
+    "indicatorSize": "tab",
+    "labelPadding": 0.0,
+    "labelColor": "#068a9c",
+    "labelStyle": {
+      "color": "#068a9c",
+      "fontSize": 25.0,
+      "fontWeight": "bold",
+      "backgroundColor": "#ffffff"
+    },
+    "unselectedLabelColor": "#068a9c",
+    "unselectedLabelStyle": {
+      "color": "#068a9c",
+      "fontSize": 16.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
+    } 
+  },
+  "indicatorColor" : "#068a9c"
 }

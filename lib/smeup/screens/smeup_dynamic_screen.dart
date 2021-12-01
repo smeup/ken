@@ -207,7 +207,6 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
         widget._scaffoldKey,
         widget._formKey,
         data: newList,
-        //appBarBackColor: SmeupConfigurationService.getTheme().primaryColor,
         title: 'MENU',
       );
       return smeupDrawer;

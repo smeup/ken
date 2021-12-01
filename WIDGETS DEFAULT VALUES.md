@@ -4,8 +4,20 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 ### Shared
 </a>
 
-- scaffoldBackgroundColor   :   color of the screen backgroundColor
-- primaryColor              :   main color of the application (convenient way to get the main color in static components)
+- scaffoldBackgroundColor   :   color of the screen backgroundColor. It's a convenient way to get the main color in static components where there is not 
+                                an attribute to define them or as default color: 
+                                    - SmeupForm default color
+                                    - SmeupSection backgroundColor
+                                    - Dialog backgroundColor
+                                    - SmeupButton with isLink attribute as bacbroundColor and borderColor
+                                    - SmeupDatePicker when the border is hidden
+                                    - SmeupTimePicker when the border is hidden
+                                
+- primaryColor              :   main color of the application. It's a convenient way to get the main color in static components where there is not 
+                                an attribute to define them or as default color: 
+                                    - background of the buttons in SmeupTextAutocomplete
+                                    - background of the buttons in SmeupTextPassword
+
 - errorColor                :   color of the SnackBar'sbackgroundColor in case of error
 
 

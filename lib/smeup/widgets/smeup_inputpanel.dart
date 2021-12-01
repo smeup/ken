@@ -6,7 +6,6 @@ import 'package:mobile_components_library/smeup/models/widgets/input_panel/smeup
 import 'package:mobile_components_library/smeup/models/widgets/smeup_combo_item_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_inputpanel_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
@@ -256,8 +255,6 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
           Expanded(
             child: SmeupButton(
               data: "Conferma",
-              // backColor: SmeupConfigurationService.getTheme().primaryColor,
-              // fontColor: Colors.white,
               fontSize: widget.fontSize,
               clientOnPressed: () => _fireDynamism(),
             ),

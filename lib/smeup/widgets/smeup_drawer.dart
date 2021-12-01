@@ -221,7 +221,7 @@ class _SmeupDrawerState extends State<SmeupDrawer>
 
     var header = AppBar(
         backgroundColor: _getAppBarTheme().backgroundColor,
-        elevation: 0,
+        //elevation: 0,
         automaticallyImplyLeading: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
