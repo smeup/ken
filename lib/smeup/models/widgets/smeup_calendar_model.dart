@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:intl/intl.dart';
-//import 'package:mobile_components_library/smeup/daos/smeup_calendar_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-//import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupCalendarModel extends SmeupModel {
@@ -13,7 +10,7 @@ class SmeupCalendarModel extends SmeupModel {
   // unsupported by json_theme
   static const double defaultWidth = 0;
   static const double defaultHeight = 0;
-  static const bool defaultShowPeriodButtons = false;
+  static const bool defaultShowPeriodButtons = true;
   static const String defaultTitleColumnName = 'XXDESC';
   static const String defaultDataColumnName = 'XXDAT1';
   static const String defaultStyleColumnName = 'XXGRAF';
@@ -81,7 +78,8 @@ class SmeupCalendarModel extends SmeupModel {
         optionsDefault['endTimeColumnName'] ?? defaultEndTimeColumnName;
     styleColumnName =
         optionsDefault['styleColumnName'] ?? defaultStyleColumnName;
-    showPeriodButtons = optionsDefault['showPeriodButtons'] ?? false;
+    showPeriodButtons =
+        optionsDefault['showPeriodButtons'] ?? defaultShowPeriodButtons;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;

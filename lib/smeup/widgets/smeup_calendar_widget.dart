@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_event_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
@@ -39,6 +40,7 @@ class SmeupCalendarWidget extends StatefulWidget {
   final String endTimeColumnName;
   final String id;
   final Function setDataLoad;
+  final bool showPeriodButtons;
 
   SmeupCalendarWidget(this.scaffoldKey, this.formKey,
       {this.id,
@@ -65,7 +67,8 @@ class SmeupCalendarWidget extends StatefulWidget {
       this.initTimeColumnName,
       this.styleColumnName,
       this.titleColumnName,
-      this.setDataLoad});
+      this.setDataLoad,
+      this.showPeriodButtons});
 
   @override
   _SmeupCalendarWidgetState createState() => _SmeupCalendarWidgetState();
@@ -125,6 +128,8 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
       if (calendarWidth == 0) calendarWidth = MediaQuery.of(context).size.width;
     }
 
+    double separatorHeight = 8.0;
+
     return Container(
       height: calendarHeight,
       width: calendarWidth,
@@ -174,20 +179,15 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                 weekendStyle: SmeupConfigurationService.getTheme()
                     .textTheme
                     .bodyText2
-                    .copyWith(color: Colors.red[600], fontSize: 16),
-                weekdayStyle: SmeupConfigurationService.getTheme()
-                    .textTheme
-                    .bodyText2
-                    .copyWith(fontSize: 16),
+                    .copyWith(color: Colors.red[600]),
+                weekdayStyle:
+                    SmeupConfigurationService.getTheme().textTheme.bodyText2,
               ),
               headerVisible: widget.showNavigation,
               headerStyle: HeaderStyle(
-                titleTextStyle: TextStyle(
-                    backgroundColor:
-                        SmeupConfigurationService.getTheme().primaryColor,
-                    color: Colors.white,
-                    fontSize: widget.titleFontSize,
-                    fontWeight: FontWeight.bold),
+                titleTextStyle: SmeupConfigurationService.getTheme()
+                    .appBarTheme
+                    .titleTextStyle,
                 titleCentered: true,
                 formatButtonVisible: false,
                 decoration: BoxDecoration(
@@ -295,9 +295,10 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                     size: 60),
               )
           ]),
-          const SizedBox(height: 8.0),
+          SizedBox(height: separatorHeight),
           if (_selectedEvents != null)
-            Expanded(
+            Container(
+              height: _getListHeight(separatorHeight),
               child: ValueListenableBuilder<List<SmeupCalentarEventModel>>(
                 valueListenable: _selectedEvents,
                 builder: (context, event, _) {
@@ -333,6 +334,30 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
         ],
       ),
     );
+  }
+
+  double _getListHeight(separatorHeight) {
+    double calendarHeight = 0;
+    switch (widget.calendarFormat) {
+      case CalendarFormat.month:
+        calendarHeight = 336;
+        break;
+      case CalendarFormat.twoWeeks:
+        calendarHeight = 180;
+        break;
+      case CalendarFormat.week:
+        calendarHeight = 130;
+        break;
+    }
+
+    double buttonsHeight = 0;
+    if (widget.showPeriodButtons) {
+      buttonsHeight = SmeupButtonsModel.defaultHeight +
+          SmeupButtonsModel.defaultPadding.vertical +
+          8;
+    }
+
+    return widget.height - separatorHeight - calendarHeight - buttonsHeight;
   }
 
   List<SmeupCalentarEventModel> _getEventsForDay(DateTime day) {
@@ -421,6 +446,7 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
         .textTheme
         .bodyText2
         .copyWith(
+            backgroundColor: event.backgroundColor,
             color: event.foreColor,
             fontSize: Platform.isAndroid ? 12.0 : 10.0,
             fontWeight: event.fontWeight);

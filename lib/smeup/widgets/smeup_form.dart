@@ -126,7 +126,12 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
         bool isDialog =
             routeArgs == null ? false : routeArgs['isDialog'] ?? false;
 
-        final formHeight = isDialog ? 300 : deviceInfo.size.height - 70;
+        final formHeight = isDialog
+            ? 300
+            : deviceInfo.size.height -
+                SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight -
+                24 -
+                widget.smeupFormModel.padding.vertical;
         final formWidth = isDialog ? 300 : deviceInfo.size.width;
 
         s.height = smeupFormModel.layout == 'column'

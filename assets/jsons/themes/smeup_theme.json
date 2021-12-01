@@ -26,31 +26,31 @@
     },
     "caption": {
       "color": "#068a9c",
-      "fontSize": 18.0,
+      "fontSize": 16.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
     "bodyText1": {
       "color": "#068a9c",
-      "fontSize": 18.0,
+      "fontSize": 16.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
     "bodyText2": {
       "color": "#000000",
-      "fontSize": 18.0,
+      "fontSize": 16.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
     "headline1": {
       "color": "#068a9c",
-      "fontSize": 18.0,
+      "fontSize": 16.0,
       "fontWeight": "bold",
       "backgroundColor": "#ffffff"
     },
     "headline2": {
       "color": "#068a9c",
-      "fontSize": 18.0,
+      "fontSize": 16.0,
       "fontWeight": "bold",
       "backgroundColor": "#ffffff"
     },
@@ -72,7 +72,7 @@
       "borderRadius": 10.0
     },
     "dayPeriodBorderSide": {
-      "color": "#ffffff",
+      "color": "#068a9c",
       "width": 2.0
     }
   },
@@ -102,12 +102,14 @@
     "titleTextStyle": {
       "color": "#ffffff",
       "fontSize": 18.0,
-      "fontWeight": "normal"
+      "fontWeight": "normal",
+      "backgroundColor": "#068a9c"
     },
     "toolbarTextStyle": {
       "color": "#ffffff",
       "fontSize": 18.0,
-      "fontWeight": "normal"
+      "fontWeight": "normal",
+      "backgroundColor": "#068a9c"
     },
     "iconTheme": {
       "size": 20.0,
@@ -134,14 +136,14 @@
     "labelColor": "#068a9c",
     "labelStyle": {
       "color": "#068a9c",
-      "fontSize": 25.0,
+      "fontSize": 18.0,
       "fontWeight": "bold",
       "backgroundColor": "#ffffff"
     },
     "unselectedLabelColor": "#068a9c",
     "unselectedLabelStyle": {
       "color": "#068a9c",
-      "fontSize": 16.0,
+      "fontSize": 12.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     } 
