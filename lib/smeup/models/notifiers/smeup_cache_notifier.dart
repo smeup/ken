@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SmeupCacheModel with ChangeNotifier {
+class SmeupCacheNotifier with ChangeNotifier {
   bool _isOnline;
   bool get isOnline => _isOnline;
   set isOnline(bool isOnline) {
@@ -8,7 +8,7 @@ class SmeupCacheModel with ChangeNotifier {
     notifyListeners();
   }
 
-  SmeupCacheModel() {
+  SmeupCacheNotifier() {
     _isOnline = true;
   }
 }

@@ -1,5 +1,5 @@
 import 'package:async/async.dart';
-import 'package:mobile_components_library/smeup/models/smeup_cache_model.dart';
+import 'package:mobile_components_library/smeup/models/notifiers/smeup_cache_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 
@@ -13,7 +13,7 @@ class SmeupCacheService {
   static bool cacheLogEnabled;
   static bool cacheIsTest;
   static bool isOnline = true;
-  static SmeupCacheModel cacheModel;
+  static SmeupCacheNotifier cacheModel;
   static bool isPinging = false;
   static bool isBusy = false;
   static dynamic fun;
