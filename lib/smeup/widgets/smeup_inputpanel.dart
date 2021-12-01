@@ -256,8 +256,8 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
           Expanded(
             child: SmeupButton(
               data: "Conferma",
-              backColor: SmeupConfigurationService.getTheme().primaryColor,
-              fontColor: Colors.white,
+              // backColor: SmeupConfigurationService.getTheme().primaryColor,
+              // fontColor: Colors.white,
               fontSize: widget.fontSize,
               clientOnPressed: () => _fireDynamism(),
             ),

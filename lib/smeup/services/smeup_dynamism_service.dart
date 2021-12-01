@@ -263,10 +263,10 @@ class SmeupDynamismService {
                 backColor = SmeupConfigurationService.getTheme().errorColor;
                 break;
               case LogType.warning:
-                backColor = SmeupConfigurationService.getTheme().primaryColor;
+                backColor = Colors.orange;
                 break;
               default:
-              //color = Colors.green;
+                backColor = Colors.green;
             }
 
             if (text.isNotEmpty) {
