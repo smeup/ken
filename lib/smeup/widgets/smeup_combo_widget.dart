@@ -65,7 +65,7 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
         color: iconTheme.color,
         size: iconTheme.size,
       ),
-      elevation: 20,
+      //elevation: 20,
       underline: Container(
         height: dividerStyle.thickness,
         color: dividerStyle.color,
