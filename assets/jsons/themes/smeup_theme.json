@@ -21,7 +21,7 @@
     "button": {
       "color": "#ffffff",
       "fontSize": 16.0,
-      "fontWeight": "bold",
+      "fontWeight": "normal",
       "decoration": "none"
     },
     "caption": {
@@ -44,20 +44,38 @@
     },
     "headline1": {
       "color": "#068a9c",
-      "fontSize": 16.0,
-      "fontWeight": "bold",
+      "fontSize": 56.0,
+      "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
     "headline2": {
       "color": "#068a9c",
-      "fontSize": 16.0,
-      "fontWeight": "bold",
+      "fontSize": 43.0,
+      "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
     "headline3": {
       "color": "#068a9c",
-      "fontSize": 56.0,
+      "fontSize": 14.0,
       "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
+    },
+    "headline4": {
+      "color": "#068a9c",
+      "fontSize": 12.0,
+      "fontWeight": "bold",
+      "backgroundColor": "#ffffff"
+    },
+    "headline5": {
+      "color": "#068a9c",
+      "fontSize": 10.0,
+      "fontWeight": "bold",
+      "backgroundColor": "#ffffff"
+    },
+    "headline6": {
+      "color": "#068a9c",
+      "fontSize": 8.0,
+      "fontWeight": "bold",
       "backgroundColor": "#ffffff"
     }
   },
