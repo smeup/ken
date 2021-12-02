@@ -37,11 +37,3 @@ class SmeupCarouselModel extends SmeupModel implements SmeupDataInterface {
     SmeupDataService.incrementDataFetch(id);
   }
 }
-
-class SmeupCaurouselModelIndicator with ChangeNotifier {
-  int index;
-  void setIndex(int value) {
-    index = value;
-    notifyListeners();
-  }
-}

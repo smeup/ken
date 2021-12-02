@@ -41,7 +41,8 @@ class SmeupAppBar extends AppBar {
 
   static Widget _getTitle(String appBarImage, String appBarTitle,
       GlobalKey<ScaffoldState> scaffoldKey, GlobalKey<FormState> formKey) {
-    double imageSize = 70.0;
+    double imageSize =
+        SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight;
     if (appBarImage.isNotEmpty) {
       return Center(
         child: SmeupImage(scaffoldKey, formKey, appBarImage,

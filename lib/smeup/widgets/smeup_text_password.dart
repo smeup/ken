@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_text_password_dao.dart';
+import 'package:mobile_components_library/smeup/models/notifiers/smeup_text_password_visibility_notifier.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_password_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_text_password_rule_model.dart';
+import 'package:mobile_components_library/smeup/models/notifiers/smeup_text_password_rule_notifier.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_text_field.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_text_password_indicators.dart';
@@ -23,14 +25,25 @@ class SmeupTextPassword extends StatefulWidget
   GlobalKey<FormState> formKey;
 
   Color backColor;
-  double fontsize;
+  double fontSize;
+  Color fontColor;
+  bool fontBold;
+  bool captionFontBold;
+  double captionFontSize;
+  Color captionFontColor;
+  Color captionBackColor;
+  Color borderColor;
+  double borderWidth;
+  double borderRadius;
+
   String label;
+  String submitLabel;
   double width;
   double height;
   EdgeInsetsGeometry padding;
-  bool showborder;
+  bool showBorder;
   String data;
-  bool showUnderline;
+  bool underline;
   bool autoFocus;
   String id;
   String type;
@@ -43,6 +56,7 @@ class SmeupTextPassword extends StatefulWidget
   Function clientValidator;
   Function clientOnSave;
   Function clientOnChange;
+  Function clientOnSubmit;
 
   List<TextInputFormatter> inputFormatters;
 
@@ -55,14 +69,24 @@ class SmeupTextPassword extends StatefulWidget
       {this.id = '',
       this.type = 'FLD',
       this.backColor,
-      this.fontsize = SmeupTextPasswordModel.defaultFontsize,
-      this.label,
+      this.fontSize,
+      this.fontBold,
+      this.fontColor,
+      this.captionBackColor,
+      this.captionFontBold,
+      this.captionFontColor,
+      this.captionFontSize,
+      this.borderColor,
+      this.borderRadius,
+      this.borderWidth,
+      this.label = SmeupTextPasswordModel.defaultLabel,
+      this.submitLabel = SmeupTextPasswordModel.defaultSubmitLabel,
       this.width = SmeupTextPasswordModel.defaultWidth,
       this.height = SmeupTextPasswordModel.defaultHeight,
       this.padding = SmeupTextPasswordModel.defaultPadding,
-      this.showborder = SmeupTextPasswordModel.defaultShowBorder,
+      this.showBorder = SmeupTextPasswordModel.defaultShowBorder,
       this.data,
-      this.showUnderline = SmeupTextPasswordModel.defaultShowUnderline,
+      this.underline = SmeupTextPasswordModel.defaultUnderline,
       this.autoFocus = SmeupTextPasswordModel.defaultAutoFocus,
       this.valueField = SmeupTextPasswordModel.defaultValueField,
       this.showSubmit = SmeupTextPasswordModel.defaultShowSubmit,
@@ -72,10 +96,11 @@ class SmeupTextPassword extends StatefulWidget
       this.clientValidator, // ?
       this.clientOnSave,
       this.clientOnChange,
-      this.inputFormatters // ?
-      })
+      this.inputFormatters, // ?
+      this.clientOnSubmit})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
+    SmeupTextPasswordModel.setDefaults(this);
   }
 
   @override
@@ -84,17 +109,27 @@ class SmeupTextPassword extends StatefulWidget
     id = m.id;
     type = m.type;
     backColor = m.backColor;
-    fontsize = m.fontsize;
+    fontSize = m.fontSize;
+    fontBold = m.fontBold;
+    fontColor = m.fontColor;
+    captionBackColor = m.captionBackColor;
+    captionFontBold = m.captionFontBold;
+    captionFontColor = m.captionFontColor;
+    captionFontSize = m.captionFontSize;
+    borderColor = m.borderColor;
+    borderRadius = m.borderRadius;
+    borderWidth = m.borderWidth;
     label = m.label;
+    submitLabel = m.submitLabel;
     width = m.width;
     height = m.height;
     padding = m.padding;
-    showborder = m.showBorder;
+    showBorder = m.showBorder;
     showRules = m.showRules;
     checkRules = m.checkRules;
     showRulesIcon = m.showRulesIcon;
     showSubmit = m.showSubmit;
-    showUnderline = m.showUnderline;
+    underline = m.underline;
     autoFocus = m.autoFocus;
     valueField = m.valueField;
 
@@ -114,7 +149,7 @@ class SmeupTextPassword extends StatefulWidget
         workData['rows'][0][m.valueField] != null) {
       return workData['rows'][0][m.valueField].toString();
     } else {
-      return m.data;
+      return '';
     }
   }
 
@@ -127,13 +162,12 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
     implements SmeupWidgetStateInterface {
   SmeupTextPasswordModel _model;
   dynamic _data;
-  bool _passwordVisible;
+  // bool _passwordVisible;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
-    _passwordVisible = false;
     if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
@@ -170,7 +204,14 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
     }
 
     final passwordModel =
-        Provider.of<SmeupTextPasswordRuleModel>(context, listen: false);
+        Provider.of<SmeupTextPasswordRuleNotifier>(context, listen: false);
+    final passwordFieldModel = Provider.of<SmeupTextPasswordVisibilityNotifier>(
+        context,
+        listen: false);
+
+    final iconTheme = _getIconTheme();
+    final dividerStyle = _getDividerStyle();
+    final captionStyle = _getCaptionStile();
 
     final children = Container(
       child: Column(
@@ -179,50 +220,75 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
             child: Row(
               children: [
                 Expanded(
-                  child: SmeupTextField(widget.scaffoldKey, widget.formKey,
-                      id: widget.id,
-                      label: widget.label,
-                      autoFocus: widget.autoFocus,
-                      backColor: widget.backColor,
-                      fontsize: widget.fontsize,
-                      height: widget.height,
-                      inputFormatters: widget.inputFormatters,
-                      padding: widget.padding,
-                      showSubmit: widget.showSubmit,
-                      showborder: widget.showborder,
-                      width: widget.width,
-                      showUnderline: widget.showUnderline,
-                      data: _data,
-                      clientValidator: widget.clientValidator,
-                      clientOnSave: widget.clientOnSave,
-                      clientOnChange: (value) {
-                    widget.clientOnChange(value);
-                    passwordModel.checkProgress(value);
-                    _data = value;
-                  },
-                      keyboard: _passwordVisible
-                          ? TextInputType.text
-                          : TextInputType.visiblePassword),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: GestureDetector(
-                    child: Icon(
-                        _passwordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: Colors.black38),
-                    onTap: () {
-                      setState(() {
-                        _passwordVisible = !_passwordVisible;
-                      });
+                  child: Consumer<SmeupTextPasswordVisibilityNotifier>(
+                    builder: (context, fieldmodel, child) {
+                      return SmeupTextField(widget.scaffoldKey, widget.formKey,
+                          id: widget.id,
+                          label: widget.label,
+                          autoFocus: widget.autoFocus,
+                          backColor: widget.backColor,
+                          fontSize: widget.fontSize,
+                          fontBold: widget.fontBold,
+                          fontColor: widget.fontColor,
+                          captionBackColor: widget.captionBackColor,
+                          captionFontBold: widget.captionFontBold,
+                          captionFontColor: widget.captionFontColor,
+                          captionFontSize: widget.captionFontSize,
+                          borderColor: widget.borderColor,
+                          borderRadius: widget.borderRadius,
+                          borderWidth: widget.borderWidth,
+                          submitLabel: widget.submitLabel,
+                          clientOnSubmit: widget.clientOnSubmit,
+                          height: widget.height,
+                          inputFormatters: widget.inputFormatters,
+                          padding: widget.padding,
+                          showSubmit: widget.showSubmit,
+                          showBorder: widget.showBorder,
+                          width: widget.width,
+                          underline: widget.underline,
+                          data: _data,
+                          clientValidator: widget.clientValidator,
+                          clientOnSave: widget.clientOnSave,
+                          clientOnChange: (value) {
+                        if (widget.clientOnChange != null)
+                          widget.clientOnChange(value);
+                        passwordModel.checkProgress(value);
+                        _data = value;
+                      },
+                          keyboard: fieldmodel.passwordVisible
+                              ? TextInputType.text
+                              : TextInputType.visiblePassword);
                     },
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
+                Container(
+                  color: Theme.of(context).primaryColor,
+                  padding: EdgeInsets.all(iconTheme.size.toDouble()),
                   child: GestureDetector(
-                    child: Icon(Icons.close, color: Colors.black38),
+                    child: Icon(
+                      passwordFieldModel.passwordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: iconTheme.color,
+                      size: iconTheme.size,
+                    ),
+                    onTap: () {
+                      passwordFieldModel.toggleVisible();
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: 3,
+                ),
+                Container(
+                  color: Theme.of(context).primaryColor,
+                  padding: EdgeInsets.all(iconTheme.size.toDouble()),
+                  child: GestureDetector(
+                    child: Icon(
+                      Icons.close,
+                      color: iconTheme.color,
+                      size: iconTheme.size,
+                    ),
                     onTap: () {
                       setState(() {
                         _data = '';
@@ -236,15 +302,16 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
           ),
           Column(
             children: [
-              if (!widget.showUnderline)
+              if (!widget.underline)
                 Divider(
-                  color: Colors.black38,
-                  thickness: 1.5,
+                  thickness: dividerStyle.thickness,
+                  color: dividerStyle.color,
                 ),
               if (widget.showRules)
                 Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: SmeupTextPasswordIndicators(widget.showRulesIcon),
+                  child: SmeupTextPasswordIndicators(
+                      widget.showRulesIcon, captionStyle, iconTheme),
                 )
             ],
           )
@@ -253,5 +320,36 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
     );
 
     return SmeupWidgetBuilderResponse(_model, children);
+  }
+
+  IconThemeData _getIconTheme() {
+    IconThemeData themeData = SmeupConfigurationService.getTheme().iconTheme;
+
+    return themeData;
+  }
+
+  DividerThemeData _getDividerStyle() {
+    DividerThemeData dividerData = SmeupConfigurationService.getTheme()
+        .dividerTheme
+        .copyWith(color: widget.fontColor);
+
+    return dividerData;
+  }
+
+  TextStyle _getCaptionStile() {
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
+
+    style = style.copyWith(
+        color: widget.captionFontColor,
+        fontSize: widget.captionFontSize,
+        backgroundColor: widget.captionBackColor);
+
+    if (widget.captionFontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
   }
 }

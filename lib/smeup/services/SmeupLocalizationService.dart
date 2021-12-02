@@ -29,7 +29,10 @@ class SmeupLocalizationService {
       'delete': 'DELETE',
       'elementDeleted': 'The item has been deleted',
       'dataNotAvailable': 'Data not available',
-      'settings': 'SETTINGS'
+      'settings': 'SETTINGS',
+      'month': 'Month',
+      '2weeks': '2 Weeks',
+      'week': 'Week'
     },
     'it': {
       'confirm': 'CONFERMA',
@@ -38,7 +41,10 @@ class SmeupLocalizationService {
       'delete': 'ELIMINA',
       'elementDeleted': 'L\'elemento è stato eliminato',
       'dataNotAvailable': 'Dati non disponibili',
-      'settings': 'IMPOSTAZIONI'
+      'settings': 'IMPOSTAZIONI',
+      'month': 'Mese',
+      '2weeks': '2 Settimane',
+      'week': 'Settimana'
     },
     'fr': {
       'confirm': 'CONFIRMATION',
@@ -47,7 +53,10 @@ class SmeupLocalizationService {
       'delete': 'SUPPRIMER',
       'elementDeleted': 'L\'élément a été supprimé',
       'dataNotAvailable': 'Données non disponibles',
-      'settings': 'PARAMÈTRES'
+      'settings': 'PARAMÈTRES',
+      'month': 'Mois',
+      '2weeks': '2 Semaines',
+      'week': 'Semaine'
     },
   };
 

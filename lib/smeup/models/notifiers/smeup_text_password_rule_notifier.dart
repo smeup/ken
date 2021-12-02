@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SmeupTextPasswordRuleModel with ChangeNotifier {
+class SmeupTextPasswordRuleNotifier with ChangeNotifier {
   int satisfiedRules;
   int totalRules;
   static String passwordRules = '';
 
   List<dynamic> rules;
 
-  SmeupTextPasswordRuleModel(
+  SmeupTextPasswordRuleNotifier(
     this.rules,
   ) {
     this.totalRules = rules.length;

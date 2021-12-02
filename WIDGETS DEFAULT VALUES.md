@@ -4,8 +4,20 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 ### Shared
 </a>
 
-- scaffoldBackgroundColor   :   color of the screen backgroundColor
-- primaryColor              :   main color of the application (convenient way to get the main color in static components)
+- scaffoldBackgroundColor   :   color of the screen backgroundColor. It's a convenient way to get the main color in static components where there is not 
+                                an attribute to define them or as default color: 
+                                    - SmeupForm default color
+                                    - SmeupSection backgroundColor
+                                    - Dialog backgroundColor
+                                    - SmeupButton with isLink attribute as bacbroundColor and borderColor
+                                    - SmeupDatePicker when the border is hidden
+                                    - SmeupTimePicker when the border is hidden
+                                
+- primaryColor              :   main color of the application. It's a convenient way to get the main color in static components where there is not 
+                                an attribute to define them or as default color: 
+                                    - background of the buttons in SmeupTextAutocomplete
+                                    - background of the buttons in SmeupTextPassword
+
 - errorColor                :   color of the SnackBar'sbackgroundColor in case of error
 
 
@@ -13,7 +25,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 ### SmeupAppBar
 </a>
 
-    The SmeupAppBar does not have any default. Its style depend on "appBarTheme"
+    The SmeupAppBar is an internal widget, meaning can be used only statically. Its style depend on "appBarTheme".
         
 <a name="SmeupButton">
 ### SmeupButton
@@ -23,14 +35,13 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - backColor             :   elevatedButtonTheme.style.backgroundColor
     - borderColor           :   elevatedButtonTheme.style.side.color
     - borderWidth           :   elevatedButtonTheme.style.side.width
-    - borderRadius          :   elevatedButtonTheme.style.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
+    - borderRadius          :   elevatedButtonTheme.style.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
     - elevation             :   elevatedButtonTheme.style.elevation
 
     - fontColor             :   textTheme.button.color
     - fontSize              :   textTheme.button.fontSize
     - fontBold              :   textTheme.button.fontWeight 
-    - underline             :   textTheme.button.decoration
-
+    
     - iconSize              :   iconTheme.size
     - iconColor             :   iconTheme.color
 
@@ -45,12 +56,36 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - isLink                :   false
     - orientation           :   WidgetOrientation.Vertical
 
+<a name="SmeupAppBar">
+### SmeupCalendar
+</a>
+
+    SmeupAppBar is an internal widget. It is completely managed by the appBarTheme.
+        
+
 <a name="SmeupCalendar">
 ### SmeupCalendar
 </a>
 
     json_theme's supported attributes:
-        TODO
+    - dayFontSize           :   textTheme.bodyText2.fontSize
+    - eventFontSize         :   textTheme.headline3.fontSize
+    - titleFontSize         :   textTheme.bodyText2.fontSize
+    - markerFontSize        :   appBarTheme.titleTextStyle.fontSize
+
+    json_theme's not overridable attributes:
+    - width                 :   0
+    - height                :   0
+    - showPeriodButtons     :   true
+    - titleColumnName       :   'XXDESC'
+    - columnName            :   'XXDAT1'
+    - columnName            :   'XXGRAF'
+    - initTimeColumnName    :   'init'
+    - endTimeColumnName     :   'end'
+    - showAsWeek            :   false
+    - showNavigation        :   true
+    - padding               :   EdgeInsets.all(0)
+
 
     Others attributes:
         TODO
@@ -62,8 +97,8 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     json_theme's supported attributes:
     
     Others attributes:
-    height                  :   100
-    autoPlay                :   false
+    - height                :   100
+    - autoPlay              :   false
 
 <a name="SmeupChart">
 ### SmeupChart
@@ -84,6 +119,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 </a>
 
     json_theme's supported attributes:
+    - fontColor             :   textTheme.bodyText1.color
     - fontSize              :   textTheme.bodyText1.fontSize
     - fontBold              :   textTheme.bodyText1.fontWeight 
     - backColor             :   textTheme.bodyText1.backgroundColor
@@ -91,14 +127,10 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - iconSize              :   iconTheme.size
     - iconColor             :   iconTheme.color
 
+    - captionFontColor      :   textTheme.caption.color
     - captionFontSize       :   textTheme.caption.fontSize
     - captionFontBold       :   textTheme.caption.fontWeight 
     - captionBackColor      :   textTheme.caption.backgroundColor
-
-    - underline             :   the underline attribute is a boolean and decides wheter or not a SmeupLine should be shown under the SmeupDatePicker. 
-
-   Notes:
-    See [SmeupLine](#SmeupLine) for further information about SmeupLine. 
 
     Others attributes:
     - width                 :   100
@@ -109,15 +141,16 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - label                 :   ''
     - align                 :   Alignment.centerLeft
     - innerSpace            :   10.0
+    - underline             :   true
 
 <a name="SmeupDashboard">
 ### SmeupDashboard
 </a>
 
     json_theme's supported attributes:
-    - fontColor             :   textTheme.headline3.color
-    - fontSize              :   textTheme.headline3.fontSize
-    - fontBold              :   textTheme.headline3.fontWeight 
+    - fontColor             :   textTheme.headline1.color
+    - fontSize              :   textTheme.headline1.fontSize
+    - fontBold              :   textTheme.headline1.fontWeight 
     
     - captionFontColor      :   textTheme.caption.color
     - captionFontSize       :   textTheme.caption.fontSize
@@ -158,17 +191,19 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - elementFontBold       :   appBarTheme.toolbarTextStyle.fontWeight 
         
     Others attributes:
-        TODO
+    - imageWidth            :   40
+    - imageHeight           :   40
+    - showItemDivider       :   true
 
 <a name="SmeupDatePicker">
 ### SmeupDatePicker
 </a>
 
     json_theme's supported attributes:
-    - borderColor           :   timePickerThemeData.dayPeriodBorderSide.color
-    - borderWidth           :   timePickerThemeData.dayPeriodBorderSide.width
-    - borderRadius          :   timePickerThemeData.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
-    - backColor             :   timePickerThemeData.backgroundColor
+    - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
+    - borderWidth           :   timePickerTheme.dayPeriodBorderSide.width
+    - borderRadius          :   timePickerTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
+    - backColor             :   timePickerTheme.backgroundColor
 
     - fontSize              :   textTheme.bodyText1.fontSize
     - fontBold              :   textTheme.bodyText1.fontWeight 
@@ -180,11 +215,6 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 
     - elevation             :   elevatedButtonTheme.style.elevation
 
-    - underline             :   the underline attribute is a boolean and decides wheter or not a SmeupLine should be shown under the SmeupDatePicker. 
-
-   Notes:
-    See [SmeupLine](#SmeupLine) for further information about SmeupLine. 
-
     Others attributes:
     - label                 :   ''
     - width                 :   100
@@ -195,6 +225,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - displayedField        :   'display'
     - align                 :   Alignment.topCenter
     - innerSpace            :   10.0
+    - underline             :   true
 
 <a name="SmeupGauge">
 ### SmeupGauge
@@ -233,15 +264,15 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - backColor             :   cardTheme.color
     - borderColor           :   cardTheme.shape.side.color
     - borderWidth           :   cardTheme.shape.side.width
-    - borderRadius          :   cardTheme.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
+    - borderRadius          :   cardTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
     
-    - fontColor             :   textTheme.headline1.color
-    - fontSize              :   textTheme.headline1.fontSize
-    - fontBold              :   textTheme.headline1.fontWeight 
+    - fontColor             :   textTheme.headline4.color
+    - fontSize              :   textTheme.headline4.fontSize
+    - fontBold              :   textTheme.headline4.fontWeight 
 
-    - captionFontColor      :   textTheme.headline2.color
-    - captionFontSize       :   textTheme.headline2.fontSize
-    - captionFontBold       :   textTheme.headline2.fontWeight 
+    - captionFontColor      :   textTheme.headline5.color
+    - captionFontSize       :   textTheme.headline5.fontSize
+    - captionFontBold       :   textTheme.headline5.fontWeight 
         
     Others attributes:
     - width                 :   0
@@ -291,15 +322,15 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - backColor             :   cardTheme.color
     - borderColor           :   cardTheme.shape.side.color
     - borderWidth           :   cardTheme.shape.side.width
-    - borderRadius          :   cardTheme.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
+    - borderRadius          :   cardTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
     
-    - fontColor             :   textTheme.headline1.color
-    - fontSize              :   textTheme.headline1.fontSize
-    - fontBold              :   textTheme.headline1.fontWeight 
+    - fontColor             :   textTheme.headline4.color
+    - fontSize              :   textTheme.headline4.fontSize
+    - fontBold              :   textTheme.headline4.fontWeight 
 
-    - captionFontColor      :   textTheme.headline2.color
-    - captionFontSize       :   textTheme.headline2.fontSize
-    - captionFontBold       :   textTheme.headline2.fontWeight 
+    - captionFontColor      :   textTheme.headline5.color
+    - captionFontSize       :   textTheme.headline5.fontSize
+    - captionFontBold       :   textTheme.headline5.fontWeight 
 
     Others attributes:
     - width                 :   0
@@ -428,40 +459,105 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 </a>
 
     json_theme's supported attributes:
-        TODO
+    - fontSize              :   textTheme.bodyText1.fontSize
+    - fontBold              :   textTheme.bodyText1.fontWeight 
+    - backColor             :   textTheme.bodyText1.backgroundColor
+    - fontColor             :   textTheme.bodyText1.color
+
+    - captionFontSize       :   textTheme.caption.fontSize
+    - captionFontBold       :   textTheme.caption.fontWeight 
+    - captionBackColor      :   textTheme.caption.backgroundColor
+    - captionFontColor      :   textTheme.caption.color
+    
+    - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
+    - borderWidth           :   timePickerTheme.dayPeriodBorderSide.width
+    - borderRadius          :   timePickerTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
 
     Others attributes:
-        TODO
+    - label                 :   ''
+    - width                 :   100
+    - height                :   100
+    - padding               :   EdgeInsets.all(0)
+    - showBorder            :   false
+    - autoFocus             :   false
+    - underline             :   true
+    - submitLabel           :   ''
+    - showSubmit            :   false
 
 <a name="SmeupTextField">
 ### SmeupTextField
 </a>
 
     json_theme's supported attributes:
-        TODO
+    - fontSize              :   textTheme.bodyText1.fontSize
+    - fontBold              :   textTheme.bodyText1.fontWeight 
+    - backColor             :   textTheme.bodyText1.backgroundColor
+    - fontColor             :   textTheme.bodyText1.color
 
+    - captionFontSize       :   textTheme.caption.fontSize
+    - captionFontBold       :   textTheme.caption.fontWeight 
+    - captionBackColor      :   textTheme.caption.backgroundColor
+    - captionFontColor      :   textTheme.caption.color
+    
+    - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
+    - borderWidth           :   timePickerTheme.dayPeriodBorderSide.width
+    - borderRadius          :   timePickerTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
+    
     Others attributes:
-        TODO
+    - label                 :   ''
+    - submitLabel           :   ''
+    - width                 :   100
+    - height                :   100
+    - padding               :   EdgeInsets.all(0)
+    - showBorder            :   false
+    - autoFocus             :   false
+    - valueField            :   'value'
+    - showSubmit            :   false
+    - underline             :   true
 
 <a name="SmeupTextPassword">
 ### SmeupTextPassword
 </a>
 
     json_theme's supported attributes:
-        TODO
+    - fontSize              :   textTheme.bodyText1.fontSize
+    - fontBold              :   textTheme.bodyText1.fontWeight 
+    - backColor             :   textTheme.bodyText1.backgroundColor
+    - fontColor             :   textTheme.bodyText1.color
+
+    - captionFontSize       :   textTheme.caption.fontSize
+    - captionFontBold       :   textTheme.caption.fontWeight 
+    - captionBackColor      :   textTheme.caption.backgroundColor
+    - captionFontColor      :   textTheme.caption.color
+    
+    - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
+    - borderWidth           :   timePickerTheme.dayPeriodBorderSide.width
+    - borderRadius          :   timePickerTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
 
     Others attributes:
-        TODO
+    - label                 :   ''
+    - submitLabel           :   ''
+    - width                 :   100
+    - height                :   100
+    - padding               :   EdgeInsets.all(0)
+    - showBorder            :   false
+    - autoFocus             :   false
+    - valueField            :   'value'
+    - showSubmit            :   false
+    - underline             :   true
+    - showRules             :   true
+    - showRulesIcon         :   true
+    - checkRules            :   true
 
 <a name="SmeupTimePicker">
 ### SmeupTimePicker
 </a>
 
     json_theme's supported attributes:
-    - borderColor           :   timePickerThemeData.dayPeriodBorderSide.color
-    - borderWidth           :   timePickerThemeData.dayPeriodBorderSide.width
-    - borderRadius          :   timePickerThemeData.shape.borderRadius (note: the button will be avalable only with a 'rectangle' shape)
-    - backColor             :   timePickerThemeData.backgroundColor
+    - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
+    - borderWidth           :   timePickerTheme.dayPeriodBorderSide.width
+    - borderRadius          :   timePickerTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
+    - backColor             :   timePickerTheme.backgroundColor
 
     - fontSize              :   textTheme.bodyText1.fontSize
     - fontBold              :   textTheme.bodyText1.fontWeight 
@@ -473,11 +569,6 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 
     - elevation             :   elevatedButtonTheme.style.elevation
 
-    - underline             :   the underline attribute is a boolean and decides wheter or not a SmeupLine should be shown under the SmeupDatePicker. 
-
-   Notes:
-    See [SmeupLine](#SmeupLine) for further information about SmeupLine. 
-
     Others attributes:
     - label                 :   ''
     - width                 :   100
@@ -488,6 +579,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - displayedField        :   'display'
     - align                 :   Alignment.topCenter
     - innerSpace            :   10.0
+    - underline             :   true
 
 <a name="SmeupWait">
 ### SmeupWait

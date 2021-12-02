@@ -478,7 +478,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
   }
 
   TextStyle _getTextStile(Color backColor) {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.headline1;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.headline4;
 
     style = style.copyWith(
         color: widget.fontColor,
@@ -495,7 +495,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
   }
 
   TextStyle _getCaptionStile(Color backColor) {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.headline2;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.headline5;
 
     style = style.copyWith(
         color: widget.captionFontColor,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_calendar_dao.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
+import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_event_model.dart';
@@ -9,6 +11,7 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart'
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_button.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_calendar_widget.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
@@ -28,13 +31,17 @@ class SmeupCalendar extends StatefulWidget
   GlobalKey<FormState> formKey;
 
   // graphic properties
+  double dayFontSize;
+  double eventFontSize;
+  double titleFontSize;
+  double markerFontSize;
+
+  EdgeInsetsGeometry padding;
   String titleColumnName;
   String dataColumnName;
   String styleColumnName;
   double width;
   double height;
-  double eventFontSize;
-  double titleFontSize;
   bool showPeriodButtons;
   String title;
   String id;
@@ -55,6 +62,10 @@ class SmeupCalendar extends StatefulWidget
   SmeupCalendar(this.scaffoldKey, this.formKey,
       {this.id = '',
       this.type = 'CAL',
+      this.eventFontSize,
+      this.titleFontSize,
+      this.dayFontSize,
+      this.markerFontSize,
       this.data,
       this.initialFirstWork,
       this.initialLastWork,
@@ -68,10 +79,9 @@ class SmeupCalendar extends StatefulWidget
       this.showPeriodButtons = SmeupCalendarModel.defaultShowPeriodButtons,
       this.height = SmeupCalendarModel.defaultHeight,
       this.width = SmeupCalendarModel.defaultWidth,
-      this.eventFontSize = SmeupCalendarModel.defaultEventFontSize,
-      this.titleFontSize = SmeupCalendarModel.defaultTitleFontSize,
       this.showAsWeek = SmeupCalendarModel.defaultShowAsWeek,
       this.showNavigation = SmeupCalendarModel.defaultShowNavigation,
+      this.padding = SmeupCalendarModel.defaultPadding,
       this.clientOnDaySelected,
       this.clientOnChangeMonth,
       this.clientOnEventClick})
@@ -98,6 +108,10 @@ class SmeupCalendar extends StatefulWidget
   @override
   runControllerActivities(SmeupModel model) {
     SmeupCalendarModel m = model;
+    eventFontSize = m.eventFontSize;
+    titleFontSize = m.titleFontSize;
+    dayFontSize = m.dayFontSize;
+    markerFontSize = m.markerFontSize;
     id = m.id;
     type = m.type;
     title = m.title;
@@ -108,14 +122,13 @@ class SmeupCalendar extends StatefulWidget
     styleColumnName = m.styleColumnName;
     width = m.width;
     height = m.height;
-    eventFontSize = m.eventFontSize;
-    titleFontSize = m.titleFontSize;
     showPeriodButtons = m.showPeriodButtons;
     initialFirstWork = m.initialFirstWork;
     initialLastWork = m.initialLastWork;
     initialDate = m.initialDate;
     showAsWeek = m.showAsWeek;
     showNavigation = m.showNavigation;
+    padding = m.padding;
 
     data = treatData(m);
   }
@@ -236,25 +249,44 @@ class SmeupCalendarState extends State<SmeupCalendar>
     }
     setDataLoad(widget.id, false);
 
-    final calendar = Column(
-      children: <Widget>[
-        if (widget.showPeriodButtons) _buildButtons(),
-        if (widget.showPeriodButtons) SizedBox(height: 8),
-        SmeupCalendarWidget(widget.scaffoldKey, widget.formKey,
+    double calHeight = widget.height;
+    double calWidth = widget.width;
+    if (widget.model != null && widget.model.parent != null) {
+      if (calHeight == 0)
+        calHeight = (widget.model.parent as SmeupSectionModel).height;
+      if (calWidth == 0)
+        calWidth = (widget.model.parent as SmeupSectionModel).width;
+    } else {
+      if (calHeight == 0) calHeight = MediaQuery.of(context).size.height;
+      if (calWidth == 0) calWidth = MediaQuery.of(context).size.width;
+    }
+
+    final calendar = Container(
+      padding: widget.padding,
+      child: Column(
+        children: <Widget>[
+          if (widget.showPeriodButtons) _buildButtons(calHeight, calWidth),
+          if (widget.showPeriodButtons) SizedBox(height: 8),
+          SmeupCalendarWidget(
+            widget.scaffoldKey,
+            widget.formKey,
+            eventFontSize: widget.eventFontSize,
+            titleFontSize: widget.titleFontSize,
+            dayFontSize: widget.dayFontSize,
+            markerFontSize: widget.markerFontSize,
             id: widget.id,
             events: _events,
             firstWork: _firstWork,
             focusDay: _focusDay,
-            height: widget.height,
-            width: widget.width,
+            height: calHeight,
+            width: calWidth,
             lastWork: _lastWork,
             selectedDay: _selectedDay,
             model: _model,
+            padding: widget.padding,
             holidays: _holidays,
             showNavigation: widget.showNavigation,
             calendarFormat: _calendarFormat,
-            eventFontSize: widget.eventFontSize,
-            titleFontSize: widget.titleFontSize,
             clientOnChangeMonth: _clientOnChangeMonth,
             clientOnDaySelected: widget.clientOnDaySelected,
             clientOnEventClick: widget.clientOnEventClick,
@@ -265,8 +297,11 @@ class SmeupCalendarState extends State<SmeupCalendar>
             initTimeColumnName: widget.initTimeColumnName,
             setDataLoad: setDataLoad,
             styleColumnName: widget.styleColumnName,
-            titleColumnName: widget.titleColumnName),
-      ],
+            titleColumnName: widget.titleColumnName,
+            showPeriodButtons: widget.showPeriodButtons,
+          ),
+        ],
+      ),
     );
 
     return SmeupWidgetBuilderResponse(_model, calendar);
@@ -297,47 +332,43 @@ class SmeupCalendarState extends State<SmeupCalendar>
     return list;
   }
 
-  Widget _buildButtons() {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Flexible(
-          child: ElevatedButton(
-            child: Text(
-              'Mese',
-              style: TextStyle(fontSize: widget.eventFontSize),
-            ),
-            onPressed: () {
+  Widget _buildButtons(double calHeight, double calWidth) {
+    double buttonWidth = (calWidth - 50 - widget.padding.horizontal) / 3;
+    return Container(
+      width: calWidth,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          SmeupButton(
+            data: SmeupLocalizationService.of(context).getLocalString('month'),
+            width: buttonWidth,
+            clientOnPressed: () {
               setState(() {
                 _calendarFormat = CalendarFormat.month;
               });
             },
           ),
-        ),
-        Flexible(
-          child: ElevatedButton(
-            child: Text('2 Settimane',
-                style: TextStyle(fontSize: widget.eventFontSize)),
-            onPressed: () {
+          SmeupButton(
+            data: SmeupLocalizationService.of(context).getLocalString('2weeks'),
+            width: buttonWidth,
+            clientOnPressed: () {
               setState(() {
                 _calendarFormat = CalendarFormat.twoWeeks;
               });
             },
           ),
-        ),
-        Flexible(
-          child: ElevatedButton(
-            child: Text('Settimana',
-                style: TextStyle(fontSize: widget.eventFontSize)),
-            onPressed: () {
+          SmeupButton(
+            data: SmeupLocalizationService.of(context).getLocalString('week'),
+            width: buttonWidth,
+            clientOnPressed: () {
               setState(() {
                 _calendarFormat = CalendarFormat.week;
               });
             },
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

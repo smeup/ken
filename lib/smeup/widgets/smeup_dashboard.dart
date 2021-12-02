@@ -281,7 +281,7 @@ class _SmeupDashboardState extends State<SmeupDashboard>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.headline3;
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.headline1;
 
     style = style.copyWith(
       color: widget.fontColor,

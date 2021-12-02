@@ -13,10 +13,11 @@ class SmeupComboModel extends SmeupModel implements SmeupDataInterface {
   static double defaultFontSize;
   static Color defaultFontColor;
   static bool defaultFontBold;
-  static bool defaultUnderline;
+  static Color defaultBackColor;
   static bool defaultCaptionFontBold;
   static double defaultCaptionFontSize;
   static Color defaultCaptionFontColor;
+  static Color defaultCaptionBackColor;
 
   // unsupported by json_theme
   static const double defaultWidth = 100;
@@ -27,17 +28,20 @@ class SmeupComboModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultLabel = '';
   static const Alignment defaultAlign = Alignment.centerLeft;
   static const double defaultInnerSpace = 10.0;
+  static const bool defaultUnderline = false;
 
   double fontSize;
   Color fontColor;
   bool fontBold;
+  Color backColor;
   bool captionFontBold;
   double captionFontSize;
   Color captionFontColor;
+  Color captionBackColor;
   double iconSize;
   Color iconColor;
-  bool underline;
 
+  bool underline;
   double width;
   double height;
   double innerSpace;
@@ -55,12 +59,14 @@ class SmeupComboModel extends SmeupModel implements SmeupDataInterface {
       this.fontColor,
       this.fontSize,
       this.fontBold,
+      this.backColor,
       this.captionFontBold,
       this.captionFontSize,
       this.captionFontColor,
+      this.captionBackColor,
       this.iconSize,
       this.iconColor,
-      this.underline,
+      this.underline = defaultUnderline,
       this.align = defaultAlign,
       this.innerSpace = defaultInnerSpace,
       this.valueField = defaultValueField,
@@ -102,6 +108,9 @@ class SmeupComboModel extends SmeupModel implements SmeupDataInterface {
     fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']) ??
         defaultFontColor;
     fontBold = optionsDefault['bold'] ?? defaultFontBold;
+    backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??
+        defaultBackColor;
+
     underline =
         SmeupUtilities.getBool(optionsDefault['underline']) ?? defaultUnderline;
 
@@ -116,6 +125,9 @@ class SmeupComboModel extends SmeupModel implements SmeupDataInterface {
         SmeupUtilities.getColorFromRGB(optionsDefault['captionFontColor']) ??
             defaultCaptionFontColor;
     captionFontBold = optionsDefault['captionBold'] ?? defaultCaptionFontBold;
+    captionBackColor =
+        SmeupUtilities.getColorFromRGB(optionsDefault['captionBackColor']) ??
+            defaultCaptionBackColor;
 
     padding =
         SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
@@ -134,12 +146,13 @@ class SmeupComboModel extends SmeupModel implements SmeupDataInterface {
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
-    defaultUnderline = textStyle.decoration == TextDecoration.underline;
+    defaultBackColor = textStyle.backgroundColor;
 
     var captionStyle = SmeupConfigurationService.getTheme().textTheme.caption;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;
+    defaultCaptionBackColor = captionStyle.backgroundColor;
 
     var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
     defaultIconSize = iconTheme.size;
@@ -149,7 +162,7 @@ class SmeupComboModel extends SmeupModel implements SmeupDataInterface {
     if (obj.fontBold == null) obj.fontBold = SmeupComboModel.defaultFontBold;
     if (obj.fontColor == null) obj.fontColor = SmeupComboModel.defaultFontColor;
     if (obj.fontSize == null) obj.fontSize = SmeupComboModel.defaultFontSize;
-    if (obj.underline == null) obj.underline = SmeupComboModel.defaultUnderline;
+    if (obj.backColor == null) obj.backColor = SmeupComboModel.defaultBackColor;
 
     if (obj.captionFontBold == null)
       obj.captionFontBold = SmeupComboModel.defaultCaptionFontBold;
@@ -157,6 +170,8 @@ class SmeupComboModel extends SmeupModel implements SmeupDataInterface {
       obj.captionFontColor = SmeupComboModel.defaultCaptionFontColor;
     if (obj.captionFontSize == null)
       obj.captionFontSize = SmeupComboModel.defaultCaptionFontSize;
+    if (obj.captionBackColor == null)
+      obj.captionBackColor = SmeupComboModel.defaultCaptionBackColor;
 
     if (obj.iconSize == null) obj.iconSize = SmeupComboModel.defaultIconSize;
     if (obj.iconColor == null) obj.iconColor = SmeupComboModel.defaultIconColor;

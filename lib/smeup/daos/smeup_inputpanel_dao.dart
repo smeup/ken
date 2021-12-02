@@ -1,7 +1,7 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
-import 'package:mobile_components_library/smeup/models/widgets/input_panel/smeup_input_panel_field.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_input_panel_field.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_inputpanel_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_service_response.dart';

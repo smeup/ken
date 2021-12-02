@@ -183,39 +183,24 @@ class _SmeupSectionState extends State<SmeupSection>
 
     MediaQueryData deviceInfo = MediaQuery.of(context);
 
+    var appBarTheme = _getAppBarTheme();
+
     return Container(
       height: deviceInfo.size.height,
       child: Theme(
         data: SmeupConfigurationService.getTheme(),
         child: Scaffold(
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(60),
+            preferredSize: Size.fromHeight(appBarTheme.toolbarHeight),
             child: AppBar(
-              elevation: 0,
-              shape: Border(
-                  bottom: BorderSide(
-                      color: SmeupConfigurationService.getTheme()
-                          .scaffoldBackgroundColor)),
-              backgroundColor: Color.fromRGBO(255, 255, 255, 0),
+              backgroundColor: appBarTheme.backgroundColor,
               automaticallyImplyLeading: false,
               bottom: TabBar(
-                indicator: UnderlineTabIndicator(
-                  borderSide: BorderSide(
-                      width: 5.0,
-                      color: SmeupConfigurationService.getTheme().primaryColor),
-                ),
-                labelColor: SmeupConfigurationService.getTheme().primaryColor,
-                unselectedLabelColor: SmeupConfigurationService.getTheme()
-                    .textTheme
-                    .bodyText1
-                    .color,
                 controller: _tabController,
                 isScrollable: true,
                 onTap: (index) {
                   _onTabChanged(index);
                 },
-                labelStyle: TextStyle(fontSize: 16, color: Color(0xFF151026)),
-                labelPadding: EdgeInsets.all(3),
                 tabs: tabsTitles,
               ),
             ),
@@ -236,5 +221,11 @@ class _SmeupSectionState extends State<SmeupSection>
 
     SmeupDynamismService.run(widget.smeupSectionModel.dynamisms, context,
         'change', widget.scaffoldKey, widget.formKey);
+  }
+
+  AppBarTheme _getAppBarTheme() {
+    return SmeupConfigurationService.getTheme().appBarTheme.copyWith(
+        backgroundColor:
+            SmeupConfigurationService.getTheme().scaffoldBackgroundColor);
   }
 }

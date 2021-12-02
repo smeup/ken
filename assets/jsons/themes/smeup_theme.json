@@ -14,50 +14,68 @@
         "type": "rectangle",
         "borderRadius": 20.0
       },
-      "elevation": "0.0"
+      "elevation": 0.0
     }
   },
   "textTheme": {
     "button": {
       "color": "#ffffff",
       "fontSize": 16.0,
-      "fontWeight": "bold",
+      "fontWeight": "normal",
       "decoration": "none"
     },
     "caption": {
       "color": "#068a9c",
-      "fontSize": 18.0,
+      "fontSize": 16.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
     "bodyText1": {
       "color": "#068a9c",
-      "fontSize": 18.0,
+      "fontSize": 16.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
     "bodyText2": {
       "color": "#000000",
-      "fontSize": 18.0,
+      "fontSize": 16.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
     "headline1": {
       "color": "#068a9c",
-      "fontSize": 18.0,
-      "fontWeight": "bold",
+      "fontSize": 56.0,
+      "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
     "headline2": {
       "color": "#068a9c",
-      "fontSize": 18.0,
-      "fontWeight": "bold",
+      "fontSize": 43.0,
+      "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
     "headline3": {
       "color": "#068a9c",
-      "fontSize": 56.0,
+      "fontSize": 14.0,
       "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
+    },
+    "headline4": {
+      "color": "#068a9c",
+      "fontSize": 12.0,
+      "fontWeight": "bold",
+      "backgroundColor": "#ffffff"
+    },
+    "headline5": {
+      "color": "#068a9c",
+      "fontSize": 10.0,
+      "fontWeight": "bold",
+      "backgroundColor": "#ffffff"
+    },
+    "headline6": {
+      "color": "#068a9c",
+      "fontSize": 8.0,
+      "fontWeight": "bold",
       "backgroundColor": "#ffffff"
     }
   },
@@ -65,14 +83,14 @@
     "size": 20.0,
     "color": "#ffffff"
   },
-  "timePickerThemeData": {
+  "timePickerTheme": {
     "backgroundColor": "#ffffff",
     "shape": {
       "type": "rectangle",
       "borderRadius": 10.0
     },
     "dayPeriodBorderSide": {
-      "color": "#ffffff",
+      "color": "#068a9c",
       "width": 2.0
     }
   },
@@ -102,12 +120,14 @@
     "titleTextStyle": {
       "color": "#ffffff",
       "fontSize": 18.0,
-      "fontWeight": "normal"
+      "fontWeight": "normal",
+      "backgroundColor": "#068a9c"
     },
     "toolbarTextStyle": {
       "color": "#ffffff",
       "fontSize": 18.0,
-      "fontWeight": "normal"
+      "fontWeight": "normal",
+      "backgroundColor": "#068a9c"
     },
     "iconTheme": {
       "size": 20.0,
@@ -127,5 +147,24 @@
         "width": 2.0
       }
     }
-  }
+  },
+  "tabBarTheme": {
+    "indicatorSize": "tab",
+    "labelPadding": 0.0,
+    "labelColor": "#068a9c",
+    "labelStyle": {
+      "color": "#068a9c",
+      "fontSize": 18.0,
+      "fontWeight": "bold",
+      "backgroundColor": "#ffffff"
+    },
+    "unselectedLabelColor": "#068a9c",
+    "unselectedLabelStyle": {
+      "color": "#068a9c",
+      "fontSize": 12.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
+    } 
+  },
+  "indicatorColor" : "#068a9c"
 }

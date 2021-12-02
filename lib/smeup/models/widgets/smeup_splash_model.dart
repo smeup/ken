@@ -25,10 +25,8 @@ class SmeupSplashModel extends SmeupModel implements SmeupDataInterface {
     setDefaults(this);
     title = jsonMap['title'] ?? '';
 
-    if (optionsDefault['color'] != null) {
-      color = SmeupUtilities.getColorFromRGB(optionsDefault['color']) ??
-          defaultColor;
-    }
+    color =
+        SmeupUtilities.getColorFromRGB(optionsDefault['color']) ?? defaultColor;
 
     SmeupDataService.incrementDataFetch(id);
   }

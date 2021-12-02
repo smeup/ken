@@ -19,7 +19,6 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   static bool defaultFontBold;
   static double defaultIconSize;
   static Color defaultIconColor;
-  static bool defaultUnderline;
 
   // unsupported by json_theme
   static const double defaultWidth = 0;
@@ -43,7 +42,6 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   bool fontBold;
   double iconSize;
   Color iconColor;
-  bool underline;
 
   MainAxisAlignment position;
   Alignment align;
@@ -71,7 +69,6 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
       this.fontBold,
       this.iconSize,
       this.iconColor,
-      this.underline,
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.position = defaultPosition,
@@ -109,9 +106,6 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     } else {
       orientation = defaultOrientation;
     }
-
-    underline =
-        SmeupUtilities.getBool(optionsDefault['underline']) ?? defaultUnderline;
 
     valueField = optionsDefault['valueField'] ?? defaultValueField;
     position = SmeupUtilities.getMainAxisAlignment(optionsDefault['position']);
@@ -180,7 +174,6 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-    defaultUnderline = textStyle.decoration == TextDecoration.underline;
 
     var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
     defaultIconSize = iconTheme.size;
@@ -202,8 +195,6 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
     if (obj.fontColor == null)
       obj.fontColor = SmeupButtonsModel.defaultFontColor;
     if (obj.fontBold == null) obj.fontBold = SmeupButtonsModel.defaultFontBold;
-    if (obj.underline == null)
-      obj.underline = SmeupButtonsModel.defaultUnderline;
     if (obj.iconSize == null) obj.iconSize = SmeupButtonsModel.defaultIconSize;
     if (obj.iconColor == null)
       obj.iconColor = SmeupButtonsModel.defaultIconColor;

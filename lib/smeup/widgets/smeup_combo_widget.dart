@@ -9,9 +9,11 @@ class SmeupComboWidget extends StatefulWidget {
   final double fontSize;
   final Color fontColor;
   final bool fontBold;
+  final Color backColor;
   final bool captionFontBold;
   final double captionFontSize;
   final Color captionFontColor;
+  final Color captionBackColor;
   final double iconSize;
   final Color iconColor;
 
@@ -23,9 +25,11 @@ class SmeupComboWidget extends StatefulWidget {
       {this.fontColor,
       this.fontSize,
       this.fontBold,
+      this.backColor,
       this.captionFontBold,
       this.captionFontSize,
       this.captionFontColor,
+      this.captionBackColor,
       this.iconSize,
       this.iconColor,
       this.selectedValue,
@@ -53,15 +57,15 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
     DividerThemeData dividerStyle = _getDividerStyle();
 
     return DropdownButton<String>(
-      //isExpanded: true,
       value: _selectedValue,
+      dropdownColor: widget.backColor,
+      style: _getTextStile(),
       icon: Icon(
         Icons.arrow_downward,
         color: iconTheme.color,
         size: iconTheme.size,
       ),
-      elevation: 20,
-      style: const TextStyle(color: Colors.deepPurple),
+      //elevation: 20,
       underline: Container(
         height: dividerStyle.thickness,
         color: dividerStyle.color,
@@ -105,9 +109,9 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
     TextStyle style = SmeupConfigurationService.getTheme().textTheme.bodyText1;
 
     style = style.copyWith(
-      color: widget.fontColor,
-      fontSize: widget.fontSize,
-    );
+        color: widget.fontColor,
+        fontSize: widget.fontSize,
+        backgroundColor: Colors.transparent);
 
     if (widget.fontBold) {
       style = style.copyWith(

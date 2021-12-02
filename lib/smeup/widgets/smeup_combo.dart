@@ -24,13 +24,15 @@ class SmeupCombo extends StatefulWidget
   double fontSize;
   Color fontColor;
   bool fontBold;
+  Color backColor;
   bool captionFontBold;
   double captionFontSize;
   Color captionFontColor;
+  Color captionBackColor;
   double iconSize;
   Color iconColor;
-  bool underline;
 
+  bool underline;
   double innerSpace;
   Alignment align;
   SmeupComboModel model;
@@ -53,12 +55,14 @@ class SmeupCombo extends StatefulWidget
     this.fontColor,
     this.fontSize,
     this.fontBold,
+    this.backColor,
     this.captionFontBold,
     this.captionFontSize,
     this.captionFontColor,
+    this.captionBackColor,
     this.iconSize,
     this.iconColor,
-    this.underline,
+    this.underline = SmeupComboModel.defaultUnderline,
     this.title,
     this.id = '',
     this.type = 'CMB',
@@ -100,12 +104,14 @@ class SmeupCombo extends StatefulWidget
     fontSize = m.fontSize;
     fontColor = m.fontColor;
     fontBold = m.fontBold;
+    backColor = m.backColor;
     underline = m.underline;
     iconSize = m.iconSize;
     iconColor = m.iconColor;
     captionFontBold = m.captionFontBold;
     captionFontSize = m.captionFontSize;
     captionFontColor = m.captionFontColor;
+    captionBackColor = m.captionBackColor;
     align = m.align;
     innerSpace = m.innerSpace;
     width = m.width;
@@ -201,11 +207,13 @@ class _SmeupComboState extends State<SmeupCombo>
             fontColor: widget.fontColor,
             fontSize: widget.fontSize,
             fontBold: widget.fontBold,
+            backColor: widget.backColor,
             iconColor: widget.iconColor,
             iconSize: widget.iconSize,
             captionFontBold: widget.captionFontBold,
             captionFontColor: widget.captionFontColor,
             captionFontSize: widget.captionFontSize,
+            captionBackColor: widget.captionBackColor,
             selectedValue: _selectedValue,
             clientOnChange: (String newValue) {
               _selectedValue = newValue;

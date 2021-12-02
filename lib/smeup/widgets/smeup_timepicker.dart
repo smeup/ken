@@ -83,7 +83,7 @@ class SmeupTimePicker extends StatefulWidget
     this.captionFontSize,
     this.captionFontColor,
     this.captionBackColor,
-    this.underline,
+    this.underline = SmeupTimePickerModel.defaultUnderline,
     this.innerSpace = SmeupTimePickerModel.defaultInnerSpace,
     this.align = SmeupTimePickerModel.defaultAlign,
     this.label = SmeupTimePickerModel.defaultLabel,

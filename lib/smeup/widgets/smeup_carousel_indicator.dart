@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:mobile_components_library/smeup/models/notifiers/smeup_carousel_indicator_notifier.dart';
 import 'package:provider/provider.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_carousel_model.dart';
 
 // ignore: must_be_immutable
 class SmeupCarouselIndicator extends StatefulWidget {
@@ -15,8 +15,8 @@ class SmeupCarouselIndicator extends StatefulWidget {
 class _SmeupCarouselIndicatorState extends State<SmeupCarouselIndicator> {
   @override
   Widget build(BuildContext context) {
-    final SmeupCaurouselModelIndicator notifier =
-        Provider.of<SmeupCaurouselModelIndicator>(context, listen: true);
+    final SmeupCarouselIndicatorNotifier notifier =
+        Provider.of<SmeupCarouselIndicatorNotifier>(context, listen: true);
 
     var list = List<Widget>.empty(growable: true);
     (widget.data).forEach((element) {

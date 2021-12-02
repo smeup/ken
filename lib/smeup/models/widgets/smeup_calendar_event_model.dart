@@ -2,11 +2,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class SmeupCalentarEventModel {
-  DateTime day;
-  String description;
+  // supported by json_theme
   Color backgroundColor = Color.fromRGBO(224, 226, 109, 1);
   Color foreColor = Colors.black;
   FontWeight fontWeight = FontWeight.normal;
+
+  // unsupported by json_theme
+  DateTime day;
+  String description;
   DateTime initTime;
   DateTime endTime;
   dynamic fields;

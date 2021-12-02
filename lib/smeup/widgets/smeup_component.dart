@@ -20,6 +20,7 @@ import 'package:mobile_components_library/smeup/widgets/smeup_qrcode_reader.dart
 import 'package:mobile_components_library/smeup/widgets/smeup_splash.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_switch.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_text_autocomplete.dart';
+import 'package:mobile_components_library/smeup/widgets/smeup_text_password.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_gauge.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_radio_buttons.dart';
@@ -166,6 +167,11 @@ class _SmeupComponentState extends State<SmeupComponent> {
 
           case 'qrc':
             children = SmeupQRCodeReader.withController(
+                smeupModel, widget.scaffoldKey, widget.formKey);
+            break;
+
+          case 'pwd':
+            children = SmeupTextPassword.withController(
                 smeupModel, widget.scaffoldKey, widget.formKey);
             break;
 

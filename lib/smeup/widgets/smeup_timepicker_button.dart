@@ -6,10 +6,6 @@ import 'package:mobile_components_library/smeup/services/smeup_variables_service
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_timepicker_customization.dart';
 
-// TODO:
-// https://github.com/peiffer-innovations/json_theme/issues/29
-// Should be fixed in 3.1.2+1.
-
 // ignore: must_be_immutable
 class SmeupTimePickerButton extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -62,7 +58,7 @@ class SmeupTimePickerButton extends StatefulWidget {
     this.captionFontSize,
     this.captionFontColor,
     this.captionBackColor,
-    this.underline,
+    this.underline = SmeupTimePickerModel.defaultUnderline,
     this.align = SmeupTimePickerModel.defaultAlign,
     this.label = SmeupTimePickerModel.defaultLabel,
     this.width = SmeupTimePickerModel.defaultWidth,
@@ -94,42 +90,38 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
   Widget build(BuildContext context) {
     final button = Container(
         height: 20,
-        //height: widget.height,
-        // color: SmeupConfigurationService.getTheme()
-        //     .canvasColor, // Color.fromRGBO(250, 250, 250, 1),
         padding: widget.padding,
-        child:
-            // SizedBox(
-            //     height: widget.height,
-            //     width: widget.width,
-            //     child:
-            ElevatedButton(
-                style: widget.buttonStyle,
-                onPressed: () {
-                  DatePicker.showPicker(context,
-                      pickerModel: SmeupTimePickerCustomization(
-                          currentTime: _currentValue,
-                          showSecondsColumn: false,
-                          minutesList: widget.minutesList),
-                      showTitleActions: true, onConfirm: (date) {
-                    setState(() {
-                      final newTime = DateFormat('HH:mm').format(date);
-                      _currentDisplay = newTime;
-                      _currentValue = date;
-                      if (widget.clientOnChange != null) {
-                        widget.clientOnChange(SmeupTimePickerData(
-                          time: _currentValue,
-                          formattedTime: _currentDisplay,
-                        ));
-                      }
-                      SmeupVariablesService.setVariable(widget.id, newTime,
-                          formKey: widget.formKey);
-                    });
-                  });
-                },
-                child: Text(_currentDisplay, style: widget.textStyle))
-        // )
-        );
+        child: ElevatedButton(
+            style: widget.buttonStyle,
+            onPressed: () {
+              DatePicker.showPicker(context,
+                  theme: DatePickerTheme(
+                      backgroundColor: widget.backColor,
+                      headerColor: widget.textStyle.backgroundColor,
+                      doneStyle: widget.textStyle,
+                      cancelStyle: widget.textStyle,
+                      itemStyle: widget.textStyle),
+                  pickerModel: SmeupTimePickerCustomization(
+                      currentTime: _currentValue,
+                      showSecondsColumn: false,
+                      minutesList: widget.minutesList),
+                  showTitleActions: true, onConfirm: (date) {
+                setState(() {
+                  final newTime = DateFormat('HH:mm').format(date);
+                  _currentDisplay = newTime;
+                  _currentValue = date;
+                  if (widget.clientOnChange != null) {
+                    widget.clientOnChange(SmeupTimePickerData(
+                      time: _currentValue,
+                      formattedTime: _currentDisplay,
+                    ));
+                  }
+                  SmeupVariablesService.setVariable(widget.id, newTime,
+                      formKey: widget.formKey);
+                });
+              });
+            },
+            child: Text(_currentDisplay, style: widget.textStyle)));
 
     return button;
   }

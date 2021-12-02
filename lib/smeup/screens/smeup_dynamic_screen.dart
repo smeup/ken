@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/models/notifiers/smeup_error_notifier.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_drawer_data_element.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_drawer_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
@@ -11,7 +12,6 @@ import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_form_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_screen_model.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_error_notifier.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_form.dart';
@@ -207,7 +207,6 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
         widget._scaffoldKey,
         widget._formKey,
         data: newList,
-        appBarBackColor: SmeupConfigurationService.getTheme().primaryColor,
         title: 'MENU',
       );
       return smeupDrawer;

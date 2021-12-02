@@ -171,8 +171,11 @@ class SmeupDynamismService {
       GlobalKey<ScaffoldState> scaffoldKey) {
     showDialog(
         barrierDismissible: false,
-        routeSettings: RouteSettings(
-            arguments: {'smeupFun': smeupFunExec, 'isDialog': true}),
+        routeSettings: RouteSettings(arguments: {
+          'smeupFun': smeupFunExec,
+          'isDialog': true,
+          'backButtonVisible': false
+        }),
         context: context,
         builder: (_) => SimpleDialog(
               contentPadding: EdgeInsets.only(top: 20, bottom: 20),
@@ -260,10 +263,10 @@ class SmeupDynamismService {
                 backColor = SmeupConfigurationService.getTheme().errorColor;
                 break;
               case LogType.warning:
-                backColor = SmeupConfigurationService.getTheme().primaryColor;
+                backColor = Colors.orange;
                 break;
               default:
-              //color = Colors.green;
+                backColor = Colors.green;
             }
 
             if (text.isNotEmpty) {

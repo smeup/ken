@@ -5,10 +5,6 @@ import 'package:mobile_components_library/smeup/models/widgets/smeup_section_mod
 import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 
-// TODO:
-// https://github.com/peiffer-innovations/json_theme/issues/28
-// Should be fixed in 3.1.2+1.
-
 // ignore: must_be_immutable
 class SmeupButton extends StatelessWidget {
   final int buttonIndex;
@@ -22,7 +18,6 @@ class SmeupButton extends StatelessWidget {
   bool fontBold;
   double iconSize;
   Color iconColor;
-  bool underline;
 
   final double width;
   final double height;
@@ -56,7 +51,6 @@ class SmeupButton extends StatelessWidget {
       this.fontBold,
       this.iconSize,
       this.iconColor,
-      this.underline,
       this.width = SmeupButtonsModel.defaultWidth,
       this.height = SmeupButtonsModel.defaultHeight,
       this.position = SmeupButtonsModel.defaultPosition,
@@ -74,7 +68,6 @@ class SmeupButton extends StatelessWidget {
       this.model}) {
     SmeupButtonsModel.setDefaults(this);
     if (isLink) {
-      underline = true;
       borderColor =
           SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
       fontColor = backColor;
@@ -248,7 +241,7 @@ class SmeupButton extends StatelessWidget {
       );
     }
 
-    if (underline) {
+    if (isLink) {
       style = style.copyWith(decoration: TextDecoration.underline);
     }
 

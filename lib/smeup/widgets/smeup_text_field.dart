@@ -25,24 +25,35 @@ class SmeupTextField extends StatefulWidget
 
   // graphic properties
   Color backColor;
-  double fontsize;
+  double fontSize;
+  Color fontColor;
+  bool fontBold;
+  bool captionFontBold;
+  double captionFontSize;
+  Color captionFontColor;
+  Color captionBackColor;
+  Color borderColor;
+  double borderWidth;
+  double borderRadius;
+
+  bool underline;
   String label;
   double width;
   double height;
   EdgeInsetsGeometry padding;
-  bool showborder;
+  bool showBorder;
   String data;
-  bool showUnderline;
   bool autoFocus;
   String id;
   String type;
   String valueField;
   bool showSubmit;
+  String submitLabel;
   TextInputType keyboard;
-
   Function clientValidator;
   Function clientOnSave;
   Function clientOnChange;
+  Function clientOnSubmit;
 
   List<TextInputFormatter> inputFormatters;
 
@@ -55,25 +66,37 @@ class SmeupTextField extends StatefulWidget
       {this.id = '',
       this.type = 'FLD',
       this.backColor,
-      this.fontsize = SmeupTextFieldModel.defaultFontsize,
-      this.label,
+      this.fontSize,
+      this.fontBold,
+      this.fontColor,
+      this.captionBackColor,
+      this.captionFontBold,
+      this.captionFontColor,
+      this.captionFontSize,
+      this.borderColor,
+      this.borderRadius,
+      this.borderWidth,
+      this.underline = SmeupTextFieldModel.defaultUnderline,
+      this.label = SmeupTextFieldModel.defaultLabel,
+      this.submitLabel = SmeupTextFieldModel.defaultSubmitLabel,
       this.width = SmeupTextFieldModel.defaultWidth,
       this.height = SmeupTextFieldModel.defaultHeight,
       this.padding = SmeupTextFieldModel.defaultPadding,
-      this.showborder = SmeupTextFieldModel.defaultShowBorder,
-      this.data,
-      this.showUnderline = SmeupTextFieldModel.defaultShowUnderline,
+      this.showBorder = SmeupTextFieldModel.defaultShowBorder,
       this.autoFocus = SmeupTextFieldModel.defaultAutoFocus,
       this.valueField = SmeupTextFieldModel.defaultValueField,
       this.showSubmit = SmeupTextFieldModel.defaultShowSubmit,
+      this.data,
       this.keyboard,
       this.clientValidator, // ?
       this.clientOnSave,
       this.clientOnChange,
+      this.clientOnSubmit,
       this.inputFormatters // ?
       })
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
+    SmeupTextFieldModel.setDefaults(this);
   }
 
   @override
@@ -85,14 +108,24 @@ class SmeupTextField extends StatefulWidget
     id = m.id;
     type = m.type;
     backColor = m.backColor;
-    fontsize = m.fontsize;
+    fontSize = m.fontSize;
+    fontBold = m.fontBold;
+    fontColor = m.fontColor;
+    captionBackColor = m.captionBackColor;
+    captionFontBold = m.captionFontBold;
+    captionFontColor = m.captionFontColor;
+    captionFontSize = m.captionFontSize;
+    borderColor = m.borderColor;
+    borderRadius = m.borderRadius;
+    borderWidth = m.borderWidth;
+    underline = m.underline;
     label = m.label;
+    submitLabel = m.submitLabel;
     width = m.width;
     height = m.height;
     padding = m.padding;
-    showborder = m.showBorder;
+    showBorder = m.showBorder;
     showSubmit = m.showSubmit;
-    showUnderline = m.showUnderline;
     autoFocus = m.autoFocus;
     valueField = m.valueField;
     keyboard = m.keyboard;
@@ -163,27 +196,25 @@ class _SmeupTextFieldState extends State<SmeupTextField>
       setDataLoad(widget.id, true);
     }
 
+    TextStyle textStyle = _getTextStile();
+    TextStyle captionStyle = _getCaptionStile();
+
     Widget textField;
 
     SmeupVariablesService.setVariable(widget.id, _data,
         formKey: widget.formKey);
 
-    Color underlineColor = widget.showUnderline
-        ? SmeupConfigurationService.getTheme().primaryColor
-        : Colors.transparent;
-
-    Color focusColor = widget.showUnderline ? Colors.blue : Colors.transparent;
-
     textField = Container(
         alignment: Alignment.centerLeft,
         padding: widget.padding,
-        decoration: widget.showborder
+        decoration: widget.showBorder
             ? BoxDecoration(
-                borderRadius: BorderRadius.circular(12.0),
+                borderRadius: BorderRadius.circular(widget.borderRadius),
                 border: Border.all(
-                    color: SmeupConfigurationService.getTheme().primaryColor))
+                    color: widget.borderColor, width: widget.borderWidth))
             : null,
         child: TextFormField(
+          style: textStyle,
           inputFormatters: widget.inputFormatters,
           autofocus: widget.autoFocus,
           maxLines: 1,
@@ -204,17 +235,22 @@ class _SmeupTextFieldState extends State<SmeupTextField>
             if (_model != null)
               SmeupDynamismService.run(_model.dynamisms, context, 'change',
                   widget.scaffoldKey, widget.formKey);
+            _data = value;
           },
           decoration: InputDecoration(
-            labelStyle: TextStyle(
-                fontSize: widget.fontsize,
-                color: SmeupConfigurationService.getTheme().primaryColor),
+            labelStyle: captionStyle,
             labelText: widget.label,
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: underlineColor),
+              borderSide: BorderSide(
+                  color: widget.underline
+                      ? widget.borderColor
+                      : Colors.transparent),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: focusColor),
+              borderSide: BorderSide(
+                  color: widget.underline
+                      ? widget.borderColor
+                      : Colors.transparent),
             ),
           ),
           onSaved: (value) {
@@ -228,19 +264,31 @@ class _SmeupTextFieldState extends State<SmeupTextField>
         ));
 
     if (widget.showSubmit) {
-      var json = {
-        "type": "BTN",
-        "data": {
-          "rows": [
-            {'value': _model.options['FLD']['default']["submitLabel"]},
-          ]
-        },
-        "dynamisms": _model.dynamisms
-      };
-      final button = SmeupButtons.withController(
-          SmeupButtonsModel.fromMap(json, widget.formKey),
+      SmeupButtons button;
+      if (_model == null) {
+        button = SmeupButtons(
           widget.scaffoldKey,
-          widget.formKey);
+          widget.formKey,
+          data: [widget.submitLabel],
+          clientOnPressed: widget.clientOnSubmit,
+          padding: EdgeInsets.all(0),
+        );
+      } else {
+        var json = {
+          "type": "BTN",
+          "data": {
+            "rows": [
+              {'value': widget.submitLabel},
+            ]
+          },
+          "dynamisms": _model.dynamisms
+        };
+        button = SmeupButtons.withController(
+            SmeupButtonsModel.fromMap(json, widget.formKey),
+            widget.scaffoldKey,
+            widget.formKey);
+      }
+
       final column = Column(
         //mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -256,5 +304,39 @@ class _SmeupTextFieldState extends State<SmeupTextField>
     } else {
       return SmeupWidgetBuilderResponse(_model, textField);
     }
+  }
+
+  TextStyle _getTextStile() {
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.bodyText1;
+
+    style = style.copyWith(
+        color: widget.fontColor,
+        fontSize: widget.fontSize,
+        backgroundColor: widget.backColor);
+
+    if (widget.fontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
+  }
+
+  TextStyle _getCaptionStile() {
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
+
+    style = style.copyWith(
+        color: widget.captionFontColor,
+        fontSize: widget.captionFontSize,
+        backgroundColor: widget.captionBackColor);
+
+    if (widget.captionFontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
   }
 }

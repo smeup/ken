@@ -136,13 +136,13 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
 
     var textStyle = SmeupConfigurationService.getTheme()
         .textTheme
-        .headline1
+        .headline4
         .copyWith(backgroundColor: defaultBackColor);
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
 
-    var captionStyle = SmeupConfigurationService.getTheme().textTheme.headline2;
+    var captionStyle = SmeupConfigurationService.getTheme().textTheme.headline5;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;
