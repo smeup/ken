@@ -68,7 +68,24 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 </a>
 
     json_theme's supported attributes:
-        TODO
+    - dayFontSize           :   textTheme.bodyText2.fontSize
+    - eventFontSize         :   textTheme.headline3.fontSize
+    - titleFontSize         :   textTheme.bodyText2.fontSize
+    - markerFontSize        :   appBarTheme.titleTextStyle.fontSize
+
+    json_theme's not overridable attributes:
+    - width                 :   0
+    - height                :   0
+    - showPeriodButtons     :   true
+    - titleColumnName       :   'XXDESC'
+    - columnName            :   'XXDAT1'
+    - columnName            :   'XXGRAF'
+    - initTimeColumnName    :   'init'
+    - endTimeColumnName     :   'end'
+    - showAsWeek            :   false
+    - showNavigation        :   true
+    - padding               :   EdgeInsets.all(0)
+
 
     Others attributes:
         TODO
