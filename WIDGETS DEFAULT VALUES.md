@@ -25,7 +25,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 ### SmeupAppBar
 </a>
 
-    The SmeupAppBar does not have any default. Its style depend on "appBarTheme"
+    The SmeupAppBar is an internal widget, meaning can be used only statically. Its style depend on "appBarTheme".
         
 <a name="SmeupButton">
 ### SmeupButton
@@ -56,6 +56,13 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - isLink                :   false
     - orientation           :   WidgetOrientation.Vertical
 
+<a name="SmeupAppBar">
+### SmeupCalendar
+</a>
+
+    SmeupAppBar is an internal widget. It is completely managed by the appBarTheme.
+        
+
 <a name="SmeupCalendar">
 ### SmeupCalendar
 </a>
@@ -73,8 +80,8 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     json_theme's supported attributes:
     
     Others attributes:
-    height                  :   100
-    autoPlay                :   false
+    - height                :   100
+    - autoPlay              :   false
 
 <a name="SmeupChart">
 ### SmeupChart
@@ -124,9 +131,9 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 </a>
 
     json_theme's supported attributes:
-    - fontColor             :   textTheme.headline3.color
-    - fontSize              :   textTheme.headline3.fontSize
-    - fontBold              :   textTheme.headline3.fontWeight 
+    - fontColor             :   textTheme.headline1.color
+    - fontSize              :   textTheme.headline1.fontSize
+    - fontBold              :   textTheme.headline1.fontWeight 
     
     - captionFontColor      :   textTheme.caption.color
     - captionFontSize       :   textTheme.caption.fontSize
@@ -242,13 +249,13 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - borderWidth           :   cardTheme.shape.side.width
     - borderRadius          :   cardTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
     
-    - fontColor             :   textTheme.headline1.color
-    - fontSize              :   textTheme.headline1.fontSize
-    - fontBold              :   textTheme.headline1.fontWeight 
+    - fontColor             :   textTheme.headline4.color
+    - fontSize              :   textTheme.headline4.fontSize
+    - fontBold              :   textTheme.headline4.fontWeight 
 
-    - captionFontColor      :   textTheme.headline2.color
-    - captionFontSize       :   textTheme.headline2.fontSize
-    - captionFontBold       :   textTheme.headline2.fontWeight 
+    - captionFontColor      :   textTheme.headline5.color
+    - captionFontSize       :   textTheme.headline5.fontSize
+    - captionFontBold       :   textTheme.headline5.fontWeight 
         
     Others attributes:
     - width                 :   0
@@ -300,13 +307,13 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - borderWidth           :   cardTheme.shape.side.width
     - borderRadius          :   cardTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
     
-    - fontColor             :   textTheme.headline1.color
-    - fontSize              :   textTheme.headline1.fontSize
-    - fontBold              :   textTheme.headline1.fontWeight 
+    - fontColor             :   textTheme.headline4.color
+    - fontSize              :   textTheme.headline4.fontSize
+    - fontBold              :   textTheme.headline4.fontWeight 
 
-    - captionFontColor      :   textTheme.headline2.color
-    - captionFontSize       :   textTheme.headline2.fontSize
-    - captionFontBold       :   textTheme.headline2.fontWeight 
+    - captionFontColor      :   textTheme.headline5.color
+    - captionFontSize       :   textTheme.headline5.fontSize
+    - captionFontBold       :   textTheme.headline5.fontWeight 
 
     Others attributes:
     - width                 :   0

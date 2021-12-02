@@ -159,7 +159,7 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var textStyle = SmeupConfigurationService.getTheme().textTheme.headline3;
+    var textStyle = SmeupConfigurationService.getTheme().textTheme.headline1;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;

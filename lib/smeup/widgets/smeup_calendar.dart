@@ -31,13 +31,17 @@ class SmeupCalendar extends StatefulWidget
   GlobalKey<FormState> formKey;
 
   // graphic properties
+  double dayFontSize;
+  double eventFontSize;
+  double titleFontSize;
+  double markerFontSize;
+
+  EdgeInsetsGeometry padding;
   String titleColumnName;
   String dataColumnName;
   String styleColumnName;
   double width;
   double height;
-  double eventFontSize;
-  double titleFontSize;
   bool showPeriodButtons;
   String title;
   String id;
@@ -58,6 +62,10 @@ class SmeupCalendar extends StatefulWidget
   SmeupCalendar(this.scaffoldKey, this.formKey,
       {this.id = '',
       this.type = 'CAL',
+      this.eventFontSize,
+      this.titleFontSize,
+      this.dayFontSize,
+      this.markerFontSize,
       this.data,
       this.initialFirstWork,
       this.initialLastWork,
@@ -71,10 +79,9 @@ class SmeupCalendar extends StatefulWidget
       this.showPeriodButtons = SmeupCalendarModel.defaultShowPeriodButtons,
       this.height = SmeupCalendarModel.defaultHeight,
       this.width = SmeupCalendarModel.defaultWidth,
-      this.eventFontSize = SmeupCalendarModel.defaultEventFontSize,
-      this.titleFontSize = SmeupCalendarModel.defaultTitleFontSize,
       this.showAsWeek = SmeupCalendarModel.defaultShowAsWeek,
       this.showNavigation = SmeupCalendarModel.defaultShowNavigation,
+      this.padding = SmeupCalendarModel.defaultPadding,
       this.clientOnDaySelected,
       this.clientOnChangeMonth,
       this.clientOnEventClick})
@@ -101,6 +108,10 @@ class SmeupCalendar extends StatefulWidget
   @override
   runControllerActivities(SmeupModel model) {
     SmeupCalendarModel m = model;
+    eventFontSize = m.eventFontSize;
+    titleFontSize = m.titleFontSize;
+    dayFontSize = m.dayFontSize;
+    markerFontSize = m.markerFontSize;
     id = m.id;
     type = m.type;
     title = m.title;
@@ -111,14 +122,13 @@ class SmeupCalendar extends StatefulWidget
     styleColumnName = m.styleColumnName;
     width = m.width;
     height = m.height;
-    eventFontSize = m.eventFontSize;
-    titleFontSize = m.titleFontSize;
     showPeriodButtons = m.showPeriodButtons;
     initialFirstWork = m.initialFirstWork;
     initialLastWork = m.initialLastWork;
     initialDate = m.initialDate;
     showAsWeek = m.showAsWeek;
     showNavigation = m.showNavigation;
+    padding = m.padding;
 
     data = treatData(m);
   }
@@ -251,41 +261,47 @@ class SmeupCalendarState extends State<SmeupCalendar>
       if (calWidth == 0) calWidth = MediaQuery.of(context).size.width;
     }
 
-    final calendar = Column(
-      children: <Widget>[
-        if (widget.showPeriodButtons) _buildButtons(calHeight, calWidth),
-        if (widget.showPeriodButtons) SizedBox(height: 8),
-        SmeupCalendarWidget(
-          widget.scaffoldKey,
-          widget.formKey,
-          id: widget.id,
-          events: _events,
-          firstWork: _firstWork,
-          focusDay: _focusDay,
-          height: calHeight,
-          width: calWidth,
-          lastWork: _lastWork,
-          selectedDay: _selectedDay,
-          model: _model,
-          holidays: _holidays,
-          showNavigation: widget.showNavigation,
-          calendarFormat: _calendarFormat,
-          eventFontSize: widget.eventFontSize,
-          titleFontSize: widget.titleFontSize,
-          clientOnChangeMonth: _clientOnChangeMonth,
-          clientOnDaySelected: widget.clientOnDaySelected,
-          clientOnEventClick: widget.clientOnEventClick,
-          data: _data,
-          selectedEvents: _selectedEvents,
-          dataColumnName: widget.dataColumnName,
-          endTimeColumnName: widget.endTimeColumnName,
-          initTimeColumnName: widget.initTimeColumnName,
-          setDataLoad: setDataLoad,
-          styleColumnName: widget.styleColumnName,
-          titleColumnName: widget.titleColumnName,
-          showPeriodButtons: widget.showPeriodButtons,
-        ),
-      ],
+    final calendar = Container(
+      padding: widget.padding,
+      child: Column(
+        children: <Widget>[
+          if (widget.showPeriodButtons) _buildButtons(calHeight, calWidth),
+          if (widget.showPeriodButtons) SizedBox(height: 8),
+          SmeupCalendarWidget(
+            widget.scaffoldKey,
+            widget.formKey,
+            eventFontSize: widget.eventFontSize,
+            titleFontSize: widget.titleFontSize,
+            dayFontSize: widget.dayFontSize,
+            markerFontSize: widget.markerFontSize,
+            id: widget.id,
+            events: _events,
+            firstWork: _firstWork,
+            focusDay: _focusDay,
+            height: calHeight,
+            width: calWidth,
+            lastWork: _lastWork,
+            selectedDay: _selectedDay,
+            model: _model,
+            padding: widget.padding,
+            holidays: _holidays,
+            showNavigation: widget.showNavigation,
+            calendarFormat: _calendarFormat,
+            clientOnChangeMonth: _clientOnChangeMonth,
+            clientOnDaySelected: widget.clientOnDaySelected,
+            clientOnEventClick: widget.clientOnEventClick,
+            data: _data,
+            selectedEvents: _selectedEvents,
+            dataColumnName: widget.dataColumnName,
+            endTimeColumnName: widget.endTimeColumnName,
+            initTimeColumnName: widget.initTimeColumnName,
+            setDataLoad: setDataLoad,
+            styleColumnName: widget.styleColumnName,
+            titleColumnName: widget.titleColumnName,
+            showPeriodButtons: widget.showPeriodButtons,
+          ),
+        ],
+      ),
     );
 
     return SmeupWidgetBuilderResponse(_model, calendar);
@@ -317,7 +333,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
   }
 
   Widget _buildButtons(double calHeight, double calWidth) {
-    double buttonWidth = (calWidth - 50) / 3;
+    double buttonWidth = (calWidth - 50 - widget.padding.horizontal) / 3;
     return Container(
       width: calWidth,
       child: Row(
