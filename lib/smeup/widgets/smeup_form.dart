@@ -126,13 +126,13 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
         bool isDialog =
             routeArgs == null ? false : routeArgs['isDialog'] ?? false;
 
-        final formHeight = isDialog
+        double formHeight = isDialog
             ? 300
             : deviceInfo.size.height -
                 SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight -
                 24 -
                 widget.smeupFormModel.padding.vertical;
-        final formWidth = isDialog ? 300 : deviceInfo.size.width;
+        double formWidth = isDialog ? 300 : deviceInfo.size.width;
 
         s.height = smeupFormModel.layout == 'column'
             ? (formHeight) / totalDim * s.dim
@@ -164,17 +164,24 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
     });
 
     if (smeupFormModel.layout == 'column') {
-      container = Container(
-        constraints: smeupFormModel.autoAdaptHeight
-            ? BoxConstraints(minHeight: 0)
-            : null,
-        padding: smeupFormModel.padding,
-        child: SingleChildScrollView(
+      if (smeupFormModel.autoAdaptHeight) {
+        container = Container(
+          constraints: BoxConstraints(minHeight: 0),
+          padding: smeupFormModel.padding,
+          child: SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: sections),
+          ),
+        );
+      } else {
+        container = Container(
+          padding: smeupFormModel.padding,
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: sections),
-        ),
-      );
+        );
+      }
     } else {
       container = Container(
         padding: smeupFormModel.padding,

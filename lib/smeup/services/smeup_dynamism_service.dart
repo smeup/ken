@@ -177,16 +177,20 @@ class SmeupDynamismService {
           'backButtonVisible': false
         }),
         context: context,
-        builder: (_) => SimpleDialog(
-              contentPadding: EdgeInsets.only(top: 20, bottom: 20),
-              backgroundColor:
-                  SmeupConfigurationService.getTheme().scaffoldBackgroundColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
+        builder: (_) => Theme(
+              data: SmeupConfigurationService.getTheme(),
+              child: SimpleDialog(
+                contentPadding: EdgeInsets.only(top: 20, bottom: 20),
+                // backgroundColor: SmeupConfigurationService.getTheme()
+                //     .scaffoldBackgroundColor,
+                // shape: RoundedRectangleBorder(
+                //   borderRadius: BorderRadius.circular(20.0),
+                // ),
+                children: [
+                  Container(
+                      height: 300, width: 350, child: SmeupDynamicScreen())
+                ],
               ),
-              children: [
-                Container(height: 300, width: 350, child: SmeupDynamicScreen())
-              ],
             )).then((value) {
       _manageNotify(notify, context, scaffoldKey.hashCode);
     });

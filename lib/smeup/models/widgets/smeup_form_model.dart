@@ -33,14 +33,15 @@ class SmeupFormModel extends SmeupModel
     backColor = SmeupUtilities.getColorFromRGB(optionsType['backColor']) ??
         SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
 
-    autoAdaptHeight = defaultAutoAdaptHeight;
+    autoAdaptHeight = SmeupUtilities.getBool(jsonMap['autoAdaptHeight']) ??
+        defaultAutoAdaptHeight;
 
     layout = jsonMap['layout'] ?? defaultLayout;
     _replaceFormTitle(jsonMap);
     formVariables = _getFormVariables(jsonMap);
 
     smeupSectionsModels =
-        getSections(jsonMap, 'sections', formKey, autoAdaptHeight);
+        getSections(jsonMap, 'sections', formKey, autoAdaptHeight, this);
   }
 
   void _replaceFormTitle(dynamic jsonMap) {

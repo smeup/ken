@@ -166,5 +166,20 @@
       "backgroundColor": "#ffffff"
     } 
   },
-  "indicatorColor" : "#068a9c"
+  "indicatorColor" : "#068a9c",
+  "dialogTheme": {
+    "backgroundColor": "#ffffff",
+    "elevation": 0,
+    "shape": {
+      "type": "rectangle",
+      "borderRadius": 20.0
+    },
+    "titleTextStyle": {
+      "color": "#000000",
+      "fontSize": 25.0,
+      "fontWeight": "bold",
+      "backgroundColor": "#ffffff",
+      "decoration": "underline"
+    }
+  }
 }

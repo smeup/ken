@@ -25,7 +25,9 @@ class SmeupDynamicScreen extends StatefulWidget {
   final bool backButtonVisible;
   final bool isDialog;
   SmeupDynamicScreen(
-      {this.initialFun, this.backButtonVisible = true, this.isDialog});
+      {this.initialFun,
+      this.backButtonVisible = SmeupScreenModel.defaultBackButtonVisible,
+      this.isDialog = SmeupScreenModel.defaultIsDialog});
 
   static const routeName = '/dynamic-screen';
 
@@ -139,10 +141,22 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     SmeupDataService.setDataFetch(0);
     await smeupScreenModel.setData();
 
+    bool isDialog = widget.isDialog;
+    bool backButtonVisible = widget.backButtonVisible;
+
     if (!hasData(smeupScreenModel)) {
       showErrorForm(context, smeupScreenModel.smeupFun);
       return SmeupWidgetBuilderResponse(smeupScreenModel, SmeupNotAvailable(),
           serviceStatusCode: smeupScreenModel.serviceStatusCode);
+    } else {
+      isDialog = smeupScreenModel.isDialog;
+      backButtonVisible = smeupScreenModel.backButtonVisible;
+    }
+
+    if (routeArgs != null) {
+      if (routeArgs['isDialog'] != null) isDialog = routeArgs['isDialog'];
+      if (routeArgs['backButtonVisible'] != null)
+        backButtonVisible = routeArgs['backButtonVisible'] ?? true;
     }
 
     smeupFormModel =
@@ -152,14 +166,6 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
 
     final smeupForm =
         SmeupForm(smeupFormModel, widget._scaffoldKey, widget._formKey);
-
-    bool isDialog = widget.isDialog ?? false;
-    bool backButtonVisible = widget.backButtonVisible;
-    if (routeArgs != null) {
-      if (routeArgs['isDialog'] != null) isDialog = routeArgs['isDialog'];
-      if (routeArgs['backButtonVisible'] != null)
-        backButtonVisible = routeArgs['backButtonVisible'] ?? true;
-    }
 
     SmeupFun smeupFun =
         widget.initialFun != null ? widget.initialFun : routeArgs['smeupFun'];
@@ -172,9 +178,10 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
                   return _onWillPop(backButtonVisible);
                 },
                 child: Scaffold(
-                  backgroundColor: smeupFormModel.backColor,
+                  backgroundColor:
+                      isDialog ? Colors.transparent : smeupFormModel.backColor,
                   key: widget._scaffoldKey,
-                  endDrawer: _getDrawer(smeupScreenModel),
+                  endDrawer: _getDrawer(smeupScreenModel, isDialog),
                   appBar: SmeupAppBar(isDialog,
                       appBarTitle: smeupScreenModel.data['title'] ?? '',
                       appBarActions: _getActions(smeupScreenModel.data),
@@ -198,11 +205,11 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
   //   return _getDrawer(smeupScreenModel);
   // }
 
-  SmeupDrawer _getDrawer(SmeupScreenModel smeupScreenModel) {
+  SmeupDrawer _getDrawer(SmeupScreenModel smeupScreenModel, bool isDialog) {
     SmeupDrawer smeupDrawer;
     Function getNewDrawer = () {
       var newList = List<SmeupDrawerDataElement>.empty(growable: true);
-      SmeupDrawer.addInternalDrawerElements(newList, context);
+      if (!isDialog) SmeupDrawer.addInternalDrawerElements(newList, context);
       smeupDrawer = SmeupDrawer(
         widget._scaffoldKey,
         widget._formKey,
