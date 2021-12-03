@@ -2,12 +2,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class SmeupCalentarEventModel {
-  // supported by json_theme
   Color backgroundColor = Color.fromRGBO(224, 226, 109, 1);
-  Color foreColor = Colors.black;
+  Color fontColor = Colors.black;
   FontWeight fontWeight = FontWeight.normal;
+  Color markerBackgroundColor = Colors.blue;
+  Color markerFontColor = Colors.black;
 
-  // unsupported by json_theme
   DateTime day;
   String description;
   DateTime initTime;
@@ -27,29 +27,37 @@ class SmeupCalentarEventModel {
     this.day = DateTime.parse(fields[dataColumnName].toString());
     this.initTime = _toTime(fields[initColumnName]);
     this.endTime = _toTime(fields[endColumnName]);
-    this.description = fields[titleColumnName];
-    dynamic styleColValue = fields[styleColumnName];
+    this.description = fields[titleColumnName] ?? '';
+    String style = fields[styleColumnName] ?? '';
 
-    switch (styleColValue) {
+    switch (style) {
       case '50G00':
         backgroundColor = Color.fromRGBO(6, 138, 156, 1); // dark green
-        foreColor = Colors.white;
+        fontColor = Colors.white;
         fontWeight = FontWeight.normal;
+        markerBackgroundColor = Colors.amber;
+        markerFontColor = Colors.black;
         break;
       case '00H00':
         backgroundColor = Color.fromRGBO(148, 197, 154, 1); // clear green
-        foreColor = Colors.black;
+        fontColor = Colors.black;
         fontWeight = FontWeight.normal;
+        markerBackgroundColor = Colors.lime;
+        markerFontColor = Colors.black;
         break;
       case '51G00':
         backgroundColor = Color.fromRGBO(6, 138, 156, 1); // dark green
-        foreColor = Colors.white;
+        fontColor = Colors.white;
         fontWeight = FontWeight.bold;
+        markerBackgroundColor = Colors.amber;
+        markerFontColor = Colors.black;
         break;
       case '01H00':
         backgroundColor = Color.fromRGBO(148, 197, 154, 1); // clear green
-        foreColor = Colors.black;
+        fontColor = Colors.black;
         fontWeight = FontWeight.bold;
+        markerBackgroundColor = Colors.lime;
+        markerFontColor = Colors.black;
         break;
       default:
     }
