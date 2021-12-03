@@ -25,7 +25,10 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 ### SmeupAppBar
 </a>
 
-    The SmeupAppBar is an internal widget, meaning can be used only statically. Its style depend on "appBarTheme".
+    The SmeupAppBar is an internal widget, it can be used only statically. 
+    Its style depend on:
+        - "appBarTheme" if the dynamicScreen is a form
+        - "dialogTheme" if the dynamicScreen is a dialog.
         
 <a name="SmeupButton">
 ### SmeupButton
@@ -55,13 +58,6 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - innerSpace            :   10.0
     - isLink                :   false
     - orientation           :   WidgetOrientation.Vertical
-
-<a name="SmeupAppBar">
-### SmeupCalendar
-</a>
-
-    SmeupAppBar is an internal widget. It is completely managed by the appBarTheme.
-        
 
 <a name="SmeupCalendar">
 ### SmeupCalendar
@@ -174,6 +170,20 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - forceUm               :   ''
     - numberFormat          :   '*;0'
 
+<a name="SmeupDynamicScreen">
+### SmeupDynamicScreen
+</a>
+
+    json_theme's supported attributes:
+
+
+    Others attributes:
+    - isDialog              :   false
+    - backButtonVisible     :   true
+
+    The backgroundColor is "scaffoldBackgroundColor" if SmeupDynamicScreen is a form and "dialogTheme.backgroundColor" if it is a dialog. 
+    
+
 <a name="SmeupDrawer">
 ### SmeupDrawer
 </a>
@@ -226,6 +236,18 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - align                 :   Alignment.topCenter
     - innerSpace            :   10.0
     - underline             :   true
+
+<a name="SmeupForm">
+### SmeupForm
+</a>
+    The SmeupAppBar is an internal widget, it can be used only statically.
+
+    json_theme's supported attributes:
+
+    Others attributes:
+    - padding               :   EdgeInsets.all(8)
+    - layout                :   '1'
+    - autoAdaptHeight       :   true
 
 <a name="SmeupGauge">
 ### SmeupGauge
@@ -411,6 +433,16 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - defaultHeight         :   75
     - defaultPadding        :   EdgeInsets.all(0)
     - defaultColumns        :   1
+
+<a name="SmeupSection">
+### SmeupSection
+</a>
+
+    The SmeupSection is an internal widget, it can be used only statically. 
+    
+    - dim                   :   0
+    - layout                :   ''
+    - autoAdaptHeight       :   inherithed from SmeupForm
 
 <a name="SmeupSlider">
 ### SmeupSlider

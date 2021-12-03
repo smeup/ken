@@ -312,22 +312,23 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
   Widget _getMarkerContainer(DateTime date, TextStyle markerStyle) {
     var eventsInDay = _events[_nomalizeDateTime(date)];
     if (eventsInDay == null) return null;
+    final ev = eventsInDay[0];
     return Container(
-      padding: EdgeInsets.only(right: 5, left: 5),
+      padding: EdgeInsets.only(right: 4, left: 4),
       child: Container(
           height: 16,
           width: double.infinity,
-          decoration: BoxDecoration(color: Colors.blue),
+          decoration: BoxDecoration(color: ev.markerBackgroundColor),
           child: Text(
               eventsInDay.length == 1
-                  ? eventsInDay[0].description
+                  ? ev.description
                   : eventsInDay.length.toString(),
               textAlign: TextAlign.center,
               style: markerStyle.copyWith(
-                  backgroundColor: Colors.blue,
-                  color: eventsInDay[0].foreColor,
+                  backgroundColor: ev.markerBackgroundColor,
+                  color: ev.markerFontColor,
                   fontSize: widget.markerFontSize,
-                  fontWeight: eventsInDay[0].fontWeight,
+                  fontWeight: ev.fontWeight,
                   overflow: TextOverflow.ellipsis))),
     );
   }
@@ -455,7 +456,7 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
         .headline3
         .copyWith(
             backgroundColor: event.backgroundColor,
-            color: event.foreColor,
+            color: event.fontColor,
             fontSize: widget.eventFontSize,
             fontWeight: event.fontWeight);
 

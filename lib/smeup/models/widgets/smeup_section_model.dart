@@ -34,7 +34,6 @@ import 'smeup_datepicker_model.dart';
 
 class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
   double dim;
-  //int size;
   String layout;
   List<SmeupModel> components;
   List<SmeupSectionModel> smeupSectionsModels;
@@ -44,20 +43,22 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
   double height;
   bool autoAdaptHeight;
 
-  SmeupSectionModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+  SmeupSectionModel.fromMap(Map<String, dynamic> jsonMap,
+      GlobalKey<FormState> formKey, SmeupModel parent)
       : super.fromMap(jsonMap, formKey) {
     String tmp = jsonMap['dim'] ?? '';
     tmp = tmp.replaceAll('%', '');
     dim = double.tryParse(tmp) ?? 0;
     layout = jsonMap['layout'];
     selectedTabColName = jsonMap['selectedTabColName'];
-    autoAdaptHeight = SmeupFormModel.defaultAutoAdaptHeight;
+    if (parent is SmeupFormModel) autoAdaptHeight = parent.autoAdaptHeight;
+    if (parent is SmeupSectionModel) autoAdaptHeight = parent.autoAdaptHeight;
+
     _replaceSelectedTabIndex(jsonMap);
 
     components = getComponents(jsonMap, 'components');
     smeupSectionsModels =
-        getSections(jsonMap, 'sections', formKey, autoAdaptHeight);
+        getSections(jsonMap, 'sections', formKey, autoAdaptHeight, parent);
   }
 
   void _replaceSelectedTabIndex(dynamic jsonMap) {

@@ -24,9 +24,17 @@ class SmeupAppBar extends AppBar {
       : super(
             key: key,
             automaticallyImplyLeading: !isDialog,
+            backgroundColor: isDialog
+                ? Colors.transparent
+                : SmeupConfigurationService.getTheme()
+                    .appBarTheme
+                    .backgroundColor,
             leading: _getLeadingButton(backButtonVisible, myContext),
-            title: _getTitle(appBarImage, appBarTitle, scaffoldKey, formKey),
-            elevation: isDialog ? 0 : 10,
+            title: _getTitle(
+                appBarImage, appBarTitle, scaffoldKey, formKey, isDialog),
+            elevation: isDialog
+                ? SmeupConfigurationService.getTheme().dialogTheme.elevation
+                : SmeupConfigurationService.getTheme().appBarTheme.elevation,
             actions: appBarActions);
 
   static Widget _getLeadingButton(
@@ -39,8 +47,12 @@ class SmeupAppBar extends AppBar {
         : Container();
   }
 
-  static Widget _getTitle(String appBarImage, String appBarTitle,
-      GlobalKey<ScaffoldState> scaffoldKey, GlobalKey<FormState> formKey) {
+  static Widget _getTitle(
+      String appBarImage,
+      String appBarTitle,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      GlobalKey<FormState> formKey,
+      bool isDialog) {
     double imageSize =
         SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight;
     if (appBarImage.isNotEmpty) {
@@ -58,8 +70,16 @@ class SmeupAppBar extends AppBar {
       return Center(
           child: Text(
         appBarTitle ?? '',
+        style: _getTitleStyle(isDialog),
         key: Key('appbar_text'),
       ));
     }
+  }
+
+  static TextStyle _getTitleStyle(bool isDialog) {
+    if (isDialog)
+      return SmeupConfigurationService.getTheme().dialogTheme.titleTextStyle;
+    else
+      return SmeupConfigurationService.getTheme().appBarTheme.titleTextStyle;
   }
 }

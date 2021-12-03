@@ -133,14 +133,18 @@ class _SmeupSectionState extends State<SmeupSection>
       });
 
       if (smeupSectionModel.layout == 'column') {
-        children = Container(
-          constraints: smeupSectionModel.autoAdaptHeight
-              ? BoxConstraints(minHeight: 0)
-              : null,
-          child: SingleChildScrollView(
+        if (smeupSectionModel.autoAdaptHeight) {
+          children = Container(
+            constraints: BoxConstraints(minHeight: 0),
+            child: SingleChildScrollView(
+              child: Column(children: sections),
+            ),
+          );
+        } else {
+          children = Container(
             child: Column(children: sections),
-          ),
-        );
+          );
+        }
       } else {
         children = Container(
           child: SingleChildScrollView(

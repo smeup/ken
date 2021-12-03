@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 
 class SmeupModelMixin {
   List<SmeupSectionModel> getSections(jsonMap, sectionName,
-      GlobalKey<FormState> formKey, bool autoAdaptHeight) {
+      GlobalKey<FormState> formKey, bool autoAdaptHeight, SmeupModel parent) {
     final smeupSectionsModels = List<SmeupSectionModel>.empty(growable: true);
     List<dynamic> sectionsJson;
 
@@ -14,7 +15,7 @@ class SmeupModelMixin {
     if (sectionsJson != null)
       sectionsJson.forEach((v) {
         SmeupSectionModel smeupSectionModel =
-            SmeupSectionModel.fromMap(v, formKey);
+            SmeupSectionModel.fromMap(v, formKey, parent);
         smeupSectionsModels.add(smeupSectionModel);
       });
 

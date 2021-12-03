@@ -3,6 +3,7 @@ import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_image_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
@@ -154,23 +155,26 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
               return await showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text(SmeupLocalizationService.of(context)
-                        .getLocalString('confirm')),
-                    content: Text(SmeupLocalizationService.of(context)
-                        .getLocalString(('areYouSureDelete'))),
-                    actions: <Widget>[
-                      ElevatedButton(
-                        onPressed: () => Navigator.of(context).pop(true),
-                        child: Text(SmeupLocalizationService.of(context)
-                            .getLocalString('delete')),
-                      ),
-                      ElevatedButton(
-                        onPressed: () => Navigator.of(context).pop(false),
-                        child: Text(SmeupLocalizationService.of(context)
-                            .getLocalString('cancel')),
-                      ),
-                    ],
+                  return Theme(
+                    data: SmeupConfigurationService.getTheme(),
+                    child: AlertDialog(
+                      title: Text(SmeupLocalizationService.of(context)
+                          .getLocalString('confirm')),
+                      content: Text(SmeupLocalizationService.of(context)
+                          .getLocalString(('areYouSureDelete'))),
+                      actions: <Widget>[
+                        ElevatedButton(
+                          onPressed: () => Navigator.of(context).pop(true),
+                          child: Text(SmeupLocalizationService.of(context)
+                              .getLocalString('delete')),
+                        ),
+                        ElevatedButton(
+                          onPressed: () => Navigator.of(context).pop(false),
+                          child: Text(SmeupLocalizationService.of(context)
+                              .getLocalString('cancel')),
+                        ),
+                      ],
+                    ),
                   );
                 },
               );
