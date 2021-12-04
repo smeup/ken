@@ -106,12 +106,12 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       }
       totalDim = maxDim;
     }
-    if (totalDim > maxDim) {
+    if (!smeupFormModel.autoAdaptHeight && totalDim > maxDim) {
       SmeupLogService.writeDebugMessage('Section \'dim\' greater than 100%',
           logType: LogType.error);
       useDim = false;
     }
-    if (totalDim == 0) {
+    if (!smeupFormModel.autoAdaptHeight && totalDim == 0) {
       SmeupLogService.writeDebugMessage('Section \'dim\' 0%',
           logType: LogType.error);
       useDim = false;

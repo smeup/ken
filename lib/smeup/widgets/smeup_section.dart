@@ -135,10 +135,12 @@ class _SmeupSectionState extends State<SmeupSection>
       if (smeupSectionModel.layout == 'column') {
         if (smeupSectionModel.autoAdaptHeight) {
           children = Container(
-            constraints: BoxConstraints(minHeight: 0),
-            child: SingleChildScrollView(
-              child: Column(children: sections),
-            ),
+            height: smeupSectionModel.height,
+            width: smeupSectionModel.width,
+            //constraints: BoxConstraints(minHeight: 0),
+            //child: SingleChildScrollView(
+            child: Column(children: sections),
+            //),
           );
         } else {
           children = Container(
