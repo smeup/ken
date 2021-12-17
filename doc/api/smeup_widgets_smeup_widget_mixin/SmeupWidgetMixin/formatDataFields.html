@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the formatDataFields method from the SmeupWidgetMixin class, for the Dart programming language.">
+  <title>formatDataFields method - SmeupWidgetMixin class - smeup_widget_mixin library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">ken</a></li>
+    <li><a href="../../smeup_widgets_smeup_widget_mixin/smeup_widgets_smeup_widget_mixin-library.html">smeup_widget_mixin</a></li>
+    <li><a href="../../smeup_widgets_smeup_widget_mixin/SmeupWidgetMixin-class.html">SmeupWidgetMixin</a></li>
+    <li class="self-crumb">formatDataFields method</li>
+  </ol>
+  <div class="self-name">formatDataFields</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-method">formatDataFields</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+
+<span class="returntype">dynamic</span>
+<span class="name ">formatDataFields</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="formatDataFields-param-model"><span class="type-annotation"><a href="../../smeup_models_widgets_smeup_model/SmeupModel-class.html">SmeupModel</a></span> <span class="parameter-name">model</span></span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>this function will format each field in the "data.rows"
+by checking the corresponing "data.columns"</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">dynamic formatDataFields(SmeupModel model) {
+  if (!SmeupDataService.isDataStructure(model.data)) return null;
+
+  dynamic res = SmeupDataService.getEmptyDataStructure();
+  res[&#39;messages&#39;] = model.data[&#39;messages&#39;];
+  res[&#39;columns&#39;] = model.data[&#39;columns&#39;];
+  res[&#39;rows&#39;] = model.data[&#39;rows&#39;];
+  res[&#39;type&#39;] = model.data[&#39;type&#39;];
+
+  if (res[&#39;rows&#39;] != null &amp;&amp;
+      (res[&#39;rows&#39;] as List).length &gt; 0 &amp;&amp;
+      res[&#39;columns&#39;] != null &amp;&amp;
+      (res[&#39;columns&#39;] as List).length &gt; 0) {
+    for (var z = 0; z &lt; (res[&#39;rows&#39;] as List).length; z++) {
+      var row = res[&#39;rows&#39;][z];
+
+      for (var i = 0; i &lt; (res[&#39;columns&#39;] as List).length; i++) {
+        var col = res[&#39;columns&#39;][i];
+
+        if (col[&#39;ogg&#39;] != null) {
+          var cell = row[col[&#39;code&#39;]];
+          if (cell != null) {
+            final ogg = col[&#39;ogg&#39;].toString();
+            switch (ogg) {
+              case &#39;D8*YYMD&#39;:
+                var dateToConvert = DateTime.tryParse(cell);
+                if (dateToConvert != null)
+                  cell = DateFormat(&quot;dd&#47;MM&#47;yyyy&quot;).format(dateToConvert);
+                break;
+              default:
+            }
+          }
+          row[col[&#39;code&#39;]] = cell;
+        }
+      }
+    }
+  }
+
+  return res;
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../../index.html">ken</a></li>
+  <li><a href="../../smeup_widgets_smeup_widget_mixin/smeup_widgets_smeup_widget_mixin-library.html">smeup_widget_mixin</a></li>
+  <li><a href="../../smeup_widgets_smeup_widget_mixin/SmeupWidgetMixin-class.html">SmeupWidgetMixin</a></li>
+  <li class="self-crumb">formatDataFields method</li>
+</ol>
+
+
+    <h5>SmeupWidgetMixin class</h5>
+    <ol>
+
+    <li class="section-title"><a href="../../smeup_widgets_smeup_widget_mixin/SmeupWidgetMixin-class.html#constructors">Constructors</a></li>
+    <li><a href="../../smeup_widgets_smeup_widget_mixin/SmeupWidgetMixin/SmeupWidgetMixin.html">SmeupWidgetMixin</a></li>
+
+
+    <li class="section-title inherited">
+      <a href="../../smeup_widgets_smeup_widget_mixin/SmeupWidgetMixin-class.html#instance-properties">Properties</a>
+    </li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
+
+    <li class="section-title"><a href="../../smeup_widgets_smeup_widget_mixin/SmeupWidgetMixin-class.html#instance-methods">Methods</a></li>
+    <li><a href="../../smeup_widgets_smeup_widget_mixin/SmeupWidgetMixin/formatDataFields.html">formatDataFields</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li><a href="../../smeup_widgets_smeup_widget_mixin/SmeupWidgetMixin/runControllerActivities.html">runControllerActivities</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
+
+    <li class="section-title inherited"><a href="../../smeup_widgets_smeup_widget_mixin/SmeupWidgetMixin-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    ken
+      0.0.1+1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/script.js?v1"></script>
+
+
+
+</body>
+
+</html>
+

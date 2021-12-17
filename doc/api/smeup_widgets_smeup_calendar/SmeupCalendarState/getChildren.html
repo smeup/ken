@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the getChildren method from the SmeupCalendarState class, for the Dart programming language.">
+  <title>getChildren method - SmeupCalendarState class - smeup_calendar library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">ken</a></li>
+    <li><a href="../../smeup_widgets_smeup_calendar/smeup_widgets_smeup_calendar-library.html">smeup_calendar</a></li>
+    <li><a href="../../smeup_widgets_smeup_calendar/SmeupCalendarState-class.html">SmeupCalendarState</a></li>
+    <li class="self-crumb">getChildren method</li>
+  </ol>
+  <div class="self-name">getChildren</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-method">getChildren</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+<div>
+  <ol class="annotation-list">
+    <li>@<a href="https://api.flutter.dev/flutter/dart-core/override-constant.html">override</a></li>
+  </ol>
+</div>
+
+<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../smeup_models_smeupWidgetBuilderResponse/SmeupWidgetBuilderResponse-class.html">SmeupWidgetBuilderResponse</a></span>&gt;</span></span>
+<span class="name ">getChildren</span>(<wbr>)
+
+      <div class="features">override</div>
+
+    </section>
+    
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">@override
+Future&lt;SmeupWidgetBuilderResponse&gt; getChildren() async {
+  if (!getDataLoaded(widget.id) &amp;&amp; widgetLoadType != LoadType.Delay) {
+    await _load();
+  }
+  setDataLoad(widget.id, false);
+
+  double calHeight = widget.height;
+  double calWidth = widget.width;
+  if (widget.model != null &amp;&amp; widget.model.parent != null) {
+    if (calHeight == 0)
+      calHeight = (widget.model.parent as SmeupSectionModel).height;
+    if (calWidth == 0)
+      calWidth = (widget.model.parent as SmeupSectionModel).width;
+  } else {
+    if (calHeight == 0) calHeight = MediaQuery.of(context).size.height;
+    if (calWidth == 0) calWidth = MediaQuery.of(context).size.width;
+  }
+
+  final calendar = Container(
+    padding: widget.padding,
+    child: Column(
+      children: &lt;Widget&gt;[
+        if (widget.showPeriodButtons) _buildButtons(calHeight, calWidth),
+        if (widget.showPeriodButtons) SizedBox(height: 8),
+        SmeupCalendarWidget(
+          widget.scaffoldKey,
+          widget.formKey,
+          eventFontSize: widget.eventFontSize,
+          titleFontSize: widget.titleFontSize,
+          dayFontSize: widget.dayFontSize,
+          markerFontSize: widget.markerFontSize,
+          id: widget.id,
+          events: _events,
+          firstWork: _firstWork,
+          focusDay: _focusDay,
+          height: calHeight,
+          width: calWidth,
+          lastWork: _lastWork,
+          selectedDay: _selectedDay,
+          model: _model,
+          padding: widget.padding,
+          holidays: _holidays,
+          showNavigation: widget.showNavigation,
+          calendarFormat: _calendarFormat,
+          clientOnChangeMonth: _clientOnChangeMonth,
+          clientOnDaySelected: widget.clientOnDaySelected,
+          clientOnEventClick: widget.clientOnEventClick,
+          data: _data,
+          selectedEvents: _selectedEvents,
+          dataColumnName: widget.dataColumnName,
+          endTimeColumnName: widget.endTimeColumnName,
+          initTimeColumnName: widget.initTimeColumnName,
+          setDataLoad: setDataLoad,
+          styleColumnName: widget.styleColumnName,
+          titleColumnName: widget.titleColumnName,
+          showPeriodButtons: widget.showPeriodButtons,
+        ),
+      ],
+    ),
+  );
+
+  return SmeupWidgetBuilderResponse(_model, calendar);
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../../index.html">ken</a></li>
+  <li><a href="../../smeup_widgets_smeup_calendar/smeup_widgets_smeup_calendar-library.html">smeup_calendar</a></li>
+  <li><a href="../../smeup_widgets_smeup_calendar/SmeupCalendarState-class.html">SmeupCalendarState</a></li>
+  <li class="self-crumb">getChildren method</li>
+</ol>
+
+
+    <h5>SmeupCalendarState class</h5>
+    <ol>
+
+    <li class="section-title"><a href="../../smeup_widgets_smeup_calendar/SmeupCalendarState-class.html#constructors">Constructors</a></li>
+    <li><a href="../../smeup_widgets_smeup_calendar/SmeupCalendarState/SmeupCalendarState.html">SmeupCalendarState</a></li>
+
+
+    <li class="section-title">
+      <a href="../../smeup_widgets_smeup_calendar/SmeupCalendarState-class.html#instance-properties">Properties</a>
+    </li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/context.html">context</a></li>
+    <li><a href="../../smeup_widgets_smeup_calendar/SmeupCalendarState/endFunDate.html">endFunDate</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/mounted.html">mounted</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li><a href="../../smeup_widgets_smeup_calendar/SmeupCalendarState/startFunDate.html">startFunDate</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/widget.html">widget</a></li>
+    <li class="inherited"><a href="../../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/widgetLoadType.html">widgetLoadType</a></li>
+
+    <li class="section-title"><a href="../../smeup_widgets_smeup_calendar/SmeupCalendarState-class.html#instance-methods">Methods</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/activate.html">activate</a></li>
+    <li><a href="../../smeup_widgets_smeup_calendar/SmeupCalendarState/build.html">build</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/deactivate.html">deactivate</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/debugFillProperties.html">debugFillProperties</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/didChangeDependencies.html">didChangeDependencies</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/didUpdateWidget.html">didUpdateWidget</a></li>
+    <li><a href="../../smeup_widgets_smeup_calendar/SmeupCalendarState/dispose.html">dispose</a></li>
+    <li><a href="../../smeup_widgets_smeup_calendar/SmeupCalendarState/getChildren.html">getChildren</a></li>
+    <li class="inherited"><a href="../../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/getDataLoaded.html">getDataLoaded</a></li>
+    <li class="inherited"><a href="../../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/getFunErrorResponse.html">getFunErrorResponse</a></li>
+    <li class="inherited"><a href="../../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/getInitialdataLoaded.html">getInitialdataLoaded</a></li>
+    <li class="inherited"><a href="../../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/hasData.html">hasData</a></li>
+    <li class="inherited"><a href="../../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/hasSections.html">hasSections</a></li>
+    <li><a href="../../smeup_widgets_smeup_calendar/SmeupCalendarState/initState.html">initState</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="../../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/notifyError.html">notifyError</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/reassemble.html">reassemble</a></li>
+    <li class="inherited"><a href="../../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/runBuild.html">runBuild</a></li>
+    <li class="inherited"><a href="../../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/runDispose.html">runDispose</a></li>
+    <li class="inherited"><a href="../../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/setDataLoad.html">setDataLoad</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/State/setState.html">setState</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/Diagnosticable/toDiagnosticsNode.html">toDiagnosticsNode</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/Diagnosticable/toString.html">toString</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/Diagnosticable/toStringShort.html">toStringShort</a></li>
+
+    <li class="section-title inherited"><a href="../../smeup_widgets_smeup_calendar/SmeupCalendarState-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    ken
+      0.0.1+1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/script.js?v1"></script>
+
+
+
+</body>
+
+</html>
+
