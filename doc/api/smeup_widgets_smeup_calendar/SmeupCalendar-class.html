@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the SmeupCalendar class from the smeup_calendar library, for the Dart programming language.">
+  <title>SmeupCalendar class - smeup_calendar library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">ken</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/smeup_widgets_smeup_calendar-library.html">smeup_calendar</a></li>
+    <li class="self-crumb">SmeupCalendar class</li>
+  </ol>
+  <div class="self-name">SmeupCalendar</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-class">SmeupCalendar</span> class 
+ 
+</h1></div>
+
+    
+
+
+    <section>
+      <dl class="dl-horizontal">
+        <dt>Inheritance</dt>
+        <dd><ul class="gt-separated dark clazz-relationships">
+          <li><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></li>
+          <li><a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree-class.html">DiagnosticableTree</a></li>
+          <li><a href="https://api.flutter.dev/flutter/widgets/Widget-class.html">Widget</a></li>
+          <li><a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a></li>
+          <li>SmeupCalendar</li>
+        </ul></dd>
+
+        <dt>Implemented types</dt>
+        <dd>
+          <ul class="comma-separated clazz-relationships">
+            <li><a href="../smeup_widgets_smeup_widget_interface/SmeupWidgetInterface-class.html">SmeupWidgetInterface</a></li>
+          </ul>
+        </dd>
+
+        <dt>Mixed in types</dt>
+        <dd><ul class="comma-separated clazz-relationships">
+          <li><a href="../smeup_widgets_smeup_widget_mixin/SmeupWidgetMixin-class.html">SmeupWidgetMixin</a></li>
+        </ul></dd>
+
+
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="SmeupCalendar" class="callable">
+          <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/SmeupCalendar.html">SmeupCalendar</a></span><span class="signature">(<span class="parameter" id="-param-scaffoldKey"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/GlobalKey-class.html">GlobalKey</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/material/ScaffoldState-class.html">ScaffoldState</a></span>&gt;</span></span> <span class="parameter-name">scaffoldKey</span>, </span><span class="parameter" id="-param-formKey"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/GlobalKey-class.html">GlobalKey</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/widgets/FormState-class.html">FormState</a></span>&gt;</span></span> <span class="parameter-name">formKey</span>, </span><span class="parameter" id="-param-id">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">id</span> = <span class="default-value">&#39;&#39;</span>, </span><span class="parameter" id="-param-type"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">type</span> = <span class="default-value">&#39;CAL&#39;</span>, </span><span class="parameter" id="-param-eventFontSize"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">eventFontSize</span>, </span><span class="parameter" id="-param-titleFontSize"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">titleFontSize</span>, </span><span class="parameter" id="-param-dayFontSize"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">dayFontSize</span>, </span><span class="parameter" id="-param-markerFontSize"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">markerFontSize</span>, </span><span class="parameter" id="-param-data"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">data</span>, </span><span class="parameter" id="-param-initialFirstWork"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">initialFirstWork</span>, </span><span class="parameter" id="-param-initialLastWork"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">initialLastWork</span>, </span><span class="parameter" id="-param-initialDate"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">initialDate</span>, </span><span class="parameter" id="-param-titleColumnName"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">titleColumnName</span> = <span class="default-value">SmeupCalendarModel.defaultTitleColumnName</span>, </span><span class="parameter" id="-param-dataColumnName"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">dataColumnName</span> = <span class="default-value">SmeupCalendarModel.defaultDataColumnName</span>, </span><span class="parameter" id="-param-initTimeColumnName"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">initTimeColumnName</span> = <span class="default-value">SmeupCalendarModel.defaultInitTimeColumnName</span>, </span><span class="parameter" id="-param-endTimeColumnName"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">endTimeColumnName</span> = <span class="default-value">SmeupCalendarModel.defaultEndTimeColumnName</span>, </span><span class="parameter" id="-param-styleColumnName"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">styleColumnName</span> = <span class="default-value">SmeupCalendarModel.defaultStyleColumnName</span>, </span><span class="parameter" id="-param-title"><span class="type-annotation">dynamic</span> <span class="parameter-name">title</span> = <span class="default-value">&#39;&#39;</span>, </span><span class="parameter" id="-param-showPeriodButtons"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">showPeriodButtons</span> = <span class="default-value">SmeupCalendarModel.defaultShowPeriodButtons</span>, </span><span class="parameter" id="-param-height"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">height</span> = <span class="default-value">SmeupCalendarModel.defaultHeight</span>, </span><span class="parameter" id="-param-width"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">width</span> = <span class="default-value">SmeupCalendarModel.defaultWidth</span>, </span><span class="parameter" id="-param-showAsWeek"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">showAsWeek</span> = <span class="default-value">SmeupCalendarModel.defaultShowAsWeek</span>, </span><span class="parameter" id="-param-showNavigation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">showNavigation</span> = <span class="default-value">SmeupCalendarModel.defaultShowNavigation</span>, </span><span class="parameter" id="-param-padding"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html">EdgeInsetsGeometry</a></span> <span class="parameter-name">padding</span> = <span class="default-value">SmeupCalendarModel.defaultPadding</span>, </span><span class="parameter" id="-param-clientOnDaySelected"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Function-class.html">Function</a></span> <span class="parameter-name">clientOnDaySelected</span>, </span><span class="parameter" id="-param-clientOnChangeMonth"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Function-class.html">Function</a></span> <span class="parameter-name">clientOnChangeMonth</span>, </span><span class="parameter" id="-param-clientOnEventClick"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Function-class.html">Function</a></span> <span class="parameter-name">clientOnEventClick</span>}</span>)</span>
+        </dt>
+        <dd>
+           
+        </dd>
+        <dt id="SmeupCalendar.withController" class="callable">
+          <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/SmeupCalendar.withController.html">SmeupCalendar.withController</a></span><span class="signature">(<span class="parameter" id="withController-param-model"><span class="type-annotation"><a href="../smeup_models_widgets_smeup_calendar_model/SmeupCalendarModel-class.html">SmeupCalendarModel</a></span> <span class="parameter-name">model</span>, </span><span class="parameter" id="withController-param-scaffoldKey"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/GlobalKey-class.html">GlobalKey</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/material/ScaffoldState-class.html">ScaffoldState</a></span>&gt;</span></span> <span class="parameter-name">scaffoldKey</span>, </span><span class="parameter" id="withController-param-formKey"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/GlobalKey-class.html">GlobalKey</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/widgets/FormState-class.html">FormState</a></span>&gt;</span></span> <span class="parameter-name">formKey</span>, </span><span class="parameter" id="withController-param-initialFirstWork"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">initialFirstWork</span>, </span><span class="parameter" id="withController-param-initialLastWork"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">initialLastWork</span></span>)</span>
+        </dt>
+        <dd>
+           
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="clientOnChangeMonth" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/clientOnChangeMonth.html">clientOnChangeMonth</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/Function-class.html">Function</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="clientOnDaySelected" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/clientOnDaySelected.html">clientOnDaySelected</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/Function-class.html">Function</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="clientOnEventClick" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/clientOnEventClick.html">clientOnEventClick</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/Function-class.html">Function</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="data" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/data.html">data</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="dataColumnName" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/dataColumnName.html">dataColumnName</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="dayFontSize" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/dayFontSize.html">dayFontSize</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="endTimeColumnName" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/endTimeColumnName.html">endTimeColumnName</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="eventFontSize" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/eventFontSize.html">eventFontSize</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="formKey" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/formKey.html">formKey</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/widgets/GlobalKey-class.html">GlobalKey</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/widgets/FormState-class.html">FormState</a></span>&gt;</span></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/Widget/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> 
+
+</dt>
+<dd class="inherited">
+  The hash code for this object. <a href="https://api.flutter.dev/flutter/widgets/Widget/hashCode.html">[...]</a>
+  <div class="features">@<a href="https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant.html">nonVirtual</a>, read-only, inherited</div>
+
+</dd>
+
+        <dt id="height" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/height.html">height</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="id" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/id.html">id</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="initialDate" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/initialDate.html">initialDate</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="initialFirstWork" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/initialFirstWork.html">initialFirstWork</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="initialLastWork" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/initialLastWork.html">initialLastWork</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="initTimeColumnName" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/initTimeColumnName.html">initTimeColumnName</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="key" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/Widget/key.html">key</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/foundation/Key-class.html">Key</a></span> 
+
+</dt>
+<dd class="inherited">
+  Controls how one widget replaces another widget in the tree. <a href="https://api.flutter.dev/flutter/widgets/Widget/key.html">[...]</a>
+  <div class="features">final, inherited</div>
+
+</dd>
+
+        <dt id="markerFontSize" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/markerFontSize.html">markerFontSize</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="model" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/model.html">model</a></span>
+  <span class="signature">&#8596; <a href="../smeup_models_widgets_smeup_calendar_model/SmeupCalendarModel-class.html">SmeupCalendarModel</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="padding" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/padding.html">padding</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html">EdgeInsetsGeometry</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Type-class.html">Type</a></span> 
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object. 
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="scaffoldKey" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/scaffoldKey.html">scaffoldKey</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/widgets/GlobalKey-class.html">GlobalKey</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/material/ScaffoldState-class.html">ScaffoldState</a></span>&gt;</span></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="showAsWeek" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/showAsWeek.html">showAsWeek</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="showNavigation" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/showNavigation.html">showNavigation</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="showPeriodButtons" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/showPeriodButtons.html">showPeriodButtons</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="styleColumnName" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/styleColumnName.html">styleColumnName</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="title" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/title.html">title</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="titleColumnName" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/titleColumnName.html">titleColumnName</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="titleFontSize" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/titleFontSize.html">titleFontSize</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="type" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/type.html">type</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="width" class="property">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/width.html">width</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> 
+
+</dt>
+<dd>
+   
+  <div class="features">read / write</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="createElement" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/StatefulWidget/createElement.html">createElement</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/widgets/StatefulElement-class.html">StatefulElement</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Creates a <a href="https://api.flutter.dev/flutter/widgets/StatefulElement-class.html">StatefulElement</a> to manage this widget's location in the tree. <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget/createElement.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="createState" class="callable">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/createState.html">createState</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../smeup_widgets_smeup_calendar/SmeupCalendarState-class.html">SmeupCalendarState</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Creates the mutable state for this widget at a given location in the tree. <a href="../smeup_widgets_smeup_calendar/SmeupCalendar/createState.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="debugDescribeChildren" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree/debugDescribeChildren.html">debugDescribeChildren</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html">DiagnosticsNode</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns a list of <code>DiagnosticsNode</code> objects describing this node's
+children. <a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree/debugDescribeChildren.html">[...]</a>
+  <div class="features">@<a href="https://pub.dev/documentation/meta/1.7.0/meta/protected-constant.html">protected</a>, inherited</div>
+
+</dd>
+
+        <dt id="debugFillProperties" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/Widget/debugFillProperties.html">debugFillProperties</a></span><span class="signature">(<wbr><span class="parameter" id="debugFillProperties-param-properties"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticPropertiesBuilder-class.html">DiagnosticPropertiesBuilder</a></span> <span class="parameter-name">properties</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Add additional properties associated with the node. <a href="https://api.flutter.dev/flutter/widgets/Widget/debugFillProperties.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="formatDataFields" class="callable inherited">
+  <span class="name"><a href="../smeup_widgets_smeup_widget_mixin/SmeupWidgetMixin/formatDataFields.html">formatDataFields</a></span><span class="signature">(<wbr><span class="parameter" id="formatDataFields-param-model"><span class="type-annotation"><a href="../smeup_models_widgets_smeup_model/SmeupModel-class.html">SmeupModel</a></span> <span class="parameter-name">model</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  this function will format each field in the "data.rows"
+by checking the corresponing "data.columns" 
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a non-existent method or property is accessed. <a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="runControllerActivities" class="callable">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/runControllerActivities.html">runControllerActivities</a></span><span class="signature">(<wbr><span class="parameter" id="runControllerActivities-param-model"><span class="type-annotation"><a href="../smeup_models_widgets_smeup_model/SmeupModel-class.html">SmeupModel</a></span> <span class="parameter-name">model</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd>
+   
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="toDiagnosticsNode" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html">toDiagnosticsNode</a></span><span class="signature">(<wbr><span class="parameter" id="toDiagnosticsNode-param-name">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="toDiagnosticsNode-param-style"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html">DiagnosticsTreeStyle</a></span> <span class="parameter-name">style</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html">DiagnosticsNode</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns a debug representation of the object that is used by debugging
+tools and by <a href="https://api.flutter.dev/flutter/foundation/DiagnosticsNode/toStringDeep.html">DiagnosticsNode.toStringDeep</a>. <a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/foundation/Diagnosticable/toString.html">toString</a></span><span class="signature">(<wbr><span class="parameter" id="toString-param-minLevel">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html">DiagnosticLevel</a></span> <span class="parameter-name">minLevel</span> = <span class="default-value">DiagnosticLevel.info</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object. <a href="https://api.flutter.dev/flutter/foundation/Diagnosticable/toString.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="toStringDeep" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html">toStringDeep</a></span><span class="signature">(<wbr><span class="parameter" id="toStringDeep-param-prefixLineOne">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">prefixLineOne</span> = <span class="default-value">&#39;&#39;</span>, </span><span class="parameter" id="toStringDeep-param-prefixOtherLines"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">prefixOtherLines</span>, </span><span class="parameter" id="toStringDeep-param-minLevel"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html">DiagnosticLevel</a></span> <span class="parameter-name">minLevel</span> = <span class="default-value">DiagnosticLevel.debug</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns a string representation of this node and its descendants. <a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="toStringShallow" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringShallow.html">toStringShallow</a></span><span class="signature">(<wbr><span class="parameter" id="toStringShallow-param-joiner">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">joiner</span> = <span class="default-value">&#39;, &#39;</span>, </span><span class="parameter" id="toStringShallow-param-minLevel"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html">DiagnosticLevel</a></span> <span class="parameter-name">minLevel</span> = <span class="default-value">DiagnosticLevel.debug</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns a one-line detailed description of the object. <a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringShallow.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="toStringShort" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/Widget/toStringShort.html">toStringShort</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A short, textual description of this widget. 
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="treatData" class="callable">
+  <span class="name"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/treatData.html">treatData</a></span><span class="signature">(<wbr><span class="parameter" id="treatData-param-model"><span class="type-annotation"><a href="../smeup_models_widgets_smeup_model/SmeupModel-class.html">SmeupModel</a></span> <span class="parameter-name">model</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd>
+   
+  <div class="features">override</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/Widget/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator. <a href="https://api.flutter.dev/flutter/widgets/Widget/operator_equals.html">[...]</a>
+  <div class="features">@<a href="https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant.html">nonVirtual</a>, inherited</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../index.html">ken</a></li>
+  <li><a href="../smeup_widgets_smeup_calendar/smeup_widgets_smeup_calendar-library.html">smeup_calendar</a></li>
+  <li class="self-crumb">SmeupCalendar class</li>
+</ol>
+
+
+    <h5>smeup_calendar library</h5>
+    <ol>
+  <li class="section-title"><a href="../smeup_widgets_smeup_calendar/smeup_widgets_smeup_calendar-library.html#classes">Classes</a></li>
+  <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar-class.html">SmeupCalendar</a></li>
+  <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendarState-class.html">SmeupCalendarState</a></li>
+
+
+
+
+
+
+
+
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+    <ol>
+
+    <li class="section-title"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar-class.html#constructors">Constructors</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/SmeupCalendar.html">SmeupCalendar</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/SmeupCalendar.withController.html">withController</a></li>
+
+
+    <li class="section-title">
+      <a href="../smeup_widgets_smeup_calendar/SmeupCalendar-class.html#instance-properties">Properties</a>
+    </li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/clientOnChangeMonth.html">clientOnChangeMonth</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/clientOnDaySelected.html">clientOnDaySelected</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/clientOnEventClick.html">clientOnEventClick</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/data.html">data</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/dataColumnName.html">dataColumnName</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/dayFontSize.html">dayFontSize</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/endTimeColumnName.html">endTimeColumnName</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/eventFontSize.html">eventFontSize</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/formKey.html">formKey</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/Widget/hashCode.html">hashCode</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/height.html">height</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/id.html">id</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/initialDate.html">initialDate</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/initialFirstWork.html">initialFirstWork</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/initialLastWork.html">initialLastWork</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/initTimeColumnName.html">initTimeColumnName</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/Widget/key.html">key</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/markerFontSize.html">markerFontSize</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/model.html">model</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/padding.html">padding</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/scaffoldKey.html">scaffoldKey</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/showAsWeek.html">showAsWeek</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/showNavigation.html">showNavigation</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/showPeriodButtons.html">showPeriodButtons</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/styleColumnName.html">styleColumnName</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/title.html">title</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/titleColumnName.html">titleColumnName</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/titleFontSize.html">titleFontSize</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/type.html">type</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/width.html">width</a></li>
+
+    <li class="section-title"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar-class.html#instance-methods">Methods</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/StatefulWidget/createElement.html">createElement</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/createState.html">createState</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree/debugDescribeChildren.html">debugDescribeChildren</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/Widget/debugFillProperties.html">debugFillProperties</a></li>
+    <li class="inherited"><a href="../smeup_widgets_smeup_widget_mixin/SmeupWidgetMixin/formatDataFields.html">formatDataFields</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/runControllerActivities.html">runControllerActivities</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html">toDiagnosticsNode</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/Diagnosticable/toString.html">toString</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html">toStringDeep</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringShallow.html">toStringShallow</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/Widget/toStringShort.html">toStringShort</a></li>
+    <li><a href="../smeup_widgets_smeup_calendar/SmeupCalendar/treatData.html">treatData</a></li>
+
+    <li class="section-title inherited"><a href="../smeup_widgets_smeup_calendar/SmeupCalendar-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/widgets/Widget/operator_equals.html">operator ==</a></li>
+
+
+
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    ken
+      0.0.1+1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/script.js?v1"></script>
+
+
+
+</body>
+
+</html>
+

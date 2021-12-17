@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the setDefaults method from the SmeupTextPasswordModel class, for the Dart programming language.">
+  <title>setDefaults method - SmeupTextPasswordModel class - smeup_text_password_model library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">ken</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/smeup_models_widgets_smeup_text_password_model-library.html">smeup_text_password_model</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel-class.html">SmeupTextPasswordModel</a></li>
+    <li class="self-crumb">setDefaults method</li>
+  </ol>
+  <div class="self-name">setDefaults</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-method">setDefaults</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+
+<span class="returntype">dynamic</span>
+<span class="name ">setDefaults</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="setDefaults-param-obj"><span class="type-annotation">dynamic</span> <span class="parameter-name">obj</span></span></li>
+</ol>)
+
+      
+
+    </section>
+    
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">static setDefaults(dynamic obj) {
+  var timePickerTheme = SmeupConfigurationService.getTheme().timePickerTheme;
+  defaultBackColor = timePickerTheme.backgroundColor;
+  var shape = timePickerTheme.shape;
+  defaultBorderRadius = (shape as ContinuousRectangleBorder)
+      .borderRadius
+      .resolve(TextDirection.ltr)
+      .topLeft
+      .x;
+  var side = timePickerTheme.dayPeriodBorderSide;
+  defaultBorderColor = side.color;
+  defaultBorderWidth = side.width;
+
+  var textStyle = SmeupConfigurationService.getTheme().textTheme.bodyText1;
+  defaultFontBold = textStyle.fontWeight == FontWeight.bold;
+  defaultFontSize = textStyle.fontSize;
+  defaultFontColor = textStyle.color;
+  defaultBackColor = textStyle.backgroundColor;
+
+  var captionStyle = SmeupConfigurationService.getTheme().textTheme.caption;
+  defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
+  defaultCaptionFontSize = captionStyle.fontSize;
+  defaultCaptionFontColor = captionStyle.color;
+  defaultCaptionBackColor = captionStyle.backgroundColor;
+
+  &#47;&#47; ----------------- set properties from default
+  if (obj.borderColor == null)
+    obj.borderColor = SmeupTextPasswordModel.defaultBorderColor;
+  if (obj.borderWidth == null)
+    obj.borderWidth = SmeupTextPasswordModel.defaultBorderWidth;
+  if (obj.borderRadius == null)
+    obj.borderRadius = SmeupTextPasswordModel.defaultBorderRadius;
+  if (obj.fontBold == null)
+    obj.fontBold = SmeupTextPasswordModel.defaultFontBold;
+  if (obj.fontColor == null)
+    obj.fontColor = SmeupTextPasswordModel.defaultFontColor;
+  if (obj.fontSize == null)
+    obj.fontSize = SmeupTextPasswordModel.defaultFontSize;
+  if (obj.backColor == null)
+    obj.backColor = SmeupTextPasswordModel.defaultBackColor;
+  if (obj.captionFontBold == null)
+    obj.captionFontBold = SmeupTextPasswordModel.defaultCaptionFontBold;
+  if (obj.captionFontColor == null)
+    obj.captionFontColor = SmeupTextPasswordModel.defaultCaptionFontColor;
+  if (obj.captionFontSize == null)
+    obj.captionFontSize = SmeupTextPasswordModel.defaultCaptionFontSize;
+  if (obj.captionBackColor == null)
+    obj.captionBackColor = SmeupTextPasswordModel.defaultCaptionBackColor;
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../../index.html">ken</a></li>
+  <li><a href="../../smeup_models_widgets_smeup_text_password_model/smeup_models_widgets_smeup_text_password_model-library.html">smeup_text_password_model</a></li>
+  <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel-class.html">SmeupTextPasswordModel</a></li>
+  <li class="self-crumb">setDefaults method</li>
+</ol>
+
+
+    <h5>SmeupTextPasswordModel class</h5>
+    <ol>
+
+    <li class="section-title"><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel-class.html#constructors">Constructors</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/SmeupTextPasswordModel.html">SmeupTextPasswordModel</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/SmeupTextPasswordModel.fromMap.html">fromMap</a></li>
+
+
+    <li class="section-title">
+      <a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel-class.html#instance-properties">Properties</a>
+    </li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/autoFocus.html">autoFocus</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/backColor.html">backColor</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/borderColor.html">borderColor</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/borderRadius.html">borderRadius</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/borderWidth.html">borderWidth</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/captionBackColor.html">captionBackColor</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/captionFontBold.html">captionFontBold</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/captionFontColor.html">captionFontColor</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/captionFontSize.html">captionFontSize</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/checkRules.html">checkRules</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/data.html">data</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/dynamisms.html">dynamisms</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/fontBold.html">fontBold</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/fontColor.html">fontColor</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/fontSize.html">fontSize</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/formKey.html">formKey</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/height.html">height</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/id.html">id</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/isNotified.html">isNotified</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/label.html">label</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/notificationEnabled.html">notificationEnabled</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/onReady.html">onReady</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/options.html">options</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/optionsDefault.html">optionsDefault</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/optionsType.html">optionsType</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/padding.html">padding</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/parent.html">parent</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/serviceStatusCode.html">serviceStatusCode</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/showBorder.html">showBorder</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/showLoader.html">showLoader</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/showRules.html">showRules</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/showRulesIcon.html">showRulesIcon</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/showSubmit.html">showSubmit</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/smeupFun.html">smeupFun</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/smeupSectionsModels.html">smeupSectionsModels</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/submitLabel.html">submitLabel</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/title.html">title</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/type.html">type</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/underline.html">underline</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/valueField.html">valueField</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/widgetLoadType.html">widgetLoadType</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/width.html">width</a></li>
+
+    <li class="section-title inherited"><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel-class.html#instance-methods">Methods</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
+
+    <li class="section-title inherited"><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+    <li class="section-title"><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel-class.html#static-properties">Static properties</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultBackColor.html">defaultBackColor</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultBorderColor.html">defaultBorderColor</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultBorderRadius.html">defaultBorderRadius</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultBorderWidth.html">defaultBorderWidth</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultCaptionBackColor.html">defaultCaptionBackColor</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultCaptionFontBold.html">defaultCaptionFontBold</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultCaptionFontColor.html">defaultCaptionFontColor</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultCaptionFontSize.html">defaultCaptionFontSize</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultFontBold.html">defaultFontBold</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultFontColor.html">defaultFontColor</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultFontSize.html">defaultFontSize</a></li>
+
+    <li class="section-title"><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel-class.html#static-methods">Static methods</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/setDefaults.html">setDefaults</a></li>
+
+    <li class="section-title"><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel-class.html#constants">Constants</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultAutoFocus-constant.html">defaultAutoFocus</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultCheckRules-constant.html">defaultCheckRules</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultHeight-constant.html">defaultHeight</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultLabel-constant.html">defaultLabel</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultPadding-constant.html">defaultPadding</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultShowBorder-constant.html">defaultShowBorder</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultShowRules-constant.html">defaultShowRules</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultShowRulesIcon-constant.html">defaultShowRulesIcon</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultShowSubmit-constant.html">defaultShowSubmit</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultSubmitLabel-constant.html">defaultSubmitLabel</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultUnderline-constant.html">defaultUnderline</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultValueField-constant.html">defaultValueField</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultWidth-constant.html">defaultWidth</a></li>
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    ken
+      0.0.1+1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/script.js?v1"></script>
+
+
+
+</body>
+
+</html>
+

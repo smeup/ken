@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the SmeupProgressBarModel.fromMap constructor from the Class SmeupProgressBarModel class from the smeup_progress_bar_model library, for the Dart programming language.">
+  <title>SmeupProgressBarModel.fromMap constructor - SmeupProgressBarModel class - smeup_progress_bar_model library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">ken</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/smeup_models_widgets_smeup_progress_bar_model-library.html">smeup_progress_bar_model</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel-class.html">SmeupProgressBarModel</a></li>
+    <li class="self-crumb">SmeupProgressBarModel.fromMap constructor</li>
+  </ol>
+  <div class="self-name">SmeupProgressBarModel.fromMap</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-constructor">SmeupProgressBarModel.fromMap</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      <span class="name ">SmeupProgressBarModel.fromMap</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="fromMap-param-jsonMap"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">jsonMap</span>, </span></li>
+<li><span class="parameter" id="fromMap-param-formKey"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/GlobalKey-class.html">GlobalKey</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/widgets/FormState-class.html">FormState</a></span>&gt;</span></span> <span class="parameter-name">formKey</span></span></li>
+</ol>)
+    </section>
+
+    
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">SmeupProgressBarModel.fromMap(
+    Map&lt;String, dynamic&gt; jsonMap, GlobalKey&lt;FormState&gt; formKey)
+    : super.fromMap(jsonMap, formKey) {
+  setDefaults(this);
+  title = jsonMap[&#39;title&#39;] ?? &#39;&#39;;
+
+  valueField = optionsDefault[&#39;valueField&#39;] ?? defaultValueField;
+
+  progressBarMinimun = SmeupUtilities.getDouble(optionsDefault[&#39;pgbMin&#39;]) ??
+      defaultProgressBarMinimun;
+  progressBarMaximun = SmeupUtilities.getDouble(optionsDefault[&#39;pgbMax&#39;]) ??
+      defaultProgressBarMaximun;
+  height =
+      SmeupUtilities.getDouble(optionsDefault[&#39;height&#39;]) ?? defaultHeight;
+
+  padding =
+      SmeupUtilities.getPadding(optionsDefault[&#39;padding&#39;]) ?? defaultPadding;
+
+  color =
+      SmeupUtilities.getColorFromRGB(optionsDefault[&#39;color&#39;]) ?? defaultColor;
+
+  linearTrackColor =
+      SmeupUtilities.getColorFromRGB(optionsDefault[&#39;linearTrackColor&#39;]) ??
+          defaultLinearTrackColor;
+
+  if (widgetLoadType != LoadType.Delay) {
+    onReady = () async {
+      await SmeupProgressBarDao.getData(this);
+    };
+  }
+
+  SmeupDataService.incrementDataFetch(id);
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../../index.html">ken</a></li>
+  <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/smeup_models_widgets_smeup_progress_bar_model-library.html">smeup_progress_bar_model</a></li>
+  <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel-class.html">SmeupProgressBarModel</a></li>
+  <li class="self-crumb">SmeupProgressBarModel.fromMap constructor</li>
+</ol>
+
+
+    <h5>SmeupProgressBarModel class</h5>
+    <ol>
+
+    <li class="section-title"><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel-class.html#constructors">Constructors</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/SmeupProgressBarModel.html">SmeupProgressBarModel</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/SmeupProgressBarModel.fromMap.html">fromMap</a></li>
+
+
+    <li class="section-title">
+      <a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel-class.html#instance-properties">Properties</a>
+    </li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/color.html">color</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/data.html">data</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/dynamisms.html">dynamisms</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/formKey.html">formKey</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/height.html">height</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/id.html">id</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/isNotified.html">isNotified</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/linearTrackColor.html">linearTrackColor</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/notificationEnabled.html">notificationEnabled</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/onReady.html">onReady</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/options.html">options</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/optionsDefault.html">optionsDefault</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/optionsType.html">optionsType</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/padding.html">padding</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/parent.html">parent</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/progressBarMaximun.html">progressBarMaximun</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/progressBarMinimun.html">progressBarMinimun</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/serviceStatusCode.html">serviceStatusCode</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/showLoader.html">showLoader</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/smeupFun.html">smeupFun</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/smeupSectionsModels.html">smeupSectionsModels</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/title.html">title</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/type.html">type</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/valueField.html">valueField</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/widgetLoadType.html">widgetLoadType</a></li>
+
+    <li class="section-title inherited"><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel-class.html#instance-methods">Methods</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
+
+    <li class="section-title inherited"><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+    <li class="section-title"><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel-class.html#static-properties">Static properties</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/defaultColor.html">defaultColor</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/defaultLinearTrackColor.html">defaultLinearTrackColor</a></li>
+
+    <li class="section-title"><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel-class.html#static-methods">Static methods</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/setDefaults.html">setDefaults</a></li>
+
+    <li class="section-title"><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel-class.html#constants">Constants</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/defaultHeight-constant.html">defaultHeight</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/defaultPadding-constant.html">defaultPadding</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/defaultProgressBarMaximun-constant.html">defaultProgressBarMaximun</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/defaultProgressBarMinimun-constant.html">defaultProgressBarMinimun</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_progress_bar_model/SmeupProgressBarModel/defaultValueField-constant.html">defaultValueField</a></li>
+</ol>
+
+  </div><!--/.sidebar-offcanvas-left-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    ken
+      0.0.1+1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/script.js?v1"></script>
+
+
+
+</body>
+
+</html>
+

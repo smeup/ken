@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the getComponents method from the SmeupSectionModel class, for the Dart programming language.">
+  <title>getComponents method - SmeupSectionModel class - smeup_section_model library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">ken</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_section_model/smeup_models_widgets_smeup_section_model-library.html">smeup_section_model</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.html">SmeupSectionModel</a></li>
+    <li class="self-crumb">getComponents method</li>
+  </ol>
+  <div class="self-name">getComponents</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-method">getComponents</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+
+<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../smeup_models_widgets_smeup_model/SmeupModel-class.html">SmeupModel</a></span>&gt;</span></span>
+<span class="name ">getComponents</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="getComponents-param-jsonMap"><span class="type-annotation">dynamic</span> <span class="parameter-name">jsonMap</span>, </span></li>
+<li><span class="parameter" id="getComponents-param-componentName"><span class="type-annotation">dynamic</span> <span class="parameter-name">componentName</span></span></li>
+</ol>)
+
+      
+
+    </section>
+    
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">List&lt;SmeupModel&gt; getComponents(jsonMap, componentName) {
+  final components = List&lt;SmeupModel&gt;.empty(growable: true);
+
+  if (jsonMap.containsKey(componentName)) {
+    List&lt;dynamic&gt; componentsJson = jsonMap[componentName];
+    componentsJson.forEach((v) async {
+      SmeupModel model;
+
+      try {
+        switch (v[&#39;type&#39;]) {
+          case &#39;LAB&#39;: &#47;&#47; ok
+            model = SmeupLabelModel.fromMap(v, formKey);
+            break;
+          case &#39;GAU&#39;:
+            model = SmeupGaugeModel.fromMap(v, formKey);
+            break;
+          case &#39;CAU&#39;:
+            model = SmeupCarouselModel.fromMap(v, formKey);
+            break;
+          case &#39;TRE&#39;:
+            model = SmeupTreeModel.fromMap(v, formKey);
+            break;
+          case &#39;CAL&#39;:
+            model = SmeupCalendarModel.fromMap(v, formKey);
+            break;
+          case &#39;CHA&#39;:
+            model = SmeupChartModel.fromMap(v, formKey);
+            break;
+          case &#39;BTN&#39;:
+            model = SmeupButtonsModel.fromMap(v, formKey);
+            break;
+          case &#39;BOX&#39;:
+            model = SmeupListBoxModel.fromMap(v, formKey);
+            break;
+          case &#39;DSH&#39;:
+            model = SmeupDashboardModel.fromMap(v, formKey);
+            break;
+          case &#39;LIN&#39;:
+            model = SmeupLineModel.fromMap(v, formKey);
+            break;
+          case &#39;IMG&#39;:
+            model = SmeupImageModel.fromMap(v, formKey);
+            break;
+          case &#39;IML&#39;:
+            model = SmeupImageListModel.fromMap(v, formKey);
+            break;
+          case &#39;FLD&#39;:
+            switch (v[&#39;options&#39;][&#39;FLD&#39;][&#39;default&#39;][&#39;type&#39;]) {
+              case &#39;acp&#39;:
+                model = SmeupTextAutocompleteModel.fromMap(v, formKey);
+                break;
+              case &#39;cal&#39;:
+                model = SmeupDatePickerModel.fromMap(v, formKey);
+                break;
+              case &#39;cmb&#39;:
+                model = SmeupComboModel.fromMap(v, formKey);
+                break;
+              case &#39;itx&#39;:
+                model = SmeupTextFieldModel.fromMap(v, formKey);
+                break;
+              case &#39;pgb&#39;:
+                model = SmeupProgressBarModel.fromMap(v, formKey);
+                break;
+              case &#39;pgi&#39;:
+                model = SmeupProgressIndicatorModel.fromMap(v, formKey);
+                break;
+              case &#39;pwd&#39;:
+                model = SmeupTextPasswordModel.fromMap(v, formKey);
+                break;
+              case &#39;qrc&#39;:
+                model = SmeupQRCodeReaderModel.fromMap(v, formKey);
+                break;
+              case &#39;rad&#39;:
+                model = SmeupRadioButtonsModel.fromMap(v, formKey);
+                break;
+              case &#39;sld&#39;:
+                model = SmeupSliderModel.fromMap(v, formKey);
+                break;
+              case &#39;spl&#39;:
+                model = SmeupSplashModel.fromMap(v, formKey);
+                break;
+              case &#39;swt&#39;:
+                model = SmeupSwitchModel.fromMap(v, formKey);
+                break;
+              case &#39;tpk&#39;:
+                model = SmeupTimePickerModel.fromMap(v, formKey);
+                break;
+
+              default:
+            }
+
+            break;
+          case &#39;SCH&#39;:
+            model = SmeupFormModel.fromMap(v, formKey);
+            break;
+          case &#39;DRW&#39;:
+            break;
+
+          case &#39;INP&#39;: &#47;&#47; ok
+            model = SmeupInputPanelModel.fromMap(v, formKey);
+            break;
+          default:
+            SmeupLogService.writeDebugMessage(
+                &#39;component not defined: ${v[&#39;type&#39;]}&#39;,
+                logType: LogType.error);
+        }
+      } catch (e) {
+        final msg =
+            &#39;SmeupSectionModel - getComponents - Error while creating the model ${v[&#39;type&#39;]} &#39;;
+        SmeupLogService.writeDebugMessage(msg, logType: LogType.error);
+        throw (msg);
+      }
+
+      if (model != null) {
+        model.parent = this;
+        components.add(model);
+      }
+    });
+  }
+
+  return components;
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../../index.html">ken</a></li>
+  <li><a href="../../smeup_models_widgets_smeup_section_model/smeup_models_widgets_smeup_section_model-library.html">smeup_section_model</a></li>
+  <li><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.html">SmeupSectionModel</a></li>
+  <li class="self-crumb">getComponents method</li>
+</ol>
+
+
+    <h5>SmeupSectionModel class</h5>
+    <ol>
+
+    <li class="section-title"><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.html#constructors">Constructors</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel/SmeupSectionModel.fromMap.html">fromMap</a></li>
+
+
+    <li class="section-title">
+      <a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.html#instance-properties">Properties</a>
+    </li>
+    <li><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel/autoAdaptHeight.html">autoAdaptHeight</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel/components.html">components</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/data.html">data</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel/dim.html">dim</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/dynamisms.html">dynamisms</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/formKey.html">formKey</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel/height.html">height</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/id.html">id</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/isNotified.html">isNotified</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel/layout.html">layout</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/notificationEnabled.html">notificationEnabled</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/onReady.html">onReady</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/options.html">options</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/optionsDefault.html">optionsDefault</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/optionsType.html">optionsType</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/parent.html">parent</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel/selectedTabColName.html">selectedTabColName</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel/selectedTabIndex.html">selectedTabIndex</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/serviceStatusCode.html">serviceStatusCode</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/showLoader.html">showLoader</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/smeupFun.html">smeupFun</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel/smeupSectionsModels.html">smeupSectionsModels</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/title.html">title</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/type.html">type</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model/SmeupModel/widgetLoadType.html">widgetLoadType</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel/width.html">width</a></li>
+
+    <li class="section-title"><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.html#instance-methods">Methods</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel/getComponents.html">getComponents</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel/getSectionData.html">getSectionData</a></li>
+    <li class="inherited"><a href="../../smeup_models_widgets_smeup_model_mixin/SmeupModelMixin/getSections.html">getSections</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel/hasComponents.html">hasComponents</a></li>
+    <li><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel/hasSections.html">hasSections</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
+
+    <li class="section-title inherited"><a href="../../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    ken
+      0.0.1+1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/script.js?v1"></script>
+
+
+
+</body>
+
+</html>
+
