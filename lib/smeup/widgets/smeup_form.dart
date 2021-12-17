@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_form_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
@@ -23,18 +23,18 @@ class SmeupForm extends StatefulWidget {
 class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
   @override
   Widget build(BuildContext context) {
-    //MediaQueryData deviceInfo = MediaQuery.of(context);
-
     return FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getFormChildren(widget.smeupFormModel),
       builder: (BuildContext context,
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return widget.smeupFormModel.showLoader ? SmeupWait() : Container();
+          return widget.smeupFormModel.showLoader
+              ? SmeupWait(widget.scaffoldKey, widget.formKey)
+              : Container();
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(
-                'Error SmeupForm: ${snapshot.error}',
+                'Error SmeupForm: ${snapshot.error}. StackTrace: ${snapshot.stackTrace}',
                 logType: LogType.error);
             return SmeupNotAvailable();
           } else {
@@ -47,13 +47,13 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
 
   Future<SmeupWidgetBuilderResponse> _getFormChildren(
       SmeupFormModel smeupFormModel) async {
-    await smeupFormModel.setData();
+    //await smeupFormModel.setData();
 
     if (smeupFormModel.type != null && smeupFormModel.type != 'EXD') {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Il form deve essere di tipo EXD.'),
-          backgroundColor: SmeupOptions.theme.errorColor,
+          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
         ),
       );
 
@@ -64,7 +64,7 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Non sono presenti sezioni nel form.'),
-          backgroundColor: SmeupOptions.theme.errorColor,
+          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
         ),
       );
 
@@ -73,14 +73,16 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
 
     if (smeupFormModel.hasVariables()) {
       smeupFormModel.formVariables.forEach((element) {
-        SmeupDynamismService.storeFormVariables(element);
+        SmeupDynamismService.storeFormVariables(
+            element, smeupFormModel.formKey);
       });
     }
 
-    Widget children;
+    Widget form;
     var sections = List<Widget>.empty(growable: true);
-    double maxDim = 100;
+    Widget container;
 
+    double maxDim = 100;
     double totalDim = 0;
     bool useDim = true;
     int sectionWithNoDim = 0;
@@ -104,65 +106,93 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       }
       totalDim = maxDim;
     }
-    if (totalDim > maxDim) {
+    if (!smeupFormModel.autoAdaptHeight && totalDim > maxDim) {
       SmeupLogService.writeDebugMessage('Section \'dim\' greater than 100%',
           logType: LogType.error);
       useDim = false;
     }
-    if (totalDim == 0) {
+    if (!smeupFormModel.autoAdaptHeight && totalDim == 0) {
       SmeupLogService.writeDebugMessage('Section \'dim\' 0%',
           logType: LogType.error);
       useDim = false;
     }
 
-    final routeArgs =
-        ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
-    bool isDialog = routeArgs == null ? false : routeArgs['isDialog'] ?? false;
-    final formHeight = isDialog ? 300 : SmeupOptions.deviceHeight;
+    smeupFormModel.smeupSectionsModels.forEach((s) {
+      MediaQueryData deviceInfo = MediaQuery.of(context);
+
+      if (useDim && totalDim > 0) {
+        final routeArgs =
+            ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
+        bool isDialog =
+            routeArgs == null ? false : routeArgs['isDialog'] ?? false;
+
+        double formHeight = isDialog
+            ? 300
+            : deviceInfo.size.height -
+                SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight -
+                24 -
+                widget.smeupFormModel.padding.vertical;
+        double formWidth = isDialog ? 300 : deviceInfo.size.width;
+
+        s.height = smeupFormModel.layout == 'column'
+            ? (formHeight) / totalDim * s.dim
+            : formHeight;
+
+        s.width = smeupFormModel.layout == 'row'
+            ? formWidth / totalDim * s.dim
+            : formWidth;
+      } else {
+        s.height = deviceInfo.size.height;
+        s.width = deviceInfo.size.width;
+      }
+    });
 
     smeupFormModel.smeupSectionsModels.forEach((s) {
       var section;
-      if (useDim && totalDim > 0) {
+      if (!smeupFormModel.autoAdaptHeight && useDim && totalDim > 0) {
         section = Container(
-            height: smeupFormModel.layout == 'column'
-                ? (formHeight - 70) / totalDim * s.dim
-                : formHeight,
-            child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
+            height: s.height,
+            width: s.width,
+            child: SmeupSection(
+                s, widget.scaffoldKey, widget.smeupFormModel.formKey));
       } else {
         section = Container(
-            child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
+            child: SmeupSection(
+                s, widget.scaffoldKey, widget.smeupFormModel.formKey));
       }
       sections.add(section);
     });
 
     if (smeupFormModel.layout == 'column') {
-      children = Container(
-        padding: getPadding(smeupFormModel),
-        child: SingleChildScrollView(
+      if (smeupFormModel.autoAdaptHeight) {
+        container = Container(
+          constraints: BoxConstraints(minHeight: 0),
+          padding: smeupFormModel.padding,
+          child: SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: sections),
+          ),
+        );
+      } else {
+        container = Container(
+          padding: smeupFormModel.padding,
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: sections),
-        ),
-      );
+        );
+      }
     } else {
-      children = Container(
-        padding: getPadding(smeupFormModel),
+      container = Container(
+        padding: smeupFormModel.padding,
         child: SingleChildScrollView(
           child: Row(children: sections),
         ),
       );
     }
 
-    return SmeupWidgetBuilderResponse(smeupFormModel, children);
-  }
+    form = Form(key: widget.smeupFormModel.formKey, child: container);
 
-  EdgeInsets getPadding(SmeupFormModel smeupFormModel) {
-    return smeupFormModel.padding > 0
-        ? EdgeInsets.all(smeupFormModel.padding)
-        : EdgeInsets.only(
-            top: smeupFormModel.topPadding,
-            bottom: smeupFormModel.bottomPadding,
-            right: smeupFormModel.rightPadding,
-            left: smeupFormModel.leftPadding);
+    return SmeupWidgetBuilderResponse(smeupFormModel, form);
   }
 }

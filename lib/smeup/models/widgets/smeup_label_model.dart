@@ -1,103 +1,135 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_label_dao.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_data_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
-import '../smeup_options.dart';
-
 class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
-  static const double defaultPadding = 5.0;
-  static const double defaultFontSize = 16.0;
-  static const double defaultIconSize = 16.0;
-  static const Alignment defaultAlign = Alignment.center;
-  static const bool defaultFontbold = false;
-  static const double defaultWidth = 0;
-  static const double defaultHeight = 40;
+  // supported by json_theme
+  static double defaultFontSize;
+  static Color defaultFontColor;
+  static bool defaultFontBold;
+  static Color defaultBackColor;
+  static double defaultIconSize;
+  static Color defaultIconColor;
 
-  double padding;
+  // unsupported by json_theme
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const Alignment defaultAlign = Alignment.center;
+  static const double defaultWidth = 0;
+  static const double defaultHeight = 15;
+  static const String defaultValColName = 'value';
+
   double fontSize;
+  Color fontColor;
+  bool fontBold;
+  Color backColor;
   double iconSize;
+  Color iconColor;
+
+  EdgeInsetsGeometry padding;
   Alignment align;
-  bool fontbold;
   double width;
   double height;
   String valueColName;
-  String colorColName;
-  String colorFontColName;
+  String backColorColName;
+  String fontColorColName;
   int iconData;
   String iconColname;
-  Color backColor;
-  Color fontColor;
 
   SmeupLabelModel(
       {id,
       type,
-      this.valueColName = '',
+      GlobalKey<FormState> formKey,
+      this.fontSize,
+      this.fontColor,
+      this.fontBold,
+      this.backColor,
+      this.iconSize,
+      this.iconColor,
+      this.valueColName = defaultValColName,
       this.padding = defaultPadding,
-      this.fontSize = defaultFontSize,
       this.align = defaultAlign,
-      this.fontbold = defaultFontbold,
       this.width = defaultWidth,
       this.height = defaultHeight,
-      this.colorColName = '',
-      this.backColor,
-      this.fontColor,
+      this.backColorColName = '',
       this.iconData = 0,
       this.iconColname = '',
-      this.colorFontColName = '',
-      this.iconSize = defaultIconSize,
+      this.fontColorColName = '',
       title = ''})
-      : super(title: title, id: id, type: type) {
+      : super(formKey, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
+    setDefaults(this);
   }
 
-  SmeupLabelModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
-    if (fontColor == null)
-      fontColor = SmeupOptions.theme.textTheme.bodyText1.color;
+  SmeupLabelModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
+    setDefaults(this);
 
-    valueColName = optionsDefault['valueColName'] ?? 'value';
-    colorColName = optionsDefault['colorColName'] ?? '';
-    colorFontColName = optionsDefault['colorFontColName'] ?? '';
+    if (fontColor == null)
+      fontColor =
+          SmeupConfigurationService.getTheme().textTheme.bodyText1.color;
+
+    valueColName = optionsDefault['valueColName'] ?? defaultValColName;
+    backColorColName = optionsDefault['backColorColName'] ?? '';
+    fontColorColName = optionsDefault['fontColorColName'] ?? '';
     padding =
-        SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
+        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     fontSize =
         SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontSize;
     iconSize =
         SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
-    align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']);
+    iconColor = SmeupUtilities.getColorFromRGB(optionsDefault['iconColor']) ??
+        defaultIconColor;
+    align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']) ??
+        defaultAlign;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     title = jsonMap['title'] ?? '';
-    if (optionsDefault['backColor'] != null) {
-      backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']);
-    }
-    if (optionsDefault['fontColor'] != null) {
-      fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']);
-    }
+    backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??
+        defaultBackColor;
+    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']) ??
+        defaultFontColor;
     if (optionsDefault['icon'] != null)
-      iconData = int.tryParse(optionsDefault['icon']) ?? 0;
+      iconData = SmeupUtilities.getInt(optionsDefault['icon']) ?? 0;
     else
       iconData = 0;
     iconColname = optionsDefault['iconColName'] ?? '';
-    if (optionsDefault['fontBold'] == null) {
-      fontbold = defaultFontbold;
-    } else {
-      if (optionsDefault['fontBold'] is bool)
-        fontbold = optionsDefault['fontBold'];
-      else if (optionsDefault['fontBold'] == 'Yes')
-        fontbold = true;
-      else
-        fontbold = false;
-    }
+    fontBold =
+        SmeupUtilities.getBool(optionsDefault['fontBold']) ?? defaultFontBold;
 
     if (widgetLoadType != LoadType.Delay) {
-      SmeupLabelDao.getData(this);
+      onReady = () async {
+        await SmeupLabelDao.getData(this);
+      };
     }
 
     SmeupDataService.incrementDataFetch(id);
+  }
+
+  static setDefaults(dynamic obj) {
+    TextStyle textStyle =
+        SmeupConfigurationService.getTheme().textTheme.bodyText2;
+    defaultFontSize = textStyle.fontSize;
+    defaultFontColor = textStyle.color;
+    defaultBackColor = textStyle.backgroundColor;
+    defaultFontBold = textStyle.fontWeight == FontWeight.bold;
+
+    var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
+    defaultIconSize = iconTheme.size;
+    defaultIconColor = iconTheme.color;
+
+    // ----------------- set properties from default
+
+    if (obj.fontSize == null) obj.fontSize = SmeupLabelModel.defaultFontSize;
+    if (obj.fontColor == null) obj.fontColor = SmeupLabelModel.defaultFontColor;
+    if (obj.backColor == null) obj.backColor = SmeupLabelModel.defaultBackColor;
+    if (obj.fontBold == null) obj.fontBold = SmeupLabelModel.defaultFontBold;
+    if (obj.iconSize == null) obj.iconSize = SmeupLabelModel.defaultIconSize;
+    if (obj.iconColor == null) obj.iconColor = SmeupLabelModel.defaultIconColor;
   }
 }

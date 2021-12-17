@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service_interface.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_http_data_service.dart';
@@ -18,8 +18,8 @@ class SmeupDataService {
   static int timeout = DEFAULD_TIMEOUT;
   static int _activeDataFetch = 0;
 
-  static initInternalService({List<String> preloadedJsons}) {
-    SmeupDataService.services['*JSN'] = SmeupJsonDataService(preloadedJsons);
+  static initInternalService() {
+    SmeupDataService.services['*JSN'] = SmeupJsonDataService();
     SmeupDataService.services['*IMAGE'] = SmeupImageDataService();
     SmeupDataService.services['*HTTP'] = SmeupHttpDataService();
   }
@@ -37,9 +37,10 @@ class SmeupDataService {
     var newSmeupFun;
     if (smeupFun != null && smeupFun.fun != null) {
       String funString = jsonEncode(smeupFun.fun);
-      funString = SmeupDynamismService.replaceFunVariables(funString);
+      funString =
+          SmeupDynamismService.replaceFunVariables(funString, smeupFun.formKey);
       final fun = jsonDecode(funString);
-      newSmeupFun = SmeupFun(fun);
+      newSmeupFun = SmeupFun(fun, smeupFun.formKey);
     }
 
     if (smeupDataService is SmeupDefaultDataService)
@@ -95,6 +96,15 @@ class SmeupDataService {
     return {"messages": [], "columns": null, "rows": null, "type": ""};
   }
 
+  static bool isDataStructure(dynamic data) {
+    if (data == null) return false;
+    if (data is List) return false;
+    if (data['rows'] == null) {
+      return false;
+    }
+    return true;
+  }
+
   static void incrementDataFetch(String id) {
     _activeDataFetch += 1;
   }
@@ -113,7 +123,7 @@ class SmeupDataService {
   }
 
   static void printRequestDuration(DateTime start) {
-    if (SmeupOptions.isDebug) {
+    if (SmeupConfigurationService.logLevel == LogType.debug) {
       DateTime end = DateTime.now();
       final diff = end.difference(start);
       SmeupLogService.writeDebugMessage(

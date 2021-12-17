@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 
 class SmeupMemoryService {
   static Map memory = Map();
@@ -73,7 +73,9 @@ class SmeupMemoryService {
         SmeupDataService.isValid(responseProperties.statusCode);
 
     var memoryDevice;
-    if (SmeupDynamismService.variables['productId'] == '108') {
+    if (SmeupVariablesService.getVariable('productId',
+            formKey: smeupFun.formKey) ==
+        '108') {
       final urlZones = 'devices/${smeupFun.fun['fun']['obj1']['k']}/zones';
       var responseZones =
           await dataFunction(smeupFun, urlZones, 'get', 'application/json');

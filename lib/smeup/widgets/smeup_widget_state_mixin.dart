@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_components_library/smeup/models/notifiers/smeup_error_notifier.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/notifiers/smeup_error_notifier.dart';
+import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
 import 'package:mobile_components_library/smeup/services/smeup_widget_notification_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
@@ -46,7 +47,7 @@ class SmeupWidgetStateMixin {
               } else {
                 if (snapshot.hasError) {
                   SmeupLogService.writeDebugMessage(
-                      'Error $type: ${snapshot.error}',
+                      'Error $type: ${snapshot.error}. StackTrace: ${snapshot.stackTrace}',
                       logType: LogType.error);
                   notifyError(context, id, snapshot.error);
                   return SmeupNotAvailable();
@@ -100,8 +101,8 @@ class SmeupWidgetStateMixin {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-              'Dati non disponibili.  (${model.smeupFun.fun['fun']['function']})'),
-          backgroundColor: SmeupOptions.theme.errorColor,
+              '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${model.smeupFun.fun['fun']['function']})'),
+          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
         ),
       );
       return SmeupWidgetBuilderResponse(model, SmeupNotAvailable());
@@ -119,7 +120,10 @@ class SmeupWidgetStateMixin {
     return model.data != null;
   }
 
-  bool getInitialdataLoaded(bool isWithController, SmeupModel model) {
-    return isWithController && model.data != null;
+  /// return the information if data has been loaded
+  /// static constructor: always false (because in this case the widget will receive the data directly)
+  /// dynamic constrctor: true if the model is not null and contains data
+  bool getInitialdataLoaded(SmeupModel model) {
+    return (model != null && model.data != null) || model == null;
   }
 }

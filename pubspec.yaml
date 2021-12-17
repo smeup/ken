@@ -1,7 +1,6 @@
 name: mobile_components_library
 description: A new Flutter package project.
 version: 0.0.1+1
-author: smeup spa
 homepage: "https://github.com/smeup/mobile-components-library"
 
 environment:
@@ -16,9 +15,8 @@ dependencies:
   path_provider: ^2.0.1
   flutter_speedometer: ^1.0.0
   carousel_slider: ^2.3.1
-  table_calendar: ^2.2.3
-  charts_flutter: ^0.10.0
-  flutter_treeview: ^0.9.0+1
+  table_calendar: ^3.0.2
+  charts_flutter: ^0.12.0
   expandable: ^4.1.4
   url_launcher: ^6.0.3
   flutter_datetime_picker: ^1.5.0
@@ -26,7 +24,9 @@ dependencies:
   qr_flutter: ^4.0.0
   package_info: ^2.0.0
   clickable_list_wheel_view: ^0.0.4
-  
+  shared_preferences: ^2.0.5
+  xml: ^5.3.1
+  json_theme: ^3.1.2+1
 
 dev_dependencies:
   flutter_test:
@@ -39,7 +39,8 @@ dev_dependencies:
 flutter:
 
   # To add assets to your package, add an assets section, like this:
-  # assets:
+  assets:
+    - assets/jsons/themes/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   #

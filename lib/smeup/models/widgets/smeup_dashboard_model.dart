@@ -1,87 +1,197 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_component_interface.dart';
+import 'package:mobile_components_library/smeup/daos/smeup_dashboard_dao.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_data_interface.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 
 class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
-  static const double defaultFontsize = 60.0;
-  static const double defaultLabelFontsize = 10.0;
-  static const double defaultWidth = 100;
-  static const double defaultHeight = 100;
-  static const double defaultIconSize = 40.0;
+  // supported by json_theme
+  static double defaultFontSize;
+  static Color defaultFontColor;
+  static bool defaultFontBold;
+  static double defaultCaptionFontSize;
+  static Color defaultCaptionFontColor;
+  static bool defaultCaptionFontBold;
+  static double defaultIconSize;
+  static Color defaultIconColor;
 
-  String valueColName = '';
-  String forceText = '';
-  int forceValue = 0;
-  int forceIcon = 0;
+  // unsupported by json_theme
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const double defaultWidth = 120;
+  static const double defaultHeight = 120;
+  static const String defaultValueColName = 'value';
+  static const String defaultIconColName = 'icon';
+  static const String defaultTextColName = 'description';
+  static const String defaultUmColName = 'um';
+  static const String defaultSelectLayout = '';
+  static const String defaultForceText = '';
+  static const String defaultForceIcon = '';
+  static const String defaultForceValue = '';
+  static const String defaultForceUm = '';
+  static const String defaultNumberFormat = '*;0';
+
+  double fontSize;
+  Color fontColor;
+  bool fontBold;
+  double captionFontSize;
+  bool captionFontBold;
+  Color captionFontColor;
+  double iconSize;
   Color iconColor;
-  String selectLayout = '';
-  double fontsize;
-  double labelFontsize;
+
+  EdgeInsetsGeometry padding;
+  String valueColName;
+  String iconColName;
+  String umColName;
+  String textColName;
+  String forceText;
+  String forceUm;
+  String forceValue;
+  String forceIcon;
+  String selectLayout;
   double width;
   double height;
-  double iconSize;
+  String numberFormat;
 
   SmeupDashboardModel(
-      {this.valueColName = '',
-      this.forceText = '',
-      this.forceValue,
-      this.forceIcon,
+      {id,
+      type,
+      formKey,
+      this.fontColor,
+      this.fontSize,
+      this.fontBold,
+      this.captionFontBold,
+      this.captionFontSize,
+      this.captionFontColor,
+      this.iconSize,
       this.iconColor,
-      this.selectLayout,
+      this.valueColName = defaultValueColName,
+      this.umColName = defaultUmColName,
+      this.textColName = defaultTextColName,
+      this.iconColName = defaultIconColName,
+      this.padding = defaultPadding,
+      this.selectLayout = defaultSelectLayout,
       this.width = defaultWidth,
       this.height = defaultHeight,
-      this.fontsize = defaultFontsize,
-      this.labelFontsize = defaultLabelFontsize,
-      this.iconSize = defaultIconSize,
+      this.forceText = defaultForceText,
+      this.forceValue = defaultForceValue,
+      this.forceUm = defaultForceUm,
+      this.forceIcon = defaultForceIcon,
+      this.numberFormat = defaultNumberFormat,
       title = ''})
-      : super(title: title) {
-    if (iconColor == null) iconColor = SmeupOptions.theme.iconTheme.color;
+      : super(formKey, title: title, id: id, type: type) {
+    if (iconColor == null)
+      iconColor = SmeupConfigurationService.getTheme().iconTheme.color;
     id = SmeupUtilities.getWidgetId('DSH', id);
     SmeupDataService.incrementDataFetch(id);
+    setDefaults(this);
   }
 
-  SmeupDashboardModel.fromMap(Map<String, dynamic> jsonMap)
-      : super.fromMap(jsonMap) {
-    valueColName = optionsDefault['valueColName'] ?? '';
-    forceText = optionsDefault['forceText'] ?? '';
-    forceValue = optionsDefault['forceValue'] ?? 0;
+  SmeupDashboardModel.fromMap(
+      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
+      : super.fromMap(jsonMap, formKey) {
+    setDefaults(this);
+    valueColName = optionsDefault['ValueColName'] ?? defaultValueColName;
+    iconColName = optionsDefault['iconColName'] ?? defaultIconColName;
+    textColName = optionsDefault['textColName'] ?? defaultTextColName;
+    umColName = optionsDefault['umColName'] ?? defaultUmColName;
+    padding =
+        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
-    fontsize =
-        SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontsize;
-    iconSize =
-        SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
-    labelFontsize = SmeupUtilities.getDouble(optionsDefault['labelFontSize']) ??
-        defaultLabelFontsize;
-    if (optionsDefault['forceIcon'] != null)
-      forceIcon = int.tryParse(optionsDefault['forceIcon']) ?? 0;
-    else
-      forceIcon = 0;
 
-    if (optionsDefault['iconColor'] != null) {
-      iconColor = SmeupUtilities.getColorFromRGB(optionsDefault['iconColor']);
+    if (optionsDefault['FontSize'].toString().contains('%')) {
+      double perc = SmeupUtilities.getDouble(
+              optionsDefault['FontSize'].toString().replaceAll("%", "")) ??
+          defaultFontSize;
+      fontSize = defaultFontSize * perc / 100;
+
+      iconSize = SmeupUtilities.getDouble(optionsDefault['iconSize']) ??
+          defaultIconSize * perc / 100;
+
+      captionFontSize =
+          SmeupUtilities.getDouble(optionsDefault['labelFontSize']) ??
+              defaultCaptionFontSize * perc / 100;
+    } else {
+      fontSize = SmeupUtilities.getDouble(optionsDefault['FontSize']) ??
+          defaultFontSize;
+
+      iconSize = SmeupUtilities.getDouble(optionsDefault['iconSize']) ??
+          defaultIconSize;
+
+      captionFontSize =
+          SmeupUtilities.getDouble(optionsDefault['labelFontSize']) ??
+              defaultCaptionFontSize;
     }
+
+    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']) ??
+        defaultFontColor;
+
+    fontBold = optionsDefault['bold'] ?? defaultFontBold;
+
+    captionFontColor =
+        SmeupUtilities.getColorFromRGB(optionsDefault['captionFontColor']) ??
+            defaultCaptionFontColor;
+
+    captionFontBold = optionsDefault['captionBold'] ?? defaultCaptionFontBold;
+
+    iconColor = SmeupUtilities.getColorFromRGB(optionsDefault['iconColor']) ??
+        defaultIconColor;
+
     selectLayout = optionsDefault['selectLayout'] ?? '';
+    forceText = optionsDefault['forceText'] ?? '';
+    forceUm = optionsDefault['forceUm'] ?? '';
+    forceIcon = optionsDefault['forceIcon'] ?? '';
+    forceValue = optionsDefault['forceValue'] ?? '';
+
+    numberFormat = optionsDefault['numberFormat'] ?? defaultNumberFormat;
+
+    if (widgetLoadType != LoadType.Delay) {
+      onReady = () async {
+        await SmeupDashboardDao.getData(this);
+      };
+    }
+
     SmeupDataService.incrementDataFetch(id);
   }
 
-  @override
-  // ignore: override_on_non_overriding_member
-  setData() async {
-    if (smeupFun != null && smeupFun.isFunValid()) {
-      final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
+  static setDefaults(dynamic obj) {
+    var textStyle = SmeupConfigurationService.getTheme().textTheme.headline1;
+    defaultFontBold = textStyle.fontWeight == FontWeight.bold;
+    defaultFontSize = textStyle.fontSize;
+    defaultFontColor = textStyle.color;
 
-      if (!smeupServiceResponse.succeded) {
-        return;
-      }
-      data = smeupServiceResponse.result.data;
-      SmeupDynamismService.storeDynamicVariables(data['rows'][0]);
-    }
-    SmeupDataService.decrementDataFetch(id);
+    var captionStyle = SmeupConfigurationService.getTheme().textTheme.caption;
+    defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
+    defaultCaptionFontSize = captionStyle.fontSize;
+    defaultCaptionFontColor = captionStyle.color;
+
+    var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
+    defaultIconSize = iconTheme.size;
+    defaultIconColor = iconTheme.color;
+
+    // ----------------- set properties from default
+
+    if (obj.fontBold == null)
+      obj.fontBold = SmeupDashboardModel.defaultFontBold;
+    if (obj.fontColor == null)
+      obj.fontColor = SmeupDashboardModel.defaultFontColor;
+    if (obj.fontSize == null)
+      obj.fontSize = SmeupDashboardModel.defaultFontSize;
+
+    if (obj.captionFontBold == null)
+      obj.captionFontBold = SmeupDashboardModel.defaultCaptionFontBold;
+    if (obj.captionFontColor == null)
+      obj.captionFontColor = SmeupDashboardModel.defaultCaptionFontColor;
+    if (obj.captionFontSize == null)
+      obj.captionFontSize = SmeupDashboardModel.defaultCaptionFontSize;
+
+    if (obj.iconSize == null)
+      obj.iconSize = SmeupDashboardModel.defaultIconSize;
+    if (obj.iconColor == null)
+      obj.iconColor = SmeupDashboardModel.defaultIconColor;
   }
 }

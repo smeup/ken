@@ -1,9 +1,17 @@
-import 'package:mobile_components_library/smeup/models/smeupChartColumn.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_column.dart';
 
 class SmeupChartRow {
   List<dynamic> cells;
   List<SmeupChartColumn> _columns;
+
+  SmeupChartRow(this.cells);
+
+  SmeupChartRow.fromMap(Map jsonData, this._columns) {
+    cells = List<dynamic>.empty(growable: true);
+    for (SmeupChartColumn col in _columns) {
+      cells.add(jsonData[col.name]);
+    }
+  }
 
   SmeupChartRow.fromInfluxDB(List<dynamic> jsonMap, this._columns) {
     cells = List<dynamic>.empty(growable: true);
@@ -20,14 +28,6 @@ class SmeupChartRow {
         cellValue = double.parse(jsonValue);
 
       cells.add(cellValue);
-    }
-  }
-
-  SmeupChartRow.fromMap(Map<String, dynamic> jsonMap, this._columns) {
-    cells = List<dynamic>.empty(growable: true);
-    for (SmeupChartColumn col in _columns) {
-      cells.add(
-          SmeupUtilities.extractValueFromName(jsonMap['fields'][col.name]));
     }
   }
 }

@@ -1,7 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 
 class SmeupDrawerItem extends StatelessWidget {
   final String text;
@@ -9,23 +7,22 @@ class SmeupDrawerItem extends StatelessWidget {
   final int iconCode;
   final Function action;
   final double fontSize;
+  final Color fontColor;
+  final bool fontBold;
   final Alignment align;
-  final bool executePop;
-  SmeupDrawerItem(this.text, this.route, this.iconCode, this.action,
-      this.fontSize, this.align, this.executePop);
+  final bool showItemDivider;
+
+  SmeupDrawerItem(this.text, this.route, this.iconCode, this.action, this.align,
+      this.showItemDivider,
+      {this.fontSize, this.fontBold, this.fontColor});
 
   @override
   Widget build(BuildContext context) {
     final title = Align(
-        alignment: align,
-        child: Text(text, style: TextStyle(fontSize: fontSize)));
+        alignment: align, child: Text(text, style: _getElementTextStile()));
     Function function = () {
-      if (executePop) {
-        Navigator.of(context).pop();
-        sleep(Duration(milliseconds: 50));
-      }
       if (action != null) {
-        action();
+        action(context);
       } else {
         Navigator.of(context).pushNamed(route);
       }
@@ -34,12 +31,16 @@ class SmeupDrawerItem extends StatelessWidget {
     return Container(
         child: Column(
       children: [
-        Divider(),
+        if (showItemDivider)
+          Divider(
+            color: _getElementTextStile().color,
+          ),
         if (iconCode > 0)
           ListTile(
             leading: Icon(
               IconData(iconCode, fontFamily: 'MaterialIcons'),
-              color: SmeupOptions.theme.primaryColor,
+              color: _getIconTheme().color,
+              size: _getIconTheme().size,
             ),
             title: title,
             onTap: function,
@@ -51,5 +52,40 @@ class SmeupDrawerItem extends StatelessWidget {
           ),
       ],
     ));
+  }
+
+  TextStyle _getElementTextStile() {
+    TextStyle style = SmeupConfigurationService.getTheme()
+        .appBarTheme
+        .toolbarTextStyle
+        .copyWith(
+            backgroundColor: SmeupConfigurationService.getTheme()
+                .appBarTheme
+                .backgroundColor);
+
+    if (fontSize != null)
+      style = style.copyWith(
+        fontSize: fontSize,
+      );
+
+    if (fontColor != null)
+      style = style.copyWith(
+        color: fontColor,
+      );
+
+    if (fontBold != null && fontBold)
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+
+    return style;
+  }
+
+  IconThemeData _getIconTheme() {
+    IconThemeData themeData = SmeupConfigurationService.getTheme()
+        .iconTheme
+        .copyWith(color: _getElementTextStile().color);
+
+    return themeData;
   }
 }

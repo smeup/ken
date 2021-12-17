@@ -2,7 +2,8 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
 
 import 'smeup_widget_notification_service.dart';
 
@@ -40,15 +41,23 @@ class SmeupUtilities {
   }
 
   static Color getColorFromRGB(String color, {double opacity = 1.0}) {
+    if (color == null) return null;
+
     final split = color.split(RegExp(r"(?=[A-Z])"));
-    if (split == null || split.length != 3)
-      return SmeupOptions.theme.textTheme.headline6.color;
+    if (split == null || split.length != 3) return null;
 
-    int r = int.parse(split[0].substring(1));
-    int g = int.parse(split[1].substring(1));
-    int b = int.parse(split[2].substring(1));
+    try {
+      int r = int.parse(split[0].substring(1));
+      int g = int.parse(split[1].substring(1));
+      int b = int.parse(split[2].substring(1));
 
-    return Color.fromRGBO(r, g, b, opacity);
+      return Color.fromRGBO(r, g, b, opacity);
+    } catch (e) {
+      SmeupLogService.writeDebugMessage(
+          'Error in getColorFromRGB while extracting color: $color ',
+          logType: LogType.error);
+      return null;
+    }
   }
 
   static bool isNumeric(String s) {
@@ -65,6 +74,8 @@ class SmeupUtilities {
   static int getInt(dynamic value) {
     if (value is int) {
       return value;
+    } else if (value is double) {
+      return value.toInt();
     } else if (value is String) {
       return int.tryParse(value);
     }
@@ -81,6 +92,31 @@ class SmeupUtilities {
       return value.toDouble();
     }
     return value;
+  }
+
+  static EdgeInsetsGeometry getPadding(dynamic value) {
+    if (value == null)
+      return null;
+    else if (value is double) {
+      return EdgeInsets.all(SmeupUtilities.getDouble(value));
+    } else if (value is int) {
+      return EdgeInsets.all(SmeupUtilities.getDouble(value));
+    } else if (value is String) {
+      return EdgeInsets.all(SmeupUtilities.getDouble(value));
+    } else {
+      double left = 0;
+      double right = 0;
+      double top = 0;
+      double bottom = 0;
+      if (value['left'] != null) left = SmeupUtilities.getDouble(value['left']);
+      if (value['right'] != null)
+        right = SmeupUtilities.getDouble(value['right']);
+      if (value['top'] != null) top = SmeupUtilities.getDouble(value['top']);
+      if (value['bottom'] != null)
+        bottom = SmeupUtilities.getDouble(value['bottom']);
+      return EdgeInsets.only(
+          top: top, bottom: bottom, left: left, right: right);
+    }
   }
 
   static Alignment getAlignmentGeometry(String alignment) {
@@ -104,7 +140,7 @@ class SmeupUtilities {
       case "bottom":
         return Alignment.bottomCenter;
       default:
-        return Alignment.center;
+        return null;
     }
   }
 
@@ -160,17 +196,60 @@ class SmeupUtilities {
     String newId = id;
 
     if (newId.isEmpty) {
-      newId = id.isNotEmpty ? id : type + Random().nextInt(100).toString();
+      // SmeupLogService.writeDebugMessage('getWidgetId. type: $type',
+      //     logType: LogType.debug);
+      newId = id.isNotEmpty ? id : type + Random().nextInt(1000).toString();
       while (SmeupWidgetNotificationService.objects.firstWhere(
               (element) => element['id'] == newId,
               orElse: () => null) !=
           null) {
         newId = id.isNotEmpty
-            ? id + Random().nextInt(100).toString()
-            : type + Random().nextInt(100).toString();
+            ? id + Random().nextInt(1000).toString()
+            : type + Random().nextInt(1000).toString();
       }
     }
 
     return newId;
+  }
+
+  static String replaceDictionaryPlaceHolders(String source) {
+    String workString = source;
+    if (SmeupConfigurationService.appDictionary != null) {
+      RegExp re = RegExp(r'\{\{.*\}\}');
+      re.allMatches(source).forEach((match) {
+        final placeHolder = source.substring(match.start, match.end);
+        if (placeHolder != null && placeHolder.isNotEmpty) {
+          final dictionaryKey =
+              placeHolder.replaceFirst('{{', '').replaceFirst('}}', '');
+
+          if (dictionaryKey != null &&
+              SmeupConfigurationService.appDictionary
+                      .getLocalString(dictionaryKey) !=
+                  null) {
+            workString = workString.replaceAll(
+                placeHolder,
+                SmeupConfigurationService.appDictionary
+                    .getLocalString(dictionaryKey));
+          }
+        }
+      });
+    }
+
+    return workString;
+  }
+
+  static bool getBool(dynamic value) {
+    if (value is bool) {
+      return value;
+    } else if (value is String) {
+      switch (value.toLowerCase()) {
+        case 'yes':
+        case 'si':
+          return true;
+        case 'no':
+          return false;
+      }
+    }
+    return null;
   }
 }

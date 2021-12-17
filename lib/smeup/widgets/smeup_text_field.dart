@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_text_field_dao.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_text_field_model.dart';
 import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_buttons.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
@@ -25,24 +25,35 @@ class SmeupTextField extends StatefulWidget
 
   // graphic properties
   Color backColor;
-  double fontsize;
+  double fontSize;
+  Color fontColor;
+  bool fontBold;
+  bool captionFontBold;
+  double captionFontSize;
+  Color captionFontColor;
+  Color captionBackColor;
+  Color borderColor;
+  double borderWidth;
+  double borderRadius;
+
+  bool underline;
   String label;
   double width;
   double height;
-  double padding;
-  bool showborder;
-  dynamic clientData;
-  bool showUnderline;
+  EdgeInsetsGeometry padding;
+  bool showBorder;
+  String data;
   bool autoFocus;
   String id;
   String type;
   String valueField;
   bool showSubmit;
+  String submitLabel;
   TextInputType keyboard;
-
   Function clientValidator;
   Function clientOnSave;
   Function clientOnChange;
+  Function clientOnSubmit;
 
   List<TextInputFormatter> inputFormatters;
 
@@ -55,42 +66,37 @@ class SmeupTextField extends StatefulWidget
       {this.id = '',
       this.type = 'FLD',
       this.backColor,
-      this.fontsize = SmeupTextFieldModel.defaultFontsize,
-      this.label,
+      this.fontSize,
+      this.fontBold,
+      this.fontColor,
+      this.captionBackColor,
+      this.captionFontBold,
+      this.captionFontColor,
+      this.captionFontSize,
+      this.borderColor,
+      this.borderRadius,
+      this.borderWidth,
+      this.underline = SmeupTextFieldModel.defaultUnderline,
+      this.label = SmeupTextFieldModel.defaultLabel,
+      this.submitLabel = SmeupTextFieldModel.defaultSubmitLabel,
       this.width = SmeupTextFieldModel.defaultWidth,
       this.height = SmeupTextFieldModel.defaultHeight,
       this.padding = SmeupTextFieldModel.defaultPadding,
-      this.showborder = SmeupTextFieldModel.defaultShowBorder,
-      this.clientData,
-      this.showUnderline = SmeupTextFieldModel.defaultShowUnderline,
+      this.showBorder = SmeupTextFieldModel.defaultShowBorder,
       this.autoFocus = SmeupTextFieldModel.defaultAutoFocus,
       this.valueField = SmeupTextFieldModel.defaultValueField,
       this.showSubmit = SmeupTextFieldModel.defaultShowSubmit,
+      this.data,
       this.keyboard,
       this.clientValidator, // ?
       this.clientOnSave,
       this.clientOnChange,
+      this.clientOnSubmit,
       this.inputFormatters // ?
       })
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
-
-    this.model = SmeupTextFieldModel(
-        id: id,
-        type: type,
-        backColor: backColor,
-        fontsize: fontsize,
-        label: label,
-        width: width,
-        height: height,
-        padding: padding,
-        showborder: showborder,
-        showSubmit: showSubmit,
-        clientData: clientData,
-        showUnderline: showUnderline,
-        autoFocus: autoFocus,
-        valueField: valueField,
-        keyboard: keyboard);
+    SmeupTextFieldModel.setDefaults(this);
   }
 
   @override
@@ -102,18 +108,46 @@ class SmeupTextField extends StatefulWidget
     id = m.id;
     type = m.type;
     backColor = m.backColor;
-    fontsize = m.fontsize;
+    fontSize = m.fontSize;
+    fontBold = m.fontBold;
+    fontColor = m.fontColor;
+    captionBackColor = m.captionBackColor;
+    captionFontBold = m.captionFontBold;
+    captionFontColor = m.captionFontColor;
+    captionFontSize = m.captionFontSize;
+    borderColor = m.borderColor;
+    borderRadius = m.borderRadius;
+    borderWidth = m.borderWidth;
+    underline = m.underline;
     label = m.label;
+    submitLabel = m.submitLabel;
     width = m.width;
     height = m.height;
     padding = m.padding;
-    showborder = m.showborder;
+    showBorder = m.showBorder;
     showSubmit = m.showSubmit;
-    clientData = m.clientData;
-    showUnderline = m.showUnderline;
     autoFocus = m.autoFocus;
     valueField = m.valueField;
     keyboard = m.keyboard;
+
+    data = treatData(m);
+  }
+
+  @override
+  dynamic treatData(SmeupModel model) {
+    SmeupTextFieldModel m = model;
+
+    // change data format
+    var workData = formatDataFields(m);
+
+    // set the widget data
+    if (workData != null &&
+        (workData['rows'] as List).length > 0 &&
+        workData['rows'][0][m.valueField] != null) {
+      return workData['rows'][0][m.valueField].toString();
+    } else {
+      return m.data;
+    }
   }
 }
 
@@ -121,11 +155,13 @@ class _SmeupTextFieldState extends State<SmeupTextField>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
   SmeupTextFieldModel _model;
+  dynamic _data;
 
   @override
   void initState() {
     _model = widget.model;
-    widgetLoadType = _model.widgetLoadType;
+    _data = widget.data;
+    if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
 
@@ -138,8 +174,7 @@ class _SmeupTextFieldState extends State<SmeupTextField>
   @override
   Widget build(BuildContext context) {
     final input = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
-        getInitialdataLoaded(widget.isWithController, _model),
-        notifierFunction: () {
+        getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
@@ -153,56 +188,37 @@ class _SmeupTextFieldState extends State<SmeupTextField>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      await SmeupTextFieldDao.getData(_model);
+      if (_model != null) {
+        await SmeupTextFieldDao.getData(_model);
+        _data = widget.treatData(_model);
+      }
+
       setDataLoad(widget.id, true);
     }
 
-    // if (!hasData(_model)) {
-    //   return getFunErrorResponse(context, _model);
-    // }
+    TextStyle textStyle = _getTextStile();
+    TextStyle captionStyle = _getCaptionStile();
 
     Widget textField;
 
-    // String valueField = _model.optionsDefault == null ||
-    //         _model.optionsDefault['valueField'] == null
-    //     ? 'value'
-    //     : _model.optionsDefault['valueField'];
-    String value = '';
-    if (hasData(_model)) {
-      value = _model.data['rows'][0][widget.valueField].toString();
-
-      final List cols = _model.data['columns'];
-      if (cols != null) {
-        final col = cols.firstWhere(
-            (element) => element['code'] == widget.valueField,
-            orElse: () => null);
-        if (col['ogg'] == 'D8*YYMD') {
-          value = DateFormat("dd/MM/yyyy").format(DateTime.tryParse(value));
-        }
-      }
-    }
-
-    SmeupDynamismService.variables[widget.id] = value;
-
-    Color underlineColor = widget.showUnderline
-        ? SmeupOptions.theme.primaryColor
-        : Colors.transparent;
-
-    Color focusColor = widget.showUnderline ? Colors.blue : Colors.transparent;
+    SmeupVariablesService.setVariable(widget.id, _data,
+        formKey: widget.formKey);
 
     textField = Container(
         alignment: Alignment.centerLeft,
-        padding: EdgeInsets.only(left: 10, right: 10),
-        decoration: widget.showborder
+        padding: widget.padding,
+        decoration: widget.showBorder
             ? BoxDecoration(
-                borderRadius: BorderRadius.circular(12.0),
-                border: Border.all(color: SmeupOptions.theme.primaryColor))
+                borderRadius: BorderRadius.circular(widget.borderRadius),
+                border: Border.all(
+                    color: widget.borderColor, width: widget.borderWidth))
             : null,
         child: TextFormField(
+          style: textStyle,
           inputFormatters: widget.inputFormatters,
           autofocus: widget.autoFocus,
           maxLines: 1,
-          initialValue: value,
+          initialValue: _data,
           key: Key('${widget.id}_text'),
           autocorrect: false,
           textCapitalization: TextCapitalization.none,
@@ -214,44 +230,65 @@ class _SmeupTextFieldState extends State<SmeupTextField>
               widget.keyboard == TextInputType.visiblePassword ? true : false,
           onChanged: (value) {
             if (widget.clientOnChange != null) widget.clientOnChange(value);
-            SmeupDynamismService.variables[widget.id] = value;
-            SmeupDynamismService.run(
-                _model.dynamisms, context, 'change', widget.scaffoldKey);
+            SmeupVariablesService.setVariable(widget.id, value,
+                formKey: widget.formKey);
+            if (_model != null)
+              SmeupDynamismService.run(_model.dynamisms, context, 'change',
+                  widget.scaffoldKey, widget.formKey);
+            _data = value;
           },
           decoration: InputDecoration(
-            labelStyle: TextStyle(
-                fontSize: widget.fontsize,
-                color: SmeupOptions.theme.primaryColor),
+            labelStyle: captionStyle,
             labelText: widget.label,
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: underlineColor),
+              borderSide: BorderSide(
+                  color: widget.underline
+                      ? widget.borderColor
+                      : Colors.transparent),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: focusColor),
+              borderSide: BorderSide(
+                  color: widget.underline
+                      ? widget.borderColor
+                      : Colors.transparent),
             ),
           ),
           onSaved: (value) {
             if (widget.clientOnSave != null) widget.clientOnSave(value);
-            SmeupDynamismService.variables[widget.id] = value;
-            SmeupDynamismService.run(
-                _model.dynamisms, context, 'lostfocus', widget.scaffoldKey);
+            SmeupVariablesService.setVariable(widget.id, value,
+                formKey: widget.formKey);
+            if (_model != null)
+              SmeupDynamismService.run(_model.dynamisms, context, 'lostfocus',
+                  widget.scaffoldKey, widget.formKey);
           }, // lostfocus
         ));
 
     if (widget.showSubmit) {
-      var json = {
-        "type": "BTN",
-        "data": [
-          {'value': _model.options['FLD']['default']["submitLabel"]},
-        ],
-        "dynamisms": _model.dynamisms
-      };
-      final button = SmeupButtons.withController(
-          SmeupButtonsModel.fromMap(
-            json,
-          ),
+      SmeupButtons button;
+      if (_model == null) {
+        button = SmeupButtons(
           widget.scaffoldKey,
-          widget.formKey);
+          widget.formKey,
+          data: [widget.submitLabel],
+          clientOnPressed: widget.clientOnSubmit,
+          padding: EdgeInsets.all(0),
+        );
+      } else {
+        var json = {
+          "type": "BTN",
+          "data": {
+            "rows": [
+              {'value': widget.submitLabel},
+            ]
+          },
+          "dynamisms": _model.dynamisms
+        };
+        button = SmeupButtons.withController(
+            SmeupButtonsModel.fromMap(json, widget.formKey),
+            widget.scaffoldKey,
+            widget.formKey);
+      }
+
       final column = Column(
         //mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -267,5 +304,39 @@ class _SmeupTextFieldState extends State<SmeupTextField>
     } else {
       return SmeupWidgetBuilderResponse(_model, textField);
     }
+  }
+
+  TextStyle _getTextStile() {
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.bodyText1;
+
+    style = style.copyWith(
+        color: widget.fontColor,
+        fontSize: widget.fontSize,
+        backgroundColor: widget.backColor);
+
+    if (widget.fontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
+  }
+
+  TextStyle _getCaptionStile() {
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
+
+    style = style.copyWith(
+        color: widget.captionFontColor,
+        fontSize: widget.captionFontSize,
+        backgroundColor: widget.captionBackColor);
+
+    if (widget.captionFontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
   }
 }

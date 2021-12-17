@@ -1,7 +1,16 @@
 # mobile-components-library
-Smeup mobile widgets' library 
+Smeup mobile widgets' library is a set of widgets built on top of Flutter widgets.
 
-## dependencies:
+## Icons
+
+- Images and icons generator for ios
+    https://easyappicon.com/   
+
+- IconData codes
+    https://api.flutter.dev/flutter/material/Icons-class.html#constants
+    https://raw.githubusercontent.com/flutter/flutter/flutter-1.22-candidate.13/packages/flutter/lib/src/material/icons.dart
+    
+## Dependencies:
 - dio:                      https://pub.dev/packages/dio
 - provider:                 https://pub.dev/packages/provider
 - permission_handler:       https://pub.dev/packages/permission_handler
@@ -18,3 +27,6 @@ Smeup mobile widgets' library
 ## Permissions
 
 - storage
+
+## Widgets default values
+The document [widgets_defaults_values.md](WIDGETS%20DEFAULT%20VALUES.md) contains the defaults values for each widget

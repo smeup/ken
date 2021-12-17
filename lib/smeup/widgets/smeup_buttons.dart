@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_treeview/tree_view.dart';
 import 'package:mobile_components_library/smeup/daos/smeup_buttons_dao.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
@@ -23,23 +22,30 @@ class SmeupButtons extends StatefulWidget
 
   Color backColor;
   Color borderColor;
+  double borderWidth;
+  double borderRadius;
+  double elevation;
+  double fontSize;
+  Color fontColor;
+  bool fontBold;
+  double iconSize;
+  Color iconColor;
+
   double width;
   double height;
   MainAxisAlignment position;
   Alignment align;
-  Color fontColor;
-  double fontsize;
-  double padding;
-  String clientData;
+  EdgeInsetsGeometry padding;
+  dynamic data;
   String valueField;
-  double borderRadius;
-  double elevation;
-  bool bold;
-  double iconSize;
   int iconData;
   String id;
   String type;
   String title;
+  WidgetOrientation orientation;
+  bool isLink;
+  double innerSpace;
+  Function clientOnPressed;
 
   SmeupButtons.withController(
     this.model,
@@ -49,51 +55,36 @@ class SmeupButtons extends StatefulWidget
     runControllerActivities(model);
   }
 
-  SmeupButtons(
-    this.scaffoldKey,
-    this.formKey, {
-    this.id = '',
-    this.type = 'BTN',
-    this.title = '',
-    this.clientData = '',
-    this.backColor,
-    this.borderColor,
-    this.width = SmeupButtonsModel.defaultWidth,
-    this.height = SmeupButtonsModel.defaultHeight,
-    this.position = SmeupButtonsModel.defaultPosition,
-    this.align = SmeupButtonsModel.defaultAlign,
-    this.fontColor,
-    this.fontsize = SmeupButtonsModel.defaultFontsize,
-    this.padding = SmeupButtonsModel.defaultPadding,
-    this.valueField,
-    this.borderRadius = SmeupButtonsModel.defaultBorderRadius,
-    this.elevation = SmeupButtonsModel.defaultElevation,
-    this.bold = SmeupButtonsModel.defaultBold,
-    this.iconData = 0,
-    this.iconSize = SmeupButtonsModel.defaultIconSize,
-  }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
+  SmeupButtons(this.scaffoldKey, this.formKey,
+      {this.id = '',
+      this.type = 'BTN',
+      this.title = '',
+      this.data,
+      this.backColor,
+      this.borderColor,
+      this.borderRadius,
+      this.borderWidth,
+      this.elevation,
+      this.fontSize,
+      this.fontColor,
+      this.fontBold,
+      this.iconSize,
+      this.iconColor,
+      this.width = SmeupButtonsModel.defaultWidth,
+      this.height = SmeupButtonsModel.defaultHeight,
+      this.position = SmeupButtonsModel.defaultPosition,
+      this.align = SmeupButtonsModel.defaultAlign,
+      this.padding = SmeupButtonsModel.defaultPadding,
+      this.valueField = SmeupButtonsModel.defaultValueField,
+      this.iconData = 0,
+      this.orientation = SmeupButtonsModel.defaultOrientation,
+      this.isLink = SmeupButtonsModel.defaultIsLink,
+      this.innerSpace = SmeupButtonsModel.defaultInnerSpace,
+      this.clientOnPressed})
+      : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
-
-    this.model = SmeupButtonsModel(
-        id: id,
-        type: type,
-        title: title,
-        clientData: clientData,
-        backColor: backColor,
-        borderColor: borderColor,
-        width: width,
-        height: height,
-        position: position,
-        align: align,
-        fontColor: fontColor,
-        fontsize: fontsize,
-        padding: padding,
-        valueField: valueField,
-        borderRadius: borderRadius,
-        elevation: elevation,
-        bold: bold,
-        iconData: iconData,
-        iconSize: iconSize);
+    SmeupButtonsModel.setDefaults(this);
+    if (data == null) data = List<String>.empty(growable: true);
   }
 
   @override
@@ -102,7 +93,6 @@ class SmeupButtons extends StatefulWidget
     id = m.id;
     type = m.type;
     title = m.title;
-    clientData = m.clientData;
     backColor = m.backColor;
     borderColor = m.borderColor;
     width = m.width;
@@ -110,14 +100,29 @@ class SmeupButtons extends StatefulWidget
     position = m.position;
     align = m.align;
     fontColor = m.fontColor;
-    fontsize = m.fontsize;
+    fontSize = m.fontSize;
     padding = m.padding;
     valueField = m.valueField;
     borderRadius = m.borderRadius;
+    borderWidth = m.borderWidth;
     elevation = m.elevation;
-    bold = m.bold;
+    fontBold = m.fontBold;
     iconData = m.iconData;
     iconSize = m.iconSize;
+    iconColor = m.iconColor;
+    orientation = m.orientation;
+    isLink = m.isLink;
+    innerSpace = m.innerSpace;
+
+    data = treatData(m);
+  }
+
+  @override
+  dynamic treatData(SmeupModel model) {
+    SmeupButtonsModel m = model;
+
+    // change data format
+    return formatDataFields(m);
   }
 
   @override
@@ -129,12 +134,14 @@ class SmeupButtonsState extends State<SmeupButtons>
     implements SmeupWidgetStateInterface {
   bool _isBusy;
   SmeupButtonsModel _model;
+  dynamic _data;
 
   @override
   void initState() {
     _isBusy = false;
     _model = widget.model;
-    widgetLoadType = _model.widgetLoadType;
+    _data = widget.data;
+    if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
 
@@ -153,13 +160,8 @@ class SmeupButtonsState extends State<SmeupButtons>
 
   @override
   Widget build(BuildContext context) {
-    final buttons = runBuild(
-        context,
-        widget.id,
-        widget.type,
-        widget.scaffoldKey,
-        getInitialdataLoaded(widget.isWithController, _model),
-        notifierFunction: () {
+    final buttons = runBuild(context, widget.id, widget.type,
+        widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
@@ -172,64 +174,69 @@ class SmeupButtonsState extends State<SmeupButtons>
   /// Buttons' structure:
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      await SmeupButtonsDao.getData(_model);
+      if (_model != null) {
+        await SmeupButtonsDao.getData(_model);
+        _data = widget.treatData(_model);
+      }
+
       setDataLoad(widget.id, true);
     }
-
-    // if (!hasData(_model)) {
-    //   return getFunErrorResponse(context, _model);
-    // }
 
     var buttons = List<SmeupButton>.empty(growable: true);
 
     int buttonIndex = 0;
-    _model.data.forEach((buttonData) {
-      // dynamic _buttonData = buttonData;
-      //SmeupButtonsModel _modelClone = _model;
-
-      // if (buttonData is Node) {
-      //   _buttonData = {"p": "", "t": "", "k": buttonData.label};
-      //   _modelClone = SmeupButtonsModel.clone(_model);
-      //   _modelClone.clientData = buttonData.label;
-      //   _modelClone.dynamisms = [
-      //     {"event": "click", "exec": buttonData.data["exec"] ?? ""}
-      //   ];
-      // }
+    List array = _model == null ? _data : _data['rows'];
+    array.forEach((buttonData) {
       buttonIndex += 1;
+      String buttonText = _model == null ? buttonData : buttonData['value'];
       final button = SmeupButton(
-          id: '${SmeupUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
-          type: widget.type,
-          buttonIndex: buttonIndex,
-          title: widget.title,
-          clientData: buttonData['value'],
-          backColor: widget.backColor,
-          borderColor: widget.borderColor,
-          width: widget.width,
-          height: widget.height,
-          position: widget.position,
-          align: widget.align,
-          fontColor: widget.fontColor,
-          fontsize: widget.fontsize,
-          padding: widget.padding,
-          valueField: widget.valueField,
-          borderRadius: widget.borderRadius,
-          elevation: widget.elevation,
-          bold: widget.bold,
-          iconData: widget.iconData,
-          iconSize: widget.iconSize,
-          //data: buttonData,
-          icon: null,
-          isBusy: _isBusy,
-          onServerPressed: () {
-            runDynamism(_model, context, buttonData);
-          });
+        id: '${SmeupUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
+        type: widget.type,
+        buttonIndex: buttonIndex,
+        title: widget.title,
+        data: buttonText,
+        backColor: widget.backColor,
+        borderColor: widget.borderColor,
+        width: widget.width,
+        height: widget.height,
+        position: widget.position,
+        align: widget.align,
+        fontColor: widget.fontColor,
+        fontSize: widget.fontSize,
+        padding: widget.padding,
+        valueField: widget.valueField,
+        borderRadius: widget.borderRadius,
+        borderWidth: widget.borderWidth,
+        elevation: widget.elevation,
+        fontBold: widget.fontBold,
+        iconData: widget.iconData,
+        iconSize: widget.iconSize,
+        iconColor: widget.iconColor,
+        icon: null,
+        isBusy: _isBusy,
+        clientOnPressed: () {
+          if (widget.clientOnPressed != null) {
+            widget.clientOnPressed(buttonIndex, buttonText);
+          }
+          runDynamism(context, buttonData);
+        },
+        isLink: widget.isLink,
+        model: _model,
+      );
 
       buttons.add(button);
     });
 
     if (buttons.length > 0) {
-      final column = Column(children: buttons);
-      return SmeupWidgetBuilderResponse(_model, column);
+      var widgets;
+      if (widget.orientation == WidgetOrientation.Vertical)
+        widgets = SingleChildScrollView(
+            scrollDirection: Axis.vertical, child: Column(children: buttons));
+      else
+        widgets = SingleChildScrollView(
+            scrollDirection: Axis.horizontal, child: Row(children: buttons));
+
+      return SmeupWidgetBuilderResponse(_model, widgets);
     } else {
       SmeupLogService.writeDebugMessage(
           'Error SmeupButtons no children \'button\' created',
@@ -239,10 +246,9 @@ class SmeupButtonsState extends State<SmeupButtons>
     }
   }
 
-  void runDynamism(
-      SmeupButtonsModel modelClone, BuildContext context, dynamic child) async {
-    if (_isDinamismAsync(modelClone)) {
-      execDynamismActions(modelClone, child, true);
+  void runDynamism(BuildContext context, dynamic child) async {
+    if (_isDinamismAsync()) {
+      execDynamismActions(child, true);
 
       SmeupLogService.writeDebugMessage('********************* ASYNC = TRUE',
           logType: LogType.info);
@@ -260,7 +266,7 @@ class SmeupButtonsState extends State<SmeupButtons>
           _isBusy = true;
         });
 
-        await execDynamismActions(modelClone, child, false);
+        await execDynamismActions(child, false);
 
         setState(() {
           _isBusy = false;
@@ -269,30 +275,22 @@ class SmeupButtonsState extends State<SmeupButtons>
     }
   }
 
-  bool _isDinamismAsync(SmeupButtonsModel modelClone) {
-    return modelClone.smeupFun != null
-        ? modelClone.smeupFun.isDinamismAsync(modelClone.dynamisms, 'click')
+  bool _isDinamismAsync() {
+    return _model != null && _model.smeupFun != null
+        ? _model.smeupFun.isDinamismAsync(_model.dynamisms, 'click')
         : false;
   }
 
-  Future<void> execDynamismActions(
-      SmeupButtonsModel modelClone, dynamic child, bool isAsync) async {
-    dynamic _child = child;
-    if (child is Node) {
-      _child = {
-        "t": child.data["tipo"],
-        "p": child.data["parametro"],
-        "k": child.data["codice"]
-      };
+  Future<void> execDynamismActions(dynamic child, bool isAsync) async {
+    SmeupDynamismService.storeDynamicVariables(child, widget.formKey);
+
+    if (_model != null) {
+      if (isAsync)
+        SmeupDynamismService.run(_model.dynamisms, context, 'click',
+            widget.scaffoldKey, widget.formKey);
+      else
+        await SmeupDynamismService.run(_model.dynamisms, context, 'click',
+            widget.scaffoldKey, widget.formKey);
     }
-
-    SmeupDynamismService.storeDynamicVariables(_child['content']);
-
-    if (isAsync)
-      SmeupDynamismService.run(
-          modelClone.dynamisms, context, 'click', widget.scaffoldKey);
-    else
-      await SmeupDynamismService.run(
-          modelClone.dynamisms, context, 'click', widget.scaffoldKey);
   }
 }

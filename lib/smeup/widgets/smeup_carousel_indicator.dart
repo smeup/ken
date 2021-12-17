@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:mobile_components_library/smeup/models/notifiers/smeup_carousel_indicator_notifier.dart';
 import 'package:provider/provider.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_carousel_model.dart';
 
+// ignore: must_be_immutable
 class SmeupCarouselIndicator extends StatefulWidget {
   final int initialIndex;
-  final SmeupCaurouselModel smeupCaurouselModel;
-  SmeupCarouselIndicator(this.initialIndex, this.smeupCaurouselModel);
+  List<Map> data;
+  SmeupCarouselIndicator(this.initialIndex, this.data);
 
   @override
   _SmeupCarouselIndicatorState createState() => _SmeupCarouselIndicatorState();
@@ -14,12 +15,12 @@ class SmeupCarouselIndicator extends StatefulWidget {
 class _SmeupCarouselIndicatorState extends State<SmeupCarouselIndicator> {
   @override
   Widget build(BuildContext context) {
-    final SmeupCaurouselModelIndicator notifier =
-        Provider.of<SmeupCaurouselModelIndicator>(context, listen: true);
+    final SmeupCarouselIndicatorNotifier notifier =
+        Provider.of<SmeupCarouselIndicatorNotifier>(context, listen: true);
 
     var list = List<Widget>.empty(growable: true);
-    (widget.smeupCaurouselModel.data).forEach((element) {
-      int i = widget.smeupCaurouselModel.data.indexOf(element);
+    (widget.data).forEach((element) {
+      int i = widget.data.indexOf(element);
       var cont = Container(
         width: 8.0,
         height: 8.0,

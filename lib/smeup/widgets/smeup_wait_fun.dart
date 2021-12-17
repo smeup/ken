@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'smeup_progress_indicator.dart';
 import 'smeup_splash.dart';
 
 class SmeupWaitFun extends StatelessWidget {
   final Widget target;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<FormState> formKey;
 
-  SmeupWaitFun(this.target);
+  final Color splashColor;
+  final Color loaderColor;
+  final Color circularTrackColor;
+
+  SmeupWaitFun(this.scaffoldKey, this.formKey, this.target,
+      {this.splashColor, this.loaderColor, this.circularTrackColor});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +26,13 @@ class SmeupWaitFun extends StatelessWidget {
           return Stack(
             children: [
               target,
-              SmeupSplash(SmeupOptions.appSplashColor),
-              SmeupProgressIndicator(SmeupOptions.loaderColor),
+              SmeupSplash(
+                scaffoldKey,
+                formKey,
+                color: splashColor,
+              ),
+              SmeupProgressIndicator(scaffoldKey, formKey,
+                  color: loaderColor, circularTrackColor: circularTrackColor),
             ],
           );
         } else {

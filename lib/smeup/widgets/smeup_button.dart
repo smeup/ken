@@ -1,194 +1,258 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
 
+// ignore: must_be_immutable
 class SmeupButton extends StatelessWidget {
   final int buttonIndex;
-  final Color backColor;
-  final Color borderColor;
+  Color backColor;
+  Color borderColor;
+  double borderWidth;
+  double borderRadius;
+  double elevation;
+  double fontSize;
+  Color fontColor;
+  bool fontBold;
+  double iconSize;
+  Color iconColor;
+
   final double width;
   final double height;
   final MainAxisAlignment position;
   final Alignment align;
-  final Color fontColor;
-  final double fontsize;
-  final double padding;
-  final String clientData;
+  final EdgeInsetsGeometry padding;
+  final String data;
   final String valueField;
-  final double borderRadius;
-  final double elevation;
-  final bool bold;
-  final double iconSize;
   final int iconData;
-
+  final bool isLink;
   final IconData icon;
-  final Function onServerPressed;
-  final Function onClientPressed;
-
-  //final dynamic data;
+  final Function clientOnPressed;
+  final double innerSpace;
   final bool isBusy;
   final String id;
   final String type;
   final String title;
+  final SmeupButtonsModel model;
 
-  const SmeupButton(
+  SmeupButton(
       {this.id = '',
       this.type = 'BTN',
       this.title = '',
-      this.clientData = '',
+      this.data = '',
       this.backColor,
       this.borderColor,
+      this.borderWidth,
+      this.borderRadius,
+      this.fontSize,
+      this.fontColor,
+      this.fontBold,
+      this.iconSize,
+      this.iconColor,
       this.width = SmeupButtonsModel.defaultWidth,
       this.height = SmeupButtonsModel.defaultHeight,
       this.position = SmeupButtonsModel.defaultPosition,
       this.align = SmeupButtonsModel.defaultAlign,
-      this.fontColor,
-      this.fontsize = SmeupButtonsModel.defaultFontsize,
       this.padding = SmeupButtonsModel.defaultPadding,
       this.valueField,
-      this.borderRadius = SmeupButtonsModel.defaultBorderRadius,
-      this.elevation = SmeupButtonsModel.defaultElevation,
-      this.bold = SmeupButtonsModel.defaultBold,
+      this.elevation,
       this.iconData = 0,
-      this.iconSize = SmeupButtonsModel.defaultIconSize,
       this.buttonIndex,
       this.icon,
-      this.onServerPressed,
-      this.onClientPressed,
-      //this.data,
-      this.isBusy = false});
+      this.clientOnPressed,
+      this.isBusy = false,
+      this.isLink = SmeupButtonsModel.defaultIsLink,
+      this.innerSpace = SmeupButtonsModel.defaultInnerSpace,
+      this.model}) {
+    SmeupButtonsModel.setDefaults(this);
+    if (isLink) {
+      borderColor =
+          SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
+      fontColor = backColor;
+      backColor = SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor =
-        backColor == null ? SmeupOptions.theme.buttonColor : backColor;
+    var elevatedButtonStyle = _getButtonStyle();
 
-    final _borderColor =
-        borderColor != null ? borderColor : SmeupOptions.theme.primaryColor;
+    double buttonHeight = height;
+    double buttonWidth = width;
+    if (model != null && model.parent != null) {
+      if (buttonHeight == 0)
+        buttonHeight = (model.parent as SmeupSectionModel).height;
+      if (buttonWidth == 0)
+        buttonWidth = (model.parent as SmeupSectionModel).width;
+    } else {
+      if (buttonHeight == 0) buttonHeight = MediaQuery.of(context).size.height;
+      if (buttonWidth == 0) buttonWidth = MediaQuery.of(context).size.width;
+    }
 
     return Container(
-      color: Color.fromRGBO(0, 0, 0,
-          0), // SmeupOptions.theme.canvasColor, // Color.fromRGBO(250, 250, 250, 1),
-      padding: EdgeInsets.all(padding),
+      color: Color.fromRGBO(0, 0, 0, 0),
+      padding: padding,
       child: SizedBox(
-        height: height,
-        width: width == 0 ? double.infinity : width,
-        child: ElevatedButton(
-          key: Key(id),
-          style: ElevatedButton.styleFrom(
-            primary: backgroundColor,
-            onPrimary: SmeupOptions.theme.primaryColor,
-            elevation: elevation,
-            // focusColor: backgroundColor,
-
-            padding: EdgeInsets.all(0),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(borderRadius),
-                side: BorderSide(
-                    width: borderColor == null ? 2 : 2, color: _borderColor)),
-          ),
-          onPressed:
-              onClientPressed != null ? onClientPressed : onServerPressed,
-          child: Column(mainAxisAlignment: position, children: <Widget>[
-            isBusy
-                ? CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(fontColor == null
-                        ? SmeupOptions.loaderColor
-                        : fontColor),
-                  )
-                : () {
-                    //Row(children: [],)
-                    final icon = iconData == 0
-                        ? Container()
-                        : Icon(
-                            IconData(iconData, fontFamily: 'MaterialIcons'),
-                            color: fontColor,
-                            size: iconSize,
-                          );
-                    var text = Align(
-                        alignment: align,
-                        child: Text(clientData,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontWeight:
-                                    bold ? FontWeight.bold : FontWeight.normal,
-                                fontSize: fontsize,
-                                color: fontColor == null
-                                    ? SmeupOptions.theme.primaryColor
-                                    : fontColor)));
-
-                    var widget;
-                    switch (align.toString()) {
-                      case 'centerLeft': // text on the left icon on the right
-                        widget = Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              text,
-                              icon,
-                            ],
-                          ),
-                          color: backColor,
-                        );
-                        break;
-                      case 'centerRight': // text on the right icon on the left
-                        widget = Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              icon,
-                              text,
-                            ],
-                          ),
-                          color: backColor,
-                        );
-                        break;
-                      case 'topCenter': // text at the top icon at the bottom
-                        widget = Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              text,
-                              icon,
-                            ],
-                          ),
-                          color: backColor,
-                        );
-                        break;
-                      case 'bottomCenter': // text at the bottom icon at the top
-                        widget = Container(
-                          height: height,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(child: icon),
-                              text,
-                            ],
-                          ),
-                          color: backColor,
-                        );
-
-                        break;
-                      default:
-                        widget = Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              icon,
-                              const SizedBox(width: 5),
-                              text,
-                            ],
-                          ),
-                          color: backColor,
-                        );
-                        break;
-                    }
-
-                    return widget;
-                  }()
-          ]),
-        ),
-      ),
+          height: buttonHeight,
+          width: buttonWidth,
+          child: isLink
+              ? _getTextButton(elevatedButtonStyle, buttonHeight, buttonWidth)
+              : _getElevatedButton(
+                  elevatedButtonStyle, buttonHeight, buttonWidth)),
     );
+  }
+
+  ElevatedButton _getElevatedButton(
+      elevatedButtonStyle, double buttonHeight, double buttonWidth) {
+    return ElevatedButton(
+      key: Key(id),
+      style: elevatedButtonStyle,
+      onPressed: clientOnPressed,
+      child: _getButtonChildren(buttonHeight, buttonWidth),
+    );
+  }
+
+  TextButton _getTextButton(
+      elevatedButtonStyle, double buttonHeight, double buttonWidth) {
+    return TextButton(
+      key: Key(id),
+      style: elevatedButtonStyle,
+      onPressed: clientOnPressed,
+      child: _getButtonChildren(buttonHeight, buttonWidth),
+    );
+  }
+
+  Widget _getButtonChildren(double buttonHeight, double buttonWidth) {
+    IconThemeData iconTheme = _getIconTheme();
+    return Column(mainAxisAlignment: position, children: <Widget>[
+      isBusy
+          ? CircularProgressIndicator()
+          : () {
+              final icon = iconData == 0
+                  ? Container()
+                  : Icon(
+                      IconData(iconData, fontFamily: 'MaterialIcons'),
+                      color: iconTheme.color,
+                      size: iconTheme.size,
+                    );
+              var text = Align(
+                  alignment: align,
+                  child: Text(data,
+                      textAlign: TextAlign.center, style: _getTextStile()));
+
+              var children;
+
+              if (align == Alignment.centerLeft) {
+                children = Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      text,
+                      SizedBox(width: innerSpace),
+                      icon,
+                    ],
+                  ),
+                  color: backColor,
+                );
+              } else if (align == Alignment.centerRight) {
+                children = Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      icon,
+                      SizedBox(width: innerSpace),
+                      text,
+                    ],
+                  ),
+                  color: backColor,
+                );
+              } else if (align == Alignment.topCenter) {
+                children = Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      text,
+                      SizedBox(height: innerSpace),
+                      icon,
+                    ],
+                  ),
+                  color: backColor,
+                );
+              } else if (align == Alignment.bottomCenter) {
+                children = Container(
+                  height: buttonHeight,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(child: icon),
+                      text,
+                    ],
+                  ),
+                  color: backColor,
+                );
+              } else // center
+              {
+                children = Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      icon,
+                      SizedBox(width: innerSpace),
+                      Expanded(child: text),
+                    ],
+                  ),
+                  color: backColor,
+                );
+              }
+
+              return children;
+            }()
+    ]);
+  }
+
+  ButtonStyle _getButtonStyle() {
+    var elevatedButtonStyle = SmeupConfigurationService.getTheme()
+        .elevatedButtonTheme
+        .style
+        .copyWith(
+            backgroundColor: MaterialStateProperty.all<Color>(backColor),
+            elevation: MaterialStateProperty.all<double>(elevation),
+            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                EdgeInsets.all(0)),
+            shape: MaterialStateProperty.all<OutlinedBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(borderRadius))),
+            side: MaterialStateProperty.all<BorderSide>(
+                BorderSide(width: borderWidth, color: borderColor)));
+
+    return elevatedButtonStyle;
+  }
+
+  TextStyle _getTextStile() {
+    TextStyle style = SmeupConfigurationService.getTheme().textTheme.button;
+
+    style = style.copyWith(color: fontColor, fontSize: fontSize);
+
+    if (fontBold) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    if (isLink) {
+      style = style.copyWith(decoration: TextDecoration.underline);
+    }
+
+    return style;
+  }
+
+  IconThemeData _getIconTheme() {
+    IconThemeData themeData = SmeupConfigurationService.getTheme()
+        .iconTheme
+        .copyWith(size: iconSize, color: iconColor);
+
+    return themeData;
   }
 }

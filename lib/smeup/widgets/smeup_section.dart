@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
 import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
 import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
@@ -48,20 +49,18 @@ class _SmeupSectionState extends State<SmeupSection>
 
   @override
   Widget build(BuildContext context) {
-    //MediaQueryData deviceInfo = MediaQuery.of(context);
-
     return FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getSectionChildren(widget.smeupSectionModel),
       builder: (BuildContext context,
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return widget.smeupSectionModel.showLoader
-              ? SmeupWait()
+              ? SmeupWait(widget.scaffoldKey, widget.formKey)
               : Container();
         } else {
           if (snapshot.hasError) {
             SmeupLogService.writeDebugMessage(
-                'Error SmeupSection: ${snapshot.error}',
+                'Error SmeupSection: ${snapshot.error}. StackTrace: ${snapshot.stackTrace}',
                 logType: LogType.error);
             return SmeupNotAvailable();
           } else {
@@ -82,20 +81,25 @@ class _SmeupSectionState extends State<SmeupSection>
 
     if (hasSections(smeupSectionModel)) {
       var sections = List<Widget>.empty(growable: true);
+
       double maxDim = 100;
       double totalDim = 0;
-      smeupSectionModel.smeupSectionsModels.forEach((section) {
-        totalDim += section.dim;
-      });
-      if (totalDim == 0 && smeupSectionModel.smeupSectionsModels.length > 0) {
-        double singleDim =
-            (maxDim / smeupSectionModel.smeupSectionsModels.length)
-                .ceil()
-                .toDouble();
-        double spareDim =
-            maxDim - (singleDim * smeupSectionModel.smeupSectionsModels.length);
+      int sectionWithNoDim = 0;
+
+      for (var i = 0; i < smeupSectionModel.smeupSectionsModels.length; i++) {
+        var s = smeupSectionModel.smeupSectionsModels[i];
+        totalDim += s.dim;
+        if (s.dim == 0) sectionWithNoDim += 1;
+      }
+
+      double dimToSplit = 100 - totalDim;
+
+      if (totalDim < 100 && sectionWithNoDim > 0 && dimToSplit > 0) {
+        double singleDim = (dimToSplit / sectionWithNoDim).ceil().toDouble();
+        double spareDim = dimToSplit - (singleDim * sectionWithNoDim);
         for (var i = 0; i < smeupSectionModel.smeupSectionsModels.length; i++) {
           var s = smeupSectionModel.smeupSectionsModels[i];
+          if (s.dim != 0) continue;
           if (i == 0) {
             s.dim = singleDim + spareDim;
           } else {
@@ -106,23 +110,43 @@ class _SmeupSectionState extends State<SmeupSection>
       }
 
       smeupSectionModel.smeupSectionsModels.forEach((s) {
-        var section;
+        MediaQueryData deviceInfo = MediaQuery.of(context);
         if (s.dim <= 0) {
-          section = SmeupSection(s, widget.scaffoldKey, widget.formKey);
+          s.height = deviceInfo.size.height;
+          s.width = deviceInfo.size.width;
         } else {
-          section = Expanded(
-              flex: s.dim.floor(),
-              child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
+          s.height = smeupSectionModel.layout == 'column'
+              ? smeupSectionModel.height / totalDim * s.dim
+              : smeupSectionModel.height;
+          s.width = smeupSectionModel.layout == 'row'
+              ? smeupSectionModel.width / totalDim * s.dim
+              : smeupSectionModel.width;
         }
+      });
+
+      smeupSectionModel.smeupSectionsModels.forEach((s) {
+        var section;
+        section = Expanded(
+            flex: s.dim.floor(),
+            child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
         sections.add(section);
       });
 
       if (smeupSectionModel.layout == 'column') {
-        children = Container(
-          child: SingleChildScrollView(
+        if (smeupSectionModel.autoAdaptHeight) {
+          children = Container(
+            height: smeupSectionModel.height,
+            width: smeupSectionModel.width,
+            //constraints: BoxConstraints(minHeight: 0),
+            //child: SingleChildScrollView(
             child: Column(children: sections),
-          ),
-        );
+            //),
+          );
+        } else {
+          children = Container(
+            child: Column(children: sections),
+          );
+        }
       } else {
         children = Container(
           child: SingleChildScrollView(
@@ -153,53 +177,36 @@ class _SmeupSectionState extends State<SmeupSection>
     }).toList();
 
     final tabsTitles = widget.smeupSectionModel.components.map((e) {
-      return
-          //Padding(
-          //padding: const EdgeInsets.only(bottom: 8.0),
-          //child:
-          Container(
-        color: SmeupOptions.theme.scaffoldBackgroundColor,
+      return Container(
+        color: SmeupConfigurationService.getTheme().scaffoldBackgroundColor,
         width: 120,
         height: 30,
-        // decoration: BoxDecoration(
-        //   color: SmeupOptions.theme.scaffoldBackgroundColor,
-        // ),
         child: Tab(
           text: e.title,
         ),
-        //),
       );
     }).toList();
 
+    MediaQueryData deviceInfo = MediaQuery.of(context);
+
+    var appBarTheme = _getAppBarTheme();
+
     return Container(
-      height: SmeupOptions.deviceHeight,
+      height: deviceInfo.size.height,
       child: Theme(
-        data: SmeupOptions.theme,
+        data: SmeupConfigurationService.getTheme(),
         child: Scaffold(
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(60),
+            preferredSize: Size.fromHeight(appBarTheme.toolbarHeight),
             child: AppBar(
-              elevation: 0,
-              shape: Border(
-                  bottom: BorderSide(
-                      color: SmeupOptions.theme.scaffoldBackgroundColor)),
-              backgroundColor: Color.fromRGBO(255, 255, 255, 0),
+              backgroundColor: appBarTheme.backgroundColor,
               automaticallyImplyLeading: false,
               bottom: TabBar(
-                indicator: UnderlineTabIndicator(
-                  borderSide: BorderSide(
-                      width: 5.0, color: SmeupOptions.theme.primaryColor),
-                ),
-                labelColor: SmeupOptions.theme.primaryColor,
-                unselectedLabelColor:
-                    SmeupOptions.theme.textTheme.bodyText1.color,
                 controller: _tabController,
                 isScrollable: true,
                 onTap: (index) {
                   _onTabChanged(index);
                 },
-                labelStyle: TextStyle(fontSize: 16, color: Color(0xFF151026)),
-                labelPadding: EdgeInsets.all(3),
                 tabs: tabsTitles,
               ),
             ),
@@ -214,11 +221,17 @@ class _SmeupSectionState extends State<SmeupSection>
   }
 
   void _onTabChanged(int index) {
-    SmeupDynamismService
-            .variables[widget.smeupSectionModel.selectedTabColName] =
-        index.toString();
+    SmeupVariablesService.setVariable(
+        widget.smeupSectionModel.selectedTabColName, index.toString(),
+        formKey: widget.formKey);
 
     SmeupDynamismService.run(widget.smeupSectionModel.dynamisms, context,
-        'change', widget.scaffoldKey);
+        'change', widget.scaffoldKey, widget.formKey);
+  }
+
+  AppBarTheme _getAppBarTheme() {
+    return SmeupConfigurationService.getTheme().appBarTheme.copyWith(
+        backgroundColor:
+            SmeupConfigurationService.getTheme().scaffoldBackgroundColor);
   }
 }

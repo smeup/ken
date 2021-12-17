@@ -1,9 +1,12 @@
+import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
+
 class SmeupDao {
   static dynamic getClientDataStructure(dynamic model) {
     switch (model.type) {
       case 'LAB':
         var newList = List.empty(growable: true);
-        (model.clientData as List).forEach((element) {
+        (model.data as List).forEach((element) {
           newList.add({
             'value': element,
           });
@@ -18,18 +21,36 @@ class SmeupDao {
             return {
               "rows": [
                 {
-                  'value': model.clientData,
+                  'value': model.data,
                 }
               ],
             };
 
           default:
-            return model.clientData;
+            return model.data;
         }
         break;
 
       default:
-        return {"rows": model.clientData};
+        return {"rows": model.data};
     }
+  }
+
+  static Future<void> getData(SmeupModel model) async {
+    if (model.smeupFun != null && model.smeupFun.isFunValid()) {
+      final smeupServiceResponse =
+          await SmeupDataService.invoke(model.smeupFun);
+      if (!smeupServiceResponse.succeded) {
+        SmeupDataService.decrementDataFetch(model.id);
+        return;
+      }
+      model.data = smeupServiceResponse.result.data;
+    }
+    if (!SmeupDataService.isDataStructure(model.data)) {
+      dynamic res = SmeupDataService.getEmptyDataStructure();
+      res['rows'] = model.data;
+      model.data = res;
+    }
+    SmeupDataService.decrementDataFetch(model.id);
   }
 }

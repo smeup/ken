@@ -2,10 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_treeview/tree_view.dart';
 import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
-import 'package:mobile_components_library/smeup/models/smeup_options.dart';
+import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_cache_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
 import 'package:mobile_components_library/smeup/services/smeup_data_service_interface.dart';
@@ -23,27 +21,6 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
       receiveTimeout: DEFAULD_TIMEOUT,
     );
     dio = Dio(options);
-
-    // rootBundle.loadString('assets/certs/smeup.com-2020-2022.crt').then((key) {
-    //   (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-    //       (client) {
-    //     client.badCertificateCallback =
-    //         (X509Certificate cert, String host, int port) {
-    //       if (cert.pem == key) {
-    //         return true;
-    //       }
-    //       return false;
-    //     };
-    //     return client;
-    //   };
-    // });
-
-    // (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-    //     (HttpClient client) {
-    //   client.badCertificateCallback =
-    //       (X509Certificate cert, String host, int port) => true;
-    //   return client;
-    // };
   }
 
   @override
@@ -54,7 +31,7 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
       String url;
       String contentType;
 
-      url = '${SmeupOptions.defaultServiceEndpoint}/jfun';
+      url = '${SmeupConfigurationService.getDefaultServiceEndpoint()}/jfun';
       contentType = 'application/json';
       data = smeupFun.fun;
 
@@ -115,7 +92,8 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
       dio.options.headers['content-type'] = contentType;
 
       dio.options.headers['Authorization'] =
-          '${SmeupOptions.defaultServiceToken}';
+          SmeupConfigurationService.getLocalStorage()
+              .getString('authorization');
 
       Response response;
 
@@ -265,26 +243,37 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
                 row['fields'][column['code']]['smeupObject']['parametro'];
             newRow['codice'] =
                 row['fields'][column['code']]['smeupObject']['codice'];
+            newRow['testo'] =
+                row['fields'][column['code']]['smeupObject']['testo'];
           });
           rows.add(newRow);
         });
 
         res['rows'] = rows;
-        res['type'] = 'SmeupTable';
+        res['type'] = 'SmeupDataTable';
         return res;
 
       case 'TRE':
         dynamic res = SmeupDataService.getEmptyDataStructure();
-        List<Node> rows = List<Node>.empty(growable: true);
-        (response.data['children'] as List).forEach((child) {
-          var newRow = Node(
-              children: _loadTreeChildren(child['children']),
-              icon: IconData(59251, fontFamily: 'MaterialIcons'),
-              data: child['content'],
-              key: child['content']['codice'],
-              label: child['content']['testo']);
+        List rows = List.empty(growable: true);
+        for (var i = 0; i < (response.data['children'] as List).length; i++) {
+          final child = (response.data['children'] as List)[i];
+          final tipo = child['content']['tipo'];
+          final parametro = child['content']['parametro'];
+          final codice = child['content']['codice'];
+          final testo = child['content']['testo'];
+
+          var newRow = {
+            'tipo': tipo,
+            'parametro': parametro,
+            'codice': codice,
+            'value': testo,
+            //'${child['content']['codice']}': testo
+          };
+
           rows.add(newRow);
-        });
+        }
+
         res['rows'] = rows;
         res['type'] = 'SmeupTreeNode';
         return res;
@@ -294,17 +283,5 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
       default:
         return response.data;
     }
-  }
-
-  List<Node> _loadTreeChildren(parent) {
-    List<Node> rows = List<Node>.empty(growable: true);
-    (parent as List).forEach((child) {
-      var newRow = Node(
-          children: _loadTreeChildren(child),
-          key: child['content']['codice'],
-          label: child['content']['testo']);
-      rows.add(newRow);
-    });
-    return rows;
   }
 }

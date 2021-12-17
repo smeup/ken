@@ -20,15 +20,12 @@ class SmeupImage extends StatefulWidget
   // graphic properties
   double width;
   double height;
-  double padding;
-  double rightPadding;
-  double leftPadding;
-  double topPadding;
-  double bottomPadding;
-  dynamic clientData;
+  EdgeInsetsGeometry padding;
+  String data;
   String title;
   String id;
   String type;
+  bool isRemote;
 
   SmeupImage.withController(
     this.model,
@@ -38,33 +35,16 @@ class SmeupImage extends StatefulWidget
     runControllerActivities(model);
   }
 
-  SmeupImage(this.scaffoldKey, this.formKey,
+  SmeupImage(this.scaffoldKey, this.formKey, this.data,
       {this.id = '',
       this.type = 'IMG',
       this.width = SmeupImageModel.defaultWidth,
       this.height = SmeupImageModel.defaultHeight,
       this.padding = SmeupImageModel.defaultPadding,
-      this.rightPadding = SmeupImageModel.defaultPadding,
-      this.leftPadding = SmeupImageModel.defaultPadding,
-      this.topPadding = SmeupImageModel.defaultPadding,
-      this.bottomPadding = SmeupImageModel.defaultPadding,
-      title = '',
-      this.clientData})
+      this.isRemote = SmeupImageModel.defaultIsRemote,
+      title = ''})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
-
-    this.model = SmeupImageModel(
-        id: id,
-        type: type,
-        height: height,
-        padding: padding,
-        rightPadding: rightPadding,
-        leftPadding: leftPadding,
-        topPadding: topPadding,
-        width: width,
-        bottomPadding: bottomPadding,
-        clientData: clientData,
-        title: title);
   }
 
   @override
@@ -73,13 +53,41 @@ class SmeupImage extends StatefulWidget
     id = m.id;
     type = m.type;
     padding = m.padding;
-    rightPadding = m.rightPadding;
-    leftPadding = m.leftPadding;
-    topPadding = m.topPadding;
     width = m.width;
-    bottomPadding = m.bottomPadding;
-    clientData = m.clientData;
+    height = m.height;
     title = m.title;
+
+    var res = treatData(m);
+    data = res['data'];
+    isRemote = res['isRemote'];
+  }
+
+  @override
+  dynamic treatData(SmeupModel model) {
+    SmeupImageModel m = model;
+
+    // set the widget data
+    bool isRemote = SmeupImageModel.defaultIsRemote;
+    dynamic data;
+    if (m.data != null &&
+        (m.data['rows'] as List).length > 0 &&
+        m.data['rows'][0]['code'] != null) {
+      String code = m.data['rows'][0]['code'].toString();
+      List<String> split = code.split(';');
+      if (split.length == 3) {
+        String url = split.getRange(2, split.length).join('');
+        data = url;
+        if (split[0].toString() == 'J1' && split[1].toString() == 'URL')
+          isRemote = true;
+        else
+          isRemote = false;
+      } else {
+        isRemote = true;
+        data = code;
+      }
+    }
+
+    return {"data": data, "isRemote": isRemote};
   }
 
   @override
@@ -90,11 +98,13 @@ class _SmeupImageState extends State<SmeupImage>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
   SmeupImageModel _model;
+  dynamic _data;
 
   @override
   void initState() {
     _model = widget.model;
-    widgetLoadType = _model.widgetLoadType;
+    _data = widget.data;
+    if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
 
@@ -107,8 +117,7 @@ class _SmeupImageState extends State<SmeupImage>
   @override
   Widget build(BuildContext context) {
     final box = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
-        getInitialdataLoaded(widget.isWithController, _model),
-        notifierFunction: () {
+        getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
@@ -122,45 +131,42 @@ class _SmeupImageState extends State<SmeupImage>
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
-      await SmeupImageDao.getData(_model);
+      if (_model != null) {
+        await SmeupImageDao.getData(_model);
+        var res = widget.treatData(_model);
+        _data = res['data'];
+        //isRemote = res['isRemote'];
+
+      }
+
       setDataLoad(widget.id, true);
     }
 
-    if (!hasData(_model)) {
-      return getFunErrorResponse(context, _model);
-    }
+    // if (_model.data == null) {
+    //   return getFunErrorResponse(context, _model);
+    // }
 
     Widget children;
 
     var image;
-    if (_model.data['imageLocalPath'] != null) {
-      image = Image.asset(
-        _model.data['imageLocalPath'],
+    if (widget.isRemote) {
+      image = Image.network(
+        _data,
         height: widget.height,
         width: widget.width,
       );
     } else {
-      image = Image.network(
-        _model.data['imageRemotePath'],
+      image = Image.asset(
+        _data,
         height: widget.height,
         width: widget.width,
       );
     }
     children = Container(
-      padding: _getPadding(),
+      padding: widget.padding,
       child: image,
     );
 
     return SmeupWidgetBuilderResponse(_model, children);
-  }
-
-  EdgeInsets _getPadding() {
-    return widget.padding > 0
-        ? EdgeInsets.all(widget.padding)
-        : EdgeInsets.only(
-            top: widget.topPadding,
-            bottom: widget.bottomPadding,
-            right: widget.rightPadding,
-            left: widget.leftPadding);
   }
 }

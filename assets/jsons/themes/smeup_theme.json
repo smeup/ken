@@ -1,0 +1,185 @@
+{
+  "_comment": "smeup_components_library: for further information about the supported styles read the document README.md",
+  "primaryColor": "#068a9c",
+  "splashColor": "#068a9c",
+  "scaffoldBackgroundColor": "#ffffff",
+  "elevatedButtonTheme": {
+    "style": {
+      "backgroundColor": "#068a9c",
+      "side": {
+        "color": "#068a9c",
+        "width": 2.0
+      },
+      "shape": {
+        "type": "rectangle",
+        "borderRadius": 20.0
+      },
+      "elevation": 0.0
+    }
+  },
+  "textTheme": {
+    "button": {
+      "color": "#ffffff",
+      "fontSize": 16.0,
+      "fontWeight": "normal",
+      "decoration": "none"
+    },
+    "caption": {
+      "color": "#068a9c",
+      "fontSize": 16.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
+    },
+    "bodyText1": {
+      "color": "#068a9c",
+      "fontSize": 16.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
+    },
+    "bodyText2": {
+      "color": "#000000",
+      "fontSize": 16.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
+    },
+    "headline1": {
+      "color": "#068a9c",
+      "fontSize": 56.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
+    },
+    "headline2": {
+      "color": "#068a9c",
+      "fontSize": 43.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
+    },
+    "headline3": {
+      "color": "#068a9c",
+      "fontSize": 14.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
+    },
+    "headline4": {
+      "color": "#068a9c",
+      "fontSize": 12.0,
+      "fontWeight": "bold",
+      "backgroundColor": "#ffffff"
+    },
+    "headline5": {
+      "color": "#068a9c",
+      "fontSize": 10.0,
+      "fontWeight": "bold",
+      "backgroundColor": "#ffffff"
+    },
+    "headline6": {
+      "color": "#068a9c",
+      "fontSize": 8.0,
+      "fontWeight": "bold",
+      "backgroundColor": "#ffffff"
+    }
+  },
+  "iconTheme": {
+    "size": 20.0,
+    "color": "#ffffff"
+  },
+  "timePickerTheme": {
+    "backgroundColor": "#ffffff",
+    "shape": {
+      "type": "rectangle",
+      "borderRadius": 10.0
+    },
+    "dayPeriodBorderSide": {
+      "color": "#068a9c",
+      "width": 2.0
+    }
+  },
+  "radioTheme": {
+    "fillColor": "#068a9c"
+  },
+  "switchTheme": {
+    "thumbColor": "#068a9c",
+    "trackColor": "#cef8fd"
+  },
+  "sliderTheme": {
+    "activeTrackColor": "#068a9c",
+    "thumbColor": "#068a9c",
+    "inactiveTrackColor": "#cef8fd"
+  },
+  "progressIndicatorTheme": {
+    "color": "#068a9c",
+    "linearTrackColor": "#cef8fd",
+    "circularTrackColor": "#cef8fd"
+  },
+  "dividerTheme": {
+    "color": "#068a9c",
+    "thickness": 1
+  },
+  "appBarTheme": {
+    "backgroundColor": "#068a9c",
+    "titleTextStyle": {
+      "color": "#ffffff",
+      "fontSize": 18.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#068a9c"
+    },
+    "toolbarTextStyle": {
+      "color": "#ffffff",
+      "fontSize": 18.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#068a9c"
+    },
+    "iconTheme": {
+      "size": 20.0,
+      "color": "#ffffff"
+    },
+    "centerTitle": true,
+    "elevation": 0,
+    "toolbarHeight": 70
+  },
+  "cardTheme": {
+    "color": "#ffffff",
+    "shape": {
+      "type": "rectangle",
+      "borderRadius": 20.0,
+      "side": {
+        "color": "#068a9c",
+        "width": 2.0
+      }
+    }
+  },
+  "tabBarTheme": {
+    "indicatorSize": "tab",
+    "labelPadding": 0.0,
+    "labelColor": "#068a9c",
+    "labelStyle": {
+      "color": "#068a9c",
+      "fontSize": 18.0,
+      "fontWeight": "bold",
+      "backgroundColor": "#ffffff"
+    },
+    "unselectedLabelColor": "#068a9c",
+    "unselectedLabelStyle": {
+      "color": "#068a9c",
+      "fontSize": 12.0,
+      "fontWeight": "normal",
+      "backgroundColor": "#ffffff"
+    } 
+  },
+  "indicatorColor" : "#068a9c",
+  "dialogTheme": {
+    "backgroundColor": "#ffffff",
+    "elevation": 0,
+    "shape": {
+      "type": "rectangle",
+      "borderRadius": 20.0
+    },
+    "titleTextStyle": {
+      "color": "#000000",
+      "fontSize": 25.0,
+      "fontWeight": "bold",
+      "backgroundColor": "#ffffff",
+      "decoration": "underline"
+    }
+  }
+}
