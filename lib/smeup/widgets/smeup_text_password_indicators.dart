@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_text_password_rule.dart';
-import 'package:mobile_components_library/smeup/models/notifiers/smeup_text_password_rule_notifier.dart';
+import 'package:ken/smeup/widgets/smeup_text_password_rule.dart';
+import 'package:ken/smeup/models/notifiers/smeup_text_password_rule_notifier.dart';
 
 import 'package:provider/provider.dart';
 

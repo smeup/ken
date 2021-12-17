@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/services/smeup_data_service.dart';
 
 class SmeupWidgetMixin {
   runControllerActivities(SmeupModel model) {

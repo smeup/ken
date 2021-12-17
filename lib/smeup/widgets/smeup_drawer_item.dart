@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
 
 class SmeupDrawerItem extends StatelessWidget {
   final String text;

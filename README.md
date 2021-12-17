@@ -1,4 +1,4 @@
-# mobile-components-library
+# ken
 Smeup mobile widgets' library is a set of widgets built on top of Flutter widgets.
 
 ## Icons

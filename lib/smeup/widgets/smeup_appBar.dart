@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_image.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/widgets/smeup_image.dart';
 
 class SmeupAppBar extends AppBar {
   final BuildContext myContext;

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:mobile_components_library/smeup/models/notifiers/smeup_carousel_indicator_notifier.dart';
+import 'package:ken/smeup/models/notifiers/smeup_carousel_indicator_notifier.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable

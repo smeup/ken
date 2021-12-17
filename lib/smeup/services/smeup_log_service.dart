@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
 
 enum LogType { none, debug, info, warning, error }
 enum MessagesPromptMode { snackbar }

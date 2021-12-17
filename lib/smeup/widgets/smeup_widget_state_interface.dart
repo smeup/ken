@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
 
 abstract class SmeupWidgetStateInterface {
   Widget runBuild(BuildContext context, String id, String type,

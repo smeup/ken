@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_datepicker_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
+import 'package:ken/smeup/models/widgets/smeup_datepicker_model.dart';
+import 'package:ken/smeup/services/smeup_variables_service.dart';
 
 // ignore: must_be_immutable
 class SmeupDatePickerButton extends StatefulWidget {

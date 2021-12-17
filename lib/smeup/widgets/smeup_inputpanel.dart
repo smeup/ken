@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mobile_components_library/smeup/daos/smeup_inputpanel_dao.dart';
-import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_input_panel_field.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_combo_item_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_inputpanel_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
-import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_button.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_combo.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_label.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_qrcode_reader.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_radio_buttons.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_text_field.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
+import 'package:ken/smeup/daos/smeup_inputpanel_dao.dart';
+import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:ken/smeup/models/widgets/smeup_input_panel_field.dart';
+import 'package:ken/smeup/models/widgets/smeup_combo_item_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_inputpanel_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/services/smeup_dynamism_service.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/services/smeup_variables_service.dart';
+import 'package:ken/smeup/widgets/smeup_button.dart';
+import 'package:ken/smeup/widgets/smeup_combo.dart';
+import 'package:ken/smeup/widgets/smeup_label.dart';
+import 'package:ken/smeup/widgets/smeup_qrcode_reader.dart';
+import 'package:ken/smeup/widgets/smeup_radio_buttons.dart';
+import 'package:ken/smeup/widgets/smeup_text_field.dart';
+import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
 // ignore: must_be_immutable
 class SmeupInputPanel extends StatefulWidget
