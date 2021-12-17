@@ -16,7 +16,7 @@ Go to [ken Showcase](https://github.com/smeup/ken-showcase).
 
 ## Development
 
-All information for developers is to be found in the [Development guide](doc/api/index.html).
+- [API information](https://github.com/smeup/ken/blob/rename-package-and-repository/doc/api/index.html).
 
 ## How to use ken in your project
 
