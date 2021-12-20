@@ -1,5 +1,5 @@
-import 'package:mobile_components_library/smeup/models/widgets/smeup_qrcode_reader_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
+import 'package:ken/smeup/models/widgets/smeup_qrcode_reader_model.dart';
+import 'package:ken/smeup/services/smeup_data_service.dart';
 
 import 'smeup_dao.dart';
 

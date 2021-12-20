@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_column.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_row.dart';
+import 'package:ken/smeup/models/widgets/smeup_chart_column.dart';
+import 'package:ken/smeup/models/widgets/smeup_chart_row.dart';
 
 class SmeupChartDatasource {
   List<SmeupChartColumn> columns;

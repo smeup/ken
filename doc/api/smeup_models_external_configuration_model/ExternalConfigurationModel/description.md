@@ -1,0 +1,33 @@
+
+
+
+# description property
+
+
+
+
+
+
+[String](https://api.flutter.dev/flutter/dart-core/String-class.html) description
+  
+_read / write_
+
+
+
+
+
+
+## Implementation
+
+```dart
+String description;
+
+
+```
+
+
+
+
+
+
+

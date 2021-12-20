@@ -1,16 +1,16 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service_interface.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_http_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_image_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_json_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_default_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_service_response.dart';
+import 'package:ken/smeup/models/smeup_fun.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_data_service_interface.dart';
+import 'package:ken/smeup/services/smeup_dynamism_service.dart';
+import 'package:ken/smeup/services/smeup_http_data_service.dart';
+import 'package:ken/smeup/services/smeup_image_data_service.dart';
+import 'package:ken/smeup/services/smeup_json_data_service.dart';
+import 'package:ken/smeup/services/smeup_default_data_service.dart';
+import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/services/smeup_service_response.dart';
 
 class SmeupDataService {
   static var services = Map<String, SmeupDataServiceInterface>();

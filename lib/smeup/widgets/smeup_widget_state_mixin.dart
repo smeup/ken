@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/notifiers/smeup_error_notifier.dart';
-import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
-import 'package:mobile_components_library/smeup/services/smeup_widget_notification_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
+import 'package:ken/smeup/models/notifiers/smeup_error_notifier.dart';
+import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/services/SmeupLocalizationService.dart';
+import 'package:ken/smeup/services/smeup_widget_notification_service.dart';
+import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/widgets/smeup_not_available.dart';
 import 'package:provider/provider.dart';
 
 class SmeupWidgetStateMixin {

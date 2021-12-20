@@ -3,14 +3,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:json_theme/json_theme.dart';
-import 'package:mobile_components_library/smeup/models/authentication_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_cache_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service_interface.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
+import 'package:ken/smeup/models/authentication_model.dart';
+import 'package:ken/smeup/services/smeup_cache_service.dart';
+import 'package:ken/smeup/services/smeup_data_service.dart';
+import 'package:ken/smeup/services/smeup_data_service_interface.dart';
+import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/services/smeup_variables_service.dart';
 import 'package:package_info/package_info.dart';
-import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
+import 'package:ken/smeup/services/SmeupLocalizationService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/external_configuration_model.dart';
@@ -135,8 +135,8 @@ class SmeupConfigurationService {
           logType: LogType.error);
     } finally {
       if (_theme == null) {
-        String themeStr = await rootBundle.loadString(
-            'packages/mobile_components_library/assets/jsons/themes/smeup_theme.json');
+        String themeStr = await rootBundle
+            .loadString('packages/ken/assets/jsons/themes/smeup_theme.json');
         dynamic themeJson = json.decode(themeStr);
         _theme = ThemeDecoder.decodeThemeData(themeJson);
         print(_theme);

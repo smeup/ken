@@ -1,0 +1,24 @@
+
+
+
+# SmeupWidgetStateInterface constructor
+
+
+
+
+
+
+
+SmeupWidgetStateInterface()
+
+
+
+
+
+
+
+
+
+
+
+

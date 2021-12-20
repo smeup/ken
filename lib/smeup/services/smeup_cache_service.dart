@@ -1,7 +1,7 @@
 import 'package:async/async.dart';
-import 'package:mobile_components_library/smeup/models/notifiers/smeup_cache_notifier.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/models/notifiers/smeup_cache_notifier.dart';
+import 'package:ken/smeup/services/smeup_data_service.dart';
+import 'package:ken/smeup/services/smeup_log_service.dart';
 
 class SmeupCacheService {
   static const DEFAULD_RETRY = 2; // seconds

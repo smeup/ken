@@ -1,4 +1,4 @@
-import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_column.dart';
+import 'package:ken/smeup/models/widgets/smeup_chart_column.dart';
 
 class SmeupChartRow {
   List<dynamic> cells;
