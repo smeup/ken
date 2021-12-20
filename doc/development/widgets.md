@@ -1,8 +1,19 @@
-Follow the list of the attributes of the smeup_components_library widgets with their defaults.
+# ken widgets
+In this document you can find all about ken widgets
 
-<a name="Shared">
+[[_TOC_]]
+
+## Icons
+Icons in the ken library are treated as numeric values. You can find the flutter documentation 
+ [IconData codes](https://api.flutter.dev/flutter/material/Icons-class.html#constants)
+    
+## Theme
+The style of all widgets depend on [json_theme extension](https://pub.dev/packages/json_theme) 
+
+## Widgets
+
+
 ### Shared
-</a>
 
 - scaffoldBackgroundColor   :   color of the screen backgroundColor. It's a convenient way to get the main color in static components where there is not 
                                 an attribute to define them or as default color: 
@@ -21,18 +32,14 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 - errorColor                :   color of the SnackBar'sbackgroundColor in case of error
 
 
-<a name="SmeupAppBar">
 ### SmeupAppBar
-</a>
 
     The SmeupAppBar is an internal widget, it can be used only statically. 
     Its style depend on:
         - "appBarTheme" if the dynamicScreen is a form
         - "dialogTheme" if the dynamicScreen is a dialog.
         
-<a name="SmeupButton">
 ### SmeupButton
-</a>
 
     json_theme's supported attributes:
     - backColor             :   elevatedButtonTheme.style.backgroundColor
@@ -59,9 +66,8 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - isLink                :   false
     - orientation           :   WidgetOrientation.Vertical
 
-<a name="SmeupCalendar">
+
 ### SmeupCalendar
-</a>
 
     json_theme's supported attributes:
     - dayFontSize           :   textTheme.bodyText2.fontSize
@@ -86,9 +92,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     Others attributes:
         TODO
 
-<a name="SmeupCarousel">
 ### SmeupCarousel
-</a>
 
     json_theme's supported attributes:
     
@@ -96,9 +100,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - height                :   100
     - autoPlay              :   false
 
-<a name="SmeupChart">
 ### SmeupChart
-</a>
 
     json_theme's supported attributes:
     
@@ -110,9 +112,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - legend                :   true
 
 
-<a name="SmeupCombo">
 ### SmeupCombo
-</a>
 
     json_theme's supported attributes:
     - fontColor             :   textTheme.bodyText1.color
@@ -139,9 +139,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - innerSpace            :   10.0
     - underline             :   true
 
-<a name="SmeupDashboard">
 ### SmeupDashboard
-</a>
 
     json_theme's supported attributes:
     - fontColor             :   textTheme.headline1.color
@@ -170,9 +168,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - forceUm               :   ''
     - numberFormat          :   '*;0'
 
-<a name="SmeupDynamicScreen">
 ### SmeupDynamicScreen
-</a>
 
     json_theme's supported attributes:
 
@@ -184,9 +180,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     The backgroundColor is "scaffoldBackgroundColor" if SmeupDynamicScreen is a form and "dialogTheme.backgroundColor" if it is a dialog. 
     
 
-<a name="SmeupDrawer">
 ### SmeupDrawer
-</a>
 
     json_theme's supported attributes:
 
@@ -205,9 +199,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - imageHeight           :   40
     - showItemDivider       :   true
 
-<a name="SmeupDatePicker">
 ### SmeupDatePicker
-</a>
 
     json_theme's supported attributes:
     - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
@@ -237,9 +229,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - innerSpace            :   10.0
     - underline             :   true
 
-<a name="SmeupForm">
 ### SmeupForm
-</a>
     The SmeupAppBar is an internal widget, it can be used only statically.
 
     json_theme's supported attributes:
@@ -249,9 +239,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - layout                :   '1'
     - autoAdaptHeight       :   true
 
-<a name="SmeupGauge">
 ### SmeupGauge
-</a>
 
     json_theme's supported attributes:
     
@@ -265,9 +253,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - warning               :   50
     - value                 :   0
 
-<a name="SmeupImage">
 ### SmeupImage
-</a>
 
     json_theme's supported attributes:
     
@@ -278,9 +264,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - padding                 :   EdgeInsets.all(0)
     - isRemote                :   false
 
-<a name="SmeupImageList">
 ### SmeupImageList
-</a>
 
     json_theme's supported attributes:
     - backColor             :   cardTheme.color
@@ -305,9 +289,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - orientation           :   Axis.vertical
     - listHeight            :   0
 
-<a name="SmeupLabel">
 ### SmeupLabel
-</a>
 
     json_theme's supported attributes:
     - fontColor             :   textTheme.bodyText2.color
@@ -325,9 +307,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - height                :   15
     - valColName            :   'value'
 
-<a name="SmeupLine">
 ### SmeupLine
-</a>
 
     json_theme's supported attributes:
     - color                 :   dividerTheme.color
@@ -335,9 +315,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
 
     Others attributes:
 
-<a name="SmeupListBox">
 ### SmeupListBox
-</a>
 
     json_theme's supported attributes:
 
@@ -369,9 +347,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - selectedRow           :   -1
     - listHeight            :   0    
 
-<a name="SmeupProgressBar">
 ### SmeupProgressBar
-</a>
 
     json_theme's supported attributes:
     - color                 :   progressIndicatorTheme.color
@@ -384,9 +360,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - height                :   10
     - padding               :   EdgeInsets.all(0)
 
-<a name="SmeupProgressIndicator">
 ### SmeupProgressIndicator
-</a>
 
     json_theme's supported attributes:
     - color                 :   progressIndicatorTheme.color
@@ -395,9 +369,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     Others attributes:
     - defaultSize           :   30
 
-<a name="SmeupQRCodeReader">
 ### SmeupQRCodeReader
-</a>
 
     json_theme's supported attributes:
     
@@ -408,9 +380,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - maxReads               :   1
     - dealyInMillis          :   0
 
-<a name="SmeupRadioButton">
 ### SmeupRadioButton
-</a>
 
     json_theme's supported attributes:
     - radioButtonColor      :   radioTheme.fillColor
@@ -434,9 +404,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - defaultPadding        :   EdgeInsets.all(0)
     - defaultColumns        :   1
 
-<a name="SmeupSection">
 ### SmeupSection
-</a>
 
     The SmeupSection is an internal widget, it can be used only statically. 
     
@@ -444,9 +412,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - layout                :   ''
     - autoAdaptHeight       :   inherithed from SmeupForm
 
-<a name="SmeupSlider">
 ### SmeupSlider
-</a>
 
     json_theme's supported attributes:
     - activeTrackColor      :   sliderTheme.activeTrackColor
@@ -458,18 +424,14 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - defaultSldMin         :   0
     - defaultSldMax         :   100
 
-<a name="SmeupSplash">
 ### SmeupSplash
-</a>
 
     json_theme's supported attributes:
     - color                 :   splashColor
     
     Others attributes:
 
-<a name="SmeupSwitch">
 ### SmeupSwitch
-</a>
 
     json_theme's supported attributes:
     - thumbColor            :   switchTheme.thumbColor
@@ -486,9 +448,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - align                 :   Alignment.center
     - padding               :   EdgeInsets.all(0)
 
-<a name="SmeupTextAutocomplete">
 ### SmeupTextAutocomplete
-</a>
 
     json_theme's supported attributes:
     - fontSize              :   textTheme.bodyText1.fontSize
@@ -516,9 +476,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - submitLabel           :   ''
     - showSubmit            :   false
 
-<a name="SmeupTextField">
 ### SmeupTextField
-</a>
 
     json_theme's supported attributes:
     - fontSize              :   textTheme.bodyText1.fontSize
@@ -547,9 +505,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - showSubmit            :   false
     - underline             :   true
 
-<a name="SmeupTextPassword">
 ### SmeupTextPassword
-</a>
 
     json_theme's supported attributes:
     - fontSize              :   textTheme.bodyText1.fontSize
@@ -581,9 +537,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - showRulesIcon         :   true
     - checkRules            :   true
 
-<a name="SmeupTimePicker">
 ### SmeupTimePicker
-</a>
 
     json_theme's supported attributes:
     - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
@@ -613,9 +567,7 @@ Follow the list of the attributes of the smeup_components_library widgets with t
     - innerSpace            :   10.0
     - underline             :   true
 
-<a name="SmeupWait">
 ### SmeupWait
-</a>
 
    The SmeupWait contains the following two widgets. Read their documentation for further information about their defaults:
     - [SmeupSplash](#SmeupSplash)

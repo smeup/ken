@@ -18,8 +18,8 @@ Go to [ken Showcase](https://github.com/smeup/ken-showcase).
 
 ## ken Development
 
-- [Dependencies](/doc/development/old_markdown.md)
-- [Widgets defaults](/doc/development/widgets_default_values.md)
+- [Dependencies](/doc/development/dependencies.md)
+- [Widgets](/doc/development/widgets.md)
 
 ## How to use ken in your project
 
