@@ -3,24 +3,6 @@
 
 # ken - Dart API docs
 
-
-<h1 id="ken-super-rich-components-for-mobile-applications">ken: super-rich components for mobile applications</h1>
-<p><img src="https://github.com/smeup/ken/blob/rename-package-and-repository/assets/images/KEN.png" alt="ken Logo"></p>
-<p><a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></p>
-<h2 id="intro">Intro</h2>
-<p>Ken is a mobile components library, built with <a href="https://flutter.dev/">Flutter</a>.</p>
-<h2 id="showcase">Showcase</h2>
-<p>Go to <a href="https://github.com/smeup/ken-showcase">ken Showcase</a>.</p>
-<h2 id="documentation">Documentation</h2>
-<ul>
-<li>Check out our <a href="https://smeup.github.io/ken/">documentation</a></li>
-</ul>
-<h2 id="how-to-use-ken-in-your-project">How to use ken in your project</h2>
-<h2 id="contributing">Contributing</h2>
-<h2 id="issues">Issues</h2>
-<p>If you run into an error or an unexpected behavior, or you just want to give us feedback on how to improve, feel free to use the <a href="https://github.com/smeup/ken/issues">issues</a> page.</p>
-
-
 ## Libraries
 
 ##### [authentication_model](smeup_models_authentication_model/smeup_models_authentication_model-library.md)
