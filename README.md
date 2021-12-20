@@ -1,6 +1,6 @@
 # ken: super-rich components for mobile applications
 
-![ken Logo](https://github.com/smeup/ken/blob/rename-package-and-repository/assets/images/KEN.png)
+![ken Logo](https://github.com/smeup/ken/blob/rename-package-and-repository/assets/images/logo_KEN.png)
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 

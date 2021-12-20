@@ -2,6 +2,9 @@ name: ken
 description: super-rich dynamic components for mobile applications
 version: 0.0.1+1
 homepage: "https://github.com/smeup/ken"
+repository: "https://github.com/smeup/ken"
+issue_tracker: "https://github.com/smeup/ken/issues"
+documentation: "https://github.com/smeup/ken"
 
 environment:
   sdk: ">=2.11.0 <3.0.0"
@@ -9,6 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  async: ^2.8.1
   dio: ^4.0.0
   provider: ^4.3.3
   permission_handler: ^7.1.0
