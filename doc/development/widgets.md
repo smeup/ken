@@ -1,7 +1,6 @@
 # ken widgets
 In this document you can find all about ken widgets
 
-[[_TOC_]]
 
 ## Icons
 Icons in the ken library are treated as numeric values. You can find the flutter documentation 
