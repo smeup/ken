@@ -12,9 +12,14 @@ Ken is a mobile components library, built with [Flutter](https://flutter.dev/).
 
 Go to [ken Showcase](https://github.com/smeup/ken-showcase).
 
-## Documentation
+## ken API
 
-- Check out our [documentation](https://smeup.github.io/ken/)
+- Check out our [API](/doc/api/index.md)
+
+## ken Development
+
+- [Dependencies](/doc/development/old_markdown.md)
+- [Widgets defaults](/doc/development/widgets_default_values.md)
 
 ## How to use ken in your project
 
