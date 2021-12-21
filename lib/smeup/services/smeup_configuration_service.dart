@@ -62,7 +62,7 @@ class SmeupConfigurationService {
     await SmeupConfigurationService.setLocalStorage();
 
     await SmeupConfigurationService.setTheme(
-        SmeupConfigurationService.getAppConfiguration().theme);
+        SmeupConfigurationService.getAppConfiguration()?.theme);
 
     SmeupConfigurationService.appDictionary = localizationService;
 
@@ -139,7 +139,7 @@ class SmeupConfigurationService {
             .loadString('packages/ken/assets/jsons/themes/smeup_theme.json');
         dynamic themeJson = json.decode(themeStr);
         _theme = ThemeDecoder.decodeThemeData(themeJson);
-        print(_theme);
+        // print(_theme);
       }
     }
   }
@@ -174,7 +174,8 @@ class SmeupConfigurationService {
       _defaultServiceEndpoint = savedDefaultServiceEndpoint;
     else
       _defaultServiceEndpoint = SmeupConfigurationService.getAppConfiguration()
-          .defaultServiceEndpoint;
+              ?.defaultServiceEndpoint ??
+          '';
   }
 
   static getDefaultServiceEndpoint() {
@@ -188,8 +189,9 @@ class SmeupConfigurationService {
     if (savedHttpServiceEndpoint.isNotEmpty)
       _httpServiceEndpoint = savedHttpServiceEndpoint;
     else
-      _httpServiceEndpoint =
-          SmeupConfigurationService.getAppConfiguration().httpServiceEndpoint;
+      _httpServiceEndpoint = SmeupConfigurationService.getAppConfiguration()
+              ?.httpServiceEndpoint ??
+          '';
   }
 
   static getHttpServiceEndpoint() {
