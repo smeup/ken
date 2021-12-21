@@ -34,7 +34,7 @@ Create a new Flutter app:
 To install the ken library, add the following dependency into the pubspec.yaml:
 
     dependencies:
-        ken: ^0.0.1+3
+        ken: ^0.0.1
 
 Add the ken library initilization in the main.dart file. In the initialization statement, you can set many attributes. Follow a minimal configuration:
 

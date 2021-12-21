@@ -107,6 +107,7 @@ This widget is used internally by SmeupDynamicScreen, to create the top AppBar w
 - The property "title" is used as Title  
 - The property "buttons" is used as to create the "actions" in the appBar
 
+```
     {
             "layout": "column",
             "id": "testForm",
@@ -129,9 +130,10 @@ This widget is used internally by SmeupDynamicScreen, to create the top AppBar w
                     ]
                 }
     }
+```
 
+Its style depend on:
 
-    Its style depend on:
         - "appBarTheme" if the dynamicScreen is a form
         - "dialogTheme" if the dynamicScreen is a dialog.
         
