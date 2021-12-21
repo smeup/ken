@@ -1,15 +1,34 @@
 # ken widgets
 In this document you can find all about ken widgets
 
+## null safety
+ken widgets are not null safety yet. They will be converted soon.
+
+Be sure you declared a compatible sdk in your pubspec.yaml file:
+
+    ...
+    environment:
+      sdk: ">=2.11.0 <3.0.0"
+    ...
 
 ## Icons
 Icons in the ken library are treated as numeric values. You can find the flutter documentation 
  [IconData codes](https://api.flutter.dev/flutter/material/Icons-class.html#constants)
     
-## Theme
-The style of all widgets depend on [json_theme extension](https://pub.dev/packages/json_theme) 
+## Themes
+The style of ken widgets depend on [json_theme extension](https://pub.dev/packages/json_theme). ken library will look for your own style json file in the folder /assets/jsons/themes/. The name must be declared in the folder /assets/jsons/config.json. 
+
+{
+    ..
+    "theme": "app.json",
+    .. 
+ }
+
+If you don't declare one, ken library will use its internal theme file. 
 
 ## Widgets
+
+
 
 
 ### Shared

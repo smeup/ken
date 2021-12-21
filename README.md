@@ -23,6 +23,23 @@ Go to [ken Showcase](https://github.com/smeup/ken-showcase).
 
 ## How to use ken in your project
 
+Create a new Flutter app:
+    
+    > flutter create myapp
+
+Install the ken library
+
+    > TODO
+
+Add the ken library initilization in the main.dart file. In the initialization statement, you can set many attributes. Follow a minimal configuration:
+
+    SmeupConfigurationService.init(
+        ..
+        context,
+        ..
+    );
+
+
 
 ## Contributing
 
