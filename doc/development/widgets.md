@@ -18,11 +18,10 @@ Also disable the null-safity in the debug configuration:
     ]
 
 ## Icons
-Icons in the ken library are treated as numeric values. You can find the flutter documentation 
- [IconData codes](https://api.flutter.dev/flutter/material/Icons-class.html#constants)
+Icons, in the ken library, are treated as numeric values. You can find further information about [IconData codes](https://api.flutter.dev/flutter/material/Icons-class.html#constants) in the flutter documentation 
     
 ## Themes
-The style of ken widgets depend on [json_theme extension](https://pub.dev/packages/json_theme). ken library will look for your own style json file in the folder /assets/jsons/themes/. The name must be declared in the folder /assets/jsons/config.json. 
+The style of ken widgets depend on [json_theme](https://pub.dev/packages/json_theme) library. You can specifdefine your custon style in a json file that must be placed in the folder /assets/jsons/themes/. The name must be declared in the folder /assets/jsons/config.json. 
 
 {
     ..
@@ -30,35 +29,108 @@ The style of ken widgets depend on [json_theme extension](https://pub.dev/packag
     .. 
  }
 
-If you don't declare one, ken library will use its internal theme file. 
+If you don't declare a custom style, ken library will use its [internal theme file](https://github.com/smeup/ken/blob/develop/assets/jsons/themes/smeup_theme.json). 
 
-## Widgets
+## Widgets 
+This section will list all ken widgets with their coresponding parameters and style's default.
+
+### Structure of a widget
+Each ken widget has two constructors: 
+
+#### Static constructor
+Is the canonical Flutter constructor. it will received all parameters in the constructor.
+
+            SmeupButton(
+              data: 'Hi there',
+            ),
+
+#### Dynamic constructor
+Is the constructor that allow you to add a widget a Smeupdynamic screen dynamically through a json file. in this case you won't send the parameter in the constructor but you define it in a json which represent the entire form. The form is divided in sections. The section has the following orientations: row and column. Each section might contains only one component (widget) except when you have to define a TabBar. In this case, each component represent a Tab. 
 
 
+      {
+        "loaded": true,
+        "layout": "column",
+        "id": "testForm",
+        "type": "EXD",
+        "title": "[description]",
+        "sections": [
+          {
+            "id": "S1",
+            "components": [
+              {
+                "type": "BTN",
+                "id": "buttons_1",
+                "options": {
+                  "BTN": {
+                    "default": {
+                      "horiz": "Yes",
+                      "backColor": "R255G000B000",
+                      "borderColor": "R000G000B000",
+                      "fontColor": "R000G000B000",
+                      "padding": { "right": 5 },
+                      "height": 50,
+                      "width" : 300,
+                      "fontSize": 20
+                    }
+                  }
+                },
+                "data": {
+                  "rows": [
+                    { "value": "I am a button" },
+                    { "value": "I am a button too" }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
 
+You don't instantiate a widget through the dynamic constructor, but send a json containing the page structure and its components to SmeupDynamicScreen which will create all the widgets for you. The dynamic constructor of a widget receives in input the part of the json that it have to use to create the instance. The json will be parsed and used to fill the same parameters that you can pass through the static constructor.
 
-### Shared
+The json will be send in the dynamic constructor into the widget model. 
 
-- scaffoldBackgroundColor   :   color of the screen backgroundColor. It's a convenient way to get the main color in static components where there is not 
-                                an attribute to define them or as default color: 
-                                    - SmeupForm default color
-                                    - SmeupSection backgroundColor
-                                    - Dialog backgroundColor
-                                    - SmeupButton with isLink attribute as bacbroundColor and borderColor
-                                    - SmeupDatePicker when the border is hidden
-                                    - SmeupTimePicker when the border is hidden
-                                
-- primaryColor              :   main color of the application. It's a convenient way to get the main color in static components where there is not 
-                                an attribute to define them or as default color: 
-                                    - background of the buttons in SmeupTextAutocomplete
-                                    - background of the buttons in SmeupTextPassword
+Each widget can receive the data in two different ways:
+- compilation time: the "data" property into the json file will contains the data to use in the component
+- run time: the "fun" property into the json file will contains the function to execute when the widget is loaded. The "fun" property contains a Smeup [script language](#fun_script_language) used to reduce the syntax of the function.
 
-- errorColor                :   color of the SnackBar'sbackgroundColor in case of error
-
+### fun script language
+.. TODO
 
 ### SmeupAppBar
+[SmeupAppBar](https://github.com/smeup/ken/blob/develop/doc/api/smeup_widgets_smeup_appBar/smeup_widgets_smeup_appBar-library.md). 
 
-    The SmeupAppBar is an internal widget, it can be used only statically. 
+In the documentation you can find the input parameters to define a SmeupAppBar in your static Scaffold.
+
+This widget is used internally by SmeupDynamicScreen, to create the top AppBar when it receive the json of the form. 
+- The property "title" is used as Title  
+- The property "buttons" is used as to create the "actions" in the appBar
+
+    {
+            "layout": "column",
+            "id": "testForm",
+            "type": "EXD",
+            "title": "[description]",
+            "sections": [
+                ....
+            ],
+            "buttons": [
+                {
+                    "icon": "59110",
+                    "text": "Static Widgets",
+                    "flat": true,
+                    "dynamisms": [
+                        {
+                            "event": "click",
+                            "exec": "F(EXD;*ROUTE;) 2(;;StaticScreen)",
+                            "async": false
+                        }
+                    ]
+                }
+    }
+
+
     Its style depend on:
         - "appBarTheme" if the dynamicScreen is a form
         - "dialogTheme" if the dynamicScreen is a dialog.
@@ -597,5 +669,21 @@ If you don't declare one, ken library will use its internal theme file.
     - [SmeupSplash](#SmeupSplash)
     - [SmeupProgressIndicator](#SmeupProgressIndicator)
 
+### Shared default styles 
 
+- scaffoldBackgroundColor   :   color of the screen backgroundColor. It's a convenient way to get the main color in static components where there is not 
+                                an attribute to define them or as default color: 
+                                    - SmeupForm default color
+                                    - SmeupSection backgroundColor
+                                    - Dialog backgroundColor
+                                    - SmeupButton with isLink attribute as bacbroundColor and borderColor
+                                    - SmeupDatePicker when the border is hidden
+                                    - SmeupTimePicker when the border is hidden
+                                
+- primaryColor              :   main color of the application. It's a convenient way to get the main color in static components where there is not 
+                                an attribute to define them or as default color: 
+                                    - background of the buttons in SmeupTextAutocomplete
+                                    - background of the buttons in SmeupTextPassword
+
+- errorColor                :   color of the SnackBar'sbackgroundColor in case of error
 
