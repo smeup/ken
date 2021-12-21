@@ -2,7 +2,7 @@
 In this document you can find all about ken widgets
 
 ## null safety
-ken widgets are not null safety yet. They will be converted soon.
+ken library is not null safety yet. It will be converted soon.
 
 Be sure you declared a compatible sdk in your pubspec.yaml file:
 
@@ -10,6 +10,12 @@ Be sure you declared a compatible sdk in your pubspec.yaml file:
     environment:
       sdk: ">=2.11.0 <3.0.0"
     ...
+
+Also disable the null-safity in the debug configuration:
+
+    "args": [
+        "--no-sound-null-safety"
+    ]
 
 ## Icons
 Icons in the ken library are treated as numeric values. You can find the flutter documentation 
