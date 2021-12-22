@@ -2,21 +2,20 @@
 
 Follow the steps below to publish a new version
 
-- make you changes in the code
+- make your changes to the code
 
 - update the documentation with the following command:
 
-    dartdoc --format "md"
+  `dartdoc --format "md"`
 
-- update the version in the pubspec.yaml 
+- update the version in the pubspec.yaml
 
 - document the version in the CHANGELOG.md file
 
 - Check the release with following command:
 
-    dart pub publish --dry-run
+  `dart pub publish --dry-run`
 
 - Run the following command to publish the new version:
-    
-    dart pub publish
 
+  `dart pub publish`

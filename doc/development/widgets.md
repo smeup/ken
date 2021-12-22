@@ -1,52 +1,61 @@
 # ken widgets
-In this document you can find all about ken widgets
+
+In this document you can find all about ken widgets.
 
 ## null safety
-ken library is not null safety yet. It will be converted soon.
 
-Be sure you declared a compatible sdk in your pubspec.yaml file:
+The ken library does not support null safety yet. It will be converted soon.
+
+Make sure to declare a compatible sdk in your `pubspec.yaml` file:
 
     ...
     environment:
       sdk: ">=2.11.0 <3.0.0"
     ...
 
-Also disable the null-safity in the debug configuration:
+Also disable the null safety in the debug configuration:
 
     "args": [
         "--no-sound-null-safety"
     ]
 
 ## Icons
-Icons, in the ken library, are treated as numeric values. You can find further information about [IconData codes](https://api.flutter.dev/flutter/material/Icons-class.html#constants) in the flutter documentation 
-    
+
+Icons, in the ken library, are treated as numeric values. You can find further information about [IconData codes](https://api.flutter.dev/flutter/material/Icons-class.html#constants) in the flutter documentation
+
 ## Themes
-The style of ken widgets depend on [json_theme](https://pub.dev/packages/json_theme) library. You can specifdefine your custon style in a json file that must be placed in the folder /assets/jsons/themes/. The name must be declared in the folder /assets/jsons/config.json. 
 
-{
-    ..
-    "theme": "app.json",
-    .. 
- }
+The style of ken widgets depends on the [json_theme](https://pub.dev/packages/json_theme) library. You can define your custon style in a json file that must be placed in the folder `/assets/jsons/themes/` The name must be declared in the folder `/assets/jsons/config.json`
 
-If you don't declare a custom style, ken library will use its [internal theme file](https://github.com/smeup/ken/blob/develop/assets/jsons/themes/smeup_theme.json). 
+    {
+        ..
+        "theme": "app.json",
+        ..
+    }
 
-## Widgets 
+If you don't declare a custom style, the ken library will use its [internal theme file](https://github.com/smeup/ken/blob/develop/assets/jsons/themes/smeup_theme.json).
+
+## Widgets
+
 This section will list all ken widgets with their coresponding parameters and style's default.
 
 ### Structure of a widget
-Each ken widget has two constructors: 
+
+Each ken widget has two constructors:
 
 #### Static constructor
-Is the canonical Flutter constructor. it will received all parameters in the constructor.
+
+Is the canonical Flutter constructor. It receives all the parameters in the constructor.
 
             SmeupButton(
               data: 'Hi there',
             ),
 
 #### Dynamic constructor
-Is the constructor that allow you to add a widget a Smeupdynamic screen dynamically through a json file. in this case you won't send the parameter in the constructor but you define it in a json which represent the entire form. The form is divided in sections. The section has the following orientations: row and column. Each section might contains only one component (widget) except when you have to define a TabBar. In this case, each component represent a Tab. 
 
+Is the constructor that lets you add a widget to a Smeupdynamic screen dynamically through a json file. in this case you won't send the parameter in the constructor but you will define it in a json which represents the entire form. The form is divided in sections.
+
+A section has the following orientations: row and column. Each section might contains only one component (widget) except when you have to define a TabBar. In this case, each component represent a Tab.
 
       {
         "loaded": true,
@@ -87,25 +96,29 @@ Is the constructor that allow you to add a widget a Smeupdynamic screen dynamica
         ]
       }
 
-You don't instantiate a widget through the dynamic constructor, but send a json containing the page structure and its components to SmeupDynamicScreen which will create all the widgets for you. The dynamic constructor of a widget receives in input the part of the json that it have to use to create the instance. The json will be parsed and used to fill the same parameters that you can pass through the static constructor.
+You don't instantiate a widget through the dynamic constructor, but instead send a json containing the page structure and its components to SmeupDynamicScreen which will create all the widgets for you. The dynamic constructor of a widget receives in input the part of the json that it will use to create the instance. The json will be parsed and used to fill the same parameters that you can pass through the static constructor.
 
-The json will be send in the dynamic constructor into the widget model. 
+The json will be sent from the dynamic constructor into the widget model.
 
 Each widget can receive the data in two different ways:
-- compilation time: the "data" property into the json file will contains the data to use in the component
-- run time: the "fun" property into the json file will contains the function to execute when the widget is loaded. The "fun" property contains a Smeup [script language](#fun_script_language) used to reduce the syntax of the function.
+
+- compilation time: the "data" property into the json file will contain the data to use in the component
+- run time: the "fun" property into the json file will contain the function to execute when the widget is loaded. The "fun" property contains a Smeup [script language](#fun_script_language) used to reduce the syntax of the function.
 
 ### fun script language
+
 .. TODO
 
 ### SmeupAppBar
-[SmeupAppBar](https://github.com/smeup/ken/blob/develop/doc/api/smeup_widgets_smeup_appBar/smeup_widgets_smeup_appBar-library.md). 
+
+[SmeupAppBar](https://github.com/smeup/ken/blob/develop/doc/api/smeup_widgets_smeup_appBar/smeup_widgets_smeup_appBar-library.md).
 
 In the documentation you can find the input parameters to define a SmeupAppBar in your static Scaffold.
 
-This widget is used internally by SmeupDynamicScreen, to create the top AppBar when it receive the json of the form. 
-- The property "title" is used as Title  
-- The property "buttons" is used as to create the "actions" in the appBar
+This widget is used internally by SmeupDynamicScreen, to create the top AppBar when it receives the json of the form.
+
+- The property "title" is used as Title
+- The property "buttons" is used to create the "actions" in the appBar
 
 ```
     {
@@ -132,11 +145,11 @@ This widget is used internally by SmeupDynamicScreen, to create the top AppBar w
     }
 ```
 
-Its style depend on:
+Its style depends on:
 
         - "appBarTheme" if the dynamicScreen is a form
         - "dialogTheme" if the dynamicScreen is a dialog.
-        
+
 ### SmeupButton
 
     json_theme's supported attributes:
@@ -148,8 +161,8 @@ Its style depend on:
 
     - fontColor             :   textTheme.button.color
     - fontSize              :   textTheme.button.fontSize
-    - fontBold              :   textTheme.button.fontWeight 
-    
+    - fontBold              :   textTheme.button.fontWeight
+
     - iconSize              :   iconTheme.size
     - iconColor             :   iconTheme.color
 
@@ -163,7 +176,6 @@ Its style depend on:
     - innerSpace            :   10.0
     - isLink                :   false
     - orientation           :   WidgetOrientation.Vertical
-
 
 ### SmeupCalendar
 
@@ -193,7 +205,7 @@ Its style depend on:
 ### SmeupCarousel
 
     json_theme's supported attributes:
-    
+
     Others attributes:
     - height                :   100
     - autoPlay              :   false
@@ -201,7 +213,7 @@ Its style depend on:
 ### SmeupChart
 
     json_theme's supported attributes:
-    
+
     Others attributes:
     - chartType             :   ChartType.Bar
     - refresh               :   -1
@@ -209,13 +221,12 @@ Its style depend on:
     - height                :   100
     - legend                :   true
 
-
 ### SmeupCombo
 
     json_theme's supported attributes:
     - fontColor             :   textTheme.bodyText1.color
     - fontSize              :   textTheme.bodyText1.fontSize
-    - fontBold              :   textTheme.bodyText1.fontWeight 
+    - fontBold              :   textTheme.bodyText1.fontWeight
     - backColor             :   textTheme.bodyText1.backgroundColor
 
     - iconSize              :   iconTheme.size
@@ -223,7 +234,7 @@ Its style depend on:
 
     - captionFontColor      :   textTheme.caption.color
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight 
+    - captionFontBold       :   textTheme.caption.fontWeight
     - captionBackColor      :   textTheme.caption.backgroundColor
 
     Others attributes:
@@ -242,15 +253,15 @@ Its style depend on:
     json_theme's supported attributes:
     - fontColor             :   textTheme.headline1.color
     - fontSize              :   textTheme.headline1.fontSize
-    - fontBold              :   textTheme.headline1.fontWeight 
-    
+    - fontBold              :   textTheme.headline1.fontWeight
+
     - captionFontColor      :   textTheme.caption.color
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight 
+    - captionFontBold       :   textTheme.caption.fontWeight
 
     - iconSize              :   iconTheme.size
     - iconColor             :   iconTheme.color
-        
+
     Others attributes:
     - padding               :   EdgeInsets.all(0)
     - width                 :   120
@@ -275,8 +286,7 @@ Its style depend on:
     - isDialog              :   false
     - backButtonVisible     :   true
 
-    The backgroundColor is "scaffoldBackgroundColor" if SmeupDynamicScreen is a form and "dialogTheme.backgroundColor" if it is a dialog. 
-    
+    The backgroundColor is "scaffoldBackgroundColor" if SmeupDynamicScreen is a form and "dialogTheme.backgroundColor" if it is a dialog.
 
 ### SmeupDrawer
 
@@ -286,12 +296,12 @@ Its style depend on:
 
     - titleFontColor        :   appBarTheme.titleTextStyle.color
     - titleFontSize         :   appBarTheme.titleTextStyle.fontSize
-    - titleFontBold         :   appBarTheme.titleTextStyle.fontWeight 
-    
+    - titleFontBold         :   appBarTheme.titleTextStyle.fontWeight
+
     - elementFontColor      :   appBarTheme.toolbarTextStyle.color
     - elementFontSize       :   appBarTheme.toolbarTextStyle.fontSize
-    - elementFontBold       :   appBarTheme.toolbarTextStyle.fontWeight 
-        
+    - elementFontBold       :   appBarTheme.toolbarTextStyle.fontWeight
+
     Others attributes:
     - imageWidth            :   40
     - imageHeight           :   40
@@ -306,11 +316,11 @@ Its style depend on:
     - backColor             :   timePickerTheme.backgroundColor
 
     - fontSize              :   textTheme.bodyText1.fontSize
-    - fontBold              :   textTheme.bodyText1.fontWeight 
+    - fontBold              :   textTheme.bodyText1.fontWeight
     - backColor             :   textTheme.bodyText1.backgroundColor
 
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight 
+    - captionFontBold       :   textTheme.caption.fontWeight
     - captionBackColor      :   textTheme.caption.backgroundColor
 
     - elevation             :   elevatedButtonTheme.style.elevation
@@ -328,6 +338,7 @@ Its style depend on:
     - underline             :   true
 
 ### SmeupForm
+
     The SmeupAppBar is an internal widget, it can be used only statically.
 
     json_theme's supported attributes:
@@ -340,7 +351,7 @@ Its style depend on:
 ### SmeupGauge
 
     json_theme's supported attributes:
-    
+
     Others attributes:
     - valColName            :   'value'
     - maxColName            :   'maxValue'
@@ -354,8 +365,8 @@ Its style depend on:
 ### SmeupImage
 
     json_theme's supported attributes:
-    
-    
+
+
     Others attributes:
     - width                   :   40
     - height                  :   40
@@ -369,15 +380,15 @@ Its style depend on:
     - borderColor           :   cardTheme.shape.side.color
     - borderWidth           :   cardTheme.shape.side.width
     - borderRadius          :   cardTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
-    
+
     - fontColor             :   textTheme.headline4.color
     - fontSize              :   textTheme.headline4.fontSize
-    - fontBold              :   textTheme.headline4.fontWeight 
+    - fontBold              :   textTheme.headline4.fontWeight
 
     - captionFontColor      :   textTheme.headline5.color
     - captionFontSize       :   textTheme.headline5.fontSize
-    - captionFontBold       :   textTheme.headline5.fontWeight 
-        
+    - captionFontBold       :   textTheme.headline5.fontWeight
+
     Others attributes:
     - width                 :   0
     - height                :   300
@@ -392,7 +403,7 @@ Its style depend on:
     json_theme's supported attributes:
     - fontColor             :   textTheme.bodyText2.color
     - fontSize              :   textTheme.bodyText2.fontSize
-    - fontBold              :   textTheme.bodyText2.fontWeight 
+    - fontBold              :   textTheme.bodyText2.fontWeight
     - backColor             :   textTheme.bodyText2.backgroundColor
 
     - iconSize              :   iconTheme.size
@@ -421,14 +432,14 @@ Its style depend on:
     - borderColor           :   cardTheme.shape.side.color
     - borderWidth           :   cardTheme.shape.side.width
     - borderRadius          :   cardTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
-    
+
     - fontColor             :   textTheme.headline4.color
     - fontSize              :   textTheme.headline4.fontSize
-    - fontBold              :   textTheme.headline4.fontWeight 
+    - fontBold              :   textTheme.headline4.fontWeight
 
     - captionFontColor      :   textTheme.headline5.color
     - captionFontSize       :   textTheme.headline5.fontSize
-    - captionFontBold       :   textTheme.headline5.fontWeight 
+    - captionFontBold       :   textTheme.headline5.fontWeight
 
     Others attributes:
     - width                 :   0
@@ -443,7 +454,7 @@ Its style depend on:
     - backgroundColName     :   ''
     - showSelection         :   false
     - selectedRow           :   -1
-    - listHeight            :   0    
+    - listHeight            :   0
 
 ### SmeupProgressBar
 
@@ -470,8 +481,8 @@ Its style depend on:
 ### SmeupQRCodeReader
 
     json_theme's supported attributes:
-    
-    
+
+
     Others attributes:
     - padding                :   5.0
     - size                   :   200
@@ -485,12 +496,12 @@ Its style depend on:
 
     - fontColor             :   textTheme.bodyText1.color
     - fontSize              :   textTheme.bodyText1.fontSize
-    - fontBold              :   textTheme.bodyText1.fontWeight 
+    - fontBold              :   textTheme.bodyText1.fontWeight
     - backColor             :   textTheme.bodyText1.backgroundColor
 
     - captionFontColor      :   textTheme.caption.color
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight 
+    - captionFontBold       :   textTheme.caption.fontWeight
     - captionBackColor      :   textTheme.caption.backgroundColor
 
     Others attributes:
@@ -504,8 +515,8 @@ Its style depend on:
 
 ### SmeupSection
 
-    The SmeupSection is an internal widget, it can be used only statically. 
-    
+    The SmeupSection is an internal widget, it can be used only statically.
+
     - dim                   :   0
     - layout                :   ''
     - autoAdaptHeight       :   inherithed from SmeupForm
@@ -526,7 +537,7 @@ Its style depend on:
 
     json_theme's supported attributes:
     - color                 :   splashColor
-    
+
     Others attributes:
 
 ### SmeupSwitch
@@ -536,7 +547,7 @@ Its style depend on:
     - trackColor            :   switchTheme.trackColor
 
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight 
+    - captionFontBold       :   textTheme.caption.fontWeight
     - captionBackColor      :   textTheme.caption.backgroundColor
     - captionFontColor      :   textTheme.caption.color
 
@@ -550,15 +561,15 @@ Its style depend on:
 
     json_theme's supported attributes:
     - fontSize              :   textTheme.bodyText1.fontSize
-    - fontBold              :   textTheme.bodyText1.fontWeight 
+    - fontBold              :   textTheme.bodyText1.fontWeight
     - backColor             :   textTheme.bodyText1.backgroundColor
     - fontColor             :   textTheme.bodyText1.color
 
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight 
+    - captionFontBold       :   textTheme.caption.fontWeight
     - captionBackColor      :   textTheme.caption.backgroundColor
     - captionFontColor      :   textTheme.caption.color
-    
+
     - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
     - borderWidth           :   timePickerTheme.dayPeriodBorderSide.width
     - borderRadius          :   timePickerTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
@@ -578,19 +589,19 @@ Its style depend on:
 
     json_theme's supported attributes:
     - fontSize              :   textTheme.bodyText1.fontSize
-    - fontBold              :   textTheme.bodyText1.fontWeight 
+    - fontBold              :   textTheme.bodyText1.fontWeight
     - backColor             :   textTheme.bodyText1.backgroundColor
     - fontColor             :   textTheme.bodyText1.color
 
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight 
+    - captionFontBold       :   textTheme.caption.fontWeight
     - captionBackColor      :   textTheme.caption.backgroundColor
     - captionFontColor      :   textTheme.caption.color
-    
+
     - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
     - borderWidth           :   timePickerTheme.dayPeriodBorderSide.width
     - borderRadius          :   timePickerTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
-    
+
     Others attributes:
     - label                 :   ''
     - submitLabel           :   ''
@@ -607,15 +618,15 @@ Its style depend on:
 
     json_theme's supported attributes:
     - fontSize              :   textTheme.bodyText1.fontSize
-    - fontBold              :   textTheme.bodyText1.fontWeight 
+    - fontBold              :   textTheme.bodyText1.fontWeight
     - backColor             :   textTheme.bodyText1.backgroundColor
     - fontColor             :   textTheme.bodyText1.color
 
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight 
+    - captionFontBold       :   textTheme.caption.fontWeight
     - captionBackColor      :   textTheme.caption.backgroundColor
     - captionFontColor      :   textTheme.caption.color
-    
+
     - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
     - borderWidth           :   timePickerTheme.dayPeriodBorderSide.width
     - borderRadius          :   timePickerTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
@@ -644,11 +655,11 @@ Its style depend on:
     - backColor             :   timePickerTheme.backgroundColor
 
     - fontSize              :   textTheme.bodyText1.fontSize
-    - fontBold              :   textTheme.bodyText1.fontWeight 
+    - fontBold              :   textTheme.bodyText1.fontWeight
     - backColor             :   textTheme.bodyText1.backgroundColor
 
     - captionFontSize       :   textTheme.caption.fontSize
-    - captionFontBold       :   textTheme.caption.fontWeight 
+    - captionFontBold       :   textTheme.caption.fontWeight
     - captionBackColor      :   textTheme.caption.backgroundColor
 
     - elevation             :   elevatedButtonTheme.style.elevation
@@ -667,25 +678,13 @@ Its style depend on:
 
 ### SmeupWait
 
-   The SmeupWait contains the following two widgets. Read their documentation for further information about their defaults:
-    - [SmeupSplash](#SmeupSplash)
-    - [SmeupProgressIndicator](#SmeupProgressIndicator)
+The SmeupWait contains the following two widgets. Read their documentation for further information about their defaults: - [SmeupSplash](#SmeupSplash) - [SmeupProgressIndicator](#SmeupProgressIndicator)
 
-### Shared default styles 
+### Shared default styles
 
-- scaffoldBackgroundColor   :   color of the screen backgroundColor. It's a convenient way to get the main color in static components where there is not 
-                                an attribute to define them or as default color: 
-                                    - SmeupForm default color
-                                    - SmeupSection backgroundColor
-                                    - Dialog backgroundColor
-                                    - SmeupButton with isLink attribute as bacbroundColor and borderColor
-                                    - SmeupDatePicker when the border is hidden
-                                    - SmeupTimePicker when the border is hidden
-                                
-- primaryColor              :   main color of the application. It's a convenient way to get the main color in static components where there is not 
-                                an attribute to define them or as default color: 
-                                    - background of the buttons in SmeupTextAutocomplete
-                                    - background of the buttons in SmeupTextPassword
+- `scaffoldBackgroundColor` : color of the screen backgroundColor. It's a convenient way to get the main color in static components where there is not
+  an attribute to define them or as default color: - SmeupForm default color - SmeupSection backgroundColor - Dialog backgroundColor - SmeupButton with isLink attribute as bacbroundColor and borderColor - SmeupDatePicker when the border is hidden - SmeupTimePicker when the border is hidden
+- `primaryColor` : the main color of the application. It's a convenient way to get the main color in static components where there isn't
+  an attribute to define them or as default color: - background of the buttons in SmeupTextAutocomplete - background of the buttons in SmeupTextPassword
 
-- errorColor                :   color of the SnackBar'sbackgroundColor in case of error
-
+- `errorColor` : color of the SnackBar's backgroundColor in case of error
