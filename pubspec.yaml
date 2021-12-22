@@ -1,13 +1,13 @@
 name: ken
 description: super-rich dynamic components for Flutter applications
-version: 0.0.1+4
-homepage: "https://github.com/smeup/ken"
-repository: "https://github.com/smeup/ken"
-issue_tracker: "https://github.com/smeup/ken/issues"
-documentation: "https://github.com/smeup/ken"
+version: 0.0.1+5
+homepage: 'https://github.com/smeup/ken'
+repository: 'https://github.com/smeup/ken'
+issue_tracker: 'https://github.com/smeup/ken/issues'
+documentation: 'https://github.com/smeup/ken'
 
 environment:
-  sdk: ">=2.11.0 <3.0.0"
+  sdk: '>=2.11.0 <3.0.0'
 
 dependencies:
   flutter:
@@ -37,6 +37,5 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-
   assets:
     - assets/jsons/themes/

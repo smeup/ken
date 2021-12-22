@@ -7,28 +7,29 @@
 ## Intro
 
 Ken is a library for [Flutter](https://flutter.dev/) applications. All widgets in this library can be used both as static and dynamic.
-The static use of the widgets, is a declaration of the widget in the page like any other widget in Flutter.
-The dynamic use of the component, is a definition of the widget in a json file which can be received as input in a SmeupDynamicScreen. This methodology allow you to have a single page application where the content of the page could be sent from a backend. 
+The static use of the widgets is a declaration of the widget in the page, like any other widget in Flutter.
+The dynamic use of the component is a definition of the widget in a json file, which can be received as input in a SmeupDynamicScreen. This methodology allows you to have a single page application where the content of the page could be sent from a backend.
 
 ## ken Showcase
 
-There is a project entirely dedicated to the [ken Showcase](https://github.com/smeup/ken-showcase). Feel free to download it and check out the examples provided. 
+There is a project entirely dedicated to the [ken Showcase](https://github.com/smeup/ken-showcase). Feel free to download it and check out the examples provided.
 
 ## ken API
 
-The [API documentation](https://github.com/smeup/ken/blob/develop/doc/api/index.md) provide with a full description of: classes, services, models and widgeds included in the ken library.
+The [API documentation](https://github.com/smeup/ken/blob/develop/doc/api/index.md) provides a full description of classes, services, models and widgets included in the ken library.
 
 ## ken Development
 
-The following documents will provide all material you need to start using ken library: 
+The following documents will provide all the material you need to start using the ken library:
+
 - [Dependencies](https://github.com/smeup/ken/blob/develop/doc/development/dependencies.md)
 - [Widgets](https://github.com/smeup/ken/blob/develop/doc/development/widgets.md)
-- [publish](https://github.com/smeup/ken/blob/develop/doc/development/publish_procedure.md)
+- [Publish](https://github.com/smeup/ken/blob/develop/doc/development/publish_procedure.md)
 
 ## How to use ken in your project
 
 Create a new Flutter app:
-    
+
     > flutter create myapp
 
 To install the ken library, add the following dependency into the pubspec.yaml:
