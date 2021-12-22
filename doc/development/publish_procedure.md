@@ -12,7 +12,7 @@ Follow the steps below to publish a new version
 
 - document the version in the CHANGELOG.md file
 
-- Check the release with following command:
+- Check the release with the following command:
 
   `dart pub publish --dry-run`
 
