@@ -45,5 +45,6 @@ dev_dependencies:
 
 flutter:
   assets:
+    - assets/jsons/
     - assets/jsons/themes/
     - assets/jsons/forms/

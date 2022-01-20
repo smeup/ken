@@ -9,7 +9,7 @@ void main() {
   test('test SmeupJsonDataService', () async {
     await UnitTestService.initTests();
 
-    var smeupFun = SmeupFun('F(EXD;*JSN;) 2(;;test_dynamic_screen)', null);
+    var smeupFun = SmeupFun('F(EXD;*JSN;) 2(;;test_dynamic_screen_auto)', null);
     expect(smeupFun.fun['fun']['service'], '*JSN');
 
     final res = await SmeupDataService.invoke(smeupFun);
