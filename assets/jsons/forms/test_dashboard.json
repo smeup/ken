@@ -1,0 +1,70 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "[description]",
+  "sections": [
+    {
+      "id": "S1",
+      "components": [
+        {
+          "type": "DSH",
+          "id": "dashboard1",
+          "options": {
+            "DSH": {
+              "default": {
+                "padding": {"left":0.0},
+                "forceText": "Dashboard with %",
+                "fontsize": "90%",
+                "icon": 59191,
+                "iconColor": "R000G255B000",
+                "width": 300
+              }
+            }
+          },
+          "data":{
+            "rows" :  [{ 
+              "value": 15.86,
+              "um": "Kg",
+              "description" : "My Value",
+              "icon": 59191
+            }
+            ]
+          } 
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "components": [
+        {
+          "type": "DSH",
+          "id": "dashboard2",
+          "options": {
+            "DSH": {
+              "default": {
+                "padding": {"left":0.0},
+                "forceText": "Dashboard with values",
+                "fontsize": 56,
+                "icon": 59191,
+                "iconSize": 40,
+                "iconColor": "R255G000B000",
+                "width": 300
+              }
+            }
+          },
+          "data":{
+            "rows" :  [{ 
+              "value": 15.86,
+              "um": "Kg",
+              "description" : "My Value",
+              "icon": 59191
+            }
+            ]
+          } 
+        }
+      ]
+    }
+  ]
+}

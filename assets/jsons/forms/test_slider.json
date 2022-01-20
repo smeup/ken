@@ -1,0 +1,36 @@
+{
+    "loaded": true,
+    "layout": "column",
+    "id": "testSld",
+    "type": "EXD",
+    "title": "[description]",
+    "sections": [
+      {
+        "id": "S1",
+        "title": "",
+        "components": [
+          {
+            "type": "FLD",
+            "id": "sld1",
+            "data": {
+              "rows": [
+                {
+                  "value": 20
+                }
+              ]
+            },
+            "options": {
+              "FLD": {
+                "default": {
+                  "type": "sld",
+                  "sldMin": 0,
+                  "sldMax": 100
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+  

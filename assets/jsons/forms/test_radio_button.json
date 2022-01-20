@@ -1,0 +1,224 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "[description]",
+  "sections": [
+    {
+      "id": "S1",
+      "title": "",
+      "dim": "25%",
+      "components": [
+        {
+          "type": "FLD",
+          "id": "radio_buttons_1",
+          "title": "Title 1",
+          "data": {
+            "rows": [
+              {
+                "code": "1",
+                "value": "Yes"
+              },
+              {
+                "code": "0",
+                "value": "No"
+              },
+              {
+                "code": "2",
+                "value": "Don't know"
+              },
+              {
+                "code": "3",
+                "value": "Maybe"
+              }
+            ]
+          },
+          "options": {
+            "FLD": {
+              "default": {
+                "type": "rad",
+                "selectedValue": "0",
+                "radCol": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "components": [
+        {
+          "type": "LIN",
+          "id": "lin1",
+          "options": {
+            "LIN": {
+              "default": {
+                
+              }
+            }
+          },
+          "data":{
+            "rows" :  [{ "color": "R128G128B128" }]
+          } 
+        }
+      ],
+      "id": "SL1"
+    },
+    {
+      "id": "S2",
+      "title": "",
+      "dim": "25%",
+      "components": [
+        {
+          "type": "FLD",
+          "id": "radio_buttons_2",
+          "title": "Title 2",
+          "data": {
+            "rows": [
+              {
+                "code": "1",
+                "value": "Yes"
+              },
+              {
+                "code": "0",
+                "value": "No"
+              },
+              {
+                "code": "2",
+                "value": "don't know"
+              },
+              {
+                "code": "3",
+                "value": "Maybe"
+              }
+            ]
+          },
+          "options": {
+            "FLD": {
+              "default": {
+                "type": "rad",
+                "selectedValue": "0",
+                "radCol": 2
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "components": [
+        {
+          "type": "LIN",
+          "id": "lin2",
+          "options": {
+            "LIN": {
+              "default": {
+                
+              }
+            }
+          },
+          "data":{
+            "rows" :  [{ "color": "R128G128B128" }]
+          } 
+        }
+      ],
+      "id": "SL2"
+    },
+    {
+      "id": "S3",
+      "title": "",
+      "dim": "25%",
+      "components": [
+        {
+          "type": "FLD",
+          "id": "radio_buttons_3",
+          "title": "Title 3",
+          "data": {
+            "rows": [
+              {
+                "code": "1",
+                "value": "Yes"
+              },
+              {
+                "code": "0",
+                "value": "No"
+              }
+            ]
+          },
+          "options": {
+            "FLD": {
+              "default": {
+                "type": "rad",
+                "selectedValue": "0",
+                "align": "right",
+                "radCol": 1,
+                "fontSize": 25,
+                "fontColor": "R255G255B255",
+                "backColor": "R000G000B255"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "components": [
+        {
+          "type": "LIN",
+          "id": "lin3",
+          "options": {
+            "LIN": {
+              "default": {
+                
+              }
+            }
+          },
+          "data":{
+            "rows" :  [{ "color": "R128G128B128" }]
+          } 
+        }
+      ],
+      "id": "SL3"
+    },
+    {
+      "id": "S4",
+      "title": "",
+      "dim": "25%",
+      "components": [
+        {
+          "type": "FLD",
+          "id": "radio_buttons_4",
+          "title": "Title 4",
+          "data": {
+            "rows": [
+              {
+                "myFieldValue": "1",
+                "myFieldDisplay": "ValueField - Yes"
+              },
+              {
+                "myFieldValue": "0",
+                "myFieldDisplay": "ValueField - No"
+              }
+            ]
+          },
+          "options": {
+            "FLD": {
+              "default": {
+                "type": "rad",
+                "selectedValue": "0",
+                "align": "center",
+                "radCol": 1,
+                "fontSize": 35,
+                "fontColor": "R000G000B000",
+                "backColor": "R255G000B000",
+                "valueField": "myFieldValue",
+                "displayedField": "myFieldDisplay"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

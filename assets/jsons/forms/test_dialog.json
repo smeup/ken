@@ -1,0 +1,55 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testDialog",
+  "type": "EXD",
+  "title": "[description]",
+  "sections": [
+    {
+      "id": "S1",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "fontSize": 25
+              }
+            }
+          },
+          "data":{
+            "rows" :  [{ "value": "Tap the button below to open the dialog" }]
+          } 
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "components": [
+        {
+          "type": "BTN",
+          "id": "buttons_1",
+          "options": {
+            "BTN": {
+              "default": {
+                "fontSize": 20
+              }
+            }
+          },
+          "data": {
+            "rows": [
+              { "value": "Open the dialog" }
+            ]
+          },
+          "dynamisms": [
+            {
+              "event": "click",
+              "exec": "F(EXD;*JSN;) 2(;;dialog_form) P(DIALOG) G(DLG) "
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

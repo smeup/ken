@@ -1,0 +1,157 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "[description]",
+  "sections": [
+    {
+      "id": "S1",
+      "components": [
+        {
+          "type": "BTN",
+          "id": "buttons_1",
+          "options": {
+            "BTN": {
+              "default": {
+                "horiz": "Yes",
+                "backColor": "R255G000B000",
+                "borderColor": "R000G000B000",
+                "fontColor": "R000G000B000",
+                "padding": { "right": 5 },
+                "height": 50,
+                "width" : 300,
+                "fontSize": 20
+              }
+            }
+          },
+          "data": {
+            "rows": [
+              { "value": "I am a button" },
+              { "value": "I am a button too" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "components": [
+        {
+          "type": "BTN",
+          "id": "buttons_2",
+          "options": {
+            "BTN": {
+              "default": {
+                "flat": "Yes",
+                "fontSize": 30
+              }
+            }
+          },
+          "data": {
+            "rows": [
+              { "value": "I am a link 1" },
+              { "value": "I am a link 2" },
+              { "value": "I am a link 3" },
+              { "value": "I am a link 4" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "S3",
+      "layout": "row",
+      "sections": [
+        {
+          "id": "S31",
+          "components": [
+            {
+              "type": "BTN",
+              "id": "buttons_3",
+              "options": {
+                "BTN": {
+                  "default": {
+                    "fillSpace": "Yes",
+                    "borderRadius": 10,
+                    "backColor": "R000G000B255",
+                    "borderColor": "R000G000B000",
+                    "fontColor": "R255G255B255",
+                    "bold": true,
+                    "padding": { "bottom": 5 },
+                    "height": 50,
+                    "fontSize": 20
+                  }
+                }
+              },
+              "data": {
+                "rows": [
+                  { "value": "Horizontal 1" },
+                  { "value": "Horizontal 2" }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S3",
+      "layout": "row",
+      "sections": [
+        {
+          "id": "S31",
+          "components": [
+            {
+              "type": "BTN",
+              "id": "buttons_4",
+              "options": {
+                "BTN": {
+                  "default": {
+                    "bold": true,
+                    "height": 40,
+                    "icon": 62370,
+                    "iconSize": 30,
+                    "align": "right",
+                    "borderRadius": 50,
+                    "fontSize": 20
+                  }
+                }
+              },
+              "data": {
+                "rows": [{ "value": "align right" }]
+              }
+            }
+          ]
+        },
+        {
+          "id": "S32",
+          "components": [
+            {
+              "type": "BTN",
+              "id": "buttons5",
+              "options": {
+                "BTN": {
+                  "default": {
+                    "bold": true,
+                    "height": 80,
+                    "width": 400,
+                    "icon": 62751,
+                    "iconSize": 20,
+                    "fontColor": "R000G000B255",
+                    "fontSize": 20,
+                    "borderColor": "R000G000B255",
+                    "align": "left"
+                  }
+                }
+              },
+              "data": {
+                "rows": [{ "value": "align left" }]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "[description]",
+  "sections": [
+    {
+      "components": [
+        {
+          "type": "CAU",
+          "id": "cau1",
+          "options": {
+            "CAU": {
+              "default": {
+                "padding": {"left":0.0},
+                "height": 300
+              }
+            }
+          },
+          "data":{
+            "rows" :  [
+              {
+                "imageFile": "assets/images/img-upick.png",
+                "text": "Descriptive text one"
+              },
+              {
+                "imageFile": "assets/images/not_available.png",
+                "text": "Descriptive text  two"
+              },
+              {
+                "imageFile": "assets/images/sun.jpg",
+                "text": "Descriptive text  three"
+              }
+            ]}
+        }
+      ],
+      "id": "S1"
+    }
+  ]
+}

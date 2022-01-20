@@ -1,0 +1,40 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "[description]",
+  "sections": [
+    {
+      "id": "S1",
+      "dim": "10%",
+      "components": [
+        {
+          "type": "FLD",
+          "id": "timePicker",
+          "options": {
+            "FLD": {
+              "default": {
+                "type": "tpk",
+                "underline": true,
+                "label" : "My time"
+              }
+            }
+          },
+          "data": {
+            "rows": [
+              {
+                "value": "17:30",
+                "display": "17:30"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "S1",
+      "dim": "90%"
+    }
+  ]
+}

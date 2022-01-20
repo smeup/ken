@@ -1,0 +1,27 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "[description]",
+  "sections": [
+    {
+      "id": "S1",
+      "title": "",
+      "components": [
+        {
+          "type": "FLD",
+          "id": "splash1",
+          "options": {
+            "FLD": {
+              "default": {
+                "type": "spl",
+                "color": "R255G000B000"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

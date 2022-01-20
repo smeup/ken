@@ -1,0 +1,132 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "[description]",
+  "sections": [
+    {
+      "id": "S4",
+      "dim" : "10%",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "align": "center"
+              }
+            }
+          },
+          "data": {
+            "rows": [
+              { "value": "regular autocomplete" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "S1",
+      "dim" : "10%",
+      "components": [
+        {
+          "id": "autocomplete1",
+          "type": "FLD",
+          "options": {
+            "FLD": {
+              "default": {
+                "type": "acp",
+                "label": "description",
+                "valueField": "value",
+                "padding": {"left":0.0}
+              }
+            }
+          },
+          "data": {
+            "rows": [
+              {
+                "code": "1",
+                "value": "description 1",
+                "type" : "",
+                "parameter": ""
+
+              },
+              {
+                "code": "2",
+                "value": "description 2",
+                "type" : "",
+                "parameter": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "S5",
+      "dim" : "10%",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab2",
+          "options": {
+            "LAB": {
+              "default": {
+                "align": "center"
+              }
+            }
+          },
+          "data": {
+            "rows": [
+              { "value": "autocomplete with submit button" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "dim" : "10%",
+      "components": [
+        {
+          "id": "autocomplete2",
+          "type": "FLD",
+          "options": {
+            "FLD": {
+              "default": {
+                "type": "acp",
+                "label": "description",
+                "valueField": "value",
+                "padding": {"left":0.0},
+                "showSubmit": true,
+                "submitLabel": "tap me"
+              }
+            }
+          },
+          "data": {
+            "rows": [
+              {
+                "code": "1",
+                "value": "description 1",
+                "type" : "",
+                "parameter": ""
+
+              },
+              {
+                "code": "2",
+                "value": "description 2",
+                "type" : "",
+                "parameter": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "S3"
+    }
+  ]
+}

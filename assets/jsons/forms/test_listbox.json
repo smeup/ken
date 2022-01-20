@@ -1,0 +1,72 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "[description]",
+  "sections": [
+    {
+      "id": "S1",
+      "components": 
+      [
+        {
+          "type": "BOX",
+          "id":"listbox1",
+          "options": {
+            "BOX": 
+            {
+              "default": {
+                "listType": "oriented",
+                "portraitColumns": 1,
+                "landscapeColumns": 1,
+                "height": 100.0,
+                "width": 0.0,
+                "listHeight": 0,
+                "padding" : {"left": 20},
+                "defaultSort": "description",
+                "fontColor": "R255G000B000",
+                "backColor": "R000G255B000",
+                "backgroundColName": "back",
+                "showSelection": "Yes",
+                "selectRow": 1
+              }
+            }
+          },
+          "data":{
+            "rows": 
+            [
+              {
+                "code": "a",
+                "description": "d",
+                "info": "boh1",
+                "back": "R255G255B000"
+              },
+              {
+                "code": "c",
+                "description": "b",
+                "info": "boh2",
+                "back": "R000G255B000"
+              }
+            ],
+            "columns": [
+              {"code": "code", "text": "codice", "IO": "O"},
+              {
+                "code": "description",
+                "text": "descrizione",
+                "IO": "O"
+              },
+              {"code": "info", "text": "informazioni", "IO": "H"},
+              {
+                "code": "back",
+                "text": "background color",
+                "IO": "H"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+
+

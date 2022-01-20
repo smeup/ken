@@ -1,0 +1,104 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "[description]",
+  "sections": [
+    {
+      "id": "S1",
+      "components": [
+        {
+          "type": "CHA",
+          "id": "chart1",
+          "options": {
+            "CHA": {
+              "default": {
+                "typ": ["bar"],
+                "height": 200,
+                "width": 600
+              }
+            }
+          },
+          "data": {
+            "rows": [
+              { "col1": "pippo", "col2": 1, "col3": 9, "col4": 11 },
+              { "col1": "pluto", "col2": 10, "col3": 20, "col4": 30 }
+            ],
+            "columns": [
+              {
+                "code": "col1",
+                "text": "value1",
+                "IO": "O",
+                "fill": "ASSE",
+                "lun": 0
+              },
+              {
+                "code": "col2",
+                "text": "value2",
+                "IO": "O",
+                "fill": "SERIE",
+                "lun": 0
+              },
+              {
+                "code": "col3",
+                "text": "value3",
+                "IO": "O",
+                "fill": "SERIE",
+                "lun": 0
+              },
+              {
+                "code": "col4",
+                "text": "value4",
+                "IO": "O",
+                "fill": "SERIE",
+                "lun": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "S2",
+      "components": [
+        {
+          "type": "CHA",
+          "id": "chart2",
+          "options": {
+            "CHA": {
+              "default": {
+                "types": ["pie"],
+                "height": 200,
+                "width": 600
+              }
+            }
+          },
+          "data": {
+            "rows": [
+              { "col1": "pippo", "col2": 1 },
+              { "col1": "pluto", "col2": 10 }
+            ],
+            "columns": [
+              {
+                "code": "col1",
+                "text": "value1",
+                "IO": "O",
+                "fill": "ASSE",
+                "lun": 0
+              },
+              {
+                "code": "col2",
+                "text": "value2",
+                "IO": "O",
+                "fill": "SERIE",
+                "lun": 0
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

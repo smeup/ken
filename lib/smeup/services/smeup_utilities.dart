@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
@@ -251,5 +250,10 @@ class SmeupUtilities {
       }
     }
     return null;
+  }
+
+  static void invokeScaffoldMessenger(BuildContext context, String text) {
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(text), duration: Duration(milliseconds: 500)));
   }
 }

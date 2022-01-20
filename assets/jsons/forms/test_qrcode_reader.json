@@ -1,0 +1,30 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "[description]",
+  "sections": [
+    {
+      "id": "S1",
+      "components": [
+        {
+          "id": "qrc1",
+          "type": "FLD",
+          "options": {
+            "FLD": {
+              "default": {
+                "type": "qrc",
+                "label": "description"                
+              }
+            }
+          },
+          "data":{
+            "rows" :  [{ "QRC": "I am a qrcode" }]
+          }
+        }
+      ]
+    }
+  ]
+}
+
