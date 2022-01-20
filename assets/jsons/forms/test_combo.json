@@ -1,0 +1,50 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "[description]",
+  "sections": [
+    {
+      "id": "S1",
+      "components": [
+        {
+          "type": "FLD",
+          "id": "combo1",
+          "options": {
+            "FLD": {
+              "default": {
+                "type": "cmb",
+                "defaultValue": "1",
+                "valueField": "code",
+                "descriptionField": "description",
+                "label" : "My combo",
+                "iconColor" : "R006G138B156"
+              }
+            }
+          },
+          "data": {
+            "rows": [
+              { "code": "1", "description": "One" },
+              { "code": "2", "description": "Two" },
+              { "code": "3", "description": "Free" },
+              { "code": "4", "description": "Four" }
+            ],
+            "columns": [
+              {
+                "value": "code",
+                "text": "",
+                "IO": "O"
+              },
+              {
+                "value": "description",
+                "text": "",
+                "IO": "O"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

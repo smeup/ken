@@ -1,0 +1,38 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "[description]",
+  "sections": [
+    {
+      "id": "S1",
+      "title": "",
+      "components": [
+        {
+          "type": "FLD",
+          "id": "switch1",
+          "data": {
+            "rows": [
+              {
+                "value": 1,
+                "txt": "Smeup Switch"
+              }
+            ]
+          },
+          "options": {
+            "FLD": {
+              "default": {
+                "type": "swt",
+                "width": 400,
+                "height": 50,
+                "fontsize": 20,
+                "text": "Smeup Switch"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

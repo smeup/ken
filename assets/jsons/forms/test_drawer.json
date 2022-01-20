@@ -1,0 +1,93 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "[description]",
+  "sections": [
+    {
+      "id": "S1",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "fontSize": 25
+              }
+            }
+          },
+          "data":{
+            "rows" :  [{ "value": "Click on the drawer icon at the top right of the screen" }]
+          } 
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "components": [
+        {
+          "type": "DRW",
+          "id": "drawer1",
+          "title": "my drawer",
+          "options": {
+            "DRW": {
+              "default": {
+                "imageUrl": "assets/images/sun.jpg",
+                "imageHeight": 80,
+                "imageWidth": 120
+              }
+            }
+          },
+          "data": {
+            "rows": [
+              {
+                "text": "WIDGETS",
+                "route": "F(EXD;*JSN;) 2(;;app_home)",
+                "iconCode": 0,
+                "fontSize": 18
+              },
+              {
+                "text": "Label",
+                "route": "F(EXD;*JSN;) 2(;;test_label)",
+                "iconCode": 0,
+                "group": "GROUP 1",
+                "fontSize": 16,
+                "groupIcon": 58722,
+                "groupFontSize": 18
+              },
+              {
+                "text": "Dashboard",
+                "route": "F(EXD;*JSN;) 2(;;test_dashboard)",
+                "iconCode": 0,
+                "group": "GROUP 1",
+                "fontSize": 16,
+                "groupIcon": 58722,
+                "groupFontSize": 18
+              },
+              {
+                "text": "Chart",
+                "route": "F(EXD;*JSN;) 2(;;test_chart)",
+                "iconCode": 0,
+                "group": "GROUP 2",
+                "fontSize": 16,
+                "groupIcon": 58722,
+                "groupFontSize": 18
+              },
+              {
+                "text": "Calendar",
+                "route": "F(EXD;*JSN;) 2(;;test_calendar)",
+                "iconCode": 0,
+                "group": "GROUP 2",
+                "fontSize": 16,
+                "groupIcon": 58722,
+                "groupFontSize": 18
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
