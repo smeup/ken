@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ken/smeup/widgets/smeup_text_autocomplete.dart';
-import 'package:ken/smeup/screens/textAutocomplete_screen.dart';
+import 'package:ken/smeup/screens/test/textAutocomplete_screen.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {
@@ -40,12 +40,12 @@ Future<void> runTests(WidgetTester tester) async {
   expect(findKeyText, findsOneWidget);
 
   var findWidget = find.byType(SmeupTextAutocomplete);
-  expect(findWidget, findsOneWidget);
+  expect(findWidget, findsWidgets);
 
   var findText = find.byType(TextFormField);
-  expect(findText, findsOneWidget);
+  expect(findText, findsWidgets);
 
-  await tester.tap(findText);
+  await tester.tap(findText.first);
   await tester.pump();
 
   var finderTextContent1 = find.text('description 1');

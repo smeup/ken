@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ken/smeup/widgets/smeup_qrcode_reader.dart';
-import 'package:ken/smeup/screens/qrcode_reader_screen.dart';
+import 'package:ken/smeup/screens/test/qrcode_reader_screen.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import 'widget_test_service.dart';

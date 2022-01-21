@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/widgets/smeup_drawer_data_element.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/widgets/smeup_drawer.dart';
-import 'package:ken/smeup/screens/calendar_screen.dart';
-import 'package:ken/smeup/screens/chart_screen.dart';
-import 'package:ken/smeup/screens/dashboard_screen.dart';
-import 'package:ken/smeup/screens/label_screen.dart';
+import 'package:ken/smeup/screens/test/calendar_screen.dart';
+import 'package:ken/smeup/screens/test/chart_screen.dart';
+import 'package:ken/smeup/screens/test/dashboard_screen.dart';
+import 'package:ken/smeup/screens/test/label_screen.dart';
 
 class DrawerScreen extends StatelessWidget {
   static const routeName = '/DrawerScreen';

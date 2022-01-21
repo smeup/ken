@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ken/smeup/models/notifiers/smeup_carousel_indicator_notifier.dart';
 import 'package:ken/smeup/widgets/smeup_carousel.dart';
 import 'package:provider/provider.dart';
-import 'package:ken/smeup/screens/carousel_screen.dart';
+import 'package:ken/smeup/screens/test/carousel_screen.dart';
 
 import 'widget_test_service.dart';
 

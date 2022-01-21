@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ken/smeup/services/smeupLocalizationDelegate.dart';
 import 'package:ken/smeup/widgets/smeup_calendar.dart';
-import 'package:ken/smeup/screens/calendar_screen.dart';
+import 'package:ken/smeup/screens/test/calendar_screen.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {
@@ -11,12 +14,18 @@ Future<void> main() async {
 
     Widget testWidget = new MediaQuery(
         data: new MediaQueryData(),
-        child: new MaterialApp(home: CalendarScreen()));
+        child: new MaterialApp(localizationsDelegates: [
+          SmeupLocalizationDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          DefaultCupertinoLocalizations.delegate
+        ], home: CalendarScreen()));
 
     await tester.pumpWidget(testWidget).then((value) async {
       await tester.pumpAndSettle();
 
-      runTests();
+      runTests(tester);
     });
   });
 
@@ -29,12 +38,12 @@ Future<void> main() async {
 
     await tester.pumpWidget(testWidget).then((value) async {
       await tester.pumpAndSettle();
-      runTests();
+      runTests(tester);
     });
   });
 }
 
-runTests() {
+runTests(WidgetTester tester) async {
   final findKey = find.byKey(Key('calendar1'));
   expect(findKey, findsWidgets);
 
@@ -43,6 +52,10 @@ runTests() {
 
   var findText = find.byType(Text);
   expect(findText, findsWidgets);
+
+  var finderTextDay = find.text('18');
+  await tester.tap(finderTextDay.first);
+  await tester.pump();
 
   var finderTextContent = find.text('My event 1');
   expect(finderTextContent, findsWidgets);

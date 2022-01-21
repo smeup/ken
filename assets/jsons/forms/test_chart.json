@@ -16,7 +16,8 @@
               "default": {
                 "typ": ["bar"],
                 "height": 200,
-                "width": 600
+                "width": 600,
+                "showMarks": true
               }
             }
           },

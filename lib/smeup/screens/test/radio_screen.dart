@@ -31,7 +31,7 @@ class RadioScreen extends StatelessWidget {
                       title: 'Select a value',
                       data: [
                         {"code": "0", "value": "No"},
-                        {"code": "1", "value": "Si"},
+                        {"code": "1", "value": "Yes"},
                       ],
                       id: 'radio_buttons_1',
                       clientOnPressed: (String value) {

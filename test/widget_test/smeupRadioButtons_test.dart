@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ken/smeup/widgets/smeup_radio_button.dart';
-import 'package:ken/smeup/screens/radio_screen.dart';
+import 'package:ken/smeup/screens/test/radio_screen.dart';
 
 import 'widget_test_service.dart';
 
@@ -51,7 +51,7 @@ runTests() {
   var findText = find.byType(Text);
   expect(findText, findsWidgets);
 
-  var finderTextContent1 = find.text('Si');
+  var finderTextContent1 = find.text('Yes');
   expect(finderTextContent1, findsWidgets);
 
   var finderTextContent2 = find.text('No');
