@@ -50,10 +50,9 @@ class SmeupChartModel extends SmeupModel {
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
-    if (optionsDefault['ShowMarks'] == 'Si')
-      legend = true;
-    else
-      legend = false;
+
+    legend =
+        SmeupUtilities.getBool(optionsDefault['showMarks']) ?? defaultLegend;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {

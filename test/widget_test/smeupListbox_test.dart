@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ken/smeup/widgets/smeup_list_box.dart';
-import 'package:ken/smeup/screens/listbox_screen.dart';
+import 'package:ken/smeup/screens/test/listbox_screen.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {

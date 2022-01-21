@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ken/smeup/widgets/smeup_gauge.dart';
-import 'package:ken/smeup/screens/gauge_screen.dart';
+import 'package:ken/smeup/screens/test/gauge_screen.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {
@@ -42,6 +42,6 @@ runTests() {
   var findText = find.byType(Text);
   expect(findText, findsWidgets);
 
-  var finderTextContent = find.text('15');
+  var finderTextContent = find.text('120');
   expect(finderTextContent, findsWidgets);
 }

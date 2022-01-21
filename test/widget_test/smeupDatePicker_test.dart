@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ken/smeup/widgets/smeup_datepicker.dart';
-import 'package:ken/smeup/screens/datePicker_screen.dart';
+import 'package:ken/smeup/screens/test/datePicker_screen.dart';
 
 import 'widget_test_service.dart';
 

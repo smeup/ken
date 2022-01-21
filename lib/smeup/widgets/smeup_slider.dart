@@ -150,7 +150,7 @@ class _SmeupSliderState extends State<SmeupSlider>
           child: SmeupSliderWidget(
             widget.scaffoldKey,
             widget.formKey,
-            id: widget.id,
+            //id: widget.id,
             activeTrackColor: widget.activeTrackColor,
             thumbColor: widget.thumbColor,
             inactiveTrackColor: widget.inactiveTrackColor,

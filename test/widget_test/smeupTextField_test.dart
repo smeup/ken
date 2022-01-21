@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ken/smeup/widgets/smeup_text_field.dart';
-import 'package:ken/smeup/screens/textField_screen.dart';
+import 'package:ken/smeup/screens/test/textField_screen.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {

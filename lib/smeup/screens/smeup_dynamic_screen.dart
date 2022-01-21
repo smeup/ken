@@ -95,7 +95,8 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
 
     smeupFun.saveParameters(widget._formKey);
 
-    var smeupScreenModel = SmeupScreenModel(context, smeupFun);
+    var smeupScreenModel = SmeupScreenModel(context, smeupFun,
+        backButtonVisible: widget.backButtonVisible, isDialog: widget.isDialog);
 
     var screen = FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getScreenChildren(smeupScreenModel, errorNotifier, routeArgs),

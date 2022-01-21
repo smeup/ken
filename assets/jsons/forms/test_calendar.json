@@ -13,9 +13,9 @@
           "options": {
             "CAL": {
               "default": {
-                "initialFirstWork": "2021-08-01",
-                "initialLastWork": "2021-12-31",    
-                "initialDay": "2021-09-01",
+                "initialFirstWork": "2022-01-01",
+                "initialLastWork": "2022-12-31",    
+                "initialDay": "2022-01-01",
                 "showNavigation" : true,
                 "dataColumnName": "value",
                 "titleColumnName": "title",
@@ -26,17 +26,17 @@
           },
           "data": {
             "rows": [
-              { "value": "20210901", "title": "Call allineamento app nativa", "style": "50G00", "init" : "103000", "end" : "113000"},
-              { "value": "20210901", "title": "Appuntamento dal dentista", "style": "50G00" },                                                 
-              { "value": "20210901", "title": "Serata Squid Games", "style": "50G00", "init" : "210000"},       
-              { "value": "20210905", "title": "My event 1", "style": "00H00"},
-              { "value": "20210910", "title": "My event 2", "style": "00H00"},
-              { "value": "20210910", "title": "My event 3", "style": "51G00" },
-              { "value": "20210910", "title": "My event 22", "style": "51G00" },
-              { "value": "20210910", "title": "My event 222", "style": "51G00" },
-              { "value": "20210910", "title": "My event 2222", "style": "51G00" },
-              { "value": "20211021", "title": "My event 4", "style": "01H00" },
-              { "value": "20211021", "title": "My event 5", "style": "01H00" }
+              { "value": "20220101", "title": "Call allineamento app nativa", "style": "50G00", "init" : "103000", "end" : "113000"},
+              { "value": "20220101", "title": "Appuntamento dal dentista", "style": "50G00" },                                                 
+              { "value": "20220101", "title": "Serata Squid Games", "style": "50G00", "init" : "210000"},       
+              { "value": "20220118", "title": "My event 1", "style": "00H00"},
+              { "value": "20220118", "title": "My event 2", "style": "00H00"},
+              { "value": "20220120", "title": "My event 3", "style": "51G00" },
+              { "value": "20220118", "title": "My event 22", "style": "51G00" },
+              { "value": "20220118", "title": "My event 222", "style": "51G00" },
+              { "value": "20220118", "title": "My event 2222", "style": "51G00" },
+              { "value": "20220121", "title": "My event 4", "style": "01H00" },
+              { "value": "20220221", "title": "My event 5", "style": "01H00" }
             ]
           }
         }

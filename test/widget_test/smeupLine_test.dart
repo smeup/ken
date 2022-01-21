@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ken/smeup/widgets/smeup_line.dart';
-import 'package:ken/smeup/screens/line_screen.dart';
+import 'package:ken/smeup/screens/test/line_screen.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {

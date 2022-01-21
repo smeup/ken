@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ken/smeup/widgets/smeup_dashboard.dart';
-import 'package:ken/smeup/screens/dashboard_screen.dart';
+import 'package:ken/smeup/screens/test/dashboard_screen.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {
@@ -40,9 +40,9 @@ runTests() {
   var findWidget = find.byType(SmeupDashboard);
   expect(findWidget, findsWidgets);
 
-  var finderTextContent = find.text('My Value');
+  var finderTextContent = find.textContaining('Dashboard ');
   expect(finderTextContent, findsWidgets);
 
-  var finderValueContent = find.text('15.86');
+  var finderValueContent = find.text('15');
   expect(finderValueContent, findsWidgets);
 }

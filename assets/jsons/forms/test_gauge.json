@@ -18,7 +18,7 @@
             }
           },
           "data":{
-            "rows" :  [{ "value": 15, "minValue": 0, "maxValue": 30, "warning" : 20 }]
+            "rows" :  [{ "value": 120, "minValue": 50, "maxValue": 150, "warning" : 100 }]
           } 
         }
       ],
