@@ -1,4 +1,5 @@
 {
   "organizationId": "Smeup",
-  "description": "Smeup"
+  "description": "Smeup",
+  "defaultServiceTransformer": "KOKOS"
 }

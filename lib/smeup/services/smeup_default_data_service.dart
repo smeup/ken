@@ -50,7 +50,7 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
 
       bool isValid = SmeupDataService.isValid(response.statusCode);
 
-      var responseData = _getResponseData(smeupFun, response, isValid);
+      var responseData = _transformResponse(smeupFun, response, isValid);
 
       return SmeupServiceResponse(
           isValid,
@@ -209,79 +209,9 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
     }
   }
 
-  dynamic _getResponseData(
+  dynamic _transformResponse(
       SmeupFun smeupFun, Response<dynamic> response, bool isValid) {
-    switch (smeupFun.fun['fun']['component']) {
-      case 'EXD':
-        return response.data;
-
-      case 'EXB':
-        dynamic res = SmeupDataService.getEmptyDataStructure();
-
-        // columns
-        res['columns'] = response.data['columns'];
-        // (response.data['columns'] as List)
-        //     .map((e) => {
-        //           'code': e['code'],
-        //           'text': e['text'],
-        //           'hidden': e['IO'] == 'H' ? true : false
-        //         })
-        //     .toList();
-
-        // rows
-        List rows = List<dynamic>.empty(growable: true);
-
-        (response.data['rows'] as List).forEach((row) {
-          var newRow = Map();
-          (res['columns'] as List).forEach((column) {
-            final value =
-                row['fields'][column['code']]['smeupObject']['codice'];
-            newRow[column['code']] = value;
-            newRow['tipo'] =
-                row['fields'][column['code']]['smeupObject']['tipo'];
-            newRow['parametro'] =
-                row['fields'][column['code']]['smeupObject']['parametro'];
-            newRow['codice'] =
-                row['fields'][column['code']]['smeupObject']['codice'];
-            newRow['testo'] =
-                row['fields'][column['code']]['smeupObject']['testo'];
-          });
-          rows.add(newRow);
-        });
-
-        res['rows'] = rows;
-        res['type'] = 'SmeupDataTable';
-        return res;
-
-      case 'TRE':
-        dynamic res = SmeupDataService.getEmptyDataStructure();
-        List rows = List.empty(growable: true);
-        for (var i = 0; i < (response.data['children'] as List).length; i++) {
-          final child = (response.data['children'] as List)[i];
-          final tipo = child['content']['tipo'];
-          final parametro = child['content']['parametro'];
-          final codice = child['content']['codice'];
-          final testo = child['content']['testo'];
-
-          var newRow = {
-            'tipo': tipo,
-            'parametro': parametro,
-            'codice': codice,
-            'value': testo,
-            //'${child['content']['codice']}': testo
-          };
-
-          rows.add(newRow);
-        }
-
-        res['rows'] = rows;
-        res['type'] = 'SmeupTreeNode';
-        return res;
-      case 'FBK':
-        break;
-
-      default:
-        return response.data;
-    }
+    return SmeupConfigurationService.getSmeupDataTransformer()
+        .transform(smeupFun, response.data);
   }
 }

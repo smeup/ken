@@ -9,6 +9,9 @@ import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_data_service_interface.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
+import 'package:ken/smeup/services/transformers/kokos_transformer.dart';
+import 'package:ken/smeup/services/transformers/null_transformer.dart';
+import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 import 'package:package_info/package_info.dart';
 import 'package:ken/smeup/services/SmeupLocalizationService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,6 +42,7 @@ class SmeupConfigurationService {
   static ExternalConfigurationModel _appConfiguration;
   static String appBarImage;
   static AuthenticationModel authenticationModel;
+  static SmeupDataTransformerInterface dataTransformer;
 
   static PackageInfo packageInfoModel = PackageInfo(
     appName: 'Unknown',
@@ -53,7 +57,8 @@ class SmeupConfigurationService {
       Map<String, SmeupDataServiceInterface> customDataServices,
       bool enableCache = false,
       AuthenticationModel authenticationModel,
-      String appBarImage = ''}) async {
+      String appBarImage = '',
+      SmeupDataTransformerInterface dataTransformer}) async {
     await SmeupConfigurationService.setAppConfiguration();
 
     SmeupConfigurationService.logLevel = logLevel;
@@ -89,6 +94,9 @@ class SmeupConfigurationService {
     SmeupConfigurationService.setPackageInfo(packageInfoModel);
     if (context != null) SmeupConfigurationService.setHolidays(context);
     if (enableCache) SmeupCacheService.init();
+
+    SmeupConfigurationService.dataTransformer =
+        dataTransformer ?? NullTransformer();
   }
 
   static void setPackageInfo(PackageInfo packageInfo) {
@@ -232,5 +240,24 @@ class SmeupConfigurationService {
 
   static SharedPreferences getLocalStorage() {
     return _localStorge;
+  }
+
+  static setSmeupDataTransformer() {
+    if (dataTransformer == null) {
+      dataTransformer = NullTransformer();
+
+      String defaultTranformer = SmeupConfigurationService.getAppConfiguration()
+          .defaultDataTransformer;
+
+      if (defaultTranformer != null) {
+        if (defaultTranformer.toUpperCase() == 'KOKOS') {
+          dataTransformer = KokosTransformer();
+        }
+      }
+    }
+  }
+
+  static getSmeupDataTransformer() {
+    return dataTransformer;
   }
 }

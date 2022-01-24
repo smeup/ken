@@ -10,6 +10,7 @@ class ExternalConfigurationModel {
   String httpServiceCheckEndpoint;
   bool enableCheckWiFi;
   bool enableCheckDataService;
+  String defaultDataTransformer;
 
   ExternalConfigurationModel.fromMap(dynamic json) {
     organizationId = json['organizationId'] ?? '';
@@ -19,6 +20,7 @@ class ExternalConfigurationModel {
     defaultServiceEndpoint = json['defaultServiceEndpoint'] ?? '';
     httpServiceEndpoint = json['httpServiceEndpoint'] ?? '';
     httpServiceCheckEndpoint = json['httpServiceCheckEndpoint'] ?? '';
+    defaultDataTransformer = json['defaultServiceTransformer'] ?? '';
     enableCheckWiFi = json['enableCheckWiFi'] ?? true;
     enableCheckDataService = json['enableCheckDataService'] ?? true;
   }
