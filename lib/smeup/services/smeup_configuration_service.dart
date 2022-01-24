@@ -54,6 +54,9 @@ class SmeupConfigurationService {
       bool enableCache = false,
       AuthenticationModel authenticationModel,
       String appBarImage = ''}) async {
+    SmeupConfigurationService.jsonsPath = 'assets/jsons';
+    SmeupConfigurationService.imagesPath = 'assets/images';
+
     await SmeupConfigurationService.setAppConfiguration();
 
     SmeupConfigurationService.logLevel = logLevel;
@@ -68,9 +71,6 @@ class SmeupConfigurationService {
 
     SmeupConfigurationService.setDefaultServiceEndpoint();
     SmeupConfigurationService.setHttpServiceEndpoint();
-
-    SmeupConfigurationService.jsonsPath = 'assets/jsons';
-    SmeupConfigurationService.imagesPath = 'assets/images';
 
     SmeupDataService.initInternalService();
 
@@ -170,7 +170,8 @@ class SmeupConfigurationService {
     final savedDefaultServiceEndpoint =
         _loadAltServiceEndpoint(ALT_SERVICE_ENDPOINTS.DEFAULT);
 
-    if (savedDefaultServiceEndpoint.isNotEmpty)
+    if (savedDefaultServiceEndpoint != null &&
+        savedDefaultServiceEndpoint.isNotEmpty)
       _defaultServiceEndpoint = savedDefaultServiceEndpoint;
     else
       _defaultServiceEndpoint = SmeupConfigurationService.getAppConfiguration()
@@ -186,7 +187,7 @@ class SmeupConfigurationService {
     final savedHttpServiceEndpoint =
         _loadAltServiceEndpoint(ALT_SERVICE_ENDPOINTS.HTTP);
 
-    if (savedHttpServiceEndpoint.isNotEmpty)
+    if (savedHttpServiceEndpoint != null && savedHttpServiceEndpoint.isNotEmpty)
       _httpServiceEndpoint = savedHttpServiceEndpoint;
     else
       _httpServiceEndpoint = SmeupConfigurationService.getAppConfiguration()
@@ -223,8 +224,8 @@ class SmeupConfigurationService {
       // SharedPreferences.setMockInitialValues(
       //     <String, dynamic>{'DEFAULT': '', 'HTTP': ''});
       _localStorge = await SharedPreferences.getInstance();
-      _localStorge.setString('DEFAULT', '');
-      _localStorge.setString('HTTP', '');
+      //_localStorge.setString('DEFAULT', '');
+      //_localStorge.setString('HTTP', '');
     } catch (e) {
       SmeupLogService.writeDebugMessage('setLocalStorage failed: $e');
     }
