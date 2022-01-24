@@ -254,8 +254,9 @@ class _SmeupDrawerState extends State<SmeupDrawer>
                   : null,
               title: Text(e.group, style: _getElementTextStile()),
             ),
-            theme: const ExpandableThemeData(
+            theme: ExpandableThemeData(
                 headerAlignment: ExpandablePanelHeaderAlignment.center,
+                iconColor: _getIconTheme().color,
                 tapBodyToCollapse: true),
             expanded: Column(
               children: listInGroup,
