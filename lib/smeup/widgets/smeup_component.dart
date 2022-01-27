@@ -221,7 +221,10 @@ class _SmeupComponentState extends State<SmeupComponent> {
           double deviceWidth = deviceInfo.size.width;
 
           var smeupJsonForm = SmeupFormModel.fromMap(
-              smeupServiceResponse.result.data, widget.formKey);
+              smeupServiceResponse.result.data,
+              widget.formKey,
+              widget.scaffoldKey,
+              context);
           final form =
               SmeupForm(smeupJsonForm, widget.scaffoldKey, widget.formKey);
 

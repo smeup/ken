@@ -61,7 +61,7 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
       dropdownColor: widget.backColor,
       style: _getTextStile(),
       icon: Icon(
-        Icons.arrow_downward,
+        Icons.keyboard_arrow_down_sharp,
         color: iconTheme.color,
         size: iconTheme.size,
       ),

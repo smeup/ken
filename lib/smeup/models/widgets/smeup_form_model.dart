@@ -15,6 +15,7 @@ class SmeupFormModel extends SmeupModel
   static const bool defaultAutoAdaptHeight = true;
 
   final GlobalKey<FormState> formKey;
+  final GlobalKey<ScaffoldState> scaffoldKey;
   List<SmeupSectionModel> smeupSectionsModels;
   List<dynamic> formVariables;
   EdgeInsetsGeometry padding;
@@ -23,8 +24,8 @@ class SmeupFormModel extends SmeupModel
   Color backColor;
   bool autoAdaptHeight;
 
-  SmeupFormModel.fromMap(response, this.formKey)
-      : super.fromMap(response, formKey) {
+  SmeupFormModel.fromMap(response, this.formKey, this.scaffoldKey, this.context)
+      : super.fromMap(response, formKey, scaffoldKey, context) {
     Map<String, dynamic> jsonMap = response;
 
     padding =
@@ -40,8 +41,8 @@ class SmeupFormModel extends SmeupModel
     _replaceFormTitle(jsonMap);
     formVariables = _getFormVariables(jsonMap);
 
-    smeupSectionsModels =
-        getSections(jsonMap, 'sections', formKey, autoAdaptHeight, this);
+    smeupSectionsModels = getSections(jsonMap, 'sections', formKey, scaffoldKey,
+        context, autoAdaptHeight, this);
   }
 
   void _replaceFormTitle(dynamic jsonMap) {

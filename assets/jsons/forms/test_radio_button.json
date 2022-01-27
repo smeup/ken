@@ -209,9 +209,6 @@
                 "selectedValue": "0",
                 "align": "center",
                 "radCol": 1,
-                "fontSize": 35,
-                "fontColor": "R000G000B000",
-                "backColor": "R255G000B000",
                 "valueField": "myFieldValue",
                 "displayedField": "myFieldDisplay"
               }

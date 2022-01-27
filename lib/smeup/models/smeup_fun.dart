@@ -6,8 +6,10 @@ import 'package:ken/smeup/services/smeup_variables_service.dart';
 class SmeupFun {
   dynamic fun;
   GlobalKey<FormState> formKey;
+  GlobalKey<ScaffoldState> scaffoldKey;
+  BuildContext context;
 
-  SmeupFun(dynamic dynamicFun, this.formKey) {
+  SmeupFun(dynamic dynamicFun, this.formKey, this.scaffoldKey, this.context) {
     // the object to parse is empty:
     // - return an empty SmeupFun
     if (dynamicFun == null || dynamicFun.toString().isEmpty) {

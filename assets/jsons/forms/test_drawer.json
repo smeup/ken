@@ -44,13 +44,13 @@
             "rows": [
               {
                 "text": "WIDGETS",
-                "route": "F(EXD;*JSN;) 2(;;app_home)",
+                "route": "F(EXD;*JSN;) 1(;;packages/ken/assets/jsons/forms) 2(;;app_home)",
                 "iconCode": 0,
                 "fontSize": 18
               },
               {
                 "text": "Label",
-                "route": "F(EXD;*JSN;) 2(;;test_label)",
+                "route": "F(EXD;*JSN;) 1(;;packages/ken/assets/jsons/forms) 2(;;test_label)",
                 "iconCode": 0,
                 "group": "GROUP 1",
                 "fontSize": 16,
@@ -59,7 +59,7 @@
               },
               {
                 "text": "Dashboard",
-                "route": "F(EXD;*JSN;) 2(;;test_dashboard)",
+                "route": "F(EXD;*JSN;) 1(;;packages/ken/assets/jsons/forms) 2(;;test_dashboard)",
                 "iconCode": 0,
                 "group": "GROUP 1",
                 "fontSize": 16,
@@ -68,7 +68,7 @@
               },
               {
                 "text": "Chart",
-                "route": "F(EXD;*JSN;) 2(;;test_chart)",
+                "route": "F(EXD;*JSN;) 1(;;packages/ken/assets/jsons/forms) 2(;;test_chart)",
                 "iconCode": 0,
                 "group": "GROUP 2",
                 "fontSize": 16,
@@ -77,7 +77,7 @@
               },
               {
                 "text": "Calendar",
-                "route": "F(EXD;*JSN;) 2(;;test_calendar)",
+                "route": "F(EXD;*JSN;) 1(;;packages/ken/assets/jsons/forms) 2(;;test_calendar)",
                 "iconCode": 0,
                 "group": "GROUP 2",
                 "fontSize": 16,

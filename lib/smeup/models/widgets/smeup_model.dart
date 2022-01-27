@@ -30,11 +30,14 @@ abstract class SmeupModel {
   int serviceStatusCode = 0;
   //int refresh;
   GlobalKey<FormState> formKey;
+  GlobalKey<ScaffoldState> scaffoldKey;
+  BuildContext context;
   Function onReady;
 
   List<SmeupSectionModel> smeupSectionsModels;
 
-  SmeupModel(this.formKey, {this.title, this.id, this.type}) {
+  SmeupModel(this.formKey, this.scaffoldKey, this.context,
+      {this.title, this.id, this.type}) {
     showLoader = SmeupConfigurationService.getAppConfiguration().showLoader;
     if (optionsDefault == null) {
       optionsDefault = _getNewLinkedHashMap();
@@ -43,13 +46,14 @@ abstract class SmeupModel {
     }
   }
 
-  SmeupModel.fromMap(Map<String, dynamic> jsonMap, this.formKey) {
+  SmeupModel.fromMap(Map<String, dynamic> jsonMap, this.formKey,
+      this.scaffoldKey, this.context) {
     var myJsonMap = _getNewLinkedHashMap();
     _setLinkedHashMap(jsonMap, myJsonMap);
 
     type = myJsonMap['type'];
     dynamisms = myJsonMap['dynamisms'];
-    smeupFun = SmeupFun(myJsonMap['fun'], formKey);
+    smeupFun = SmeupFun(myJsonMap['fun'], formKey, scaffoldKey, context);
 
     switch (myJsonMap['load']) {
       case 'D':

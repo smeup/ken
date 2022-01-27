@@ -59,6 +59,8 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
       type,
       title = '',
       GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
       this.backColor,
       this.borderColor,
       this.borderWidth,
@@ -79,14 +81,17 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
       this.orientation = defaultOrientation,
       this.isLink = defaultIsLink,
       this.innerSpace = defaultInnerSpace})
-      : super(formKey, title: title) {
+      : super(formKey, scaffoldKey, context, title: title) {
     SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
 
   SmeupButtonsModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+      Map<String, dynamic> jsonMap,
+      GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context)
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';

@@ -117,6 +117,7 @@ class StaticScreen extends StatelessWidget {
           height: 110,
           width: deviceInfo.size.width,
           fontSize: 12,
+          fontBold: true,
           clientOnPressed: () {
             Navigator.of(context).pushNamed(
               routing,

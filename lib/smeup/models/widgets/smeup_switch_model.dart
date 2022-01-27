@@ -35,6 +35,8 @@ class SmeupSwitchModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupSwitchModel({
     GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
     id,
     type,
     title = '',
@@ -48,15 +50,23 @@ class SmeupSwitchModel extends SmeupModel implements SmeupDataInterface {
     this.width = defaultWidth,
     this.height = defaultHeight,
     this.padding = defaultPadding,
-  }) : super(formKey, title: title, id: id, type: type) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'swt';
     SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
 
   SmeupSwitchModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     setDefaults(this);
     title = jsonMap['title'] ?? '';
     padding =

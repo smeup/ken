@@ -66,6 +66,8 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
       {id,
       type,
       GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
       this.backColor,
       this.fontSize,
       this.fontBold,
@@ -91,7 +93,7 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
       this.valueField,
       this.showRules = defaultShowRules,
       this.checkRules = defaultCheckRules})
-      : super(formKey, title: title, id: id, type: type) {
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (backColor == null)
       backColor = SmeupConfigurationService.getTheme().backgroundColor;
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'pwd';
@@ -101,8 +103,16 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
   }
 
   SmeupTextPasswordModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     setDefaults(this);
     backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??
         defaultBackColor;

@@ -47,6 +47,8 @@ class SmeupCalendarModel extends SmeupModel {
     id,
     type,
     GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
     this.dayFontSize,
     this.eventFontSize,
     this.titleFontSize,
@@ -66,7 +68,7 @@ class SmeupCalendarModel extends SmeupModel {
     this.showAsWeek,
     this.showNavigation,
     this.padding = defaultPadding,
-  }) : super(formKey, title: title, id: id, type: type) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     id = SmeupUtilities.getWidgetId('CAL', id);
     setDefaults(this);
 
@@ -80,8 +82,11 @@ class SmeupCalendarModel extends SmeupModel {
   }
 
   SmeupCalendarModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+      Map<String, dynamic> jsonMap,
+      GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context)
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     dayFontSize = SmeupUtilities.getDouble(optionsDefault['todayFontSize']) ??

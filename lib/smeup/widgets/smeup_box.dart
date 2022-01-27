@@ -7,6 +7,7 @@ import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/services/smeup_message_data_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/widgets/smeup_button.dart';
 import 'package:ken/smeup/widgets/smeup_image.dart';
@@ -180,11 +181,12 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
               );
             },
             onDismissed: (direction) async {
-              var smeupFun = SmeupFun(deleteDynamism['exec'], widget.formKey);
+              var smeupFun = SmeupFun(deleteDynamism['exec'], widget.formKey,
+                  widget.scaffoldKey, context);
               var smeupServiceResponse =
                   await SmeupDataService.invoke(smeupFun);
-              SmeupDynamismService.manageResponseMessage(
-                  context, smeupServiceResponse.result, widget.scaffoldKey);
+              SmeupMessageDataService.manageResponseMessage(
+                  context, smeupServiceResponse.result);
               widget.onRefresh();
             },
             background: Container(
@@ -733,7 +735,8 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
             }
           };
 
-          final smeupFun = SmeupFun(fun, null);
+          final smeupFun =
+              SmeupFun(fun, widget.formKey, widget.scaffoldKey, context);
 
           final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
           if (!smeupServiceResponse.succeded) {

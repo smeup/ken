@@ -49,6 +49,8 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupRadioButtonsModel(
       {GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
       id,
       type,
       title = '',
@@ -69,7 +71,7 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
       this.displayedField = defaultDisplayedField,
       this.selectedValue,
       this.columns = defaultColumns})
-      : super(formKey, title: title, id: id, type: type) {
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     setDefaults(this);
 
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'rad';
@@ -78,8 +80,16 @@ class SmeupRadioButtonsModel extends SmeupModel implements SmeupDataInterface {
   }
 
   SmeupRadioButtonsModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';

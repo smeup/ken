@@ -60,7 +60,13 @@
                 "parameter": ""
               }
             ]
-          }
+          },
+          "dynamisms": [
+            {
+              "event": "change",
+              "exec": "F(FBK;*MSG;) P(you selected the option: \"[autocomplete1]\" \"[value]\")"
+            }
+          ]
         }
       ]
     },
@@ -121,7 +127,13 @@
                 "parameter": ""
               }
             ]
-          }
+          },
+          "dynamisms": [
+            {
+              "event": "change",
+              "exec": "F(FBK;*MSG;) P(you selected the option: \"[autocomplete2]\" \"[value]\")"
+            }
+          ]
         }
       ]
     },

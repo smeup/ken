@@ -59,6 +59,8 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       {id,
       type,
       formKey,
+      scaffoldKey,
+      context,
       this.fontColor,
       this.fontSize,
       this.fontBold,
@@ -81,7 +83,7 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       this.forceIcon = defaultForceIcon,
       this.numberFormat = defaultNumberFormat,
       title = ''})
-      : super(formKey, title: title, id: id, type: type) {
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (iconColor == null)
       iconColor = SmeupConfigurationService.getTheme().iconTheme.color;
     id = SmeupUtilities.getWidgetId('DSH', id);
@@ -90,8 +92,16 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   }
 
   SmeupDashboardModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     setDefaults(this);
     valueColName = optionsDefault['ValueColName'] ?? defaultValueColName;
     iconColName = optionsDefault['iconColName'] ?? defaultIconColName;

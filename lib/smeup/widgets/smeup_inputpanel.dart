@@ -114,7 +114,8 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
   Future<SmeupWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupInputPanelDao.getData(_model, widget.formKey);
+        await SmeupInputPanelDao.getData(
+            _model, widget.formKey, widget.scaffoldKey, context);
         _data = widget.treatData(_model);
       }
       setDataLoad(widget.id, true);

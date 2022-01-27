@@ -39,6 +39,8 @@ class SmeupDrawerModel extends SmeupModel {
     id,
     type,
     GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
     this.appBarBackColor,
     this.titleFontSize,
     this.titleFontColor,
@@ -51,7 +53,7 @@ class SmeupDrawerModel extends SmeupModel {
     this.imageWidth = defaultImageWidth,
     this.imageHeight = defaultImageHeight,
     this.showItemDivider = defaultShowItemDivider,
-  }) : super(formKey, title: title, id: id, type: type) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (appBarBackColor == null)
       appBarBackColor =
           SmeupConfigurationService.getTheme().appBarTheme.backgroundColor;
@@ -60,8 +62,16 @@ class SmeupDrawerModel extends SmeupModel {
   }
 
   SmeupDrawerModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';

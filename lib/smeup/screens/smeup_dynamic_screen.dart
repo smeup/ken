@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/notifiers/smeup_error_notifier.dart';
-import 'package:ken/smeup/models/widgets/smeup_drawer_data_element.dart';
 import 'package:ken/smeup/models/widgets/smeup_drawer_model.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_widget_notification_service.dart';
@@ -160,8 +159,8 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
         backButtonVisible = routeArgs['backButtonVisible'] ?? true;
     }
 
-    smeupFormModel =
-        SmeupFormModel.fromMap(smeupScreenModel.data, widget._formKey);
+    smeupFormModel = SmeupFormModel.fromMap(
+        smeupScreenModel.data, widget._formKey, widget._scaffoldKey, context);
 
     await smeupFormModel.getSectionsData();
 
@@ -208,17 +207,17 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
 
   SmeupDrawer _getDrawer(SmeupScreenModel smeupScreenModel, bool isDialog) {
     SmeupDrawer smeupDrawer;
-    Function getNewDrawer = () {
-      var newList = List<SmeupDrawerDataElement>.empty(growable: true);
-      if (!isDialog) SmeupDrawer.addInternalDrawerElements(newList, context);
-      smeupDrawer = SmeupDrawer(
-        widget._scaffoldKey,
-        widget._formKey,
-        data: newList,
-        title: 'MENU',
-      );
-      return smeupDrawer;
-    };
+    // Function getNewDrawer = () {
+    //   var newList = List<SmeupDrawerDataElement>.empty(growable: true);
+    //   if (!isDialog) SmeupDrawer.addInternalDrawerElements(newList, context);
+    //   smeupDrawer = SmeupDrawer(
+    //     widget._scaffoldKey,
+    //     widget._formKey,
+    //     data: newList,
+    //     title: 'MENU',
+    //   );
+    //   return smeupDrawer;
+    // };
 
     if (smeupScreenModel.data != null &&
         smeupScreenModel.data['sections'] != null &&
@@ -238,16 +237,18 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
       }
 
       if (smeupDrawerJson != null) {
-        smeupDrawerModel =
-            SmeupDrawerModel.fromMap(smeupDrawerJson, widget._formKey);
+        smeupDrawerModel = SmeupDrawerModel.fromMap(
+            smeupDrawerJson, widget._formKey, widget._scaffoldKey, context);
         smeupDrawer = SmeupDrawer.withController(
             smeupDrawerModel, widget._scaffoldKey, widget._formKey);
-      } else {
-        smeupDrawer = getNewDrawer();
       }
-    } else {
-      smeupDrawer = getNewDrawer();
+      // else {
+      //   smeupDrawer = getNewDrawer();
+      // }
     }
+    // else {
+    //   smeupDrawer = getNewDrawer();
+    // }
     return smeupDrawer;
   }
 
@@ -331,7 +332,8 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
                   ),
                 ),
                 onTap: () async {
-                  SmeupFun smeupFun = SmeupFun(button, widget._formKey);
+                  SmeupFun smeupFun = SmeupFun(
+                      button, widget._formKey, widget._scaffoldKey, context);
                   if (smeupFun.isDinamismAsync(
                       smeupFun.fun['fun']['dynamisms'], 'click')) {
                     SmeupDynamismService.run(smeupFun.fun['fun']['dynamisms'],

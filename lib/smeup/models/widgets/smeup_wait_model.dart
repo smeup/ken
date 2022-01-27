@@ -10,15 +10,29 @@ class SmeupWaitModel extends SmeupModel implements SmeupDataInterface {
   Color circularTrackColor;
 
   SmeupWaitModel(
-      {id, type, GlobalKey<FormState> formKey, this.splashColor, title = ''})
-      : super(formKey, title: title, id: id, type: type) {
+      {id,
+      type,
+      GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
+      this.splashColor,
+      title = ''})
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'wai';
     SmeupDataService.incrementDataFetch(id);
   }
 
   SmeupWaitModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     title = jsonMap['title'] ?? '';
 
     splashColor = SmeupUtilities.getColorFromRGB(optionsDefault['splashColor']);

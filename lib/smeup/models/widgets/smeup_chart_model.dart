@@ -23,19 +23,24 @@ class SmeupChartModel extends SmeupModel {
     id,
     type,
     GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
     title = '',
     this.chartType = defaultChartType,
     //this.refresh = defaultRefresh,
     this.height = defaultHeight,
     this.width = defaultWidth,
     this.legend = defaultLegend,
-  }) : super(formKey, title: title, id: id, type: type) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
   }
 
   SmeupChartModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+      Map<String, dynamic> jsonMap,
+      GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context)
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     if (optionsDefault['Typ'] == null) {
       chartType = defaultChartType;
     } else {

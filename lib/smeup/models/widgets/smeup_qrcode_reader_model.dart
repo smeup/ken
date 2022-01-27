@@ -18,20 +18,29 @@ class SmeupQRCodeReaderModel extends SmeupModel implements SmeupDataInterface {
   int delayInMillis;
 
   SmeupQRCodeReaderModel(GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey, BuildContext context,
       {this.padding = defaultPadding,
       this.size = defaultSize,
       title = '',
       this.onDataRead,
       this.maxReads = defaultMaxReads,
       this.delayInMillis = defaultDealyInMillis})
-      : super(formKey, title: title) {
+      : super(formKey, scaffoldKey, context, title: title) {
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
   }
 
   SmeupQRCodeReaderModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     padding =
         SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
     size = SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultSize;
