@@ -209,13 +209,19 @@ class _SmeupListBoxState extends State<SmeupListBox>
       _selectedRow = int.tryParse(localSelectedRow) ?? widget.selectedRow;
     }
 
-    if (_selectedRow != -1) {
+    double realBoxHeight = SmeupConfigurationService.getLocalStorage()
+        .getDouble('${widget.formKey.hashCode}_${widget.id}_realBoxHeight');
+
+    if (widget.listType == SmeupListType.oriented &&
+        _selectedRow != -1 &&
+        realBoxHeight != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         MediaQueryData deviceInfo = MediaQuery.of(context);
         double formSpace = deviceInfo.size.height -
             SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight;
-        double scrollPosition = ((_selectedRow + 1) * (_model.height - 10)) -
-            SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight;
+        double scrollPosition = ((_selectedRow + 1) *
+            (realBoxHeight - 10) /
+            _model.landscapeColumns);
         if (scrollPosition > formSpace)
           Future.delayed(Duration(milliseconds: 300), () {
             _scrollController.jumpTo(scrollPosition);
@@ -468,31 +474,41 @@ class _SmeupListBoxState extends State<SmeupListBox>
         }
       };
 
-      final cell = SmeupBox(widget.scaffoldKey, widget.formKey, i,
-          isDynamic: _model != null,
-          selectedRow: _selectedRow,
-          onRefresh: _refreshList,
-          showLoader: widget.showLoader,
-          id: widget.id,
-          layout: widget.layout,
-          columns: _data['columns'],
-          data: dataElement,
-          dynamisms: _model?.dynamisms,
-          height: widget.height,
-          width: widget.width,
-          fontColor: widget.fontColor,
-          backColor: _backColor,
-          showSelection: widget.showSelection,
-          dismissEnabled: widget.dismissEnabled,
-          onItemTap: _onItemTap,
-          cardTheme: cardTheme,
-          textStyle: textStyle,
-          captionStyle: captionStyle);
+      final cell = SmeupBox(
+        widget.scaffoldKey,
+        widget.formKey,
+        i,
+        isDynamic: _model != null,
+        selectedRow: _selectedRow,
+        onRefresh: _refreshList,
+        showLoader: widget.showLoader,
+        id: widget.id,
+        layout: widget.layout,
+        columns: _data['columns'],
+        data: dataElement,
+        dynamisms: _model?.dynamisms,
+        height: widget.height,
+        width: widget.width,
+        fontColor: widget.fontColor,
+        backColor: _backColor,
+        showSelection: widget.showSelection,
+        dismissEnabled: widget.dismissEnabled,
+        onItemTap: _onItemTap,
+        cardTheme: cardTheme,
+        textStyle: textStyle,
+        captionStyle: captionStyle,
+        onSizeChanged: onSizeChanged,
+      );
 
       cells.add(cell);
     });
 
     return cells;
+  }
+
+  void onSizeChanged(Size size) {
+    SmeupConfigurationService.getLocalStorage().setDouble(
+        '${widget.formKey.hashCode}_${widget.id}_realBoxHeight', size.height);
   }
 
   CardTheme _getCardStyle(Color backColor) {

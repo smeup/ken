@@ -1,3 +1,4 @@
+import 'package:clickable_list_wheel_view/measure_size.dart';
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/models/widgets/smeup_image_model.dart';
@@ -39,6 +40,7 @@ class SmeupBox extends StatefulWidget {
   final CardTheme cardTheme;
   final TextStyle textStyle;
   final TextStyle captionStyle;
+  final Function onSizeChanged;
 
   SmeupBox(this.scaffoldKey, this.formKey, this.index,
       {this.id,
@@ -59,7 +61,8 @@ class SmeupBox extends StatefulWidget {
       this.showSelection,
       this.cardTheme,
       this.textStyle,
-      this.captionStyle});
+      this.captionStyle,
+      this.onSizeChanged});
 
   @override
   _SmeupBoxState createState() => _SmeupBoxState();
@@ -206,14 +209,27 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           )
         : box;
 
-    final container = Container(
+    Widget container;
+    if (widget.index == 0) {
+      container = MeasureSize(
+          onChange: (Size size) {
+            if (widget.onSizeChanged != null) widget.onSizeChanged(size);
+          },
+          child: _getContainer(res));
+    } else {
+      container = _getContainer(res);
+    }
+
+    return SmeupWidgetBuilderResponse(null, container);
+  }
+
+  Container _getContainer(res) {
+    return Container(
         padding: const EdgeInsets.all(5.0),
         color: Colors.transparent,
         height: widget.height,
         width: widget.width,
         child: res);
-
-    return SmeupWidgetBuilderResponse(null, container);
   }
 
   Widget _getLayout1(dynamic data, BuildContext context) {
