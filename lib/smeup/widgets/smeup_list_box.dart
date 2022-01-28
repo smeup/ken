@@ -192,14 +192,36 @@ class _SmeupListBoxState extends State<SmeupListBox>
   List<Widget> cells;
   SmeupListBoxModel _model;
   dynamic _data;
-
-  final _scrollController = FixedExtentScrollController();
+  ScrollController _scrollController;
+  int _selectedRow = -1;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
+    _selectedRow = widget.selectedRow;
     if (_model != null) widgetLoadType = _model.widgetLoadType;
+    _scrollController = new ScrollController();
+
+    String localSelectedRow = SmeupConfigurationService.getLocalStorage()
+        .getString('${widget.formKey.hashCode}_${widget.id}');
+    if (localSelectedRow != null && localSelectedRow.isNotEmpty) {
+      _selectedRow = int.tryParse(localSelectedRow) ?? widget.selectedRow;
+    }
+
+    if (_selectedRow != -1) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        MediaQueryData deviceInfo = MediaQuery.of(context);
+        double formSpace = deviceInfo.size.height -
+            SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight;
+        double scrollPosition = ((_selectedRow + 1) * (_model.height - 10)) -
+            SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight;
+        if (scrollPosition > formSpace)
+          Future.delayed(Duration(milliseconds: 300), () {
+            _scrollController.jumpTo(scrollPosition);
+          });
+      });
+    }
     super.initState();
   }
 
@@ -273,6 +295,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
     var list = RefreshIndicator(
       onRefresh: _refreshList,
       child: ListView.builder(
+        key: ObjectKey("_list_${widget.id}"),
+        controller: _scrollController,
         scrollDirection: widget.orientation,
         physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         itemCount: cells.length,
@@ -318,6 +342,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
         return RefreshIndicator(
           onRefresh: _refreshList,
           child: GridView.count(
+            controller: _scrollController,
             childAspectRatio: childAspectRatio,
             physics:
                 BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
@@ -344,6 +369,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
   Widget _getWheelList(List<Widget> cells) {
     var list;
 
+    _scrollController = FixedExtentScrollController();
     list = RefreshIndicator(
         onRefresh: _refreshList,
         child: ClickableListWheelScrollView(
@@ -430,16 +456,21 @@ class _SmeupListBoxState extends State<SmeupListBox>
           SmeupDynamismService.run(_model.dynamisms, context, 'click',
               widget.scaffoldKey, widget.formKey);
 
+        _selectedRow = index;
+
+        SmeupConfigurationService.getLocalStorage().setString(
+            '${widget.formKey.hashCode}_${widget.id}', _selectedRow.toString());
+
         if (widget.showSelection && widget.selectedRow != index) {
           setState(() {
-            widget.selectedRow = index;
+            //widget.selectedRow = index;
           });
         }
       };
 
       final cell = SmeupBox(widget.scaffoldKey, widget.formKey, i,
           isDynamic: _model != null,
-          selectedRow: widget.selectedRow,
+          selectedRow: _selectedRow,
           onRefresh: _refreshList,
           showLoader: widget.showLoader,
           id: widget.id,

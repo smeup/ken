@@ -23,7 +23,7 @@
               {
                 "type":"J4",
                 "parameter":"IMG",
-                "code":";;assets/images/sun.jpg"
+                "code":";;packages/ken/assets/images/sun.jpg"
               }
           
             ]
