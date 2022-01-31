@@ -16,7 +16,7 @@ class SmeupScreenModel extends SmeupModel implements SmeupDataInterface {
   SmeupScreenModel(this.context, SmeupFun smeupFun,
       {this.isDialog = defaultIsDialog,
       this.backButtonVisible = defaultBackButtonVisible})
-      : super(null) {
+      : super(null, null, null) {
     this.smeupFun = smeupFun;
   }
 

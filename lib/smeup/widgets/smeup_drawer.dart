@@ -111,7 +111,8 @@ class SmeupDrawer extends StatefulWidget
             action: element['route'] == null
                 ? null
                 : (context) {
-                    final smeupFun = SmeupFun(element['route'], formKey);
+                    final smeupFun = SmeupFun(
+                        element['route'], formKey, scaffoldKey, context);
 
                     Navigator.of(context).pushNamed(
                         SmeupDynamicScreen.routeName,
@@ -254,8 +255,9 @@ class _SmeupDrawerState extends State<SmeupDrawer>
                   : null,
               title: Text(e.group, style: _getElementTextStile()),
             ),
-            theme: const ExpandableThemeData(
+            theme: ExpandableThemeData(
                 headerAlignment: ExpandablePanelHeaderAlignment.center,
+                iconColor: _getIconTheme().color,
                 tapBodyToCollapse: true),
             expanded: Column(
               children: listInGroup,

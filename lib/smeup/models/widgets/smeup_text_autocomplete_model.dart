@@ -60,6 +60,8 @@ class SmeupTextAutocompleteModel extends SmeupModel
       {id,
       type,
       GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
       this.backColor,
       this.fontSize,
       this.fontBold,
@@ -81,15 +83,23 @@ class SmeupTextAutocompleteModel extends SmeupModel
       this.autoFocus = defaultAutoFocus,
       this.defaultValue = '',
       this.valueField = 'value'})
-      : super(formKey, title: title, id: id, type: type) {
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'acp';
     SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
 
   SmeupTextAutocompleteModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     setDefaults(this);
     backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??
         defaultBackColor;

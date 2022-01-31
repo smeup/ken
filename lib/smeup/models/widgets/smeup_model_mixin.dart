@@ -3,8 +3,14 @@ import 'package:ken/smeup/models/widgets/smeup_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
 
 class SmeupModelMixin {
-  List<SmeupSectionModel> getSections(jsonMap, sectionName,
-      GlobalKey<FormState> formKey, bool autoAdaptHeight, SmeupModel parent) {
+  List<SmeupSectionModel> getSections(
+      jsonMap,
+      sectionName,
+      GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
+      bool autoAdaptHeight,
+      SmeupModel parent) {
     final smeupSectionsModels = List<SmeupSectionModel>.empty(growable: true);
     List<dynamic> sectionsJson;
 
@@ -14,8 +20,13 @@ class SmeupModelMixin {
 
     if (sectionsJson != null)
       sectionsJson.forEach((v) {
-        SmeupSectionModel smeupSectionModel =
-            SmeupSectionModel.fromMap(v, formKey, parent);
+        SmeupSectionModel smeupSectionModel = SmeupSectionModel.fromMap(
+          v,
+          formKey,
+          context,
+          parent,
+          scaffoldKey,
+        );
         smeupSectionsModels.add(smeupSectionModel);
       });
 

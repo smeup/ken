@@ -26,7 +26,8 @@ class ImageScreen extends StatelessWidget {
                     child: Column(
                   children: [
                     SmeupLabel(_scaffoldKey, _formKey, ['Local image']),
-                    SmeupImage(_scaffoldKey, _formKey, 'assets/images/sun.jpg',
+                    SmeupImage(_scaffoldKey, _formKey,
+                        'packages/ken/assets/images/sun.jpg',
                         id: 'img1', width: 200, height: 200, isRemote: false),
                   ],
                 )),

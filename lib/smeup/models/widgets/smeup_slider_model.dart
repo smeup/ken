@@ -28,21 +28,31 @@ class SmeupSliderModel extends SmeupModel {
     id,
     type,
     GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
     this.activeTrackColor,
     this.thumbColor,
     this.inactiveTrackColor,
     this.padding = defaultPadding,
     this.sldMin = defaultSldMin,
     this.sldMax = defaultSldMax,
-  }) : super(formKey, title: '', id: id, type: type) {
+  }) : super(formKey, scaffoldKey, context, title: '', id: id, type: type) {
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'sld';
     id = SmeupUtilities.getWidgetId('FLD', id);
     setDefaults(this);
   }
 
   SmeupSliderModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+      Map<String, dynamic> jsonMap,
+      GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context)
+      : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     setDefaults(this);
 
     sldMin =

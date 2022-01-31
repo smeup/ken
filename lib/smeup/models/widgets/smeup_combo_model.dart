@@ -56,6 +56,8 @@ class SmeupComboModel extends SmeupModel implements SmeupDataInterface {
       {id,
       type,
       GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
       this.fontColor,
       this.fontSize,
       this.fontBold,
@@ -77,15 +79,18 @@ class SmeupComboModel extends SmeupModel implements SmeupDataInterface {
       this.width = defaultWidth,
       this.height = defaultHeight,
       title = ''})
-      : super(formKey, title: title, id: id, type: type) {
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'cmb';
     SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
 
   SmeupComboModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+      Map<String, dynamic> jsonMap,
+      GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context)
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';
@@ -156,7 +161,8 @@ class SmeupComboModel extends SmeupModel implements SmeupDataInterface {
 
     var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
     defaultIconSize = iconTheme.size;
-    defaultIconColor = iconTheme.color;
+    defaultIconColor = textStyle.color;
+    //iconTheme.color;
 
     // ----------------- set properties from default
     if (obj.fontBold == null) obj.fontBold = SmeupComboModel.defaultFontBold;

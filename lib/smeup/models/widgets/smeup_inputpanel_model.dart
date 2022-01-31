@@ -20,16 +20,26 @@ class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
     id,
     type,
     GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
     title = '',
     this.padding = defaultPadding,
     this.fontSize = defaultFontSize,
-  }) : super(formKey, title: title, id: id, type: type) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
   }
 
   SmeupInputPanelModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     padding =
         SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     fontSize =
@@ -41,7 +51,7 @@ class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-        await SmeupInputPanelDao.getData(this, formKey);
+        await SmeupInputPanelDao.getData(this, formKey, scaffoldKey, context);
       };
     }
 

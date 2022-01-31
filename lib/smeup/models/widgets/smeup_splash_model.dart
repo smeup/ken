@@ -12,16 +12,30 @@ class SmeupSplashModel extends SmeupModel implements SmeupDataInterface {
   Color color;
 
   SmeupSplashModel(
-      {id, type, GlobalKey<FormState> formKey, this.color, title = ''})
-      : super(formKey, title: title, id: id, type: type) {
+      {id,
+      type,
+      GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
+      this.color,
+      title = ''})
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'spl';
     SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
 
   SmeupSplashModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     setDefaults(this);
     title = jsonMap['title'] ?? '';
 

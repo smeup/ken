@@ -52,6 +52,8 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
       {id,
       type,
       GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
       this.backColor,
       this.borderColor,
       this.borderWidth,
@@ -70,14 +72,22 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
       this.orientation = defaultOrientation,
       this.rows = defaultRows,
       title = ''})
-      : super(formKey, title: title, id: id, type: type) {
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
 
   SmeupImageListModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';

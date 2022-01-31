@@ -26,13 +26,13 @@ class ImageListScreen extends StatelessWidget {
               {
                 "rows": [
                   {
-                    "code": "assets/images/sun.jpg",
+                    "code": "packages/ken/assets/images/sun.jpg",
                     "description": "first image",
                     "info": "boh1",
                     "isRemote": false
                   },
                   {
-                    "code": "assets/images/sun.jpg",
+                    "code": "packages/ken/assets/images/sun.jpg",
                     "description": "second image",
                     "info": "boh2",
                     "isRemote": false

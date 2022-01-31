@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_message_data_service.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
 import 'package:ken/smeup/services/smeup_widget_notification_service.dart';
 import 'package:ken/smeup/screens/smeup_dynamic_screen.dart';
@@ -11,7 +12,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 class SmeupDynamismService {
   static const loggerId = "SmeupDynamismService";
-  //static GlobalKey<ScaffoldState> currentScaffoldKey;
 
   static void storeDynamicVariables(
       dynamic data, GlobalKey<FormState> formKey) {
@@ -102,7 +102,7 @@ class SmeupDynamismService {
           return;
         }
 
-        SmeupFun smeupFunExec = SmeupFun(exec, formKey);
+        SmeupFun smeupFunExec = SmeupFun(exec, formKey, scaffoldKey, context);
         String notify = smeupFunExec.fun['fun']['NOTIFY'];
 
         switch (smeupFunExec.fun['fun']['component']) {
@@ -143,8 +143,8 @@ class SmeupDynamismService {
             final smeupServiceResponse =
                 await SmeupDataService.invoke(smeupFunExec);
 
-            await manageResponseMessage(
-                context, smeupServiceResponse.result, scaffoldKey);
+            await SmeupMessageDataService.manageResponseMessage(
+                context, smeupServiceResponse.result);
             if (smeupServiceResponse.succeded) {
               _manageNotify(notify, context, scaffoldKey.hashCode);
             } else {
@@ -247,55 +247,5 @@ class SmeupDynamismService {
             widgetsIds, context, scaffoldHashCode);
       }
     }
-  }
-
-  static manageResponseMessage(BuildContext context, dynamic response,
-      GlobalKey<ScaffoldState> scaffoldKey) async {
-    try {
-      if (response.data['messages'] != null) {
-        List messages = response.data['messages'];
-        if (messages.length > 0) {
-          messages.forEach((message) {
-            MessagesPromptMode mode =
-                message['mode'] ?? MessagesPromptMode.snackbar;
-            LogType severity = message['gravity'] ?? LogType.info;
-            String text = message['message'];
-
-            Color backColor;
-            switch (severity) {
-              case LogType.error:
-                backColor = SmeupConfigurationService.getTheme().errorColor;
-                break;
-              case LogType.warning:
-                backColor = Colors.orange;
-                break;
-              default:
-                backColor = Colors.green;
-            }
-
-            if (text.isNotEmpty) {
-              switch (mode) {
-                case MessagesPromptMode.snackbar:
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(text,
-                          style: TextStyle(
-                              color: SmeupConfigurationService.getTheme()
-                                  .textTheme
-                                  .bodyText2
-                                  .color)),
-                      backgroundColor: backColor,
-                    ),
-                  );
-
-                  break;
-                default:
-              }
-            }
-          });
-          await new Future.delayed(const Duration(seconds: 1));
-        }
-      }
-    } catch (e) {}
   }
 }

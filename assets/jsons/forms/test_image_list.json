@@ -10,28 +10,7 @@
       "dim": "8%",
       "components": [
         {
-          "type": "LAB",
-          "id": "lab1",
-          "options": {
-            "LAB": {
-              "default": {
-                "padding": { "right": 5.0 },
-                "fontSize": 30,
-                "fontBold": true
-              }
-            }
-          },
-          "data": {
-            "rows": [{ "value": "COLUMNS" }]
-          }
-        }
-      ]
-    },
-    {
-      "id": "S1",
-      "dim": "42%",
-      "components": [
-        {
+          "title": "COLUMNS",
           "type": "IML",
           "id": "imageList1",
           "options": {
@@ -46,7 +25,7 @@
           "data": {
             "rows": [
               {
-                "code": "assets/images/sun.jpg",
+                "code": "packages/ken/assets/images/sun.jpg",
                 "description": "first image",
                 "info": "boh1",
                 "isRemote": false
@@ -58,7 +37,7 @@
                 "isRemote": true
               },
               {
-                "code": "assets/images/sun.jpg",
+                "code": "packages/ken/assets/images/sun.jpg",
                 "description": "second image",
                 "info": "boh2",
                 "isRemote": false
@@ -70,7 +49,7 @@
                 "isRemote": true
               },
               {
-                "code": "assets/images/sun.jpg",
+                "code": "packages/ken/assets/images/sun.jpg",
                 "description": "second image",
                 "info": "boh2",
                 "isRemote": false
@@ -82,7 +61,7 @@
                 "isRemote": true
               },
               {
-                "code": "assets/images/sun.jpg",
+                "code": "packages/ken/assets/images/sun.jpg",
                 "description": "second image",
                 "info": "boh2",
                 "isRemote": false
@@ -95,36 +74,9 @@
               { "code": "isRemote", "text": "remote image", "IO": "H" }
             ]
           }
-        }
-      ]
-    },
-    {
-      "id": "S11",
-      "dim": "8%",
-      "components": [
+        },
         {
-          "type": "LAB",
-          "id": "lab1",
-          "options": {
-            "LAB": {
-              "default": {
-                "padding": { "right": 5.0 },
-                "fontSize": 30,
-                "fontBold": true
-              }
-            }
-          },
-          "data": {
-            "rows": [{ "value": "ROWS" }]
-          }
-        }
-      ]
-    },
-    {
-      "id": "S2",
-      "dim": "42%",
-      "components": [
-        {
+          "title": "ROWS",
           "type": "IML",
           "id": "imageList2",
           "options": {
@@ -139,7 +91,7 @@
           "data": {
             "rows": [
               {
-                "code": "assets/images/sun.jpg",
+                "code": "packages/ken/assets/images/sun.jpg",
                 "description": "first image",
                 "info": "boh1",
                 "isRemote": false
@@ -151,7 +103,7 @@
                 "isRemote": true
               },
               {
-                "code": "assets/images/sun.jpg",
+                "code": "packages/ken/assets/images/sun.jpg",
                 "description": "second image",
                 "info": "boh2",
                 "isRemote": false
@@ -163,7 +115,7 @@
                 "isRemote": true
               },
               {
-                "code": "assets/images/sun.jpg",
+                "code": "packages/ken/assets/images/sun.jpg",
                 "description": "second image",
                 "info": "boh2",
                 "isRemote": false
@@ -175,7 +127,7 @@
                 "isRemote": true
               },
               {
-                "code": "assets/images/sun.jpg",
+                "code": "packages/ken/assets/images/sun.jpg",
                 "description": "second image",
                 "info": "boh2",
                 "isRemote": false
@@ -189,6 +141,8 @@
             ]
           }
         }
+
+
       ]
     }
   ]

@@ -29,18 +29,28 @@ class SmeupGaugeModel extends SmeupModel implements SmeupDataInterface {
       {id,
       type,
       GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
       this.valueColName = defaultValColName,
       this.warningColName = defaultWarningColName,
       this.maxColName = defaultMaxColName,
       this.minColName = defaultMinColName,
       title = ''})
-      : super(formKey, title: title, id: id, type: type) {
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
   }
 
   SmeupGaugeModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     title = jsonMap['title'] ?? '';
     valueColName = optionsDefault['valueColName'] ?? defaultValColName;
     maxColName = optionsDefault['maxColName'] ?? defaultMaxColName;

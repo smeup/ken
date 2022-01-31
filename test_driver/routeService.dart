@@ -21,7 +21,7 @@ import 'package:ken/smeup/screens/test/progress_indicator_screen.dart';
 import 'package:ken/smeup/screens/test/radio_screen.dart';
 import 'package:ken/smeup/screens/test/slider_screen.dart';
 import 'package:ken/smeup/screens/test/splash_screen.dart';
-import 'package:ken/smeup/screens/test/static_screen.dart';
+import '../../ken_showcase/lib/screens/static_screen.dart';
 import 'package:ken/smeup/screens/test/switch_screen.dart';
 import 'package:ken/smeup/screens/test/textAutocomplete_screen.dart';
 import 'package:ken/smeup/screens/test/textField_screen.dart';

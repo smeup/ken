@@ -67,6 +67,8 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       {id,
       type,
       GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
       this.backColor,
       this.borderColor,
       this.borderWidth,
@@ -92,7 +94,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
       this.showSelection = defaultShowSelection,
       this.selectedRow = defaultSelectedRow,
       title = ''})
-      : super(formKey, title: title, id: id, type: type) {
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
     if (visibleColumns == null)
       visibleColumns = List<String>.empty(growable: true);
@@ -100,8 +102,16 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   }
 
   SmeupListBoxModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     setDefaults(this);
 
     layout = defaultLayout;

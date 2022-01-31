@@ -60,6 +60,8 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
       {id,
       type,
       GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
       this.backColor,
       this.fontSize,
       this.fontBold,
@@ -83,7 +85,7 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
       this.autoFocus = defaultAutoFocus,
       this.valueField,
       this.keyboard})
-      : super(formKey, title: title, id: id, type: type) {
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'itx';
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
@@ -91,8 +93,16 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
   }
 
   SmeupTextFieldModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     setDefaults(this);
 
     backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??

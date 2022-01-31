@@ -60,6 +60,8 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupDatePickerModel(
       {GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
       id,
       type,
       this.borderColor,
@@ -86,15 +88,23 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
       this.innerSpace = defaultInnerSpace,
       title = '',
       this.minutesList})
-      : super(formKey, id: id, type: type, title: title) {
+      : super(formKey, scaffoldKey, context, id: id, type: type, title: title) {
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
 
   SmeupDatePickerModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     setDefaults(this);
 
     valueField = optionsDefault['valueField'] ?? defaultValueField;

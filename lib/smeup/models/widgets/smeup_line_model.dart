@@ -18,17 +18,27 @@ class SmeupLineModel extends SmeupModel {
   SmeupLineModel(
     id,
     type,
-    GlobalKey<FormState> formKey, {
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context, {
     this.color,
     this.thickness,
-  }) : super(formKey, title: '', id: id, type: type) {
+  }) : super(formKey, scaffoldKey, context, title: '', id: id, type: type) {
     id = SmeupUtilities.getWidgetId('LIN', id);
     setDefaults(this);
   }
 
   SmeupLineModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     setDefaults(this);
 
     thickness = SmeupUtilities.getDouble(optionsDefault['thickness']) ??
