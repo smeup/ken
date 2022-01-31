@@ -303,12 +303,12 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                 ),
               ),
               Container(
-                color: Theme.of(context).primaryColor,
+                color: iconTheme.color,
                 padding: EdgeInsets.all(iconTheme.size.toDouble()),
                 child: GestureDetector(
                   child: Icon(
                     Icons.close,
-                    color: iconTheme.color,
+                    color: Theme.of(context).primaryColor,
                     size: iconTheme.size,
                   ),
                   onTap: () {

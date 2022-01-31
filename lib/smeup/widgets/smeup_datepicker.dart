@@ -238,6 +238,17 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
     ButtonStyle buttonStyle = _getButtonStyle();
     TextStyle textStyle = _getTextStile();
     TextStyle captionStyle = _getCaptionStile();
+    IconThemeData iconTheme = _getIconTheme();
+
+    Widget icon = Container(
+      color: iconTheme.color,
+      padding: EdgeInsets.all(iconTheme.size.toDouble()),
+      child: Icon(
+        Icons.calendar_today,
+        color: Theme.of(context).primaryColor,
+        size: iconTheme.size,
+      ),
+    );
 
     var text = widget.label.isEmpty
         ? Container()
@@ -281,7 +292,19 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
           children: [
             text,
             SizedBox(width: widget.innerSpace),
-            Expanded(child: Align(child: datepicker, alignment: widget.align)),
+            Expanded(
+                child: Align(
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: Align(
+                          child: datepicker,
+                          alignment: Alignment.centerLeft,
+                        )),
+                        icon,
+                      ],
+                    ),
+                    alignment: widget.align)),
           ],
         ),
         line
@@ -296,7 +319,16 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
             children: [
               Expanded(
                   child: Align(
-                child: datepicker,
+                child: Row(
+                  children: [
+                    icon,
+                    Expanded(
+                        child: Align(
+                      child: datepicker,
+                      alignment: Alignment.centerLeft,
+                    )),
+                  ],
+                ),
                 alignment: widget.align,
               )),
               SizedBox(width: widget.innerSpace),
@@ -309,8 +341,8 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
       );
     } else if (widget.align == Alignment.topCenter) {
       children = Container(
-        height: widget.height,
-        width: widget.width,
+        height: datePickerHeight,
+        width: datePickerWidth,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -320,7 +352,16 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
             ),
             SizedBox(height: widget.innerSpace),
             Align(
-              child: datepicker,
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Align(
+                    child: datepicker,
+                    alignment: Alignment.centerLeft,
+                  )),
+                  icon
+                ],
+              ),
               alignment: Alignment.centerLeft,
             ),
             line
@@ -330,21 +371,29 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
       );
     } else if (widget.align == Alignment.bottomCenter) {
       children = Container(
-        height: widget.height,
-        width: widget.width,
+        height: datePickerHeight,
+        width: datePickerWidth,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Align(
-              child: datepicker,
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Align(
+                    child: datepicker,
+                    alignment: Alignment.centerLeft,
+                  )),
+                  icon
+                ],
+              ),
               alignment: Alignment.centerLeft,
             ),
             SizedBox(height: widget.innerSpace),
             Align(
               child: text,
               alignment: Alignment.centerLeft,
-            ),
-            line
+            )
           ],
         ),
         //color: widget.backColor,
@@ -360,14 +409,9 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
             Expanded(child: text),
           ],
         ),
-        //color: widget.backColor,
       );
     }
 
-// SizedBox(
-//         height: widget.height,
-//         width: widget.width,
-//         child:
     return SmeupWidgetBuilderResponse(_model, children);
   }
 
@@ -425,5 +469,13 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
     }
 
     return style;
+  }
+
+  IconThemeData _getIconTheme() {
+    IconThemeData themeData = SmeupConfigurationService.getTheme()
+        .iconTheme
+        .copyWith(size: widget.fontSize);
+
+    return themeData;
   }
 }
