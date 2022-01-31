@@ -75,10 +75,6 @@ class SmeupConfigurationService {
     SmeupConfigurationService.setDefaultServiceEndpoint();
     SmeupConfigurationService.setHttpServiceEndpoint();
 
-    SmeupConfigurationService.jsonsPath = 'assets/jsons';
-    SmeupConfigurationService.imagesPath = 'assets/images';
-    SmeupDataService.initInternalService();
-
     if (customDataServices != null) {
       customDataServices.entries.forEach((customService) {
         SmeupDataService.services[customService.key] = customService.value;
@@ -101,6 +97,8 @@ class SmeupConfigurationService {
     SmeupConfigurationService.httpServiceDataTransformer =
         httpServiceDataTransformer ?? NullTransformer();
 
+    SmeupConfigurationService.jsonsPath = 'assets/jsons';
+    SmeupConfigurationService.imagesPath = 'assets/images';
     SmeupDataService.initInternalService();
   }
 

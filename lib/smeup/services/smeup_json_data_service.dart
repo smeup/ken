@@ -63,7 +63,7 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
           return SmeupServiceResponse(
               false,
               Response(
-                  data: 'Error in SmeupJsonDataService',
+                  data: 'Error in SmeupJsonDataService: ${e.toString()}',
                   statusCode: HttpStatus.badRequest,
                   requestOptions: null));
         }

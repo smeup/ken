@@ -12,6 +12,7 @@ import 'package:ken/smeup/services/smeup_default_data_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_message_data_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
+import 'package:ken/smeup/services/transformers/null_transformer.dart';
 
 class SmeupDataService {
   static var services = Map<String, SmeupDataServiceInterface>();
@@ -64,7 +65,8 @@ class SmeupDataService {
       response = await smeupDataService.invoke(newSmeupFun);
 
     // Apply transformation to service response (only on success)
-    if (response.succeded) {
+    if (response.succeded &&
+        smeupDataService.getTransformer() is NullTransformer == false) {
       var data = response.result.data;
       if (data is Map) {
         response.result.data =
