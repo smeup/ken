@@ -217,11 +217,17 @@ class _SmeupListBoxState extends State<SmeupListBox>
         realBoxHeight != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         MediaQueryData deviceInfo = MediaQuery.of(context);
-        double formSpace = deviceInfo.size.height -
-            SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight;
-        double scrollPosition = ((_selectedRow + 1) *
-            (realBoxHeight - 10) /
-            _model.landscapeColumns);
+        Orientation orientation = deviceInfo.orientation;
+        int colsNumber = orientation == Orientation.landscape
+            ? _model.landscapeColumns
+            : _model.portraitColumns;
+        double formSpace = deviceInfo.size.height;
+
+        if (_model != null && _model.parent != null) {
+          formSpace = (_model.parent as SmeupSectionModel).height;
+        }
+
+        double scrollPosition = (_selectedRow * realBoxHeight / colsNumber);
         if (scrollPosition > formSpace)
           Future.delayed(Duration(milliseconds: 300), () {
             _scrollController.jumpTo(scrollPosition);
