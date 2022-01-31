@@ -23,7 +23,7 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
 
   // unsupported by json_theme
   static const String defaultLabel = '';
-  static const double defaultWidth = 100;
+  static const double defaultWidth = 0;
   static const double defaultHeight = 100;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const bool defaultShowBorder = false;

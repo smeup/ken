@@ -90,6 +90,7 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
   Widget build(BuildContext context) {
     final button = Container(
         height: 20,
+        width: widget.width,
         padding: widget.padding,
         child: ElevatedButton(
             style: widget.buttonStyle,
@@ -121,7 +122,10 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
                 });
               });
             },
-            child: Text(_currentDisplay, style: widget.textStyle)));
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(_currentDisplay, style: widget.textStyle),
+            )));
 
     return button;
   }

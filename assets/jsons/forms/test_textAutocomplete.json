@@ -7,7 +7,7 @@
   "sections": [
     {
       "id": "S4",
-      "dim" : "10%",
+      "dim": "10%",
       "components": [
         {
           "type": "LAB",
@@ -20,16 +20,14 @@
             }
           },
           "data": {
-            "rows": [
-              { "value": "regular autocomplete" }
-            ]
+            "rows": [{ "value": "regular autocomplete" }]
           }
         }
       ]
     },
     {
       "id": "S1",
-      "dim" : "10%",
+      "dim": "10%",
       "components": [
         {
           "id": "autocomplete1",
@@ -40,7 +38,7 @@
                 "type": "acp",
                 "label": "description",
                 "valueField": "value",
-                "padding": {"left":0.0}
+                "padding": { "left": 0.0 }
               }
             }
           },
@@ -48,15 +46,44 @@
             "rows": [
               {
                 "code": "1",
-                "value": "description 1",
-                "type" : "",
+                "value": "abitante",
+                "type": "",
                 "parameter": ""
-
               },
               {
                 "code": "2",
+                "value": "accomodante",
+                "type": "",
+                "parameter": ""
+              },
+              {
+                "code": "3",
+                "value": "addiacente",
+                "type": "",
+                "parameter": ""
+              },
+              {
+                "code": "4",
+                "value": "bastian contrario",
+                "type": "",
+                "parameter": ""
+              },
+              {
+                "code": "5",
+                "value": "birillo",
+                "type": "",
+                "parameter": ""
+              },
+              {
+                "code": "6",
+                "value": "description 1",
+                "type": "",
+                "parameter": ""
+              },
+              {
+                "code": "7",
                 "value": "description 2",
-                "type" : "",
+                "type": "",
                 "parameter": ""
               }
             ]
@@ -72,7 +99,7 @@
     },
     {
       "id": "S5",
-      "dim" : "10%",
+      "dim": "10%",
       "components": [
         {
           "type": "LAB",
@@ -85,16 +112,14 @@
             }
           },
           "data": {
-            "rows": [
-              { "value": "autocomplete with submit button" }
-            ]
+            "rows": [{ "value": "autocomplete with submit button" }]
           }
         }
       ]
     },
     {
       "id": "S2",
-      "dim" : "10%",
+      "dim": "10%",
       "components": [
         {
           "id": "autocomplete2",
@@ -105,7 +130,7 @@
                 "type": "acp",
                 "label": "description",
                 "valueField": "value",
-                "padding": {"left":0.0},
+                "padding": { "left": 0.0 },
                 "showSubmit": true,
                 "submitLabel": "tap me"
               }
@@ -115,15 +140,44 @@
             "rows": [
               {
                 "code": "1",
-                "value": "description 1",
-                "type" : "",
+                "value": "abitante",
+                "type": "",
                 "parameter": ""
-
               },
               {
                 "code": "2",
+                "value": "accomodante",
+                "type": "",
+                "parameter": ""
+              },
+              {
+                "code": "3",
+                "value": "addiacente",
+                "type": "",
+                "parameter": ""
+              },
+              {
+                "code": "4",
+                "value": "bastian contrario",
+                "type": "",
+                "parameter": ""
+              },
+              {
+                "code": "5",
+                "value": "birillo",
+                "type": "",
+                "parameter": ""
+              },
+              {
+                "code": "6",
+                "value": "description 1",
+                "type": "",
+                "parameter": ""
+              },
+              {
+                "code": "7",
                 "value": "description 2",
-                "type" : "",
+                "type": "",
                 "parameter": ""
               }
             ]

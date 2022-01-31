@@ -246,6 +246,17 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
     ButtonStyle buttonStyle = _getButtonStyle();
     TextStyle textStyle = _getTextStile();
     TextStyle captionStyle = _getCaptionStile();
+    IconThemeData iconTheme = _getIconTheme();
+
+    Widget icon = Container(
+      color: iconTheme.color,
+      padding: EdgeInsets.all(iconTheme.size.toDouble()),
+      child: Icon(
+        Icons.access_time,
+        color: Theme.of(context).primaryColor,
+        size: iconTheme.size,
+      ),
+    );
 
     var text = widget.label.isEmpty
         ? Container()
@@ -294,7 +305,19 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
           children: [
             text,
             SizedBox(width: widget.innerSpace),
-            Expanded(child: Align(child: timepicker, alignment: widget.align)),
+            Expanded(
+                child: Align(
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: Align(
+                          child: timepicker,
+                          alignment: Alignment.centerLeft,
+                        )),
+                        icon,
+                      ],
+                    ),
+                    alignment: widget.align)),
           ],
         ),
         line
@@ -309,7 +332,16 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
             children: [
               Expanded(
                   child: Align(
-                child: timepicker,
+                child: Row(
+                  children: [
+                    icon,
+                    Expanded(
+                        child: Align(
+                      child: timepicker,
+                      alignment: Alignment.centerLeft,
+                    )),
+                  ],
+                ),
                 alignment: widget.align,
               )),
               SizedBox(width: widget.innerSpace),
@@ -333,7 +365,16 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
             ),
             SizedBox(height: widget.innerSpace),
             Align(
-              child: timepicker,
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Align(
+                    child: timepicker,
+                    alignment: Alignment.centerLeft,
+                  )),
+                  icon
+                ],
+              ),
               alignment: Alignment.centerLeft,
             ),
             line
@@ -349,7 +390,16 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Align(
-              child: timepicker,
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Align(
+                    child: timepicker,
+                    alignment: Alignment.centerLeft,
+                  )),
+                  icon
+                ],
+              ),
               alignment: Alignment.centerLeft,
             ),
             SizedBox(height: widget.innerSpace),
@@ -434,5 +484,13 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
     }
 
     return style;
+  }
+
+  IconThemeData _getIconTheme() {
+    IconThemeData themeData = SmeupConfigurationService.getTheme()
+        .iconTheme
+        .copyWith(size: widget.fontSize);
+
+    return themeData;
   }
 }
