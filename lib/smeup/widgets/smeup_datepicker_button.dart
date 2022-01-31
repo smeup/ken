@@ -88,6 +88,7 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
   Widget build(BuildContext context) {
     final button = Container(
       height: 20,
+      width: widget.width,
       padding: widget.padding,
       child: ElevatedButton(
           style: widget.buttonStyle,
@@ -110,7 +111,10 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
               });
             });
           },
-          child: Text(_currentDisplay, style: widget.textStyle)),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(_currentDisplay, style: widget.textStyle),
+          )),
     );
 
     return button;
