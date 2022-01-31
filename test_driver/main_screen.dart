@@ -43,7 +43,7 @@ class _MainScreenState extends State<MainScreen> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return _getWait();
             } else {
-              final smeupFun = SmeupFun(initialFun, null);
+              final smeupFun = SmeupFun(initialFun, null, null, context);
               return SmeupDynamicScreen(
                 initialFun: smeupFun,
                 backButtonVisible: false,

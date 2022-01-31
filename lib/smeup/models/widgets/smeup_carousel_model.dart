@@ -15,15 +15,18 @@ class SmeupCarouselModel extends SmeupModel implements SmeupDataInterface {
       {id,
       type,
       GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
       this.height = defaultHeight,
       this.autoPlay = false,
       title = ''})
-      : super(formKey, title: title, id: id, type: type) {
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
   }
 
-  SmeupCarouselModel.fromMap(Map jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+  SmeupCarouselModel.fromMap(Map jsonMap, GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey, BuildContext context)
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
     autoPlay = optionsDefault['autoPlay'] ?? false;

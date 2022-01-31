@@ -284,7 +284,8 @@ class _SmeupTextFieldState extends State<SmeupTextField>
           "dynamisms": _model.dynamisms
         };
         button = SmeupButtons.withController(
-            SmeupButtonsModel.fromMap(json, widget.formKey),
+            SmeupButtonsModel.fromMap(
+                json, widget.formKey, widget.scaffoldKey, context),
             widget.scaffoldKey,
             widget.formKey);
       }

@@ -192,14 +192,48 @@ class _SmeupListBoxState extends State<SmeupListBox>
   List<Widget> cells;
   SmeupListBoxModel _model;
   dynamic _data;
-
-  final _scrollController = FixedExtentScrollController();
+  ScrollController _scrollController;
+  int _selectedRow = -1;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
+    _selectedRow = widget.selectedRow;
     if (_model != null) widgetLoadType = _model.widgetLoadType;
+    _scrollController = new ScrollController();
+
+    String localSelectedRow = SmeupConfigurationService.getLocalStorage()
+        .getString('${widget.formKey.hashCode}_${widget.id}');
+    if (localSelectedRow != null && localSelectedRow.isNotEmpty) {
+      _selectedRow = int.tryParse(localSelectedRow) ?? widget.selectedRow;
+    }
+
+    double realBoxHeight = SmeupConfigurationService.getLocalStorage()
+        .getDouble('${widget.formKey.hashCode}_${widget.id}_realBoxHeight');
+
+    if (widget.listType == SmeupListType.oriented &&
+        _selectedRow != -1 &&
+        realBoxHeight != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        MediaQueryData deviceInfo = MediaQuery.of(context);
+        Orientation orientation = deviceInfo.orientation;
+        int colsNumber = orientation == Orientation.landscape
+            ? _model.landscapeColumns
+            : _model.portraitColumns;
+        double formSpace = deviceInfo.size.height;
+
+        if (_model != null && _model.parent != null) {
+          formSpace = (_model.parent as SmeupSectionModel).height;
+        }
+
+        double scrollPosition = (_selectedRow * realBoxHeight / colsNumber);
+        if (scrollPosition > formSpace)
+          Future.delayed(Duration(milliseconds: 300), () {
+            _scrollController.jumpTo(scrollPosition);
+          });
+      });
+    }
     super.initState();
   }
 
@@ -273,6 +307,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
     var list = RefreshIndicator(
       onRefresh: _refreshList,
       child: ListView.builder(
+        key: ObjectKey("_list_${widget.id}"),
+        controller: _scrollController,
         scrollDirection: widget.orientation,
         physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         itemCount: cells.length,
@@ -318,6 +354,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
         return RefreshIndicator(
           onRefresh: _refreshList,
           child: GridView.count(
+            controller: _scrollController,
             childAspectRatio: childAspectRatio,
             physics:
                 BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
@@ -344,6 +381,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
   Widget _getWheelList(List<Widget> cells) {
     var list;
 
+    _scrollController = FixedExtentScrollController();
     list = RefreshIndicator(
         onRefresh: _refreshList,
         child: ClickableListWheelScrollView(
@@ -430,38 +468,53 @@ class _SmeupListBoxState extends State<SmeupListBox>
           SmeupDynamismService.run(_model.dynamisms, context, 'click',
               widget.scaffoldKey, widget.formKey);
 
+        _selectedRow = index;
+
+        SmeupConfigurationService.getLocalStorage().setString(
+            '${widget.formKey.hashCode}_${widget.id}', _selectedRow.toString());
+
         if (widget.showSelection && widget.selectedRow != index) {
           setState(() {
-            widget.selectedRow = index;
+            //widget.selectedRow = index;
           });
         }
       };
 
-      final cell = SmeupBox(widget.scaffoldKey, widget.formKey, i,
-          isDynamic: _model != null,
-          selectedRow: widget.selectedRow,
-          onRefresh: _refreshList,
-          showLoader: widget.showLoader,
-          id: widget.id,
-          layout: widget.layout,
-          columns: _data['columns'],
-          data: dataElement,
-          dynamisms: _model?.dynamisms,
-          height: widget.height,
-          width: widget.width,
-          fontColor: widget.fontColor,
-          backColor: _backColor,
-          showSelection: widget.showSelection,
-          dismissEnabled: widget.dismissEnabled,
-          onItemTap: _onItemTap,
-          cardTheme: cardTheme,
-          textStyle: textStyle,
-          captionStyle: captionStyle);
+      final cell = SmeupBox(
+        widget.scaffoldKey,
+        widget.formKey,
+        i,
+        isDynamic: _model != null,
+        selectedRow: _selectedRow,
+        onRefresh: _refreshList,
+        showLoader: widget.showLoader,
+        id: widget.id,
+        layout: widget.layout,
+        columns: _data['columns'],
+        data: dataElement,
+        dynamisms: _model?.dynamisms,
+        height: widget.height,
+        width: widget.width,
+        fontColor: widget.fontColor,
+        backColor: _backColor,
+        showSelection: widget.showSelection,
+        dismissEnabled: widget.dismissEnabled,
+        onItemTap: _onItemTap,
+        cardTheme: cardTheme,
+        textStyle: textStyle,
+        captionStyle: captionStyle,
+        onSizeChanged: onSizeChanged,
+      );
 
       cells.add(cell);
     });
 
     return cells;
+  }
+
+  void onSizeChanged(Size size) {
+    SmeupConfigurationService.getLocalStorage().setDouble(
+        '${widget.formKey.hashCode}_${widget.id}_realBoxHeight', size.height);
   }
 
   CardTheme _getCardStyle(Color backColor) {

@@ -29,15 +29,17 @@ class CarouselScreen extends StatelessWidget {
                         _formKey,
                         [
                           {
-                            'imageFile': 'assets/images/img-upick.png',
+                            'imageFile':
+                                'packages/ken/assets/images/img-upick.png',
                             'text': 'Descriptive text one'
                           },
                           {
-                            'imageFile': 'assets/images/not_available.png',
+                            'imageFile':
+                                'packages/ken/assets/images/not_available.png',
                             'text': 'Descriptive text  two'
                           },
                           {
-                            'imageFile': 'assets/images/sun.jpg',
+                            'imageFile': 'packages/ken/assets/images/sun.jpg',
                             'text': 'Descriptive text  three'
                           }
                         ],

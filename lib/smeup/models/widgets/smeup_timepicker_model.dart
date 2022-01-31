@@ -62,6 +62,8 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
       {id,
       type,
       GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
       this.backColor,
       this.fontSize,
       this.fontColor,
@@ -86,15 +88,23 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
       this.showBorder = defaultShowBorder,
       title = '',
       this.minutesList})
-      : super(formKey, title: title, id: id, type: type) {
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     id = SmeupUtilities.getWidgetId('FLD', id);
     SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
 
   SmeupTimePickerModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     setDefaults(this);
 
     valueField = optionsDefault['valueField'] ?? defaultValueField;

@@ -30,6 +30,8 @@ class SmeupProgressBarModel extends SmeupModel implements SmeupDataInterface {
       {id,
       type,
       GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
       this.color,
       this.linearTrackColor,
       this.height = defaultHeight,
@@ -38,15 +40,23 @@ class SmeupProgressBarModel extends SmeupModel implements SmeupDataInterface {
       this.progressBarMinimun = defaultProgressBarMinimun,
       this.progressBarMaximun = defaultProgressBarMaximun,
       title = ''})
-      : super(formKey, title: title, id: id, type: type) {
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault['type'] == null) optionsDefault['type'] = 'pgb';
     SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
 
   SmeupProgressBarModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     setDefaults(this);
     title = jsonMap['title'] ?? '';
 

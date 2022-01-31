@@ -10,6 +10,7 @@ import 'package:ken/smeup/services/smeup_image_data_service.dart';
 import 'package:ken/smeup/services/smeup_json_data_service.dart';
 import 'package:ken/smeup/services/smeup_default_data_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/services/smeup_message_data_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
 
 class SmeupDataService {
@@ -20,6 +21,7 @@ class SmeupDataService {
 
   static initInternalService() {
     SmeupDataService.services['*JSN'] = SmeupJsonDataService();
+    SmeupDataService.services['*MSG'] = SmeupMessageDataService();
     SmeupDataService.services['*IMAGE'] = SmeupImageDataService();
     SmeupDataService.services['*HTTP'] = SmeupHttpDataService();
   }
@@ -40,7 +42,8 @@ class SmeupDataService {
       funString =
           SmeupDynamismService.replaceFunVariables(funString, smeupFun.formKey);
       final fun = jsonDecode(funString);
-      newSmeupFun = SmeupFun(fun, smeupFun.formKey);
+      newSmeupFun = SmeupFun(
+          fun, smeupFun.formKey, smeupFun.scaffoldKey, smeupFun.context);
     }
 
     if (smeupDataService is SmeupDefaultDataService)

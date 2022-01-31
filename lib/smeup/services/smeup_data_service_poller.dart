@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
@@ -12,16 +12,20 @@ class SmeupDataServicePoller {
   final bool ignoreErrors;
   bool _canceled = false;
   GlobalKey<FormState> formKey;
+  GlobalKey<ScaffoldState> scaffoldKey;
+  BuildContext context;
 
   SmeupDataServicePoller(
-    this.formKey, {
+    this.formKey,
+    this.scaffoldKey,
+    this.context, {
     @required this.interval,
     @required this.fun,
     this.ignoreErrors = true,
   });
 
   Future<dynamic> doPoll({@required UntilPredicate until}) async {
-    SmeupFun smeupFun = SmeupFun(fun, formKey);
+    SmeupFun smeupFun = SmeupFun(fun, formKey, scaffoldKey, context);
     while (!_canceled) {
       await Future.delayed(interval);
       if (!_canceled) {

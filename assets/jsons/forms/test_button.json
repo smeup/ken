@@ -30,7 +30,13 @@
               { "value": "I am a button" },
               { "value": "I am a button too" }
             ]
-          }
+          },
+          "dynamisms": [
+            {
+              "event": "click",
+              "exec": "F(FBK;*MSG;) P(you clicked the button: \"[value]\")"
+            }
+          ]
         }
       ]
     },
@@ -55,7 +61,13 @@
               { "value": "I am a link 3" },
               { "value": "I am a link 4" }
             ]
-          }
+          },
+          "dynamisms": [
+            {
+              "event": "click",
+              "exec": "F(FBK;*MSG;) P(you clicked the button: \"[value]\")"
+            }
+          ]
         }
       ]
     },
@@ -89,7 +101,13 @@
                   { "value": "Horizontal 1" },
                   { "value": "Horizontal 2" }
                 ]
-              }
+              },
+              "dynamisms": [
+                {
+                  "event": "click",
+                  "exec": "F(FBK;*MSG;) P(you clicked the button: \"[value]\")"
+                }
+              ]
             }
           ]
         }
@@ -120,7 +138,13 @@
               },
               "data": {
                 "rows": [{ "value": "align right" }]
-              }
+              },
+              "dynamisms": [
+                {
+                  "event": "click",
+                  "exec": "F(FBK;*MSG;) P(you clicked the button: \"[value]\")"
+                }
+              ]
             }
           ]
         },
@@ -147,7 +171,13 @@
               },
               "data": {
                 "rows": [{ "value": "align left" }]
-              }
+              },
+              "dynamisms": [
+                {
+                  "event": "click",
+                  "exec": "F(FBK;*MSG;) P(you clicked the button: \"[value]\")"
+                }
+              ]
             }
           ]
         }

@@ -42,6 +42,8 @@ class SmeupTreeModel extends SmeupModel implements SmeupDataInterface {
     id,
     type,
     GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
     title = '',
     this.width = defaultWidth,
     this.height = defaultHeight,
@@ -57,13 +59,21 @@ class SmeupTreeModel extends SmeupModel implements SmeupDataInterface {
     this.parentFontbold = defaultParentFontbold,
     this.parentVerticalSpacing = defaultParentVerticalSpacing,
     this.parentHeight = defaultParentHeight,
-  }) : super(formKey, title: title, id: id, type: type) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
   }
 
   SmeupTreeModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;

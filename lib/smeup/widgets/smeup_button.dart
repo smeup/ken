@@ -215,6 +215,7 @@ class SmeupButton extends StatelessWidget {
         .elevatedButtonTheme
         .style
         .copyWith(
+            overlayColor: MaterialStateProperty.all(backColor),
             backgroundColor: MaterialStateProperty.all<Color>(backColor),
             elevation: MaterialStateProperty.all<double>(elevation),
             padding: MaterialStateProperty.all<EdgeInsetsGeometry>(

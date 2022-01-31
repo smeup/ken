@@ -345,6 +345,9 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                           SmeupVariablesService.setVariable(
                               widget.id, option['code'],
                               formKey: widget.formKey);
+                          SmeupVariablesService.setVariable(
+                              "value", option['value'],
+                              formKey: widget.formKey);
                           if (_model != null)
                             SmeupDynamismService.run(_model.dynamisms, context,
                                 'change', widget.scaffoldKey, widget.formKey);
@@ -387,7 +390,8 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
           "dynamisms": _model.dynamisms
         };
         button = SmeupButtons.withController(
-            SmeupButtonsModel.fromMap(json, widget.formKey),
+            SmeupButtonsModel.fromMap(
+                json, widget.formKey, widget.scaffoldKey, context),
             widget.scaffoldKey,
             widget.formKey);
       }

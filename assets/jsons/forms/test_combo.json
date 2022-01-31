@@ -18,8 +18,7 @@
                 "defaultValue": "1",
                 "valueField": "code",
                 "descriptionField": "description",
-                "label" : "My combo",
-                "iconColor" : "R006G138B156"
+                "label" : "My combo"
               }
             }
           },

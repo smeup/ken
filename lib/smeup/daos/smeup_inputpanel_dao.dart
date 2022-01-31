@@ -11,7 +11,10 @@ import 'smeup_dao.dart';
 
 class SmeupInputPanelDao extends SmeupDao {
   static Future<void> getData(
-      SmeupInputPanelModel model, GlobalKey<FormState> formKey) async {
+      SmeupInputPanelModel model,
+      GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context) async {
     await SmeupDao.getData(model);
 
     List columns = model.data["columns"];
@@ -19,14 +22,19 @@ class SmeupInputPanelDao extends SmeupDao {
 
     model.fields = _createFields(columns, rowFields);
 
-    var layoutData = await _getLayoutData(model.options, formKey);
+    var layoutData =
+        await _getLayoutData(model.options, formKey, scaffoldKey, context);
     if (layoutData != null) {
-      await _applyLayout(model.fields, layoutData["data"], formKey);
+      await _applyLayout(
+          model.fields, layoutData["data"], formKey, scaffoldKey, context);
     }
   }
 
   static Future<Map> _getLayoutData(
-      Map<String, dynamic> options, GlobalKey<FormState> formKey) async {
+      Map<String, dynamic> options,
+      GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context) async {
     // Experimental only
     final optionsDefault = LinkedHashMap<String, dynamic>(
         equals: (a, b) => a.toLowerCase() == b.toLowerCase(),
@@ -42,7 +50,10 @@ class SmeupInputPanelDao extends SmeupDao {
     }
     if (optionsDefault["layout"] != null) {
       SmeupFun smeupFun = SmeupFun(
-          "F(EXD;LOSER_09;LAY) 2(;;${optionsDefault["layout"]})", formKey);
+          "F(EXD;LOSER_09;LAY) 2(;;${optionsDefault["layout"]})",
+          formKey,
+          scaffoldKey,
+          context);
       SmeupServiceResponse response = await SmeupDataService.invoke(smeupFun);
       if (response.succeded) {
         return response.result.data;
@@ -70,8 +81,12 @@ class SmeupInputPanelDao extends SmeupDao {
     return fields;
   }
 
-  static Future<void> _applyLayout(List<SmeupInputPanelField> fields,
-      String layoutData, GlobalKey<FormState> formKey) async {
+  static Future<void> _applyLayout(
+      List<SmeupInputPanelField> fields,
+      String layoutData,
+      GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context) async {
     int position = 0;
     XmlDocument doc = XmlDocument.parse(layoutData);
     fields.forEach((field) => field.visible = false);
@@ -83,7 +98,8 @@ class SmeupInputPanelDao extends SmeupDao {
           fields[i].update(elements[j], position++);
           if (fields[i].component == SmeupInputPanelSupportedComp.Cmb &&
               fields[i].fun != null) {
-            fields[i].items = await _getComboData(fields[i], formKey);
+            fields[i].items =
+                await _getComboData(fields[i], formKey, scaffoldKey, context);
           }
         }
       }
@@ -92,10 +108,13 @@ class SmeupInputPanelDao extends SmeupDao {
   }
 
   static Future<List<SmeupInputPanelValue>> _getComboData(
-      SmeupInputPanelField field, GlobalKey<FormState> formKey) async {
+      SmeupInputPanelField field,
+      GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context) async {
     field.items = [];
     if (field.fun != null) {
-      final fun = SmeupFun(field.fun, formKey);
+      final fun = SmeupFun(field.fun, formKey, scaffoldKey, context);
       SmeupServiceResponse response = await SmeupDataService.invoke(fun);
       List rows;
       if (response.succeded) {

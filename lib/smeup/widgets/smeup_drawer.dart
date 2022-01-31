@@ -111,7 +111,8 @@ class SmeupDrawer extends StatefulWidget
             action: element['route'] == null
                 ? null
                 : (context) {
-                    final smeupFun = SmeupFun(element['route'], formKey);
+                    final smeupFun = SmeupFun(
+                        element['route'], formKey, scaffoldKey, context);
 
                     Navigator.of(context).pushNamed(
                         SmeupDynamicScreen.routeName,

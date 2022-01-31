@@ -195,16 +195,6 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
 
     var buttons = List<Widget>.empty(growable: true);
 
-    TextStyle captionStyle = _getCaptionStile();
-
-    if (widget.title.isNotEmpty) {
-      buttons.add(Container(
-          child: Text(
-        widget.title,
-        style: captionStyle,
-      )));
-    }
-
     int buttonIndex = 0;
     double radioHeight = widget.height;
     double radioWidth = widget.width;
@@ -280,13 +270,27 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
       childAspectRatio =
           (radioWidth / radioHeight * buttons.length * 3) / widget.columns;
 
+      TextStyle captionStyle = _getCaptionStile();
+
+      var title = Container(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            widget.title.isNotEmpty ? widget.title : '',
+            style: captionStyle,
+          ));
+
       final container = Container(
           padding: widget.padding,
-          child: GridView.count(
-            shrinkWrap: true,
-            childAspectRatio: childAspectRatio,
-            crossAxisCount: widget.columns,
-            children: buttons,
+          child: Column(
+            children: [
+              title,
+              GridView.count(
+                shrinkWrap: true,
+                childAspectRatio: childAspectRatio,
+                crossAxisCount: widget.columns,
+                children: buttons,
+              )
+            ],
           ));
 
       dynamic selData = (_data as List).firstWhere(
