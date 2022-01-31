@@ -9,13 +9,15 @@ import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_data_service_interface.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
+import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 
-class SmeupDefaultDataService implements SmeupDataServiceInterface {
+class SmeupDefaultDataService extends SmeupDataServiceInterface {
   Dio dio;
   String server;
   static const DEFAULD_TIMEOUT = 10000;
 
-  SmeupDefaultDataService() {
+  SmeupDefaultDataService(SmeupDataTransformerInterface transformer)
+      : super(transformer) {
     BaseOptions options = new BaseOptions(
       connectTimeout: DEFAULD_TIMEOUT,
       receiveTimeout: DEFAULD_TIMEOUT,
@@ -50,12 +52,10 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
 
       bool isValid = SmeupDataService.isValid(response.statusCode);
 
-      var responseData = _transformResponse(smeupFun, response, isValid);
-
       return SmeupServiceResponse(
           isValid,
           Response(
-              data: responseData,
+              data: response.data,
               statusCode: response.statusCode,
               requestOptions: null));
     } catch (e) {
@@ -207,11 +207,5 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
       // return the result from online
       SmeupLogService.writeDebugMessage('response cached');
     }
-  }
-
-  dynamic _transformResponse(
-      SmeupFun smeupFun, Response<dynamic> response, bool isValid) {
-    return SmeupConfigurationService.getSmeupDataTransformer()
-        .transform(smeupFun, response.data);
   }
 }

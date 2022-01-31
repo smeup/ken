@@ -9,7 +9,6 @@ import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_data_service_interface.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
-import 'package:ken/smeup/services/transformers/kokos_transformer.dart';
 import 'package:ken/smeup/services/transformers/null_transformer.dart';
 import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 import 'package:package_info/package_info.dart';
@@ -42,7 +41,8 @@ class SmeupConfigurationService {
   static ExternalConfigurationModel _appConfiguration;
   static String appBarImage;
   static AuthenticationModel authenticationModel;
-  static SmeupDataTransformerInterface dataTransformer;
+  static SmeupDataTransformerInterface defaultServiceDataTransformer;
+  static SmeupDataTransformerInterface httpServiceDataTransformer;
 
   static PackageInfo packageInfoModel = PackageInfo(
     appName: 'Unknown',
@@ -58,7 +58,8 @@ class SmeupConfigurationService {
       bool enableCache = false,
       AuthenticationModel authenticationModel,
       String appBarImage = '',
-      SmeupDataTransformerInterface dataTransformer}) async {
+      SmeupDataTransformerInterface defaultServiceDataTransformer,
+      SmeupDataTransformerInterface httpServiceDataTransformer}) async {
     await SmeupConfigurationService.setAppConfiguration();
 
     SmeupConfigurationService.logLevel = logLevel;
@@ -77,8 +78,6 @@ class SmeupConfigurationService {
     SmeupConfigurationService.jsonsPath = 'assets/jsons';
     SmeupConfigurationService.imagesPath = 'assets/images';
 
-    SmeupDataService.initInternalService();
-
     if (customDataServices != null) {
       customDataServices.entries.forEach((customService) {
         SmeupDataService.services[customService.key] = customService.value;
@@ -95,8 +94,13 @@ class SmeupConfigurationService {
     if (context != null) SmeupConfigurationService.setHolidays(context);
     if (enableCache) SmeupCacheService.init();
 
-    SmeupConfigurationService.dataTransformer =
-        dataTransformer ?? NullTransformer();
+    SmeupConfigurationService.defaultServiceDataTransformer =
+        defaultServiceDataTransformer ?? NullTransformer();
+
+    SmeupConfigurationService.httpServiceDataTransformer =
+        httpServiceDataTransformer ?? NullTransformer();
+
+    SmeupDataService.initInternalService();
   }
 
   static void setPackageInfo(PackageInfo packageInfo) {
@@ -242,22 +246,11 @@ class SmeupConfigurationService {
     return _localStorge;
   }
 
-  static setSmeupDataTransformer() {
-    if (dataTransformer == null) {
-      dataTransformer = NullTransformer();
-
-      String defaultTranformer = SmeupConfigurationService.getAppConfiguration()
-          .defaultDataTransformer;
-
-      if (defaultTranformer != null) {
-        if (defaultTranformer.toUpperCase() == 'KOKOS') {
-          dataTransformer = KokosTransformer();
-        }
-      }
-    }
+  static getDefaultServiceDataTransformer() {
+    return defaultServiceDataTransformer;
   }
 
-  static getSmeupDataTransformer() {
-    return dataTransformer;
+  static getHttpServiceDataTransformer() {
+    return defaultServiceDataTransformer;
   }
 }

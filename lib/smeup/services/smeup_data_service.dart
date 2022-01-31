@@ -21,7 +21,8 @@ class SmeupDataService {
   static initInternalService() {
     SmeupDataService.services['*JSN'] = SmeupJsonDataService();
     SmeupDataService.services['*IMAGE'] = SmeupImageDataService();
-    SmeupDataService.services['*HTTP'] = SmeupHttpDataService();
+    SmeupDataService.services['*HTTP'] = SmeupHttpDataService(
+        SmeupConfigurationService.getHttpServiceDataTransformer());
   }
 
   static Future<SmeupServiceResponse> invoke(SmeupFun smeupFun,
@@ -43,17 +44,32 @@ class SmeupDataService {
       newSmeupFun = SmeupFun(fun, smeupFun.formKey);
     }
 
+    // Read response from service
+
+    SmeupServiceResponse response;
+
     if (smeupDataService is SmeupDefaultDataService)
-      return await smeupDataService.invoke(newSmeupFun);
+      response = await smeupDataService.invoke(newSmeupFun);
     else if (smeupDataService is SmeupHttpDataService)
-      return await smeupDataService.invoke(newSmeupFun,
+      response = await smeupDataService.invoke(newSmeupFun,
           httpServiceMethod: httpServiceMethod,
           httpServiceUrl: httpServiceUrl,
           httpServiceBody: httpServiceBody,
           httpServiceContentType: httpServiceContentType,
           headers: headers);
     else
-      return await smeupDataService.invoke(newSmeupFun);
+      response = await smeupDataService.invoke(newSmeupFun);
+
+    // Apply transformation to service response (only on success)
+    if (response.succeded) {
+      var data = response.result.data;
+      if (data is Map) {
+        response.result.data =
+            smeupDataService.getTransformer().transform(smeupFun, data);
+      }
+    }
+
+    return response;
   }
 
   static SmeupDataServiceInterface getServiceImplementation(String name) {
@@ -62,7 +78,8 @@ class SmeupDataService {
           ' The server implementation \'$name\' does not exist, will be used SmeupDefaultDataService',
           logType: LogType.warning);
 
-      return SmeupDefaultDataService();
+      return SmeupDefaultDataService(
+          SmeupConfigurationService.getDefaultServiceDataTransformer());
     } else {
       return services[name];
     }

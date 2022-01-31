@@ -7,13 +7,15 @@ import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_data_service_interface.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
+import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 
-class SmeupHttpDataService implements SmeupDataServiceInterface {
+class SmeupHttpDataService extends SmeupDataServiceInterface {
   Dio dio;
   String server;
   static const DEFAULD_TIMEOUT = 20000;
 
-  SmeupHttpDataService() {
+  SmeupHttpDataService(SmeupDataTransformerInterface transformer)
+      : super(transformer) {
     BaseOptions options = new BaseOptions(
       connectTimeout: DEFAULD_TIMEOUT,
       receiveTimeout: DEFAULD_TIMEOUT,
