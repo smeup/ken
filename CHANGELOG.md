@@ -11,3 +11,8 @@
 ## [0.0.1+5] - 22/12/2021
 
 - update documentation
+
+## [0.0.1+6] - 31/01/2022
+
+- improve the application style
+- bug fixing
