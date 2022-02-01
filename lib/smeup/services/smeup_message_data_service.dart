@@ -7,9 +7,12 @@ import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_data_service_interface.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
+import 'package:ken/smeup/services/transformers/null_transformer.dart';
 
-class SmeupMessageDataService implements SmeupDataServiceInterface {
+class SmeupMessageDataService extends SmeupDataServiceInterface {
   Map<String, Map<String, dynamic>> jsons = Map();
+
+  SmeupMessageDataService() : super(NullTransformer());
 
   @override
   Future<SmeupServiceResponse> invoke(smeupFun) async {

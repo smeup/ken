@@ -5,6 +5,7 @@ import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/screens/smeup_dynamic_screen.dart';
+import 'package:ken/smeup/services/transformers/null_transformer.dart';
 import 'package:package_info/package_info.dart';
 
 class MainScreen extends StatefulWidget {
@@ -59,6 +60,8 @@ class _MainScreenState extends State<MainScreen> {
         context,
         logLevel: LogType.error,
         authenticationModel: AuthenticationModel(managed: false),
+        defaultServiceDataTransformer: NullTransformer(),
+        httpServiceDataTransformer: NullTransformer(),
       );
 
       _isInitialized = true;

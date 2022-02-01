@@ -9,13 +9,15 @@ import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_data_service_interface.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
+import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 
-class SmeupDefaultDataService implements SmeupDataServiceInterface {
+class SmeupDefaultDataService extends SmeupDataServiceInterface {
   Dio dio;
   String server;
   static const DEFAULD_TIMEOUT = 10000;
 
-  SmeupDefaultDataService() {
+  SmeupDefaultDataService(SmeupDataTransformerInterface transformer)
+      : super(transformer) {
     BaseOptions options = new BaseOptions(
       connectTimeout: DEFAULD_TIMEOUT,
       receiveTimeout: DEFAULD_TIMEOUT,
@@ -50,12 +52,10 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
 
       bool isValid = SmeupDataService.isValid(response.statusCode);
 
-      var responseData = _getResponseData(smeupFun, response, isValid);
-
       return SmeupServiceResponse(
           isValid,
           Response(
-              data: responseData,
+              data: response.data,
               statusCode: response.statusCode,
               requestOptions: null));
     } catch (e) {
@@ -206,82 +206,6 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
 
       // return the result from online
       SmeupLogService.writeDebugMessage('response cached');
-    }
-  }
-
-  dynamic _getResponseData(
-      SmeupFun smeupFun, Response<dynamic> response, bool isValid) {
-    switch (smeupFun.fun['fun']['component']) {
-      case 'EXD':
-        return response.data;
-
-      case 'EXB':
-        dynamic res = SmeupDataService.getEmptyDataStructure();
-
-        // columns
-        res['columns'] = response.data['columns'];
-        // (response.data['columns'] as List)
-        //     .map((e) => {
-        //           'code': e['code'],
-        //           'text': e['text'],
-        //           'hidden': e['IO'] == 'H' ? true : false
-        //         })
-        //     .toList();
-
-        // rows
-        List rows = List<dynamic>.empty(growable: true);
-
-        (response.data['rows'] as List).forEach((row) {
-          var newRow = Map();
-          (res['columns'] as List).forEach((column) {
-            final value =
-                row['fields'][column['code']]['smeupObject']['codice'];
-            newRow[column['code']] = value;
-            newRow['tipo'] =
-                row['fields'][column['code']]['smeupObject']['tipo'];
-            newRow['parametro'] =
-                row['fields'][column['code']]['smeupObject']['parametro'];
-            newRow['codice'] =
-                row['fields'][column['code']]['smeupObject']['codice'];
-            newRow['testo'] =
-                row['fields'][column['code']]['smeupObject']['testo'];
-          });
-          rows.add(newRow);
-        });
-
-        res['rows'] = rows;
-        res['type'] = 'SmeupDataTable';
-        return res;
-
-      case 'TRE':
-        dynamic res = SmeupDataService.getEmptyDataStructure();
-        List rows = List.empty(growable: true);
-        for (var i = 0; i < (response.data['children'] as List).length; i++) {
-          final child = (response.data['children'] as List)[i];
-          final tipo = child['content']['tipo'];
-          final parametro = child['content']['parametro'];
-          final codice = child['content']['codice'];
-          final testo = child['content']['testo'];
-
-          var newRow = {
-            'tipo': tipo,
-            'parametro': parametro,
-            'codice': codice,
-            'value': testo,
-            //'${child['content']['codice']}': testo
-          };
-
-          rows.add(newRow);
-        }
-
-        res['rows'] = rows;
-        res['type'] = 'SmeupTreeNode';
-        return res;
-      case 'FBK':
-        break;
-
-      default:
-        return response.data;
     }
   }
 }
