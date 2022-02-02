@@ -28,7 +28,7 @@ class SmeupConfigurationService {
   static Map<DateTime, List> _holidays;
 
   static LogType logLevel;
-  static bool isLoginEnabled = false;
+
   static bool isOfflineEnabled = false;
   static bool isCacheEnabled = false;
   static bool isLogEnabled = false;

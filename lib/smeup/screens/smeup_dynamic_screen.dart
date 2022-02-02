@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/notifiers/smeup_error_notifier.dart';
+import 'package:ken/smeup/models/widgets/smeup_drawer_data_element.dart';
 import 'package:ken/smeup/models/widgets/smeup_drawer_model.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_widget_notification_service.dart';
@@ -207,17 +208,17 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
 
   SmeupDrawer _getDrawer(SmeupScreenModel smeupScreenModel, bool isDialog) {
     SmeupDrawer smeupDrawer;
-    // Function getNewDrawer = () {
-    //   var newList = List<SmeupDrawerDataElement>.empty(growable: true);
-    //   if (!isDialog) SmeupDrawer.addInternalDrawerElements(newList, context);
-    //   smeupDrawer = SmeupDrawer(
-    //     widget._scaffoldKey,
-    //     widget._formKey,
-    //     data: newList,
-    //     title: 'MENU',
-    //   );
-    //   return smeupDrawer;
-    // };
+    Function getNewDrawer = () {
+      var newList = List<SmeupDrawerDataElement>.empty(growable: true);
+      if (!isDialog) SmeupDrawer.addInternalDrawerElements(newList, context);
+      smeupDrawer = SmeupDrawer(
+        widget._scaffoldKey,
+        widget._formKey,
+        data: newList,
+        title: 'MENU',
+      );
+      return smeupDrawer;
+    };
 
     if (smeupScreenModel.data != null &&
         smeupScreenModel.data['sections'] != null &&
@@ -241,10 +242,10 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
             smeupDrawerJson, widget._formKey, widget._scaffoldKey, context);
         smeupDrawer = SmeupDrawer.withController(
             smeupDrawerModel, widget._scaffoldKey, widget._formKey);
+      } else if (SmeupConfigurationService.authenticationModel != null &&
+          SmeupConfigurationService.authenticationModel.managed) {
+        smeupDrawer = getNewDrawer();
       }
-      // else {
-      //   smeupDrawer = getNewDrawer();
-      // }
     }
     // else {
     //   smeupDrawer = getNewDrawer();
