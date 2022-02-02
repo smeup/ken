@@ -16,3 +16,8 @@
 
 - improve the application style
 - bug fixing
+
+## [0.0.1+7] - 02/02/2022
+
+- fix drawer visibility
+- change test forms
