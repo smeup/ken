@@ -15,9 +15,9 @@
             "DSH": {
               "default": {
                 "padding": {"left":0.0},
-                "forceText": "Dashboard with %",
+                "forceText": "Dashboard text",
                 "fontsize": "90%",
-                "icon": 59191,
+                "icon": 59192,
                 "iconColor": "R000G255B000",
                 "width": 300
               }
@@ -45,7 +45,7 @@
             "DSH": {
               "default": {
                 "padding": {"left":0.0},
-                "forceText": "Dashboard with values",
+                "forceText": "Temperature",
                 "fontsize": 56,
                 "icon": 59191,
                 "iconSize": 40,

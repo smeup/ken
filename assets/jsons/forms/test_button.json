@@ -27,7 +27,40 @@
           },
           "data": {
             "rows": [
-              { "value": "I am a button" },
+              { "value": "I am a button" }
+            ]
+          },
+          "dynamisms": [
+            {
+              "event": "click",
+              "exec": "F(FBK;*MSG;) P(you clicked the button: \"[value]\")"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S1",
+      "components": [
+        {
+          "type": "BTN",
+          "id": "buttons_1",
+          "options": {
+            "BTN": {
+              "default": {
+                "horiz": "Yes",
+                "backColor": "R255G000B000",
+                "borderColor": "R000G000B000",
+                "fontColor": "R000G000B000",
+                "padding": { "right": 5 },
+                "height": 50,
+                "width" : 300,
+                "fontSize": 20
+              }
+            }
+          },
+          "data": {
+            "rows": [
               { "value": "I am a button too" }
             ]
           },
@@ -41,7 +74,7 @@
       ]
     },
     {
-      "id": "S2",
+      "id": "S3",
       "components": [
         {
           "type": "BTN",
@@ -50,16 +83,14 @@
             "BTN": {
               "default": {
                 "flat": "Yes",
-                "fontSize": 30
+                "fontSize": 18
               }
             }
           },
           "data": {
             "rows": [
-              { "value": "I am a link 1" },
-              { "value": "I am a link 2" },
-              { "value": "I am a link 3" },
-              { "value": "I am a link 4" }
+              { "value": "I am a link " },
+              { "value": "I am a link too" }
             ]
           },
           "dynamisms": [
@@ -72,7 +103,7 @@
       ]
     },
     {
-      "id": "S3",
+      "id": "S4",
       "layout": "row",
       "sections": [
         {
@@ -98,8 +129,7 @@
               },
               "data": {
                 "rows": [
-                  { "value": "Horizontal 1" },
-                  { "value": "Horizontal 2" }
+                  { "value": "Horizontal" }
                 ]
               },
               "dynamisms": [
@@ -113,12 +143,9 @@
         }
       ]
     },
-    {
-      "id": "S3",
-      "layout": "row",
-      "sections": [
+
         {
-          "id": "S31",
+          "id": "S5",
           "components": [
             {
               "type": "BTN",
@@ -126,8 +153,9 @@
               "options": {
                 "BTN": {
                   "default": {
-                    "bold": true,
-                    "height": 40,
+                    "bold": false,
+                    "height": 60,
+                    "width": 400,
                     "icon": 62370,
                     "iconSize": 30,
                     "align": "right",
@@ -137,7 +165,7 @@
                 }
               },
               "data": {
-                "rows": [{ "value": "align right" }]
+                "rows": [{ "value": "small button" }]
               },
               "dynamisms": [
                 {
@@ -149,7 +177,7 @@
           ]
         },
         {
-          "id": "S32",
+          "id": "S6",
           "components": [
             {
               "type": "BTN",
@@ -170,7 +198,7 @@
                 }
               },
               "data": {
-                "rows": [{ "value": "align left" }]
+                "rows": [{ "value": "Big button" }]
               },
               "dynamisms": [
                 {
@@ -181,7 +209,5 @@
             }
           ]
         }
-      ]
-    }
   ]
 }

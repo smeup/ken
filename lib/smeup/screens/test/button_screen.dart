@@ -25,6 +25,9 @@ class ButtonScreen extends StatelessWidget {
                   width: double.infinity,
                   id: 'buttons_1',
                   data: ['I am a button', 'I am a button too'],
+                  backColor: Colors.red,
+                  fontColor: Colors.black,
+                  align: Alignment.center,
                   clientOnPressed: (buttonIndex, buttonText) {
                     SmeupUtilities.invokeScaffoldMessenger(context,
                         "You have clicked the button with text \"$buttonText\" ");
@@ -38,6 +41,46 @@ class ButtonScreen extends StatelessWidget {
                   id: 'buttons_2',
                   data: ['I am a link', 'I am a link too'],
                   isLink: true,
+                  clientOnPressed: (buttonIndex, buttonText) {
+                    SmeupUtilities.invokeScaffoldMessenger(context,
+                        "You have clicked the button with text \"$buttonText\" ");
+                  },
+                ),
+                SmeupButtons(
+                  _scaffoldKey,
+                  _formKey,
+                  width: double.infinity,
+                  id: 'buttons_3',
+                  data: ['Horizontal'],
+                  backColor: Colors.blue,
+                  fontColor: Colors.white,
+                  align: Alignment.center,
+                  clientOnPressed: (buttonIndex, buttonText) {
+                    SmeupUtilities.invokeScaffoldMessenger(context,
+                        "You have clicked the button with text \"$buttonText\" ");
+                  },
+                ),
+                SmeupButtons(
+                  _scaffoldKey,
+                  _formKey,
+                  width: 60,
+                  iconData: 62370,
+                  id: 'buttons_4',
+                  data: ['Small button'],
+                  align: Alignment.centerRight,
+                  clientOnPressed: (buttonIndex, buttonText) {
+                    SmeupUtilities.invokeScaffoldMessenger(context,
+                        "You have clicked the button with text \"$buttonText\" ");
+                  },
+                ),
+                SmeupButtons(
+                  _scaffoldKey,
+                  _formKey,
+                  width: 500,
+                  iconData: 62751,
+                  id: 'buttons_5',
+                  data: ['Big button'],
+                  align: Alignment.centerLeft,
                   clientOnPressed: (buttonIndex, buttonText) {
                     SmeupUtilities.invokeScaffoldMessenger(context,
                         "You have clicked the button with text \"$buttonText\" ");
