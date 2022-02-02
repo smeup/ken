@@ -4,11 +4,10 @@
   "id": "testDim",
   "type": "EXD",
   "title": "[description]",
-  "autoAdaptHeight": false,
   "sections": [
     {
       "id": "S1",
-      "dim": "25%",
+      "dim": "40%",
       "components": [
         {
           "type": "LAB",
@@ -23,7 +22,7 @@
     },
     {
       "id": "S2",
-      "dim": "25%",
+      "dim": "30%",
       "layout": "row",
       "sections": [
         {
@@ -43,7 +42,7 @@
         },
         {
           "id": "S2B",
-          "dim": "30%",
+          "dim": "40%",
           "components": [
             {
               "type": "LAB",
@@ -58,7 +57,7 @@
         },
         {
           "id": "S2C",
-          "dim": "40%",
+          "dim": "30%",
           "components": [
             {
               "type": "LAB",
@@ -75,12 +74,12 @@
     },
     {
       "id": "S3",
-      "dim": "25%",
+      "dim": "30%",
       "layout": "column",
       "sections": [
         {
           "id": "S3A",
-          "dim": "30%",
+          "dim": "50%",
           "components": [
             {
               "type": "LAB",
@@ -95,7 +94,7 @@
         },
         {
           "id": "S3B",
-          "dim": "30%",
+          "dim": "50%",
           "components": [
             {
               "type": "LAB",
@@ -107,36 +106,6 @@
               }
             }
           ]
-        },
-        {
-          "id": "S3C",
-          "dim": "40%",
-          "components": [
-            {
-              "type": "LAB",
-              "id": "lab7",
-              "data": {
-                "rows": [
-                  { "value": "Section S3C" }
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "S4",
-      "dim": "25%",
-      "components": [
-        {
-          "type": "LAB",
-          "id": "lab4",
-          "data": {
-            "rows": [
-              { "value": "Section S4" }
-            ]
-          }
         }
       ]
     }
