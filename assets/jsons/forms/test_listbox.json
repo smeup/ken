@@ -65,6 +65,67 @@
           }
         }
       ]
+    },
+    {
+      "id": "S2",
+      "components": 
+      [
+        {
+          "type": "BOX",
+          "id":"listbox2",
+          "options": {
+            "BOX": 
+            {
+              "default": {
+                "listType": "oriented",
+                "portraitColumns": 1,
+                "landscapeColumns": 1,
+                "height": 100.0,
+                "width": 0.0,
+                "listHeight": 0,
+                "padding" : {"left": 20},
+                "defaultSort": "description",
+                "fontColor": "R000G000B000",
+                "backColor": "R255G255B000",
+                "backgroundColName": "back",
+                "showSelection": "Yes",
+                "selectRow": 1
+              }
+            }
+          },
+          "data":{
+            "rows": 
+            [
+              {
+                "code": "Francesco",
+                "description": "27",
+                "info": "boh1",
+                "back": "R255G255B000"
+              },
+              {
+                "code": "Massimo",
+                "description": "36",
+                "info": "boh2",
+                "back": "R000G255B000"
+              }
+            ],
+            "columns": [
+              {"code": "code", "text": "codice", "IO": "O"},
+              {
+                "code": "description",
+                "text": "descrizione",
+                "IO": "O"
+              },
+              {"code": "info", "text": "informazioni", "IO": "H"},
+              {
+                "code": "back",
+                "text": "background color",
+                "IO": "H"
+              }
+            ]
+          }
+        }
+      ]
     }
   ]
 }

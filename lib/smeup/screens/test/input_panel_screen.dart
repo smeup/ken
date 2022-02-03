@@ -46,13 +46,14 @@ class InputPanelScreen extends StatelessWidget {
   List<SmeupInputPanelField> _getInputPanelFields() {
     final List<SmeupInputPanelField> data = [];
     data.add(SmeupInputPanelField(
-      id: "ITX",
-      label: "Nota generica",
-      value: SmeupInputPanelValue(code: ""),
+      id: "RAD",
+      label: "Rilevato stato febbrile ?",
+      component: SmeupInputPanelSupportedComp.Rad,
+      value: SmeupInputPanelValue(),
     ));
     data.add(SmeupInputPanelField(
       id: "RAD",
-      label: "Green Passa Valido ?",
+      label: "Sintomi influenzali ?",
       component: SmeupInputPanelSupportedComp.Rad,
       value: SmeupInputPanelValue(),
     ));

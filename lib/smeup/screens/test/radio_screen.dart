@@ -40,6 +40,21 @@ class RadioScreen extends StatelessWidget {
                       },
                       selectedValue: '0',
                     ),
+                    SmeupRadioButtons(
+                      _scaffoldKey,
+                      _formKey,
+                      title: 'Vote for...',
+                      data: [
+                        {"code": "0", "Vote": "Like"},
+                        {"code": "1", "Vote": "don't like"},
+                      ],
+                      id: 'radio_buttons_2',
+                      clientOnPressed: (String value) {
+                        SmeupUtilities.invokeScaffoldMessenger(context,
+                            "You have changed the radiobutton to: $value");
+                      },
+                      selectedValue: '1',
+                    ),
                   ],
                 )),
               ),

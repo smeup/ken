@@ -45,7 +45,7 @@
               },
               {
                 "code": "SED",
-                "IO": "B",
+                "IO": "H",
                 "text": "Sede di accesso"
               },
               {
