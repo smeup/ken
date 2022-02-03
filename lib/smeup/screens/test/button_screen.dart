@@ -63,10 +63,10 @@ class ButtonScreen extends StatelessWidget {
                 SmeupButtons(
                   _scaffoldKey,
                   _formKey,
-                  width: 60,
+                  width: 120,
                   iconData: 62370,
                   id: 'buttons_4',
-                  data: ['Small button'],
+                  data: ['Button with icon'],
                   align: Alignment.centerRight,
                   clientOnPressed: (buttonIndex, buttonText) {
                     SmeupUtilities.invokeScaffoldMessenger(context,

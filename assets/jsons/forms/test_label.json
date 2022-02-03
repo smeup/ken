@@ -15,7 +15,7 @@
             "LAB": {
               "default": {
                 "padding": { "right": 5.0 },
-                "fontSize": 40,
+                "fontSize": 35,
                 "fontBold": true,
                 "width": 10,
                 "height": 30
@@ -24,19 +24,14 @@
           },
           "data": {
             "rows": [
-              { "value": "I am a label" },
-              { "value": "I am a label too" }
+              { "value": "I am a label" }
             ]
           }
         }
       ]
     },
     {
-      "id": "S2",
-      "layout": "row",
-      "sections": [
-        {
-          "id": "S21",
+          "id": "S2",
           "components": [
             {
               "type": "LAB",
@@ -45,10 +40,10 @@
                 "LAB": {
                   "default": {
                     "padding": { "right": 5.0 },
-                    "iconSize": 30,
+                    "iconSize": 40,
                     "iconColor": "R000G000B000",
                     "icon": 62751,
-                    "fontSize": 15,
+                    "fontSize": 30,
                     "valueColName": "secondValue",
                     "fontColorColName": "columnFontColor",
                     "backColorColName": "columnBackColor"
@@ -59,7 +54,7 @@
                 "rows": [
                   {
                     "value": "non used",
-                    "secondValue": "colName left",
+                    "secondValue": "Label with icon",
                     "columnFontColor": "R255G255B000",
                     "columnBackColor": "R000G000B255"
                   }
@@ -67,42 +62,6 @@
               }
             }
           ]
-        },
-        {
-          "id": "S22",
-          "components": [
-            {
-              "type": "LAB",
-              "id": "lab3",
-              "options": {
-                "LAB": {
-                  "default": {
-                    "padding": { "left": 5.0 },
-                    "fontSize": 10,
-                    "iconSize": 40,
-                    "iconColor": "R000G000B000",
-                    "icon": 62370,
-                    "align": "right",
-                    "valueColName": "secondValue",
-                    "fontColorColName": "columnFontColor",
-                    "backColorColName": "columnBackColor"
-                  }
-                }
-              },
-              "data": {
-                "rows": [
-                  {
-                    "value": "non used",
-                    "secondValue": "colName right",
-                    "columnFontColor": "R255G000B000",
-                    "columnBackColor": "R000G000B255"
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ]
     },
     {
       "id": "S3",
@@ -114,7 +73,7 @@
             "LAB": {
               "default": {
                 "padding": { "right": 5.0 },
-                "fontSize": 50,
+                "fontSize": 20,
                 "fontBold": true,
                 "width": 0,
                 "height": 10,
@@ -124,7 +83,7 @@
             }
           },
           "data": {
-            "rows": [{ "value": "backcolor & fontcolor" }]
+            "rows": [{ "value": "Label with backcolor & fontcolor" }]
           }
         }
       ]
