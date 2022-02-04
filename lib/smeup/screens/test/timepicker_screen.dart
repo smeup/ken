@@ -15,7 +15,7 @@ class TimePickerScreen extends StatelessWidget {
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
-            title: Center(child: Text('Timepiscker Screen')),
+            title: Center(child: Text('Timepicker Screen')),
           ),
           body: SingleChildScrollView(
             child: Container(

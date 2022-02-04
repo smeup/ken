@@ -43,7 +43,7 @@ class RadioScreen extends StatelessWidget {
                     SmeupRadioButtons(
                       _scaffoldKey,
                       _formKey,
-                      title: 'Vote for...',
+                      title: 'did you like it?',
                       data: [
                         {"code": "0", "Vote": "Like"},
                         {"code": "1", "Vote": "don't like"},
