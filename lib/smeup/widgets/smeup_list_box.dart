@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/daos/smeup_list_box_dao.dart';
@@ -194,6 +196,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
   dynamic _data;
   ScrollController _scrollController;
   int _selectedRow = -1;
+  bool _executeBouncing;
 
   @override
   void initState() {
@@ -209,12 +212,22 @@ class _SmeupListBoxState extends State<SmeupListBox>
       _selectedRow = int.tryParse(localSelectedRow) ?? widget.selectedRow;
     }
 
+    _executeBouncing = true;
+
+    _runAutomaticScroll();
+
+    super.initState();
+  }
+
+  void _runAutomaticScroll() {
     double realBoxHeight = SmeupConfigurationService.getLocalStorage()
         .getDouble('${widget.formKey.hashCode}_${widget.id}_realBoxHeight');
 
     if (widget.listType == SmeupListType.oriented &&
         _selectedRow != -1 &&
         realBoxHeight != null) {
+      _executeBouncing = false;
+
       WidgetsBinding.instance.addPostFrameCallback((_) {
         MediaQueryData deviceInfo = MediaQuery.of(context);
         Orientation orientation = deviceInfo.orientation;
@@ -227,14 +240,27 @@ class _SmeupListBoxState extends State<SmeupListBox>
           formSpace = (_model.parent as SmeupSectionModel).height;
         }
 
-        double scrollPosition = (_selectedRow * realBoxHeight / colsNumber);
-        if (scrollPosition > formSpace)
-          Future.delayed(Duration(milliseconds: 300), () {
-            _scrollController.jumpTo(scrollPosition);
+        double scrollPosition =
+            ((_selectedRow + 1) * realBoxHeight / colsNumber);
+        if (scrollPosition > formSpace) {
+          int times = 0;
+          while (!getDataLoaded(widget.id)) {
+            if (times > 1000) break;
+            sleep(const Duration(milliseconds: 10));
+            times += 1;
+          }
+          Future.delayed(Duration(milliseconds: 10), () {
+            if (_scrollController.positions.isNotEmpty) {
+              _scrollController.animateTo(scrollPosition,
+                  duration: Duration(milliseconds: 10),
+                  curve: Curves.bounceInOut);
+            } else {
+              print('positions was empty');
+            }
           });
+        }
       });
     }
-    super.initState();
   }
 
   @override
@@ -310,7 +336,9 @@ class _SmeupListBoxState extends State<SmeupListBox>
         key: ObjectKey("_list_${widget.id}"),
         controller: _scrollController,
         scrollDirection: widget.orientation,
-        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        physics: _executeBouncing
+            ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+            : null,
         itemCount: cells.length,
         itemBuilder: (context, index) {
           return cells[index];
@@ -356,8 +384,9 @@ class _SmeupListBoxState extends State<SmeupListBox>
           child: GridView.count(
             controller: _scrollController,
             childAspectRatio: childAspectRatio,
-            physics:
-                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            physics: _executeBouncing
+                ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+                : null,
             scrollDirection: widget.orientation,
             crossAxisCount: col,
             children: cells,
@@ -396,8 +425,10 @@ class _SmeupListBoxState extends State<SmeupListBox>
               //}
             },
             child: ListWheelScrollView.useDelegate(
-              physics: BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics()),
+              physics: _executeBouncing
+                  ? BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics())
+                  : null,
               controller: _scrollController,
               itemExtent: widget.height,
               onSelectedItemChanged: (index) {
