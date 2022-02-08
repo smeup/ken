@@ -4,6 +4,7 @@ import 'package:ken/smeup/models/widgets/smeup_form_model.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/widgets/smeup_not_available.dart';
 import 'package:ken/smeup/widgets/smeup_wait.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
@@ -118,7 +119,7 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
     }
 
     smeupFormModel.smeupSectionsModels.forEach((s) {
-      MediaQueryData deviceInfo = MediaQuery.of(context);
+      //MediaQueryData deviceInfo = MediaQuery.of(context);
 
       if (useDim && totalDim > 0) {
         final routeArgs =
@@ -128,11 +129,12 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
 
         double formHeight = isDialog
             ? 300
-            : deviceInfo.size.height -
+            : SmeupUtilities.getDeviceSizes()['physicalHeight'] -
                 SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight -
                 24 -
                 widget.smeupFormModel.padding.vertical;
-        double formWidth = isDialog ? 300 : deviceInfo.size.width;
+        double formWidth =
+            isDialog ? 300 : SmeupUtilities.getDeviceSizes()['physicalWidth'];
 
         s.height = smeupFormModel.layout == 'column'
             ? (formHeight) / totalDim * s.dim
@@ -142,8 +144,8 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
             ? formWidth / totalDim * s.dim
             : formWidth;
       } else {
-        s.height = deviceInfo.size.height;
-        s.width = deviceInfo.size.width;
+        s.height = SmeupUtilities.getDeviceSizes()['physicalHeight'];
+        s.width = SmeupUtilities.getDeviceSizes()['physicalWidth'];
       }
     });
 
