@@ -320,7 +320,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
     _runAutomaticScroll();
 
     if (_oldOrientation != null &&
-        //  _oldOrientation != _orientation &&
+        _oldOrientation != _orientation &&
         widget.parentForm != null &&
         widget.parentForm.currentFormReload != null) {
       widget.parentForm.currentFormReload();
