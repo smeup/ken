@@ -129,12 +129,10 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
 
         double formHeight = isDialog
             ? 300
-            : SmeupUtilities.getDeviceSizes()['physicalHeight'] -
-                SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight -
-                24 -
-                widget.smeupFormModel.padding.vertical;
+            : SmeupUtilities.getDeviceInfo().safeHeight -
+                SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight;
         double formWidth =
-            isDialog ? 300 : SmeupUtilities.getDeviceSizes()['physicalWidth'];
+            isDialog ? 300 : SmeupUtilities.getDeviceInfo().safeWidth;
 
         s.height = smeupFormModel.layout == 'column'
             ? (formHeight) / totalDim * s.dim
@@ -144,8 +142,8 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
             ? formWidth / totalDim * s.dim
             : formWidth;
       } else {
-        s.height = SmeupUtilities.getDeviceSizes()['physicalHeight'];
-        s.width = SmeupUtilities.getDeviceSizes()['physicalWidth'];
+        s.height = SmeupUtilities.getDeviceInfo().safeHeight;
+        s.width = SmeupUtilities.getDeviceInfo().safeWidth;
       }
     });
 

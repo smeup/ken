@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:ken/smeup/models/smeup_device_info.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 
@@ -258,7 +259,7 @@ class SmeupUtilities {
         SnackBar(content: Text(text), duration: Duration(milliseconds: 500)));
   }
 
-  static dynamic getDeviceSizes() {
+  static SmeupDeviceInfo getDeviceInfo() {
     var pixelRatio = window.devicePixelRatio;
 
     //Size in physical pixels
@@ -272,7 +273,7 @@ class SmeupUtilities {
     var logicalHeight = logicalScreenSize.height;
 
     //Padding in physical pixels
-    //var padding = window.padding;
+    var padding = window.padding;
 
     //Safe area paddings in logical pixels
     var paddingLeft = window.padding.left / window.devicePixelRatio;
@@ -284,11 +285,9 @@ class SmeupUtilities {
     var safeWidth = logicalWidth - paddingLeft - paddingRight;
     var safeHeight = logicalHeight - paddingTop - paddingBottom;
 
-    return {
-      'physicalWidth': physicalWidth,
-      'physicalHeight': physicalHeight,
-      'safeWidth': safeWidth,
-      'safeHeight': safeHeight
-    };
+    var smeupDeviceInfo = SmeupDeviceInfo(
+        padding, physicalHeight, physicalWidth, safeHeight, safeWidth);
+
+    return smeupDeviceInfo;
   }
 }
