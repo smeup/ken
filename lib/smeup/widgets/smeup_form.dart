@@ -4,6 +4,7 @@ import 'package:ken/smeup/models/widgets/smeup_form_model.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/widgets/smeup_not_available.dart';
 import 'package:ken/smeup/widgets/smeup_wait.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
@@ -21,8 +22,25 @@ class SmeupForm extends StatefulWidget {
 }
 
 class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
+  Function currentFormReload;
+
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    currentFormReload = () {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Future.delayed(Duration(milliseconds: 300), () async {
+          setState(() {});
+        });
+      });
+    };
+
     return FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getFormChildren(widget.smeupFormModel),
       builder: (BuildContext context,
@@ -118,7 +136,7 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
     }
 
     smeupFormModel.smeupSectionsModels.forEach((s) {
-      MediaQueryData deviceInfo = MediaQuery.of(context);
+      //MediaQueryData deviceInfo = MediaQuery.of(context);
 
       if (useDim && totalDim > 0) {
         final routeArgs =
@@ -128,11 +146,10 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
 
         double formHeight = isDialog
             ? 300
-            : deviceInfo.size.height -
-                SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight -
-                24 -
-                widget.smeupFormModel.padding.vertical;
-        double formWidth = isDialog ? 300 : deviceInfo.size.width;
+            : SmeupUtilities.getDeviceInfo().safeHeight -
+                SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight;
+        double formWidth =
+            isDialog ? 300 : SmeupUtilities.getDeviceInfo().safeWidth;
 
         s.height = smeupFormModel.layout == 'column'
             ? (formHeight) / totalDim * s.dim
@@ -142,8 +159,8 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
             ? formWidth / totalDim * s.dim
             : formWidth;
       } else {
-        s.height = deviceInfo.size.height;
-        s.width = deviceInfo.size.width;
+        s.height = SmeupUtilities.getDeviceInfo().safeHeight;
+        s.width = SmeupUtilities.getDeviceInfo().safeWidth;
       }
     });
 
@@ -154,11 +171,11 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
             height: s.height,
             width: s.width,
             child: SmeupSection(
-                s, widget.scaffoldKey, widget.smeupFormModel.formKey));
+                s, widget.scaffoldKey, widget.smeupFormModel.formKey, this));
       } else {
         section = Container(
             child: SmeupSection(
-                s, widget.scaffoldKey, widget.smeupFormModel.formKey));
+                s, widget.scaffoldKey, widget.smeupFormModel.formKey, this));
       }
       sections.add(section);
     });

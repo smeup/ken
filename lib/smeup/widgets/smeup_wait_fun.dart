@@ -20,6 +20,7 @@ class SmeupWaitFun extends StatelessWidget {
     var start = DateTime.now();
 
     return FutureBuilder<Widget>(
+      key: Key('smeupWaitFun_${formKey.hashCode}'),
       future: _getWidget(3000, start),
       builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {

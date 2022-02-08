@@ -1,6 +1,8 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:ken/smeup/models/smeup_device_info.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 
@@ -255,5 +257,37 @@ class SmeupUtilities {
   static void invokeScaffoldMessenger(BuildContext context, String text) {
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(text), duration: Duration(milliseconds: 500)));
+  }
+
+  static SmeupDeviceInfo getDeviceInfo() {
+    var pixelRatio = window.devicePixelRatio;
+
+    //Size in physical pixels
+    var physicalScreenSize = window.physicalSize;
+    var physicalWidth = physicalScreenSize.width;
+    var physicalHeight = physicalScreenSize.height;
+
+    //Size in logical pixels
+    var logicalScreenSize = window.physicalSize / pixelRatio;
+    var logicalWidth = logicalScreenSize.width;
+    var logicalHeight = logicalScreenSize.height;
+
+    //Padding in physical pixels
+    var padding = window.padding;
+
+    //Safe area paddings in logical pixels
+    var paddingLeft = window.padding.left / window.devicePixelRatio;
+    var paddingRight = window.padding.right / window.devicePixelRatio;
+    var paddingTop = window.padding.top / window.devicePixelRatio;
+    var paddingBottom = window.padding.bottom / window.devicePixelRatio;
+
+    //Safe area in logical pixels
+    var safeWidth = logicalWidth - paddingLeft - paddingRight;
+    var safeHeight = logicalHeight - paddingTop - paddingBottom;
+
+    var smeupDeviceInfo = SmeupDeviceInfo(
+        padding, physicalHeight, physicalWidth, safeHeight, safeWidth);
+
+    return smeupDeviceInfo;
   }
 }
