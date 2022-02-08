@@ -9,7 +9,6 @@ import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/widgets/smeup_box.dart';
-import 'package:ken/smeup/widgets/smeup_form.dart';
 import 'package:ken/smeup/widgets/smeup_not_available.dart';
 import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
@@ -23,6 +22,7 @@ class SmeupListBox extends StatefulWidget
   SmeupListBoxModel model;
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
+  dynamic parentForm;
 
   Color backColor;
   Color borderColor;
@@ -58,7 +58,8 @@ class SmeupListBox extends StatefulWidget
   // dynamisms functions
   Function clientOnItemTap;
 
-  SmeupListBox.withController(this.model, this.scaffoldKey, this.formKey)
+  SmeupListBox.withController(
+      this.model, this.scaffoldKey, this.formKey, this.parentForm)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model);
   }
@@ -257,12 +258,12 @@ class _SmeupListBoxState extends State<SmeupListBox>
     super.dispose();
   }
 
-  // @override
-  // void setState(fn) {
-  //   if (mounted) {
-  //     super.setState(fn);
-  //   }
-  // }
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -318,18 +319,15 @@ class _SmeupListBoxState extends State<SmeupListBox>
 
     _runAutomaticScroll();
 
-    _updateForm();
-
-    return SmeupWidgetBuilderResponse(_model, children);
-  }
-
-  void _updateForm() {
     if (_oldOrientation != null &&
         //  _oldOrientation != _orientation &&
-        SmeupForm.currentFormReload != null) {
-      SmeupForm.currentFormReload();
+        widget.parentForm != null &&
+        widget.parentForm.currentFormReload != null) {
+      widget.parentForm.currentFormReload();
     }
     _oldOrientation = _orientation;
+
+    return SmeupWidgetBuilderResponse(_model, children);
   }
 
   Widget _getSimpleList(List<Widget> cells) {
@@ -449,7 +447,6 @@ class _SmeupListBoxState extends State<SmeupListBox>
   Future<void> _refreshList() async {
     setDataLoad(widget.id, false);
     setState(() {});
-    _updateForm();
   }
 
   List<Widget> _getCells() {

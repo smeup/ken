@@ -46,8 +46,10 @@ class SmeupImageList extends StatefulWidget
 
   // dynamisms functions
   Function clientOnItemTap;
+  dynamic parentForm;
 
-  SmeupImageList.withController(this.model, this.scaffoldKey, this.formKey)
+  SmeupImageList.withController(
+      this.model, this.scaffoldKey, this.formKey, this.parentForm)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model);
   }
@@ -250,7 +252,7 @@ class _SmeupImageListState extends State<SmeupImageList>
       _modelListBox.dynamisms = _model.dynamisms;
       _modelListBox.data = _data;
       children = SmeupListBox.withController(
-          _modelListBox, widget.scaffoldKey, widget.formKey);
+          _modelListBox, widget.scaffoldKey, widget.formKey, widget.parentForm);
     }
 
     return SmeupWidgetBuilderResponse(_model, children);

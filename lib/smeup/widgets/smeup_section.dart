@@ -14,8 +14,10 @@ class SmeupSection extends StatefulWidget {
   final SmeupSectionModel smeupSectionModel;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
+  final dynamic parentForm;
 
-  SmeupSection(this.smeupSectionModel, this.scaffoldKey, this.formKey);
+  SmeupSection(
+      this.smeupSectionModel, this.scaffoldKey, this.formKey, this.parentForm);
 
   @override
   _SmeupSectionState createState() => _SmeupSectionState();
@@ -128,7 +130,8 @@ class _SmeupSectionState extends State<SmeupSection>
         var section;
         section = Expanded(
             flex: s.dim.floor(),
-            child: SmeupSection(s, widget.scaffoldKey, widget.formKey));
+            child: SmeupSection(
+                s, widget.scaffoldKey, widget.formKey, widget.parentForm));
         sections.add(section);
       });
 
@@ -159,7 +162,7 @@ class _SmeupSectionState extends State<SmeupSection>
     if (smeupSectionModel.hasComponents()) {
       if (smeupSectionModel.components.length == 1) {
         children = SmeupComponent(smeupSectionModel.components.first,
-            widget.scaffoldKey, widget.formKey);
+            widget.scaffoldKey, widget.formKey, widget.parentForm);
       } else {
         children = _getTabs();
       }
@@ -172,7 +175,8 @@ class _SmeupSectionState extends State<SmeupSection>
     final tabsView = widget.smeupSectionModel.components.map((e) {
       return Padding(
         padding: const EdgeInsets.only(top: 8.0),
-        child: SmeupComponent(e, widget.scaffoldKey, widget.formKey),
+        child: SmeupComponent(
+            e, widget.scaffoldKey, widget.formKey, widget.parentForm),
       );
     }).toList();
 

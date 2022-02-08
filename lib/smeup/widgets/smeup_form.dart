@@ -14,7 +14,6 @@ class SmeupForm extends StatefulWidget {
   final SmeupFormModel smeupFormModel;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
-  static Function currentFormReload;
 
   SmeupForm(this.smeupFormModel, this.scaffoldKey, this.formKey);
 
@@ -23,11 +22,20 @@ class SmeupForm extends StatefulWidget {
 }
 
 class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
+  Function currentFormReload;
+
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    SmeupForm.currentFormReload = () {
+    currentFormReload = () {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Future.delayed(Duration(milliseconds: 200), () async {
+        Future.delayed(Duration(milliseconds: 300), () async {
           setState(() {});
         });
       });
@@ -163,11 +171,11 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
             height: s.height,
             width: s.width,
             child: SmeupSection(
-                s, widget.scaffoldKey, widget.smeupFormModel.formKey));
+                s, widget.scaffoldKey, widget.smeupFormModel.formKey, this));
       } else {
         section = Container(
             child: SmeupSection(
-                s, widget.scaffoldKey, widget.smeupFormModel.formKey));
+                s, widget.scaffoldKey, widget.smeupFormModel.formKey, this));
       }
       sections.add(section);
     });

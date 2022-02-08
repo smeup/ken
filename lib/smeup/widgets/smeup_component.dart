@@ -39,8 +39,10 @@ class SmeupComponent extends StatefulWidget {
   final SmeupModel smeupModel;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
+  final dynamic parentForm;
 
-  SmeupComponent(this.smeupModel, this.scaffoldKey, this.formKey);
+  SmeupComponent(
+      this.smeupModel, this.scaffoldKey, this.formKey, this.parentForm);
 
   @override
   _SmeupComponentState createState() => _SmeupComponentState();
@@ -115,7 +117,7 @@ class _SmeupComponentState extends State<SmeupComponent> {
         break;
       case 'BOX':
         children = SmeupListBox.withController(
-            smeupModel, widget.scaffoldKey, widget.formKey);
+            smeupModel, widget.scaffoldKey, widget.formKey, widget.parentForm);
         break;
       case 'LIN':
         children = SmeupLine.withController(
@@ -131,7 +133,7 @@ class _SmeupComponentState extends State<SmeupComponent> {
         break;
       case 'IML':
         children = SmeupImageList.withController(
-            smeupModel, widget.scaffoldKey, widget.formKey);
+            smeupModel, widget.scaffoldKey, widget.formKey, widget.parentForm);
         break;
       case 'FLD':
         switch (smeupModel.options['FLD']['default']['type']) {
