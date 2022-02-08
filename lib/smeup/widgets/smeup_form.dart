@@ -24,6 +24,9 @@ class SmeupForm extends StatefulWidget {
 class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
+    var orientation = MediaQuery.of(context).orientation;
+
     return FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getFormChildren(widget.smeupFormModel),
       builder: (BuildContext context,
