@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/daos/smeup_list_box_dao.dart';
@@ -11,6 +9,7 @@ import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/widgets/smeup_box.dart';
+import 'package:ken/smeup/widgets/smeup_form.dart';
 import 'package:ken/smeup/widgets/smeup_not_available.dart';
 import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
@@ -179,7 +178,7 @@ class SmeupListBox extends StatefulWidget
         listboxHeight = (model.parent as SmeupSectionModel).height;
     } else {
       if (listboxHeight == 0)
-        listboxHeight = MediaQuery.of(context).size.height;
+        listboxHeight = SmeupUtilities.getDeviceInfo().safeHeight;
     }
     return listboxHeight;
   }
@@ -196,7 +195,9 @@ class _SmeupListBoxState extends State<SmeupListBox>
   dynamic _data;
   ScrollController _scrollController;
   int _selectedRow = -1;
-  bool _executeBouncing;
+  bool _executeBouncing = false;
+  Orientation _orientation;
+  Orientation _oldOrientation;
 
   @override
   void initState() {
@@ -212,55 +213,42 @@ class _SmeupListBoxState extends State<SmeupListBox>
       _selectedRow = int.tryParse(localSelectedRow) ?? widget.selectedRow;
     }
 
-    _executeBouncing = true;
-
-    _runAutomaticScroll();
+    //_executeBouncing = true;
 
     super.initState();
   }
 
   void _runAutomaticScroll() {
-    double realBoxHeight = SmeupConfigurationService.getLocalStorage()
-        .getDouble('${widget.formKey.hashCode}_${widget.id}_realBoxHeight');
+    Future.delayed(Duration(milliseconds: 80), () async {
+      double realBoxHeight = SmeupConfigurationService.getLocalStorage()
+          .getDouble('${widget.formKey.hashCode}_${widget.id}_realBoxHeight');
 
-    if (widget.listType == SmeupListType.oriented &&
-        _selectedRow != -1 &&
-        realBoxHeight != null) {
-      _executeBouncing = false;
+      if (widget.listType == SmeupListType.oriented &&
+          _selectedRow != -1 &&
+          realBoxHeight != null &&
+          _model != null) {
+        if (_orientation != null) {
+          int colsNumber = _orientation == Orientation.landscape
+              ? _model.landscapeColumns
+              : _model.portraitColumns;
+          double formSpace = SmeupUtilities.getDeviceInfo().safeHeight;
 
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        MediaQueryData deviceInfo = MediaQuery.of(context);
-        Orientation orientation = deviceInfo.orientation;
-        int colsNumber = orientation == Orientation.landscape
-            ? _model.landscapeColumns
-            : _model.portraitColumns;
-        double formSpace = deviceInfo.size.height;
-
-        if (_model != null && _model.parent != null) {
-          formSpace = (_model.parent as SmeupSectionModel).height;
-        }
-
-        double scrollPosition =
-            ((_selectedRow + 1) * realBoxHeight / colsNumber);
-        if (scrollPosition > formSpace) {
-          int times = 0;
-          while (!getDataLoaded(widget.id)) {
-            if (times > 1000) break;
-            sleep(const Duration(milliseconds: 10));
-            times += 1;
+          if (_model != null && _model.parent != null) {
+            formSpace = (_model.parent as SmeupSectionModel).height;
           }
-          Future.delayed(Duration(milliseconds: 10), () {
+
+          double scrollPosition =
+              ((_selectedRow + 1) * realBoxHeight / colsNumber);
+          if (scrollPosition > formSpace) {
             if (_scrollController.positions.isNotEmpty) {
               _scrollController.animateTo(scrollPosition,
-                  duration: Duration(milliseconds: 10),
+                  duration: Duration(milliseconds: 80),
                   curve: Curves.bounceInOut);
-            } else {
-              print('positions was empty');
             }
-          });
+          }
         }
-      });
-    }
+      }
+    });
   }
 
   @override
@@ -269,12 +257,12 @@ class _SmeupListBoxState extends State<SmeupListBox>
     super.dispose();
   }
 
-  @override
-  void setState(fn) {
-    if (mounted) {
-      super.setState(fn);
-    }
-  }
+  // @override
+  // void setState(fn) {
+  //   if (mounted) {
+  //     super.setState(fn);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -306,6 +294,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
       return getFunErrorResponse(context, _model);
     }
 
+    _orientation = MediaQuery.of(context).orientation;
+
     Widget children;
 
     cells = _getCells();
@@ -325,6 +315,15 @@ class _SmeupListBoxState extends State<SmeupListBox>
         break;
       default:
     }
+
+    _runAutomaticScroll();
+
+    if (_oldOrientation != null &&
+        _oldOrientation != _orientation &&
+        SmeupForm.currentFormReload != null) {
+      SmeupForm.currentFormReload();
+    }
+    _oldOrientation = _orientation;
 
     return SmeupWidgetBuilderResponse(_model, children);
   }
@@ -361,38 +360,33 @@ class _SmeupListBoxState extends State<SmeupListBox>
   Widget _getOrientedList(List<Widget> cells) {
     var list;
 
-    MediaQueryData deviceInfo = MediaQuery.of(context);
     double boxHeight = 0;
     if (cells.length > 0)
       boxHeight = (cells[0] as SmeupBox).height;
     else
       boxHeight = 1;
 
-    list = OrientationBuilder(
-      builder: (context, orientation) {
-        int col = widget.portraitColumns;
-        if (orientation == Orientation.landscape) {
-          col = widget.landscapeColumns;
-        }
+    int col = widget.portraitColumns;
+    if (_orientation == Orientation.landscape) {
+      col = widget.landscapeColumns;
+    }
 
-        double childAspectRatio = 0;
-        childAspectRatio = deviceInfo.size.width / boxHeight * col;
-        // 500;
+    double childAspectRatio = 0;
+    childAspectRatio =
+        SmeupUtilities.getDeviceInfo().safeWidth / boxHeight * col;
 
-        return RefreshIndicator(
-          onRefresh: _refreshList,
-          child: GridView.count(
-            controller: _scrollController,
-            childAspectRatio: childAspectRatio,
-            physics: _executeBouncing
-                ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
-                : null,
-            scrollDirection: widget.orientation,
-            crossAxisCount: col,
-            children: cells,
-          ),
-        );
-      },
+    list = RefreshIndicator(
+      onRefresh: _refreshList,
+      child: GridView.count(
+        controller: _scrollController,
+        childAspectRatio: childAspectRatio,
+        physics: _executeBouncing
+            ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+            : null,
+        scrollDirection: widget.orientation,
+        crossAxisCount: col,
+        children: cells,
+      ),
     );
 
     double listboxHeight =
@@ -418,11 +412,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
             itemHeight: widget.height,
             itemCount: cells.length,
             onItemTapCallback: (index) {
-              // if (widget.clientOnItemTap != null) {
-              //   widget.clientOnItemTap();
-              // } else {
               (cells[index] as SmeupBox).onItemTap();
-              //}
             },
             child: ListWheelScrollView.useDelegate(
               physics: _executeBouncing
@@ -467,8 +457,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
         boxHeight = (_model.parent as SmeupSectionModel).height;
       if (boxWidth == 0) boxWidth = (_model.parent as SmeupSectionModel).width;
     } else {
-      if (boxHeight == 0) boxHeight = MediaQuery.of(context).size.height;
-      if (boxWidth == 0) boxWidth = MediaQuery.of(context).size.width;
+      if (boxHeight == 0) boxHeight = SmeupUtilities.getDeviceInfo().safeHeight;
+      if (boxWidth == 0) boxWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     List _rows = _data['rows'];

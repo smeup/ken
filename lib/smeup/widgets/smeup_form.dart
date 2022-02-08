@@ -14,6 +14,7 @@ class SmeupForm extends StatefulWidget {
   final SmeupFormModel smeupFormModel;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
+  static Function currentFormReload;
 
   SmeupForm(this.smeupFormModel, this.scaffoldKey, this.formKey);
 
@@ -24,8 +25,11 @@ class SmeupForm extends StatefulWidget {
 class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    var orientation = MediaQuery.of(context).orientation;
+    SmeupForm.currentFormReload = () {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        setState(() {});
+      });
+    };
 
     return FutureBuilder<SmeupWidgetBuilderResponse>(
       future: _getFormChildren(widget.smeupFormModel),
