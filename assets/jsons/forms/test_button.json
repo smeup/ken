@@ -5,147 +5,8 @@
   "type": "EXD",
   "title": "[description]",
   "sections": [
-    {
-      "id": "S1",
-      "components": [
-        {
-          "type": "BTN",
-          "id": "buttons_1",
-          "options": {
-            "BTN": {
-              "default": {
-                "horiz": "Yes",
-                "backColor": "R255G000B000",
-                "borderColor": "R000G000B000",
-                "fontColor": "R000G000B000",
-                "padding": { "right": 5 },
-                "height": 50,
-                "width" : 300,
-                "fontSize": 20
-              }
-            }
-          },
-          "data": {
-            "rows": [
-              { "value": "I am a button" }
-            ]
-          },
-          "dynamisms": [
-            {
-              "event": "click",
-              "exec": "F(FBK;*MSG;) P(you clicked the button: \"[value]\")"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "S1",
-      "components": [
-        {
-          "type": "BTN",
-          "id": "buttons_1",
-          "options": {
-            "BTN": {
-              "default": {
-                "horiz": "Yes",
-                "backColor": "R255G000B000",
-                "borderColor": "R000G000B000",
-                "fontColor": "R000G000B000",
-                "padding": { "right": 5 },
-                "height": 50,
-                "width" : 300,
-                "fontSize": 20
-              }
-            }
-          },
-          "data": {
-            "rows": [
-              { "value": "I am a button too" }
-            ]
-          },
-          "dynamisms": [
-            {
-              "event": "click",
-              "exec": "F(FBK;*MSG;) P(you clicked the button: \"[value]\")"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "S3",
-      "components": [
-        {
-          "type": "BTN",
-          "id": "buttons_2",
-          "options": {
-            "BTN": {
-              "default": {
-                "flat": "Yes",
-                "fontSize": 18
-              }
-            }
-          },
-          "data": {
-            "rows": [
-              { "value": "I am a link " },
-              { "value": "I am a link too" }
-            ]
-          },
-          "dynamisms": [
-            {
-              "event": "click",
-              "exec": "F(FBK;*MSG;) P(you clicked the button: \"[value]\")"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "S4",
-      "layout": "row",
-      "sections": [
-        {
-          "id": "S31",
-          "components": [
-            {
-              "type": "BTN",
-              "id": "buttons_3",
-              "options": {
-                "BTN": {
-                  "default": {
-                    "fillSpace": "Yes",
-                    "borderRadius": 10,
-                    "backColor": "R000G000B255",
-                    "borderColor": "R000G000B000",
-                    "fontColor": "R255G255B255",
-                    "bold": true,
-                    "padding": { "bottom": 5 },
-                    "height": 50,
-                    "fontSize": 20
-                  }
-                }
-              },
-              "data": {
-                "rows": [
-                  { "value": "Horizontal" }
-                ]
-              },
-              "dynamisms": [
-                {
-                  "event": "click",
-                  "exec": "F(FBK;*MSG;) P(you clicked the button: \"[value]\")"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-
-        {
-          "id": "S5",
+      {
+          "id": "S1",
           "components": [
             {
               "type": "BTN",
@@ -154,51 +15,20 @@
                 "BTN": {
                   "default": {
                     "bold": false,
-                    "height": 60,
-                    "width": 400,
-                    "icon": 62370,
+                    "height": 100,
+                    "width": 260,
+                    "icon": 62371,
                     "iconSize": 30,
                     "align": "right",
                     "borderRadius": 50,
-                    "fontSize": 20
+                    "fontSize": 18,
+                    "backColor": "R135G206B235",
+                    "padding": {"left": 50, "righ": 50, "top": 200}
                   }
                 }
               },
               "data": {
-                "rows": [{ "value": "Button with icon" }]
-              },
-              "dynamisms": [
-                {
-                  "event": "click",
-                  "exec": "F(FBK;*MSG;) P(you clicked the button: \"[value]\")"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "S6",
-          "components": [
-            {
-              "type": "BTN",
-              "id": "buttons5",
-              "options": {
-                "BTN": {
-                  "default": {
-                    "bold": true,
-                    "height": 80,
-                    "width": 400,
-                    "icon": 62751,
-                    "iconSize": 20,
-                    "fontColor": "R000G000B255",
-                    "fontSize": 20,
-                    "borderColor": "R000G000B255",
-                    "align": "left"
-                  }
-                }
-              },
-              "data": {
-                "rows": [{ "value": "Big button" }]
+                "rows": [{ "value": "Button" }]
               },
               "dynamisms": [
                 {
