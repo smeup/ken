@@ -27,7 +27,9 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
   Widget build(BuildContext context) {
     SmeupForm.currentFormReload = () {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        setState(() {});
+        Future.delayed(Duration(milliseconds: 200), () async {
+          setState(() {});
+        });
       });
     };
 

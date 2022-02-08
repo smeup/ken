@@ -318,14 +318,18 @@ class _SmeupListBoxState extends State<SmeupListBox>
 
     _runAutomaticScroll();
 
+    _updateForm();
+
+    return SmeupWidgetBuilderResponse(_model, children);
+  }
+
+  void _updateForm() {
     if (_oldOrientation != null &&
-        _oldOrientation != _orientation &&
+        //  _oldOrientation != _orientation &&
         SmeupForm.currentFormReload != null) {
       SmeupForm.currentFormReload();
     }
     _oldOrientation = _orientation;
-
-    return SmeupWidgetBuilderResponse(_model, children);
   }
 
   Widget _getSimpleList(List<Widget> cells) {
@@ -445,6 +449,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
   Future<void> _refreshList() async {
     setDataLoad(widget.id, false);
     setState(() {});
+    _updateForm();
   }
 
   List<Widget> _getCells() {
