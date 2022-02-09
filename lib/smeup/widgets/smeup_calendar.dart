@@ -343,6 +343,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
           SmeupButton(
             data: SmeupLocalizationService.of(context).getLocalString('month'),
             width: buttonWidth,
+            align: Alignment.center,
             clientOnPressed: () {
               setState(() {
                 _calendarFormat = CalendarFormat.month;
@@ -352,6 +353,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
           SmeupButton(
             data: SmeupLocalizationService.of(context).getLocalString('2weeks'),
             width: buttonWidth,
+            align: Alignment.center,
             clientOnPressed: () {
               setState(() {
                 _calendarFormat = CalendarFormat.twoWeeks;
@@ -361,6 +363,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
           SmeupButton(
             data: SmeupLocalizationService.of(context).getLocalString('week'),
             width: buttonWidth,
+            align: Alignment.center,
             clientOnPressed: () {
               setState(() {
                 _calendarFormat = CalendarFormat.week;
