@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:ken/smeup/models/widgets/smeup_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_wait_model.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
@@ -34,6 +35,7 @@ class SmeupWait extends StatefulWidget
       this.circularTrackColor})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
+    SmeupWaitModel.setDefaults(this);
   }
 
   SmeupWait.withController(
@@ -103,6 +105,9 @@ class _SmeupWaitState extends State<SmeupWait>
 
     children = Stack(
       children: [
+        Container(
+          color: SmeupConfigurationService.getTheme().splashColor,
+        ),
         SmeupSplash(widget.scaffoldKey, widget.formKey,
             color: widget.splashColor,
             id: 'SmeupSplash_${widget.scaffoldKey.hashCode.toString()}'),
