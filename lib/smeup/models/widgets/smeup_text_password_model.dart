@@ -19,6 +19,9 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
   static Color defaultBorderColor;
   static double defaultBorderWidth;
   static double defaultBorderRadius;
+  static Color defaultButtonBackColor;
+  static double defaultIconSize;
+  static Color defaultIconColor;
 
   // unsupported by json_theme
 
@@ -47,6 +50,9 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
   Color borderColor;
   double borderWidth;
   double borderRadius;
+  double iconSize;
+  Color iconColor;
+  Color buttonBackColor;
 
   String label;
   String submitLabel;
@@ -79,6 +85,9 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
       this.borderColor,
       this.borderRadius,
       this.borderWidth,
+      this.iconSize,
+      this.iconColor,
+      this.buttonBackColor,
       this.label = defaultLabel,
       this.submitLabel = defaultSubmitLabel,
       this.width = defaultWidth,
@@ -137,6 +146,13 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
     submitLabel = optionsDefault['submitLabel'] ?? defaultSubmitLabel;
     valueField = optionsDefault['valueField'] ?? defaultValueField;
     showSubmit = optionsDefault['showSubmit'] ?? defaultShowSubmit;
+    iconSize =
+        SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
+    iconColor = SmeupUtilities.getColorFromRGB(optionsDefault['iconColor']) ??
+        defaultIconColor;
+    buttonBackColor =
+        SmeupUtilities.getColorFromRGB(optionsDefault['buttonBackColor']) ??
+            defaultBackColor;
     padding =
         SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
     width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
@@ -198,6 +214,12 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
     defaultCaptionFontColor = captionStyle.color;
     defaultCaptionBackColor = captionStyle.backgroundColor;
 
+    var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
+    defaultIconSize = iconTheme.size;
+    defaultIconColor = iconTheme.color;
+
+    defaultButtonBackColor = SmeupConfigurationService.getTheme().primaryColor;
+
     // ----------------- set properties from default
     if (obj.borderColor == null)
       obj.borderColor = SmeupTextPasswordModel.defaultBorderColor;
@@ -221,5 +243,11 @@ class SmeupTextPasswordModel extends SmeupModel implements SmeupDataInterface {
       obj.captionFontSize = SmeupTextPasswordModel.defaultCaptionFontSize;
     if (obj.captionBackColor == null)
       obj.captionBackColor = SmeupTextPasswordModel.defaultCaptionBackColor;
+    if (obj.iconSize == null)
+      obj.iconSize = SmeupTextPasswordModel.defaultIconSize;
+    if (obj.iconColor == null)
+      obj.iconColor = SmeupTextPasswordModel.defaultIconColor;
+    if (obj.buttonBackColor == null)
+      obj.buttonBackColor = SmeupTextPasswordModel.defaultButtonBackColor;
   }
 }

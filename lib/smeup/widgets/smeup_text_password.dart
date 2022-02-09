@@ -35,6 +35,9 @@ class SmeupTextPassword extends StatefulWidget
   Color borderColor;
   double borderWidth;
   double borderRadius;
+  double iconSize;
+  Color iconColor;
+  Color buttonBackColor;
 
   String label;
   String submitLabel;
@@ -79,6 +82,9 @@ class SmeupTextPassword extends StatefulWidget
       this.borderColor,
       this.borderRadius,
       this.borderWidth,
+      this.iconSize,
+      this.iconColor,
+      this.buttonBackColor,
       this.label = SmeupTextPasswordModel.defaultLabel,
       this.submitLabel = SmeupTextPasswordModel.defaultSubmitLabel,
       this.width = SmeupTextPasswordModel.defaultWidth,
@@ -132,6 +138,9 @@ class SmeupTextPassword extends StatefulWidget
     underline = m.underline;
     autoFocus = m.autoFocus;
     valueField = m.valueField;
+    iconSize = m.iconSize;
+    iconColor = m.iconColor;
+    buttonBackColor = m.buttonBackColor;
 
     data = treatData(m);
   }
@@ -262,14 +271,14 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
                   ),
                 ),
                 Container(
-                  color: iconTheme.color,
+                  color: widget.buttonBackColor,
                   padding: EdgeInsets.all(iconTheme.size.toDouble()),
                   child: GestureDetector(
                     child: Icon(
                       passwordFieldModel.passwordVisible
                           ? Icons.visibility
                           : Icons.visibility_off,
-                      color: Theme.of(context).primaryColor,
+                      color: iconTheme.color,
                       size: iconTheme.size,
                     ),
                     onTap: () {
@@ -281,12 +290,12 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
                   width: 3,
                 ),
                 Container(
-                  color: iconTheme.color,
+                  color: widget.buttonBackColor,
                   padding: EdgeInsets.all(iconTheme.size.toDouble()),
                   child: GestureDetector(
                     child: Icon(
                       Icons.close,
-                      color: Theme.of(context).primaryColor,
+                      color: iconTheme.color,
                       size: iconTheme.size,
                     ),
                     onTap: () {
@@ -323,7 +332,9 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = SmeupConfigurationService.getTheme().iconTheme;
+    IconThemeData themeData = SmeupConfigurationService.getTheme()
+        .iconTheme
+        .copyWith(size: widget.iconSize, color: widget.iconColor);
 
     return themeData;
   }
