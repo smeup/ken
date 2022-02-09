@@ -627,6 +627,10 @@ Its style depends on:
     - captionBackColor      :   textTheme.caption.backgroundColor
     - captionFontColor      :   textTheme.caption.color
 
+    - iconSize              :   iconTheme.size
+    - iconColor             :   iconTheme.color
+    - buttonBackColor       :   primaryColor
+
     - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
     - borderWidth           :   timePickerTheme.dayPeriodBorderSide.width
     - borderRadius          :   timePickerTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
@@ -679,6 +683,13 @@ Its style depends on:
 ### SmeupWait
 
 The SmeupWait contains the following two widgets. Read their documentation for further information about their defaults: - [SmeupSplash](#SmeupSplash) - [SmeupProgressIndicator](#SmeupProgressIndicator)
+
+json_theme's supported attributes:
+    - splashColor           :   splashColor
+    - loaderColor           :   splashColor
+    - circularTrackColor    :   progressIndicatorTheme.circularTrackColor
+
+    Others attributes:
 
 ### Shared default styles
 
