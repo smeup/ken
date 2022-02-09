@@ -6,7 +6,7 @@
   "title": "[description]",
   "sections": [
     {
-      "id": "S4",
+      "id": "S1",
       "dim": "10%",
       "components": [
         {
@@ -15,111 +15,20 @@
           "options": {
             "LAB": {
               "default": {
+                "padding": { "left": 10.0, "Top": 30, "Right": 10.0},
                 "align": "center"
               }
             }
           },
           "data": {
-            "rows": [{ "value": "regular autocomplete" }]
-          }
-        }
-      ]
-    },
-    {
-      "id": "S1",
-      "dim": "10%",
-      "components": [
-        {
-          "id": "autocomplete1",
-          "type": "FLD",
-          "options": {
-            "FLD": {
-              "default": {
-                "type": "acp",
-                "label": "description",
-                "valueField": "value",
-                "padding": { "left": 0.0 }
-              }
-            }
-          },
-          "data": {
-            "rows": [
-              {
-                "code": "1",
-                "value": "abitante",
-                "type": "",
-                "parameter": ""
-              },
-              {
-                "code": "2",
-                "value": "accomodante",
-                "type": "",
-                "parameter": ""
-              },
-              {
-                "code": "3",
-                "value": "addiacente",
-                "type": "",
-                "parameter": ""
-              },
-              {
-                "code": "4",
-                "value": "bastian contrario",
-                "type": "",
-                "parameter": ""
-              },
-              {
-                "code": "5",
-                "value": "birillo",
-                "type": "",
-                "parameter": ""
-              },
-              {
-                "code": "6",
-                "value": "description 1",
-                "type": "",
-                "parameter": ""
-              },
-              {
-                "code": "7",
-                "value": "description 2",
-                "type": "",
-                "parameter": ""
-              }
-            ]
-          },
-          "dynamisms": [
-            {
-              "event": "change",
-              "exec": "F(FBK;*MSG;) P(you selected the option: \"[autocomplete1]\" \"[value]\")"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "S5",
-      "dim": "10%",
-      "components": [
-        {
-          "type": "LAB",
-          "id": "lab2",
-          "options": {
-            "LAB": {
-              "default": {
-                "align": "center"
-              }
-            }
-          },
-          "data": {
-            "rows": [{ "value": "autocomplete with submit button" }]
+            "rows": [{ "value": "Esempio di autocompleate" }]
           }
         }
       ]
     },
     {
       "id": "S2",
-      "dim": "10%",
+      "dim": "90%",
       "components": [
         {
           "id": "autocomplete2",
@@ -130,9 +39,9 @@
                 "type": "acp",
                 "label": "description",
                 "valueField": "value",
-                "padding": { "left": 0.0 },
+                "padding": { "left": 10.0, "Top": 200, "Right": 10.0},
                 "showSubmit": true,
-                "submitLabel": "tap me"
+                "submitLabel": "Conferma"
               }
             }
           },
@@ -140,43 +49,43 @@
             "rows": [
               {
                 "code": "1",
-                "value": "abitante",
+                "value": "Bari",
                 "type": "",
                 "parameter": ""
               },
               {
                 "code": "2",
-                "value": "accomodante",
+                "value": "Brescia",
                 "type": "",
                 "parameter": ""
               },
               {
                 "code": "3",
-                "value": "addiacente",
+                "value": "Como",
                 "type": "",
                 "parameter": ""
               },
               {
                 "code": "4",
-                "value": "bastian contrario",
+                "value": "Firenze",
                 "type": "",
                 "parameter": ""
               },
               {
                 "code": "5",
-                "value": "birillo",
+                "value": "Milano",
                 "type": "",
                 "parameter": ""
               },
               {
                 "code": "6",
-                "value": "description 1",
+                "value": "Napoli",
                 "type": "",
                 "parameter": ""
               },
               {
                 "code": "7",
-                "value": "description 2",
+                "value": "Venezia",
                 "type": "",
                 "parameter": ""
               }

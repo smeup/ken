@@ -7,6 +7,28 @@
   "sections": [
     {
       "id": "S1",
+      "dim": "10%",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "padding": { "left": 10.0, "Top": 30, "Right": 10.0},
+                "align": "center"
+              }
+            }
+          },
+          "data": {
+            "rows": [{ "value": "Esempio di grafico" }]
+          }
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "dim": "90%",
       "components": [
         {
           "type": "CHA",
@@ -23,75 +45,34 @@
           },
           "data": {
             "rows": [
-              { "col1": "pippo", "col2": 1, "col3": 9, "col4": 11 },
-              { "col1": "pluto", "col2": 10, "col3": 20, "col4": 30 }
+              { "col1": "Anno 2020", "col2": 100, "col3": 50, "col4": 50 },
+              { "col1": "Anno 2021", "col2": 90, "col3": 40, "col4": 40 }
             ],
             "columns": [
               {
                 "code": "col1",
-                "text": "value1",
+                "text": "Costi",
                 "IO": "O",
                 "fill": "ASSE",
                 "lun": 0
               },
               {
                 "code": "col2",
-                "text": "value2",
+                "text": "Fatturato",
                 "IO": "O",
                 "fill": "SERIE",
                 "lun": 0
               },
               {
                 "code": "col3",
-                "text": "value3",
+                "text": "Costi",
                 "IO": "O",
                 "fill": "SERIE",
                 "lun": 0
               },
               {
                 "code": "col4",
-                "text": "value4",
-                "IO": "O",
-                "fill": "SERIE",
-                "lun": 0
-              }
-            ]
-          }
-        }
-      ]
-    },
-
-    {
-      "id": "S2",
-      "components": [
-        {
-          "type": "CHA",
-          "id": "chart2",
-          "options": {
-            "CHA": {
-              "default": {
-                "types": ["pie"],
-                "height": 200,
-                "width": 600
-              }
-            }
-          },
-          "data": {
-            "rows": [
-              { "col1": "pippo", "col2": 1 },
-              { "col1": "pluto", "col2": 10 }
-            ],
-            "columns": [
-              {
-                "code": "col1",
-                "text": "value1",
-                "IO": "O",
-                "fill": "ASSE",
-                "lun": 0
-              },
-              {
-                "code": "col2",
-                "text": "value2",
+                "text": "Guadagno",
                 "IO": "O",
                 "fill": "SERIE",
                 "lun": 0
