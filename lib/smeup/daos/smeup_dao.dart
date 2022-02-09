@@ -36,12 +36,13 @@ class SmeupDao {
     }
   }
 
-  static Future<void> getData(SmeupModel model) async {
+  static Future<void> getData(SmeupModel model,
+      {bool executeDecrementDataFetch = true}) async {
     if (model.smeupFun != null && model.smeupFun.isFunValid()) {
       final smeupServiceResponse =
           await SmeupDataService.invoke(model.smeupFun);
       if (!smeupServiceResponse.succeded) {
-        SmeupDataService.decrementDataFetch(model.id);
+        _decrementDataFetch(model, executeDecrementDataFetch);
         return;
       }
       model.data = smeupServiceResponse.result.data;
@@ -51,6 +52,12 @@ class SmeupDao {
       res['rows'] = model.data;
       model.data = res;
     }
-    SmeupDataService.decrementDataFetch(model.id);
+    _decrementDataFetch(model, executeDecrementDataFetch);
+  }
+
+  static _decrementDataFetch(SmeupModel model, bool executeDecrementDataFetch) {
+    if (executeDecrementDataFetch) {
+      SmeupDataService.decrementDataFetch(model.id);
+    }
   }
 }

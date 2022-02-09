@@ -5,6 +5,7 @@ import 'package:ken/smeup/models/widgets/smeup_input_panel_field.dart';
 import 'package:ken/smeup/models/widgets/smeup_combo_item_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_inputpanel_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
@@ -29,7 +30,8 @@ class SmeupInputPanel extends StatefulWidget
 
   EdgeInsetsGeometry padding;
   double fontSize;
-
+  double width;
+  double height;
   String id;
   String type;
   String title;
@@ -43,6 +45,8 @@ class SmeupInputPanel extends StatefulWidget
       this.title = '',
       this.padding = SmeupInputPanelModel.defaultPadding,
       this.fontSize = SmeupInputPanelModel.defaultFontSize,
+      this.width = SmeupInputPanelModel.defaultWidth,
+      this.height = SmeupInputPanelModel.defaultHeight,
       this.data,
       this.onSubmit})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
@@ -65,6 +69,8 @@ class SmeupInputPanel extends StatefulWidget
     title = m.title;
     padding = m.padding;
     fontSize = m.fontSize;
+    width = m.width;
+    height = m.height;
     data = treatData(model);
   }
 
@@ -121,22 +127,47 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
       setDataLoad(widget.id, true);
     }
 
+    double inputPanelHeight = widget.height;
+    double inputPanelWidth = widget.width;
+    if (inputPanelWidth == 0) {
+      if (_model != null && _model.parent != null) {
+        inputPanelWidth = (_model.parent as SmeupSectionModel).width;
+      } else {
+        inputPanelWidth = MediaQuery.of(context).size.width;
+      }
+    }
+    if (inputPanelHeight == 0) {
+      if (_model != null && _model.parent != null) {
+        inputPanelHeight = (_model.parent as SmeupSectionModel).height;
+      } else {
+        inputPanelHeight = MediaQuery.of(context).size.height;
+      }
+    }
+
     if (_data == null) {
       return getFunErrorResponse(context, _model);
     } else {
-      Widget children = Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            widget.title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      var children = Container(
+        height: inputPanelHeight,
+        width: inputPanelWidth,
+        child: Scaffold(
+          floatingActionButton: _getConfirmButton(),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.title,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              _getFields(),
+            ],
           ),
-          SizedBox(
-            height: 16,
-          ),
-          _getFields(),
-          _getConfirmButton(),
-        ],
+        ),
       );
 
       return SmeupWidgetBuilderResponse(_model, children);

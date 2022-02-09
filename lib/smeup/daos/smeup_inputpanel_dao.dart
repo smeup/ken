@@ -15,7 +15,7 @@ class SmeupInputPanelDao extends SmeupDao {
       GlobalKey<FormState> formKey,
       GlobalKey<ScaffoldState> scaffoldKey,
       BuildContext context) async {
-    await SmeupDao.getData(model);
+    await SmeupDao.getData(model, executeDecrementDataFetch: false);
 
     List columns = model.data["columns"];
     Map rowFields = model.data["rows"][0];
@@ -28,6 +28,7 @@ class SmeupInputPanelDao extends SmeupDao {
       await _applyLayout(
           model.fields, layoutData["data"], formKey, scaffoldKey, context);
     }
+    SmeupDataService.decrementDataFetch(model.id);
   }
 
   static Future<Map> _getLayoutData(

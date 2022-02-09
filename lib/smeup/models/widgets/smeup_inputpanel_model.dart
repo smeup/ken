@@ -9,11 +9,14 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const double defaultFontSize = 16.0;
+  static const double defaultWidth = 0;
+  static const double defaultHeight = 0;
 
   EdgeInsetsGeometry padding;
   double fontSize;
   double iconSize;
-
+  double width;
+  double height;
   List<SmeupInputPanelField> fields;
 
   SmeupInputPanelModel({
@@ -23,6 +26,8 @@ class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
     GlobalKey<ScaffoldState> scaffoldKey,
     BuildContext context,
     title = '',
+    this.width = defaultWidth,
+    this.height = defaultHeight,
     this.padding = defaultPadding,
     this.fontSize = defaultFontSize,
   }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
@@ -48,6 +53,10 @@ class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
     title = jsonMap['title'] == null || jsonMap['title'] == '*NONE'
         ? ''
         : jsonMap['title'];
+
+    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+    height =
+        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
