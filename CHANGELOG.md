@@ -21,3 +21,8 @@
 
 - fix drawer visibility
 - change test forms
+
+## [0.0.1+8] - 10/02/2022
+
+- bugs fixing
+- style improvements
