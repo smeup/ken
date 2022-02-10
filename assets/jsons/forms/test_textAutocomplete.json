@@ -3,11 +3,11 @@
   "layout": "column",
   "id": "testForm",
   "type": "EXD",
-  "title": "[description]",
+  "title": "Autocompleate",
+  "padding": 30,
   "sections": [
     {
       "id": "S1",
-      "dim": "10%",
       "components": [
         {
           "type": "LAB",
@@ -15,7 +15,7 @@
           "options": {
             "LAB": {
               "default": {
-                "padding": { "left": 10.0, "Top": 30, "Right": 10.0},
+                "padding": { "left": 30.0, "Top": 30, "Right": 30.0},
                 "align": "center"
               }
             }
@@ -28,7 +28,6 @@
     },
     {
       "id": "S2",
-      "dim": "90%",
       "components": [
         {
           "id": "autocomplete2",
@@ -39,8 +38,8 @@
                 "type": "acp",
                 "label": "description",
                 "valueField": "value",
-                "padding": { "left": 10.0, "Top": 200, "Right": 10.0},
-                "showSubmit": true,
+                "padding": {"left": 30, "righ": 30},
+                "showSubmit": false,
                 "submitLabel": "Conferma"
               }
             }
@@ -99,9 +98,6 @@
           ]
         }
       ]
-    },
-    {
-      "id": "S3"
     }
   ]
 }
