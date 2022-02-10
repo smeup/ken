@@ -333,7 +333,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
   }
 
   Widget _buildButtons(double calHeight, double calWidth) {
-    double buttonWidth = (calWidth - 50 - widget.padding.horizontal) / 3;
+    double buttonWidth = (calWidth - 100 - widget.padding.horizontal) / 3;
     return Container(
       width: calWidth,
       child: Row(

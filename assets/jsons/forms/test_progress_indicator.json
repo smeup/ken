@@ -4,9 +4,31 @@
   "id": "testForm",
   "type": "EXD",
   "title": "[description]",
+  "padding": 30,
   "sections": [
     {
       "id": "S1",
+      "dim": "10%",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "padding": { "left": 10.0, "Top": 30, "Right": 10.0},
+                "align": "center"
+              }
+            }
+          },
+          "data": {
+            "rows": [{ "value": "Esempio di Progress Indicator" }]
+          }
+        }
+      ]
+    },
+    {
+      "id": "S2",
       "components": [
         {
           "type": "FLD",
