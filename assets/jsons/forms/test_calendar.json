@@ -16,13 +16,13 @@
           "options": {
             "LAB": {
               "default": {
-                "padding": { "left": 10.0, "Top": 30, "Right": 10.0},
+                "padding": { "Top": 30},
                 "align": "center"
               }
             }
           },
           "data": {
-            "rows": [{ "value": "Esempio di calendario" }]
+            "rows": [{ "value": "Highly customizable, feature-packed calendar widget for Flutter" }]
           }
         }
       ]
@@ -44,7 +44,6 @@
                 "showPeriodButtons": false,
                 "dataColumnName": "value",
                 "titleColumnName": "title",
-                "padding": {"left": 10, "righ": 10},
                 "styleColumnName": "style"
               }
             }
