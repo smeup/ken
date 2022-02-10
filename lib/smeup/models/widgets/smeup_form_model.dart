@@ -28,8 +28,7 @@ class SmeupFormModel extends SmeupModel
       : super.fromMap(response, formKey, scaffoldKey, context) {
     Map<String, dynamic> jsonMap = response;
 
-    padding =
-        SmeupUtilities.getPadding(optionsType['padding']) ?? defaultPadding;
+    padding = SmeupUtilities.getPadding(jsonMap['padding']) ?? defaultPadding;
 
     backColor = SmeupUtilities.getColorFromRGB(optionsType['backColor']) ??
         SmeupConfigurationService.getTheme().scaffoldBackgroundColor;

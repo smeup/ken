@@ -4,6 +4,7 @@
   "id": "testForm",
   "type": "EXD",
   "title": "[description]",
+  "padding": 30,
   "sections": [
     {
       "id": "S1",
@@ -40,6 +41,7 @@
                 "initialLastWork": "2022-12-31",    
                 "initialDay": "2022-01-01",
                 "showNavigation" : true,
+                "showPeriodButtons": false,
                 "dataColumnName": "value",
                 "titleColumnName": "title",
                 "padding": {"left": 10, "righ": 10},
