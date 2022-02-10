@@ -16,64 +16,65 @@ class TextAutocompleteScreen extends StatelessWidget {
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
-            title: Center(child: Text('TextAutocomplete Screen')),
+            title: Center(child: Text('Autocomplete')),
           ),
           body: SingleChildScrollView(
             child: Container(
               padding: const EdgeInsets.all(20),
               child: Padding(
-                padding: const EdgeInsets.only(top: 60.0),
+                padding: const EdgeInsets.only(top: 30.0, left: 10, right: 10),
                 child: Center(
                     child: Column(
                   children: [
-                    SmeupLabel(
-                        _scaffoldKey, _formKey, ['regular autocomplete']),
+                    SmeupLabel(_scaffoldKey, _formKey,
+                        ['Esempio di componente autocompleate']),
                     SmeupTextAutocomplete(
                       _scaffoldKey,
                       _formKey,
                       label: 'description',
+                      padding: EdgeInsets.only(left: 10, right: 10),
                       id: 'autocomplete1',
                       valueField: "value",
                       data: [
                         {
                           "code": "1",
-                          "value": "abitante",
+                          "value": "Bari",
                           "type": "",
                           "parameter": ""
                         },
                         {
                           "code": "2",
-                          "value": "accomodante",
+                          "value": "Brescia",
                           "type": "",
                           "parameter": ""
                         },
                         {
                           "code": "3",
-                          "value": "addiacente",
+                          "value": "Como",
                           "type": "",
                           "parameter": ""
                         },
                         {
                           "code": "4",
-                          "value": "bastian contrario",
+                          "value": "Firenze",
                           "type": "",
                           "parameter": ""
                         },
                         {
                           "code": "5",
-                          "value": "birillo",
+                          "value": "Milano",
                           "type": "",
                           "parameter": ""
                         },
                         {
                           "code": "6",
-                          "value": "description 1",
+                          "value": "Napoli",
                           "type": "",
                           "parameter": ""
                         },
                         {
                           "code": "7",
-                          "value": "description 2",
+                          "value": "Venezia",
                           "type": "",
                           "parameter": ""
                         }
@@ -81,39 +82,6 @@ class TextAutocompleteScreen extends StatelessWidget {
                       clientOnSelected: (option) {
                         SmeupUtilities.invokeScaffoldMessenger(context,
                             'selected code: ${option['code']}, value: ${option['value']}');
-                      },
-                    ),
-                    SmeupLabel(_scaffoldKey, _formKey,
-                        ['autocomplete with submit button']),
-                    SmeupTextAutocomplete(
-                      _scaffoldKey,
-                      _formKey,
-                      label: 'description',
-                      id: 'autocomplete2',
-                      valueField: "value",
-                      data: [
-                        {
-                          "code": "1",
-                          "value": "description 1",
-                          "type": "",
-                          "parameter": ""
-                        },
-                        {
-                          "code": "2",
-                          "value": "description 2",
-                          "type": "",
-                          "parameter": ""
-                        }
-                      ],
-                      showSubmit: true,
-                      submitLabel: "tap me",
-                      clientOnSelected: (option) {
-                        SmeupUtilities.invokeScaffoldMessenger(context,
-                            'selected code: ${option['code']}, value: ${option['value']}');
-                      },
-                      clientOnSubmit: (buttonIndex, buttonText) {
-                        SmeupUtilities.invokeScaffoldMessenger(
-                            context, 'you tapped the button "$buttonText"');
                       },
                     ),
                   ],
