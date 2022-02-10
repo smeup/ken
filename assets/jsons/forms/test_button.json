@@ -3,27 +3,48 @@
   "layout": "column",
   "id": "testForm",
   "type": "EXD",
-  "title": "[description]",
+  "title": "Button",
+  "padding": 30,
   "sections": [
+    {
+      "id": "S1",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "padding": { "Top": 30},
+                "align": "center"
+              }
+            }
+          },
+          "data": {
+            "rows": [{ "value": "Highly customizable, feature-packed button widget for Flutter" }]
+          }
+        }
+      ]
+    },
       {
-          "id": "S1",
+          "id": "S2",
           "components": [
             {
               "type": "BTN",
-              "id": "buttons_4",
+              "id": "buttons",
               "options": {
                 "BTN": {
                   "default": {
                     "bold": false,
-                    "height": 100,
+                    "height": 80,
                     "width": 260,
                     "icon": 62371,
-                    "iconSize": 30,
+                    "iconSize": 25,
                     "align": "right",
-                    "borderRadius": 50,
+                    "borderRadius": 30,
                     "fontSize": 18,
-                    "backColor": "R135G206B235",
-                    "padding": {"left": 50, "righ": 50, "top": 200}
+                    "backColor": "R006G140B154",
+                    "textColor": "R006G140B154"
                   }
                 }
               },

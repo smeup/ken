@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/widgets/smeup_buttons.dart';
+import 'package:ken/smeup/screens/test/showcase_shared.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class ButtonScreen extends StatelessWidget {
   static const routeName = '/ButtonScreen';
+  static const description =
+      'Highly customizable, feature-packed button widget for Flutter';
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -14,80 +17,45 @@ class ButtonScreen extends StatelessWidget {
       data: SmeupConfigurationService.getTheme(),
       child: Builder(
         builder: (BuildContext context) => Scaffold(
-            appBar: AppBar(
-              title: Center(child: Text('Button Screen')),
+          appBar: AppBar(
+            title: Center(child: Text('Button Screen')),
+          ),
+          body: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(30),
+              //child: Padding(
+              //padding: const EdgeInsets.only(top: 30.0, left: 10, right: 10),
+              child: Center(
+                  child: Column(
+                children: [
+                  ShowCaseShared.getTestLabel(
+                      _scaffoldKey, _formKey, description),
+                  SmeupButtons(
+                    _scaffoldKey,
+                    _formKey,
+                    //width: double.infinity,
+                    id: 'buttons_1',
+                    data: ['Button'],
+                    height: 80,
+                    width: 260,
+                    iconData: 62371,
+                    iconSize: 25,
+                    borderRadius: 30,
+                    fontSize: 18,
+                    backColor: Color.fromRGBO(6, 140, 154, 10),
+                    fontColor: Colors.white,
+                    align: Alignment.centerRight,
+                    clientOnPressed: (buttonIndex, buttonText) {
+                      SmeupUtilities.invokeScaffoldMessenger(context,
+                          "You have clicked the button with text \"$buttonText\" ");
+                    },
+                  ),
+                ],
+              )),
+              //),
             ),
-            body: Column(
-              children: [
-                SmeupButtons(
-                  _scaffoldKey,
-                  _formKey,
-                  width: double.infinity,
-                  id: 'buttons_1',
-                  data: ['I am a button', 'I am a button too'],
-                  backColor: Colors.red,
-                  fontColor: Colors.black,
-                  align: Alignment.center,
-                  clientOnPressed: (buttonIndex, buttonText) {
-                    SmeupUtilities.invokeScaffoldMessenger(context,
-                        "You have clicked the button with text \"$buttonText\" ");
-                  },
-                ),
-                SizedBox(height: 10),
-                SmeupButtons(
-                  _scaffoldKey,
-                  _formKey,
-                  width: double.infinity,
-                  id: 'buttons_2',
-                  data: ['I am a link', 'I am a link too'],
-                  isLink: true,
-                  clientOnPressed: (buttonIndex, buttonText) {
-                    SmeupUtilities.invokeScaffoldMessenger(context,
-                        "You have clicked the button with text \"$buttonText\" ");
-                  },
-                ),
-                SmeupButtons(
-                  _scaffoldKey,
-                  _formKey,
-                  width: double.infinity,
-                  id: 'buttons_3',
-                  data: ['Horizontal'],
-                  backColor: Colors.blue,
-                  fontColor: Colors.white,
-                  align: Alignment.center,
-                  clientOnPressed: (buttonIndex, buttonText) {
-                    SmeupUtilities.invokeScaffoldMessenger(context,
-                        "You have clicked the button with text \"$buttonText\" ");
-                  },
-                ),
-                SmeupButtons(
-                  _scaffoldKey,
-                  _formKey,
-                  width: 120,
-                  iconData: 62370,
-                  id: 'buttons_4',
-                  data: ['Button with icon'],
-                  align: Alignment.centerRight,
-                  clientOnPressed: (buttonIndex, buttonText) {
-                    SmeupUtilities.invokeScaffoldMessenger(context,
-                        "You have clicked the button with text \"$buttonText\" ");
-                  },
-                ),
-                SmeupButtons(
-                  _scaffoldKey,
-                  _formKey,
-                  width: 500,
-                  iconData: 62751,
-                  id: 'buttons_5',
-                  data: ['Big button'],
-                  align: Alignment.centerLeft,
-                  clientOnPressed: (buttonIndex, buttonText) {
-                    SmeupUtilities.invokeScaffoldMessenger(context,
-                        "You have clicked the button with text \"$buttonText\" ");
-                  },
-                ),
-              ],
-            )),
+          ),
+        ),
       ),
     );
   }

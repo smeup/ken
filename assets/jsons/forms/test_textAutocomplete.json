@@ -15,13 +15,13 @@
           "options": {
             "LAB": {
               "default": {
-                "padding": { "left": 30.0, "Top": 30, "Right": 30.0},
+                "padding": { "Top": 30},
                 "align": "center"
               }
             }
           },
           "data": {
-            "rows": [{ "value": "Esempio di autocompleate" }]
+            "rows": [{ "value": "example of autocomplete in flutter, it is possible to add confirmation key" }]
           }
         }
       ]
@@ -36,9 +36,9 @@
             "FLD": {
               "default": {
                 "type": "acp",
+                "align": "center",
                 "label": "description",
                 "valueField": "value",
-                "padding": {"left": 30, "righ": 30},
                 "showSubmit": false,
                 "submitLabel": "Conferma"
               }
