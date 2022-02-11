@@ -3,10 +3,31 @@
   "layout": "column",
   "id": "testForm",
   "type": "EXD",
-  "title": "[description]",
+  "title": "Combo",
+  "padding": 30,
   "sections": [
     {
       "id": "S1",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "padding": { "Top": 30},
+                "align": "center"
+              }
+            }
+          },
+          "data": {
+            "rows": [{ "value": "flutter combo widget example. When opened, allow you to select a city" }]
+          }
+        }
+      ]
+    },
+    {
+      "id": "S2",
       "components": [
         {
           "type": "FLD",
@@ -18,16 +39,16 @@
                 "defaultValue": "1",
                 "valueField": "code",
                 "descriptionField": "description",
-                "label" : "My combo"
+                "label" : "City"
               }
             }
           },
           "data": {
             "rows": [
-              { "code": "1", "description": "One" },
-              { "code": "2", "description": "Two" },
-              { "code": "3", "description": "Free" },
-              { "code": "4", "description": "Four" }
+              { "code": "1", "description": "Antwerp" },
+              { "code": "2", "description": "Boston" },
+              { "code": "3", "description": "Milan" },
+              { "code": "4", "description": "Paris" }
             ],
             "columns": [
               {
