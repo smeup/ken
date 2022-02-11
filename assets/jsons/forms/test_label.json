@@ -4,6 +4,7 @@
   "id": "testForm",
   "type": "EXD",
   "title": "[description]",
+  "padding": 30,
   "sections": [
     {
       "id": "S1",
@@ -14,76 +15,49 @@
           "options": {
             "LAB": {
               "default": {
-                "padding": { "right": 5.0 },
-                "fontSize": 35,
-                "fontBold": true,
-                "width": 10,
-                "height": 30
+                "padding": {
+                  "Top": 30
+                },
+                "align": "center"
               }
             }
           },
           "data": {
             "rows": [
-              { "value": "I am a label" }
+              {
+                "value": "Highly customizable, feature-packed label widget for Flutter"
+              }
             ]
           }
         }
       ]
     },
     {
-          "id": "S2",
-          "components": [
-            {
-              "type": "LAB",
-              "id": "lab2",
-              "options": {
-                "LAB": {
-                  "default": {
-                    "padding": { "right": 5.0 },
-                    "iconSize": 40,
-                    "iconColor": "R000G000B000",
-                    "icon": 62751,
-                    "fontSize": 30,
-                    "valueColName": "secondValue",
-                    "fontColorColName": "columnFontColor",
-                    "backColorColName": "columnBackColor"
-                  }
-                }
-              },
-              "data": {
-                "rows": [
-                  {
-                    "value": "non used",
-                    "secondValue": "Label with icon",
-                    "columnFontColor": "R255G255B000",
-                    "columnBackColor": "R000G000B255"
-                  }
-                ]
-              }
-            }
-          ]
-    },
-    {
-      "id": "S3",
+      "id": "S2",
       "components": [
         {
           "type": "LAB",
-          "id": "lab1",
+          "id": "lab2",
           "options": {
             "LAB": {
               "default": {
-                "padding": { "right": 5.0 },
-                "fontSize": 20,
-                "fontBold": true,
-                "width": 0,
-                "height": 10,
-                "backColor": "R255G255B000",
-                "fontColor": "R000G000B000"
+                "padding": {
+                  "right": 5.0
+                },
+                "iconSize": 40,
+                "iconColor": "R000G000B000",
+                "icon": 62751,
+                "fontSize": 30,
+                "align": "right"
               }
             }
           },
           "data": {
-            "rows": [{ "value": "Label with backcolor & fontcolor" }]
+            "rows": [
+              {
+                "value": "Label"
+              }
+            ]
           }
         }
       ]
