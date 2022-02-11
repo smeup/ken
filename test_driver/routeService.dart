@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ken/smeup/screens/test/dialog_screen.dart';
 import 'package:ken/smeup/screens/smeup_dynamic_screen.dart';
 import 'package:ken/smeup/screens/test/button_screen.dart';
 import 'package:ken/smeup/screens/test/calendar_screen.dart';
@@ -153,6 +154,10 @@ class RouteService {
 
       case TextPasswordScreen.routeName:
         instance = TextPasswordScreen();
+        break;
+
+      case DialogScreen.routeName:
+        instance = DialogScreen();
         break;
 
       default:

@@ -4,6 +4,7 @@
   "id": "testDialog",
   "type": "EXD",
   "title": "[description]",
+  "padding": 30,
   "sections": [
     {
       "id": "S1",
@@ -14,12 +15,14 @@
           "options": {
             "LAB": {
               "default": {
-                "fontSize": 25
+                "padding": {
+                  "Top": 30
+                }
               }
             }
           },
           "data":{
-            "rows" :  [{ "value": "Tap the button below to open the dialog" }]
+            "rows" :  [{ "value": "Tap the button below to open an example dialog" }]
           } 
         }
       ]
@@ -45,7 +48,7 @@
           "dynamisms": [
             {
               "event": "click",
-              "exec": "F(EXD;*JSN;) 2(;;dialog_form) P(DIALOG) G(DLG) "
+              "exec": "F(EXD;*JSN;) 1(;;packages/ken/assets/jsons/forms) 2(;;dialog_form) P(DIALOG) G(DLG) "
             }
           ]
         }
