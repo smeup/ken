@@ -3,11 +3,31 @@
   "layout": "column",
   "id": "testForm",
   "type": "EXD",
-  "title": "[description]",
+  "title": "Timepicker",
+  "padding": 30,
   "sections": [
     {
       "id": "S1",
-      "dim": "10%",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "padding": { "Top": 30},
+                "align": "center"
+              }
+            }
+          },
+          "data": {
+            "rows": [{ "value": "Highly customizable, feature-packed time-picker widget for Flutter" }]
+          }
+        }
+      ]
+    },
+    {
+      "id": "S2",
       "components": [
         {
           "type": "FLD",
@@ -17,7 +37,7 @@
               "default": {
                 "type": "tpk",
                 "underline": true,
-                "label" : "My time"
+                "label" : "Select hour:"
               }
             }
           },
@@ -31,10 +51,6 @@
           }
         }
       ]
-    },
-    {
-      "id": "S1",
-      "dim": "90%"
     }
   ]
 }

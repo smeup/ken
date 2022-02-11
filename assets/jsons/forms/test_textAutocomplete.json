@@ -3,7 +3,7 @@
   "layout": "column",
   "id": "testForm",
   "type": "EXD",
-  "title": "Autocompleate",
+  "title": "Autocomplete",
   "padding": 30,
   "sections": [
     {
