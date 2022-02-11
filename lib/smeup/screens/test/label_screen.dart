@@ -14,51 +14,37 @@ class LabelScreen extends StatelessWidget {
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
-            title: Center(child: Text('Label Screen')),
+            title: Center(child: Text('Label')),
           ),
           body: SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
               child: Padding(
-                padding: const EdgeInsets.only(top: 60.0),
+                padding: const EdgeInsets.only(top: 10),
                 child: Center(
                     child: Column(
                   children: [
                     SmeupLabel(
                       _scaffoldKey,
                       _formKey,
-                      ['I am a label'],
+                      [
+                        'Highly customizable, feature-packed label widget for Flutter'
+                      ],
                       id: 'lab1',
-                      fontBold: true,
-                      fontColor: Colors.black,
+                      fontBold: false,
                       align: Alignment.center,
-                      height: 30,
-                      fontSize: 26,
                     ),
                     SmeupLabel(
                       _scaffoldKey,
                       _formKey,
-                      ['Label with icon'],
+                      ['Label'],
                       id: 'lab2',
-                      fontBold: true,
-                      fontColor: Colors.black,
-                      align: Alignment.center,
-                      height: 30,
+                      fontBold: false,
+                      align: Alignment.centerRight,
                       iconData: 62751,
-                      fontSize: 26,
-                      iconSize: 30,
-                    ),
-                    SmeupLabel(
-                      _scaffoldKey,
-                      _formKey,
-                      ['Label with back color e font color'],
-                      id: 'lab3',
-                      fontBold: true,
-                      fontColor: Colors.white,
-                      align: Alignment.center,
-                      height: 30,
-                      backColor: Colors.black,
-                      fontSize: 26,
+                      fontSize: 30,
+                      iconSize: 40,
+                      iconColor: Colors.black,
                     ),
                   ],
                 )),
