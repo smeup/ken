@@ -26,41 +26,38 @@ class ImageListScreen extends StatelessWidget {
               {
                 "rows": [
                   {
-                    "code": "packages/ken/assets/images/sun.jpg",
+                    "code":
+                        "packages/ken/assets/images/image_list_blue_Tavola disegno 1.png",
                     "description": "first image",
                     "info": "boh1",
                     "isRemote": false
                   },
                   {
-                    "code": "packages/ken/assets/images/sun.jpg",
+                    "code":
+                        "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 2.png",
                     "description": "second image",
                     "info": "boh2",
                     "isRemote": false
                   },
                   {
                     "code":
-                        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.X_65uIJkSF8bJl_zyU4twgHaEo%26pid%3DApi&f=1",
+                        "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 3.png",
                     "description": "third image",
                     "info": "boh3",
-                    "isRemote": true
-                  },
-                  {
-                    "code":
-                        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.X_65uIJkSF8bJl_zyU4twgHaEo%26pid%3DApi&f=1",
-                    "description": "third image",
-                    "info": "boh3",
-                    "isRemote": true
-                  },
-                  {
-                    "code": "packages/ken/assets/images/sun.jpg",
-                    "description": "second image",
-                    "info": "boh2",
                     "isRemote": false
                   },
                   {
-                    "code": "packages/ken/assets/images/sun.jpg",
-                    "description": "first image",
-                    "info": "boh1",
+                    "code":
+                        "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 4.png",
+                    "description": "third image",
+                    "info": "boh3",
+                    "isRemote": false
+                  },
+                  {
+                    "code":
+                        "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 5.png",
+                    "description": "second image",
+                    "info": "boh2",
                     "isRemote": false
                   }
                 ],
