@@ -29,18 +29,59 @@ class CarouselScreen extends StatelessWidget {
                         _formKey,
                         [
                           {
-                            'imageFile':
-                                'packages/ken/assets/images/img-upick.png',
-                            'text': 'Descriptive text one'
+                            "imageFile":
+                                "packages/ken/assets/images/image_list_blue_Tavola disegno 1.png",
+                            "text": "Descriptive text one"
                           },
                           {
-                            'imageFile':
-                                'packages/ken/assets/images/not_available.png',
-                            'text': 'Descriptive text  two'
+                            "imageFile":
+                                "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 2.png",
+                            "text": "Descriptive text  two"
                           },
                           {
-                            'imageFile': 'packages/ken/assets/images/sun.jpg',
-                            'text': 'Descriptive text  three'
+                            "imageFile":
+                                "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 3.png",
+                            "text": "Descriptive text  three"
+                          },
+                          {
+                            "imageFile":
+                                "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 4.png",
+                            "text": "Descriptive text  three"
+                          },
+                          {
+                            "imageFile":
+                                "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 5.png",
+                            "text": "Descriptive text  three"
+                          },
+                          {
+                            "imageFile":
+                                "packages/ken/assets/images/image_list_orange_Tavola disegno 1.png",
+                            "text": "Descriptive text  three"
+                          },
+                          {
+                            "imageFile":
+                                "packages/ken/assets/images/image_list_orange_Tavola disegno 1 copia.png",
+                            "text": "Descriptive text  three"
+                          },
+                          {
+                            "imageFile":
+                                "packages/ken/assets/images/image_list_orange_Tavola disegno 1 copia 2.png",
+                            "text": "Descriptive text  three"
+                          },
+                          {
+                            "imageFile":
+                                "packages/ken/assets/images/image_list_orange_Tavola disegno 1 copia 3.png",
+                            "text": "Descriptive text  three"
+                          },
+                          {
+                            "imageFile":
+                                "packages/ken/assets/images/image_list_orange_Tavola disegno 1 copia 4.png",
+                            "text": "Descriptive text  three"
+                          },
+                          {
+                            "imageFile":
+                                "packages/ken/assets/images/image_list_orange_Tavola disegno 1 copia 5.png",
+                            "text": "Descriptive text  three"
                           }
                         ],
                         height: 300,
