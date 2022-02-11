@@ -146,9 +146,13 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     bool backButtonVisible = widget.backButtonVisible;
 
     if (!hasData(smeupScreenModel)) {
-      showErrorForm(context, smeupScreenModel.smeupFun);
-      return SmeupWidgetBuilderResponse(smeupScreenModel, SmeupNotAvailable(),
-          serviceStatusCode: smeupScreenModel.serviceStatusCode);
+      if (mounted) {
+        showErrorForm(context, smeupScreenModel.smeupFun);
+        return SmeupWidgetBuilderResponse(smeupScreenModel, SmeupNotAvailable(),
+            serviceStatusCode: smeupScreenModel.serviceStatusCode);
+      } else {
+        Navigator.of(context).pop();
+      }
     } else {
       isDialog = smeupScreenModel.isDialog;
       backButtonVisible = smeupScreenModel.backButtonVisible;
