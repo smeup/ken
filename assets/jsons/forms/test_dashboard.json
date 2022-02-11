@@ -3,35 +3,26 @@
   "layout": "column",
   "id": "testForm",
   "type": "EXD",
-  "title": "[description]",
+  "title": "Dashboard",
+  "padding": 30,
   "sections": [
     {
       "id": "S1",
       "components": [
         {
-          "type": "DSH",
-          "id": "dashboard1",
+          "type": "LAB",
+          "id": "lab1",
           "options": {
-            "DSH": {
+            "LAB": {
               "default": {
-                "padding": {"left":0.0},
-                "forceText": "Dashboard text",
-                "fontsize": "90%",
-                "icon": 59192,
-                "iconColor": "R000G255B000",
-                "width": 300
+                "padding": { "Top": 30},
+                "align": "center"
               }
             }
           },
-          "data":{
-            "rows" :  [{ 
-              "value": 15.86,
-              "um": "Kg",
-              "description" : "Dashboard 1",
-              "icon": 59191
-            }
-            ]
-          } 
+          "data": {
+            "rows": [{ "value": "Dashboard componente, it allows to show data. it allows a high style customization." }]
+          }
         }
       ]
     },
@@ -40,17 +31,17 @@
       "components": [
         {
           "type": "DSH",
-          "id": "dashboard2",
+          "id": "dashboard",
           "options": {
             "DSH": {
               "default": {
                 "padding": {"left":0.0},
                 "forceText": "Temperature",
-                "fontsize": 56,
+                "fontsize": 60,
                 "icon": 59191,
                 "iconSize": 40,
                 "iconColor": "R255G000B000",
-                "width": 300
+                "width": 350
               }
             }
           },

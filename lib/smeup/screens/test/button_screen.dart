@@ -18,7 +18,7 @@ class ButtonScreen extends StatelessWidget {
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
-            title: Center(child: Text('Button Screen')),
+            title: Center(child: Text('Button')),
           ),
           body: SingleChildScrollView(
             child: Container(
