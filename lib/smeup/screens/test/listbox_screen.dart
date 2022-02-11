@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ken/smeup/models/widgets/smeup_list_box_model.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/widgets/smeup_label.dart';
 import 'package:ken/smeup/widgets/smeup_list_box.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 
@@ -21,112 +23,70 @@ class ListBoxScreen extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(20),
               child: Padding(
-                padding: const EdgeInsets.only(top: 60.0),
+                padding: const EdgeInsets.only(top: 0.0),
                 child: Center(
                     child: Column(
                   children: [
-                    Text('List box', textAlign: TextAlign.left),
+                    SmeupLabel(
+                      _scaffoldKey,
+                      _formKey,
+                      [
+                        'Highly customizable, feature-packed box widget for Flutter'
+                      ],
+                      id: 'lab1',
+                      fontBold: false,
+                      align: Alignment.center,
+                    ),
                     SmeupListBox(
                         _scaffoldKey,
                         _formKey,
                         {
                           "rows": [
-                            {"code": "a", "description": "b", "info": "boh1"},
-                            {"code": "c", "description": "d", "info": "boh2"}
+                            {
+                              "code": "0001",
+                              "description": "Description 1",
+                              "info": "Information ford code 1",
+                              "back": "R006G140B154"
+                            },
+                            {
+                              "code": "0002",
+                              "description": "Description 2",
+                              "info": "Information for code 2",
+                              "back": "R006G140B154"
+                            },
+                            {
+                              "code": "0003",
+                              "description": "Description 3",
+                              "info": "Information for code 3",
+                              "back": "R006G140B154"
+                            }
                           ],
                           "columns": [
-                            {'code': 'code', 'text': 'codice', 'IO': "O"},
+                            {"code": "code", "text": "codice", "IO": "O"},
                             {
-                              'code': 'description',
-                              'text': 'descrizione',
-                              'IO': "O"
+                              "code": "description",
+                              "text": "descrizione",
+                              "IO": "O"
                             },
-                            {'code': 'info', 'text': 'informazioni', 'IO': "H"}
+                            {"code": "info", "text": "informazioni", "IO": "H"},
+                            {
+                              "code": "back",
+                              "text": "background color",
+                              "IO": "H"
+                            }
                           ]
                         },
                         height: 100,
-                        listHeight: 200,
+                        listHeight: 300,
+                        listType: SmeupListType.oriented,
+                        fontSize: 16.0,
+                        backColor: Colors.white,
+                        showSelection: true,
+                        selectedRow: 1,
                         id: 'listbox1', clientOnItemTap: (item) {
                       SmeupUtilities.invokeScaffoldMessenger(
                           context, 'item clicked: $item');
-                    }),
-                    Text(
-                        'List box ordered by description, selectable and pre selected',
-                        textAlign: TextAlign.left),
-                    SmeupListBox(
-                      _scaffoldKey,
-                      _formKey,
-                      {
-                        "rows": [
-                          {"code": "a", "description": "d", "info": "boh1"},
-                          {"code": "c", "description": "b", "info": "boh2"}
-                        ],
-                        "columns": [
-                          {'code': 'code', 'text': 'codice', 'IO': "O"},
-                          {
-                            'code': 'description',
-                            'text': 'descrizione',
-                            'IO': "O"
-                          },
-                          {'code': 'info', 'text': 'informazioni', 'IO': "H"}
-                        ]
-                      },
-                      id: 'listbox2',
-                      height: 100,
-                      listHeight: 200,
-                      clientOnItemTap: (item) {
-                        SmeupUtilities.invokeScaffoldMessenger(
-                            context, 'item clicked: $item');
-                      },
-                      defaultSort: 'description',
-                      showSelection: true,
-                      selectedRow: 1,
-                    ),
-                    Text('List box with colors', textAlign: TextAlign.left),
-                    SmeupListBox(
-                      _scaffoldKey,
-                      _formKey,
-                      {
-                        "rows": [
-                          {
-                            "code": "a",
-                            "description": "d",
-                            "info": "boh1",
-                            "back": "R255G255B000"
-                          },
-                          {
-                            "code": "c",
-                            "description": "b",
-                            "info": "boh2",
-                            "back": "R000G255B000"
-                          }
-                        ],
-                        "columns": [
-                          {'code': 'code', 'text': 'codice', 'IO': "O"},
-                          {
-                            'code': 'description',
-                            'text': 'descrizione',
-                            'IO': "O"
-                          },
-                          {'code': 'info', 'text': 'informazioni', 'IO': "H"},
-                          {
-                            'code': 'back',
-                            'text': 'background color',
-                            'IO': "H"
-                          }
-                        ]
-                      },
-                      id: 'listbox3',
-                      clientOnItemTap: (item) {
-                        SmeupUtilities.invokeScaffoldMessenger(
-                            context, 'item clicked: $item');
-                      },
-                      fontColor: Colors.red,
-                      backColor: Colors.yellow,
-                      backgroundColName: "back",
-                      height: 100,
-                      listHeight: 200,
-                    )
+                    })
                   ],
                 )),
               ),

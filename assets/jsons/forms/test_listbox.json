@@ -4,9 +4,36 @@
   "id": "testForm",
   "type": "EXD",
   "title": "[description]",
+  "padding": 30,
   "sections": [
     {
       "id": "S1",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "padding": {
+                  "Top": 30
+                },
+                "align": "center"
+              }
+            }
+          },
+          "data": {
+            "rows": [
+              {
+                "value": "Highly customizable, feature-packed box widget for Flutter"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "S2",
       "components": 
       [
         {
@@ -23,10 +50,9 @@
                 "width": 0.0,
                 "listHeight": 0,
                 "padding" : {"left": 20},
-                "defaultSort": "description",
-                "fontColor": "R255G000B000",
-                "backColor": "R000G255B000",
-                "backgroundColName": "back",
+                "defaultSort": "code",
+                "borderColor": "R006G140B154",
+                "fontSize": 16.0,
                 "showSelection": "Yes",
                 "selectRow": 1
               }
@@ -36,77 +62,22 @@
             "rows": 
             [
               {
-                "code": "a",
-                "description": "d",
-                "info": "boh1",
-                "back": "R255G255B000"
+                "code": "0001",
+                "description": "Description 1",
+                "info": "Information ford code 1",
+                "back": "R006G140B154"
               },
               {
-                "code": "c",
-                "description": "b",
-                "info": "boh2",
-                "back": "R000G255B000"
-              }
-            ],
-            "columns": [
-              {"code": "code", "text": "codice", "IO": "O"},
-              {
-                "code": "description",
-                "text": "descrizione",
-                "IO": "O"
-              },
-              {"code": "info", "text": "informazioni", "IO": "H"},
-              {
-                "code": "back",
-                "text": "background color",
-                "IO": "H"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "S2",
-      "components": 
-      [
-        {
-          "type": "BOX",
-          "id":"listbox2",
-          "options": {
-            "BOX": 
-            {
-              "default": {
-                "listType": "oriented",
-                "portraitColumns": 1,
-                "landscapeColumns": 1,
-                "height": 100.0,
-                "width": 0.0,
-                "listHeight": 0,
-                "padding" : {"left": 20},
-                "defaultSort": "description",
-                "fontColor": "R000G000B000",
-                "backColor": "R255G255B000",
-                "backgroundColName": "back",
-                "showSelection": "Yes",
-                "selectRow": 1
-              }
-            }
-          },
-          "data":{
-            "rows": 
-            [
-              {
-                "code": "Francesco",
-                "description": "27",
-                "info": "boh1",
-                "back": "R255G255B000"
+                "code": "0002",
+                "description": "Description 2",
+                "info": "Information for code 2",
+                "back": "R006G140B154"
               },
               {
-                "code": "Massimo",
-                "description": "36",
-                "info": "boh2",
-                "back": "R000G255B000"
+                "code": "0003",
+                "description": "Description 3",
+                "info": "Information for code 3",
+                "back": "R006G140B154"
               }
             ],
             "columns": [
