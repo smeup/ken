@@ -4,9 +4,31 @@
   "id": "testForm",
   "type": "EXD",
   "title": "[description]",
+  "padding": 30,
   "sections": [
     {
       "id": "S1",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "padding": {
+                  "Top": 30
+                }
+              }
+            }
+          },
+          "data":{
+            "rows" :  [{ "value": "Highly customizable, feature-packed image widget for Flutter" }]
+          } 
+        }
+      ]
+    },
+    {
+      "id": "S2",
       "components": [
         {
           "type": "IMG",
@@ -14,7 +36,10 @@
           "options": {
             "IMG": {
               "default": {
-                "padding": {"left":0.0}
+                "padding": {"left":0.0},
+                "width": 300,
+                "height": 300
+                
               }
             }
           },

@@ -16,21 +16,22 @@ class ImageScreen extends StatelessWidget {
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
-            title: Center(child: Text('Image Screen')),
+            title: Center(child: Text('Image')),
             actions: ShowCaseShared.getEmptyAction(),
           ),
           body: SingleChildScrollView(
             child: Container(
               padding: const EdgeInsets.all(20),
               child: Padding(
-                padding: const EdgeInsets.only(top: 60.0),
+                padding: const EdgeInsets.only(top: 30.0),
                 child: Center(
                     child: Column(
                   children: [
-                    SmeupLabel(_scaffoldKey, _formKey, ['Local image']),
+                    ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
+                        'Highly customizable, feature-packed image widget for Flutter'),
                     SmeupImage(_scaffoldKey, _formKey,
                         'packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 5.png',
-                        id: 'img1', width: 200, height: 200, isRemote: false),
+                        id: 'img1', width: 300, height: 300, isRemote: false),
                   ],
                 )),
               ),

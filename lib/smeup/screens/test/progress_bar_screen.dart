@@ -7,6 +7,8 @@ class ProgressBarScreen extends StatelessWidget {
   static const routeName = '/ProgressBarScreen';
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static const description =
+      'Highly customizable, feature-packed progress bar widget for Flutter';
 
   @override
   Widget build(BuildContext context) {
@@ -15,26 +17,28 @@ class ProgressBarScreen extends StatelessWidget {
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
-            title: Center(child: Text('ProgressBar Screen')),
+            title: Center(child: Text('ProgressBar')),
             actions: ShowCaseShared.getEmptyAction(),
           ),
           body: SingleChildScrollView(
             child: Container(
               padding: const EdgeInsets.all(20),
               child: Padding(
-                padding: const EdgeInsets.only(top: 60.0),
+                padding: const EdgeInsets.only(top: 30.0),
                 child: Center(
                     child: Column(
                   children: [
+                    ShowCaseShared.getTestLabel(
+                        _scaffoldKey, _formKey, description),
                     SmeupProgressBar(
                       _scaffoldKey,
                       _formKey,
                       id: 'pgb1',
-                      data: 5,
-                      height: 30,
+                      data: 6,
+                      height: 40,
                       progressBarMinimun: 0,
                       progressBarMaximun: 10,
-                      padding: EdgeInsets.only(left: 5, right: 5),
+                      padding: EdgeInsets.only(top: 30, left: 5, right: 5),
                     )
                   ],
                 )),
