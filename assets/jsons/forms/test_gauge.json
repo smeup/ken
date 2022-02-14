@@ -4,16 +4,38 @@
   "id": "testForm",
   "type": "EXD",
   "title": "[description]",
+  "padding:": 30,
   "sections": [
-    {
-      "components": [
+      {
+        "id": "S1",
+        "components": [
+          {
+            "type": "LAB",
+            "id": "lab1",
+            "options": {
+              "LAB": {
+                "default": {
+                  "padding": { "Top": 30},
+                  "align": "center"
+                }
+              }
+            },
+            "data":{
+              "rows" :  [{ "value": "Highly customizable, feature-packed gauge widget for Flutter" }]
+            } 
+          }
+        ]
+      },
+      {
+        "id": "S2",
+        "components": [        
         {
           "type": "GAU",
           "id": "gau1",
           "options": {
             "GAU": {
               "default": {
-                "padding": {"left":0.0}
+                "padding": {"top":30.0, "left":5.0, "right":5.0}
               }
             }
           },
@@ -21,8 +43,7 @@
             "rows" :  [{ "value": 120, "minValue": 50, "maxValue": 150, "warning" : 100 }]
           } 
         }
-      ],
-      "id": "S1"
-    }
+      ]
+    }    
   ]
 }
