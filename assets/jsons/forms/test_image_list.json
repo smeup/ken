@@ -4,13 +4,35 @@
   "id": "testForm",
   "type": "EXD",
   "title": "[description]",
+  "padding": 30,
   "sections": [
     {
-      "id": "S0",
+      "id": "S1",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "padding": {
+                  "Top": 30
+                }
+              }
+            }
+          },
+          "data":{
+            "rows" :  [{ "value": "Highly customizable, feature-packed image list widget for Flutter" }]
+          } 
+        }
+      ]
+    },
+    {
+      "id": "S1",
       "dim": "8%",
       "components": [
         {
-          "title": "COLUMNS",
+          "title": "",
           "type": "IML",
           "id": "imageList1",
           "options": {
@@ -32,79 +54,25 @@
               },
               {
                 "code": "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 2.png",
-                "description": "third image",
+                "description": "second image",
                 "info": "boh3",
                 "isRemote": false
               },
               {
                 "code": "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 3.png",
-                "description": "second image",
+                "description": "third image",
                 "info": "boh2",
                 "isRemote": false
               },
               {
                 "code": "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 4.png",
-                "description": "third image",
+                "description": "fourth image",
                 "info": "boh3",
                 "isRemote": false
               },
               {
                 "code": "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 5.png",
-                "description": "second image",
-                "info": "boh2",
-                "isRemote": false
-              }
-            ],
-            "columns": [
-              { "code": "code", "text": "codice", "IO": "H" },
-              { "code": "description", "text": "descrizione", "IO": "O" },
-              { "code": "info", "text": "informazioni", "IO": "H" },
-              { "code": "isRemote", "text": "remote image", "IO": "H" }
-            ]
-          }
-        },
-        {
-          "title": "ROWS",
-          "type": "IML",
-          "id": "imageList2",
-          "options": {
-            "IML": {
-              "default": {
-                "height": 250,
-                "listHeight": 400,
-                "rows": 1
-              }
-            }
-          },
-          "data": {
-            "rows": [
-              {
-                "code": "packages/ken/assets/images/image_list_orange_Tavola disegno 1.png",
-                "description": "first image",
-                "info": "boh1",
-                "isRemote": false
-              },
-              {
-                "code": "packages/ken/assets/images/image_list_orange_Tavola disegno 1 copia 2.png",
-                "description": "third image",
-                "info": "boh3",
-                "isRemote": false
-              },
-              {
-                "code": "packages/ken/assets/images/image_list_orange_Tavola disegno 1 copia 3.png",
-                "description": "second image",
-                "info": "boh2",
-                "isRemote": false
-              },
-              {
-                "code": "packages/ken/assets/images/image_list_orange_Tavola disegno 1 copia 4.png",
-                "description": "third image",
-                "info": "boh3",
-                "isRemote": false
-              },
-              {
-                "code": "packages/ken/assets/images/image_list_orange_Tavola disegno 1 copia 5.png",
-                "description": "second image",
+                "description": "fifth image",
                 "info": "boh2",
                 "isRemote": false
               }
@@ -117,8 +85,6 @@
             ]
           }
         }
-
-
       ]
     }
   ]
