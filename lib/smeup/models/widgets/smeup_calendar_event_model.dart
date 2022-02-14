@@ -31,7 +31,7 @@ class SmeupCalentarEventModel {
 
     switch (style) {
       case 'secondary': // secondary
-        backgroundColor = Color.fromRGBO(0, 92, 109, 1); // primary dark
+        backgroundColor = Color.fromRGBO(6, 137, 155, 1); // primary dark
         fontColor = Colors.black;
         fontWeight = FontWeight.normal;
         markerBackgroundColor =

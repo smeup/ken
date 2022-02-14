@@ -6,6 +6,7 @@ import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/widgets/smeup_line.dart';
 import 'package:ken/smeup/widgets/smeup_progress_indicator.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -269,7 +270,10 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                     size: 60),
               )
           ]),
-          SizedBox(height: separatorHeight),
+          SizedBox(
+            height: separatorHeight,
+            child: SmeupLine(widget.scaffoldKey, widget.formKey),
+          ),
           if (_selectedEvents != null)
             Container(
               height: _selectedEvents.value.length.toDouble() *
@@ -278,6 +282,7 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                 valueListenable: _selectedEvents,
                 builder: (context, event, _) {
                   return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: event.length,
                     itemBuilder: (context, index) {
                       return Container(
