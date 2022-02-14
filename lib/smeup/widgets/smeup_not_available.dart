@@ -12,7 +12,7 @@ class SmeupNotAvailable extends StatelessWidget {
       padding: EdgeInsets.all(5),
       child: Center(
         child: Image.asset(
-          "assets/images/not_available.png",
+          "packages/ken/assets/images/not_available.png",
           height: height,
           width: width,
         ),

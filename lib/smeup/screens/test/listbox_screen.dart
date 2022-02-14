@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/widgets/smeup_list_box_model.dart';
+import 'package:ken/smeup/screens/test/showcase_shared.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_label.dart';
 import 'package:ken/smeup/widgets/smeup_list_box.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 
@@ -27,16 +27,8 @@ class ListBoxScreen extends StatelessWidget {
                 child: Center(
                     child: Column(
                   children: [
-                    SmeupLabel(
-                      _scaffoldKey,
-                      _formKey,
-                      [
-                        'Highly customizable, feature-packed box widget for Flutter'
-                      ],
-                      id: 'lab1',
-                      fontBold: false,
-                      align: Alignment.center,
-                    ),
+                    ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
+                        'Highly customizable, feature-packed box widget for Flutter'),
                     SmeupListBox(
                         _scaffoldKey,
                         _formKey,

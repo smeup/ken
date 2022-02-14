@@ -3,11 +3,11 @@
   "layout": "column",
   "id": "testForm",
   "type": "EXD",
-  "title": "[description]",
+  "title": "Carousel",
+  "padding": 30,
   "sections": [
     {
       "id": "S1",
-      "dim": "10%",
       "components": [
         {
           "type": "LAB",
@@ -15,20 +15,19 @@
           "options": {
             "LAB": {
               "default": {
-                "padding": { "left": 10.0, "Top": 30, "Right": 10.0},
+                "padding": { "Top": 30},
                 "align": "center"
               }
             }
           },
           "data": {
-            "rows": [{ "value": "Esempio di carousel" }]
+            "rows": [{ "value": "Carousel component in Flutter. You can customize the description of the image" }]
           }
         }
       ]
     },
     {
       "id": "S2",
-      "dim": "90%",
       "components": [
         {
           "type": "CAU",
@@ -45,47 +44,23 @@
             "rows" :  [
               {
                 "imageFile": "packages/ken/assets/images/image_list_blue_Tavola disegno 1.png",
-                "text": "Descriptive text one"
+                "text": "I am a reveille"
               },
               {
                 "imageFile": "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 2.png",
-                "text": "Descriptive text  two"
+                "text": "I am a ball"
               },
               {
                 "imageFile": "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 3.png",
-                "text": "Descriptive text  three"
+                "text": "I am a telephone"
               },
               {
                 "imageFile": "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 4.png",
-                "text": "Descriptive text  three"
+                "text": "I am a fruit"
               },
               {
                 "imageFile": "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 5.png",
-                "text": "Descriptive text  three"
-              },
-              {
-                "imageFile": "packages/ken/assets/images/image_list_orange_Tavola disegno 1.png",
-                "text": "Descriptive text  three"
-              },
-              {
-                "imageFile": "packages/ken/assets/images/image_list_orange_Tavola disegno 1 copia.png",
-                "text": "Descriptive text  three"
-              },
-              {
-                "imageFile": "packages/ken/assets/images/image_list_orange_Tavola disegno 1 copia 2.png",
-                "text": "Descriptive text  three"
-              },
-              {
-                "imageFile": "packages/ken/assets/images/image_list_orange_Tavola disegno 1 copia 3.png",
-                "text": "Descriptive text  three"
-              },
-              {
-                "imageFile": "packages/ken/assets/images/image_list_orange_Tavola disegno 1 copia 4.png",
-                "text": "Descriptive text  three"
-              },
-              {
-                "imageFile": "packages/ken/assets/images/image_list_orange_Tavola disegno 1 copia 5.png",
-                "text": "Descriptive text  three"
+                "text": "I am a cherry"
               }
             ]}
         }

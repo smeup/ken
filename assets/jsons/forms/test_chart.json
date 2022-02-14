@@ -3,7 +3,8 @@
   "layout": "column",
   "id": "testForm",
   "type": "EXD",
-  "title": "[description]",
+  "title": "Chart",
+  "padding": 30,
   "sections": [
     {
       "id": "S1",
@@ -15,13 +16,13 @@
           "options": {
             "LAB": {
               "default": {
-                "padding": { "left": 10.0, "Top": 30, "Right": 10.0},
+                "padding": {"Top": 30},
                 "align": "center"
               }
             }
           },
           "data": {
-            "rows": [{ "value": "Esempio di grafico" }]
+            "rows": [{ "value": "Highly customizable, feature-packed chart widget for Fluttero" }]
           }
         }
       ]
@@ -45,8 +46,8 @@
           },
           "data": {
             "rows": [
-              { "col1": "Anno 2020", "col2": 100, "col3": 50, "col4": 50 },
-              { "col1": "Anno 2021", "col2": 90, "col3": 40, "col4": 40 }
+              { "col1": "Italy", "col2": 70, "col3": 50, "col4": 60 },
+              { "col1": "France", "col2": 70, "col3": 40, "col4": 80 }
             ],
             "columns": [
               {
@@ -58,21 +59,21 @@
               },
               {
                 "code": "col2",
-                "text": "Fatturato",
+                "text": "Wine",
                 "IO": "O",
                 "fill": "SERIE",
                 "lun": 0
               },
               {
                 "code": "col3",
-                "text": "Costi",
+                "text": "Cheese",
                 "IO": "O",
                 "fill": "SERIE",
                 "lun": 0
               },
               {
                 "code": "col4",
-                "text": "Guadagno",
+                "text": "Fruit",
                 "IO": "O",
                 "fill": "SERIE",
                 "lun": 0
