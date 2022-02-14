@@ -72,15 +72,15 @@ class _MainScreenState extends State<MainScreen> {
     return Stack(
       children: [
         Container(
-          color: Color(0xff068a9c),
+          color: Color(0xff06899b),
         ),
         Center(
           child: SizedBox(
               height: 30,
               width: 30,
               child: CircularProgressIndicator(
-                color: Color(0xff068a9c),
-                backgroundColor: Color(0xffcef8fd),
+                color: Color(0xff06899b),
+                backgroundColor: Color(0xff53b9cc),
               )),
         )
       ],

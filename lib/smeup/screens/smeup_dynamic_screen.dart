@@ -189,7 +189,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
                   endDrawer: _getDrawer(smeupScreenModel, isDialog),
                   appBar: SmeupAppBar(isDialog,
                       appBarTitle: smeupScreenModel.data['title'] ?? '',
-                      appBarActions: _getActions(smeupScreenModel.data),
+                      appBarActions: _getActions(smeupScreenModel),
                       myContext: context,
                       scaffoldKey: widget._scaffoldKey,
                       formKey: widget._formKey,
@@ -205,31 +205,12 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     return SmeupWidgetBuilderResponse(smeupScreenModel, screen);
   }
 
-  // Future<SmeupDrawer> _getDrawerAsync(SmeupScreenModel smeupScreenModel) async {
-  //   await Future.delayed(const Duration(seconds: 2), () {});
-  //   return _getDrawer(smeupScreenModel);
-  // }
-
-  SmeupDrawer _getDrawer(SmeupScreenModel smeupScreenModel, bool isDialog) {
-    SmeupDrawer smeupDrawer;
-    Function getNewDrawer = () {
-      var newList = List<SmeupDrawerDataElement>.empty(growable: true);
-      if (!isDialog) SmeupDrawer.addInternalDrawerElements(newList, context);
-      smeupDrawer = SmeupDrawer(
-        widget._scaffoldKey,
-        widget._formKey,
-        data: newList,
-        title: 'MENU',
-      );
-      return smeupDrawer;
-    };
+  dynamic getDrawerJson(SmeupScreenModel smeupScreenModel) {
+    var smeupDrawerJson;
 
     if (smeupScreenModel.data != null &&
         smeupScreenModel.data['sections'] != null &&
         (smeupScreenModel.data['sections'] as List).length > 0) {
-      var smeupDrawerModel;
-      var smeupDrawerJson;
-
       for (var i = 0;
           i < (smeupScreenModel.data['sections'] as List).length;
           i++) {
@@ -240,20 +221,34 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
               orElse: () => null);
         }
       }
-
-      if (smeupDrawerJson != null) {
-        smeupDrawerModel = SmeupDrawerModel.fromMap(
-            smeupDrawerJson, widget._formKey, widget._scaffoldKey, context);
-        smeupDrawer = SmeupDrawer.withController(
-            smeupDrawerModel, widget._scaffoldKey, widget._formKey);
-      } else if (SmeupConfigurationService.authenticationModel != null &&
-          SmeupConfigurationService.authenticationModel.managed) {
-        smeupDrawer = getNewDrawer();
-      }
     }
-    // else {
-    //   smeupDrawer = getNewDrawer();
-    // }
+
+    return smeupDrawerJson;
+  }
+
+  SmeupDrawer _getDrawer(SmeupScreenModel smeupScreenModel, bool isDialog) {
+    SmeupDrawer smeupDrawer;
+
+    var smeupDrawerJson = getDrawerJson(smeupScreenModel);
+
+    if (smeupDrawerJson != null) {
+      var smeupDrawerModel;
+      smeupDrawerModel = SmeupDrawerModel.fromMap(
+          smeupDrawerJson, widget._formKey, widget._scaffoldKey, context);
+      smeupDrawer = SmeupDrawer.withController(
+          smeupDrawerModel, widget._scaffoldKey, widget._formKey);
+    } else if (SmeupConfigurationService.authenticationModel != null &&
+        SmeupConfigurationService.authenticationModel.managed) {
+      var newList = List<SmeupDrawerDataElement>.empty(growable: true);
+      if (!isDialog) SmeupDrawer.addInternalDrawerElements(newList, context);
+      smeupDrawer = SmeupDrawer(
+        widget._scaffoldKey,
+        widget._formKey,
+        data: newList,
+        title: 'MENU',
+      );
+    }
+
     return smeupDrawer;
   }
 
@@ -321,60 +316,63 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     return Container();
   }
 
-  List<Widget> _getActions(data) {
-    return data['buttons'] != null
-        ? () {
-            var list = List<Widget>.empty(growable: true);
-            data['buttons'].forEach((button) {
-              final action = GestureDetector(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 18.0),
-                  child: Icon(
-                    IconData(int.tryParse(button['icon']) ?? 0,
-                        fontFamily: 'MaterialIcons'),
-                    key:
-                        Key('appbar_icon_${int.tryParse(button['icon']) ?? 0}'),
-                  ),
-                ),
-                onTap: () async {
-                  SmeupFun smeupFun = SmeupFun(
-                      button, widget._formKey, widget._scaffoldKey, context);
-                  if (smeupFun.isDinamismAsync(
-                      smeupFun.fun['fun']['dynamisms'], 'click')) {
-                    SmeupDynamismService.run(smeupFun.fun['fun']['dynamisms'],
-                        context, 'click', widget._scaffoldKey, widget._formKey);
+  List<Widget> _getActions(smeupScreenModel) {
+    if (smeupScreenModel.data['buttons'] != null) {
+      var list = List<Widget>.empty(growable: true);
+      smeupScreenModel.data['buttons'].forEach((button) {
+        final action = GestureDetector(
+          child: Padding(
+            padding: const EdgeInsets.only(right: 18.0),
+            child: Icon(
+              IconData(int.tryParse(button['icon']) ?? 0,
+                  fontFamily: 'MaterialIcons'),
+              key: Key('appbar_icon_${int.tryParse(button['icon']) ?? 0}'),
+            ),
+          ),
+          onTap: () async {
+            SmeupFun smeupFun =
+                SmeupFun(button, widget._formKey, widget._scaffoldKey, context);
+            if (smeupFun.isDinamismAsync(
+                smeupFun.fun['fun']['dynamisms'], 'click')) {
+              SmeupDynamismService.run(smeupFun.fun['fun']['dynamisms'],
+                  context, 'click', widget._scaffoldKey, widget._formKey);
 
-                    SmeupLogService.writeDebugMessage(
-                        '********************* ASYNC = TRUE',
-                        logType: LogType.debug);
-                  } else {
-                    SmeupLogService.writeDebugMessage(
-                        '********************* ASYNC = FALSE',
-                        logType: LogType.debug);
+              SmeupLogService.writeDebugMessage(
+                  '********************* ASYNC = TRUE',
+                  logType: LogType.debug);
+            } else {
+              SmeupLogService.writeDebugMessage(
+                  '********************* ASYNC = FALSE',
+                  logType: LogType.debug);
 
-                    if (SmeupAppBar.isBusy) {
-                      SmeupLogService.writeDebugMessage(
-                          '********************* SKIPPED DOUBLE CLICK',
-                          logType: LogType.warning);
-                      return;
-                    } else {
-                      SmeupAppBar.isBusy = true;
+              if (SmeupAppBar.isBusy) {
+                SmeupLogService.writeDebugMessage(
+                    '********************* SKIPPED DOUBLE CLICK',
+                    logType: LogType.warning);
+                return;
+              } else {
+                SmeupAppBar.isBusy = true;
 
-                      await SmeupDynamismService.run(
-                          smeupFun.fun['fun']['dynamisms'],
-                          context,
-                          'click',
-                          widget._scaffoldKey,
-                          widget._formKey);
-                      SmeupAppBar.isBusy = false;
-                    }
-                  }
-                },
-              );
-              list.add(action);
-            });
-            return list;
-          }()
-        : null;
+                await SmeupDynamismService.run(smeupFun.fun['fun']['dynamisms'],
+                    context, 'click', widget._scaffoldKey, widget._formKey);
+                SmeupAppBar.isBusy = false;
+              }
+            }
+          },
+        );
+        list.add(action);
+      });
+      return list;
+    } else {
+      if (getDrawerJson(smeupScreenModel) == null) {
+        return [
+          SizedBox(
+            width: 56,
+          )
+        ];
+      } else {
+        return null;
+      }
+    }
   }
 }

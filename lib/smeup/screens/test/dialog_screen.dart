@@ -20,6 +20,7 @@ class DialogScreen extends StatelessWidget {
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
             title: Center(child: Text('Dialog')),
+            actions: ShowCaseShared.getEmptyAction(),
           ),
           body: SingleChildScrollView(
             child: Container(

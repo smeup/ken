@@ -17,6 +17,7 @@ class ImageScreen extends StatelessWidget {
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
             title: Center(child: Text('Image')),
+            actions: ShowCaseShared.getEmptyAction(),
           ),
           body: SingleChildScrollView(
             child: Container(

@@ -16,13 +16,13 @@
             "options": {
               "LAB": {
                 "default": {
-                  "padding": { "left": 10.0, "Top": 30, "Right": 10.0},
+                  "padding": { "Top": 30},
                   "align": "center"
                 }
               }
             },
             "data": {
-              "rows": [{ "value": "Esempio di Slider" }]
+              "rows": [{ "value": "A slider can be used to select from either a continuous or a discrete set of values" }]
             }
           }
         ]

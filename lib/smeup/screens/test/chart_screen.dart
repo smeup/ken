@@ -26,6 +26,7 @@ class ChartScreen extends StatelessWidget {
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
             title: Center(child: Text('Chart')),
+            actions: ShowCaseShared.getEmptyAction(),
           ),
           body: SingleChildScrollView(
             child: Container(
@@ -83,6 +84,7 @@ class ChartScreen extends StatelessWidget {
     );
   }
 
+  // ignore: unused_element
   SmeupChart _getPieChart(double deviceHeight, double deviceWidth) {
     var rows = List<SmeupChartRow>.empty(growable: true);
     var columns = List<SmeupChartColumn>.empty(growable: true);

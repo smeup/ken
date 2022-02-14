@@ -20,6 +20,7 @@ class ComboScreen extends StatelessWidget {
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
             title: Center(child: Text('Combo')),
+            actions: ShowCaseShared.getEmptyAction(),
           ),
           body: SingleChildScrollView(
             child: Container(

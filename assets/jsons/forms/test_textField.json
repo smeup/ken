@@ -16,13 +16,14 @@
           "options": {
             "LAB": {
               "default": {
-                "padding": { "left": 10.0, "Top": 30, "Right": 10.0},
-                "align": "center"
+                "padding": {"Top": 30},
+                "align": "center",
+                "height": 30
               }
             }
           },
           "data": {
-            "rows": [{ "value": "Esempio di Textfield" }]
+            "rows": [{ "value": "A text field lets the user enter text and perform validation on it. It is also possible to add a submit button" }]
           }
         }
       ]
@@ -46,10 +47,16 @@
           "data": {
             "rows": [
               {
-                "value": "I am a textfield"
+                "value": "some text"
               }
             ]
-          }
+          },
+          "dynamisms": [
+            {
+              "event": "click",
+              "exec": "F(FBK;*MSG;) P(you tapped the submit button: \"[value]\")"
+            }
+          ]
         }
       ]
     }

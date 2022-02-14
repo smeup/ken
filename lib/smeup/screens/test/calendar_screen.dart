@@ -7,8 +7,6 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class CalendarScreen extends StatelessWidget {
   static const routeName = '/CalendarScreen';
-  static const description =
-      'Highly customizable, feature-packed calendar widget for Flutter';
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -21,14 +19,15 @@ class CalendarScreen extends StatelessWidget {
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
             title: Center(child: Text('Calendar Screen')),
+            actions: ShowCaseShared.getEmptyAction(),
           ),
           body: SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.all(30),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
-                  ShowCaseShared.getTestLabel(
-                      _scaffoldKey, _formKey, description),
+                  ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
+                      'Highly customizable, feature-packed calendar widget for Flutter'),
                   SmeupCalendar(_scaffoldKey, _formKey,
                       id: 'calendar1',
                       width: deviceInfo.size.width,
@@ -44,48 +43,40 @@ class CalendarScreen extends StatelessWidget {
                         {
                           "value": "${DateTime.now().year}-01-18",
                           "title": "My event 1",
-                          "style": "50G00",
                           "init": "100000",
                           "end": "103000"
                         },
                         {
                           "value": "${DateTime.now().year}-01-18",
                           "title": "My event 2",
-                          "style": "00H00",
                           "init": "132000",
                         },
                         {
                           "value": "${DateTime.now().year}-01-18",
                           "title": "My event 22",
-                          "style": "00H00",
                           "init": "132000",
                         },
                         {
                           "value": "${DateTime.now().year}-01-18",
                           "title": "My event 222",
-                          "style": "00H00",
                           "init": "132000",
                         },
                         {
                           "value": "${DateTime.now().year}-01-18",
                           "title": "My event 2222",
-                          "style": "00H00",
                           "init": "132000",
                         },
                         {
                           "value": "${DateTime.now().year}-01-20",
-                          "title": "My event 3",
-                          "style": "51G00"
+                          "title": "My event 3"
                         },
                         {
                           "value": "${DateTime.now().year}-01-21",
-                          "title": "My event 4",
-                          "style": "01H00"
+                          "title": "My event 4"
                         },
                         {
                           "value": "${DateTime.now().year}-02-21",
-                          "title": "My event 5",
-                          "style": "01H00"
+                          "title": "My event 5"
                         }
                       ], clientOnDaySelected: (DateTime day) {
                     SmeupUtilities.invokeScaffoldMessenger(

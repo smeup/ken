@@ -6,6 +6,7 @@ import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/widgets/smeup_line.dart';
 import 'package:ken/smeup/widgets/smeup_progress_indicator.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -138,8 +139,10 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
     final iconTheme = SmeupConfigurationService.getTheme().iconTheme;
     final daysHeaderTextStyle =
         SmeupConfigurationService.getTheme().textTheme.bodyText1;
-    final dayTextStyle =
-        SmeupConfigurationService.getTheme().textTheme.bodyText2;
+    final dayTextStyle = SmeupConfigurationService.getTheme()
+        .textTheme
+        .bodyText2
+        .copyWith(color: Colors.black);
     final markerStyle =
         SmeupConfigurationService.getTheme().textTheme.headline4;
 
@@ -267,7 +270,10 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                     size: 60),
               )
           ]),
-          SizedBox(height: separatorHeight),
+          SizedBox(
+            height: separatorHeight,
+            child: SmeupLine(widget.scaffoldKey, widget.formKey),
+          ),
           if (_selectedEvents != null)
             Container(
               height: _selectedEvents.value.length.toDouble() *
@@ -276,6 +282,7 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                 valueListenable: _selectedEvents,
                 builder: (context, event, _) {
                   return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: event.length,
                     itemBuilder: (context, index) {
                       return Container(
@@ -284,11 +291,11 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                           vertical: 4.0,
                         ),
                         decoration: BoxDecoration(
-                          border:
-                              Border.all(color: event[index].backgroundColor),
+                          border: Border.all(
+                              color: event[index].markerBackgroundColor),
                           borderRadius: BorderRadius.circular(12.0),
                           shape: BoxShape.rectangle,
-                          color: event[index].backgroundColor,
+                          color: event[index].markerBackgroundColor,
                         ),
                         child: ListTile(
                           visualDensity:
@@ -455,8 +462,8 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
         .textTheme
         .headline3
         .copyWith(
-            backgroundColor: event.backgroundColor,
-            color: event.fontColor,
+            backgroundColor: event.markerBackgroundColor,
+            color: event.markerFontColor,
             fontSize: widget.eventFontSize,
             fontWeight: event.fontWeight);
 
