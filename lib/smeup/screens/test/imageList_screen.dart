@@ -18,7 +18,7 @@ class ImageListScreen extends StatelessWidget {
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
-            title: Center(child: Text('ImageList Screen')),
+            title: Center(child: Text('ImageList')),
           ),
           body: SingleChildScrollView(
             child: Container(
