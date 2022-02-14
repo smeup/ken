@@ -41,7 +41,7 @@
                 "initialLastWork": "2022-12-31",    
                 "initialDay": "2022-01-01",
                 "showNavigation" : true,
-                "showPeriodButtons": false,
+                "showPeriodButtons": true,
                 "dataColumnName": "value",
                 "titleColumnName": "title",
                 "styleColumnName": "style"

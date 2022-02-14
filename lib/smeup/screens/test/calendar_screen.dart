@@ -7,8 +7,6 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class CalendarScreen extends StatelessWidget {
   static const routeName = '/CalendarScreen';
-  static const description =
-      'Highly customizable, feature-packed calendar widget for Flutter';
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -24,11 +22,11 @@ class CalendarScreen extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.all(30),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
-                  ShowCaseShared.getTestLabel(
-                      _scaffoldKey, _formKey, description),
+                  ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
+                      'Highly customizable, feature-packed calendar widget for Flutter'),
                   SmeupCalendar(_scaffoldKey, _formKey,
                       id: 'calendar1',
                       width: deviceInfo.size.width,

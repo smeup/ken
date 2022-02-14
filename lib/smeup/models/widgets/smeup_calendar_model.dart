@@ -13,7 +13,7 @@ class SmeupCalendarModel extends SmeupModel {
   // unsupported by json_theme
   static const double defaultWidth = 0;
   static const double defaultHeight = 0;
-  static const bool defaultShowPeriodButtons = true;
+  static const bool defaultShowPeriodButtons = false;
   static const String defaultTitleColumnName = 'XXDESC';
   static const String defaultDataColumnName = 'XXDAT1';
   static const String defaultStyleColumnName = 'XXGRAF';

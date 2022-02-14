@@ -16,13 +16,14 @@
           "options": {
             "LAB": {
               "default": {
-                "padding": { "left": 10.0, "Top": 30, "Right": 10.0},
-                "align": "center"
+                "padding": { "Top": 30},
+                "align": "center",
+                "height": 30
               }
             }
           },
           "data": {
-            "rows": [{ "value": "Esempio di Tab" }]
+            "rows": [{ "value": "Tabs offer a convenient way to create categories of content or features and let the users to be able to quickly glance at each option and move between them with a simple swipe" }]
           }
         }
       ]
@@ -47,7 +48,7 @@
           },
           "data": {
             "rows": [
-              { "value": "I am the first tab" }
+              { "value": "First tab content" }
             ]
           }
         },
@@ -68,7 +69,7 @@
           },
           "data": {
             "rows": [
-              { "value": "I am the second tab" }
+              { "value": "Second tab content" }
             ]
           }
         },
@@ -89,7 +90,7 @@
           },
           "data": {
             "rows": [
-              { "value": "I am the third tab" }
+              { "value": "Third tab content" }
             ]
           }
         }

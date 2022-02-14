@@ -197,7 +197,7 @@ class SmeupButton extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       icon,
-                      SizedBox(width: innerSpace),
+                      //SizedBox(width: innerSpace),
                       Expanded(child: text),
                     ],
                   ),

@@ -1,13 +1,13 @@
 {
   "_comment": "smeup_components_library: for further information about the supported styles read the document README.md",
-  "primaryColor": "#068a9c",
-  "splashColor": "#068a9c",
+  "primaryColor": "#06899b",
+  "splashColor": "#06899b",
   "scaffoldBackgroundColor": "#ffffff",
   "elevatedButtonTheme": {
     "style": {
-      "backgroundColor": "#068a9c",
+      "backgroundColor": "#06899b",
       "side": {
-        "color": "#068a9c",
+        "color": "#06899b",
         "width": 2.0
       },
       "shape": {
@@ -25,13 +25,13 @@
       "decoration": "none"
     },
     "caption": {
-      "color": "#068a9c",
+      "color": "#06899b",
       "fontSize": 16.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
     "bodyText1": {
-      "color": "#068a9c",
+      "color": "#06899b",
       "fontSize": 16.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
@@ -43,37 +43,37 @@
       "backgroundColor": "#ffffff"
     },
     "headline1": {
-      "color": "#068a9c",
+      "color": "#06899b",
       "fontSize": 56.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
     "headline2": {
-      "color": "#068a9c",
+      "color": "#06899b",
       "fontSize": 43.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
     "headline3": {
-      "color": "#068a9c",
+      "color": "#06899b",
       "fontSize": 14.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
     "headline4": {
-      "color": "#068a9c",
+      "color": "#06899b",
       "fontSize": 12.0,
       "fontWeight": "bold",
       "backgroundColor": "#ffffff"
     },
     "headline5": {
-      "color": "#068a9c",
+      "color": "#06899b",
       "fontSize": 10.0,
       "fontWeight": "bold",
       "backgroundColor": "#ffffff"
     },
     "headline6": {
-      "color": "#068a9c",
+      "color": "#06899b",
       "fontSize": 8.0,
       "fontWeight": "bold",
       "backgroundColor": "#ffffff"
@@ -90,44 +90,44 @@
       "borderRadius": 10.0
     },
     "dayPeriodBorderSide": {
-      "color": "#068a9c",
+      "color": "#06899b",
       "width": 2.0
     }
   },
   "radioTheme": {
-    "fillColor": "#068a9c"
+    "fillColor": "#06899b"
   },
   "switchTheme": {
-    "thumbColor": "#068a9c",
-    "trackColor": "#cef8fd"
+    "thumbColor": "#06899b",
+    "trackColor": "#53b9cc"
   },
   "sliderTheme": {
-    "activeTrackColor": "#068a9c",
-    "thumbColor": "#068a9c",
-    "inactiveTrackColor": "#cef8fd"
+    "activeTrackColor": "#06899b",
+    "thumbColor": "#06899b",
+    "inactiveTrackColor": "#53b9cc"
   },
   "progressIndicatorTheme": {
-    "color": "#068a9c",
-    "linearTrackColor": "#cef8fd",
-    "circularTrackColor": "#cef8fd"
+    "color": "#06899b",
+    "linearTrackColor": "#53b9cc",
+    "circularTrackColor": "#53b9cc"
   },
   "dividerTheme": {
-    "color": "#068a9c",
+    "color": "#06899b",
     "thickness": 1
   },
   "appBarTheme": {
-    "backgroundColor": "#068a9c",
+    "backgroundColor": "#06899b",
     "titleTextStyle": {
       "color": "#ffffff",
       "fontSize": 18.0,
       "fontWeight": "normal",
-      "backgroundColor": "#068a9c"
+      "backgroundColor": "#06899b"
     },
     "toolbarTextStyle": {
       "color": "#ffffff",
       "fontSize": 18.0,
       "fontWeight": "normal",
-      "backgroundColor": "#068a9c"
+      "backgroundColor": "#06899b"
     },
     "iconTheme": {
       "size": 20.0,
@@ -143,7 +143,7 @@
       "type": "rectangle",
       "borderRadius": 20.0,
       "side": {
-        "color": "#068a9c",
+        "color": "#06899b",
         "width": 2.0
       }
     }
@@ -151,22 +151,22 @@
   "tabBarTheme": {
     "indicatorSize": "tab",
     "labelPadding": 0.0,
-    "labelColor": "#068a9c",
+    "labelColor": "#06899b",
     "labelStyle": {
-      "color": "#068a9c",
+      "color": "#06899b",
       "fontSize": 18.0,
       "fontWeight": "bold",
       "backgroundColor": "#ffffff"
     },
-    "unselectedLabelColor": "#068a9c",
+    "unselectedLabelColor": "#06899b",
     "unselectedLabelStyle": {
-      "color": "#068a9c",
+      "color": "#06899b",
       "fontSize": 12.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     } 
   },
-  "indicatorColor" : "#068a9c",
+  "indicatorColor" : "#06899b",
   "dialogTheme": {
     "backgroundColor": "#ffffff",
     "elevation": 0,

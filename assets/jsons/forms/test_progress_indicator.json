@@ -16,13 +16,13 @@
           "options": {
             "LAB": {
               "default": {
-                "padding": { "left": 10.0, "Top": 30, "Right": 10.0},
+                "padding": { "Top": 30},
                 "align": "center"
               }
             }
           },
           "data": {
-            "rows": [{ "value": "Esempio di Progress Indicator" }]
+            "rows": [{ "value": "Animated progress indicators for Flutter" }]
           }
         }
       ]
@@ -37,8 +37,6 @@
             "FLD": {
               "default": {
                 "type": "pgi",
-                "color": "R255G000B000",
-                "circularTrackColor": "R255G179B179",
                 "size": 200
               }
             }

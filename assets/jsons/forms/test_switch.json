@@ -16,13 +16,13 @@
           "options": {
             "LAB": {
               "default": {
-                "padding": { "left": 10.0, "Top": 30, "Right": 10.0},
+                "padding": { "Top": 30},
                 "align": "center"
               }
             }
           },
           "data": {
-            "rows": [{ "value": "Esempio di Switch" }]
+            "rows": [{ "value": "A Switch is used to toggle a setting between on/off which is true/false respectively" }]
           }
         }
       ]
@@ -38,7 +38,7 @@
             "rows": [
               {
                 "value": 1,
-                "txt": "Smeup Switch"
+                "txt": "Turn me on/off"
               }
             ]
           },

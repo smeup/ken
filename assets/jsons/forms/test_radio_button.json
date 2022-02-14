@@ -16,13 +16,13 @@
           "options": {
             "LAB": {
               "default": {
-                "padding": { "left": 10.0, "Top": 30, "Right": 10.0},
+                "padding": { "Top": 30},
                 "align": "center"
               }
             }
           },
           "data": {
-            "rows": [{ "value": "Esempio di Radio Button" }]
+            "rows": [{ "value": "The Radio Button is used to select between a number of mutually exclusive values" }]
           }
         }
       ]

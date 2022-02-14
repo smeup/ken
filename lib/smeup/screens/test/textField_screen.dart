@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ken/smeup/screens/test/showcase_shared.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/widgets/smeup_text_field.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
@@ -20,35 +21,35 @@ class TextFieldScreen extends StatelessWidget {
           body: SingleChildScrollView(
             child: Container(
               padding: const EdgeInsets.all(20),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 60.0),
-                child: Center(
-                    child: Column(
-                  children: [
-                    SmeupTextField(
-                      _scaffoldKey,
-                      _formKey,
-                      label: 'description',
-                      id: 'text1',
-                      data: 'I am a textfield',
-                      showSubmit: true,
-                      submitLabel: 'tap me',
-                      clientOnChange: (value) {
-                        SmeupUtilities.invokeScaffoldMessenger(
-                            context, 'value changed $value');
-                      },
-                      clientOnSave: (value) {
-                        SmeupUtilities.invokeScaffoldMessenger(
-                            context, 'value saved $value');
-                      },
-                      clientOnSubmit: (buttonIndex, buttonText) {
-                        SmeupUtilities.invokeScaffoldMessenger(
-                            context, 'you tapped the button "$buttonText"');
-                      },
-                    ),
-                  ],
-                )),
-              ),
+              child: Center(
+                  child: Column(
+                children: [
+                  ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
+                      'A text field lets the user enter text and perform validation on it. It is also possible to add a submit button',
+                      height: 30),
+                  SmeupTextField(
+                    _scaffoldKey,
+                    _formKey,
+                    label: 'description',
+                    id: 'text1',
+                    data: 'some text',
+                    showSubmit: true,
+                    submitLabel: 'tap me',
+                    clientOnChange: (value) {
+                      SmeupUtilities.invokeScaffoldMessenger(
+                          context, 'value changed $value');
+                    },
+                    clientOnSave: (value) {
+                      SmeupUtilities.invokeScaffoldMessenger(
+                          context, 'value saved $value');
+                    },
+                    clientOnSubmit: (buttonIndex, buttonText) {
+                      SmeupUtilities.invokeScaffoldMessenger(context,
+                          'you tapped the submit button "$buttonText"');
+                    },
+                  ),
+                ],
+              )),
             ),
           ),
         ),

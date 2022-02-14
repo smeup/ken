@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ken/smeup/screens/test/showcase_shared.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/widgets/smeup_switch.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
@@ -20,28 +21,27 @@ class SwitchScreen extends StatelessWidget {
           body: SingleChildScrollView(
             child: Container(
               padding: const EdgeInsets.all(20),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 60.0),
-                child: Center(
-                    child: Column(
-                  children: [
-                    SmeupSwitch(
-                      _scaffoldKey,
-                      _formKey,
-                      text: 'Smeup Switch',
-                      data: true,
-                      id: 'switch1',
-                      width: 400,
-                      height: 50,
-                      captionFontSize: 20,
-                      onClientChange: (value) {
-                        SmeupUtilities.invokeScaffoldMessenger(
-                            context, "You have changed the switch to: $value");
-                      },
-                    ),
-                  ],
-                )),
-              ),
+              child: Center(
+                  child: Column(
+                children: [
+                  ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
+                      'A Switch is used to toggle a setting between on/off which is true/false respectively'),
+                  SmeupSwitch(
+                    _scaffoldKey,
+                    _formKey,
+                    text: 'Turn me on/off',
+                    data: true,
+                    id: 'switch1',
+                    width: 400,
+                    height: 50,
+                    captionFontSize: 20,
+                    onClientChange: (value) {
+                      SmeupUtilities.invokeScaffoldMessenger(
+                          context, "You have changed the switch to: $value");
+                    },
+                  ),
+                ],
+              )),
             ),
           ),
         ),
