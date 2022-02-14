@@ -27,7 +27,7 @@ class ImageScreen extends StatelessWidget {
                   children: [
                     SmeupLabel(_scaffoldKey, _formKey, ['Local image']),
                     SmeupImage(_scaffoldKey, _formKey,
-                        'packages/ken/assets/images/sun.jpg',
+                        'packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 5.png',
                         id: 'img1', width: 200, height: 200, isRemote: false),
                   ],
                 )),

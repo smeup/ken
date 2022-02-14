@@ -3,7 +3,7 @@
   "layout": "column",
   "id": "testForm",
   "type": "EXD",
-  "title": "Autocompleate",
+  "title": "Autocomplete",
   "padding": 30,
   "sections": [
     {
@@ -21,7 +21,7 @@
             }
           },
           "data": {
-            "rows": [{ "value": "example of autocomplete in flutter, it is possible to add confirmation key" }]
+            "rows": [{ "value": "Example of autocomplete in flutter, it is possible to add confirmation key" }]
           }
         }
       ]

@@ -3,10 +3,31 @@
   "layout": "column",
   "id": "testForm",
   "type": "EXD",
-  "title": "[description]",
+  "title": "Datepicker",
+  "padding": 30,
   "sections": [
     {
       "id": "S1",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "padding": { "Top": 30},
+                "align": "center"
+              }
+            }
+          },
+          "data": {
+            "rows": [{ "value": "Highly customizable, feature-packed date-picker widget for Flutter" }]
+          }
+        }
+      ]
+    },
+    {
+      "id": "S2",
       "components": [
         {
           "id": "datepicker1",
@@ -15,7 +36,7 @@
             "FLD": {
               "default": {
                 "type": "cal",
-                "label": "My date",
+                "label": "Date",
                 "underline" : true                
               }
             }

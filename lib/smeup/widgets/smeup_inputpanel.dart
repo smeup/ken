@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/daos/smeup_inputpanel_dao.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:ken/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_input_panel_field.dart';
 import 'package:ken/smeup/models/widgets/smeup_combo_item_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_inputpanel_model.dart';
@@ -144,6 +145,13 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
       }
     }
 
+    inputPanelHeight = inputPanelHeight - 20;
+
+    double innerPanel = inputPanelHeight;
+    if (_isConfirmButtonEnabled()) {
+      innerPanel = innerPanel - SmeupButtonsModel.defaultHeight;
+    }
+
     if (_data == null) {
       return getFunErrorResponse(context, _model);
     } else {
@@ -151,23 +159,28 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
         height: inputPanelHeight,
         width: inputPanelWidth,
         child: Scaffold(
-          floatingActionButton: _getConfirmButton(),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.title,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            floatingActionButton: _getConfirmButton(),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            body: Container(
+              height: innerPanel,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.title,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    _getFields(),
+                  ],
+                ),
               ),
-              SizedBox(
-                height: 16,
-              ),
-              _getFields(),
-            ],
-          ),
-        ),
+            )),
       );
 
       return SmeupWidgetBuilderResponse(_model, children);
@@ -277,10 +290,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
   }
 
   Widget _getConfirmButton() {
-    if ((_model != null &&
-            _model.dynamisms != null &&
-            (_model.dynamisms as List).length > 0) ||
-        widget.onSubmit != null) {
+    if (_isConfirmButtonEnabled()) {
       return Row(
         children: [
           Expanded(
@@ -295,6 +305,14 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     } else {
       return Container();
     }
+  }
+
+  bool _isConfirmButtonEnabled() {
+    if ((_model != null &&
+            _model.dynamisms != null &&
+            (_model.dynamisms as List).length > 0) ||
+        widget.onSubmit != null) return true;
+    return false;
   }
 
   _fireDynamism() {
