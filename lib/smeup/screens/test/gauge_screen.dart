@@ -20,12 +20,14 @@ class GaugeScreen extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.only(left: 10, right: 10),
               child: Padding(
-                padding: const EdgeInsets.only(top: 60.0),
+                padding: const EdgeInsets.only(top: 30.0),
                 child: Center(
                     child: Column(
                   children: [
+                    ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
+                        'Highly customizable, feature-packed gauge widget for Flutter'),
                     SmeupGauge(
                       _scaffoldKey,
                       _formKey,
