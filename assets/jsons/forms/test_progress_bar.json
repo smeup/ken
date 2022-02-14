@@ -4,9 +4,31 @@
   "id": "testForm",
   "type": "EXD",
   "title": "[description]",
+  "padding": 30,
   "sections": [
     {
       "id": "S1",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "padding": {
+                  "Top": 30
+                }
+              }
+            }
+          },
+          "data":{
+            "rows" :  [{ "value": "Highly customizable, feature-packed progress bar widget for Flutter" }]
+          } 
+        }
+      ]
+    }, 
+    {
+      "id": "S2",
       "components": [
         {
           "type": "FLD",
@@ -15,59 +37,15 @@
             "FLD": {
               "default": {
                 "type": "pgb",
-                "padding": {"left":5.0, "right":5.0},
-                "height": 30,
-                "pgbMin": 0,
-                "pgbMax": 100
-              }
-            }
-          },
-          "data":{
-            "rows" :  [{ "value": 30 }]
-          } 
-        }
-      ]
-    },
-    {
-      "components": [
-        {
-          "type": "LIN",
-          "id": "lin1",
-          "options": {
-            "LIN": {
-              "default": {
-              
-              }
-            }
-          },
-          "data":{
-            "rows" :  [{ "color": "R128G128B128" }]
-          } 
-        }
-      ],
-      "id": "SL1"
-    },
-    {
-      "id": "S1",
-      "components": [
-        {
-          "type": "FLD",
-          "id": "pgb2",
-          "options": {
-            "FLD": {
-              "default": {
-                "type": "pgb",
-                "padding": {"left":5.0, "right":5.0},
-                "height": 50,
-                "color": "R255G000B000",
-                "linearTrackColor": "R255G179B179",
+                "padding": {"top":30.0, "left":5.0, "right":5.0},
+                "height": 40,
                 "pgbMin": 0,
                 "pgbMax": 10
               }
             }
           },
           "data":{
-            "rows" :  [{ "value": 5 }]
+            "rows" :  [{ "value": 6 }]
           } 
         }
       ]
