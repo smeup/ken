@@ -7,7 +7,7 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 class TextAutocompleteScreen extends StatelessWidget {
   static const routeName = '/TextAutocompleteScreen';
   static const description =
-      'example of autocomplete in flutter, it is possible to add confirmation key';
+      'Example of autocomplete in flutter, it is possible to add confirmation key';
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 

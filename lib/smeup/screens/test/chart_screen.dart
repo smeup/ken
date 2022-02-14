@@ -3,11 +3,14 @@ import 'package:ken/smeup/models/widgets/smeup_chart_column.dart';
 import 'package:ken/smeup/models/widgets/smeup_chart_datasource.dart';
 import 'package:ken/smeup/models/widgets/smeup_chart_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_chart_row.dart';
+import 'package:ken/smeup/screens/test/showcase_shared.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/widgets/smeup_chart.dart';
 
 class ChartScreen extends StatelessWidget {
   static const routeName = '/ChartScreen';
+  static const description =
+      'Highly customizable, feature-packed button widget for Flutter';
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -22,30 +25,32 @@ class ChartScreen extends StatelessWidget {
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
-            title: Center(child: Text('Chart Screen')),
+            title: Center(child: Text('Chart')),
           ),
           body: SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.all(20),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 60.0),
-                child: Center(
-                    child: Column(
-                  children: [
-                    // Text(
-                    //   'BarChart',
-                    //   style: TextStyle(fontSize: 30),
-                    // ),
-                    _getBarChart(deviceHeight, deviceWidth),
-                    //SizedBox(height: 50),
-                    // Text(
-                    //   'PieChart',
-                    //   style: TextStyle(fontSize: 30),
-                    // ),
-                    _getPieChart(deviceHeight, deviceWidth),
-                  ],
-                )),
-              ),
+              padding: const EdgeInsets.all(30),
+              //child: Padding(
+              //padding: const EdgeInsets.only(top: 60.0),
+              child: Center(
+                  child: Column(
+                children: [
+                  ShowCaseShared.getTestLabel(
+                      _scaffoldKey, _formKey, description),
+                  // Text(
+                  //   'BarChart',
+                  //   style: TextStyle(fontSize: 30),
+                  // ),
+                  _getBarChart(deviceHeight, deviceWidth),
+                  //SizedBox(height: 50),
+                  // Text(
+                  //   'PieChart',
+                  //   style: TextStyle(fontSize: 30),
+                  // ),
+                  // _getPieChart(deviceHeight, deviceWidth),
+                ],
+              )),
+              //),
             ),
           ),
         ),
@@ -57,14 +62,14 @@ class ChartScreen extends StatelessWidget {
     var rows = List<SmeupChartRow>.empty(growable: true);
     var columns = List<SmeupChartColumn>.empty(growable: true);
 
-    final row1 = SmeupChartRow(['pippo', 1, 9, 11]);
-    final row2 = SmeupChartRow(['pluto', 10, 20, 30]);
+    final row1 = SmeupChartRow(['Italy', 70, 50, 60]);
+    final row2 = SmeupChartRow(['France', 70, 40, 80]);
     rows.addAll([row1, row2]);
 
     final col1 = SmeupChartColumn('col1', 'value1', ColumnType.Axes, 0);
-    final col2 = SmeupChartColumn('col2', 'value2', ColumnType.Series, 0);
-    final col3 = SmeupChartColumn('col3', 'value3', ColumnType.Series, 0);
-    final col4 = SmeupChartColumn('col4', 'value4', ColumnType.Series, 0);
+    final col2 = SmeupChartColumn('col2', 'Wine', ColumnType.Series, 0);
+    final col3 = SmeupChartColumn('col3', 'Cheese', ColumnType.Series, 0);
+    final col4 = SmeupChartColumn('col4', 'Fruit', ColumnType.Series, 0);
     columns.addAll([col1, col2, col3, col4]);
     return SmeupChart(
       _scaffoldKey,
