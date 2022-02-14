@@ -30,35 +30,21 @@ class SmeupCalentarEventModel {
     String style = fields[styleColumnName] ?? '';
 
     switch (style) {
-      case '50G00':
-        backgroundColor = Color.fromRGBO(6, 138, 156, 1); // dark green
-        fontColor = Colors.white;
-        fontWeight = FontWeight.normal;
-        markerBackgroundColor = Colors.amber;
-        markerFontColor = Colors.black;
-        break;
-      case '00H00':
-        backgroundColor = Color.fromRGBO(148, 197, 154, 1); // clear green
+      case 'secondary': // secondary
+        backgroundColor = Color.fromRGBO(0, 92, 109, 1); // primary dark
         fontColor = Colors.black;
         fontWeight = FontWeight.normal;
-        markerBackgroundColor = Colors.lime;
+        markerBackgroundColor =
+            Color.fromRGBO(255, 186, 69, 1); // secondary light
         markerFontColor = Colors.black;
         break;
-      case '51G00':
-        backgroundColor = Color.fromRGBO(6, 138, 156, 1); // dark green
-        fontColor = Colors.white;
-        fontWeight = FontWeight.bold;
-        markerBackgroundColor = Colors.amber;
-        markerFontColor = Colors.black;
-        break;
-      case '01H00':
-        backgroundColor = Color.fromRGBO(148, 197, 154, 1); // clear green
+      default: // primary
+        backgroundColor = Color.fromRGBO(255, 186, 69, 1); // secondary light
         fontColor = Colors.black;
-        fontWeight = FontWeight.bold;
-        markerBackgroundColor = Colors.lime;
-        markerFontColor = Colors.black;
+        fontWeight = FontWeight.normal;
+        markerBackgroundColor = Color.fromRGBO(0, 92, 109, 1); // primary dark
+        markerFontColor = Colors.white;
         break;
-      default:
     }
   }
 

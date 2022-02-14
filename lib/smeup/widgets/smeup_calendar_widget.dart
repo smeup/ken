@@ -138,8 +138,10 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
     final iconTheme = SmeupConfigurationService.getTheme().iconTheme;
     final daysHeaderTextStyle =
         SmeupConfigurationService.getTheme().textTheme.bodyText1;
-    final dayTextStyle =
-        SmeupConfigurationService.getTheme().textTheme.bodyText2;
+    final dayTextStyle = SmeupConfigurationService.getTheme()
+        .textTheme
+        .bodyText2
+        .copyWith(color: Colors.black);
     final markerStyle =
         SmeupConfigurationService.getTheme().textTheme.headline4;
 
@@ -284,11 +286,11 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                           vertical: 4.0,
                         ),
                         decoration: BoxDecoration(
-                          border:
-                              Border.all(color: event[index].backgroundColor),
+                          border: Border.all(
+                              color: event[index].markerBackgroundColor),
                           borderRadius: BorderRadius.circular(12.0),
                           shape: BoxShape.rectangle,
-                          color: event[index].backgroundColor,
+                          color: event[index].markerBackgroundColor,
                         ),
                         child: ListTile(
                           visualDensity:
@@ -455,8 +457,8 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
         .textTheme
         .headline3
         .copyWith(
-            backgroundColor: event.backgroundColor,
-            color: event.fontColor,
+            backgroundColor: event.markerBackgroundColor,
+            color: event.markerFontColor,
             fontSize: widget.eventFontSize,
             fontWeight: event.fontWeight);
 

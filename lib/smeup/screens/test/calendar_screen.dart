@@ -42,48 +42,40 @@ class CalendarScreen extends StatelessWidget {
                         {
                           "value": "${DateTime.now().year}-01-18",
                           "title": "My event 1",
-                          "style": "50G00",
                           "init": "100000",
                           "end": "103000"
                         },
                         {
                           "value": "${DateTime.now().year}-01-18",
                           "title": "My event 2",
-                          "style": "00H00",
                           "init": "132000",
                         },
                         {
                           "value": "${DateTime.now().year}-01-18",
                           "title": "My event 22",
-                          "style": "00H00",
                           "init": "132000",
                         },
                         {
                           "value": "${DateTime.now().year}-01-18",
                           "title": "My event 222",
-                          "style": "00H00",
                           "init": "132000",
                         },
                         {
                           "value": "${DateTime.now().year}-01-18",
                           "title": "My event 2222",
-                          "style": "00H00",
                           "init": "132000",
                         },
                         {
                           "value": "${DateTime.now().year}-01-20",
-                          "title": "My event 3",
-                          "style": "51G00"
+                          "title": "My event 3"
                         },
                         {
                           "value": "${DateTime.now().year}-01-21",
-                          "title": "My event 4",
-                          "style": "01H00"
+                          "title": "My event 4"
                         },
                         {
                           "value": "${DateTime.now().year}-02-21",
-                          "title": "My event 5",
-                          "style": "01H00"
+                          "title": "My event 5"
                         }
                       ], clientOnDaySelected: (DateTime day) {
                     SmeupUtilities.invokeScaffoldMessenger(
