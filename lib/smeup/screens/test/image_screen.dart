@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ken/smeup/screens/test/showcase_shared.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/widgets/smeup_image.dart';
 import 'package:ken/smeup/widgets/smeup_label.dart';
@@ -16,6 +17,7 @@ class ImageScreen extends StatelessWidget {
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
             title: Center(child: Text('Image Screen')),
+            actions: ShowCaseShared.getEmptyAction(),
           ),
           body: SingleChildScrollView(
             child: Container(

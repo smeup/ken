@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:ken/smeup/widgets/smeup_label.dart';
 
 class ShowCaseShared {
@@ -8,5 +9,13 @@ class ShowCaseShared {
       [text],
       height: height,
     );
+  }
+
+  static getEmptyAction() {
+    return [
+      SizedBox(
+        width: 56,
+      )
+    ];
   }
 }
