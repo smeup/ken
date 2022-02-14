@@ -50,17 +50,17 @@
           },
           "data": {
             "rows": [
-              { "value": "20220101", "title": "Call allineamento app nativa", "init" : "103000", "end" : "113000", "style": "secondary"  },
-              { "value": "20220101", "title": "Appuntamento dal dentista", "style": "secondary"  },                                                 
-              { "value": "20220101", "title": "Serata Squid Games", "init" : "210000", "style": "secondary" },       
-              { "value": "20220118", "title": "My event 1"},
-              { "value": "20220118", "title": "My event 2"},
-              { "value": "20220120", "title": "My event 3", "style": "secondary" },
-              { "value": "20220118", "title": "My event 22" },
-              { "value": "20220118", "title": "My event 222" },
-              { "value": "20220118", "title": "My event 2222" },
-              { "value": "20220121", "title": "My event 4"},
-              { "value": "20220221", "title": "My event 5"}
+              { "value": "20220101", "title": "Fase 2 project Alfa", "init" : "103000", "end" : "113000", "style": "secondary"  },
+              { "value": "20220101", "title": "Metting call (10:00)", "style": "secondary"  },                                                 
+              { "value": "20220101", "title": "Flutter Tutorial", "init" : "210000", "style": "secondary" },       
+              { "value": "20220118", "title": "Meet the parents"},
+              { "value": "20220118", "title": "Meet the Fockers"},
+              { "value": "20220120", "title": "Get to Interstellar", "style": "secondary" },
+              { "value": "20220118", "title": "Choose a new avatar" },
+              { "value": "20220118", "title": "Phone call with the martian" },
+              { "value": "20220118", "title": "Martian in the attic" },
+              { "value": "20220121", "title": "Rough night with my ex"},
+              { "value": "20220221", "title": "So far so good"}
             ]
           }
         }

@@ -60,7 +60,8 @@
               "default": {
                 "type": "rad",
                 "selectedValue": "0",
-                "radCol": 1
+                "radCol": 1,
+                "height": 100
               }
             }
           }
