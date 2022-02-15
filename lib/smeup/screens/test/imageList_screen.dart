@@ -11,8 +11,6 @@ class ImageListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MediaQueryData deviceInfo = MediaQuery.of(context);
-
     return Theme(
       data: SmeupConfigurationService.getTheme(),
       child: Builder(
@@ -38,53 +36,65 @@ class ImageListScreen extends StatelessWidget {
                             "packages/ken/assets/images/image_list_blue_Tavola disegno 1.png",
                         "description": "first image",
                         "info": "boh1",
-                        "isRemote": false
+                        "isRemote": false,
+                        "width": 200,
+                        "height": 200
                       },
                       {
                         "code":
                             "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 2.png",
                         "description": "second image",
                         "info": "boh2",
-                        "isRemote": false
+                        "isRemote": false,
+                        "width": 200,
+                        "height": 200
                       },
                       {
                         "code":
                             "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 3.png",
                         "description": "third image",
                         "info": "boh3",
-                        "isRemote": false
+                        "isRemote": false,
+                        "width": 200,
+                        "height": 200
                       },
                       {
                         "code":
                             "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 4.png",
                         "description": "fourth image",
                         "info": "boh3",
-                        "isRemote": false
+                        "isRemote": false,
+                        "width": 200,
+                        "height": 200
                       },
                       {
                         "code":
                             "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 5.png",
                         "description": "fifth image",
                         "info": "boh2",
-                        "isRemote": false
+                        "isRemote": false,
+                        "width": 200,
+                        "height": 200
                       }
                     ],
                     "columns": [
                       {'code': 'code', 'text': 'codice', 'IO': "H"},
                       {'code': 'description', 'text': 'descrizione', 'IO': "O"},
                       {'code': 'info', 'text': 'informazioni', 'IO': "H"},
-                      {'code': 'isRemote', 'text': 'remote image', 'IO': "H"}
+                      {'code': 'isRemote', 'text': 'remote image', 'IO': "H"},
+                      {"code": "width", "text": "image width", "IO": "H"},
+                      {"code": "height", "text": "image height", "IO": "H"}
                     ]
                   },
                   0,
-                  2,
+                  1,
                   id: 'imageList1',
-                  height: 450,
+                  height: 330,
                   width: 450,
-                  listHeight: deviceInfo.size.height,
-                  clientOnItemTap: (item) {
+                  listHeight: 500,
+                  clientOnItemTap: (Map item) {
                     SmeupUtilities.invokeScaffoldMessenger(
-                        context, 'item clicked: $item');
+                        context, 'you clicked the ${item['description']}');
                   },
                 )
               ])),
