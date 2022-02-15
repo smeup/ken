@@ -42,41 +42,41 @@ class CalendarScreen extends StatelessWidget {
                       data: [
                         {
                           "value": "${DateTime.now().year}-01-18",
-                          "title": "My event 1",
+                          "title": "Fase 2 project Alfa",
                           "init": "100000",
                           "end": "103000"
                         },
                         {
                           "value": "${DateTime.now().year}-01-18",
-                          "title": "My event 2",
+                          "title": "Metting call (13:20)",
                           "init": "132000",
                         },
                         {
                           "value": "${DateTime.now().year}-01-18",
-                          "title": "My event 22",
+                          "title": "Flutter Tutorial",
                           "init": "132000",
                         },
                         {
                           "value": "${DateTime.now().year}-01-18",
-                          "title": "My event 222",
+                          "title": "Meet the parents",
                           "init": "132000",
                         },
                         {
                           "value": "${DateTime.now().year}-01-18",
-                          "title": "My event 2222",
+                          "title": "Meet the Fockers",
                           "init": "132000",
                         },
                         {
                           "value": "${DateTime.now().year}-01-20",
-                          "title": "My event 3"
+                          "title": "Get to Interstellar"
                         },
                         {
                           "value": "${DateTime.now().year}-01-21",
-                          "title": "My event 4"
+                          "title": "Choose a new avatar"
                         },
                         {
                           "value": "${DateTime.now().year}-02-21",
-                          "title": "My event 5"
+                          "title": "Phone call with the martian"
                         }
                       ], clientOnDaySelected: (DateTime day) {
                     SmeupUtilities.invokeScaffoldMessenger(

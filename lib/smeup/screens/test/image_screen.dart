@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/widgets/smeup_image.dart';
-import 'package:ken/smeup/widgets/smeup_label.dart';
 
 class ImageScreen extends StatelessWidget {
   static const routeName = '/ImageScreen';
