@@ -7,7 +7,7 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 class ButtonScreen extends StatelessWidget {
   static const routeName = '/ButtonScreen';
   static const description =
-      'Highly customizable, feature-packed button widget for Flutter';
+      'This Button has the ability to include all the Flutter buttons features';
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 

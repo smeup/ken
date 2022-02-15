@@ -8,7 +8,7 @@ import 'package:ken/smeup/screens/test/showcase_shared.dart';
 class DialogScreen extends StatelessWidget {
   static const routeName = '/DialogScreen';
   static const description =
-      'Highly customizable, feature-packed button widget for Flutter';
+      'The dialog comes on a separated window or screen which contains any critical information or can ask for any decision';
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 

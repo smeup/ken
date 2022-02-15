@@ -16,12 +16,13 @@
             "LAB": {
               "default": {
                 "padding": { "Top": 30},
-                "align": "center"
+                "align": "center",
+                "height": 30
               }
             }
           },
           "data": {
-            "rows": [{ "value": "Highly customizable, feature-packed time-picker widget for Flutter" }]
+            "rows": [{ "value": "This timepicker is a widget used to select a single time" }]
           }
         }
       ]
@@ -37,7 +38,7 @@
               "default": {
                 "type": "tpk",
                 "underline": true,
-                "label" : "Select hour:"
+                "label" : ""
               }
             }
           },

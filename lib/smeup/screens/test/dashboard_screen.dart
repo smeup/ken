@@ -7,7 +7,7 @@ class DashboardScreen extends StatelessWidget {
   static const routeName = '/DashboardScreen';
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   static const description =
-      'Dashboard componente, it allows to show data. it allows a high style customization.';
+      'The Dashboard widget allows you to show the main data of an element: value, description and an optional icon';
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override

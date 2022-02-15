@@ -27,7 +27,7 @@ class LabelScreen extends StatelessWidget {
                     child: Column(
                   children: [
                     ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
-                        'Highly customizable, feature-packed label widget for Flutter'),
+                        'The label has the function to show a not editable descriptive text'),
                     SmeupLabel(
                       _scaffoldKey,
                       _formKey,

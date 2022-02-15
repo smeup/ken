@@ -16,7 +16,8 @@
             "LAB": {
               "default": {
                 "padding": {
-                  "Top": 30
+                  "Top": 30,
+                  "height": 30
                 }
               }
             }

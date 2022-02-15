@@ -3,11 +3,12 @@
   "layout": "column",
   "id": "testForm",
   "type": "EXD",
-  "title": "[description]",
+  "title": "Gauge",
   "padding": 30,
   "sections": [
       {
         "id": "S1",
+        "dim": "10%",
         "components": [
           {
             "type": "LAB",
@@ -16,18 +17,20 @@
               "LAB": {
                 "default": {
                   "padding": { "Top": 30},
-                  "align": "center"
+                  "align": "center",
+                  "height": 30
                 }
               }
             },
             "data":{
-              "rows" :  [{ "value": "Highly customizable, feature-packed gauge widget for Flutter" }]
+              "rows" :  [{ "value": "The Gauge is a visual element that helps to quickly visualize where a value falls on the axis" }]
             } 
           }
         ]
       },
       {
         "id": "S2",
+        "dim": "90%",
         "components": [        
         {
           "type": "GAU",
@@ -35,7 +38,7 @@
           "options": {
             "GAU": {
               "default": {
-                "padding": {"top":30.0, "left":5.0, "right":5.0}
+                
               }
             }
           },

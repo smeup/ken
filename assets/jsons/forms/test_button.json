@@ -16,12 +16,13 @@
             "LAB": {
               "default": {
                 "padding": { "Top": 30},
-                "align": "center"
+                "align": "center",
+                "height": 30
               }
             }
           },
           "data": {
-            "rows": [{ "value": "Highly customizable, feature-packed button widget for Flutter" }]
+            "rows": [{ "value": "This Button has the ability to include all the Flutter buttons features" }]
           }
         }
       ]

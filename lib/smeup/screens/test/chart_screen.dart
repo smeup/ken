@@ -10,7 +10,7 @@ import 'package:ken/smeup/widgets/smeup_chart.dart';
 class ChartScreen extends StatelessWidget {
   static const routeName = '/ChartScreen';
   static const description =
-      'Highly customizable, feature-packed button widget for Flutter';
+      'This chart is used to craft high-quality mobile app user interfaces with Flutter';
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 

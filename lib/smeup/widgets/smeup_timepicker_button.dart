@@ -124,7 +124,10 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
             },
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text(_currentDisplay, style: widget.textStyle),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 5.0),
+                child: Text(_currentDisplay, style: widget.textStyle),
+              ),
             )));
 
     return button;
