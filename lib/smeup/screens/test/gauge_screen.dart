@@ -27,7 +27,7 @@ class GaugeScreen extends StatelessWidget {
                   child: Column(
                 children: [
                   ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
-                      'Highly customizable, feature-packed gauge widget for Flutter'),
+                        'The Gauge is a visual element that helps to quickly visualize where a value falls on the axis'),
                   SmeupGauge(
                     _scaffoldKey,
                     _formKey,

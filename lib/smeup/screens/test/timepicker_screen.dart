@@ -6,7 +6,7 @@ import 'package:ken/smeup/widgets/smeup_timepicker.dart';
 class TimePickerScreen extends StatelessWidget {
   static const routeName = '/TimePickerScreen';
   static const description =
-      'Highly customizable, feature-packed time-picker widget for Flutter';
+      'This timepicker is a widget used to select a single time';
   static const timePickerId = 'timePicker';
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -39,7 +39,7 @@ class TimePickerScreen extends StatelessWidget {
                         formattedTime: "17:30"),
                     id: timePickerId,
                     width: MediaQuery.of(context).size.width,
-                    label: "Select hour:",
+                    label: "",
                     underline: true,
                     clientOnChange: (data) => ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(

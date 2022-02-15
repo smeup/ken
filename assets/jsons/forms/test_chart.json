@@ -17,12 +17,13 @@
             "LAB": {
               "default": {
                 "padding": {"Top": 30},
-                "align": "center"
+                "align": "center",
+                "height": 30
               }
             }
           },
           "data": {
-            "rows": [{ "value": "Highly customizable, feature-packed chart widget for Fluttero" }]
+            "rows": [{ "value": "This chart is used to craft high-quality mobile app user interfaces with Flutter" }]
           }
         }
       ]

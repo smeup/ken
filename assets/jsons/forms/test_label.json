@@ -18,14 +18,15 @@
                 "padding": {
                   "Top": 30
                 },
-                "align": "center"
+                "align": "center",
+                "height": 30
               }
             }
           },
           "data": {
             "rows": [
               {
-                "value": "Highly customizable, feature-packed label widget for Flutter"
+                "value": "The label has the function to show a not editable descriptive text"
               }
             ]
           }

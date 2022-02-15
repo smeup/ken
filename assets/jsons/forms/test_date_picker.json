@@ -16,12 +16,13 @@
             "LAB": {
               "default": {
                 "padding": { "Top": 30},
-                "align": "center"
+                "align": "center",
+                "height": 30
               }
             }
           },
           "data": {
-            "rows": [{ "value": "Highly customizable, feature-packed date-picker widget for Flutter" }]
+            "rows": [{ "value": "This datepicker is a widget used to select a single date" }]
           }
         }
       ]
@@ -36,7 +37,7 @@
             "FLD": {
               "default": {
                 "type": "cal",
-                "label": "Date",
+                "label": "",
                 "underline" : true                
               }
             }
