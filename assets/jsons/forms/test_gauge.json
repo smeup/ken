@@ -16,7 +16,8 @@
               "LAB": {
                 "default": {
                   "padding": { "Top": 30},
-                  "align": "center"
+                  "align": "center",
+                  "height": 30
                 }
               }
             },
