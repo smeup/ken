@@ -74,7 +74,7 @@ class ListBoxScreen extends StatelessWidget {
                         listType: SmeupListType.oriented,
                         fontSize: 16.0,
                         backColor: Colors.white,
-                        showSelection: true,
+                        showSelection: false,
                         selectedRow: 1,
                         id: 'listbox1', clientOnItemTap: (item) {
                       SmeupUtilities.invokeScaffoldMessenger(

@@ -62,7 +62,13 @@
               { "value": "20220121", "title": "Rough night with my ex"},
               { "value": "20220221", "title": "So far so good"}
             ]
-          }
+          },
+          "dynamisms": [
+            {
+              "event": "click",
+              "exec": "F(FBK;*MSG;) P(you tapped the event: \"[title]\")"
+            }
+          ]
         }
       ]
     } 

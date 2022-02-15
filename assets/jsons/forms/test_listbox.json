@@ -53,7 +53,7 @@
                 "defaultSort": "code",
                 "borderColor": "R006G140B154",
                 "fontSize": 16.0,
-                "showSelection": "Yes",
+                "showSelection": false,
                 "selectRow": 1
               }
             }
@@ -94,7 +94,13 @@
                 "IO": "H"
               }
             ]
-          }
+          },
+          "dynamisms": [
+            {
+              "event": "click",
+              "exec": "F(FBK;*MSG;) P(item clicked: \"[code]\"  \"[description]\")"
+            }
+          ]
         }
       ]
     }
