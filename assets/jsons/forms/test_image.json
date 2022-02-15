@@ -22,7 +22,7 @@
             }
           },
           "data":{
-            "rows" :  [{ "value": "Highly customizable, feature-packed image widget for Flutter" }]
+            "rows" :  [{ "value": "This widget is used to show a single image" }]
           } 
         }
       ]

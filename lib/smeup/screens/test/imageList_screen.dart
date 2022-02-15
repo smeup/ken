@@ -27,7 +27,7 @@ class ImageListScreen extends StatelessWidget {
               child: Center(
                   child: Column(children: [
                 ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
-                    'Highly customizable, feature-packed image list widget for Flutter'),
+                    'This widget is capable of showing images on one or more columns/rows'),
                 SmeupImageList(
                   _scaffoldKey,
                   _formKey,

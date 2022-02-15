@@ -27,7 +27,7 @@ class ImageScreen extends StatelessWidget {
                     child: Column(
                   children: [
                     ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
-                        'Highly customizable, feature-packed image widget for Flutter'),
+                        'This widget is used to show a single image'),
                     SmeupImage(_scaffoldKey, _formKey,
                         'packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 5.png',
                         id: 'img1', width: 300, height: 300, isRemote: false),

@@ -8,7 +8,7 @@ class DatePickerScreen extends StatelessWidget {
   static const routeName = '/DatePickerScreen';
   static const datePickerId = 'datepicker1';
   static const description =
-      'Highly customizable, feature-packed date-picker widget for Flutter';
+      'This datepicker is a widget used to select a single date';
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -38,7 +38,7 @@ class DatePickerScreen extends StatelessWidget {
                     SmeupDatePickerData(value: DateTime(2021, 03, 21)),
                     id: datePickerId,
                     underline: true,
-                    label: "Date",
+                    label: "",
                     width: MediaQuery.of(context).size.width,
                     clientOnChange: (data) =>
                         SmeupUtilities.invokeScaffoldMessenger(

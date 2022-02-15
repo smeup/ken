@@ -8,7 +8,7 @@ class ProgressBarScreen extends StatelessWidget {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   static const description =
-      'Highly customizable, feature-packed progress bar widget for Flutter';
+      'A progress bar is a graphical control element used to show the progress of a task';
 
   @override
   Widget build(BuildContext context) {

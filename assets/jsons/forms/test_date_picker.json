@@ -21,7 +21,7 @@
             }
           },
           "data": {
-            "rows": [{ "value": "Highly customizable, feature-packed date-picker widget for Flutter" }]
+            "rows": [{ "value": "This datepicker is a widget used to select a single date" }]
           }
         }
       ]
@@ -36,7 +36,7 @@
             "FLD": {
               "default": {
                 "type": "cal",
-                "label": "Date",
+                "label": "",
                 "underline" : true                
               }
             }

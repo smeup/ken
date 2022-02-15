@@ -21,7 +21,7 @@
             }
           },
           "data": {
-            "rows": [{ "value": "Highly customizable, feature-packed time-picker widget for Flutter" }]
+            "rows": [{ "value": "This timepicker is a widget used to select a single time" }]
           }
         }
       ]
@@ -37,7 +37,7 @@
               "default": {
                 "type": "tpk",
                 "underline": true,
-                "label" : "Select hour:"
+                "label" : ""
               }
             }
           },

@@ -25,7 +25,7 @@
           "data": {
             "rows": [
               {
-                "value": "Highly customizable, feature-packed box widget for Flutter"
+                "value": "This widget is a list of boxes whose format is predetermined by a layout. It is also possible to decide the number of columns"
               }
             ]
           }

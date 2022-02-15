@@ -29,7 +29,7 @@ class ListBoxScreen extends StatelessWidget {
                     child: Column(
                   children: [
                     ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
-                        'Highly customizable, feature-packed box widget for Flutter'),
+                        'This widget is a list of boxes whose format is predetermined by a layout. It is also possible to decide the number of columns'),
                     SmeupListBox(
                         _scaffoldKey,
                         _formKey,

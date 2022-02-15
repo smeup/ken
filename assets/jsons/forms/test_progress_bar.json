@@ -22,7 +22,7 @@
             }
           },
           "data":{
-            "rows" :  [{ "value": "Highly customizable, feature-packed progress bar widget for Flutter" }]
+            "rows" :  [{ "value": "A progress bar is a graphical control element used to show the progress of a task" }]
           } 
         }
       ]
