@@ -3,7 +3,7 @@
   "layout": "column",
   "id": "testForm",
   "type": "EXD",
-  "title": "[description]",
+  "title": "Calendar",
   "padding": 30,
   "sections": [
     {

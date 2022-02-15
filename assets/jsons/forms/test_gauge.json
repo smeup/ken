@@ -4,7 +4,7 @@
   "id": "testForm",
   "type": "EXD",
   "title": "[description]",
-  "padding:": 30,
+  "padding": 30,
   "sections": [
       {
         "id": "S1",

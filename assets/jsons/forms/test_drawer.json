@@ -3,7 +3,8 @@
   "layout": "column",
   "id": "testForm",
   "type": "EXD",
-  "title": "[description]",
+  "title": "Drawer",
+  "padding": 30,
   "sections": [
     {
       "id": "S1",
@@ -14,12 +15,14 @@
           "options": {
             "LAB": {
               "default": {
-                "fontSize": 25
+                "padding": {
+                  "Top": 30
+                }
               }
             }
           },
           "data":{
-            "rows" :  [{ "value": "Click on the drawer icon at the top right of the screen" }]
+            "rows" :  [{ "value": "Click on drawer icon at top right of the screen" }]
           } 
         }
       ]
@@ -34,7 +37,6 @@
           "options": {
             "DRW": {
               "default": {
-                "imageUrl": "assets/images/sun.jpg",
                 "imageHeight": 80,
                 "imageWidth": 120
               }
@@ -50,38 +52,38 @@
               },
               {
                 "text": "Label",
-                "route": "F(EXD;*JSN;) 1(;;packages/ken/assets/jsons/forms) 2(;;test_label)",
+                "route": "/LabelScreen",
                 "iconCode": 0,
-                "group": "GROUP 1",
+                "group": "STATIC",
                 "fontSize": 16,
-                "groupIcon": 58722,
+                "groupIcon": 59110,
                 "groupFontSize": 18
               },
               {
                 "text": "Dashboard",
-                "route": "F(EXD;*JSN;) 1(;;packages/ken/assets/jsons/forms) 2(;;test_dashboard)",
+                "route": "F(EXD;*ROUTE;) 2(;;DashboardScreen)",
                 "iconCode": 0,
-                "group": "GROUP 1",
+                "group": "STATIC",
                 "fontSize": 16,
-                "groupIcon": 58722,
+                "groupIcon": 59110,
                 "groupFontSize": 18
               },
               {
                 "text": "Chart",
                 "route": "F(EXD;*JSN;) 1(;;packages/ken/assets/jsons/forms) 2(;;test_chart)",
                 "iconCode": 0,
-                "group": "GROUP 2",
+                "group": "DYNAMIC",
                 "fontSize": 16,
-                "groupIcon": 58722,
+                "groupIcon": 57873,
                 "groupFontSize": 18
               },
               {
                 "text": "Calendar",
                 "route": "F(EXD;*JSN;) 1(;;packages/ken/assets/jsons/forms) 2(;;test_calendar)",
                 "iconCode": 0,
-                "group": "GROUP 2",
+                "group": "DYNAMIC",
                 "fontSize": 16,
-                "groupIcon": 58722,
+                "groupIcon": 57873,
                 "groupFontSize": 18
               }
             ]
