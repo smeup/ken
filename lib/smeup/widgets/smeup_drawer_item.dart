@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 
 class SmeupDrawerItem extends StatelessWidget {
   final String text;
@@ -11,9 +12,11 @@ class SmeupDrawerItem extends StatelessWidget {
   final bool fontBold;
   final Alignment align;
   final bool showItemDivider;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<FormState> formKey;
 
-  SmeupDrawerItem(this.text, this.route, this.iconCode, this.action, this.align,
-      this.showItemDivider,
+  SmeupDrawerItem(this.scaffoldKey, this.formKey, this.text, this.route,
+      this.iconCode, this.action, this.align, this.showItemDivider,
       {this.fontSize, this.fontBold, this.fontColor});
 
   @override
@@ -24,7 +27,13 @@ class SmeupDrawerItem extends StatelessWidget {
       if (action != null) {
         action(context);
       } else {
-        Navigator.of(context).pushNamed(route);
+        if (route.trimLeft().toUpperCase().startsWith('F(')) {
+          SmeupDynamismService.run([
+            {"event": "click", "exec": "$route"}
+          ], context, 'click', scaffoldKey, formKey);
+        } else {
+          Navigator.of(context).pushNamed(route);
+        }
       }
     };
 

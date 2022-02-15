@@ -1,14 +1,13 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/daos/smeup_drawer_dao.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
+import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:ken/smeup/models/widgets/smeup_drawer_data_element.dart';
+import 'package:ken/smeup/models/widgets/smeup_drawer_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_model.dart';
-import 'package:ken/smeup/screens/smeup_dynamic_screen.dart';
 import 'package:ken/smeup/services/SmeupLocalizationService.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/models/widgets/smeup_drawer_model.dart';
-import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/widgets/smeup_drawer_item.dart';
 import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
@@ -111,12 +110,24 @@ class SmeupDrawer extends StatefulWidget
             action: element['route'] == null
                 ? null
                 : (context) {
+                    String route = element['route'];
+                    if (route.trimLeft().toUpperCase().startsWith('F(')) {
+                      SmeupDynamismService.run([
+                        {"event": "click", "exec": "${element['route']}"}
+                      ], context, 'click', scaffoldKey, formKey);
+                    } else {
+                      Navigator.of(context).pushNamed(route);
+                    }
+
+                    /*
+
                     final smeupFun = SmeupFun(
                         element['route'], formKey, scaffoldKey, context);
 
                     Navigator.of(context).pushNamed(
                         SmeupDynamicScreen.routeName,
                         arguments: {'isDialog': false, 'smeupFun': smeupFun});
+                    */
                   },
             group: element['group'] ?? '',
             groupFontSize:
@@ -236,8 +247,8 @@ class _SmeupDrawerState extends State<SmeupDrawer>
 
     for (SmeupDrawerDataElement e in _data) {
       if (e.group.isEmpty) {
-        list.add(SmeupDrawerItem(
-            e.text, e.route, e.iconCode, e.action, e.align, false,
+        list.add(SmeupDrawerItem(widget.scaffoldKey, widget.formKey, e.text,
+            e.route, e.iconCode, e.action, e.align, false,
             fontSize: e.fontSize));
       } else {
         List<Widget> listInGroup;
@@ -269,8 +280,8 @@ class _SmeupDrawerState extends State<SmeupDrawer>
         listInGroup = groups[e.group];
         listInGroup.add(Padding(
           padding: const EdgeInsets.only(left: 60.0),
-          child: SmeupDrawerItem(e.text, e.route, e.iconCode, e.action, e.align,
-              widget.showItemDivider,
+          child: SmeupDrawerItem(widget.scaffoldKey, widget.formKey, e.text,
+              e.route, e.iconCode, e.action, e.align, widget.showItemDivider,
               fontSize: e.fontSize),
         ));
       }
