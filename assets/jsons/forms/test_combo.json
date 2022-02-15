@@ -22,7 +22,7 @@
             }
           },
           "data": {
-            "rows": [{ "value": "flutter combo widget example. When opened, allow you to select a city" }]
+            "rows": [{ "value": "The combo widget allows you to select a single value from a list" }]
           }
         }
       ]

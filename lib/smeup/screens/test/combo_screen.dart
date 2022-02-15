@@ -8,7 +8,7 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 class ComboScreen extends StatelessWidget {
   static const routeName = '/ComboScreen';
   static const description =
-      'flutter combo widget example. When opened, allow you to select a city';
+      'The combo widget allows you to select a single value from a list';
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 

@@ -22,7 +22,7 @@
             }
           },
           "data": {
-            "rows": [{ "value": "Dashboard componente, it allows to show data. it allows a high style customization." }]
+            "rows": [{ "value": "The Dashboard widget allows you to show the main data of an element: value, description and an optional icon" }]
           }
         }
       ]
