@@ -3,11 +3,12 @@
   "layout": "column",
   "id": "testForm",
   "type": "EXD",
-  "title": "[description]",
-  "padding:": 30,
+  "title": "Gauge",
+  "padding": 30,
   "sections": [
       {
         "id": "S1",
+        "dim": "10%",
         "components": [
           {
             "type": "LAB",
@@ -28,6 +29,7 @@
       },
       {
         "id": "S2",
+        "dim": "90%",
         "components": [        
         {
           "type": "GAU",
@@ -35,7 +37,7 @@
           "options": {
             "GAU": {
               "default": {
-                "padding": {"top":30.0, "left":5.0, "right":5.0}
+                
               }
             }
           },
