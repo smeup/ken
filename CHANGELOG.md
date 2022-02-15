@@ -26,3 +26,9 @@
 
 - bugs fixing
 - style improvements
+
+## [0.0.1+9] - 15/02/2022
+
+- bugs fixing
+- style improvements
+- showcase improvements
