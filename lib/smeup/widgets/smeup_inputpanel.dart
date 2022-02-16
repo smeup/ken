@@ -6,6 +6,7 @@ import 'package:ken/smeup/models/widgets/smeup_combo_item_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_inputpanel_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
@@ -88,6 +89,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     implements SmeupWidgetStateInterface {
   SmeupInputPanelModel _model;
   List<SmeupInputPanelField> _data;
+  double confirmButtonRowHeight = 120;
 
   @override
   void initState() {
@@ -118,6 +120,10 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
 
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
+    bool autoAdaptHeight = SmeupConfigurationService.defaultAutoAdaptHeight;
+    // autoadapt on input panel alway enabled
+    autoAdaptHeight = true;
+
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
         await SmeupInputPanelDao.getData(
@@ -144,6 +150,11 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
       }
     }
 
+    double innerPanelHeight = inputPanelHeight;
+
+    if (autoAdaptHeight && _isConfirmButtonEnabled())
+      innerPanelHeight -= confirmButtonRowHeight;
+
     if (_data == null) {
       return getFunErrorResponse(context, _model);
     } else {
@@ -151,11 +162,12 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
         height: inputPanelHeight,
         width: inputPanelWidth,
         child: Scaffold(
-            floatingActionButton: _getConfirmButton(),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: autoAdaptHeight ? _getConfirmButton() : null,
+            floatingActionButtonLocation: autoAdaptHeight
+                ? FloatingActionButtonLocation.centerDocked
+                : null,
             body: Container(
-              height: inputPanelHeight,
+              height: innerPanelHeight,
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,6 +183,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
                         height: 16,
                       ),
                     _getFields(),
+                    if (!autoAdaptHeight) _getConfirmButton()
                   ],
                 ),
               ),
@@ -285,16 +298,19 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
 
   Widget _getConfirmButton() {
     if (_isConfirmButtonEnabled()) {
-      return Row(
-        children: [
-          Expanded(
-            child: SmeupButton(
-              data: "Conferma",
-              fontSize: widget.fontSize,
-              clientOnPressed: () => _fireDynamism(),
+      return Container(
+        height: confirmButtonRowHeight,
+        child: Row(
+          children: [
+            Expanded(
+              child: SmeupButton(
+                data: "Conferma",
+                fontSize: widget.fontSize,
+                clientOnPressed: () => _fireDynamism(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
     } else {
       return Container();
