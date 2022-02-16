@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/daos/smeup_inputpanel_dao.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:ken/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_input_panel_field.dart';
 import 'package:ken/smeup/models/widgets/smeup_combo_item_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_inputpanel_model.dart';
@@ -145,13 +144,6 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
       }
     }
 
-    inputPanelHeight = inputPanelHeight - 20;
-
-    double innerPanel = inputPanelHeight;
-    if (_isConfirmButtonEnabled()) {
-      innerPanel = innerPanel - SmeupButtonsModel.defaultHeight;
-    }
-
     if (_data == null) {
       return getFunErrorResponse(context, _model);
     } else {
@@ -163,19 +155,21 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             body: Container(
-              height: innerPanel,
+              height: inputPanelHeight,
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.title,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
+                    if (widget.title.isNotEmpty)
+                      Text(
+                        widget.title,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                    if (widget.title.isNotEmpty)
+                      SizedBox(
+                        height: 16,
+                      ),
                     _getFields(),
                   ],
                 ),

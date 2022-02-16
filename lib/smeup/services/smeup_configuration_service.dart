@@ -43,6 +43,7 @@ class SmeupConfigurationService {
   static AuthenticationModel authenticationModel;
   static SmeupDataTransformerInterface defaultServiceDataTransformer;
   static SmeupDataTransformerInterface httpServiceDataTransformer;
+  static bool defaultAutoAdaptHeight;
 
   static PackageInfo packageInfoModel = PackageInfo(
     appName: 'Unknown',
@@ -59,9 +60,11 @@ class SmeupConfigurationService {
       AuthenticationModel authenticationModel,
       String appBarImage = '',
       SmeupDataTransformerInterface defaultServiceDataTransformer,
-      SmeupDataTransformerInterface httpServiceDataTransformer}) async {
+      SmeupDataTransformerInterface httpServiceDataTransformer,
+      bool defaultAutoAdaptHeight = true}) async {
     await SmeupConfigurationService.setAppConfiguration();
 
+    SmeupConfigurationService.defaultAutoAdaptHeight = defaultAutoAdaptHeight;
     SmeupConfigurationService.logLevel = logLevel;
     SmeupConfigurationService.appBarImage = appBarImage;
 

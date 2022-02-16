@@ -194,9 +194,11 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       } else {
         container = Container(
           padding: smeupFormModel.padding,
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: sections),
+          child: SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: sections),
+          ),
         );
       }
     } else {
