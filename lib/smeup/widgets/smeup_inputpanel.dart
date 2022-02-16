@@ -89,7 +89,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     implements SmeupWidgetStateInterface {
   SmeupInputPanelModel _model;
   List<SmeupInputPanelField> _data;
-  double confirmButtonRowHeight = 120;
+  double confirmButtonRowHeight = 110;
 
   @override
   void initState() {
@@ -201,7 +201,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
         children: [
           _getInputFieldWidget(field),
           SizedBox(
-            height: 16,
+            height: 13,
           ),
         ],
       );
@@ -221,6 +221,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
           id: field.id,
           fontSize: widget.fontSize,
           title: field.label,
+          height: 55,
           data: [
             {"code": "0", "value": "No"},
             {"code": "1", "value": "Si"},
@@ -254,14 +255,17 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
           height: 8,
           fontSize: widget.fontSize,
         ),
-        SmeupTextField(
-          widget.scaffoldKey,
-          widget.formKey,
-          id: field.id,
-          data: field.value.code,
-          clientOnChange: (value) {
-            field.value.code = field.value.descr = value;
-          },
+        SizedBox(
+          height: 30,
+          child: SmeupTextField(
+            widget.scaffoldKey,
+            widget.formKey,
+            id: field.id,
+            data: field.value.code,
+            clientOnChange: (value) {
+              field.value.code = field.value.descr = value;
+            },
+          ),
         )
       ],
     );
