@@ -50,7 +50,7 @@
                 }
               },
               "data": {
-                "rows": [{ "value": "Button" }]
+                "rows": [{ "value": "Click me" }]
               },
               "dynamisms": [
                 {
