@@ -32,7 +32,7 @@
 
 ## Constructors
 
-[SmeupFormModel.fromMap](../smeup_models_widgets_smeup_form_model/SmeupFormModel/SmeupFormModel.fromMap.md) (dynamic response, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupFormModel.fromMap](../smeup_models_widgets_smeup_form_model/SmeupFormModel/SmeupFormModel.fromMap.md) (dynamic response, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
 
     
 
@@ -62,7 +62,7 @@ _read / write_
 
 
    
-_read / write_
+_read / write, override_
 
 
 
@@ -210,6 +210,15 @@ _read-only, inherited_
 
 
 
+##### [scaffoldKey](../smeup_models_widgets_smeup_form_model/SmeupFormModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+
+
+
+   
+_final, read / write, inherited-setter, override-getter_
+
+
+
 ##### [serviceStatusCode](../smeup_models_widgets_smeup_model/SmeupModel/serviceStatusCode.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
 
 
@@ -276,7 +285,7 @@ _read / write, inherited_
 
 ## Methods
 
-##### [getSections](../smeup_models_widgets_smeup_model_mixin/SmeupModelMixin/getSections.md)(dynamic jsonMap, dynamic sectionName, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) autoAdaptHeight, [SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md) parent) [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupSectionModel](../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.md)>
+##### [getSections](../smeup_models_widgets_smeup_model_mixin/SmeupModelMixin/getSections.md)(dynamic jsonMap, dynamic sectionName, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) autoAdaptHeight, [SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md) parent) [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupSectionModel](../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.md)>
 
 
 
@@ -337,15 +346,6 @@ _inherited_
 
 
 ## Constants
-
-##### [defaultAutoAdaptHeight](../smeup_models_widgets_smeup_form_model/SmeupFormModel/defaultAutoAdaptHeight-constant.md) const [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
-
-
-
-   
-
-
-
 
 ##### [defaultLayout](../smeup_models_widgets_smeup_form_model/SmeupFormModel/defaultLayout-constant.md) const [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 

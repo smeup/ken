@@ -35,21 +35,21 @@
 
 ## Properties
 
-##### [circularTrackColor](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/circularTrackColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [circularTrackColor](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/circularTrackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
 
 
 
    
-_final_
+_read / write_
 
 
 
-##### [formKey](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/formKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
 
 
 
    
-_final_
+_read / write_
 
 
 
@@ -71,12 +71,12 @@ _final, inherited_
 
 
 
-##### [loaderColor](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/loaderColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [loaderColor](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/loaderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
 
 
 
    
-_final_
+_read / write_
 
 
 
@@ -89,30 +89,30 @@ _read-only, inherited_
 
 
 
-##### [scaffoldKey](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/scaffoldKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+##### [scaffoldKey](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
 
 
 
    
-_final_
+_read / write_
 
 
 
-##### [splashColor](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/splashColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
-
-
-
-   
-_final_
-
-
-
-##### [target](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/target.md) &#8594; [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)
+##### [splashColor](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/splashColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
 
 
 
    
-_final_
+_read / write_
+
+
+
+##### [target](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/target.md) &#8596; [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)
+
+
+
+   
+_read / write_
 
 
 

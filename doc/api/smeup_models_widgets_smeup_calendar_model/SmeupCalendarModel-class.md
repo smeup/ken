@@ -26,16 +26,25 @@
 
 ## Constructors
 
-[SmeupCalendarModel](../smeup_models_widgets_smeup_calendar_model/SmeupCalendarModel/SmeupCalendarModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) dayFontSize, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) eventFontSize, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) titleFontSize, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) markerFontSize, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) titleColumnName = defaultTitleColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) dataColumnName = defaultDataColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) initTimeColumnName = defaultInitTimeColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) endTimeColumnName = defaultEndTimeColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) styleColumnName = defaultStyleColumnName, dynamic title = '', [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showPeriodButtons = defaultShowPeriodButtons, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) initialFirstWork, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) initialLastWork, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) initialDate, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showAsWeek, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showNavigation, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = defaultPadding})
+[SmeupCalendarModel](../smeup_models_widgets_smeup_calendar_model/SmeupCalendarModel/SmeupCalendarModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) dayFontSize, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) eventFontSize, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) titleFontSize, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) markerFontSize, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) titleColumnName = defaultTitleColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) dataColumnName = defaultDataColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) initTimeColumnName = defaultInitTimeColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) endTimeColumnName = defaultEndTimeColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) styleColumnName = defaultStyleColumnName, dynamic title = '', [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showPeriodButtons = defaultShowPeriodButtons, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) initialFirstWork, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) initialLastWork, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) initialDate, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showAsWeek, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showNavigation, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = defaultPadding})
 
     
 
-[SmeupCalendarModel.fromMap](../smeup_models_widgets_smeup_calendar_model/SmeupCalendarModel/SmeupCalendarModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupCalendarModel.fromMap](../smeup_models_widgets_smeup_calendar_model/SmeupCalendarModel/SmeupCalendarModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
 
     
 
 
 ## Properties
+
+##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)
+
+
+
+   
+_read / write, inherited_
+
+
 
 ##### [data](../smeup_models_widgets_smeup_model/SmeupModel/data.md) &#8596; dynamic
 
@@ -250,6 +259,15 @@ _read / write, inherited_
 
 A representation of the runtime type of the object.   
 _read-only, inherited_
+
+
+
+##### [scaffoldKey](../smeup_models_widgets_smeup_model/SmeupModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+
+
+
+   
+_read / write, inherited_
 
 
 

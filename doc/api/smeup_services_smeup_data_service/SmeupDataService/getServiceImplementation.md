@@ -29,7 +29,8 @@ static SmeupDataServiceInterface getServiceImplementation(String name) {
         ' The server implementation \'$name\' does not exist, will be used SmeupDefaultDataService',
         logType: LogType.warning);
 
-    return SmeupDefaultDataService();
+    return SmeupDefaultDataService(
+        SmeupConfigurationService.getDefaultServiceDataTransformer());
   } else {
     return services[name];
   }

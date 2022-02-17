@@ -54,16 +54,25 @@
 
 ## Constructors
 
-[SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel/SmeupModel.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) title, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) id, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type})
+[SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel/SmeupModel.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) title, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) id, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type})
 
     
 
-[SmeupModel.fromMap](../smeup_models_widgets_smeup_model/SmeupModel/SmeupModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupModel.fromMap](../smeup_models_widgets_smeup_model/SmeupModel/SmeupModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
 
     
 
 
 ## Properties
+
+##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)
+
+
+
+   
+_read / write_
+
+
 
 ##### [data](../smeup_models_widgets_smeup_model/SmeupModel/data.md) &#8596; dynamic
 
@@ -179,6 +188,15 @@ _read / write_
 
 A representation of the runtime type of the object.   
 _read-only, inherited_
+
+
+
+##### [scaffoldKey](../smeup_models_widgets_smeup_model/SmeupModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+
+
+
+   
+_read / write_
 
 
 

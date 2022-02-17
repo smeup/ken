@@ -62,19 +62,23 @@ Widget build(BuildContext context) {
   var start = DateTime.now();
 
   return FutureBuilder<Widget>(
+    key: Key('smeupWaitFun_${formKey.hashCode}'),
     future: _getWidget(3000, start),
     builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
         return Stack(
           children: [
-            target,
-            SmeupSplash(
-              scaffoldKey,
-              formKey,
-              color: splashColor,
+            Container(
+              color: SmeupConfigurationService.getTheme().splashColor,
             ),
+            target,
+            SmeupSplash(scaffoldKey, formKey,
+                color: splashColor,
+                id: 'SmeupSplash_${scaffoldKey.hashCode.toString()}'),
             SmeupProgressIndicator(scaffoldKey, formKey,
-                color: loaderColor, circularTrackColor: circularTrackColor),
+                color: loaderColor,
+                circularTrackColor: circularTrackColor,
+                id: 'SmeupProgressIndicator_${scaffoldKey.hashCode.toString()}'),
           ],
         );
       } else {

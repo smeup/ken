@@ -21,7 +21,7 @@ SmeupScreenModel([BuildContext](https://api.flutter.dev/flutter/widgets/BuildCon
 SmeupScreenModel(this.context, SmeupFun smeupFun,
     {this.isDialog = defaultIsDialog,
     this.backButtonVisible = defaultBackButtonVisible})
-    : super(null) {
+    : super(null, null, null) {
   this.smeupFun = smeupFun;
 }
 ```

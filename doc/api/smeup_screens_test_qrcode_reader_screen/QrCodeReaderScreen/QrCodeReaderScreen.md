@@ -1,0 +1,24 @@
+
+
+
+# QrCodeReaderScreen constructor
+
+
+
+
+
+
+
+QrCodeReaderScreen()
+
+
+
+
+
+
+
+
+
+
+
+

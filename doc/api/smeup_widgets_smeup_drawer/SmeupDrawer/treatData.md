@@ -45,11 +45,24 @@ dynamic treatData(SmeupModel model) {
           action: element['route'] == null
               ? null
               : (context) {
-                  final smeupFun = SmeupFun(element['route'], formKey);
+                  String route = element['route'];
+                  if (route.trimLeft().toUpperCase().startsWith('F(')) {
+                    SmeupDynamismService.run([
+                      {"event": "click", "exec": "${element['route']}"}
+                    ], context, 'click', scaffoldKey, formKey);
+                  } else {
+                    Navigator.of(context).pushNamed(route);
+                  }
+
+                  /*
+
+                  final smeupFun = SmeupFun(
+                      element['route'], formKey, scaffoldKey, context);
 
                   Navigator.of(context).pushNamed(
                       SmeupDynamicScreen.routeName,
                       arguments: {'isDialog': false, 'smeupFun': smeupFun});
+                  */
                 },
           group: element['group'] ?? '',
           groupFontSize:

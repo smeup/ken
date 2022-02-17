@@ -20,7 +20,7 @@
 ## Implementation
 
 ```dart
-static const DEFAULD_TIMEOUT = 20000;
+static const DEFAULD_TIMEOUT = 5000;
 
 
 ```

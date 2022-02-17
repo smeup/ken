@@ -29,11 +29,11 @@
 
 ## Constructors
 
-[SmeupLabelModel](../smeup_models_widgets_smeup_label_model/SmeupLabelModel/SmeupLabelModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) iconSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) iconColor, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) valueColName = defaultValColName, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = defaultPadding, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html) align = defaultAlign, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) backColorColName = '', [int](https://api.flutter.dev/flutter/dart-core/int-class.html) iconData = 0, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) iconColname = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) fontColorColName = '', dynamic title = ''})
+[SmeupLabelModel](../smeup_models_widgets_smeup_label_model/SmeupLabelModel/SmeupLabelModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) iconSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) iconColor, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) valueColName = defaultValColName, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = defaultPadding, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html) align = defaultAlign, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) backColorColName = '', [int](https://api.flutter.dev/flutter/dart-core/int-class.html) iconData = 0, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) iconColname = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) fontColorColName = '', dynamic title = ''})
 
     
 
-[SmeupLabelModel.fromMap](../smeup_models_widgets_smeup_label_model/SmeupLabelModel/SmeupLabelModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupLabelModel.fromMap](../smeup_models_widgets_smeup_label_model/SmeupLabelModel/SmeupLabelModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
 
     
 
@@ -64,6 +64,15 @@ _read / write_
 
    
 _read / write_
+
+
+
+##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)
+
+
+
+   
+_read / write, inherited_
 
 
 
@@ -271,6 +280,15 @@ _read / write, inherited_
 
 A representation of the runtime type of the object.   
 _read-only, inherited_
+
+
+
+##### [scaffoldKey](../smeup_models_widgets_smeup_model/SmeupModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+
+
+
+   
+_read / write, inherited_
 
 
 

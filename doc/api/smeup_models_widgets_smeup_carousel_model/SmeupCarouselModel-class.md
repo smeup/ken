@@ -29,11 +29,11 @@
 
 ## Constructors
 
-[SmeupCarouselModel](../smeup_models_widgets_smeup_carousel_model/SmeupCarouselModel/SmeupCarouselModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) autoPlay = false, dynamic title = ''})
+[SmeupCarouselModel](../smeup_models_widgets_smeup_carousel_model/SmeupCarouselModel/SmeupCarouselModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) autoPlay = false, dynamic title = ''})
 
     
 
-[SmeupCarouselModel.fromMap](../smeup_models_widgets_smeup_carousel_model/SmeupCarouselModel/SmeupCarouselModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupCarouselModel.fromMap](../smeup_models_widgets_smeup_carousel_model/SmeupCarouselModel/SmeupCarouselModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
 
     
 
@@ -46,6 +46,15 @@
 
    
 _read / write_
+
+
+
+##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)
+
+
+
+   
+_read / write, inherited_
 
 
 
@@ -172,6 +181,15 @@ _read / write, inherited_
 
 A representation of the runtime type of the object.   
 _read-only, inherited_
+
+
+
+##### [scaffoldKey](../smeup_models_widgets_smeup_model/SmeupModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+
+
+
+   
+_read / write, inherited_
 
 
 

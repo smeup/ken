@@ -9,7 +9,7 @@
 
 
 
-SmeupModel.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+SmeupModel.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
 
 
 
@@ -18,13 +18,14 @@ SmeupModel.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Map-class.htm
 ## Implementation
 
 ```dart
-SmeupModel.fromMap(Map<String, dynamic> jsonMap, this.formKey) {
+SmeupModel.fromMap(Map<String, dynamic> jsonMap, this.formKey,
+    this.scaffoldKey, this.context) {
   var myJsonMap = _getNewLinkedHashMap();
   _setLinkedHashMap(jsonMap, myJsonMap);
 
   type = myJsonMap['type'];
   dynamisms = myJsonMap['dynamisms'];
-  smeupFun = SmeupFun(myJsonMap['fun'], formKey);
+  smeupFun = SmeupFun(myJsonMap['fun'], formKey, scaffoldKey, context);
 
   switch (myJsonMap['load']) {
     case 'D':

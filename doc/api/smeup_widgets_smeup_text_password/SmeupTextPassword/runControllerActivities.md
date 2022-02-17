@@ -53,6 +53,9 @@ runControllerActivities(SmeupModel model) {
   underline = m.underline;
   autoFocus = m.autoFocus;
   valueField = m.valueField;
+  iconSize = m.iconSize;
+  iconColor = m.iconColor;
+  buttonBackColor = m.buttonBackColor;
 
   data = treatData(m);
 }

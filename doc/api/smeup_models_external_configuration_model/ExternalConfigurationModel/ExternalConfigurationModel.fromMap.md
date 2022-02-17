@@ -21,7 +21,7 @@ ExternalConfigurationModel.fromMap(dynamic json)
 ExternalConfigurationModel.fromMap(dynamic json) {
   organizationId = json['organizationId'] ?? '';
   description = json['description'] ?? '';
-  theme = json['theme'] ?? 'tony_blue.json';
+  theme = json['theme'] ?? 'smeup_theme.json';
   showLoader = json['showLoader'] ?? false;
   defaultServiceEndpoint = json['defaultServiceEndpoint'] ?? '';
   httpServiceEndpoint = json['httpServiceEndpoint'] ?? '';

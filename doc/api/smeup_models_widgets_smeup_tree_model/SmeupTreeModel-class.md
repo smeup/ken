@@ -29,16 +29,25 @@
 
 ## Constructors
 
-[SmeupTreeModel](../smeup_models_widgets_smeup_tree_model/SmeupTreeModel/SmeupTreeModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, dynamic title = '', [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) labelFontSize = defaultLabelFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) labelBackColor = defaultLabelBackColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) labelFontColor = defaultLabelFontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) labelFontbold = defaultLabelFontbold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) labelVerticalSpacing = defaultLabelVerticalSpacing, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) labelHeight = defaultLabelHeight, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) parentFontSize = defaultParentFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) parentBackColor = defaultParentBackColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) parentFontColor = defaultParentFontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) parentFontbold = defaultParentFontbold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) parentVerticalSpacing = defaultParentVerticalSpacing, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) parentHeight = defaultParentHeight})
+[SmeupTreeModel](../smeup_models_widgets_smeup_tree_model/SmeupTreeModel/SmeupTreeModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, dynamic title = '', [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) labelFontSize = defaultLabelFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) labelBackColor = defaultLabelBackColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) labelFontColor = defaultLabelFontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) labelFontbold = defaultLabelFontbold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) labelVerticalSpacing = defaultLabelVerticalSpacing, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) labelHeight = defaultLabelHeight, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) parentFontSize = defaultParentFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) parentBackColor = defaultParentBackColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) parentFontColor = defaultParentFontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) parentFontbold = defaultParentFontbold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) parentVerticalSpacing = defaultParentVerticalSpacing, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) parentHeight = defaultParentHeight})
 
     
 
-[SmeupTreeModel.fromMap](../smeup_models_widgets_smeup_tree_model/SmeupTreeModel/SmeupTreeModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupTreeModel.fromMap](../smeup_models_widgets_smeup_tree_model/SmeupTreeModel/SmeupTreeModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
 
     
 
 
 ## Properties
+
+##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)
+
+
+
+   
+_read / write, inherited_
+
+
 
 ##### [data](../smeup_models_widgets_smeup_model/SmeupModel/data.md) &#8596; dynamic
 
@@ -271,6 +280,15 @@ _read / write_
 
 A representation of the runtime type of the object.   
 _read-only, inherited_
+
+
+
+##### [scaffoldKey](../smeup_models_widgets_smeup_model/SmeupModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+
+
+
+   
+_read / write, inherited_
 
 
 

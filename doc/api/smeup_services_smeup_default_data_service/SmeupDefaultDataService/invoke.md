@@ -51,12 +51,10 @@ Future<SmeupServiceResponse> invoke(SmeupFun smeupFun) async {
 
     bool isValid = SmeupDataService.isValid(response.statusCode);
 
-    var responseData = _getResponseData(smeupFun, response, isValid);
-
     return SmeupServiceResponse(
         isValid,
         Response(
-            data: responseData,
+            data: response.data,
             statusCode: response.statusCode,
             requestOptions: null));
   } catch (e) {

@@ -53,7 +53,7 @@ _read-only, inherited_
 
 ## Methods
 
-##### [getSections](../smeup_models_widgets_smeup_model_mixin/SmeupModelMixin/getSections.md)(dynamic jsonMap, dynamic sectionName, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) autoAdaptHeight, [SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md) parent) [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupSectionModel](../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.md)>
+##### [getSections](../smeup_models_widgets_smeup_model_mixin/SmeupModelMixin/getSections.md)(dynamic jsonMap, dynamic sectionName, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) autoAdaptHeight, [SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md) parent) [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupSectionModel](../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.md)>
 
 
 

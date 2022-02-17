@@ -18,7 +18,7 @@ SmeupImageDataService()
 ## Implementation
 
 ```dart
-SmeupImageDataService();
+SmeupImageDataService() : super(NullTransformer());
 ```
 
 

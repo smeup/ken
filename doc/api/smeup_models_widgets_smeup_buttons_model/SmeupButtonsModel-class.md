@@ -29,11 +29,11 @@
 
 ## Constructors
 
-[SmeupButtonsModel](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/SmeupButtonsModel.md) ({dynamic id, dynamic type, dynamic title = '', [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) borderColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderRadius, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) elevation, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) iconSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) iconColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [MainAxisAlignment](https://api.flutter.dev/flutter/rendering/MainAxisAlignment.html) position = defaultPosition, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html) align = defaultAlign, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = defaultPadding, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) valueField, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) iconData = 0, [WidgetOrientation](../smeup_models_widgets_smeup_model/WidgetOrientation.md) orientation = defaultOrientation, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) isLink = defaultIsLink, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) innerSpace = defaultInnerSpace})
+[SmeupButtonsModel](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/SmeupButtonsModel.md) ({dynamic id, dynamic type, dynamic title = '', [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) borderColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderRadius, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) elevation, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) iconSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) iconColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [MainAxisAlignment](https://api.flutter.dev/flutter/rendering/MainAxisAlignment.html) position = defaultPosition, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html) align = defaultAlign, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = defaultPadding, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) valueField, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) iconData = 0, [WidgetOrientation](../smeup_models_widgets_smeup_model/WidgetOrientation.md) orientation = defaultOrientation, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) isLink = defaultIsLink, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) innerSpace = defaultInnerSpace})
 
     
 
-[SmeupButtonsModel.fromMap](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/SmeupButtonsModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupButtonsModel.fromMap](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/SmeupButtonsModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
 
     
 
@@ -82,6 +82,15 @@ _read / write_
 
    
 _read / write_
+
+
+
+##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)
+
+
+
+   
+_read / write, inherited_
 
 
 
@@ -316,6 +325,15 @@ _read / write_
 
 A representation of the runtime type of the object.   
 _read-only, inherited_
+
+
+
+##### [scaffoldKey](../smeup_models_widgets_smeup_model/SmeupModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+
+
+
+   
+_read / write, inherited_
 
 
 

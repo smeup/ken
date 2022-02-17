@@ -19,7 +19,9 @@ SmeupWaitFun([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class
 
 ```dart
 SmeupWaitFun(this.scaffoldKey, this.formKey, this.target,
-    {this.splashColor, this.loaderColor, this.circularTrackColor});
+    {this.splashColor, this.loaderColor, this.circularTrackColor}) {
+  SmeupWaitModel.setDefaults(this);
+}
 ```
 
 

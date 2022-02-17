@@ -78,15 +78,6 @@ _inherited_
 
 ## Static Methods
 
-##### [manageResponseMessage](../smeup_services_smeup_dynamism_service/SmeupDynamismService/manageResponseMessage.md)([BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, dynamic response, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey) dynamic
-
-
-
-   
-
-
-
-
 ##### [replaceFunVariables](../smeup_services_smeup_dynamism_service/SmeupDynamismService/replaceFunVariables.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) funString, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 

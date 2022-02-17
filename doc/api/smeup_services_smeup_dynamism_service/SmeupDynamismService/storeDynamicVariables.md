@@ -35,7 +35,7 @@ static void storeDynamicVariables(
         if (key == 'tipo' || key == 't') key = 'T1';
         if (key == 'parametro' || key == 'p') key = 'P1';
         if (key == 'codice' || key == 'k') key = 'K1';
-        if (key == 'testo') key = 'Tx';
+        if (key == 'testo' || key == 'value') key = 'Tx';
         if (key == 'nome') key = 'Nm';
 
         String value = '';

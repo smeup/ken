@@ -20,7 +20,7 @@
 ## Implementation
 
 ```dart
-static const bool defaultShowPeriodButtons = true;
+static const bool defaultShowPeriodButtons = false;
 
 
 ```

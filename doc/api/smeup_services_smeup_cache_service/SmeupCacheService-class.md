@@ -179,7 +179,7 @@ _read / write_
 
 ## Static Methods
 
-##### [addElement](../smeup_services_smeup_cache_service/SmeupCacheService/addElement.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key, [AsyncCache](https://pub.dev/documentation/async/2.8.1/async/AsyncCache-class.html)&lt;[List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>> value) dynamic
+##### [addElement](../smeup_services_smeup_cache_service/SmeupCacheService/addElement.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key, [AsyncCache](https://pub.dev/documentation/async/2.8.2/async/AsyncCache-class.html)&lt;[List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>> value) dynamic
 
 
 
@@ -197,7 +197,7 @@ _read / write_
 
 
 
-##### [createElement](../smeup_services_smeup_cache_service/SmeupCacheService/createElement.md)([Duration](https://api.flutter.dev/flutter/dart-core/Duration-class.html) _offLineExpireTime) [AsyncCache](https://pub.dev/documentation/async/2.8.1/async/AsyncCache-class.html)&lt;[List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>>
+##### [createElement](../smeup_services_smeup_cache_service/SmeupCacheService/createElement.md)([Duration](https://api.flutter.dev/flutter/dart-core/Duration-class.html) _offLineExpireTime) [AsyncCache](https://pub.dev/documentation/async/2.8.2/async/AsyncCache-class.html)&lt;[List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>>
 
 
 
@@ -215,7 +215,7 @@ _read / write_
 
 
 
-##### [getElement](../smeup_services_smeup_cache_service/SmeupCacheService/getElement.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key) [AsyncCache](https://pub.dev/documentation/async/2.8.1/async/AsyncCache-class.html)&lt;[List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>>
+##### [getElement](../smeup_services_smeup_cache_service/SmeupCacheService/getElement.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key) [AsyncCache](https://pub.dev/documentation/async/2.8.2/async/AsyncCache-class.html)&lt;[List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>>
 
 
 

@@ -118,7 +118,7 @@ _inherited_
 
 
 
-##### [getData](../smeup_daos_smeup_dao/SmeupDao/getData.md)([SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md) model) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;void>
+##### [getData](../smeup_daos_smeup_dao/SmeupDao/getData.md)([SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md) model, {[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) executeDecrementDataFetch = true}) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;void>
 
 
 

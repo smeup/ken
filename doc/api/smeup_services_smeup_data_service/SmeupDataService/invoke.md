@@ -39,20 +39,37 @@ static Future<SmeupServiceResponse> invoke(SmeupFun smeupFun,
     funString =
         SmeupDynamismService.replaceFunVariables(funString, smeupFun.formKey);
     final fun = jsonDecode(funString);
-    newSmeupFun = SmeupFun(fun, smeupFun.formKey);
+    newSmeupFun = SmeupFun(
+        fun, smeupFun.formKey, smeupFun.scaffoldKey, smeupFun.context);
   }
 
+  // Read response from service
+
+  SmeupServiceResponse response;
+
   if (smeupDataService is SmeupDefaultDataService)
-    return await smeupDataService.invoke(newSmeupFun);
+    response = await smeupDataService.invoke(newSmeupFun);
   else if (smeupDataService is SmeupHttpDataService)
-    return await smeupDataService.invoke(newSmeupFun,
+    response = await smeupDataService.invoke(newSmeupFun,
         httpServiceMethod: httpServiceMethod,
         httpServiceUrl: httpServiceUrl,
         httpServiceBody: httpServiceBody,
         httpServiceContentType: httpServiceContentType,
         headers: headers);
   else
-    return await smeupDataService.invoke(newSmeupFun);
+    response = await smeupDataService.invoke(newSmeupFun);
+
+  // Apply transformation to service response (only on success)
+  if (response.succeded &&
+      smeupDataService.getTransformer() is NullTransformer == false) {
+    var data = response.result.data;
+    if (data is Map) {
+      response.result.data =
+          smeupDataService.getTransformer().transform(smeupFun, data);
+    }
+  }
+
+  return response;
 }
 ```
 

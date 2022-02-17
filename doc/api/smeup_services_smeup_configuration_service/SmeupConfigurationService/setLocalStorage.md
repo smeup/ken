@@ -29,8 +29,8 @@ static setLocalStorage() async {
     // SharedPreferences.setMockInitialValues(
     //     <String, dynamic>{'DEFAULT': '', 'HTTP': ''});
     _localStorge = await SharedPreferences.getInstance();
-    _localStorge.setString('DEFAULT', '');
-    _localStorge.setString('HTTP', '');
+    //_localStorge.setString('DEFAULT', '');
+    //_localStorge.setString('HTTP', '');
   } catch (e) {
     SmeupLogService.writeDebugMessage('setLocalStorage failed: $e');
   }

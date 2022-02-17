@@ -28,7 +28,7 @@
 
 ## Constructors
 
-[SmeupSection](../smeup_widgets_smeup_section/SmeupSection/SmeupSection.md) ([SmeupSectionModel](../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.md) smeupSectionModel, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupSection](../smeup_widgets_smeup_section/SmeupSection/SmeupSection.md) ([SmeupSectionModel](../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.md) smeupSectionModel, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, dynamic parentForm)
 
     
 
@@ -59,6 +59,15 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 Controls how one widget replaces another widget in the tree. [...](https://api.flutter.dev/flutter/widgets/Widget/key.html)  
 _final, inherited_
+
+
+
+##### [parentForm](../smeup_widgets_smeup_section/SmeupSection/parentForm.md) &#8594; dynamic
+
+
+
+   
+_final_
 
 
 

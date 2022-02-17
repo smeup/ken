@@ -29,7 +29,7 @@
 
 ## Constructors
 
-[SmeupSectionModel.fromMap](../smeup_models_widgets_smeup_section_model/SmeupSectionModel/SmeupSectionModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md) parent)
+[SmeupSectionModel.fromMap](../smeup_models_widgets_smeup_section_model/SmeupSectionModel/SmeupSectionModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md) parent, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey)
 
     
 
@@ -51,6 +51,15 @@ _read / write_
 
    
 _read / write_
+
+
+
+##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)
+
+
+
+   
+_read / write, inherited_
 
 
 
@@ -198,6 +207,15 @@ _read-only, inherited_
 
 
 
+##### [scaffoldKey](../smeup_models_widgets_smeup_model/SmeupModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+
+
+
+   
+_read / write, inherited_
+
+
+
 ##### [selectedTabColName](../smeup_models_widgets_smeup_section_model/SmeupSectionModel/selectedTabColName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
@@ -309,7 +327,7 @@ _read / write_
 
 
 
-##### [getSections](../smeup_models_widgets_smeup_model_mixin/SmeupModelMixin/getSections.md)(dynamic jsonMap, dynamic sectionName, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) autoAdaptHeight, [SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md) parent) [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupSectionModel](../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.md)>
+##### [getSections](../smeup_models_widgets_smeup_model_mixin/SmeupModelMixin/getSections.md)(dynamic jsonMap, dynamic sectionName, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) autoAdaptHeight, [SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md) parent) [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupSectionModel](../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.md)>
 
 
 

@@ -29,16 +29,25 @@
 
 ## Constructors
 
-[SmeupInputPanelModel](../smeup_models_widgets_smeup_inputpanel_model/SmeupInputPanelModel/SmeupInputPanelModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, dynamic title = '', [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = defaultPadding, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize = defaultFontSize})
+[SmeupInputPanelModel](../smeup_models_widgets_smeup_inputpanel_model/SmeupInputPanelModel/SmeupInputPanelModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, dynamic title = '', [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = defaultPadding, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize = defaultFontSize})
 
     
 
-[SmeupInputPanelModel.fromMap](../smeup_models_widgets_smeup_inputpanel_model/SmeupInputPanelModel/SmeupInputPanelModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupInputPanelModel.fromMap](../smeup_models_widgets_smeup_inputpanel_model/SmeupInputPanelModel/SmeupInputPanelModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
 
     
 
 
 ## Properties
+
+##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)
+
+
+
+   
+_read / write, inherited_
+
+
 
 ##### [data](../smeup_models_widgets_smeup_model/SmeupModel/data.md) &#8596; dynamic
 
@@ -91,6 +100,15 @@ _read / write, inherited_
 
 The hash code for this object. [...](https://api.flutter.dev/flutter/dart-core/Object/hashCode.html)  
 _read-only, inherited_
+
+
+
+##### [height](../smeup_models_widgets_smeup_inputpanel_model/SmeupInputPanelModel/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+
+
+
+   
+_read / write_
 
 
 
@@ -193,6 +211,15 @@ _read-only, inherited_
 
 
 
+##### [scaffoldKey](../smeup_models_widgets_smeup_model/SmeupModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+
+
+
+   
+_read / write, inherited_
+
+
+
 ##### [serviceStatusCode](../smeup_models_widgets_smeup_model/SmeupModel/serviceStatusCode.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
 
 
@@ -256,6 +283,15 @@ _read / write, inherited_
 
 
 
+##### [width](../smeup_models_widgets_smeup_inputpanel_model/SmeupInputPanelModel/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+
+
+
+   
+_read / write_
+
+
+
 
 ## Methods
 
@@ -303,7 +339,25 @@ _inherited_
 
 
 
+##### [defaultHeight](../smeup_models_widgets_smeup_inputpanel_model/SmeupInputPanelModel/defaultHeight-constant.md) const [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+
+
+
+   
+
+
+
+
 ##### [defaultPadding](../smeup_models_widgets_smeup_inputpanel_model/SmeupInputPanelModel/defaultPadding-constant.md) const [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)
+
+
+
+   
+
+
+
+
+##### [defaultWidth](../smeup_models_widgets_smeup_inputpanel_model/SmeupInputPanelModel/defaultWidth-constant.md) const [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
 
 
 

@@ -34,7 +34,7 @@
 
 ## Constructors
 
-[SmeupInputPanel](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/SmeupInputPanel.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type = 'INP', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) title = '', [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = SmeupInputPanelModel.defaultPadding, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize = SmeupInputPanelModel.defaultFontSize, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupInputPanelField](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField-class.md)> data, void onSubmit([List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupInputPanelField](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField-class.md)>)})
+[SmeupInputPanel](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/SmeupInputPanel.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type = 'INP', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) title = '', [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = SmeupInputPanelModel.defaultPadding, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize = SmeupInputPanelModel.defaultFontSize, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = SmeupInputPanelModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = SmeupInputPanelModel.defaultHeight, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupInputPanelField](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField-class.md)> data, void onSubmit([List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupInputPanelField](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField-class.md)>)})
 
     
 
@@ -78,6 +78,15 @@ _read / write_
 
 The hash code for this object. [...](https://api.flutter.dev/flutter/widgets/Widget/hashCode.html)  
 _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant.html), read-only, inherited_
+
+
+
+##### [height](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+
+
+
+   
+_read / write_
 
 
 
@@ -154,6 +163,15 @@ _read / write_
 
 
 ##### [type](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+
+
+
+   
+_read / write_
+
+
+
+##### [width](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
 
 
 

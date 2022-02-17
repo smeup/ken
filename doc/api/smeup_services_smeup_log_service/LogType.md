@@ -11,6 +11,11 @@
 
 
 
+**Inheritance**
+
+- [Object](https://api.flutter.dev/flutter/dart-core/Object-class.html)
+- [Enum](https://api.flutter.dev/flutter/dart-core/Enum-class.html)
+- LogType
 
 
 ## Constants
@@ -115,8 +120,8 @@ _inherited_
 
 
 
-A string representation of this object. [...](../smeup_services_smeup_log_service/LogType/toString.md)  
-_override_
+   
+
 
 
 

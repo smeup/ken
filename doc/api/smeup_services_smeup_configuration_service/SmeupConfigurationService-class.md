@@ -104,6 +104,33 @@ _read / write_
 
 
 
+##### [defaultAutoAdaptHeight](../smeup_services_smeup_configuration_service/SmeupConfigurationService/defaultAutoAdaptHeight.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+
+
+
+   
+_read / write_
+
+
+
+##### [defaultServiceDataTransformer](../smeup_services_smeup_configuration_service/SmeupConfigurationService/defaultServiceDataTransformer.md) &#8596; [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)
+
+
+
+   
+_read / write_
+
+
+
+##### [httpServiceDataTransformer](../smeup_services_smeup_configuration_service/SmeupConfigurationService/httpServiceDataTransformer.md) &#8596; [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)
+
+
+
+   
+_read / write_
+
+
+
 ##### [imagesPath](../smeup_services_smeup_configuration_service/SmeupConfigurationService/imagesPath.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
@@ -132,15 +159,6 @@ _read / write_
 
 
 ##### [isLogEnabled](../smeup_services_smeup_configuration_service/SmeupConfigurationService/isLogEnabled.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
-
-
-
-   
-_read / write_
-
-
-
-##### [isLoginEnabled](../smeup_services_smeup_configuration_service/SmeupConfigurationService/isLoginEnabled.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
 
 
 
@@ -197,6 +215,15 @@ _read / write_
 
 
 
+##### [getDefaultServiceDataTransformer](../smeup_services_smeup_configuration_service/SmeupConfigurationService/getDefaultServiceDataTransformer.md)() dynamic
+
+
+
+   
+
+
+
+
 ##### [getDefaultServiceEndpoint](../smeup_services_smeup_configuration_service/SmeupConfigurationService/getDefaultServiceEndpoint.md)() dynamic
 
 
@@ -207,6 +234,15 @@ _read / write_
 
 
 ##### [getHolidays](../smeup_services_smeup_configuration_service/SmeupConfigurationService/getHolidays.md)() [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html), [List](https://api.flutter.dev/flutter/dart-core/List-class.html)>
+
+
+
+   
+
+
+
+
+##### [getHttpServiceDataTransformer](../smeup_services_smeup_configuration_service/SmeupConfigurationService/getHttpServiceDataTransformer.md)() dynamic
 
 
 
@@ -251,7 +287,7 @@ _read / write_
 
 
 
-##### [init](../smeup_services_smeup_configuration_service/SmeupConfigurationService/init.md)([BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, {[LogType](../smeup_services_smeup_log_service/LogType.md) logLevel = LogType.none, dynamic localizationService, [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), [SmeupDataServiceInterface](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface-class.md)> customDataServices, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) enableCache = false, [AuthenticationModel](../smeup_models_authentication_model/AuthenticationModel-class.md) authenticationModel, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) appBarImage = ''}) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;void>
+##### [init](../smeup_services_smeup_configuration_service/SmeupConfigurationService/init.md)([BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, {[LogType](../smeup_services_smeup_log_service/LogType.md) logLevel = LogType.none, dynamic localizationService, [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), [SmeupDataServiceInterface](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface-class.md)> customDataServices, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) enableCache = false, [AuthenticationModel](../smeup_models_authentication_model/AuthenticationModel-class.md) authenticationModel, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) appBarImage = '', [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) defaultServiceDataTransformer, [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) httpServiceDataTransformer, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) defaultAutoAdaptHeight = true}) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;void>
 
 
 

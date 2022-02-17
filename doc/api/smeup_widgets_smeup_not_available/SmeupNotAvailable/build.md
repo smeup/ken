@@ -63,7 +63,7 @@ Widget build(BuildContext context) {
     padding: EdgeInsets.all(5),
     child: Center(
       child: Image.asset(
-        "assets/images/not_available.png",
+        "packages/ken/assets/images/not_available.png",
         height: height,
         width: width,
       ),

@@ -72,7 +72,7 @@ static Future<void> run(
         return;
       }
 
-      SmeupFun smeupFunExec = SmeupFun(exec, formKey);
+      SmeupFun smeupFunExec = SmeupFun(exec, formKey, scaffoldKey, context);
       String notify = smeupFunExec.fun['fun']['NOTIFY'];
 
       switch (smeupFunExec.fun['fun']['component']) {
@@ -113,8 +113,8 @@ static Future<void> run(
           final smeupServiceResponse =
               await SmeupDataService.invoke(smeupFunExec);
 
-          await manageResponseMessage(
-              context, smeupServiceResponse.result, scaffoldKey);
+          await SmeupMessageDataService.manageResponseMessage(
+              context, smeupServiceResponse.result);
           if (smeupServiceResponse.succeded) {
             _manageNotify(notify, context, scaffoldKey.hashCode);
           } else {

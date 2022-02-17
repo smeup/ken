@@ -27,6 +27,7 @@ SmeupWait(this.scaffoldKey, this.formKey,
     this.circularTrackColor})
     : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
   id = SmeupUtilities.getWidgetId(type, id);
+  SmeupWaitModel.setDefaults(this);
 }
 ```
 
