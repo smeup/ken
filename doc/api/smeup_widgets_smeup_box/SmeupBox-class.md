@@ -28,7 +28,7 @@
 
 ## Constructors
 
-[SmeupBox](../smeup_widgets_smeup_box/SmeupBox/SmeupBox.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) index, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) isDynamic = false, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) selectedRow, [List](https://api.flutter.dev/flutter/dart-core/List-class.html) columns, dynamic data, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) onRefresh, dynamic dynamisms, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showLoader, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) layout, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) onItemTap, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) dismissEnabled, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showSelection, [CardTheme](https://api.flutter.dev/flutter/material/CardTheme-class.html) cardTheme, [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html) textStyle, [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html) captionStyle})
+[SmeupBox](../smeup_widgets_smeup_box/SmeupBox/SmeupBox.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) index, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) isDynamic = false, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) selectedRow, [List](https://api.flutter.dev/flutter/dart-core/List-class.html) columns, dynamic data, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) onRefresh, dynamic dynamisms, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showLoader, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) layout, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) onItemTap, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) dismissEnabled, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showSelection, [CardTheme](https://api.flutter.dev/flutter/material/CardTheme-class.html) cardTheme, [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html) textStyle, [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html) captionStyle, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) onSizeChanged})
 
     
 
@@ -189,6 +189,15 @@ _final_
 
 
 ##### [onRefresh](../smeup_widgets_smeup_box/SmeupBox/onRefresh.md) &#8594; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+
+
+
+   
+_final_
+
+
+
+##### [onSizeChanged](../smeup_widgets_smeup_box/SmeupBox/onSizeChanged.md) &#8594; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
 
 
 

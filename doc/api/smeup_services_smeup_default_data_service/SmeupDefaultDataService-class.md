@@ -13,10 +13,12 @@
 
 
 
+**Inheritance**
 
-**Implemented types**
-
+- [Object](https://api.flutter.dev/flutter/dart-core/Object-class.html)
 - [SmeupDataServiceInterface](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface-class.md)
+- SmeupDefaultDataService
+
 
 
 
@@ -24,7 +26,7 @@
 
 ## Constructors
 
-[SmeupDefaultDataService](../smeup_services_smeup_default_data_service/SmeupDefaultDataService/SmeupDefaultDataService.md) ()
+[SmeupDefaultDataService](../smeup_services_smeup_default_data_service/SmeupDefaultDataService/SmeupDefaultDataService.md) ([SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer)
 
     
 
@@ -67,8 +69,26 @@ _read / write_
 
 
 
+##### [transformer](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface/transformer.md) &#8596; [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)
+
+
+
+   
+_read / write, inherited_
+
+
+
 
 ## Methods
+
+##### [getTransformer](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface/getTransformer.md)() [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)
+
+
+
+   
+_inherited_
+
+
 
 ##### [invoke](../smeup_services_smeup_default_data_service/SmeupDefaultDataService/invoke.md)([SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
 

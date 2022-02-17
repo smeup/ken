@@ -29,11 +29,11 @@
 
 ## Constructors
 
-[SmeupDashboardModel](../smeup_models_widgets_smeup_dashboard_model/SmeupDashboardModel/SmeupDashboardModel.md) ({dynamic id, dynamic type, dynamic formKey, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) captionFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionFontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) iconSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) iconColor, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) valueColName = defaultValueColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) umColName = defaultUmColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) textColName = defaultTextColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) iconColName = defaultIconColName, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = defaultPadding, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) selectLayout = defaultSelectLayout, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) forceText = defaultForceText, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) forceValue = defaultForceValue, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) forceUm = defaultForceUm, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) forceIcon = defaultForceIcon, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) numberFormat = defaultNumberFormat, dynamic title = ''})
+[SmeupDashboardModel](../smeup_models_widgets_smeup_dashboard_model/SmeupDashboardModel/SmeupDashboardModel.md) ({dynamic id, dynamic type, dynamic formKey, dynamic scaffoldKey, dynamic context, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) captionFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionFontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) iconSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) iconColor, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) valueColName = defaultValueColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) umColName = defaultUmColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) textColName = defaultTextColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) iconColName = defaultIconColName, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = defaultPadding, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) selectLayout = defaultSelectLayout, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) forceText = defaultForceText, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) forceValue = defaultForceValue, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) forceUm = defaultForceUm, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) forceIcon = defaultForceIcon, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) numberFormat = defaultNumberFormat, dynamic title = ''})
 
     
 
-[SmeupDashboardModel.fromMap](../smeup_models_widgets_smeup_dashboard_model/SmeupDashboardModel/SmeupDashboardModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupDashboardModel.fromMap](../smeup_models_widgets_smeup_dashboard_model/SmeupDashboardModel/SmeupDashboardModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
 
     
 
@@ -64,6 +64,15 @@ _read / write_
 
    
 _read / write_
+
+
+
+##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)
+
+
+
+   
+_read / write, inherited_
 
 
 
@@ -298,6 +307,15 @@ _read / write, inherited_
 
 A representation of the runtime type of the object.   
 _read-only, inherited_
+
+
+
+##### [scaffoldKey](../smeup_models_widgets_smeup_model/SmeupModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+
+
+
+   
+_read / write, inherited_
 
 
 

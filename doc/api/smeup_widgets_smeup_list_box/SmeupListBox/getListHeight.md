@@ -31,7 +31,7 @@ static double getListHeight(
       listboxHeight = (model.parent as SmeupSectionModel).height;
   } else {
     if (listboxHeight == 0)
-      listboxHeight = MediaQuery.of(context).size.height;
+      listboxHeight = SmeupUtilities.getDeviceInfo().safeHeight;
   }
   return listboxHeight;
 }

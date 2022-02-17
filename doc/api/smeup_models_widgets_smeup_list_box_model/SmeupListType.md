@@ -11,6 +11,11 @@
 
 
 
+**Inheritance**
+
+- [Object](https://api.flutter.dev/flutter/dart-core/Object-class.html)
+- [Enum](https://api.flutter.dev/flutter/dart-core/Enum-class.html)
+- SmeupListType
 
 
 ## Constants
@@ -97,8 +102,8 @@ _inherited_
 
 
 
-A string representation of this object. [...](../smeup_models_widgets_smeup_list_box_model/SmeupListType/toString.md)  
-_override_
+   
+
 
 
 

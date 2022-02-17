@@ -24,7 +24,7 @@
 
 ```dart
 Future<dynamic> doPoll({@required UntilPredicate until}) async {
-  SmeupFun smeupFun = SmeupFun(fun, formKey);
+  SmeupFun smeupFun = SmeupFun(fun, formKey, scaffoldKey, context);
   while (!_canceled) {
     await Future.delayed(interval);
     if (!_canceled) {

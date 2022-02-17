@@ -38,7 +38,7 @@
 
     
 
-[SmeupListBox.withController](../smeup_widgets_smeup_list_box/SmeupListBox/SmeupListBox.withController.md) ([SmeupListBoxModel](../smeup_models_widgets_smeup_list_box_model/SmeupListBoxModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupListBox.withController](../smeup_widgets_smeup_list_box/SmeupListBox/SmeupListBox.withController.md) ([SmeupListBoxModel](../smeup_models_widgets_smeup_list_box_model/SmeupListBoxModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, dynamic parentForm)
 
     
 
@@ -280,6 +280,15 @@ _read / write_
 
 
 ##### [padding](../smeup_widgets_smeup_list_box/SmeupListBox/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)
+
+
+
+   
+_read / write_
+
+
+
+##### [parentForm](../smeup_widgets_smeup_list_box/SmeupListBox/parentForm.md) &#8596; dynamic
 
 
 

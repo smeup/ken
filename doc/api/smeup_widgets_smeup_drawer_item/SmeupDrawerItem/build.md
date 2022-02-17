@@ -65,7 +65,13 @@ Widget build(BuildContext context) {
     if (action != null) {
       action(context);
     } else {
-      Navigator.of(context).pushNamed(route);
+      if (route.trimLeft().toUpperCase().startsWith('F(')) {
+        SmeupDynamismService.run([
+          {"event": "click", "exec": "$route"}
+        ], context, 'click', scaffoldKey, formKey);
+      } else {
+        Navigator.of(context).pushNamed(route);
+      }
     }
   };
 

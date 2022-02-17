@@ -123,6 +123,15 @@ _inherited_
 
 
 
+##### [getDeviceInfo](../smeup_services_smeup_utilities/SmeupUtilities/getDeviceInfo.md)() [SmeupDeviceInfo](../smeup_models_smeup_device_info/SmeupDeviceInfo-class.md)
+
+
+
+   
+
+
+
+
 ##### [getDouble](../smeup_services_smeup_utilities/SmeupUtilities/getDouble.md)(dynamic value) [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
 
 
@@ -168,7 +177,25 @@ _inherited_
 
 
 
+##### [getRandom](../smeup_services_smeup_utilities/SmeupUtilities/getRandom.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) type, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) id) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+
+
+
+   
+
+
+
+
 ##### [getWidgetId](../smeup_services_smeup_utilities/SmeupUtilities/getWidgetId.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) type, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) id) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+
+
+
+   
+
+
+
+
+##### [invokeScaffoldMessenger](../smeup_services_smeup_utilities/SmeupUtilities/invokeScaffoldMessenger.md)([BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) text) void
 
 
 

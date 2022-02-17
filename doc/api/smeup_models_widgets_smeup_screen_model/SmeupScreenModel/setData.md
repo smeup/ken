@@ -39,9 +39,10 @@ setData() async {
 
     data = smeupServiceResponse.result.data;
 
-    isDialog = SmeupUtilities.getBool(data['isDialog']) ?? defaultIsDialog;
-    backButtonVisible = SmeupUtilities.getBool(data['backButtonVisible']) ??
-        defaultBackButtonVisible;
+    if (data['isDialog'] != null)
+      isDialog = SmeupUtilities.getBool(data['isDialog']);
+    if (data['backButtonVisible'] != null)
+      backButtonVisible = SmeupUtilities.getBool(data['backButtonVisible']);
 
     try {
       serviceStatusCode = smeupServiceResponse.result.statusCode;

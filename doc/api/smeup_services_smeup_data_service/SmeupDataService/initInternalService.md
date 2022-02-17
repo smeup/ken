@@ -25,8 +25,10 @@ dynamic initInternalService
 ```dart
 static initInternalService() {
   SmeupDataService.services['*JSN'] = SmeupJsonDataService();
+  SmeupDataService.services['*MSG'] = SmeupMessageDataService();
   SmeupDataService.services['*IMAGE'] = SmeupImageDataService();
-  SmeupDataService.services['*HTTP'] = SmeupHttpDataService();
+  SmeupDataService.services['*HTTP'] = SmeupHttpDataService(
+      SmeupConfigurationService.getHttpServiceDataTransformer());
 }
 ```
 

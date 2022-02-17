@@ -28,11 +28,13 @@ static setDefaultServiceEndpoint() {
   final savedDefaultServiceEndpoint =
       _loadAltServiceEndpoint(ALT_SERVICE_ENDPOINTS.DEFAULT);
 
-  if (savedDefaultServiceEndpoint.isNotEmpty)
+  if (savedDefaultServiceEndpoint != null &&
+      savedDefaultServiceEndpoint.isNotEmpty)
     _defaultServiceEndpoint = savedDefaultServiceEndpoint;
   else
     _defaultServiceEndpoint = SmeupConfigurationService.getAppConfiguration()
-        .defaultServiceEndpoint;
+            ?.defaultServiceEndpoint ??
+        '';
 }
 ```
 

@@ -29,11 +29,11 @@
 
 ## Constructors
 
-[SmeupWaitModel](../smeup_models_widgets_smeup_wait_model/SmeupWaitModel/SmeupWaitModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) splashColor, dynamic title = ''})
+[SmeupWaitModel](../smeup_models_widgets_smeup_wait_model/SmeupWaitModel/SmeupWaitModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) splashColor, dynamic title = ''})
 
     
 
-[SmeupWaitModel.fromMap](../smeup_models_widgets_smeup_wait_model/SmeupWaitModel/SmeupWaitModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupWaitModel.fromMap](../smeup_models_widgets_smeup_wait_model/SmeupWaitModel/SmeupWaitModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
 
     
 
@@ -46,6 +46,15 @@
 
    
 _read / write_
+
+
+
+##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)
+
+
+
+   
+_read / write, inherited_
 
 
 
@@ -175,6 +184,15 @@ _read-only, inherited_
 
 
 
+##### [scaffoldKey](../smeup_models_widgets_smeup_model/SmeupModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+
+
+
+   
+_read / write, inherited_
+
+
+
 ##### [serviceStatusCode](../smeup_models_widgets_smeup_model/SmeupModel/serviceStatusCode.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
 
 
@@ -278,6 +296,46 @@ _inherited_
 The equality operator. [...](https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html)  
 _inherited_
 
+
+
+
+## Static Properties
+
+##### [defaultcircularTrackColor](../smeup_models_widgets_smeup_wait_model/SmeupWaitModel/defaultcircularTrackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+
+
+
+   
+_read / write_
+
+
+
+##### [defaultLoaderColor](../smeup_models_widgets_smeup_wait_model/SmeupWaitModel/defaultLoaderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+
+
+
+   
+_read / write_
+
+
+
+##### [defaultSplashColor](../smeup_models_widgets_smeup_wait_model/SmeupWaitModel/defaultSplashColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+
+
+
+   
+_read / write_
+
+
+
+
+## Static Methods
+
+##### [setDefaults](../smeup_models_widgets_smeup_wait_model/SmeupWaitModel/setDefaults.md)(dynamic obj) dynamic
+
+
+
+   
 
 
 

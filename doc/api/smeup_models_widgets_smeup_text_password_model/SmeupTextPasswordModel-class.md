@@ -29,11 +29,11 @@
 
 ## Constructors
 
-[SmeupTextPasswordModel](../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/SmeupTextPasswordModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionBackColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) captionFontBold, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionFontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) borderColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderRadius, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderWidth, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) label = defaultLabel, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) submitLabel = defaultSubmitLabel, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = defaultPadding, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showBorder = defaultShowBorder, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showSubmit = defaultShowSubmit, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showRulesIcon = defaultShowRulesIcon, dynamic title = '', [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) underline = defaultUnderline, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) autoFocus = defaultAutoFocus, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) valueField, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showRules = defaultShowRules, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) checkRules = defaultCheckRules})
+[SmeupTextPasswordModel](../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/SmeupTextPasswordModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionBackColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) captionFontBold, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionFontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) borderColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderRadius, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) iconSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) iconColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) buttonBackColor, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) label = defaultLabel, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) submitLabel = defaultSubmitLabel, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = defaultPadding, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showBorder = defaultShowBorder, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showSubmit = defaultShowSubmit, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showRulesIcon = defaultShowRulesIcon, dynamic title = '', [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) underline = defaultUnderline, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) autoFocus = defaultAutoFocus, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) valueField, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showRules = defaultShowRules, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) checkRules = defaultCheckRules})
 
     
 
-[SmeupTextPasswordModel.fromMap](../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/SmeupTextPasswordModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupTextPasswordModel.fromMap](../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/SmeupTextPasswordModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
 
     
 
@@ -85,6 +85,15 @@ _read / write_
 
 
 
+##### [buttonBackColor](../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/buttonBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+
+
+
+   
+_read / write_
+
+
+
 ##### [captionBackColor](../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/captionBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
 
 
@@ -127,6 +136,15 @@ _read / write_
 
    
 _read / write_
+
+
+
+##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)
+
+
+
+   
+_read / write, inherited_
 
 
 
@@ -194,6 +212,24 @@ _read-only, inherited_
 
 
 ##### [height](../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+
+
+
+   
+_read / write_
+
+
+
+##### [iconColor](../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/iconColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+
+
+
+   
+_read / write_
+
+
+
+##### [iconSize](../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/iconSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
 
 
 
@@ -298,6 +334,15 @@ _read / write, inherited_
 
 A representation of the runtime type of the object.   
 _read-only, inherited_
+
+
+
+##### [scaffoldKey](../smeup_models_widgets_smeup_model/SmeupModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+
+
+
+   
+_read / write, inherited_
 
 
 
@@ -508,6 +553,15 @@ _read / write_
 
 
 
+##### [defaultButtonBackColor](../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultButtonBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+
+
+
+   
+_read / write_
+
+
+
 ##### [defaultCaptionBackColor](../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultCaptionBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
 
 
@@ -563,6 +617,24 @@ _read / write_
 
 
 ##### [defaultFontSize](../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+
+
+
+   
+_read / write_
+
+
+
+##### [defaultIconColor](../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultIconColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+
+
+
+   
+_read / write_
+
+
+
+##### [defaultIconSize](../smeup_models_widgets_smeup_text_password_model/SmeupTextPasswordModel/defaultIconSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
 
 
 

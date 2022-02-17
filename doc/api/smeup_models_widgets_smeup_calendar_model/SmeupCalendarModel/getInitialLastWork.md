@@ -24,7 +24,7 @@
 
 ```dart
 static DateTime getInitialLastWork(DateTime focusedDay) {
-  var dt = DateTime(focusedDay.year, focusedDay.month + 2, 0);
+  var dt = DateTime(focusedDay.year + 2, focusedDay.month, 0);
 
   return dt;
 }

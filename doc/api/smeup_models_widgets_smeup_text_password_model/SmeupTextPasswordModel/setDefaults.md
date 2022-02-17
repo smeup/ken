@@ -48,6 +48,12 @@ static setDefaults(dynamic obj) {
   defaultCaptionFontColor = captionStyle.color;
   defaultCaptionBackColor = captionStyle.backgroundColor;
 
+  var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
+  defaultIconSize = iconTheme.size;
+  defaultIconColor = iconTheme.color;
+
+  defaultButtonBackColor = SmeupConfigurationService.getTheme().primaryColor;
+
   // ----------------- set properties from default
   if (obj.borderColor == null)
     obj.borderColor = SmeupTextPasswordModel.defaultBorderColor;
@@ -71,6 +77,12 @@ static setDefaults(dynamic obj) {
     obj.captionFontSize = SmeupTextPasswordModel.defaultCaptionFontSize;
   if (obj.captionBackColor == null)
     obj.captionBackColor = SmeupTextPasswordModel.defaultCaptionBackColor;
+  if (obj.iconSize == null)
+    obj.iconSize = SmeupTextPasswordModel.defaultIconSize;
+  if (obj.iconColor == null)
+    obj.iconColor = SmeupTextPasswordModel.defaultIconColor;
+  if (obj.buttonBackColor == null)
+    obj.buttonBackColor = SmeupTextPasswordModel.defaultButtonBackColor;
 }
 ```
 

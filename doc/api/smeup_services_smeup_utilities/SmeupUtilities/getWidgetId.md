@@ -31,14 +31,14 @@ static String getWidgetId(String type, String id) {
   if (newId.isEmpty) {
     // SmeupLogService.writeDebugMessage('getWidgetId. type: $type',
     //     logType: LogType.debug);
-    newId = id.isNotEmpty ? id : type + Random().nextInt(1000).toString();
+    newId = id.isNotEmpty
+        ? id
+        : getRandom(type, ''); //type + Random().nextInt(10000).toString();
     while (SmeupWidgetNotificationService.objects.firstWhere(
             (element) => element['id'] == newId,
             orElse: () => null) !=
         null) {
-      newId = id.isNotEmpty
-          ? id + Random().nextInt(1000).toString()
-          : type + Random().nextInt(1000).toString();
+      newId = getRandom(type, id);
     }
   }
 

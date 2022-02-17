@@ -29,11 +29,11 @@
 
 ## Constructors
 
-[SmeupListBoxModel](../smeup_models_widgets_smeup_list_box_model/SmeupListBoxModel/SmeupListBoxModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) borderColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderRadius, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) captionFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionFontColor, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) layout = defaultLayout, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [Axis](https://api.flutter.dev/flutter/painting/Axis.html) orientation = defaultOrientation, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = defaultPadding, [SmeupListType](../smeup_models_widgets_smeup_list_box_model/SmeupListType.md) listType = defaultListType, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) portraitColumns = defaultPortraitColumns, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) landscapeColumns = defaultLandscapeColumns, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)> visibleColumns, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) defaultSort = defaultDefaultSort, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) listHeight = defaultListHeight, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) backgroundColName = defaultBackgroundColName, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showSelection = defaultShowSelection, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) selectedRow = defaultSelectedRow, dynamic title = ''})
+[SmeupListBoxModel](../smeup_models_widgets_smeup_list_box_model/SmeupListBoxModel/SmeupListBoxModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) borderColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderRadius, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) captionFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionFontColor, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) layout = defaultLayout, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [Axis](https://api.flutter.dev/flutter/painting/Axis.html) orientation = defaultOrientation, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = defaultPadding, [SmeupListType](../smeup_models_widgets_smeup_list_box_model/SmeupListType.md) listType = defaultListType, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) portraitColumns = defaultPortraitColumns, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) landscapeColumns = defaultLandscapeColumns, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)> visibleColumns, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) defaultSort = defaultDefaultSort, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) listHeight = defaultListHeight, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) backgroundColName = defaultBackgroundColName, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showSelection = defaultShowSelection, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) selectedRow = defaultSelectedRow, dynamic title = ''})
 
     
 
-[SmeupListBoxModel.fromMap](../smeup_models_widgets_smeup_list_box_model/SmeupListBoxModel/SmeupListBoxModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupListBoxModel.fromMap](../smeup_models_widgets_smeup_list_box_model/SmeupListBoxModel/SmeupListBoxModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
 
     
 
@@ -109,6 +109,15 @@ _read / write_
 
    
 _read / write_
+
+
+
+##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)
+
+
+
+   
+_read / write, inherited_
 
 
 
@@ -334,6 +343,15 @@ _read / write_
 
 A representation of the runtime type of the object.   
 _read-only, inherited_
+
+
+
+##### [scaffoldKey](../smeup_models_widgets_smeup_model/SmeupModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+
+
+
+   
+_read / write, inherited_
 
 
 

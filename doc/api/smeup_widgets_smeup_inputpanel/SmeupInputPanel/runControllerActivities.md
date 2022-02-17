@@ -32,6 +32,8 @@ runControllerActivities(SmeupModel model) {
   title = m.title;
   padding = m.padding;
   fontSize = m.fontSize;
+  width = m.width;
+  height = m.height;
   data = treatData(model);
 }
 ```

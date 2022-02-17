@@ -41,7 +41,7 @@ static setTheme(String themeFile) async {
           .loadString('packages/ken/assets/jsons/themes/smeup_theme.json');
       dynamic themeJson = json.decode(themeStr);
       _theme = ThemeDecoder.decodeThemeData(themeJson);
-      print(_theme);
+      // print(_theme);
     }
   }
 }

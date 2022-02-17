@@ -16,12 +16,21 @@
 
 ## Constructors
 
-[SmeupDataServicePoller](../smeup_services_smeup_data_service_poller/SmeupDataServicePoller/SmeupDataServicePoller.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {@[required](https://pub.dev/documentation/meta/1.7.0/meta/required-constant.html) [Duration](https://api.flutter.dev/flutter/dart-core/Duration-class.html) interval, @[required](https://pub.dev/documentation/meta/1.7.0/meta/required-constant.html) [String](https://api.flutter.dev/flutter/dart-core/String-class.html) fun, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) ignoreErrors = true})
+[SmeupDataServicePoller](../smeup_services_smeup_data_service_poller/SmeupDataServicePoller/SmeupDataServicePoller.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, {@[required](https://pub.dev/documentation/meta/1.7.0/meta/required-constant.html) [Duration](https://api.flutter.dev/flutter/dart-core/Duration-class.html) interval, @[required](https://pub.dev/documentation/meta/1.7.0/meta/required-constant.html) [String](https://api.flutter.dev/flutter/dart-core/String-class.html) fun, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) ignoreErrors = true})
 
     
 
 
 ## Properties
+
+##### [context](../smeup_services_smeup_data_service_poller/SmeupDataServicePoller/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)
+
+
+
+   
+_read / write_
+
+
 
 ##### [formKey](../smeup_services_smeup_data_service_poller/SmeupDataServicePoller/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
 
@@ -74,6 +83,15 @@ _final_
 
 A representation of the runtime type of the object.   
 _read-only, inherited_
+
+
+
+##### [scaffoldKey](../smeup_services_smeup_data_service_poller/SmeupDataServicePoller/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+
+
+
+   
+_read / write_
 
 
 

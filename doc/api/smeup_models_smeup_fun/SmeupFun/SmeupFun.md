@@ -9,7 +9,7 @@
 
 
 
-SmeupFun(dynamic dynamicFun, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+SmeupFun(dynamic dynamicFun, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
 
 
 
@@ -18,7 +18,7 @@ SmeupFun(dynamic dynamicFun, [GlobalKey](https://api.flutter.dev/flutter/widgets
 ## Implementation
 
 ```dart
-SmeupFun(dynamic dynamicFun, this.formKey) {
+SmeupFun(dynamic dynamicFun, this.formKey, this.scaffoldKey, this.context) {
   // the object to parse is empty:
   // - return an empty SmeupFun
   if (dynamicFun == null || dynamicFun.toString().isEmpty) {

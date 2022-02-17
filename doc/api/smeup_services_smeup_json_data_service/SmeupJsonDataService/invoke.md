@@ -35,8 +35,12 @@ Future<SmeupServiceResponse> invoke(smeupFun) async {
             jsons.keys.contains(smeupFun.fun['fun']['obj2']['k'])) {
           data = jsons[smeupFun.fun['fun']['obj2']['k']];
         } else {
-          String jsonFilePath =
-              '${SmeupConfigurationService.jsonsPath}/forms/${smeupFun.fun['fun']['obj2']['k']}.json';
+          String customFolder = smeupFun.fun['fun']['obj1']['k'];
+          String fileName = smeupFun.fun['fun']['obj2']['k'];
+
+          String jsonFilePath = customFolder.isEmpty
+              ? '${SmeupConfigurationService.jsonsPath}/forms/$fileName.json'
+              : '$customFolder/$fileName.json';
 
           SmeupLogService.writeDebugMessage(
               '*** http request \'SmeupJsonDataService\': $jsonFilePath');
@@ -67,7 +71,7 @@ Future<SmeupServiceResponse> invoke(smeupFun) async {
         return SmeupServiceResponse(
             false,
             Response(
-                data: 'Error in SmeupJsonDataService',
+                data: 'Error in SmeupJsonDataService: ${e.toString()}',
                 statusCode: HttpStatus.badRequest,
                 requestOptions: null));
       }

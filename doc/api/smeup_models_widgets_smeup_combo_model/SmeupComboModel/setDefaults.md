@@ -38,7 +38,8 @@ static setDefaults(dynamic obj) {
 
   var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
   defaultIconSize = iconTheme.size;
-  defaultIconColor = iconTheme.color;
+  defaultIconColor = textStyle.color;
+  //iconTheme.color;
 
   // ----------------- set properties from default
   if (obj.fontBold == null) obj.fontBold = SmeupComboModel.defaultFontBold;

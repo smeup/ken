@@ -9,7 +9,7 @@
 
 
 
-SmeupChartModel.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+SmeupChartModel.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
 
 
 
@@ -19,8 +19,11 @@ SmeupChartModel.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Map-clas
 
 ```dart
 SmeupChartModel.fromMap(
-    Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-    : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context)
+    : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
   if (optionsDefault['Typ'] == null) {
     chartType = defaultChartType;
   } else {
@@ -35,10 +38,9 @@ SmeupChartModel.fromMap(
   width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
   height =
       SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
-  if (optionsDefault['ShowMarks'] == 'Si')
-    legend = true;
-  else
-    legend = false;
+
+  legend =
+      SmeupUtilities.getBool(optionsDefault['showMarks']) ?? defaultLegend;
 
   if (widgetLoadType != LoadType.Delay) {
     onReady = () async {

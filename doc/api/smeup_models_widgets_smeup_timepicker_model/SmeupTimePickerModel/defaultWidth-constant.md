@@ -20,7 +20,7 @@
 ## Implementation
 
 ```dart
-static const double defaultWidth = 100;
+static const double defaultWidth = 0;
 
 
 ```

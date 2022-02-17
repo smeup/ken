@@ -11,6 +11,11 @@
 
 
 
+**Inheritance**
+
+- [Object](https://api.flutter.dev/flutter/dart-core/Object-class.html)
+- [Enum](https://api.flutter.dev/flutter/dart-core/Enum-class.html)
+- SmeupInputPanelSupportedComp
 
 
 ## Constants
@@ -106,8 +111,8 @@ _inherited_
 
 
 
-A string representation of this object. [...](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelSupportedComp/toString.md)  
-_override_
+   
+
 
 
 

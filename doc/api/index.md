@@ -1,4 +1,43 @@
-# ken API
+
+
+
+# ken - Dart API docs
+
+
+<h1 id="ken-super-rich-components-for-flutter-applications">ken: super-rich components for Flutter applications</h1>
+<p><img src="https://github.com/smeup/ken/blob/develop/assets/images/logo_KEN.png" alt="ken Logo"></p>
+<p><a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></p>
+<h2 id="intro">Intro</h2>
+<p>Ken is a library for <a href="https://flutter.dev/">Flutter</a> applications. All widgets in this library can be used both as static and dynamic.
+The static use of the widgets is a declaration of the widget in the page, like any other widget in Flutter.
+The dynamic use of the component is a definition of the widget in a json file, which can be received as input in a SmeupDynamicScreen. This methodology allows you to have a single page application where the content of the page could be sent from a backend.</p>
+<h2 id="ken-showcase">ken Showcase</h2>
+<p>There is a project entirely dedicated to the <a href="https://github.com/smeup/ken-showcase">ken Showcase</a>. Feel free to download it and check out the examples provided.</p>
+<h2 id="ken-api">ken API</h2>
+<p>The <a href="https://github.com/smeup/ken/blob/develop/doc/api/index.md">API documentation</a> provides a full description of classes, services, models and widgets included in the ken library.</p>
+<h2 id="ken-development">ken Development</h2>
+<p>The following documents will provide all the material you need to start using the ken library:</p>
+<ul>
+<li><a href="https://github.com/smeup/ken/blob/develop/doc/development/dependencies.md">Dependencies</a></li>
+<li><a href="https://github.com/smeup/ken/blob/develop/doc/development/widgets.md">Widgets</a></li>
+<li><a href="https://github.com/smeup/ken/blob/develop/doc/development/publish_procedure.md">Publish</a></li>
+</ul>
+<h2 id="how-to-use-ken-in-your-project">How to use ken in your project</h2>
+<p>Create a new Flutter app:</p>
+<pre class="language-dart"><code>&gt; flutter create myapp
+</code></pre>
+<p>To install the ken library, add the following dependency into the pubspec.yaml:</p>
+<pre class="language-dart"><code>dependencies:
+    ken: ^0.0.1
+</code></pre>
+<p>Add the ken library initilization in the main.dart file. In the initialization statement, you can set many attributes. Follow a minimal configuration:</p>
+<pre class="language-dart"><code>SmeupConfigurationService.init(
+    context,
+);
+</code></pre>
+<h2 id="issues">Issues</h2>
+<p>If you run into an error or an unexpected behavior, or you just want to give us feedback on how to improve, feel free to use the <a href="https://github.com/smeup/ken/issues">issues</a> page.</p>
+
 
 ## Libraries
 
@@ -6,7 +45,99 @@
  
 
 
+##### [button_screen](smeup_screens_test_button_screen/smeup_screens_test_button_screen-library.md)
+ 
+
+
+##### [calendar_screen](smeup_screens_test_calendar_screen/smeup_screens_test_calendar_screen-library.md)
+ 
+
+
+##### [carousel_screen](smeup_screens_test_carousel_screen/smeup_screens_test_carousel_screen-library.md)
+ 
+
+
+##### [chart_screen](smeup_screens_test_chart_screen/smeup_screens_test_chart_screen-library.md)
+ 
+
+
+##### [combo_screen](smeup_screens_test_combo_screen/smeup_screens_test_combo_screen-library.md)
+ 
+
+
+##### [dashboard_screen](smeup_screens_test_dashboard_screen/smeup_screens_test_dashboard_screen-library.md)
+ 
+
+
+##### [datePicker_screen](smeup_screens_test_datePicker_screen/smeup_screens_test_datePicker_screen-library.md)
+ 
+
+
+##### [dialog_screen](smeup_screens_test_dialog_screen/smeup_screens_test_dialog_screen-library.md)
+ 
+
+
+##### [drawer_screen](smeup_screens_test_drawer_screen/smeup_screens_test_drawer_screen-library.md)
+ 
+
+
 ##### [external_configuration_model](smeup_models_external_configuration_model/smeup_models_external_configuration_model-library.md)
+ 
+
+
+##### [gauge_screen](smeup_screens_test_gauge_screen/smeup_screens_test_gauge_screen-library.md)
+ 
+
+
+##### [image_screen](smeup_screens_test_image_screen/smeup_screens_test_image_screen-library.md)
+ 
+
+
+##### [imageList_screen](smeup_screens_test_imageList_screen/smeup_screens_test_imageList_screen-library.md)
+ 
+
+
+##### [input_panel_screen](smeup_screens_test_input_panel_screen/smeup_screens_test_input_panel_screen-library.md)
+ 
+
+
+##### [label_screen](smeup_screens_test_label_screen/smeup_screens_test_label_screen-library.md)
+ 
+
+
+##### [line_screen](smeup_screens_test_line_screen/smeup_screens_test_line_screen-library.md)
+ 
+
+
+##### [listbox_screen](smeup_screens_test_listbox_screen/smeup_screens_test_listbox_screen-library.md)
+ 
+
+
+##### [null_transformer](smeup_services_transformers_null_transformer/smeup_services_transformers_null_transformer-library.md)
+ 
+
+
+##### [progress_bar_screen](smeup_screens_test_progress_bar_screen/smeup_screens_test_progress_bar_screen-library.md)
+ 
+
+
+##### [progress_indicator_screen](smeup_screens_test_progress_indicator_screen/smeup_screens_test_progress_indicator_screen-library.md)
+ 
+
+
+##### [qrcode_reader_screen](smeup_screens_test_qrcode_reader_screen/smeup_screens_test_qrcode_reader_screen-library.md)
+ 
+
+
+##### [radio_screen](smeup_screens_test_radio_screen/smeup_screens_test_radio_screen-library.md)
+ 
+
+
+##### [showcase_shared](smeup_screens_test_showcase_shared/smeup_screens_test_showcase_shared-library.md)
+ 
+
+
+##### [slider_screen](smeup_screens_test_slider_screen/smeup_screens_test_slider_screen-library.md)
  
 
 
@@ -178,6 +309,10 @@
  
 
 
+##### [smeup_data_transformer_interface](smeup_services_transformers_smeup_data_transformer_interface/smeup_services_transformers_smeup_data_transformer_interface-library.md)
+ 
+
+
 ##### [smeup_datepicker](smeup_widgets_smeup_datepicker/smeup_widgets_smeup_datepicker-library.md)
  
 
@@ -195,6 +330,10 @@
 
 
 ##### [smeup_default_data_service](smeup_services_smeup_default_data_service/smeup_services_smeup_default_data_service-library.md)
+ 
+
+
+##### [smeup_device_info](smeup_models_smeup_device_info/smeup_models_smeup_device_info-library.md)
  
 
 
@@ -343,6 +482,10 @@
 
 
 ##### [smeup_memory_service](smeup_services_smeup_memory_service/smeup_services_smeup_memory_service-library.md)
+ 
+
+
+##### [smeup_message_data_service](smeup_services_smeup_message_data_service/smeup_services_smeup_message_data_service-library.md)
  
 
 
@@ -599,6 +742,38 @@
 
 
 ##### [smeupWidgetBuilderResponse](smeup_models_smeupWidgetBuilderResponse/smeup_models_smeupWidgetBuilderResponse-library.md)
+ 
+
+
+##### [splash_screen](smeup_screens_test_splash_screen/smeup_screens_test_splash_screen-library.md)
+ 
+
+
+##### [switch_screen](smeup_screens_test_switch_screen/smeup_screens_test_switch_screen-library.md)
+ 
+
+
+##### [textAutocomplete_screen](smeup_screens_test_textAutocomplete_screen/smeup_screens_test_textAutocomplete_screen-library.md)
+ 
+
+
+##### [textField_screen](smeup_screens_test_textField_screen/smeup_screens_test_textField_screen-library.md)
+ 
+
+
+##### [textPassword_screen](smeup_screens_test_textPassword_screen/smeup_screens_test_textPassword_screen-library.md)
+ 
+
+
+##### [timepicker_screen](smeup_screens_test_timepicker_screen/smeup_screens_test_timepicker_screen-library.md)
+ 
+
+
+##### [tree_screen](smeup_screens_test_tree_screen/smeup_screens_test_tree_screen-library.md)
+ 
+
+
+##### [wait_screen](smeup_screens_test_wait_screen/smeup_screens_test_wait_screen-library.md)
  
 
 

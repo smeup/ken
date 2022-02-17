@@ -28,7 +28,7 @@
 
 ## Constructors
 
-[SmeupDrawerItem](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/SmeupDrawerItem.md) ([String](https://api.flutter.dev/flutter/dart-core/String-class.html) text, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) route, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) iconCode, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) action, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html) align, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showItemDivider, {[double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor})
+[SmeupDrawerItem](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/SmeupDrawerItem.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) text, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) route, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) iconCode, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) action, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html) align, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showItemDivider, {[double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor})
 
     
 
@@ -80,6 +80,15 @@ _final_
 
 
 
+##### [formKey](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/formKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+
+
+
+   
+_final_
+
+
+
 ##### [hashCode](https://api.flutter.dev/flutter/widgets/Widget/hashCode.html) &#8594; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
 
 
@@ -122,6 +131,15 @@ _final_
 
 A representation of the runtime type of the object.   
 _read-only, inherited_
+
+
+
+##### [scaffoldKey](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/scaffoldKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+
+
+
+   
+_final_
 
 
 
