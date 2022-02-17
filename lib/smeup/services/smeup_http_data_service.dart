@@ -12,7 +12,7 @@ import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface
 class SmeupHttpDataService extends SmeupDataServiceInterface {
   Dio dio;
   String server;
-  static const DEFAULD_TIMEOUT = 20000;
+  static const DEFAULD_TIMEOUT = 5000;
 
   SmeupHttpDataService(SmeupDataTransformerInterface transformer)
       : super(transformer) {

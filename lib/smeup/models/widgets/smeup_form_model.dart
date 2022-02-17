@@ -12,7 +12,6 @@ class SmeupFormModel extends SmeupModel
     implements SmeupDataInterface {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(8);
   static const String defaultLayout = '1';
-  static const bool defaultAutoAdaptHeight = true;
 
   final GlobalKey<FormState> formKey;
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -34,7 +33,7 @@ class SmeupFormModel extends SmeupModel
         SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
 
     autoAdaptHeight = SmeupUtilities.getBool(jsonMap['autoAdaptHeight']) ??
-        defaultAutoAdaptHeight;
+        SmeupConfigurationService.defaultAutoAdaptHeight;
 
     layout = jsonMap['layout'] ?? defaultLayout;
     _replaceFormTitle(jsonMap);

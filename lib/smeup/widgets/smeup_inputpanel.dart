@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/daos/smeup_inputpanel_dao.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:ken/smeup/models/widgets/smeup_buttons_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_input_panel_field.dart';
 import 'package:ken/smeup/models/widgets/smeup_combo_item_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_inputpanel_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
@@ -89,6 +89,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     implements SmeupWidgetStateInterface {
   SmeupInputPanelModel _model;
   List<SmeupInputPanelField> _data;
+  double confirmButtonRowHeight = 110;
 
   @override
   void initState() {
@@ -119,6 +120,10 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
 
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
+    bool autoAdaptHeight = SmeupConfigurationService.defaultAutoAdaptHeight;
+    // autoadapt on input panel alway enabled
+    autoAdaptHeight = true;
+
     if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
         await SmeupInputPanelDao.getData(
@@ -145,12 +150,10 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
       }
     }
 
-    inputPanelHeight = inputPanelHeight - 20;
+    double innerPanelHeight = inputPanelHeight;
 
-    double innerPanel = inputPanelHeight;
-    if (_isConfirmButtonEnabled()) {
-      innerPanel = innerPanel - SmeupButtonsModel.defaultHeight;
-    }
+    if (autoAdaptHeight && _isConfirmButtonEnabled())
+      innerPanelHeight -= confirmButtonRowHeight;
 
     if (_data == null) {
       return getFunErrorResponse(context, _model);
@@ -159,24 +162,28 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
         height: inputPanelHeight,
         width: inputPanelWidth,
         child: Scaffold(
-            floatingActionButton: _getConfirmButton(),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: autoAdaptHeight ? _getConfirmButton() : null,
+            floatingActionButtonLocation: autoAdaptHeight
+                ? FloatingActionButtonLocation.centerDocked
+                : null,
             body: Container(
-              height: innerPanel,
+              height: innerPanelHeight,
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.title,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
+                    if (widget.title.isNotEmpty)
+                      Text(
+                        widget.title,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                    if (widget.title.isNotEmpty)
+                      SizedBox(
+                        height: 16,
+                      ),
                     _getFields(),
+                    if (!autoAdaptHeight) _getConfirmButton()
                   ],
                 ),
               ),
@@ -194,7 +201,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
         children: [
           _getInputFieldWidget(field),
           SizedBox(
-            height: 16,
+            height: 13,
           ),
         ],
       );
@@ -214,6 +221,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
           id: field.id,
           fontSize: widget.fontSize,
           title: field.label,
+          height: 55,
           data: [
             {"code": "0", "value": "No"},
             {"code": "1", "value": "Si"},
@@ -247,14 +255,17 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
           height: 8,
           fontSize: widget.fontSize,
         ),
-        SmeupTextField(
-          widget.scaffoldKey,
-          widget.formKey,
-          id: field.id,
-          data: field.value.code,
-          clientOnChange: (value) {
-            field.value.code = field.value.descr = value;
-          },
+        SizedBox(
+          height: 30,
+          child: SmeupTextField(
+            widget.scaffoldKey,
+            widget.formKey,
+            id: field.id,
+            data: field.value.code,
+            clientOnChange: (value) {
+              field.value.code = field.value.descr = value;
+            },
+          ),
         )
       ],
     );
@@ -291,16 +302,19 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
 
   Widget _getConfirmButton() {
     if (_isConfirmButtonEnabled()) {
-      return Row(
-        children: [
-          Expanded(
-            child: SmeupButton(
-              data: "Conferma",
-              fontSize: widget.fontSize,
-              clientOnPressed: () => _fireDynamism(),
+      return Container(
+        height: confirmButtonRowHeight,
+        child: Row(
+          children: [
+            Expanded(
+              child: SmeupButton(
+                data: "Conferma",
+                fontSize: widget.fontSize,
+                clientOnPressed: () => _fireDynamism(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
     } else {
       return Container();

@@ -285,6 +285,7 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
             children: [
               title,
               GridView.count(
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 childAspectRatio: childAspectRatio,
                 crossAxisCount: widget.columns,
