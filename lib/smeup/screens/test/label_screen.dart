@@ -31,7 +31,7 @@ class LabelScreen extends StatelessWidget {
                     SmeupLabel(
                       _scaffoldKey,
                       _formKey,
-                      ['Label'],
+                      ['Information'],
                       id: 'lab2',
                       fontBold: false,
                       align: Alignment.centerRight,
