@@ -36,3 +36,8 @@
 ## [0.0.1+10] - 16/02/2022
 
 - bugs fixing
+
+## [0.0.1+11] - 18/02/2022
+
+- upgrade flutter to 2.1.10
+- fix list scroll behaviour
