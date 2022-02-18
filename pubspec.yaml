@@ -1,6 +1,6 @@
 name: ken
 description: super-rich dynamic components for Flutter applications
-version: 0.0.1+10
+version: 0.0.1+11
 homepage: 'https://github.com/smeup/ken'
 repository: 'https://github.com/smeup/ken'
 issue_tracker: 'https://github.com/smeup/ken/issues'
@@ -15,8 +15,8 @@ dependencies:
   async: ^2.8.1
   dio: ^4.0.0
   provider: ^4.3.3
-  permission_handler: ^7.1.0
-  path_provider: ^2.0.1
+  permission_handler: ^9.1.0
+  path_provider: ^2.0.9
   flutter_speedometer: ^1.0.0
   carousel_slider: ^2.3.1
   table_calendar: ^3.0.2
