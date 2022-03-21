@@ -82,8 +82,9 @@ class SmeupFun {
       parmsSplit.forEach((parm) {
         parm = parm.trim();
         RegExp re = RegExp(r'\([^)]*\)');
+        var keyInd = 0;
         re.allMatches(parm).forEach((match) {
-          final key = parm.substring(0, parm.indexOf('('));
+          final key = parm.substring(keyInd, parm.indexOf('(', keyInd));
           var value = parm
               .substring(match.start, match.end)
               .replaceFirst('(', '')
@@ -101,11 +102,9 @@ class SmeupFun {
             } else {
               value = value;
             }
-
             list.add({'key': key, 'value': value});
-
-            //SmeupVariablesService.setVariable(key, value, formKey: formKey);
           }
+          keyInd += match.end + 1;
         });
       });
     } catch (e) {

@@ -24,8 +24,8 @@ class SmeupDataService {
     SmeupDataService.services['*JSN'] = SmeupJsonDataService();
     SmeupDataService.services['*MSG'] = SmeupMessageDataService();
     SmeupDataService.services['*IMAGE'] = SmeupImageDataService();
-    SmeupDataService.services['*HTTP'] = SmeupHttpDataService(
-        SmeupConfigurationService.getHttpServiceDataTransformer());
+    SmeupDataService.services['*HTTP'] =
+        SmeupHttpDataService(NullTransformer());
   }
 
   static Future<SmeupServiceResponse> invoke(SmeupFun smeupFun,
@@ -64,16 +64,6 @@ class SmeupDataService {
     else
       response = await smeupDataService.invoke(newSmeupFun);
 
-    // Apply transformation to service response (only on success)
-    if (response.succeded &&
-        smeupDataService.getTransformer() is NullTransformer == false) {
-      var data = response.result.data;
-      if (data is Map) {
-        response.result.data =
-            smeupDataService.getTransformer().transform(smeupFun, data);
-      }
-    }
-
     return response;
   }
 
@@ -82,9 +72,7 @@ class SmeupDataService {
       SmeupLogService.writeDebugMessage(
           ' The server implementation \'$name\' does not exist, will be used SmeupDefaultDataService',
           logType: LogType.warning);
-
-      return SmeupDefaultDataService(
-          SmeupConfigurationService.getDefaultServiceDataTransformer());
+      return services['*DEFAULT'];
     } else {
       return services[name];
     }
