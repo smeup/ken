@@ -14,8 +14,8 @@ import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface
 class SmeupFirestoreDataService extends SmeupDataServiceInterface {
   FirebaseFirestore fsDatabase;
 
-  SmeupFirestoreDataService(
-      SmeupDataTransformerInterface transformer, this.fsDatabase)
+  SmeupFirestoreDataService(this.fsDatabase,
+      {SmeupDataTransformerInterface transformer})
       : super(transformer) {
     fsDatabase.settings = const Settings(persistenceEnabled: true);
   }
@@ -29,6 +29,14 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         return await getDocument(fun);
       case "GET.FORM":
         return await getForm(fun);
+      case "GET.DEFAULT":
+        return await getDocumentDefault(fun);
+      case "UPDATE.DOCUMENT":
+        return await updateDocument(fun);
+      case "DELETE.DOCUMENT":
+        return await deleteDocument(fun);
+      case "WRITE.DOCUMENT":
+        return await writeDocument(fun);
       default:
         return null;
     }
@@ -80,7 +88,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         responseData = getTransformer().transform(smeupFun, snapshot);
       } else {
         final message =
-            'SmeupFirestoreDataService: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}';
+            'SmeupFirestoreDataService.getDocuments: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}';
         responseData = _getErrorResponse(message);
       }
 
@@ -92,7 +100,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
               requestOptions: null));
     } catch (e) {
       final message =
-          'SmeupFirestoreDataService: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}: $e';
+          'SmeupFirestoreDataService.getDocuments: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}: $e';
       return _getErrorResponse(message);
     }
   }
@@ -114,6 +122,10 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         throw Exception('The collection is empty. FUN: $smeupFun');
       }
 
+      if (id == null) {
+        throw Exception('The id is empty. FUN: $smeupFun');
+      }
+
       DocumentSnapshot<Map<String, dynamic>> snapshot = await fsDatabase
           .collection(collection['value'])
           .doc(id['value'])
@@ -126,7 +138,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         responseData = getTransformer().transform(smeupFun, snapshot);
       } else {
         final message =
-            'SmeupFirestoreDataService: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}';
+            'SmeupFirestoreDataService.getDocument: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}';
         responseData = _getErrorResponse(message);
       }
 
@@ -138,7 +150,65 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
               requestOptions: null));
     } catch (e) {
       final message =
-          'SmeupFirestoreDataService: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}: $e';
+          'SmeupFirestoreDataService.getDocument: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}: $e';
+      return _getErrorResponse(message);
+    }
+  }
+
+  Future<SmeupServiceResponse> getDocumentDefault(SmeupFun smeupFun) async {
+    try {
+      List<Map<String, dynamic>> list = smeupFun.getParameters();
+
+      final options = GetOptions(source: await getSource());
+
+      final collection = list.firstWhere(
+          (element) => element['key'] == 'collection',
+          orElse: () => null);
+
+      final formId = list.firstWhere((element) => element['key'] == 'formId',
+          orElse: () => null);
+
+      final fieldId = list.firstWhere((element) => element['key'] == 'fieldId',
+          orElse: () => null);
+
+      if (collection == null) {
+        throw Exception('The collection is empty. FUN: $smeupFun');
+      }
+
+      if (formId == null) {
+        throw Exception('The formId is empty. FUN: $smeupFun');
+      }
+
+      if (fieldId == null) {
+        throw Exception('The fieldId is empty. FUN: $smeupFun');
+      }
+
+      QuerySnapshot<Map<String, dynamic>> snapshot = await fsDatabase
+          .collection(collection['value'])
+          .where('formId', isEqualTo: formId['value'])
+          .where('fieldId', isEqualTo: fieldId['value'])
+          .get(options);
+
+      dynamic responseData;
+
+      // Apply transformation to service response (only on success)
+      if (snapshot != null && getTransformer() is NullTransformer == false) {
+        responseData = getTransformer().transform(smeupFun, snapshot);
+      } else {
+        final message =
+            'SmeupFirestoreDataService.getDocumentDefault: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}';
+        responseData = _getErrorResponse(message);
+      }
+
+      return SmeupServiceResponse(
+          true,
+          Response(
+              data: responseData,
+              statusCode: HttpStatus.accepted,
+              requestOptions: null));
+    } catch (e) {
+      final message =
+          'SmeupFirestoreDataService.getDocumentDefault: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}: $e';
       return _getErrorResponse(message);
     }
   }
@@ -172,7 +242,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         responseData = getTransformer().transform(smeupFun, snapshot);
       } else {
         final message =
-            'SmeupFirestoreDataService: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}';
+            'SmeupFirestoreDataService.getForm: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}';
         responseData = _getErrorResponse(message);
       }
 
@@ -184,9 +254,302 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
               requestOptions: null));
     } catch (e) {
       final message =
-          'SmeupFirestoreDataService: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}: $e';
+          'SmeupFirestoreDataService.getForm: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}: $e';
       return _getErrorResponse(message);
     }
+  }
+
+  Future<SmeupServiceResponse> updateDocument(SmeupFun smeupFun) async {
+    try {
+      final checkResult = _checkDocument(smeupFun);
+      if (checkResult.isNotEmpty) {
+        final messages = {
+          "messages": [
+            {
+              "gravity": LogType.error,
+              "message": checkResult,
+            }
+          ]
+        };
+        return SmeupServiceResponse(
+            false,
+            Response(
+                data: messages,
+                statusCode: HttpStatus.badRequest,
+                requestOptions: null));
+      }
+
+      // final df = new DateFormat('dd/MM/yyyy');
+
+      // final order = {
+      //   "customer": SmeupUtilities.getInt(SmeupVariablesService.getVariable(
+      //       'fldCustomer',
+      //       formKey: smeupFun.formKey)),
+      //   "address": SmeupUtilities.getInt(SmeupVariablesService.getVariable(
+      //       'fldAddress',
+      //       formKey: smeupFun.formKey)),
+      //   "description": SmeupVariablesService.getVariable('fldDescription',
+      //           formKey: smeupFun.formKey)
+      //       .toString(),
+      //   "date": DateFormat('yyyyMMdd').format(df.parse(
+      //       SmeupVariablesService.getVariable('fldDate',
+      //           formKey: smeupFun.formKey)))
+      // };
+
+      bool isOnLine = await isInternetOn();
+
+      // if (isOnLine) {
+      //   await fsDatabase
+      //       .collection(FirestoreSharedService.ordersCollection)
+      //       .doc(SmeupVariablesService.getVariable('orderId',
+      //           formKey: smeupFun.formKey))
+      //       .update(order);
+      // } else {
+      //   fsDatabase
+      //       .collection(FirestoreSharedService.ordersCollection)
+      //       .doc(SmeupVariablesService.getVariable('orderId',
+      //           formKey: smeupFun.formKey))
+      //       .update(order);
+      // }
+
+      final messages = {
+        "messages": [
+          {
+            "gravity": isOnLine ? LogType.info : LogType.warning,
+            "message":
+                "${SmeupConfigurationService.appDictionary.getLocalString('updateCompletedSuccessfully')} ${isOnLine ? '' : 'offline'}",
+          }
+        ]
+      };
+      return SmeupServiceResponse(
+          true,
+          Response(
+              data: messages,
+              statusCode: HttpStatus.accepted,
+              requestOptions: null));
+    } catch (e) {
+      SmeupLogService.writeDebugMessage(
+          'Errore durante l\'aggiornamento dell\'ordine: $e',
+          logType: LogType.error);
+      final messages = {
+        "messages": [
+          {
+            "gravity": LogType.error,
+            "message": SmeupConfigurationService.appDictionary
+                .getLocalString('errorWritingInformation'),
+          }
+        ]
+      };
+      return SmeupServiceResponse(
+          false,
+          Response(
+              data: messages,
+              statusCode: HttpStatus.badRequest,
+              requestOptions: null));
+    }
+  }
+
+  Future<SmeupServiceResponse> deleteDocument(SmeupFun smeupFun) async {
+    try {
+      //String orderId = smeupFun.fun['fun']['obj1']['k'];
+
+      bool isOnLine = await isInternetOn();
+
+      // if (isOnLine) {
+      //   QuerySnapshot snapshot = await fsDatabase
+      //       .collection(FirestoreSharedService.ordersRowsCollection)
+      //       .where('idorder', isEqualTo: orderId)
+      //       .get();
+
+      //   snapshot.docs.toList().forEach((orderRowDoc) async {
+      //     await fsDatabase
+      //         .collection(FirestoreSharedService.ordersRowsCollection)
+      //         .doc(orderRowDoc.id)
+      //         .delete();
+      //   });
+
+      //   await fsDatabase
+      //       .collection(FirestoreSharedService.ordersCollection)
+      //       .doc(orderId)
+      //       .delete();
+      // } else {
+      //   fsDatabase
+      //       .collection(FirestoreSharedService.ordersRowsCollection)
+      //       .where('idorder', isEqualTo: orderId)
+      //       .get()
+      //       .then((QuerySnapshot snapshot) {
+      //     snapshot.docs.toList().forEach((orderRowDoc) async {
+      //       fsDatabase
+      //           .collection(FirestoreSharedService.ordersRowsCollection)
+      //           .doc(orderRowDoc.id)
+      //           .delete();
+      //     });
+      //   });
+
+      //   fsDatabase
+      //       .collection(FirestoreSharedService.ordersCollection)
+      //       .doc(orderId)
+      //       .delete();
+      // }
+
+      // SmeupVariablesService.setVariable('orderId', '',
+      //     formKey: smeupFun.formKey);
+
+      final messages = {
+        "messages": [
+          {
+            "gravity": isOnLine ? LogType.info : LogType.warning,
+            "message":
+                "${SmeupConfigurationService.appDictionary.getLocalString('updateCompletedSuccessfully')} ${isOnLine ? '' : 'offline'}",
+            "smeupObject": {"tipo": "", "parametro": "", "codice": ""}
+          }
+        ]
+      };
+      return SmeupServiceResponse(
+          true,
+          Response(
+              data: messages,
+              statusCode: HttpStatus.accepted,
+              requestOptions: null));
+    } catch (e) {
+      SmeupLogService.writeDebugMessage(
+          'Errore durante la cancellazione dell\'ordine: $e',
+          logType: LogType.error);
+      return SmeupServiceResponse(
+          false,
+          Response(
+              data: null,
+              statusCode: HttpStatus.badRequest,
+              requestOptions: null));
+    }
+  }
+
+  Future<SmeupServiceResponse> writeDocument(SmeupFun smeupFun) async {
+    final checkResult = _checkDocument(smeupFun);
+    if (checkResult.isNotEmpty) {
+      final messages = {
+        "messages": [
+          {
+            "gravity": LogType.error,
+            "message": checkResult,
+          }
+        ]
+      };
+      return SmeupServiceResponse(
+          false,
+          Response(
+              data: messages,
+              statusCode: HttpStatus.badRequest,
+              requestOptions: null));
+    }
+
+    try {
+      // final df = new DateFormat('dd/MM/yyyy');
+
+      // final order = {
+      //   "customer": SmeupUtilities.getInt(SmeupVariablesService.getVariable(
+      //       'fldCustomer',
+      //       formKey: smeupFun.formKey)),
+      //   "address": SmeupUtilities.getInt(SmeupVariablesService.getVariable(
+      //       'fldAddress',
+      //       formKey: smeupFun.formKey)),
+      //   "description": SmeupVariablesService.getVariable('fldDescription',
+      //           formKey: smeupFun.formKey)
+      //       .toString(),
+      //   "date": DateFormat('yyyyMMdd').format(df.parse(
+      //       SmeupVariablesService.getVariable('fldDate',
+      //           formKey: smeupFun.formKey)))
+      // };
+
+      if (await isInternetOn()) {
+        // final docRef = await fsDatabase
+        //     .collection(FirestoreSharedService.ordersCollection)
+        //     .add(order);
+
+        // TODO: temp
+        var docRef;
+
+        if (docRef != null) {
+          // SmeupVariablesService.setVariable(
+          //     'orderId', await docRef.get().then((snapshot) => snapshot.id),
+          //     formKey: smeupFun.formKey);
+
+          final messages = {
+            "messages": [
+              {
+                "gravity": LogType.info,
+                "message": SmeupConfigurationService.appDictionary
+                    .getLocalString('updateCompletedSuccessfully'),
+              }
+            ]
+          };
+          return SmeupServiceResponse(
+              true,
+              Response(
+                  data: messages,
+                  statusCode: HttpStatus.accepted,
+                  requestOptions: null));
+        } else {
+          final messages = {
+            "messages": [
+              {
+                "gravity": LogType.error,
+                "message": SmeupConfigurationService.appDictionary
+                    .getLocalString('errorWritingInformation'),
+              }
+            ]
+          };
+          return SmeupServiceResponse(
+              false,
+              Response(
+                  data: messages,
+                  statusCode: HttpStatus.accepted,
+                  requestOptions: null));
+        }
+      } else {
+        // fsDatabase
+        //     .collection(FirestoreSharedService.ordersCollection)
+        //     .add(order);
+        final messages = {
+          "messages": [
+            {
+              "gravity": LogType.warning,
+              "message": SmeupConfigurationService.appDictionary
+                  .getLocalString('updateSuccessfullyOffline'),
+            }
+          ]
+        };
+        return SmeupServiceResponse(
+            true,
+            Response(
+                data: messages,
+                statusCode: HttpStatus.accepted,
+                requestOptions: null));
+      }
+    } catch (e) {
+      SmeupLogService.writeDebugMessage(
+          'Errore durante la scrittura dell\'ordine: $e',
+          logType: LogType.error);
+      final messages = {
+        "messages": [
+          {
+            "gravity": LogType.error,
+            "message": SmeupConfigurationService.appDictionary
+                .getLocalString('errorWritingInformation'),
+          }
+        ]
+      };
+      return SmeupServiceResponse(
+          false,
+          Response(
+              data: messages,
+              statusCode: HttpStatus.badRequest,
+              requestOptions: null));
+    }
+  }
+
+  String _checkDocument(SmeupFun smeupFun) {
+    return '';
   }
 
   SmeupServiceResponse _getErrorResponse(String message) {

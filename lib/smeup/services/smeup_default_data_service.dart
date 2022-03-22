@@ -17,7 +17,7 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
   String server;
   static const DEFAULD_TIMEOUT = 10000;
 
-  SmeupDefaultDataService(SmeupDataTransformerInterface transformer)
+  SmeupDefaultDataService({SmeupDataTransformerInterface transformer})
       : super(transformer) {
     BaseOptions options = new BaseOptions(
       connectTimeout: DEFAULD_TIMEOUT,

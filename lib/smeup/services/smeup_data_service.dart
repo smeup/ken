@@ -12,7 +12,6 @@ import 'package:ken/smeup/services/smeup_default_data_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_message_data_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
-import 'package:ken/smeup/services/transformers/null_transformer.dart';
 
 class SmeupDataService {
   static var services = Map<String, SmeupDataServiceInterface>();
@@ -24,8 +23,7 @@ class SmeupDataService {
     SmeupDataService.services['*JSN'] = SmeupJsonDataService();
     SmeupDataService.services['*MSG'] = SmeupMessageDataService();
     SmeupDataService.services['*IMAGE'] = SmeupImageDataService();
-    SmeupDataService.services['*HTTP'] =
-        SmeupHttpDataService(NullTransformer());
+    SmeupDataService.services['*HTTP'] = SmeupHttpDataService();
   }
 
   static Future<SmeupServiceResponse> invoke(SmeupFun smeupFun,
