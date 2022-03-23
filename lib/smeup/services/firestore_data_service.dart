@@ -14,6 +14,7 @@ import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface
 
 class SmeupFirestoreDataService extends SmeupDataServiceInterface {
   FirebaseFirestore fsDatabase;
+  final String FIRESTORE_FIELDS = 'firestoreFields';
 
   SmeupFirestoreDataService(this.fsDatabase,
       {SmeupDataTransformerInterface transformer})
@@ -30,7 +31,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         return await getDocument(fun);
       case "GET.FORM":
         return await getForm(fun);
-      case "GET.DEFAULT":
+      case "GET.DOCUMENT.DEFAULT":
         return await getDocumentDefault(fun);
       case "UPDATE.DOCUMENT":
         return await updateDocument(fun);
@@ -143,23 +144,15 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         responseData = _getErrorResponse(message);
       }
 
-      List<String> firestoreFields = SmeupVariablesService.getVariable(
-              'firestoreFields',
-              formKey: smeupFun.formKey) ??
-          List<String>.empty(growable: true);
+      List<String> firestoreFields = _getFireStoreFieldsVariable(smeupFun);
 
       (responseData['rows'] as List<dynamic>).forEach((dynamic row) {
         row.keys.forEach((key) {
-          SmeupVariablesService.setVariable(key, row[key],
-              formKey: smeupFun.formKey);
-          String firestoreKey =
-              smeupFun.formKey.hashCode.toString() + '_' + key;
-          if (!firestoreFields.contains(firestoreKey))
-            firestoreFields.add(firestoreKey);
+          _addFirestoFieldToList(key, row[key], smeupFun, firestoreFields);
         });
       });
 
-      SmeupVariablesService.setVariable('firestoreFields', firestoreFields,
+      SmeupVariablesService.setVariable(FIRESTORE_FIELDS, firestoreFields,
           formKey: smeupFun.formKey);
 
       return SmeupServiceResponse(
@@ -185,27 +178,26 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
           (element) => element['key'] == 'collection',
           orElse: () => null);
 
-      final formId = list.firstWhere((element) => element['key'] == 'formId',
-          orElse: () => null);
-
       final fieldId = list.firstWhere((element) => element['key'] == 'fieldId',
           orElse: () => null);
 
+      final key = smeupFun.fun['fun']['parentFun'];
+
       if (collection == null) {
         throw Exception('The collection is empty. FUN: $smeupFun');
-      }
-
-      if (formId == null) {
-        throw Exception('The formId is empty. FUN: $smeupFun');
       }
 
       if (fieldId == null) {
         throw Exception('The fieldId is empty. FUN: $smeupFun');
       }
 
+      if (key == null) {
+        throw Exception('The key is empty. FUN: $smeupFun');
+      }
+
       QuerySnapshot<Map<String, dynamic>> snapshot = await fsDatabase
           .collection(collection['value'])
-          .where('formId', isEqualTo: formId['value'])
+          .where('key', isEqualTo: key)
           .where('fieldId', isEqualTo: fieldId['value'])
           .get(options);
 
@@ -219,6 +211,11 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
             'SmeupFirestoreDataService.getDocumentDefault: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}';
         responseData = _getErrorResponse(message);
       }
+
+      List<String> firestoreFields = _getFireStoreFieldsVariable(smeupFun);
+
+      _addFirestoFieldToList(fieldId['value'], responseData['rows'][0][key],
+          smeupFun, firestoreFields);
 
       return SmeupServiceResponse(
           true,
@@ -265,6 +262,8 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
             'SmeupFirestoreDataService.getForm: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}';
         responseData = _getErrorResponse(message);
       }
+
+      responseData = _updateFirestoreData(smeupFun, responseData);
 
       return SmeupServiceResponse(
           true,
@@ -318,7 +317,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       }
 
       List<String> firestoreFields = SmeupVariablesService.getVariable(
-              'firestoreFields',
+              FIRESTORE_FIELDS,
               formKey: smeupFun.formKey) ??
           List<String>.empty(growable: true);
 
@@ -445,8 +444,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
               statusCode: HttpStatus.accepted,
               requestOptions: null));
     } catch (e) {
-      SmeupLogService.writeDebugMessage(
-          'Errore durante la cancellazione dell\'ordine: $e',
+      SmeupLogService.writeDebugMessage('Error in deleteDocument: $e',
           logType: LogType.error);
       return SmeupServiceResponse(
           false,
@@ -487,34 +485,29 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     }
 
     try {
-      // final df = new DateFormat('dd/MM/yyyy');
+      List<String> firestoreFields = _getFireStoreFieldsVariable(smeupFun);
 
-      // final order = {
-      //   "customer": SmeupUtilities.getInt(SmeupVariablesService.getVariable(
-      //       'fldCustomer',
-      //       formKey: smeupFun.formKey)),
-      //   "address": SmeupUtilities.getInt(SmeupVariablesService.getVariable(
-      //       'fldAddress',
-      //       formKey: smeupFun.formKey)),
-      //   "description": SmeupVariablesService.getVariable('fldDescription',
-      //           formKey: smeupFun.formKey)
-      //       .toString(),
-      //   "date": DateFormat('yyyyMMdd').format(df.parse(
-      //       SmeupVariablesService.getVariable('fldDate',
-      //           formKey: smeupFun.formKey)))
-      // };
+      var formInputFields = Map<String, Object>();
+      SmeupVariablesService.getVariables(formKey: smeupFun.formKey)
+          .entries
+          .forEach((element) {
+        if (firestoreFields.contains(element.key)) {
+          formInputFields[element.key.toString().replaceFirst(
+              smeupFun.formKey.hashCode.toString() + '_', '')] = element.value;
+        }
+      });
 
-      if (await isInternetOn()) {
-        // final docRef = await fsDatabase
-        //     .collection(FirestoreSharedService.ordersCollection)
-        //     .add(order);
+      bool isOnLine = await isInternetOn();
 
-        var docRef;
+      if (isOnLine) {
+        final docRef = await fsDatabase
+            .collection(collection['value'])
+            .add(formInputFields);
 
         if (docRef != null) {
-          // SmeupVariablesService.setVariable(
-          //     'orderId', await docRef.get().then((snapshot) => snapshot.id),
-          //     formKey: smeupFun.formKey);
+          SmeupVariablesService.setVariable(
+              'id', await docRef.get().then((snapshot) => snapshot.id),
+              formKey: smeupFun.formKey);
 
           final messages = {
             "messages": [
@@ -549,9 +542,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
                   requestOptions: null));
         }
       } else {
-        // fsDatabase
-        //     .collection(FirestoreSharedService.ordersCollection)
-        //     .add(order);
+        fsDatabase.collection(collection['value']).add(formInputFields);
         final messages = {
           "messages": [
             {
@@ -569,8 +560,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
                 requestOptions: null));
       }
     } catch (e) {
-      SmeupLogService.writeDebugMessage(
-          'Errore durante la scrittura dell\'ordine: $e',
+      SmeupLogService.writeDebugMessage('Error in writeDocument: $e',
           logType: LogType.error);
       final messages = {
         "messages": [
@@ -610,5 +600,59 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
             data: messages,
             statusCode: HttpStatus.badRequest,
             requestOptions: null));
+  }
+
+  dynamic _updateFirestoreData(SmeupFun smeupFun, dynamic data) {
+    try {
+      for (var section in data['sections']) {
+        _updateFirestoreSection(section, smeupFun);
+      }
+    } catch (e) {
+      SmeupLogService.writeDebugMessage('Error in getInputFields: $e',
+          logType: LogType.error);
+    }
+    return data;
+  }
+
+  _updateFirestoreSection(dynamic section, SmeupFun smeupFun) {
+    if (section['components'] != null) {
+      for (var component in section['components']) {
+        if (component['type'] == 'FLD') {
+          component['fun'] =
+              component['fun'] + ' parentFun(${smeupFun.fun.toString()})';
+        }
+      }
+    }
+
+    if (section['sections'] != null) {
+      for (var subSection in section['sections']) {
+        _updateFirestoreSection(subSection, smeupFun);
+      }
+    }
+  }
+
+  _getFireStoreFieldsVariable(SmeupFun smeupFun) {
+    List<String> firestoreFields = SmeupVariablesService.getVariable(
+        FIRESTORE_FIELDS,
+        formKey: smeupFun.formKey);
+    if (firestoreFields == null) {
+      SmeupVariablesService.setVariable(
+          FIRESTORE_FIELDS, List<String>.empty(growable: true),
+          formKey: smeupFun.formKey);
+      firestoreFields = SmeupVariablesService.getVariable(FIRESTORE_FIELDS,
+          formKey: smeupFun.formKey);
+    }
+
+    return firestoreFields;
+  }
+
+  _addFirestoFieldToList(String componentId, dynamic componentValue,
+      SmeupFun smeupFun, List<String> firestoreFields) {
+    SmeupVariablesService.setVariable(componentId, componentValue,
+        formKey: smeupFun.formKey);
+    String firestoreKey =
+        smeupFun.formKey.hashCode.toString() + '_' + componentId;
+    if (!firestoreFields.contains(firestoreKey))
+      firestoreFields.add(firestoreKey);
   }
 }

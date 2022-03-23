@@ -136,6 +136,7 @@ class SmeupFun {
     fun['fun']['obj5'] = Map();
     fun['fun']['obj6'] = Map();
     fun['fun']['P'] = '';
+    fun['fun']['parentFun'] = '';
     fun['fun']['INPUT'] = '';
     fun['fun']['SG'] = {'cache': 0, 'forceCache': false};
     fun['fun']['G'] = '';
@@ -192,6 +193,9 @@ class SmeupFun {
 
     arg = extractArg(funString, 'G');
     fun['fun']['G'] = arg;
+
+    arg = extractArg(funString, 'parentFun');
+    fun['fun']['parentFun'] = arg;
   }
 
   static String extractArg(String funString, String parm,
