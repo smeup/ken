@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_js/flutter_js.dart';
 import 'package:ken/smeup/daos/smeup_inputpanel_dao.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:ken/smeup/models/widgets/smeup_input_panel_field.dart';
@@ -90,11 +92,13 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
   SmeupInputPanelModel _model;
   List<SmeupInputPanelField> _data;
   double confirmButtonRowHeight = 110;
+  JavascriptRuntime _javascriptRuntime;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
+    _javascriptRuntime = _createJavaScriptRuntime();
     if (_model != null) widgetLoadType = _model.widgetLoadType;
     super.initState();
   }
@@ -336,8 +340,48 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     widget.data.forEach((field) => SmeupVariablesService.setVariable(
         field.id, field.value.code,
         formKey: widget.formKey));
-    if (_model != null)
+    if (_model != null && _validate()) {
       SmeupDynamismService.run(_model.dynamisms, context, "click",
           widget.scaffoldKey, widget.formKey);
+    }
+  }
+
+  bool _validate() {
+    if (_model.validationScript != null) {
+      Map jsMap = Map();
+      SmeupVariablesService.getVariables(formKey: widget.formKey)
+          .forEach((key, value) {
+        jsMap[key.toString().replaceFirst(
+            widget.formKey.hashCode.toString() + "_", "")] = value;
+      });
+
+      JsEvalResult _result = _javascriptRuntime.evaluate(
+          "validate(JSON.parse('${json.encode(jsMap)}'));" +
+              _model.validationScript);
+      if (_result.isError) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("Error on js evaluation ${_result.stringResult}")));
+        return false;
+      } else {
+        return _result.stringResult == "true";
+      }
+    } else {
+      return true;
+    }
+  }
+
+  JavascriptRuntime _createJavaScriptRuntime() {
+    var _flutterJs = getJavascriptRuntime(xhr: false);
+    _flutterJs.evaluate("""
+    var helper = {
+      snackBar: function() {
+        sendMessage('Helper', JSON.stringify(['snackBar', ...arguments]));
+      }
+    }""");
+    _flutterJs.onMessage('Helper', (dynamic args) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(args[1])));
+    });
+    return _flutterJs;
   }
 }
