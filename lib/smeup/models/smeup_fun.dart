@@ -256,15 +256,13 @@ class SmeupFun {
   }
 
   String getSmeupFormatString() {
-    String smeupFormatString = 'F';
+    String smeupFormatString = '';
 
     // ----
 
-    // "F(TRE;FS_00_01;GET.DOCUMENT.DEFAULT) P(collection(default);fieldId(surname))",
-
     try {
-      // fun
-      String function = '(';
+      // function
+      String function = 'F(';
       if (fun['fun']['component'] != null) function = fun['fun']['component'];
       function += ';';
       if (fun['fun']['service'] != null) function += fun['fun']['service'];
@@ -311,9 +309,13 @@ class SmeupFun {
         smeupFormatString += ' INPUT(${fun['fun']['INPUT']})';
       }
 
+      // G
+      if (fun['fun']['G'] != null && fun['fun']['G'].toString().isNotEmpty) {
+        smeupFormatString += ' G(${fun['fun']['G']})';
+      }
+
       // ----
 
-      smeupFormatString += ')';
     } catch (e) {
       SmeupLogService.writeDebugMessage(
           'Error in _parseFromSmeupSyntax while getSmeupFormatString : ${fun['fun']} ',
