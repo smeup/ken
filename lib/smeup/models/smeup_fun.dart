@@ -145,14 +145,14 @@ class SmeupFun {
     funString = ' $funString';
     String arg = '';
 
-    arg = extractArg(funString, 'F');
+    arg = _extractArg(funString, 'F');
     var argSplit = arg.split(';');
     if (argSplit.length > 0) fun['fun']['component'] = argSplit[0];
     if (argSplit.length > 1) fun['fun']['service'] = argSplit[1];
     if (argSplit.length > 2) fun['fun']['function'] = argSplit[2];
 
     for (var i = 1; i < 7; i++) {
-      arg = extractArg(funString, i.toString());
+      arg = _extractArg(funString, i.toString());
       argSplit = arg.split(';');
       String valT = '';
       String valP = '';
@@ -166,24 +166,24 @@ class SmeupFun {
       fun['fun']['obj$i']['k'] = valK;
     }
 
-    arg = extractArg(funString, 'P');
+    arg = _extractArg(funString, 'P');
     fun['fun']['P'] = arg;
 
-    arg = extractArg(funString, 'INPUT');
+    arg = _extractArg(funString, 'INPUT');
     fun['fun']['INPUT'] = arg;
 
-    arg = extractArg(funString, 'NOTIFY');
+    arg = _extractArg(funString, 'NOTIFY');
     fun['fun']['NOTIFY'] = arg;
 
-    arg = extractArg(funString, 'SG');
+    arg = _extractArg(funString, 'SG');
     argSplit = arg.split(',');
     String val1 = '';
     String val2 = '';
     if (argSplit.length > 0) val1 = argSplit[0].trim();
     if (argSplit.length > 1) val2 = argSplit[1].trim();
     String cache =
-        extractArg(val1.contains('cache') ? val1 : val2, 'cache', prefix: '');
-    String forceCache = extractArg(
+        _extractArg(val1.contains('cache') ? val1 : val2, 'cache', prefix: '');
+    String forceCache = _extractArg(
         val1.contains('forceCache') ? val1 : val2, 'forceCache',
         prefix: '');
     fun['fun']['SG'] = {
@@ -191,15 +191,14 @@ class SmeupFun {
       "forceCache": forceCache.toLowerCase() == 'yes' ? true : false
     };
 
-    arg = extractArg(funString, 'G');
+    arg = _extractArg(funString, 'G');
     fun['fun']['G'] = arg;
 
-    arg = extractArg(funString, 'parentFun');
+    arg = _extractArg(funString, 'parentFun');
     fun['fun']['parentFun'] = arg;
   }
 
-  static String extractArg(String funString, String parm,
-      {String prefix = ' '}) {
+  String _extractArg(String funString, String parm, {String prefix = ' '}) {
     String arg = '';
 
     if (funString.startsWith(parm)) {
