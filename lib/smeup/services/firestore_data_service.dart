@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
@@ -12,9 +11,11 @@ import 'package:ken/smeup/services/smeup_variables_service.dart';
 import 'package:ken/smeup/services/transformers/null_transformer.dart';
 import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 
+import 'firestore_shared.dart';
+
 class SmeupFirestoreDataService extends SmeupDataServiceInterface {
   FirebaseFirestore fsDatabase;
-  final String FIRESTORE_FIELDS = 'firestoreFields';
+  static const String FIRESTORE_FIELDS = 'firestoreFields';
 
   SmeupFirestoreDataService(this.fsDatabase,
       {SmeupDataTransformerInterface transformer})
@@ -29,8 +30,6 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         return await getDocuments(fun);
       case "GET.DOCUMENT":
         return await getDocument(fun);
-      case "GET.FORM":
-        return await getForm(fun);
       case "GET.DOCUMENT.DEFAULT":
         return await getDocumentDefault(fun);
       case "UPDATE.DOCUMENT":
@@ -44,31 +43,11 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     }
   }
 
-  Future<Source> getSource() async {
-    final bool onValue = await isInternetOn();
-    if (onValue) {
-      return Source.server;
-    } else {
-      return Source.cache;
-    }
-  }
-
-  Future<bool> isInternetOn() async {
-    final connectivityResult = await (Connectivity().checkConnectivity());
-    switch (connectivityResult) {
-      case ConnectivityResult.none:
-        return false;
-      default:
-        return true;
-    }
-  }
-  //
-
   Future<SmeupServiceResponse> getDocuments(SmeupFun smeupFun) async {
     try {
       List<Map<String, dynamic>> list = smeupFun.getParameters();
 
-      final options = GetOptions(source: await getSource());
+      final options = GetOptions(source: await FirestoreShared.getSource());
 
       final collection = list.firstWhere(
           (element) => element['key'] == 'collection',
@@ -111,7 +90,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     try {
       List<Map<String, dynamic>> list = smeupFun.getParameters();
 
-      final options = GetOptions(source: await getSource());
+      final options = GetOptions(source: await FirestoreShared.getSource());
 
       final collection = list.firstWhere(
           (element) => element['key'] == 'collection',
@@ -144,17 +123,6 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         responseData = _getErrorResponse(message);
       }
 
-      List<String> firestoreFields = _getFireStoreFieldsVariable(smeupFun);
-
-      (responseData['rows'] as List<dynamic>).forEach((dynamic row) {
-        row.keys.forEach((key) {
-          _addFirestoFieldToList(key, row[key], smeupFun, firestoreFields);
-        });
-      });
-
-      SmeupVariablesService.setVariable(FIRESTORE_FIELDS, firestoreFields,
-          formKey: smeupFun.formKey);
-
       return SmeupServiceResponse(
           true,
           Response(
@@ -172,7 +140,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     try {
       List<Map<String, dynamic>> list = smeupFun.getParameters();
 
-      final options = GetOptions(source: await getSource());
+      final options = GetOptions(source: await FirestoreShared.getSource());
 
       final collection = list.firstWhere(
           (element) => element['key'] == 'collection',
@@ -212,11 +180,6 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         responseData = _getErrorResponse(message);
       }
 
-      List<String> firestoreFields = _getFireStoreFieldsVariable(smeupFun);
-
-      _addFirestoFieldToList(fieldId['value'], responseData['rows'][0][key],
-          smeupFun, firestoreFields);
-
       return SmeupServiceResponse(
           true,
           Response(
@@ -226,54 +189,6 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     } catch (e) {
       final message =
           'SmeupFirestoreDataService.getDocumentDefault: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}: $e';
-      return _getErrorResponse(message);
-    }
-  }
-
-  Future<SmeupServiceResponse> getForm(SmeupFun smeupFun) async {
-    try {
-      List<Map<String, dynamic>> list = smeupFun.getParameters();
-
-      final options = GetOptions(source: await getSource());
-
-      final collection = list.firstWhere(
-          (element) => element['key'] == 'collection',
-          orElse: () => null);
-
-      final formId = list.firstWhere((element) => element['key'] == 'formId',
-          orElse: () => null);
-
-      if (collection == null) {
-        throw Exception('The collection is empty. FUN: $smeupFun');
-      }
-
-      QuerySnapshot<Map<String, dynamic>> snapshot = await fsDatabase
-          .collection(collection['value'])
-          .where('formId', isEqualTo: formId['value'])
-          .get(options);
-
-      dynamic responseData;
-
-      // Apply transformation to service response (only on success)
-      if (snapshot != null && getTransformer() is NullTransformer == false) {
-        responseData = getTransformer().transform(smeupFun, snapshot);
-      } else {
-        final message =
-            'SmeupFirestoreDataService.getForm: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}';
-        responseData = _getErrorResponse(message);
-      }
-
-      responseData = _updateFirestoreData(smeupFun, responseData);
-
-      return SmeupServiceResponse(
-          true,
-          Response(
-              data: responseData,
-              statusCode: HttpStatus.accepted,
-              requestOptions: null));
-    } catch (e) {
-      final message =
-          'SmeupFirestoreDataService.getForm: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}: $e';
       return _getErrorResponse(message);
     }
   }
@@ -289,6 +204,10 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       final id = list.firstWhere((element) => element['key'] == 'id',
           orElse: () => null);
 
+      final parFields = list.firstWhere(
+          (element) => element['key'] == FIRESTORE_FIELDS,
+          orElse: () => null);
+
       if (collection == null) {
         throw Exception('The collection is empty. FUN: $smeupFun');
       }
@@ -296,6 +215,13 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       if (id == null) {
         throw Exception('The id is empty. FUN: $smeupFun');
       }
+
+      if (parFields == null || parFields.isEmpty) {
+        throw Exception('The $FIRESTORE_FIELDS is empty. FUN: $smeupFun');
+      }
+
+      List<String> firestoreFields =
+          parFields[0]['value'].toString().split(',');
 
       final checkResult = _checkDocument(smeupFun);
 
@@ -316,11 +242,6 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
                 requestOptions: null));
       }
 
-      List<String> firestoreFields = SmeupVariablesService.getVariable(
-              FIRESTORE_FIELDS,
-              formKey: smeupFun.formKey) ??
-          List<String>.empty(growable: true);
-
       var formInputFields = Map<String, Object>();
       SmeupVariablesService.getVariables(formKey: smeupFun.formKey)
           .entries
@@ -331,7 +252,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         }
       });
 
-      bool isOnLine = await isInternetOn();
+      bool isOnLine = await FirestoreShared.isInternetOn();
 
       if (isOnLine) {
         await fsDatabase
@@ -383,49 +304,60 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
   Future<SmeupServiceResponse> deleteDocument(SmeupFun smeupFun) async {
     try {
-      //String orderId = smeupFun.fun['fun']['obj1']['k'];
+      List<Map<String, dynamic>> list = smeupFun.getParameters();
 
-      bool isOnLine = await isInternetOn();
+      final id = list.firstWhere((element) => element['key'] == 'id',
+          orElse: () => null);
 
-      // if (isOnLine) {
-      //   QuerySnapshot snapshot = await fsDatabase
-      //       .collection(FirestoreSharedService.ordersRowsCollection)
-      //       .where('idorder', isEqualTo: orderId)
-      //       .get();
+      final collection = list.firstWhere(
+          (element) => element['key'] == 'collection',
+          orElse: () => null);
 
-      //   snapshot.docs.toList().forEach((orderRowDoc) async {
-      //     await fsDatabase
-      //         .collection(FirestoreSharedService.ordersRowsCollection)
-      //         .doc(orderRowDoc.id)
-      //         .delete();
-      //   });
+      if (id == null) {
+        throw Exception('The id is empty. FUN: $smeupFun');
+      }
 
-      //   await fsDatabase
-      //       .collection(FirestoreSharedService.ordersCollection)
-      //       .doc(orderId)
-      //       .delete();
-      // } else {
-      //   fsDatabase
-      //       .collection(FirestoreSharedService.ordersRowsCollection)
-      //       .where('idorder', isEqualTo: orderId)
-      //       .get()
-      //       .then((QuerySnapshot snapshot) {
-      //     snapshot.docs.toList().forEach((orderRowDoc) async {
-      //       fsDatabase
-      //           .collection(FirestoreSharedService.ordersRowsCollection)
-      //           .doc(orderRowDoc.id)
-      //           .delete();
-      //     });
-      //   });
+      if (collection == null) {
+        throw Exception('The collection is empty. FUN: $smeupFun');
+      }
 
-      //   fsDatabase
-      //       .collection(FirestoreSharedService.ordersCollection)
-      //       .doc(orderId)
-      //       .delete();
-      // }
+      bool isOnLine = await FirestoreShared.isInternetOn();
 
-      // SmeupVariablesService.setVariable('orderId', '',
-      //     formKey: smeupFun.formKey);
+      if (isOnLine) {
+        // QuerySnapshot snapshot = await fsDatabase
+        //     .collection(FirestoreSharedService.ordersRowsCollection)
+        //     .where('idorder', isEqualTo: orderId)
+        //     .get();
+
+        // snapshot.docs.toList().forEach((orderRowDoc) async {
+        //   await fsDatabase
+        //       .collection(FirestoreSharedService.ordersRowsCollection)
+        //       .doc(orderRowDoc.id)
+        //       .delete();
+        // });
+
+        await fsDatabase
+            .collection(collection['value'])
+            .doc(id['value'])
+            .delete();
+      } else {
+        // fsDatabase
+        //     .collection(FirestoreSharedService.ordersRowsCollection)
+        //     .where('idorder', isEqualTo: orderId)
+        //     .get()
+        //     .then((QuerySnapshot snapshot) {
+        //   snapshot.docs.toList().forEach((orderRowDoc) async {
+        //     fsDatabase
+        //         .collection(FirestoreSharedService.ordersRowsCollection)
+        //         .doc(orderRowDoc.id)
+        //         .delete();
+        //   });
+        // });
+
+        fsDatabase.collection(collection['value']).doc(id['value']).delete();
+      }
+
+      SmeupVariablesService.setVariable('id', '', formKey: smeupFun.formKey);
 
       final messages = {
         "messages": [
@@ -462,9 +394,19 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         (element) => element['key'] == 'collection',
         orElse: () => null);
 
+    final parFields = list.firstWhere(
+        (element) => element['key'] == FIRESTORE_FIELDS,
+        orElse: () => null);
+
     if (collection == null) {
       throw Exception('The collection is empty. FUN: $smeupFun');
     }
+
+    if (parFields == null || parFields.isEmpty) {
+      throw Exception('The $FIRESTORE_FIELDS is empty. FUN: $smeupFun');
+    }
+
+    List<String> firestoreFields = parFields[0]['value'].toString().split(',');
 
     final checkResult = _checkDocument(smeupFun);
     if (checkResult.isNotEmpty) {
@@ -485,8 +427,6 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     }
 
     try {
-      List<String> firestoreFields = _getFireStoreFieldsVariable(smeupFun);
-
       var formInputFields = Map<String, Object>();
       SmeupVariablesService.getVariables(formKey: smeupFun.formKey)
           .entries
@@ -497,7 +437,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         }
       });
 
-      bool isOnLine = await isInternetOn();
+      bool isOnLine = await FirestoreShared.isInternetOn();
 
       if (isOnLine) {
         final docRef = await fsDatabase
@@ -600,59 +540,5 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
             data: messages,
             statusCode: HttpStatus.badRequest,
             requestOptions: null));
-  }
-
-  dynamic _updateFirestoreData(SmeupFun smeupFun, dynamic data) {
-    try {
-      for (var section in data['sections']) {
-        _updateFirestoreSection(section, smeupFun);
-      }
-    } catch (e) {
-      SmeupLogService.writeDebugMessage('Error in getInputFields: $e',
-          logType: LogType.error);
-    }
-    return data;
-  }
-
-  _updateFirestoreSection(dynamic section, SmeupFun smeupFun) {
-    if (section['components'] != null) {
-      for (var component in section['components']) {
-        if (component['type'] == 'FLD') {
-          component['fun'] =
-              component['fun'] + ' parentFun(${smeupFun.fun.toString()})';
-        }
-      }
-    }
-
-    if (section['sections'] != null) {
-      for (var subSection in section['sections']) {
-        _updateFirestoreSection(subSection, smeupFun);
-      }
-    }
-  }
-
-  _getFireStoreFieldsVariable(SmeupFun smeupFun) {
-    List<String> firestoreFields = SmeupVariablesService.getVariable(
-        FIRESTORE_FIELDS,
-        formKey: smeupFun.formKey);
-    if (firestoreFields == null) {
-      SmeupVariablesService.setVariable(
-          FIRESTORE_FIELDS, List<String>.empty(growable: true),
-          formKey: smeupFun.formKey);
-      firestoreFields = SmeupVariablesService.getVariable(FIRESTORE_FIELDS,
-          formKey: smeupFun.formKey);
-    }
-
-    return firestoreFields;
-  }
-
-  _addFirestoFieldToList(String componentId, dynamic componentValue,
-      SmeupFun smeupFun, List<String> firestoreFields) {
-    SmeupVariablesService.setVariable(componentId, componentValue,
-        formKey: smeupFun.formKey);
-    String firestoreKey =
-        smeupFun.formKey.hashCode.toString() + '_' + componentId;
-    if (!firestoreFields.contains(firestoreKey))
-      firestoreFields.add(firestoreKey);
   }
 }
