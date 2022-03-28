@@ -156,8 +156,10 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
 
   dynamic _updateParentFun(SmeupFun smeupFun, dynamic data) {
     try {
+      String parentFun = smeupFun.getSmeupFormatString();
+
       for (var section in data['sections']) {
-        _updateFirestoreSection(section, smeupFun);
+        _updateFirestoreSection(section, parentFun);
       }
     } catch (e) {
       SmeupLogService.writeDebugMessage('Error in getInputFields: $e',
@@ -166,19 +168,18 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
     return data;
   }
 
-  _updateFirestoreSection(dynamic section, SmeupFun smeupFun) {
+  _updateFirestoreSection(dynamic section, String parentFun) {
     if (section['components'] != null) {
       for (var component in section['components']) {
         if (component['type'] == 'FLD') {
-          component['fun'] =
-              component['fun'] + ' parentFun(${smeupFun.fun.toString()})';
+          component['fun'] = component['fun'] + ' parentFun($parentFun)';
         }
       }
     }
 
     if (section['sections'] != null) {
       for (var subSection in section['sections']) {
-        _updateFirestoreSection(subSection, smeupFun);
+        _updateFirestoreSection(subSection, parentFun);
       }
     }
   }
