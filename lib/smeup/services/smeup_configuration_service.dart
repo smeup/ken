@@ -9,8 +9,6 @@ import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_data_service_interface.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
-import 'package:ken/smeup/services/transformers/null_transformer.dart';
-import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 import 'package:package_info/package_info.dart';
 import 'package:ken/smeup/services/SmeupLocalizationService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,8 +39,6 @@ class SmeupConfigurationService {
   static ExternalConfigurationModel _appConfiguration;
   static String appBarImage;
   static AuthenticationModel authenticationModel;
-  static SmeupDataTransformerInterface defaultServiceDataTransformer;
-  static SmeupDataTransformerInterface httpServiceDataTransformer;
   static bool defaultAutoAdaptHeight;
 
   static PackageInfo packageInfoModel = PackageInfo(
@@ -59,8 +55,6 @@ class SmeupConfigurationService {
       bool enableCache = false,
       AuthenticationModel authenticationModel,
       String appBarImage = '',
-      SmeupDataTransformerInterface defaultServiceDataTransformer,
-      SmeupDataTransformerInterface httpServiceDataTransformer,
       bool defaultAutoAdaptHeight = true}) async {
     await SmeupConfigurationService.setAppConfiguration();
 
@@ -78,6 +72,10 @@ class SmeupConfigurationService {
     SmeupConfigurationService.setDefaultServiceEndpoint();
     SmeupConfigurationService.setHttpServiceEndpoint();
 
+    SmeupConfigurationService.jsonsPath = 'assets/jsons';
+    SmeupConfigurationService.imagesPath = 'assets/images';
+    SmeupDataService.initInternalService();
+
     if (customDataServices != null) {
       customDataServices.entries.forEach((customService) {
         SmeupDataService.services[customService.key] = customService.value;
@@ -93,16 +91,6 @@ class SmeupConfigurationService {
     SmeupConfigurationService.setPackageInfo(packageInfoModel);
     if (context != null) SmeupConfigurationService.setHolidays(context);
     if (enableCache) SmeupCacheService.init();
-
-    SmeupConfigurationService.defaultServiceDataTransformer =
-        defaultServiceDataTransformer ?? NullTransformer();
-
-    SmeupConfigurationService.httpServiceDataTransformer =
-        httpServiceDataTransformer ?? NullTransformer();
-
-    SmeupConfigurationService.jsonsPath = 'assets/jsons';
-    SmeupConfigurationService.imagesPath = 'assets/images';
-    SmeupDataService.initInternalService();
   }
 
   static void setPackageInfo(PackageInfo packageInfo) {
@@ -234,12 +222,7 @@ class SmeupConfigurationService {
 
   static setLocalStorage() async {
     try {
-      // ignore: invalid_use_of_visible_for_testing_member
-      // SharedPreferences.setMockInitialValues(
-      //     <String, dynamic>{'DEFAULT': '', 'HTTP': ''});
       _localStorge = await SharedPreferences.getInstance();
-      //_localStorge.setString('DEFAULT', '');
-      //_localStorge.setString('HTTP', '');
     } catch (e) {
       SmeupLogService.writeDebugMessage('setLocalStorage failed: $e');
     }
@@ -247,13 +230,5 @@ class SmeupConfigurationService {
 
   static SharedPreferences getLocalStorage() {
     return _localStorge;
-  }
-
-  static getDefaultServiceDataTransformer() {
-    return defaultServiceDataTransformer;
-  }
-
-  static getHttpServiceDataTransformer() {
-    return defaultServiceDataTransformer;
   }
 }
