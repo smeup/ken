@@ -72,6 +72,9 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
                   statusCode: HttpStatus.accepted,
                   requestOptions: null));
         } catch (e) {
+          SmeupLogService.writeDebugMessage('Error in JsonDataService: $e',
+              logType: LogType.error);
+
           return SmeupServiceResponse(
               false,
               Response(
@@ -106,7 +109,9 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
         orElse: () => null);
 
     if (collection == null) {
-      throw Exception('The collection is empty');
+      final msg = 'The collection is empty';
+      SmeupLogService.writeDebugMessage(msg, logType: LogType.error);
+      throw Exception(msg);
     }
 
     QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
@@ -117,10 +122,18 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
     dynamic responseData;
 
     // Apply transformation to service response (only on success)
-    if (snapshot != null && getTransformer() is NullTransformer == false) {
+    if (snapshot == null) {
+      final msg = 'Form not found';
+      SmeupLogService.writeDebugMessage(msg, logType: LogType.error);
+      throw Exception(msg);
+    }
+
+    if (getTransformer() is NullTransformer == false) {
       responseData = getTransformer().transform(smeupFun, snapshot);
     } else {
-      throw Exception('Form not found');
+      final msg = 'No transformer defined in the service';
+      SmeupLogService.writeDebugMessage(msg, logType: LogType.error);
+      throw Exception(msg);
     }
 
     responseData = _updateParentFun(smeupFun, responseData);
@@ -128,7 +141,7 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
     SmeupLogService.writeDebugMessage(
         '*** \'SmeupJsonDataService\' getFromFirestore. collection: ${collection['value']}; form: $fileName');
 
-    return responseData;
+    return jsonEncode(responseData);
   }
 
   Future<String> getFromCustomPath(source, fileName) async {
@@ -162,7 +175,8 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
         _updateFirestoreSection(section, parentFun);
       }
     } catch (e) {
-      SmeupLogService.writeDebugMessage('Error in getInputFields: $e',
+      SmeupLogService.writeDebugMessage(
+          'Error in JsonDataService.updateParentFun: $e',
           logType: LogType.error);
     }
     return data;

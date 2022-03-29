@@ -53,7 +53,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
           (element) => element['key'] == 'collection',
           orElse: () => null);
 
-      if (collection == null) {
+      if (collection == null || collection.toString().isEmpty) {
         throw Exception('The collection is empty. FUN: $smeupFun');
       }
 
@@ -99,11 +99,11 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       final id = list.firstWhere((element) => element['key'] == 'id',
           orElse: () => null);
 
-      if (collection == null) {
+      if (collection == null || collection.toString().isEmpty) {
         throw Exception('The collection is empty. FUN: $smeupFun');
       }
 
-      if (id == null) {
+      if (id == null || id.toString().isEmpty) {
         throw Exception('The id is empty. FUN: $smeupFun');
       }
 
@@ -151,15 +151,15 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
       final key = smeupFun.fun['fun']['parentFun'];
 
-      if (collection == null) {
+      if (collection == null || collection.toString().isEmpty) {
         throw Exception('The collection is empty. FUN: $smeupFun');
       }
 
-      if (fieldId == null) {
+      if (fieldId == null || fieldId.toString().isEmpty) {
         throw Exception('The fieldId is empty. FUN: $smeupFun');
       }
 
-      if (key == null) {
+      if (key == null || key.toString().isEmpty) {
         throw Exception('The key is empty. FUN: $smeupFun');
       }
 
@@ -171,8 +171,13 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
       dynamic responseData;
 
+      if (snapshot == null || snapshot.docs.length == 0) {
+        throw Exception(
+            'key $key for the fieldId $fieldId not found. FUN: $smeupFun');
+      }
+
       // Apply transformation to service response (only on success)
-      if (snapshot != null && getTransformer() is NullTransformer == false) {
+      if (getTransformer() is NullTransformer == false) {
         responseData = getTransformer().transform(smeupFun, snapshot);
       } else {
         final message =
@@ -208,11 +213,11 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
           (element) => element['key'] == FIRESTORE_FIELDS,
           orElse: () => null);
 
-      if (collection == null) {
+      if (collection == null || collection.toString().isEmpty) {
         throw Exception('The collection is empty. FUN: $smeupFun');
       }
 
-      if (id == null) {
+      if (id == null || id.toString().isEmpty) {
         throw Exception('The id is empty. FUN: $smeupFun');
       }
 
@@ -220,8 +225,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         throw Exception('The $FIRESTORE_FIELDS is empty. FUN: $smeupFun');
       }
 
-      List<String> firestoreFields =
-          parFields[0]['value'].toString().split(',');
+      List<String> firestoreFields = parFields['value'].toString().split(',');
 
       final checkResult = _checkDocument(smeupFun);
 
@@ -242,15 +246,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
                 requestOptions: null));
       }
 
-      var formInputFields = Map<String, Object>();
-      SmeupVariablesService.getVariables(formKey: smeupFun.formKey)
-          .entries
-          .forEach((element) {
-        if (firestoreFields.contains(element.key)) {
-          formInputFields[element.key.toString().replaceFirst(
-              smeupFun.formKey.hashCode.toString() + '_', '')] = element.value;
-        }
-      });
+      var formInputFields = _getFirestoreFields(smeupFun, firestoreFields);
 
       bool isOnLine = await FirestoreShared.isInternetOn();
 
@@ -313,11 +309,11 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
           (element) => element['key'] == 'collection',
           orElse: () => null);
 
-      if (id == null) {
+      if (id == null || id.toString().isEmpty) {
         throw Exception('The id is empty. FUN: $smeupFun');
       }
 
-      if (collection == null) {
+      if (collection == null || collection.toString().isEmpty) {
         throw Exception('The collection is empty. FUN: $smeupFun');
       }
 
@@ -398,7 +394,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         (element) => element['key'] == FIRESTORE_FIELDS,
         orElse: () => null);
 
-    if (collection == null) {
+    if (collection == null || collection.toString().isEmpty) {
       throw Exception('The collection is empty. FUN: $smeupFun');
     }
 
@@ -406,7 +402,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       throw Exception('The $FIRESTORE_FIELDS is empty. FUN: $smeupFun');
     }
 
-    List<String> firestoreFields = parFields[0]['value'].toString().split(',');
+    List<String> firestoreFields = parFields['value'].toString().split(',');
 
     final checkResult = _checkDocument(smeupFun);
     if (checkResult.isNotEmpty) {
@@ -427,15 +423,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     }
 
     try {
-      var formInputFields = Map<String, Object>();
-      SmeupVariablesService.getVariables(formKey: smeupFun.formKey)
-          .entries
-          .forEach((element) {
-        if (firestoreFields.contains(element.key)) {
-          formInputFields[element.key.toString().replaceFirst(
-              smeupFun.formKey.hashCode.toString() + '_', '')] = element.value;
-        }
-      });
+      var formInputFields = _getFirestoreFields(smeupFun, firestoreFields);
 
       bool isOnLine = await FirestoreShared.isInternetOn();
 
@@ -540,5 +528,21 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
             data: messages,
             statusCode: HttpStatus.badRequest,
             requestOptions: null));
+  }
+
+  Map<String, Object> _getFirestoreFields(
+      SmeupFun smeupFun, List<String> firestoreFields) {
+    var formInputFields = Map<String, Object>();
+    SmeupVariablesService.getVariables(formKey: smeupFun.formKey)
+        .entries
+        .forEach((element) {
+      final varName = element.key
+          .toString()
+          .replaceFirst(smeupFun.formKey.hashCode.toString() + '_', '');
+      if (firestoreFields.contains(varName)) {
+        formInputFields[varName] = element.value;
+      }
+    });
+    return formInputFields;
   }
 }
