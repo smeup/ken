@@ -320,36 +320,11 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       bool isOnLine = await FirestoreShared.isInternetOn();
 
       if (isOnLine) {
-        // QuerySnapshot snapshot = await fsDatabase
-        //     .collection(FirestoreSharedService.ordersRowsCollection)
-        //     .where('idorder', isEqualTo: orderId)
-        //     .get();
-
-        // snapshot.docs.toList().forEach((orderRowDoc) async {
-        //   await fsDatabase
-        //       .collection(FirestoreSharedService.ordersRowsCollection)
-        //       .doc(orderRowDoc.id)
-        //       .delete();
-        // });
-
         await fsDatabase
             .collection(collection['value'])
             .doc(id['value'])
             .delete();
       } else {
-        // fsDatabase
-        //     .collection(FirestoreSharedService.ordersRowsCollection)
-        //     .where('idorder', isEqualTo: orderId)
-        //     .get()
-        //     .then((QuerySnapshot snapshot) {
-        //   snapshot.docs.toList().forEach((orderRowDoc) async {
-        //     fsDatabase
-        //         .collection(FirestoreSharedService.ordersRowsCollection)
-        //         .doc(orderRowDoc.id)
-        //         .delete();
-        //   });
-        // });
-
         fsDatabase.collection(collection['value']).doc(id['value']).delete();
       }
 
