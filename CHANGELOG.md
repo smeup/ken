@@ -41,3 +41,8 @@
 
 - upgrade flutter to 2.1.10
 - fix list scroll behaviour
+
+## [0.0.2+12] - 30/03/2022
+
+- add Firestore Data Service
+- refactoring data service configuration

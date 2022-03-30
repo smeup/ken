@@ -51,19 +51,27 @@ Future<SmeupServiceResponse> invoke(SmeupFun smeupFun) async {
 
     bool isValid = SmeupDataService.isValid(response.statusCode);
 
+    dynamic responseData;
+
+// Apply transformation to service response (only on success)
+    if (isValid && getTransformer() is NullTransformer == false) {
+      responseData = getTransformer().transform(smeupFun, response.data);
+    } else {
+      final message =
+          'SmeupDefaultDataService: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}';
+      responseData = _getErrorResponse(message);
+    }
+
     return SmeupServiceResponse(
         isValid,
         Response(
-            data: response.data,
+            data: responseData,
             statusCode: response.statusCode,
             requestOptions: null));
   } catch (e) {
-    return SmeupServiceResponse(
-        false,
-        Response(
-            data: 'Error in SmeupDefaultDataService',
-            statusCode: HttpStatus.badRequest,
-            requestOptions: null));
+    final message =
+        'SmeupDefaultDataService: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}: $e';
+    return _getErrorResponse(message);
   }
 }
 ```

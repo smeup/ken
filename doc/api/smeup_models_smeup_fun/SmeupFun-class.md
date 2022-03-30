@@ -93,6 +93,15 @@ _read / write_
 
 
 
+##### [getSmeupFormatString](../smeup_models_smeup_fun/SmeupFun/getSmeupFormatString.md)() [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+
+
+
+   
+
+
+
+
 ##### [isDinamismAsync](../smeup_models_smeup_fun/SmeupFun/isDinamismAsync.md)([List](https://api.flutter.dev/flutter/dart-core/List-class.html) dynamisms, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) event) [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
 
 
@@ -148,17 +157,6 @@ _inherited_
 The equality operator. [...](https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html)  
 _inherited_
 
-
-
-
-
-## Static Methods
-
-##### [extractArg](../smeup_models_smeup_fun/SmeupFun/extractArg.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) funString, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) parm, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefix = ' '}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
-
-
-
-   
 
 
 

@@ -58,10 +58,7 @@ List<Map<String, dynamic>> getParameters() {
           } else {
             value = value;
           }
-
           list.add({'key': key, 'value': value});
-
-          //SmeupVariablesService.setVariable(key, value, formKey: formKey);
         }
       });
     });

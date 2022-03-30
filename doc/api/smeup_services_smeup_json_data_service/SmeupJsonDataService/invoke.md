@@ -31,28 +31,33 @@ Future<SmeupServiceResponse> invoke(smeupFun) async {
       try {
         Map<String, dynamic> data;
 
-        if (jsons != null &&
-            jsons.keys.contains(smeupFun.fun['fun']['obj2']['k'])) {
-          data = jsons[smeupFun.fun['fun']['obj2']['k']];
+        String fileName = smeupFun.fun['fun']['obj2']['k'];
+
+        //String customFolder = smeupFun.fun['fun']['obj1']['k'];
+        List<Map<String, dynamic>> list = smeupFun.getParameters();
+
+        final sourceMap = list.firstWhere(
+            (element) => element['key'] == 'source',
+            orElse: () => null);
+        String source = sourceMap != null ? sourceMap['value'] : '';
+
+        String jsonString = '';
+
+        if (source == 'firestore') {
+          jsonString = await getFromFirestore(smeupFun, fileName);
+        } else if (source.isNotEmpty) {
+          jsonString = await getFromCustomPath(source, fileName);
         } else {
-          String customFolder = smeupFun.fun['fun']['obj1']['k'];
-          String fileName = smeupFun.fun['fun']['obj2']['k'];
-
-          String jsonFilePath = customFolder.isEmpty
-              ? '${SmeupConfigurationService.jsonsPath}/forms/$fileName.json'
-              : '$customFolder/$fileName.json';
-
-          SmeupLogService.writeDebugMessage(
-              '*** http request \'SmeupJsonDataService\': $jsonFilePath');
-
-          String jsonString = await rootBundle.loadString(jsonFilePath);
-
-          jsonString =
-              SmeupUtilities.replaceDictionaryPlaceHolders(jsonString);
-
-          data = jsonDecode(jsonString);
+          jsonString = await getFromDefaultFolder(source, fileName);
         }
 
+        // replace placeholders
+        jsonString = SmeupUtilities.replaceDictionaryPlaceHolders(jsonString);
+
+        // decode
+        data = jsonDecode(jsonString);
+
+        // return the response
         var response = Response(
             data: data,
             statusCode: HttpStatus.accepted,
@@ -68,6 +73,9 @@ Future<SmeupServiceResponse> invoke(smeupFun) async {
                 statusCode: HttpStatus.accepted,
                 requestOptions: null));
       } catch (e) {
+        SmeupLogService.writeDebugMessage('Error in JsonDataService: $e',
+            logType: LogType.error);
+
         return SmeupServiceResponse(
             false,
             Response(

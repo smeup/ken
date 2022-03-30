@@ -26,7 +26,7 @@
 
 ## Constructors
 
-[SmeupHttpDataService](../smeup_services_smeup_http_data_service/SmeupHttpDataService/SmeupHttpDataService.md) ([SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer)
+[SmeupHttpDataService](../smeup_services_smeup_http_data_service/SmeupHttpDataService/SmeupHttpDataService.md) ({[SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer})
 
     
 

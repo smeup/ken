@@ -1,7 +1,7 @@
 
 
 
-# SmeupDataTransformerInterface class
+# FirestoreShared class
 
 
 
@@ -11,20 +11,12 @@
 
 
 
-
-
-
-
-
-**Implementers**
-
-- [NullTransformer](../smeup_services_transformers_null_transformer/NullTransformer-class.md)
 
 
 
 ## Constructors
 
-[SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface/SmeupDataTransformerInterface.md) ()
+[FirestoreShared](../smeup_services_firestore_shared/FirestoreShared/FirestoreShared.md) ()
 
     
 
@@ -70,15 +62,6 @@ _inherited_
 
 
 
-##### [transform](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface/transform.md)([SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun, dynamic data) [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)
-
-
-
-   
-
-
-
-
 
 ## Operators
 
@@ -89,6 +72,26 @@ _inherited_
 The equality operator. [...](https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html)  
 _inherited_
 
+
+
+
+
+## Static Methods
+
+##### [getSource](../smeup_services_firestore_shared/FirestoreShared/getSource.md)() [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[Source](https://pub.dev/documentation/cloud_firestore_platform_interface/5.5.1/cloud_firestore_platform_interface/Source.html)>
+
+
+
+   
+
+
+
+
+##### [isInternetOn](../smeup_services_firestore_shared/FirestoreShared/isInternetOn.md)() [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)>
+
+
+
+   
 
 
 

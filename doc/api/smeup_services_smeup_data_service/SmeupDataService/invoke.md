@@ -59,16 +59,6 @@ static Future<SmeupServiceResponse> invoke(SmeupFun smeupFun,
   else
     response = await smeupDataService.invoke(newSmeupFun);
 
-  // Apply transformation to service response (only on success)
-  if (response.succeded &&
-      smeupDataService.getTransformer() is NullTransformer == false) {
-    var data = response.result.data;
-    if (data is Map) {
-      response.result.data =
-          smeupDataService.getTransformer().transform(smeupFun, data);
-    }
-  }
-
   return response;
 }
 ```
