@@ -9,7 +9,7 @@
 
 
 
-SmeupMessageDataService()
+SmeupMessageDataService({[SmeupDataTransformerInterface](../../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer})
 
 
 
@@ -18,7 +18,8 @@ SmeupMessageDataService()
 ## Implementation
 
 ```dart
-SmeupMessageDataService() : super(NullTransformer());
+SmeupMessageDataService({SmeupDataTransformerInterface transformer})
+    : super(transformer);
 ```
 
 

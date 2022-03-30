@@ -9,7 +9,7 @@
 
 
 
-SmeupDefaultDataService([SmeupDataTransformerInterface](../../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer)
+SmeupDefaultDataService({[SmeupDataTransformerInterface](../../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer})
 
 
 
@@ -18,7 +18,7 @@ SmeupDefaultDataService([SmeupDataTransformerInterface](../../smeup_services_tra
 ## Implementation
 
 ```dart
-SmeupDefaultDataService(SmeupDataTransformerInterface transformer)
+SmeupDefaultDataService({SmeupDataTransformerInterface transformer})
     : super(transformer) {
   BaseOptions options = new BaseOptions(
     connectTimeout: DEFAULD_TIMEOUT,

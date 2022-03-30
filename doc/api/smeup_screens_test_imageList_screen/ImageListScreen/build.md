@@ -82,7 +82,7 @@ Widget build(BuildContext context) {
                     {
                       "code":
                           "packages/ken/assets/images/image_list_blue_Tavola disegno 1.png",
-                      "description": "first image",
+                      "description": "I am a reveille",
                       "info": "boh1",
                       "isRemote": false,
                       "width": 200,
@@ -91,7 +91,7 @@ Widget build(BuildContext context) {
                     {
                       "code":
                           "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 2.png",
-                      "description": "second image",
+                      "description": "I am a ball",
                       "info": "boh2",
                       "isRemote": false,
                       "width": 200,
@@ -100,7 +100,7 @@ Widget build(BuildContext context) {
                     {
                       "code":
                           "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 3.png",
-                      "description": "third image",
+                      "description": "I am a telephone",
                       "info": "boh3",
                       "isRemote": false,
                       "width": 200,
@@ -109,7 +109,7 @@ Widget build(BuildContext context) {
                     {
                       "code":
                           "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 4.png",
-                      "description": "fourth image",
+                      "description": "I am a fruit",
                       "info": "boh3",
                       "isRemote": false,
                       "width": 200,
@@ -118,7 +118,7 @@ Widget build(BuildContext context) {
                     {
                       "code":
                           "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 5.png",
-                      "description": "fifth image",
+                      "description": "I am a cherry",
                       "info": "boh2",
                       "isRemote": false,
                       "width": 200,

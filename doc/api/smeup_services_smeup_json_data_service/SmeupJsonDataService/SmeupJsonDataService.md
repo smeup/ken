@@ -9,7 +9,7 @@
 
 
 
-SmeupJsonDataService()
+SmeupJsonDataService({[SmeupDataTransformerInterface](../../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer, [FirebaseFirestore](https://pub.dev/documentation/cloud_firestore/2.5.4/cloud_firestore/FirebaseFirestore-class.html) firestoreInstance})
 
 
 
@@ -18,7 +18,9 @@ SmeupJsonDataService()
 ## Implementation
 
 ```dart
-SmeupJsonDataService() : super(NullTransformer());
+SmeupJsonDataService(
+    {SmeupDataTransformerInterface transformer, this.firestoreInstance})
+    : super(transformer);
 ```
 
 

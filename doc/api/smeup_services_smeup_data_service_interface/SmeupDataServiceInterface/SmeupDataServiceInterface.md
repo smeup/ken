@@ -19,6 +19,7 @@ SmeupDataServiceInterface([SmeupDataTransformerInterface](../../smeup_services_t
 
 ```dart
 SmeupDataServiceInterface(SmeupDataTransformerInterface transformer) {
+  if (transformer == null) transformer = NullTransformer();
   this.transformer = transformer;
 }
 ```

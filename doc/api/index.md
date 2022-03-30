@@ -85,6 +85,14 @@ The dynamic use of the component is a definition of the widget in a json file, w
  
 
 
+##### [firestore_data_service](smeup_services_firestore_data_service/smeup_services_firestore_data_service-library.md)
+ 
+
+
+##### [firestore_shared](smeup_services_firestore_shared/smeup_services_firestore_shared-library.md)
+ 
+
+
 ##### [gauge_screen](smeup_screens_test_gauge_screen/smeup_screens_test_gauge_screen-library.md)
  
 

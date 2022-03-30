@@ -26,12 +26,21 @@
 
 ## Constructors
 
-[SmeupJsonDataService](../smeup_services_smeup_json_data_service/SmeupJsonDataService/SmeupJsonDataService.md) ()
+[SmeupJsonDataService](../smeup_services_smeup_json_data_service/SmeupJsonDataService/SmeupJsonDataService.md) ({[SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer, [FirebaseFirestore](https://pub.dev/documentation/cloud_firestore/2.5.4/cloud_firestore/FirebaseFirestore-class.html) firestoreInstance})
 
     
 
 
 ## Properties
+
+##### [firestoreInstance](../smeup_services_smeup_json_data_service/SmeupJsonDataService/firestoreInstance.md) &#8596; [FirebaseFirestore](https://pub.dev/documentation/cloud_firestore/2.5.4/cloud_firestore/FirebaseFirestore-class.html)
+
+
+
+   
+_read / write_
+
+
 
 ##### [hashCode](https://api.flutter.dev/flutter/dart-core/Object/hashCode.html) &#8594; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
 
@@ -39,15 +48,6 @@
 
 The hash code for this object. [...](https://api.flutter.dev/flutter/dart-core/Object/hashCode.html)  
 _read-only, inherited_
-
-
-
-##### [jsons](../smeup_services_smeup_json_data_service/SmeupJsonDataService/jsons.md) &#8596; [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic>>
-
-
-
-   
-_read / write_
 
 
 
@@ -71,6 +71,33 @@ _read / write, inherited_
 
 
 ## Methods
+
+##### [getFromCustomPath](../smeup_services_smeup_json_data_service/SmeupJsonDataService/getFromCustomPath.md)(dynamic source, dynamic fileName) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>
+
+
+
+   
+
+
+
+
+##### [getFromDefaultFolder](../smeup_services_smeup_json_data_service/SmeupJsonDataService/getFromDefaultFolder.md)(dynamic source, dynamic fileName) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>
+
+
+
+   
+
+
+
+
+##### [getFromFirestore](../smeup_services_smeup_json_data_service/SmeupJsonDataService/getFromFirestore.md)([SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun, dynamic fileName) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>
+
+
+
+   
+
+
+
 
 ##### [getTransformer](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface/getTransformer.md)() [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)
 
