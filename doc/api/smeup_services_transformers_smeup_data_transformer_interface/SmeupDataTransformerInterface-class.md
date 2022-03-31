@@ -70,7 +70,7 @@ _inherited_
 
 
 
-##### [transform](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface/transform.md)([SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun, [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) data) [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)
+##### [transform](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface/transform.md)([SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun, dynamic data) [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)
 
 
 

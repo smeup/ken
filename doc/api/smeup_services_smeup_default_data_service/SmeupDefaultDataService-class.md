@@ -26,7 +26,7 @@
 
 ## Constructors
 
-[SmeupDefaultDataService](../smeup_services_smeup_default_data_service/SmeupDefaultDataService/SmeupDefaultDataService.md) ([SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer)
+[SmeupDefaultDataService](../smeup_services_smeup_default_data_service/SmeupDefaultDataService/SmeupDefaultDataService.md) ({[SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer})
 
     
 

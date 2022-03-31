@@ -6,10 +6,11 @@ import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_data_service_interface.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
-import 'package:ken/smeup/services/transformers/null_transformer.dart';
+import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 
 class SmeupImageDataService extends SmeupDataServiceInterface {
-  SmeupImageDataService() : super(NullTransformer());
+  SmeupImageDataService({SmeupDataTransformerInterface transformer})
+      : super(transformer);
 
   @override
   Future<SmeupServiceResponse> invoke(smeupFun, {BuildContext context}) async {

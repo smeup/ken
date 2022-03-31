@@ -26,7 +26,7 @@
 
 ## Constructors
 
-[SmeupMessageDataService](../smeup_services_smeup_message_data_service/SmeupMessageDataService/SmeupMessageDataService.md) ()
+[SmeupMessageDataService](../smeup_services_smeup_message_data_service/SmeupMessageDataService/SmeupMessageDataService.md) ({[SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer})
 
     
 

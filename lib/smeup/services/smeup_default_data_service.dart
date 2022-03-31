@@ -9,6 +9,7 @@ import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_data_service_interface.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
+import 'package:ken/smeup/services/transformers/null_transformer.dart';
 import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 
 class SmeupDefaultDataService extends SmeupDataServiceInterface {
@@ -16,7 +17,7 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
   String server;
   static const DEFAULD_TIMEOUT = 10000;
 
-  SmeupDefaultDataService(SmeupDataTransformerInterface transformer)
+  SmeupDefaultDataService({SmeupDataTransformerInterface transformer})
       : super(transformer) {
     BaseOptions options = new BaseOptions(
       connectTimeout: DEFAULD_TIMEOUT,
@@ -52,20 +53,46 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
 
       bool isValid = SmeupDataService.isValid(response.statusCode);
 
+      dynamic responseData;
+
+// Apply transformation to service response (only on success)
+      if (isValid && getTransformer() is NullTransformer == false) {
+        responseData = getTransformer().transform(smeupFun, response.data);
+      } else {
+        final message =
+            'SmeupDefaultDataService: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}';
+        responseData = _getErrorResponse(message);
+      }
+
       return SmeupServiceResponse(
           isValid,
           Response(
-              data: response.data,
+              data: responseData,
               statusCode: response.statusCode,
               requestOptions: null));
     } catch (e) {
-      return SmeupServiceResponse(
-          false,
-          Response(
-              data: 'Error in SmeupDefaultDataService',
-              statusCode: HttpStatus.badRequest,
-              requestOptions: null));
+      final message =
+          'SmeupDefaultDataService: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}: $e';
+      return _getErrorResponse(message);
     }
+  }
+
+  SmeupServiceResponse _getErrorResponse(String message) {
+    final messages = {
+      "messages": [
+        {
+          "gravity": LogType.error,
+          "message": message,
+        }
+      ]
+    };
+    SmeupLogService.writeDebugMessage(message, logType: LogType.error);
+    return SmeupServiceResponse(
+        false,
+        Response(
+            data: messages,
+            statusCode: HttpStatus.badRequest,
+            requestOptions: null));
   }
 
   Future<Response> invokeDio(
