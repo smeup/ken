@@ -853,9 +853,9 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
       final String imageColName = col['code'];
       final String ogg = data[imageColName];
 
-      String buttonText = _extractArg(ogg, 'T');
-      String buttonFun = _extractArg(ogg, 'E');
-      String buttonIcon = _extractArg(ogg, 'I');
+      String buttonText = SmeupFun.extractArg(ogg, 'T');
+      String buttonFun = SmeupFun.extractArg(ogg, 'E');
+      String buttonIcon = SmeupFun.extractArg(ogg, 'I');
 
       final List split = buttonIcon.split(';');
       if (split.length == 3) {
@@ -906,40 +906,6 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     });
 
     return widgetBtns;
-  }
-
-  String _extractArg(String funString, String parm, {String prefix = ' '}) {
-    String arg = '';
-
-    if (funString.startsWith(parm)) {
-      funString = prefix + funString;
-    }
-
-    int startIdx = funString.indexOf('$prefix$parm(');
-    if (startIdx >= 0) {
-      startIdx += (parm.length + prefix.length);
-
-      int endIdx = 0;
-
-      //endIdx = funString.indexOf(')', startIdx);
-      int parCount = 0;
-      final split = funString.split('');
-      for (var i = startIdx; i < split.length; i++) {
-        final character = split[i];
-        if (character == '(') parCount += 1;
-        if (character == ')') {
-          parCount -= 1;
-          if (parCount == 0) {
-            endIdx = i;
-            break;
-          }
-        }
-      }
-
-      arg = funString.substring(startIdx, endIdx);
-      if (arg.startsWith('(')) arg = arg.substring(1);
-    }
-    return arg;
   }
 
   void _manageTap(index, data) {

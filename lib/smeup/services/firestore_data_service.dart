@@ -53,14 +53,31 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
           (element) => element['key'] == 'collection',
           orElse: () => null);
 
+      final filters = list.firstWhere((element) => element['key'] == 'filters',
+          orElse: () => null);
+
       if (collection == null || collection.toString().isEmpty) {
         throw Exception('The collection is empty. FUN: $smeupFun');
       }
 
-      QuerySnapshot<Map<String, dynamic>> snapshot = await fsDatabase
-          .collection(collection['value'])
+      Query<Map<String, dynamic>> query =
+          fsDatabase.collection(collection['value'])
           //.orderBy(orderBy, descending: true)
-          .get(options);
+          ;
+
+      if (filters != null && filters.toString().isNotEmpty) {
+        var parmsSplit = SmeupFun.splitParameters(filters['value']);
+        parmsSplit.forEach((element) {
+          Map ds = SmeupFun.deserilizeParameter(element);
+          final key = ds['key'];
+          var value = ds['value'];
+          query = query.where(key, isEqualTo: value);
+        });
+      }
+
+      // TODO: order by
+
+      QuerySnapshot<Map<String, dynamic>> snapshot = await query.get(options);
 
       dynamic responseData;
 
