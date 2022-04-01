@@ -75,7 +75,14 @@ class SmeupFun {
 
     if (parms == null || parms.isEmpty) return list;
 
-    List<String> parmsSplit = parms.split(';');
+    var parmsSplit = List<String>.empty(growable: true);
+    RegExp re = RegExp(r'[a-zA-Z0-9]+\([^)]*\)');
+    re.allMatches(parms).forEach((match) {
+      var parm = parms.substring(match.start, match.end);
+      print(parm);
+      parmsSplit.add(parm);
+    });
+
     if (parmsSplit.length == 0) return list;
 
     try {
@@ -294,7 +301,7 @@ class SmeupFun {
           String parameters = 'P(';
           for (var p = 0; p < parms.length; p++) {
             final parm = parms[p];
-            final sep = p < parms.length - 1 ? ';' : '';
+            final sep = p < parms.length - 1 ? ' ' : '';
             parameters += '${parm["key"]}(${parm["value"]})$sep';
           }
           parameters += ')';
