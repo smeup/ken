@@ -174,8 +174,6 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       final fieldId = list.firstWhere((element) => element['key'] == 'fieldId',
           orElse: () => null);
 
-      final key = smeupFun.fun['fun']['parentFun'];
-
       if (collection == null || collection.toString().isEmpty) {
         throw Exception('The collection is empty. FUN: $smeupFun');
       }
@@ -183,6 +181,9 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       if (fieldId == null || fieldId.toString().isEmpty) {
         throw Exception('The fieldId is empty. FUN: $smeupFun');
       }
+
+      final server = smeupFun.fun['fun']['SERVER'];
+      final key = SmeupFun.extractArg(server, 'parentFun');
 
       if (key == null || key.toString().isEmpty) {
         throw Exception('The key is empty. FUN: $smeupFun');

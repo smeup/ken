@@ -86,6 +86,26 @@ class SmeupFun {
     return list;
   }
 
+  List<Map<String, dynamic>> getServer() {
+    var list = List<Map<String, dynamic>>.empty(growable: true);
+
+    if (fun['fun'] == null) return list;
+
+    final parms = fun['fun']['SERVER'];
+
+    if (parms == null || parms.isEmpty) return list;
+
+    try {
+      list = extractParametersList(parms, formKey);
+    } catch (e) {
+      SmeupLogService.writeDebugMessage(
+          'Error in _parseFromSmeupSyntax while extracting P: $parms ',
+          logType: LogType.error);
+    }
+
+    return list;
+  }
+
   static List<Map<String, dynamic>> extractParametersList(
       String parms, GlobalKey<FormState> formKey) {
     var list = List<Map<String, dynamic>>.empty(growable: true);
@@ -98,12 +118,6 @@ class SmeupFun {
       parm = parm.trim();
       RegExp re = RegExp(r'\([^)]*\)');
       re.allMatches(parm).forEach((match) {
-        // final key = parm.substring(0, parm.indexOf('('));
-
-        // int indIni = parm.indexOf("(");
-        // int indEnd = parm.lastIndexOf(")");
-        // var value = parm.substring(indIni + 1, indEnd);
-
         Map ds = deserilizeParameter(parm);
         final key = ds['key'];
         var value = ds['value'];
@@ -168,7 +182,7 @@ class SmeupFun {
     fun['fun']['obj5'] = Map();
     fun['fun']['obj6'] = Map();
     fun['fun']['P'] = '';
-    fun['fun']['parentFun'] = '';
+    fun['fun']['SERVER'] = '';
     fun['fun']['INPUT'] = '';
     fun['fun']['SG'] = {'cache': 0, 'forceCache': false};
     fun['fun']['G'] = '';
@@ -226,8 +240,8 @@ class SmeupFun {
     arg = extractArg(funString, 'G');
     fun['fun']['G'] = arg;
 
-    arg = extractArg(funString, 'parentFun');
-    fun['fun']['parentFun'] = arg;
+    arg = extractArg(funString, 'SERVER');
+    fun['fun']['SERVER'] = arg;
   }
 
   static String extractArg(String funString, String parm,
@@ -344,6 +358,21 @@ class SmeupFun {
       // G
       if (fun['fun']['G'] != null && fun['fun']['G'].toString().isNotEmpty) {
         smeupFormatString += ' G(${fun['fun']['G']})';
+      }
+
+      // SERVER
+      if (fun['fun']['SERVER'] != null) {
+        List<Map<String, dynamic>> parms = getServer();
+        if (parms.length > 0) {
+          String parameters = 'SERVER(';
+          for (var p = 0; p < parms.length; p++) {
+            final parm = parms[p];
+            final sep = p < parms.length - 1 ? ' ' : '';
+            parameters += '${parm["key"]}(${parm["value"]})$sep';
+          }
+          parameters += ')';
+          smeupFormatString += ' $parameters';
+        }
       }
 
       // ----

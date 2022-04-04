@@ -186,7 +186,16 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
     if (section['components'] != null) {
       for (var component in section['components']) {
         if (component['type'] == 'FLD') {
-          component['fun'] = component['fun'] + ' parentFun($parentFun)';
+          if (component['fun'].toString().indexOf('SERVER(') < 0) {
+            component['fun'] =
+                component['fun'] + ' SERVER(parentFun($parentFun))';
+          } else {
+            // TODO:
+            //  - deserialize the fun as SmeupFun(..) from component['fun']
+            //  - add the SERVER object
+            //  - add the parentfun into the SERVER OBJECT
+            //  - serialize the fun back to component['fun']
+          }
         }
       }
     }
