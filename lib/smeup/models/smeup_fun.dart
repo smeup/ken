@@ -141,7 +141,8 @@ class SmeupFun {
 
   static List<String> splitParameters(String parms) {
     var parmsSplit = List<String>.empty(growable: true);
-    RegExp re = RegExp(r'[a-zA-Z0-9]+\(+(?<=\()(?:[^()]+|\([^)]+\))+(?=\))*\)');
+    RegExp re =
+        RegExp(r'[a-zA-Z0-9]+\(+(?<=\()(?:[^()]+|\([^)]+\))+(?=\))*\)*\)');
     re.allMatches(parms).forEach((match) {
       var parm = parms.substring(match.start, match.end);
       print(parm);

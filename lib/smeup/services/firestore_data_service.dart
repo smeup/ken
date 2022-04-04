@@ -44,18 +44,19 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
   Future<SmeupServiceResponse> getDocuments(SmeupFun smeupFun) async {
     try {
-      List<Map<String, dynamic>> list = smeupFun.getParameters();
+      List<Map<String, dynamic>> serverList = smeupFun.getServer();
 
       final options = GetOptions(source: await FirestoreShared.getSource());
 
-      final collection = list.firstWhere(
+      final collection = serverList.firstWhere(
           (element) => element['key'] == 'collection',
           orElse: () => null);
 
-      final filters = list.firstWhere((element) => element['key'] == 'filters',
+      final filters = serverList.firstWhere(
+          (element) => element['key'] == 'filters',
           orElse: () => null);
 
-      final sort = list.firstWhere((element) => element['key'] == 'sort',
+      final sort = serverList.firstWhere((element) => element['key'] == 'sort',
           orElse: () => null);
 
       if (collection == null || collection.toString().isEmpty) {
@@ -113,15 +114,16 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
   Future<SmeupServiceResponse> getDocument(SmeupFun smeupFun) async {
     try {
-      List<Map<String, dynamic>> list = smeupFun.getParameters();
+      List<Map<String, dynamic>> parametersList = smeupFun.getParameters();
+      List<Map<String, dynamic>> serverList = smeupFun.getServer();
 
       final options = GetOptions(source: await FirestoreShared.getSource());
 
-      final collection = list.firstWhere(
+      final collection = serverList.firstWhere(
           (element) => element['key'] == 'collection',
           orElse: () => null);
 
-      final id = list.firstWhere((element) => element['key'] == 'id',
+      final id = parametersList.firstWhere((element) => element['key'] == 'id',
           orElse: () => null);
 
       if (collection == null || collection.toString().isEmpty) {
@@ -163,15 +165,17 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
   Future<SmeupServiceResponse> getDocumentDefault(SmeupFun smeupFun) async {
     try {
-      List<Map<String, dynamic>> list = smeupFun.getParameters();
+      List<Map<String, dynamic>> parametersList = smeupFun.getParameters();
+      List<Map<String, dynamic>> serverList = smeupFun.getServer();
 
       final options = GetOptions(source: await FirestoreShared.getSource());
 
-      final collection = list.firstWhere(
+      final collection = serverList.firstWhere(
           (element) => element['key'] == 'collection',
           orElse: () => null);
 
-      final fieldId = list.firstWhere((element) => element['key'] == 'fieldId',
+      final fieldId = parametersList.firstWhere(
+          (element) => element['key'] == 'fieldId',
           orElse: () => null);
 
       if (collection == null || collection.toString().isEmpty) {
@@ -226,13 +230,14 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
   Future<SmeupServiceResponse> updateDocument(SmeupFun smeupFun) async {
     try {
-      List<Map<String, dynamic>> list = smeupFun.getParameters();
+      List<Map<String, dynamic>> parametersList = smeupFun.getParameters();
+      List<Map<String, dynamic>> serverList = smeupFun.getServer();
 
-      final collection = list.firstWhere(
+      final collection = serverList.firstWhere(
           (element) => element['key'] == 'collection',
           orElse: () => null);
 
-      final id = list.firstWhere((element) => element['key'] == 'id',
+      final id = parametersList.firstWhere((element) => element['key'] == 'id',
           orElse: () => null);
 
       if (collection == null || collection.toString().isEmpty) {
@@ -245,7 +250,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
       var formInputFields = Map<String, dynamic>();
 
-      for (var field in list) {
+      for (var field in parametersList) {
         if (field['key'] == 'collection') continue;
         if (field['key'] == 'id') continue;
         formInputFields[field['key']] = field['value'];
@@ -327,12 +332,13 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
   Future<SmeupServiceResponse> deleteDocument(SmeupFun smeupFun) async {
     try {
-      List<Map<String, dynamic>> list = smeupFun.getParameters();
+      List<Map<String, dynamic>> parametersList = smeupFun.getParameters();
+      List<Map<String, dynamic>> serverList = smeupFun.getServer();
 
-      final id = list.firstWhere((element) => element['key'] == 'id',
+      final id = parametersList.firstWhere((element) => element['key'] == 'id',
           orElse: () => null);
 
-      final collection = list.firstWhere(
+      final collection = serverList.firstWhere(
           (element) => element['key'] == 'collection',
           orElse: () => null);
 
@@ -386,9 +392,10 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
   }
 
   Future<SmeupServiceResponse> writeDocument(SmeupFun smeupFun) async {
-    List<Map<String, dynamic>> list = smeupFun.getParameters();
+    List<Map<String, dynamic>> parametersList = smeupFun.getParameters();
+    List<Map<String, dynamic>> serverList = smeupFun.getServer();
 
-    final collection = list.firstWhere(
+    final collection = serverList.firstWhere(
         (element) => element['key'] == 'collection',
         orElse: () => null);
 
@@ -398,7 +405,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
     var formInputFields = Map<String, dynamic>();
 
-    for (var field in list) {
+    for (var field in parametersList) {
       if (field['key'] == 'collection') continue;
       formInputFields[field['key']] = field['value'];
     }

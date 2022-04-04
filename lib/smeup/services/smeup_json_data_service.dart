@@ -33,7 +33,7 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
           String fileName = smeupFun.fun['fun']['obj2']['k'];
 
           //String customFolder = smeupFun.fun['fun']['obj1']['k'];
-          List<Map<String, dynamic>> list = smeupFun.getParameters();
+          List<Map<String, dynamic>> list = smeupFun.getServer();
 
           final sourceMap = list.firstWhere(
               (element) => element['key'] == 'source',
@@ -100,7 +100,7 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
     if (firestoreInstance == null)
       throw Exception('Firebase instance not valid');
 
-    List<Map<String, dynamic>> list = smeupFun.getParameters();
+    List<Map<String, dynamic>> list = smeupFun.getServer();
 
     final options = GetOptions(source: await FirestoreShared.getSource());
 
@@ -172,7 +172,7 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
       String parentFun = smeupFun.getSmeupFormatString();
 
       for (var section in data['sections']) {
-        _updateFirestoreSection(section, parentFun);
+        _updateFirestoreSection(section, parentFun, smeupFun);
       }
     } catch (e) {
       SmeupLogService.writeDebugMessage(
@@ -182,7 +182,8 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
     return data;
   }
 
-  _updateFirestoreSection(dynamic section, String parentFun) {
+  _updateFirestoreSection(
+      dynamic section, String parentFun, SmeupFun smeupFun) {
     if (section['components'] != null) {
       for (var component in section['components']) {
         if (component['type'] == 'FLD') {
@@ -190,11 +191,11 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
             component['fun'] =
                 component['fun'] + ' SERVER(parentFun($parentFun))';
           } else {
-            // TODO:
-            //  - deserialize the fun as SmeupFun(..) from component['fun']
-            //  - add the SERVER object
-            //  - add the parentfun into the SERVER OBJECT
-            //  - serialize the fun back to component['fun']
+            String oldServer = SmeupFun.extractArg(component['fun'], 'SERVER');
+            String newServer = oldServer + ' parentFun($parentFun)';
+            component['fun'] =
+                component['fun'].toString().replaceAll(oldServer, newServer);
+            print('object');
           }
         }
       }
@@ -202,7 +203,7 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
 
     if (section['sections'] != null) {
       for (var subSection in section['sections']) {
-        _updateFirestoreSection(subSection, parentFun);
+        _updateFirestoreSection(subSection, parentFun, smeupFun);
       }
     }
   }
