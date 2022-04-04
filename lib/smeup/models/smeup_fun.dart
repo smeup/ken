@@ -75,36 +75,8 @@ class SmeupFun {
 
     if (parms == null || parms.isEmpty) return list;
 
-    List<String> parmsSplit = parms.split(';');
-    if (parmsSplit.length == 0) return list;
-
     try {
-      parmsSplit.forEach((parm) {
-        parm = parm.trim();
-        RegExp re = RegExp(r'\([^)]*\)');
-        re.allMatches(parm).forEach((match) {
-          final key = parm.substring(0, parm.indexOf('('));
-          var value = parm
-              .substring(match.start, match.end)
-              .replaceFirst('(', '')
-              .replaceFirst(')', '');
-          if (key != null && key.isNotEmpty) {
-            if (value.toString().startsWith('[')) {
-              String varName = value
-                  .toString()
-                  .trim()
-                  .replaceAll('[', '')
-                  .replaceAll(']', '');
-              value =
-                  SmeupVariablesService.getVariable(varName, formKey: formKey)
-                      .toString();
-            } else {
-              value = value;
-            }
-            list.add({'key': key, 'value': value});
-          }
-        });
-      });
+      list = extractParametersList(parms, formKey);
     } catch (e) {
       SmeupLogService.writeDebugMessage(
           'Error in _parseFromSmeupSyntax while extracting P: $parms ',
@@ -112,6 +84,81 @@ class SmeupFun {
     }
 
     return list;
+  }
+
+  List<Map<String, dynamic>> getServer() {
+    var list = List<Map<String, dynamic>>.empty(growable: true);
+
+    if (fun['fun'] == null) return list;
+
+    final parms = fun['fun']['SERVER'];
+
+    if (parms == null || parms.isEmpty) return list;
+
+    try {
+      list = extractParametersList(parms, formKey);
+    } catch (e) {
+      SmeupLogService.writeDebugMessage(
+          'Error in _parseFromSmeupSyntax while extracting P: $parms ',
+          logType: LogType.error);
+    }
+
+    return list;
+  }
+
+  static List<Map<String, dynamic>> extractParametersList(
+      String parms, GlobalKey<FormState> formKey) {
+    var list = List<Map<String, dynamic>>.empty(growable: true);
+
+    var parmsSplit = splitParameters(parms);
+
+    if (parmsSplit.length == 0) return list;
+
+    parmsSplit.forEach((parm) {
+      parm = parm.trim();
+      RegExp re = RegExp(r'\([^)]*\)');
+      re.allMatches(parm).forEach((match) {
+        Map ds = deserilizeParameter(parm);
+        final key = ds['key'];
+        var value = ds['value'];
+
+        if (key != null && key.isNotEmpty) {
+          if (value.toString().startsWith('[')) {
+            String varName =
+                value.toString().trim().replaceAll('[', '').replaceAll(']', '');
+            value = SmeupVariablesService.getVariable(varName, formKey: formKey)
+                .toString();
+          } else {
+            value = value;
+          }
+          list.add({'key': key, 'value': value});
+        }
+      });
+    });
+
+    return list;
+  }
+
+  static List<String> splitParameters(String parms) {
+    var parmsSplit = List<String>.empty(growable: true);
+    RegExp re =
+        RegExp(r'[a-zA-Z0-9]+\(+(?<=\()(?:[^()]+|\([^)]+\))+(?=\))*\)*\)');
+    re.allMatches(parms).forEach((match) {
+      var parm = parms.substring(match.start, match.end);
+      print(parm);
+      parmsSplit.add(parm);
+    });
+    return parmsSplit;
+  }
+
+  static Map deserilizeParameter(String parm) {
+    final key = parm.substring(0, parm.indexOf('('));
+
+    int indIni = parm.indexOf("(");
+    int indEnd = parm.lastIndexOf(")");
+    var value = parm.substring(indIni + 1, indEnd);
+
+    return {"key": key, "value": value};
   }
 
   void saveParameters(GlobalKey<FormState> formKey) {
@@ -136,7 +183,7 @@ class SmeupFun {
     fun['fun']['obj5'] = Map();
     fun['fun']['obj6'] = Map();
     fun['fun']['P'] = '';
-    fun['fun']['parentFun'] = '';
+    fun['fun']['SERVER'] = '';
     fun['fun']['INPUT'] = '';
     fun['fun']['SG'] = {'cache': 0, 'forceCache': false};
     fun['fun']['G'] = '';
@@ -145,14 +192,14 @@ class SmeupFun {
     funString = ' $funString';
     String arg = '';
 
-    arg = _extractArg(funString, 'F');
+    arg = extractArg(funString, 'F');
     var argSplit = arg.split(';');
     if (argSplit.length > 0) fun['fun']['component'] = argSplit[0];
     if (argSplit.length > 1) fun['fun']['service'] = argSplit[1];
     if (argSplit.length > 2) fun['fun']['function'] = argSplit[2];
 
     for (var i = 1; i < 7; i++) {
-      arg = _extractArg(funString, i.toString());
+      arg = extractArg(funString, i.toString());
       argSplit = arg.split(';');
       String valT = '';
       String valP = '';
@@ -166,24 +213,24 @@ class SmeupFun {
       fun['fun']['obj$i']['k'] = valK;
     }
 
-    arg = _extractArg(funString, 'P');
+    arg = extractArg(funString, 'P');
     fun['fun']['P'] = arg;
 
-    arg = _extractArg(funString, 'INPUT');
+    arg = extractArg(funString, 'INPUT');
     fun['fun']['INPUT'] = arg;
 
-    arg = _extractArg(funString, 'NOTIFY');
+    arg = extractArg(funString, 'NOTIFY');
     fun['fun']['NOTIFY'] = arg;
 
-    arg = _extractArg(funString, 'SG');
+    arg = extractArg(funString, 'SG');
     argSplit = arg.split(',');
     String val1 = '';
     String val2 = '';
     if (argSplit.length > 0) val1 = argSplit[0].trim();
     if (argSplit.length > 1) val2 = argSplit[1].trim();
     String cache =
-        _extractArg(val1.contains('cache') ? val1 : val2, 'cache', prefix: '');
-    String forceCache = _extractArg(
+        extractArg(val1.contains('cache') ? val1 : val2, 'cache', prefix: '');
+    String forceCache = extractArg(
         val1.contains('forceCache') ? val1 : val2, 'forceCache',
         prefix: '');
     fun['fun']['SG'] = {
@@ -191,14 +238,15 @@ class SmeupFun {
       "forceCache": forceCache.toLowerCase() == 'yes' ? true : false
     };
 
-    arg = _extractArg(funString, 'G');
+    arg = extractArg(funString, 'G');
     fun['fun']['G'] = arg;
 
-    arg = _extractArg(funString, 'parentFun');
-    fun['fun']['parentFun'] = arg;
+    arg = extractArg(funString, 'SERVER');
+    fun['fun']['SERVER'] = arg;
   }
 
-  String _extractArg(String funString, String parm, {String prefix = ' '}) {
+  static String extractArg(String funString, String parm,
+      {String prefix = ' '}) {
     String arg = '';
 
     if (funString.startsWith(parm)) {
@@ -294,7 +342,7 @@ class SmeupFun {
           String parameters = 'P(';
           for (var p = 0; p < parms.length; p++) {
             final parm = parms[p];
-            final sep = p < parms.length - 1 ? ';' : '';
+            final sep = p < parms.length - 1 ? ' ' : '';
             parameters += '${parm["key"]}(${parm["value"]})$sep';
           }
           parameters += ')';
@@ -311,6 +359,21 @@ class SmeupFun {
       // G
       if (fun['fun']['G'] != null && fun['fun']['G'].toString().isNotEmpty) {
         smeupFormatString += ' G(${fun['fun']['G']})';
+      }
+
+      // SERVER
+      if (fun['fun']['SERVER'] != null) {
+        List<Map<String, dynamic>> parms = getServer();
+        if (parms.length > 0) {
+          String parameters = 'SERVER(';
+          for (var p = 0; p < parms.length; p++) {
+            final parm = parms[p];
+            final sep = p < parms.length - 1 ? ' ' : '';
+            parameters += '${parm["key"]}(${parm["value"]})$sep';
+          }
+          parameters += ')';
+          smeupFormatString += ' $parameters';
+        }
       }
 
       // ----
