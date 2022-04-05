@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/daos/smeup_qrcode_reader_dao.dart';
 import 'package:ken/smeup/models/widgets/smeup_data_interface.dart';
+import 'package:ken/smeup/models/widgets/smeup_input_field_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_model.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 
-class SmeupQRCodeReaderModel extends SmeupModel implements SmeupDataInterface {
+class SmeupQRCodeReaderModel extends SmeupInputFieldModel
+    implements SmeupDataInterface {
   static const double defaultPadding = 5.0;
   static const double defaultSize = 200;
   static const int defaultMaxReads = 1;
@@ -31,16 +33,12 @@ class SmeupQRCodeReaderModel extends SmeupModel implements SmeupDataInterface {
   }
 
   SmeupQRCodeReaderModel.fromMap(
-    Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
-  ) : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-        ) {
+      Map<String, dynamic> jsonMap,
+      GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
+      SmeupModel parent)
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context, parent) {
     padding =
         SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
     size = SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultSize;

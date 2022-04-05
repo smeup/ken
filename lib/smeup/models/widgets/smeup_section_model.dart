@@ -30,6 +30,7 @@ import 'package:ken/smeup/models/widgets/smeup_tree_model.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 
+import '../../services/smeup_utilities.dart';
 import 'smeup_datepicker_model.dart';
 
 class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
@@ -42,6 +43,7 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
   double width;
   double height;
   bool autoAdaptHeight;
+  SmeupModel parentForm;
 
   SmeupSectionModel.fromMap(
       Map<String, dynamic> jsonMap,
@@ -58,10 +60,17 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
     String tmp = jsonMap['dim'] ?? '';
     tmp = tmp.replaceAll('%', '');
     dim = double.tryParse(tmp) ?? 0;
+    id = SmeupUtilities.getWidgetId('', jsonMap['id']);
     layout = jsonMap['layout'];
     selectedTabColName = jsonMap['selectedTabColName'];
-    if (parent is SmeupFormModel) autoAdaptHeight = parent.autoAdaptHeight;
-    if (parent is SmeupSectionModel) autoAdaptHeight = parent.autoAdaptHeight;
+    if (parent is SmeupFormModel) {
+      autoAdaptHeight = parent.autoAdaptHeight;
+      parentForm = parent;
+    }
+    if (parent is SmeupSectionModel) {
+      autoAdaptHeight = parent.autoAdaptHeight;
+      parentForm = parent.parentForm;
+    }
 
     _replaceSelectedTabIndex(jsonMap);
 
@@ -149,12 +158,12 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
                       v, formKey, scaffoldKey, context);
                   break;
                 case 'cmb':
-                  model =
-                      SmeupComboModel.fromMap(v, formKey, scaffoldKey, context);
+                  model = SmeupComboModel.fromMap(
+                      v, formKey, scaffoldKey, context, this);
                   break;
                 case 'itx':
                   model = SmeupTextFieldModel.fromMap(
-                      v, formKey, scaffoldKey, context);
+                      v, formKey, scaffoldKey, context, this);
                   break;
                 case 'pgb':
                   model = SmeupProgressBarModel.fromMap(
@@ -170,11 +179,11 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
                   break;
                 case 'qrc':
                   model = SmeupQRCodeReaderModel.fromMap(
-                      v, formKey, scaffoldKey, context);
+                      v, formKey, scaffoldKey, context, this);
                   break;
                 case 'rad':
                   model = SmeupRadioButtonsModel.fromMap(
-                      v, formKey, scaffoldKey, context);
+                      v, formKey, scaffoldKey, context, this);
                   break;
                 case 'sld':
                   model = SmeupSliderModel.fromMap(
@@ -220,7 +229,7 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
         }
 
         if (model != null) {
-          model.parent = this;
+          if (model.parent == null) model.parent = this;
           components.add(model);
         }
       });
