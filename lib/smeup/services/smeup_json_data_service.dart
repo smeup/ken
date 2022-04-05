@@ -136,8 +136,6 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
       throw Exception(msg);
     }
 
-    responseData = _updateParentFun(smeupFun, responseData);
-
     SmeupLogService.writeDebugMessage(
         '*** \'SmeupJsonDataService\' getFromFirestore. collection: ${collection['value']}; form: $fileName');
 
@@ -165,46 +163,5 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
         '*** \'SmeupJsonDataService\' getFromDefaultFolder: $jsonFilePath');
 
     return jsonString;
-  }
-
-  dynamic _updateParentFun(SmeupFun smeupFun, dynamic data) {
-    try {
-      String parentFun = smeupFun.getSmeupFormatString();
-
-      for (var section in data['sections']) {
-        _updateFirestoreSection(section, parentFun, smeupFun);
-      }
-    } catch (e) {
-      SmeupLogService.writeDebugMessage(
-          'Error in JsonDataService.updateParentFun: $e',
-          logType: LogType.error);
-    }
-    return data;
-  }
-
-  _updateFirestoreSection(
-      dynamic section, String parentFun, SmeupFun smeupFun) {
-    if (section['components'] != null) {
-      for (var component in section['components']) {
-        if (component['type'] == 'FLD') {
-          if (component['fun'].toString().indexOf('SERVER(') < 0) {
-            component['fun'] =
-                component['fun'] + ' SERVER(parentFun($parentFun))';
-          } else {
-            String oldServer = SmeupFun.extractArg(component['fun'], 'SERVER');
-            String newServer = oldServer + ' parentFun($parentFun)';
-            component['fun'] =
-                component['fun'].toString().replaceAll(oldServer, newServer);
-            print('object');
-          }
-        }
-      }
-    }
-
-    if (section['sections'] != null) {
-      for (var subSection in section['sections']) {
-        _updateFirestoreSection(subSection, parentFun, smeupFun);
-      }
-    }
   }
 }

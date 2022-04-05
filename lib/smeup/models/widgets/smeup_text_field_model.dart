@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/daos/smeup_text_field_dao.dart';
 import 'package:ken/smeup/models/widgets/smeup_data_interface.dart';
+import 'package:ken/smeup/models/widgets/smeup_input_field_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_model.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 
-class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
+class SmeupTextFieldModel extends SmeupInputFieldModel
+    implements SmeupDataInterface {
   // supported by json_theme
   static double defaultFontSize;
   static Color defaultBackColor;
@@ -93,16 +95,12 @@ class SmeupTextFieldModel extends SmeupModel implements SmeupDataInterface {
   }
 
   SmeupTextFieldModel.fromMap(
-    Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
-  ) : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-        ) {
+      Map<String, dynamic> jsonMap,
+      GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
+      SmeupModel parent)
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context, parent) {
     setDefaults(this);
 
     backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??
