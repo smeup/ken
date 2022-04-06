@@ -41,7 +41,7 @@ class SmeupTextAutocomplete extends StatefulWidget
   double? height;
   EdgeInsetsGeometry? padding;
   bool? showborder;
-  List<dynamic>? data;
+  List<Map<dynamic, dynamic>>? data;
   bool? underline;
   bool? autoFocus;
   String? title;
@@ -147,7 +147,7 @@ class SmeupTextAutocomplete extends StatefulWidget
 
     // set the widget data
     if (workData != null) {
-      var newList = List<dynamic>.empty(growable: true);
+      var newList = List<Map<dynamic, dynamic>>.empty(growable: true);
       for (var i = 0; i < (workData['rows'] as List).length; i++) {
         final element = workData['rows'][i];
         newList.add({
@@ -171,7 +171,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
   SmeupTextAutocompleteModel? _model;
   dynamic _data;
 
-  List<Object>? _options;
+  List<Map<dynamic, dynamic>>? _options;
 
   @override
   void initState() {
@@ -219,6 +219,9 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
     TextStyle captionStyle = _getCaptionStile();
     IconThemeData iconTheme = _getIconTheme();
 
+    String _displayStringForOption(Map<dynamic, dynamic> option) =>
+        option['value'];
+
     Widget children;
 
     children = Container(
@@ -229,15 +232,16 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                 border: Border.all(
                     color: widget.borderColor!, width: widget.borderWidth!))
             : null,
-        child: RawAutocomplete<Object>(
+        child: RawAutocomplete<Map<dynamic, dynamic>>(
           optionsBuilder: (TextEditingValue textEditingValue) {
-            return _options!.where((dynamic option) {
+            return _options!.where((Map<dynamic, dynamic> option) {
               return option['value']
                   .toString()
                   .toLowerCase()
                   .contains(textEditingValue.text.toLowerCase());
             });
           },
+          displayStringForOption: _displayStringForOption,
           fieldViewBuilder: (BuildContext context,
               TextEditingController textEditingController,
               FocusNode focusNode,
@@ -326,8 +330,8 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
             ]);
           },
           optionsViewBuilder: (BuildContext context,
-              AutocompleteOnSelected<Object> onSelected,
-              Iterable<dynamic> options) {
+              AutocompleteOnSelected<Map<dynamic, dynamic>> onSelected,
+              Iterable<Map<dynamic, dynamic>> options) {
             return Align(
               alignment: Alignment.topLeft,
               child: Material(
@@ -339,10 +343,11 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                     padding: const EdgeInsets.all(8.0),
                     itemCount: options.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final dynamic option = options.elementAt(index);
+                      final Map<dynamic, dynamic> option =
+                          options.elementAt(index);
                       return GestureDetector(
                         onTap: () {
-                          onSelected(option['value']);
+                          onSelected(option);
                           SmeupVariablesService.setVariable(
                               widget.id, option['code'],
                               formKey: widget.formKey);
