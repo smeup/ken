@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -13,11 +14,11 @@ import 'package:ken/smeup/services/transformers/null_transformer.dart';
 import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 
 class SmeupDefaultDataService extends SmeupDataServiceInterface {
-  Dio dio;
-  String server;
+  late Dio dio;
+  String? server;
   static const DEFAULD_TIMEOUT = 10000;
 
-  SmeupDefaultDataService({SmeupDataTransformerInterface transformer})
+  SmeupDefaultDataService({SmeupDataTransformerInterface? transformer})
       : super(transformer) {
     BaseOptions options = new BaseOptions(
       connectTimeout: DEFAULD_TIMEOUT,
@@ -30,7 +31,7 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
   Future<SmeupServiceResponse> invoke(SmeupFun smeupFun) async {
     try {
       dynamic data;
-      Response response;
+      Response? response;
       String url;
       String contentType;
 
@@ -51,13 +52,13 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
 
       SmeupDataService.writeResponseResult(response, 'SmeupDefaultDataService');
 
-      bool isValid = SmeupDataService.isValid(response.statusCode);
+      bool isValid = SmeupDataService.isValid(response!.statusCode!);
 
       dynamic responseData;
 
 // Apply transformation to service response (only on success)
       if (isValid && getTransformer() is NullTransformer == false) {
-        responseData = getTransformer().transform(smeupFun, response.data);
+        responseData = getTransformer()!.transform(smeupFun, response.data);
       } else {
         final message =
             'SmeupDefaultDataService: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}';
@@ -69,7 +70,7 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
           Response(
               data: responseData,
               statusCode: response.statusCode,
-              requestOptions: null));
+              requestOptions: RequestOptions(path: '')));
     } catch (e) {
       final message =
           'SmeupDefaultDataService: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}: $e';
@@ -92,14 +93,14 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
         Response(
             data: messages,
             statusCode: HttpStatus.badRequest,
-            requestOptions: null));
+            requestOptions: RequestOptions(path: '')));
   }
 
-  Future<Response> invokeDio(
-      {String method,
-      String url,
+  Future<Response?> invokeDio(
+      {String? method,
+      String? url,
       dynamic body,
-      String contentType,
+      String? contentType,
       int cache = 0,
       bool forceCache = false}) async {
     DateTime start = DateTime.now();
@@ -108,7 +109,7 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
       final cacheDuration = Duration(
           days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: cache);
 
-      Response responseFromCache =
+      Response? responseFromCache =
           await _getResposeFromCache(url, body, forceCache);
       if (responseFromCache != null) {
         SmeupDataService.printRequestDuration(start);
@@ -119,23 +120,23 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
       dio.options.headers['content-type'] = contentType;
 
       dio.options.headers['Authorization'] =
-          SmeupConfigurationService.getLocalStorage()
+          SmeupConfigurationService.getLocalStorage()!
               .getString('authorization');
 
-      Response response;
+      late Response response;
 
       switch (method) {
         case 'post':
-          response = await dio.post(url, data: body);
+          response = await dio.post(url!, data: body);
           break;
         case 'put':
-          response = await dio.put(url, data: body);
+          response = await dio.put(url!, data: body);
           break;
         case 'get':
-          response = await dio.get(url);
+          response = await dio.get(url!);
           break;
         case 'delete':
-          response = await dio.delete(url);
+          response = await dio.delete(url!);
           break;
       }
 
@@ -145,9 +146,8 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
         SmeupDataService.printRequestDuration(start);
         return response;
       });
-    } catch (e) {
-      SmeupLogService.writeDebugMessage(
-          '_invoke dio error: $e (${e.message != null ? e.message : ''})',
+    } on DioError catch (e) {
+      SmeupLogService.writeDebugMessage('_invoke dio error: $e (${e.message})',
           logType: LogType.error);
       SmeupDataService.printRequestDuration(start);
       if (e.response != null) {
@@ -156,13 +156,13 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
         return Response(
             data: 'Unkwnown Error',
             statusCode: HttpStatus.badRequest,
-            requestOptions: null);
+            requestOptions: RequestOptions(path: ''));
       }
     }
   }
 
-  Future<Response> _getResposeFromCache(
-      String url, dynamic body, bool forceCache) async {
+  Future<Response>? _getResposeFromCache(
+      String? url, dynamic body, bool forceCache) async {
     if (forceCache) {
       try {
         SmeupLogService.writeDebugMessage(
@@ -181,19 +181,17 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
             return Future(() {
               SmeupLogService.writeDebugMessage('no cache found ...');
               return null;
-            });
+            } as FutureOr<List<String>> Function());
           });
 
-          if (list != null) {
-            dynamic result = jsonDecode(list.first);
-            SmeupLogService.writeDebugMessage(
-                'response returned from the cache ...',
-                logType: LogType.warning);
-            return Response(
-                data: result,
-                statusCode: HttpStatus.accepted,
-                requestOptions: null);
-          }
+          dynamic result = jsonDecode(list.first);
+          SmeupLogService.writeDebugMessage(
+              'response returned from the cache ...',
+              logType: LogType.warning);
+          return Response(
+              data: result,
+              statusCode: HttpStatus.accepted,
+              requestOptions: RequestOptions(path: ''));
         }
       } catch (e) {
         SmeupLogService.writeDebugMessage(
@@ -204,12 +202,12 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
 
     return Future(() {
       return null;
-    });
+    } as FutureOr<Response<dynamic>> Function());
   }
 
-  void _addResposeToCache(Response<dynamic> response, String url, dynamic body,
+  void _addResposeToCache(Response<dynamic> response, String? url, dynamic body,
       Duration cacheExpireTime) async {
-    if (SmeupDataService.isValid(response.statusCode) &&
+    if (SmeupDataService.isValid(response.statusCode!) &&
         cacheExpireTime.inSeconds > 0) {
       SmeupLogService.writeDebugMessage('caching the response ....');
 

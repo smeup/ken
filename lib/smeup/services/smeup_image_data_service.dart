@@ -9,11 +9,11 @@ import 'package:ken/smeup/services/smeup_service_response.dart';
 import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 
 class SmeupImageDataService extends SmeupDataServiceInterface {
-  SmeupImageDataService({SmeupDataTransformerInterface transformer})
+  SmeupImageDataService({SmeupDataTransformerInterface? transformer})
       : super(transformer);
 
   @override
-  Future<SmeupServiceResponse> invoke(smeupFun, {BuildContext context}) async {
+  Future<SmeupServiceResponse> invoke(smeupFun, {BuildContext? context}) async {
     try {
       SmeupLogService.writeDebugMessage(
           '*** \'SmeupImageDataService\': ${smeupFun.fun['fun']['obj1']['k']}');
@@ -28,7 +28,7 @@ class SmeupImageDataService extends SmeupDataServiceInterface {
           Response(
               data: 'Error in SmeupImageDataService',
               statusCode: HttpStatus.badRequest,
-              requestOptions: null));
+              requestOptions: RequestOptions(path: '')));
     }
   }
 }

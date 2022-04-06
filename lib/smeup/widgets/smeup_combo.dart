@@ -19,35 +19,35 @@ class SmeupCombo extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
-  double fontSize;
-  Color fontColor;
-  bool fontBold;
-  Color backColor;
-  bool captionFontBold;
-  double captionFontSize;
-  Color captionFontColor;
-  Color captionBackColor;
-  double iconSize;
-  Color iconColor;
+  double? fontSize;
+  Color? fontColor;
+  bool? fontBold;
+  Color? backColor;
+  bool? captionFontBold;
+  double? captionFontSize;
+  Color? captionFontColor;
+  Color? captionBackColor;
+  double? iconSize;
+  Color? iconColor;
 
-  bool underline;
-  double innerSpace;
-  Alignment align;
-  SmeupComboModel model;
-  EdgeInsetsGeometry padding;
-  List<SmeupComboItemModel> data;
-  String id;
-  String type;
-  String title;
-  String selectedValue;
-  String valueField;
-  String label;
-  String descriptionField;
-  double width;
-  double height;
-  void Function(String newValue) clientOnChange;
+  bool? underline;
+  double? innerSpace;
+  Alignment? align;
+  SmeupComboModel? model;
+  EdgeInsetsGeometry? padding;
+  List<SmeupComboItemModel>? data;
+  String? id;
+  String? type;
+  String? title;
+  String? selectedValue;
+  String? valueField;
+  String? label;
+  String? descriptionField;
+  double? width;
+  double? height;
+  void Function(String? newValue)? clientOnChange;
 
   SmeupCombo(
     this.scaffoldKey,
@@ -83,16 +83,16 @@ class SmeupCombo extends StatefulWidget
   }
 
   SmeupCombo.withController(
-    this.model,
+    SmeupComboModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupComboModel m = model;
+    SmeupComboModel m = model as SmeupComboModel;
     id = m.id;
     type = m.type;
     title = m.title;
@@ -121,7 +121,7 @@ class SmeupCombo extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupComboModel m = model;
+    SmeupComboModel m = model as SmeupComboModel;
 
     // change data format
     var workData = formatDataFields(m);
@@ -147,16 +147,16 @@ class SmeupCombo extends StatefulWidget
 class _SmeupComboState extends State<SmeupCombo>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupComboModel _model;
-  List<SmeupComboItemModel> _data;
-  String _selectedValue;
+  SmeupComboModel? _model;
+  List<SmeupComboItemModel>? _data;
+  String? _selectedValue;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
     _selectedValue = widget.selectedValue;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -180,10 +180,10 @@ class _SmeupComboState extends State<SmeupCombo>
 
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupComboDao.getData(_model);
-        _data = widget.treatData(_model);
+        await SmeupComboDao.getData(_model!);
+        _data = widget.treatData(_model!);
       }
       setDataLoad(widget.id, true);
     }
@@ -191,9 +191,9 @@ class _SmeupComboState extends State<SmeupCombo>
     SmeupVariablesService.setVariable(widget.id, _selectedValue,
         formKey: widget.formKey);
 
-    var text = widget.label.isEmpty
+    var text = widget.label!.isEmpty
         ? Container()
-        : Text(widget.label,
+        : Text(widget.label!,
             textAlign: TextAlign.center, style: _getCaptionStile());
 
     final combo = Align(
@@ -215,18 +215,18 @@ class _SmeupComboState extends State<SmeupCombo>
             captionFontSize: widget.captionFontSize,
             captionBackColor: widget.captionBackColor,
             selectedValue: _selectedValue,
-            clientOnChange: (String newValue) {
+            clientOnChange: (String? newValue) {
               _selectedValue = newValue;
               SmeupVariablesService.setVariable(widget.id, newValue,
                   formKey: widget.formKey);
               if (widget.clientOnChange != null) {
-                widget.clientOnChange(newValue);
+                widget.clientOnChange!(newValue);
               }
             },
           )),
     );
 
-    var line = widget.underline
+    var line = widget.underline!
         ? SmeupLine(widget.scaffoldKey, widget.formKey)
         : Container();
 
@@ -239,7 +239,7 @@ class _SmeupComboState extends State<SmeupCombo>
           children: [
             text,
             SizedBox(width: widget.innerSpace),
-            Expanded(child: Align(child: combo, alignment: widget.align)),
+            Expanded(child: Align(child: combo, alignment: widget.align!)),
           ],
         ),
         line
@@ -255,7 +255,7 @@ class _SmeupComboState extends State<SmeupCombo>
               Expanded(
                   child: Align(
                 child: combo,
-                alignment: widget.align,
+                alignment: widget.align!,
               )),
               SizedBox(width: widget.innerSpace),
               text,
@@ -326,12 +326,12 @@ class _SmeupComboState extends State<SmeupCombo>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
+    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
         color: widget.captionFontColor, fontSize: widget.captionFontSize);
 
-    if (widget.captionFontBold) {
+    if (widget.captionFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );

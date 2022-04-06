@@ -5,9 +5,9 @@ import 'package:ken/smeup/services/smeup_variables_service.dart';
 
 class SmeupFun {
   dynamic fun;
-  GlobalKey<FormState> formKey;
-  GlobalKey<ScaffoldState> scaffoldKey;
-  BuildContext context;
+  GlobalKey<FormState>? formKey;
+  GlobalKey<ScaffoldState>? scaffoldKey;
+  BuildContext? context;
 
   SmeupFun(dynamic dynamicFun, this.formKey, this.scaffoldKey, this.context) {
     // the object to parse is empty:
@@ -47,7 +47,7 @@ class SmeupFun {
   SmeupFun.fromServiceName(String service) {
     fun = Map();
     fun['fun'] = Map();
-    if (service == null || service.isEmpty) {
+    if (service.isEmpty) {
       return;
     }
     fun['fun']['component'] = '';
@@ -107,7 +107,7 @@ class SmeupFun {
   }
 
   static List<Map<String, dynamic>> extractParametersList(
-      String parms, GlobalKey<FormState> formKey) {
+      String parms, GlobalKey<FormState>? formKey) {
     var list = List<Map<String, dynamic>>.empty(growable: true);
 
     var parmsSplit = splitParameters(parms);
@@ -145,7 +145,7 @@ class SmeupFun {
         RegExp(r'[a-zA-Z0-9]+\(+(?<=\()(?:[^()]+|\([^)]+\))+(?=\))*\)*\)');
     re.allMatches(parms).forEach((match) {
       var parm = parms.substring(match.start, match.end);
-      print(parm);
+      //print(parm);
       parmsSplit.add(parm);
     });
     return parmsSplit;
@@ -161,7 +161,7 @@ class SmeupFun {
     return {"key": key, "value": value};
   }
 
-  void saveParameters(GlobalKey<FormState> formKey) {
+  void saveParameters(GlobalKey<FormState>? formKey) {
     List<Map<String, dynamic>> list = getParameters();
     list.forEach((element) {
       SmeupVariablesService.setVariable(element['key'], element['value'],
@@ -282,15 +282,15 @@ class SmeupFun {
 
   bool isFunValid() {
     if (fun != null &&
-        (fun['fun'] as Map) != null &&
+        (fun['fun'] as Map?) != null &&
         (fun['fun'] as Map).entries.length > 0) return true;
     return false;
   }
 
-  bool isDinamismAsync(List dynamisms, String event) {
+  bool isDinamismAsync(List? dynamisms, String event) {
     if (dynamisms == null) return true;
 
-    Map dynamism = dynamisms.firstWhere((element) => element['event'] == event,
+    Map? dynamism = dynamisms.firstWhere((element) => element['event'] == event,
         orElse: () => null);
 
     if (dynamism == null) return true;

@@ -12,19 +12,19 @@ class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 0;
   static const double defaultHeight = 0;
 
-  EdgeInsetsGeometry padding;
-  double fontSize;
-  double iconSize;
-  double width;
-  double height;
-  List<SmeupInputPanelField> fields;
+  EdgeInsetsGeometry? padding;
+  double? fontSize;
+  double? iconSize;
+  double? width;
+  double? height;
+  List<SmeupInputPanelField>? fields;
 
   SmeupInputPanelModel({
     id,
     type,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
     title = '',
     this.width = defaultWidth,
     this.height = defaultHeight,
@@ -36,9 +36,9 @@ class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupInputPanelModel.fromMap(
     Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
   ) : super.fromMap(
           jsonMap,
           formKey,
@@ -46,17 +46,17 @@ class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
           context,
         ) {
     padding =
-        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
+        SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     fontSize =
-        SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontSize;
+        SmeupUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
 
     title = jsonMap['title'] == null || jsonMap['title'] == '*NONE'
         ? ''
         : jsonMap['title'];
 
-    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+    width = SmeupUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height =
-        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+        SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {

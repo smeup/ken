@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/smeup_fun.dart';
@@ -12,30 +13,30 @@ import 'smeup_dao.dart';
 class SmeupInputPanelDao extends SmeupDao {
   static Future<void> getData(
       SmeupInputPanelModel model,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context) async {
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context) async {
     await SmeupDao.getData(model, executeDecrementDataFetch: false);
 
     List columns = model.data["columns"];
-    Map rowFields = model.data["rows"][0];
+    Map? rowFields = model.data["rows"][0];
 
     model.fields = _createFields(columns, rowFields);
 
     var layoutData =
-        await _getLayoutData(model.options, formKey, scaffoldKey, context);
+        await _getLayoutData(model.options!, formKey, scaffoldKey, context);
     if (layoutData != null) {
       await _applyLayout(
-          model.fields, layoutData["data"], formKey, scaffoldKey, context);
+          model.fields!, layoutData["data"], formKey, scaffoldKey, context);
     }
     SmeupDataService.decrementDataFetch(model.id);
   }
 
-  static Future<Map> _getLayoutData(
+  static Future<Map?> _getLayoutData(
       Map<String, dynamic> options,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context) async {
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context) async {
     // Experimental only
     final optionsDefault = LinkedHashMap<String, dynamic>(
         equals: (a, b) => a.toLowerCase() == b.toLowerCase(),
@@ -55,7 +56,7 @@ class SmeupInputPanelDao extends SmeupDao {
           formKey,
           scaffoldKey,
           context);
-      SmeupServiceResponse response = await SmeupDataService.invoke(smeupFun);
+      SmeupServiceResponse response = await (SmeupDataService.invoke(smeupFun));
       if (response.succeded) {
         return response.result.data;
       } else {
@@ -65,7 +66,8 @@ class SmeupInputPanelDao extends SmeupDao {
     return null;
   }
 
-  static List<SmeupInputPanelField> _createFields(List columns, Map rowFields) {
+  static List<SmeupInputPanelField> _createFields(
+      List columns, Map? rowFields) {
     List<SmeupInputPanelField> fields = columns
         .map((column) => SmeupInputPanelField(
             id: column["code"],
@@ -74,10 +76,8 @@ class SmeupInputPanelDao extends SmeupDao {
             visible: column["IO"] != 'H'))
         .toList();
     fields.forEach((field) {
-      if (field != null) {
-        String code = rowFields[field.id];
-        field.value = SmeupInputPanelValue(code: code, descr: code);
-      }
+      String? code = rowFields![field.id];
+      field.value = SmeupInputPanelValue(code: code, descr: code);
     });
     return fields;
   }
@@ -85,9 +85,9 @@ class SmeupInputPanelDao extends SmeupDao {
   static Future<void> _applyLayout(
       List<SmeupInputPanelField> fields,
       String layoutData,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context) async {
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context) async {
     int position = 0;
     XmlDocument doc = XmlDocument.parse(layoutData);
     fields.forEach((field) => field.visible = false);
@@ -108,16 +108,16 @@ class SmeupInputPanelDao extends SmeupDao {
     fields.sort((a, b) => a.position.compareTo(b.position));
   }
 
-  static Future<List<SmeupInputPanelValue>> _getComboData(
+  static Future<List<SmeupInputPanelValue>?> _getComboData(
       SmeupInputPanelField field,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context) async {
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context) async {
     field.items = [];
     if (field.fun != null) {
       final fun = SmeupFun(field.fun, formKey, scaffoldKey, context);
       SmeupServiceResponse response = await SmeupDataService.invoke(fun);
-      List rows;
+      List? rows;
       if (response.succeded) {
         rows = response.result.data["rows"];
       } else {
@@ -125,7 +125,7 @@ class SmeupInputPanelDao extends SmeupDao {
       }
       if (rows != null) {
         rows.forEach((row) {
-          field.items.add(
+          field.items!.add(
               SmeupInputPanelValue(code: row["codice"], descr: row["testo"]));
         });
       }

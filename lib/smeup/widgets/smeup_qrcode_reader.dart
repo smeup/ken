@@ -16,27 +16,27 @@ class SmeupQRCodeReader extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
   // Graphics properties
-  double padding;
-  double size;
-  Function onDataRead;
-  int maxReads;
-  int delayInMillis;
-  bool showLoader;
+  double? padding;
+  double? size;
+  Function? onDataRead;
+  int? maxReads;
+  int? delayInMillis;
+  bool? showLoader;
 
-  SmeupQRCodeReaderModel model;
+  SmeupQRCodeReaderModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
-  String id;
-  String type;
+  GlobalKey<FormState>? formKey;
+  String? id;
+  String? type;
 
-  String data;
+  String? data;
 
   SmeupQRCodeReader.withController(
-    this.model,
+    SmeupQRCodeReaderModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   SmeupQRCodeReader(this.scaffoldKey, this.formKey,
@@ -54,7 +54,7 @@ class SmeupQRCodeReader extends StatefulWidget
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupQRCodeReaderModel m = model;
+    SmeupQRCodeReaderModel m = model as SmeupQRCodeReaderModel;
     id = m.id;
     type = m.type;
     padding = m.padding;
@@ -66,7 +66,7 @@ class SmeupQRCodeReader extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupQRCodeReaderModel m = model;
+    SmeupQRCodeReaderModel m = model as SmeupQRCodeReaderModel;
 
     // change data format
     var workData = formatDataFields(m);
@@ -81,7 +81,7 @@ class SmeupQRCodeReader extends StatefulWidget
 class _SmeupQRCodeReaderState extends State<SmeupQRCodeReader>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupQRCodeReaderModel _model;
+  SmeupQRCodeReaderModel? _model;
   dynamic _data;
 
   @override
@@ -89,7 +89,7 @@ class _SmeupQRCodeReaderState extends State<SmeupQRCodeReader>
     _model = widget.model;
     _data = widget.data;
 
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -114,10 +114,10 @@ class _SmeupQRCodeReaderState extends State<SmeupQRCodeReader>
 
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupQRCodeReaderDao.getData(_model);
-        _data = widget.treatData(_model);
+        await SmeupQRCodeReaderDao.getData(_model!);
+        _data = widget.treatData(_model!);
       }
       setDataLoad(widget.id, true);
     }
@@ -133,7 +133,7 @@ class _SmeupQRCodeReaderState extends State<SmeupQRCodeReader>
 
     children = Center(
       child: Container(
-        padding: EdgeInsets.all(widget.padding),
+        padding: EdgeInsets.all(widget.padding!),
         child: QrImage(
           data: _data,
           size: widget.size,

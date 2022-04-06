@@ -18,23 +18,23 @@ import 'package:provider/provider.dart';
 class SmeupCarousel extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupCarouselModel model;
+  SmeupCarouselModel? model;
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
+  final GlobalKey<FormState>? formKey;
 
-  List<Map> data;
-  String id;
-  String type;
-  double height;
-  bool autoPlay;
-  String title;
+  List<Map>? data;
+  String? id;
+  String? type;
+  double? height;
+  bool? autoPlay;
+  String? title;
 
   SmeupCarousel.withController(
-    this.model,
+    SmeupCarouselModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   SmeupCarousel(this.scaffoldKey, this.formKey, this.data,
@@ -49,7 +49,7 @@ class SmeupCarousel extends StatefulWidget
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupCarouselModel m = model;
+    SmeupCarouselModel m = model as SmeupCarouselModel;
     id = m.id;
     type = m.type;
     height = m.height;
@@ -61,7 +61,7 @@ class SmeupCarousel extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupCarouselModel m = model;
+    SmeupCarouselModel m = model as SmeupCarouselModel;
 
     // change data format
     var workData = formatDataFields(m);
@@ -91,14 +91,14 @@ class _SmeupCarouselState extends State<SmeupCarousel>
     implements SmeupWidgetStateInterface {
   int _initialIndex = 0;
 
-  SmeupCarouselModel _model;
+  SmeupCarouselModel? _model;
   dynamic _data;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -123,10 +123,10 @@ class _SmeupCarouselState extends State<SmeupCarousel>
 
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupCarouselDao.getData(_model);
-        _data = widget.treatData(_model);
+        await SmeupCarouselDao.getData(_model!);
+        _data = widget.treatData(_model!);
       }
       setDataLoad(widget.id, true);
     }
@@ -148,7 +148,7 @@ class _SmeupCarouselState extends State<SmeupCarousel>
       options: CarouselOptions(
           initialPage: _initialIndex,
           height: widget.height,
-          autoPlay: widget.autoPlay,
+          autoPlay: widget.autoPlay!,
           onPageChanged: (index, reason) {
             notifier.setIndex(index);
           }),

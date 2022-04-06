@@ -13,33 +13,33 @@ import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 class SmeupTree extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupTreeModel model;
+  SmeupTreeModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
-  List<dynamic> data;
-  String title;
-  String id;
-  String type;
-  Function onClientClick;
-  double width;
-  double height;
-  double labelFontSize;
-  Color labelBackColor;
-  Color labelFontColor;
-  bool labelFontbold;
-  double labelVerticalSpacing;
-  double labelHeight;
-  double parentFontSize;
-  Color parentBackColor;
-  Color parentFontColor;
-  bool parentFontbold;
-  double parentVerticalSpacing;
-  double parentHeight;
+  List<dynamic>? data;
+  String? title;
+  String? id;
+  String? type;
+  Function? onClientClick;
+  double? width;
+  double? height;
+  double? labelFontSize;
+  Color? labelBackColor;
+  Color? labelFontColor;
+  bool? labelFontbold;
+  double? labelVerticalSpacing;
+  double? labelHeight;
+  double? parentFontSize;
+  Color? parentBackColor;
+  Color? parentFontColor;
+  bool? parentFontbold;
+  double? parentVerticalSpacing;
+  double? parentHeight;
 
-  SmeupTree.withController(this.model, this.scaffoldKey, this.formKey)
+  SmeupTree.withController(SmeupTreeModel this.model, this.scaffoldKey, this.formKey)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   SmeupTree(
@@ -73,7 +73,7 @@ class SmeupTree extends StatefulWidget
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupTreeModel m = model;
+    SmeupTreeModel m = model as SmeupTreeModel;
     id = m.id;
     type = m.type;
     title = m.title;
@@ -95,7 +95,7 @@ class SmeupTree extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupTreeModel m = model;
+    SmeupTreeModel m = model as SmeupTreeModel;
 
     // change data format
     // ignore: unused_local_variable
@@ -121,7 +121,7 @@ class SmeupTree extends StatefulWidget
 class _SmeupTreeState extends State<SmeupTree>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupTreeModel _model;
+  SmeupTreeModel? _model;
   // List<dynamic> _data;
 
   // TreeViewTheme _treeViewTheme = TreeViewTheme(
@@ -153,7 +153,7 @@ class _SmeupTreeState extends State<SmeupTree>
   void initState() {
     _model = widget.model;
     //_data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -178,15 +178,15 @@ class _SmeupTreeState extends State<SmeupTree>
 
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    Widget children;
+    Widget? children;
 
-    double treeHeight = widget.height;
-    double treeWidth = widget.width;
-    if (_model != null && _model.parent != null) {
+    double? treeHeight = widget.height;
+    double? treeWidth = widget.width;
+    if (_model != null && _model!.parent != null) {
       if (treeHeight == 0)
-        treeHeight = (_model.parent as SmeupSectionModel).height;
+        treeHeight = (_model!.parent as SmeupSectionModel).height;
       if (treeWidth == 0)
-        treeWidth = (_model.parent as SmeupSectionModel).width;
+        treeWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
       if (treeHeight == 0) treeHeight = MediaQuery.of(context).size.height;
       if (treeWidth == 0) treeWidth = MediaQuery.of(context).size.width;

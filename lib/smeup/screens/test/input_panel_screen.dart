@@ -12,7 +12,7 @@ class InputPanelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme(),
+      data: SmeupConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -37,8 +37,8 @@ class InputPanelScreen extends StatelessWidget {
       id: 'inputpanel',
       data: _getInputPanelFields(),
       onSubmit: (fields) {
-        List<String> values =
-            fields.map((e) => "code=${e.id} value=${e.value.code}").toList();
+        List<String>? values =
+            fields?.map((e) => "code=${e.id} value=${e.value.code}").toList();
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text("Fields $values")));
       },

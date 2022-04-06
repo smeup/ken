@@ -12,9 +12,9 @@ import 'package:provider/provider.dart';
 class SmeupWidgetStateMixin {
   LoadType widgetLoadType = LoadType.Immediate;
 
-  Widget runBuild(BuildContext context, String id, String type,
-      GlobalKey<ScaffoldState> scaffoldKey, bool initialDataLoad,
-      {Function notifierFunction}) {
+  Widget runBuild(BuildContext context, String? id, String? type,
+      GlobalKey<ScaffoldState>? scaffoldKey, bool initialDataLoad,
+      {Function? notifierFunction}) {
     var sel = SmeupWidgetNotificationService.objects
         .firstWhere((element) => element['id'] == id, orElse: () => null);
     if (sel == null) {
@@ -25,7 +25,7 @@ class SmeupWidgetStateMixin {
         'notifierFunction': notifierFunction
       });
     } else {
-      bool exLoaded = sel['dataLoaded'];
+      bool? exLoaded = sel['dataLoaded'];
       SmeupWidgetNotificationService.objects
           .removeWhere((element) => element['id'] == id);
       SmeupWidgetNotificationService.objects.add({
@@ -52,20 +52,20 @@ class SmeupWidgetStateMixin {
                   notifyError(context, id, snapshot.error);
                   return SmeupNotAvailable();
                 } else {
-                  return snapshot.data.children;
+                  return snapshot.data!.children!;
                 }
               }
             },
           );
   }
 
-  bool getDataLoaded(id) {
+  bool? getDataLoaded(id) {
     final sel = SmeupWidgetNotificationService.objects
         .firstWhere((element) => element['id'] == id, orElse: () => null);
     return sel['dataLoaded'];
   }
 
-  void setDataLoad(String id, bool value) {
+  void setDataLoad(String? id, bool value) {
     var sel = SmeupWidgetNotificationService.objects
         .firstWhere((element) => element['id'] == id, orElse: () => null);
     sel['dataLoaded'] = value;
@@ -81,7 +81,7 @@ class SmeupWidgetStateMixin {
     });
   }
 
-  void notifyError(context, String id, Object error) {
+  void notifyError(context, String? id, Object? error) {
     final SmeupErrorNotifier errorNotifier =
         Provider.of<SmeupErrorNotifier>(context, listen: false);
 
@@ -96,24 +96,24 @@ class SmeupWidgetStateMixin {
   }
 
   Future<SmeupWidgetBuilderResponse> getFunErrorResponse(
-      BuildContext context, SmeupModel model) {
+      BuildContext context, SmeupModel? model) {
     return Future(() {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-              '${SmeupLocalizationService.of(context).getLocalString('dataNotAvailable')}.  (${model.smeupFun.fun['fun']['function']})'),
-          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
+              '${SmeupLocalizationService.of(context)!.getLocalString('dataNotAvailable')}.  (${model!.smeupFun!.fun['fun']['function']})'),
+          backgroundColor: SmeupConfigurationService.getTheme()!.errorColor,
         ),
       );
       return SmeupWidgetBuilderResponse(model, SmeupNotAvailable());
     });
   }
 
-  void runDispose(GlobalKey<ScaffoldState> scaffoldKey, String id) {}
+  void runDispose(GlobalKey<ScaffoldState>? scaffoldKey, String? id) {}
 
   bool hasSections(SmeupModel model) {
     return model.smeupSectionsModels != null &&
-        model.smeupSectionsModels.length > 0;
+        model.smeupSectionsModels!.length > 0;
   }
 
   bool hasData(SmeupModel model) {
@@ -123,7 +123,7 @@ class SmeupWidgetStateMixin {
   /// return the information if data has been loaded
   /// static constructor: always false (because in this case the widget will receive the data directly)
   /// dynamic constrctor: true if the model is not null and contains data
-  bool getInitialdataLoaded(SmeupModel model) {
+  bool getInitialdataLoaded(SmeupModel? model) {
     return (model != null && model.data != null) || model == null;
   }
 }

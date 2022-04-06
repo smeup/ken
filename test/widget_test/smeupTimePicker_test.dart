@@ -48,6 +48,6 @@ runTests() {
   var findText = find.byType(Text);
   expect(findText, findsWidgets);
 
-  var finderTextContent = find.text(timePickerData.formattedTime);
+  var finderTextContent = find.text(timePickerData.formattedTime!);
   expect(finderTextContent, findsWidgets);
 }

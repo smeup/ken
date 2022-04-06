@@ -8,18 +8,18 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
   // supported by json_theme
-  static Color defaultBorderColor;
-  static double defaultBorderWidth;
-  static double defaultBorderRadius;
-  static bool defaultFontBold;
-  static double defaultFontSize;
-  static Color defaultFontColor;
-  static Color defaultBackColor;
-  static bool defaultCaptionFontBold;
-  static double defaultCaptionFontSize;
-  static Color defaultCaptionFontColor;
-  static Color defaultCaptionBackColor;
-  static double defaultElevation;
+  static Color? defaultBorderColor;
+  static double? defaultBorderWidth;
+  static double? defaultBorderRadius;
+  static bool? defaultFontBold;
+  static double? defaultFontSize;
+  static Color? defaultFontColor;
+  static Color? defaultBackColor;
+  static bool? defaultCaptionFontBold;
+  static double? defaultCaptionFontSize;
+  static Color? defaultCaptionFontColor;
+  static Color? defaultCaptionBackColor;
+  static double? defaultElevation;
 
   // unsupported by json_theme
   static const String defaultLabel = '';
@@ -33,35 +33,35 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultInnerSpace = 10.0;
   static const bool defaultUnderline = true;
 
-  Color borderColor;
-  double borderWidth;
-  double borderRadius;
-  bool fontBold;
-  double fontSize;
-  Color fontColor;
-  Color backColor;
-  bool captionFontBold;
-  double captionFontSize;
-  Color captionFontColor;
-  Color captionBackColor;
-  double elevation;
-  bool underline;
-  double innerSpace;
-  Alignment align;
-  String valueField;
-  String displayedField;
-  String label;
-  double width;
-  double height;
-  EdgeInsetsGeometry padding;
-  bool showBorder;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
+  bool? fontBold;
+  double? fontSize;
+  Color? fontColor;
+  Color? backColor;
+  bool? captionFontBold;
+  double? captionFontSize;
+  Color? captionFontColor;
+  Color? captionBackColor;
+  double? elevation;
+  bool? underline;
+  double? innerSpace;
+  Alignment? align;
+  String? valueField;
+  String? displayedField;
+  String? label;
+  double? width;
+  double? height;
+  EdgeInsetsGeometry? padding;
+  bool? showBorder;
 
-  List<String> minutesList;
+  List<String>? minutesList;
 
   SmeupDatePickerModel(
-      {GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context,
+      {GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
       id,
       type,
       this.borderColor,
@@ -96,9 +96,9 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupDatePickerModel.fromMap(
     Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
   ) : super.fromMap(
           jsonMap,
           formKey,
@@ -107,59 +107,59 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
         ) {
     setDefaults(this);
 
-    valueField = optionsDefault['valueField'] ?? defaultValueField;
-    displayedField = optionsDefault['displayedField'] ?? defaultdisplayedField;
-    backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??
+    valueField = optionsDefault!['valueField'] ?? defaultValueField;
+    displayedField = optionsDefault!['displayedField'] ?? defaultdisplayedField;
+    backColor = SmeupUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
     fontSize =
-        SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontSize;
-    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']) ??
+        SmeupUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
+    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
         defaultFontColor;
-    fontBold = optionsDefault['bold'] ?? defaultFontBold;
+    fontBold = optionsDefault!['bold'] ?? defaultFontBold;
 
     captionBackColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['captionBackColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['captionBackColor']) ??
             defaultCaptionBackColor;
     captionFontSize =
-        SmeupUtilities.getDouble(optionsDefault['captionFontSize']) ??
+        SmeupUtilities.getDouble(optionsDefault!['captionFontSize']) ??
             defaultCaptionFontSize;
     captionFontColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['captionFontColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['captionFontColor']) ??
             defaultCaptionFontColor;
-    captionFontBold = optionsDefault['captionBold'] ?? defaultCaptionFontBold;
+    captionFontBold = optionsDefault!['captionBold'] ?? defaultCaptionFontBold;
 
-    label = optionsDefault['label'] ?? defaultLabel;
+    label = optionsDefault!['label'] ?? defaultLabel;
     padding =
-        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
-    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+        SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
+    width = SmeupUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height =
-        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
-    elevation = SmeupUtilities.getDouble(optionsDefault['elevation']) ??
+        SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    elevation = SmeupUtilities.getDouble(optionsDefault!['elevation']) ??
         defaultElevation;
-    if (optionsDefault['minutesList'] == null) {
+    if (optionsDefault!['minutesList'] == null) {
       minutesList = null;
     } else {
-      minutesList = (optionsDefault['minutesList'] as List)
+      minutesList = (optionsDefault!['minutesList'] as List)
           .map((e) => e.toString())
           .toList();
     }
-    innerSpace = SmeupUtilities.getDouble(optionsDefault['innerSpace']) ??
+    innerSpace = SmeupUtilities.getDouble(optionsDefault!['innerSpace']) ??
         defaultInnerSpace;
-    showBorder = SmeupUtilities.getBool(optionsDefault['showborder']) ??
+    showBorder = SmeupUtilities.getBool(optionsDefault!['showborder']) ??
         defaultShowBorder;
 
-    borderRadius = SmeupUtilities.getDouble(optionsDefault['borderRadius']) ??
+    borderRadius = SmeupUtilities.getDouble(optionsDefault!['borderRadius']) ??
         defaultBorderRadius;
-    borderWidth = SmeupUtilities.getDouble(optionsDefault['borderWidth']) ??
+    borderWidth = SmeupUtilities.getDouble(optionsDefault!['borderWidth']) ??
         defaultBorderWidth;
     borderColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['borderColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['borderColor']) ??
             defaultBorderColor;
 
     underline =
-        SmeupUtilities.getBool(optionsDefault['underline']) ?? defaultUnderline;
+        SmeupUtilities.getBool(optionsDefault!['underline']) ?? defaultUnderline;
 
-    align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']) ??
+    align = SmeupUtilities.getAlignmentGeometry(optionsDefault!['align']) ??
         defaultAlign;
 
     if (widgetLoadType != LoadType.Delay) {
@@ -172,28 +172,28 @@ class SmeupDatePickerModel extends SmeupModel implements SmeupDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var timePickerTheme = SmeupConfigurationService.getTheme().timePickerTheme;
+    var timePickerTheme = SmeupConfigurationService.getTheme()!.timePickerTheme;
     defaultBackColor = timePickerTheme.backgroundColor;
-    var shape = timePickerTheme.shape;
+    var shape = timePickerTheme.shape!;
     defaultBorderRadius = (shape as ContinuousRectangleBorder)
         .borderRadius
         .resolve(TextDirection.ltr)
         .topLeft
         .x;
-    var side = timePickerTheme.dayPeriodBorderSide;
+    var side = timePickerTheme.dayPeriodBorderSide!;
     defaultBorderColor = side.color;
     defaultBorderWidth = side.width;
 
     var buttonStyle =
-        SmeupConfigurationService.getTheme().elevatedButtonTheme.style;
-    defaultElevation = buttonStyle.elevation.resolve(Set<MaterialState>());
+        SmeupConfigurationService.getTheme()!.elevatedButtonTheme.style!;
+    defaultElevation = buttonStyle.elevation!.resolve(Set<MaterialState>());
 
-    var textStyle = SmeupConfigurationService.getTheme().textTheme.bodyText1;
+    var textStyle = SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
 
-    var captionStyle = SmeupConfigurationService.getTheme().textTheme.caption;
+    var captionStyle = SmeupConfigurationService.getTheme()!.textTheme.caption!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;

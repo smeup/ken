@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SmeupTextPasswordRuleNotifier with ChangeNotifier {
-  int satisfiedRules;
-  int totalRules;
+  late int satisfiedRules;
+  late int totalRules;
   static String passwordRules = '';
 
   List<dynamic> rules;
@@ -20,16 +20,13 @@ class SmeupTextPasswordRuleNotifier with ChangeNotifier {
   }
 
   static bool isPasswordValid(String password) {
-    if (password == null) {
-      return false;
-    }
     if (password.isEmpty) {
       return false;
     }
 
     RegExp re = RegExp(passwordRules);
 
-    Match firstMatch = re.firstMatch(password);
+    Match? firstMatch = re.firstMatch(password);
 
     if (firstMatch == null) return false;
 
@@ -43,10 +40,6 @@ class SmeupTextPasswordRuleNotifier with ChangeNotifier {
 
     satisfiedRules = 0;
 
-    if (password == null) {
-      notifyListeners();
-      return;
-    }
     if (password.isEmpty) {
       notifyListeners();
       return;
@@ -62,7 +55,7 @@ class SmeupTextPasswordRuleNotifier with ChangeNotifier {
 
   bool _isRuleSadisfied(String rule, String password) {
     RegExp re = RegExp(rule);
-    RegExpMatch match = re.firstMatch(password);
+    RegExpMatch? match = re.firstMatch(password);
     return match != null;
   }
 

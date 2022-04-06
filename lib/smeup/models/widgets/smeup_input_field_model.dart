@@ -9,20 +9,20 @@ import '../smeup_fun.dart';
 class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultValidationField = 'validation';
 
-  SmeupFun validationFun;
-  String validation;
-  String validationField;
+  SmeupFun? validationFun;
+  String? validation;
+  String? validationField;
 
-  SmeupInputFieldModel(GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey, BuildContext context,
+  SmeupInputFieldModel(GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey, BuildContext? context,
       {title, id, type})
       : super(formKey, scaffoldKey, context, title: title, id: id, type: type);
 
   SmeupInputFieldModel.fromMap(
       Map<String, dynamic> jsonMap,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
       SmeupModel parent)
       : super.fromMap(
           jsonMap,
@@ -32,9 +32,9 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
         ) {
     this.parent = parent;
 
-    validation = optionsDefault['validation'];
+    validation = optionsDefault!['validation'];
     validationField =
-        optionsDefault['validationField'] ?? defaultValidationField;
+        optionsDefault!['validationField'] ?? defaultValidationField;
     validationFun = jsonMap['validation'] != null
         ? SmeupFun(jsonMap['validation'], formKey, scaffoldKey, context)
         : null;
@@ -45,15 +45,15 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
     SmeupInputFieldDao.getValidation(this);
   }
 
-  _setServer(SmeupFun fun) {
+  _setServer(SmeupFun? fun) {
     if (fun == null) return;
     var server = fun.fun['fun']['SERVER'];
 
     if (server.toString().isEmpty) {
-      server = _getFieldPath(parent);
+      server = _getFieldPath(parent as SmeupSectionModel);
     } else {
       String oldServer = server;
-      String newServer = server + _getFieldPath(parent);
+      String newServer = server + _getFieldPath(parent as SmeupSectionModel);
       server = server.toString().replaceAll(oldServer, newServer);
     }
 
@@ -61,6 +61,6 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
   }
 
   _getFieldPath(SmeupSectionModel smeupSectionModel) {
-    return 'fieldPath(${smeupSectionModel.parentForm.id.toLowerCase()}.${smeupSectionModel.id.toLowerCase()}.${id.toLowerCase()})';
+    return 'fieldPath(${smeupSectionModel.parentForm!.id!.toLowerCase()}.${smeupSectionModel.id!.toLowerCase()}.${id!.toLowerCase()})';
   }
 }

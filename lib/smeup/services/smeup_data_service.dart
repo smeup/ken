@@ -26,22 +26,22 @@ class SmeupDataService {
     SmeupDataService.services['*HTTP'] = SmeupHttpDataService();
   }
 
-  static Future<SmeupServiceResponse> invoke(SmeupFun smeupFun,
-      {String httpServiceMethod,
-      String httpServiceUrl,
+  static Future<SmeupServiceResponse> invoke(SmeupFun? smeupFun,
+      {String? httpServiceMethod,
+      String? httpServiceUrl,
       dynamic httpServiceBody,
-      String httpServiceContentType,
+      String? httpServiceContentType,
       dynamic headers}) async {
-    SmeupDataServiceInterface smeupDataService =
+    SmeupDataServiceInterface? smeupDataService =
         SmeupDataService.getServiceImplementation(
             smeupFun == null ? null : smeupFun.fun['fun']['service']);
 
     var newSmeupFun;
     if (smeupFun != null && smeupFun.fun != null) {
-      String funString = jsonEncode(smeupFun.fun);
+      String? funString = jsonEncode(smeupFun.fun);
       funString =
           SmeupDynamismService.replaceFunVariables(funString, smeupFun.formKey);
-      final fun = jsonDecode(funString);
+      final fun = jsonDecode(funString!);
       newSmeupFun = SmeupFun(
           fun, smeupFun.formKey, smeupFun.scaffoldKey, smeupFun.context);
     }
@@ -60,13 +60,13 @@ class SmeupDataService {
           httpServiceContentType: httpServiceContentType,
           headers: headers);
     else
-      response = await smeupDataService.invoke(newSmeupFun);
+      response = await smeupDataService!.invoke(newSmeupFun);
 
     return response;
   }
 
-  static SmeupDataServiceInterface getServiceImplementation(String name) {
-    if (services[name] == null) {
+  static SmeupDataServiceInterface? getServiceImplementation(String? name) {
+    if (services[name!] == null) {
       SmeupLogService.writeDebugMessage(
           ' The server implementation \'$name\' does not exist, will be used SmeupDefaultDataService',
           logType: LogType.warning);
@@ -89,9 +89,9 @@ class SmeupDataService {
         logType: LogType.error);
   }
 
-  static void writeResponseResult(Response response, String method) {
+  static void writeResponseResult(Response? response, String method) {
     LogType logType =
-        response != null && SmeupDataService.isValid(response.statusCode)
+        response != null && SmeupDataService.isValid(response.statusCode!)
             ? LogType.info
             : LogType.error;
 
@@ -113,11 +113,11 @@ class SmeupDataService {
     return true;
   }
 
-  static void incrementDataFetch(String id) {
+  static void incrementDataFetch(String? id) {
     _activeDataFetch += 1;
   }
 
-  static void decrementDataFetch(String id) {
+  static void decrementDataFetch(String? id) {
     if (_activeDataFetch == 0) return;
     _activeDataFetch -= 1;
   }

@@ -11,16 +11,16 @@ class SmeupImageModel extends SmeupModel implements SmeupDataInterface {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const bool defaultIsRemote = false;
 
-  double width;
-  double height;
-  EdgeInsetsGeometry padding;
+  double? width;
+  double? height;
+  EdgeInsetsGeometry? padding;
 
   SmeupImageModel(
       {id,
       type,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.padding = defaultPadding,
@@ -31,20 +31,20 @@ class SmeupImageModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupImageModel.fromMap(
     Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
   ) : super.fromMap(
           jsonMap,
           formKey,
           scaffoldKey,
           context,
         ) {
-    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+    width = SmeupUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height =
-        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+        SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     padding =
-        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
+        SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     title = jsonMap['title'] ?? '';
 
     if (widgetLoadType != LoadType.Delay) {

@@ -36,9 +36,6 @@ runTests() {
   final findKey1 = find.byKey(Key('buttons_1'));
   expect(findKey1, findsOneWidget);
 
-  final findKey2 = find.byKey(Key('buttons_2'));
-  expect(findKey2, findsOneWidget);
-
   var findWidget = find.byType(SmeupButton);
   expect(findWidget, findsWidgets);
 

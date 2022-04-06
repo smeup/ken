@@ -15,23 +15,23 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 class SmeupGauge extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupGaugeModel model;
+  SmeupGaugeModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
-  String id;
-  String type;
-  String title;
-  String valueColName;
-  String warningColName;
-  String maxColName;
-  String minColName;
+  String? id;
+  String? type;
+  String? title;
+  String? valueColName;
+  String? warningColName;
+  String? maxColName;
+  String? minColName;
 
   //dynamic data;
-  int minValue;
-  int maxValue;
-  int value;
-  int warning;
+  int? minValue;
+  int? maxValue;
+  int? value;
+  int? warning;
 
   SmeupGauge(this.scaffoldKey, this.formKey,
       {this.value = SmeupGaugeModel.defaultValue,
@@ -49,14 +49,14 @@ class SmeupGauge extends StatefulWidget
     id = SmeupUtilities.getWidgetId(type, id);
   }
 
-  SmeupGauge.whitController(this.model, this.scaffoldKey, this.formKey)
+  SmeupGauge.whitController(SmeupGaugeModel this.model, this.scaffoldKey, this.formKey)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupGaugeModel m = model;
+    SmeupGaugeModel m = model as SmeupGaugeModel;
     id = m.id;
     type = m.type;
     title = m.title;
@@ -70,7 +70,7 @@ class SmeupGauge extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupGaugeModel m = model;
+    SmeupGaugeModel m = model as SmeupGaugeModel;
 
     // change data format
     var workData = formatDataFields(m);
@@ -91,11 +91,11 @@ class SmeupGauge extends StatefulWidget
 class _SmeupGaugeState extends State<SmeupGauge>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupGaugeModel _model;
-  int _maxValue;
-  int _minValue;
-  int _value;
-  int _warning;
+  SmeupGaugeModel? _model;
+  int? _maxValue;
+  int? _minValue;
+  int? _value;
+  int? _warning;
 
   @override
   void initState() {
@@ -104,7 +104,7 @@ class _SmeupGaugeState extends State<SmeupGauge>
     _maxValue = widget.maxValue;
     _minValue = widget.minValue;
     _warning = widget.warning;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -128,10 +128,10 @@ class _SmeupGaugeState extends State<SmeupGauge>
 
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupGaugeDao.getData(_model);
-        widget.treatData(_model);
+        await SmeupGaugeDao.getData(_model!);
+        widget.treatData(_model!);
         _value = widget.value;
         _maxValue = widget.maxValue;
         _minValue = widget.minValue;

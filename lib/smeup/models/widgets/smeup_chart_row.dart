@@ -1,15 +1,15 @@
 import 'package:ken/smeup/models/widgets/smeup_chart_column.dart';
 
 class SmeupChartRow {
-  List<dynamic> cells;
-  List<SmeupChartColumn> _columns;
+  List<dynamic>? cells;
+  late List<SmeupChartColumn> _columns;
 
   SmeupChartRow(this.cells);
 
   SmeupChartRow.fromMap(Map jsonData, this._columns) {
     cells = List<dynamic>.empty(growable: true);
     for (SmeupChartColumn col in _columns) {
-      cells.add(jsonData[col.name]);
+      cells!.add(jsonData[col.name]);
     }
   }
 
@@ -27,7 +27,7 @@ class SmeupChartRow {
       else
         cellValue = double.parse(jsonValue);
 
-      cells.add(cellValue);
+      cells!.add(cellValue);
     }
   }
 }

@@ -10,16 +10,16 @@ enum SmeupListType { simple, oriented, wheel }
 
 class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   // supported by json_theme
-  static Color defaultBackColor;
-  static Color defaultBorderColor;
-  static double defaultBorderWidth;
-  static double defaultBorderRadius;
-  static double defaultFontSize;
-  static Color defaultFontColor;
-  static bool defaultFontBold;
-  static bool defaultCaptionFontBold;
-  static double defaultCaptionFontSize;
-  static Color defaultCaptionFontColor;
+  static Color? defaultBackColor;
+  static Color? defaultBorderColor;
+  static double? defaultBorderWidth;
+  static double? defaultBorderRadius;
+  static double? defaultFontSize;
+  static Color? defaultFontColor;
+  static bool? defaultFontBold;
+  static bool? defaultCaptionFontBold;
+  static double? defaultCaptionFontSize;
+  static Color? defaultCaptionFontColor;
 
   // unsupported by json_theme
   static const double defaultWidth = 0;
@@ -37,38 +37,38 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   static const int defaultSelectedRow = -1;
   static const double defaultListHeight = 0;
 
-  Color backColor;
-  Color borderColor;
-  double borderWidth;
-  double borderRadius;
-  double fontSize;
-  Color fontColor;
-  bool fontBold;
-  bool captionFontBold;
-  double captionFontSize;
-  Color captionFontColor;
+  Color? backColor;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
+  double? fontSize;
+  Color? fontColor;
+  bool? fontBold;
+  bool? captionFontBold;
+  double? captionFontSize;
+  Color? captionFontColor;
 
-  double width;
-  double height;
-  Axis orientation;
-  EdgeInsetsGeometry padding;
-  SmeupListType listType;
-  int portraitColumns;
-  int landscapeColumns;
+  double? width;
+  double? height;
+  Axis? orientation;
+  EdgeInsetsGeometry? padding;
+  SmeupListType? listType;
+  int? portraitColumns;
+  int? landscapeColumns;
   String layout = '';
-  List<String> visibleColumns;
-  String defaultSort;
-  String backgroundColName;
-  bool showSelection;
-  int selectedRow;
-  double listHeight;
+  List<String>? visibleColumns;
+  String? defaultSort;
+  String? backgroundColName;
+  bool? showSelection;
+  int? selectedRow;
+  double? listHeight;
 
   SmeupListBoxModel(
       {id,
       type,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
       this.backColor,
       this.borderColor,
       this.borderWidth,
@@ -103,9 +103,9 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupListBoxModel.fromMap(
     Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
   ) : super.fromMap(
           jsonMap,
           formKey,
@@ -117,73 +117,73 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     layout = defaultLayout;
     if (jsonMap['layout'] != null) {
       layout = jsonMap['layout'].toString();
-      if (layout != null && layout.length > 0) {
+      if (layout.length > 0) {
         layout = layout.substring(layout.length - 1);
       }
     }
 
     title = jsonMap['title'] ?? '';
-    layout = optionsDefault['Layout'] ?? defaultLayout;
+    layout = optionsDefault!['Layout'] ?? defaultLayout;
     portraitColumns =
-        SmeupUtilities.getInt(optionsDefault['portraitColumns']) ??
+        SmeupUtilities.getInt(optionsDefault!['portraitColumns']) ??
             defaultPortraitColumns;
     landscapeColumns =
-        SmeupUtilities.getInt(optionsDefault['landscapeColumns']) ??
+        SmeupUtilities.getInt(optionsDefault!['landscapeColumns']) ??
             defaultLandscapeColumns;
 
     padding =
-        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
-    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+        SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
+    width = SmeupUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height =
-        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
-    listType = decodeListType(optionsDefault['listType']);
+        SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    listType = decodeListType(optionsDefault!['listType']);
     orientation = jsonMap['orientation'] == 'horizontal'
         ? Axis.horizontal
         : Axis.vertical;
 
-    if (optionsDefault['columns'] != null) {
-      visibleColumns = optionsDefault['columns'].split('|');
+    if (optionsDefault!['columns'] != null) {
+      visibleColumns = optionsDefault!['columns'].split('|');
     } else {
       visibleColumns = List<String>.empty(growable: true);
     }
 
-    fontSize = optionsDefault['fontSize'] ?? defaultFontSize;
-    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']) ??
+    fontSize = optionsDefault!['fontSize'] ?? defaultFontSize;
+    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
         defaultFontColor;
-    fontBold = optionsDefault['bold'] ?? defaultFontBold;
+    fontBold = optionsDefault!['bold'] ?? defaultFontBold;
 
-    backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??
+    backColor = SmeupUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
 
-    backgroundColName = optionsDefault['backgroundColName'];
-    defaultSort = optionsDefault['defaultSort'] ?? defaultDefaultSort;
+    backgroundColName = optionsDefault!['backgroundColName'];
+    defaultSort = optionsDefault!['defaultSort'] ?? defaultDefaultSort;
 
     showSelection =
-        SmeupUtilities.getBool(optionsDefault['showSelection']) ?? false;
+        SmeupUtilities.getBool(optionsDefault!['showSelection']) ?? false;
 
     selectedRow = -1;
-    if (optionsDefault['selectRow'] != null) {
-      selectedRow = SmeupUtilities.getInt(optionsDefault['selectRow']);
+    if (optionsDefault!['selectRow'] != null) {
+      selectedRow = SmeupUtilities.getInt(optionsDefault!['selectRow']);
     }
 
-    listHeight = SmeupUtilities.getDouble(optionsDefault['listHeight']) ??
+    listHeight = SmeupUtilities.getDouble(optionsDefault!['listHeight']) ??
         defaultListHeight;
 
-    borderRadius = SmeupUtilities.getDouble(optionsDefault['borderRadius']) ??
+    borderRadius = SmeupUtilities.getDouble(optionsDefault!['borderRadius']) ??
         defaultBorderRadius;
-    borderWidth = SmeupUtilities.getDouble(optionsDefault['borderWidth']) ??
+    borderWidth = SmeupUtilities.getDouble(optionsDefault!['borderWidth']) ??
         defaultBorderWidth;
     borderColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['borderColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['borderColor']) ??
             defaultBorderColor;
 
     captionFontSize =
-        SmeupUtilities.getDouble(optionsDefault['captionFontSize']) ??
+        SmeupUtilities.getDouble(optionsDefault!['captionFontSize']) ??
             defaultCaptionFontSize;
     captionFontColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['captionFontColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['captionFontColor']) ??
             defaultCaptionFontColor;
-    captionFontBold = optionsDefault['captionBold'] ?? defaultCaptionFontBold;
+    captionFontBold = optionsDefault!['captionBold'] ?? defaultCaptionFontBold;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
@@ -194,7 +194,7 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
     SmeupDataService.incrementDataFetch(id);
   }
 
-  static SmeupListType decodeListType(String type) {
+  static SmeupListType decodeListType(String? type) {
     switch (type) {
       case 'simple':
         return SmeupListType.simple;
@@ -208,24 +208,26 @@ class SmeupListBoxModel extends SmeupModel implements SmeupDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var cardTheme = SmeupConfigurationService.getTheme().cardTheme;
+    var cardTheme = SmeupConfigurationService.getTheme()!.cardTheme;
     defaultBackColor = cardTheme.color;
-    ContinuousRectangleBorder shape = cardTheme.shape;
+    ContinuousRectangleBorder shape =
+        cardTheme.shape as ContinuousRectangleBorder;
     defaultBorderRadius =
         shape.borderRadius.resolve(TextDirection.ltr).topLeft.x;
     var side = shape.side;
     defaultBorderColor = side.color;
     defaultBorderWidth = side.width;
 
-    var textStyle = SmeupConfigurationService.getTheme()
+    var textStyle = SmeupConfigurationService.getTheme()!
         .textTheme
-        .headline4
+        .headline4!
         .copyWith(backgroundColor: defaultBackColor);
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
 
-    var captionStyle = SmeupConfigurationService.getTheme().textTheme.headline5;
+    var captionStyle =
+        SmeupConfigurationService.getTheme()!.textTheme.headline5!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;

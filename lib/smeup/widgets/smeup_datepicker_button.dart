@@ -6,32 +6,32 @@ import 'package:ken/smeup/services/smeup_variables_service.dart';
 
 // ignore: must_be_immutable
 class SmeupDatePickerButton extends StatefulWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<FormState>? formKey;
 
-  Color borderColor;
-  double borderWidth;
-  double borderRadius;
-  bool fontBold;
-  double fontSize;
-  Color fontColor;
-  Color backColor;
-  double elevation;
-  bool captionFontBold;
-  double captionFontSize;
-  Color captionFontColor;
-  Color captionBackColor;
-  bool underline;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
+  bool? fontBold;
+  double? fontSize;
+  Color? fontColor;
+  Color? backColor;
+  double? elevation;
+  bool? captionFontBold;
+  double? captionFontSize;
+  Color? captionFontColor;
+  Color? captionBackColor;
+  bool? underline;
 
-  final DateTime value;
-  final String id;
-  final String display;
-  final String label;
-  final double width;
-  final double height;
-  final EdgeInsetsGeometry padding;
-  final bool showborder;
-  final Alignment align;
+  final DateTime? value;
+  final String? id;
+  final String? display;
+  final String? label;
+  final double? width;
+  final double? height;
+  final EdgeInsetsGeometry? padding;
+  final bool? showborder;
+  final Alignment? align;
 
   final ButtonStyle buttonStyle;
   final TextStyle textStyle;
@@ -72,8 +72,8 @@ class SmeupDatePickerButton extends StatefulWidget {
 }
 
 class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
-  DateTime _currentValue;
-  String _currentDisplay;
+  DateTime? _currentValue;
+  String? _currentDisplay;
 
   @override
   void initState() {
@@ -95,7 +95,7 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
           onPressed: () {
             DatePicker.showDatePicker(context,
                 theme: DatePickerTheme(
-                    backgroundColor: widget.backColor,
+                    backgroundColor: widget.backColor!,
                     headerColor: widget.textStyle.backgroundColor,
                     doneStyle: widget.textStyle,
                     cancelStyle: widget.textStyle,
@@ -115,7 +115,7 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: const EdgeInsets.only(left: 5.0),
-              child: Text(_currentDisplay, style: widget.textStyle),
+              child: Text(_currentDisplay!, style: widget.textStyle),
             ),
           )),
     );

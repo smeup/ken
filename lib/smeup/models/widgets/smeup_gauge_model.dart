@@ -20,17 +20,17 @@ class SmeupGaugeModel extends SmeupModel implements SmeupDataInterface {
   static const int defaultWarning = 50;
   static const int defaultValue = 0;
 
-  String valueColName;
-  String warningColName;
-  String maxColName;
-  String minColName;
+  String? valueColName;
+  String? warningColName;
+  String? maxColName;
+  String? minColName;
 
   SmeupGaugeModel(
       {id,
       type,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
       this.valueColName = defaultValColName,
       this.warningColName = defaultWarningColName,
       this.maxColName = defaultMaxColName,
@@ -42,9 +42,9 @@ class SmeupGaugeModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupGaugeModel.fromMap(
     Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
   ) : super.fromMap(
           jsonMap,
           formKey,
@@ -52,10 +52,10 @@ class SmeupGaugeModel extends SmeupModel implements SmeupDataInterface {
           context,
         ) {
     title = jsonMap['title'] ?? '';
-    valueColName = optionsDefault['valueColName'] ?? defaultValColName;
-    maxColName = optionsDefault['maxColName'] ?? defaultMaxColName;
-    minColName = optionsDefault['minColName'] ?? defaultMinColName;
-    warningColName = optionsDefault['warningColName'] ?? defaultWarningColName;
+    valueColName = optionsDefault!['valueColName'] ?? defaultValColName;
+    maxColName = optionsDefault!['maxColName'] ?? defaultMaxColName;
+    minColName = optionsDefault!['minColName'] ?? defaultMinColName;
+    warningColName = optionsDefault!['warningColName'] ?? defaultWarningColName;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {

@@ -19,12 +19,12 @@ class SmeupDataServicePoller {
     this.formKey,
     this.scaffoldKey,
     this.context, {
-    @required this.interval,
-    @required this.fun,
+    required this.interval,
+    required this.fun,
     this.ignoreErrors = true,
   });
 
-  Future<dynamic> doPoll({@required UntilPredicate until}) async {
+  Future<dynamic> doPoll({required UntilPredicate until}) async {
     SmeupFun smeupFun = SmeupFun(fun, formKey, scaffoldKey, context);
     while (!_canceled) {
       await Future.delayed(interval);

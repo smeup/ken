@@ -31,6 +31,32 @@ import 'package:ken/smeup/widgets/smeup_progress_bar.dart';
 import 'package:ken/smeup/widgets/smeup_slider.dart';
 import 'package:ken/smeup/widgets/smeup_tree.dart';
 import 'package:ken/smeup/widgets/smeup_wait.dart';
+import '../models/widgets/smeup_buttons_model.dart';
+import '../models/widgets/smeup_calendar_model.dart';
+import '../models/widgets/smeup_carousel_model.dart';
+import '../models/widgets/smeup_chart_model.dart';
+import '../models/widgets/smeup_combo_model.dart';
+import '../models/widgets/smeup_dashboard_model.dart';
+import '../models/widgets/smeup_datepicker_model.dart';
+import '../models/widgets/smeup_gauge_model.dart';
+import '../models/widgets/smeup_image_list_model.dart';
+import '../models/widgets/smeup_image_model.dart';
+import '../models/widgets/smeup_inputpanel_model.dart';
+import '../models/widgets/smeup_label_model.dart';
+import '../models/widgets/smeup_line_model.dart';
+import '../models/widgets/smeup_list_box_model.dart';
+import '../models/widgets/smeup_progress_bar_model.dart';
+import '../models/widgets/smeup_progress_indicator_model.dart';
+import '../models/widgets/smeup_qrcode_reader_model.dart';
+import '../models/widgets/smeup_radio_buttons_model.dart';
+import '../models/widgets/smeup_slider_model.dart';
+import '../models/widgets/smeup_splash_model.dart';
+import '../models/widgets/smeup_switch_model.dart';
+import '../models/widgets/smeup_text_autocomplete_model.dart';
+import '../models/widgets/smeup_text_field_model.dart';
+import '../models/widgets/smeup_text_password_model.dart';
+import '../models/widgets/smeup_timepicker_model.dart';
+import '../models/widgets/smeup_tree_model.dart';
 import 'smeup_chart.dart';
 import 'smeup_form.dart';
 import 'smeup_label.dart';
@@ -38,7 +64,7 @@ import 'smeup_label.dart';
 class SmeupComponent extends StatefulWidget {
   final SmeupModel smeupModel;
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
+  final GlobalKey<FormState>? formKey;
   final dynamic parentForm;
 
   SmeupComponent(
@@ -56,7 +82,7 @@ class _SmeupComponentState extends State<SmeupComponent> {
       builder: (BuildContext context,
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return widget.smeupModel.showLoader
+          return widget.smeupModel.showLoader!
               ? SmeupWait(widget.scaffoldKey, widget.formKey)
               : Container();
         } else {
@@ -66,7 +92,7 @@ class _SmeupComponentState extends State<SmeupComponent> {
                 logType: LogType.error);
             return SmeupNotAvailable();
           } else {
-            return snapshot.data.children;
+            return snapshot.data!.children!;
           }
         }
       },
@@ -82,19 +108,21 @@ class _SmeupComponentState extends State<SmeupComponent> {
     switch (smeupModel.type) {
       case 'LAB':
         children = SmeupLabel.withController(
-            smeupModel, widget.scaffoldKey, widget.formKey);
+            smeupModel as SmeupLabelModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'GAU':
         children = SmeupGauge.whitController(
-            smeupModel, widget.scaffoldKey, widget.formKey);
+            smeupModel as SmeupGaugeModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'CAU':
         children = SmeupCarousel.withController(
-            smeupModel, widget.scaffoldKey, widget.formKey);
+            smeupModel as SmeupCarouselModel,
+            widget.scaffoldKey,
+            widget.formKey);
         break;
       case 'TRE':
         children = SmeupTree.withController(
-            smeupModel, widget.scaffoldKey, widget.formKey);
+            smeupModel as SmeupTreeModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'CAL':
         DateTime initialFirstWork;
@@ -104,102 +132,135 @@ class _SmeupComponentState extends State<SmeupComponent> {
         initialLastWork =
             DateTime(DateTime.now().year, DateTime.now().month + 1, 0);
 
-        children = SmeupCalendar.withController(smeupModel, widget.scaffoldKey,
-            widget.formKey, initialFirstWork, initialLastWork);
+        children = SmeupCalendar.withController(
+            smeupModel as SmeupCalendarModel,
+            widget.scaffoldKey,
+            widget.formKey,
+            initialFirstWork,
+            initialLastWork);
         break;
       case 'CHA':
         children = SmeupChart.withController(
-            smeupModel, widget.scaffoldKey, widget.formKey);
+            smeupModel as SmeupChartModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'BTN':
-        children = SmeupButtons.withController(
-            smeupModel, widget.scaffoldKey, widget.formKey);
+        children = SmeupButtons.withController(smeupModel as SmeupButtonsModel,
+            widget.scaffoldKey, widget.formKey);
         break;
       case 'BOX':
-        children = SmeupListBox.withController(
-            smeupModel, widget.scaffoldKey, widget.formKey, widget.parentForm);
+        children = SmeupListBox.withController(smeupModel as SmeupListBoxModel,
+            widget.scaffoldKey, widget.formKey, widget.parentForm);
         break;
       case 'LIN':
         children = SmeupLine.withController(
-            smeupModel, widget.scaffoldKey, widget.formKey);
+            smeupModel as SmeupLineModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'DSH':
         children = SmeupDashboard.withController(
-            smeupModel, widget.scaffoldKey, widget.formKey);
+            smeupModel as SmeupDashboardModel,
+            widget.scaffoldKey,
+            widget.formKey);
         break;
       case 'IMG':
         children = SmeupImage.withController(
-            smeupModel, widget.scaffoldKey, widget.formKey);
+            smeupModel as SmeupImageModel, widget.scaffoldKey, widget.formKey);
         break;
       case 'IML':
         children = SmeupImageList.withController(
-            smeupModel, widget.scaffoldKey, widget.formKey, widget.parentForm);
+            smeupModel as SmeupImageListModel,
+            widget.scaffoldKey,
+            widget.formKey,
+            widget.parentForm);
         break;
       case 'FLD':
-        switch (smeupModel.options['FLD']['default']['type']) {
+        switch (smeupModel.options!['FLD']['default']['type']) {
           case 'acp':
             children = SmeupTextAutocomplete.withController(
-                smeupModel, widget.scaffoldKey, widget.formKey);
+                smeupModel as SmeupTextAutocompleteModel,
+                widget.scaffoldKey,
+                widget.formKey);
             break;
 
           case 'cal':
             children = SmeupDatePicker.withController(
-                smeupModel, widget.scaffoldKey, widget.formKey);
+                smeupModel as SmeupDatePickerModel,
+                widget.scaffoldKey,
+                widget.formKey);
             break;
 
           case 'cmb':
-            children = SmeupCombo.withController(
-                smeupModel, widget.scaffoldKey, widget.formKey);
+            children = SmeupCombo.withController(smeupModel as SmeupComboModel,
+                widget.scaffoldKey, widget.formKey);
             break;
 
           case 'itx':
             children = SmeupTextField.withController(
-                smeupModel, widget.scaffoldKey, widget.formKey);
+                smeupModel as SmeupTextFieldModel,
+                widget.scaffoldKey,
+                widget.formKey);
             break;
 
           case 'pgb':
             children = SmeupProgressBar.withController(
-                smeupModel, widget.scaffoldKey, widget.formKey);
+                smeupModel as SmeupProgressBarModel,
+                widget.scaffoldKey,
+                widget.formKey);
             break;
 
           case 'pgi':
             children = SmeupProgressIndicator.withController(
-                smeupModel, widget.scaffoldKey, widget.formKey);
+                smeupModel as SmeupProgressIndicatorModel,
+                widget.scaffoldKey,
+                widget.formKey);
             break;
 
           case 'qrc':
             children = SmeupQRCodeReader.withController(
-                smeupModel, widget.scaffoldKey, widget.formKey);
+                smeupModel as SmeupQRCodeReaderModel,
+                widget.scaffoldKey,
+                widget.formKey);
             break;
 
           case 'pwd':
             children = SmeupTextPassword.withController(
-                smeupModel, widget.scaffoldKey, widget.formKey);
+                smeupModel as SmeupTextPasswordModel,
+                widget.scaffoldKey,
+                widget.formKey);
             break;
 
           case 'rad':
             children = SmeupRadioButtons.withController(
-                smeupModel, widget.scaffoldKey, widget.formKey);
+                smeupModel as SmeupRadioButtonsModel,
+                widget.scaffoldKey,
+                widget.formKey);
             break;
 
           case 'sld':
             children = SmeupSlider.withController(
-                smeupModel, widget.scaffoldKey, widget.formKey);
+                smeupModel as SmeupSliderModel,
+                widget.scaffoldKey,
+                widget.formKey);
             break;
 
           case 'spl':
             children = SmeupSplash.withController(
-                smeupModel, widget.scaffoldKey, widget.formKey);
+                smeupModel as SmeupSplashModel,
+                widget.scaffoldKey,
+                widget.formKey);
             break;
 
           case 'swt':
             children = SmeupSwitch.withController(
-                smeupModel, widget.scaffoldKey, widget.formKey);
+                smeupModel as SmeupSwitchModel,
+                widget.scaffoldKey,
+                widget.formKey);
             break;
 
           case 'tpk':
             children = SmeupTimePicker.withController(
-                smeupModel, widget.scaffoldKey, widget.formKey);
+                smeupModel as SmeupTimePickerModel,
+                widget.scaffoldKey,
+                widget.formKey);
             break;
 
           default:
@@ -208,7 +269,9 @@ class _SmeupComponentState extends State<SmeupComponent> {
 
       case 'INP':
         children = SmeupInputPanel.withController(
-            smeupModel, widget.scaffoldKey, widget.formKey);
+            smeupModel as SmeupInputPanelModel,
+            widget.scaffoldKey,
+            widget.formKey);
         break;
 
       case 'SCH':
