@@ -152,7 +152,7 @@ class _SmeupCarouselState extends State<SmeupCarousel>
           onPageChanged: (index, reason) {
             notifier.setIndex(index);
           }),
-      itemBuilder: (context, index) {
+      itemBuilder: (BuildContext context, int index, int realIndex) {
         return SmeupCarouselItem(
             _data[index]['imageFile'], _data[index]['text']);
       },

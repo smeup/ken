@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_speedometer/flutter_speedometer.dart';
+//import 'package:flutter_speedometer/flutter_speedometer.dart';
 import 'package:ken/smeup/daos/smeup_gauge_dao.dart';
 import 'package:ken/smeup/models/widgets/smeup_gauge_model.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
@@ -9,6 +9,7 @@ import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 // ignore: must_be_immutable
 class SmeupGauge extends StatefulWidget
@@ -144,22 +145,63 @@ class _SmeupGaugeState extends State<SmeupGauge>
     //int value = int.parse(_data['Elemento']['Valore']);
     //int warning = int.parse(_data['Elemento']['Soglia1']);
 
+    // children = Center(
+    //   child: Speedometer(
+    //     size: 100,
+    //     minValue: _minValue,
+    //     maxValue: _maxValue,
+    //     currentValue: _value,
+    //     warningValue: _warning,
+    //     backgroundColor: Colors.white,
+    //     meterColor: Colors.green,
+    //     warningColor: Colors.red,
+    //     kimColor: Colors.grey,
+    //     displayNumericStyle: const TextStyle(
+    //         fontFamily: 'Digital-Display', color: Colors.black, fontSize: 30),
+    //     displayText: '',
+    //     displayTextStyle: const TextStyle(color: Colors.black, fontSize: 12),
+    //   ),
+    // );
+
+    // TODO: complete the migration from flutter_speedometer to syncfusion_flutter_gauges
     children = Center(
-      child: Speedometer(
-        size: 100,
-        minValue: _minValue,
-        maxValue: _maxValue,
-        currentValue: _value,
-        warningValue: _warning,
-        backgroundColor: Colors.white,
-        meterColor: Colors.green,
-        warningColor: Colors.red,
-        kimColor: Colors.grey,
-        displayNumericStyle: const TextStyle(
-            fontFamily: 'Digital-Display', color: Colors.black, fontSize: 30),
-        displayText: '',
-        displayTextStyle: const TextStyle(color: Colors.black, fontSize: 12),
-      ),
+      child: SfRadialGauge(
+          title: GaugeTitle(
+              text: 'Speedometer',
+              textStyle:
+                  const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+          axes: <RadialAxis>[
+            RadialAxis(minimum: 0, maximum: 150, ranges: <GaugeRange>[
+              GaugeRange(
+                  startValue: 0,
+                  endValue: 50,
+                  color: Colors.green,
+                  startWidth: 10,
+                  endWidth: 10),
+              GaugeRange(
+                  startValue: 50,
+                  endValue: 100,
+                  color: Colors.orange,
+                  startWidth: 10,
+                  endWidth: 10),
+              GaugeRange(
+                  startValue: 100,
+                  endValue: 150,
+                  color: Colors.red,
+                  startWidth: 10,
+                  endWidth: 10)
+            ], pointers: <GaugePointer>[
+              NeedlePointer(value: 90)
+            ], annotations: <GaugeAnnotation>[
+              GaugeAnnotation(
+                  widget: Container(
+                      child: const Text('90.0',
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold))),
+                  angle: 90,
+                  positionFactor: 0.5)
+            ])
+          ]),
     );
 
     return SmeupWidgetBuilderResponse(_model, children);
