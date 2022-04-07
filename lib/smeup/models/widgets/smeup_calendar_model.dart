@@ -29,11 +29,11 @@ class SmeupCalendarModel extends SmeupModel {
   double? markerFontSize;
 
   EdgeInsetsGeometry? padding;
-  String? titleColumnName;
-  String? dataColumnName;
-  String? initTimeColumnName;
-  String? endTimeColumnName;
-  String? styleColumnName;
+  late String titleColumnName;
+  late String dataColumnName;
+  late String initTimeColumnName;
+  late String endTimeColumnName;
+  late String styleColumnName;
   double? width;
   double? height;
   bool? showPeriodButtons;
@@ -91,10 +91,12 @@ class SmeupCalendarModel extends SmeupModel {
 
     dayFontSize = SmeupUtilities.getDouble(optionsDefault!['todayFontSize']) ??
         defaultDayFontSize;
-    eventFontSize = SmeupUtilities.getDouble(optionsDefault!['eventFontSize']) ??
-        defaultEventFontSize;
-    titleFontSize = SmeupUtilities.getDouble(optionsDefault!['titleFontSize']) ??
-        defaultTitleFontSize;
+    eventFontSize =
+        SmeupUtilities.getDouble(optionsDefault!['eventFontSize']) ??
+            defaultEventFontSize;
+    titleFontSize =
+        SmeupUtilities.getDouble(optionsDefault!['titleFontSize']) ??
+            defaultTitleFontSize;
     markerFontSize =
         SmeupUtilities.getDouble(optionsDefault!['markerFontSize']) ??
             defaultMarkerFontSize;
@@ -162,10 +164,12 @@ class SmeupCalendarModel extends SmeupModel {
   }
 
   static setDefaults(dynamic obj) {
-    var dayTextStyle = SmeupConfigurationService.getTheme()!.textTheme.bodyText2!;
+    var dayTextStyle =
+        SmeupConfigurationService.getTheme()!.textTheme.bodyText2!;
     defaultDayFontSize = dayTextStyle.fontSize;
 
-    var markerStyle = SmeupConfigurationService.getTheme()!.textTheme.headline4!;
+    var markerStyle =
+        SmeupConfigurationService.getTheme()!.textTheme.headline4!;
     defaultMarkerFontSize = markerStyle.fontSize;
 
     var eventStyle = SmeupConfigurationService.getTheme()!.textTheme.headline3!;

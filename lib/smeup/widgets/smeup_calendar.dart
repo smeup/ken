@@ -95,12 +95,13 @@ class SmeupCalendar extends StatefulWidget
           SmeupCalendarModel.getInitialFirstWork(initialDate!);
     }
     if (initialLastWork == null) {
-      this.initialLastWork = SmeupCalendarModel.getInitialLastWork(initialDate!);
+      this.initialLastWork =
+          SmeupCalendarModel.getInitialLastWork(initialDate!);
     }
   }
 
-  SmeupCalendar.withController(SmeupCalendarModel this.model, this.scaffoldKey, this.formKey,
-      this.initialFirstWork, this.initialLastWork)
+  SmeupCalendar.withController(SmeupCalendarModel this.model, this.scaffoldKey,
+      this.formKey, this.initialFirstWork, this.initialLastWork)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
@@ -143,7 +144,8 @@ class SmeupCalendar extends StatefulWidget
 
     // set the widget data
     if (workData != null) {
-      List<Map<String?, dynamic>> newList = List<Map<String, dynamic>>.empty(growable: true);
+      List<Map<String, dynamic>> newList =
+          List<Map<String, dynamic>>.empty(growable: true);
       for (var i = 0; i < (workData['rows'] as List).length; i++) {
         final element = workData['rows'][i];
         newList.add({
@@ -351,7 +353,8 @@ class SmeupCalendarState extends State<SmeupCalendar>
             },
           ),
           SmeupButton(
-            data: SmeupLocalizationService.of(context)!.getLocalString('2weeks'),
+            data:
+                SmeupLocalizationService.of(context)!.getLocalString('2weeks'),
             width: buttonWidth,
             align: Alignment.center,
             clientOnPressed: () {
