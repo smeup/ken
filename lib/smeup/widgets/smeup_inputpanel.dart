@@ -349,6 +349,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     return SmeupScriptingServices.validate(
         context: context,
         formKey: widget.formKey!,
+        scaffoldKey: widget.scaffoldKey,
         screenId: _model!.data['id'],
         script: _model!.validationScript);
   }

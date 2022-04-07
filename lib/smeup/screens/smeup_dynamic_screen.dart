@@ -3,7 +3,6 @@ import 'package:ken/smeup/models/notifiers/smeup_error_notifier.dart';
 import 'package:ken/smeup/models/widgets/smeup_drawer_data_element.dart';
 import 'package:ken/smeup/models/widgets/smeup_drawer_model.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
-import 'package:ken/smeup/services/smeup_scripting_services.dart';
 import 'package:ken/smeup/services/smeup_widget_notification_service.dart';
 import 'package:ken/smeup/widgets/smeup_drawer.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
