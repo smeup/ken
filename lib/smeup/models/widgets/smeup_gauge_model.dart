@@ -15,13 +15,16 @@ class SmeupGaugeModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultMaxColName = 'maxValue';
   static const String defaultMinColName = 'minValue';
   static const String defaultWarningColName = 'warning';
-  static const int defaultMaxValue = 100;
-  static const int defaultMinValue = 0;
-  static const int defaultWarning = 50;
-  static const int defaultValue = 0;
+  static const String defaultAlertColName = 'alert';
+  static const double defaultMaxValue = 100;
+  static const double defaultMinValue = 0;
+  static const double defaultWarning = 50;
+  static const double defaultAlert = 80;
+  static const double defaultValue = 0;
 
   String? valueColName;
   String? warningColName;
+  String? alertColName;
   String? maxColName;
   String? minColName;
 
@@ -56,6 +59,7 @@ class SmeupGaugeModel extends SmeupModel implements SmeupDataInterface {
     maxColName = optionsDefault!['maxColName'] ?? defaultMaxColName;
     minColName = optionsDefault!['minColName'] ?? defaultMinColName;
     warningColName = optionsDefault!['warningColName'] ?? defaultWarningColName;
+    alertColName = optionsDefault!['alertColName'] ?? defaultAlertColName;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {

@@ -24,32 +24,37 @@ class SmeupGauge extends StatefulWidget
   String? title;
   String? valueColName;
   String? warningColName;
+  String? alertColName;
   String? maxColName;
   String? minColName;
 
   //dynamic data;
-  int? minValue;
-  int? maxValue;
-  int? value;
-  int? warning;
+  double? minValue;
+  double? maxValue;
+  double? value;
+  double? warning;
+  double? alert;
 
   SmeupGauge(this.scaffoldKey, this.formKey,
       {this.value = SmeupGaugeModel.defaultValue,
       this.maxValue = SmeupGaugeModel.defaultMaxValue,
       this.minValue = SmeupGaugeModel.defaultMinValue,
       this.warning = SmeupGaugeModel.defaultWarning,
+      this.alert = SmeupGaugeModel.defaultAlert,
       id = '',
       type = 'GAU',
       this.valueColName = SmeupGaugeModel.defaultValColName,
       this.maxColName = SmeupGaugeModel.defaultMaxColName,
       this.minColName = SmeupGaugeModel.defaultMinColName,
       this.warningColName = SmeupGaugeModel.defaultWarningColName,
+      this.alertColName = SmeupGaugeModel.defaultAlertColName,
       this.title = ''})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
   }
 
-  SmeupGauge.whitController(SmeupGaugeModel this.model, this.scaffoldKey, this.formKey)
+  SmeupGauge.whitController(
+      SmeupGaugeModel this.model, this.scaffoldKey, this.formKey)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
@@ -64,6 +69,7 @@ class SmeupGauge extends StatefulWidget
     maxColName = m.maxColName;
     minColName = m.minColName;
     warningColName = m.warningColName;
+    alertColName = m.alertColName;
 
     treatData(m);
   }
@@ -77,10 +83,11 @@ class SmeupGauge extends StatefulWidget
 
     // set the widget data
     if (workData != null && (workData['rows'] as List).length > 0) {
-      value = workData['rows'][0][m.valueColName];
-      maxValue = workData['rows'][0][m.maxColName];
-      minValue = workData['rows'][0][m.minColName];
-      warning = workData['rows'][0][m.warningColName];
+      value = SmeupUtilities.getDouble(workData['rows'][0][m.valueColName]);
+      maxValue = SmeupUtilities.getDouble(workData['rows'][0][m.maxColName]);
+      minValue = SmeupUtilities.getDouble(workData['rows'][0][m.minColName]);
+      warning = SmeupUtilities.getDouble(workData['rows'][0][m.warningColName]);
+      alert = SmeupUtilities.getDouble(workData['rows'][0][m.alertColName]);
     }
   }
 
@@ -92,10 +99,11 @@ class _SmeupGaugeState extends State<SmeupGauge>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
   SmeupGaugeModel? _model;
-  int? _maxValue;
-  int? _minValue;
-  int? _value;
-  int? _warning;
+  double? _maxValue;
+  double? _minValue;
+  double? _value;
+  double? _warning;
+  double? _alert;
 
   @override
   void initState() {
@@ -104,6 +112,7 @@ class _SmeupGaugeState extends State<SmeupGauge>
     _maxValue = widget.maxValue;
     _minValue = widget.minValue;
     _warning = widget.warning;
+    _alert = widget.alert;
     if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
@@ -136,34 +145,18 @@ class _SmeupGaugeState extends State<SmeupGauge>
         _maxValue = widget.maxValue;
         _minValue = widget.minValue;
         _warning = widget.warning;
+        _alert = widget.alert;
       }
       setDataLoad(widget.id, true);
     }
     Widget children;
 
-    //int maxValue = int.parse(_data['Elemento']['Max']);
-    //int value = int.parse(_data['Elemento']['Valore']);
-    //int warning = int.parse(_data['Elemento']['Soglia1']);
+    double vMin = _minValue ?? 0;
+    double vMax = _maxValue ?? 0;
+    double vWar = _warning ?? 0;
+    double vAle = _alert ?? 0;
+    double vVal = _value ?? 0;
 
-    // children = Center(
-    //   child: Speedometer(
-    //     size: 100,
-    //     minValue: _minValue,
-    //     maxValue: _maxValue,
-    //     currentValue: _value,
-    //     warningValue: _warning,
-    //     backgroundColor: Colors.white,
-    //     meterColor: Colors.green,
-    //     warningColor: Colors.red,
-    //     kimColor: Colors.grey,
-    //     displayNumericStyle: const TextStyle(
-    //         fontFamily: 'Digital-Display', color: Colors.black, fontSize: 30),
-    //     displayText: '',
-    //     displayTextStyle: const TextStyle(color: Colors.black, fontSize: 12),
-    //   ),
-    // );
-
-    // TODO: complete the migration from flutter_speedometer to syncfusion_flutter_gauges
     children = Center(
       child: SfRadialGauge(
           title: GaugeTitle(
@@ -171,31 +164,31 @@ class _SmeupGaugeState extends State<SmeupGauge>
               textStyle:
                   const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
           axes: <RadialAxis>[
-            RadialAxis(minimum: 0, maximum: 150, ranges: <GaugeRange>[
+            RadialAxis(minimum: vMin, maximum: vMax, ranges: <GaugeRange>[
               GaugeRange(
-                  startValue: 0,
-                  endValue: 50,
+                  startValue: vMin,
+                  endValue: vWar,
                   color: Colors.green,
                   startWidth: 10,
                   endWidth: 10),
               GaugeRange(
-                  startValue: 50,
-                  endValue: 100,
+                  startValue: vWar,
+                  endValue: vAle,
                   color: Colors.orange,
                   startWidth: 10,
                   endWidth: 10),
               GaugeRange(
-                  startValue: 100,
-                  endValue: 150,
+                  startValue: vAle,
+                  endValue: vMax,
                   color: Colors.red,
                   startWidth: 10,
                   endWidth: 10)
             ], pointers: <GaugePointer>[
-              NeedlePointer(value: 90)
+              NeedlePointer(value: vVal)
             ], annotations: <GaugeAnnotation>[
               GaugeAnnotation(
                   widget: Container(
-                      child: const Text('90.0',
+                      child: Text(vVal.toString(),
                           style: TextStyle(
                               fontSize: 25, fontWeight: FontWeight.bold))),
                   angle: 90,
