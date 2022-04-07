@@ -8,6 +8,7 @@ import 'package:ken/smeup/models/widgets/smeup_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
+import 'package:ken/smeup/services/smeup_scripting_services.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
 import 'package:ken/smeup/widgets/smeup_button.dart';
@@ -336,8 +337,21 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     widget.data.forEach((field) => SmeupVariablesService.setVariable(
         field.id, field.value.code,
         formKey: widget.formKey));
-    if (_model != null)
+    if (_model != null && _validate()) {
       SmeupDynamismService.run(_model.dynamisms, context, "click",
           widget.scaffoldKey, widget.formKey);
+    }
+  }
+
+  bool _validate() {
+    if (_model.validationScript != null) {
+      return SmeupScriptingServices.validate(
+          context: context,
+          formKey: widget.formKey,
+          screenId: _model.data['id'],
+          script: _model.validationScript);
+    } else {
+      return true;
+    }
   }
 }

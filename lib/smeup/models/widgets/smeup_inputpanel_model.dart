@@ -18,6 +18,7 @@ class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
   double width;
   double height;
   List<SmeupInputPanelField> fields;
+  String validationScript = '';
 
   SmeupInputPanelModel({
     id,
