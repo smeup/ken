@@ -18,25 +18,7 @@ class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
   double width;
   double height;
   List<SmeupInputPanelField> fields;
-  String validationScript = '''
-    function validate(variables) {
-      if (variables["SFE"] == '') {
-        helper.snackBar("Selezione stato febbrile richiesto");
-        return false;
-      }
-      else if (variable["SIN"] == '') {
-        helper.snackBar("Selezione sintomi influenzali richiesto");
-        return false;
-      }
-      else if (variables["SFE"] == '1' || variables["SIN"] == '1') {
-        helper.snackBar("Se sei indisposto è meglio riposare");
-        return false;
-      }
-      else {
-        return true;
-      }
-    };
-  ''';
+  String validationScript = '';
 
   SmeupInputPanelModel({
     id,
