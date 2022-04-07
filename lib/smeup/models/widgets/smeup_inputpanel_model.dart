@@ -18,6 +18,7 @@ class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
   double? width;
   double? height;
   List<SmeupInputPanelField>? fields;
+  String validationScript = '';
 
   SmeupInputPanelModel({
     id,
@@ -47,8 +48,8 @@ class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
         ) {
     padding =
         SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
-    fontSize =
-        SmeupUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
+    fontSize = SmeupUtilities.getDouble(optionsDefault!['fontSize']) ??
+        defaultFontSize;
 
     title = jsonMap['title'] == null || jsonMap['title'] == '*NONE'
         ? ''
