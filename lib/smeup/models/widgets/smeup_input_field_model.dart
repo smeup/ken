@@ -47,7 +47,8 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
 
   _setServer(SmeupFun? fun) {
     if (fun == null) return;
-    var server = fun.fun['fun']['SERVER'];
+    if (!fun.isFunValid()) return;
+    dynamic server = fun.fun['fun']['SERVER'] ?? '';
 
     if (server.toString().isEmpty) {
       server = _getFieldPath(parent as SmeupSectionModel);
