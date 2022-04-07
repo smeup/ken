@@ -52,7 +52,7 @@ class DialogScreen extends StatelessWidget {
                         {
                           "event": "click",
                           "exec":
-                              "F(EXD;*JSN;) 1(;;packages/ken/assets/jsons/forms) 2(;;dialog_form) P(DIALOG) G(DLG) "
+                              "F(EXD;*JSN;) 2(;;dialog_form) P(DIALOG) G(DLG) SERVER(source(packages/ken/assets/jsons/forms))"
                         }
                       ], context, 'click', _scaffoldKey, _formKey);
                     },
