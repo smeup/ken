@@ -41,7 +41,7 @@ class DashboardScreen extends StatelessWidget {
                     iconSize: 40,
                     iconColor: Colors.red,
                     width: 300,
-                    id: 'dashboard2',
+                    id: 'dashboard1',
                   )
                 ],
               )),

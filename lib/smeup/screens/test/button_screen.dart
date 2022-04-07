@@ -35,7 +35,7 @@ class ButtonScreen extends StatelessWidget {
                     _scaffoldKey,
                     _formKey,
                     //width: double.infinity,
-                    id: 'buttons_1',
+                    id: 'buttons',
                     data: ['Click me'],
                     height: 80,
                     width: 260,

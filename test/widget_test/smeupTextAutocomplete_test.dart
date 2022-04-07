@@ -48,12 +48,9 @@ Future<void> runTests(WidgetTester tester) async {
   await tester.tap(findText.first);
   await tester.pump();
 
-  var finderTextContent1 = find.text('description 1');
+  var finderTextContent1 = find.text('Bari');
   expect(finderTextContent1, findsWidgets);
 
-  var finderTextContent2 = find.text('description 2');
+  var finderTextContent2 = find.text('Brescia');
   expect(finderTextContent2, findsWidgets);
-
-  var finderTextContent3 = find.text('description 3');
-  expect(finderTextContent3, findsNothing);
 }

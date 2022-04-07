@@ -43,10 +43,10 @@ runTests() {
   expect(findText, findsWidgets);
 
   var finderTextContent;
-  finderTextContent = find.text('value2');
+  finderTextContent = find.text('Wine');
   expect(finderTextContent, findsWidgets);
-  finderTextContent = find.text('value3');
+  finderTextContent = find.text('Cheese');
   expect(finderTextContent, findsWidgets);
-  finderTextContent = find.text('value4');
+  finderTextContent = find.text('Fruit');
   expect(finderTextContent, findsWidgets);
 }

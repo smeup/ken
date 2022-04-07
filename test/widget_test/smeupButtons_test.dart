@@ -33,7 +33,7 @@ Future<void> main() async {
 }
 
 runTests() {
-  final findKey1 = find.byKey(Key('buttons_1'));
+  final findKey1 = find.byKey(Key('buttons'));
   expect(findKey1, findsOneWidget);
 
   var findWidget = find.byType(SmeupButton);
@@ -42,9 +42,6 @@ runTests() {
   var findText = find.byType(Text);
   expect(findText, findsWidgets);
 
-  var finderTextContent1 = find.text('I am a button');
+  var finderTextContent1 = find.text('Click me');
   expect(finderTextContent1, findsWidgets);
-
-  var finderTextContent2 = find.text('I am a button too');
-  expect(finderTextContent2, findsWidgets);
 }
