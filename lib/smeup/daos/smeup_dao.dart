@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ken/smeup/models/widgets/smeup_model.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 
@@ -12,7 +14,6 @@ class SmeupDao {
           });
         });
         return newList;
-        break;
 
       case 'FLD':
         switch (model.optionsDefault['type']) {
@@ -29,7 +30,6 @@ class SmeupDao {
           default:
             return model.data;
         }
-        break;
 
       default:
         return {"rows": model.data};
@@ -38,9 +38,9 @@ class SmeupDao {
 
   static Future<void> getData(SmeupModel model,
       {bool executeDecrementDataFetch = true}) async {
-    if (model.smeupFun != null && model.smeupFun.isFunValid()) {
+    if (model.smeupFun != null && model.smeupFun!.isFunValid()) {
       final smeupServiceResponse =
-          await SmeupDataService.invoke(model.smeupFun);
+          await (SmeupDataService.invoke(model.smeupFun));
       if (!smeupServiceResponse.succeded) {
         _decrementDataFetch(model, executeDecrementDataFetch);
         return;

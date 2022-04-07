@@ -42,6 +42,6 @@ runTests() {
   var findText = find.byType(TextFormField);
   expect(findText, findsWidgets);
 
-  var finderTextContent = find.text('I am a textfield');
+  var finderTextContent = find.text('some text');
   expect(finderTextContent, findsWidgets);
 }

@@ -16,54 +16,54 @@ import 'smeup_widget_interface.dart';
 import 'smeup_widget_mixin.dart';
 
 class SmeupTimePickerData {
-  DateTime time;
-  String formattedTime;
+  DateTime? time;
+  String? formattedTime;
 
-  SmeupTimePickerData({@required this.time, this.formattedTime});
+  SmeupTimePickerData({required this.time, this.formattedTime});
 }
 
 // ignore: must_be_immutable
 class SmeupTimePicker extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupTimePickerModel model;
+  SmeupTimePickerModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
-  String id;
-  String type;
-  Color backColor;
-  double fontSize;
-  Color fontColor;
-  String label;
-  double width;
-  double height;
-  EdgeInsetsGeometry padding;
-  bool showborder;
-  String valueField;
-  String displayField;
-  Color borderColor;
-  double borderWidth;
-  double borderRadius;
-  bool fontBold;
-  bool captionFontBold;
-  double captionFontSize;
-  Color captionFontColor;
-  Color captionBackColor;
-  bool underline;
-  double innerSpace;
-  Alignment align;
-  String title;
-  double elevation;
-  List<String> minutesList;
-  SmeupTimePickerData data;
+  String? id;
+  String? type;
+  Color? backColor;
+  double? fontSize;
+  Color? fontColor;
+  String? label;
+  double? width;
+  double? height;
+  EdgeInsetsGeometry? padding;
+  bool? showborder;
+  String? valueField;
+  String? displayField;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
+  bool? fontBold;
+  bool? captionFontBold;
+  double? captionFontSize;
+  Color? captionFontColor;
+  Color? captionBackColor;
+  bool? underline;
+  double? innerSpace;
+  Alignment? align;
+  String? title;
+  double? elevation;
+  List<String>? minutesList;
+  SmeupTimePickerData? data;
 
   // They have to be mapped with all the dynamisms
   // Function clientValidator;
   // Function clientOnSave;
-  Function clientOnChange;
+  Function? clientOnChange;
 
-  TextInputType keyboard;
+  TextInputType? keyboard;
 
   SmeupTimePicker(
     this.scaffoldKey,
@@ -99,19 +99,21 @@ class SmeupTimePicker extends StatefulWidget
   }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
     SmeupTimePickerModel.setDefaults(this);
+    if (minutesList == null)
+      this.minutesList = SmeupTimePickerModel.defaultMinutesList;
   }
 
   SmeupTimePicker.withController(
-    this.model,
+    SmeupTimePickerModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupTimePickerModel m = model;
+    SmeupTimePickerModel m = model as SmeupTimePickerModel;
     id = m.id;
     type = m.type;
     title = m.title;
@@ -147,7 +149,7 @@ class SmeupTimePicker extends StatefulWidget
     // change data format
     final workData = formatDataFields(model);
 
-    String display;
+    String? display;
     DateTime value;
 
     final now = DateTime.now();
@@ -174,14 +176,14 @@ class SmeupTimePicker extends StatefulWidget
 class _SmeupTimePickerState extends State<SmeupTimePicker>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupTimePickerModel _model;
-  SmeupTimePickerData _data;
+  SmeupTimePickerModel? _model;
+  SmeupTimePickerData? _data;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -206,10 +208,10 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
 
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupTimePickerDao.getData(_model);
-        _data = widget.treatData(_model);
+        await SmeupTimePickerDao.getData(_model!);
+        _data = widget.treatData(_model!);
       }
       setDataLoad(widget.id, true);
     }
@@ -221,16 +223,16 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
     }
 
     if (_model != null) {
-      SmeupVariablesService.setVariable(_model.id, _data.formattedTime);
+      SmeupVariablesService.setVariable(_model!.id, _data!.formattedTime);
     }
 
-    double timePickerHeight = widget.height;
-    double timePickerWidth = widget.width;
-    if (_model != null && _model.parent != null) {
+    double? timePickerHeight = widget.height;
+    double? timePickerWidth = widget.width;
+    if (_model != null && _model!.parent != null) {
       if (timePickerHeight == 0)
-        timePickerHeight = (_model.parent as SmeupSectionModel).height;
+        timePickerHeight = (_model!.parent as SmeupSectionModel).height;
       if (timePickerWidth == 0)
-        timePickerWidth = (_model.parent as SmeupSectionModel).width;
+        timePickerWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
       if (timePickerHeight == 0)
         timePickerHeight = MediaQuery.of(context).size.height;
@@ -238,9 +240,9 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
         timePickerWidth = MediaQuery.of(context).size.width;
     }
 
-    if (!widget.showborder) {
+    if (!widget.showborder!) {
       widget.borderColor =
-          SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
+          SmeupConfigurationService.getTheme()!.scaffoldBackgroundColor;
     }
 
     ButtonStyle buttonStyle = _getButtonStyle();
@@ -250,7 +252,7 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
 
     Widget icon = Container(
       color: iconTheme.color,
-      padding: EdgeInsets.all(iconTheme.size.toDouble()),
+      padding: EdgeInsets.all(iconTheme.size!.toDouble()),
       child: Icon(
         Icons.access_time,
         color: Theme.of(context).primaryColor,
@@ -258,9 +260,9 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
       ),
     );
 
-    var text = widget.label.isEmpty
+    var text = widget.label!.isEmpty
         ? Container()
-        : Text(widget.label, textAlign: TextAlign.center, style: captionStyle);
+        : Text(widget.label!, textAlign: TextAlign.center, style: captionStyle);
 
     timepicker = SmeupTimePickerButton(
       _data,
@@ -292,7 +294,7 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
       clientOnChange: widget.clientOnChange,
     );
 
-    var line = widget.underline
+    var line = widget.underline!
         ? SmeupLine(widget.scaffoldKey, widget.formKey)
         : Container();
 
@@ -317,7 +319,7 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
                         icon,
                       ],
                     ),
-                    alignment: widget.align)),
+                    alignment: widget.align!)),
           ],
         ),
         line
@@ -342,7 +344,7 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
                     )),
                   ],
                 ),
-                alignment: widget.align,
+                alignment: widget.align!,
               )),
               SizedBox(width: widget.innerSpace),
               text,
@@ -431,38 +433,39 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
   }
 
   ButtonStyle _getButtonStyle() {
-    var timePickerTheme = SmeupConfigurationService.getTheme()
+    var timePickerTheme = SmeupConfigurationService.getTheme()!
         .timePickerTheme
         .copyWith(
             backgroundColor: widget.backColor,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius)),
+                borderRadius: BorderRadius.circular(widget.borderRadius!)),
             dayPeriodBorderSide: BorderSide(
-                width: widget.borderWidth, color: widget.borderColor));
+                width: widget.borderWidth!, color: widget.borderColor!));
 
-    var elevatedButtonStyle = SmeupConfigurationService.getTheme()
+    var elevatedButtonStyle = SmeupConfigurationService.getTheme()!
         .elevatedButtonTheme
-        .style
+        .style!
         .copyWith(
-            backgroundColor: MaterialStateProperty.all<Color>(
+            backgroundColor: MaterialStateProperty.all<Color?>(
                 timePickerTheme.backgroundColor),
-            elevation: MaterialStateProperty.all<double>(widget.elevation),
+            elevation: MaterialStateProperty.all<double?>(widget.elevation),
             padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                 EdgeInsets.all(0)),
-            shape: MaterialStateProperty.all<OutlinedBorder>(
-                timePickerTheme.shape),
-            side: MaterialStateProperty.all<BorderSide>(
+            shape: MaterialStateProperty.all<OutlinedBorder?>(
+                timePickerTheme.shape as OutlinedBorder?),
+            side: MaterialStateProperty.all<BorderSide?>(
                 timePickerTheme.dayPeriodBorderSide));
 
     return elevatedButtonStyle;
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.bodyText1;
+    TextStyle style =
+        SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
 
     style = style.copyWith(color: widget.fontColor, fontSize: widget.fontSize);
 
-    if (widget.fontBold) {
+    if (widget.fontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -472,12 +475,12 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
+    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
         color: widget.captionFontColor, fontSize: widget.captionFontSize);
 
-    if (widget.captionFontBold) {
+    if (widget.captionFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -487,7 +490,7 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = SmeupConfigurationService.getTheme()
+    IconThemeData themeData = SmeupConfigurationService.getTheme()!
         .iconTheme
         .copyWith(size: widget.fontSize);
 

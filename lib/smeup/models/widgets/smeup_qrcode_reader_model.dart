@@ -13,11 +13,11 @@ class SmeupQRCodeReaderModel extends SmeupInputFieldModel
   static const int defaultMaxReads = 1;
   static const int defaultDealyInMillis = 0;
 
-  double padding;
-  double size;
-  Function onDataRead;
-  int maxReads;
-  int delayInMillis;
+  double? padding;
+  double? size;
+  Function? onDataRead;
+  int? maxReads;
+  int? delayInMillis;
 
   SmeupQRCodeReaderModel(GlobalKey<FormState> formKey,
       GlobalKey<ScaffoldState> scaffoldKey, BuildContext context,
@@ -34,14 +34,14 @@ class SmeupQRCodeReaderModel extends SmeupInputFieldModel
 
   SmeupQRCodeReaderModel.fromMap(
       Map<String, dynamic> jsonMap,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
       SmeupModel parent)
       : super.fromMap(jsonMap, formKey, scaffoldKey, context, parent) {
     padding =
-        SmeupUtilities.getDouble(optionsDefault['padding']) ?? defaultPadding;
-    size = SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultSize;
+        SmeupUtilities.getDouble(optionsDefault!['padding']) ?? defaultPadding;
+    size = SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultSize;
     title = jsonMap['title'] ?? '';
 
     if (widgetLoadType != LoadType.Delay) {

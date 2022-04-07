@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
@@ -14,7 +16,7 @@ class SmeupDynamismService {
   static const loggerId = "SmeupDynamismService";
 
   static void storeDynamicVariables(
-      dynamic data, GlobalKey<FormState> formKey) {
+      dynamic data, GlobalKey<FormState>? formKey) {
     if (data != null && data is Map) {
       for (var i = 0; i < data.entries.length; i++) {
         final element = data.entries.elementAt(i);
@@ -28,7 +30,7 @@ class SmeupDynamismService {
           if (key == 'testo' || key == 'value') key = 'Tx';
           if (key == 'nome') key = 'Nm';
 
-          String value = '';
+          String? value = '';
           if (element.value is Map && element.value['smeupObject'] != null) {
             value = SmeupUtilities.extractValueFromName(element.value);
           } else {
@@ -40,9 +42,9 @@ class SmeupDynamismService {
     }
   }
 
-  static void storeFormVariables(Map data, GlobalKey<FormState> formKey) {
-    if (data != null && data['name'] != null) {
-      String type = data['type'];
+  static void storeFormVariables(Map data, GlobalKey<FormState>? formKey) {
+    if (data['name'] != null) {
+      String? type = data['type'];
       if (type == null || type.toString() != 'sch') {
         SmeupVariablesService.setVariable(data['name'], data['value'] ?? '',
             formKey: null);
@@ -54,16 +56,15 @@ class SmeupDynamismService {
   }
 
   static Future<void> run(
-      List dynamisms,
+      List? dynamisms,
       BuildContext context,
       String event,
       GlobalKey<ScaffoldState> scaffoldKey,
-      GlobalKey<FormState> formKey) async {
+      GlobalKey<FormState>? formKey) async {
     if (dynamisms == null) return;
 
     List selectedDynamisms =
         dynamisms.where((element) => element['event'] == event).toList();
-    if (selectedDynamisms == null) return;
 
     for (var i = 0; i < selectedDynamisms.length; i++) {
       final dynamism = selectedDynamisms[i];
@@ -72,7 +73,7 @@ class SmeupDynamismService {
 
       if (dynamism['variables'] != null) {
         (dynamism['variables'] as List<dynamic>).forEach((element) {
-          String value = '';
+          String? value = '';
           if (element['value'].toString().startsWith('[')) {
             String varName = element['value']
                 .toString()
@@ -94,8 +95,8 @@ class SmeupDynamismService {
       }
 
       if (dynamism['exec'] != null) {
-        String exec =
-            SmeupDynamismService.replaceFunVariables(dynamism['exec'], formKey);
+        String exec = SmeupDynamismService.replaceFunVariables(
+            dynamism['exec'], formKey)!;
 
         if (exec.toLowerCase() == 'close') {
           Navigator.of(context).pop();
@@ -103,7 +104,7 @@ class SmeupDynamismService {
         }
 
         SmeupFun smeupFunExec = SmeupFun(exec, formKey, scaffoldKey, context);
-        String notify = smeupFunExec.fun['fun']['NOTIFY'];
+        String? notify = smeupFunExec.fun['fun']['NOTIFY'];
 
         switch (smeupFunExec.fun['fun']['component']) {
           case 'EXD':
@@ -167,8 +168,8 @@ class SmeupDynamismService {
     }
   }
 
-  static _showDialog(SmeupFun smeupFunExec, BuildContext context, String notify,
-      GlobalKey<ScaffoldState> scaffoldKey) {
+  static _showDialog(SmeupFun smeupFunExec, BuildContext context,
+      String? notify, GlobalKey<ScaffoldState> scaffoldKey) {
     showDialog(
         barrierDismissible: false,
         routeSettings: RouteSettings(arguments: {
@@ -178,7 +179,7 @@ class SmeupDynamismService {
         }),
         context: context,
         builder: (_) => Theme(
-              data: SmeupConfigurationService.getTheme(),
+              data: SmeupConfigurationService.getTheme()!,
               child: SimpleDialog(
                 contentPadding: EdgeInsets.only(top: 20, bottom: 20),
                 // backgroundColor: SmeupConfigurationService.getTheme()
@@ -196,34 +197,33 @@ class SmeupDynamismService {
     });
   }
 
-  static String replaceFunVariables(
-      String funString, GlobalKey<FormState> formKey) {
+  static String? replaceFunVariables(
+      String? funString, GlobalKey<FormState>? formKey) {
     SmeupVariablesService.getVariables(formKey: formKey)
         .entries
         .forEach((element) {
-      String key = element.key;
+      String? key = element.key;
       if (formKey != null)
-        key = key.replaceAll('${formKey.hashCode.toString()}_', '');
+        key = key!.replaceAll('${formKey.hashCode.toString()}_', '');
 
       if (element.value is String) {
-        funString =
-            funString.replaceAll('[$key]', element.value.toString() ?? '');
+        funString = funString!.replaceAll('[$key]', element.value.toString());
       } else {
         funString =
-            funString.replaceAll('\"[$key]\"', element.value.toString() ?? '');
+            funString!.replaceAll('\"[$key]\"', element.value.toString());
       }
     });
     try {
       // remove not replacable variable
       RegExp re = RegExp(r'\[[^\]]*\]');
-      String newFun = funString;
-      re.allMatches(funString).forEach((match) {
-        final value = funString
+      String? newFun = funString;
+      re.allMatches(funString!).forEach((match) {
+        final value = funString!
             .substring(match.start, match.end)
             .replaceFirst('[', '')
             .replaceFirst(']', '');
-        if (value != null && value.isNotEmpty) {
-          newFun = newFun.replaceAll('[$value]', '');
+        if (value.isNotEmpty) {
+          newFun = newFun!.replaceAll('[$value]', '');
           SmeupLogService.writeDebugMessage(
               'removed the parameter: $value in replaceFunVariables',
               logType: LogType.warning);
@@ -239,7 +239,7 @@ class SmeupDynamismService {
   }
 
   static _manageNotify(
-      String notify, BuildContext context, int scaffoldHashCode) {
+      String? notify, BuildContext context, int scaffoldHashCode) {
     if (notify != null && notify.isNotEmpty) {
       var widgetsIds = notify.toString().split('\\');
       if (widgetsIds.length > 0) {

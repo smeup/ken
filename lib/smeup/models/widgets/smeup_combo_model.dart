@@ -10,16 +10,16 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 class SmeupComboModel extends SmeupInputFieldModel
     implements SmeupDataInterface {
   // supported by json_theme
-  static double defaultIconSize;
-  static Color defaultIconColor;
-  static double defaultFontSize;
-  static Color defaultFontColor;
-  static bool defaultFontBold;
-  static Color defaultBackColor;
-  static bool defaultCaptionFontBold;
-  static double defaultCaptionFontSize;
-  static Color defaultCaptionFontColor;
-  static Color defaultCaptionBackColor;
+  static double? defaultIconSize;
+  static Color? defaultIconColor;
+  static double? defaultFontSize;
+  static Color? defaultFontColor;
+  static bool? defaultFontBold;
+  static Color? defaultBackColor;
+  static bool? defaultCaptionFontBold;
+  static double? defaultCaptionFontSize;
+  static Color? defaultCaptionFontColor;
+  static Color? defaultCaptionBackColor;
 
   // unsupported by json_theme
   static const double defaultWidth = 100;
@@ -32,34 +32,34 @@ class SmeupComboModel extends SmeupInputFieldModel
   static const double defaultInnerSpace = 10.0;
   static const bool defaultUnderline = false;
 
-  double fontSize;
-  Color fontColor;
-  bool fontBold;
-  Color backColor;
-  bool captionFontBold;
-  double captionFontSize;
-  Color captionFontColor;
-  Color captionBackColor;
-  double iconSize;
-  Color iconColor;
+  double? fontSize;
+  Color? fontColor;
+  bool? fontBold;
+  Color? backColor;
+  bool? captionFontBold;
+  double? captionFontSize;
+  Color? captionFontColor;
+  Color? captionBackColor;
+  double? iconSize;
+  Color? iconColor;
 
-  bool underline;
-  double width;
-  double height;
-  double innerSpace;
-  Alignment align;
-  String valueField;
-  String descriptionField;
-  String selectedValue;
-  String label;
-  EdgeInsetsGeometry padding;
+  bool? underline;
+  double? width;
+  double? height;
+  double? innerSpace;
+  Alignment? align;
+  String? valueField;
+  String? descriptionField;
+  String? selectedValue;
+  String? label;
+  EdgeInsetsGeometry? padding;
 
   SmeupComboModel(
       {id,
       type,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
       this.fontColor,
       this.fontSize,
       this.fontBold,
@@ -82,63 +82,63 @@ class SmeupComboModel extends SmeupInputFieldModel
       this.height = defaultHeight,
       title = ''})
       : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
-    if (optionsDefault['type'] == null) optionsDefault['type'] = 'cmb';
+    if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'cmb';
     SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
 
   SmeupComboModel.fromMap(
       Map<String, dynamic> jsonMap,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
       SmeupModel parent)
       : super.fromMap(jsonMap, formKey, scaffoldKey, context, parent) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';
 
-    valueField = optionsDefault['valueField'] ?? defaultValueField;
+    valueField = optionsDefault!['valueField'] ?? defaultValueField;
     descriptionField =
-        optionsDefault['descriptionField'] ?? defaultDescriptionField;
-    selectedValue = optionsDefault['defaultValue'] ?? '';
-    label = optionsDefault['label'] ?? defaultLabel;
-    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+        optionsDefault!['descriptionField'] ?? defaultDescriptionField;
+    selectedValue = optionsDefault!['defaultValue'] ?? '';
+    label = optionsDefault!['label'] ?? defaultLabel;
+    width = SmeupUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height =
-        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+        SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     iconSize =
-        SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
-    iconColor = SmeupUtilities.getColorFromRGB(optionsDefault['iconColor']) ??
+        SmeupUtilities.getDouble(optionsDefault!['iconSize']) ?? defaultIconSize;
+    iconColor = SmeupUtilities.getColorFromRGB(optionsDefault!['iconColor']) ??
         defaultIconColor;
 
     fontSize =
-        SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontSize;
-    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']) ??
+        SmeupUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
+    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
         defaultFontColor;
-    fontBold = optionsDefault['bold'] ?? defaultFontBold;
-    backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??
+    fontBold = optionsDefault!['bold'] ?? defaultFontBold;
+    backColor = SmeupUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
 
     underline =
-        SmeupUtilities.getBool(optionsDefault['underline']) ?? defaultUnderline;
+        SmeupUtilities.getBool(optionsDefault!['underline']) ?? defaultUnderline;
 
-    innerSpace = SmeupUtilities.getDouble(optionsDefault['innerSpace']) ??
+    innerSpace = SmeupUtilities.getDouble(optionsDefault!['innerSpace']) ??
         defaultInnerSpace;
-    align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']) ??
+    align = SmeupUtilities.getAlignmentGeometry(optionsDefault!['align']) ??
         defaultAlign;
     captionFontSize =
-        SmeupUtilities.getDouble(optionsDefault['captionFontSize']) ??
+        SmeupUtilities.getDouble(optionsDefault!['captionFontSize']) ??
             defaultCaptionFontSize;
     captionFontColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['captionFontColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['captionFontColor']) ??
             defaultCaptionFontColor;
-    captionFontBold = optionsDefault['captionBold'] ?? defaultCaptionFontBold;
+    captionFontBold = optionsDefault!['captionBold'] ?? defaultCaptionFontBold;
     captionBackColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['captionBackColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['captionBackColor']) ??
             defaultCaptionBackColor;
 
     padding =
-        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
+        SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
@@ -150,19 +150,19 @@ class SmeupComboModel extends SmeupInputFieldModel
   }
 
   static setDefaults(dynamic obj) {
-    var textStyle = SmeupConfigurationService.getTheme().textTheme.bodyText1;
+    var textStyle = SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
     defaultBackColor = textStyle.backgroundColor;
 
-    var captionStyle = SmeupConfigurationService.getTheme().textTheme.caption;
+    var captionStyle = SmeupConfigurationService.getTheme()!.textTheme.caption!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;
     defaultCaptionBackColor = captionStyle.backgroundColor;
 
-    var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
+    var iconTheme = SmeupConfigurationService.getTheme()!.iconTheme;
     defaultIconSize = iconTheme.size;
     defaultIconColor = textStyle.color;
     //iconTheme.color;

@@ -160,7 +160,7 @@ class SmeupMemoryService {
           break;
 
         case 'zones':
-          List zones = jsonDecode(jsonData['result']);
+          List? zones = jsonDecode(jsonData['result']);
           if (zones == null)
             zones = [
               {"id": property}
@@ -206,7 +206,7 @@ class SmeupMemoryService {
     jsonToKey[toSegment] = Response(
         data: jsonDecode(jsonFromSegment.toString()),
         statusCode: jsonFromSegment.statusCode,
-        requestOptions: null);
+        requestOptions: RequestOptions(path: ''));
 
     SmeupLogService.writeDebugMessage(
         'copied memory from $fromKey-$fromSegment to $toKey-$toSegment',

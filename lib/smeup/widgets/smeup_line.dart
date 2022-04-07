@@ -14,15 +14,15 @@ import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 class SmeupLine extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupLineModel model;
+  SmeupLineModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
-  Color color;
-  double thickness;
-  String title;
-  String id;
-  String type;
+  Color? color;
+  double? thickness;
+  String? title;
+  String? id;
+  String? type;
 
   dynamic data;
 
@@ -34,16 +34,16 @@ class SmeupLine extends StatefulWidget
   }
 
   SmeupLine.withController(
-    this.model,
+    SmeupLineModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupLineModel m = model;
+    SmeupLineModel m = model as SmeupLineModel;
     id = m.id;
     type = m.type;
     color = m.color;
@@ -55,7 +55,7 @@ class SmeupLine extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupLineModel m = model;
+    SmeupLineModel m = model as SmeupLineModel;
 
     // change data format
     return formatDataFields(m);
@@ -68,7 +68,7 @@ class SmeupLine extends StatefulWidget
 class _SmeupLineState extends State<SmeupLine>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupLineModel _model;
+  SmeupLineModel? _model;
   // ignore: unused_field
   dynamic _data;
 
@@ -76,7 +76,7 @@ class _SmeupLineState extends State<SmeupLine>
   void initState() {
     _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -101,10 +101,10 @@ class _SmeupLineState extends State<SmeupLine>
 
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupLineDao.getData(_model);
-        _data = widget.treatData(_model);
+        await SmeupLineDao.getData(_model!);
+        _data = widget.treatData(_model!);
       }
       setDataLoad(widget.id, true);
     }
@@ -119,7 +119,7 @@ class _SmeupLineState extends State<SmeupLine>
   }
 
   DividerThemeData _getDividerStile() {
-    DividerThemeData dividerData = SmeupConfigurationService.getTheme()
+    DividerThemeData dividerData = SmeupConfigurationService.getTheme()!
         .dividerTheme
         .copyWith(color: widget.color, thickness: widget.thickness);
 

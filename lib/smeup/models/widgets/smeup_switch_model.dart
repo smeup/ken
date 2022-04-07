@@ -8,12 +8,12 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class SmeupSwitchModel extends SmeupModel implements SmeupDataInterface {
   // supported by json_theme
-  static Color defaultThumbColor;
-  static Color defaultTrackColor;
-  static double defaultCaptionFontSize;
-  static Color defaultCaptionFontColor;
-  static Color defaultCaptionBackColor;
-  static bool defaultCaptionFontBold;
+  static Color? defaultThumbColor;
+  static Color? defaultTrackColor;
+  static double? defaultCaptionFontSize;
+  static Color? defaultCaptionFontColor;
+  static Color? defaultCaptionBackColor;
+  static bool? defaultCaptionFontBold;
 
   // unsupported by json_theme
   static const double defaultWidth = 100;
@@ -21,22 +21,22 @@ class SmeupSwitchModel extends SmeupModel implements SmeupDataInterface {
   static const Alignment defaultAlign = Alignment.center;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
 
-  double captionFontSize;
-  Color captionFontColor;
-  Color captionBackColor;
-  bool captionFontBold;
-  Color thumbColor;
-  Color trackColor;
+  double? captionFontSize;
+  Color? captionFontColor;
+  Color? captionBackColor;
+  bool? captionFontBold;
+  Color? thumbColor;
+  Color? trackColor;
 
-  double width;
-  double height;
-  EdgeInsetsGeometry padding;
-  String text;
+  double? width;
+  double? height;
+  EdgeInsetsGeometry? padding;
+  String? text;
 
   SmeupSwitchModel({
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
     id,
     type,
     title = '',
@@ -51,16 +51,16 @@ class SmeupSwitchModel extends SmeupModel implements SmeupDataInterface {
     this.height = defaultHeight,
     this.padding = defaultPadding,
   }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
-    if (optionsDefault['type'] == null) optionsDefault['type'] = 'swt';
+    if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'swt';
     SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
 
   SmeupSwitchModel.fromMap(
     Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
   ) : super.fromMap(
           jsonMap,
           formKey,
@@ -70,29 +70,29 @@ class SmeupSwitchModel extends SmeupModel implements SmeupDataInterface {
     setDefaults(this);
     title = jsonMap['title'] ?? '';
     padding =
-        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
+        SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
 
-    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+    width = SmeupUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height =
-        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+        SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 
-    captionFontSize = SmeupUtilities.getDouble(optionsDefault['fontSize']) ??
+    captionFontSize = SmeupUtilities.getDouble(optionsDefault!['fontSize']) ??
         defaultCaptionFontSize;
 
     captionBackColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
             defaultCaptionBackColor;
 
     captionFontColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
             defaultCaptionFontColor;
 
-    captionFontBold = optionsDefault['bold'] ?? defaultCaptionFontBold;
+    captionFontBold = optionsDefault!['bold'] ?? defaultCaptionFontBold;
 
-    thumbColor = SmeupUtilities.getColorFromRGB(optionsDefault['thumbColor']) ??
+    thumbColor = SmeupUtilities.getColorFromRGB(optionsDefault!['thumbColor']) ??
         defaultThumbColor;
 
-    trackColor = SmeupUtilities.getColorFromRGB(optionsDefault['trackColor']) ??
+    trackColor = SmeupUtilities.getColorFromRGB(optionsDefault!['trackColor']) ??
         defaultTrackColor;
 
     if (widgetLoadType != LoadType.Delay) {
@@ -105,12 +105,12 @@ class SmeupSwitchModel extends SmeupModel implements SmeupDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var radioTheme = SmeupConfigurationService.getTheme().switchTheme;
+    var radioTheme = SmeupConfigurationService.getTheme()!.switchTheme;
 
-    defaultThumbColor = radioTheme.thumbColor.resolve(Set<MaterialState>());
-    defaultTrackColor = radioTheme.trackColor.resolve(Set<MaterialState>());
+    defaultThumbColor = radioTheme.thumbColor!.resolve(Set<MaterialState>());
+    defaultTrackColor = radioTheme.trackColor!.resolve(Set<MaterialState>());
 
-    var captionStyle = SmeupConfigurationService.getTheme().textTheme.caption;
+    var captionStyle = SmeupConfigurationService.getTheme()!.textTheme.caption!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;

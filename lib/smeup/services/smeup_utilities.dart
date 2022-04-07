@@ -9,9 +9,9 @@ import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'smeup_widget_notification_service.dart';
 
 class SmeupUtilities {
-  static String extractValueFromType(
+  static String? extractValueFromType(
       Map fields, String tipo, String parametro) {
-    Map retField;
+    Map? retField;
     for (var i = 0; i < fields.entries.length; i++) {
       final element = fields.entries.elementAt(i);
       if (element.value['smeupObject']['tipo'] == tipo &&
@@ -20,12 +20,12 @@ class SmeupUtilities {
         break;
       }
     }
-    return extractValueFromName(retField);
+    return extractValueFromName(retField!);
   }
 
-  static String extractValueFromName(Map field) {
-    String fieldValue;
-    Map smeupObject = field['smeupObject'];
+  static String? extractValueFromName(Map field) {
+    String? fieldValue;
+    Map? smeupObject = field['smeupObject'];
     if (smeupObject != null) {
       switch (smeupObject['tipo']) {
         case 'NR':
@@ -41,11 +41,11 @@ class SmeupUtilities {
     return fieldValue;
   }
 
-  static Color getColorFromRGB(String color, {double opacity = 1.0}) {
+  static Color? getColorFromRGB(String? color, {double opacity = 1.0}) {
     if (color == null) return null;
 
     final split = color.split(RegExp(r"(?=[A-Z])"));
-    if (split == null || split.length != 3) return null;
+    if (split.length != 3) return null;
 
     try {
       int r = int.parse(split[0].substring(1));
@@ -62,17 +62,13 @@ class SmeupUtilities {
   }
 
   static bool isNumeric(String s) {
-    if (s == null) {
-      return false;
-    }
-
     if (((int.tryParse(s) ?? null) != null) ||
         ((double.tryParse(s) ?? null) != null)) return true;
 
     return false;
   }
 
-  static int getInt(dynamic value) {
+  static int? getInt(dynamic value) {
     if (value is int) {
       return value;
     } else if (value is double) {
@@ -83,7 +79,7 @@ class SmeupUtilities {
     return value;
   }
 
-  static double getDouble(dynamic value) {
+  static double? getDouble(dynamic value) {
     if (value is double) {
       return value;
     } else if (value is String) {
@@ -95,20 +91,20 @@ class SmeupUtilities {
     return value;
   }
 
-  static EdgeInsetsGeometry getPadding(dynamic value) {
+  static EdgeInsetsGeometry? getPadding(dynamic value) {
     if (value == null)
       return null;
     else if (value is double) {
-      return EdgeInsets.all(SmeupUtilities.getDouble(value));
+      return EdgeInsets.all(SmeupUtilities.getDouble(value)!);
     } else if (value is int) {
-      return EdgeInsets.all(SmeupUtilities.getDouble(value));
+      return EdgeInsets.all(SmeupUtilities.getDouble(value)!);
     } else if (value is String) {
-      return EdgeInsets.all(SmeupUtilities.getDouble(value));
+      return EdgeInsets.all(SmeupUtilities.getDouble(value)!);
     } else {
-      double left = 0;
-      double right = 0;
-      double top = 0;
-      double bottom = 0;
+      double? left = 0;
+      double? right = 0;
+      double? top = 0;
+      double? bottom = 0;
       if (value['left'] != null) left = SmeupUtilities.getDouble(value['left']);
       if (value['right'] != null)
         right = SmeupUtilities.getDouble(value['right']);
@@ -116,11 +112,11 @@ class SmeupUtilities {
       if (value['bottom'] != null)
         bottom = SmeupUtilities.getDouble(value['bottom']);
       return EdgeInsets.only(
-          top: top, bottom: bottom, left: left, right: right);
+          top: top!, bottom: bottom!, left: left!, right: right!);
     }
   }
 
-  static Alignment getAlignmentGeometry(String alignment) {
+  static Alignment? getAlignmentGeometry(String? alignment) {
     switch (alignment) {
       case "left":
         return Alignment.centerLeft;
@@ -145,7 +141,7 @@ class SmeupUtilities {
     }
   }
 
-  static MainAxisAlignment getMainAxisAlignment(String position) {
+  static MainAxisAlignment getMainAxisAlignment(String? position) {
     switch (position) {
       case "center":
         return MainAxisAlignment.center;
@@ -164,7 +160,7 @@ class SmeupUtilities {
     }
   }
 
-  static TextInputType getKeyboard(String keyboard) {
+  static TextInputType getKeyboard(String? keyboard) {
     switch (keyboard) {
       case "datetime":
         return TextInputType.datetime;
@@ -191,7 +187,7 @@ class SmeupUtilities {
     }
   }
 
-  static String getWidgetId(String type, String id) {
+  static String getWidgetId(String? type, String? id) {
     if (type == null || type.isEmpty) type = '';
     if (id == null || id.isEmpty) id = '';
     String newId = id;
@@ -227,14 +223,13 @@ class SmeupUtilities {
       RegExp re = RegExp(r'\{\{.*\}\}');
       re.allMatches(source).forEach((match) {
         final placeHolder = source.substring(match.start, match.end);
-        if (placeHolder != null && placeHolder.isNotEmpty) {
+        if (placeHolder.isNotEmpty) {
           final dictionaryKey =
               placeHolder.replaceFirst('{{', '').replaceFirst('}}', '');
 
-          if (dictionaryKey != null &&
-              SmeupConfigurationService.appDictionary
-                      .getLocalString(dictionaryKey) !=
-                  null) {
+          if (SmeupConfigurationService.appDictionary
+                  .getLocalString(dictionaryKey) !=
+              null) {
             workString = workString.replaceAll(
                 placeHolder,
                 SmeupConfigurationService.appDictionary
@@ -247,7 +242,7 @@ class SmeupUtilities {
     return workString;
   }
 
-  static bool getBool(dynamic value) {
+  static bool? getBool(dynamic value) {
     if (value is bool) {
       return value;
     } else if (value is String) {

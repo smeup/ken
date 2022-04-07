@@ -50,12 +50,12 @@ class SmeupScriptingServices {
   }
 
   static bool validate(
-      {@required BuildContext context,
-      @required GlobalKey<FormState> formKey,
-      @required GlobalKey<ScaffoldState> scaffoldKey,
-      @required String screenId,
-      @required String script}) {
-    if (script == null || script == "") return true;
+      {required BuildContext context,
+      required GlobalKey<FormState> formKey,
+      required GlobalKey<ScaffoldState> scaffoldKey,
+      required String screenId,
+      required String script}) {
+    if (script.isEmpty) return true;
     Map jsMap = Map();
     SmeupVariablesService.getVariables(formKey: formKey).forEach((key, value) {
       jsMap[key

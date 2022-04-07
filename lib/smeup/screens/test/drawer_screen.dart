@@ -13,7 +13,7 @@ class DrawerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme(),
+      data: SmeupConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -82,7 +82,7 @@ class DrawerScreen extends StatelessWidget {
         SmeupDrawerDataElement(
           'Chart',
           route:
-              'F(EXD;*JSN;) 1(;;packages/ken/assets/jsons/forms) 2(;;test_chart)',
+              'F(EXD;*JSN;) 2(;;test_chart) SERVER(source(packages/ken/assets/jsons/forms))',
           iconCode: 0,
           group: 'DYNAMIC',
           fontSize: fontSize,
@@ -92,7 +92,7 @@ class DrawerScreen extends StatelessWidget {
         SmeupDrawerDataElement(
           'Calendar',
           route:
-              'F(EXD;*JSN;) 1(;;packages/ken/assets/jsons/forms) 2(;;test_calendar)',
+              'F(EXD;*JSN;) 2(;;test_calendar) SERVER(source(packages/ken/assets/jsons/forms))',
           iconCode: 0,
           group: 'DYNAMIC',
           fontSize: fontSize,

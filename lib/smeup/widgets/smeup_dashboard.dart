@@ -16,36 +16,36 @@ import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 class SmeupDashboard extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupDashboardModel model;
+  SmeupDashboardModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
-  double fontSize;
-  Color fontColor;
-  bool fontBold;
-  double captionFontSize;
-  bool captionFontBold;
-  Color captionFontColor;
-  double iconSize;
-  Color iconColor;
+  double? fontSize;
+  Color? fontColor;
+  bool? fontBold;
+  double? captionFontSize;
+  bool? captionFontBold;
+  Color? captionFontColor;
+  double? iconSize;
+  Color? iconColor;
 
-  double data;
-  String unitOfMeasure = '';
-  String text = '';
-  int icon = 0;
-  String valueColName;
-  String selectLayout;
-  double width;
-  double height;
-  EdgeInsetsGeometry padding;
-  String title;
-  String id;
-  String type;
-  String forceText;
-  String forceUm;
-  String forceValue;
-  String forceIcon;
-  String numberFormat;
+  double? data;
+  String? unitOfMeasure = '';
+  String? text = '';
+  int? icon = 0;
+  String? valueColName;
+  String? selectLayout;
+  double? width;
+  double? height;
+  EdgeInsetsGeometry? padding;
+  String? title;
+  String? id;
+  String? type;
+  String? forceText;
+  String? forceUm;
+  String? forceValue;
+  String? forceIcon;
+  String? numberFormat;
 
   SmeupDashboard(this.scaffoldKey, this.formKey, this.data,
       {id = '',
@@ -77,14 +77,14 @@ class SmeupDashboard extends StatefulWidget
     SmeupDashboardModel.setDefaults(this);
   }
 
-  SmeupDashboard.withController(this.model, this.scaffoldKey, this.formKey)
+  SmeupDashboard.withController(SmeupDashboardModel this.model, this.scaffoldKey, this.formKey)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupDashboardModel m = model;
+    SmeupDashboardModel m = model as SmeupDashboardModel;
     fontSize = m.fontSize;
     fontColor = m.fontColor;
     fontBold = m.fontBold;
@@ -112,7 +112,7 @@ class SmeupDashboard extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupDashboardModel m = model;
+    SmeupDashboardModel m = model as SmeupDashboardModel;
 
     // change data format
     var workData = formatDataFields(m);
@@ -127,20 +127,20 @@ class SmeupDashboard extends StatefulWidget
       icon = SmeupUtilities.getInt(workData['rows'][0][m.iconColName]);
     }
 
-    if (m.forceText.isNotEmpty) {
+    if (m.forceText!.isNotEmpty) {
       text = m.forceText;
     }
 
-    if (m.forceIcon.isNotEmpty) {
-      icon = m.forceIcon as int;
+    if (m.forceIcon!.isNotEmpty) {
+      icon = m.forceIcon as int?;
     }
 
-    if (m.forceUm.isNotEmpty) {
+    if (m.forceUm!.isNotEmpty) {
       unitOfMeasure = m.forceUm;
     }
 
-    if (m.forceValue.isNotEmpty) {
-      data = m.forceValue as double;
+    if (m.forceValue!.isNotEmpty) {
+      data = m.forceValue as double?;
     }
 
     return data;
@@ -153,14 +153,14 @@ class SmeupDashboard extends StatefulWidget
 class _SmeupDashboardState extends State<SmeupDashboard>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupDashboardModel _model;
-  double _data;
+  SmeupDashboardModel? _model;
+  double? _data;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -184,10 +184,10 @@ class _SmeupDashboardState extends State<SmeupDashboard>
 
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupDashboardDao.getData(_model);
-        _data = widget.treatData(_model);
+        await SmeupDashboardDao.getData(_model!);
+        _data = widget.treatData(_model!);
       }
       setDataLoad(widget.id, true);
     }
@@ -198,7 +198,7 @@ class _SmeupDashboardState extends State<SmeupDashboard>
     //   return getFunErrorResponse(context, _model);
     // }
 
-    if (widget.valueColName.isEmpty) {
+    if (widget.valueColName!.isEmpty) {
       SmeupLogService.writeDebugMessage(
           'Error SmeupDashboard ValColName not set',
           logType: LogType.error);
@@ -222,7 +222,7 @@ class _SmeupDashboardState extends State<SmeupDashboard>
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               if (widget.icon != null && widget.icon != 0)
                 Icon(
-                  IconData(widget.icon, fontFamily: 'MaterialIcons'),
+                  IconData(widget.icon!, fontFamily: 'MaterialIcons'),
                   color: iconTheme.color,
                   size: iconTheme.size,
                 ),
@@ -233,7 +233,7 @@ class _SmeupDashboardState extends State<SmeupDashboard>
             ]),
             if (widget.text != null)
               Text(
-                widget.text,
+                widget.text!,
                 style: captionStyle,
               )
           ],
@@ -244,19 +244,19 @@ class _SmeupDashboardState extends State<SmeupDashboard>
     return SmeupWidgetBuilderResponse(_model, children);
   }
 
-  String _getValue(double data) {
+  String _getValue(double? data) {
     String newValue = _data.toString();
     try {
-      var split = widget.numberFormat.split(';');
+      var split = widget.numberFormat!.split(';');
       // String integers = split[0]; not used
       String decimals = split[1];
-      int precision = int.tryParse(decimals);
+      int? precision = int.tryParse(decimals);
       switch (precision) {
         case 0:
           newValue = SmeupUtilities.getInt(data).toString();
           break;
         default:
-          newValue = data.toStringAsFixed(precision);
+          newValue = data!.toStringAsFixed(precision!);
       }
     } catch (e) {
       SmeupLogService.writeDebugMessage('Error in dashboard _getValue: $e ',
@@ -266,12 +266,12 @@ class _SmeupDashboardState extends State<SmeupDashboard>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
+    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
         color: widget.captionFontColor, fontSize: widget.captionFontSize);
 
-    if (widget.captionFontBold) {
+    if (widget.captionFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -281,14 +281,14 @@ class _SmeupDashboardState extends State<SmeupDashboard>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.headline1;
+    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.headline1!;
 
     style = style.copyWith(
       color: widget.fontColor,
       fontSize: widget.fontSize,
     );
 
-    if (widget.fontBold) {
+    if (widget.fontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -298,7 +298,7 @@ class _SmeupDashboardState extends State<SmeupDashboard>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = SmeupConfigurationService.getTheme()
+    IconThemeData themeData = SmeupConfigurationService.getTheme()!
         .iconTheme
         .copyWith(size: widget.iconSize, color: widget.iconColor);
 

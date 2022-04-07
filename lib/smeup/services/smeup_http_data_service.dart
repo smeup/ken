@@ -10,11 +10,11 @@ import 'package:ken/smeup/services/smeup_service_response.dart';
 import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 
 class SmeupHttpDataService extends SmeupDataServiceInterface {
-  Dio dio;
-  String server;
+  late Dio dio;
+  String? server;
   static const DEFAULD_TIMEOUT = 5000;
 
-  SmeupHttpDataService({SmeupDataTransformerInterface transformer})
+  SmeupHttpDataService({SmeupDataTransformerInterface? transformer})
       : super(transformer) {
     BaseOptions options = new BaseOptions(
       connectTimeout: DEFAULD_TIMEOUT,
@@ -24,15 +24,15 @@ class SmeupHttpDataService extends SmeupDataServiceInterface {
   }
 
   @override
-  Future<SmeupServiceResponse> invoke(SmeupFun smeupFun,
-      {String httpServiceMethod,
-      String httpServiceUrl,
+  Future<SmeupServiceResponse> invoke(SmeupFun? smeupFun,
+      {String? httpServiceMethod,
+      String? httpServiceUrl,
       dynamic httpServiceBody,
-      String httpServiceContentType,
+      String? httpServiceContentType,
       dynamic headers}) async {
     try {
       dynamic data;
-      Response response;
+      Response? response;
 
       SmeupLogService.writeDebugMessage(
           '*** http request \'SmeupHttpDataService\': ${jsonEncode(data)}');
@@ -46,29 +46,29 @@ class SmeupHttpDataService extends SmeupDataServiceInterface {
 
       SmeupDataService.writeResponseResult(response, 'SmeupHttpDataService');
 
-      bool isValid = SmeupDataService.isValid(response.statusCode);
+      bool isValid = SmeupDataService.isValid(response!.statusCode!);
 
       return SmeupServiceResponse(
           isValid,
           Response(
               data: response,
               statusCode: response.statusCode,
-              requestOptions: null));
+              requestOptions: RequestOptions(path: '')));
     } catch (e) {
       return SmeupServiceResponse(
           false,
           Response(
               data: 'Error in SmeupHttpDataService',
               statusCode: HttpStatus.badRequest,
-              requestOptions: null));
+              requestOptions: RequestOptions(path: '')));
     }
   }
 
-  Future<Response> invokeDio(
-      {String method,
-      String url,
+  Future<Response?> invokeDio(
+      {String? method,
+      String? url,
       dynamic body,
-      String contentType,
+      String? contentType,
       dynamic headers}) async {
     DateTime start = DateTime.now();
 
@@ -84,20 +84,20 @@ class SmeupHttpDataService extends SmeupDataServiceInterface {
         });
       }
 
-      Response response;
+      late Response response;
 
       switch (method) {
         case 'post':
-          response = await dio.post(url, data: body);
+          response = await dio.post(url!, data: body);
           break;
         case 'put':
-          response = await dio.put(url, data: body);
+          response = await dio.put(url!, data: body);
           break;
         case 'get':
-          response = await dio.get(url);
+          response = await dio.get(url!);
           break;
         case 'delete':
-          response = await dio.delete(url);
+          response = await dio.delete(url!);
           break;
       }
 
@@ -105,9 +105,8 @@ class SmeupHttpDataService extends SmeupDataServiceInterface {
         SmeupDataService.printRequestDuration(start);
         return response;
       });
-    } catch (e) {
-      SmeupLogService.writeDebugMessage(
-          '_invoke dio error: $e (${e.message != null ? e.message : ''})',
+    } on DioError catch (e) {
+      SmeupLogService.writeDebugMessage('_invoke dio error: $e (${e.message})',
           logType: LogType.error);
       SmeupDataService.printRequestDuration(start);
       if (e.response != null) {
@@ -116,7 +115,7 @@ class SmeupHttpDataService extends SmeupDataServiceInterface {
         return Response(
             data: 'Unkwnown Error',
             statusCode: HttpStatus.badRequest,
-            requestOptions: null);
+            requestOptions: RequestOptions(path: ''));
       }
     }
   }

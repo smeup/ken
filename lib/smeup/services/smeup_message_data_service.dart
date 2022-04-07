@@ -12,7 +12,7 @@ import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface
 class SmeupMessageDataService extends SmeupDataServiceInterface {
   Map<String, Map<String, dynamic>> jsons = Map();
 
-  SmeupMessageDataService({SmeupDataTransformerInterface transformer})
+  SmeupMessageDataService({SmeupDataTransformerInterface? transformer})
       : super(transformer);
 
   @override
@@ -21,7 +21,7 @@ class SmeupMessageDataService extends SmeupDataServiceInterface {
       case 'FBK':
         try {
           Map<String, dynamic> data = SmeupDataService.getEmptyDataStructure();
-          String message = '';
+          String? message = '';
 
           if (smeupFun.fun['fun']['P'] != null) {
             message = smeupFun.fun['fun']['P'];
@@ -68,7 +68,7 @@ class SmeupMessageDataService extends SmeupDataServiceInterface {
           var response = Response(
               data: data,
               statusCode: HttpStatus.accepted,
-              requestOptions: null);
+              requestOptions: RequestOptions(path: ''));
 
           SmeupDataService.writeResponseResult(
               response, 'SmeupMessageDataService');
@@ -78,17 +78,15 @@ class SmeupMessageDataService extends SmeupDataServiceInterface {
               Response(
                   data: data,
                   statusCode: HttpStatus.accepted,
-                  requestOptions: null));
+                  requestOptions: RequestOptions(path: '')));
         } catch (e) {
           return SmeupServiceResponse(
               false,
               Response(
                   data: 'Error in SmeupMessageDataService',
                   statusCode: HttpStatus.badRequest,
-                  requestOptions: null));
+                  requestOptions: RequestOptions(path: '')));
         }
-
-        break;
 
       default:
         return SmeupServiceResponse(
@@ -97,7 +95,7 @@ class SmeupMessageDataService extends SmeupDataServiceInterface {
                 data:
                     'Error in SmeupMessageDataService: component ${smeupFun.fun['fun']['component']} not implemented',
                 statusCode: HttpStatus.badRequest,
-                requestOptions: null));
+                requestOptions: RequestOptions(path: '')));
     }
   }
 
@@ -110,24 +108,24 @@ class SmeupMessageDataService extends SmeupDataServiceInterface {
             MessagesPromptMode mode =
                 message['mode'] ?? MessagesPromptMode.snackbar;
             LogType severity = message['gravity'] ?? LogType.info;
-            String text = message['message'];
+            String? text = message['message'];
             int milliseconds = message['milliseconds'] ?? 500;
 
-            Color backColor;
+            Color? backColor;
             switch (severity) {
               case LogType.error:
-                backColor = SmeupConfigurationService.getTheme().errorColor;
+                backColor = SmeupConfigurationService.getTheme()!.errorColor;
                 break;
               case LogType.warning:
                 backColor = Colors.orange;
                 break;
               default:
-                backColor = SmeupConfigurationService.getTheme()
+                backColor = SmeupConfigurationService.getTheme()!
                     .snackBarTheme
                     .backgroundColor;
             }
 
-            if (text.isNotEmpty) {
+            if (text!.isNotEmpty) {
               switch (mode) {
                 case MessagesPromptMode.snackbar:
                   ScaffoldMessenger.of(context).showSnackBar(

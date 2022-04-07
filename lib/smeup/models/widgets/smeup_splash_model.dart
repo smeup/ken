@@ -7,29 +7,29 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class SmeupSplashModel extends SmeupModel implements SmeupDataInterface {
   // supported by json_theme
-  static Color defaultColor;
+  static Color? defaultColor;
 
-  Color color;
+  Color? color;
 
   SmeupSplashModel(
       {id,
       type,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
       this.color,
       title = ''})
       : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
-    if (optionsDefault['type'] == null) optionsDefault['type'] = 'spl';
+    if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'spl';
     SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
 
   SmeupSplashModel.fromMap(
     Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
   ) : super.fromMap(
           jsonMap,
           formKey,
@@ -40,13 +40,13 @@ class SmeupSplashModel extends SmeupModel implements SmeupDataInterface {
     title = jsonMap['title'] ?? '';
 
     color =
-        SmeupUtilities.getColorFromRGB(optionsDefault['color']) ?? defaultColor;
+        SmeupUtilities.getColorFromRGB(optionsDefault!['color']) ?? defaultColor;
 
     SmeupDataService.incrementDataFetch(id);
   }
 
   static setDefaults(dynamic obj) {
-    defaultColor = SmeupConfigurationService.getTheme().splashColor;
+    defaultColor = SmeupConfigurationService.getTheme()!.splashColor;
 
     // ----------------- set properties from default
 

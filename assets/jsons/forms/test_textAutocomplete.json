@@ -31,7 +31,7 @@
       "id": "S2",
       "components": [
         {
-          "id": "autocomplete2",
+          "id": "autocomplete1",
           "type": "FLD",
           "options": {
             "FLD": {

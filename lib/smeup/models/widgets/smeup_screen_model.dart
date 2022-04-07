@@ -6,12 +6,12 @@ import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class SmeupScreenModel extends SmeupModel implements SmeupDataInterface {
-  BuildContext context;
+  BuildContext? context;
   static const bool defaultIsDialog = false;
   static const bool defaultBackButtonVisible = true;
 
-  bool isDialog;
-  bool backButtonVisible;
+  bool? isDialog;
+  bool? backButtonVisible;
 
   SmeupScreenModel(this.context, SmeupFun smeupFun,
       {this.isDialog = defaultIsDialog,
@@ -23,7 +23,7 @@ class SmeupScreenModel extends SmeupModel implements SmeupDataInterface {
   @override
   // ignore: override_on_non_overriding_member
   setData() async {
-    if (smeupFun != null && smeupFun.isFunValid()) {
+    if (smeupFun != null && smeupFun!.isFunValid()) {
       final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
 
       if (!smeupServiceResponse.succeded) {

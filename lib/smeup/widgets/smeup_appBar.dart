@@ -3,17 +3,17 @@ import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/widgets/smeup_image.dart';
 
 class SmeupAppBar extends AppBar {
-  final BuildContext myContext;
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
+  final BuildContext? myContext;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<FormState>? formKey;
   final bool backButtonVisible;
-  final List<Widget> appBarActions;
-  final String appBarTitle;
+  final List<Widget>? appBarActions;
+  final String? appBarTitle;
   final String appBarImage;
   static bool isBusy = false;
 
   SmeupAppBar(bool isDialog,
-      {Key key,
+      {Key? key,
       this.appBarActions,
       this.appBarTitle,
       this.myContext,
@@ -26,35 +26,35 @@ class SmeupAppBar extends AppBar {
             automaticallyImplyLeading: !isDialog,
             backgroundColor: isDialog
                 ? Colors.transparent
-                : SmeupConfigurationService.getTheme()
+                : SmeupConfigurationService.getTheme()!
                     .appBarTheme
                     .backgroundColor,
             leading: _getLeadingButton(backButtonVisible, myContext),
             title: _getTitle(
                 appBarImage, appBarTitle, scaffoldKey, formKey, isDialog),
             elevation: isDialog
-                ? SmeupConfigurationService.getTheme().dialogTheme.elevation
-                : SmeupConfigurationService.getTheme().appBarTheme.elevation,
+                ? SmeupConfigurationService.getTheme()!.dialogTheme.elevation
+                : SmeupConfigurationService.getTheme()!.appBarTheme.elevation,
             actions: appBarActions);
 
   static Widget _getLeadingButton(
-      bool backButtonVisible, BuildContext myContext) {
+      bool backButtonVisible, BuildContext? myContext) {
     return backButtonVisible
         ? IconButton(
             icon: Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pop(myContext, false),
+            onPressed: () => Navigator.pop(myContext!, false),
           )
         : Container();
   }
 
   static Widget _getTitle(
       String appBarImage,
-      String appBarTitle,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      GlobalKey<FormState> formKey,
+      String? appBarTitle,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      GlobalKey<FormState>? formKey,
       bool isDialog) {
-    double imageSize =
-        SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight;
+    double? imageSize =
+        SmeupConfigurationService.getTheme()!.appBarTheme.toolbarHeight;
     if (appBarImage.isNotEmpty) {
       return Center(
         child: SmeupImage(scaffoldKey, formKey, appBarImage,
@@ -76,10 +76,10 @@ class SmeupAppBar extends AppBar {
     }
   }
 
-  static TextStyle _getTitleStyle(bool isDialog) {
+  static TextStyle? _getTitleStyle(bool isDialog) {
     if (isDialog)
-      return SmeupConfigurationService.getTheme().dialogTheme.titleTextStyle;
+      return SmeupConfigurationService.getTheme()!.dialogTheme.titleTextStyle;
     else
-      return SmeupConfigurationService.getTheme().appBarTheme.titleTextStyle;
+      return SmeupConfigurationService.getTheme()!.appBarTheme.titleTextStyle;
   }
 }

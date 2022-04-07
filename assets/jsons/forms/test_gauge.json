@@ -43,7 +43,7 @@
             }
           },
           "data":{
-            "rows" :  [{ "value": 120, "minValue": 50, "maxValue": 150, "warning" : 100 }]
+            "rows" :  [{ "value": 120, "minValue": 50, "maxValue": 150, "warning" : 100, "alert" : 110 }]
           } 
         }
       ]

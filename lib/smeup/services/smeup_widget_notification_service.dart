@@ -14,7 +14,7 @@ class SmeupWidgetNotificationService {
 
         try {
           RegExp re = RegExp(r'\([^)]*\)');
-          Match firstMatch = re.firstMatch(widgetId);
+          Match? firstMatch = re.firstMatch(widgetId);
           if (firstMatch != null) {
             routeName = widgetId
                 .substring(firstMatch.start, firstMatch.end)
@@ -45,13 +45,12 @@ class SmeupWidgetNotificationService {
     final sels = SmeupWidgetNotificationService.objects
         .where((element) => element['id'] == widgetId)
         .toList();
-    if (sels == null) return;
 
     for (var i = 0; i < sels.length; i++) {
       var sel = sels[i];
       sel['dataLoaded'] = false;
 
-      Function notifierFunction = sel['notifierFunction'];
+      Function? notifierFunction = sel['notifierFunction'];
       if (notifierFunction != null) notifierFunction();
     }
   }

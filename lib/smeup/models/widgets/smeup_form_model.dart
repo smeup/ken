@@ -13,15 +13,15 @@ class SmeupFormModel extends SmeupModel
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(8);
   static const String defaultLayout = '1';
 
-  final GlobalKey<FormState> formKey;
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  List<SmeupSectionModel> smeupSectionsModels;
-  List<dynamic> formVariables;
-  EdgeInsetsGeometry padding;
-  String layout;
-  BuildContext context;
-  Color backColor;
-  bool autoAdaptHeight;
+  final GlobalKey<FormState>? formKey;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  List<SmeupSectionModel>? smeupSectionsModels;
+  List<dynamic>? formVariables;
+  EdgeInsetsGeometry? padding;
+  String? layout;
+  BuildContext? context;
+  Color? backColor;
+  bool? autoAdaptHeight;
 
   SmeupFormModel.fromMap(response, this.formKey, this.scaffoldKey, this.context)
       : super.fromMap(response, formKey, scaffoldKey, context) {
@@ -30,7 +30,7 @@ class SmeupFormModel extends SmeupModel
     padding = SmeupUtilities.getPadding(jsonMap['padding']) ?? defaultPadding;
 
     backColor = SmeupUtilities.getColorFromRGB(optionsType['backColor']) ??
-        SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
+        SmeupConfigurationService.getTheme()!.scaffoldBackgroundColor;
 
     autoAdaptHeight = SmeupUtilities.getBool(jsonMap['autoAdaptHeight']) ??
         SmeupConfigurationService.defaultAutoAdaptHeight;
@@ -51,7 +51,7 @@ class SmeupFormModel extends SmeupModel
     }
   }
 
-  List<dynamic> _getFormVariables(dynamic jsonMap) {
+  List<dynamic>? _getFormVariables(dynamic jsonMap) {
     if (jsonMap['variables'] != null) {
       return jsonMap['variables'];
     } else {
@@ -60,13 +60,13 @@ class SmeupFormModel extends SmeupModel
   }
 
   bool hasVariables() {
-    return formVariables != null && formVariables.length > 0;
+    return formVariables != null && formVariables!.length > 0;
   }
 
   Future<void> getSectionsData() async {
     if (smeupSectionsModels != null)
-      for (var i = 0; i < smeupSectionsModels.length; i++) {
-        var section = smeupSectionsModels[i];
+      for (var i = 0; i < smeupSectionsModels!.length; i++) {
+        var section = smeupSectionsModels![i];
         await section.getSectionData();
       }
   }

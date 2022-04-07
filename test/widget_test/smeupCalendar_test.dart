@@ -57,6 +57,6 @@ runTests(WidgetTester tester) async {
   await tester.tap(finderTextDay.first);
   await tester.pump();
 
-  var finderTextContent = find.text('My event 1');
+  var finderTextContent = find.text('Meet the parents');
   expect(finderTextContent, findsWidgets);
 }

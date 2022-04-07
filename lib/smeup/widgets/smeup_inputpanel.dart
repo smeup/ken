@@ -26,20 +26,20 @@ import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 class SmeupInputPanel extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupInputPanelModel model;
+  SmeupInputPanelModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
-  EdgeInsetsGeometry padding;
-  double fontSize;
-  double width;
-  double height;
-  String id;
-  String type;
-  String title;
-  List<SmeupInputPanelField> data;
+  EdgeInsetsGeometry? padding;
+  double? fontSize;
+  double? width;
+  double? height;
+  String? id;
+  String? type;
+  String? title;
+  List<SmeupInputPanelField>? data;
 
-  void Function(List<SmeupInputPanelField>) onSubmit;
+  void Function(List<SmeupInputPanelField>?)? onSubmit;
 
   SmeupInputPanel(this.scaffoldKey, this.formKey,
       {this.id = '',
@@ -56,16 +56,16 @@ class SmeupInputPanel extends StatefulWidget
   }
 
   SmeupInputPanel.withController(
-    this.model,
+    SmeupInputPanelModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupInputPanelModel m = model;
+    SmeupInputPanelModel m = model as SmeupInputPanelModel;
     id = m.id;
     type = m.type;
     title = m.title;
@@ -88,15 +88,15 @@ class SmeupInputPanel extends StatefulWidget
 class _SmeupInputPanelState extends State<SmeupInputPanel>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupInputPanelModel _model;
-  List<SmeupInputPanelField> _data;
+  SmeupInputPanelModel? _model;
+  List<SmeupInputPanelField>? _data;
   double confirmButtonRowHeight = 110;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -121,40 +121,41 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
 
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    bool autoAdaptHeight = SmeupConfigurationService.defaultAutoAdaptHeight;
+    bool? autoAdaptHeight = SmeupConfigurationService.defaultAutoAdaptHeight;
     // autoadapt on input panel alway enabled
     autoAdaptHeight = true;
 
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
         await SmeupInputPanelDao.getData(
-            _model, widget.formKey, widget.scaffoldKey, context);
-        _data = widget.treatData(_model);
+            _model!, widget.formKey, widget.scaffoldKey, context);
+        _data = widget.treatData(_model!);
       }
       setDataLoad(widget.id, true);
     }
 
-    double inputPanelHeight = widget.height;
-    double inputPanelWidth = widget.width;
+    double? inputPanelHeight = widget.height;
+    double? inputPanelWidth = widget.width;
     if (inputPanelWidth == 0) {
-      if (_model != null && _model.parent != null) {
-        inputPanelWidth = (_model.parent as SmeupSectionModel).width;
+      if (_model != null && _model!.parent != null) {
+        inputPanelWidth = (_model!.parent as SmeupSectionModel).width;
       } else {
         inputPanelWidth = MediaQuery.of(context).size.width;
       }
     }
     if (inputPanelHeight == 0) {
-      if (_model != null && _model.parent != null) {
-        inputPanelHeight = (_model.parent as SmeupSectionModel).height;
+      if (_model != null && _model!.parent != null) {
+        inputPanelHeight = (_model!.parent as SmeupSectionModel).height;
       } else {
         inputPanelHeight = MediaQuery.of(context).size.height;
       }
     }
 
-    double innerPanelHeight = inputPanelHeight;
+    double? innerPanelHeight = inputPanelHeight;
 
-    if (autoAdaptHeight && _isConfirmButtonEnabled())
-      innerPanelHeight -= confirmButtonRowHeight;
+    if (autoAdaptHeight && _isConfirmButtonEnabled()) {
+      innerPanelHeight = innerPanelHeight! - confirmButtonRowHeight;
+    }
 
     if (_data == null) {
       return getFunErrorResponse(context, _model);
@@ -163,8 +164,9 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
         height: inputPanelHeight,
         width: inputPanelWidth,
         child: Scaffold(
-            floatingActionButton: autoAdaptHeight ? _getConfirmButton() : null,
-            floatingActionButtonLocation: autoAdaptHeight
+            floatingActionButton:
+                autoAdaptHeight == true ? _getConfirmButton() : null,
+            floatingActionButtonLocation: autoAdaptHeight == true
                 ? FloatingActionButtonLocation.centerDocked
                 : null,
             body: Container(
@@ -173,18 +175,18 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (widget.title.isNotEmpty)
+                    if (widget.title!.isNotEmpty)
                       Text(
-                        widget.title,
+                        widget.title!,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18),
                       ),
-                    if (widget.title.isNotEmpty)
+                    if (widget.title!.isNotEmpty)
                       SizedBox(
                         height: 16,
                       ),
                     _getFields(),
-                    if (!autoAdaptHeight) _getConfirmButton()
+                    if (autoAdaptHeight == false) _getConfirmButton()
                   ],
                 ),
               ),
@@ -196,7 +198,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
   }
 
   Widget _getFields() {
-    List<Widget> fields = _data.where((field) => field.visible).map((field) {
+    List<Widget> fields = _data!.where((field) => field.visible!).map((field) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -291,7 +293,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
           widget.formKey,
           id: field.id,
           selectedValue: field.value.code == "" ? null : field.value.code,
-          data: field.items
+          data: field.items!
               .map((e) => SmeupComboItemModel(e.code, e.descr))
               .toList(),
           clientOnChange: (newValue) =>
@@ -324,34 +326,31 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
 
   bool _isConfirmButtonEnabled() {
     if ((_model != null &&
-            _model.dynamisms != null &&
-            (_model.dynamisms as List).length > 0) ||
+            _model!.dynamisms != null &&
+            (_model!.dynamisms as List).length > 0) ||
         widget.onSubmit != null) return true;
     return false;
   }
 
   _fireDynamism() {
     if (widget.onSubmit != null) {
-      widget.onSubmit(widget.data);
+      widget.onSubmit!(widget.data);
     }
-    widget.data.forEach((field) => SmeupVariablesService.setVariable(
+    widget.data!.forEach((field) => SmeupVariablesService.setVariable(
         field.id, field.value.code,
         formKey: widget.formKey));
     if (_model != null && _validate()) {
-      SmeupDynamismService.run(_model.dynamisms, context, "click",
+      SmeupDynamismService.run(_model!.dynamisms, context, "click",
           widget.scaffoldKey, widget.formKey);
     }
   }
 
   bool _validate() {
-    if (_model.validationScript != null) {
-      return SmeupScriptingServices.validate(
-          context: context,
-          formKey: widget.formKey,
-          screenId: _model.data['id'],
-          script: _model.validationScript);
-    } else {
-      return true;
-    }
+    return SmeupScriptingServices.validate(
+        context: context,
+        formKey: widget.formKey!,
+        scaffoldKey: widget.scaffoldKey,
+        screenId: _model!.data['id'],
+        script: _model!.validationScript);
   }
 }

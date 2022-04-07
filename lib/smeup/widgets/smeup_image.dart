@@ -13,26 +13,26 @@ import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 class SmeupImage extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupImageModel model;
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
+  SmeupImageModel? model;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<FormState>? formKey;
 
   // graphic properties
-  double width;
-  double height;
-  EdgeInsetsGeometry padding;
-  String data;
-  String title;
-  String id;
-  String type;
-  bool isRemote;
+  double? width;
+  double? height;
+  EdgeInsetsGeometry? padding;
+  String? data;
+  String? title;
+  String? id;
+  String? type;
+  bool? isRemote;
 
   SmeupImage.withController(
-    this.model,
+    SmeupImageModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   SmeupImage(this.scaffoldKey, this.formKey, this.data,
@@ -49,7 +49,7 @@ class SmeupImage extends StatefulWidget
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupImageModel m = model;
+    SmeupImageModel m = model as SmeupImageModel;
     id = m.id;
     type = m.type;
     padding = m.padding;
@@ -64,7 +64,7 @@ class SmeupImage extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupImageModel m = model;
+    SmeupImageModel m = model as SmeupImageModel;
 
     // set the widget data
     bool isRemote = SmeupImageModel.defaultIsRemote;
@@ -97,14 +97,14 @@ class SmeupImage extends StatefulWidget
 class _SmeupImageState extends State<SmeupImage>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupImageModel _model;
+  SmeupImageModel? _model;
   dynamic _data;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -130,10 +130,10 @@ class _SmeupImageState extends State<SmeupImage>
   /// define the structure ...
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupImageDao.getData(_model);
-        var res = widget.treatData(_model);
+        await SmeupImageDao.getData(_model!);
+        var res = widget.treatData(_model!);
         _data = res['data'];
         //isRemote = res['isRemote'];
 
@@ -149,7 +149,7 @@ class _SmeupImageState extends State<SmeupImage>
     Widget children;
 
     var image;
-    if (widget.isRemote) {
+    if (widget.isRemote!) {
       image = Image.network(
         _data,
         height: widget.height,

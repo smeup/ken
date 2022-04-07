@@ -7,13 +7,13 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class SmeupLineModel extends SmeupModel {
   // supported by json_theme
-  static Color defaultColor;
-  static double defaultThickness;
+  static Color? defaultColor;
+  static double? defaultThickness;
 
   // unsupported by json_theme
 
-  Color color;
-  double thickness;
+  Color? color;
+  double? thickness;
 
   SmeupLineModel(
     id,
@@ -30,9 +30,9 @@ class SmeupLineModel extends SmeupModel {
 
   SmeupLineModel.fromMap(
     Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
   ) : super.fromMap(
           jsonMap,
           formKey,
@@ -41,11 +41,11 @@ class SmeupLineModel extends SmeupModel {
         ) {
     setDefaults(this);
 
-    thickness = SmeupUtilities.getDouble(optionsDefault['thickness']) ??
+    thickness = SmeupUtilities.getDouble(optionsDefault!['thickness']) ??
         defaultThickness;
 
     color =
-        SmeupUtilities.getColorFromRGB(optionsDefault['color']) ?? defaultColor;
+        SmeupUtilities.getColorFromRGB(optionsDefault!['color']) ?? defaultColor;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
@@ -58,7 +58,7 @@ class SmeupLineModel extends SmeupModel {
 
   static setDefaults(dynamic obj) {
     DividerThemeData dividerData =
-        SmeupConfigurationService.getTheme().dividerTheme;
+        SmeupConfigurationService.getTheme()!.dividerTheme;
 
     defaultColor = dividerData.color;
     defaultThickness = dividerData.thickness;

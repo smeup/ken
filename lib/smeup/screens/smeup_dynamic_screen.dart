@@ -3,7 +3,6 @@ import 'package:ken/smeup/models/notifiers/smeup_error_notifier.dart';
 import 'package:ken/smeup/models/widgets/smeup_drawer_data_element.dart';
 import 'package:ken/smeup/models/widgets/smeup_drawer_model.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
-import 'package:ken/smeup/services/smeup_scripting_services.dart';
 import 'package:ken/smeup/services/smeup_widget_notification_service.dart';
 import 'package:ken/smeup/widgets/smeup_drawer.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
@@ -22,7 +21,7 @@ import 'package:ken/smeup/widgets/smeup_wait.dart';
 import 'package:ken/smeup/widgets/smeup_wait_fun.dart';
 
 class SmeupDynamicScreen extends StatefulWidget {
-  final SmeupFun initialFun;
+  final SmeupFun? initialFun;
   final bool backButtonVisible;
   final bool isDialog;
   SmeupDynamicScreen(
@@ -54,13 +53,13 @@ class SmeupDynamicScreen extends StatefulWidget {
 
 class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     with SmeupWidgetStateMixin {
-  SmeupFormModel smeupFormModel;
+  SmeupFormModel? smeupFormModel;
 
   @override
   void initState() {
     SmeupDynamicScreen.onInit();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       final SmeupErrorNotifier errorNotifier =
           Provider.of<SmeupErrorNotifier>(context, listen: false);
       errorNotifier.reset();
@@ -71,7 +70,8 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
 
   @override
   void dispose() {
-    if (smeupFormModel != null) SmeupDynamicScreen.onDispose(smeupFormModel.id);
+    if (smeupFormModel != null)
+      SmeupDynamicScreen.onDispose(smeupFormModel!.id);
     int currObj = SmeupWidgetNotificationService.objects.length;
     SmeupWidgetNotificationService.objects.removeWhere(
         (element) => element['scaffoldKey'] == widget._scaffoldKey.hashCode);
@@ -89,10 +89,10 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     var routeArgs;
     if (ModalRoute.of(context) != null)
       routeArgs =
-          ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
 
     SmeupFun smeupFun =
-        widget.initialFun != null ? widget.initialFun : routeArgs['smeupFun'];
+        widget.initialFun != null ? widget.initialFun! : routeArgs['smeupFun'];
 
     smeupFun.saveParameters(widget._formKey);
 
@@ -114,20 +114,20 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
             return SmeupNotAvailable();
           } else {
             if (smeupFormModel != null)
-              SmeupDynamicScreen.onBuild(smeupFormModel.id);
-            if (snapshot.data.children is SmeupNotAvailable) {
-              if (SmeupConfigurationService.authenticationModel.managed &&
+              SmeupDynamicScreen.onBuild(smeupFormModel!.id);
+            if (snapshot.data!.children is SmeupNotAvailable) {
+              if (SmeupConfigurationService.authenticationModel!.managed &&
                   SmeupConfigurationService
-                          .authenticationModel.logoutFunction !=
+                          .authenticationModel!.logoutFunction !=
                       null &&
-                  snapshot.data.serviceStatusCode == 511)
-                SmeupConfigurationService.authenticationModel
-                    .logoutFunction(context);
+                  snapshot.data!.serviceStatusCode == 511)
+                SmeupConfigurationService
+                    .authenticationModel!.logoutFunction!(context);
               else
                 showErrorForm(context, smeupFun);
             }
 
-            return snapshot.data.children;
+            return snapshot.data!.children!;
           }
         }
       },
@@ -143,8 +143,10 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     SmeupDataService.setDataFetch(0);
     await smeupScreenModel.setData();
 
-    bool isDialog = widget.isDialog;
-    bool backButtonVisible = widget.backButtonVisible;
+    bool? isDialog = widget.isDialog;
+    bool? backButtonVisible = widget.backButtonVisible;
+
+    if (!mounted) Navigator.of(context).pop();
 
     if (!hasData(smeupScreenModel)) {
       if (mounted) {
@@ -168,24 +170,25 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     smeupFormModel = SmeupFormModel.fromMap(
         smeupScreenModel.data, widget._formKey, widget._scaffoldKey, context);
 
-    await smeupFormModel.getSectionsData();
+    await smeupFormModel!.getSectionsData();
 
     final smeupForm =
         SmeupForm(smeupFormModel, widget._scaffoldKey, widget._formKey);
 
-    SmeupFun smeupFun =
+    SmeupFun? smeupFun =
         widget.initialFun != null ? widget.initialFun : routeArgs['smeupFun'];
 
     var screen = Theme(
-      data: SmeupConfigurationService.getTheme(),
+      data: SmeupConfigurationService.getTheme()!,
       child: Builder(
           builder: (BuildContext context) => WillPopScope(
                 onWillPop: () {
                   return _onWillPop(backButtonVisible);
                 },
                 child: Scaffold(
-                  backgroundColor:
-                      isDialog ? Colors.transparent : smeupFormModel.backColor,
+                  backgroundColor: isDialog!
+                      ? Colors.transparent
+                      : smeupFormModel!.backColor,
                   key: widget._scaffoldKey,
                   endDrawer: _getDrawer(smeupScreenModel, isDialog),
                   appBar: SmeupAppBar(isDialog,
@@ -194,7 +197,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
                       myContext: context,
                       scaffoldKey: widget._scaffoldKey,
                       formKey: widget._formKey,
-                      backButtonVisible: backButtonVisible),
+                      backButtonVisible: backButtonVisible!),
                   body: errorNotifier.isError()
                       ? showErrorForm(context, smeupFun)
                       : SmeupWaitFun(
@@ -227,8 +230,8 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     return smeupDrawerJson;
   }
 
-  SmeupDrawer _getDrawer(SmeupScreenModel smeupScreenModel, bool isDialog) {
-    SmeupDrawer smeupDrawer;
+  SmeupDrawer? _getDrawer(SmeupScreenModel smeupScreenModel, bool? isDialog) {
+    SmeupDrawer? smeupDrawer;
 
     var smeupDrawerJson = getDrawerJson(smeupScreenModel);
 
@@ -239,9 +242,9 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
       smeupDrawer = SmeupDrawer.withController(
           smeupDrawerModel, widget._scaffoldKey, widget._formKey);
     } else if (SmeupConfigurationService.authenticationModel != null &&
-        SmeupConfigurationService.authenticationModel.managed) {
+        SmeupConfigurationService.authenticationModel!.managed) {
       var newList = List<SmeupDrawerDataElement>.empty(growable: true);
-      if (!isDialog) SmeupDrawer.addInternalDrawerElements(newList, context);
+      if (!isDialog!) SmeupDrawer.addInternalDrawerElements(newList, context);
       smeupDrawer = SmeupDrawer(
         widget._scaffoldKey,
         widget._formKey,
@@ -255,25 +258,25 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
 
   Future<bool> _onWillPop(backButtonVisible) async {
     if (!backButtonVisible) return false;
-    SmeupDynamicScreen.onPop(smeupFormModel.id, widget._scaffoldKey);
+    SmeupDynamicScreen.onPop(smeupFormModel!.id, widget._scaffoldKey);
 
     Navigator.of(context).pop(false);
 
     return true;
   }
 
-  Widget showErrorForm(BuildContext context, SmeupFun smeupFun) {
-    SmeupConfigurationService.getLocalStorage().setString('authorization', '');
+  Widget showErrorForm(BuildContext context, SmeupFun? smeupFun) {
+    SmeupConfigurationService.getLocalStorage()!.setString('authorization', '');
 
     Future.delayed(Duration(milliseconds: 300), () async {
       showDialog(
         barrierDismissible: false,
         context: context,
         builder: (context) => Theme(
-            data: SmeupConfigurationService.getTheme(),
+            data: SmeupConfigurationService.getTheme()!,
             child: SimpleDialog(
               backgroundColor:
-                  SmeupConfigurationService.getTheme().scaffoldBackgroundColor,
+                  SmeupConfigurationService.getTheme()!.scaffoldBackgroundColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
@@ -317,7 +320,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     return Container();
   }
 
-  List<Widget> _getActions(smeupScreenModel) {
+  List<Widget>? _getActions(smeupScreenModel) {
     if (smeupScreenModel.data['buttons'] != null) {
       var list = List<Widget>.empty(growable: true);
       smeupScreenModel.data['buttons'].forEach((button) {
