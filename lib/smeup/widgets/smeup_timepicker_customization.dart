@@ -17,9 +17,11 @@ class SmeupTimePickerCustomization extends CommonPickerModel {
     this.currentTime = currentTime ?? DateTime.now();
     this.setLeftIndex(this.currentTime.hour);
 
-    this.middleList = this.minutesList!;
-    this.setMiddleIndex(
-        this.middleList.indexOf(this.currentTime.minute.toString()));
+    if (minutesList != null) {
+      this.middleList = this.minutesList!;
+      this.setMiddleIndex(
+          this.middleList.indexOf(this.currentTime.minute.toString()));
+    }
 
     this.setRightIndex(this.currentTime.second);
   }

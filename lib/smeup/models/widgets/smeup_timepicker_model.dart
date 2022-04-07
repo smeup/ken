@@ -20,6 +20,68 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
   static double? defaultCaptionFontSize;
   static Color? defaultCaptionFontColor;
   static Color? defaultCaptionBackColor;
+  static List<String> defaultMinutesList = [
+    '00',
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23',
+    '24',
+    '25',
+    '26',
+    '27',
+    '28',
+    '29',
+    '30',
+    '31',
+    '32',
+    '33',
+    '34',
+    '35',
+    '36',
+    '37',
+    '38',
+    '39',
+    '40',
+    '41',
+    '42',
+    '43',
+    '44',
+    '45',
+    '46',
+    '47',
+    '48',
+    '49',
+    '50',
+    '51',
+    '52',
+    '53',
+    '54',
+    '55',
+    '56',
+    '57',
+    '58',
+    '59'
+  ];
 
   // unsupported by json_theme
   static const String defaultLabel = '';
@@ -116,8 +178,8 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
     fontColor = SmeupUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
         defaultFontColor;
 
-    fontSize =
-        SmeupUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
+    fontSize = SmeupUtilities.getDouble(optionsDefault!['fontSize']) ??
+        defaultFontSize;
 
     fontBold = optionsDefault!['bold'] ?? defaultFontBold;
 
@@ -128,7 +190,7 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
     height =
         SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     if (optionsDefault!['minutesList'] == null) {
-      minutesList = null;
+      minutesList = defaultMinutesList;
     } else {
       minutesList = (optionsDefault!['minutesList'] as List)
           .map((e) => e.toString())
@@ -159,8 +221,8 @@ class SmeupTimePickerModel extends SmeupModel implements SmeupDataInterface {
             defaultCaptionFontColor;
     captionFontBold = optionsDefault!['captionBold'] ?? defaultCaptionFontBold;
 
-    underline =
-        SmeupUtilities.getBool(optionsDefault!['underline']) ?? defaultUnderline;
+    underline = SmeupUtilities.getBool(optionsDefault!['underline']) ??
+        defaultUnderline;
 
     align = SmeupUtilities.getAlignmentGeometry(optionsDefault!['align']) ??
         defaultAlign;

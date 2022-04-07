@@ -99,6 +99,8 @@ class SmeupTimePicker extends StatefulWidget
   }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
     SmeupTimePickerModel.setDefaults(this);
+    if (minutesList == null)
+      this.minutesList = SmeupTimePickerModel.defaultMinutesList;
   }
 
   SmeupTimePicker.withController(
@@ -458,7 +460,8 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
+    TextStyle style =
+        SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
 
     style = style.copyWith(color: widget.fontColor, fontSize: widget.fontSize);
 
