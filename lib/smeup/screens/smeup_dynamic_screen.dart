@@ -331,6 +331,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
             ),
           ),
           onTap: () async {
+            // TODO - Left as reminder for stefano
             // if (!SmeupScriptingServices.validate(
             //     context: context,
             //     formKey: widget._formKey,
