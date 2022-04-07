@@ -161,7 +161,7 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
     }
   }
 
-  Future<Response>? _getResposeFromCache(
+  Future<Response?> _getResposeFromCache(
       String? url, dynamic body, bool forceCache) async {
     if (forceCache) {
       try {
@@ -176,14 +176,9 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
         // if it doesn't exist return error
         if (cacheElement != null) {
           // otherwise I fetch the cache element and return the value
-          List<String> list = await cacheElement.fetch(() {
-            // if the element is expired: remove the cache element from the list and return null
-            return Future(() {
-              SmeupLogService.writeDebugMessage('no cache found ...');
-              return null;
-            } as FutureOr<List<String>> Function());
-          });
+          List<String> list = await _fetch(cacheElement);
 
+          //if (list != null) {
           dynamic result = jsonDecode(list.first);
           SmeupLogService.writeDebugMessage(
               'response returned from the cache ...',
@@ -192,6 +187,7 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
               data: result,
               statusCode: HttpStatus.accepted,
               requestOptions: RequestOptions(path: ''));
+          //}
         }
       } catch (e) {
         SmeupLogService.writeDebugMessage(
@@ -202,7 +198,23 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
 
     return Future(() {
       return null;
-    } as FutureOr<Response<dynamic>> Function());
+    });
+  }
+
+  _fetch(cacheElement) {
+    try {
+      cacheElement.fetch(() {
+        // if the element is expired: remove the cache element from the list and return null
+        // return Future(() {
+        //   SmeupLogService.writeDebugMessage('no cache found ...');
+        //   return null;
+        // });
+        return Future(() {
+          SmeupLogService.writeDebugMessage('no cache found ...');
+          return null;
+        });
+      });
+    } catch (e) {}
   }
 
   void _addResposeToCache(Response<dynamic> response, String? url, dynamic body,
