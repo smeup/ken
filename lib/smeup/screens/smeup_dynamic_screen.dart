@@ -8,7 +8,6 @@ import 'package:ken/smeup/widgets/smeup_drawer.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/models/widgets/smeup_form_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_screen_model.dart';
@@ -19,6 +18,9 @@ import 'package:ken/smeup/widgets/smeup_appBar.dart';
 import 'package:ken/smeup/widgets/smeup_not_available.dart';
 import 'package:ken/smeup/widgets/smeup_wait.dart';
 import 'package:ken/smeup/widgets/smeup_wait_fun.dart';
+
+import '../models/fun.dart';
+import '../models/fun_dynamism.dart';
 
 class SmeupDynamicScreen extends StatefulWidget {
   final SmeupFun? initialFun;
@@ -94,7 +96,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     SmeupFun smeupFun =
         widget.initialFun != null ? widget.initialFun! : routeArgs['smeupFun'];
 
-    smeupFun.saveParameters(widget._formKey);
+    smeupFun.saveParametersToVariables(widget._formKey);
 
     var smeupScreenModel = SmeupScreenModel(context, smeupFun,
         backButtonVisible: widget.backButtonVisible, isDialog: widget.isDialog);
@@ -364,12 +366,16 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
             //     return true;
             //   }
             // ''')) return;
-            SmeupFun smeupFun =
-                SmeupFun(button, widget._formKey, widget._scaffoldKey, context);
-            if (smeupFun.isDinamismAsync(
-                smeupFun.fun['fun']['dynamisms'], 'click')) {
-              SmeupDynamismService.run(smeupFun.fun['fun']['dynamisms'],
-                  context, 'click', widget._scaffoldKey, widget._formKey);
+
+            // SmeupFun smeupFun =
+            //     SmeupFun(button, widget._formKey, widget._scaffoldKey, context);
+
+            var dynamisms = FunDynamism.getDynamismsList(
+                button['dynamisms'] as List<dynamic>);
+
+            if (FunDynamism.isDinamismAsync('click', dynamisms)) {
+              SmeupDynamismService.run(dynamisms, context, 'click',
+                  widget._scaffoldKey, widget._formKey);
 
               SmeupLogService.writeDebugMessage(
                   '********************* ASYNC = TRUE',
@@ -387,8 +393,8 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
               } else {
                 SmeupAppBar.isBusy = true;
 
-                await SmeupDynamismService.run(smeupFun.fun['fun']['dynamisms'],
-                    context, 'click', widget._scaffoldKey, widget._formKey);
+                await SmeupDynamismService.run(dynamisms, context, 'click',
+                    widget._scaffoldKey, widget._formKey);
                 SmeupAppBar.isBusy = false;
               }
             }

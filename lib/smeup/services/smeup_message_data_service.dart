@@ -17,18 +17,16 @@ class SmeupMessageDataService extends SmeupDataServiceInterface {
 
   @override
   Future<SmeupServiceResponse> invoke(smeupFun) async {
-    switch (smeupFun.fun['fun']['component']) {
+    switch (smeupFun.identifier.component) {
       case 'FBK':
         try {
           Map<String, dynamic> data = SmeupDataService.getEmptyDataStructure();
           String? message = '';
 
-          if (smeupFun.fun['fun']['P'] != null) {
-            message = smeupFun.fun['fun']['P'];
-          }
+          message = smeupFun.parameters.toString();
 
           LogType logType = LogType.info;
-          String gravity = smeupFun.fun['fun']['obj1']['k'];
+          String gravity = smeupFun.getObjectByName('obj1').k;
           if (gravity.isNotEmpty) {
             switch (gravity) {
               case "info":
@@ -52,9 +50,9 @@ class SmeupMessageDataService extends SmeupDataServiceInterface {
           }
 
           int milliseconds = 500;
-          if (smeupFun.fun['fun']['obj2']['k'] != null) {
+          if (smeupFun.getObjectByName('obj2').k.isNotEmpty) {
             milliseconds =
-                int.tryParse(smeupFun.fun['fun']['obj2']['k']) ?? 500;
+                int.tryParse(smeupFun.getObjectByName('obj2').k) ?? 500;
           }
 
           data['messages'] = [
@@ -93,7 +91,7 @@ class SmeupMessageDataService extends SmeupDataServiceInterface {
             false,
             Response(
                 data:
-                    'Error in SmeupMessageDataService: component ${smeupFun.fun['fun']['component']} not implemented',
+                    'Error in SmeupMessageDataService: component ${smeupFun.identifier.component} not implemented',
                 statusCode: HttpStatus.badRequest,
                 requestOptions: RequestOptions(path: '')));
     }

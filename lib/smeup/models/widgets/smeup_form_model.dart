@@ -45,8 +45,7 @@ class SmeupFormModel extends SmeupModel
 
   void _replaceFormTitle(dynamic jsonMap) {
     if (jsonMap['title'] != null) {
-      title =
-          SmeupDynamismService.replaceFunVariables(jsonMap['title'], formKey);
+      title = SmeupDynamismService.replaceVariables(jsonMap['title'], formKey);
       jsonMap['title'] = title;
     }
   }

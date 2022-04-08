@@ -16,10 +16,10 @@ class SmeupImageDataService extends SmeupDataServiceInterface {
   Future<SmeupServiceResponse> invoke(smeupFun, {BuildContext? context}) async {
     try {
       SmeupLogService.writeDebugMessage(
-          '*** \'SmeupImageDataService\': ${smeupFun.fun['fun']['obj1']['k']}');
+          '*** \'SmeupImageDataService\': ${smeupFun.getObjectByName('obj1').k}');
 
       final imageLocalPath =
-          '${SmeupConfigurationService.imagesPath}/${smeupFun.fun['fun']['obj1']['k']}';
+          '${SmeupConfigurationService.imagesPath}/${smeupFun.getObjectByName('obj1').k}';
 
       return SmeupServiceResponse(true, {"imageLocalPath": imageLocalPath});
     } catch (e) {

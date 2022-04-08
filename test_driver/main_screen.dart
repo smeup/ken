@@ -1,9 +1,9 @@
 import 'package:ken/smeup/models/authentication_model.dart';
+import 'package:ken/smeup/models/fun.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/screens/smeup_dynamic_screen.dart';
 import 'package:package_info/package_info.dart';
 

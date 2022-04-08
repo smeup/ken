@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/daos/smeup_list_box_dao.dart';
+import 'package:ken/smeup/models/fun_dynamism.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:ken/smeup/models/widgets/smeup_image_list_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_list_box_model.dart';
@@ -48,8 +49,8 @@ class SmeupImageList extends StatefulWidget
   Function? clientOnItemTap;
   dynamic parentForm;
 
-  SmeupImageList.withController(
-      SmeupImageListModel this.model, this.scaffoldKey, this.formKey, this.parentForm)
+  SmeupImageList.withController(SmeupImageListModel this.model,
+      this.scaffoldKey, this.formKey, this.parentForm)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
@@ -104,10 +105,10 @@ class SmeupImageList extends StatefulWidget
     listHeight = m.listHeight;
 
     dynamic deleteDynamism;
-    if (m.dynamisms != null)
-      deleteDynamism = (m.dynamisms as List<dynamic>).firstWhere(
-          (element) => element['event'] == 'delete',
-          orElse: () => null);
+
+    deleteDynamism = (m.dynamisms).firstWhere(
+        (element) => element.event == 'delete',
+        orElse: () => null as FunDynamism);
 
     if (deleteDynamism != null) {
       dismissEnabled = true;

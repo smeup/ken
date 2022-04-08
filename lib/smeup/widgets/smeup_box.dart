@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:clickable_list_wheel_view/measure_size.dart';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
+import 'package:ken/smeup/models/fun_dynamism.dart';
 import 'package:ken/smeup/models/widgets/smeup_image_model.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:ken/smeup/services/SmeupLocalizationService.dart';
@@ -18,6 +18,8 @@ import 'package:ken/smeup/widgets/smeup_not_available.dart';
 import 'package:ken/smeup/widgets/smeup_wait.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
+import '../models/fun.dart';
+
 class SmeupBox extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState>? formKey;
@@ -31,7 +33,7 @@ class SmeupBox extends StatefulWidget {
   final bool? showLoader;
   final String? id;
   final String? layout;
-  final dynamic dynamisms;
+  final List<FunDynamism>? dynamisms;
   final double? width;
   final double? height;
   final bool? dismissEnabled;
@@ -143,9 +145,9 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     // bool dismissEnabled = false;
     dynamic deleteDynamism;
     if (widget.dynamisms != null)
-      deleteDynamism = (widget.dynamisms as List<dynamic>).firstWhere(
-          (element) => element['event'] == 'delete',
-          orElse: () => null);
+      deleteDynamism = widget.dynamisms!.firstWhere(
+          (element) => element.event == 'delete',
+          orElse: () => null as FunDynamism);
 
     // if (deleteDynamism != null) {
     //   dismissEnabled = true;
@@ -867,11 +869,13 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
               iconData: int.tryParse(buttonIcon) ?? 0,
               data: buttonText,
               clientOnPressed: () {
-                List<dynamic> dynamisms = [
-                  {
-                    "event": "click",
-                    "exec": buttonFun,
-                  }
+                List<FunDynamism> dynamisms = [
+                  FunDynamism(
+                      "click",
+                      buttonFun,
+                      false,
+                      List<dynamic>.empty(growable: true),
+                      List<dynamic>.empty(growable: true))
                 ];
                 SmeupDynamismService.run(dynamisms, context, "click",
                     widget.scaffoldKey, widget.formKey);

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
+import 'package:ken/smeup/models/fun.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 
@@ -11,7 +11,7 @@ void main() {
 
     var smeupFun = SmeupFun(
         'F(EXD;*JSN;) 2(;;test_dynamic_screen_auto)', null, null, null);
-    expect(smeupFun.fun['fun']['service'], '*JSN');
+    expect(smeupFun.identifier.service, '*JSN');
 
     final res = await SmeupDataService.invoke(smeupFun);
 
@@ -22,7 +22,7 @@ void main() {
     await UnitTestService.initTests();
 
     var smeupFun = SmeupFun('F(;*HTTP;)', null, null, null);
-    expect(smeupFun.fun['fun']['service'], '*HTTP');
+    expect(smeupFun.identifier.service, '*HTTP');
 
     final res = await SmeupDataService.invoke(
       smeupFun,

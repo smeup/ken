@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:dio/dio.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_data_service_interface.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
@@ -12,6 +11,7 @@ import 'package:ken/smeup/services/smeup_variables_service.dart';
 import 'package:ken/smeup/services/transformers/null_transformer.dart';
 import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 
+import '../models/fun.dart';
 import 'firestore_shared.dart';
 
 class SmeupFirestoreDataService extends SmeupDataServiceInterface {
@@ -25,7 +25,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
   @override
   Future<SmeupServiceResponse> invoke(SmeupFun fun) async {
-    switch (fun.fun['fun']['function']) {
+    switch (fun.identifier.function) {
       case "GET.DOCUMENTS":
         return await getDocuments(fun);
       case "GET.DOCUMENT":
@@ -48,7 +48,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
   Future<SmeupServiceResponse> getDocuments(SmeupFun smeupFun) async {
     try {
-      List<Map<String, dynamic>> list = smeupFun.getParameters();
+      List<Map<String, dynamic>> list = smeupFun.parameters;
       var checkResult = '';
 
       final options = GetOptions(source: await FirestoreShared.getSource());
@@ -120,7 +120,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
   Future<SmeupServiceResponse> getDocument(SmeupFun smeupFun) async {
     try {
-      List<Map<String, dynamic>> list = smeupFun.getParameters();
+      List<Map<String, dynamic>> list = smeupFun.parameters;
       var checkResult = '';
 
       final options = GetOptions(source: await FirestoreShared.getSource());
@@ -173,8 +173,8 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
   Future<SmeupServiceResponse> getFieldSetting(SmeupFun smeupFun) async {
     try {
-      List<Map<String, dynamic>> parameters = smeupFun.getParameters();
-      List<Map<String, dynamic>> server = smeupFun.getServer();
+      List<Map<String, dynamic>> parameters = smeupFun.parameters;
+      List<Map<String, dynamic>> server = smeupFun.server;
       var checkResult = '';
 
       final options = GetOptions(source: await FirestoreShared.getSource());
@@ -241,7 +241,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
   Future<SmeupServiceResponse> updateDocument(SmeupFun smeupFun) async {
     try {
-      List<Map<String, dynamic>> list = smeupFun.getParameters();
+      List<Map<String, dynamic>> list = smeupFun.parameters;
       var checkResult = '';
 
       final collection =
@@ -327,7 +327,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
   Future<SmeupServiceResponse> deleteDocument(SmeupFun smeupFun) async {
     try {
-      List<Map<String, dynamic>> list = smeupFun.getParameters();
+      List<Map<String, dynamic>> list = smeupFun.parameters;
       var checkResult = '';
 
       final id = list.firstWhereOrNull((element) => element['key'] == 'id');
@@ -389,7 +389,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
   }
 
   Future<SmeupServiceResponse> writeDocument(SmeupFun smeupFun) async {
-    List<Map<String, dynamic>> list = smeupFun.getParameters();
+    List<Map<String, dynamic>> list = smeupFun.parameters;
     var checkResult = '';
     final collection =
         list.firstWhereOrNull((element) => element['key'] == 'collection');

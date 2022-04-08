@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:collection';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/models/widgets/smeup_input_panel_field.dart';
 import 'package:ken/smeup/models/widgets/smeup_inputpanel_model.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
 import 'package:xml/xml.dart';
 
+import '../models/fun.dart';
 import 'smeup_dao.dart';
 
 class SmeupInputPanelDao extends SmeupDao {

@@ -325,9 +325,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
   }
 
   bool _isConfirmButtonEnabled() {
-    if ((_model != null &&
-            _model!.dynamisms != null &&
-            (_model!.dynamisms as List).length > 0) ||
+    if ((_model != null && _model!.dynamisms.length > 0) ||
         widget.onSubmit != null) return true;
     return false;
   }
