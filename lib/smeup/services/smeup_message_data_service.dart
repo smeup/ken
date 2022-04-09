@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
@@ -21,9 +22,11 @@ class SmeupMessageDataService extends SmeupDataServiceInterface {
       case 'FBK':
         try {
           Map<String, dynamic> data = SmeupDataService.getEmptyDataStructure();
-          String? message = '';
 
-          message = smeupFun.parameters.toString();
+          List<Map<String, dynamic>> list = smeupFun.parameters;
+
+          final message =
+              list.firstWhereOrNull((element) => element['key'] == 'message');
 
           LogType logType = LogType.info;
           String gravity = smeupFun.getObjectByName('obj1').k;
@@ -58,7 +61,7 @@ class SmeupMessageDataService extends SmeupDataServiceInterface {
           data['messages'] = [
             {
               "gravity": logType,
-              "message": message,
+              "message": message!['value'],
               "milliseconds": milliseconds
             }
           ];

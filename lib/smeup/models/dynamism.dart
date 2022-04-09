@@ -1,15 +1,16 @@
 import '../services/smeup_log_service.dart';
 
-class FunDynamism {
+class Dynamism {
   String event;
   String exec;
   bool async;
   List<dynamic> targets;
   List<dynamic> variables;
-  FunDynamism(this.event, this.exec, this.async, this.targets, this.variables);
+  Dynamism(this.event, this.exec, this.async, this.targets, this.variables);
 
-  static List<FunDynamism> getDynamismsList(List<dynamic> dynFuns) {
-    var list = List<FunDynamism>.empty(growable: true);
+  static List<Dynamism> getDynamismsList(List<dynamic> dynFuns) {
+    if (dynFuns is List<Dynamism>) return dynFuns;
+    var list = List<Dynamism>.empty(growable: true);
 
     if (dynFuns.isEmpty) return list;
 
@@ -23,7 +24,7 @@ class FunDynamism {
         if (dynFun['variables'] != null) {
           variables = dynFun['variables'];
         }
-        final funDynamism = FunDynamism(dynFun['event'] ?? '',
+        final funDynamism = Dynamism(dynFun['event'] ?? '',
             dynFun['exec'] ?? '', dynFun['async'] ?? false, targets, variables);
         list.add(funDynamism);
       }
@@ -36,11 +37,15 @@ class FunDynamism {
     return list;
   }
 
-  static bool isDinamismAsync(String event, List<FunDynamism> dynamisms) {
-    FunDynamism? dynamism = dynamisms.firstWhere(
-        (element) => element.event == event,
-        orElse: () => null as FunDynamism);
+  static bool isDinamismAsync(String event, List<Dynamism> dynamisms) {
+    int no = dynamisms.where((element) => element.event == event).length;
 
-    return dynamism.async;
+    if (no > 0) {
+      Dynamism dynamism =
+          dynamisms.where((element) => element.event == event).first;
+      return dynamism.async;
+    }
+
+    return false;
   }
 }

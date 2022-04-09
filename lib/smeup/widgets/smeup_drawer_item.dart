@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 
-import '../models/fun_dynamism.dart';
+import '../models/dynamism.dart';
 
 class SmeupDrawerItem extends StatelessWidget {
   final String? text;
@@ -31,7 +31,7 @@ class SmeupDrawerItem extends StatelessWidget {
       } else {
         if (route!.trimLeft().toUpperCase().startsWith('F(')) {
           SmeupDynamismService.run([
-            FunDynamism(
+            Dynamism(
                 "click",
                 route ?? '',
                 false,

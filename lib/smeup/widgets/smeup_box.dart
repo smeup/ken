@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:clickable_list_wheel_view/measure_size.dart';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/fun_dynamism.dart';
+import 'package:ken/smeup/models/dynamism.dart';
 import 'package:ken/smeup/models/widgets/smeup_image_model.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:ken/smeup/services/SmeupLocalizationService.dart';
@@ -33,7 +33,7 @@ class SmeupBox extends StatefulWidget {
   final bool? showLoader;
   final String? id;
   final String? layout;
-  final List<FunDynamism>? dynamisms;
+  final List<Dynamism>? dynamisms;
   final double? width;
   final double? height;
   final bool? dismissEnabled;
@@ -143,15 +143,18 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     }
 
     // bool dismissEnabled = false;
-    dynamic deleteDynamism;
-    if (widget.dynamisms != null)
+    Dynamism? deleteDynamism;
+
+    int no = widget.dynamisms == null
+        ? 0
+        : widget.dynamisms!
+            .where((element) => element.event == 'delete')
+            .length;
+
+    if (no > 0)
       deleteDynamism = widget.dynamisms!.firstWhere(
           (element) => element.event == 'delete',
-          orElse: () => null as FunDynamism);
-
-    // if (deleteDynamism != null) {
-    //   dismissEnabled = true;
-    // }
+          orElse: () => null as Dynamism);
 
     Widget res = widget.dismissEnabled!
         ? Dismissible(
@@ -188,7 +191,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
               );
             },
             onDismissed: (direction) async {
-              var smeupFun = SmeupFun(deleteDynamism['exec'], widget.formKey,
+              var smeupFun = SmeupFun(deleteDynamism!.exec, widget.formKey,
                   widget.scaffoldKey, context);
               var smeupServiceResponse =
                   await SmeupDataService.invoke(smeupFun);
@@ -869,8 +872,8 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
               iconData: int.tryParse(buttonIcon) ?? 0,
               data: buttonText,
               clientOnPressed: () {
-                List<FunDynamism> dynamisms = [
-                  FunDynamism(
+                List<Dynamism> dynamisms = [
+                  Dynamism(
                       "click",
                       buttonFun,
                       false,

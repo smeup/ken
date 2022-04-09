@@ -15,7 +15,7 @@ import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
-import '../models/fun_dynamism.dart';
+import '../models/dynamism.dart';
 
 // ignore: must_be_immutable
 class SmeupDrawer extends StatefulWidget
@@ -115,7 +115,7 @@ class SmeupDrawer extends StatefulWidget
                     String route = element['route'];
                     if (route.trimLeft().toUpperCase().startsWith('F(')) {
                       SmeupDynamismService.run([
-                        FunDynamism(
+                        Dynamism(
                             "click",
                             "${element['route']}",
                             false,

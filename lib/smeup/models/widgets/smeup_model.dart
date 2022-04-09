@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/fun_dynamism.dart';
+import 'package:ken/smeup/models/dynamism.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
@@ -25,7 +25,7 @@ abstract class SmeupModel {
   String? title = '';
   SmeupModel? parent;
 
-  late List<FunDynamism> dynamisms;
+  late List<Dynamism> dynamisms;
   bool? showLoader = false;
   bool notificationEnabled = true;
   bool isNotified = false;
@@ -54,7 +54,7 @@ abstract class SmeupModel {
     _setLinkedHashMap(jsonMap, myJsonMap);
 
     type = myJsonMap['type'];
-    dynamisms = FunDynamism.getDynamismsList(myJsonMap['dynamisms'] ?? []);
+    dynamisms = Dynamism.getDynamismsList(myJsonMap['dynamisms'] ?? []);
     smeupFun = SmeupFun(myJsonMap['fun'], formKey, scaffoldKey, context);
 
     switch (myJsonMap['load']) {

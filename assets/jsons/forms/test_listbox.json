@@ -99,7 +99,7 @@
           "dynamisms": [
             {
               "event": "click",
-              "exec": "F(FBK;*MSG;) P(item clicked: \"[code]\"  \"[description]\")"
+              "exec": "F(FBK;*MSG;) P(message(item clicked: \"[code]\"  \"[description]\"))"
             }
           ]
         }

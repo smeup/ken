@@ -273,17 +273,6 @@ class SmeupFun {
     });
   }
 
-  // dynamic _checkFunElement(dynamicFun) {
-  //   if (dynamicFun != null &&
-  //       (dynamicFun as Map).entries.length > 0 &&
-  //       dynamicFun['fun'] == null) {
-  //     Map newEl = {'fun': dynamicFun};
-  //     dynamicFun = newEl;
-  //   }
-
-  //   return dynamicFun;
-  // }
-
   static String extractArg(String funString, String parm,
       {String prefix = ' '}) {
     String arg = '';
@@ -319,9 +308,6 @@ class SmeupFun {
   }
 
   bool isFunValid() {
-    // if (_fun != null &&
-    //     (_fun['fun'] as Map?) != null &&
-    //     (_fun['fun'] as Map).entries.length > 0)
     if (identifier.isValid()) return true;
     return false;
   }

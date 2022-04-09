@@ -54,7 +54,8 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
 
   Map<String, dynamic> _getFieldPath(SmeupSectionModel smeupSectionModel) {
     return {
-      "fieldPath":
+      "key": "fieldPath",
+      "value":
           "${smeupSectionModel.parentForm!.id!.toLowerCase()}.${smeupSectionModel.id!.toLowerCase()}.${id!.toLowerCase()}"
     };
   }

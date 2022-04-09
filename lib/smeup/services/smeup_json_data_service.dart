@@ -33,7 +33,6 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
 
           String? fileName = smeupFun.getObjectByName('obj2').k;
 
-          //String customFolder = smeupFun.fun['fun']['obj1']['k'];
           List<Map<String, dynamic>> list = smeupFun.server;
 
           final sourceMap =

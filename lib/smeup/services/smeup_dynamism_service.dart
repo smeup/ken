@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/fun_dynamism.dart';
+import 'package:ken/smeup/models/dynamism.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_message_data_service.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
@@ -29,7 +29,8 @@ class SmeupDynamismService {
           if (key == 'tipo' || key == 't') key = 'T1';
           if (key == 'parametro' || key == 'p') key = 'P1';
           if (key == 'codice' || key == 'k') key = 'K1';
-          if (key == 'testo' || key == 'value') key = 'Tx';
+          // if (key == 'testo' || key == 'value') key = 'Tx';
+          if (key == 'testo') key = 'Tx';
           if (key == 'nome') key = 'Nm';
 
           String? value = '';
@@ -58,14 +59,14 @@ class SmeupDynamismService {
   }
 
   static Future<void> run(
-      List<FunDynamism>? dynamisms,
+      List<Dynamism>? dynamisms,
       BuildContext context,
       String event,
       GlobalKey<ScaffoldState> scaffoldKey,
       GlobalKey<FormState>? formKey) async {
     if (dynamisms == null) return;
 
-    List<FunDynamism> selectedDynamisms =
+    List<Dynamism> selectedDynamisms =
         dynamisms.where((element) => element.event == event).toList();
 
     for (var i = 0; i < selectedDynamisms.length; i++) {

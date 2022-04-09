@@ -15,8 +15,6 @@ import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
-import '../models/fun_dynamism.dart';
-
 // ignore: must_be_immutable
 class SmeupListBox extends StatefulWidget
     with SmeupWidgetMixin
@@ -132,12 +130,9 @@ class SmeupListBox extends StatefulWidget
     captionFontSize = m.captionFontSize;
     captionFontColor = m.captionFontColor;
 
-    dynamic deleteDynamism;
-    deleteDynamism = m.dynamisms.firstWhere(
-        (element) => element.event == 'delete',
-        orElse: () => null as FunDynamism);
+    int no = m.dynamisms.where((element) => element.event == 'delete').length;
 
-    if (deleteDynamism != null) {
+    if (no > 0) {
       dismissEnabled = true;
     } else {
       dismissEnabled = false;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/fun_dynamism.dart';
+import 'package:ken/smeup/models/dynamism.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
@@ -49,7 +49,7 @@ class DialogScreen extends StatelessWidget {
                       SmeupUtilities.invokeScaffoldMessenger(context,
                           "You have clicked the button with text \"$buttonText\" ");
                       SmeupDynamismService.run([
-                        FunDynamism(
+                        Dynamism(
                             "click",
                             "F(EXD;*JSN;) 2(;;dialog_form) P(DIALOG) G(DLG) SERVER(source(packages/ken/assets/jsons/forms))",
                             false,

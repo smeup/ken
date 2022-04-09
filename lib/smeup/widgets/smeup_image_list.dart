@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/daos/smeup_list_box_dao.dart';
-import 'package:ken/smeup/models/fun_dynamism.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:ken/smeup/models/widgets/smeup_image_list_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_list_box_model.dart';
@@ -104,13 +103,9 @@ class SmeupImageList extends StatefulWidget
     orientation = m.orientation;
     listHeight = m.listHeight;
 
-    dynamic deleteDynamism;
+    int no = m.dynamisms.where((element) => element.event == 'delete').length;
 
-    deleteDynamism = (m.dynamisms).firstWhere(
-        (element) => element.event == 'delete',
-        orElse: () => null as FunDynamism);
-
-    if (deleteDynamism != null) {
+    if (no > 0) {
       dismissEnabled = true;
     } else {
       dismissEnabled = false;

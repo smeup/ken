@@ -20,7 +20,7 @@ import 'package:ken/smeup/widgets/smeup_wait.dart';
 import 'package:ken/smeup/widgets/smeup_wait_fun.dart';
 
 import '../models/fun.dart';
-import '../models/fun_dynamism.dart';
+import '../models/dynamism.dart';
 
 class SmeupDynamicScreen extends StatefulWidget {
   final SmeupFun? initialFun;
@@ -367,13 +367,10 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
             //   }
             // ''')) return;
 
-            // SmeupFun smeupFun =
-            //     SmeupFun(button, widget._formKey, widget._scaffoldKey, context);
+            var dynamisms =
+                Dynamism.getDynamismsList(button['dynamisms'] as List<dynamic>);
 
-            var dynamisms = FunDynamism.getDynamismsList(
-                button['dynamisms'] as List<dynamic>);
-
-            if (FunDynamism.isDinamismAsync('click', dynamisms)) {
+            if (Dynamism.isDinamismAsync('click', dynamisms)) {
               SmeupDynamismService.run(dynamisms, context, 'click',
                   widget._scaffoldKey, widget._formKey);
 
