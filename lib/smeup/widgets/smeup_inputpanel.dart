@@ -348,7 +348,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
         context: context,
         formKey: widget.formKey!,
         scaffoldKey: widget.scaffoldKey,
-        screenId: _model!.data['id'],
+        screenId: _model!.id ?? '', // TODO: it was: _model!.data['id']
         script: _model!.validationScript);
   }
 }
