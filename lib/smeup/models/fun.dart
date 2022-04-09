@@ -343,6 +343,7 @@ class SmeupFun {
 
     for (var i = 1; i < 7; i++) {
       FunObject funObject = getObjectByName('obj$i');
+      fun['fun']['obj$i'] = Map();
       fun['fun']['obj$i']['t'] = funObject.t;
       fun['fun']['obj$i']['p'] = funObject.p;
       fun['fun']['obj$i']['k'] = funObject.k;
@@ -357,6 +358,8 @@ class SmeupFun {
       }
       parmsStr += ')';
       fun['fun']['P'] = ' $parmsStr';
+    } else {
+      fun['fun']['P'] = '';
     }
 
     if (server.length > 0) {

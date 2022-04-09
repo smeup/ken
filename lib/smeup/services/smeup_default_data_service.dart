@@ -38,7 +38,7 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
 
       url = '${SmeupConfigurationService.getDefaultServiceEndpoint()}/jfun';
       contentType = 'application/json';
-      data = smeupFun;
+      data = smeupFun.getJson();
 
       SmeupLogService.writeDebugMessage(
           '*** http request \'SmeupDefaultDataService\': $data');
