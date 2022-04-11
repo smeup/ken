@@ -191,7 +191,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
               );
             },
             onDismissed: (direction) async {
-              var smeupFun = SmeupFun(deleteDynamism!.exec, widget.formKey,
+              var smeupFun = Fun(deleteDynamism!.exec, widget.formKey,
                   widget.scaffoldKey, context);
               var smeupServiceResponse =
                   await SmeupDataService.invoke(smeupFun);
@@ -761,7 +761,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           };
 
           final smeupFun =
-              SmeupFun(fun, widget.formKey, widget.scaffoldKey, context);
+              Fun(fun, widget.formKey, widget.scaffoldKey, context);
 
           final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
           if (!smeupServiceResponse.succeded) {
@@ -837,9 +837,9 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
       final String? imageColName = col['code'];
       final String ogg = data[imageColName];
 
-      String buttonText = SmeupFun.extractArg(ogg, 'T');
-      String buttonFun = SmeupFun.extractArg(ogg, 'E');
-      String buttonIcon = SmeupFun.extractArg(ogg, 'I');
+      String buttonText = Fun.extractArg(ogg, 'T');
+      String buttonFun = Fun.extractArg(ogg, 'E');
+      String buttonIcon = Fun.extractArg(ogg, 'I');
 
       final List split = buttonIcon.split(';');
       if (split.length == 3) {

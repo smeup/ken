@@ -26,7 +26,7 @@ class SmeupDataServicePoller {
   });
 
   Future<dynamic> doPoll({required UntilPredicate until}) async {
-    SmeupFun smeupFun = SmeupFun(fun, formKey, scaffoldKey, context);
+    Fun smeupFun = Fun(fun, formKey, scaffoldKey, context);
     while (!_canceled) {
       await Future.delayed(interval);
       if (!_canceled) {

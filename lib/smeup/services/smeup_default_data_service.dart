@@ -29,7 +29,7 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
   }
 
   @override
-  Future<SmeupServiceResponse> invoke(SmeupFun smeupFun) async {
+  Future<SmeupServiceResponse> invoke(Fun smeupFun) async {
     try {
       dynamic data;
       Response? response;

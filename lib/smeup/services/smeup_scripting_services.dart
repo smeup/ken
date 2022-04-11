@@ -40,7 +40,7 @@ class SmeupScriptingServices {
               formKey: formKey);
           SmeupVariablesService.setVariable("operation", _args["operation"],
               formKey: formKey);
-          SmeupFun fun = SmeupFun(
+          Fun fun = Fun(
               "F(FBK;FS_00_01;WRITE.DOCUMENT) NOTIFY(CLOSE()) P(collection(${args[1]});firestoreFields(time,operation))",
               formKey,
               scaffoldKey,

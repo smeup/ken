@@ -25,7 +25,7 @@ class SmeupHttpDataService extends SmeupDataServiceInterface {
   }
 
   @override
-  Future<SmeupServiceResponse> invoke(SmeupFun? smeupFun,
+  Future<SmeupServiceResponse> invoke(Fun? smeupFun,
       {String? httpServiceMethod,
       String? httpServiceUrl,
       dynamic httpServiceBody,

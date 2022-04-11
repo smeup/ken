@@ -4,7 +4,7 @@ import '../../models/fun.dart';
 
 class NullTransformer implements SmeupDataTransformerInterface {
   @override
-  transform(SmeupFun smeupFun, data) {
+  transform(Fun smeupFun, data) {
     return data;
   }
 }

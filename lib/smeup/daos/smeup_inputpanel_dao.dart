@@ -51,11 +51,8 @@ class SmeupInputPanelDao extends SmeupDao {
       return layoutData;
     }
     if (optionsDefault["layout"] != null) {
-      SmeupFun smeupFun = SmeupFun(
-          "F(EXD;LOSER_09;LAY) 2(;;${optionsDefault["layout"]})",
-          formKey,
-          scaffoldKey,
-          context);
+      Fun smeupFun = Fun("F(EXD;LOSER_09;LAY) 2(;;${optionsDefault["layout"]})",
+          formKey, scaffoldKey, context);
       SmeupServiceResponse response = await (SmeupDataService.invoke(smeupFun));
       if (response.succeded) {
         return response.result.data;
@@ -115,7 +112,7 @@ class SmeupInputPanelDao extends SmeupDao {
       BuildContext? context) async {
     field.items = [];
     if (field.fun != null) {
-      final fun = SmeupFun(field.fun, formKey, scaffoldKey, context);
+      final fun = Fun(field.fun, formKey, scaffoldKey, context);
       SmeupServiceResponse response = await SmeupDataService.invoke(fun);
       List? rows;
       if (response.succeded) {

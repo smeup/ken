@@ -13,7 +13,7 @@ abstract class SmeupDataServiceInterface {
   }
 
   // ignore: missing_return
-  Future<SmeupServiceResponse> invoke(SmeupFun fun) {
+  Future<SmeupServiceResponse> invoke(Fun fun) {
     throw ('not implemented');
   }
 

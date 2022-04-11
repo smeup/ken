@@ -23,7 +23,7 @@ import '../models/fun.dart';
 import '../models/dynamism.dart';
 
 class SmeupDynamicScreen extends StatefulWidget {
-  final SmeupFun? initialFun;
+  final Fun? initialFun;
   final bool backButtonVisible;
   final bool isDialog;
   SmeupDynamicScreen(
@@ -93,7 +93,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
       routeArgs =
           ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
 
-    SmeupFun smeupFun =
+    Fun smeupFun =
         widget.initialFun != null ? widget.initialFun! : routeArgs['smeupFun'];
 
     smeupFun.saveParametersToVariables(widget._formKey);
@@ -177,7 +177,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     final smeupForm =
         SmeupForm(smeupFormModel, widget._scaffoldKey, widget._formKey);
 
-    SmeupFun? smeupFun =
+    Fun? smeupFun =
         widget.initialFun != null ? widget.initialFun : routeArgs['smeupFun'];
 
     var screen = Theme(
@@ -267,7 +267,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
     return true;
   }
 
-  Widget showErrorForm(BuildContext context, SmeupFun? smeupFun) {
+  Widget showErrorForm(BuildContext context, Fun? smeupFun) {
     SmeupConfigurationService.getLocalStorage()!.setString('authorization', '');
 
     Future.delayed(Duration(milliseconds: 300), () async {

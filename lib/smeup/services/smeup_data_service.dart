@@ -24,7 +24,7 @@ class SmeupDataService {
     SmeupDataService.services['*HTTP'] = SmeupHttpDataService();
   }
 
-  static Future<SmeupServiceResponse> invoke(SmeupFun? smeupFun,
+  static Future<SmeupServiceResponse> invoke(Fun? smeupFun,
       {String? httpServiceMethod,
       String? httpServiceUrl,
       dynamic httpServiceBody,

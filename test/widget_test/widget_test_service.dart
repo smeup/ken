@@ -22,7 +22,7 @@ class WidgetTestService {
   }
 
   static getDynamicScreen(String jsonFile) async {
-    var smeupFun = SmeupFun('F(EXD;*JSN;) 2(;;$jsonFile)', null, null, null);
+    var smeupFun = Fun('F(EXD;*JSN;) 2(;;$jsonFile)', null, null, null);
     expect(smeupFun.identifier.service, '*JSN');
 
     final res = await SmeupDataService.invoke(smeupFun);

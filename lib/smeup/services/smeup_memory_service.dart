@@ -11,8 +11,8 @@ class SmeupMemoryService {
   static Map memory = Map();
   static bool _isMemoryBusy = false;
 
-  static Future<dynamic> getMemory(String key, String segment,
-      SmeupFun smeupFun, Function dataFunction) async {
+  static Future<dynamic> getMemory(
+      String key, String segment, Fun smeupFun, Function dataFunction) async {
     if (memory[key] != null) {
       SmeupLogService.writeDebugMessage(
           'response returned from the $key memory',
@@ -65,8 +65,8 @@ class SmeupMemoryService {
     });
   }
 
-  static Future<void> _getValue(String key, String segment, SmeupFun smeupFun,
-      Function dataFunction) async {
+  static Future<void> _getValue(
+      String key, String segment, Fun smeupFun, Function dataFunction) async {
     final urlProperties = 'devices/${smeupFun.getObjectByName('obj1').k}';
     var responseProperties =
         await dataFunction(smeupFun, urlProperties, 'get', 'application/json');

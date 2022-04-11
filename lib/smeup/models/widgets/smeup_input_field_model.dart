@@ -9,7 +9,7 @@ import '../fun.dart';
 class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultValidationField = 'validation';
 
-  SmeupFun? validationFun;
+  Fun? validationFun;
   String? validation;
   String? validationField;
 
@@ -36,7 +36,7 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
     validationField =
         optionsDefault!['validationField'] ?? defaultValidationField;
     validationFun = jsonMap['validation'] != null
-        ? SmeupFun(jsonMap['validation'], formKey, scaffoldKey, context)
+        ? Fun(jsonMap['validation'], formKey, scaffoldKey, context)
         : null;
 
     _addFieldPathToFun(validationFun);
@@ -45,7 +45,7 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
     SmeupInputFieldDao.getValidation(this);
   }
 
-  _addFieldPathToFun(SmeupFun? fun) {
+  _addFieldPathToFun(Fun? fun) {
     if (fun == null) return;
     if (!fun.isFunValid()) return;
 

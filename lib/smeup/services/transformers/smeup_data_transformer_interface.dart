@@ -2,7 +2,7 @@ import '../../models/fun.dart';
 
 class SmeupDataTransformerInterface {
   // ignore: missing_return
-  Map? transform(SmeupFun smeupFun, dynamic data) {
+  Map? transform(Fun smeupFun, dynamic data) {
     return null;
   }
 }

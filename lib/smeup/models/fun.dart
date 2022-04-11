@@ -8,7 +8,7 @@ import '../services/smeup_log_service.dart';
 import '../services/smeup_variables_service.dart';
 import 'fun_identifier.dart';
 
-class SmeupFun {
+class Fun {
   GlobalKey<FormState>? formKey;
   GlobalKey<ScaffoldState>? scaffoldKey;
   BuildContext? context;
@@ -22,7 +22,7 @@ class SmeupFun {
   late String G;
   late String notify;
 
-  SmeupFun(dynamic dynamicFun, this.formKey, this.scaffoldKey, this.context) {
+  Fun(dynamic dynamicFun, this.formKey, this.scaffoldKey, this.context) {
     _init();
 
     // the object to parse is empty:
@@ -59,7 +59,7 @@ class SmeupFun {
     saveParametersToVariables(formKey);
   }
 
-  SmeupFun.fromServiceName(String service) {
+  Fun.fromServiceName(String service) {
     _init();
 
     if (service.isEmpty) {
@@ -344,8 +344,7 @@ class SmeupFun {
   replaceVariables() {
     String funString = this.getSmeupFormatString();
     funString = SmeupDynamismService.replaceVariables(funString, formKey);
-    SmeupFun newFun =
-        SmeupFun(funString, this.formKey, this.scaffoldKey, this.context);
+    Fun newFun = Fun(funString, this.formKey, this.scaffoldKey, this.context);
     parameters = newFun.parameters;
     server = newFun.server;
     identifier = newFun.identifier;

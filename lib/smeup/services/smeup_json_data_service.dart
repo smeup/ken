@@ -93,7 +93,7 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
     }
   }
 
-  Future<String> getFromFirestore(SmeupFun smeupFun, fileName) async {
+  Future<String> getFromFirestore(Fun smeupFun, fileName) async {
     if (firestoreInstance == null)
       throw Exception('Firebase instance not valid');
 

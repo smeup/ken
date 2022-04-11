@@ -17,7 +17,7 @@ abstract class SmeupModel {
   dynamic data;
   String? type;
   String? id;
-  SmeupFun? smeupFun;
+  Fun? smeupFun;
   LoadType widgetLoadType = LoadType.Immediate;
   LinkedHashMap<String, dynamic>? options;
   dynamic optionsType;
@@ -55,7 +55,7 @@ abstract class SmeupModel {
 
     type = myJsonMap['type'];
     dynamisms = Dynamism.getDynamismsList(myJsonMap['dynamisms'] ?? []);
-    smeupFun = SmeupFun(myJsonMap['fun'], formKey, scaffoldKey, context);
+    smeupFun = Fun(myJsonMap['fun'], formKey, scaffoldKey, context);
 
     switch (myJsonMap['load']) {
       case 'D':

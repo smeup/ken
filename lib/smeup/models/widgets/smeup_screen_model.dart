@@ -14,7 +14,7 @@ class SmeupScreenModel extends SmeupModel implements SmeupDataInterface {
   bool? isDialog;
   bool? backButtonVisible;
 
-  SmeupScreenModel(this.context, SmeupFun smeupFun,
+  SmeupScreenModel(this.context, Fun smeupFun,
       {this.isDialog = defaultIsDialog,
       this.backButtonVisible = defaultBackButtonVisible})
       : super(null, null, null) {

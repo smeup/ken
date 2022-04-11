@@ -24,7 +24,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
   }
 
   @override
-  Future<SmeupServiceResponse> invoke(SmeupFun fun) async {
+  Future<SmeupServiceResponse> invoke(Fun fun) async {
     switch (fun.identifier.function) {
       case "GET.DOCUMENTS":
         return await getDocuments(fun);
@@ -46,7 +46,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     }
   }
 
-  Future<SmeupServiceResponse> getDocuments(SmeupFun smeupFun) async {
+  Future<SmeupServiceResponse> getDocuments(Fun smeupFun) async {
     try {
       List<Map<String, dynamic>> list = smeupFun.parameters;
       var checkResult = '';
@@ -73,9 +73,9 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
           fsDatabase.collection(collection!['value']);
 
       if (filters != null && filters.toString().isNotEmpty) {
-        var parmsSplit = SmeupFun.splitParameters(filters['value']);
+        var parmsSplit = Fun.splitParameters(filters['value']);
         parmsSplit.forEach((element) {
-          Map ds = SmeupFun.deserilizeParameter(element);
+          Map ds = Fun.deserilizeParameter(element);
           final key = ds['key'];
           var value = ds['value'];
           query = query.where(key, isEqualTo: value);
@@ -83,9 +83,9 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       }
 
       if (sort != null && sort.toString().isNotEmpty) {
-        var parmsSplit = SmeupFun.splitParameters(sort['value']);
+        var parmsSplit = Fun.splitParameters(sort['value']);
         parmsSplit.forEach((element) {
-          Map ds = SmeupFun.deserilizeParameter(element);
+          Map ds = Fun.deserilizeParameter(element);
           final key = ds['key'];
           var descending = ds['value'] == 'descending';
           query = query.orderBy(key, descending: descending);
@@ -118,7 +118,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     }
   }
 
-  Future<SmeupServiceResponse> getDocument(SmeupFun smeupFun) async {
+  Future<SmeupServiceResponse> getDocument(Fun smeupFun) async {
     try {
       List<Map<String, dynamic>> list = smeupFun.parameters;
       var checkResult = '';
@@ -171,7 +171,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     }
   }
 
-  Future<SmeupServiceResponse> getFieldSetting(SmeupFun smeupFun) async {
+  Future<SmeupServiceResponse> getFieldSetting(Fun smeupFun) async {
     try {
       List<Map<String, dynamic>> parameters = smeupFun.parameters;
       List<Map<String, dynamic>> server = smeupFun.server;
@@ -239,7 +239,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     }
   }
 
-  Future<SmeupServiceResponse> updateDocument(SmeupFun smeupFun) async {
+  Future<SmeupServiceResponse> updateDocument(Fun smeupFun) async {
     try {
       List<Map<String, dynamic>> list = smeupFun.parameters;
       var checkResult = '';
@@ -325,7 +325,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     }
   }
 
-  Future<SmeupServiceResponse> deleteDocument(SmeupFun smeupFun) async {
+  Future<SmeupServiceResponse> deleteDocument(Fun smeupFun) async {
     try {
       List<Map<String, dynamic>> list = smeupFun.parameters;
       var checkResult = '';
@@ -388,7 +388,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     }
   }
 
-  Future<SmeupServiceResponse> writeDocument(SmeupFun smeupFun) async {
+  Future<SmeupServiceResponse> writeDocument(Fun smeupFun) async {
     List<Map<String, dynamic>> list = smeupFun.parameters;
     var checkResult = '';
     final collection =

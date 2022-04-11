@@ -104,7 +104,7 @@ class SmeupDynamismService {
           return;
         }
 
-        SmeupFun smeupFunExec = SmeupFun(exec, formKey, scaffoldKey, context);
+        Fun smeupFunExec = Fun(exec, formKey, scaffoldKey, context);
         String? notify = smeupFunExec.notify;
 
         switch (smeupFunExec.identifier.component) {
@@ -167,8 +167,8 @@ class SmeupDynamismService {
     }
   }
 
-  static _showDialog(SmeupFun smeupFunExec, BuildContext context,
-      String? notify, GlobalKey<ScaffoldState> scaffoldKey) {
+  static _showDialog(Fun smeupFunExec, BuildContext context, String? notify,
+      GlobalKey<ScaffoldState> scaffoldKey) {
     showDialog(
         barrierDismissible: false,
         routeSettings: RouteSettings(arguments: {

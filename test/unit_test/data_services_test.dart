@@ -9,8 +9,8 @@ void main() {
   test('test SmeupJsonDataService', () async {
     await UnitTestService.initTests();
 
-    var smeupFun = SmeupFun(
-        'F(EXD;*JSN;) 2(;;test_dynamic_screen_auto)', null, null, null);
+    var smeupFun =
+        Fun('F(EXD;*JSN;) 2(;;test_dynamic_screen_auto)', null, null, null);
     expect(smeupFun.identifier.service, '*JSN');
 
     final res = await SmeupDataService.invoke(smeupFun);
@@ -21,7 +21,7 @@ void main() {
   test('test SmeupHttpDataService', () async {
     await UnitTestService.initTests();
 
-    var smeupFun = SmeupFun('F(;*HTTP;)', null, null, null);
+    var smeupFun = Fun('F(;*HTTP;)', null, null, null);
     expect(smeupFun.identifier.service, '*HTTP');
 
     final res = await SmeupDataService.invoke(
