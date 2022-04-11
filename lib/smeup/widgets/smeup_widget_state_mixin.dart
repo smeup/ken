@@ -101,7 +101,7 @@ class SmeupWidgetStateMixin {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-              '${SmeupLocalizationService.of(context)!.getLocalString('dataNotAvailable')}.  (${model!.smeupFun!.fun['fun']['function']})'),
+              '${SmeupLocalizationService.of(context)!.getLocalString('dataNotAvailable')}.  (${model!.smeupFun!.identifier.function})'),
           backgroundColor: SmeupConfigurationService.getTheme()!.errorColor,
         ),
       );

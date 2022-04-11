@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
+import 'package:ken/smeup/models/dynamism.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_message_data_service.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
@@ -11,6 +11,8 @@ import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../models/fun.dart';
 
 class SmeupDynamismService {
   static const loggerId = "SmeupDynamismService";
@@ -27,7 +29,8 @@ class SmeupDynamismService {
           if (key == 'tipo' || key == 't') key = 'T1';
           if (key == 'parametro' || key == 'p') key = 'P1';
           if (key == 'codice' || key == 'k') key = 'K1';
-          if (key == 'testo' || key == 'value') key = 'Tx';
+          // if (key == 'testo' || key == 'value') key = 'Tx';
+          if (key == 'testo') key = 'Tx';
           if (key == 'nome') key = 'Nm';
 
           String? value = '';
@@ -56,23 +59,21 @@ class SmeupDynamismService {
   }
 
   static Future<void> run(
-      List? dynamisms,
+      List<Dynamism>? dynamisms,
       BuildContext context,
       String event,
       GlobalKey<ScaffoldState> scaffoldKey,
       GlobalKey<FormState>? formKey) async {
     if (dynamisms == null) return;
 
-    List selectedDynamisms =
-        dynamisms.where((element) => element['event'] == event).toList();
+    List<Dynamism> selectedDynamisms =
+        dynamisms.where((element) => element.event == event).toList();
 
     for (var i = 0; i < selectedDynamisms.length; i++) {
       final dynamism = selectedDynamisms[i];
 
-      if (dynamism == null) return;
-
-      if (dynamism['variables'] != null) {
-        (dynamism['variables'] as List<dynamic>).forEach((element) {
+      if (dynamism.variables.isNotEmpty) {
+        dynamism.variables.forEach((element) {
           String? value = '';
           if (element['value'].toString().startsWith('[')) {
             String varName = element['value']
@@ -94,29 +95,29 @@ class SmeupDynamismService {
         });
       }
 
-      if (dynamism['exec'] != null) {
-        String exec = SmeupDynamismService.replaceFunVariables(
-            dynamism['exec'], formKey)!;
+      if (dynamism.exec.isNotEmpty) {
+        String exec =
+            SmeupDynamismService.replaceVariables(dynamism.exec, formKey);
 
         if (exec.toLowerCase() == 'close') {
           Navigator.of(context).pop();
           return;
         }
 
-        SmeupFun smeupFunExec = SmeupFun(exec, formKey, scaffoldKey, context);
-        String? notify = smeupFunExec.fun['fun']['NOTIFY'];
+        Fun smeupFunExec = Fun(exec, formKey, scaffoldKey, context);
+        String? notify = smeupFunExec.notify;
 
-        switch (smeupFunExec.fun['fun']['component']) {
+        switch (smeupFunExec.identifier.component) {
           case 'EXD':
-            switch (smeupFunExec.fun['fun']['service'].toString()) {
+            switch (smeupFunExec.identifier.service) {
               case '*ROUTE':
                 // Pass SmeupFun reference to destination screen
                 Navigator.pushNamed(
-                    context, '/${smeupFunExec.fun['fun']['obj2']['k']}',
+                    context, '/${smeupFunExec.getObjectByName('obj2').k}',
                     arguments: {'smeupFun': smeupFunExec});
                 break;
               default:
-                if (smeupFunExec.fun['fun']['G'] == 'DLG') {
+                if (smeupFunExec.G == 'DLG') {
                   _showDialog(smeupFunExec, context, notify, scaffoldKey);
                 } else {
                   Navigator.of(context).pushNamed(SmeupDynamicScreen.routeName,
@@ -128,9 +129,9 @@ class SmeupDynamismService {
 
             break;
           case 'WEB':
-            switch (smeupFunExec.fun['fun']['service'].toString()) {
+            switch (smeupFunExec.identifier.service.toString()) {
               case '*URL':
-                String url = smeupFunExec.fun['fun']['INPUT'];
+                String url = smeupFunExec.input;
                 if (await canLaunch(url)) {
                   await launch(url);
                 } else {
@@ -157,19 +158,17 @@ class SmeupDynamismService {
         }
       }
 
-      if (dynamism['targets'] != null &&
-          dynamism['targets'] is List &&
-          (dynamism['targets'] as List).length > 0) {
+      if (dynamism.targets.isNotEmpty) {
         List<String> targets =
-            (dynamism['targets'] as List).map((e) => e.toString()).toList();
+            dynamism.targets.map((e) => e.toString()).toList();
         SmeupWidgetNotificationService.notifyWidgets(
             targets, context, scaffoldKey.hashCode);
       }
     }
   }
 
-  static _showDialog(SmeupFun smeupFunExec, BuildContext context,
-      String? notify, GlobalKey<ScaffoldState> scaffoldKey) {
+  static _showDialog(Fun smeupFunExec, BuildContext context, String? notify,
+      GlobalKey<ScaffoldState> scaffoldKey) {
     showDialog(
         barrierDismissible: false,
         routeSettings: RouteSettings(arguments: {
@@ -197,33 +196,33 @@ class SmeupDynamismService {
     });
   }
 
-  static String? replaceFunVariables(
-      String? funString, GlobalKey<FormState>? formKey) {
+  static String replaceVariables(
+      String funString, GlobalKey<FormState>? formKey) {
     SmeupVariablesService.getVariables(formKey: formKey)
         .entries
         .forEach((element) {
-      String? key = element.key;
+      String key = element.key;
       if (formKey != null)
-        key = key!.replaceAll('${formKey.hashCode.toString()}_', '');
+        key = key.replaceAll('${formKey.hashCode.toString()}_', '');
 
       if (element.value is String) {
-        funString = funString!.replaceAll('[$key]', element.value.toString());
+        funString = funString.replaceAll('[$key]', element.value.toString());
       } else {
         funString =
-            funString!.replaceAll('\"[$key]\"', element.value.toString());
+            funString.replaceAll('\"[$key]\"', element.value.toString());
       }
     });
     try {
       // remove not replacable variable
       RegExp re = RegExp(r'\[[^\]]*\]');
-      String? newFun = funString;
-      re.allMatches(funString!).forEach((match) {
-        final value = funString!
+      String newFun = funString;
+      re.allMatches(funString).forEach((match) {
+        final value = funString
             .substring(match.start, match.end)
             .replaceFirst('[', '')
             .replaceFirst(']', '');
         if (value.isNotEmpty) {
-          newFun = newFun!.replaceAll('[$value]', '');
+          newFun = newFun.replaceAll('[$value]', '');
           SmeupLogService.writeDebugMessage(
               'removed the parameter: $value in replaceFunVariables',
               logType: LogType.warning);

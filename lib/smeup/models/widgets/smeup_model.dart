@@ -1,10 +1,12 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
+import 'package:ken/smeup/models/dynamism.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
+
+import '../fun.dart';
 
 enum LoadType { Immediate, Delay }
 enum WidgetOrientation { Vertical, Horizontal }
@@ -15,7 +17,7 @@ abstract class SmeupModel {
   dynamic data;
   String? type;
   String? id;
-  SmeupFun? smeupFun;
+  Fun? smeupFun;
   LoadType widgetLoadType = LoadType.Immediate;
   LinkedHashMap<String, dynamic>? options;
   dynamic optionsType;
@@ -23,7 +25,7 @@ abstract class SmeupModel {
   String? title = '';
   SmeupModel? parent;
 
-  dynamic dynamisms;
+  late List<Dynamism> dynamisms;
   bool? showLoader = false;
   bool notificationEnabled = true;
   bool isNotified = false;
@@ -52,8 +54,8 @@ abstract class SmeupModel {
     _setLinkedHashMap(jsonMap, myJsonMap);
 
     type = myJsonMap['type'];
-    dynamisms = myJsonMap['dynamisms'];
-    smeupFun = SmeupFun(myJsonMap['fun'], formKey, scaffoldKey, context);
+    dynamisms = Dynamism.getDynamismsList(myJsonMap['dynamisms'] ?? []);
+    smeupFun = Fun(myJsonMap['fun'], formKey, scaffoldKey, context);
 
     switch (myJsonMap['load']) {
       case 'D':

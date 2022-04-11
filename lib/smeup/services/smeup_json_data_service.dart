@@ -14,7 +14,7 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/services/transformers/null_transformer.dart';
 import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 
-import '../models/smeup_fun.dart';
+import '../models/fun.dart';
 import 'firestore_shared.dart';
 
 class SmeupJsonDataService extends SmeupDataServiceInterface {
@@ -26,15 +26,14 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
 
   @override
   Future<SmeupServiceResponse> invoke(smeupFun) async {
-    switch (smeupFun.fun['fun']['component']) {
+    switch (smeupFun.identifier.component) {
       case 'EXD':
         try {
           Map<String, dynamic>? data;
 
-          String? fileName = smeupFun.fun['fun']['obj2']['k'];
+          String? fileName = smeupFun.getObjectByName('obj2').k;
 
-          //String customFolder = smeupFun.fun['fun']['obj1']['k'];
-          List<Map<String, dynamic>> list = smeupFun.getServer();
+          List<Map<String, dynamic>> list = smeupFun.server;
 
           final sourceMap =
               list.firstWhereOrNull((element) => element['key'] == 'source');
@@ -88,17 +87,17 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
             false,
             Response(
                 data:
-                    'Error in SmeupJsonDataService: component ${smeupFun.fun['fun']['component']} not implemented',
+                    'Error in SmeupJsonDataService: component ${smeupFun.identifier.component} not implemented',
                 statusCode: HttpStatus.badRequest,
                 requestOptions: RequestOptions(path: '')));
     }
   }
 
-  Future<String> getFromFirestore(SmeupFun smeupFun, fileName) async {
+  Future<String> getFromFirestore(Fun smeupFun, fileName) async {
     if (firestoreInstance == null)
       throw Exception('Firebase instance not valid');
 
-    List<Map<String, dynamic>> list = smeupFun.getServer();
+    List<Map<String, dynamic>> list = smeupFun.server;
 
     final options = GetOptions(source: await FirestoreShared.getSource());
 

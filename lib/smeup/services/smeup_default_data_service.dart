@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_cache_service.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
@@ -12,6 +11,8 @@ import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
 import 'package:ken/smeup/services/transformers/null_transformer.dart';
 import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
+
+import '../models/fun.dart';
 
 class SmeupDefaultDataService extends SmeupDataServiceInterface {
   late Dio dio;
@@ -28,7 +29,7 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
   }
 
   @override
-  Future<SmeupServiceResponse> invoke(SmeupFun smeupFun) async {
+  Future<SmeupServiceResponse> invoke(Fun smeupFun) async {
     try {
       dynamic data;
       Response? response;
@@ -37,10 +38,10 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
 
       url = '${SmeupConfigurationService.getDefaultServiceEndpoint()}/jfun';
       contentType = 'application/json';
-      data = smeupFun.fun;
+      data = smeupFun.getJson();
 
       SmeupLogService.writeDebugMessage(
-          '*** http request \'SmeupDefaultDataService\': ${jsonEncode(data)}');
+          '*** http request \'SmeupDefaultDataService\': $data');
 
       response = await invokeDio(
           url: url,

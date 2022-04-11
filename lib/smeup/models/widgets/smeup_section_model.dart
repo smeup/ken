@@ -81,8 +81,8 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
 
   void _replaceSelectedTabIndex(dynamic jsonMap) {
     if (jsonMap['selectedTabColName'] != null) {
-      selectedTabIndex = int.tryParse(SmeupDynamismService.replaceFunVariables(
-          '[${jsonMap['selectedTabColName']}]', formKey)!);
+      selectedTabIndex = int.tryParse(SmeupDynamismService.replaceVariables(
+          '[${jsonMap['selectedTabColName']}]', formKey));
     }
     if (selectedTabIndex == null) selectedTabIndex = 0;
   }

@@ -105,10 +105,11 @@ class SmeupRadioButtonsModel extends SmeupInputFieldModel
     align = SmeupUtilities.getAlignmentGeometry(optionsDefault!['align']) ??
         defaultAlign;
 
-    columns = SmeupUtilities.getInt(optionsDefault!['radCol']) ?? defaultColumns;
+    columns =
+        SmeupUtilities.getInt(optionsDefault!['radCol']) ?? defaultColumns;
 
-    fontSize =
-        SmeupUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
+    fontSize = SmeupUtilities.getDouble(optionsDefault!['fontSize']) ??
+        defaultFontSize;
 
     backColor = SmeupUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
@@ -145,7 +146,7 @@ class SmeupRadioButtonsModel extends SmeupInputFieldModel
 
   _replaceSelectedValue(dynamic jsonMap) {
     if (optionsDefault!['selectedValue'] != null) {
-      return SmeupDynamismService.replaceFunVariables(
+      return SmeupDynamismService.replaceVariables(
           optionsDefault!['selectedValue'], formKey);
     }
   }

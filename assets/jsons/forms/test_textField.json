@@ -54,7 +54,7 @@
           "dynamisms": [
             {
               "event": "click",
-              "exec": "F(FBK;*MSG;) P(you tapped the submit button: \"[value]\")"
+              "exec": "F(FBK;*MSG;) P(message(you tapped the submit button: \"[value]\"))"
             }
           ]
         }

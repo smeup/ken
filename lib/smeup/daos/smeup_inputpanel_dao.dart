@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:collection';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/models/widgets/smeup_input_panel_field.dart';
 import 'package:ken/smeup/models/widgets/smeup_inputpanel_model.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
 import 'package:xml/xml.dart';
 
+import '../models/fun.dart';
 import 'smeup_dao.dart';
 
 class SmeupInputPanelDao extends SmeupDao {
@@ -51,11 +51,8 @@ class SmeupInputPanelDao extends SmeupDao {
       return layoutData;
     }
     if (optionsDefault["layout"] != null) {
-      SmeupFun smeupFun = SmeupFun(
-          "F(EXD;LOSER_09;LAY) 2(;;${optionsDefault["layout"]})",
-          formKey,
-          scaffoldKey,
-          context);
+      Fun smeupFun = Fun("F(EXD;LOSER_09;LAY) 2(;;${optionsDefault["layout"]})",
+          formKey, scaffoldKey, context);
       SmeupServiceResponse response = await (SmeupDataService.invoke(smeupFun));
       if (response.succeded) {
         return response.result.data;
@@ -115,7 +112,7 @@ class SmeupInputPanelDao extends SmeupDao {
       BuildContext? context) async {
     field.items = [];
     if (field.fun != null) {
-      final fun = SmeupFun(field.fun, formKey, scaffoldKey, context);
+      final fun = Fun(field.fun, formKey, scaffoldKey, context);
       SmeupServiceResponse response = await SmeupDataService.invoke(fun);
       List? rows;
       if (response.succeded) {

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/models/widgets/smeup_data_interface.dart';
 import 'package:ken/smeup/models/widgets/smeup_model.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
+
+import '../fun.dart';
 
 class SmeupScreenModel extends SmeupModel implements SmeupDataInterface {
   BuildContext? context;
@@ -13,7 +14,7 @@ class SmeupScreenModel extends SmeupModel implements SmeupDataInterface {
   bool? isDialog;
   bool? backButtonVisible;
 
-  SmeupScreenModel(this.context, SmeupFun smeupFun,
+  SmeupScreenModel(this.context, Fun smeupFun,
       {this.isDialog = defaultIsDialog,
       this.backButtonVisible = defaultBackButtonVisible})
       : super(null, null, null) {

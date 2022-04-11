@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 
+import '../models/dynamism.dart';
+
 class SmeupDrawerItem extends StatelessWidget {
   final String? text;
   final String? route;
@@ -29,7 +31,12 @@ class SmeupDrawerItem extends StatelessWidget {
       } else {
         if (route!.trimLeft().toUpperCase().startsWith('F(')) {
           SmeupDynamismService.run([
-            {"event": "click", "exec": "$route"}
+            Dynamism(
+                "click",
+                route ?? '',
+                false,
+                List<dynamic>.empty(growable: true),
+                List<dynamic>.empty(growable: true))
           ], context, 'click', scaffoldKey, formKey);
         } else {
           Navigator.of(context).pushNamed(route!);

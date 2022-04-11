@@ -48,8 +48,8 @@ class SmeupImageList extends StatefulWidget
   Function? clientOnItemTap;
   dynamic parentForm;
 
-  SmeupImageList.withController(
-      SmeupImageListModel this.model, this.scaffoldKey, this.formKey, this.parentForm)
+  SmeupImageList.withController(SmeupImageListModel this.model,
+      this.scaffoldKey, this.formKey, this.parentForm)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
@@ -103,13 +103,9 @@ class SmeupImageList extends StatefulWidget
     orientation = m.orientation;
     listHeight = m.listHeight;
 
-    dynamic deleteDynamism;
-    if (m.dynamisms != null)
-      deleteDynamism = (m.dynamisms as List<dynamic>).firstWhere(
-          (element) => element['event'] == 'delete',
-          orElse: () => null);
+    int no = m.dynamisms.where((element) => element.event == 'delete').length;
 
-    if (deleteDynamism != null) {
+    if (no > 0) {
       dismissEnabled = true;
     } else {
       dismissEnabled = false;

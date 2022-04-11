@@ -1,15 +1,17 @@
 import 'dart:convert';
 import 'package:flutter_js/flutter_js.dart';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
+
+import '../models/fun.dart';
 
 class SmeupScriptingServices {
   static JavascriptRuntime _createScriptingRuntime(BuildContext context,
       GlobalKey<FormState> formKey, GlobalKey<ScaffoldState> scaffoldKey) {
     var _flutterJs = getJavascriptRuntime(xhr: false);
-    JsEvalResult _result = _flutterJs.evaluate("""
+    JsEvalResult _result = _flutterJs.evaluate(
+        """
     var dataHelper = {
       insert: function(collection, data) {
         sendMessage('DataHelper', JSON.stringify(['insert', ...arguments]));
@@ -38,7 +40,7 @@ class SmeupScriptingServices {
               formKey: formKey);
           SmeupVariablesService.setVariable("operation", _args["operation"],
               formKey: formKey);
-          SmeupFun fun = SmeupFun(
+          Fun fun = Fun(
               "F(FBK;FS_00_01;WRITE.DOCUMENT) NOTIFY(CLOSE()) P(collection(${args[1]});firestoreFields(time,operation))",
               formKey,
               scaffoldKey,

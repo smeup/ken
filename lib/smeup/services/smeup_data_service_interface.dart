@@ -1,7 +1,8 @@
-import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
 import 'package:ken/smeup/services/transformers/null_transformer.dart';
 import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
+
+import '../models/fun.dart';
 
 abstract class SmeupDataServiceInterface {
   SmeupDataTransformerInterface? transformer;
@@ -12,7 +13,7 @@ abstract class SmeupDataServiceInterface {
   }
 
   // ignore: missing_return
-  Future<SmeupServiceResponse> invoke(SmeupFun fun) {
+  Future<SmeupServiceResponse> invoke(Fun fun) {
     throw ('not implemented');
   }
 

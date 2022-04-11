@@ -2,12 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_data_service_interface.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
 import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
+
+import '../models/fun.dart';
 
 class SmeupHttpDataService extends SmeupDataServiceInterface {
   late Dio dio;
@@ -24,7 +25,7 @@ class SmeupHttpDataService extends SmeupDataServiceInterface {
   }
 
   @override
-  Future<SmeupServiceResponse> invoke(SmeupFun? smeupFun,
+  Future<SmeupServiceResponse> invoke(Fun? smeupFun,
       {String? httpServiceMethod,
       String? httpServiceUrl,
       dynamic httpServiceBody,

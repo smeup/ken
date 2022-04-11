@@ -58,8 +58,8 @@ class SmeupListBox extends StatefulWidget
   // dynamisms functions
   Function? clientOnItemTap;
 
-  SmeupListBox.withController(
-      SmeupListBoxModel this.model, this.scaffoldKey, this.formKey, this.parentForm)
+  SmeupListBox.withController(SmeupListBoxModel this.model, this.scaffoldKey,
+      this.formKey, this.parentForm)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
@@ -130,13 +130,9 @@ class SmeupListBox extends StatefulWidget
     captionFontSize = m.captionFontSize;
     captionFontColor = m.captionFontColor;
 
-    dynamic deleteDynamism;
-    if (m.dynamisms != null)
-      deleteDynamism = (m.dynamisms as List<dynamic>).firstWhere(
-          (element) => element['event'] == 'delete',
-          orElse: () => null);
+    int no = m.dynamisms.where((element) => element.event == 'delete').length;
 
-    if (deleteDynamism != null) {
+    if (no > 0) {
       dismissEnabled = true;
     } else {
       dismissEnabled = false;
@@ -541,19 +537,21 @@ class _SmeupListBoxState extends State<SmeupListBox>
   }
 
   CardTheme _getCardStyle(Color? backColor) {
-    var timeCardTheme = SmeupConfigurationService.getTheme()!.cardTheme.copyWith(
-          color: backColor,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(widget.borderRadius!),
-              side: BorderSide(
-                  width: widget.borderWidth!, color: widget.borderColor!)),
-        );
+    var timeCardTheme =
+        SmeupConfigurationService.getTheme()!.cardTheme.copyWith(
+              color: backColor,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(widget.borderRadius!),
+                  side: BorderSide(
+                      width: widget.borderWidth!, color: widget.borderColor!)),
+            );
 
     return timeCardTheme;
   }
 
   TextStyle _getTextStile(Color? backColor) {
-    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.headline4!;
+    TextStyle style =
+        SmeupConfigurationService.getTheme()!.textTheme.headline4!;
 
     style = style.copyWith(
         color: widget.fontColor,
@@ -570,7 +568,8 @@ class _SmeupListBoxState extends State<SmeupListBox>
   }
 
   TextStyle _getCaptionStile(Color? backColor) {
-    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.headline5!;
+    TextStyle style =
+        SmeupConfigurationService.getTheme()!.textTheme.headline5!;
 
     style = style.copyWith(
         color: widget.captionFontColor,

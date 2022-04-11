@@ -12,6 +12,8 @@ import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
+import '../models/dynamism.dart';
+
 // ignore: must_be_immutable
 class SmeupButtons extends StatefulWidget
     with SmeupWidgetMixin
@@ -247,7 +249,8 @@ class SmeupButtonsState extends State<SmeupButtons>
   }
 
   void runDynamism(BuildContext context, dynamic child) async {
-    if (_isDinamismAsync()) {
+    if (_model != null &&
+        Dynamism.isDinamismAsync('click', _model!.dynamisms)) {
       execDynamismActions(child, true);
 
       SmeupLogService.writeDebugMessage('********************* ASYNC = TRUE',
@@ -273,12 +276,6 @@ class SmeupButtonsState extends State<SmeupButtons>
         });
       }
     }
-  }
-
-  bool _isDinamismAsync() {
-    return _model != null && _model!.smeupFun != null
-        ? _model!.smeupFun!.isDinamismAsync(_model!.dynamisms, 'click')
-        : false;
   }
 
   Future<void> execDynamismActions(dynamic child, bool isAsync) async {
