@@ -13,11 +13,8 @@ class SmeupFun {
   GlobalKey<ScaffoldState>? scaffoldKey;
   BuildContext? context;
 
-  //dynamic _fun;
-
   late List<Map<String, dynamic>> parameters;
   late List<Map<String, dynamic>> server;
-  //late List<FunDynamism> dynamisms;
   late FunIdentifier identifier;
   late List<FunObject> objects;
   late String input;
@@ -74,7 +71,6 @@ class SmeupFun {
   _init() {
     parameters = List<Map<String, dynamic>>.empty(growable: true);
     server = List<Map<String, dynamic>>.empty(growable: true);
-    //dynamisms = List<FunDynamism>.empty(growable: true);
     identifier = FunIdentifier('', '', '');
     objects = List<FunObject>.empty(growable: true);
     for (var i = 1; i < 7; i++) {
@@ -96,8 +92,6 @@ class SmeupFun {
 
     parameters = _getParameters(funString);
 
-    //dynamisms = _getDynamisms(funString);
-
     input = extractArg(funString, 'INPUT');
 
     notify = extractArg(funString, 'NOTIFY');
@@ -110,24 +104,54 @@ class SmeupFun {
   }
 
   _parseFromJson(dynamic dynamicFun) {
-    print('ciao');
-    // identifier = _getIdentifier(funString);
+    dynamic newFun = _checkFunElement(dynamicFun);
+    identifier = FunIdentifier(newFun['fun']['component'] ?? '',
+        newFun['fun']['service'] ?? '', newFun['fun']['function'] ?? '');
 
-    // objects = _getObjects(funString);
+    for (var i = 1; i < 7; i++) {
+      String objName = 'obj$i';
+      dynamic obj = newFun['fun'][objName];
+      if (obj != null) {
+        FunObject funObject = FunObject(objName, obj['t'], obj['p'], obj['k']);
+        objects.add(funObject);
+      }
+    }
 
-    // parameters = _getParameters(funString);
+    if (newFun['fun']['P'] != null) {
+      parameters = extractParametersList(newFun['fun']['P'], formKey);
+    }
 
-    // dynamisms = _getDynamisms(funString);
+    if (newFun['fun']['INPUT'] != null) {
+      input = newFun['fun']['INPUT'];
+    }
 
-    // input = extractArg(funString, 'INPUT');
+    if (newFun['fun']['NOTIFY'] != null) {
+      notify = newFun['fun']['NOTIFY'];
+    }
 
-    // notify = extractArg(funString, 'NOTIFY');
+    if (newFun['fun']['SG'] != null) {
+      funSG = FunSG(newFun['fun']['SG']['cache'] ?? 0,
+          newFun['fun']['SG']['forceCache'] ?? false);
+    }
 
-    // funSG = _getFunSG(funString);
+    if (newFun['fun']['G'] != null) {
+      G = newFun['fun']['G'];
+    }
 
-    // G = extractArg(funString, 'G');
+    if (newFun['fun']['SERVER'] != null) {
+      server = extractParametersList(newFun['fun']['SERVER'], formKey);
+    }
+  }
 
-    // server = _getServer(funString);
+  dynamic _checkFunElement(dynamicFun) {
+    if (dynamicFun != null &&
+        (dynamicFun as Map).entries.length > 0 &&
+        dynamicFun['fun'] == null) {
+      Map newEl = {'fun': dynamicFun};
+      dynamicFun = newEl;
+    }
+
+    return dynamicFun;
   }
 
   FunIdentifier _getIdentifier(String funString) {
@@ -324,7 +348,6 @@ class SmeupFun {
         SmeupFun(funString, this.formKey, this.scaffoldKey, this.context);
     parameters = newFun.parameters;
     server = newFun.server;
-    //dynamisms = newFun.dynamisms;
     identifier = newFun.identifier;
     objects = newFun.objects;
     input = newFun.input;
@@ -376,6 +399,7 @@ class SmeupFun {
     fun['fun']['INPUT'] = input;
     fun['fun']['SG'] = {'cache': funSG.cache, 'forceCache': funSG.forceCache};
     fun['fun']['G'] = G;
+    fun['fun']['NOTIFY'] = notify;
 
     return fun;
   }
