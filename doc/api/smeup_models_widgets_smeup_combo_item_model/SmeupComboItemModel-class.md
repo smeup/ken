@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -16,14 +17,14 @@
 
 ## Constructors
 
-[SmeupComboItemModel](../smeup_models_widgets_smeup_combo_item_model/SmeupComboItemModel/SmeupComboItemModel.md) ([String](https://api.flutter.dev/flutter/dart-core/String-class.html) code, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) value)
+[SmeupComboItemModel](../smeup_models_widgets_smeup_combo_item_model/SmeupComboItemModel/SmeupComboItemModel.md) ([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? code, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? value)
 
     
 
 
 ## Properties
 
-##### [code](../smeup_models_widgets_smeup_combo_item_model/SmeupComboItemModel/code.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [code](../smeup_models_widgets_smeup_combo_item_model/SmeupComboItemModel/code.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -50,7 +51,7 @@ _read-only, inherited_
 
 
 
-##### [value](../smeup_models_widgets_smeup_combo_item_model/SmeupComboItemModel/value.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [value](../smeup_models_widgets_smeup_combo_item_model/SmeupComboItemModel/value.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 

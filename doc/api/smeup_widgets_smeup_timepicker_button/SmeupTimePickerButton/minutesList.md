@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)> minutesList
+[List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>? minutesList
   
 _final_
 
@@ -20,7 +21,7 @@ _final_
 ## Implementation
 
 ```dart
-final List<String> minutesList;
+final List<String>? minutesList;
 
 
 ```

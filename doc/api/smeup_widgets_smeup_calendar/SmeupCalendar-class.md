@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -34,18 +35,18 @@
 
 ## Constructors
 
-[SmeupCalendar](../smeup_widgets_smeup_calendar/SmeupCalendar/SmeupCalendar.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type = 'CAL', [double](https://api.flutter.dev/flutter/dart-core/double-class.html) eventFontSize, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) titleFontSize, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) dayFontSize, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) markerFontSize, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic>> data, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) initialFirstWork, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) initialLastWork, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) initialDate, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) titleColumnName = SmeupCalendarModel.defaultTitleColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) dataColumnName = SmeupCalendarModel.defaultDataColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) initTimeColumnName = SmeupCalendarModel.defaultInitTimeColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) endTimeColumnName = SmeupCalendarModel.defaultEndTimeColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) styleColumnName = SmeupCalendarModel.defaultStyleColumnName, dynamic title = '', [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showPeriodButtons = SmeupCalendarModel.defaultShowPeriodButtons, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = SmeupCalendarModel.defaultHeight, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = SmeupCalendarModel.defaultWidth, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showAsWeek = SmeupCalendarModel.defaultShowAsWeek, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showNavigation = SmeupCalendarModel.defaultShowNavigation, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = SmeupCalendarModel.defaultPadding, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) clientOnDaySelected, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) clientOnChangeMonth, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) clientOnEventClick})
+[SmeupCalendar](../smeup_widgets_smeup_calendar/SmeupCalendar/SmeupCalendar.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type = 'CAL', [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? eventFontSize, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? titleFontSize, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? dayFontSize, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? markerFontSize, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic>>? data, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)? initialFirstWork, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)? initialLastWork, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)? initialDate, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? titleColumnName = SmeupCalendarModel.defaultTitleColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? dataColumnName = SmeupCalendarModel.defaultDataColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? initTimeColumnName = SmeupCalendarModel.defaultInitTimeColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? endTimeColumnName = SmeupCalendarModel.defaultEndTimeColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? styleColumnName = SmeupCalendarModel.defaultStyleColumnName, dynamic title = '', [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? showPeriodButtons = SmeupCalendarModel.defaultShowPeriodButtons, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? height = SmeupCalendarModel.defaultHeight, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? width = SmeupCalendarModel.defaultWidth, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? showAsWeek = SmeupCalendarModel.defaultShowAsWeek, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? showNavigation = SmeupCalendarModel.defaultShowNavigation, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)? padding = SmeupCalendarModel.defaultPadding, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? clientOnDaySelected, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? clientOnChangeMonth, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? clientOnEventClick})
 
     
 
-[SmeupCalendar.withController](../smeup_widgets_smeup_calendar/SmeupCalendar/SmeupCalendar.withController.md) ([SmeupCalendarModel](../smeup_models_widgets_smeup_calendar_model/SmeupCalendarModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) initialFirstWork, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) initialLastWork)
+[SmeupCalendar.withController](../smeup_widgets_smeup_calendar/SmeupCalendar/SmeupCalendar.withController.md) ([SmeupCalendarModel](../smeup_models_widgets_smeup_calendar_model/SmeupCalendarModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)? initialFirstWork, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)? initialLastWork)
 
     
 
 
 ## Properties
 
-##### [clientOnChangeMonth](../smeup_widgets_smeup_calendar/SmeupCalendar/clientOnChangeMonth.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [clientOnChangeMonth](../smeup_widgets_smeup_calendar/SmeupCalendar/clientOnChangeMonth.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -54,7 +55,7 @@ _read / write_
 
 
 
-##### [clientOnDaySelected](../smeup_widgets_smeup_calendar/SmeupCalendar/clientOnDaySelected.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [clientOnDaySelected](../smeup_widgets_smeup_calendar/SmeupCalendar/clientOnDaySelected.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -63,7 +64,7 @@ _read / write_
 
 
 
-##### [clientOnEventClick](../smeup_widgets_smeup_calendar/SmeupCalendar/clientOnEventClick.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [clientOnEventClick](../smeup_widgets_smeup_calendar/SmeupCalendar/clientOnEventClick.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -72,7 +73,7 @@ _read / write_
 
 
 
-##### [data](../smeup_widgets_smeup_calendar/SmeupCalendar/data.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic>>
+##### [data](../smeup_widgets_smeup_calendar/SmeupCalendar/data.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic>>?
 
 
 
@@ -81,7 +82,7 @@ _read / write_
 
 
 
-##### [dataColumnName](../smeup_widgets_smeup_calendar/SmeupCalendar/dataColumnName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [dataColumnName](../smeup_widgets_smeup_calendar/SmeupCalendar/dataColumnName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -90,7 +91,7 @@ _read / write_
 
 
 
-##### [dayFontSize](../smeup_widgets_smeup_calendar/SmeupCalendar/dayFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [dayFontSize](../smeup_widgets_smeup_calendar/SmeupCalendar/dayFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -99,7 +100,7 @@ _read / write_
 
 
 
-##### [endTimeColumnName](../smeup_widgets_smeup_calendar/SmeupCalendar/endTimeColumnName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [endTimeColumnName](../smeup_widgets_smeup_calendar/SmeupCalendar/endTimeColumnName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -108,7 +109,7 @@ _read / write_
 
 
 
-##### [eventFontSize](../smeup_widgets_smeup_calendar/SmeupCalendar/eventFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [eventFontSize](../smeup_widgets_smeup_calendar/SmeupCalendar/eventFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -117,7 +118,7 @@ _read / write_
 
 
 
-##### [formKey](../smeup_widgets_smeup_calendar/SmeupCalendar/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_calendar/SmeupCalendar/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -135,7 +136,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [height](../smeup_widgets_smeup_calendar/SmeupCalendar/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [height](../smeup_widgets_smeup_calendar/SmeupCalendar/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -144,7 +145,7 @@ _read / write_
 
 
 
-##### [id](../smeup_widgets_smeup_calendar/SmeupCalendar/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_calendar/SmeupCalendar/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -153,7 +154,7 @@ _read / write_
 
 
 
-##### [initialDate](../smeup_widgets_smeup_calendar/SmeupCalendar/initialDate.md) &#8596; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)
+##### [initialDate](../smeup_widgets_smeup_calendar/SmeupCalendar/initialDate.md) &#8596; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)?
 
 
 
@@ -162,7 +163,7 @@ _read / write_
 
 
 
-##### [initialFirstWork](../smeup_widgets_smeup_calendar/SmeupCalendar/initialFirstWork.md) &#8596; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)
+##### [initialFirstWork](../smeup_widgets_smeup_calendar/SmeupCalendar/initialFirstWork.md) &#8596; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)?
 
 
 
@@ -171,7 +172,7 @@ _read / write_
 
 
 
-##### [initialLastWork](../smeup_widgets_smeup_calendar/SmeupCalendar/initialLastWork.md) &#8596; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)
+##### [initialLastWork](../smeup_widgets_smeup_calendar/SmeupCalendar/initialLastWork.md) &#8596; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)?
 
 
 
@@ -180,7 +181,7 @@ _read / write_
 
 
 
-##### [initTimeColumnName](../smeup_widgets_smeup_calendar/SmeupCalendar/initTimeColumnName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [initTimeColumnName](../smeup_widgets_smeup_calendar/SmeupCalendar/initTimeColumnName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -189,7 +190,7 @@ _read / write_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -198,7 +199,7 @@ _final, inherited_
 
 
 
-##### [markerFontSize](../smeup_widgets_smeup_calendar/SmeupCalendar/markerFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [markerFontSize](../smeup_widgets_smeup_calendar/SmeupCalendar/markerFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -207,7 +208,7 @@ _read / write_
 
 
 
-##### [model](../smeup_widgets_smeup_calendar/SmeupCalendar/model.md) &#8596; [SmeupCalendarModel](../smeup_models_widgets_smeup_calendar_model/SmeupCalendarModel-class.md)
+##### [model](../smeup_widgets_smeup_calendar/SmeupCalendar/model.md) &#8596; [SmeupCalendarModel](../smeup_models_widgets_smeup_calendar_model/SmeupCalendarModel-class.md)?
 
 
 
@@ -216,7 +217,7 @@ _read / write_
 
 
 
-##### [padding](../smeup_widgets_smeup_calendar/SmeupCalendar/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)
+##### [padding](../smeup_widgets_smeup_calendar/SmeupCalendar/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)?
 
 
 
@@ -243,7 +244,7 @@ _read / write_
 
 
 
-##### [showAsWeek](../smeup_widgets_smeup_calendar/SmeupCalendar/showAsWeek.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [showAsWeek](../smeup_widgets_smeup_calendar/SmeupCalendar/showAsWeek.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -252,7 +253,7 @@ _read / write_
 
 
 
-##### [showNavigation](../smeup_widgets_smeup_calendar/SmeupCalendar/showNavigation.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [showNavigation](../smeup_widgets_smeup_calendar/SmeupCalendar/showNavigation.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -261,7 +262,7 @@ _read / write_
 
 
 
-##### [showPeriodButtons](../smeup_widgets_smeup_calendar/SmeupCalendar/showPeriodButtons.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [showPeriodButtons](../smeup_widgets_smeup_calendar/SmeupCalendar/showPeriodButtons.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -270,7 +271,7 @@ _read / write_
 
 
 
-##### [styleColumnName](../smeup_widgets_smeup_calendar/SmeupCalendar/styleColumnName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [styleColumnName](../smeup_widgets_smeup_calendar/SmeupCalendar/styleColumnName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -279,7 +280,7 @@ _read / write_
 
 
 
-##### [title](../smeup_widgets_smeup_calendar/SmeupCalendar/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_widgets_smeup_calendar/SmeupCalendar/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -288,7 +289,7 @@ _read / write_
 
 
 
-##### [titleColumnName](../smeup_widgets_smeup_calendar/SmeupCalendar/titleColumnName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [titleColumnName](../smeup_widgets_smeup_calendar/SmeupCalendar/titleColumnName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -297,7 +298,7 @@ _read / write_
 
 
 
-##### [titleFontSize](../smeup_widgets_smeup_calendar/SmeupCalendar/titleFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [titleFontSize](../smeup_widgets_smeup_calendar/SmeupCalendar/titleFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -306,7 +307,7 @@ _read / write_
 
 
 
-##### [type](../smeup_widgets_smeup_calendar/SmeupCalendar/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_widgets_smeup_calendar/SmeupCalendar/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -315,7 +316,7 @@ _read / write_
 
 
 
-##### [width](../smeup_widgets_smeup_calendar/SmeupCalendar/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [width](../smeup_widgets_smeup_calendar/SmeupCalendar/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -392,7 +393,7 @@ _override_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -411,7 +412,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

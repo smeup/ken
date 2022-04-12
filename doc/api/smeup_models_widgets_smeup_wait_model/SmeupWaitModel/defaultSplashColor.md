@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) defaultSplashColor
+[Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? defaultSplashColor
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-static Color defaultSplashColor;
+static Color? defaultSplashColor;
 
 
 ```

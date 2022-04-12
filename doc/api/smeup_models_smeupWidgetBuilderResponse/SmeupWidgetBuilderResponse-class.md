@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -16,14 +17,14 @@
 
 ## Constructors
 
-[SmeupWidgetBuilderResponse](../smeup_models_smeupWidgetBuilderResponse/SmeupWidgetBuilderResponse/SmeupWidgetBuilderResponse.md) ([SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md) parentState, [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html) children, {[int](https://api.flutter.dev/flutter/dart-core/int-class.html) serviceStatusCode})
+[SmeupWidgetBuilderResponse](../smeup_models_smeupWidgetBuilderResponse/SmeupWidgetBuilderResponse/SmeupWidgetBuilderResponse.md) ([SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md)? parentState, [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)? children, {[int](https://api.flutter.dev/flutter/dart-core/int-class.html)? serviceStatusCode})
 
     
 
 
 ## Properties
 
-##### [children](../smeup_models_smeupWidgetBuilderResponse/SmeupWidgetBuilderResponse/children.md) &#8596; [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)
+##### [children](../smeup_models_smeupWidgetBuilderResponse/SmeupWidgetBuilderResponse/children.md) &#8596; [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)?
 
 
 
@@ -41,7 +42,7 @@ _read-only, inherited_
 
 
 
-##### [parentState](../smeup_models_smeupWidgetBuilderResponse/SmeupWidgetBuilderResponse/parentState.md) &#8596; [SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md)
+##### [parentState](../smeup_models_smeupWidgetBuilderResponse/SmeupWidgetBuilderResponse/parentState.md) &#8596; [SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md)?
 
 
 
@@ -59,7 +60,7 @@ _read-only, inherited_
 
 
 
-##### [serviceStatusCode](../smeup_models_smeupWidgetBuilderResponse/SmeupWidgetBuilderResponse/serviceStatusCode.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
+##### [serviceStatusCode](../smeup_models_smeupWidgetBuilderResponse/SmeupWidgetBuilderResponse/serviceStatusCode.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)?
 
 
 

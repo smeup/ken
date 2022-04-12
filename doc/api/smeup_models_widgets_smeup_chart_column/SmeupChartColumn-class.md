@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -16,11 +17,11 @@
 
 ## Constructors
 
-[SmeupChartColumn](../smeup_models_widgets_smeup_chart_column/SmeupChartColumn/SmeupChartColumn.md) ([String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) title, [ColumnType](../smeup_models_widgets_smeup_chart_column/ColumnType.md) type, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) size)
+[SmeupChartColumn](../smeup_models_widgets_smeup_chart_column/SmeupChartColumn/SmeupChartColumn.md) ([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? title, [ColumnType](../smeup_models_widgets_smeup_chart_column/ColumnType.md)? type, [int](https://api.flutter.dev/flutter/dart-core/int-class.html)? size)
 
     
 
-[SmeupChartColumn.fromInfluxDB](../smeup_models_widgets_smeup_chart_column/SmeupChartColumn/SmeupChartColumn.fromInfluxDB.md) ([String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) title, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) size)
+[SmeupChartColumn.fromInfluxDB](../smeup_models_widgets_smeup_chart_column/SmeupChartColumn/SmeupChartColumn.fromInfluxDB.md) ([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? title, [int](https://api.flutter.dev/flutter/dart-core/int-class.html)? size)
 
     
 
@@ -40,7 +41,7 @@ _read-only, inherited_
 
 
 
-##### [name](../smeup_models_widgets_smeup_chart_column/SmeupChartColumn/name.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [name](../smeup_models_widgets_smeup_chart_column/SmeupChartColumn/name.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -58,7 +59,7 @@ _read-only, inherited_
 
 
 
-##### [size](../smeup_models_widgets_smeup_chart_column/SmeupChartColumn/size.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
+##### [size](../smeup_models_widgets_smeup_chart_column/SmeupChartColumn/size.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)?
 
 
 
@@ -67,7 +68,7 @@ _read / write_
 
 
 
-##### [title](../smeup_models_widgets_smeup_chart_column/SmeupChartColumn/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_models_widgets_smeup_chart_column/SmeupChartColumn/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -76,7 +77,7 @@ _read / write_
 
 
 
-##### [type](../smeup_models_widgets_smeup_chart_column/SmeupChartColumn/type.md) &#8596; [ColumnType](../smeup_models_widgets_smeup_chart_column/ColumnType.md)
+##### [type](../smeup_models_widgets_smeup_chart_column/SmeupChartColumn/type.md) &#8596; [ColumnType](../smeup_models_widgets_smeup_chart_column/ColumnType.md)?
 
 
 

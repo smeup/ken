@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -34,18 +35,18 @@
 
 ## Constructors
 
-[SmeupSlider](../smeup_widgets_smeup_slider/SmeupSlider/SmeupSlider.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {[Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) activeTrackColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) thumbColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) inactiveTrackColor, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = SmeupSliderModel.defaultPadding, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) title, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type = 'SLD', [double](https://api.flutter.dev/flutter/dart-core/double-class.html) value = 0, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) sldMax = SmeupSliderModel.defaultSldMax, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) sldMin = SmeupSliderModel.defaultSldMin, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) clientOnChange})
+[SmeupSlider](../smeup_widgets_smeup_slider/SmeupSlider/SmeupSlider.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, {[Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? activeTrackColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? thumbColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? inactiveTrackColor, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)? padding = SmeupSliderModel.defaultPadding, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? title, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type = 'SLD', [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? value = 0, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? sldMax = SmeupSliderModel.defaultSldMax, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? sldMin = SmeupSliderModel.defaultSldMin, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? clientOnChange})
 
     
 
-[SmeupSlider.withController](../smeup_widgets_smeup_slider/SmeupSlider/SmeupSlider.withController.md) ([SmeupSliderModel](../smeup_models_widgets_smeup_slider_model/SmeupSliderModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupSlider.withController](../smeup_widgets_smeup_slider/SmeupSlider/SmeupSlider.withController.md) ([SmeupSliderModel](../smeup_models_widgets_smeup_slider_model/SmeupSliderModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey)
 
     
 
 
 ## Properties
 
-##### [activeTrackColor](../smeup_widgets_smeup_slider/SmeupSlider/activeTrackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [activeTrackColor](../smeup_widgets_smeup_slider/SmeupSlider/activeTrackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -54,7 +55,7 @@ _read / write_
 
 
 
-##### [clientOnChange](../smeup_widgets_smeup_slider/SmeupSlider/clientOnChange.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [clientOnChange](../smeup_widgets_smeup_slider/SmeupSlider/clientOnChange.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -63,7 +64,7 @@ _read / write_
 
 
 
-##### [formKey](../smeup_widgets_smeup_slider/SmeupSlider/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_slider/SmeupSlider/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -81,7 +82,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [id](../smeup_widgets_smeup_slider/SmeupSlider/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_slider/SmeupSlider/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -90,7 +91,7 @@ _read / write_
 
 
 
-##### [inactiveTrackColor](../smeup_widgets_smeup_slider/SmeupSlider/inactiveTrackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [inactiveTrackColor](../smeup_widgets_smeup_slider/SmeupSlider/inactiveTrackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -99,7 +100,7 @@ _read / write_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -108,7 +109,7 @@ _final, inherited_
 
 
 
-##### [model](../smeup_widgets_smeup_slider/SmeupSlider/model.md) &#8596; [SmeupSliderModel](../smeup_models_widgets_smeup_slider_model/SmeupSliderModel-class.md)
+##### [model](../smeup_widgets_smeup_slider/SmeupSlider/model.md) &#8596; [SmeupSliderModel](../smeup_models_widgets_smeup_slider_model/SmeupSliderModel-class.md)?
 
 
 
@@ -117,7 +118,7 @@ _read / write_
 
 
 
-##### [padding](../smeup_widgets_smeup_slider/SmeupSlider/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)
+##### [padding](../smeup_widgets_smeup_slider/SmeupSlider/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)?
 
 
 
@@ -144,7 +145,7 @@ _read / write_
 
 
 
-##### [sldMax](../smeup_widgets_smeup_slider/SmeupSlider/sldMax.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [sldMax](../smeup_widgets_smeup_slider/SmeupSlider/sldMax.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -153,7 +154,7 @@ _read / write_
 
 
 
-##### [sldMin](../smeup_widgets_smeup_slider/SmeupSlider/sldMin.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [sldMin](../smeup_widgets_smeup_slider/SmeupSlider/sldMin.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -162,7 +163,7 @@ _read / write_
 
 
 
-##### [thumbColor](../smeup_widgets_smeup_slider/SmeupSlider/thumbColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [thumbColor](../smeup_widgets_smeup_slider/SmeupSlider/thumbColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -171,7 +172,7 @@ _read / write_
 
 
 
-##### [title](../smeup_widgets_smeup_slider/SmeupSlider/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_widgets_smeup_slider/SmeupSlider/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -180,7 +181,7 @@ _read / write_
 
 
 
-##### [type](../smeup_widgets_smeup_slider/SmeupSlider/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_widgets_smeup_slider/SmeupSlider/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -189,7 +190,7 @@ _read / write_
 
 
 
-##### [value](../smeup_widgets_smeup_slider/SmeupSlider/value.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [value](../smeup_widgets_smeup_slider/SmeupSlider/value.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -266,7 +267,7 @@ _override_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -285,7 +286,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

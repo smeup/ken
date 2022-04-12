@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 dynamic treatData(SmeupModel model) {
-  SmeupDrawerModel m = model;
+  SmeupDrawerModel m = model as SmeupDrawerModel;
 
   // change data format
   var workData = formatDataFields(m);
@@ -48,7 +49,12 @@ dynamic treatData(SmeupModel model) {
                   String route = element['route'];
                   if (route.trimLeft().toUpperCase().startsWith('F(')) {
                     SmeupDynamismService.run([
-                      {"event": "click", "exec": "${element['route']}"}
+                      Dynamism(
+                          "click",
+                          "${element['route']}",
+                          false,
+                          List<dynamic>.empty(growable: true),
+                          List<dynamic>.empty(growable: true))
                     ], context, 'click', scaffoldKey, formKey);
                   } else {
                     Navigator.of(context).pushNamed(route);

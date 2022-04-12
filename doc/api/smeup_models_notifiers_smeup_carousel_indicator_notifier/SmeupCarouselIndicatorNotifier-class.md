@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -49,7 +50,7 @@ _@[protected](https://pub.dev/documentation/meta/1.7.0/meta/protected-constant.h
 
 
 
-##### [index](../smeup_models_notifiers_smeup_carousel_indicator_notifier/SmeupCarouselIndicatorNotifier/index.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
+##### [index](../smeup_models_notifiers_smeup_carousel_indicator_notifier/SmeupCarouselIndicatorNotifier/index.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)?
 
 
 

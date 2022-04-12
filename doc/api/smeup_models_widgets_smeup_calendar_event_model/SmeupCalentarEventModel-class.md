@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -16,11 +17,11 @@
 
 ## Constructors
 
-[SmeupCalentarEventModel](../smeup_models_widgets_smeup_calendar_event_model/SmeupCalentarEventModel/SmeupCalentarEventModel.md) ([DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) day, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) description, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) initTime, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) endTime)
+[SmeupCalentarEventModel](../smeup_models_widgets_smeup_calendar_event_model/SmeupCalentarEventModel/SmeupCalentarEventModel.md) ([DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)? day, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? description, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)? initTime, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)? endTime)
 
     
 
-[SmeupCalentarEventModel.fromMap](../smeup_models_widgets_smeup_calendar_event_model/SmeupCalentarEventModel/SmeupCalentarEventModel.fromMap.md) (dynamic fields, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) titleColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) dataColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) styleColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) initColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) endColumnName)
+[SmeupCalentarEventModel.fromMap](../smeup_models_widgets_smeup_calendar_event_model/SmeupCalentarEventModel/SmeupCalentarEventModel.fromMap.md) (dynamic fields, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? titleColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? dataColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? styleColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? initColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? endColumnName)
 
     
 
@@ -36,7 +37,7 @@ _read / write_
 
 
 
-##### [day](../smeup_models_widgets_smeup_calendar_event_model/SmeupCalentarEventModel/day.md) &#8596; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)
+##### [day](../smeup_models_widgets_smeup_calendar_event_model/SmeupCalentarEventModel/day.md) &#8596; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)?
 
 
 
@@ -45,7 +46,7 @@ _read / write_
 
 
 
-##### [description](../smeup_models_widgets_smeup_calendar_event_model/SmeupCalentarEventModel/description.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [description](../smeup_models_widgets_smeup_calendar_event_model/SmeupCalentarEventModel/description.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -54,7 +55,7 @@ _read / write_
 
 
 
-##### [endTime](../smeup_models_widgets_smeup_calendar_event_model/SmeupCalentarEventModel/endTime.md) &#8596; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)
+##### [endTime](../smeup_models_widgets_smeup_calendar_event_model/SmeupCalentarEventModel/endTime.md) &#8596; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)?
 
 
 
@@ -99,7 +100,7 @@ _read-only, inherited_
 
 
 
-##### [initTime](../smeup_models_widgets_smeup_calendar_event_model/SmeupCalentarEventModel/initTime.md) &#8596; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)
+##### [initTime](../smeup_models_widgets_smeup_calendar_event_model/SmeupCalentarEventModel/initTime.md) &#8596; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)?
 
 
 

@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 void setDataLoad
-([String](https://api.flutter.dev/flutter/dart-core/String-class.html) id, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) value)
+([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) value)
 
 
 
@@ -23,7 +24,7 @@ void setDataLoad
 ## Implementation
 
 ```dart
-void setDataLoad(String id, bool value) {
+void setDataLoad(String? id, bool value) {
   var sel = SmeupWidgetNotificationService.objects
       .firstWhere((element) => element['id'] == id, orElse: () => null);
   sel['dataLoaded'] = value;

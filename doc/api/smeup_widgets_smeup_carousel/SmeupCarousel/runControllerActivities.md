@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 runControllerActivities(SmeupModel model) {
-  SmeupCarouselModel m = model;
+  SmeupCarouselModel m = model as SmeupCarouselModel;
   id = m.id;
   type = m.type;
   height = m.height;

@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,17 +25,19 @@ dynamic setDefaults
 
 ```dart
 static setDefaults(dynamic obj) {
-  var dayTextStyle = SmeupConfigurationService.getTheme().textTheme.bodyText2;
+  var dayTextStyle =
+      SmeupConfigurationService.getTheme()!.textTheme.bodyText2!;
   defaultDayFontSize = dayTextStyle.fontSize;
 
-  var markerStyle = SmeupConfigurationService.getTheme().textTheme.headline4;
+  var markerStyle =
+      SmeupConfigurationService.getTheme()!.textTheme.headline4!;
   defaultMarkerFontSize = markerStyle.fontSize;
 
-  var eventStyle = SmeupConfigurationService.getTheme().textTheme.headline3;
+  var eventStyle = SmeupConfigurationService.getTheme()!.textTheme.headline3!;
   defaultEventFontSize = eventStyle.fontSize;
 
   var titleTextStyle =
-      SmeupConfigurationService.getTheme().appBarTheme.titleTextStyle;
+      SmeupConfigurationService.getTheme()!.appBarTheme.titleTextStyle!;
   defaultTitleFontSize = titleTextStyle.fontSize;
 
   // ----------------- set properties from default

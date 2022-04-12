@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-SmeupModel.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
+SmeupModel.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>? scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)? context)
 
 
 
@@ -24,8 +25,8 @@ SmeupModel.fromMap(Map<String, dynamic> jsonMap, this.formKey,
   _setLinkedHashMap(jsonMap, myJsonMap);
 
   type = myJsonMap['type'];
-  dynamisms = myJsonMap['dynamisms'];
-  smeupFun = SmeupFun(myJsonMap['fun'], formKey, scaffoldKey, context);
+  dynamisms = Dynamism.getDynamismsList(myJsonMap['dynamisms'] ?? []);
+  smeupFun = Fun(myJsonMap['fun'], formKey, scaffoldKey, context);
 
   switch (myJsonMap['load']) {
     case 'D':
@@ -36,10 +37,10 @@ SmeupModel.fromMap(Map<String, dynamic> jsonMap, this.formKey,
   }
 
   showLoader = myJsonMap['showLoader'] ??
-      SmeupConfigurationService.getAppConfiguration().showLoader;
+      SmeupConfigurationService.getAppConfiguration()!.showLoader;
   notificationEnabled = myJsonMap['notification'] ?? true;
 
-  if (type != null && (id == null || id.isEmpty)) {
+  if (type != null && (id == null || id!.isEmpty)) {
     id = SmeupUtilities.getWidgetId(myJsonMap['type'], myJsonMap['id']);
 
     optionsDefault = _getNewLinkedHashMap();

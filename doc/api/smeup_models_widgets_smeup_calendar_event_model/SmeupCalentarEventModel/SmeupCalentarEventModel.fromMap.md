@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-SmeupCalentarEventModel.fromMap(dynamic fields, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) titleColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) dataColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) styleColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) initColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) endColumnName)
+SmeupCalentarEventModel.fromMap(dynamic fields, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? titleColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? dataColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? styleColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? initColumnName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? endColumnName)
 
 
 
@@ -20,11 +21,11 @@ SmeupCalentarEventModel.fromMap(dynamic fields, [String](https://api.flutter.dev
 ```dart
 SmeupCalentarEventModel.fromMap(
     this.fields,
-    String titleColumnName,
-    String dataColumnName,
-    String styleColumnName,
-    String initColumnName,
-    String endColumnName) {
+    String? titleColumnName,
+    String? dataColumnName,
+    String? styleColumnName,
+    String? initColumnName,
+    String? endColumnName) {
   this.day = DateTime.parse(fields[dataColumnName].toString());
   this.initTime = _toTime(fields[initColumnName]);
   this.endTime = _toTime(fields[endColumnName]);

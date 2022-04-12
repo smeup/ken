@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,16 +25,13 @@
 
 ```dart
 static bool isPasswordValid(String password) {
-  if (password == null) {
-    return false;
-  }
   if (password.isEmpty) {
     return false;
   }
 
   RegExp re = RegExp(passwordRules);
 
-  Match firstMatch = re.firstMatch(password);
+  Match? firstMatch = re.firstMatch(password);
 
   if (firstMatch == null) return false;
 

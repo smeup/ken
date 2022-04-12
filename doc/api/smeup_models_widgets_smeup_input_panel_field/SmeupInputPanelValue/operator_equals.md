@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) operator ==
-(dynamic o)
+([Object](https://api.flutter.dev/flutter/dart-core/Object-class.html) o)
 
 _override_
 

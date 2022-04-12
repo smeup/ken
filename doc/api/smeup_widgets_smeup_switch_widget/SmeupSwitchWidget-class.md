@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -28,14 +29,14 @@
 
 ## Constructors
 
-[SmeupSwitchWidget](../smeup_widgets_smeup_switch_widget/SmeupSwitchWidget/SmeupSwitchWidget.md) ({[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) data, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) id, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) onClientChange, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) thumbColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) trackColor})
+[SmeupSwitchWidget](../smeup_widgets_smeup_switch_widget/SmeupSwitchWidget/SmeupSwitchWidget.md) ({[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? data, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? onClientChange, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? thumbColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? trackColor})
 
     
 
 
 ## Properties
 
-##### [data](../smeup_widgets_smeup_switch_widget/SmeupSwitchWidget/data.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [data](../smeup_widgets_smeup_switch_widget/SmeupSwitchWidget/data.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -53,7 +54,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [id](../smeup_widgets_smeup_switch_widget/SmeupSwitchWidget/id.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_switch_widget/SmeupSwitchWidget/id.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -62,7 +63,7 @@ _final_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -71,7 +72,7 @@ _final, inherited_
 
 
 
-##### [onClientChange](../smeup_widgets_smeup_switch_widget/SmeupSwitchWidget/onClientChange.md) &#8594; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [onClientChange](../smeup_widgets_smeup_switch_widget/SmeupSwitchWidget/onClientChange.md) &#8594; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -89,7 +90,7 @@ _read-only, inherited_
 
 
 
-##### [thumbColor](../smeup_widgets_smeup_switch_widget/SmeupSwitchWidget/thumbColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [thumbColor](../smeup_widgets_smeup_switch_widget/SmeupSwitchWidget/thumbColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -98,7 +99,7 @@ _read / write_
 
 
 
-##### [trackColor](../smeup_widgets_smeup_switch_widget/SmeupSwitchWidget/trackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [trackColor](../smeup_widgets_smeup_switch_widget/SmeupSwitchWidget/trackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -156,7 +157,7 @@ _inherited_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -175,7 +176,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -16,14 +17,14 @@
 
 ## Constructors
 
-[SmeupDrawerDataElement](../smeup_models_widgets_smeup_drawer_data_element/SmeupDrawerDataElement/SmeupDrawerDataElement.md) ([String](https://api.flutter.dev/flutter/dart-core/String-class.html) text, {[int](https://api.flutter.dev/flutter/dart-core/int-class.html) iconCode = 0, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize = 10, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html) align = Alignment.center, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) route, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) action, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) group = '', [int](https://api.flutter.dev/flutter/dart-core/int-class.html) groupIcon = 0, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) groupFontSize = 15})
+[SmeupDrawerDataElement](../smeup_models_widgets_smeup_drawer_data_element/SmeupDrawerDataElement/SmeupDrawerDataElement.md) ([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? text, {[int](https://api.flutter.dev/flutter/dart-core/int-class.html) iconCode = 0, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize = 10, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html) align = Alignment.center, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? route, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? action, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) group = '', [int](https://api.flutter.dev/flutter/dart-core/int-class.html) groupIcon = 0, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) groupFontSize = 15})
 
     
 
 
 ## Properties
 
-##### [action](../smeup_models_widgets_smeup_drawer_data_element/SmeupDrawerDataElement/action.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [action](../smeup_models_widgets_smeup_drawer_data_element/SmeupDrawerDataElement/action.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -95,7 +96,7 @@ _read / write_
 
 
 
-##### [route](../smeup_models_widgets_smeup_drawer_data_element/SmeupDrawerDataElement/route.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [route](../smeup_models_widgets_smeup_drawer_data_element/SmeupDrawerDataElement/route.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -113,7 +114,7 @@ _read-only, inherited_
 
 
 
-##### [text](../smeup_models_widgets_smeup_drawer_data_element/SmeupDrawerDataElement/text.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [text](../smeup_models_widgets_smeup_drawer_data_element/SmeupDrawerDataElement/text.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 

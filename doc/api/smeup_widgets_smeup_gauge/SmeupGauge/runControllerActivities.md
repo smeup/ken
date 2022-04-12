@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 runControllerActivities(SmeupModel model) {
-  SmeupGaugeModel m = model;
+  SmeupGaugeModel m = model as SmeupGaugeModel;
   id = m.id;
   type = m.type;
   title = m.title;
@@ -34,6 +35,7 @@ runControllerActivities(SmeupModel model) {
   maxColName = m.maxColName;
   minColName = m.minColName;
   warningColName = m.warningColName;
+  alertColName = m.alertColName;
 
   treatData(m);
 }

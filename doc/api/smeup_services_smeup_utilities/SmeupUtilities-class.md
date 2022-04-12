@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -78,7 +79,7 @@ _inherited_
 
 ## Static Methods
 
-##### [extractValueFromName](../smeup_services_smeup_utilities/SmeupUtilities/extractValueFromName.md)([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) field) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [extractValueFromName](../smeup_services_smeup_utilities/SmeupUtilities/extractValueFromName.md)([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) field) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -87,7 +88,7 @@ _inherited_
 
 
 
-##### [extractValueFromType](../smeup_services_smeup_utilities/SmeupUtilities/extractValueFromType.md)([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) fields, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) tipo, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) parametro) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [extractValueFromType](../smeup_services_smeup_utilities/SmeupUtilities/extractValueFromType.md)([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) fields, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) tipo, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) parametro) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -96,7 +97,7 @@ _inherited_
 
 
 
-##### [getAlignmentGeometry](../smeup_services_smeup_utilities/SmeupUtilities/getAlignmentGeometry.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) alignment) [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)
+##### [getAlignmentGeometry](../smeup_services_smeup_utilities/SmeupUtilities/getAlignmentGeometry.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? alignment) [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)?
 
 
 
@@ -105,7 +106,7 @@ _inherited_
 
 
 
-##### [getBool](../smeup_services_smeup_utilities/SmeupUtilities/getBool.md)(dynamic value) [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [getBool](../smeup_services_smeup_utilities/SmeupUtilities/getBool.md)(dynamic value) [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -114,7 +115,7 @@ _inherited_
 
 
 
-##### [getColorFromRGB](../smeup_services_smeup_utilities/SmeupUtilities/getColorFromRGB.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) color, {[double](https://api.flutter.dev/flutter/dart-core/double-class.html) opacity = 1.0}) [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [getColorFromRGB](../smeup_services_smeup_utilities/SmeupUtilities/getColorFromRGB.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? color, {[double](https://api.flutter.dev/flutter/dart-core/double-class.html) opacity = 1.0}) [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -132,7 +133,7 @@ _inherited_
 
 
 
-##### [getDouble](../smeup_services_smeup_utilities/SmeupUtilities/getDouble.md)(dynamic value) [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [getDouble](../smeup_services_smeup_utilities/SmeupUtilities/getDouble.md)(dynamic value) [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -141,7 +142,7 @@ _inherited_
 
 
 
-##### [getInt](../smeup_services_smeup_utilities/SmeupUtilities/getInt.md)(dynamic value) [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
+##### [getInt](../smeup_services_smeup_utilities/SmeupUtilities/getInt.md)(dynamic value) [int](https://api.flutter.dev/flutter/dart-core/int-class.html)?
 
 
 
@@ -150,7 +151,7 @@ _inherited_
 
 
 
-##### [getKeyboard](../smeup_services_smeup_utilities/SmeupUtilities/getKeyboard.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) keyboard) [TextInputType](https://api.flutter.dev/flutter/services/TextInputType-class.html)
+##### [getKeyboard](../smeup_services_smeup_utilities/SmeupUtilities/getKeyboard.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? keyboard) [TextInputType](https://api.flutter.dev/flutter/services/TextInputType-class.html)
 
 
 
@@ -159,7 +160,7 @@ _inherited_
 
 
 
-##### [getMainAxisAlignment](../smeup_services_smeup_utilities/SmeupUtilities/getMainAxisAlignment.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) position) [MainAxisAlignment](https://api.flutter.dev/flutter/rendering/MainAxisAlignment.html)
+##### [getMainAxisAlignment](../smeup_services_smeup_utilities/SmeupUtilities/getMainAxisAlignment.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? position) [MainAxisAlignment](https://api.flutter.dev/flutter/rendering/MainAxisAlignment.html)
 
 
 
@@ -168,7 +169,7 @@ _inherited_
 
 
 
-##### [getPadding](../smeup_services_smeup_utilities/SmeupUtilities/getPadding.md)(dynamic value) [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)
+##### [getPadding](../smeup_services_smeup_utilities/SmeupUtilities/getPadding.md)(dynamic value) [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)?
 
 
 
@@ -186,7 +187,7 @@ _inherited_
 
 
 
-##### [getWidgetId](../smeup_services_smeup_utilities/SmeupUtilities/getWidgetId.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) type, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) id) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [getWidgetId](../smeup_services_smeup_utilities/SmeupUtilities/getWidgetId.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

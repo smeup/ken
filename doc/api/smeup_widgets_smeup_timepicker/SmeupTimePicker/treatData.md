@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -29,7 +30,7 @@ dynamic treatData(SmeupModel model) {
   // change data format
   final workData = formatDataFields(model);
 
-  String display;
+  String? display;
   DateTime value;
 
   final now = DateTime.now();

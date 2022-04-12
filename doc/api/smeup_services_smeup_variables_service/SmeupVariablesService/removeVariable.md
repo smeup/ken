@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 void removeVariable
-([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key, {[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey})
+([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key, {[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey})
 
 
 
@@ -23,7 +24,7 @@ void removeVariable
 ## Implementation
 
 ```dart
-static void removeVariable(String key, {GlobalKey<FormState> formKey}) {
+static void removeVariable(String key, {GlobalKey<FormState>? formKey}) {
   if (formKey == null) {
     _globalVariables.remove(key);
 

@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[LogType](../../smeup_services_smeup_log_service/LogType.md) logLevel
+[LogType](../../smeup_services_smeup_log_service/LogType.md)? logLevel
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-static LogType logLevel;
+static LogType? logLevel;
 
 
 ```

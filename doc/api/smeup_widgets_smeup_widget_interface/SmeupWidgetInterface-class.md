@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -88,7 +89,7 @@ _inherited_
 
 
 
-##### [runControllerActivities](../smeup_widgets_smeup_widget_interface/SmeupWidgetInterface/runControllerActivities.md)([SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md) model) void
+##### [runControllerActivities](../smeup_widgets_smeup_widget_interface/SmeupWidgetInterface/runControllerActivities.md)([SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md) model) dynamic
 
 
 

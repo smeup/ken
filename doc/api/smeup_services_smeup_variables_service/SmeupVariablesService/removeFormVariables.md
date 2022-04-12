@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,14 +25,12 @@ void removeFormVariables
 
 ```dart
 static void removeFormVariables(GlobalKey<FormState> formKey) {
-  if (formKey != null) {
-    SmeupVariablesService._formVariables.removeWhere((key, value) =>
-        key.toString().startsWith(formKey.hashCode.toString()));
+  SmeupVariablesService._formVariables.removeWhere(
+      (key, value) => key.toString().startsWith(formKey.hashCode.toString()));
 
-    SmeupLogService.writeDebugMessage(
-        "Removed all form variables : ${formKey.hashCode}",
-        logType: LogType.debug);
-  }
+  SmeupLogService.writeDebugMessage(
+      "Removed all form variables : ${formKey.hashCode}",
+      logType: LogType.debug);
 }
 ```
 

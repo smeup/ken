@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -34,18 +35,18 @@
 
 ## Constructors
 
-[SmeupImage](../smeup_widgets_smeup_image/SmeupImage/SmeupImage.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) data, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type = 'IMG', [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = SmeupImageModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = SmeupImageModel.defaultHeight, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = SmeupImageModel.defaultPadding, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) isRemote = SmeupImageModel.defaultIsRemote, dynamic title = ''})
+[SmeupImage](../smeup_widgets_smeup_image/SmeupImage/SmeupImage.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>? scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? data, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type = 'IMG', [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? width = SmeupImageModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? height = SmeupImageModel.defaultHeight, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)? padding = SmeupImageModel.defaultPadding, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? isRemote = SmeupImageModel.defaultIsRemote, dynamic title = ''})
 
     
 
-[SmeupImage.withController](../smeup_widgets_smeup_image/SmeupImage/SmeupImage.withController.md) ([SmeupImageModel](../smeup_models_widgets_smeup_image_model/SmeupImageModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupImage.withController](../smeup_widgets_smeup_image/SmeupImage/SmeupImage.withController.md) ([SmeupImageModel](../smeup_models_widgets_smeup_image_model/SmeupImageModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>? scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey)
 
     
 
 
 ## Properties
 
-##### [data](../smeup_widgets_smeup_image/SmeupImage/data.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [data](../smeup_widgets_smeup_image/SmeupImage/data.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -54,7 +55,7 @@ _read / write_
 
 
 
-##### [formKey](../smeup_widgets_smeup_image/SmeupImage/formKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_image/SmeupImage/formKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -72,7 +73,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [height](../smeup_widgets_smeup_image/SmeupImage/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [height](../smeup_widgets_smeup_image/SmeupImage/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -81,7 +82,7 @@ _read / write_
 
 
 
-##### [id](../smeup_widgets_smeup_image/SmeupImage/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_image/SmeupImage/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -90,7 +91,7 @@ _read / write_
 
 
 
-##### [isRemote](../smeup_widgets_smeup_image/SmeupImage/isRemote.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [isRemote](../smeup_widgets_smeup_image/SmeupImage/isRemote.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -99,7 +100,7 @@ _read / write_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -108,7 +109,7 @@ _final, inherited_
 
 
 
-##### [model](../smeup_widgets_smeup_image/SmeupImage/model.md) &#8596; [SmeupImageModel](../smeup_models_widgets_smeup_image_model/SmeupImageModel-class.md)
+##### [model](../smeup_widgets_smeup_image/SmeupImage/model.md) &#8596; [SmeupImageModel](../smeup_models_widgets_smeup_image_model/SmeupImageModel-class.md)?
 
 
 
@@ -117,7 +118,7 @@ _read / write_
 
 
 
-##### [padding](../smeup_widgets_smeup_image/SmeupImage/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)
+##### [padding](../smeup_widgets_smeup_image/SmeupImage/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)?
 
 
 
@@ -135,7 +136,7 @@ _read-only, inherited_
 
 
 
-##### [scaffoldKey](../smeup_widgets_smeup_image/SmeupImage/scaffoldKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+##### [scaffoldKey](../smeup_widgets_smeup_image/SmeupImage/scaffoldKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>?
 
 
 
@@ -144,7 +145,7 @@ _final_
 
 
 
-##### [title](../smeup_widgets_smeup_image/SmeupImage/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_widgets_smeup_image/SmeupImage/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -153,7 +154,7 @@ _read / write_
 
 
 
-##### [type](../smeup_widgets_smeup_image/SmeupImage/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_widgets_smeup_image/SmeupImage/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -162,7 +163,7 @@ _read / write_
 
 
 
-##### [width](../smeup_widgets_smeup_image/SmeupImage/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [width](../smeup_widgets_smeup_image/SmeupImage/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -239,7 +240,7 @@ _override_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -258,7 +259,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

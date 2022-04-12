@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
-[Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) transform
-([SmeupFun](../../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun, dynamic data)
+[Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)? transform
+([Fun](../../smeup_models_fun/Fun-class.md) smeupFun, dynamic data)
 
 
 
@@ -23,7 +24,9 @@
 ## Implementation
 
 ```dart
-Map transform(SmeupFun smeupFun, dynamic data) {}
+Map? transform(Fun smeupFun, dynamic data) {
+  return null;
+}
 ```
 
 

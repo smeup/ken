@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -56,13 +57,13 @@ void initState() {
   _data = widget.data;
   _firstWork = widget.initialFirstWork;
   _lastWork = widget.initialLastWork;
-  startFunDate = SmeupCalendarModel.getStartFunDate(widget.initialDate);
-  endFunDate = SmeupCalendarModel.getEndFunDate(widget.initialDate);
-  _events = Map<DateTime, List<SmeupCalentarEventModel>>();
+  startFunDate = SmeupCalendarModel.getStartFunDate(widget.initialDate!);
+  endFunDate = SmeupCalendarModel.getEndFunDate(widget.initialDate!);
+  _events = Map<DateTime?, List<SmeupCalentarEventModel>>();
   _focusDay = widget.initialDate ?? DateTime.now();
   _selectedDay = widget.initialDate ?? DateTime.now();
   _calendarFormat =
-      widget.showAsWeek ? CalendarFormat.week : CalendarFormat.month;
+      widget.showAsWeek! ? CalendarFormat.week : CalendarFormat.month;
 }
 ```
 

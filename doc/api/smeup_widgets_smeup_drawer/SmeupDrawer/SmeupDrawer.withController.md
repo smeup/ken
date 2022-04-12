@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -19,11 +20,11 @@ SmeupDrawer.withController([SmeupDrawerModel](../../smeup_models_widgets_smeup_d
 
 ```dart
 SmeupDrawer.withController(
-  this.model,
+  SmeupDrawerModel this.model,
   this.scaffoldKey,
   this.formKey,
 ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-  runControllerActivities(model);
+  runControllerActivities(model!);
 }
 ```
 

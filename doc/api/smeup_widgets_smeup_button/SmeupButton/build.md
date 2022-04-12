@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -61,13 +62,13 @@ and</li>
 Widget build(BuildContext context) {
   var elevatedButtonStyle = _getButtonStyle();
 
-  double buttonHeight = height;
-  double buttonWidth = width;
-  if (model != null && model.parent != null) {
+  double? buttonHeight = height;
+  double? buttonWidth = width;
+  if (model != null && model!.parent != null) {
     if (buttonHeight == 0)
-      buttonHeight = (model.parent as SmeupSectionModel).height;
+      buttonHeight = (model!.parent as SmeupSectionModel).height;
     if (buttonWidth == 0)
-      buttonWidth = (model.parent as SmeupSectionModel).width;
+      buttonWidth = (model!.parent as SmeupSectionModel).width;
   } else {
     if (buttonHeight == 0) buttonHeight = MediaQuery.of(context).size.height;
     if (buttonWidth == 0) buttonWidth = MediaQuery.of(context).size.width;

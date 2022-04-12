@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -34,18 +35,18 @@
 
 ## Constructors
 
-[SmeupCarousel](../smeup_widgets_smeup_carousel/SmeupCarousel/SmeupCarousel.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)> data, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type = 'CAU', [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = SmeupCarouselModel.defaultHeight, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) autoPlay = false, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) title = ''})
+[SmeupCarousel](../smeup_widgets_smeup_carousel/SmeupCarousel/SmeupCarousel.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)>? data, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type = 'CAU', [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? height = SmeupCarouselModel.defaultHeight, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? autoPlay = false, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? title = ''})
 
     
 
-[SmeupCarousel.withController](../smeup_widgets_smeup_carousel/SmeupCarousel/SmeupCarousel.withController.md) ([SmeupCarouselModel](../smeup_models_widgets_smeup_carousel_model/SmeupCarouselModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupCarousel.withController](../smeup_widgets_smeup_carousel/SmeupCarousel/SmeupCarousel.withController.md) ([SmeupCarouselModel](../smeup_models_widgets_smeup_carousel_model/SmeupCarouselModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey)
 
     
 
 
 ## Properties
 
-##### [autoPlay](../smeup_widgets_smeup_carousel/SmeupCarousel/autoPlay.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [autoPlay](../smeup_widgets_smeup_carousel/SmeupCarousel/autoPlay.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -54,7 +55,7 @@ _read / write_
 
 
 
-##### [data](../smeup_widgets_smeup_carousel/SmeupCarousel/data.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)>
+##### [data](../smeup_widgets_smeup_carousel/SmeupCarousel/data.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)>?
 
 
 
@@ -63,7 +64,7 @@ _read / write_
 
 
 
-##### [formKey](../smeup_widgets_smeup_carousel/SmeupCarousel/formKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_carousel/SmeupCarousel/formKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -81,7 +82,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [height](../smeup_widgets_smeup_carousel/SmeupCarousel/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [height](../smeup_widgets_smeup_carousel/SmeupCarousel/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -90,7 +91,7 @@ _read / write_
 
 
 
-##### [id](../smeup_widgets_smeup_carousel/SmeupCarousel/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_carousel/SmeupCarousel/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -99,7 +100,7 @@ _read / write_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -108,7 +109,7 @@ _final, inherited_
 
 
 
-##### [model](../smeup_widgets_smeup_carousel/SmeupCarousel/model.md) &#8596; [SmeupCarouselModel](../smeup_models_widgets_smeup_carousel_model/SmeupCarouselModel-class.md)
+##### [model](../smeup_widgets_smeup_carousel/SmeupCarousel/model.md) &#8596; [SmeupCarouselModel](../smeup_models_widgets_smeup_carousel_model/SmeupCarouselModel-class.md)?
 
 
 
@@ -135,7 +136,7 @@ _final_
 
 
 
-##### [title](../smeup_widgets_smeup_carousel/SmeupCarousel/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_widgets_smeup_carousel/SmeupCarousel/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -144,7 +145,7 @@ _read / write_
 
 
 
-##### [type](../smeup_widgets_smeup_carousel/SmeupCarousel/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_widgets_smeup_carousel/SmeupCarousel/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -221,7 +222,7 @@ _override_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -240,7 +241,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

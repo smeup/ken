@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,14 +25,14 @@ dynamic setDefaults
 
 ```dart
 static setDefaults(dynamic obj) {
-  AppBarTheme appBarTheme = SmeupConfigurationService.getTheme().appBarTheme;
+  AppBarTheme appBarTheme = SmeupConfigurationService.getTheme()!.appBarTheme;
 
-  TextStyle titleStyle = appBarTheme.titleTextStyle;
+  TextStyle titleStyle = appBarTheme.titleTextStyle!;
   defaultTitleFontSize = titleStyle.fontSize;
   defaultTitleFontColor = titleStyle.color;
   defaultTitleFontBold = titleStyle.fontWeight == FontWeight.bold;
 
-  TextStyle elementStyle = appBarTheme.toolbarTextStyle;
+  TextStyle elementStyle = appBarTheme.toolbarTextStyle!;
   defaultElementFontSize = elementStyle.fontSize;
   defaultElementFontColor = elementStyle.color;
   defaultElementFontBold = elementStyle.fontWeight == FontWeight.bold;

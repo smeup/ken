@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[SmeupDatePickerModel](../../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel-class.md) model
+[SmeupDatePickerModel](../../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel-class.md)? model
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-SmeupDatePickerModel model;
+SmeupDatePickerModel? model;
 
 
 ```

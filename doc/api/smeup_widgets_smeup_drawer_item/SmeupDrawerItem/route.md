@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[String](https://api.flutter.dev/flutter/dart-core/String-class.html) route
+[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? route
   
 _final_
 
@@ -20,7 +21,7 @@ _final_
 ## Implementation
 
 ```dart
-final String route;
+final String? route;
 
 
 ```

@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 runControllerActivities(SmeupModel model) {
-  SmeupListBoxModel m = model;
+  SmeupListBoxModel m = model as SmeupListBoxModel;
   id = m.id;
   type = m.type;
   layout = m.layout;
@@ -55,13 +56,9 @@ runControllerActivities(SmeupModel model) {
   captionFontSize = m.captionFontSize;
   captionFontColor = m.captionFontColor;
 
-  dynamic deleteDynamism;
-  if (m.dynamisms != null)
-    deleteDynamism = (m.dynamisms as List<dynamic>).firstWhere(
-        (element) => element['event'] == 'delete',
-        orElse: () => null);
+  int no = m.dynamisms.where((element) => element.event == 'delete').length;
 
-  if (deleteDynamism != null) {
+  if (no > 0) {
     dismissEnabled = true;
   } else {
     dismissEnabled = false;

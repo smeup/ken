@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,7 +25,7 @@
 
 ```dart
 String getLocalString(stringCode) {
-  var localString = _localizedValues[locale.languageCode][stringCode];
+  var localString = _localizedValues[locale.languageCode]![stringCode];
 
   if (localString != null) {
     return localString;

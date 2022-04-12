@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -77,7 +78,7 @@ static setMemory(
         break;
 
       case 'zones':
-        List zones = jsonDecode(jsonData['result']);
+        List? zones = jsonDecode(jsonData['result']);
         if (zones == null)
           zones = [
             {"id": property}

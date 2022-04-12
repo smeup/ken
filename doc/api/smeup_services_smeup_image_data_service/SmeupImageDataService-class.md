@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@
 
 ## Constructors
 
-[SmeupImageDataService](../smeup_services_smeup_image_data_service/SmeupImageDataService/SmeupImageDataService.md) ({[SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer})
+[SmeupImageDataService](../smeup_services_smeup_image_data_service/SmeupImageDataService/SmeupImageDataService.md) ({[SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)? transformer})
 
     
 
@@ -51,7 +52,7 @@ _read-only, inherited_
 
 
 
-##### [transformer](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface/transformer.md) &#8596; [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)
+##### [transformer](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface/transformer.md) &#8596; [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)?
 
 
 
@@ -63,7 +64,7 @@ _read / write, inherited_
 
 ## Methods
 
-##### [getTransformer](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface/getTransformer.md)() [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)
+##### [getTransformer](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface/getTransformer.md)() [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)?
 
 
 
@@ -72,7 +73,7 @@ _inherited_
 
 
 
-##### [invoke](../smeup_services_smeup_image_data_service/SmeupImageDataService/invoke.md)([SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun, {[BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context}) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
+##### [invoke](../smeup_services_smeup_image_data_service/SmeupImageDataService/invoke.md)([Fun](../smeup_models_fun/Fun-class.md) smeupFun, {[BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)? context}) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
 
 
 

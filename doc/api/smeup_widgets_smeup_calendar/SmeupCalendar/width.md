@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[double](https://api.flutter.dev/flutter/dart-core/double-class.html) width
+[double](https://api.flutter.dev/flutter/dart-core/double-class.html)? width
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-double width;
+double? width;
 
 
 ```

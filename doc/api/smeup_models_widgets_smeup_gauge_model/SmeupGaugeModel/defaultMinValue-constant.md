@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[int](https://api.flutter.dev/flutter/dart-core/int-class.html) const defaultMinValue
+[double](https://api.flutter.dev/flutter/dart-core/double-class.html) const defaultMinValue
   
 
 
@@ -20,7 +21,7 @@
 ## Implementation
 
 ```dart
-static const int defaultMinValue = 0;
+static const double defaultMinValue = 0;
 
 
 ```

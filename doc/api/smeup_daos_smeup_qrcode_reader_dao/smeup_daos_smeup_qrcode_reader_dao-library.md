@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -29,7 +30,7 @@
 
 ## Functions
 
-##### [encodedText](../smeup_daos_smeup_qrcode_reader_dao/encodedText.md)([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) data) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [encodedText](../smeup_daos_smeup_qrcode_reader_dao/encodedText.md)([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) data) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 

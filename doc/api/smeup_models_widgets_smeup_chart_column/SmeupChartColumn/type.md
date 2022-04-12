@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[ColumnType](../../smeup_models_widgets_smeup_chart_column/ColumnType.md) type
+[ColumnType](../../smeup_models_widgets_smeup_chart_column/ColumnType.md)? type
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-ColumnType type;
+ColumnType? type;
 
 
 ```

@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -49,7 +50,7 @@ _@[protected](https://pub.dev/documentation/meta/1.7.0/meta/protected-constant.h
 
 
 
-##### [isOnline](../smeup_models_notifiers_smeup_cache_notifier/SmeupCacheNotifier/isOnline.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [isOnline](../smeup_models_notifiers_smeup_cache_notifier/SmeupCacheNotifier/isOnline.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 

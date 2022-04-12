@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 [ButtonStyle](https://api.flutter.dev/flutter/material/ButtonStyle-class.html) buttonStyle

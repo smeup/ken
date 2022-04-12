@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showRulesIcon
+[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? showRulesIcon
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-bool showRulesIcon;
+bool? showRulesIcon;
 
 
 ```

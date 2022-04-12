@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 runControllerActivities(SmeupModel model) {
-  SmeupTextAutocompleteModel m = model;
+  SmeupTextAutocompleteModel m = model as SmeupTextAutocompleteModel;
   id = m.id;
   type = m.type;
   backColor = m.backColor;

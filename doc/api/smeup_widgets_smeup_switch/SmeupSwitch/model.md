@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[SmeupSwitchModel](../../smeup_models_widgets_smeup_switch_model/SmeupSwitchModel-class.md) model
+[SmeupSwitchModel](../../smeup_models_widgets_smeup_switch_model/SmeupSwitchModel-class.md)? model
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-SmeupSwitchModel model;
+SmeupSwitchModel? model;
 
 
 ```

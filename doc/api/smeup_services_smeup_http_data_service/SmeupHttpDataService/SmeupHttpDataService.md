@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-SmeupHttpDataService({[SmeupDataTransformerInterface](../../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer})
+SmeupHttpDataService({[SmeupDataTransformerInterface](../../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)? transformer})
 
 
 
@@ -18,7 +19,7 @@ SmeupHttpDataService({[SmeupDataTransformerInterface](../../smeup_services_trans
 ## Implementation
 
 ```dart
-SmeupHttpDataService({SmeupDataTransformerInterface transformer})
+SmeupHttpDataService({SmeupDataTransformerInterface? transformer})
     : super(transformer) {
   BaseOptions options = new BaseOptions(
     connectTimeout: DEFAULD_TIMEOUT,

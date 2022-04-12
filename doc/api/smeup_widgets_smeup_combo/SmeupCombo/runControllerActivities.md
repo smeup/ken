@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 runControllerActivities(SmeupModel model) {
-  SmeupComboModel m = model;
+  SmeupComboModel m = model as SmeupComboModel;
   id = m.id;
   type = m.type;
   title = m.title;

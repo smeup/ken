@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -78,7 +79,7 @@ _inherited_
 
 ## Static Methods
 
-##### [dumpVariables](../smeup_services_smeup_variables_service/SmeupVariablesService/dumpVariables.md)({[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey}) void
+##### [dumpVariables](../smeup_services_smeup_variables_service/SmeupVariablesService/dumpVariables.md)({[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey}) void
 
 
 
@@ -87,7 +88,7 @@ _inherited_
 
 
 
-##### [getVariable](../smeup_services_smeup_variables_service/SmeupVariablesService/getVariable.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key, {[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey}) dynamic
+##### [getVariable](../smeup_services_smeup_variables_service/SmeupVariablesService/getVariable.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? key, {[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey}) dynamic
 
 
 
@@ -96,7 +97,7 @@ _inherited_
 
 
 
-##### [getVariables](../smeup_services_smeup_variables_service/SmeupVariablesService/getVariables.md)({[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey}) [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)
+##### [getVariables](../smeup_services_smeup_variables_service/SmeupVariablesService/getVariables.md)({[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey}) [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)
 
 
 
@@ -114,7 +115,7 @@ _inherited_
 
 
 
-##### [removeVariable](../smeup_services_smeup_variables_service/SmeupVariablesService/removeVariable.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key, {[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey}) void
+##### [removeVariable](../smeup_services_smeup_variables_service/SmeupVariablesService/removeVariable.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key, {[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey}) void
 
 
 
@@ -123,7 +124,7 @@ _inherited_
 
 
 
-##### [setVariable](../smeup_services_smeup_variables_service/SmeupVariablesService/setVariable.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key, dynamic value, {[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey}) dynamic
+##### [setVariable](../smeup_services_smeup_variables_service/SmeupVariablesService/setVariable.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? key, dynamic value, {[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey}) dynamic
 
 
 

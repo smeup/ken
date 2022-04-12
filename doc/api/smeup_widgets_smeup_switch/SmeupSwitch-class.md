@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -34,18 +35,18 @@
 
 ## Constructors
 
-[SmeupSwitch](../smeup_widgets_smeup_switch/SmeupSwitch/SmeupSwitch.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type = 'FLD', [double](https://api.flutter.dev/flutter/dart-core/double-class.html) captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionFontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionBackColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) captionFontBold, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) thumbColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) trackColor, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) title = '', [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) onClientChange, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) data = false, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) text = '', [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = SmeupSwitchModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = SmeupSwitchModel.defaultHeight, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = SmeupSwitchModel.defaultPadding})
+[SmeupSwitch](../smeup_widgets_smeup_switch/SmeupSwitch/SmeupSwitch.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type = 'FLD', [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionFontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionBackColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? captionFontBold, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? thumbColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? trackColor, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? title = '', [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? onClientChange, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? data = false, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? text = '', [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? width = SmeupSwitchModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? height = SmeupSwitchModel.defaultHeight, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)? padding = SmeupSwitchModel.defaultPadding})
 
     
 
-[SmeupSwitch.withController](../smeup_widgets_smeup_switch/SmeupSwitch/SmeupSwitch.withController.md) ([SmeupSwitchModel](../smeup_models_widgets_smeup_switch_model/SmeupSwitchModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupSwitch.withController](../smeup_widgets_smeup_switch/SmeupSwitch/SmeupSwitch.withController.md) ([SmeupSwitchModel](../smeup_models_widgets_smeup_switch_model/SmeupSwitchModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey)
 
     
 
 
 ## Properties
 
-##### [captionBackColor](../smeup_widgets_smeup_switch/SmeupSwitch/captionBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [captionBackColor](../smeup_widgets_smeup_switch/SmeupSwitch/captionBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -54,7 +55,7 @@ _read / write_
 
 
 
-##### [captionFontBold](../smeup_widgets_smeup_switch/SmeupSwitch/captionFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [captionFontBold](../smeup_widgets_smeup_switch/SmeupSwitch/captionFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -63,7 +64,7 @@ _read / write_
 
 
 
-##### [captionFontColor](../smeup_widgets_smeup_switch/SmeupSwitch/captionFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [captionFontColor](../smeup_widgets_smeup_switch/SmeupSwitch/captionFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -72,7 +73,7 @@ _read / write_
 
 
 
-##### [captionFontSize](../smeup_widgets_smeup_switch/SmeupSwitch/captionFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [captionFontSize](../smeup_widgets_smeup_switch/SmeupSwitch/captionFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -81,7 +82,7 @@ _read / write_
 
 
 
-##### [data](../smeup_widgets_smeup_switch/SmeupSwitch/data.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [data](../smeup_widgets_smeup_switch/SmeupSwitch/data.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -90,7 +91,7 @@ _read / write_
 
 
 
-##### [formKey](../smeup_widgets_smeup_switch/SmeupSwitch/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_switch/SmeupSwitch/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -108,7 +109,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [height](../smeup_widgets_smeup_switch/SmeupSwitch/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [height](../smeup_widgets_smeup_switch/SmeupSwitch/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -117,7 +118,7 @@ _read / write_
 
 
 
-##### [id](../smeup_widgets_smeup_switch/SmeupSwitch/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_switch/SmeupSwitch/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -126,7 +127,7 @@ _read / write_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -135,7 +136,7 @@ _final, inherited_
 
 
 
-##### [model](../smeup_widgets_smeup_switch/SmeupSwitch/model.md) &#8596; [SmeupSwitchModel](../smeup_models_widgets_smeup_switch_model/SmeupSwitchModel-class.md)
+##### [model](../smeup_widgets_smeup_switch/SmeupSwitch/model.md) &#8596; [SmeupSwitchModel](../smeup_models_widgets_smeup_switch_model/SmeupSwitchModel-class.md)?
 
 
 
@@ -144,7 +145,7 @@ _read / write_
 
 
 
-##### [onClientChange](../smeup_widgets_smeup_switch/SmeupSwitch/onClientChange.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [onClientChange](../smeup_widgets_smeup_switch/SmeupSwitch/onClientChange.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -153,7 +154,7 @@ _read / write_
 
 
 
-##### [padding](../smeup_widgets_smeup_switch/SmeupSwitch/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)
+##### [padding](../smeup_widgets_smeup_switch/SmeupSwitch/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)?
 
 
 
@@ -180,7 +181,7 @@ _read / write_
 
 
 
-##### [text](../smeup_widgets_smeup_switch/SmeupSwitch/text.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [text](../smeup_widgets_smeup_switch/SmeupSwitch/text.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -189,7 +190,7 @@ _read / write_
 
 
 
-##### [thumbColor](../smeup_widgets_smeup_switch/SmeupSwitch/thumbColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [thumbColor](../smeup_widgets_smeup_switch/SmeupSwitch/thumbColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -198,7 +199,7 @@ _read / write_
 
 
 
-##### [title](../smeup_widgets_smeup_switch/SmeupSwitch/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_widgets_smeup_switch/SmeupSwitch/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -207,7 +208,7 @@ _read / write_
 
 
 
-##### [trackColor](../smeup_widgets_smeup_switch/SmeupSwitch/trackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [trackColor](../smeup_widgets_smeup_switch/SmeupSwitch/trackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -216,7 +217,7 @@ _read / write_
 
 
 
-##### [type](../smeup_widgets_smeup_switch/SmeupSwitch/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_widgets_smeup_switch/SmeupSwitch/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -225,7 +226,7 @@ _read / write_
 
 
 
-##### [width](../smeup_widgets_smeup_switch/SmeupSwitch/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [width](../smeup_widgets_smeup_switch/SmeupSwitch/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -302,7 +303,7 @@ _override_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -321,7 +322,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

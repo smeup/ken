@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -16,14 +17,14 @@
 
 ## Constructors
 
-[SmeupInputPanelValue](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelValue/SmeupInputPanelValue.md) ({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) code = "", [String](https://api.flutter.dev/flutter/dart-core/String-class.html) descr = ""})
+[SmeupInputPanelValue](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelValue/SmeupInputPanelValue.md) ({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? code = "", [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? descr = ""})
 
     
 
 
 ## Properties
 
-##### [code](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelValue/code.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [code](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelValue/code.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -32,7 +33,7 @@ _read / write_
 
 
 
-##### [descr](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelValue/descr.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [descr](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelValue/descr.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -83,7 +84,7 @@ _override_
 
 ## Operators
 
-##### [operator ==](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelValue/operator_equals.md)(dynamic o) [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [operator ==](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelValue/operator_equals.md)([Object](https://api.flutter.dev/flutter/dart-core/Object-class.html) o) [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
 
 
 

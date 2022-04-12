@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-SmeupDynamicScreen({[SmeupFun](../../smeup_models_smeup_fun/SmeupFun-class.md) initialFun, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) backButtonVisible = SmeupScreenModel.defaultBackButtonVisible, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) isDialog = SmeupScreenModel.defaultIsDialog})
+SmeupDynamicScreen({[Fun](../../smeup_models_fun/Fun-class.md)? initialFun, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) backButtonVisible = SmeupScreenModel.defaultBackButtonVisible, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) isDialog = SmeupScreenModel.defaultIsDialog})
 
 
 

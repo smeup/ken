@@ -6,13 +6,14 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 - @[override](https://api.flutter.dev/flutter/dart-core/override-constant.html)
 
 [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)> invoke
-([SmeupFun](../../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun)
+([Fun](../../smeup_models_fun/Fun-class.md) smeupFun)
 
 _override_
 
@@ -25,19 +26,19 @@ _override_
 
 ```dart
 @override
-Future<SmeupServiceResponse> invoke(SmeupFun smeupFun) async {
+Future<SmeupServiceResponse> invoke(Fun smeupFun) async {
   try {
     dynamic data;
-    Response response;
+    Response? response;
     String url;
     String contentType;
 
     url = '${SmeupConfigurationService.getDefaultServiceEndpoint()}/jfun';
     contentType = 'application/json';
-    data = smeupFun.fun;
+    data = smeupFun.getJson();
 
     SmeupLogService.writeDebugMessage(
-        '*** http request \'SmeupDefaultDataService\': ${jsonEncode(data)}');
+        '*** http request \'SmeupDefaultDataService\': $data');
 
     response = await invokeDio(
         url: url,
@@ -49,13 +50,13 @@ Future<SmeupServiceResponse> invoke(SmeupFun smeupFun) async {
 
     SmeupDataService.writeResponseResult(response, 'SmeupDefaultDataService');
 
-    bool isValid = SmeupDataService.isValid(response.statusCode);
+    bool isValid = SmeupDataService.isValid(response!.statusCode!);
 
     dynamic responseData;
 
 // Apply transformation to service response (only on success)
     if (isValid && getTransformer() is NullTransformer == false) {
-      responseData = getTransformer().transform(smeupFun, response.data);
+      responseData = getTransformer()!.transform(smeupFun, response.data);
     } else {
       final message =
           'SmeupDefaultDataService: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}';
@@ -67,7 +68,7 @@ Future<SmeupServiceResponse> invoke(SmeupFun smeupFun) async {
         Response(
             data: responseData,
             statusCode: response.statusCode,
-            requestOptions: null));
+            requestOptions: RequestOptions(path: '')));
   } catch (e) {
     final message =
         'SmeupDefaultDataService: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}: $e';

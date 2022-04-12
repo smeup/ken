@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-SmeupQRCodeReader([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type = 'QRC', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) data, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) padding = SmeupQRCodeReaderModel.defaultPadding, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) size = SmeupQRCodeReaderModel.defaultSize, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) maxReads = SmeupQRCodeReaderModel.defaultMaxReads, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) delayInMillis = SmeupQRCodeReaderModel.defaultDealyInMillis, dynamic title = ''})
+SmeupQRCodeReader([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type = 'QRC', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? data, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? padding = SmeupQRCodeReaderModel.defaultPadding, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? size = SmeupQRCodeReaderModel.defaultSize, [int](https://api.flutter.dev/flutter/dart-core/int-class.html)? maxReads = SmeupQRCodeReaderModel.defaultMaxReads, [int](https://api.flutter.dev/flutter/dart-core/int-class.html)? delayInMillis = SmeupQRCodeReaderModel.defaultDealyInMillis, dynamic title = ''})
 
 
 

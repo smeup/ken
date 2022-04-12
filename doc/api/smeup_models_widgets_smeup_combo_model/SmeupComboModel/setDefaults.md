@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,19 +25,19 @@ dynamic setDefaults
 
 ```dart
 static setDefaults(dynamic obj) {
-  var textStyle = SmeupConfigurationService.getTheme().textTheme.bodyText1;
+  var textStyle = SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
   defaultFontBold = textStyle.fontWeight == FontWeight.bold;
   defaultFontSize = textStyle.fontSize;
   defaultFontColor = textStyle.color;
   defaultBackColor = textStyle.backgroundColor;
 
-  var captionStyle = SmeupConfigurationService.getTheme().textTheme.caption;
+  var captionStyle = SmeupConfigurationService.getTheme()!.textTheme.caption!;
   defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
   defaultCaptionFontSize = captionStyle.fontSize;
   defaultCaptionFontColor = captionStyle.color;
   defaultCaptionBackColor = captionStyle.backgroundColor;
 
-  var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
+  var iconTheme = SmeupConfigurationService.getTheme()!.iconTheme;
   defaultIconSize = iconTheme.size;
   defaultIconColor = textStyle.color;
   //iconTheme.color;

@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 runControllerActivities(SmeupModel model) {
-  SmeupCalendarModel m = model;
+  SmeupCalendarModel m = model as SmeupCalendarModel;
   eventFontSize = m.eventFontSize;
   titleFontSize = m.titleFontSize;
   dayFontSize = m.dayFontSize;

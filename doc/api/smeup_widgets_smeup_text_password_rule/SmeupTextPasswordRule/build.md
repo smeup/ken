@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -62,14 +63,14 @@ Widget build(BuildContext context) {
   return Container(
       child: Row(
     children: [
-      if (showRulesIcon)
+      if (showRulesIcon!)
         Icon(
           icon,
           color: iconTheme.color,
           size: iconTheme.size,
         ),
       Text(
-        text,
+        text!,
         style: captionStyle.copyWith(color: color),
       )
     ],

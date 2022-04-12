@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -23,7 +24,7 @@
 
 ## Properties
 
-##### [defaultServiceEndpoint](../smeup_models_external_configuration_model/ExternalConfigurationModel/defaultServiceEndpoint.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [defaultServiceEndpoint](../smeup_models_external_configuration_model/ExternalConfigurationModel/defaultServiceEndpoint.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -32,7 +33,7 @@ _read / write_
 
 
 
-##### [defaultServicePassword](../smeup_models_external_configuration_model/ExternalConfigurationModel/defaultServicePassword.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [defaultServicePassword](../smeup_models_external_configuration_model/ExternalConfigurationModel/defaultServicePassword.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -41,7 +42,7 @@ _read / write_
 
 
 
-##### [defaultServiceUserName](../smeup_models_external_configuration_model/ExternalConfigurationModel/defaultServiceUserName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [defaultServiceUserName](../smeup_models_external_configuration_model/ExternalConfigurationModel/defaultServiceUserName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -50,7 +51,7 @@ _read / write_
 
 
 
-##### [description](../smeup_models_external_configuration_model/ExternalConfigurationModel/description.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [description](../smeup_models_external_configuration_model/ExternalConfigurationModel/description.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -59,7 +60,7 @@ _read / write_
 
 
 
-##### [enableCheckDataService](../smeup_models_external_configuration_model/ExternalConfigurationModel/enableCheckDataService.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [enableCheckDataService](../smeup_models_external_configuration_model/ExternalConfigurationModel/enableCheckDataService.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -68,7 +69,7 @@ _read / write_
 
 
 
-##### [enableCheckWiFi](../smeup_models_external_configuration_model/ExternalConfigurationModel/enableCheckWiFi.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [enableCheckWiFi](../smeup_models_external_configuration_model/ExternalConfigurationModel/enableCheckWiFi.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -86,7 +87,7 @@ _read-only, inherited_
 
 
 
-##### [httpServiceCheckEndpoint](../smeup_models_external_configuration_model/ExternalConfigurationModel/httpServiceCheckEndpoint.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [httpServiceCheckEndpoint](../smeup_models_external_configuration_model/ExternalConfigurationModel/httpServiceCheckEndpoint.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -95,7 +96,7 @@ _read / write_
 
 
 
-##### [httpServiceEndpoint](../smeup_models_external_configuration_model/ExternalConfigurationModel/httpServiceEndpoint.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [httpServiceEndpoint](../smeup_models_external_configuration_model/ExternalConfigurationModel/httpServiceEndpoint.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -104,7 +105,7 @@ _read / write_
 
 
 
-##### [organizationId](../smeup_models_external_configuration_model/ExternalConfigurationModel/organizationId.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [organizationId](../smeup_models_external_configuration_model/ExternalConfigurationModel/organizationId.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -122,7 +123,7 @@ _read-only, inherited_
 
 
 
-##### [showLoader](../smeup_models_external_configuration_model/ExternalConfigurationModel/showLoader.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [showLoader](../smeup_models_external_configuration_model/ExternalConfigurationModel/showLoader.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 

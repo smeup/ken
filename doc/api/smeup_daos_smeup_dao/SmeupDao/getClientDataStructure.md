@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -33,7 +34,6 @@ static dynamic getClientDataStructure(dynamic model) {
         });
       });
       return newList;
-      break;
 
     case 'FLD':
       switch (model.optionsDefault['type']) {
@@ -50,7 +50,6 @@ static dynamic getClientDataStructure(dynamic model) {
         default:
           return model.data;
       }
-      break;
 
     default:
       return {"rows": model.data};

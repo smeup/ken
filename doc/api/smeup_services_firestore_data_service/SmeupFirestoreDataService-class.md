@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,14 +27,14 @@
 
 ## Constructors
 
-[SmeupFirestoreDataService](../smeup_services_firestore_data_service/SmeupFirestoreDataService/SmeupFirestoreDataService.md) ([FirebaseFirestore](https://pub.dev/documentation/cloud_firestore/2.5.4/cloud_firestore/FirebaseFirestore-class.html) fsDatabase, {[SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer})
+[SmeupFirestoreDataService](../smeup_services_firestore_data_service/SmeupFirestoreDataService/SmeupFirestoreDataService.md) ([FirebaseFirestore](https://pub.dev/documentation/cloud_firestore/3.1.11/cloud_firestore/FirebaseFirestore-class.html) fsDatabase, {[SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)? transformer})
 
     
 
 
 ## Properties
 
-##### [fsDatabase](../smeup_services_firestore_data_service/SmeupFirestoreDataService/fsDatabase.md) &#8596; [FirebaseFirestore](https://pub.dev/documentation/cloud_firestore/2.5.4/cloud_firestore/FirebaseFirestore-class.html)
+##### [fsDatabase](../smeup_services_firestore_data_service/SmeupFirestoreDataService/fsDatabase.md) &#8596; [FirebaseFirestore](https://pub.dev/documentation/cloud_firestore/3.1.11/cloud_firestore/FirebaseFirestore-class.html)
 
 
 
@@ -60,7 +61,7 @@ _read-only, inherited_
 
 
 
-##### [transformer](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface/transformer.md) &#8596; [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)
+##### [transformer](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface/transformer.md) &#8596; [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)?
 
 
 
@@ -72,7 +73,7 @@ _read / write, inherited_
 
 ## Methods
 
-##### [deleteDocument](../smeup_services_firestore_data_service/SmeupFirestoreDataService/deleteDocument.md)([SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
+##### [deleteDocument](../smeup_services_firestore_data_service/SmeupFirestoreDataService/deleteDocument.md)([Fun](../smeup_models_fun/Fun-class.md) smeupFun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
 
 
 
@@ -81,7 +82,7 @@ _read / write, inherited_
 
 
 
-##### [getDocument](../smeup_services_firestore_data_service/SmeupFirestoreDataService/getDocument.md)([SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
+##### [getDocument](../smeup_services_firestore_data_service/SmeupFirestoreDataService/getDocument.md)([Fun](../smeup_models_fun/Fun-class.md) smeupFun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
 
 
 
@@ -90,7 +91,7 @@ _read / write, inherited_
 
 
 
-##### [getDocumentDefault](../smeup_services_firestore_data_service/SmeupFirestoreDataService/getDocumentDefault.md)([SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
+##### [getDocuments](../smeup_services_firestore_data_service/SmeupFirestoreDataService/getDocuments.md)([Fun](../smeup_models_fun/Fun-class.md) smeupFun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
 
 
 
@@ -99,7 +100,7 @@ _read / write, inherited_
 
 
 
-##### [getDocuments](../smeup_services_firestore_data_service/SmeupFirestoreDataService/getDocuments.md)([SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
+##### [getFieldSetting](../smeup_services_firestore_data_service/SmeupFirestoreDataService/getFieldSetting.md)([Fun](../smeup_models_fun/Fun-class.md) smeupFun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
 
 
 
@@ -108,7 +109,7 @@ _read / write, inherited_
 
 
 
-##### [getTransformer](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface/getTransformer.md)() [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)
+##### [getTransformer](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface/getTransformer.md)() [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)?
 
 
 
@@ -117,7 +118,7 @@ _inherited_
 
 
 
-##### [invoke](../smeup_services_firestore_data_service/SmeupFirestoreDataService/invoke.md)([SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) fun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
+##### [invoke](../smeup_services_firestore_data_service/SmeupFirestoreDataService/invoke.md)([Fun](../smeup_models_fun/Fun-class.md) fun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
 
 
 
@@ -144,7 +145,7 @@ _inherited_
 
 
 
-##### [updateDocument](../smeup_services_firestore_data_service/SmeupFirestoreDataService/updateDocument.md)([SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
+##### [updateDocument](../smeup_services_firestore_data_service/SmeupFirestoreDataService/updateDocument.md)([Fun](../smeup_models_fun/Fun-class.md) smeupFun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
 
 
 
@@ -153,7 +154,7 @@ _inherited_
 
 
 
-##### [writeDocument](../smeup_services_firestore_data_service/SmeupFirestoreDataService/writeDocument.md)([SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
+##### [writeDocument](../smeup_services_firestore_data_service/SmeupFirestoreDataService/writeDocument.md)([Fun](../smeup_models_fun/Fun-class.md) smeupFun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
 
 
 
@@ -173,17 +174,6 @@ The equality operator. [...](https://api.flutter.dev/flutter/dart-core/Object/op
 _inherited_
 
 
-
-
-
-
-## Constants
-
-##### [FIRESTORE_FIELDS](../smeup_services_firestore_data_service/SmeupFirestoreDataService/FIRESTORE_FIELDS-constant.md) const [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
-
-
-
-   
 
 
 

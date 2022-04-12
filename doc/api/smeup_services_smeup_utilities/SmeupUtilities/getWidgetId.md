@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 [String](https://api.flutter.dev/flutter/dart-core/String-class.html) getWidgetId
-([String](https://api.flutter.dev/flutter/dart-core/String-class.html) type, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) id)
+([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id)
 
 
 
@@ -23,7 +24,7 @@
 ## Implementation
 
 ```dart
-static String getWidgetId(String type, String id) {
+static String getWidgetId(String? type, String? id) {
   if (type == null || type.isEmpty) type = '';
   if (id == null || id.isEmpty) id = '';
   String newId = id;

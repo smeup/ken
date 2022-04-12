@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -28,14 +29,14 @@
 
 ## Constructors
 
-[SmeupWaitFun](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/SmeupWaitFun.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html) target, {[Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) splashColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) loaderColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) circularTrackColor})
+[SmeupWaitFun](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/SmeupWaitFun.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html) target, {[Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? splashColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? loaderColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? circularTrackColor})
 
     
 
 
 ## Properties
 
-##### [circularTrackColor](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/circularTrackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [circularTrackColor](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/circularTrackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -62,7 +63,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -71,7 +72,7 @@ _final, inherited_
 
 
 
-##### [loaderColor](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/loaderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [loaderColor](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/loaderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -98,7 +99,7 @@ _read / write_
 
 
 
-##### [splashColor](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/splashColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [splashColor](../smeup_widgets_smeup_wait_fun/SmeupWaitFun/splashColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -165,7 +166,7 @@ _inherited_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -184,7 +185,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

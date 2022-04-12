@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -34,7 +35,7 @@
 
 ## Constructors
 
-[SmeupDrawer](../smeup_widgets_smeup_drawer/SmeupDrawer/SmeupDrawer.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type = 'DRW', [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) appBarBackColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) titleFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) titleFontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) titleFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) elementFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) elementFontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) elementFontBold, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) title = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) imageUrl = '', [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupDrawerDataElement](../smeup_models_widgets_smeup_drawer_data_element/SmeupDrawerDataElement-class.md)> data, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) imageWidth = SmeupDrawerModel.defaultImageWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) imageHeight = SmeupDrawerModel.defaultImageHeight, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showItemDivider = SmeupDrawerModel.defaultShowItemDivider})
+[SmeupDrawer](../smeup_widgets_smeup_drawer/SmeupDrawer/SmeupDrawer.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type = 'DRW', [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? appBarBackColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? titleFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? titleFontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? titleFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? elementFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? elementFontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? elementFontBold, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? title = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? imageUrl = '', [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupDrawerDataElement](../smeup_models_widgets_smeup_drawer_data_element/SmeupDrawerDataElement-class.md)>? data, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? imageWidth = SmeupDrawerModel.defaultImageWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? imageHeight = SmeupDrawerModel.defaultImageHeight, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? showItemDivider = SmeupDrawerModel.defaultShowItemDivider})
 
     
 
@@ -45,7 +46,7 @@
 
 ## Properties
 
-##### [appBarBackColor](../smeup_widgets_smeup_drawer/SmeupDrawer/appBarBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [appBarBackColor](../smeup_widgets_smeup_drawer/SmeupDrawer/appBarBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -54,7 +55,7 @@ _read / write_
 
 
 
-##### [data](../smeup_widgets_smeup_drawer/SmeupDrawer/data.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupDrawerDataElement](../smeup_models_widgets_smeup_drawer_data_element/SmeupDrawerDataElement-class.md)>
+##### [data](../smeup_widgets_smeup_drawer/SmeupDrawer/data.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupDrawerDataElement](../smeup_models_widgets_smeup_drawer_data_element/SmeupDrawerDataElement-class.md)>?
 
 
 
@@ -63,7 +64,7 @@ _read / write_
 
 
 
-##### [elementFontBold](../smeup_widgets_smeup_drawer/SmeupDrawer/elementFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [elementFontBold](../smeup_widgets_smeup_drawer/SmeupDrawer/elementFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -72,7 +73,7 @@ _read / write_
 
 
 
-##### [elementFontColor](../smeup_widgets_smeup_drawer/SmeupDrawer/elementFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [elementFontColor](../smeup_widgets_smeup_drawer/SmeupDrawer/elementFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -81,7 +82,7 @@ _read / write_
 
 
 
-##### [elementFontSize](../smeup_widgets_smeup_drawer/SmeupDrawer/elementFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [elementFontSize](../smeup_widgets_smeup_drawer/SmeupDrawer/elementFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -108,7 +109,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [id](../smeup_widgets_smeup_drawer/SmeupDrawer/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_drawer/SmeupDrawer/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -117,7 +118,7 @@ _read / write_
 
 
 
-##### [imageHeight](../smeup_widgets_smeup_drawer/SmeupDrawer/imageHeight.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [imageHeight](../smeup_widgets_smeup_drawer/SmeupDrawer/imageHeight.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -126,7 +127,7 @@ _read / write_
 
 
 
-##### [imageUrl](../smeup_widgets_smeup_drawer/SmeupDrawer/imageUrl.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [imageUrl](../smeup_widgets_smeup_drawer/SmeupDrawer/imageUrl.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -135,7 +136,7 @@ _read / write_
 
 
 
-##### [imageWidth](../smeup_widgets_smeup_drawer/SmeupDrawer/imageWidth.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [imageWidth](../smeup_widgets_smeup_drawer/SmeupDrawer/imageWidth.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -144,7 +145,7 @@ _read / write_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -153,7 +154,7 @@ _final, inherited_
 
 
 
-##### [model](../smeup_widgets_smeup_drawer/SmeupDrawer/model.md) &#8596; [SmeupDrawerModel](../smeup_models_widgets_smeup_drawer_model/SmeupDrawerModel-class.md)
+##### [model](../smeup_widgets_smeup_drawer/SmeupDrawer/model.md) &#8596; [SmeupDrawerModel](../smeup_models_widgets_smeup_drawer_model/SmeupDrawerModel-class.md)?
 
 
 
@@ -180,7 +181,7 @@ _read / write_
 
 
 
-##### [showItemDivider](../smeup_widgets_smeup_drawer/SmeupDrawer/showItemDivider.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [showItemDivider](../smeup_widgets_smeup_drawer/SmeupDrawer/showItemDivider.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -189,7 +190,7 @@ _read / write_
 
 
 
-##### [title](../smeup_widgets_smeup_drawer/SmeupDrawer/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_widgets_smeup_drawer/SmeupDrawer/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -198,7 +199,7 @@ _read / write_
 
 
 
-##### [titleFontBold](../smeup_widgets_smeup_drawer/SmeupDrawer/titleFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [titleFontBold](../smeup_widgets_smeup_drawer/SmeupDrawer/titleFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -207,7 +208,7 @@ _read / write_
 
 
 
-##### [titleFontColor](../smeup_widgets_smeup_drawer/SmeupDrawer/titleFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [titleFontColor](../smeup_widgets_smeup_drawer/SmeupDrawer/titleFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -216,7 +217,7 @@ _read / write_
 
 
 
-##### [titleFontSize](../smeup_widgets_smeup_drawer/SmeupDrawer/titleFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [titleFontSize](../smeup_widgets_smeup_drawer/SmeupDrawer/titleFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -225,7 +226,7 @@ _read / write_
 
 
 
-##### [type](../smeup_widgets_smeup_drawer/SmeupDrawer/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_widgets_smeup_drawer/SmeupDrawer/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -302,7 +303,7 @@ _override_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -321,7 +322,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 
@@ -373,7 +374,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 ## Static Methods
 
-##### [addInternalDrawerElements](../smeup_widgets_smeup_drawer/SmeupDrawer/addInternalDrawerElements.md)(dynamic newList, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context) dynamic
+##### [addInternalDrawerElements](../smeup_widgets_smeup_drawer/SmeupDrawer/addInternalDrawerElements.md)(dynamic newList, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)? context) dynamic
 
 
 

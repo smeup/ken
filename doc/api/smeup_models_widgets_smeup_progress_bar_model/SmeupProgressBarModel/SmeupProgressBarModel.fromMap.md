@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-SmeupProgressBarModel.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
+SmeupProgressBarModel.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>? scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)? context)
 
 
 
@@ -20,9 +21,9 @@ SmeupProgressBarModel.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Ma
 ```dart
 SmeupProgressBarModel.fromMap(
   Map<String, dynamic> jsonMap,
-  GlobalKey<FormState> formKey,
-  GlobalKey<ScaffoldState> scaffoldKey,
-  BuildContext context,
+  GlobalKey<FormState>? formKey,
+  GlobalKey<ScaffoldState>? scaffoldKey,
+  BuildContext? context,
 ) : super.fromMap(
         jsonMap,
         formKey,
@@ -32,23 +33,23 @@ SmeupProgressBarModel.fromMap(
   setDefaults(this);
   title = jsonMap['title'] ?? '';
 
-  valueField = optionsDefault['valueField'] ?? defaultValueField;
+  valueField = optionsDefault!['valueField'] ?? defaultValueField;
 
-  progressBarMinimun = SmeupUtilities.getDouble(optionsDefault['pgbMin']) ??
+  progressBarMinimun = SmeupUtilities.getDouble(optionsDefault!['pgbMin']) ??
       defaultProgressBarMinimun;
-  progressBarMaximun = SmeupUtilities.getDouble(optionsDefault['pgbMax']) ??
+  progressBarMaximun = SmeupUtilities.getDouble(optionsDefault!['pgbMax']) ??
       defaultProgressBarMaximun;
   height =
-      SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+      SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 
   padding =
-      SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
+      SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
 
   color =
-      SmeupUtilities.getColorFromRGB(optionsDefault['color']) ?? defaultColor;
+      SmeupUtilities.getColorFromRGB(optionsDefault!['color']) ?? defaultColor;
 
   linearTrackColor =
-      SmeupUtilities.getColorFromRGB(optionsDefault['linearTrackColor']) ??
+      SmeupUtilities.getColorFromRGB(optionsDefault!['linearTrackColor']) ??
           defaultLinearTrackColor;
 
   if (widgetLoadType != LoadType.Delay) {

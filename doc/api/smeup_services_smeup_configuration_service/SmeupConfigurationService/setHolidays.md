@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ dynamic setHolidays
 static setHolidays(context) {
   try {
     if (SmeupLocalizationService.of(context) != null) {
-      SmeupLocalizationService.of(context)
+      SmeupLocalizationService.of(context)!
           .getHolidays(DateTime.now().year,
               Localizations.localeOf(context).countryCode)
           .then((holidays) {

@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -74,7 +75,7 @@ static void writeDebugMessage(String message,
 
     if (SmeupConfigurationService.isLogEnabled || logType == LogType.error) {
       if (_logFile != null) {
-        _logFile.writeAsString('${DateTime.now().toString()}: $message \n',
+        _logFile!.writeAsString('${DateTime.now().toString()}: $message \n',
             mode: FileMode.append);
       }
     }

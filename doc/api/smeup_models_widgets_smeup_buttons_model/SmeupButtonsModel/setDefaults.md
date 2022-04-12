@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -25,29 +26,29 @@ dynamic setDefaults
 ```dart
 static setDefaults(dynamic obj) {
   var buttonStyle =
-      SmeupConfigurationService.getTheme().elevatedButtonTheme.style;
+      SmeupConfigurationService.getTheme()!.elevatedButtonTheme.style!;
 
   defaultBackColor =
-      buttonStyle.backgroundColor.resolve(Set<MaterialState>());
-  defaultElevation = buttonStyle.elevation.resolve(Set<MaterialState>());
+      buttonStyle.backgroundColor!.resolve(Set<MaterialState>());
+  defaultElevation = buttonStyle.elevation!.resolve(Set<MaterialState>());
 
-  var side = buttonStyle.side.resolve(Set<MaterialState>());
+  var side = buttonStyle.side!.resolve(Set<MaterialState>())!;
   defaultBorderColor = side.color;
   defaultBorderWidth = side.width;
 
-  var shape = buttonStyle.shape.resolve(Set<MaterialState>());
+  var shape = buttonStyle.shape!.resolve(Set<MaterialState>())!;
   defaultBorderRadius = (shape as ContinuousRectangleBorder)
       .borderRadius
       .resolve(TextDirection.ltr)
       .topLeft
       .x;
 
-  var textStyle = SmeupConfigurationService.getTheme().textTheme.button;
+  var textStyle = SmeupConfigurationService.getTheme()!.textTheme.button!;
   defaultFontSize = textStyle.fontSize;
   defaultFontColor = textStyle.color;
   defaultFontBold = textStyle.fontWeight == FontWeight.bold;
 
-  var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
+  var iconTheme = SmeupConfigurationService.getTheme()!.iconTheme;
   defaultIconSize = iconTheme.size;
   defaultIconColor = iconTheme.color;
 

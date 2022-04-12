@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-SmeupScreenModel([BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [SmeupFun](../../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun, {[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) isDialog = defaultIsDialog, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) backButtonVisible = defaultBackButtonVisible})
+SmeupScreenModel([BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)? context, [Fun](../../smeup_models_fun/Fun-class.md) smeupFun, {[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? isDialog = defaultIsDialog, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? backButtonVisible = defaultBackButtonVisible})
 
 
 
@@ -18,7 +19,7 @@ SmeupScreenModel([BuildContext](https://api.flutter.dev/flutter/widgets/BuildCon
 ## Implementation
 
 ```dart
-SmeupScreenModel(this.context, SmeupFun smeupFun,
+SmeupScreenModel(this.context, Fun smeupFun,
     {this.isDialog = defaultIsDialog,
     this.backButtonVisible = defaultBackButtonVisible})
     : super(null, null, null) {

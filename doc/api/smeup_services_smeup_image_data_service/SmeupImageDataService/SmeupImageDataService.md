@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-SmeupImageDataService({[SmeupDataTransformerInterface](../../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer})
+SmeupImageDataService({[SmeupDataTransformerInterface](../../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)? transformer})
 
 
 
@@ -18,7 +19,7 @@ SmeupImageDataService({[SmeupDataTransformerInterface](../../smeup_services_tran
 ## Implementation
 
 ```dart
-SmeupImageDataService({SmeupDataTransformerInterface transformer})
+SmeupImageDataService({SmeupDataTransformerInterface? transformer})
     : super(transformer);
 ```
 

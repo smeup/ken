@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[double](https://api.flutter.dev/flutter/dart-core/double-class.html) sldMax
+[double](https://api.flutter.dev/flutter/dart-core/double-class.html)? sldMax
   
 _final_
 
@@ -20,7 +21,7 @@ _final_
 ## Implementation
 
 ```dart
-final double sldMax;
+final double? sldMax;
 
 
 ```

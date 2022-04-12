@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -78,7 +79,7 @@ _inherited_
 
 ## Static Methods
 
-##### [replaceFunVariables](../smeup_services_smeup_dynamism_service/SmeupDynamismService/replaceFunVariables.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) funString, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [replaceVariables](../smeup_services_smeup_dynamism_service/SmeupDynamismService/replaceVariables.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) funString, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 
@@ -87,7 +88,7 @@ _inherited_
 
 
 
-##### [run](../smeup_services_smeup_dynamism_service/SmeupDynamismService/run.md)([List](https://api.flutter.dev/flutter/dart-core/List-class.html) dynamisms, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) event, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;void>
+##### [run](../smeup_services_smeup_dynamism_service/SmeupDynamismService/run.md)([List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Dynamism](../smeup_models_dynamism/Dynamism-class.md)>? dynamisms, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) event, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;void>
 
 
 
@@ -96,7 +97,7 @@ _inherited_
 
 
 
-##### [storeDynamicVariables](../smeup_services_smeup_dynamism_service/SmeupDynamismService/storeDynamicVariables.md)(dynamic data, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey) void
+##### [storeDynamicVariables](../smeup_services_smeup_dynamism_service/SmeupDynamismService/storeDynamicVariables.md)(dynamic data, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey) void
 
 
 
@@ -105,7 +106,7 @@ _inherited_
 
 
 
-##### [storeFormVariables](../smeup_services_smeup_dynamism_service/SmeupDynamismService/storeFormVariables.md)([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) data, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey) void
+##### [storeFormVariables](../smeup_services_smeup_dynamism_service/SmeupDynamismService/storeFormVariables.md)([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) data, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey) void
 
 
 

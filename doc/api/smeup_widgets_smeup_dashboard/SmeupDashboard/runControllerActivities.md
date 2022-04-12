@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 runControllerActivities(SmeupModel model) {
-  SmeupDashboardModel m = model;
+  SmeupDashboardModel m = model as SmeupDashboardModel;
   fontSize = m.fontSize;
   fontColor = m.fontColor;
   fontBold = m.fontBold;

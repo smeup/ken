@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -32,24 +33,24 @@ static manageResponseMessage(BuildContext context, dynamic response) async {
           MessagesPromptMode mode =
               message['mode'] ?? MessagesPromptMode.snackbar;
           LogType severity = message['gravity'] ?? LogType.info;
-          String text = message['message'];
+          String? text = message['message'];
           int milliseconds = message['milliseconds'] ?? 500;
 
-          Color backColor;
+          Color? backColor;
           switch (severity) {
             case LogType.error:
-              backColor = SmeupConfigurationService.getTheme().errorColor;
+              backColor = SmeupConfigurationService.getTheme()!.errorColor;
               break;
             case LogType.warning:
               backColor = Colors.orange;
               break;
             default:
-              backColor = SmeupConfigurationService.getTheme()
+              backColor = SmeupConfigurationService.getTheme()!
                   .snackBarTheme
                   .backgroundColor;
           }
 
-          if (text.isNotEmpty) {
+          if (text!.isNotEmpty) {
             switch (mode) {
               case MessagesPromptMode.snackbar:
                 ScaffoldMessenger.of(context).showSnackBar(

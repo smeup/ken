@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -29,7 +30,7 @@ List<SmeupModel> getComponents(jsonMap, componentName) {
   if (jsonMap.containsKey(componentName)) {
     List<dynamic> componentsJson = jsonMap[componentName];
     componentsJson.forEach((v) async {
-      SmeupModel model;
+      SmeupModel? model;
 
       try {
         switch (v['type']) {
@@ -86,12 +87,12 @@ List<SmeupModel> getComponents(jsonMap, componentName) {
                     v, formKey, scaffoldKey, context);
                 break;
               case 'cmb':
-                model =
-                    SmeupComboModel.fromMap(v, formKey, scaffoldKey, context);
+                model = SmeupComboModel.fromMap(
+                    v, formKey, scaffoldKey, context, this);
                 break;
               case 'itx':
                 model = SmeupTextFieldModel.fromMap(
-                    v, formKey, scaffoldKey, context);
+                    v, formKey, scaffoldKey, context, this);
                 break;
               case 'pgb':
                 model = SmeupProgressBarModel.fromMap(
@@ -107,11 +108,11 @@ List<SmeupModel> getComponents(jsonMap, componentName) {
                 break;
               case 'qrc':
                 model = SmeupQRCodeReaderModel.fromMap(
-                    v, formKey, scaffoldKey, context);
+                    v, formKey, scaffoldKey, context, this);
                 break;
               case 'rad':
                 model = SmeupRadioButtonsModel.fromMap(
-                    v, formKey, scaffoldKey, context);
+                    v, formKey, scaffoldKey, context, this);
                 break;
               case 'sld':
                 model = SmeupSliderModel.fromMap(
@@ -157,7 +158,7 @@ List<SmeupModel> getComponents(jsonMap, componentName) {
       }
 
       if (model != null) {
-        model.parent = this;
+        if (model.parent == null) model.parent = this;
         components.add(model);
       }
     });

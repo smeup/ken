@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -33,13 +34,13 @@ SmeupWaitModel.fromMap(
   title = jsonMap['title'] ?? '';
 
   splashColor =
-      SmeupUtilities.getColorFromRGB(optionsDefault['splashColor']) ??
+      SmeupUtilities.getColorFromRGB(optionsDefault!['splashColor']) ??
           defaultSplashColor;
   loaderColor =
-      SmeupUtilities.getColorFromRGB(optionsDefault['loaderColor']) ??
+      SmeupUtilities.getColorFromRGB(optionsDefault!['loaderColor']) ??
           defaultLoaderColor;
   circularTrackColor =
-      SmeupUtilities.getColorFromRGB(optionsDefault['circularTrackColor']) ??
+      SmeupUtilities.getColorFromRGB(optionsDefault!['circularTrackColor']) ??
           defaultcircularTrackColor;
 
   SmeupDataService.incrementDataFetch(id);

@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -32,7 +33,7 @@ static Future<dynamic> copyMemory(String fromKey, String fromSegment,
   jsonToKey[toSegment] = Response(
       data: jsonDecode(jsonFromSegment.toString()),
       statusCode: jsonFromSegment.statusCode,
-      requestOptions: null);
+      requestOptions: RequestOptions(path: ''));
 
   SmeupLogService.writeDebugMessage(
       'copied memory from $fromKey-$fromSegment to $toKey-$toSegment',

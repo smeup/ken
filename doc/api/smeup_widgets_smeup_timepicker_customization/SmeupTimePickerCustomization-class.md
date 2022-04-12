@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -27,7 +28,7 @@
 
 ## Constructors
 
-[SmeupTimePickerCustomization](../smeup_widgets_smeup_timepicker_customization/SmeupTimePickerCustomization/SmeupTimePickerCustomization.md) ({[DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) currentTime, [LocaleType](https://pub.dev/documentation/flutter_datetime_picker/1.5.1/flutter_datetime_picker/LocaleType.html) locale, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showSecondsColumn = true, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)> minutesList})
+[SmeupTimePickerCustomization](../smeup_widgets_smeup_timepicker_customization/SmeupTimePickerCustomization/SmeupTimePickerCustomization.md) ({[DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)? currentTime, [LocaleType](https://pub.dev/documentation/flutter_datetime_picker/1.5.1/flutter_datetime_picker/LocaleType.html)? locale, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showSecondsColumn = true, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>? minutesList})
 
     
 
@@ -79,7 +80,7 @@ _read / write, inherited_
 
 
 
-##### [minutesList](../smeup_widgets_smeup_timepicker_customization/SmeupTimePickerCustomization/minutesList.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>
+##### [minutesList](../smeup_widgets_smeup_timepicker_customization/SmeupTimePickerCustomization/minutesList.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>?
 
 
 
@@ -181,7 +182,7 @@ _override_
 
 
 
-##### [leftStringAtIndex](../smeup_widgets_smeup_timepicker_customization/SmeupTimePickerCustomization/leftStringAtIndex.md)([int](https://api.flutter.dev/flutter/dart-core/int-class.html) index) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [leftStringAtIndex](../smeup_widgets_smeup_timepicker_customization/SmeupTimePickerCustomization/leftStringAtIndex.md)([int](https://api.flutter.dev/flutter/dart-core/int-class.html) index) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -190,7 +191,7 @@ _override_
 
 
 
-##### [middleStringAtIndex](../smeup_widgets_smeup_timepicker_customization/SmeupTimePickerCustomization/middleStringAtIndex.md)([int](https://api.flutter.dev/flutter/dart-core/int-class.html) index) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [middleStringAtIndex](../smeup_widgets_smeup_timepicker_customization/SmeupTimePickerCustomization/middleStringAtIndex.md)([int](https://api.flutter.dev/flutter/dart-core/int-class.html) index) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -217,7 +218,7 @@ _override_
 
 
 
-##### [rightStringAtIndex](../smeup_widgets_smeup_timepicker_customization/SmeupTimePickerCustomization/rightStringAtIndex.md)([int](https://api.flutter.dev/flutter/dart-core/int-class.html) index) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [rightStringAtIndex](../smeup_widgets_smeup_timepicker_customization/SmeupTimePickerCustomization/rightStringAtIndex.md)([int](https://api.flutter.dev/flutter/dart-core/int-class.html) index) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
