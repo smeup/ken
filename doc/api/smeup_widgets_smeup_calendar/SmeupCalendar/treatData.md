@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 dynamic treatData(SmeupModel model) {
-  SmeupCalendarModel m = model;
+  SmeupCalendarModel m = model as SmeupCalendarModel;
 
   // change data format
   var workData = m.data;
@@ -34,7 +35,8 @@ dynamic treatData(SmeupModel model) {
 
   // set the widget data
   if (workData != null) {
-    var newList = List<Map<String, dynamic>>.empty(growable: true);
+    List<Map<String, dynamic>> newList =
+        List<Map<String, dynamic>>.empty(growable: true);
     for (var i = 0; i < (workData['rows'] as List).length; i++) {
       final element = workData['rows'][i];
       newList.add({

@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) inactiveTrackColor
+[Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? inactiveTrackColor
   
 _final_
 
@@ -20,7 +21,7 @@ _final_
 ## Implementation
 
 ```dart
-final Color inactiveTrackColor;
+final Color? inactiveTrackColor;
 
 
 ```

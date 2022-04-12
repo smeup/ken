@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 dynamic treatData(SmeupModel model) {
-  SmeupProgressIndicatorModel m = model;
+  SmeupProgressIndicatorModel m = model as SmeupProgressIndicatorModel;
 
   // change data format
   return formatDataFields(m);

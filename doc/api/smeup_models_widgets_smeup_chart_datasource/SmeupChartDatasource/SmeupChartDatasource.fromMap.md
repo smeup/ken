@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -25,9 +26,9 @@ SmeupChartDatasource.fromMap(Map<String, dynamic> jsonData) {
   if (jsonData['columns'] != null &&
       (jsonData['columns'] as List).length > 0) {
     jsonData['columns']
-        .forEach((c) => columns.add(SmeupChartColumn.fromMap(c)));
+        .forEach((c) => columns!.add(SmeupChartColumn.fromMap(c)));
     jsonData['rows']
-        .forEach((r) => rows.add(SmeupChartRow.fromMap(r, columns)));
+        .forEach((r) => rows!.add(SmeupChartRow.fromMap(r, columns!)));
   }
 }
 ```

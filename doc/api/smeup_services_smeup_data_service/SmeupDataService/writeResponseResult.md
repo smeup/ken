@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 void writeResponseResult
-([Response](https://pub.dev/documentation/dio/4.0.0/dio/Response-class.html) response, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) method)
+([Response](https://pub.dev/documentation/dio/4.0.6/dio/Response-class.html)? response, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) method)
 
 
 
@@ -23,9 +24,9 @@ void writeResponseResult
 ## Implementation
 
 ```dart
-static void writeResponseResult(Response response, String method) {
+static void writeResponseResult(Response? response, String method) {
   LogType logType =
-      response != null && SmeupDataService.isValid(response.statusCode)
+      response != null && SmeupDataService.isValid(response.statusCode!)
           ? LogType.info
           : LogType.error;
 

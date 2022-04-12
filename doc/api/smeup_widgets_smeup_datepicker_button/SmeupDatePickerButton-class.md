@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -28,14 +29,14 @@
 
 ## Constructors
 
-[SmeupDatePickerButton](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/SmeupDatePickerButton.md) ([String](https://api.flutter.dev/flutter/dart-core/String-class.html) id, [ButtonStyle](https://api.flutter.dev/flutter/material/ButtonStyle-class.html) buttonStyle, [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html) textStyle, {[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) value, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) display, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) borderColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderRadius, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) elevation, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) captionFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionFontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionBackColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) underline = SmeupDatePickerModel.defaultUnderline, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html) align = SmeupDatePickerModel.defaultAlign, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) label = SmeupDatePickerModel.defaultLabel, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = SmeupDatePickerModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = SmeupDatePickerModel.defaultHeight, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = SmeupDatePickerModel.defaultPadding, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showborder = SmeupDatePickerModel.defaultShowBorder})
+[SmeupDatePickerButton](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/SmeupDatePickerButton.md) ([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id, [ButtonStyle](https://api.flutter.dev/flutter/material/ButtonStyle-class.html) buttonStyle, [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html) textStyle, {[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>? scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)? value, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? display, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? borderColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? borderWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? borderRadius, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? fontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? fontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? fontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? backColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? elevation, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? captionFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionFontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionBackColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? underline = SmeupDatePickerModel.defaultUnderline, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)? align = SmeupDatePickerModel.defaultAlign, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? label = SmeupDatePickerModel.defaultLabel, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? width = SmeupDatePickerModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? height = SmeupDatePickerModel.defaultHeight, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)? padding = SmeupDatePickerModel.defaultPadding, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? showborder = SmeupDatePickerModel.defaultShowBorder})
 
     
 
 
 ## Properties
 
-##### [align](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/align.md) &#8594; [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)
+##### [align](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/align.md) &#8594; [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)?
 
 
 
@@ -44,7 +45,7 @@ _final_
 
 
 
-##### [backColor](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/backColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [backColor](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/backColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -53,7 +54,7 @@ _read / write_
 
 
 
-##### [borderColor](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/borderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [borderColor](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/borderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -62,7 +63,7 @@ _read / write_
 
 
 
-##### [borderRadius](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/borderRadius.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [borderRadius](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/borderRadius.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -71,7 +72,7 @@ _read / write_
 
 
 
-##### [borderWidth](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/borderWidth.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [borderWidth](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/borderWidth.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -89,7 +90,7 @@ _final_
 
 
 
-##### [captionBackColor](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/captionBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [captionBackColor](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/captionBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -98,7 +99,7 @@ _read / write_
 
 
 
-##### [captionFontBold](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/captionFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [captionFontBold](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/captionFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -107,7 +108,7 @@ _read / write_
 
 
 
-##### [captionFontColor](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/captionFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [captionFontColor](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/captionFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -116,7 +117,7 @@ _read / write_
 
 
 
-##### [captionFontSize](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/captionFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [captionFontSize](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/captionFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -125,7 +126,7 @@ _read / write_
 
 
 
-##### [display](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/display.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [display](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/display.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -134,7 +135,7 @@ _final_
 
 
 
-##### [elevation](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/elevation.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [elevation](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/elevation.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -143,7 +144,7 @@ _read / write_
 
 
 
-##### [fontBold](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/fontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [fontBold](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/fontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -152,7 +153,7 @@ _read / write_
 
 
 
-##### [fontColor](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/fontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [fontColor](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/fontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -161,7 +162,7 @@ _read / write_
 
 
 
-##### [fontSize](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/fontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [fontSize](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/fontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -170,7 +171,7 @@ _read / write_
 
 
 
-##### [formKey](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/formKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/formKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -188,7 +189,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [height](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/height.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [height](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/height.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -197,7 +198,7 @@ _final_
 
 
 
-##### [id](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/id.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/id.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -206,7 +207,7 @@ _final_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -215,7 +216,7 @@ _final, inherited_
 
 
 
-##### [label](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/label.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [label](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/label.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -224,7 +225,7 @@ _final_
 
 
 
-##### [padding](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/padding.md) &#8594; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)
+##### [padding](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/padding.md) &#8594; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)?
 
 
 
@@ -242,7 +243,7 @@ _read-only, inherited_
 
 
 
-##### [scaffoldKey](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/scaffoldKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+##### [scaffoldKey](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/scaffoldKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>?
 
 
 
@@ -251,7 +252,7 @@ _final_
 
 
 
-##### [showborder](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/showborder.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [showborder](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/showborder.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -269,7 +270,7 @@ _final_
 
 
 
-##### [underline](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/underline.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [underline](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/underline.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -278,7 +279,7 @@ _read / write_
 
 
 
-##### [value](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/value.md) &#8594; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)
+##### [value](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/value.md) &#8594; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)?
 
 
 
@@ -287,7 +288,7 @@ _final_
 
 
 
-##### [width](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/width.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [width](../smeup_widgets_smeup_datepicker_button/SmeupDatePickerButton/width.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -345,7 +346,7 @@ _inherited_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -364,7 +365,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

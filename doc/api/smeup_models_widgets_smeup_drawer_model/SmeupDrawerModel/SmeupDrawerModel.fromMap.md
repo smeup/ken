@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -32,34 +33,34 @@ SmeupDrawerModel.fromMap(
   setDefaults(this);
 
   title = jsonMap['title'] ?? '';
-  titleFontSize = SmeupUtilities.getDouble(optionsDefault['titleFontSize']) ??
+  titleFontSize = SmeupUtilities.getDouble(optionsDefault!['titleFontSize']) ??
       defaultTitleFontSize;
   titleFontColor =
-      SmeupUtilities.getColorFromRGB(optionsDefault['titleFontColor']) ??
+      SmeupUtilities.getColorFromRGB(optionsDefault!['titleFontColor']) ??
           defaultTitleFontColor;
-  titleFontBold = SmeupUtilities.getBool(optionsDefault['titleFontBold']) ??
+  titleFontBold = SmeupUtilities.getBool(optionsDefault!['titleFontBold']) ??
       defaultTitleFontBold;
 
   elementFontSize =
-      SmeupUtilities.getDouble(optionsDefault['elementFontSize']) ??
+      SmeupUtilities.getDouble(optionsDefault!['elementFontSize']) ??
           defaultElementFontSize;
   elementFontColor =
-      SmeupUtilities.getColorFromRGB(optionsDefault['elementFontColor']) ??
+      SmeupUtilities.getColorFromRGB(optionsDefault!['elementFontColor']) ??
           defaultElementFontColor;
   elementFontBold =
-      SmeupUtilities.getBool(optionsDefault['elementFontBold']) ??
+      SmeupUtilities.getBool(optionsDefault!['elementFontBold']) ??
           defaultElementFontBold;
 
-  imageUrl = optionsDefault['imageUrl'] ?? '';
-  imageWidth = SmeupUtilities.getDouble(optionsDefault['imageWidth']) ??
+  imageUrl = optionsDefault!['imageUrl'] ?? '';
+  imageWidth = SmeupUtilities.getDouble(optionsDefault!['imageWidth']) ??
       defaultImageWidth;
-  imageHeight = SmeupUtilities.getDouble(optionsDefault['imageHeight']) ??
+  imageHeight = SmeupUtilities.getDouble(optionsDefault!['imageHeight']) ??
       defaultImageHeight;
   appBarBackColor =
-      SmeupUtilities.getColorFromRGB(optionsDefault['appBarBackColor']);
+      SmeupUtilities.getColorFromRGB(optionsDefault!['appBarBackColor']);
 
   showItemDivider =
-      SmeupUtilities.getBool(optionsDefault['showItemDivider']) ??
+      SmeupUtilities.getBool(optionsDefault!['showItemDivider']) ??
           defaultShowItemDivider;
 
   if (widgetLoadType != LoadType.Delay) {

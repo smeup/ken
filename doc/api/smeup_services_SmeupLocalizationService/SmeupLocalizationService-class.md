@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -53,7 +54,7 @@ _read-only, inherited_
 
 ## Methods
 
-##### [getHolidays](../smeup_services_SmeupLocalizationService/SmeupLocalizationService/getHolidays.md)([int](https://api.flutter.dev/flutter/dart-core/int-class.html) year, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) country) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html), [List](https://api.flutter.dev/flutter/dart-core/List-class.html)>>
+##### [getHolidays](../smeup_services_SmeupLocalizationService/SmeupLocalizationService/getHolidays.md)([int](https://api.flutter.dev/flutter/dart-core/int-class.html) year, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? country) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html), [List](https://api.flutter.dev/flutter/dart-core/List-class.html)?>>
 
 
 
@@ -105,7 +106,7 @@ _inherited_
 
 ## Static Methods
 
-##### [of](../smeup_services_SmeupLocalizationService/SmeupLocalizationService/of.md)([BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context) [SmeupLocalizationService](../smeup_services_SmeupLocalizationService/SmeupLocalizationService-class.md)
+##### [of](../smeup_services_SmeupLocalizationService/SmeupLocalizationService/of.md)([BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context) [SmeupLocalizationService](../smeup_services_SmeupLocalizationService/SmeupLocalizationService-class.md)?
 
 
 

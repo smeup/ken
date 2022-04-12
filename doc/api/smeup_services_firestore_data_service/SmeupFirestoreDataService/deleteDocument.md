@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)> deleteDocument
-([SmeupFun](../../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun)
+([Fun](../../smeup_models_fun/Fun-class.md) smeupFun)
 
 
 
@@ -23,34 +24,37 @@
 ## Implementation
 
 ```dart
-Future<SmeupServiceResponse> deleteDocument(SmeupFun smeupFun) async {
+Future<SmeupServiceResponse> deleteDocument(Fun smeupFun) async {
   try {
-    List<Map<String, dynamic>> list = smeupFun.getParameters();
+    List<Map<String, dynamic>> list = smeupFun.parameters;
+    var checkResult = '';
 
-    final id = list.firstWhere((element) => element['key'] == 'id',
-        orElse: () => null);
+    final id = list.firstWhereOrNull((element) => element['key'] == 'id');
 
-    final collection = list.firstWhere(
-        (element) => element['key'] == 'collection',
-        orElse: () => null);
+    final collection =
+        list.firstWhereOrNull((element) => element['key'] == 'collection');
 
     if (id == null || id.toString().isEmpty) {
-      throw Exception('The id is empty. FUN: $smeupFun');
+      checkResult = 'The id is empty. FUN: $smeupFun';
     }
 
     if (collection == null || collection.toString().isEmpty) {
-      throw Exception('The collection is empty. FUN: $smeupFun');
+      checkResult = 'The collection is empty. FUN: $smeupFun';
+    }
+
+    if (checkResult.isNotEmpty) {
+      return _getErrorResponse(checkResult);
     }
 
     bool isOnLine = await FirestoreShared.isInternetOn();
 
     if (isOnLine) {
       await fsDatabase
-          .collection(collection['value'])
-          .doc(id['value'])
+          .collection(collection!['value'])
+          .doc(id!['value'])
           .delete();
     } else {
-      fsDatabase.collection(collection['value']).doc(id['value']).delete();
+      fsDatabase.collection(collection!['value']).doc(id!['value']).delete();
     }
 
     SmeupVariablesService.setVariable('id', '', formKey: smeupFun.formKey);
@@ -70,7 +74,7 @@ Future<SmeupServiceResponse> deleteDocument(SmeupFun smeupFun) async {
         Response(
             data: messages,
             statusCode: HttpStatus.accepted,
-            requestOptions: null));
+            requestOptions: RequestOptions(path: '')));
   } catch (e) {
     SmeupLogService.writeDebugMessage('Error in deleteDocument: $e',
         logType: LogType.error);
@@ -79,7 +83,7 @@ Future<SmeupServiceResponse> deleteDocument(SmeupFun smeupFun) async {
         Response(
             data: null,
             statusCode: HttpStatus.badRequest,
-            requestOptions: null));
+            requestOptions: RequestOptions(path: '')));
   }
 }
 ```

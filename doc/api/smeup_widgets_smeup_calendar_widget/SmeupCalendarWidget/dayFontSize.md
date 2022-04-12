@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[double](https://api.flutter.dev/flutter/dart-core/double-class.html) dayFontSize
+[double](https://api.flutter.dev/flutter/dart-core/double-class.html)? dayFontSize
   
 _final_
 
@@ -20,7 +21,7 @@ _final_
 ## Implementation
 
 ```dart
-final double dayFontSize;
+final double? dayFontSize;
 
 
 ```

@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[double](https://api.flutter.dev/flutter/dart-core/double-class.html) markerFontSize
+[double](https://api.flutter.dev/flutter/dart-core/double-class.html)? markerFontSize
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-double markerFontSize;
+double? markerFontSize;
 
 
 ```

@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 [WidgetOrientation](../../smeup_models_widgets_smeup_model/WidgetOrientation.md) const defaultOrientation

@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -27,7 +28,7 @@ dynamic setData
 @override
 // ignore: override_on_non_overriding_member
 setData() async {
-  if (smeupFun != null && smeupFun.isFunValid()) {
+  if (smeupFun != null && smeupFun!.isFunValid()) {
     final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
 
     if (!smeupServiceResponse.succeded) {

@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -29,14 +30,13 @@ static String replaceDictionaryPlaceHolders(String source) {
     RegExp re = RegExp(r'\{\{.*\}\}');
     re.allMatches(source).forEach((match) {
       final placeHolder = source.substring(match.start, match.end);
-      if (placeHolder != null && placeHolder.isNotEmpty) {
+      if (placeHolder.isNotEmpty) {
         final dictionaryKey =
             placeHolder.replaceFirst('{{', '').replaceFirst('}}', '');
 
-        if (dictionaryKey != null &&
-            SmeupConfigurationService.appDictionary
-                    .getLocalString(dictionaryKey) !=
-                null) {
+        if (SmeupConfigurationService.appDictionary
+                .getLocalString(dictionaryKey) !=
+            null) {
           workString = workString.replaceAll(
               placeHolder,
               SmeupConfigurationService.appDictionary

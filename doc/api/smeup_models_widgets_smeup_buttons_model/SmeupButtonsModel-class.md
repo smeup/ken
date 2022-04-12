@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -29,18 +30,18 @@
 
 ## Constructors
 
-[SmeupButtonsModel](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/SmeupButtonsModel.md) ({dynamic id, dynamic type, dynamic title = '', [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) borderColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderRadius, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) elevation, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) iconSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) iconColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [MainAxisAlignment](https://api.flutter.dev/flutter/rendering/MainAxisAlignment.html) position = defaultPosition, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html) align = defaultAlign, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = defaultPadding, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) valueField, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) iconData = 0, [WidgetOrientation](../smeup_models_widgets_smeup_model/WidgetOrientation.md) orientation = defaultOrientation, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) isLink = defaultIsLink, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) innerSpace = defaultInnerSpace})
+[SmeupButtonsModel](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/SmeupButtonsModel.md) ({dynamic id, dynamic type, dynamic title = '', [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>? scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)? context, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? backColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? borderColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? borderWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? borderRadius, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? elevation, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? fontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? fontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? fontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? iconSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? iconColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? height = defaultHeight, [MainAxisAlignment](https://api.flutter.dev/flutter/rendering/MainAxisAlignment.html)? position = defaultPosition, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)? align = defaultAlign, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)? padding = defaultPadding, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? valueField, [int](https://api.flutter.dev/flutter/dart-core/int-class.html)? iconData = 0, [WidgetOrientation](../smeup_models_widgets_smeup_model/WidgetOrientation.md)? orientation = defaultOrientation, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? isLink = defaultIsLink, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? innerSpace = defaultInnerSpace})
 
     
 
-[SmeupButtonsModel.fromMap](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/SmeupButtonsModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
+[SmeupButtonsModel.fromMap](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/SmeupButtonsModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>? scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)? context)
 
     
 
 
 ## Properties
 
-##### [align](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/align.md) &#8596; [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)
+##### [align](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/align.md) &#8596; [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)?
 
 
 
@@ -49,7 +50,7 @@ _read / write_
 
 
 
-##### [backColor](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/backColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [backColor](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/backColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -58,7 +59,7 @@ _read / write_
 
 
 
-##### [borderColor](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/borderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [borderColor](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/borderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -67,7 +68,7 @@ _read / write_
 
 
 
-##### [borderRadius](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/borderRadius.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [borderRadius](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/borderRadius.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -76,7 +77,7 @@ _read / write_
 
 
 
-##### [borderWidth](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/borderWidth.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [borderWidth](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/borderWidth.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -85,7 +86,7 @@ _read / write_
 
 
 
-##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)
+##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)?
 
 
 
@@ -103,7 +104,7 @@ _read / write, inherited_
 
 
 
-##### [dynamisms](../smeup_models_widgets_smeup_model/SmeupModel/dynamisms.md) &#8596; dynamic
+##### [dynamisms](../smeup_models_widgets_smeup_model/SmeupModel/dynamisms.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Dynamism](../smeup_models_dynamism/Dynamism-class.md)>
 
 
 
@@ -112,7 +113,7 @@ _read / write, inherited_
 
 
 
-##### [elevation](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/elevation.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [elevation](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/elevation.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -121,7 +122,7 @@ _read / write_
 
 
 
-##### [fontBold](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/fontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [fontBold](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/fontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -130,7 +131,7 @@ _read / write_
 
 
 
-##### [fontColor](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/fontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [fontColor](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/fontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -139,7 +140,7 @@ _read / write_
 
 
 
-##### [fontSize](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/fontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [fontSize](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/fontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -148,7 +149,7 @@ _read / write_
 
 
 
-##### [formKey](../smeup_models_widgets_smeup_model/SmeupModel/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_models_widgets_smeup_model/SmeupModel/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -166,7 +167,7 @@ _read-only, inherited_
 
 
 
-##### [height](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [height](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -175,7 +176,7 @@ _read / write_
 
 
 
-##### [iconColor](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/iconColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [iconColor](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/iconColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -184,7 +185,7 @@ _read / write_
 
 
 
-##### [iconData](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/iconData.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
+##### [iconData](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/iconData.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)?
 
 
 
@@ -193,7 +194,7 @@ _read / write_
 
 
 
-##### [iconSize](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/iconSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [iconSize](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/iconSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -202,7 +203,7 @@ _read / write_
 
 
 
-##### [id](../smeup_models_widgets_smeup_model/SmeupModel/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_models_widgets_smeup_model/SmeupModel/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -211,7 +212,7 @@ _read / write, inherited_
 
 
 
-##### [innerSpace](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/innerSpace.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [innerSpace](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/innerSpace.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -220,7 +221,7 @@ _read / write_
 
 
 
-##### [isLink](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/isLink.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [isLink](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/isLink.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -247,7 +248,7 @@ _read / write, inherited_
 
 
 
-##### [onReady](../smeup_models_widgets_smeup_model/SmeupModel/onReady.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [onReady](../smeup_models_widgets_smeup_model/SmeupModel/onReady.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -256,7 +257,7 @@ _read / write, inherited_
 
 
 
-##### [options](../smeup_models_widgets_smeup_model/SmeupModel/options.md) &#8596; [LinkedHashMap](https://api.flutter.dev/flutter/dart-collection/LinkedHashMap-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic>
+##### [options](../smeup_models_widgets_smeup_model/SmeupModel/options.md) &#8596; [LinkedHashMap](https://api.flutter.dev/flutter/dart-collection/LinkedHashMap-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic>?
 
 
 
@@ -265,7 +266,7 @@ _read / write, inherited_
 
 
 
-##### [optionsDefault](../smeup_models_widgets_smeup_model/SmeupModel/optionsDefault.md) &#8596; [LinkedHashMap](https://api.flutter.dev/flutter/dart-collection/LinkedHashMap-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic>
+##### [optionsDefault](../smeup_models_widgets_smeup_model/SmeupModel/optionsDefault.md) &#8596; [LinkedHashMap](https://api.flutter.dev/flutter/dart-collection/LinkedHashMap-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic>?
 
 
 
@@ -283,7 +284,7 @@ _read / write, inherited_
 
 
 
-##### [orientation](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/orientation.md) &#8596; [WidgetOrientation](../smeup_models_widgets_smeup_model/WidgetOrientation.md)
+##### [orientation](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/orientation.md) &#8596; [WidgetOrientation](../smeup_models_widgets_smeup_model/WidgetOrientation.md)?
 
 
 
@@ -292,7 +293,7 @@ _read / write_
 
 
 
-##### [padding](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)
+##### [padding](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)?
 
 
 
@@ -301,7 +302,7 @@ _read / write_
 
 
 
-##### [parent](../smeup_models_widgets_smeup_model/SmeupModel/parent.md) &#8596; [SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md)
+##### [parent](../smeup_models_widgets_smeup_model/SmeupModel/parent.md) &#8596; [SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md)?
 
 
 
@@ -310,7 +311,7 @@ _read / write, inherited_
 
 
 
-##### [position](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/position.md) &#8596; [MainAxisAlignment](https://api.flutter.dev/flutter/rendering/MainAxisAlignment.html)
+##### [position](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/position.md) &#8596; [MainAxisAlignment](https://api.flutter.dev/flutter/rendering/MainAxisAlignment.html)?
 
 
 
@@ -328,7 +329,7 @@ _read-only, inherited_
 
 
 
-##### [scaffoldKey](../smeup_models_widgets_smeup_model/SmeupModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+##### [scaffoldKey](../smeup_models_widgets_smeup_model/SmeupModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>?
 
 
 
@@ -337,7 +338,7 @@ _read / write, inherited_
 
 
 
-##### [serviceStatusCode](../smeup_models_widgets_smeup_model/SmeupModel/serviceStatusCode.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
+##### [serviceStatusCode](../smeup_models_widgets_smeup_model/SmeupModel/serviceStatusCode.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)?
 
 
 
@@ -346,7 +347,7 @@ _read / write, inherited_
 
 
 
-##### [showLoader](../smeup_models_widgets_smeup_model/SmeupModel/showLoader.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [showLoader](../smeup_models_widgets_smeup_model/SmeupModel/showLoader.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -355,7 +356,7 @@ _read / write, inherited_
 
 
 
-##### [smeupFun](../smeup_models_widgets_smeup_model/SmeupModel/smeupFun.md) &#8596; [SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md)
+##### [smeupFun](../smeup_models_widgets_smeup_model/SmeupModel/smeupFun.md) &#8596; [Fun](../smeup_models_fun/Fun-class.md)?
 
 
 
@@ -364,7 +365,7 @@ _read / write, inherited_
 
 
 
-##### [smeupSectionsModels](../smeup_models_widgets_smeup_model/SmeupModel/smeupSectionsModels.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupSectionModel](../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.md)>
+##### [smeupSectionsModels](../smeup_models_widgets_smeup_model/SmeupModel/smeupSectionsModels.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupSectionModel](../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.md)>?
 
 
 
@@ -373,7 +374,7 @@ _read / write, inherited_
 
 
 
-##### [title](../smeup_models_widgets_smeup_model/SmeupModel/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_models_widgets_smeup_model/SmeupModel/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -382,7 +383,7 @@ _read / write, inherited_
 
 
 
-##### [type](../smeup_models_widgets_smeup_model/SmeupModel/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_models_widgets_smeup_model/SmeupModel/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -391,7 +392,7 @@ _read / write, inherited_
 
 
 
-##### [valueField](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/valueField.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [valueField](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/valueField.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -409,7 +410,7 @@ _read / write, inherited_
 
 
 
-##### [width](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [width](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -454,7 +455,7 @@ _inherited_
 
 ## Static Properties
 
-##### [defaultBackColor](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [defaultBackColor](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -463,7 +464,7 @@ _read / write_
 
 
 
-##### [defaultBorderColor](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultBorderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [defaultBorderColor](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultBorderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -472,7 +473,7 @@ _read / write_
 
 
 
-##### [defaultBorderRadius](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultBorderRadius.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [defaultBorderRadius](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultBorderRadius.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -481,7 +482,7 @@ _read / write_
 
 
 
-##### [defaultBorderWidth](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultBorderWidth.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [defaultBorderWidth](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultBorderWidth.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -490,7 +491,7 @@ _read / write_
 
 
 
-##### [defaultElevation](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultElevation.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [defaultElevation](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultElevation.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -499,7 +500,7 @@ _read / write_
 
 
 
-##### [defaultFontBold](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [defaultFontBold](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -508,7 +509,7 @@ _read / write_
 
 
 
-##### [defaultFontColor](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [defaultFontColor](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -517,7 +518,7 @@ _read / write_
 
 
 
-##### [defaultFontSize](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [defaultFontSize](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -526,7 +527,7 @@ _read / write_
 
 
 
-##### [defaultIconColor](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultIconColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [defaultIconColor](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultIconColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -535,7 +536,7 @@ _read / write_
 
 
 
-##### [defaultIconSize](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultIconSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [defaultIconSize](../smeup_models_widgets_smeup_buttons_model/SmeupButtonsModel/defaultIconSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 

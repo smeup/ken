@@ -6,13 +6,14 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 - @[override](https://api.flutter.dev/flutter/dart-core/override-constant.html)
 
 [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)> invoke
-([SmeupFun](../../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) httpServiceMethod, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) httpServiceUrl, dynamic httpServiceBody, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) httpServiceContentType, dynamic headers})
+([Fun](../../smeup_models_fun/Fun-class.md)? smeupFun, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? httpServiceMethod, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? httpServiceUrl, dynamic httpServiceBody, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? httpServiceContentType, dynamic headers})
 
 _override_
 
@@ -25,15 +26,15 @@ _override_
 
 ```dart
 @override
-Future<SmeupServiceResponse> invoke(SmeupFun smeupFun,
-    {String httpServiceMethod,
-    String httpServiceUrl,
+Future<SmeupServiceResponse> invoke(Fun? smeupFun,
+    {String? httpServiceMethod,
+    String? httpServiceUrl,
     dynamic httpServiceBody,
-    String httpServiceContentType,
+    String? httpServiceContentType,
     dynamic headers}) async {
   try {
     dynamic data;
-    Response response;
+    Response? response;
 
     SmeupLogService.writeDebugMessage(
         '*** http request \'SmeupHttpDataService\': ${jsonEncode(data)}');
@@ -47,21 +48,21 @@ Future<SmeupServiceResponse> invoke(SmeupFun smeupFun,
 
     SmeupDataService.writeResponseResult(response, 'SmeupHttpDataService');
 
-    bool isValid = SmeupDataService.isValid(response.statusCode);
+    bool isValid = SmeupDataService.isValid(response!.statusCode!);
 
     return SmeupServiceResponse(
         isValid,
         Response(
             data: response,
             statusCode: response.statusCode,
-            requestOptions: null));
+            requestOptions: RequestOptions(path: '')));
   } catch (e) {
     return SmeupServiceResponse(
         false,
         Response(
             data: 'Error in SmeupHttpDataService',
             statusCode: HttpStatus.badRequest,
-            requestOptions: null));
+            requestOptions: RequestOptions(path: '')));
   }
 }
 ```

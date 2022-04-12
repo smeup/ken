@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -32,7 +33,7 @@ SmeupChartRow.fromInfluxDB(List<dynamic> jsonMap, this._columns) {
     else
       cellValue = double.parse(jsonValue);
 
-    cells.add(cellValue);
+    cells!.add(cellValue);
   }
 }
 ```

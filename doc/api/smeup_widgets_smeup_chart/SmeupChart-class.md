@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -34,18 +35,18 @@
 
 ## Constructors
 
-[SmeupChart](../smeup_widgets_smeup_chart/SmeupChart/SmeupChart.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type = 'CHA', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) title = '', [ChartType](../smeup_models_widgets_smeup_chart_model/ChartType.md) chartType = SmeupChartModel.defaultChartType, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) refresh = SmeupChartModel.defaultRefresh, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = SmeupChartModel.defaultHeight, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = SmeupChartModel.defaultWidth, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) legend = SmeupChartModel.defaultLegend, [SmeupChartDatasource](../smeup_models_widgets_smeup_chart_datasource/SmeupChartDatasource-class.md) data})
+[SmeupChart](../smeup_widgets_smeup_chart/SmeupChart/SmeupChart.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type = 'CHA', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? title = '', [ChartType](../smeup_models_widgets_smeup_chart_model/ChartType.md)? chartType = SmeupChartModel.defaultChartType, [int](https://api.flutter.dev/flutter/dart-core/int-class.html)? refresh = SmeupChartModel.defaultRefresh, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? height = SmeupChartModel.defaultHeight, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? width = SmeupChartModel.defaultWidth, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? legend = SmeupChartModel.defaultLegend, [SmeupChartDatasource](../smeup_models_widgets_smeup_chart_datasource/SmeupChartDatasource-class.md)? data})
 
     
 
-[SmeupChart.withController](../smeup_widgets_smeup_chart/SmeupChart/SmeupChart.withController.md) ([SmeupChartModel](../smeup_models_widgets_smeup_chart_model/SmeupChartModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupChart.withController](../smeup_widgets_smeup_chart/SmeupChart/SmeupChart.withController.md) ([SmeupChartModel](../smeup_models_widgets_smeup_chart_model/SmeupChartModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey)
 
     
 
 
 ## Properties
 
-##### [chartType](../smeup_widgets_smeup_chart/SmeupChart/chartType.md) &#8596; [ChartType](../smeup_models_widgets_smeup_chart_model/ChartType.md)
+##### [chartType](../smeup_widgets_smeup_chart/SmeupChart/chartType.md) &#8596; [ChartType](../smeup_models_widgets_smeup_chart_model/ChartType.md)?
 
 
 
@@ -54,7 +55,7 @@ _read / write_
 
 
 
-##### [data](../smeup_widgets_smeup_chart/SmeupChart/data.md) &#8596; [SmeupChartDatasource](../smeup_models_widgets_smeup_chart_datasource/SmeupChartDatasource-class.md)
+##### [data](../smeup_widgets_smeup_chart/SmeupChart/data.md) &#8596; [SmeupChartDatasource](../smeup_models_widgets_smeup_chart_datasource/SmeupChartDatasource-class.md)?
 
 
 
@@ -63,7 +64,7 @@ _read / write_
 
 
 
-##### [formKey](../smeup_widgets_smeup_chart/SmeupChart/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_chart/SmeupChart/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -81,7 +82,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [height](../smeup_widgets_smeup_chart/SmeupChart/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [height](../smeup_widgets_smeup_chart/SmeupChart/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -90,7 +91,7 @@ _read / write_
 
 
 
-##### [id](../smeup_widgets_smeup_chart/SmeupChart/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_chart/SmeupChart/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -99,7 +100,7 @@ _read / write_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -108,7 +109,7 @@ _final, inherited_
 
 
 
-##### [legend](../smeup_widgets_smeup_chart/SmeupChart/legend.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [legend](../smeup_widgets_smeup_chart/SmeupChart/legend.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -117,7 +118,7 @@ _read / write_
 
 
 
-##### [model](../smeup_widgets_smeup_chart/SmeupChart/model.md) &#8596; [SmeupChartModel](../smeup_models_widgets_smeup_chart_model/SmeupChartModel-class.md)
+##### [model](../smeup_widgets_smeup_chart/SmeupChart/model.md) &#8596; [SmeupChartModel](../smeup_models_widgets_smeup_chart_model/SmeupChartModel-class.md)?
 
 
 
@@ -126,7 +127,7 @@ _read / write_
 
 
 
-##### [refresh](../smeup_widgets_smeup_chart/SmeupChart/refresh.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
+##### [refresh](../smeup_widgets_smeup_chart/SmeupChart/refresh.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)?
 
 
 
@@ -153,7 +154,7 @@ _read / write_
 
 
 
-##### [title](../smeup_widgets_smeup_chart/SmeupChart/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_widgets_smeup_chart/SmeupChart/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -162,7 +163,7 @@ _read / write_
 
 
 
-##### [type](../smeup_widgets_smeup_chart/SmeupChart/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_widgets_smeup_chart/SmeupChart/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -171,7 +172,7 @@ _read / write_
 
 
 
-##### [width](../smeup_widgets_smeup_chart/SmeupChart/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [width](../smeup_widgets_smeup_chart/SmeupChart/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -248,7 +249,7 @@ _override_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -267,7 +268,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

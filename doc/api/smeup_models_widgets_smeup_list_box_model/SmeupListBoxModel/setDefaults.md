@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,24 +25,26 @@ dynamic setDefaults
 
 ```dart
 static setDefaults(dynamic obj) {
-  var cardTheme = SmeupConfigurationService.getTheme().cardTheme;
+  var cardTheme = SmeupConfigurationService.getTheme()!.cardTheme;
   defaultBackColor = cardTheme.color;
-  ContinuousRectangleBorder shape = cardTheme.shape;
+  ContinuousRectangleBorder shape =
+      cardTheme.shape as ContinuousRectangleBorder;
   defaultBorderRadius =
       shape.borderRadius.resolve(TextDirection.ltr).topLeft.x;
   var side = shape.side;
   defaultBorderColor = side.color;
   defaultBorderWidth = side.width;
 
-  var textStyle = SmeupConfigurationService.getTheme()
+  var textStyle = SmeupConfigurationService.getTheme()!
       .textTheme
-      .headline4
+      .headline4!
       .copyWith(backgroundColor: defaultBackColor);
   defaultFontBold = textStyle.fontWeight == FontWeight.bold;
   defaultFontSize = textStyle.fontSize;
   defaultFontColor = textStyle.color;
 
-  var captionStyle = SmeupConfigurationService.getTheme().textTheme.headline5;
+  var captionStyle =
+      SmeupConfigurationService.getTheme()!.textTheme.headline5!;
   defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
   defaultCaptionFontSize = captionStyle.fontSize;
   defaultCaptionFontColor = captionStyle.color;

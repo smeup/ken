@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 [Duration](https://api.flutter.dev/flutter/dart-core/Duration-class.html) interval

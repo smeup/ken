@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -33,7 +34,7 @@ static void notifyWidgets(
 
       try {
         RegExp re = RegExp(r'\([^)]*\)');
-        Match firstMatch = re.firstMatch(widgetId);
+        Match? firstMatch = re.firstMatch(widgetId);
         if (firstMatch != null) {
           routeName = widgetId
               .substring(firstMatch.start, firstMatch.end)

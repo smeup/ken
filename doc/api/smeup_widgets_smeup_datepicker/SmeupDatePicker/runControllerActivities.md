@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,7 +25,7 @@ _override_
 
 ```dart
 runControllerActivities(SmeupModel model) {
-  SmeupDatePickerModel m = model;
+  SmeupDatePickerModel m = model as SmeupDatePickerModel;
   id = m.id;
   type = m.type;
   title = m.title;

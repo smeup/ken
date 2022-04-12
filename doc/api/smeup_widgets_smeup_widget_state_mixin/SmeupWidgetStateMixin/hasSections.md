@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -25,7 +26,7 @@
 ```dart
 bool hasSections(SmeupModel model) {
   return model.smeupSectionsModels != null &&
-      model.smeupSectionsModels.length > 0;
+      model.smeupSectionsModels!.length > 0;
 }
 ```
 

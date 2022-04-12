@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,7 +25,7 @@ dynamic setDefaults
 
 ```dart
 static setDefaults(dynamic obj) {
-  defaultColor = SmeupConfigurationService.getTheme().splashColor;
+  defaultColor = SmeupConfigurationService.getTheme()!.splashColor;
 
   // ----------------- set properties from default
 

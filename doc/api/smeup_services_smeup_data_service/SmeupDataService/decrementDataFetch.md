@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 void decrementDataFetch
-([String](https://api.flutter.dev/flutter/dart-core/String-class.html) id)
+([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id)
 
 
 
@@ -23,7 +24,7 @@ void decrementDataFetch
 ## Implementation
 
 ```dart
-static void decrementDataFetch(String id) {
+static void decrementDataFetch(String? id) {
   if (_activeDataFetch == 0) return;
   _activeDataFetch -= 1;
 }

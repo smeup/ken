@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[String](https://api.flutter.dev/flutter/dart-core/String-class.html) styleColumnName
+[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? styleColumnName
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-String styleColumnName;
+String? styleColumnName;
 
 
 ```

@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 [Color](https://pub.dev/documentation/charts_common/0.12.0/common/Color-class.html) color

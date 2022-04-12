@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[int](https://api.flutter.dev/flutter/dart-core/int-class.html) const defaultMaxValue
+[double](https://api.flutter.dev/flutter/dart-core/double-class.html) const defaultMaxValue
   
 
 
@@ -20,7 +21,7 @@
 ## Implementation
 
 ```dart
-static const int defaultMaxValue = 100;
+static const double defaultMaxValue = 100;
 
 
 ```

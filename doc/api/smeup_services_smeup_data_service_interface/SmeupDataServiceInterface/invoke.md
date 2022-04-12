@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)> invoke
-([SmeupFun](../../smeup_models_smeup_fun/SmeupFun-class.md) fun)
+([Fun](../../smeup_models_fun/Fun-class.md) fun)
 
 
 
@@ -23,7 +24,9 @@
 ## Implementation
 
 ```dart
-Future<SmeupServiceResponse> invoke(SmeupFun fun) {}
+Future<SmeupServiceResponse> invoke(Fun fun) {
+  throw ('not implemented');
+}
 ```
 
 

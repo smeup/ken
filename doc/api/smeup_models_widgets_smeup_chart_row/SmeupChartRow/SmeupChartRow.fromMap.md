@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -21,7 +22,7 @@ SmeupChartRow.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Map-class.
 SmeupChartRow.fromMap(Map jsonData, this._columns) {
   cells = List<dynamic>.empty(growable: true);
   for (SmeupChartColumn col in _columns) {
-    cells.add(jsonData[col.name]);
+    cells!.add(jsonData[col.name]);
   }
 }
 ```

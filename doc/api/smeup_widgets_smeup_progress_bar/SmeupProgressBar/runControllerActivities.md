@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 runControllerActivities(SmeupModel model) {
-  SmeupProgressBarModel m = model;
+  SmeupProgressBarModel m = model as SmeupProgressBarModel;
   id = m.id;
   type = m.type;
   color = m.color;

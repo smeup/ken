@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ void setPackageInfo
 static void setPackageInfo(PackageInfo packageInfo) {
   _packageInfo = packageInfo;
   SmeupVariablesService.setVariable(
-      '*VERSION', _packageInfo != null ? _packageInfo.version : '');
+      '*VERSION', _packageInfo != null ? _packageInfo!.version : '');
 }
 ```
 

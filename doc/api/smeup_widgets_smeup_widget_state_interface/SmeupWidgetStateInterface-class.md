@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -80,7 +81,7 @@ _inherited_
 
 
 
-##### [runBuild](../smeup_widgets_smeup_widget_state_interface/SmeupWidgetStateInterface/runBuild.md)([BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) id, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) initialDataLoad, {[Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) notifierFunction}) [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)
+##### [runBuild](../smeup_widgets_smeup_widget_state_interface/SmeupWidgetStateInterface/runBuild.md)([BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) id, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) initialDataLoad, {[Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? notifierFunction}) [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)
 
 
 

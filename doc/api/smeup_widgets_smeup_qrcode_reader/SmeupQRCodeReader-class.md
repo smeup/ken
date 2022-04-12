@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -34,18 +35,18 @@
 
 ## Constructors
 
-[SmeupQRCodeReader](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/SmeupQRCodeReader.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type = 'QRC', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) data, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) padding = SmeupQRCodeReaderModel.defaultPadding, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) size = SmeupQRCodeReaderModel.defaultSize, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) maxReads = SmeupQRCodeReaderModel.defaultMaxReads, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) delayInMillis = SmeupQRCodeReaderModel.defaultDealyInMillis, dynamic title = ''})
+[SmeupQRCodeReader](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/SmeupQRCodeReader.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type = 'QRC', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? data, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? padding = SmeupQRCodeReaderModel.defaultPadding, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? size = SmeupQRCodeReaderModel.defaultSize, [int](https://api.flutter.dev/flutter/dart-core/int-class.html)? maxReads = SmeupQRCodeReaderModel.defaultMaxReads, [int](https://api.flutter.dev/flutter/dart-core/int-class.html)? delayInMillis = SmeupQRCodeReaderModel.defaultDealyInMillis, dynamic title = ''})
 
     
 
-[SmeupQRCodeReader.withController](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/SmeupQRCodeReader.withController.md) ([SmeupQRCodeReaderModel](../smeup_models_widgets_smeup_qrcode_reader_model/SmeupQRCodeReaderModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupQRCodeReader.withController](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/SmeupQRCodeReader.withController.md) ([SmeupQRCodeReaderModel](../smeup_models_widgets_smeup_qrcode_reader_model/SmeupQRCodeReaderModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey)
 
     
 
 
 ## Properties
 
-##### [data](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/data.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [data](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/data.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -54,7 +55,7 @@ _read / write_
 
 
 
-##### [delayInMillis](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/delayInMillis.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
+##### [delayInMillis](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/delayInMillis.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)?
 
 
 
@@ -63,7 +64,7 @@ _read / write_
 
 
 
-##### [formKey](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -81,7 +82,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [id](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -90,7 +91,7 @@ _read / write_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -99,7 +100,7 @@ _final, inherited_
 
 
 
-##### [maxReads](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/maxReads.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
+##### [maxReads](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/maxReads.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)?
 
 
 
@@ -108,7 +109,7 @@ _read / write_
 
 
 
-##### [model](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/model.md) &#8596; [SmeupQRCodeReaderModel](../smeup_models_widgets_smeup_qrcode_reader_model/SmeupQRCodeReaderModel-class.md)
+##### [model](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/model.md) &#8596; [SmeupQRCodeReaderModel](../smeup_models_widgets_smeup_qrcode_reader_model/SmeupQRCodeReaderModel-class.md)?
 
 
 
@@ -117,7 +118,7 @@ _read / write_
 
 
 
-##### [onDataRead](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/onDataRead.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [onDataRead](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/onDataRead.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -126,7 +127,7 @@ _read / write_
 
 
 
-##### [padding](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/padding.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [padding](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/padding.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -153,7 +154,7 @@ _read / write_
 
 
 
-##### [showLoader](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/showLoader.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [showLoader](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/showLoader.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -162,7 +163,7 @@ _read / write_
 
 
 
-##### [size](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/size.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [size](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/size.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -171,7 +172,7 @@ _read / write_
 
 
 
-##### [type](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_widgets_smeup_qrcode_reader/SmeupQRCodeReader/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -248,7 +249,7 @@ _override_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -267,7 +268,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

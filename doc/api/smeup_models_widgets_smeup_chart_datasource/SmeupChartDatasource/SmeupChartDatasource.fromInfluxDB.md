@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -29,12 +30,12 @@ SmeupChartDatasource.fromInfluxDB(String script) {
 
   columns = List<SmeupChartColumn>.empty(growable: true);
   jsonColumns.forEach((c) {
-    columns.add(SmeupChartColumn.fromInfluxDB(c, c, 0));
+    columns!.add(SmeupChartColumn.fromInfluxDB(c, c, 0));
   });
 
   rows = List<SmeupChartRow>.empty(growable: true);
   jsonValues.forEach((r) {
-    rows.add(SmeupChartRow.fromInfluxDB(r, columns));
+    rows!.add(SmeupChartRow.fromInfluxDB(r, columns!));
   });
 }
 ```

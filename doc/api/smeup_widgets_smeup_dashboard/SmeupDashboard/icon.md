@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[int](https://api.flutter.dev/flutter/dart-core/int-class.html) icon
+[int](https://api.flutter.dev/flutter/dart-core/int-class.html)? icon
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-int icon = 0;
+int? icon = 0;
 
 
 ```

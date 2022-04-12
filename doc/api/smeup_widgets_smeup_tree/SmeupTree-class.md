@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -34,18 +35,18 @@
 
 ## Constructors
 
-[SmeupTree](../smeup_widgets_smeup_tree/SmeupTree/SmeupTree.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type = 'TRE', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) title = '', [List](https://api.flutter.dev/flutter/dart-core/List-class.html) data, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) onClientClick, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = SmeupTreeModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = SmeupTreeModel.defaultHeight, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) labelFontSize = SmeupTreeModel.defaultLabelFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) labelBackColor = SmeupTreeModel.defaultLabelBackColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) labelFontColor = SmeupTreeModel.defaultLabelFontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) labelFontbold = SmeupTreeModel.defaultLabelFontbold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) labelVerticalSpacing = SmeupTreeModel.defaultLabelVerticalSpacing, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) labelHeight = SmeupTreeModel.defaultLabelHeight, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) parentFontSize = SmeupTreeModel.defaultParentFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) parentBackColor = SmeupTreeModel.defaultParentBackColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) parentFontColor = SmeupTreeModel.defaultParentFontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) parentFontbold = SmeupTreeModel.defaultParentFontbold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) parentVerticalSpacing = SmeupTreeModel.defaultParentVerticalSpacing, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) parentHeight = SmeupTreeModel.defaultParentHeight})
+[SmeupTree](../smeup_widgets_smeup_tree/SmeupTree/SmeupTree.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type = 'TRE', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? title = '', [List](https://api.flutter.dev/flutter/dart-core/List-class.html)? data, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? onClientClick, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? width = SmeupTreeModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? height = SmeupTreeModel.defaultHeight, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? labelFontSize = SmeupTreeModel.defaultLabelFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? labelBackColor = SmeupTreeModel.defaultLabelBackColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? labelFontColor = SmeupTreeModel.defaultLabelFontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? labelFontbold = SmeupTreeModel.defaultLabelFontbold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? labelVerticalSpacing = SmeupTreeModel.defaultLabelVerticalSpacing, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? labelHeight = SmeupTreeModel.defaultLabelHeight, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? parentFontSize = SmeupTreeModel.defaultParentFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? parentBackColor = SmeupTreeModel.defaultParentBackColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? parentFontColor = SmeupTreeModel.defaultParentFontColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? parentFontbold = SmeupTreeModel.defaultParentFontbold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? parentVerticalSpacing = SmeupTreeModel.defaultParentVerticalSpacing, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? parentHeight = SmeupTreeModel.defaultParentHeight})
 
     
 
-[SmeupTree.withController](../smeup_widgets_smeup_tree/SmeupTree/SmeupTree.withController.md) ([SmeupTreeModel](../smeup_models_widgets_smeup_tree_model/SmeupTreeModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupTree.withController](../smeup_widgets_smeup_tree/SmeupTree/SmeupTree.withController.md) ([SmeupTreeModel](../smeup_models_widgets_smeup_tree_model/SmeupTreeModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey)
 
     
 
 
 ## Properties
 
-##### [data](../smeup_widgets_smeup_tree/SmeupTree/data.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)
+##### [data](../smeup_widgets_smeup_tree/SmeupTree/data.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)?
 
 
 
@@ -54,7 +55,7 @@ _read / write_
 
 
 
-##### [formKey](../smeup_widgets_smeup_tree/SmeupTree/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_tree/SmeupTree/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -72,7 +73,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [height](../smeup_widgets_smeup_tree/SmeupTree/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [height](../smeup_widgets_smeup_tree/SmeupTree/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -81,7 +82,7 @@ _read / write_
 
 
 
-##### [id](../smeup_widgets_smeup_tree/SmeupTree/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_tree/SmeupTree/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -90,7 +91,7 @@ _read / write_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -99,7 +100,7 @@ _final, inherited_
 
 
 
-##### [labelBackColor](../smeup_widgets_smeup_tree/SmeupTree/labelBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [labelBackColor](../smeup_widgets_smeup_tree/SmeupTree/labelBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -108,7 +109,7 @@ _read / write_
 
 
 
-##### [labelFontbold](../smeup_widgets_smeup_tree/SmeupTree/labelFontbold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [labelFontbold](../smeup_widgets_smeup_tree/SmeupTree/labelFontbold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -117,7 +118,7 @@ _read / write_
 
 
 
-##### [labelFontColor](../smeup_widgets_smeup_tree/SmeupTree/labelFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [labelFontColor](../smeup_widgets_smeup_tree/SmeupTree/labelFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -126,7 +127,7 @@ _read / write_
 
 
 
-##### [labelFontSize](../smeup_widgets_smeup_tree/SmeupTree/labelFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [labelFontSize](../smeup_widgets_smeup_tree/SmeupTree/labelFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -135,7 +136,7 @@ _read / write_
 
 
 
-##### [labelHeight](../smeup_widgets_smeup_tree/SmeupTree/labelHeight.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [labelHeight](../smeup_widgets_smeup_tree/SmeupTree/labelHeight.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -144,7 +145,7 @@ _read / write_
 
 
 
-##### [labelVerticalSpacing](../smeup_widgets_smeup_tree/SmeupTree/labelVerticalSpacing.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [labelVerticalSpacing](../smeup_widgets_smeup_tree/SmeupTree/labelVerticalSpacing.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -153,7 +154,7 @@ _read / write_
 
 
 
-##### [model](../smeup_widgets_smeup_tree/SmeupTree/model.md) &#8596; [SmeupTreeModel](../smeup_models_widgets_smeup_tree_model/SmeupTreeModel-class.md)
+##### [model](../smeup_widgets_smeup_tree/SmeupTree/model.md) &#8596; [SmeupTreeModel](../smeup_models_widgets_smeup_tree_model/SmeupTreeModel-class.md)?
 
 
 
@@ -162,7 +163,7 @@ _read / write_
 
 
 
-##### [onClientClick](../smeup_widgets_smeup_tree/SmeupTree/onClientClick.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [onClientClick](../smeup_widgets_smeup_tree/SmeupTree/onClientClick.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -171,7 +172,7 @@ _read / write_
 
 
 
-##### [parentBackColor](../smeup_widgets_smeup_tree/SmeupTree/parentBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [parentBackColor](../smeup_widgets_smeup_tree/SmeupTree/parentBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -180,7 +181,7 @@ _read / write_
 
 
 
-##### [parentFontbold](../smeup_widgets_smeup_tree/SmeupTree/parentFontbold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [parentFontbold](../smeup_widgets_smeup_tree/SmeupTree/parentFontbold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -189,7 +190,7 @@ _read / write_
 
 
 
-##### [parentFontColor](../smeup_widgets_smeup_tree/SmeupTree/parentFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [parentFontColor](../smeup_widgets_smeup_tree/SmeupTree/parentFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -198,7 +199,7 @@ _read / write_
 
 
 
-##### [parentFontSize](../smeup_widgets_smeup_tree/SmeupTree/parentFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [parentFontSize](../smeup_widgets_smeup_tree/SmeupTree/parentFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -207,7 +208,7 @@ _read / write_
 
 
 
-##### [parentHeight](../smeup_widgets_smeup_tree/SmeupTree/parentHeight.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [parentHeight](../smeup_widgets_smeup_tree/SmeupTree/parentHeight.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -216,7 +217,7 @@ _read / write_
 
 
 
-##### [parentVerticalSpacing](../smeup_widgets_smeup_tree/SmeupTree/parentVerticalSpacing.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [parentVerticalSpacing](../smeup_widgets_smeup_tree/SmeupTree/parentVerticalSpacing.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -243,7 +244,7 @@ _read / write_
 
 
 
-##### [title](../smeup_widgets_smeup_tree/SmeupTree/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_widgets_smeup_tree/SmeupTree/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -252,7 +253,7 @@ _read / write_
 
 
 
-##### [type](../smeup_widgets_smeup_tree/SmeupTree/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_widgets_smeup_tree/SmeupTree/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -261,7 +262,7 @@ _read / write_
 
 
 
-##### [width](../smeup_widgets_smeup_tree/SmeupTree/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [width](../smeup_widgets_smeup_tree/SmeupTree/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -338,7 +339,7 @@ _override_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -357,7 +358,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

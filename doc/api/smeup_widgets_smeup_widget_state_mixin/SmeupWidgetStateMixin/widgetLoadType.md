@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 [LoadType](../../smeup_models_widgets_smeup_model/LoadType.md) widgetLoadType

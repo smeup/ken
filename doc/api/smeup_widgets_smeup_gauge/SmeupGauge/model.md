@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[SmeupGaugeModel](../../smeup_models_widgets_smeup_gauge_model/SmeupGaugeModel-class.md) model
+[SmeupGaugeModel](../../smeup_models_widgets_smeup_gauge_model/SmeupGaugeModel-class.md)? model
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-SmeupGaugeModel model;
+SmeupGaugeModel? model;
 
 
 ```

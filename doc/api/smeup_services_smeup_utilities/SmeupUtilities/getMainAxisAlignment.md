@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 [MainAxisAlignment](https://api.flutter.dev/flutter/rendering/MainAxisAlignment.html) getMainAxisAlignment
-([String](https://api.flutter.dev/flutter/dart-core/String-class.html) position)
+([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? position)
 
 
 
@@ -23,7 +24,7 @@
 ## Implementation
 
 ```dart
-static MainAxisAlignment getMainAxisAlignment(String position) {
+static MainAxisAlignment getMainAxisAlignment(String? position) {
   switch (position) {
     case "center":
       return MainAxisAlignment.center;

@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[String](https://api.flutter.dev/flutter/dart-core/String-class.html) valueField
+[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? valueField
   
 _final_
 
@@ -20,7 +21,7 @@ _final_
 ## Implementation
 
 ```dart
-final String valueField;
+final String? valueField;
 
 
 ```

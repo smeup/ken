@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-dynamic dynamisms
+[List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Dynamism](../../smeup_models_dynamism/Dynamism-class.md)> dynamisms
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-dynamic dynamisms;
+late List<Dynamism> dynamisms;
 
 
 ```

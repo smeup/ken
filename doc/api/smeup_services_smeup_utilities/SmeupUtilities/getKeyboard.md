@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 [TextInputType](https://api.flutter.dev/flutter/services/TextInputType-class.html) getKeyboard
-([String](https://api.flutter.dev/flutter/dart-core/String-class.html) keyboard)
+([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? keyboard)
 
 
 
@@ -23,7 +24,7 @@
 ## Implementation
 
 ```dart
-static TextInputType getKeyboard(String keyboard) {
+static TextInputType getKeyboard(String? keyboard) {
   switch (keyboard) {
     case "datetime":
       return TextInputType.datetime;

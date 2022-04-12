@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -77,7 +78,7 @@ _inherited_
 
 ## Static Properties
 
-##### [cacheEnvironment](../smeup_services_smeup_cache_service/SmeupCacheService/cacheEnvironment.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [cacheEnvironment](../smeup_services_smeup_cache_service/SmeupCacheService/cacheEnvironment.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -86,7 +87,7 @@ _read / write_
 
 
 
-##### [cacheIsTest](../smeup_services_smeup_cache_service/SmeupCacheService/cacheIsTest.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [cacheIsTest](../smeup_services_smeup_cache_service/SmeupCacheService/cacheIsTest.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -95,7 +96,7 @@ _read / write_
 
 
 
-##### [cacheLogEnabled](../smeup_services_smeup_cache_service/SmeupCacheService/cacheLogEnabled.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [cacheLogEnabled](../smeup_services_smeup_cache_service/SmeupCacheService/cacheLogEnabled.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -113,7 +114,7 @@ _read / write_
 
 
 
-##### [cachePassword](../smeup_services_smeup_cache_service/SmeupCacheService/cachePassword.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [cachePassword](../smeup_services_smeup_cache_service/SmeupCacheService/cachePassword.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -122,7 +123,7 @@ _read / write_
 
 
 
-##### [cacheserver](../smeup_services_smeup_cache_service/SmeupCacheService/cacheserver.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [cacheserver](../smeup_services_smeup_cache_service/SmeupCacheService/cacheserver.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -131,7 +132,7 @@ _read / write_
 
 
 
-##### [cacheUsername](../smeup_services_smeup_cache_service/SmeupCacheService/cacheUsername.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [cacheUsername](../smeup_services_smeup_cache_service/SmeupCacheService/cacheUsername.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -206,7 +207,7 @@ _read / write_
 
 
 
-##### [getCacheKey](../smeup_services_smeup_cache_service/SmeupCacheService/getCacheKey.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) url) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [getCacheKey](../smeup_services_smeup_cache_service/SmeupCacheService/getCacheKey.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? url) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 
@@ -215,7 +216,7 @@ _read / write_
 
 
 
-##### [getElement](../smeup_services_smeup_cache_service/SmeupCacheService/getElement.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key) [AsyncCache](https://pub.dev/documentation/async/2.8.2/async/AsyncCache-class.html)&lt;[List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>>
+##### [getElement](../smeup_services_smeup_cache_service/SmeupCacheService/getElement.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key) [AsyncCache](https://pub.dev/documentation/async/2.8.2/async/AsyncCache-class.html)&lt;[List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>>?
 
 
 

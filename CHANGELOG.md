@@ -46,3 +46,9 @@
 
 - add Firestore Data Service
 - refactoring data service configuration
+
+## [0.0.3+13] - 12/04/2022
+
+- refactoring Firestore Data Service
+- refactoring smeup fun
+- added javascript validation

@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 [SmeupListType](../../smeup_models_widgets_smeup_list_box_model/SmeupListType.md) decodeListType
-([String](https://api.flutter.dev/flutter/dart-core/String-class.html) type)
+([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type)
 
 
 
@@ -23,7 +24,7 @@
 ## Implementation
 
 ```dart
-static SmeupListType decodeListType(String type) {
+static SmeupListType decodeListType(String? type) {
   switch (type) {
     case 'simple':
       return SmeupListType.simple;

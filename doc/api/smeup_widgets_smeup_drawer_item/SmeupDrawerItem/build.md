@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -60,17 +61,22 @@ and</li>
 @override
 Widget build(BuildContext context) {
   final title = Align(
-      alignment: align, child: Text(text, style: _getElementTextStile()));
+      alignment: align, child: Text(text!, style: _getElementTextStile()));
   Function function = () {
     if (action != null) {
-      action(context);
+      action!(context);
     } else {
-      if (route.trimLeft().toUpperCase().startsWith('F(')) {
+      if (route!.trimLeft().toUpperCase().startsWith('F(')) {
         SmeupDynamismService.run([
-          {"event": "click", "exec": "$route"}
+          Dynamism(
+              "click",
+              route ?? '',
+              false,
+              List<dynamic>.empty(growable: true),
+              List<dynamic>.empty(growable: true))
         ], context, 'click', scaffoldKey, formKey);
       } else {
-        Navigator.of(context).pushNamed(route);
+        Navigator.of(context).pushNamed(route!);
       }
     }
   };
@@ -78,7 +84,7 @@ Widget build(BuildContext context) {
   return Container(
       child: Column(
     children: [
-      if (showItemDivider)
+      if (showItemDivider!)
         Divider(
           color: _getElementTextStile().color,
         ),
@@ -90,12 +96,12 @@ Widget build(BuildContext context) {
             size: _getIconTheme().size,
           ),
           title: title,
-          onTap: function,
+          onTap: function as void Function()?,
         )
       else
         ListTile(
           title: title,
-          onTap: function,
+          onTap: function as void Function()?,
         ),
     ],
   ));

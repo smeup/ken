@@ -6,11 +6,12 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
-[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) getBool
+[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? getBool
 (dynamic value)
 
 
@@ -23,7 +24,7 @@
 ## Implementation
 
 ```dart
-static bool getBool(dynamic value) {
+static bool? getBool(dynamic value) {
   if (value is bool) {
     return value;
   } else if (value is String) {

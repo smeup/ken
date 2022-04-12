@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 dynamic setVariable
-([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key, dynamic value, {[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey})
+([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? key, dynamic value, {[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey})
 
 
 
@@ -23,8 +24,8 @@ dynamic setVariable
 ## Implementation
 
 ```dart
-static setVariable(String key, dynamic value,
-    {GlobalKey<FormState> formKey}) {
+static setVariable(String? key, dynamic value,
+    {GlobalKey<FormState>? formKey}) {
   var workKey = key;
   if (formKey == null) {
     _globalVariables[workKey] = value;

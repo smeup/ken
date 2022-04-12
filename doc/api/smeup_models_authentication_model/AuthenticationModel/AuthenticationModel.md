@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-AuthenticationModel({[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) managed = false, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) logoutFunction})
+AuthenticationModel({[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) managed = false, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? logoutFunction})
 
 
 

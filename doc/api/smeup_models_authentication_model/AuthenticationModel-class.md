@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -16,7 +17,7 @@
 
 ## Constructors
 
-[AuthenticationModel](../smeup_models_authentication_model/AuthenticationModel/AuthenticationModel.md) ({[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) managed = false, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) logoutFunction})
+[AuthenticationModel](../smeup_models_authentication_model/AuthenticationModel/AuthenticationModel.md) ({[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) managed = false, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? logoutFunction})
 
     
 
@@ -32,7 +33,7 @@ _read-only, inherited_
 
 
 
-##### [logoutFunction](../smeup_models_authentication_model/AuthenticationModel/logoutFunction.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [logoutFunction](../smeup_models_authentication_model/AuthenticationModel/logoutFunction.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 

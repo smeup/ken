@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -69,7 +70,7 @@ Widget build(BuildContext context) {
           "$imageFileName",
           fit: BoxFit.scaleDown,
         ),
-        Expanded(child: Text(text))
+        Expanded(child: Text(text!))
       ],
     ),
   );

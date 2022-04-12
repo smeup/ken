@@ -6,11 +6,12 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
-[String](https://api.flutter.dev/flutter/dart-core/String-class.html) extractValueFromName
+[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? extractValueFromName
 ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) field)
 
 
@@ -23,9 +24,9 @@
 ## Implementation
 
 ```dart
-static String extractValueFromName(Map field) {
-  String fieldValue;
-  Map smeupObject = field['smeupObject'];
+static String? extractValueFromName(Map field) {
+  String? fieldValue;
+  Map? smeupObject = field['smeupObject'];
   if (smeupObject != null) {
     switch (smeupObject['tipo']) {
       case 'NR':

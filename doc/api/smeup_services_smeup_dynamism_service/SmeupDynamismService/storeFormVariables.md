@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 void storeFormVariables
-([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) data, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) data, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey)
 
 
 
@@ -23,9 +24,9 @@ void storeFormVariables
 ## Implementation
 
 ```dart
-static void storeFormVariables(Map data, GlobalKey<FormState> formKey) {
-  if (data != null && data['name'] != null) {
-    String type = data['type'];
+static void storeFormVariables(Map data, GlobalKey<FormState>? formKey) {
+  if (data['name'] != null) {
+    String? type = data['type'];
     if (type == null || type.toString() != 'sch') {
       SmeupVariablesService.setVariable(data['name'], data['value'] ?? '',
           formKey: null);

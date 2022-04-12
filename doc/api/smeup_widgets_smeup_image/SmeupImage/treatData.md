@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 dynamic treatData(SmeupModel model) {
-  SmeupImageModel m = model;
+  SmeupImageModel m = model as SmeupImageModel;
 
   // set the widget data
   bool isRemote = SmeupImageModel.defaultIsRemote;

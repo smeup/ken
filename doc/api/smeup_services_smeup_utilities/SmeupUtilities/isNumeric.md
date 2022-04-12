@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,10 +25,6 @@
 
 ```dart
 static bool isNumeric(String s) {
-  if (s == null) {
-    return false;
-  }
-
   if (((int.tryParse(s) ?? null) != null) ||
       ((double.tryParse(s) ?? null) != null)) return true;
 

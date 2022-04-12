@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[String](https://api.flutter.dev/flutter/dart-core/String-class.html) warningColName
+[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? warningColName
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-String warningColName;
+String? warningColName;
 
 
 ```

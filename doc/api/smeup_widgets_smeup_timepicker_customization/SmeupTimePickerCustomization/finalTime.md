@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -39,9 +40,7 @@ DateTime finalTime() {
           currentTime.month,
           currentTime.day,
           this.currentLeftIndex(),
-          this.middleList == null
-              ? this.currentMiddleIndex()
-              : int.parse(this.middleList[this.currentMiddleIndex()]),
+          int.parse(this.middleList[this.currentMiddleIndex()]),
           this.currentRightIndex());
 }
 ```

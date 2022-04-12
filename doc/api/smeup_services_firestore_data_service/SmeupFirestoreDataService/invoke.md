@@ -6,13 +6,14 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 - @[override](https://api.flutter.dev/flutter/dart-core/override-constant.html)
 
 [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)> invoke
-([SmeupFun](../../smeup_models_smeup_fun/SmeupFun-class.md) fun)
+([Fun](../../smeup_models_fun/Fun-class.md) fun)
 
 _override_
 
@@ -25,14 +26,15 @@ _override_
 
 ```dart
 @override
-Future<SmeupServiceResponse> invoke(SmeupFun fun) async {
-  switch (fun.fun['fun']['function']) {
+Future<SmeupServiceResponse> invoke(Fun fun) async {
+  switch (fun.identifier.function) {
     case "GET.DOCUMENTS":
       return await getDocuments(fun);
     case "GET.DOCUMENT":
       return await getDocument(fun);
-    case "GET.DOCUMENT.DEFAULT":
-      return await getDocumentDefault(fun);
+    case "GET.FIELD.DEFAULT":
+    case "GET.FIELD.VALIDATION":
+      return await getFieldSetting(fun);
     case "UPDATE.DOCUMENT":
       return await updateDocument(fun);
     case "DELETE.DOCUMENT":
@@ -40,7 +42,9 @@ Future<SmeupServiceResponse> invoke(SmeupFun fun) async {
     case "WRITE.DOCUMENT":
       return await writeDocument(fun);
     default:
-      return null;
+      final message =
+          'SmeupFirestoreDataService.invoke: function not implemented ${fun.toString()}';
+      return _getErrorResponse(message);
   }
 }
 ```

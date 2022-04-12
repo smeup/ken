@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -28,10 +29,10 @@ Future<void> execDynamismActions(dynamic child, bool isAsync) async {
 
   if (_model != null) {
     if (isAsync)
-      SmeupDynamismService.run(_model.dynamisms, context, 'click',
+      SmeupDynamismService.run(_model!.dynamisms, context, 'click',
           widget.scaffoldKey, widget.formKey);
     else
-      await SmeupDynamismService.run(_model.dynamisms, context, 'click',
+      await SmeupDynamismService.run(_model!.dynamisms, context, 'click',
           widget.scaffoldKey, widget.formKey);
   }
 }

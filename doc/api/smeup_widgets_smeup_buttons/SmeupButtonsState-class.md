@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -178,7 +179,7 @@ _override_
 
 
 
-##### [getDataLoaded](../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/getDataLoaded.md)(dynamic id) [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [getDataLoaded](../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/getDataLoaded.md)(dynamic id) [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -187,7 +188,7 @@ _inherited_
 
 
 
-##### [getFunErrorResponse](../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/getFunErrorResponse.md)([BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md) model) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupWidgetBuilderResponse](../smeup_models_smeupWidgetBuilderResponse/SmeupWidgetBuilderResponse-class.md)>
+##### [getFunErrorResponse](../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/getFunErrorResponse.md)([BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md)? model) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupWidgetBuilderResponse](../smeup_models_smeupWidgetBuilderResponse/SmeupWidgetBuilderResponse-class.md)>
 
 
 
@@ -196,7 +197,7 @@ _inherited_
 
 
 
-##### [getInitialdataLoaded](../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/getInitialdataLoaded.md)([SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md) model) [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [getInitialdataLoaded](../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/getInitialdataLoaded.md)([SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md)? model) [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
 
 
 
@@ -243,7 +244,7 @@ _inherited_
 
 
 
-##### [notifyError](../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/notifyError.md)(dynamic context, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) id, [Object](https://api.flutter.dev/flutter/dart-core/Object-class.html) error) void
+##### [notifyError](../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/notifyError.md)(dynamic context, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id, [Object](https://api.flutter.dev/flutter/dart-core/Object-class.html)? error) void
 
 
 
@@ -262,7 +263,7 @@ _@[mustCallSuper](https://pub.dev/documentation/meta/1.7.0/meta/mustCallSuper-co
 
 
 
-##### [runBuild](../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/runBuild.md)([BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) id, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) initialDataLoad, {[Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) notifierFunction}) [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)
+##### [runBuild](../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/runBuild.md)([BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>? scaffoldKey, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) initialDataLoad, {[Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? notifierFunction}) [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)
 
 
 
@@ -271,7 +272,7 @@ _inherited_
 
 
 
-##### [runDispose](../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/runDispose.md)([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) id) void
+##### [runDispose](../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/runDispose.md)([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>? scaffoldKey, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id) void
 
 
 
@@ -289,7 +290,7 @@ _inherited_
 
 
 
-##### [setDataLoad](../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/setDataLoad.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) id, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) value) void
+##### [setDataLoad](../smeup_widgets_smeup_widget_state_mixin/SmeupWidgetStateMixin/setDataLoad.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) value) void
 
 
 
@@ -307,7 +308,7 @@ _override_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/Diagnosticable/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/Diagnosticable/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 

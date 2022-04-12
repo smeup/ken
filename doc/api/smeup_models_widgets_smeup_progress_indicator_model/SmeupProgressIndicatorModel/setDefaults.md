@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -25,7 +26,7 @@ dynamic setDefaults
 ```dart
 static setDefaults(dynamic obj) {
   ProgressIndicatorThemeData progressIndicatorThemeData =
-      SmeupConfigurationService.getTheme().progressIndicatorTheme;
+      SmeupConfigurationService.getTheme()!.progressIndicatorTheme;
   defaultColor = progressIndicatorThemeData.color;
   defaultCircularTrackColor = progressIndicatorThemeData.circularTrackColor;
 

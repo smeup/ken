@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[double](https://api.flutter.dev/flutter/dart-core/double-class.html) defaultTitleFontSize
+[double](https://api.flutter.dev/flutter/dart-core/double-class.html)? defaultTitleFontSize
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-static double defaultTitleFontSize;
+static double? defaultTitleFontSize;
 
 
 ```

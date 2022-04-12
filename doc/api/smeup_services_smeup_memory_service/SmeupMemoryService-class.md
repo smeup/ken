@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -107,7 +108,7 @@ _read / write_
 
 
 
-##### [getMemory](../smeup_services_smeup_memory_service/SmeupMemoryService/getMemory.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) segment, [SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) dataFunction) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)
+##### [getMemory](../smeup_services_smeup_memory_service/SmeupMemoryService/getMemory.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) segment, [Fun](../smeup_models_fun/Fun-class.md) smeupFun, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) dataFunction) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)
 
 
 

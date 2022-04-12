@@ -6,13 +6,14 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 - @[override](https://api.flutter.dev/flutter/dart-core/override-constant.html)
 
-[Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) transform
-([SmeupFun](../../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun, dynamic data)
+[Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)? transform
+([Fun](../../smeup_models_fun/Fun-class.md) smeupFun, dynamic data)
 
 _override_
 
@@ -25,7 +26,7 @@ _override_
 
 ```dart
 @override
-transform(SmeupFun smeupFun, data) {
+transform(Fun smeupFun, data) {
   return data;
 }
 ```

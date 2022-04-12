@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,9 +25,9 @@ void resetAltServiceEndpoint
 
 ```dart
 static void resetAltServiceEndpoint() {
-  SmeupConfigurationService.getLocalStorage()
+  SmeupConfigurationService.getLocalStorage()!
       .remove('$ALT_SERVICE_ENDPOINTS.DEFAULT'.split('.').last);
-  SmeupConfigurationService.getLocalStorage()
+  SmeupConfigurationService.getLocalStorage()!
       .remove('$ALT_SERVICE_ENDPOINTS.HTTP'.split('.').last);
 }
 ```

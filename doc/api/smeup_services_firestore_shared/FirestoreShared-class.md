@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -78,7 +79,7 @@ _inherited_
 
 ## Static Methods
 
-##### [getSource](../smeup_services_firestore_shared/FirestoreShared/getSource.md)() [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[Source](https://pub.dev/documentation/cloud_firestore_platform_interface/5.5.1/cloud_firestore_platform_interface/Source.html)>
+##### [getSource](../smeup_services_firestore_shared/FirestoreShared/getSource.md)() [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[Source](https://pub.dev/documentation/cloud_firestore_platform_interface/5.5.2/cloud_firestore_platform_interface/Source.html)>
 
 
 
