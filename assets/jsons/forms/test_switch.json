@@ -53,7 +53,13 @@
                 "text": "Smeup Switch"
               }
             }
-          }
+          },
+          "dynamisms": [
+            {
+              "event": "click",
+              "exec": "F(FBK;*MSG;) P(message(You have changed the switch to: [switch1]))"
+            }
+          ]
         }
       ]
     }

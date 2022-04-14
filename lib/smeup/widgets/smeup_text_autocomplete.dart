@@ -318,7 +318,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                   ),
                   onTap: () {
                     setState(() {
-                      SmeupVariablesService.setVariable(widget.defaultValue, '',
+                      SmeupVariablesService.setVariable(widget.valueField, '',
                           formKey: widget.formKey);
                       if (_model != null)
                         SmeupDynamismService.run(_model!.dynamisms, context,

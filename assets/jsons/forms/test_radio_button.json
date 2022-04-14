@@ -65,7 +65,13 @@
                 "height": 100
               }
             }
-          }
+          },
+          "dynamisms": [
+            {
+              "event": "change",
+              "exec": "F(FBK;*MSG;) P(message(you selected the option: [radio_buttons_1]))"
+            }
+          ]
         }
       ]
     }

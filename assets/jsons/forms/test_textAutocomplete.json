@@ -94,7 +94,7 @@
           "dynamisms": [
             {
               "event": "change",
-              "exec": "F(FBK;*MSG;) P(message(you selected the option: \"[autocomplete2]\" \"[value]\"))"
+              "exec": "F(FBK;*MSG;) P(message(you selected the option: \"[value]\"))"
             }
           ]
         }

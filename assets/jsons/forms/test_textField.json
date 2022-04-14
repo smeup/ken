@@ -55,6 +55,9 @@
             {
               "event": "click",
               "exec": "F(FBK;*MSG;) P(message(you tapped the submit button: \"[value]\"))"
+            },{
+              "event": "change",
+              "exec": "F(FBK;*MSG;) P(message('value changed: [text1]))"
             }
           ]
         }

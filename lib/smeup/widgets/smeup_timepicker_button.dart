@@ -6,6 +6,8 @@ import 'package:ken/smeup/services/smeup_variables_service.dart';
 import 'package:ken/smeup/widgets/smeup_timepicker.dart';
 import 'package:ken/smeup/widgets/smeup_timepicker_customization.dart';
 
+import '../services/smeup_dynamism_service.dart';
+
 // ignore: must_be_immutable
 class SmeupTimePickerButton extends StatefulWidget {
   final GlobalKey<ScaffoldState>? scaffoldKey;
@@ -24,6 +26,7 @@ class SmeupTimePickerButton extends StatefulWidget {
   Color? captionFontColor;
   Color? captionBackColor;
   bool? underline;
+  SmeupTimePickerModel? model;
 
   final String? id;
 
@@ -67,6 +70,7 @@ class SmeupTimePickerButton extends StatefulWidget {
     this.showborder = SmeupTimePickerModel.defaultShowBorder,
     this.minutesList,
     this.clientOnChange,
+    this.model,
   }) {
     SmeupTimePickerModel.setDefaults(this);
   }
@@ -111,14 +115,20 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
                   final newTime = DateFormat('HH:mm').format(date);
                   _currentDisplay = newTime;
                   _currentValue = date;
+                  SmeupVariablesService.setVariable(widget.id, newTime,
+                      formKey: widget.formKey);
+
                   if (widget.clientOnChange != null) {
                     widget.clientOnChange!(SmeupTimePickerData(
                       time: _currentValue,
                       formattedTime: _currentDisplay,
                     ));
                   }
-                  SmeupVariablesService.setVariable(widget.id, newTime,
-                      formKey: widget.formKey);
+
+                  if (widget.model != null) {
+                    SmeupDynamismService.run(widget.model!.dynamisms, context,
+                        'change', widget.scaffoldKey!, widget.formKey);
+                  }
                 });
               });
             },

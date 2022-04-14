@@ -223,7 +223,8 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
     }
 
     if (_model != null) {
-      SmeupVariablesService.setVariable(_model!.id, _data!.formattedTime);
+      SmeupVariablesService.setVariable(_model!.id, _data!.formattedTime,
+          formKey: widget.formKey);
     }
 
     double? timePickerHeight = widget.height;
@@ -292,6 +293,7 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
       showborder: widget.showborder,
       minutesList: widget.minutesList,
       clientOnChange: widget.clientOnChange,
+      model: _model,
     );
 
     var line = widget.underline!

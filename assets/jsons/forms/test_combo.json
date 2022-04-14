@@ -63,7 +63,13 @@
                 "IO": "O"
               }
             ]
-          }
+          },
+          "dynamisms": [
+            {
+              "event": "change",
+              "exec": "F(FBK;*MSG;) P(message(you selected the option: [combo1]))"
+            }
+          ]
         }
       ]
     }

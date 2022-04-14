@@ -214,7 +214,8 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
     }
 
     SmeupVariablesService.setVariable(
-        widget.id, DateFormat("yyyyMMdd").format(_data!.value!));
+        widget.id, DateFormat("yyyyMMdd").format(_data!.value!),
+        formKey: widget.formKey);
 
     double? datePickerHeight = widget.height;
     double? datePickerWidth = widget.width;
@@ -254,30 +255,36 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
         ? Container()
         : Text(widget.label!, textAlign: TextAlign.center, style: captionStyle);
 
-    var datepicker = SmeupDatePickerButton(widget.id, buttonStyle, textStyle,
-        scaffoldKey: widget.scaffoldKey,
-        formKey: widget.formKey,
-        value: _data!.value,
-        display: _data!.text,
-        backColor: widget.backColor,
-        fontSize: widget.fontSize,
-        fontColor: widget.fontColor,
-        label: widget.label,
-        width: datePickerWidth,
-        height: datePickerHeight,
-        padding: widget.padding,
-        showborder: widget.showborder,
-        borderRadius: widget.borderRadius,
-        borderWidth: widget.borderWidth,
-        borderColor: widget.borderColor,
-        fontBold: widget.fontBold,
-        align: widget.align,
-        underline: widget.underline,
-        elevation: widget.elevation,
-        captionFontBold: widget.captionFontBold,
-        captionFontSize: widget.captionFontSize,
-        captionFontColor: widget.captionFontColor,
-        captionBackColor: widget.captionBackColor);
+    var datepicker = SmeupDatePickerButton(
+      widget.id,
+      buttonStyle,
+      textStyle,
+      scaffoldKey: widget.scaffoldKey,
+      formKey: widget.formKey,
+      value: _data!.value,
+      display: _data!.text,
+      backColor: widget.backColor,
+      fontSize: widget.fontSize,
+      fontColor: widget.fontColor,
+      label: widget.label,
+      width: datePickerWidth,
+      height: datePickerHeight,
+      padding: widget.padding,
+      showborder: widget.showborder,
+      borderRadius: widget.borderRadius,
+      borderWidth: widget.borderWidth,
+      borderColor: widget.borderColor,
+      fontBold: widget.fontBold,
+      align: widget.align,
+      underline: widget.underline,
+      elevation: widget.elevation,
+      captionFontBold: widget.captionFontBold,
+      captionFontSize: widget.captionFontSize,
+      captionFontColor: widget.captionFontColor,
+      captionBackColor: widget.captionBackColor,
+      clientOnChange: widget.clientOnChange,
+      model: _model,
+    );
 
     var line = widget.underline!
         ? SmeupLine(widget.scaffoldKey, widget.formKey)
@@ -443,7 +450,8 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
+    TextStyle style =
+        SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
 
     style = style.copyWith(color: widget.fontColor, fontSize: widget.fontSize);
 
