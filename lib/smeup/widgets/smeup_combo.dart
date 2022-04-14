@@ -14,6 +14,8 @@ import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
+import '../services/smeup_dynamism_service.dart';
+
 // ignore: must_be_immutable
 class SmeupCombo extends StatefulWidget
     with SmeupWidgetMixin
@@ -222,6 +224,9 @@ class _SmeupComboState extends State<SmeupCombo>
               if (widget.clientOnChange != null) {
                 widget.clientOnChange!(newValue);
               }
+              if (_model != null)
+                SmeupDynamismService.run(_model!.dynamisms, context, 'change',
+                    widget.scaffoldKey, widget.formKey);
             },
           )),
     );

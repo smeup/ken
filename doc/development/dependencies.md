@@ -21,6 +21,12 @@ Follow the list of all ken dependencies
 - shared_preferences:           https://pub.dev/packages/shared_preferences
 - xml:                          https://pub.dev/packages/xml
 - json_theme:                   https://pub.dev/packages/json_theme
+- firebase_core:                https://pub.dev/packages/firebase_core
+- firebase_auth:                https://pub.dev/packages/firebase_auth
+- cloud_firestore:              https://pub.dev/packages/cloud_firestore
+- connectivity:                 https://pub.dev/packages/connectivity_plus
+- flutter_localizations:        https://pub.dev/packages/collection
+- flutter_js:                   https://pub.dev/packages/flutter_js
 
 ## ken permissions
 - storage

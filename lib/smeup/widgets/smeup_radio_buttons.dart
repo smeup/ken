@@ -248,9 +248,9 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
             }
           });
 
-      if (_model != null)
-        SmeupDynamismService.run(_model!.dynamisms, context, 'change',
-            widget.scaffoldKey, widget.formKey);
+      // if (_model != null)
+      //   SmeupDynamismService.run(_model!.dynamisms, context, 'change',
+      //       widget.scaffoldKey, widget.formKey);
       buttons.add(button);
     });
 

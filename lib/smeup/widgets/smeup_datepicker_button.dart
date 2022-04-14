@@ -3,6 +3,9 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:ken/smeup/models/widgets/smeup_datepicker_model.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
+import 'package:ken/smeup/widgets/smeup_timepicker.dart';
+
+import '../services/smeup_dynamism_service.dart';
 
 // ignore: must_be_immutable
 class SmeupDatePickerButton extends StatefulWidget {
@@ -22,6 +25,8 @@ class SmeupDatePickerButton extends StatefulWidget {
   Color? captionFontColor;
   Color? captionBackColor;
   bool? underline;
+  SmeupDatePickerModel? model;
+  final Function? clientOnChange;
 
   final DateTime? value;
   final String? id;
@@ -63,6 +68,8 @@ class SmeupDatePickerButton extends StatefulWidget {
     this.height = SmeupDatePickerModel.defaultHeight,
     this.padding = SmeupDatePickerModel.defaultPadding,
     this.showborder = SmeupDatePickerModel.defaultShowBorder,
+    this.clientOnChange,
+    this.model,
   }) {
     SmeupDatePickerModel.setDefaults(this);
   }
@@ -108,6 +115,18 @@ class _SmeupDatePickerButtonState extends State<SmeupDatePickerButton> {
                 _currentValue = date;
                 SmeupVariablesService.setVariable(widget.id, newTime,
                     formKey: widget.formKey);
+
+                if (widget.clientOnChange != null) {
+                  widget.clientOnChange!(SmeupTimePickerData(
+                    time: _currentValue,
+                    formattedTime: _currentDisplay,
+                  ));
+                }
+
+                if (widget.model != null) {
+                  SmeupDynamismService.run(widget.model!.dynamisms, context,
+                      'change', widget.scaffoldKey!, widget.formKey);
+                }
               });
             });
           },
