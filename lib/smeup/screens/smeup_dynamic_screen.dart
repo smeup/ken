@@ -332,7 +332,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
           ),
           onTap: () async {
             // TODO - Left as reminder for stefano
-            // if (!SmeupScriptingServices.validate(
+            // var validated = await SmeupScriptingServices.validate(
             //     context: context,
             //     formKey: widget._formKey,
             //     scaffoldKey: widget._scaffoldKey,
@@ -348,19 +348,44 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
             //     }
             //   }
 
-            //   function validate(screenId, variables) {
-            //     if (screenId === 'TEST_FIRESTORE_DETAILS' || screenId === 'TEST_FIRESTORE_NEW') {
-            //       var validated =
-            //         validateRequiredField('name', variables) &&
-            //         validateRequiredField('surname', variables);
+            //   async function validate(screenId, variables) {
+            //     console.log("screenId=" + screenId);
+            //     if (screenId === 'new') {
+            //       var validated = validateRequiredField('name', variables) && validateRequiredField('surname', variables);
             //       if (validated) {
-            //         dataHelper.insert('audit', JSON.stringify({time : Date.now(), operation : 'insert'}));
-            //       }
+            //         var record = await dataHelper.read('data', 'surname(' + variables.surname + ')');
+            //         console.log("JS " + record);
+            //         validated = record.surname != variables.surname;
+            //         if (!validated) {
+            //           helper.snackBar("You can't insert this customer, because " + record.surname + " is already definined");
+            //         };
+            //       };
             //       return validated;
             //     }
             //     return true;
             //   }
-            // ''')) return;
+            // ''');
+
+            var validated = await SmeupScriptingServices.validate(
+                context: context,
+                formKey: widget._formKey,
+                scaffoldKey: widget._scaffoldKey,
+                screenId: smeupScreenModel.data['id'],
+                script: '''
+                  async function validate(screenId, variables) {                    
+                    var validated = helper.validateRequiredField('surname', variables);
+                    if (validated) {
+                      var record = await dataHelper.readz('locked-surnames', 'surname(' + variables.surname + ')');                      
+                      validated = record.surname != variables.surname;
+                      if (!validated) {
+                        helper.snackBar("You can't modify this customer, because " + record.surname + " is locked");
+                      };
+                    };
+                    return validated;                    
+                  }
+            ''');
+
+            if (!validated) return;
             SmeupFun smeupFun =
                 SmeupFun(button, widget._formKey, widget._scaffoldKey, context);
             if (smeupFun.isDinamismAsync(

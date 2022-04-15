@@ -8,7 +8,6 @@ import 'package:ken/smeup/models/widgets/smeup_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
-import 'package:ken/smeup/services/smeup_scripting_services.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
 import 'package:ken/smeup/widgets/smeup_button.dart';
@@ -344,14 +343,18 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
   }
 
   bool _validate() {
-    if (_model.validationScript != null) {
-      return SmeupScriptingServices.validate(
-          context: context,
-          formKey: widget.formKey,
-          screenId: _model.data['id'],
-          script: _model.validationScript);
-    } else {
-      return true;
-    }
+    return true;
+    // TODO: call validate foreach field and exit when the first field is invalid
+
+    // if (_model.validationScript != null) {
+    //   return SmeupScriptingServices.validate(
+    //       context: context,
+    //       formKey: widget.formKey,
+    //       screenId: _model.data['id'],
+    //       scaffoldKey: widget.scaffoldKey,
+    //       script: _model.validationScript);
+    // } else {
+    //   return true;
+    // }
   }
 }

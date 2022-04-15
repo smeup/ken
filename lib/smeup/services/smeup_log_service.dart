@@ -57,7 +57,11 @@ class SmeupLogService {
     // Errors must be always written in log
 
     if (messageLevel <= logLevel || logType == LogType.error) {
-      print(color + message + '\x1B[0m');
+      final pattern = RegExp('.{1,800}');
+      pattern.allMatches(message).forEach((match) {
+        print(color + match.group(0) + '\x1B[0m');
+      });
+      //print(color + message + '\x1B[0m');
 
       if (SmeupConfigurationService.isLogEnabled || logType == LogType.error) {
         if (_logFile != null) {
