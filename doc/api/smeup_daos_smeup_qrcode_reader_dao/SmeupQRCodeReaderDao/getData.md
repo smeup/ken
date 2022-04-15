@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,7 +25,7 @@ _override_
 
 ```dart
 static Future<void> getData(SmeupQRCodeReaderModel model) async {
-  if (model.smeupFun != null && model.smeupFun.isFunValid()) {
+  if (model.smeupFun != null && model.smeupFun!.isFunValid()) {
     final smeupServiceResponse =
         await SmeupDataService.invoke(model.smeupFun);
 
@@ -35,7 +36,7 @@ static Future<void> getData(SmeupQRCodeReaderModel model) async {
 
     var data = smeupServiceResponse.result.data;
 
-    if (model.onDataRead != null) model.onDataRead(data);
+    if (model.onDataRead != null) model.onDataRead!(data);
 
     model.data = data;
 

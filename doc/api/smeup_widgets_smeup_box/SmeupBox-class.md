@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -28,14 +29,14 @@
 
 ## Constructors
 
-[SmeupBox](../smeup_widgets_smeup_box/SmeupBox/SmeupBox.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) index, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) isDynamic = false, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) selectedRow, [List](https://api.flutter.dev/flutter/dart-core/List-class.html) columns, dynamic data, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) onRefresh, dynamic dynamisms, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showLoader, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) layout, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) onItemTap, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) dismissEnabled, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showSelection, [CardTheme](https://api.flutter.dev/flutter/material/CardTheme-class.html) cardTheme, [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html) textStyle, [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html) captionStyle, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) onSizeChanged})
+[SmeupBox](../smeup_widgets_smeup_box/SmeupBox/SmeupBox.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) index, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) isDynamic = false, [int](https://api.flutter.dev/flutter/dart-core/int-class.html)? selectedRow, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)? columns, dynamic data, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? onRefresh, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Dynamism](../smeup_models_dynamism/Dynamism-class.md)>? dynamisms, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? showLoader, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? layout, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? onItemTap, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? backColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? fontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? width, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? height, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? dismissEnabled, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? showSelection, [CardTheme](https://api.flutter.dev/flutter/material/CardTheme-class.html)? cardTheme, [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html)? textStyle, [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html)? captionStyle, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? onSizeChanged})
 
     
 
 
 ## Properties
 
-##### [backColor](../smeup_widgets_smeup_box/SmeupBox/backColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [backColor](../smeup_widgets_smeup_box/SmeupBox/backColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -44,7 +45,7 @@ _final_
 
 
 
-##### [captionStyle](../smeup_widgets_smeup_box/SmeupBox/captionStyle.md) &#8594; [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html)
+##### [captionStyle](../smeup_widgets_smeup_box/SmeupBox/captionStyle.md) &#8594; [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html)?
 
 
 
@@ -53,7 +54,7 @@ _final_
 
 
 
-##### [cardTheme](../smeup_widgets_smeup_box/SmeupBox/cardTheme.md) &#8594; [CardTheme](https://api.flutter.dev/flutter/material/CardTheme-class.html)
+##### [cardTheme](../smeup_widgets_smeup_box/SmeupBox/cardTheme.md) &#8594; [CardTheme](https://api.flutter.dev/flutter/material/CardTheme-class.html)?
 
 
 
@@ -62,7 +63,7 @@ _final_
 
 
 
-##### [columns](../smeup_widgets_smeup_box/SmeupBox/columns.md) &#8594; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)
+##### [columns](../smeup_widgets_smeup_box/SmeupBox/columns.md) &#8594; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)?
 
 
 
@@ -80,7 +81,7 @@ _final_
 
 
 
-##### [dismissEnabled](../smeup_widgets_smeup_box/SmeupBox/dismissEnabled.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [dismissEnabled](../smeup_widgets_smeup_box/SmeupBox/dismissEnabled.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -89,7 +90,7 @@ _final_
 
 
 
-##### [dynamisms](../smeup_widgets_smeup_box/SmeupBox/dynamisms.md) &#8594; dynamic
+##### [dynamisms](../smeup_widgets_smeup_box/SmeupBox/dynamisms.md) &#8594; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Dynamism](../smeup_models_dynamism/Dynamism-class.md)>?
 
 
 
@@ -98,7 +99,7 @@ _final_
 
 
 
-##### [fontColor](../smeup_widgets_smeup_box/SmeupBox/fontColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [fontColor](../smeup_widgets_smeup_box/SmeupBox/fontColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -107,7 +108,7 @@ _final_
 
 
 
-##### [formKey](../smeup_widgets_smeup_box/SmeupBox/formKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_box/SmeupBox/formKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -125,7 +126,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [height](../smeup_widgets_smeup_box/SmeupBox/height.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [height](../smeup_widgets_smeup_box/SmeupBox/height.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -134,7 +135,7 @@ _final_
 
 
 
-##### [id](../smeup_widgets_smeup_box/SmeupBox/id.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_box/SmeupBox/id.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -161,7 +162,7 @@ _final_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -170,7 +171,7 @@ _final, inherited_
 
 
 
-##### [layout](../smeup_widgets_smeup_box/SmeupBox/layout.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [layout](../smeup_widgets_smeup_box/SmeupBox/layout.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -179,7 +180,7 @@ _final_
 
 
 
-##### [onItemTap](../smeup_widgets_smeup_box/SmeupBox/onItemTap.md) &#8594; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [onItemTap](../smeup_widgets_smeup_box/SmeupBox/onItemTap.md) &#8594; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -188,7 +189,7 @@ _final_
 
 
 
-##### [onRefresh](../smeup_widgets_smeup_box/SmeupBox/onRefresh.md) &#8594; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [onRefresh](../smeup_widgets_smeup_box/SmeupBox/onRefresh.md) &#8594; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -197,7 +198,7 @@ _final_
 
 
 
-##### [onSizeChanged](../smeup_widgets_smeup_box/SmeupBox/onSizeChanged.md) &#8594; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [onSizeChanged](../smeup_widgets_smeup_box/SmeupBox/onSizeChanged.md) &#8594; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -224,7 +225,7 @@ _final_
 
 
 
-##### [selectedRow](../smeup_widgets_smeup_box/SmeupBox/selectedRow.md) &#8594; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
+##### [selectedRow](../smeup_widgets_smeup_box/SmeupBox/selectedRow.md) &#8594; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)?
 
 
 
@@ -233,7 +234,7 @@ _final_
 
 
 
-##### [showLoader](../smeup_widgets_smeup_box/SmeupBox/showLoader.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [showLoader](../smeup_widgets_smeup_box/SmeupBox/showLoader.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -242,7 +243,7 @@ _final_
 
 
 
-##### [showSelection](../smeup_widgets_smeup_box/SmeupBox/showSelection.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [showSelection](../smeup_widgets_smeup_box/SmeupBox/showSelection.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -251,7 +252,7 @@ _final_
 
 
 
-##### [textStyle](../smeup_widgets_smeup_box/SmeupBox/textStyle.md) &#8594; [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html)
+##### [textStyle](../smeup_widgets_smeup_box/SmeupBox/textStyle.md) &#8594; [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html)?
 
 
 
@@ -260,7 +261,7 @@ _final_
 
 
 
-##### [width](../smeup_widgets_smeup_box/SmeupBox/width.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [width](../smeup_widgets_smeup_box/SmeupBox/width.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -318,7 +319,7 @@ _inherited_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -337,7 +338,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

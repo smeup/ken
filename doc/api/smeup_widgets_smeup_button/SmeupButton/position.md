@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[MainAxisAlignment](https://api.flutter.dev/flutter/rendering/MainAxisAlignment.html) position
+[MainAxisAlignment](https://api.flutter.dev/flutter/rendering/MainAxisAlignment.html)? position
   
 _final_
 
@@ -20,7 +21,7 @@ _final_
 ## Implementation
 
 ```dart
-final MainAxisAlignment position;
+final MainAxisAlignment? position;
 
 
 ```

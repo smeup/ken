@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -16,7 +17,7 @@
 
 ## Constructors
 
-[SmeupDatePickerData](../smeup_widgets_smeup_datepicker/SmeupDatePickerData/SmeupDatePickerData.md) ({@[required](https://pub.dev/documentation/meta/1.7.0/meta/required-constant.html) [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) value, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) text})
+[SmeupDatePickerData](../smeup_widgets_smeup_datepicker/SmeupDatePickerData/SmeupDatePickerData.md) ({required [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)? value, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? text})
 
     
 
@@ -41,7 +42,7 @@ _read-only, inherited_
 
 
 
-##### [text](../smeup_widgets_smeup_datepicker/SmeupDatePickerData/text.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [text](../smeup_widgets_smeup_datepicker/SmeupDatePickerData/text.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -50,7 +51,7 @@ _read / write_
 
 
 
-##### [value](../smeup_widgets_smeup_datepicker/SmeupDatePickerData/value.md) &#8596; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)
+##### [value](../smeup_widgets_smeup_datepicker/SmeupDatePickerData/value.md) &#8596; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)?
 
 
 

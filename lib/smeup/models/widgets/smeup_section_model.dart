@@ -34,23 +34,23 @@ import '../../services/smeup_utilities.dart';
 import 'smeup_datepicker_model.dart';
 
 class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
-  double dim;
-  String layout;
-  List<SmeupModel> components;
-  List<SmeupSectionModel> smeupSectionsModels;
-  int selectedTabIndex;
-  String selectedTabColName;
-  double width;
-  double height;
-  bool autoAdaptHeight;
-  SmeupModel parentForm;
+  double? dim;
+  String? layout;
+  List<SmeupModel>? components;
+  List<SmeupSectionModel>? smeupSectionsModels;
+  int? selectedTabIndex;
+  String? selectedTabColName;
+  double? width;
+  double? height;
+  bool? autoAdaptHeight;
+  SmeupModel? parentForm;
 
   SmeupSectionModel.fromMap(
       Map<String, dynamic> jsonMap,
-      GlobalKey<FormState> formKey,
-      BuildContext context,
+      GlobalKey<FormState>? formKey,
+      BuildContext? context,
       SmeupModel parent,
-      GlobalKey<ScaffoldState> scaffoldKey)
+      GlobalKey<ScaffoldState>? scaffoldKey)
       : super.fromMap(
           jsonMap,
           formKey,
@@ -81,18 +81,18 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
 
   void _replaceSelectedTabIndex(dynamic jsonMap) {
     if (jsonMap['selectedTabColName'] != null) {
-      selectedTabIndex = int.tryParse(SmeupDynamismService.replaceFunVariables(
+      selectedTabIndex = int.tryParse(SmeupDynamismService.replaceVariables(
           '[${jsonMap['selectedTabColName']}]', formKey));
     }
     if (selectedTabIndex == null) selectedTabIndex = 0;
   }
 
   bool hasComponents() {
-    return components != null && components.length > 0;
+    return components != null && components!.length > 0;
   }
 
   bool hasSections() {
-    return smeupSectionsModels != null && smeupSectionsModels.length > 0;
+    return smeupSectionsModels != null && smeupSectionsModels!.length > 0;
   }
 
   List<SmeupModel> getComponents(jsonMap, componentName) {
@@ -101,7 +101,7 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
     if (jsonMap.containsKey(componentName)) {
       List<dynamic> componentsJson = jsonMap[componentName];
       componentsJson.forEach((v) async {
-        SmeupModel model;
+        SmeupModel? model;
 
         try {
           switch (v['type']) {
@@ -240,15 +240,15 @@ class SmeupSectionModel extends SmeupModel with SmeupModelMixin {
 
   Future<void> getSectionData() async {
     if (hasSections()) {
-      for (var i = 0; i < smeupSectionsModels.length; i++) {
-        var section = smeupSectionsModels[i];
+      for (var i = 0; i < smeupSectionsModels!.length; i++) {
+        var section = smeupSectionsModels![i];
         await section.getSectionData();
       }
     }
     if (hasComponents()) {
-      for (var i = 0; i < components.length; i++) {
-        var componentModel = components[i];
-        if (componentModel.onReady != null) await componentModel.onReady();
+      for (var i = 0; i < components!.length; i++) {
+        var componentModel = components![i];
+        if (componentModel.onReady != null) await componentModel.onReady!();
       }
     }
   }

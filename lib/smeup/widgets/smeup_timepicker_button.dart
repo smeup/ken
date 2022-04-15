@@ -6,36 +6,39 @@ import 'package:ken/smeup/services/smeup_variables_service.dart';
 import 'package:ken/smeup/widgets/smeup_timepicker.dart';
 import 'package:ken/smeup/widgets/smeup_timepicker_customization.dart';
 
+import '../services/smeup_dynamism_service.dart';
+
 // ignore: must_be_immutable
 class SmeupTimePickerButton extends StatefulWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<FormState>? formKey;
 
-  Color borderColor;
-  double borderWidth;
-  double borderRadius;
-  bool fontBold;
-  double fontSize;
-  Color fontColor;
-  Color backColor;
-  double elevation;
-  bool captionFontBold;
-  double captionFontSize;
-  Color captionFontColor;
-  Color captionBackColor;
-  bool underline;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
+  bool? fontBold;
+  double? fontSize;
+  Color? fontColor;
+  Color? backColor;
+  double? elevation;
+  bool? captionFontBold;
+  double? captionFontSize;
+  Color? captionFontColor;
+  Color? captionBackColor;
+  bool? underline;
+  SmeupTimePickerModel? model;
 
-  final String id;
+  final String? id;
 
-  final String label;
-  final double width;
-  final double height;
-  final EdgeInsetsGeometry padding;
-  final bool showborder;
-  final Alignment align;
-  final List<String> minutesList;
-  final SmeupTimePickerData data;
-  final Function clientOnChange;
+  final String? label;
+  final double? width;
+  final double? height;
+  final EdgeInsetsGeometry? padding;
+  final bool? showborder;
+  final Alignment? align;
+  final List<String>? minutesList;
+  final SmeupTimePickerData? data;
+  final Function? clientOnChange;
   final ButtonStyle buttonStyle;
   final TextStyle textStyle;
 
@@ -67,6 +70,7 @@ class SmeupTimePickerButton extends StatefulWidget {
     this.showborder = SmeupTimePickerModel.defaultShowBorder,
     this.minutesList,
     this.clientOnChange,
+    this.model,
   }) {
     SmeupTimePickerModel.setDefaults(this);
   }
@@ -76,13 +80,13 @@ class SmeupTimePickerButton extends StatefulWidget {
 }
 
 class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
-  DateTime _currentValue;
-  String _currentDisplay;
+  DateTime? _currentValue;
+  String? _currentDisplay;
 
   @override
   void initState() {
-    _currentValue = widget.data.time;
-    _currentDisplay = widget.data.formattedTime;
+    _currentValue = widget.data!.time;
+    _currentDisplay = widget.data!.formattedTime;
     super.initState();
   }
 
@@ -97,7 +101,7 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
             onPressed: () {
               DatePicker.showPicker(context,
                   theme: DatePickerTheme(
-                      backgroundColor: widget.backColor,
+                      backgroundColor: widget.backColor!,
                       headerColor: widget.textStyle.backgroundColor,
                       doneStyle: widget.textStyle,
                       cancelStyle: widget.textStyle,
@@ -111,14 +115,20 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
                   final newTime = DateFormat('HH:mm').format(date);
                   _currentDisplay = newTime;
                   _currentValue = date;
+                  SmeupVariablesService.setVariable(widget.id, newTime,
+                      formKey: widget.formKey);
+
                   if (widget.clientOnChange != null) {
-                    widget.clientOnChange(SmeupTimePickerData(
+                    widget.clientOnChange!(SmeupTimePickerData(
                       time: _currentValue,
                       formattedTime: _currentDisplay,
                     ));
                   }
-                  SmeupVariablesService.setVariable(widget.id, newTime,
-                      formKey: widget.formKey);
+
+                  if (widget.model != null) {
+                    SmeupDynamismService.run(widget.model!.dynamisms, context,
+                        'change', widget.scaffoldKey!, widget.formKey);
+                  }
                 });
               });
             },
@@ -126,7 +136,7 @@ class _SmeupTimePickerButtonState extends State<SmeupTimePickerButton> {
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.only(left: 5.0),
-                child: Text(_currentDisplay, style: widget.textStyle),
+                child: Text(_currentDisplay!, style: widget.textStyle),
               ),
             )));
 

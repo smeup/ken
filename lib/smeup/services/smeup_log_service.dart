@@ -8,7 +8,7 @@ enum LogType { none, debug, info, warning, error }
 enum MessagesPromptMode { snackbar }
 
 class SmeupLogService {
-  static File _logFile;
+  static File? _logFile;
 
   static void writeDebugMessage(String message,
       {LogType logType = LogType.info}) async {
@@ -65,7 +65,7 @@ class SmeupLogService {
 
       if (SmeupConfigurationService.isLogEnabled || logType == LogType.error) {
         if (_logFile != null) {
-          _logFile.writeAsString('${DateTime.now().toString()}: $message \n',
+          _logFile!.writeAsString('${DateTime.now().toString()}: $message \n',
               mode: FileMode.append);
         }
       }
@@ -82,7 +82,7 @@ class SmeupLogService {
     }
   }
 
-  static Future<String> get _localPath async {
+  static Future<String?> get _localPath async {
     try {
       if (Platform.isAndroid) {
         return "/storage/emulated/0/Download";

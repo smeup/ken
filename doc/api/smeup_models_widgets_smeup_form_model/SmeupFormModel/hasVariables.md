@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,7 +25,7 @@
 
 ```dart
 bool hasVariables() {
-  return formVariables != null && formVariables.length > 0;
+  return formVariables != null && formVariables!.length > 0;
 }
 ```
 

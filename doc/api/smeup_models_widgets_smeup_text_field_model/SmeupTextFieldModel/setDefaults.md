@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,25 +25,25 @@ dynamic setDefaults
 
 ```dart
 static setDefaults(dynamic obj) {
-  var timePickerTheme = SmeupConfigurationService.getTheme().timePickerTheme;
+  var timePickerTheme = SmeupConfigurationService.getTheme()!.timePickerTheme;
   defaultBackColor = timePickerTheme.backgroundColor;
-  var shape = timePickerTheme.shape;
+  var shape = timePickerTheme.shape!;
   defaultBorderRadius = (shape as ContinuousRectangleBorder)
       .borderRadius
       .resolve(TextDirection.ltr)
       .topLeft
       .x;
-  var side = timePickerTheme.dayPeriodBorderSide;
+  var side = timePickerTheme.dayPeriodBorderSide!;
   defaultBorderColor = side.color;
   defaultBorderWidth = side.width;
 
-  var textStyle = SmeupConfigurationService.getTheme().textTheme.bodyText1;
+  var textStyle = SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
   defaultFontBold = textStyle.fontWeight == FontWeight.bold;
   defaultFontSize = textStyle.fontSize;
   defaultFontColor = textStyle.color;
   defaultBackColor = textStyle.backgroundColor;
 
-  var captionStyle = SmeupConfigurationService.getTheme().textTheme.caption;
+  var captionStyle = SmeupConfigurationService.getTheme()!.textTheme.caption!;
   defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
   defaultCaptionFontSize = captionStyle.fontSize;
   defaultCaptionFontColor = captionStyle.color;

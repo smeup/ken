@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[SmeupTimePickerData](../../smeup_widgets_smeup_timepicker/SmeupTimePickerData-class.md) data
+[SmeupTimePickerData](../../smeup_widgets_smeup_timepicker/SmeupTimePickerData-class.md)? data
   
 _final_
 
@@ -20,7 +21,7 @@ _final_
 ## Implementation
 
 ```dart
-final SmeupTimePickerData data;
+final SmeupTimePickerData? data;
 
 
 ```

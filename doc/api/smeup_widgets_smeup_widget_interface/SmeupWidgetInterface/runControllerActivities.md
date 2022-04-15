@@ -6,11 +6,12 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
-void runControllerActivities
+dynamic runControllerActivities
 ([SmeupModel](../../smeup_models_widgets_smeup_model/SmeupModel-class.md) model)
 
 
@@ -23,7 +24,7 @@ void runControllerActivities
 ## Implementation
 
 ```dart
-void runControllerActivities(SmeupModel model);
+runControllerActivities(SmeupModel model);
 ```
 
 

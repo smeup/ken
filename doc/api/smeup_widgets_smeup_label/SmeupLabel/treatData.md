@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 dynamic treatData(SmeupModel model) {
-  SmeupLabelModel m = model;
+  SmeupLabelModel m = model as SmeupLabelModel;
 
   // change data format
   var workData = formatDataFields(m);
@@ -38,20 +39,20 @@ dynamic treatData(SmeupModel model) {
     // overrides model properties from data
     var firstElement = (workData['rows'] as List).first;
     if (firstElement != null) {
-      if (firstElement[m.optionsDefault['iconColName']] != null) {
+      if (firstElement[m.optionsDefault!['iconColName']] != null) {
         m.iconData = SmeupUtilities.getInt(
-                firstElement[m.optionsDefault['iconColName']]) ??
+                firstElement[m.optionsDefault!['iconColName']]) ??
             0;
       }
 
-      if (firstElement[m.optionsDefault['backColorColName']] != null) {
+      if (firstElement[m.optionsDefault!['backColorColName']] != null) {
         m.backColor = SmeupUtilities.getColorFromRGB(
-            firstElement[m.optionsDefault['backColorColName']]);
+            firstElement[m.optionsDefault!['backColorColName']]);
       }
 
-      if (firstElement[m.optionsDefault['fontColorColName']] != null) {
+      if (firstElement[m.optionsDefault!['fontColorColName']] != null) {
         m.fontColor = SmeupUtilities.getColorFromRGB(
-            firstElement[m.optionsDefault['fontColorColName']]);
+            firstElement[m.optionsDefault!['fontColorColName']]);
       }
     }
 

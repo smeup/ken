@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 void notifyError
-(dynamic context, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) id, [Object](https://api.flutter.dev/flutter/dart-core/Object-class.html) error)
+(dynamic context, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id, [Object](https://api.flutter.dev/flutter/dart-core/Object-class.html)? error)
 
 
 
@@ -23,7 +24,7 @@ void notifyError
 ## Implementation
 
 ```dart
-void notifyError(context, String id, Object error) {
+void notifyError(context, String? id, Object? error) {
   final SmeupErrorNotifier errorNotifier =
       Provider.of<SmeupErrorNotifier>(context, listen: false);
 

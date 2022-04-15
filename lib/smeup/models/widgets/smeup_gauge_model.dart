@@ -15,22 +15,25 @@ class SmeupGaugeModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultMaxColName = 'maxValue';
   static const String defaultMinColName = 'minValue';
   static const String defaultWarningColName = 'warning';
-  static const int defaultMaxValue = 100;
-  static const int defaultMinValue = 0;
-  static const int defaultWarning = 50;
-  static const int defaultValue = 0;
+  static const String defaultAlertColName = 'alert';
+  static const double defaultMaxValue = 100;
+  static const double defaultMinValue = 0;
+  static const double defaultWarning = 50;
+  static const double defaultAlert = 80;
+  static const double defaultValue = 0;
 
-  String valueColName;
-  String warningColName;
-  String maxColName;
-  String minColName;
+  String? valueColName;
+  String? warningColName;
+  String? alertColName;
+  String? maxColName;
+  String? minColName;
 
   SmeupGaugeModel(
       {id,
       type,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
       this.valueColName = defaultValColName,
       this.warningColName = defaultWarningColName,
       this.maxColName = defaultMaxColName,
@@ -42,9 +45,9 @@ class SmeupGaugeModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupGaugeModel.fromMap(
     Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
   ) : super.fromMap(
           jsonMap,
           formKey,
@@ -52,10 +55,11 @@ class SmeupGaugeModel extends SmeupModel implements SmeupDataInterface {
           context,
         ) {
     title = jsonMap['title'] ?? '';
-    valueColName = optionsDefault['valueColName'] ?? defaultValColName;
-    maxColName = optionsDefault['maxColName'] ?? defaultMaxColName;
-    minColName = optionsDefault['minColName'] ?? defaultMinColName;
-    warningColName = optionsDefault['warningColName'] ?? defaultWarningColName;
+    valueColName = optionsDefault!['valueColName'] ?? defaultValColName;
+    maxColName = optionsDefault!['maxColName'] ?? defaultMaxColName;
+    minColName = optionsDefault!['minColName'] ?? defaultMinColName;
+    warningColName = optionsDefault!['warningColName'] ?? defaultWarningColName;
+    alertColName = optionsDefault!['alertColName'] ?? defaultAlertColName;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {

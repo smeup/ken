@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[SmeupFun](../../smeup_models_smeup_fun/SmeupFun-class.md) initialFun
+[Fun](../../smeup_models_fun/Fun-class.md)? initialFun
   
 _final_
 
@@ -20,7 +21,7 @@ _final_
 ## Implementation
 
 ```dart
-final SmeupFun initialFun;
+final Fun? initialFun;
 
 
 ```

@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[int](https://api.flutter.dev/flutter/dart-core/int-class.html) delayInMillis
+[int](https://api.flutter.dev/flutter/dart-core/int-class.html)? delayInMillis
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-int delayInMillis;
+int? delayInMillis;
 
 
 ```

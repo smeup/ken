@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
-[Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html) getAlignmentGeometry
-([String](https://api.flutter.dev/flutter/dart-core/String-class.html) alignment)
+[Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)? getAlignmentGeometry
+([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? alignment)
 
 
 
@@ -23,7 +24,7 @@
 ## Implementation
 
 ```dart
-static Alignment getAlignmentGeometry(String alignment) {
+static Alignment? getAlignmentGeometry(String? alignment) {
   switch (alignment) {
     case "left":
       return Alignment.centerLeft;

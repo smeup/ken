@@ -6,11 +6,12 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
-[Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[Source](https://pub.dev/documentation/cloud_firestore_platform_interface/5.5.1/cloud_firestore_platform_interface/Source.html)> getSource
+[Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[Source](https://pub.dev/documentation/cloud_firestore_platform_interface/5.5.2/cloud_firestore_platform_interface/Source.html)> getSource
 ()
 
 

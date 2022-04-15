@@ -5,15 +5,15 @@ import 'package:ken/smeup/services/smeup_log_service.dart';
 
 class SmeupCacheService {
   static const DEFAULD_RETRY = 2; // seconds
-  static Map<String, AsyncCache<List<String>>> _cacheList;
-  static String cacheUsername;
-  static String cachePassword;
-  static String cacheserver;
-  static String cacheEnvironment;
-  static bool cacheLogEnabled;
-  static bool cacheIsTest;
+  static late Map<String, AsyncCache<List<String>>> _cacheList;
+  static String? cacheUsername;
+  static String? cachePassword;
+  static String? cacheserver;
+  static String? cacheEnvironment;
+  static bool? cacheLogEnabled;
+  static bool? cacheIsTest;
   static bool isOnline = true;
-  static SmeupCacheNotifier cacheModel;
+  static late SmeupCacheNotifier cacheModel;
   static bool isPinging = false;
   static bool isBusy = false;
   static dynamic fun;
@@ -39,7 +39,7 @@ class SmeupCacheService {
     _cacheList.remove(key);
   }
 
-  static AsyncCache<List<String>> getElement(String key) {
+  static AsyncCache<List<String>>? getElement(String key) {
     if (_cacheList.containsKey(key))
       SmeupLogService.writeDebugMessage('hit cache element: $key');
     return _cacheList[key];
@@ -56,7 +56,7 @@ class SmeupCacheService {
     _cacheList.clear();
   }
 
-  static String getCacheKey(String url) {
+  static String getCacheKey(String? url) {
     return '$url';
   }
 }

@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -25,7 +26,7 @@ void saveAltServiceEndpoint
 ```dart
 static void saveAltServiceEndpoint(
     ALT_SERVICE_ENDPOINTS serviceEndpointType, String value) {
-  SmeupConfigurationService.getLocalStorage()
+  SmeupConfigurationService.getLocalStorage()!
       .setString('$serviceEndpointType'.split('.').last, value);
 }
 ```

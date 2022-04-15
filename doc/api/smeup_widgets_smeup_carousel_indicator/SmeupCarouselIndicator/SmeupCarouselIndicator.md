@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-SmeupCarouselIndicator([int](https://api.flutter.dev/flutter/dart-core/int-class.html) initialIndex, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)> data)
+SmeupCarouselIndicator([int](https://api.flutter.dev/flutter/dart-core/int-class.html) initialIndex, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)>? data)
 
 
 

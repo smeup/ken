@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -53,7 +54,7 @@ void initState() {
   _isBusy = false;
   _model = widget.model;
   _data = widget.data;
-  if (_model != null) widgetLoadType = _model.widgetLoadType;
+  if (_model != null) widgetLoadType = _model!.widgetLoadType;
   super.initState();
 }
 ```

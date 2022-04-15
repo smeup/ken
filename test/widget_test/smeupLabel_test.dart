@@ -32,7 +32,7 @@ Future<void> main() async {
 }
 
 runTests() {
-  final findKey = find.byKey(Key('lab1'));
+  final findKey = find.byKey(Key('lab2'));
   expect(findKey, findsWidgets);
 
   var findWidget = find.byType(SmeupLabel);
@@ -41,6 +41,6 @@ runTests() {
   var findText = find.byType(Text);
   expect(findText, findsWidgets);
 
-  var finderTextContent = find.text('I am a label');
+  var finderTextContent = find.text('Information');
   expect(finderTextContent, findsWidgets);
 }

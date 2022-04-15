@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
@@ -13,38 +14,36 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/services/transformers/null_transformer.dart';
 import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 
-import '../models/smeup_fun.dart';
+import '../models/fun.dart';
 import 'firestore_shared.dart';
 
 class SmeupJsonDataService extends SmeupDataServiceInterface {
-  FirebaseFirestore firestoreInstance;
+  FirebaseFirestore? firestoreInstance;
 
   SmeupJsonDataService(
-      {SmeupDataTransformerInterface transformer, this.firestoreInstance})
+      {SmeupDataTransformerInterface? transformer, this.firestoreInstance})
       : super(transformer);
 
   @override
   Future<SmeupServiceResponse> invoke(smeupFun) async {
-    switch (smeupFun.fun['fun']['component']) {
+    switch (smeupFun.identifier.component) {
       case 'EXD':
         try {
-          Map<String, dynamic> data;
+          Map<String, dynamic>? data;
 
-          String fileName = smeupFun.fun['fun']['obj2']['k'];
+          String? fileName = smeupFun.getObjectByName('obj2').k;
 
-          //String customFolder = smeupFun.fun['fun']['obj1']['k'];
-          List<Map<String, dynamic>> list = smeupFun.getServer();
+          List<Map<String, dynamic>> list = smeupFun.server;
 
-          final sourceMap = list.firstWhere(
-              (element) => element['key'] == 'source',
-              orElse: () => null);
-          String source = sourceMap != null ? sourceMap['value'] : '';
+          final sourceMap =
+              list.firstWhereOrNull((element) => element['key'] == 'source');
+          String? source = sourceMap != null ? sourceMap['value'] : '';
 
           String jsonString = '';
 
           if (source == 'firestore') {
             jsonString = await getFromFirestore(smeupFun, fileName);
-          } else if (source.isNotEmpty) {
+          } else if (source!.isNotEmpty) {
             jsonString = await getFromCustomPath(source, fileName);
           } else {
             jsonString = await getFromDefaultFolder(source, fileName);
@@ -60,7 +59,7 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
           var response = Response(
               data: data,
               statusCode: HttpStatus.accepted,
-              requestOptions: null);
+              requestOptions: RequestOptions(path: ''));
 
           SmeupDataService.writeResponseResult(
               response, 'SmeupJsonDataService');
@@ -70,7 +69,7 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
               Response(
                   data: data,
                   statusCode: HttpStatus.accepted,
-                  requestOptions: null));
+                  requestOptions: RequestOptions(path: '')));
         } catch (e) {
           SmeupLogService.writeDebugMessage('Error in JsonDataService: $e',
               logType: LogType.error);
@@ -80,33 +79,30 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
               Response(
                   data: 'Error in SmeupJsonDataService: ${e.toString()}',
                   statusCode: HttpStatus.badRequest,
-                  requestOptions: null));
+                  requestOptions: RequestOptions(path: '')));
         }
-
-        break;
 
       default:
         return SmeupServiceResponse(
             false,
             Response(
                 data:
-                    'Error in SmeupJsonDataService: component ${smeupFun.fun['fun']['component']} not implemented',
+                    'Error in SmeupJsonDataService: component ${smeupFun.identifier.component} not implemented',
                 statusCode: HttpStatus.badRequest,
-                requestOptions: null));
+                requestOptions: RequestOptions(path: '')));
     }
   }
 
-  Future<String> getFromFirestore(SmeupFun smeupFun, fileName) async {
+  Future<String> getFromFirestore(Fun smeupFun, fileName) async {
     if (firestoreInstance == null)
       throw Exception('Firebase instance not valid');
 
-    List<Map<String, dynamic>> list = smeupFun.getServer();
+    List<Map<String, dynamic>> list = smeupFun.server;
 
     final options = GetOptions(source: await FirestoreShared.getSource());
 
-    final collection = list.firstWhere(
-        (element) => element['key'] == 'collection',
-        orElse: () => null);
+    final collection =
+        list.firstWhereOrNull((element) => element['key'] == 'collection');
 
     if (collection == null) {
       final msg = 'The collection is empty';
@@ -114,7 +110,7 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
       throw Exception(msg);
     }
 
-    QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
+    QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance!
         .collection(collection['value'])
         .where('formId', isEqualTo: fileName)
         .get(options);
@@ -122,14 +118,8 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
     dynamic responseData;
 
     // Apply transformation to service response (only on success)
-    if (snapshot == null) {
-      final msg = 'Form not found';
-      SmeupLogService.writeDebugMessage(msg, logType: LogType.error);
-      throw Exception(msg);
-    }
-
     if (getTransformer() is NullTransformer == false) {
-      responseData = getTransformer().transform(smeupFun, snapshot);
+      responseData = getTransformer()!.transform(smeupFun, snapshot);
     } else {
       final msg = 'No transformer defined in the service';
       SmeupLogService.writeDebugMessage(msg, logType: LogType.error);

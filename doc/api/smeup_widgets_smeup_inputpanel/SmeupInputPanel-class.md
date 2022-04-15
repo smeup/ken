@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -34,18 +35,18 @@
 
 ## Constructors
 
-[SmeupInputPanel](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/SmeupInputPanel.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type = 'INP', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) title = '', [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = SmeupInputPanelModel.defaultPadding, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize = SmeupInputPanelModel.defaultFontSize, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = SmeupInputPanelModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = SmeupInputPanelModel.defaultHeight, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupInputPanelField](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField-class.md)> data, void onSubmit([List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupInputPanelField](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField-class.md)>)})
+[SmeupInputPanel](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/SmeupInputPanel.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type = 'INP', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? title = '', [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)? padding = SmeupInputPanelModel.defaultPadding, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? fontSize = SmeupInputPanelModel.defaultFontSize, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? width = SmeupInputPanelModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? height = SmeupInputPanelModel.defaultHeight, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupInputPanelField](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField-class.md)>? data, void onSubmit([List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupInputPanelField](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField-class.md)>?)?})
 
     
 
-[SmeupInputPanel.withController](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/SmeupInputPanel.withController.md) ([SmeupInputPanelModel](../smeup_models_widgets_smeup_inputpanel_model/SmeupInputPanelModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupInputPanel.withController](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/SmeupInputPanel.withController.md) ([SmeupInputPanelModel](../smeup_models_widgets_smeup_inputpanel_model/SmeupInputPanelModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey)
 
     
 
 
 ## Properties
 
-##### [data](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/data.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupInputPanelField](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField-class.md)>
+##### [data](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/data.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupInputPanelField](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField-class.md)>?
 
 
 
@@ -54,7 +55,7 @@ _read / write_
 
 
 
-##### [fontSize](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/fontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [fontSize](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/fontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -63,7 +64,7 @@ _read / write_
 
 
 
-##### [formKey](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -81,7 +82,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [height](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [height](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -90,7 +91,7 @@ _read / write_
 
 
 
-##### [id](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -99,7 +100,7 @@ _read / write_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -108,7 +109,7 @@ _final, inherited_
 
 
 
-##### [model](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/model.md) &#8596; [SmeupInputPanelModel](../smeup_models_widgets_smeup_inputpanel_model/SmeupInputPanelModel-class.md)
+##### [model](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/model.md) &#8596; [SmeupInputPanelModel](../smeup_models_widgets_smeup_inputpanel_model/SmeupInputPanelModel-class.md)?
 
 
 
@@ -117,7 +118,7 @@ _read / write_
 
 
 
-##### [onSubmit](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/onSubmit.md) &#8596; void Function([List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupInputPanelField](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField-class.md)>)
+##### [onSubmit](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/onSubmit.md) &#8596; (void (Function?)([List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupInputPanelField](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField-class.md)>?)?)
 
 
 
@@ -126,7 +127,7 @@ _read / write_
 
 
 
-##### [padding](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)
+##### [padding](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)?
 
 
 
@@ -153,7 +154,7 @@ _read / write_
 
 
 
-##### [title](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -162,7 +163,7 @@ _read / write_
 
 
 
-##### [type](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -171,7 +172,7 @@ _read / write_
 
 
 
-##### [width](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [width](../smeup_widgets_smeup_inputpanel/SmeupInputPanel/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -248,7 +249,7 @@ _override_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -267,7 +268,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

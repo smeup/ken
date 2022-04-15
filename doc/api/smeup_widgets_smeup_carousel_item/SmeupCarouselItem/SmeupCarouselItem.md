@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-SmeupCarouselItem([String](https://api.flutter.dev/flutter/dart-core/String-class.html) imageFileName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) text)
+SmeupCarouselItem([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? imageFileName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? text)
 
 
 

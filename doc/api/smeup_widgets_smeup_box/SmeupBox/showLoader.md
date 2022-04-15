@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showLoader
+[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? showLoader
   
 _final_
 
@@ -20,7 +21,7 @@ _final_
 ## Implementation
 
 ```dart
-final bool showLoader;
+final bool? showLoader;
 
 
 ```

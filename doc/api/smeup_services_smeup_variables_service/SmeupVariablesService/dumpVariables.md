@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 void dumpVariables
-({[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey})
+({[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey})
 
 
 
@@ -23,7 +24,7 @@ void dumpVariables
 ## Implementation
 
 ```dart
-static void dumpVariables({GlobalKey<FormState> formKey}) {
+static void dumpVariables({GlobalKey<FormState>? formKey}) {
   SmeupVariablesService._getJoinMap(formKey: formKey).forEach((key, value) {
     SmeupLogService.writeDebugMessage(
         "Dump variables - Variables status: $key=\"$value\"",

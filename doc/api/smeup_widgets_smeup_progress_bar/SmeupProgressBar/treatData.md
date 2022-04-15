@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 dynamic treatData(SmeupModel model) {
-  SmeupProgressBarModel m = model;
+  SmeupProgressBarModel m = model as SmeupProgressBarModel;
 
   return SmeupUtilities.getDouble(m.data['rows'][0][m.valueField]);
 }

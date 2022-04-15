@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -16,7 +17,7 @@
 
 ## Constructors
 
-[SmeupDataServicePoller](../smeup_services_smeup_data_service_poller/SmeupDataServicePoller/SmeupDataServicePoller.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, {@[required](https://pub.dev/documentation/meta/1.7.0/meta/required-constant.html) [Duration](https://api.flutter.dev/flutter/dart-core/Duration-class.html) interval, @[required](https://pub.dev/documentation/meta/1.7.0/meta/required-constant.html) [String](https://api.flutter.dev/flutter/dart-core/String-class.html) fun, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) ignoreErrors = true})
+[SmeupDataServicePoller](../smeup_services_smeup_data_service_poller/SmeupDataServicePoller/SmeupDataServicePoller.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, {required [Duration](https://api.flutter.dev/flutter/dart-core/Duration-class.html) interval, required [String](https://api.flutter.dev/flutter/dart-core/String-class.html) fun, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) ignoreErrors = true})
 
     
 
@@ -107,7 +108,7 @@ _read / write_
 
 
 
-##### [doPoll](../smeup_services_smeup_data_service_poller/SmeupDataServicePoller/doPoll.md)({[UntilPredicate](../smeup_services_smeup_data_service_poller/UntilPredicate.md) until}) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)
+##### [doPoll](../smeup_services_smeup_data_service_poller/SmeupDataServicePoller/doPoll.md)({required [UntilPredicate](../smeup_services_smeup_data_service_poller/UntilPredicate.md) until}) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)
 
 
 

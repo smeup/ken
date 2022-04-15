@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 dynamic treatData(SmeupModel model) {
-  SmeupListBoxModel m = model;
+  SmeupListBoxModel m = model as SmeupListBoxModel;
 
   // change data format
   var workData = formatDataFields(m);
@@ -34,10 +35,10 @@ dynamic treatData(SmeupModel model) {
   // set the widget data
   if (workData != null) {
     // Manage columns setup field: hide column if isn't in the set of columns
-    if (m.visibleColumns.isNotEmpty) {
+    if (m.visibleColumns!.isNotEmpty) {
       for (var i = 0; i < (workData['columns'] as List).length; i++) {
         final column = workData['columns'][i];
-        if (m.visibleColumns.contains(column['code']) == false) {
+        if (m.visibleColumns!.contains(column['code']) == false) {
           column['IO'] = 'H';
         }
       }

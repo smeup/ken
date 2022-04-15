@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 [FontWeight](https://api.flutter.dev/flutter/dart-ui/FontWeight-class.html) fontWeight

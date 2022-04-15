@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)> updateDocument
-([SmeupFun](../../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun)
+([Fun](../../smeup_models_fun/Fun-class.md) smeupFun)
 
 
 
@@ -23,68 +24,54 @@
 ## Implementation
 
 ```dart
-Future<SmeupServiceResponse> updateDocument(SmeupFun smeupFun) async {
+Future<SmeupServiceResponse> updateDocument(Fun smeupFun) async {
   try {
-    List<Map<String, dynamic>> list = smeupFun.getParameters();
+    List<Map<String, dynamic>> list = smeupFun.parameters;
+    var checkResult = '';
 
-    final collection = list.firstWhere(
-        (element) => element['key'] == 'collection',
-        orElse: () => null);
+    final collection =
+        list.firstWhereOrNull((element) => element['key'] == 'collection');
 
-    final id = list.firstWhere((element) => element['key'] == 'id',
-        orElse: () => null);
-
-    final parFields = list.firstWhere(
-        (element) => element['key'] == FIRESTORE_FIELDS,
-        orElse: () => null);
+    final id = list.firstWhereOrNull((element) => element['key'] == 'id');
 
     if (collection == null || collection.toString().isEmpty) {
-      throw Exception('The collection is empty. FUN: $smeupFun');
+      checkResult = 'The collection is empty. FUN: $smeupFun';
     }
 
     if (id == null || id.toString().isEmpty) {
-      throw Exception('The id is empty. FUN: $smeupFun');
+      checkResult = 'The id is empty. FUN: $smeupFun';
     }
 
-    if (parFields == null || parFields.isEmpty) {
-      throw Exception('The $FIRESTORE_FIELDS is empty. FUN: $smeupFun');
+    var formFields = Map<String, dynamic>();
+
+    for (var field in list) {
+      if (field['key'] == 'collection') continue;
+      if (field['key'] == 'id') continue;
+      formFields[field['key']] = field['value'];
     }
 
-    List<String> firestoreFields = parFields['value'].toString().split(',');
+    if (formFields.entries.isEmpty) {
+      checkResult = 'The list of fields to update is empty. FUN: $smeupFun';
+    }
 
-    final checkResult = _checkDocument(smeupFun);
+    //final checkResult = _checkDocument(formFields);
 
     if (checkResult.isNotEmpty) {
-      final messages = {
-        "messages": [
-          {
-            "gravity": LogType.error,
-            "message": checkResult,
-          }
-        ]
-      };
-      return SmeupServiceResponse(
-          false,
-          Response(
-              data: messages,
-              statusCode: HttpStatus.badRequest,
-              requestOptions: null));
+      return _getErrorResponse(checkResult);
     }
-
-    var formInputFields = _getFirestoreFields(smeupFun, firestoreFields);
 
     bool isOnLine = await FirestoreShared.isInternetOn();
 
     if (isOnLine) {
       await fsDatabase
-          .collection(collection['value'])
-          .doc(id['value'])
-          .update(formInputFields);
+          .collection(collection!['value'])
+          .doc(id!['value'])
+          .update(formFields);
     } else {
       fsDatabase
-          .collection(collection['value'])
-          .doc(id['value'])
-          .update(formInputFields);
+          .collection(collection!['value'])
+          .doc(id!['value'])
+          .update(formFields);
     }
 
     final messages = {
@@ -101,7 +88,7 @@ Future<SmeupServiceResponse> updateDocument(SmeupFun smeupFun) async {
         Response(
             data: messages,
             statusCode: HttpStatus.accepted,
-            requestOptions: null));
+            requestOptions: RequestOptions(path: '')));
   } catch (e) {
     SmeupLogService.writeDebugMessage('Error in updateDocument: $e',
         logType: LogType.error);
@@ -119,7 +106,7 @@ Future<SmeupServiceResponse> updateDocument(SmeupFun smeupFun) async {
         Response(
             data: messages,
             statusCode: HttpStatus.badRequest,
-            requestOptions: null));
+            requestOptions: RequestOptions(path: '')));
   }
 }
 ```

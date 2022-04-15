@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-SmeupMessageDataService({[SmeupDataTransformerInterface](../../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer})
+SmeupMessageDataService({[SmeupDataTransformerInterface](../../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)? transformer})
 
 
 
@@ -18,7 +19,7 @@ SmeupMessageDataService({[SmeupDataTransformerInterface](../../smeup_services_tr
 ## Implementation
 
 ```dart
-SmeupMessageDataService({SmeupDataTransformerInterface transformer})
+SmeupMessageDataService({SmeupDataTransformerInterface? transformer})
     : super(transformer);
 ```
 

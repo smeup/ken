@@ -23,27 +23,27 @@ class SmeupTreeModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultParentVerticalSpacing = 2;
   static const double defaultParentHeight = 10;
 
-  double width;
-  double height;
-  double labelFontSize;
-  Color labelBackColor;
-  Color labelFontColor;
-  bool labelFontbold;
-  double labelVerticalSpacing;
-  double labelHeight;
-  double parentFontSize;
-  Color parentBackColor;
-  Color parentFontColor;
-  bool parentFontbold;
-  double parentVerticalSpacing;
-  double parentHeight;
+  double? width;
+  double? height;
+  double? labelFontSize;
+  Color? labelBackColor;
+  Color? labelFontColor;
+  bool? labelFontbold;
+  double? labelVerticalSpacing;
+  double? labelHeight;
+  double? parentFontSize;
+  Color? parentBackColor;
+  Color? parentFontColor;
+  bool? parentFontbold;
+  double? parentVerticalSpacing;
+  double? parentHeight;
 
   SmeupTreeModel({
     id,
     type,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
     title = '',
     this.width = defaultWidth,
     this.height = defaultHeight,
@@ -65,18 +65,18 @@ class SmeupTreeModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupTreeModel.fromMap(
     Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
   ) : super.fromMap(
           jsonMap,
           formKey,
           scaffoldKey,
           context,
         ) {
-    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+    width = SmeupUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height =
-        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+        SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {

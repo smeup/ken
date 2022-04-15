@@ -31,7 +31,7 @@
       "id": "S2",
       "components": [
         {
-          "id": "autocomplete2",
+          "id": "autocomplete1",
           "type": "FLD",
           "options": {
             "FLD": {
@@ -94,7 +94,7 @@
           "dynamisms": [
             {
               "event": "change",
-              "exec": "F(FBK;*MSG;) P(you selected the option: \"[autocomplete2]\" \"[value]\")"
+              "exec": "F(FBK;*MSG;) P(message(you selected the option: \"[value]\"))"
             }
           ]
         }

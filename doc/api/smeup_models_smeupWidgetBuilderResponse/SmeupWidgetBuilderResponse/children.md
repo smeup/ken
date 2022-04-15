@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html) children
+[Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)? children
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-Widget children;
+Widget? children;
 
 
 ```

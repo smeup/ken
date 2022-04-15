@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -98,7 +99,7 @@ _read / write_
 
 ## Static Methods
 
-##### [decrementDataFetch](../smeup_services_smeup_data_service/SmeupDataService/decrementDataFetch.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) id) void
+##### [decrementDataFetch](../smeup_services_smeup_data_service/SmeupDataService/decrementDataFetch.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id) void
 
 
 
@@ -125,7 +126,7 @@ _read / write_
 
 
 
-##### [getServiceImplementation](../smeup_services_smeup_data_service/SmeupDataService/getServiceImplementation.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) name) [SmeupDataServiceInterface](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface-class.md)
+##### [getServiceImplementation](../smeup_services_smeup_data_service/SmeupDataService/getServiceImplementation.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name) [SmeupDataServiceInterface](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface-class.md)?
 
 
 
@@ -134,7 +135,7 @@ _read / write_
 
 
 
-##### [incrementDataFetch](../smeup_services_smeup_data_service/SmeupDataService/incrementDataFetch.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html) id) void
+##### [incrementDataFetch](../smeup_services_smeup_data_service/SmeupDataService/incrementDataFetch.md)([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id) void
 
 
 
@@ -152,7 +153,7 @@ _read / write_
 
 
 
-##### [invoke](../smeup_services_smeup_data_service/SmeupDataService/invoke.md)([SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) httpServiceMethod, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) httpServiceUrl, dynamic httpServiceBody, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) httpServiceContentType, dynamic headers}) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
+##### [invoke](../smeup_services_smeup_data_service/SmeupDataService/invoke.md)([Fun](../smeup_models_fun/Fun-class.md)? smeupFun, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? httpServiceMethod, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? httpServiceUrl, dynamic httpServiceBody, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? httpServiceContentType, dynamic headers}) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
 
 
 
@@ -206,7 +207,7 @@ _read / write_
 
 
 
-##### [writeResponseResult](../smeup_services_smeup_data_service/SmeupDataService/writeResponseResult.md)([Response](https://pub.dev/documentation/dio/4.0.0/dio/Response-class.html) response, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) method) void
+##### [writeResponseResult](../smeup_services_smeup_data_service/SmeupDataService/writeResponseResult.md)([Response](https://pub.dev/documentation/dio/4.0.6/dio/Response-class.html)? response, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) method) void
 
 
 

@@ -1,20 +1,23 @@
-import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
 import 'package:ken/smeup/services/transformers/null_transformer.dart';
 import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 
-abstract class SmeupDataServiceInterface {
-  SmeupDataTransformerInterface transformer;
+import '../models/fun.dart';
 
-  SmeupDataServiceInterface(SmeupDataTransformerInterface transformer) {
+abstract class SmeupDataServiceInterface {
+  SmeupDataTransformerInterface? transformer;
+
+  SmeupDataServiceInterface(SmeupDataTransformerInterface? transformer) {
     if (transformer == null) transformer = NullTransformer();
     this.transformer = transformer;
   }
 
   // ignore: missing_return
-  Future<SmeupServiceResponse> invoke(SmeupFun fun) {}
+  Future<SmeupServiceResponse> invoke(Fun fun) {
+    throw ('not implemented');
+  }
 
-  SmeupDataTransformerInterface getTransformer() {
+  SmeupDataTransformerInterface? getTransformer() {
     return this.transformer;
   }
 }

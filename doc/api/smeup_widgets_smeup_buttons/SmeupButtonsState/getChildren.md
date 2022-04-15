@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -25,10 +26,10 @@ _override_
 
 ```dart
 Future<SmeupWidgetBuilderResponse> getChildren() async {
-  if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+  if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
     if (_model != null) {
-      await SmeupButtonsDao.getData(_model);
-      _data = widget.treatData(_model);
+      await SmeupButtonsDao.getData(_model!);
+      _data = widget.treatData(_model!);
     }
 
     setDataLoad(widget.id, true);
@@ -40,7 +41,7 @@ Future<SmeupWidgetBuilderResponse> getChildren() async {
   List array = _model == null ? _data : _data['rows'];
   array.forEach((buttonData) {
     buttonIndex += 1;
-    String buttonText = _model == null ? buttonData : buttonData['value'];
+    String? buttonText = _model == null ? buttonData : buttonData['value'];
     final button = SmeupButton(
       id: '${SmeupUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
       type: widget.type,
@@ -68,11 +69,11 @@ Future<SmeupWidgetBuilderResponse> getChildren() async {
       isBusy: _isBusy,
       clientOnPressed: () {
         if (widget.clientOnPressed != null) {
-          widget.clientOnPressed(buttonIndex, buttonText);
+          widget.clientOnPressed!(buttonIndex, buttonText);
         }
         runDynamism(context, buttonData);
       },
-      isLink: widget.isLink,
+      isLink: widget.isLink!,
       model: _model,
     );
 

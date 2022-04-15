@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -61,7 +62,7 @@ and</li>
 Widget build(BuildContext context) {
   MediaQueryData deviceInfo = MediaQuery.of(context);
   return Theme(
-    data: SmeupConfigurationService.getTheme(),
+    data: SmeupConfigurationService.getTheme()!,
     child: Builder(
       builder: (BuildContext context) => Scaffold(
         appBar: AppBar(

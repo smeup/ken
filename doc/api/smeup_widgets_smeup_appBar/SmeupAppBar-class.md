@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -29,14 +30,14 @@
 
 ## Constructors
 
-[SmeupAppBar](../smeup_widgets_smeup_appBar/SmeupAppBar/SmeupAppBar.md) ([bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) isDialog, {[Key](https://api.flutter.dev/flutter/foundation/Key-class.html) key, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)> appBarActions, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) appBarTitle, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) myContext, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) appBarImage = '', [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) backButtonVisible = true})
+[SmeupAppBar](../smeup_widgets_smeup_appBar/SmeupAppBar/SmeupAppBar.md) ([bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) isDialog, {[Key](https://api.flutter.dev/flutter/foundation/Key-class.html)? key, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)>? appBarActions, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? appBarTitle, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)? myContext, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>? scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) appBarImage = '', [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) backButtonVisible = true})
 
     
 
 
 ## Properties
 
-##### [actions](https://api.flutter.dev/flutter/material/AppBar/actions.html) &#8594; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)>
+##### [actions](https://api.flutter.dev/flutter/material/AppBar/actions.html) &#8594; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)>?
 
 
 
@@ -45,7 +46,7 @@ _final, inherited_
 
 
 
-##### [actionsIconTheme](https://api.flutter.dev/flutter/material/AppBar/actionsIconTheme.html) &#8594; [IconThemeData](https://api.flutter.dev/flutter/widgets/IconThemeData-class.html)
+##### [actionsIconTheme](https://api.flutter.dev/flutter/material/AppBar/actionsIconTheme.html) &#8594; [IconThemeData](https://api.flutter.dev/flutter/widgets/IconThemeData-class.html)?
 
 
 
@@ -55,7 +56,7 @@ _final, inherited_
 
 
 
-##### [appBarActions](../smeup_widgets_smeup_appBar/SmeupAppBar/appBarActions.md) &#8594; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)>
+##### [appBarActions](../smeup_widgets_smeup_appBar/SmeupAppBar/appBarActions.md) &#8594; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)>?
 
 
 
@@ -73,7 +74,7 @@ _final_
 
 
 
-##### [appBarTitle](../smeup_widgets_smeup_appBar/SmeupAppBar/appBarTitle.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [appBarTitle](../smeup_widgets_smeup_appBar/SmeupAppBar/appBarTitle.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -100,7 +101,7 @@ _final_
 
 
 
-##### [backgroundColor](https://api.flutter.dev/flutter/material/AppBar/backgroundColor.html) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [backgroundColor](https://api.flutter.dev/flutter/material/AppBar/backgroundColor.html) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -109,7 +110,7 @@ _final, inherited_
 
 
 
-##### [~~backwardsCompatibility~~](https://api.flutter.dev/flutter/material/AppBar/backwardsCompatibility.html) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [~~backwardsCompatibility~~](https://api.flutter.dev/flutter/material/AppBar/backwardsCompatibility.html) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -118,7 +119,7 @@ _@[Deprecated](https://api.flutter.dev/flutter/dart-core/Deprecated-class.html)(
 
 
 
-##### [bottom](https://api.flutter.dev/flutter/material/AppBar/bottom.html) &#8594; [PreferredSizeWidget](https://api.flutter.dev/flutter/widgets/PreferredSizeWidget-class.html)
+##### [bottom](https://api.flutter.dev/flutter/material/AppBar/bottom.html) &#8594; [PreferredSizeWidget](https://api.flutter.dev/flutter/widgets/PreferredSizeWidget-class.html)?
 
 
 
@@ -136,7 +137,7 @@ _final, inherited_
 
 
 
-##### [~~brightness~~](https://api.flutter.dev/flutter/material/AppBar/brightness.html) &#8594; [Brightness](https://api.flutter.dev/flutter/dart-ui/Brightness.html)
+##### [~~brightness~~](https://api.flutter.dev/flutter/material/AppBar/brightness.html) &#8594; [Brightness](https://api.flutter.dev/flutter/dart-ui/Brightness.html)?
 
 
 
@@ -145,7 +146,7 @@ _@[Deprecated](https://api.flutter.dev/flutter/dart-core/Deprecated-class.html)(
 
 
 
-##### [centerTitle](https://api.flutter.dev/flutter/material/AppBar/centerTitle.html) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [centerTitle](https://api.flutter.dev/flutter/material/AppBar/centerTitle.html) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -154,7 +155,7 @@ _final, inherited_
 
 
 
-##### [elevation](https://api.flutter.dev/flutter/material/AppBar/elevation.html) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [elevation](https://api.flutter.dev/flutter/material/AppBar/elevation.html) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -172,7 +173,7 @@ _final, inherited_
 
 
 
-##### [flexibleSpace](https://api.flutter.dev/flutter/material/AppBar/flexibleSpace.html) &#8594; [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)
+##### [flexibleSpace](https://api.flutter.dev/flutter/material/AppBar/flexibleSpace.html) &#8594; [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)?
 
 
 
@@ -182,7 +183,7 @@ _final, inherited_
 
 
 
-##### [foregroundColor](https://api.flutter.dev/flutter/material/AppBar/foregroundColor.html) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [foregroundColor](https://api.flutter.dev/flutter/material/AppBar/foregroundColor.html) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -191,7 +192,7 @@ _final, inherited_
 
 
 
-##### [formKey](../smeup_widgets_smeup_appBar/SmeupAppBar/formKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_appBar/SmeupAppBar/formKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -209,7 +210,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [iconTheme](https://api.flutter.dev/flutter/material/AppBar/iconTheme.html) &#8594; [IconThemeData](https://api.flutter.dev/flutter/widgets/IconThemeData-class.html)
+##### [iconTheme](https://api.flutter.dev/flutter/material/AppBar/iconTheme.html) &#8594; [IconThemeData](https://api.flutter.dev/flutter/widgets/IconThemeData-class.html)?
 
 
 
@@ -218,7 +219,7 @@ _final, inherited_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -227,7 +228,7 @@ _final, inherited_
 
 
 
-##### [leading](https://api.flutter.dev/flutter/material/AppBar/leading.html) &#8594; [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)
+##### [leading](https://api.flutter.dev/flutter/material/AppBar/leading.html) &#8594; [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)?
 
 
 
@@ -236,7 +237,7 @@ _final, inherited_
 
 
 
-##### [leadingWidth](https://api.flutter.dev/flutter/material/AppBar/leadingWidth.html) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [leadingWidth](https://api.flutter.dev/flutter/material/AppBar/leadingWidth.html) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -245,7 +246,7 @@ _final, inherited_
 
 
 
-##### [myContext](../smeup_widgets_smeup_appBar/SmeupAppBar/myContext.md) &#8594; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)
+##### [myContext](../smeup_widgets_smeup_appBar/SmeupAppBar/myContext.md) &#8594; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)?
 
 
 
@@ -282,7 +283,7 @@ _read-only, inherited_
 
 
 
-##### [scaffoldKey](../smeup_widgets_smeup_appBar/SmeupAppBar/scaffoldKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+##### [scaffoldKey](../smeup_widgets_smeup_appBar/SmeupAppBar/scaffoldKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>?
 
 
 
@@ -291,7 +292,7 @@ _final_
 
 
 
-##### [shadowColor](https://api.flutter.dev/flutter/material/AppBar/shadowColor.html) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [shadowColor](https://api.flutter.dev/flutter/material/AppBar/shadowColor.html) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -300,7 +301,7 @@ _final, inherited_
 
 
 
-##### [shape](https://api.flutter.dev/flutter/material/AppBar/shape.html) &#8594; [ShapeBorder](https://api.flutter.dev/flutter/painting/ShapeBorder-class.html)
+##### [shape](https://api.flutter.dev/flutter/material/AppBar/shape.html) &#8594; [ShapeBorder](https://api.flutter.dev/flutter/painting/ShapeBorder-class.html)?
 
 
 
@@ -309,7 +310,7 @@ _final, inherited_
 
 
 
-##### [systemOverlayStyle](https://api.flutter.dev/flutter/material/AppBar/systemOverlayStyle.html) &#8594; [SystemUiOverlayStyle](https://api.flutter.dev/flutter/services/SystemUiOverlayStyle-class.html)
+##### [systemOverlayStyle](https://api.flutter.dev/flutter/material/AppBar/systemOverlayStyle.html) &#8594; [SystemUiOverlayStyle](https://api.flutter.dev/flutter/services/SystemUiOverlayStyle-class.html)?
 
 
 
@@ -318,7 +319,7 @@ _final, inherited_
 
 
 
-##### [~~textTheme~~](https://api.flutter.dev/flutter/material/AppBar/textTheme.html) &#8594; [TextTheme](https://api.flutter.dev/flutter/material/TextTheme-class.html)
+##### [~~textTheme~~](https://api.flutter.dev/flutter/material/AppBar/textTheme.html) &#8594; [TextTheme](https://api.flutter.dev/flutter/material/TextTheme-class.html)?
 
 
 
@@ -328,7 +329,7 @@ _@[Deprecated](https://api.flutter.dev/flutter/dart-core/Deprecated-class.html)(
 
 
 
-##### [title](https://api.flutter.dev/flutter/material/AppBar/title.html) &#8594; [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)
+##### [title](https://api.flutter.dev/flutter/material/AppBar/title.html) &#8594; [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)?
 
 
 
@@ -337,7 +338,7 @@ _final, inherited_
 
 
 
-##### [titleSpacing](https://api.flutter.dev/flutter/material/AppBar/titleSpacing.html) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [titleSpacing](https://api.flutter.dev/flutter/material/AppBar/titleSpacing.html) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -348,7 +349,7 @@ _final, inherited_
 
 
 
-##### [titleTextStyle](https://api.flutter.dev/flutter/material/AppBar/titleTextStyle.html) &#8594; [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html)
+##### [titleTextStyle](https://api.flutter.dev/flutter/material/AppBar/titleTextStyle.html) &#8594; [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html)?
 
 
 
@@ -357,7 +358,7 @@ _final, inherited_
 
 
 
-##### [toolbarHeight](https://api.flutter.dev/flutter/material/AppBar/toolbarHeight.html) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [toolbarHeight](https://api.flutter.dev/flutter/material/AppBar/toolbarHeight.html) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -375,7 +376,7 @@ _final, inherited_
 
 
 
-##### [toolbarTextStyle](https://api.flutter.dev/flutter/material/AppBar/toolbarTextStyle.html) &#8594; [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html)
+##### [toolbarTextStyle](https://api.flutter.dev/flutter/material/AppBar/toolbarTextStyle.html) &#8594; [TextStyle](https://api.flutter.dev/flutter/painting/TextStyle-class.html)?
 
 
 
@@ -434,7 +435,7 @@ _inherited_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -453,7 +454,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

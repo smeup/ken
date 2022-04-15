@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -34,18 +35,18 @@
 
 ## Constructors
 
-[SmeupDashboard](../smeup_widgets_smeup_dashboard/SmeupDashboard/SmeupDashboard.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) data, {dynamic id = '', dynamic type = 'DSH', [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) captionFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionFontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) iconSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) iconColor, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) forceIcon, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) forceText, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) forceUm, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) forceValue, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) valueColName = SmeupDashboardModel.defaultValueColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) text = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) unitOfMeasure = '', [int](https://api.flutter.dev/flutter/dart-core/int-class.html) icon, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) selectLayout = SmeupDashboardModel.defaultSelectLayout, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = SmeupDashboardModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = SmeupDashboardModel.defaultHeight, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = SmeupDashboardModel.defaultPadding, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) numberFormat = SmeupDashboardModel.defaultNumberFormat, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) title = ''})
+[SmeupDashboard](../smeup_widgets_smeup_dashboard/SmeupDashboard/SmeupDashboard.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? data, {dynamic id = '', dynamic type = 'DSH', [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? fontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? fontSize, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? fontBold, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? captionFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionFontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? iconSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? iconColor, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? forceIcon, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? forceText, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? forceUm, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? forceValue, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? valueColName = SmeupDashboardModel.defaultValueColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? text = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? unitOfMeasure = '', [int](https://api.flutter.dev/flutter/dart-core/int-class.html)? icon, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? selectLayout = SmeupDashboardModel.defaultSelectLayout, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? width = SmeupDashboardModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? height = SmeupDashboardModel.defaultHeight, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)? padding = SmeupDashboardModel.defaultPadding, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? numberFormat = SmeupDashboardModel.defaultNumberFormat, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? title = ''})
 
     
 
-[SmeupDashboard.withController](../smeup_widgets_smeup_dashboard/SmeupDashboard/SmeupDashboard.withController.md) ([SmeupDashboardModel](../smeup_models_widgets_smeup_dashboard_model/SmeupDashboardModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupDashboard.withController](../smeup_widgets_smeup_dashboard/SmeupDashboard/SmeupDashboard.withController.md) ([SmeupDashboardModel](../smeup_models_widgets_smeup_dashboard_model/SmeupDashboardModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey)
 
     
 
 
 ## Properties
 
-##### [captionFontBold](../smeup_widgets_smeup_dashboard/SmeupDashboard/captionFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [captionFontBold](../smeup_widgets_smeup_dashboard/SmeupDashboard/captionFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -54,7 +55,7 @@ _read / write_
 
 
 
-##### [captionFontColor](../smeup_widgets_smeup_dashboard/SmeupDashboard/captionFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [captionFontColor](../smeup_widgets_smeup_dashboard/SmeupDashboard/captionFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -63,7 +64,7 @@ _read / write_
 
 
 
-##### [captionFontSize](../smeup_widgets_smeup_dashboard/SmeupDashboard/captionFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [captionFontSize](../smeup_widgets_smeup_dashboard/SmeupDashboard/captionFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -72,7 +73,7 @@ _read / write_
 
 
 
-##### [data](../smeup_widgets_smeup_dashboard/SmeupDashboard/data.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [data](../smeup_widgets_smeup_dashboard/SmeupDashboard/data.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -81,7 +82,7 @@ _read / write_
 
 
 
-##### [fontBold](../smeup_widgets_smeup_dashboard/SmeupDashboard/fontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [fontBold](../smeup_widgets_smeup_dashboard/SmeupDashboard/fontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -90,7 +91,7 @@ _read / write_
 
 
 
-##### [fontColor](../smeup_widgets_smeup_dashboard/SmeupDashboard/fontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [fontColor](../smeup_widgets_smeup_dashboard/SmeupDashboard/fontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -99,7 +100,7 @@ _read / write_
 
 
 
-##### [fontSize](../smeup_widgets_smeup_dashboard/SmeupDashboard/fontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [fontSize](../smeup_widgets_smeup_dashboard/SmeupDashboard/fontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -108,7 +109,7 @@ _read / write_
 
 
 
-##### [forceIcon](../smeup_widgets_smeup_dashboard/SmeupDashboard/forceIcon.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [forceIcon](../smeup_widgets_smeup_dashboard/SmeupDashboard/forceIcon.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -117,7 +118,7 @@ _read / write_
 
 
 
-##### [forceText](../smeup_widgets_smeup_dashboard/SmeupDashboard/forceText.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [forceText](../smeup_widgets_smeup_dashboard/SmeupDashboard/forceText.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -126,7 +127,7 @@ _read / write_
 
 
 
-##### [forceUm](../smeup_widgets_smeup_dashboard/SmeupDashboard/forceUm.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [forceUm](../smeup_widgets_smeup_dashboard/SmeupDashboard/forceUm.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -135,7 +136,7 @@ _read / write_
 
 
 
-##### [forceValue](../smeup_widgets_smeup_dashboard/SmeupDashboard/forceValue.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [forceValue](../smeup_widgets_smeup_dashboard/SmeupDashboard/forceValue.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -144,7 +145,7 @@ _read / write_
 
 
 
-##### [formKey](../smeup_widgets_smeup_dashboard/SmeupDashboard/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_dashboard/SmeupDashboard/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -162,7 +163,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [height](../smeup_widgets_smeup_dashboard/SmeupDashboard/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [height](../smeup_widgets_smeup_dashboard/SmeupDashboard/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -171,7 +172,7 @@ _read / write_
 
 
 
-##### [icon](../smeup_widgets_smeup_dashboard/SmeupDashboard/icon.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
+##### [icon](../smeup_widgets_smeup_dashboard/SmeupDashboard/icon.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)?
 
 
 
@@ -180,7 +181,7 @@ _read / write_
 
 
 
-##### [iconColor](../smeup_widgets_smeup_dashboard/SmeupDashboard/iconColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [iconColor](../smeup_widgets_smeup_dashboard/SmeupDashboard/iconColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -189,7 +190,7 @@ _read / write_
 
 
 
-##### [iconSize](../smeup_widgets_smeup_dashboard/SmeupDashboard/iconSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [iconSize](../smeup_widgets_smeup_dashboard/SmeupDashboard/iconSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -198,7 +199,7 @@ _read / write_
 
 
 
-##### [id](../smeup_widgets_smeup_dashboard/SmeupDashboard/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_dashboard/SmeupDashboard/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -207,7 +208,7 @@ _read / write_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -216,7 +217,7 @@ _final, inherited_
 
 
 
-##### [model](../smeup_widgets_smeup_dashboard/SmeupDashboard/model.md) &#8596; [SmeupDashboardModel](../smeup_models_widgets_smeup_dashboard_model/SmeupDashboardModel-class.md)
+##### [model](../smeup_widgets_smeup_dashboard/SmeupDashboard/model.md) &#8596; [SmeupDashboardModel](../smeup_models_widgets_smeup_dashboard_model/SmeupDashboardModel-class.md)?
 
 
 
@@ -225,7 +226,7 @@ _read / write_
 
 
 
-##### [numberFormat](../smeup_widgets_smeup_dashboard/SmeupDashboard/numberFormat.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [numberFormat](../smeup_widgets_smeup_dashboard/SmeupDashboard/numberFormat.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -234,7 +235,7 @@ _read / write_
 
 
 
-##### [padding](../smeup_widgets_smeup_dashboard/SmeupDashboard/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)
+##### [padding](../smeup_widgets_smeup_dashboard/SmeupDashboard/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)?
 
 
 
@@ -261,7 +262,7 @@ _read / write_
 
 
 
-##### [selectLayout](../smeup_widgets_smeup_dashboard/SmeupDashboard/selectLayout.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [selectLayout](../smeup_widgets_smeup_dashboard/SmeupDashboard/selectLayout.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -270,7 +271,7 @@ _read / write_
 
 
 
-##### [text](../smeup_widgets_smeup_dashboard/SmeupDashboard/text.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [text](../smeup_widgets_smeup_dashboard/SmeupDashboard/text.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -279,7 +280,7 @@ _read / write_
 
 
 
-##### [title](../smeup_widgets_smeup_dashboard/SmeupDashboard/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_widgets_smeup_dashboard/SmeupDashboard/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -288,7 +289,7 @@ _read / write_
 
 
 
-##### [type](../smeup_widgets_smeup_dashboard/SmeupDashboard/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_widgets_smeup_dashboard/SmeupDashboard/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -297,7 +298,7 @@ _read / write_
 
 
 
-##### [unitOfMeasure](../smeup_widgets_smeup_dashboard/SmeupDashboard/unitOfMeasure.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [unitOfMeasure](../smeup_widgets_smeup_dashboard/SmeupDashboard/unitOfMeasure.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -306,7 +307,7 @@ _read / write_
 
 
 
-##### [valueColName](../smeup_widgets_smeup_dashboard/SmeupDashboard/valueColName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [valueColName](../smeup_widgets_smeup_dashboard/SmeupDashboard/valueColName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -315,7 +316,7 @@ _read / write_
 
 
 
-##### [width](../smeup_widgets_smeup_dashboard/SmeupDashboard/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [width](../smeup_widgets_smeup_dashboard/SmeupDashboard/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -392,7 +393,7 @@ _override_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -411,7 +412,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

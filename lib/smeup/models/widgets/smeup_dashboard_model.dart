@@ -8,14 +8,14 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   // supported by json_theme
-  static double defaultFontSize;
-  static Color defaultFontColor;
-  static bool defaultFontBold;
-  static double defaultCaptionFontSize;
-  static Color defaultCaptionFontColor;
-  static bool defaultCaptionFontBold;
-  static double defaultIconSize;
-  static Color defaultIconColor;
+  static double? defaultFontSize;
+  static Color? defaultFontColor;
+  static bool? defaultFontBold;
+  static double? defaultCaptionFontSize;
+  static Color? defaultCaptionFontColor;
+  static bool? defaultCaptionFontBold;
+  static double? defaultIconSize;
+  static Color? defaultIconColor;
 
   // unsupported by json_theme
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
@@ -32,28 +32,28 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultForceUm = '';
   static const String defaultNumberFormat = '*;0';
 
-  double fontSize;
-  Color fontColor;
-  bool fontBold;
-  double captionFontSize;
-  bool captionFontBold;
-  Color captionFontColor;
-  double iconSize;
-  Color iconColor;
+  double? fontSize;
+  Color? fontColor;
+  bool? fontBold;
+  double? captionFontSize;
+  bool? captionFontBold;
+  Color? captionFontColor;
+  double? iconSize;
+  Color? iconColor;
 
-  EdgeInsetsGeometry padding;
-  String valueColName;
-  String iconColName;
-  String umColName;
-  String textColName;
-  String forceText;
-  String forceUm;
-  String forceValue;
-  String forceIcon;
-  String selectLayout;
-  double width;
-  double height;
-  String numberFormat;
+  EdgeInsetsGeometry? padding;
+  String? valueColName;
+  String? iconColName;
+  String? umColName;
+  String? textColName;
+  String? forceText;
+  String? forceUm;
+  String? forceValue;
+  String? forceIcon;
+  String? selectLayout;
+  double? width;
+  double? height;
+  String? numberFormat;
 
   SmeupDashboardModel(
       {id,
@@ -85,7 +85,7 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
       title = ''})
       : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (iconColor == null)
-      iconColor = SmeupConfigurationService.getTheme().iconTheme.color;
+      iconColor = SmeupConfigurationService.getTheme()!.iconTheme.color;
     id = SmeupUtilities.getWidgetId('DSH', id);
     SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
@@ -93,9 +93,9 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupDashboardModel.fromMap(
     Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
   ) : super.fromMap(
           jsonMap,
           formKey,
@@ -103,61 +103,61 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
           context,
         ) {
     setDefaults(this);
-    valueColName = optionsDefault['ValueColName'] ?? defaultValueColName;
-    iconColName = optionsDefault['iconColName'] ?? defaultIconColName;
-    textColName = optionsDefault['textColName'] ?? defaultTextColName;
-    umColName = optionsDefault['umColName'] ?? defaultUmColName;
+    valueColName = optionsDefault!['ValueColName'] ?? defaultValueColName;
+    iconColName = optionsDefault!['iconColName'] ?? defaultIconColName;
+    textColName = optionsDefault!['textColName'] ?? defaultTextColName;
+    umColName = optionsDefault!['umColName'] ?? defaultUmColName;
     padding =
-        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
-    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+        SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
+    width = SmeupUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height =
-        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+        SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 
-    if (optionsDefault['FontSize'].toString().contains('%')) {
+    if (optionsDefault!['FontSize'].toString().contains('%')) {
       double perc = SmeupUtilities.getDouble(
-              optionsDefault['FontSize'].toString().replaceAll("%", "")) ??
-          defaultFontSize;
-      fontSize = defaultFontSize * perc / 100;
+              optionsDefault!['FontSize'].toString().replaceAll("%", "")) ??
+          defaultFontSize!;
+      fontSize = defaultFontSize! * perc / 100;
 
-      iconSize = SmeupUtilities.getDouble(optionsDefault['iconSize']) ??
-          defaultIconSize * perc / 100;
+      iconSize = SmeupUtilities.getDouble(optionsDefault!['iconSize']) ??
+          defaultIconSize! * perc / 100;
 
       captionFontSize =
-          SmeupUtilities.getDouble(optionsDefault['labelFontSize']) ??
-              defaultCaptionFontSize * perc / 100;
+          SmeupUtilities.getDouble(optionsDefault!['labelFontSize']) ??
+              defaultCaptionFontSize! * perc / 100;
     } else {
-      fontSize = SmeupUtilities.getDouble(optionsDefault['FontSize']) ??
+      fontSize = SmeupUtilities.getDouble(optionsDefault!['FontSize']) ??
           defaultFontSize;
 
-      iconSize = SmeupUtilities.getDouble(optionsDefault['iconSize']) ??
+      iconSize = SmeupUtilities.getDouble(optionsDefault!['iconSize']) ??
           defaultIconSize;
 
       captionFontSize =
-          SmeupUtilities.getDouble(optionsDefault['labelFontSize']) ??
+          SmeupUtilities.getDouble(optionsDefault!['labelFontSize']) ??
               defaultCaptionFontSize;
     }
 
-    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']) ??
+    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
         defaultFontColor;
 
-    fontBold = optionsDefault['bold'] ?? defaultFontBold;
+    fontBold = optionsDefault!['bold'] ?? defaultFontBold;
 
     captionFontColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['captionFontColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['captionFontColor']) ??
             defaultCaptionFontColor;
 
-    captionFontBold = optionsDefault['captionBold'] ?? defaultCaptionFontBold;
+    captionFontBold = optionsDefault!['captionBold'] ?? defaultCaptionFontBold;
 
-    iconColor = SmeupUtilities.getColorFromRGB(optionsDefault['iconColor']) ??
+    iconColor = SmeupUtilities.getColorFromRGB(optionsDefault!['iconColor']) ??
         defaultIconColor;
 
-    selectLayout = optionsDefault['selectLayout'] ?? '';
-    forceText = optionsDefault['forceText'] ?? '';
-    forceUm = optionsDefault['forceUm'] ?? '';
-    forceIcon = optionsDefault['forceIcon'] ?? '';
-    forceValue = optionsDefault['forceValue'] ?? '';
+    selectLayout = optionsDefault!['selectLayout'] ?? '';
+    forceText = optionsDefault!['forceText'] ?? '';
+    forceUm = optionsDefault!['forceUm'] ?? '';
+    forceIcon = optionsDefault!['forceIcon'] ?? '';
+    forceValue = optionsDefault!['forceValue'] ?? '';
 
-    numberFormat = optionsDefault['numberFormat'] ?? defaultNumberFormat;
+    numberFormat = optionsDefault!['numberFormat'] ?? defaultNumberFormat;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
@@ -169,17 +169,17 @@ class SmeupDashboardModel extends SmeupModel implements SmeupDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var textStyle = SmeupConfigurationService.getTheme().textTheme.headline1;
+    var textStyle = SmeupConfigurationService.getTheme()!.textTheme.headline1!;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
 
-    var captionStyle = SmeupConfigurationService.getTheme().textTheme.caption;
+    var captionStyle = SmeupConfigurationService.getTheme()!.textTheme.caption!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;
 
-    var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
+    var iconTheme = SmeupConfigurationService.getTheme()!.iconTheme;
     defaultIconSize = iconTheme.size;
     defaultIconColor = iconTheme.color;
 

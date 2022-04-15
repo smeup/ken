@@ -42,6 +42,6 @@ runTests() {
   var findText = find.byType(Text);
   expect(findText, findsWidgets);
 
-  var finderTextContent = find.text('120');
+  var finderTextContent = find.text('120.0');
   expect(finderTextContent, findsWidgets);
 }

@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -34,18 +35,36 @@
 
 ## Constructors
 
-[SmeupGauge](../smeup_widgets_smeup_gauge/SmeupGauge/SmeupGauge.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {[int](https://api.flutter.dev/flutter/dart-core/int-class.html) value = SmeupGaugeModel.defaultValue, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) maxValue = SmeupGaugeModel.defaultMaxValue, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) minValue = SmeupGaugeModel.defaultMinValue, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) warning = SmeupGaugeModel.defaultWarning, dynamic id = '', dynamic type = 'GAU', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) valueColName = SmeupGaugeModel.defaultValColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) maxColName = SmeupGaugeModel.defaultMaxColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) minColName = SmeupGaugeModel.defaultMinColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) warningColName = SmeupGaugeModel.defaultWarningColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) title = ''})
+[SmeupGauge](../smeup_widgets_smeup_gauge/SmeupGauge/SmeupGauge.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, {[double](https://api.flutter.dev/flutter/dart-core/double-class.html)? value = SmeupGaugeModel.defaultValue, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? maxValue = SmeupGaugeModel.defaultMaxValue, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? minValue = SmeupGaugeModel.defaultMinValue, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? warning = SmeupGaugeModel.defaultWarning, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? alert = SmeupGaugeModel.defaultAlert, dynamic id = '', dynamic type = 'GAU', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? valueColName = SmeupGaugeModel.defaultValColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? maxColName = SmeupGaugeModel.defaultMaxColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? minColName = SmeupGaugeModel.defaultMinColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? warningColName = SmeupGaugeModel.defaultWarningColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? alertColName = SmeupGaugeModel.defaultAlertColName, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? title = ''})
 
     
 
-[SmeupGauge.whitController](../smeup_widgets_smeup_gauge/SmeupGauge/SmeupGauge.whitController.md) ([SmeupGaugeModel](../smeup_models_widgets_smeup_gauge_model/SmeupGaugeModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupGauge.whitController](../smeup_widgets_smeup_gauge/SmeupGauge/SmeupGauge.whitController.md) ([SmeupGaugeModel](../smeup_models_widgets_smeup_gauge_model/SmeupGaugeModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey)
 
     
 
 
 ## Properties
 
-##### [formKey](../smeup_widgets_smeup_gauge/SmeupGauge/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [alert](../smeup_widgets_smeup_gauge/SmeupGauge/alert.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
+
+
+
+   
+_read / write_
+
+
+
+##### [alertColName](../smeup_widgets_smeup_gauge/SmeupGauge/alertColName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
+
+
+
+   
+_read / write_
+
+
+
+##### [formKey](../smeup_widgets_smeup_gauge/SmeupGauge/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -63,7 +82,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [id](../smeup_widgets_smeup_gauge/SmeupGauge/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_gauge/SmeupGauge/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -72,7 +91,7 @@ _read / write_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -81,7 +100,7 @@ _final, inherited_
 
 
 
-##### [maxColName](../smeup_widgets_smeup_gauge/SmeupGauge/maxColName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [maxColName](../smeup_widgets_smeup_gauge/SmeupGauge/maxColName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -90,7 +109,7 @@ _read / write_
 
 
 
-##### [maxValue](../smeup_widgets_smeup_gauge/SmeupGauge/maxValue.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
+##### [maxValue](../smeup_widgets_smeup_gauge/SmeupGauge/maxValue.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -99,7 +118,7 @@ _read / write_
 
 
 
-##### [minColName](../smeup_widgets_smeup_gauge/SmeupGauge/minColName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [minColName](../smeup_widgets_smeup_gauge/SmeupGauge/minColName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -108,7 +127,7 @@ _read / write_
 
 
 
-##### [minValue](../smeup_widgets_smeup_gauge/SmeupGauge/minValue.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
+##### [minValue](../smeup_widgets_smeup_gauge/SmeupGauge/minValue.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -117,7 +136,7 @@ _read / write_
 
 
 
-##### [model](../smeup_widgets_smeup_gauge/SmeupGauge/model.md) &#8596; [SmeupGaugeModel](../smeup_models_widgets_smeup_gauge_model/SmeupGaugeModel-class.md)
+##### [model](../smeup_widgets_smeup_gauge/SmeupGauge/model.md) &#8596; [SmeupGaugeModel](../smeup_models_widgets_smeup_gauge_model/SmeupGaugeModel-class.md)?
 
 
 
@@ -144,7 +163,7 @@ _read / write_
 
 
 
-##### [title](../smeup_widgets_smeup_gauge/SmeupGauge/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_widgets_smeup_gauge/SmeupGauge/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -153,7 +172,7 @@ _read / write_
 
 
 
-##### [type](../smeup_widgets_smeup_gauge/SmeupGauge/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_widgets_smeup_gauge/SmeupGauge/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -162,7 +181,7 @@ _read / write_
 
 
 
-##### [value](../smeup_widgets_smeup_gauge/SmeupGauge/value.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
+##### [value](../smeup_widgets_smeup_gauge/SmeupGauge/value.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -171,7 +190,7 @@ _read / write_
 
 
 
-##### [valueColName](../smeup_widgets_smeup_gauge/SmeupGauge/valueColName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [valueColName](../smeup_widgets_smeup_gauge/SmeupGauge/valueColName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -180,7 +199,7 @@ _read / write_
 
 
 
-##### [warning](../smeup_widgets_smeup_gauge/SmeupGauge/warning.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
+##### [warning](../smeup_widgets_smeup_gauge/SmeupGauge/warning.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -189,7 +208,7 @@ _read / write_
 
 
 
-##### [warningColName](../smeup_widgets_smeup_gauge/SmeupGauge/warningColName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [warningColName](../smeup_widgets_smeup_gauge/SmeupGauge/warningColName.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -266,7 +285,7 @@ _override_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -285,7 +304,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

@@ -59,6 +59,6 @@ runTests() {
   var findText = find.byType(Text);
   expect(findText, findsWidgets);
 
-  var finderTextContent = find.text('Descriptive text one');
+  var finderTextContent = find.text('Carousel');
   expect(finderTextContent, findsWidgets);
 }

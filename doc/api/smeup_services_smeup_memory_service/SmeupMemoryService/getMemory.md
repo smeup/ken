@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html) getMemory
-([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) segment, [SmeupFun](../../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) dataFunction)
+([String](https://api.flutter.dev/flutter/dart-core/String-class.html) key, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) segment, [Fun](../../smeup_models_fun/Fun-class.md) smeupFun, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) dataFunction)
 
 
 
@@ -23,8 +24,8 @@
 ## Implementation
 
 ```dart
-static Future<dynamic> getMemory(String key, String segment,
-    SmeupFun smeupFun, Function dataFunction) async {
+static Future<dynamic> getMemory(
+    String key, String segment, Fun smeupFun, Function dataFunction) async {
   if (memory[key] != null) {
     SmeupLogService.writeDebugMessage(
         'response returned from the $key memory',

@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 
 import 'integration_test_service.dart';
 
-FlutterDriver driver;
+late FlutterDriver driver;
 
 Future<void> main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

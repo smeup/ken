@@ -19,32 +19,32 @@ class SmeupSwitch extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
-  SmeupSwitchModel model;
+  GlobalKey<FormState>? formKey;
+  SmeupSwitchModel? model;
 
-  double captionFontSize;
-  Color captionFontColor;
-  Color captionBackColor;
-  bool captionFontBold;
-  Color thumbColor;
-  Color trackColor;
+  double? captionFontSize;
+  Color? captionFontColor;
+  Color? captionBackColor;
+  bool? captionFontBold;
+  Color? thumbColor;
+  Color? trackColor;
 
-  double width;
-  double height;
-  EdgeInsetsGeometry padding;
-  String text;
-  String id;
-  String type;
-  String title;
-  bool data;
-  Function onClientChange;
+  double? width;
+  double? height;
+  EdgeInsetsGeometry? padding;
+  String? text;
+  String? id;
+  String? type;
+  String? title;
+  bool? data;
+  Function? onClientChange;
 
   SmeupSwitch.withController(
-    this.model,
+    SmeupSwitchModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   SmeupSwitch(
@@ -72,7 +72,7 @@ class SmeupSwitch extends StatefulWidget
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupSwitchModel m = model;
+    SmeupSwitchModel m = model as SmeupSwitchModel;
     id = m.id;
     type = m.type;
     title = m.title;
@@ -91,7 +91,7 @@ class SmeupSwitch extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupSwitchModel m = model;
+    SmeupSwitchModel m = model as SmeupSwitchModel;
 
     // change data format
     var workData = formatDataFields(m);
@@ -116,8 +116,8 @@ class SmeupSwitch extends StatefulWidget
 class _SmeupSwitchState extends State<SmeupSwitch>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  bool _data;
-  SmeupSwitchModel _model;
+  bool? _data;
+  SmeupSwitchModel? _model;
 
   @override
   void initState() {
@@ -125,7 +125,7 @@ class _SmeupSwitchState extends State<SmeupSwitch>
         formKey: widget.formKey);
     _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -149,22 +149,22 @@ class _SmeupSwitchState extends State<SmeupSwitch>
   }
 
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupSwitchDao.getData(_model);
-        _data = widget.treatData(_model);
+        await SmeupSwitchDao.getData(_model!);
+        _data = widget.treatData(_model!);
       }
 
       setDataLoad(widget.id, true);
     }
 
-    double switchHeight = widget.height;
-    double switchWidth = widget.width;
-    if (_model != null && _model.parent != null) {
+    double? switchHeight = widget.height;
+    double? switchWidth = widget.width;
+    if (_model != null && _model!.parent != null) {
       if (switchHeight == 0)
-        switchHeight = (_model.parent as SmeupSectionModel).height;
+        switchHeight = (_model!.parent as SmeupSectionModel).height;
       if (switchWidth == 0)
-        switchWidth = (_model.parent as SmeupSectionModel).width;
+        switchWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
       if (switchHeight == 0) switchHeight = MediaQuery.of(context).size.height;
       if (switchWidth == 0) switchWidth = MediaQuery.of(context).size.width;
@@ -181,7 +181,7 @@ class _SmeupSwitchState extends State<SmeupSwitch>
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            widget.text,
+            widget.text!,
             style: captionStyle,
           ),
           SmeupSwitchWidget(
@@ -192,10 +192,10 @@ class _SmeupSwitchState extends State<SmeupSwitch>
               SmeupVariablesService.setVariable(widget.id, _data,
                   formKey: widget.formKey);
               if (widget.onClientChange != null) {
-                widget.onClientChange(changedValue);
+                widget.onClientChange!(changedValue);
               }
               if (_model != null)
-                SmeupDynamismService.run(_model.dynamisms, context, 'click',
+                SmeupDynamismService.run(_model!.dynamisms, context, 'click',
                     widget.scaffoldKey, widget.formKey);
             },
           ),
@@ -207,14 +207,14 @@ class _SmeupSwitchState extends State<SmeupSwitch>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
+    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
         color: widget.captionFontColor,
         fontSize: widget.captionFontSize,
         backgroundColor: widget.captionBackColor);
 
-    if (widget.captionFontBold) {
+    if (widget.captionFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );

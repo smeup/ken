@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -34,18 +35,18 @@
 
 ## Constructors
 
-[SmeupTimePicker](../smeup_widgets_smeup_timepicker/SmeupTimePicker/SmeupTimePicker.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [SmeupTimePickerData](../smeup_widgets_smeup_timepicker/SmeupTimePickerData-class.md) data, {dynamic id = '', dynamic type = 'tpk', [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) borderColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderRadius, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderWidth, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) elevation, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) captionFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionFontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionBackColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) underline = SmeupTimePickerModel.defaultUnderline, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) innerSpace = SmeupTimePickerModel.defaultInnerSpace, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html) align = SmeupTimePickerModel.defaultAlign, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) label = SmeupTimePickerModel.defaultLabel, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = SmeupTimePickerModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = SmeupTimePickerModel.defaultHeight, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = SmeupTimePickerModel.defaultPadding, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showborder = SmeupTimePickerModel.defaultShowBorder, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)> minutesList, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) clientOnChange, [TextInputType](https://api.flutter.dev/flutter/services/TextInputType-class.html) keyboard})
+[SmeupTimePicker](../smeup_widgets_smeup_timepicker/SmeupTimePicker/SmeupTimePicker.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [SmeupTimePickerData](../smeup_widgets_smeup_timepicker/SmeupTimePickerData-class.md)? data, {dynamic id = '', dynamic type = 'tpk', [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? borderColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? borderRadius, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? borderWidth, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? fontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? fontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? fontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? backColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? elevation, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? captionFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionFontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionBackColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? underline = SmeupTimePickerModel.defaultUnderline, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? innerSpace = SmeupTimePickerModel.defaultInnerSpace, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)? align = SmeupTimePickerModel.defaultAlign, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? label = SmeupTimePickerModel.defaultLabel, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? width = SmeupTimePickerModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? height = SmeupTimePickerModel.defaultHeight, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)? padding = SmeupTimePickerModel.defaultPadding, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? showborder = SmeupTimePickerModel.defaultShowBorder, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>? minutesList, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? clientOnChange, [TextInputType](https://api.flutter.dev/flutter/services/TextInputType-class.html)? keyboard})
 
     
 
-[SmeupTimePicker.withController](../smeup_widgets_smeup_timepicker/SmeupTimePicker/SmeupTimePicker.withController.md) ([SmeupTimePickerModel](../smeup_models_widgets_smeup_timepicker_model/SmeupTimePickerModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupTimePicker.withController](../smeup_widgets_smeup_timepicker/SmeupTimePicker/SmeupTimePicker.withController.md) ([SmeupTimePickerModel](../smeup_models_widgets_smeup_timepicker_model/SmeupTimePickerModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey)
 
     
 
 
 ## Properties
 
-##### [align](../smeup_widgets_smeup_timepicker/SmeupTimePicker/align.md) &#8596; [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)
+##### [align](../smeup_widgets_smeup_timepicker/SmeupTimePicker/align.md) &#8596; [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)?
 
 
 
@@ -54,7 +55,7 @@ _read / write_
 
 
 
-##### [backColor](../smeup_widgets_smeup_timepicker/SmeupTimePicker/backColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [backColor](../smeup_widgets_smeup_timepicker/SmeupTimePicker/backColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -63,7 +64,7 @@ _read / write_
 
 
 
-##### [borderColor](../smeup_widgets_smeup_timepicker/SmeupTimePicker/borderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [borderColor](../smeup_widgets_smeup_timepicker/SmeupTimePicker/borderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -72,7 +73,7 @@ _read / write_
 
 
 
-##### [borderRadius](../smeup_widgets_smeup_timepicker/SmeupTimePicker/borderRadius.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [borderRadius](../smeup_widgets_smeup_timepicker/SmeupTimePicker/borderRadius.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -81,7 +82,7 @@ _read / write_
 
 
 
-##### [borderWidth](../smeup_widgets_smeup_timepicker/SmeupTimePicker/borderWidth.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [borderWidth](../smeup_widgets_smeup_timepicker/SmeupTimePicker/borderWidth.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -90,7 +91,7 @@ _read / write_
 
 
 
-##### [captionBackColor](../smeup_widgets_smeup_timepicker/SmeupTimePicker/captionBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [captionBackColor](../smeup_widgets_smeup_timepicker/SmeupTimePicker/captionBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -99,7 +100,7 @@ _read / write_
 
 
 
-##### [captionFontBold](../smeup_widgets_smeup_timepicker/SmeupTimePicker/captionFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [captionFontBold](../smeup_widgets_smeup_timepicker/SmeupTimePicker/captionFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -108,7 +109,7 @@ _read / write_
 
 
 
-##### [captionFontColor](../smeup_widgets_smeup_timepicker/SmeupTimePicker/captionFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [captionFontColor](../smeup_widgets_smeup_timepicker/SmeupTimePicker/captionFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -117,7 +118,7 @@ _read / write_
 
 
 
-##### [captionFontSize](../smeup_widgets_smeup_timepicker/SmeupTimePicker/captionFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [captionFontSize](../smeup_widgets_smeup_timepicker/SmeupTimePicker/captionFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -126,7 +127,7 @@ _read / write_
 
 
 
-##### [clientOnChange](../smeup_widgets_smeup_timepicker/SmeupTimePicker/clientOnChange.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [clientOnChange](../smeup_widgets_smeup_timepicker/SmeupTimePicker/clientOnChange.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -135,7 +136,7 @@ _read / write_
 
 
 
-##### [data](../smeup_widgets_smeup_timepicker/SmeupTimePicker/data.md) &#8596; [SmeupTimePickerData](../smeup_widgets_smeup_timepicker/SmeupTimePickerData-class.md)
+##### [data](../smeup_widgets_smeup_timepicker/SmeupTimePicker/data.md) &#8596; [SmeupTimePickerData](../smeup_widgets_smeup_timepicker/SmeupTimePickerData-class.md)?
 
 
 
@@ -144,7 +145,7 @@ _read / write_
 
 
 
-##### [displayField](../smeup_widgets_smeup_timepicker/SmeupTimePicker/displayField.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [displayField](../smeup_widgets_smeup_timepicker/SmeupTimePicker/displayField.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -153,7 +154,7 @@ _read / write_
 
 
 
-##### [elevation](../smeup_widgets_smeup_timepicker/SmeupTimePicker/elevation.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [elevation](../smeup_widgets_smeup_timepicker/SmeupTimePicker/elevation.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -162,7 +163,7 @@ _read / write_
 
 
 
-##### [fontBold](../smeup_widgets_smeup_timepicker/SmeupTimePicker/fontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [fontBold](../smeup_widgets_smeup_timepicker/SmeupTimePicker/fontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -171,7 +172,7 @@ _read / write_
 
 
 
-##### [fontColor](../smeup_widgets_smeup_timepicker/SmeupTimePicker/fontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [fontColor](../smeup_widgets_smeup_timepicker/SmeupTimePicker/fontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -180,7 +181,7 @@ _read / write_
 
 
 
-##### [fontSize](../smeup_widgets_smeup_timepicker/SmeupTimePicker/fontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [fontSize](../smeup_widgets_smeup_timepicker/SmeupTimePicker/fontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -189,7 +190,7 @@ _read / write_
 
 
 
-##### [formKey](../smeup_widgets_smeup_timepicker/SmeupTimePicker/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_timepicker/SmeupTimePicker/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -207,7 +208,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [height](../smeup_widgets_smeup_timepicker/SmeupTimePicker/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [height](../smeup_widgets_smeup_timepicker/SmeupTimePicker/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -216,7 +217,7 @@ _read / write_
 
 
 
-##### [id](../smeup_widgets_smeup_timepicker/SmeupTimePicker/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_timepicker/SmeupTimePicker/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -225,7 +226,7 @@ _read / write_
 
 
 
-##### [innerSpace](../smeup_widgets_smeup_timepicker/SmeupTimePicker/innerSpace.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [innerSpace](../smeup_widgets_smeup_timepicker/SmeupTimePicker/innerSpace.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -234,7 +235,7 @@ _read / write_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -243,7 +244,7 @@ _final, inherited_
 
 
 
-##### [keyboard](../smeup_widgets_smeup_timepicker/SmeupTimePicker/keyboard.md) &#8596; [TextInputType](https://api.flutter.dev/flutter/services/TextInputType-class.html)
+##### [keyboard](../smeup_widgets_smeup_timepicker/SmeupTimePicker/keyboard.md) &#8596; [TextInputType](https://api.flutter.dev/flutter/services/TextInputType-class.html)?
 
 
 
@@ -252,7 +253,7 @@ _read / write_
 
 
 
-##### [label](../smeup_widgets_smeup_timepicker/SmeupTimePicker/label.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [label](../smeup_widgets_smeup_timepicker/SmeupTimePicker/label.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -261,7 +262,7 @@ _read / write_
 
 
 
-##### [minutesList](../smeup_widgets_smeup_timepicker/SmeupTimePicker/minutesList.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>
+##### [minutesList](../smeup_widgets_smeup_timepicker/SmeupTimePicker/minutesList.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>?
 
 
 
@@ -270,7 +271,7 @@ _read / write_
 
 
 
-##### [model](../smeup_widgets_smeup_timepicker/SmeupTimePicker/model.md) &#8596; [SmeupTimePickerModel](../smeup_models_widgets_smeup_timepicker_model/SmeupTimePickerModel-class.md)
+##### [model](../smeup_widgets_smeup_timepicker/SmeupTimePicker/model.md) &#8596; [SmeupTimePickerModel](../smeup_models_widgets_smeup_timepicker_model/SmeupTimePickerModel-class.md)?
 
 
 
@@ -279,7 +280,7 @@ _read / write_
 
 
 
-##### [padding](../smeup_widgets_smeup_timepicker/SmeupTimePicker/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)
+##### [padding](../smeup_widgets_smeup_timepicker/SmeupTimePicker/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)?
 
 
 
@@ -306,7 +307,7 @@ _read / write_
 
 
 
-##### [showborder](../smeup_widgets_smeup_timepicker/SmeupTimePicker/showborder.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [showborder](../smeup_widgets_smeup_timepicker/SmeupTimePicker/showborder.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -315,7 +316,7 @@ _read / write_
 
 
 
-##### [title](../smeup_widgets_smeup_timepicker/SmeupTimePicker/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_widgets_smeup_timepicker/SmeupTimePicker/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -324,7 +325,7 @@ _read / write_
 
 
 
-##### [type](../smeup_widgets_smeup_timepicker/SmeupTimePicker/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_widgets_smeup_timepicker/SmeupTimePicker/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -333,7 +334,7 @@ _read / write_
 
 
 
-##### [underline](../smeup_widgets_smeup_timepicker/SmeupTimePicker/underline.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [underline](../smeup_widgets_smeup_timepicker/SmeupTimePicker/underline.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -342,7 +343,7 @@ _read / write_
 
 
 
-##### [valueField](../smeup_widgets_smeup_timepicker/SmeupTimePicker/valueField.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [valueField](../smeup_widgets_smeup_timepicker/SmeupTimePicker/valueField.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -351,7 +352,7 @@ _read / write_
 
 
 
-##### [width](../smeup_widgets_smeup_timepicker/SmeupTimePicker/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [width](../smeup_widgets_smeup_timepicker/SmeupTimePicker/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -428,7 +429,7 @@ _override_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -447,7 +448,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

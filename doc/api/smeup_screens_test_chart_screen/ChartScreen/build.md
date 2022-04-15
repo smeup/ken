@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -64,7 +65,7 @@ Widget build(BuildContext context) {
   double deviceWidth = deviceInfo.size.height;
 
   return Theme(
-    data: SmeupConfigurationService.getTheme(),
+    data: SmeupConfigurationService.getTheme()!,
     child: Builder(
       builder: (BuildContext context) => Scaffold(
         appBar: AppBar(

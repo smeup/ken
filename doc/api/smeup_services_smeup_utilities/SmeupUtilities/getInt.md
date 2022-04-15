@@ -6,11 +6,12 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
-[int](https://api.flutter.dev/flutter/dart-core/int-class.html) getInt
+[int](https://api.flutter.dev/flutter/dart-core/int-class.html)? getInt
 (dynamic value)
 
 
@@ -23,7 +24,7 @@
 ## Implementation
 
 ```dart
-static int getInt(dynamic value) {
+static int? getInt(dynamic value) {
   if (value is int) {
     return value;
   } else if (value is double) {

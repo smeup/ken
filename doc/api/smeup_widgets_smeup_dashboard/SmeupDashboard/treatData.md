@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 dynamic treatData(SmeupModel model) {
-  SmeupDashboardModel m = model;
+  SmeupDashboardModel m = model as SmeupDashboardModel;
 
   // change data format
   var workData = formatDataFields(m);
@@ -41,20 +42,20 @@ dynamic treatData(SmeupModel model) {
     icon = SmeupUtilities.getInt(workData['rows'][0][m.iconColName]);
   }
 
-  if (m.forceText.isNotEmpty) {
+  if (m.forceText!.isNotEmpty) {
     text = m.forceText;
   }
 
-  if (m.forceIcon.isNotEmpty) {
-    icon = m.forceIcon as int;
+  if (m.forceIcon!.isNotEmpty) {
+    icon = m.forceIcon as int?;
   }
 
-  if (m.forceUm.isNotEmpty) {
+  if (m.forceUm!.isNotEmpty) {
     unitOfMeasure = m.forceUm;
   }
 
-  if (m.forceValue.isNotEmpty) {
-    data = m.forceValue as double;
+  if (m.forceValue!.isNotEmpty) {
+    data = m.forceValue as double?;
   }
 
   return data;

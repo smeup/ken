@@ -32,7 +32,7 @@
       "components": [
         {
           "type": "DSH",
-          "id": "dashboard",
+          "id": "dashboard1",
           "options": {
             "DSH": {
               "default": {

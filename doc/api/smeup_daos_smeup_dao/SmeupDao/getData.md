@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -25,9 +26,9 @@
 ```dart
 static Future<void> getData(SmeupModel model,
     {bool executeDecrementDataFetch = true}) async {
-  if (model.smeupFun != null && model.smeupFun.isFunValid()) {
+  if (model.smeupFun != null && model.smeupFun!.isFunValid()) {
     final smeupServiceResponse =
-        await SmeupDataService.invoke(model.smeupFun);
+        await (SmeupDataService.invoke(model.smeupFun));
     if (!smeupServiceResponse.succeded) {
       _decrementDataFetch(model, executeDecrementDataFetch);
       return;

@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -34,18 +35,18 @@
 
 ## Constructors
 
-[SmeupProgressIndicator](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/SmeupProgressIndicator.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type = 'FLD', [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) color, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) circularTrackColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) size = SmeupProgressIndicatorModel.defaultSize, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) title = ''})
+[SmeupProgressIndicator](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/SmeupProgressIndicator.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, {[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type = 'FLD', [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? color, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? circularTrackColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? size = SmeupProgressIndicatorModel.defaultSize, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? title = ''})
 
     
 
-[SmeupProgressIndicator.withController](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/SmeupProgressIndicator.withController.md) ([SmeupProgressIndicatorModel](../smeup_models_widgets_smeup_progress_indicator_model/SmeupProgressIndicatorModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+[SmeupProgressIndicator.withController](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/SmeupProgressIndicator.withController.md) ([SmeupProgressIndicatorModel](../smeup_models_widgets_smeup_progress_indicator_model/SmeupProgressIndicatorModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey)
 
     
 
 
 ## Properties
 
-##### [circularTrackColor](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/circularTrackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [circularTrackColor](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/circularTrackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -54,7 +55,7 @@ _read / write_
 
 
 
-##### [color](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/color.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [color](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/color.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -63,7 +64,7 @@ _read / write_
 
 
 
-##### [formKey](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -81,7 +82,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [id](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -90,7 +91,7 @@ _read / write_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -99,7 +100,7 @@ _final, inherited_
 
 
 
-##### [model](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/model.md) &#8596; [SmeupProgressIndicatorModel](../smeup_models_widgets_smeup_progress_indicator_model/SmeupProgressIndicatorModel-class.md)
+##### [model](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/model.md) &#8596; [SmeupProgressIndicatorModel](../smeup_models_widgets_smeup_progress_indicator_model/SmeupProgressIndicatorModel-class.md)?
 
 
 
@@ -126,7 +127,7 @@ _read / write_
 
 
 
-##### [size](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/size.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [size](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/size.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -135,7 +136,7 @@ _read / write_
 
 
 
-##### [title](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -144,7 +145,7 @@ _read / write_
 
 
 
-##### [type](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_widgets_smeup_progress_indicator/SmeupProgressIndicator/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -221,7 +222,7 @@ _override_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -240,7 +241,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

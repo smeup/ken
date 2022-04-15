@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[SmeupFun](../../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun
+[Fun](../../smeup_models_fun/Fun-class.md)? smeupFun
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-SmeupFun smeupFun;
+Fun? smeupFun;
 
 
 ```

@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,14 +27,14 @@ _override_
 ```dart
 @override
 dynamic treatData(SmeupModel model) {
-  SmeupTextAutocompleteModel m = model;
+  SmeupTextAutocompleteModel m = model as SmeupTextAutocompleteModel;
 
   // change data format
   var workData = formatDataFields(m);
 
   // set the widget data
   if (workData != null) {
-    var newList = List<dynamic>.empty(growable: true);
+    var newList = List<Map<dynamic, dynamic>>.empty(growable: true);
     for (var i = 0; i < (workData['rows'] as List).length; i++) {
       final element = workData['rows'][i];
       newList.add({

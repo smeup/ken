@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:xml/xml.dart';
 
 enum SmeupInputPanelSupportedComp { Cmb, Rad, Itx, Bcd }
 
 class SmeupInputPanelValue {
-  String code;
-  String descr;
+  String? code;
+  String? descr;
 
   SmeupInputPanelValue({this.code = "", this.descr = ""});
 
@@ -25,26 +24,24 @@ class SmeupInputPanelValue {
 }
 
 class SmeupInputPanelField {
-  SmeupInputPanelSupportedComp component;
-  String id;
-  String label;
-  bool visible;
-  int position;
-  SmeupInputPanelValue value;
-  List<SmeupInputPanelValue> items;
-  String fun;
+  SmeupInputPanelSupportedComp? component;
+  String? id;
+  String? label;
+  bool? visible;
+  late int position;
+  late SmeupInputPanelValue value;
+  List<SmeupInputPanelValue>? items;
+  String? fun;
 
   SmeupInputPanelField({
     this.label = "",
-    @required this.id,
-    this.value,
+    required String this.id,
+    required this.value,
     this.items,
     this.component = SmeupInputPanelSupportedComp.Itx,
     this.visible = true,
     this.position = 0,
-  })  : assert(id != null),
-        assert(value != null),
-        assert(position >= 0);
+  }) : assert(position >= 0);
 
   SmeupInputPanelField.fromMap(dynamic dataList) {
     // assert((dataList as List).length > 0);
@@ -75,8 +72,8 @@ class SmeupInputPanelField {
     value.descr = _getAttributeFromLayout(fieldFromLayout, "Txt", value.descr);
   }
 
-  String _getAttributeFromLayout(
-      XmlNode fieldFromLayout, String attrName, String defaultValue) {
+  String? _getAttributeFromLayout(
+      XmlNode fieldFromLayout, String attrName, String? defaultValue) {
     return fieldFromLayout.getAttribute(attrName) != null &&
             fieldFromLayout.getAttribute(attrName) != ""
         ? fieldFromLayout.getAttribute(attrName)

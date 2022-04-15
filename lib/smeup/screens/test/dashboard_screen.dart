@@ -13,7 +13,7 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme(),
+      data: SmeupConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -41,7 +41,7 @@ class DashboardScreen extends StatelessWidget {
                     iconSize: 40,
                     iconColor: Colors.red,
                     width: 300,
-                    id: 'dashboard2',
+                    id: 'dashboard1',
                   )
                 ],
               )),

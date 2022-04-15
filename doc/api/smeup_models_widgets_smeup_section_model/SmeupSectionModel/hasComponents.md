@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,7 +25,7 @@
 
 ```dart
 bool hasComponents() {
-  return components != null && components.length > 0;
+  return components != null && components!.length > 0;
 }
 ```
 

@@ -13,7 +13,7 @@ class ListBoxScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme(),
+      data: SmeupConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(

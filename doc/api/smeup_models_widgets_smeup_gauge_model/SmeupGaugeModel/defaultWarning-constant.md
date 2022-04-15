@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[int](https://api.flutter.dev/flutter/dart-core/int-class.html) const defaultWarning
+[double](https://api.flutter.dev/flutter/dart-core/double-class.html) const defaultWarning
   
 
 
@@ -20,7 +21,7 @@
 ## Implementation
 
 ```dart
-static const int defaultWarning = 50;
+static const double defaultWarning = 50;
 
 
 ```

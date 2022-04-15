@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -30,10 +31,6 @@ checkProgress(String password) {
 
   satisfiedRules = 0;
 
-  if (password == null) {
-    notifyListeners();
-    return;
-  }
   if (password.isEmpty) {
     notifyListeners();
     return;

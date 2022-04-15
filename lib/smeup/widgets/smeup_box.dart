@@ -1,6 +1,8 @@
+import 'dart:async';
+
 import 'package:clickable_list_wheel_view/measure_size.dart';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
+import 'package:ken/smeup/models/dynamism.dart';
 import 'package:ken/smeup/models/widgets/smeup_image_model.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
 import 'package:ken/smeup/services/SmeupLocalizationService.dart';
@@ -16,31 +18,33 @@ import 'package:ken/smeup/widgets/smeup_not_available.dart';
 import 'package:ken/smeup/widgets/smeup_wait.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
+import '../models/fun.dart';
+
 class SmeupBox extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
-  final Function onItemTap;
-  final Function onRefresh;
-  final Color backColor;
-  final Color fontColor;
+  final GlobalKey<FormState>? formKey;
+  final Function? onItemTap;
+  final Function? onRefresh;
+  final Color? backColor;
+  final Color? fontColor;
   final List<String> _excludedColumns = ['J4BTN', 'J4IMG'];
-  final List<dynamic> columns;
+  final List<dynamic>? columns;
   final dynamic data;
-  final bool showLoader;
-  final String id;
-  final String layout;
-  final dynamic dynamisms;
-  final double width;
-  final double height;
-  final bool dismissEnabled;
-  final bool showSelection;
+  final bool? showLoader;
+  final String? id;
+  final String? layout;
+  final List<Dynamism>? dynamisms;
+  final double? width;
+  final double? height;
+  final bool? dismissEnabled;
+  final bool? showSelection;
   final int index;
-  final int selectedRow;
+  final int? selectedRow;
   final bool isDynamic;
-  final CardTheme cardTheme;
-  final TextStyle textStyle;
-  final TextStyle captionStyle;
-  final Function onSizeChanged;
+  final CardTheme? cardTheme;
+  final TextStyle? textStyle;
+  final TextStyle? captionStyle;
+  final Function? onSizeChanged;
 
   SmeupBox(this.scaffoldKey, this.formKey, this.index,
       {this.id,
@@ -69,8 +73,8 @@ class SmeupBox extends StatefulWidget {
 }
 
 class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
-  List<dynamic> _columns;
-  double borderSize;
+  List<dynamic>? _columns;
+  double? borderSize;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +83,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
       builder: (BuildContext context,
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return widget.showLoader
+          return widget.showLoader!
               ? SmeupWait(widget.scaffoldKey, widget.formKey)
               : Container();
         } else {
@@ -90,7 +94,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
             notifyError(context, widget.id, snapshot.error);
             return Container();
           } else {
-            return snapshot.data.children;
+            return snapshot.data!.children!;
           }
         }
       },
@@ -102,7 +106,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
   Future<SmeupWidgetBuilderResponse> _getBoxComponent() async {
     Widget box;
 
-    if (widget.showSelection && widget.index == widget.selectedRow) {
+    if (widget.showSelection! && widget.index == widget.selectedRow) {
       borderSize = 4;
     } else {
       borderSize = 2;
@@ -139,17 +143,20 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     }
 
     // bool dismissEnabled = false;
-    dynamic deleteDynamism;
-    if (widget.dynamisms != null)
-      deleteDynamism = (widget.dynamisms as List<dynamic>).firstWhere(
-          (element) => element['event'] == 'delete',
-          orElse: () => null);
+    Dynamism? deleteDynamism;
 
-    // if (deleteDynamism != null) {
-    //   dismissEnabled = true;
-    // }
+    int no = widget.dynamisms == null
+        ? 0
+        : widget.dynamisms!
+            .where((element) => element.event == 'delete')
+            .length;
 
-    Widget res = widget.dismissEnabled
+    if (no > 0)
+      deleteDynamism = widget.dynamisms!.firstWhere(
+          (element) => element.event == 'delete',
+          orElse: () => null as Dynamism);
+
+    Widget res = widget.dismissEnabled!
         ? Dismissible(
             key: Key('${widget.formKey.toString()}_${widget.id}'),
             direction: DismissDirection.endToStart,
@@ -160,21 +167,21 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                 context: context,
                 builder: (BuildContext context) {
                   return Theme(
-                    data: SmeupConfigurationService.getTheme(),
+                    data: SmeupConfigurationService.getTheme()!,
                     child: AlertDialog(
-                      title: Text(SmeupLocalizationService.of(context)
+                      title: Text(SmeupLocalizationService.of(context)!
                           .getLocalString('confirm')),
-                      content: Text(SmeupLocalizationService.of(context)
+                      content: Text(SmeupLocalizationService.of(context)!
                           .getLocalString(('areYouSureDelete'))),
                       actions: <Widget>[
                         ElevatedButton(
                           onPressed: () => Navigator.of(context).pop(true),
-                          child: Text(SmeupLocalizationService.of(context)
+                          child: Text(SmeupLocalizationService.of(context)!
                               .getLocalString('delete')),
                         ),
                         ElevatedButton(
                           onPressed: () => Navigator.of(context).pop(false),
-                          child: Text(SmeupLocalizationService.of(context)
+                          child: Text(SmeupLocalizationService.of(context)!
                               .getLocalString('cancel')),
                         ),
                       ],
@@ -184,13 +191,13 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
               );
             },
             onDismissed: (direction) async {
-              var smeupFun = SmeupFun(deleteDynamism['exec'], widget.formKey,
+              var smeupFun = Fun(deleteDynamism!.exec, widget.formKey,
                   widget.scaffoldKey, context);
               var smeupServiceResponse =
                   await SmeupDataService.invoke(smeupFun);
               SmeupMessageDataService.manageResponseMessage(
                   context, smeupServiceResponse.result);
-              widget.onRefresh();
+              widget.onRefresh!();
             },
             background: Container(
               color: Colors.red,
@@ -213,7 +220,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     if (widget.index == 0) {
       container = MeasureSize(
           onChange: (Size size) {
-            if (widget.onSizeChanged != null) widget.onSizeChanged(size);
+            if (widget.onSizeChanged != null) widget.onSizeChanged!(size);
           },
           child: _getContainer(res));
     } else {
@@ -241,8 +248,8 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardTheme.color,
-            shape: widget.cardTheme.shape,
+            color: widget.cardTheme!.color,
+            shape: widget.cardTheme!.shape,
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
@@ -251,7 +258,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                     children: () {
                       var listOfRows = List<Widget>.empty(growable: true);
 
-                      cols.forEach((col) {
+                      cols!.forEach((col) {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
                           String rowData = data[col['code']].toString();
@@ -279,13 +286,13 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                               if (snapshot.hasError) {
                                 return SmeupNotAvailable();
                               } else {
-                                return snapshot.data;
+                                return snapshot.data!;
                               }
                             }
                           });
 
                       return [
-                        if (widgetImg != null) widgetImg,
+                        widgetImg,
                         Expanded(child: Column(children: listOfRows))
                       ];
                     }(),
@@ -309,7 +316,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardTheme.color,
+            color: widget.cardTheme!.color,
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
@@ -319,7 +326,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                     children: () {
                       var listOfRows = List<Widget>.empty(growable: true);
 
-                      cols.forEach((col) {
+                      cols!.forEach((col) {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
                           String rowData = data[col['code']].toString();
@@ -372,7 +379,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardTheme.color,
+            color: widget.cardTheme!.color,
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
@@ -381,7 +388,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                     children: () {
                       var listOfRows = List<Widget>.empty(growable: true);
 
-                      cols.forEach((col) {
+                      cols!.forEach((col) {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
                           String rowData = data[col['code']].toString();
@@ -419,8 +426,8 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardTheme.color,
-            shape: widget.cardTheme.shape,
+            color: widget.cardTheme!.color,
+            shape: widget.cardTheme!.shape,
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
@@ -430,7 +437,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                     children: () {
                       var widgets = List<Widget>.empty(growable: true);
 
-                      cols.forEach((col) {
+                      cols!.forEach((col) {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
                           String rowData = data[col['code']].toString();
@@ -463,17 +470,15 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
 
                       var buttonWidgets = _getButtons(data);
 
-                      if (buttonWidgets != null) {
-                        widgets.add(Padding(
-                          padding: const EdgeInsets.only(top: 5),
-                          child: Row(
-                            //crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            //mainAxisSize: MainAxisSize.min,
-                            children: buttonWidgets,
-                          ),
-                        ));
-                      }
+                      widgets.add(Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Row(
+                          //crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          //mainAxisSize: MainAxisSize.min,
+                          children: buttonWidgets,
+                        ),
+                      ));
 
                       return [Expanded(child: Column(children: widgets))];
                     }(),
@@ -497,8 +502,8 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardTheme.color,
-            shape: widget.cardTheme.shape,
+            color: widget.cardTheme!.color,
+            shape: widget.cardTheme!.shape,
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
@@ -508,7 +513,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                     children: () {
                       var listOfRows = List<Widget>.empty(growable: true);
 
-                      cols.forEach((col) {
+                      cols!.forEach((col) {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
                           String rowData = data[col['code']].toString();
@@ -561,9 +566,9 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardTheme.color,
-            shape: (widget.cardTheme.shape as RoundedRectangleBorder)
-                .copyWith(side: BorderSide(color: widget.cardTheme.color)),
+            color: widget.cardTheme!.color,
+            shape: (widget.cardTheme!.shape as RoundedRectangleBorder)
+                .copyWith(side: BorderSide(color: widget.cardTheme!.color!)),
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
@@ -572,7 +577,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                     children: () {
                       var listOfRows = List<Widget>.empty(growable: true);
 
-                      cols.forEach((col) {
+                      cols!.forEach((col) {
                         if (col['IO'] != 'H') {
                           String rowData = data[col['code']].toString();
                           if (rowData.isNotEmpty) {
@@ -600,13 +605,13 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                               if (snapshot.hasError) {
                                 return SmeupNotAvailable();
                               } else {
-                                return snapshot.data;
+                                return snapshot.data!;
                               }
                             }
                           });
 
                       return [
-                        if (widgetImg != null) widgetImg,
+                        widgetImg,
                         Expanded(child: Column(children: listOfRows))
                       ];
                     }(),
@@ -630,7 +635,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardTheme.color,
+            color: widget.cardTheme!.color,
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
@@ -639,7 +644,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                     children: () {
                       var listOfRows = List<Widget>.empty(growable: true);
 
-                      cols.forEach((col) {
+                      cols!.forEach((col) {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
                           String rowData = data[col['code']].toString();
@@ -670,7 +675,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                               if (snapshot.hasError) {
                                 return SmeupNotAvailable();
                               } else {
-                                return snapshot.data;
+                                return snapshot.data!;
                               }
                             }
                           });
@@ -678,7 +683,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                       //await _getImage(data);
 
                       return [
-                        if (widgetImg != null) widgetImg,
+                        widgetImg,
                         Expanded(child: Column(children: listOfRows))
                       ];
                     }(),
@@ -694,16 +699,20 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
   }
 
   Future<Widget> _getImage(dynamic data) async {
-    Widget widgetImg;
+    Widget? widgetImg;
     if (widget.isDynamic) {
-      var colImg = _getColumns(data).firstWhere(
-          (col) => col['ogg'] == 'J4IMG' && col['IO'] != 'H',
-          orElse: () => null);
-      String code = '';
-      String type = '';
-      String parameter = '';
+      var colImg;
+      try {
+        colImg = _getColumns(data)!.firstWhere(
+            (col) => col['ogg'] == 'J4IMG' && col['IO'] != 'H',
+            orElse: () => null);
+      } catch (e) {}
+
+      String? code = '';
+      String? type = '';
+      String? parameter = '';
       if (colImg != null) {
-        final String imageColName = colImg['code'];
+        final String? imageColName = colImg['code'];
         final String ogg = data[imageColName];
         final List split = ogg.split(';');
         if (split.length == 3) {
@@ -752,7 +761,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
           };
 
           final smeupFun =
-              SmeupFun(fun, widget.formKey, widget.scaffoldKey, context);
+              Fun(fun, widget.formKey, widget.scaffoldKey, context);
 
           final smeupServiceResponse = await SmeupDataService.invoke(smeupFun);
           if (!smeupServiceResponse.succeded) {
@@ -775,13 +784,13 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     return widgetImg ?? Container();
   }
 
-  Widget _getSmeupImage(data) {
-    Widget widgetImg;
+  Widget? _getSmeupImage(data) {
+    Widget? widgetImg;
     if (data['isRemote'] != null) {
-      bool isRemote = SmeupImageModel.defaultIsRemote;
-      double imageHeight = SmeupImageModel.defaultHeight;
-      double imageWidth = SmeupImageModel.defaultWidth;
-      EdgeInsetsGeometry imagePadding = SmeupImageModel.defaultPadding;
+      bool? isRemote = SmeupImageModel.defaultIsRemote;
+      double? imageHeight = SmeupImageModel.defaultHeight;
+      double? imageWidth = SmeupImageModel.defaultWidth;
+      EdgeInsetsGeometry? imagePadding = SmeupImageModel.defaultPadding;
       if (data['isRemote'] != null) {
         isRemote = data['isRemote'];
       }
@@ -809,60 +818,34 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
   }
 
   Future<Widget> _fetchAvailableLinks(imgList) async {
-    bool check = false;
-    if (check) {
-      if (imgList != null && imgList.length != 0) {
-        for (var i = 0; i < imgList.length; i++) {
-          var smeupFun = SmeupFun.fromServiceName('*HTTP');
-          final smeupServiceResponse = await SmeupDataService.invoke(smeupFun,
-              httpServiceMethod: 'get',
-              httpServiceUrl: imgList[i]['codice'],
-              //httpServiceContentType: 'application/x-www-form-urlencoded',
-              httpServiceBody: null);
-          if (smeupServiceResponse.succeded) {
-            return Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Image.network(
-                imgList[i]['codice'],
-                fit: BoxFit.contain,
-              ),
-            );
-          }
-        }
-      }
-    } else {
-      return Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Image.network(
-          imgList[0]['codice'],
-          fit: BoxFit.contain,
-        ),
-      );
-    }
-
-    return Container();
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Image.network(
+        imgList[0]['codice'],
+        fit: BoxFit.contain,
+      ),
+    );
   }
 
   List<Widget> _getButtons(dynamic data) {
     var widgetBtns = List<Widget>.empty(growable: true);
 
-    var buttonCols = _getColumns(data)
+    var buttonCols = _getColumns(data)!
         .where((col) => col['ogg'] == 'J4BTN' && col['IO'] != 'H');
 
     buttonCols.forEach((col) {
-      final String imageColName = col['code'];
+      final String? imageColName = col['code'];
       final String ogg = data[imageColName];
 
-      String buttonText = SmeupFun.extractArg(ogg, 'T');
-      String buttonFun = SmeupFun.extractArg(ogg, 'E');
-      String buttonIcon = SmeupFun.extractArg(ogg, 'I');
+      String buttonText = Fun.extractArg(ogg, 'T');
+      String buttonFun = Fun.extractArg(ogg, 'E');
+      String buttonIcon = Fun.extractArg(ogg, 'I');
 
       final List split = buttonIcon.split(';');
       if (split.length == 3) {
         buttonIcon = split[2];
       }
 
-      // buttonText = '';
       final double padding = buttonText.isEmpty ? 0 : 10;
 
       Widget widgetBtn = Expanded(
@@ -889,11 +872,13 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
               iconData: int.tryParse(buttonIcon) ?? 0,
               data: buttonText,
               clientOnPressed: () {
-                List<dynamic> dynamisms = [
-                  {
-                    "event": "click",
-                    "exec": buttonFun,
-                  }
+                List<Dynamism> dynamisms = [
+                  Dynamism(
+                      "click",
+                      buttonFun,
+                      false,
+                      List<dynamic>.empty(growable: true),
+                      List<dynamic>.empty(growable: true))
                 ];
                 SmeupDynamismService.run(dynamisms, context, "click",
                     widget.scaffoldKey, widget.formKey);
@@ -910,18 +895,18 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
 
   void _manageTap(index, data) {
     if (widget.onItemTap != null) {
-      widget.onItemTap(index, data);
+      widget.onItemTap!(index, data);
     }
   }
 
-  List<dynamic> _getColumns(dynamic data) {
+  List<dynamic>? _getColumns(dynamic data) {
     if (_columns == null) {
       if (widget.columns != null)
         _columns = widget.columns;
       else {
         _columns = List<dynamic>.empty(growable: true);
         (data as Map).keys.forEach((element) {
-          _columns.add({
+          _columns!.add({
             "code": element,
             "fieldNameForDecode": null,
             "text": element,

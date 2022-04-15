@@ -8,12 +8,12 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
   // supported by json_theme
-  static double defaultFontSize;
-  static Color defaultFontColor;
-  static bool defaultFontBold;
-  static Color defaultBackColor;
-  static double defaultIconSize;
-  static Color defaultIconColor;
+  static double? defaultFontSize;
+  static Color? defaultFontColor;
+  static bool? defaultFontBold;
+  static Color? defaultBackColor;
+  static double? defaultIconSize;
+  static Color? defaultIconColor;
 
   // unsupported by json_theme
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
@@ -22,29 +22,29 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultHeight = 15;
   static const String defaultValColName = 'value';
 
-  double fontSize;
-  Color fontColor;
-  bool fontBold;
-  Color backColor;
-  double iconSize;
-  Color iconColor;
+  double? fontSize;
+  Color? fontColor;
+  bool? fontBold;
+  Color? backColor;
+  double? iconSize;
+  Color? iconColor;
 
-  EdgeInsetsGeometry padding;
-  Alignment align;
-  double width;
-  double height;
-  String valueColName;
-  String backColorColName;
-  String fontColorColName;
-  int iconData;
-  String iconColname;
+  EdgeInsetsGeometry? padding;
+  Alignment? align;
+  double? width;
+  double? height;
+  String? valueColName;
+  String? backColorColName;
+  String? fontColorColName;
+  int? iconData;
+  String? iconColname;
 
   SmeupLabelModel(
       {id,
       type,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
       this.fontSize,
       this.fontColor,
       this.fontBold,
@@ -68,9 +68,9 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupLabelModel.fromMap(
     Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
   ) : super.fromMap(
           jsonMap,
           formKey,
@@ -81,36 +81,36 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
 
     if (fontColor == null)
       fontColor =
-          SmeupConfigurationService.getTheme().textTheme.bodyText1.color;
+          SmeupConfigurationService.getTheme()!.textTheme.bodyText1!.color;
 
-    valueColName = optionsDefault['valueColName'] ?? defaultValColName;
-    backColorColName = optionsDefault['backColorColName'] ?? '';
-    fontColorColName = optionsDefault['fontColorColName'] ?? '';
+    valueColName = optionsDefault!['valueColName'] ?? defaultValColName;
+    backColorColName = optionsDefault!['backColorColName'] ?? '';
+    fontColorColName = optionsDefault!['fontColorColName'] ?? '';
     padding =
-        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
+        SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     fontSize =
-        SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontSize;
+        SmeupUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
     iconSize =
-        SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
-    iconColor = SmeupUtilities.getColorFromRGB(optionsDefault['iconColor']) ??
+        SmeupUtilities.getDouble(optionsDefault!['iconSize']) ?? defaultIconSize;
+    iconColor = SmeupUtilities.getColorFromRGB(optionsDefault!['iconColor']) ??
         defaultIconColor;
-    align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']) ??
+    align = SmeupUtilities.getAlignmentGeometry(optionsDefault!['align']) ??
         defaultAlign;
-    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+    width = SmeupUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height =
-        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+        SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     title = jsonMap['title'] ?? '';
-    backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??
+    backColor = SmeupUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
-    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']) ??
+    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
         defaultFontColor;
-    if (optionsDefault['icon'] != null)
-      iconData = SmeupUtilities.getInt(optionsDefault['icon']) ?? 0;
+    if (optionsDefault!['icon'] != null)
+      iconData = SmeupUtilities.getInt(optionsDefault!['icon']) ?? 0;
     else
       iconData = 0;
-    iconColname = optionsDefault['iconColName'] ?? '';
+    iconColname = optionsDefault!['iconColName'] ?? '';
     fontBold =
-        SmeupUtilities.getBool(optionsDefault['fontBold']) ?? defaultFontBold;
+        SmeupUtilities.getBool(optionsDefault!['fontBold']) ?? defaultFontBold;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
@@ -123,13 +123,13 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
 
   static setDefaults(dynamic obj) {
     TextStyle textStyle =
-        SmeupConfigurationService.getTheme().textTheme.bodyText2;
+        SmeupConfigurationService.getTheme()!.textTheme.bodyText2!;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
     defaultBackColor = textStyle.backgroundColor;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
 
-    var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
+    var iconTheme = SmeupConfigurationService.getTheme()!.iconTheme;
     defaultIconSize = iconTheme.size;
     defaultIconColor = iconTheme.color;
 

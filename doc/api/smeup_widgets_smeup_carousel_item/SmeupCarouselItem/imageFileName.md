@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[String](https://api.flutter.dev/flutter/dart-core/String-class.html) imageFileName
+[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? imageFileName
   
 _final_
 
@@ -20,7 +21,7 @@ _final_
 ## Implementation
 
 ```dart
-final String imageFileName;
+final String? imageFileName;
 
 
 ```

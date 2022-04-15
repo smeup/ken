@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,7 +27,7 @@ _override_
 ```dart
 @override
 runControllerActivities(SmeupModel model) {
-  SmeupImageListModel m = model;
+  SmeupImageListModel m = model as SmeupImageListModel;
   id = m.id;
   type = m.type;
   width = m.width;
@@ -46,13 +47,9 @@ runControllerActivities(SmeupModel model) {
   orientation = m.orientation;
   listHeight = m.listHeight;
 
-  dynamic deleteDynamism;
-  if (m.dynamisms != null)
-    deleteDynamism = (m.dynamisms as List<dynamic>).firstWhere(
-        (element) => element['event'] == 'delete',
-        orElse: () => null);
+  int no = m.dynamisms.where((element) => element.event == 'delete').length;
 
-  if (deleteDynamism != null) {
+  if (no > 0) {
     dismissEnabled = true;
   } else {
     dismissEnabled = false;

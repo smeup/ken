@@ -8,16 +8,16 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
   // supported by json_theme
-  static Color defaultBackColor;
-  static Color defaultBorderColor;
-  static double defaultBorderWidth;
-  static double defaultBorderRadius;
-  static double defaultFontSize;
-  static Color defaultFontColor;
-  static bool defaultFontBold;
-  static bool defaultCaptionFontBold;
-  static double defaultCaptionFontSize;
-  static Color defaultCaptionFontColor;
+  static Color? defaultBackColor;
+  static Color? defaultBorderColor;
+  static double? defaultBorderWidth;
+  static double? defaultBorderRadius;
+  static double? defaultFontSize;
+  static Color? defaultFontColor;
+  static bool? defaultFontBold;
+  static bool? defaultCaptionFontBold;
+  static double? defaultCaptionFontSize;
+  static Color? defaultCaptionFontColor;
 
   // unsupported by json_theme
   static const double defaultWidth = 0;
@@ -29,31 +29,31 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
   static const Axis defaultOrientation = Axis.vertical;
   static const double defaultListHeight = 0;
 
-  Color backColor;
-  Color borderColor;
-  double borderWidth;
-  double borderRadius;
-  double fontSize;
-  Color fontColor;
-  bool fontBold;
-  bool captionFontBold;
-  double captionFontSize;
-  Color captionFontColor;
+  Color? backColor;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
+  double? fontSize;
+  Color? fontColor;
+  bool? fontBold;
+  bool? captionFontBold;
+  double? captionFontSize;
+  Color? captionFontColor;
 
-  double width;
-  double height;
-  Axis orientation;
-  EdgeInsetsGeometry padding;
-  int columns;
-  int rows;
-  double listHeight;
+  double? width;
+  double? height;
+  Axis? orientation;
+  EdgeInsetsGeometry? padding;
+  int? columns;
+  int? rows;
+  double? listHeight;
 
   SmeupImageListModel(
       {id,
       type,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
       this.backColor,
       this.borderColor,
       this.borderWidth,
@@ -79,9 +79,9 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupImageListModel.fromMap(
     Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
   ) : super.fromMap(
           jsonMap,
           formKey,
@@ -92,37 +92,37 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
 
     title = jsonMap['title'] ?? '';
     columns =
-        SmeupUtilities.getInt(optionsDefault['columns']) ?? defaultColumns;
-    rows = SmeupUtilities.getInt(optionsDefault['rows']) ?? defaultRows;
+        SmeupUtilities.getInt(optionsDefault!['columns']) ?? defaultColumns;
+    rows = SmeupUtilities.getInt(optionsDefault!['rows']) ?? defaultRows;
     if (columns == 0 && rows == 0) {
       columns = 1;
     }
-    fontSize = optionsDefault['fontSize'] ?? defaultFontSize;
-    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']) ??
+    fontSize = optionsDefault!['fontSize'] ?? defaultFontSize;
+    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
         defaultFontColor;
-    fontBold = optionsDefault['bold'] ?? defaultFontBold;
+    fontBold = optionsDefault!['bold'] ?? defaultFontBold;
 
-    backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??
+    backColor = SmeupUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
 
     captionFontSize =
-        SmeupUtilities.getDouble(optionsDefault['captionFontSize']) ??
+        SmeupUtilities.getDouble(optionsDefault!['captionFontSize']) ??
             defaultCaptionFontSize;
     captionFontColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['captionFontColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['captionFontColor']) ??
             defaultCaptionFontColor;
-    captionFontBold = optionsDefault['captionBold'] ?? defaultCaptionFontBold;
+    captionFontBold = optionsDefault!['captionBold'] ?? defaultCaptionFontBold;
 
     padding =
-        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
-    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+        SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
+    width = SmeupUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height =
-        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+        SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     orientation = jsonMap['orientation'] == 'horizontal'
         ? Axis.horizontal
         : Axis.vertical;
 
-    listHeight = SmeupUtilities.getDouble(optionsDefault['listHeight']) ??
+    listHeight = SmeupUtilities.getDouble(optionsDefault!['listHeight']) ??
         defaultListHeight;
 
     if (widgetLoadType != LoadType.Delay) {
@@ -135,24 +135,24 @@ class SmeupImageListModel extends SmeupModel implements SmeupDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var cardTheme = SmeupConfigurationService.getTheme().cardTheme;
+    var cardTheme = SmeupConfigurationService.getTheme()!.cardTheme;
     defaultBackColor = cardTheme.color;
-    ContinuousRectangleBorder shape = cardTheme.shape;
+    ContinuousRectangleBorder shape = cardTheme.shape as ContinuousRectangleBorder;
     defaultBorderRadius =
         shape.borderRadius.resolve(TextDirection.ltr).topLeft.x;
     var side = shape.side;
     defaultBorderColor = side.color;
     defaultBorderWidth = side.width;
 
-    var textStyle = SmeupConfigurationService.getTheme()
+    var textStyle = SmeupConfigurationService.getTheme()!
         .textTheme
-        .headline4
+        .headline4!
         .copyWith(backgroundColor: defaultBackColor);
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
 
-    var captionStyle = SmeupConfigurationService.getTheme().textTheme.headline5;
+    var captionStyle = SmeupConfigurationService.getTheme()!.textTheme.headline5!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;

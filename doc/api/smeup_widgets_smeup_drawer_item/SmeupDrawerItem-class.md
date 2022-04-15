@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -28,14 +29,14 @@
 
 ## Constructors
 
-[SmeupDrawerItem](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/SmeupDrawerItem.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) text, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) route, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) iconCode, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) action, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html) align, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showItemDivider, {[double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor})
+[SmeupDrawerItem](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/SmeupDrawerItem.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? text, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? route, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) iconCode, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? action, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html) align, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? showItemDivider, {[double](https://api.flutter.dev/flutter/dart-core/double-class.html)? fontSize, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? fontBold, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? fontColor})
 
     
 
 
 ## Properties
 
-##### [action](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/action.md) &#8594; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [action](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/action.md) &#8594; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -53,7 +54,7 @@ _final_
 
 
 
-##### [fontBold](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/fontBold.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [fontBold](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/fontBold.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -62,7 +63,7 @@ _final_
 
 
 
-##### [fontColor](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/fontColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [fontColor](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/fontColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -71,7 +72,7 @@ _final_
 
 
 
-##### [fontSize](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/fontSize.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [fontSize](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/fontSize.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -107,7 +108,7 @@ _final_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -116,7 +117,7 @@ _final, inherited_
 
 
 
-##### [route](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/route.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [route](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/route.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -143,7 +144,7 @@ _final_
 
 
 
-##### [showItemDivider](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/showItemDivider.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [showItemDivider](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/showItemDivider.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -152,7 +153,7 @@ _final_
 
 
 
-##### [text](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/text.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [text](../smeup_widgets_smeup_drawer_item/SmeupDrawerItem/text.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -210,7 +211,7 @@ _inherited_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -229,7 +230,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

@@ -4,25 +4,25 @@ import 'package:ken/smeup/models/widgets/smeup_data_interface.dart';
 import 'package:ken/smeup/models/widgets/smeup_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
 
-import '../smeup_fun.dart';
+import '../fun.dart';
 
 class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
   static const String defaultValidationField = 'validation';
 
-  SmeupFun validationFun;
-  String validation;
-  String validationField;
+  Fun? validationFun;
+  String? validation;
+  String? validationField;
 
-  SmeupInputFieldModel(GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey, BuildContext context,
+  SmeupInputFieldModel(GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey, BuildContext? context,
       {title, id, type})
       : super(formKey, scaffoldKey, context, title: title, id: id, type: type);
 
   SmeupInputFieldModel.fromMap(
       Map<String, dynamic> jsonMap,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
       SmeupModel parent)
       : super.fromMap(
           jsonMap,
@@ -32,35 +32,31 @@ class SmeupInputFieldModel extends SmeupModel implements SmeupDataInterface {
         ) {
     this.parent = parent;
 
-    validation = optionsDefault['validation'];
+    validation = optionsDefault!['validation'];
     validationField =
-        optionsDefault['validationField'] ?? defaultValidationField;
+        optionsDefault!['validationField'] ?? defaultValidationField;
     validationFun = jsonMap['validation'] != null
-        ? SmeupFun(jsonMap['validation'], formKey, scaffoldKey, context)
+        ? Fun(jsonMap['validation'], formKey, scaffoldKey, context)
         : null;
 
-    _setServer(validationFun);
-    _setServer(smeupFun);
+    _addFieldPathToFun(validationFun);
+    _addFieldPathToFun(smeupFun);
 
     SmeupInputFieldDao.getValidation(this);
   }
 
-  _setServer(SmeupFun fun) {
+  _addFieldPathToFun(Fun? fun) {
     if (fun == null) return;
-    var server = fun.fun['fun']['SERVER'];
+    if (!fun.isFunValid()) return;
 
-    if (server.toString().isEmpty) {
-      server = _getFieldPath(parent);
-    } else {
-      String oldServer = server;
-      String newServer = server + _getFieldPath(parent);
-      server = server.toString().replaceAll(oldServer, newServer);
-    }
-
-    fun.fun['fun']['SERVER'] = server;
+    fun.server.add(_getFieldPath(parent as SmeupSectionModel));
   }
 
-  _getFieldPath(SmeupSectionModel smeupSectionModel) {
-    return 'fieldPath(${smeupSectionModel.parentForm.id.toLowerCase()}.${smeupSectionModel.id.toLowerCase()}.${id.toLowerCase()})';
+  Map<String, dynamic> _getFieldPath(SmeupSectionModel smeupSectionModel) {
+    return {
+      "key": "fieldPath",
+      "value":
+          "${smeupSectionModel.parentForm!.id!.toLowerCase()}.${smeupSectionModel.id!.toLowerCase()}.${id!.toLowerCase()}"
+    };
   }
 }

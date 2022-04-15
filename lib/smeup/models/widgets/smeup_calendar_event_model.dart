@@ -7,22 +7,22 @@ class SmeupCalentarEventModel {
   Color markerBackgroundColor = Colors.blue;
   Color markerFontColor = Colors.black;
 
-  DateTime day;
-  String description;
-  DateTime initTime;
-  DateTime endTime;
-  dynamic fields;
+  DateTime? day;
+  String? description;
+  DateTime? initTime;
+  DateTime? endTime;
+  late dynamic fields;
 
   SmeupCalentarEventModel(
       this.day, this.description, this.initTime, this.endTime);
 
   SmeupCalentarEventModel.fromMap(
       this.fields,
-      String titleColumnName,
-      String dataColumnName,
-      String styleColumnName,
-      String initColumnName,
-      String endColumnName) {
+      String? titleColumnName,
+      String? dataColumnName,
+      String? styleColumnName,
+      String? initColumnName,
+      String? endColumnName) {
     this.day = DateTime.parse(fields[dataColumnName].toString());
     this.initTime = _toTime(fields[initColumnName]);
     this.endTime = _toTime(fields[endColumnName]);
@@ -48,7 +48,7 @@ class SmeupCalentarEventModel {
     }
   }
 
-  DateTime _toTime(String timeStr) {
+  DateTime? _toTime(String? timeStr) {
     if (timeStr != null && timeStr.length >= 4) {
       String parsableTime =
           "19700101 ${timeStr.substring(0, 2)}:${timeStr.substring(2, 4)}";

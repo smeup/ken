@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-SmeupSectionModel.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, [SmeupModel](../../smeup_models_widgets_smeup_model/SmeupModel-class.md) parent, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey)
+SmeupSectionModel.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)? context, [SmeupModel](../../smeup_models_widgets_smeup_model/SmeupModel-class.md) parent, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>? scaffoldKey)
 
 
 
@@ -20,10 +21,10 @@ SmeupSectionModel.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Map-cl
 ```dart
 SmeupSectionModel.fromMap(
     Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    BuildContext? context,
     SmeupModel parent,
-    GlobalKey<ScaffoldState> scaffoldKey)
+    GlobalKey<ScaffoldState>? scaffoldKey)
     : super.fromMap(
         jsonMap,
         formKey,
@@ -33,10 +34,17 @@ SmeupSectionModel.fromMap(
   String tmp = jsonMap['dim'] ?? '';
   tmp = tmp.replaceAll('%', '');
   dim = double.tryParse(tmp) ?? 0;
+  id = SmeupUtilities.getWidgetId('', jsonMap['id']);
   layout = jsonMap['layout'];
   selectedTabColName = jsonMap['selectedTabColName'];
-  if (parent is SmeupFormModel) autoAdaptHeight = parent.autoAdaptHeight;
-  if (parent is SmeupSectionModel) autoAdaptHeight = parent.autoAdaptHeight;
+  if (parent is SmeupFormModel) {
+    autoAdaptHeight = parent.autoAdaptHeight;
+    parentForm = parent;
+  }
+  if (parent is SmeupSectionModel) {
+    autoAdaptHeight = parent.autoAdaptHeight;
+    parentForm = parent.parentForm;
+  }
 
   _replaceSelectedTabIndex(jsonMap);
 

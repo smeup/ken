@@ -11,25 +11,27 @@ import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
+import '../services/smeup_dynamism_service.dart';
+
 // ignore: must_be_immutable
 class SmeupSlider extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
-  SmeupSliderModel model;
+  GlobalKey<FormState>? formKey;
+  SmeupSliderModel? model;
 
-  Color activeTrackColor;
-  Color thumbColor;
-  Color inactiveTrackColor;
-  EdgeInsetsGeometry padding;
-  double value;
-  double sldMin;
-  double sldMax;
-  String id;
-  String type;
-  String title;
-  Function clientOnChange;
+  Color? activeTrackColor;
+  Color? thumbColor;
+  Color? inactiveTrackColor;
+  EdgeInsetsGeometry? padding;
+  double? value;
+  double? sldMin;
+  double? sldMax;
+  String? id;
+  String? type;
+  String? title;
+  Function? clientOnChange;
 
   SmeupSlider(this.scaffoldKey, this.formKey,
       {this.activeTrackColor,
@@ -49,16 +51,16 @@ class SmeupSlider extends StatefulWidget
   }
 
   SmeupSlider.withController(
-    this.model,
+    SmeupSliderModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupSliderModel m = model;
+    SmeupSliderModel m = model as SmeupSliderModel;
     id = m.id;
     type = m.type;
     sldMin = m.sldMin;
@@ -74,7 +76,7 @@ class SmeupSlider extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupSliderModel m = model;
+    SmeupSliderModel m = model as SmeupSliderModel;
 
     // change data format
     var workData = formatDataFields(m);
@@ -98,14 +100,14 @@ class SmeupSlider extends StatefulWidget
 class _SmeupSliderState extends State<SmeupSlider>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupSliderModel _model;
+  SmeupSliderModel? _model;
   dynamic _value;
 
   @override
   void initState() {
     _model = widget.model;
     _value = widget.value;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -129,10 +131,10 @@ class _SmeupSliderState extends State<SmeupSlider>
 
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupSliderDao.getData(_model);
-        _value = widget.treatData(_model);
+        await SmeupSliderDao.getData(_model!);
+        _value = widget.treatData(_model!);
       }
       setDataLoad(widget.id, true);
     }
@@ -162,7 +164,11 @@ class _SmeupSliderState extends State<SmeupSlider>
               SmeupVariablesService.setVariable(widget.id, value,
                   formKey: widget.formKey);
               if (widget.clientOnChange != null) {
-                widget.clientOnChange(value);
+                widget.clientOnChange!(value);
+              }
+              if (_model != null) {
+                SmeupDynamismService.run(_model!.dynamisms, context, 'change',
+                    widget.scaffoldKey, widget.formKey);
               }
             },
           )),

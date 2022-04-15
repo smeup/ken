@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -29,18 +30,18 @@
 
 ## Constructors
 
-[SmeupDatePickerModel](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/SmeupDatePickerModel.md) ({[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, dynamic id, dynamic type, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) borderColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) borderRadius, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) captionFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionFontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionBackColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) elevation, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) underline = defaultUnderline, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html) align = defaultAlign, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) valueField = defaultValueField, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) displayedField = defaultdisplayedField, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) label = defaultLabel, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = defaultHeight, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = defaultPadding, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) showBorder = defaultShowBorder, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) innerSpace = defaultInnerSpace, dynamic title = '', [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)> minutesList})
+[SmeupDatePickerModel](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/SmeupDatePickerModel.md) ({[GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>? scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)? context, dynamic id, dynamic type, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? borderColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? borderWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? borderRadius, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? fontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? fontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? fontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? backColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? captionFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionFontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionBackColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? elevation, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? underline = defaultUnderline, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)? align = defaultAlign, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? valueField = defaultValueField, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? displayedField = defaultdisplayedField, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? label = defaultLabel, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? height = defaultHeight, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)? padding = defaultPadding, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? showBorder = defaultShowBorder, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? innerSpace = defaultInnerSpace, dynamic title = '', [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>? minutesList})
 
     
 
-[SmeupDatePickerModel.fromMap](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/SmeupDatePickerModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
+[SmeupDatePickerModel.fromMap](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/SmeupDatePickerModel.fromMap.md) ([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>? scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)? context)
 
     
 
 
 ## Properties
 
-##### [align](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/align.md) &#8596; [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)
+##### [align](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/align.md) &#8596; [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)?
 
 
 
@@ -49,7 +50,7 @@ _read / write_
 
 
 
-##### [backColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/backColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [backColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/backColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -58,7 +59,7 @@ _read / write_
 
 
 
-##### [borderColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/borderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [borderColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/borderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -67,7 +68,7 @@ _read / write_
 
 
 
-##### [borderRadius](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/borderRadius.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [borderRadius](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/borderRadius.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -76,7 +77,7 @@ _read / write_
 
 
 
-##### [borderWidth](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/borderWidth.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [borderWidth](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/borderWidth.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -85,7 +86,7 @@ _read / write_
 
 
 
-##### [captionBackColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/captionBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [captionBackColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/captionBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -94,7 +95,7 @@ _read / write_
 
 
 
-##### [captionFontBold](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/captionFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [captionFontBold](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/captionFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -103,7 +104,7 @@ _read / write_
 
 
 
-##### [captionFontColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/captionFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [captionFontColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/captionFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -112,7 +113,7 @@ _read / write_
 
 
 
-##### [captionFontSize](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/captionFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [captionFontSize](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/captionFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -121,7 +122,7 @@ _read / write_
 
 
 
-##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)
+##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)?
 
 
 
@@ -139,7 +140,7 @@ _read / write, inherited_
 
 
 
-##### [displayedField](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/displayedField.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [displayedField](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/displayedField.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -148,7 +149,7 @@ _read / write_
 
 
 
-##### [dynamisms](../smeup_models_widgets_smeup_model/SmeupModel/dynamisms.md) &#8596; dynamic
+##### [dynamisms](../smeup_models_widgets_smeup_model/SmeupModel/dynamisms.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[Dynamism](../smeup_models_dynamism/Dynamism-class.md)>
 
 
 
@@ -157,7 +158,7 @@ _read / write, inherited_
 
 
 
-##### [elevation](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/elevation.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [elevation](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/elevation.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -166,7 +167,7 @@ _read / write_
 
 
 
-##### [fontBold](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/fontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [fontBold](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/fontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -175,7 +176,7 @@ _read / write_
 
 
 
-##### [fontColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/fontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [fontColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/fontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -184,7 +185,7 @@ _read / write_
 
 
 
-##### [fontSize](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/fontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [fontSize](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/fontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -193,7 +194,7 @@ _read / write_
 
 
 
-##### [formKey](../smeup_models_widgets_smeup_model/SmeupModel/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_models_widgets_smeup_model/SmeupModel/formKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -211,7 +212,7 @@ _read-only, inherited_
 
 
 
-##### [height](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [height](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/height.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -220,7 +221,7 @@ _read / write_
 
 
 
-##### [id](../smeup_models_widgets_smeup_model/SmeupModel/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_models_widgets_smeup_model/SmeupModel/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -229,7 +230,7 @@ _read / write, inherited_
 
 
 
-##### [innerSpace](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/innerSpace.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [innerSpace](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/innerSpace.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -247,7 +248,7 @@ _read / write, inherited_
 
 
 
-##### [label](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/label.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [label](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/label.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -256,7 +257,7 @@ _read / write_
 
 
 
-##### [minutesList](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/minutesList.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>
+##### [minutesList](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/minutesList.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html)>?
 
 
 
@@ -274,7 +275,7 @@ _read / write, inherited_
 
 
 
-##### [onReady](../smeup_models_widgets_smeup_model/SmeupModel/onReady.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [onReady](../smeup_models_widgets_smeup_model/SmeupModel/onReady.md) &#8596; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -283,7 +284,7 @@ _read / write, inherited_
 
 
 
-##### [options](../smeup_models_widgets_smeup_model/SmeupModel/options.md) &#8596; [LinkedHashMap](https://api.flutter.dev/flutter/dart-collection/LinkedHashMap-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic>
+##### [options](../smeup_models_widgets_smeup_model/SmeupModel/options.md) &#8596; [LinkedHashMap](https://api.flutter.dev/flutter/dart-collection/LinkedHashMap-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic>?
 
 
 
@@ -292,7 +293,7 @@ _read / write, inherited_
 
 
 
-##### [optionsDefault](../smeup_models_widgets_smeup_model/SmeupModel/optionsDefault.md) &#8596; [LinkedHashMap](https://api.flutter.dev/flutter/dart-collection/LinkedHashMap-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic>
+##### [optionsDefault](../smeup_models_widgets_smeup_model/SmeupModel/optionsDefault.md) &#8596; [LinkedHashMap](https://api.flutter.dev/flutter/dart-collection/LinkedHashMap-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic>?
 
 
 
@@ -310,7 +311,7 @@ _read / write, inherited_
 
 
 
-##### [padding](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)
+##### [padding](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/padding.md) &#8596; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)?
 
 
 
@@ -319,7 +320,7 @@ _read / write_
 
 
 
-##### [parent](../smeup_models_widgets_smeup_model/SmeupModel/parent.md) &#8596; [SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md)
+##### [parent](../smeup_models_widgets_smeup_model/SmeupModel/parent.md) &#8596; [SmeupModel](../smeup_models_widgets_smeup_model/SmeupModel-class.md)?
 
 
 
@@ -337,7 +338,7 @@ _read-only, inherited_
 
 
 
-##### [scaffoldKey](../smeup_models_widgets_smeup_model/SmeupModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>
+##### [scaffoldKey](../smeup_models_widgets_smeup_model/SmeupModel/scaffoldKey.md) &#8596; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>?
 
 
 
@@ -346,7 +347,7 @@ _read / write, inherited_
 
 
 
-##### [serviceStatusCode](../smeup_models_widgets_smeup_model/SmeupModel/serviceStatusCode.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)
+##### [serviceStatusCode](../smeup_models_widgets_smeup_model/SmeupModel/serviceStatusCode.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)?
 
 
 
@@ -355,7 +356,7 @@ _read / write, inherited_
 
 
 
-##### [showBorder](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/showBorder.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [showBorder](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/showBorder.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -364,7 +365,7 @@ _read / write_
 
 
 
-##### [showLoader](../smeup_models_widgets_smeup_model/SmeupModel/showLoader.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [showLoader](../smeup_models_widgets_smeup_model/SmeupModel/showLoader.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -373,7 +374,7 @@ _read / write, inherited_
 
 
 
-##### [smeupFun](../smeup_models_widgets_smeup_model/SmeupModel/smeupFun.md) &#8596; [SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md)
+##### [smeupFun](../smeup_models_widgets_smeup_model/SmeupModel/smeupFun.md) &#8596; [Fun](../smeup_models_fun/Fun-class.md)?
 
 
 
@@ -382,7 +383,7 @@ _read / write, inherited_
 
 
 
-##### [smeupSectionsModels](../smeup_models_widgets_smeup_model/SmeupModel/smeupSectionsModels.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupSectionModel](../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.md)>
+##### [smeupSectionsModels](../smeup_models_widgets_smeup_model/SmeupModel/smeupSectionsModels.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupSectionModel](../smeup_models_widgets_smeup_section_model/SmeupSectionModel-class.md)>?
 
 
 
@@ -391,7 +392,7 @@ _read / write, inherited_
 
 
 
-##### [title](../smeup_models_widgets_smeup_model/SmeupModel/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_models_widgets_smeup_model/SmeupModel/title.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -400,7 +401,7 @@ _read / write, inherited_
 
 
 
-##### [type](../smeup_models_widgets_smeup_model/SmeupModel/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_models_widgets_smeup_model/SmeupModel/type.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -409,7 +410,7 @@ _read / write, inherited_
 
 
 
-##### [underline](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/underline.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [underline](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/underline.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -418,7 +419,7 @@ _read / write_
 
 
 
-##### [valueField](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/valueField.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [valueField](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/valueField.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -436,7 +437,7 @@ _read / write, inherited_
 
 
 
-##### [width](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [width](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/width.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -481,7 +482,7 @@ _inherited_
 
 ## Static Properties
 
-##### [defaultBackColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [defaultBackColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -490,7 +491,7 @@ _read / write_
 
 
 
-##### [defaultBorderColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultBorderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [defaultBorderColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultBorderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -499,7 +500,7 @@ _read / write_
 
 
 
-##### [defaultBorderRadius](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultBorderRadius.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [defaultBorderRadius](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultBorderRadius.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -508,7 +509,7 @@ _read / write_
 
 
 
-##### [defaultBorderWidth](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultBorderWidth.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [defaultBorderWidth](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultBorderWidth.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -517,7 +518,7 @@ _read / write_
 
 
 
-##### [defaultCaptionBackColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultCaptionBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [defaultCaptionBackColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultCaptionBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -526,7 +527,7 @@ _read / write_
 
 
 
-##### [defaultCaptionFontBold](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultCaptionFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [defaultCaptionFontBold](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultCaptionFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -535,7 +536,7 @@ _read / write_
 
 
 
-##### [defaultCaptionFontColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultCaptionFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [defaultCaptionFontColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultCaptionFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -544,7 +545,7 @@ _read / write_
 
 
 
-##### [defaultCaptionFontSize](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultCaptionFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [defaultCaptionFontSize](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultCaptionFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -553,7 +554,7 @@ _read / write_
 
 
 
-##### [defaultElevation](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultElevation.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [defaultElevation](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultElevation.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -562,7 +563,7 @@ _read / write_
 
 
 
-##### [defaultFontBold](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [defaultFontBold](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -571,7 +572,7 @@ _read / write_
 
 
 
-##### [defaultFontColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [defaultFontColor](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -580,7 +581,7 @@ _read / write_
 
 
 
-##### [defaultFontSize](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [defaultFontSize](../smeup_models_widgets_smeup_datepicker_model/SmeupDatePickerModel/defaultFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 

@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 
+import '../models/dynamism.dart';
+
 class SmeupDrawerItem extends StatelessWidget {
-  final String text;
-  final String route;
+  final String? text;
+  final String? route;
   final int iconCode;
-  final Function action;
-  final double fontSize;
-  final Color fontColor;
-  final bool fontBold;
+  final Function? action;
+  final double? fontSize;
+  final Color? fontColor;
+  final bool? fontBold;
   final Alignment align;
-  final bool showItemDivider;
+  final bool? showItemDivider;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
 
@@ -22,17 +24,22 @@ class SmeupDrawerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final title = Align(
-        alignment: align, child: Text(text, style: _getElementTextStile()));
+        alignment: align, child: Text(text!, style: _getElementTextStile()));
     Function function = () {
       if (action != null) {
-        action(context);
+        action!(context);
       } else {
-        if (route.trimLeft().toUpperCase().startsWith('F(')) {
+        if (route!.trimLeft().toUpperCase().startsWith('F(')) {
           SmeupDynamismService.run([
-            {"event": "click", "exec": "$route"}
+            Dynamism(
+                "click",
+                route ?? '',
+                false,
+                List<dynamic>.empty(growable: true),
+                List<dynamic>.empty(growable: true))
           ], context, 'click', scaffoldKey, formKey);
         } else {
-          Navigator.of(context).pushNamed(route);
+          Navigator.of(context).pushNamed(route!);
         }
       }
     };
@@ -40,7 +47,7 @@ class SmeupDrawerItem extends StatelessWidget {
     return Container(
         child: Column(
       children: [
-        if (showItemDivider)
+        if (showItemDivider!)
           Divider(
             color: _getElementTextStile().color,
           ),
@@ -52,23 +59,23 @@ class SmeupDrawerItem extends StatelessWidget {
               size: _getIconTheme().size,
             ),
             title: title,
-            onTap: function,
+            onTap: function as void Function()?,
           )
         else
           ListTile(
             title: title,
-            onTap: function,
+            onTap: function as void Function()?,
           ),
       ],
     ));
   }
 
   TextStyle _getElementTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme()
+    TextStyle style = SmeupConfigurationService.getTheme()!
         .appBarTheme
-        .toolbarTextStyle
+        .toolbarTextStyle!
         .copyWith(
-            backgroundColor: SmeupConfigurationService.getTheme()
+            backgroundColor: SmeupConfigurationService.getTheme()!
                 .appBarTheme
                 .backgroundColor);
 
@@ -82,7 +89,7 @@ class SmeupDrawerItem extends StatelessWidget {
         color: fontColor,
       );
 
-    if (fontBold != null && fontBold)
+    if (fontBold != null && fontBold!)
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -91,7 +98,7 @@ class SmeupDrawerItem extends StatelessWidget {
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = SmeupConfigurationService.getTheme()
+    IconThemeData themeData = SmeupConfigurationService.getTheme()!
         .iconTheme
         .copyWith(color: _getElementTextStile().color);
 

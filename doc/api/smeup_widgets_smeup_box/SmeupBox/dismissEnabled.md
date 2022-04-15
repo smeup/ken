@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) dismissEnabled
+[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? dismissEnabled
   
 _final_
 
@@ -20,7 +21,7 @@ _final_
 ## Implementation
 
 ```dart
-final bool dismissEnabled;
+final bool? dismissEnabled;
 
 
 ```

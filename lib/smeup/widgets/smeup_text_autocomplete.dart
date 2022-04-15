@@ -19,53 +19,53 @@ import 'smeup_widget_state_interface.dart';
 class SmeupTextAutocomplete extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupTextAutocompleteModel model;
+  SmeupTextAutocompleteModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
   // graphic properties
-  Color backColor;
-  double fontSize;
-  Color fontColor;
-  bool fontBold;
-  bool captionFontBold;
-  double captionFontSize;
-  Color captionFontColor;
-  Color captionBackColor;
-  Color borderColor;
-  double borderWidth;
-  double borderRadius;
+  Color? backColor;
+  double? fontSize;
+  Color? fontColor;
+  bool? fontBold;
+  bool? captionFontBold;
+  double? captionFontSize;
+  Color? captionFontColor;
+  Color? captionBackColor;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
 
-  String label;
-  double width;
-  double height;
-  EdgeInsetsGeometry padding;
-  bool showborder;
-  List<dynamic> data;
-  bool underline;
-  bool autoFocus;
-  String title;
-  String defaultValue;
-  String valueField;
-  String id;
-  String type;
-  bool showSubmit;
-  String submitLabel;
+  String? label;
+  double? width;
+  double? height;
+  EdgeInsetsGeometry? padding;
+  bool? showborder;
+  List<Map<dynamic, dynamic>>? data;
+  bool? underline;
+  bool? autoFocus;
+  String? title;
+  String? defaultValue;
+  String? valueField;
+  String? id;
+  String? type;
+  bool? showSubmit;
+  String? submitLabel;
 
   // other properties
-  Function clientValidator;
-  Function clientOnSave;
-  Function clientOnChange;
-  Function clientOnSelected;
-  Function clientOnSubmit;
+  Function? clientValidator;
+  Function? clientOnSave;
+  Function? clientOnChange;
+  Function? clientOnSelected;
+  Function? clientOnSubmit;
 
-  TextInputType keyboard;
-  List<TextInputFormatter> inputFormatters;
+  TextInputType? keyboard;
+  List<TextInputFormatter>? inputFormatters;
 
   SmeupTextAutocomplete.withController(
-      this.model, this.scaffoldKey, this.formKey)
+      SmeupTextAutocompleteModel this.model, this.scaffoldKey, this.formKey)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   SmeupTextAutocomplete(this.scaffoldKey, this.formKey,
@@ -108,7 +108,7 @@ class SmeupTextAutocomplete extends StatefulWidget
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupTextAutocompleteModel m = model;
+    SmeupTextAutocompleteModel m = model as SmeupTextAutocompleteModel;
     id = m.id;
     type = m.type;
     backColor = m.backColor;
@@ -140,14 +140,14 @@ class SmeupTextAutocomplete extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupTextAutocompleteModel m = model;
+    SmeupTextAutocompleteModel m = model as SmeupTextAutocompleteModel;
 
     // change data format
     var workData = formatDataFields(m);
 
     // set the widget data
     if (workData != null) {
-      var newList = List<dynamic>.empty(growable: true);
+      var newList = List<Map<dynamic, dynamic>>.empty(growable: true);
       for (var i = 0; i < (workData['rows'] as List).length; i++) {
         final element = workData['rows'][i];
         newList.add({
@@ -168,16 +168,16 @@ class SmeupTextAutocomplete extends StatefulWidget
 class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupTextAutocompleteModel _model;
+  SmeupTextAutocompleteModel? _model;
   dynamic _data;
 
-  List<dynamic> _options;
+  List<Map<dynamic, dynamic>>? _options;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     _options = _data == null ? [] : _data;
     super.initState();
   }
@@ -205,11 +205,11 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
   /// define the structure ...
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupTextAutocompleteDao.getData(_model);
-        _data = widget.treatData(_model);
-        _options = _model.data['rows'];
+        await SmeupTextAutocompleteDao.getData(_model!);
+        _data = widget.treatData(_model!);
+        _options = _model!.data['rows'];
       }
 
       setDataLoad(widget.id, true);
@@ -219,25 +219,29 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
     TextStyle captionStyle = _getCaptionStile();
     IconThemeData iconTheme = _getIconTheme();
 
+    String _displayStringForOption(Map<dynamic, dynamic> option) =>
+        option['value'];
+
     Widget children;
 
     children = Container(
         padding: widget.padding,
-        decoration: widget.showborder
+        decoration: widget.showborder!
             ? BoxDecoration(
-                borderRadius: BorderRadius.circular(widget.borderRadius),
+                borderRadius: BorderRadius.circular(widget.borderRadius!),
                 border: Border.all(
-                    color: widget.borderColor, width: widget.borderWidth))
+                    color: widget.borderColor!, width: widget.borderWidth!))
             : null,
-        child: RawAutocomplete<dynamic>(
+        child: RawAutocomplete<Map<dynamic, dynamic>>(
           optionsBuilder: (TextEditingValue textEditingValue) {
-            return _options.where((dynamic option) {
+            return _options!.where((Map<dynamic, dynamic> option) {
               return option['value']
                   .toString()
                   .toLowerCase()
                   .contains(textEditingValue.text.toLowerCase());
             });
           },
+          displayStringForOption: _displayStringForOption,
           fieldViewBuilder: (BuildContext context,
               TextEditingController textEditingController,
               FocusNode focusNode,
@@ -267,44 +271,45 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                     onFieldSubmitted();
                   },
                   inputFormatters: widget.inputFormatters,
-                  autofocus: widget.autoFocus,
+                  autofocus: widget.autoFocus!,
                   maxLines: 1,
                   key: Key('${widget.id}_text'),
                   autocorrect: false,
                   textCapitalization: TextCapitalization.none,
                   textInputAction: TextInputAction.next,
                   enableSuggestions: true,
-                  validator: widget.clientValidator,
+                  validator:
+                      widget.clientValidator as String? Function(String?)?,
                   keyboardType: widget.keyboard,
                   obscureText: widget.keyboard == TextInputType.visiblePassword
                       ? true
                       : false,
                   onChanged: (value) {
                     if (widget.clientOnChange != null)
-                      widget.clientOnChange(value);
+                      widget.clientOnChange!(value);
                   },
                   decoration: InputDecoration(
                     labelStyle: captionStyle,
                     labelText: widget.label,
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                          color: widget.underline
-                              ? widget.borderColor
+                          color: widget.underline!
+                              ? widget.borderColor!
                               : Colors.transparent),
                     ),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                          color: widget.underline
-                              ? widget.borderColor
+                          color: widget.underline!
+                              ? widget.borderColor!
                               : Colors.transparent),
                     ),
                   ),
-                  onSaved: widget.clientOnSave,
+                  onSaved: widget.clientOnSave as void Function(String?)?,
                 ),
               ),
               Container(
                 color: iconTheme.color,
-                padding: EdgeInsets.all(iconTheme.size.toDouble()),
+                padding: EdgeInsets.all(iconTheme.size!.toDouble()),
                 child: GestureDetector(
                   child: Icon(
                     Icons.close,
@@ -313,10 +318,10 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                   ),
                   onTap: () {
                     setState(() {
-                      SmeupVariablesService.setVariable(widget.defaultValue, '',
+                      SmeupVariablesService.setVariable(widget.valueField, '',
                           formKey: widget.formKey);
                       if (_model != null)
-                        SmeupDynamismService.run(_model.dynamisms, context,
+                        SmeupDynamismService.run(_model!.dynamisms, context,
                             'change', widget.scaffoldKey, widget.formKey);
                     });
                   },
@@ -325,8 +330,8 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
             ]);
           },
           optionsViewBuilder: (BuildContext context,
-              AutocompleteOnSelected<dynamic> onSelected,
-              Iterable<dynamic> options) {
+              AutocompleteOnSelected<Map<dynamic, dynamic>> onSelected,
+              Iterable<Map<dynamic, dynamic>> options) {
             return Align(
               alignment: Alignment.topLeft,
               child: Material(
@@ -338,10 +343,11 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                     padding: const EdgeInsets.all(8.0),
                     itemCount: options.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final dynamic option = options.elementAt(index);
+                      final Map<dynamic, dynamic> option =
+                          options.elementAt(index);
                       return GestureDetector(
                         onTap: () {
-                          onSelected(option['value']);
+                          onSelected(option);
                           SmeupVariablesService.setVariable(
                               widget.id, option['code'],
                               formKey: widget.formKey);
@@ -349,10 +355,10 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                               "value", option['value'],
                               formKey: widget.formKey);
                           if (_model != null)
-                            SmeupDynamismService.run(_model.dynamisms, context,
+                            SmeupDynamismService.run(_model!.dynamisms, context,
                                 'change', widget.scaffoldKey, widget.formKey);
                           if (widget.clientOnSelected != null)
-                            widget.clientOnSelected(option);
+                            widget.clientOnSelected!(option);
                         },
                         child: ListTile(
                           title: Text(
@@ -369,7 +375,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
           },
         ));
 
-    if (widget.showSubmit) {
+    if (widget.showSubmit!) {
       SmeupButtons button;
       if (_model == null) {
         button = SmeupButtons(
@@ -387,7 +393,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
               {'value': widget.submitLabel},
             ]
           },
-          "dynamisms": _model.dynamisms
+          "dynamisms": _model!.dynamisms
         };
         button = SmeupButtons.withController(
             SmeupButtonsModel.fromMap(
@@ -412,14 +418,15 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.bodyText1;
+    TextStyle style =
+        SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
 
     style = style.copyWith(
         color: widget.fontColor,
         fontSize: widget.fontSize,
         backgroundColor: widget.backColor);
 
-    if (widget.fontBold) {
+    if (widget.fontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -429,14 +436,14 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
+    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
         color: widget.captionFontColor,
         fontSize: widget.captionFontSize,
         backgroundColor: widget.captionBackColor);
 
-    if (widget.captionFontBold) {
+    if (widget.captionFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -446,7 +453,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = SmeupConfigurationService.getTheme().iconTheme;
+    IconThemeData themeData = SmeupConfigurationService.getTheme()!.iconTheme;
 
     return themeData;
   }

@@ -11,9 +11,9 @@ class SmeupWaitFun extends StatelessWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
 
-  Color splashColor;
-  Color loaderColor;
-  Color circularTrackColor;
+  Color? splashColor;
+  Color? loaderColor;
+  Color? circularTrackColor;
 
   SmeupWaitFun(this.scaffoldKey, this.formKey, this.target,
       {this.splashColor, this.loaderColor, this.circularTrackColor}) {
@@ -32,7 +32,7 @@ class SmeupWaitFun extends StatelessWidget {
           return Stack(
             children: [
               Container(
-                color: SmeupConfigurationService.getTheme().splashColor,
+                color: SmeupConfigurationService.getTheme()!.splashColor,
               ),
               target,
               SmeupSplash(scaffoldKey, formKey,
@@ -45,7 +45,7 @@ class SmeupWaitFun extends StatelessWidget {
             ],
           );
         } else {
-          return snapshot.data;
+          return snapshot.data!;
         }
       },
     );

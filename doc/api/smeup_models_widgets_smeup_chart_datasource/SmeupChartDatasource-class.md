@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -16,7 +17,7 @@
 
 ## Constructors
 
-[SmeupChartDatasource](../smeup_models_widgets_smeup_chart_datasource/SmeupChartDatasource/SmeupChartDatasource.md) ([List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupChartRow](../smeup_models_widgets_smeup_chart_row/SmeupChartRow-class.md)> rows, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupChartColumn](../smeup_models_widgets_smeup_chart_column/SmeupChartColumn-class.md)> columns)
+[SmeupChartDatasource](../smeup_models_widgets_smeup_chart_datasource/SmeupChartDatasource/SmeupChartDatasource.md) ([List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupChartRow](../smeup_models_widgets_smeup_chart_row/SmeupChartRow-class.md)>? rows, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupChartColumn](../smeup_models_widgets_smeup_chart_column/SmeupChartColumn-class.md)>? columns)
 
     
 
@@ -31,7 +32,7 @@
 
 ## Properties
 
-##### [columns](../smeup_models_widgets_smeup_chart_datasource/SmeupChartDatasource/columns.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupChartColumn](../smeup_models_widgets_smeup_chart_column/SmeupChartColumn-class.md)>
+##### [columns](../smeup_models_widgets_smeup_chart_datasource/SmeupChartDatasource/columns.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupChartColumn](../smeup_models_widgets_smeup_chart_column/SmeupChartColumn-class.md)>?
 
 
 
@@ -49,7 +50,7 @@ _read-only, inherited_
 
 
 
-##### [rows](../smeup_models_widgets_smeup_chart_datasource/SmeupChartDatasource/rows.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupChartRow](../smeup_models_widgets_smeup_chart_row/SmeupChartRow-class.md)>
+##### [rows](../smeup_models_widgets_smeup_chart_datasource/SmeupChartDatasource/rows.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupChartRow](../smeup_models_widgets_smeup_chart_row/SmeupChartRow-class.md)>?
 
 
 

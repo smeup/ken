@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -25,7 +26,7 @@ dynamic setDefaults
 ```dart
 static setDefaults(dynamic obj) {
   DividerThemeData dividerData =
-      SmeupConfigurationService.getTheme().dividerTheme;
+      SmeupConfigurationService.getTheme()!.dividerTheme;
 
   defaultColor = dividerData.color;
   defaultThickness = dividerData.thickness;

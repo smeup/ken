@@ -6,13 +6,14 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 - @[override](https://api.flutter.dev/flutter/dart-core/override-constant.html)
 
 [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)> invoke
-([SmeupFun](../../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun)
+([Fun](../../smeup_models_fun/Fun-class.md) smeupFun)
 
 _override_
 
@@ -26,18 +27,18 @@ _override_
 ```dart
 @override
 Future<SmeupServiceResponse> invoke(smeupFun) async {
-  switch (smeupFun.fun['fun']['component']) {
+  switch (smeupFun.identifier.component) {
     case 'FBK':
       try {
         Map<String, dynamic> data = SmeupDataService.getEmptyDataStructure();
-        String message = '';
 
-        if (smeupFun.fun['fun']['P'] != null) {
-          message = smeupFun.fun['fun']['P'];
-        }
+        List<Map<String, dynamic>> list = smeupFun.parameters;
+
+        final message =
+            list.firstWhereOrNull((element) => element['key'] == 'message');
 
         LogType logType = LogType.info;
-        String gravity = smeupFun.fun['fun']['obj1']['k'];
+        String gravity = smeupFun.getObjectByName('obj1').k;
         if (gravity.isNotEmpty) {
           switch (gravity) {
             case "info":
@@ -61,15 +62,15 @@ Future<SmeupServiceResponse> invoke(smeupFun) async {
         }
 
         int milliseconds = 500;
-        if (smeupFun.fun['fun']['obj2']['k'] != null) {
+        if (smeupFun.getObjectByName('obj2').k.isNotEmpty) {
           milliseconds =
-              int.tryParse(smeupFun.fun['fun']['obj2']['k']) ?? 500;
+              int.tryParse(smeupFun.getObjectByName('obj2').k) ?? 500;
         }
 
         data['messages'] = [
           {
             "gravity": logType,
-            "message": message,
+            "message": message!['value'],
             "milliseconds": milliseconds
           }
         ];
@@ -77,7 +78,7 @@ Future<SmeupServiceResponse> invoke(smeupFun) async {
         var response = Response(
             data: data,
             statusCode: HttpStatus.accepted,
-            requestOptions: null);
+            requestOptions: RequestOptions(path: ''));
 
         SmeupDataService.writeResponseResult(
             response, 'SmeupMessageDataService');
@@ -87,26 +88,24 @@ Future<SmeupServiceResponse> invoke(smeupFun) async {
             Response(
                 data: data,
                 statusCode: HttpStatus.accepted,
-                requestOptions: null));
+                requestOptions: RequestOptions(path: '')));
       } catch (e) {
         return SmeupServiceResponse(
             false,
             Response(
                 data: 'Error in SmeupMessageDataService',
                 statusCode: HttpStatus.badRequest,
-                requestOptions: null));
+                requestOptions: RequestOptions(path: '')));
       }
-
-      break;
 
     default:
       return SmeupServiceResponse(
           false,
           Response(
               data:
-                  'Error in SmeupMessageDataService: component ${smeupFun.fun['fun']['component']} not implemented',
+                  'Error in SmeupMessageDataService: component ${smeupFun.identifier.component} not implemented',
               statusCode: HttpStatus.badRequest,
-              requestOptions: null));
+              requestOptions: RequestOptions(path: '')));
   }
 }
 ```

@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[double](https://api.flutter.dev/flutter/dart-core/double-class.html) captionFontSize
+[double](https://api.flutter.dev/flutter/dart-core/double-class.html)? captionFontSize
   
 _final_
 
@@ -20,7 +21,7 @@ _final_
 ## Implementation
 
 ```dart
-final double captionFontSize;
+final double? captionFontSize;
 
 
 ```

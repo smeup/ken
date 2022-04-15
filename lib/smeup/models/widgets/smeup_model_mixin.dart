@@ -6,13 +6,13 @@ class SmeupModelMixin {
   List<SmeupSectionModel> getSections(
       jsonMap,
       sectionName,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context,
-      bool autoAdaptHeight,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
+      bool? autoAdaptHeight,
       SmeupModel parent) {
     final smeupSectionsModels = List<SmeupSectionModel>.empty(growable: true);
-    List<dynamic> sectionsJson;
+    List<dynamic>? sectionsJson;
 
     if (jsonMap is Map && jsonMap.containsKey(sectionName))
       sectionsJson = jsonMap[sectionName];

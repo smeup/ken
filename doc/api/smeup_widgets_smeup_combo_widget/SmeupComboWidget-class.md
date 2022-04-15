@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -28,14 +29,14 @@
 
 ## Constructors
 
-[SmeupComboWidget](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/SmeupComboWidget.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, {[Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) captionFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionFontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionBackColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) iconSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) iconColor, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) selectedValue, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupComboItemModel](../smeup_models_widgets_smeup_combo_item_model/SmeupComboItemModel-class.md)> data, void clientOnChange([String](https://api.flutter.dev/flutter/dart-core/String-class.html) newValue)})
+[SmeupComboWidget](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/SmeupComboWidget.md) ([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, {[Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? fontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? fontSize, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? fontBold, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? backColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? captionFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionFontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionBackColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? iconSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? iconColor, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? selectedValue, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupComboItemModel](../smeup_models_widgets_smeup_combo_item_model/SmeupComboItemModel-class.md)>? data, void clientOnChange([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? newValue)?})
 
    _const_ 
 
 
 ## Properties
 
-##### [backColor](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/backColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [backColor](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/backColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -44,7 +45,7 @@ _final_
 
 
 
-##### [captionBackColor](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/captionBackColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [captionBackColor](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/captionBackColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -53,7 +54,7 @@ _final_
 
 
 
-##### [captionFontBold](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/captionFontBold.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [captionFontBold](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/captionFontBold.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -62,7 +63,7 @@ _final_
 
 
 
-##### [captionFontColor](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/captionFontColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [captionFontColor](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/captionFontColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -71,7 +72,7 @@ _final_
 
 
 
-##### [captionFontSize](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/captionFontSize.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [captionFontSize](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/captionFontSize.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -80,7 +81,7 @@ _final_
 
 
 
-##### [clientOnChange](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/clientOnChange.md) &#8594; void Function([String](https://api.flutter.dev/flutter/dart-core/String-class.html) newValue)
+##### [clientOnChange](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/clientOnChange.md) &#8594; (void (Function?)([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? newValue)?)
 
 
 
@@ -89,7 +90,7 @@ _final_
 
 
 
-##### [data](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/data.md) &#8594; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupComboItemModel](../smeup_models_widgets_smeup_combo_item_model/SmeupComboItemModel-class.md)>
+##### [data](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/data.md) &#8594; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupComboItemModel](../smeup_models_widgets_smeup_combo_item_model/SmeupComboItemModel-class.md)>?
 
 
 
@@ -98,7 +99,7 @@ _final_
 
 
 
-##### [fontBold](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/fontBold.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [fontBold](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/fontBold.md) &#8594; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -107,7 +108,7 @@ _final_
 
 
 
-##### [fontColor](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/fontColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [fontColor](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/fontColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -116,7 +117,7 @@ _final_
 
 
 
-##### [fontSize](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/fontSize.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [fontSize](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/fontSize.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -125,7 +126,7 @@ _final_
 
 
 
-##### [formKey](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/formKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>
+##### [formKey](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/formKey.md) &#8594; [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>?
 
 
 
@@ -143,7 +144,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [iconColor](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/iconColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [iconColor](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/iconColor.md) &#8594; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -152,7 +153,7 @@ _final_
 
 
 
-##### [iconSize](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/iconSize.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [iconSize](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/iconSize.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -161,7 +162,7 @@ _final_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -188,7 +189,7 @@ _final_
 
 
 
-##### [selectedValue](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/selectedValue.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [selectedValue](../smeup_widgets_smeup_combo_widget/SmeupComboWidget/selectedValue.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -246,7 +247,7 @@ _inherited_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -265,7 +266,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -28,7 +29,7 @@
 
 ## Constructors
 
-[SmeupDynamicScreen](../smeup_screens_smeup_dynamic_screen/SmeupDynamicScreen/SmeupDynamicScreen.md) ({[SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) initialFun, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) backButtonVisible = SmeupScreenModel.defaultBackButtonVisible, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) isDialog = SmeupScreenModel.defaultIsDialog})
+[SmeupDynamicScreen](../smeup_screens_smeup_dynamic_screen/SmeupDynamicScreen/SmeupDynamicScreen.md) ({[Fun](../smeup_models_fun/Fun-class.md)? initialFun, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) backButtonVisible = SmeupScreenModel.defaultBackButtonVisible, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) isDialog = SmeupScreenModel.defaultIsDialog})
 
     
 
@@ -53,7 +54,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [initialFun](../smeup_screens_smeup_dynamic_screen/SmeupDynamicScreen/initialFun.md) &#8594; [SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md)
+##### [initialFun](../smeup_screens_smeup_dynamic_screen/SmeupDynamicScreen/initialFun.md) &#8594; [Fun](../smeup_models_fun/Fun-class.md)?
 
 
 
@@ -71,7 +72,7 @@ _final_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -138,7 +139,7 @@ _inherited_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -157,7 +158,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

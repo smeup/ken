@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -28,14 +29,14 @@
 
 ## Constructors
 
-[SmeupRadioButton](../smeup_widgets_smeup_radio_button/SmeupRadioButton/SmeupRadioButton.md) ({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) type = 'rad', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) title = '', [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) radioButtonColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) fontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) fontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) backColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) fontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionFontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) captionBackColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) captionFontBold, [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), [String](https://api.flutter.dev/flutter/dart-core/String-class.html)> data, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) width = SmeupRadioButtonsModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) height = SmeupRadioButtonsModel.defaultHeight, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html) align = SmeupRadioButtonsModel.defaultAlign, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html) padding = SmeupRadioButtonsModel.defaultPadding, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) valueField = SmeupRadioButtonsModel.defaultValueField, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) displayedField = SmeupRadioButtonsModel.defaultDisplayedField, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) selectedValue, [IconData](https://api.flutter.dev/flutter/widgets/IconData-class.html) icon, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) onPressed})
+[SmeupRadioButton](../smeup_widgets_smeup_radio_button/SmeupRadioButton/SmeupRadioButton.md) ({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) id = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? type = 'rad', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? title = '', [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? radioButtonColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? fontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? fontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? backColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? fontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionFontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionBackColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? captionFontBold, [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), [String](https://api.flutter.dev/flutter/dart-core/String-class.html)>? data, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? width = SmeupRadioButtonsModel.defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? height = SmeupRadioButtonsModel.defaultHeight, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)? align = SmeupRadioButtonsModel.defaultAlign, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)? padding = SmeupRadioButtonsModel.defaultPadding, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? valueField = SmeupRadioButtonsModel.defaultValueField, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? displayedField = SmeupRadioButtonsModel.defaultDisplayedField, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? selectedValue, [IconData](https://api.flutter.dev/flutter/widgets/IconData-class.html)? icon, [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? onPressed})
 
     
 
 
 ## Properties
 
-##### [align](../smeup_widgets_smeup_radio_button/SmeupRadioButton/align.md) &#8594; [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)
+##### [align](../smeup_widgets_smeup_radio_button/SmeupRadioButton/align.md) &#8594; [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)?
 
 
 
@@ -44,7 +45,7 @@ _final_
 
 
 
-##### [backColor](../smeup_widgets_smeup_radio_button/SmeupRadioButton/backColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [backColor](../smeup_widgets_smeup_radio_button/SmeupRadioButton/backColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -53,7 +54,7 @@ _read / write_
 
 
 
-##### [captionBackColor](../smeup_widgets_smeup_radio_button/SmeupRadioButton/captionBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [captionBackColor](../smeup_widgets_smeup_radio_button/SmeupRadioButton/captionBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -62,7 +63,7 @@ _read / write_
 
 
 
-##### [captionFontBold](../smeup_widgets_smeup_radio_button/SmeupRadioButton/captionFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [captionFontBold](../smeup_widgets_smeup_radio_button/SmeupRadioButton/captionFontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -71,7 +72,7 @@ _read / write_
 
 
 
-##### [captionFontColor](../smeup_widgets_smeup_radio_button/SmeupRadioButton/captionFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [captionFontColor](../smeup_widgets_smeup_radio_button/SmeupRadioButton/captionFontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -80,7 +81,7 @@ _read / write_
 
 
 
-##### [captionFontSize](../smeup_widgets_smeup_radio_button/SmeupRadioButton/captionFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [captionFontSize](../smeup_widgets_smeup_radio_button/SmeupRadioButton/captionFontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -98,7 +99,7 @@ _read / write_
 
 
 
-##### [data](../smeup_widgets_smeup_radio_button/SmeupRadioButton/data.md) &#8594; [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), [String](https://api.flutter.dev/flutter/dart-core/String-class.html)>
+##### [data](../smeup_widgets_smeup_radio_button/SmeupRadioButton/data.md) &#8594; [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), [String](https://api.flutter.dev/flutter/dart-core/String-class.html)>?
 
 
 
@@ -107,7 +108,7 @@ _final_
 
 
 
-##### [displayedField](../smeup_widgets_smeup_radio_button/SmeupRadioButton/displayedField.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [displayedField](../smeup_widgets_smeup_radio_button/SmeupRadioButton/displayedField.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -116,7 +117,7 @@ _final_
 
 
 
-##### [fontBold](../smeup_widgets_smeup_radio_button/SmeupRadioButton/fontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [fontBold](../smeup_widgets_smeup_radio_button/SmeupRadioButton/fontBold.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 
@@ -125,7 +126,7 @@ _read / write_
 
 
 
-##### [fontColor](../smeup_widgets_smeup_radio_button/SmeupRadioButton/fontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [fontColor](../smeup_widgets_smeup_radio_button/SmeupRadioButton/fontColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -134,7 +135,7 @@ _read / write_
 
 
 
-##### [fontSize](../smeup_widgets_smeup_radio_button/SmeupRadioButton/fontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [fontSize](../smeup_widgets_smeup_radio_button/SmeupRadioButton/fontSize.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -152,7 +153,7 @@ _@[nonVirtual](https://pub.dev/documentation/meta/1.7.0/meta/nonVirtual-constant
 
 
 
-##### [height](../smeup_widgets_smeup_radio_button/SmeupRadioButton/height.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [height](../smeup_widgets_smeup_radio_button/SmeupRadioButton/height.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -161,7 +162,7 @@ _final_
 
 
 
-##### [icon](../smeup_widgets_smeup_radio_button/SmeupRadioButton/icon.md) &#8594; [IconData](https://api.flutter.dev/flutter/widgets/IconData-class.html)
+##### [icon](../smeup_widgets_smeup_radio_button/SmeupRadioButton/icon.md) &#8594; [IconData](https://api.flutter.dev/flutter/widgets/IconData-class.html)?
 
 
 
@@ -179,7 +180,7 @@ _final_
 
 
 
-##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)
+##### [key](https://api.flutter.dev/flutter/widgets/Widget/key.html) &#8594; [Key](https://api.flutter.dev/flutter/foundation/Key-class.html)?
 
 
 
@@ -188,7 +189,7 @@ _final, inherited_
 
 
 
-##### [onPressed](../smeup_widgets_smeup_radio_button/SmeupRadioButton/onPressed.md) &#8594; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+##### [onPressed](../smeup_widgets_smeup_radio_button/SmeupRadioButton/onPressed.md) &#8594; [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)?
 
 
 
@@ -197,7 +198,7 @@ _final_
 
 
 
-##### [others](../smeup_widgets_smeup_radio_button/SmeupRadioButton/others.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupRadioButton](../smeup_widgets_smeup_radio_button/SmeupRadioButton-class.md)>
+##### [others](../smeup_widgets_smeup_radio_button/SmeupRadioButton/others.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupRadioButton](../smeup_widgets_smeup_radio_button/SmeupRadioButton-class.md)>?
 
 
 
@@ -206,7 +207,7 @@ _read / write_
 
 
 
-##### [padding](../smeup_widgets_smeup_radio_button/SmeupRadioButton/padding.md) &#8594; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)
+##### [padding](../smeup_widgets_smeup_radio_button/SmeupRadioButton/padding.md) &#8594; [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)?
 
 
 
@@ -215,7 +216,7 @@ _final_
 
 
 
-##### [radioButtonColor](../smeup_widgets_smeup_radio_button/SmeupRadioButton/radioButtonColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+##### [radioButtonColor](../smeup_widgets_smeup_radio_button/SmeupRadioButton/radioButtonColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
 
 
 
@@ -233,7 +234,7 @@ _read-only, inherited_
 
 
 
-##### [selectedValue](../smeup_widgets_smeup_radio_button/SmeupRadioButton/selectedValue.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [selectedValue](../smeup_widgets_smeup_radio_button/SmeupRadioButton/selectedValue.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -242,7 +243,7 @@ _final_
 
 
 
-##### [title](../smeup_widgets_smeup_radio_button/SmeupRadioButton/title.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [title](../smeup_widgets_smeup_radio_button/SmeupRadioButton/title.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -251,7 +252,7 @@ _final_
 
 
 
-##### [type](../smeup_widgets_smeup_radio_button/SmeupRadioButton/type.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [type](../smeup_widgets_smeup_radio_button/SmeupRadioButton/type.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -260,7 +261,7 @@ _final_
 
 
 
-##### [valueField](../smeup_widgets_smeup_radio_button/SmeupRadioButton/valueField.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [valueField](../smeup_widgets_smeup_radio_button/SmeupRadioButton/valueField.md) &#8594; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -269,7 +270,7 @@ _final_
 
 
 
-##### [width](../smeup_widgets_smeup_radio_button/SmeupRadioButton/width.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)
+##### [width](../smeup_widgets_smeup_radio_button/SmeupRadioButton/width.md) &#8594; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -327,7 +328,7 @@ _inherited_
 
 
 
-##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html) style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
+##### [toDiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? name, [DiagnosticsTreeStyle](https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html)? style}) [DiagnosticsNode](https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html)
 
 
 
@@ -346,7 +347,7 @@ _inherited_
 
 
 
-##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [toStringDeep](https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) prefixLineOne = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? prefixOtherLines, [DiagnosticLevel](https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html) minLevel = DiagnosticLevel.debug}) [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
 
 
 

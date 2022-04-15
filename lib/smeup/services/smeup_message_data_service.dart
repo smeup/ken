@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
@@ -12,23 +13,23 @@ import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface
 class SmeupMessageDataService extends SmeupDataServiceInterface {
   Map<String, Map<String, dynamic>> jsons = Map();
 
-  SmeupMessageDataService({SmeupDataTransformerInterface transformer})
+  SmeupMessageDataService({SmeupDataTransformerInterface? transformer})
       : super(transformer);
 
   @override
   Future<SmeupServiceResponse> invoke(smeupFun) async {
-    switch (smeupFun.fun['fun']['component']) {
+    switch (smeupFun.identifier.component) {
       case 'FBK':
         try {
           Map<String, dynamic> data = SmeupDataService.getEmptyDataStructure();
-          String message = '';
 
-          if (smeupFun.fun['fun']['P'] != null) {
-            message = smeupFun.fun['fun']['P'];
-          }
+          List<Map<String, dynamic>> list = smeupFun.parameters;
+
+          final message =
+              list.firstWhereOrNull((element) => element['key'] == 'message');
 
           LogType logType = LogType.info;
-          String gravity = smeupFun.fun['fun']['obj1']['k'];
+          String gravity = smeupFun.getObjectByName('obj1').k;
           if (gravity.isNotEmpty) {
             switch (gravity) {
               case "info":
@@ -52,15 +53,15 @@ class SmeupMessageDataService extends SmeupDataServiceInterface {
           }
 
           int milliseconds = 500;
-          if (smeupFun.fun['fun']['obj2']['k'] != null) {
+          if (smeupFun.getObjectByName('obj2').k.isNotEmpty) {
             milliseconds =
-                int.tryParse(smeupFun.fun['fun']['obj2']['k']) ?? 500;
+                int.tryParse(smeupFun.getObjectByName('obj2').k) ?? 500;
           }
 
           data['messages'] = [
             {
               "gravity": logType,
-              "message": message,
+              "message": message!['value'],
               "milliseconds": milliseconds
             }
           ];
@@ -68,7 +69,7 @@ class SmeupMessageDataService extends SmeupDataServiceInterface {
           var response = Response(
               data: data,
               statusCode: HttpStatus.accepted,
-              requestOptions: null);
+              requestOptions: RequestOptions(path: ''));
 
           SmeupDataService.writeResponseResult(
               response, 'SmeupMessageDataService');
@@ -78,26 +79,24 @@ class SmeupMessageDataService extends SmeupDataServiceInterface {
               Response(
                   data: data,
                   statusCode: HttpStatus.accepted,
-                  requestOptions: null));
+                  requestOptions: RequestOptions(path: '')));
         } catch (e) {
           return SmeupServiceResponse(
               false,
               Response(
                   data: 'Error in SmeupMessageDataService',
                   statusCode: HttpStatus.badRequest,
-                  requestOptions: null));
+                  requestOptions: RequestOptions(path: '')));
         }
-
-        break;
 
       default:
         return SmeupServiceResponse(
             false,
             Response(
                 data:
-                    'Error in SmeupMessageDataService: component ${smeupFun.fun['fun']['component']} not implemented',
+                    'Error in SmeupMessageDataService: component ${smeupFun.identifier.component} not implemented',
                 statusCode: HttpStatus.badRequest,
-                requestOptions: null));
+                requestOptions: RequestOptions(path: '')));
     }
   }
 
@@ -110,24 +109,24 @@ class SmeupMessageDataService extends SmeupDataServiceInterface {
             MessagesPromptMode mode =
                 message['mode'] ?? MessagesPromptMode.snackbar;
             LogType severity = message['gravity'] ?? LogType.info;
-            String text = message['message'];
+            String? text = message['message'];
             int milliseconds = message['milliseconds'] ?? 500;
 
-            Color backColor;
+            Color? backColor;
             switch (severity) {
               case LogType.error:
-                backColor = SmeupConfigurationService.getTheme().errorColor;
+                backColor = SmeupConfigurationService.getTheme()!.errorColor;
                 break;
               case LogType.warning:
                 backColor = Colors.orange;
                 break;
               default:
-                backColor = SmeupConfigurationService.getTheme()
+                backColor = SmeupConfigurationService.getTheme()!
                     .snackBarTheme
                     .backgroundColor;
             }
 
-            if (text.isNotEmpty) {
+            if (text!.isNotEmpty) {
               switch (mode) {
                 case MessagesPromptMode.snackbar:
                   ScaffoldMessenger.of(context).showSnackBar(

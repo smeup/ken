@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-SmeupQRCodeReaderModel([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, {[double](https://api.flutter.dev/flutter/dart-core/double-class.html) padding = defaultPadding, [double](https://api.flutter.dev/flutter/dart-core/double-class.html) size = defaultSize, dynamic title = '', [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html) onDataRead, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) maxReads = defaultMaxReads, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) delayInMillis = defaultDealyInMillis})
+SmeupQRCodeReaderModel([GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context, {[double](https://api.flutter.dev/flutter/dart-core/double-class.html)? padding = defaultPadding, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? size = defaultSize, dynamic title = '', [Function](https://api.flutter.dev/flutter/dart-core/Function-class.html)? onDataRead, [int](https://api.flutter.dev/flutter/dart-core/int-class.html)? maxReads = defaultMaxReads, [int](https://api.flutter.dev/flutter/dart-core/int-class.html)? delayInMillis = defaultDealyInMillis})
 
 
 

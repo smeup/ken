@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,14 +27,14 @@
 
 ## Constructors
 
-[SmeupDefaultDataService](../smeup_services_smeup_default_data_service/SmeupDefaultDataService/SmeupDefaultDataService.md) ({[SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md) transformer})
+[SmeupDefaultDataService](../smeup_services_smeup_default_data_service/SmeupDefaultDataService/SmeupDefaultDataService.md) ({[SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)? transformer})
 
     
 
 
 ## Properties
 
-##### [dio](../smeup_services_smeup_default_data_service/SmeupDefaultDataService/dio.md) &#8596; [Dio](https://pub.dev/documentation/dio/4.0.0/dio/Dio-class.html)
+##### [dio](../smeup_services_smeup_default_data_service/SmeupDefaultDataService/dio.md) &#8596; [Dio](https://pub.dev/documentation/dio/4.0.6/dio/Dio-class.html)
 
 
 
@@ -60,7 +61,7 @@ _read-only, inherited_
 
 
 
-##### [server](../smeup_services_smeup_default_data_service/SmeupDefaultDataService/server.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [server](../smeup_services_smeup_default_data_service/SmeupDefaultDataService/server.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -69,7 +70,7 @@ _read / write_
 
 
 
-##### [transformer](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface/transformer.md) &#8596; [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)
+##### [transformer](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface/transformer.md) &#8596; [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)?
 
 
 
@@ -81,7 +82,7 @@ _read / write, inherited_
 
 ## Methods
 
-##### [getTransformer](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface/getTransformer.md)() [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)
+##### [getTransformer](../smeup_services_smeup_data_service_interface/SmeupDataServiceInterface/getTransformer.md)() [SmeupDataTransformerInterface](../smeup_services_transformers_smeup_data_transformer_interface/SmeupDataTransformerInterface-class.md)?
 
 
 
@@ -90,7 +91,7 @@ _inherited_
 
 
 
-##### [invoke](../smeup_services_smeup_default_data_service/SmeupDefaultDataService/invoke.md)([SmeupFun](../smeup_models_smeup_fun/SmeupFun-class.md) smeupFun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
+##### [invoke](../smeup_services_smeup_default_data_service/SmeupDefaultDataService/invoke.md)([Fun](../smeup_models_fun/Fun-class.md) smeupFun) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[SmeupServiceResponse](../smeup_services_smeup_service_response/SmeupServiceResponse-class.md)>
 
 
 
@@ -99,7 +100,7 @@ _override_
 
 
 
-##### [invokeDio](../smeup_services_smeup_default_data_service/SmeupDefaultDataService/invokeDio.md)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) method, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) url, dynamic body, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) contentType, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) cache = 0, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) forceCache = false}) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[Response](https://pub.dev/documentation/dio/4.0.0/dio/Response-class.html)>
+##### [invokeDio](../smeup_services_smeup_default_data_service/SmeupDefaultDataService/invokeDio.md)({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? method, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? url, dynamic body, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? contentType, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) cache = 0, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) forceCache = false}) [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html)&lt;[Response](https://pub.dev/documentation/dio/4.0.6/dio/Response-class.html)?>
 
 
 

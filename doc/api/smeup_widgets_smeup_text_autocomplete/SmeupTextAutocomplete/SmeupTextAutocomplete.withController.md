@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-SmeupTextAutocomplete.withController([SmeupTextAutocompleteModel](../../smeup_models_widgets_smeup_text_autocomplete_model/SmeupTextAutocompleteModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey)
+SmeupTextAutocomplete.withController([SmeupTextAutocompleteModel](../../smeup_models_widgets_smeup_text_autocomplete_model/SmeupTextAutocompleteModel-class.md) model, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey)
 
 
 
@@ -19,9 +20,9 @@ SmeupTextAutocomplete.withController([SmeupTextAutocompleteModel](../../smeup_mo
 
 ```dart
 SmeupTextAutocomplete.withController(
-    this.model, this.scaffoldKey, this.formKey)
+    SmeupTextAutocompleteModel this.model, this.scaffoldKey, this.formKey)
     : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-  runControllerActivities(model);
+  runControllerActivities(model!);
 }
 ```
 

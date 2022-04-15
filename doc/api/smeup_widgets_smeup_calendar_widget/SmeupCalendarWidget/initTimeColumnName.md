@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[String](https://api.flutter.dev/flutter/dart-core/String-class.html) initTimeColumnName
+[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? initTimeColumnName
   
 _final_
 
@@ -20,7 +21,7 @@ _final_
 ## Implementation
 
 ```dart
-final String initTimeColumnName;
+final String? initTimeColumnName;
 
 
 ```

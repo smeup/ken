@@ -5,10 +5,10 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class SmeupCalendarModel extends SmeupModel {
   // supported by json_theme
-  static double defaultDayFontSize;
-  static double defaultEventFontSize;
-  static double defaultTitleFontSize;
-  static double defaultMarkerFontSize;
+  static double? defaultDayFontSize;
+  static double? defaultEventFontSize;
+  static double? defaultTitleFontSize;
+  static double? defaultMarkerFontSize;
 
   // unsupported by json_theme
   static const double defaultWidth = 0;
@@ -23,32 +23,32 @@ class SmeupCalendarModel extends SmeupModel {
   static const bool defaultShowNavigation = true;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
 
-  double dayFontSize;
-  double eventFontSize;
-  double titleFontSize;
-  double markerFontSize;
+  double? dayFontSize;
+  double? eventFontSize;
+  double? titleFontSize;
+  double? markerFontSize;
 
-  EdgeInsetsGeometry padding;
-  String titleColumnName;
-  String dataColumnName;
-  String initTimeColumnName;
-  String endTimeColumnName;
-  String styleColumnName;
-  double width;
-  double height;
-  bool showPeriodButtons;
-  DateTime initialFirstWork;
-  DateTime initialLastWork;
-  DateTime initialDate;
-  bool showAsWeek;
-  bool showNavigation;
+  EdgeInsetsGeometry? padding;
+  late String titleColumnName;
+  late String dataColumnName;
+  late String initTimeColumnName;
+  late String endTimeColumnName;
+  late String styleColumnName;
+  double? width;
+  double? height;
+  bool? showPeriodButtons;
+  DateTime? initialFirstWork;
+  DateTime? initialLastWork;
+  DateTime? initialDate;
+  bool? showAsWeek;
+  bool? showNavigation;
 
   SmeupCalendarModel({
     id,
     type,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
     this.dayFontSize,
     this.eventFontSize,
     this.titleFontSize,
@@ -74,67 +74,69 @@ class SmeupCalendarModel extends SmeupModel {
 
     if (initialDate == null) initialDate = DateTime.now();
     if (initialFirstWork == null) {
-      this.initialFirstWork = getInitialFirstWork(initialDate);
+      this.initialFirstWork = getInitialFirstWork(initialDate!);
     }
     if (initialLastWork == null) {
-      this.initialLastWork = getInitialFirstWork(initialDate);
+      this.initialLastWork = getInitialFirstWork(initialDate!);
     }
   }
 
   SmeupCalendarModel.fromMap(
       Map<String, dynamic> jsonMap,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context)
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context)
       : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
-    dayFontSize = SmeupUtilities.getDouble(optionsDefault['todayFontSize']) ??
+    dayFontSize = SmeupUtilities.getDouble(optionsDefault!['todayFontSize']) ??
         defaultDayFontSize;
-    eventFontSize = SmeupUtilities.getDouble(optionsDefault['eventFontSize']) ??
-        defaultEventFontSize;
-    titleFontSize = SmeupUtilities.getDouble(optionsDefault['titleFontSize']) ??
-        defaultTitleFontSize;
+    eventFontSize =
+        SmeupUtilities.getDouble(optionsDefault!['eventFontSize']) ??
+            defaultEventFontSize;
+    titleFontSize =
+        SmeupUtilities.getDouble(optionsDefault!['titleFontSize']) ??
+            defaultTitleFontSize;
     markerFontSize =
-        SmeupUtilities.getDouble(optionsDefault['markerFontSize']) ??
+        SmeupUtilities.getDouble(optionsDefault!['markerFontSize']) ??
             defaultMarkerFontSize;
 
     padding =
-        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
+        SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     titleColumnName =
-        optionsDefault['titleColumnName'] ?? defaultTitleColumnName;
-    dataColumnName = optionsDefault['dataColumnName'] ?? defaultDataColumnName;
+        optionsDefault!['titleColumnName'] ?? defaultTitleColumnName;
+    dataColumnName = optionsDefault!['dataColumnName'] ?? defaultDataColumnName;
     initTimeColumnName =
-        optionsDefault['initTimeColumnName'] ?? defaultInitTimeColumnName;
+        optionsDefault!['initTimeColumnName'] ?? defaultInitTimeColumnName;
     endTimeColumnName =
-        optionsDefault['endTimeColumnName'] ?? defaultEndTimeColumnName;
+        optionsDefault!['endTimeColumnName'] ?? defaultEndTimeColumnName;
     styleColumnName =
-        optionsDefault['styleColumnName'] ?? defaultStyleColumnName;
+        optionsDefault!['styleColumnName'] ?? defaultStyleColumnName;
     showPeriodButtons =
-        optionsDefault['showPeriodButtons'] ?? defaultShowPeriodButtons;
-    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+        optionsDefault!['showPeriodButtons'] ?? defaultShowPeriodButtons;
+    width = SmeupUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height =
-        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+        SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 
-    initialDate = optionsDefault['initialDay'] == null
+    initialDate = optionsDefault!['initialDay'] == null
         ? DateTime.now()
-        : DateTime.parse(optionsDefault['initialDay']);
+        : DateTime.parse(optionsDefault!['initialDay']);
 
-    initialFirstWork = optionsDefault['initialFirstWork'] == null
-        ? getInitialFirstWork(initialDate)
-        : DateTime.parse(optionsDefault['initialFirstWork']);
+    initialFirstWork = optionsDefault!['initialFirstWork'] == null
+        ? getInitialFirstWork(initialDate!)
+        : DateTime.parse(optionsDefault!['initialFirstWork']);
 
-    initialLastWork = optionsDefault['initialLastWork'] == null
-        ? getInitialLastWork(initialDate)
-        : DateTime.parse(optionsDefault['initialLastWork']);
+    initialLastWork = optionsDefault!['initialLastWork'] == null
+        ? getInitialLastWork(initialDate!)
+        : DateTime.parse(optionsDefault!['initialLastWork']);
 
-    showAsWeek = optionsDefault['showAsWeek'] == null
+    showAsWeek = optionsDefault!['showAsWeek'] == null
         ? defaultShowAsWeek
-        : optionsDefault['showAsWeek'].toString().toLowerCase() == "true";
+        : optionsDefault!['showAsWeek'].toString().toLowerCase() == "true";
 
-    showNavigation = optionsDefault['showNavigation'] == null
+    showNavigation = optionsDefault!['showNavigation'] == null
         ? defaultShowNavigation
-        : optionsDefault['showNavigation'].toString().toLowerCase() == "true";
+        : optionsDefault!['showNavigation'].toString().toLowerCase() == "true";
 
     widgetLoadType = LoadType.Immediate;
   }
@@ -162,17 +164,19 @@ class SmeupCalendarModel extends SmeupModel {
   }
 
   static setDefaults(dynamic obj) {
-    var dayTextStyle = SmeupConfigurationService.getTheme().textTheme.bodyText2;
+    var dayTextStyle =
+        SmeupConfigurationService.getTheme()!.textTheme.bodyText2!;
     defaultDayFontSize = dayTextStyle.fontSize;
 
-    var markerStyle = SmeupConfigurationService.getTheme().textTheme.headline4;
+    var markerStyle =
+        SmeupConfigurationService.getTheme()!.textTheme.headline4!;
     defaultMarkerFontSize = markerStyle.fontSize;
 
-    var eventStyle = SmeupConfigurationService.getTheme().textTheme.headline3;
+    var eventStyle = SmeupConfigurationService.getTheme()!.textTheme.headline3!;
     defaultEventFontSize = eventStyle.fontSize;
 
     var titleTextStyle =
-        SmeupConfigurationService.getTheme().appBarTheme.titleTextStyle;
+        SmeupConfigurationService.getTheme()!.appBarTheme.titleTextStyle!;
     defaultTitleFontSize = titleTextStyle.fontSize;
 
     // ----------------- set properties from default

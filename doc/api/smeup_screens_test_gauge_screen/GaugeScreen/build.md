@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -60,7 +61,7 @@ and</li>
 @override
 Widget build(BuildContext context) {
   return Theme(
-    data: SmeupConfigurationService.getTheme(),
+    data: SmeupConfigurationService.getTheme()!,
     child: Builder(
       builder: (BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -76,16 +77,14 @@ Widget build(BuildContext context) {
                 child: Column(
               children: [
                 ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
-                      'The Gauge is a visual element that helps to quickly visualize where a value falls on the axis'),
-                SmeupGauge(
-                  _scaffoldKey,
-                  _formKey,
-                  id: 'gau1',
-                  value: 120,
-                  maxValue: 150,
-                  minValue: 50,
-                  warning: 100,
-                ),
+                    'The Gauge is a visual element that helps to quickly visualize where a value falls on the axis'),
+                SmeupGauge(_scaffoldKey, _formKey,
+                    id: 'gau1',
+                    value: 120,
+                    maxValue: 150,
+                    minValue: 50,
+                    warning: 100,
+                    alert: 110),
               ],
             )),
             //),

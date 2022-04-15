@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,13 +25,14 @@ void runDynamism
 
 ```dart
 void runDynamism(BuildContext context, dynamic child) async {
-  if (_isDinamismAsync()) {
+  if (_model != null &&
+      Dynamism.isDinamismAsync('click', _model!.dynamisms)) {
     execDynamismActions(child, true);
 
     SmeupLogService.writeDebugMessage('********************* ASYNC = TRUE',
         logType: LogType.info);
   } else {
-    if (_isBusy) {
+    if (_isBusy!) {
       SmeupLogService.writeDebugMessage(
           '********************* SKIPPED DOUBLE CLICK',
           logType: LogType.warning);

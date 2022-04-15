@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ken/smeup/models/dynamism.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
@@ -15,7 +16,7 @@ class DialogScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme(),
+      data: SmeupConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -47,13 +48,13 @@ class DialogScreen extends StatelessWidget {
                     clientOnPressed: (buttonIndex, buttonText) {
                       SmeupUtilities.invokeScaffoldMessenger(context,
                           "You have clicked the button with text \"$buttonText\" ");
-
                       SmeupDynamismService.run([
-                        {
-                          "event": "click",
-                          "exec":
-                              "F(EXD;*JSN;) 1(;;packages/ken/assets/jsons/forms) 2(;;dialog_form) P(DIALOG) G(DLG) "
-                        }
+                        Dynamism(
+                            "click",
+                            "F(EXD;*JSN;) 2(;;dialog_form) P(DIALOG) G(DLG) SERVER(source(packages/ken/assets/jsons/forms))",
+                            false,
+                            List<dynamic>.empty(growable: true),
+                            List<dynamic>.empty(growable: true))
                       ], context, 'click', _scaffoldKey, _formKey);
                     },
                   ),

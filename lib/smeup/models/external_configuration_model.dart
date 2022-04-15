@@ -1,15 +1,15 @@
 class ExternalConfigurationModel {
-  String organizationId;
-  String description;
-  String theme;
-  bool showLoader;
-  String defaultServiceUserName;
-  String defaultServicePassword;
-  String defaultServiceEndpoint;
-  String httpServiceEndpoint;
-  String httpServiceCheckEndpoint;
-  bool enableCheckWiFi;
-  bool enableCheckDataService;
+  String? organizationId;
+  String? description;
+  late String theme;
+  bool? showLoader;
+  String? defaultServiceUserName;
+  String? defaultServicePassword;
+  String? defaultServiceEndpoint;
+  String? httpServiceEndpoint;
+  String? httpServiceCheckEndpoint;
+  bool? enableCheckWiFi;
+  bool? enableCheckDataService;
 
   ExternalConfigurationModel.fromMap(dynamic json) {
     organizationId = json['organizationId'] ?? '';

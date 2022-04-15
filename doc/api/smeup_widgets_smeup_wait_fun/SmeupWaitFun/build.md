@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -69,7 +70,7 @@ Widget build(BuildContext context) {
         return Stack(
           children: [
             Container(
-              color: SmeupConfigurationService.getTheme().splashColor,
+              color: SmeupConfigurationService.getTheme()!.splashColor,
             ),
             target,
             SmeupSplash(scaffoldKey, formKey,
@@ -82,7 +83,7 @@ Widget build(BuildContext context) {
           ],
         );
       } else {
-        return snapshot.data;
+        return snapshot.data!;
       }
     },
   );

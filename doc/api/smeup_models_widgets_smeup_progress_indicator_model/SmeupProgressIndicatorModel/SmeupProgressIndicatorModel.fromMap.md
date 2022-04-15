@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-SmeupProgressIndicatorModel.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)> formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)> scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) context)
+SmeupProgressIndicatorModel.fromMap([Map](https://api.flutter.dev/flutter/dart-core/Map-class.html)&lt;[String](https://api.flutter.dev/flutter/dart-core/String-class.html), dynamic> jsonMap, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>? scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)? context)
 
 
 
@@ -20,9 +21,9 @@ SmeupProgressIndicatorModel.fromMap([Map](https://api.flutter.dev/flutter/dart-c
 ```dart
 SmeupProgressIndicatorModel.fromMap(
   Map<String, dynamic> jsonMap,
-  GlobalKey<FormState> formKey,
-  GlobalKey<ScaffoldState> scaffoldKey,
-  BuildContext context,
+  GlobalKey<FormState>? formKey,
+  GlobalKey<ScaffoldState>? scaffoldKey,
+  BuildContext? context,
 ) : super.fromMap(
         jsonMap,
         formKey,
@@ -32,13 +33,13 @@ SmeupProgressIndicatorModel.fromMap(
   setDefaults(this);
   title = jsonMap['title'] ?? '';
 
-  size = SmeupUtilities.getDouble(optionsDefault['size']) ?? defaultSize;
+  size = SmeupUtilities.getDouble(optionsDefault!['size']) ?? defaultSize;
 
   color =
-      SmeupUtilities.getColorFromRGB(optionsDefault['color']) ?? defaultColor;
+      SmeupUtilities.getColorFromRGB(optionsDefault!['color']) ?? defaultColor;
 
   circularTrackColor =
-      SmeupUtilities.getColorFromRGB(optionsDefault['circularTrackColor']) ??
+      SmeupUtilities.getColorFromRGB(optionsDefault!['circularTrackColor']) ??
           defaultCircularTrackColor;
 
   SmeupDataService.incrementDataFetch(id);

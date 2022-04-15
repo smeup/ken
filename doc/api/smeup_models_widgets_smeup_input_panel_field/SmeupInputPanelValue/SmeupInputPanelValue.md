@@ -6,10 +6,11 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
-SmeupInputPanelValue({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) code = "", [String](https://api.flutter.dev/flutter/dart-core/String-class.html) descr = ""})
+SmeupInputPanelValue({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? code = "", [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? descr = ""})
 
 
 

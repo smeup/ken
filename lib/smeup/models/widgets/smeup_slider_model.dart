@@ -7,9 +7,9 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class SmeupSliderModel extends SmeupModel {
   // supported by json_theme
-  static Color defaultActiveTrackColor;
-  static Color defaultThumbColor;
-  static Color defaultInactiveTrackColor;
+  static Color? defaultActiveTrackColor;
+  static Color? defaultThumbColor;
+  static Color? defaultInactiveTrackColor;
 
   // unsupported by json_theme
   static const EdgeInsetsGeometry defaultPadding =
@@ -17,19 +17,19 @@ class SmeupSliderModel extends SmeupModel {
   static const double defaultSldMin = 0;
   static const double defaultSldMax = 100;
 
-  Color activeTrackColor;
-  Color thumbColor;
-  Color inactiveTrackColor;
-  EdgeInsetsGeometry padding;
-  double sldMin;
-  double sldMax;
+  Color? activeTrackColor;
+  Color? thumbColor;
+  Color? inactiveTrackColor;
+  EdgeInsetsGeometry? padding;
+  double? sldMin;
+  double? sldMax;
 
   SmeupSliderModel({
     id,
     type,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
     this.activeTrackColor,
     this.thumbColor,
     this.inactiveTrackColor,
@@ -37,16 +37,16 @@ class SmeupSliderModel extends SmeupModel {
     this.sldMin = defaultSldMin,
     this.sldMax = defaultSldMax,
   }) : super(formKey, scaffoldKey, context, title: '', id: id, type: type) {
-    if (optionsDefault['type'] == null) optionsDefault['type'] = 'sld';
+    if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'sld';
     id = SmeupUtilities.getWidgetId('FLD', id);
     setDefaults(this);
   }
 
   SmeupSliderModel.fromMap(
       Map<String, dynamic> jsonMap,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context)
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context)
       : super.fromMap(
           jsonMap,
           formKey,
@@ -56,21 +56,21 @@ class SmeupSliderModel extends SmeupModel {
     setDefaults(this);
 
     sldMin =
-        SmeupUtilities.getDouble(optionsDefault['sldMin']) ?? defaultSldMin;
+        SmeupUtilities.getDouble(optionsDefault!['sldMin']) ?? defaultSldMin;
     sldMax =
-        SmeupUtilities.getDouble(optionsDefault['sldMax']) ?? defaultSldMax;
+        SmeupUtilities.getDouble(optionsDefault!['sldMax']) ?? defaultSldMax;
     padding =
-        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
+        SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
 
-    thumbColor = SmeupUtilities.getColorFromRGB(optionsDefault['thumbColor']) ??
+    thumbColor = SmeupUtilities.getColorFromRGB(optionsDefault!['thumbColor']) ??
         defaultThumbColor;
 
     activeTrackColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['activeTrackColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['activeTrackColor']) ??
             defaultActiveTrackColor;
 
     inactiveTrackColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['inactiveTrackColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['inactiveTrackColor']) ??
             defaultInactiveTrackColor;
 
     if (widgetLoadType != LoadType.Delay) {
@@ -84,7 +84,7 @@ class SmeupSliderModel extends SmeupModel {
 
   static setDefaults(dynamic obj) {
     SliderThemeData sliderThemeData =
-        SmeupConfigurationService.getTheme().sliderTheme;
+        SmeupConfigurationService.getTheme()!.sliderTheme;
     defaultActiveTrackColor = sliderThemeData.activeTrackColor;
     defaultThumbColor = sliderThemeData.thumbColor;
     defaultInactiveTrackColor = sliderThemeData.inactiveTrackColor;

@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -16,7 +17,7 @@
 
 ## Constructors
 
-[SmeupInputPanelField](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField/SmeupInputPanelField.md) ({[String](https://api.flutter.dev/flutter/dart-core/String-class.html) label = "", @[required](https://pub.dev/documentation/meta/1.7.0/meta/required-constant.html) [String](https://api.flutter.dev/flutter/dart-core/String-class.html) id, [SmeupInputPanelValue](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelValue-class.md) value, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupInputPanelValue](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelValue-class.md)> items, [SmeupInputPanelSupportedComp](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelSupportedComp.md) component = SmeupInputPanelSupportedComp.Itx, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) visible = true, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) position = 0})
+[SmeupInputPanelField](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField/SmeupInputPanelField.md) ({[String](https://api.flutter.dev/flutter/dart-core/String-class.html)? label = "", required [String](https://api.flutter.dev/flutter/dart-core/String-class.html) id, required [SmeupInputPanelValue](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelValue-class.md) value, [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupInputPanelValue](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelValue-class.md)>? items, [SmeupInputPanelSupportedComp](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelSupportedComp.md)? component = SmeupInputPanelSupportedComp.Itx, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? visible = true, [int](https://api.flutter.dev/flutter/dart-core/int-class.html) position = 0})
 
     
 
@@ -27,7 +28,7 @@
 
 ## Properties
 
-##### [component](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField/component.md) &#8596; [SmeupInputPanelSupportedComp](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelSupportedComp.md)
+##### [component](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField/component.md) &#8596; [SmeupInputPanelSupportedComp](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelSupportedComp.md)?
 
 
 
@@ -36,7 +37,7 @@ _read / write_
 
 
 
-##### [fun](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField/fun.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [fun](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField/fun.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -54,7 +55,7 @@ _read-only, inherited_
 
 
 
-##### [id](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [id](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField/id.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -63,7 +64,7 @@ _read / write_
 
 
 
-##### [items](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField/items.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupInputPanelValue](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelValue-class.md)>
+##### [items](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField/items.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)&lt;[SmeupInputPanelValue](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelValue-class.md)>?
 
 
 
@@ -72,7 +73,7 @@ _read / write_
 
 
 
-##### [label](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField/label.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [label](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField/label.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -108,7 +109,7 @@ _read / write_
 
 
 
-##### [visible](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField/visible.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+##### [visible](../smeup_models_widgets_smeup_input_panel_field/SmeupInputPanelField/visible.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
 

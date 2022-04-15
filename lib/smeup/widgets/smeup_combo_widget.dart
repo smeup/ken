@@ -4,22 +4,22 @@ import 'package:ken/smeup/services/smeup_configuration_service.dart';
 
 class SmeupComboWidget extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
+  final GlobalKey<FormState>? formKey;
 
-  final double fontSize;
-  final Color fontColor;
-  final bool fontBold;
-  final Color backColor;
-  final bool captionFontBold;
-  final double captionFontSize;
-  final Color captionFontColor;
-  final Color captionBackColor;
-  final double iconSize;
-  final Color iconColor;
+  final double? fontSize;
+  final Color? fontColor;
+  final bool? fontBold;
+  final Color? backColor;
+  final bool? captionFontBold;
+  final double? captionFontSize;
+  final Color? captionFontColor;
+  final Color? captionBackColor;
+  final double? iconSize;
+  final Color? iconColor;
 
-  final String selectedValue;
-  final List<SmeupComboItemModel> data;
-  final void Function(String newValue) clientOnChange;
+  final String? selectedValue;
+  final List<SmeupComboItemModel>? data;
+  final void Function(String? newValue)? clientOnChange;
 
   const SmeupComboWidget(this.scaffoldKey, this.formKey,
       {this.fontColor,
@@ -41,8 +41,8 @@ class SmeupComboWidget extends StatefulWidget {
 }
 
 class _SmeupComboWidgetState extends State<SmeupComboWidget> {
-  String _selectedValue;
-  List<SmeupComboItemModel> _data;
+  String? _selectedValue;
+  List<SmeupComboItemModel>? _data;
 
   @override
   void initState() {
@@ -70,15 +70,15 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
         height: dividerStyle.thickness,
         color: dividerStyle.color,
       ),
-      onChanged: (String newValue) {
+      onChanged: (String? newValue) {
         setState(() {
           _selectedValue = newValue;
           if (widget.clientOnChange != null) {
-            widget.clientOnChange(newValue);
+            widget.clientOnChange!(newValue);
           }
         });
       },
-      items: _getItems(_data),
+      items: _getItems(_data!),
     );
   }
 
@@ -89,7 +89,7 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
       return DropdownMenuItem<String>(
         value: element.code,
         child: Text(
-          element.value,
+          element.value!,
           style: textStyle,
         ),
       );
@@ -98,7 +98,7 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = SmeupConfigurationService.getTheme()
+    IconThemeData themeData = SmeupConfigurationService.getTheme()!
         .iconTheme
         .copyWith(size: widget.iconSize, color: widget.iconColor);
 
@@ -106,14 +106,14 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.bodyText1;
+    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
 
     style = style.copyWith(
         color: widget.fontColor,
         fontSize: widget.fontSize,
         backgroundColor: Colors.transparent);
 
-    if (widget.fontBold) {
+    if (widget.fontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -123,7 +123,7 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
   }
 
   DividerThemeData _getDividerStyle() {
-    DividerThemeData dividerData = SmeupConfigurationService.getTheme()
+    DividerThemeData dividerData = SmeupConfigurationService.getTheme()!
         .dividerTheme
         .copyWith(color: widget.fontColor);
 

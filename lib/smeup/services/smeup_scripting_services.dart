@@ -2,11 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_js/flutter_js.dart';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
+
+import '../models/fun.dart';
 
 class SmeupScriptingServices {
   static JavascriptRuntime _createRuntime(
@@ -100,8 +101,8 @@ class SmeupScriptingServices {
               formKey: formKey);
           SmeupVariablesService.setVariable("operation", _args["operation"],
               formKey: formKey);
-          SmeupFun fun = SmeupFun(
-              "F(FBK;FS_00_01;WRITE.DOCUMENT) NOTIFY(CLOSE()) P(collection(${args[1]}) time([time]) operation([operation]))",
+          Fun fun = Fun(
+              "F(FBK;FS_00_01;WRITE.DOCUMENT) NOTIFY(CLOSE()) P(collection(${args[1]});firestoreFields(time,operation))",
               formKey,
               scaffoldKey,
               context);

@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) firstWork
+[DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)? firstWork
   
 _final_
 
@@ -20,7 +21,7 @@ _final_
 ## Implementation
 
 ```dart
-final DateTime firstWork;
+final DateTime? firstWork;
 
 
 ```

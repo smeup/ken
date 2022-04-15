@@ -15,43 +15,43 @@ import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 class SmeupImageList extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupImageListModel model;
+  SmeupImageListModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
-  Color backColor;
-  Color borderColor;
-  double borderWidth;
-  double borderRadius;
-  double fontSize;
-  Color fontColor;
-  bool fontBold;
-  bool captionFontBold;
-  double captionFontSize;
-  Color captionFontColor;
+  Color? backColor;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
+  double? fontSize;
+  Color? fontColor;
+  bool? fontBold;
+  bool? captionFontBold;
+  double? captionFontSize;
+  Color? captionFontColor;
 
-  double width;
-  double height;
-  EdgeInsetsGeometry padding;
-  String title;
-  int columns;
-  int rows;
-  String id;
-  String type;
+  double? width;
+  double? height;
+  EdgeInsetsGeometry? padding;
+  String? title;
+  int? columns;
+  int? rows;
+  String? id;
+  String? type;
   bool dismissEnabled = false;
   dynamic data;
-  bool showLoader = false;
-  Axis orientation;
-  double listHeight;
+  bool? showLoader = false;
+  Axis? orientation;
+  double? listHeight;
 
   // dynamisms functions
-  Function clientOnItemTap;
+  Function? clientOnItemTap;
   dynamic parentForm;
 
-  SmeupImageList.withController(
-      this.model, this.scaffoldKey, this.formKey, this.parentForm)
+  SmeupImageList.withController(SmeupImageListModel this.model,
+      this.scaffoldKey, this.formKey, this.parentForm)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   SmeupImageList(
@@ -83,7 +83,7 @@ class SmeupImageList extends StatefulWidget
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupImageListModel m = model;
+    SmeupImageListModel m = model as SmeupImageListModel;
     id = m.id;
     type = m.type;
     width = m.width;
@@ -103,13 +103,9 @@ class SmeupImageList extends StatefulWidget
     orientation = m.orientation;
     listHeight = m.listHeight;
 
-    dynamic deleteDynamism;
-    if (m.dynamisms != null)
-      deleteDynamism = (m.dynamisms as List<dynamic>).firstWhere(
-          (element) => element['event'] == 'delete',
-          orElse: () => null);
+    int no = m.dynamisms.where((element) => element.event == 'delete').length;
 
-    if (deleteDynamism != null) {
+    if (no > 0) {
       dismissEnabled = true;
     } else {
       dismissEnabled = false;
@@ -132,15 +128,15 @@ class SmeupImageList extends StatefulWidget
 class _SmeupImageListState extends State<SmeupImageList>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  List<Widget> cells;
-  SmeupImageListModel _model;
+  List<Widget>? cells;
+  SmeupImageListModel? _model;
   dynamic _data;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -174,10 +170,10 @@ class _SmeupImageListState extends State<SmeupImageList>
   /// define the structure ...
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupListBoxDao.getData(_model);
-        _data = widget.treatData(_model);
+        await SmeupListBoxDao.getData(_model!);
+        _data = widget.treatData(_model!);
       }
 
       setDataLoad(widget.id, true);
@@ -189,7 +185,7 @@ class _SmeupImageListState extends State<SmeupImageList>
 
     Widget children;
 
-    int noColl = widget.columns;
+    int? noColl = widget.columns;
     if (noColl == 0) {
       noColl = widget.rows;
     }
@@ -198,7 +194,7 @@ class _SmeupImageListState extends State<SmeupImageList>
       return getFunErrorResponse(context, _model);
     }
 
-    double listboxHeight =
+    double? listboxHeight =
         SmeupListBox.getListHeight(widget.listHeight, _model, context);
 
     if (_model == null) {
@@ -249,7 +245,7 @@ class _SmeupImageListState extends State<SmeupImageList>
           width: widget.width,
           title: widget.title,
           formKey: widget.formKey);
-      _modelListBox.dynamisms = _model.dynamisms;
+      _modelListBox.dynamisms = _model!.dynamisms;
       _modelListBox.data = _data;
       children = SmeupListBox.withController(
           _modelListBox, widget.scaffoldKey, widget.formKey, widget.parentForm);

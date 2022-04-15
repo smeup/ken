@@ -8,8 +8,8 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class SmeupProgressBarModel extends SmeupModel implements SmeupDataInterface {
   // supported by json_theme
-  static Color defaultColor;
-  static Color defaultLinearTrackColor;
+  static Color? defaultColor;
+  static Color? defaultLinearTrackColor;
 
   // unsupported by json_theme
   static const String defaultValueField = 'value';
@@ -18,20 +18,20 @@ class SmeupProgressBarModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultHeight = 10;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
 
-  Color color;
-  Color linearTrackColor;
-  String valueField;
-  double progressBarMinimun;
-  double progressBarMaximun;
-  double height;
-  EdgeInsetsGeometry padding;
+  Color? color;
+  Color? linearTrackColor;
+  String? valueField;
+  double? progressBarMinimun;
+  double? progressBarMaximun;
+  double? height;
+  EdgeInsetsGeometry? padding;
 
   SmeupProgressBarModel(
       {id,
       type,
-      GlobalKey<FormState> formKey,
-      GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
       this.color,
       this.linearTrackColor,
       this.height = defaultHeight,
@@ -41,16 +41,16 @@ class SmeupProgressBarModel extends SmeupModel implements SmeupDataInterface {
       this.progressBarMaximun = defaultProgressBarMaximun,
       title = ''})
       : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
-    if (optionsDefault['type'] == null) optionsDefault['type'] = 'pgb';
+    if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'pgb';
     SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
 
   SmeupProgressBarModel.fromMap(
     Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
   ) : super.fromMap(
           jsonMap,
           formKey,
@@ -60,23 +60,23 @@ class SmeupProgressBarModel extends SmeupModel implements SmeupDataInterface {
     setDefaults(this);
     title = jsonMap['title'] ?? '';
 
-    valueField = optionsDefault['valueField'] ?? defaultValueField;
+    valueField = optionsDefault!['valueField'] ?? defaultValueField;
 
-    progressBarMinimun = SmeupUtilities.getDouble(optionsDefault['pgbMin']) ??
+    progressBarMinimun = SmeupUtilities.getDouble(optionsDefault!['pgbMin']) ??
         defaultProgressBarMinimun;
-    progressBarMaximun = SmeupUtilities.getDouble(optionsDefault['pgbMax']) ??
+    progressBarMaximun = SmeupUtilities.getDouble(optionsDefault!['pgbMax']) ??
         defaultProgressBarMaximun;
     height =
-        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+        SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 
     padding =
-        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
+        SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
 
     color =
-        SmeupUtilities.getColorFromRGB(optionsDefault['color']) ?? defaultColor;
+        SmeupUtilities.getColorFromRGB(optionsDefault!['color']) ?? defaultColor;
 
     linearTrackColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['linearTrackColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['linearTrackColor']) ??
             defaultLinearTrackColor;
 
     if (widgetLoadType != LoadType.Delay) {
@@ -90,7 +90,7 @@ class SmeupProgressBarModel extends SmeupModel implements SmeupDataInterface {
 
   static setDefaults(dynamic obj) {
     ProgressIndicatorThemeData progressIndicatorThemeData =
-        SmeupConfigurationService.getTheme().progressIndicatorTheme;
+        SmeupConfigurationService.getTheme()!.progressIndicatorTheme;
     defaultColor = progressIndicatorThemeData.color;
     defaultLinearTrackColor = progressIndicatorThemeData.linearTrackColor;
 

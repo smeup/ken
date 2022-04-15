@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) autoFocus
+[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? autoFocus
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-bool autoFocus;
+bool? autoFocus;
 
 
 ```

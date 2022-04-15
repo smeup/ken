@@ -41,6 +41,6 @@ runTests() {
   var findWidget = find.byType(SmeupSwitch);
   expect(findWidget, findsWidgets);
 
-  var finderTextContent1 = find.text('Smeup Switch');
+  var finderTextContent1 = find.text('Turn me on/off');
   expect(finderTextContent1, findsWidgets);
 }

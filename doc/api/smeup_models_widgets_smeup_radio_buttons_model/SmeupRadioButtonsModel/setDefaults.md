@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -24,18 +25,18 @@ dynamic setDefaults
 
 ```dart
 static setDefaults(dynamic obj) {
-  var radioTheme = SmeupConfigurationService.getTheme().radioTheme;
+  var radioTheme = SmeupConfigurationService.getTheme()!.radioTheme;
 
   defaultRadioButtonColor =
-      radioTheme.fillColor.resolve(Set<MaterialState>());
+      radioTheme.fillColor!.resolve(Set<MaterialState>());
 
-  var captionStyle = SmeupConfigurationService.getTheme().textTheme.caption;
+  var captionStyle = SmeupConfigurationService.getTheme()!.textTheme.caption!;
   defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
   defaultCaptionFontSize = captionStyle.fontSize;
   defaultCaptionFontColor = captionStyle.color;
   defaultCaptionBackColor = captionStyle.backgroundColor;
 
-  var textStyle = SmeupConfigurationService.getTheme().textTheme.bodyText1;
+  var textStyle = SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
   defaultFontBold = textStyle.fontWeight == FontWeight.bold;
   defaultFontSize = textStyle.fontSize;
   defaultFontColor = textStyle.color;

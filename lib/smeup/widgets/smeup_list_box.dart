@@ -19,49 +19,49 @@ import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 class SmeupListBox extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupListBoxModel model;
+  SmeupListBoxModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
   dynamic parentForm;
 
-  Color backColor;
-  Color borderColor;
-  double borderWidth;
-  double borderRadius;
-  double fontSize;
-  Color fontColor;
-  bool fontBold;
-  bool captionFontBold;
-  double captionFontSize;
-  Color captionFontColor;
+  Color? backColor;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
+  double? fontSize;
+  Color? fontColor;
+  bool? fontBold;
+  bool? captionFontBold;
+  double? captionFontSize;
+  Color? captionFontColor;
 
-  double width;
-  double height;
-  Axis orientation;
-  EdgeInsetsGeometry padding;
-  SmeupListType listType;
-  String layout;
-  String title;
-  int portraitColumns;
-  int landscapeColumns;
-  String id;
-  String type;
+  double? width;
+  double? height;
+  Axis? orientation;
+  EdgeInsetsGeometry? padding;
+  SmeupListType? listType;
+  String? layout;
+  String? title;
+  int? portraitColumns;
+  int? landscapeColumns;
+  String? id;
+  String? type;
   bool dismissEnabled = false;
   dynamic data;
-  bool showLoader = false;
-  String defaultSort;
-  String backgroundColName;
-  bool showSelection = false;
-  int selectedRow = -1;
-  double listHeight;
+  bool? showLoader = false;
+  String? defaultSort;
+  String? backgroundColName;
+  bool? showSelection = false;
+  int? selectedRow = -1;
+  double? listHeight;
 
   // dynamisms functions
-  Function clientOnItemTap;
+  Function? clientOnItemTap;
 
-  SmeupListBox.withController(
-      this.model, this.scaffoldKey, this.formKey, this.parentForm)
+  SmeupListBox.withController(SmeupListBoxModel this.model, this.scaffoldKey,
+      this.formKey, this.parentForm)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   SmeupListBox(this.scaffoldKey, this.formKey, this.data,
@@ -101,7 +101,7 @@ class SmeupListBox extends StatefulWidget
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupListBoxModel m = model;
+    SmeupListBoxModel m = model as SmeupListBoxModel;
     id = m.id;
     type = m.type;
     layout = m.layout;
@@ -130,13 +130,9 @@ class SmeupListBox extends StatefulWidget
     captionFontSize = m.captionFontSize;
     captionFontColor = m.captionFontColor;
 
-    dynamic deleteDynamism;
-    if (m.dynamisms != null)
-      deleteDynamism = (m.dynamisms as List<dynamic>).firstWhere(
-          (element) => element['event'] == 'delete',
-          orElse: () => null);
+    int no = m.dynamisms.where((element) => element.event == 'delete').length;
 
-    if (deleteDynamism != null) {
+    if (no > 0) {
       dismissEnabled = true;
     } else {
       dismissEnabled = false;
@@ -147,7 +143,7 @@ class SmeupListBox extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupListBoxModel m = model;
+    SmeupListBoxModel m = model as SmeupListBoxModel;
 
     // change data format
     var workData = formatDataFields(m);
@@ -155,10 +151,10 @@ class SmeupListBox extends StatefulWidget
     // set the widget data
     if (workData != null) {
       // Manage columns setup field: hide column if isn't in the set of columns
-      if (m.visibleColumns.isNotEmpty) {
+      if (m.visibleColumns!.isNotEmpty) {
         for (var i = 0; i < (workData['columns'] as List).length; i++) {
           final column = workData['columns'][i];
-          if (m.visibleColumns.contains(column['code']) == false) {
+          if (m.visibleColumns!.contains(column['code']) == false) {
             column['IO'] = 'H';
           }
         }
@@ -171,9 +167,9 @@ class SmeupListBox extends StatefulWidget
     }
   }
 
-  static double getListHeight(
-      double widgetListHeight, SmeupModel model, BuildContext context) {
-    double listboxHeight = widgetListHeight;
+  static double? getListHeight(
+      double? widgetListHeight, SmeupModel? model, BuildContext context) {
+    double? listboxHeight = widgetListHeight;
     if (model != null && model.parent != null) {
       if (listboxHeight == 0)
         listboxHeight = (model.parent as SmeupSectionModel).height;
@@ -191,24 +187,24 @@ class SmeupListBox extends StatefulWidget
 class _SmeupListBoxState extends State<SmeupListBox>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  List<Widget> cells;
-  SmeupListBoxModel _model;
+  List<Widget>? cells;
+  SmeupListBoxModel? _model;
   dynamic _data;
-  ScrollController _scrollController;
-  int _selectedRow = -1;
+  ScrollController? _scrollController;
+  int? _selectedRow = -1;
   bool _executeBouncing = false;
-  Orientation _orientation;
-  Orientation _oldOrientation;
+  Orientation? _orientation;
+  Orientation? _oldOrientation;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
     _selectedRow = widget.selectedRow;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     _scrollController = new ScrollController();
 
-    String localSelectedRow = SmeupConfigurationService.getLocalStorage()
+    String? localSelectedRow = SmeupConfigurationService.getLocalStorage()!
         .getString('${widget.formKey.hashCode}_${widget.id}');
     if (localSelectedRow != null && localSelectedRow.isNotEmpty) {
       _selectedRow = int.tryParse(localSelectedRow) ?? widget.selectedRow;
@@ -221,7 +217,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
 
   void _runAutomaticScroll() {
     Future.delayed(Duration(milliseconds: 80), () async {
-      double realBoxHeight = SmeupConfigurationService.getLocalStorage()
+      double? realBoxHeight = SmeupConfigurationService.getLocalStorage()!
           .getDouble('${widget.formKey.hashCode}_${widget.id}_realBoxHeight');
 
       if (widget.listType == SmeupListType.oriented &&
@@ -230,19 +226,19 @@ class _SmeupListBoxState extends State<SmeupListBox>
           _model != null) {
         if (_orientation != null) {
           int colsNumber = _orientation == Orientation.landscape
-              ? _model.landscapeColumns
-              : _model.portraitColumns;
-          double formSpace = SmeupUtilities.getDeviceInfo().safeHeight;
+              ? _model!.landscapeColumns!
+              : _model!.portraitColumns!;
+          double? formSpace = SmeupUtilities.getDeviceInfo().safeHeight;
 
-          if (_model != null && _model.parent != null) {
-            formSpace = (_model.parent as SmeupSectionModel).height;
+          if (_model != null && _model!.parent != null) {
+            formSpace = (_model!.parent as SmeupSectionModel).height;
           }
 
           double scrollPosition =
-              ((_selectedRow + 1) * realBoxHeight / colsNumber);
-          if (scrollPosition > formSpace) {
-            if (_scrollController.positions.isNotEmpty) {
-              _scrollController.animateTo(scrollPosition,
+              ((_selectedRow! + 1) * realBoxHeight / colsNumber);
+          if (scrollPosition > formSpace!) {
+            if (_scrollController!.positions.isNotEmpty) {
+              _scrollController!.animateTo(scrollPosition,
                   duration: Duration(milliseconds: 80),
                   curve: Curves.bounceInOut);
             }
@@ -282,10 +278,10 @@ class _SmeupListBoxState extends State<SmeupListBox>
   /// define the structure ...
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupListBoxDao.getData(_model);
-        _data = widget.treatData(_model);
+        await SmeupListBoxDao.getData(_model!);
+        _data = widget.treatData(_model!);
       }
 
       setDataLoad(widget.id, true);
@@ -297,7 +293,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
 
     _orientation = MediaQuery.of(context).orientation;
 
-    Widget children;
+    Widget? children;
 
     cells = _getCells();
     if (cells == null) {
@@ -306,13 +302,13 @@ class _SmeupListBoxState extends State<SmeupListBox>
 
     switch (widget.listType) {
       case SmeupListType.simple:
-        children = _getSimpleList(cells);
+        children = _getSimpleList(cells!);
         break;
       case SmeupListType.oriented:
-        children = _getOrientedList(cells);
+        children = _getOrientedList(cells!);
         break;
       case SmeupListType.wheel:
-        children = _getWheelList(cells);
+        children = _getWheelList(cells!);
         break;
       default:
     }
@@ -336,7 +332,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
       child: ListView.builder(
         key: ObjectKey("_list_${widget.id}"),
         controller: _scrollController,
-        scrollDirection: widget.orientation,
+        scrollDirection: widget.orientation!,
         physics: _executeBouncing
             ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
             : null,
@@ -347,7 +343,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
       ),
     );
 
-    double listboxHeight =
+    double? listboxHeight =
         SmeupListBox.getListHeight(widget.listHeight, _model, context);
 
     final container = Container(
@@ -362,20 +358,20 @@ class _SmeupListBoxState extends State<SmeupListBox>
   Widget _getOrientedList(List<Widget> cells) {
     var list;
 
-    double boxHeight = 0;
+    double? boxHeight = 0;
     if (cells.length > 0)
       boxHeight = (cells[0] as SmeupBox).height;
     else
       boxHeight = 1;
 
-    int col = widget.portraitColumns;
+    int? col = widget.portraitColumns;
     if (_orientation == Orientation.landscape) {
       col = widget.landscapeColumns;
     }
 
     double childAspectRatio = 0;
     childAspectRatio =
-        SmeupUtilities.getDeviceInfo().safeWidth / boxHeight * col;
+        SmeupUtilities.getDeviceInfo().safeWidth / boxHeight! * col!;
 
     list = RefreshIndicator(
       onRefresh: _refreshList,
@@ -385,13 +381,13 @@ class _SmeupListBoxState extends State<SmeupListBox>
         physics: _executeBouncing
             ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
             : null,
-        scrollDirection: widget.orientation,
+        scrollDirection: widget.orientation!,
         crossAxisCount: col,
         children: cells,
       ),
     );
 
-    double listboxHeight =
+    double? listboxHeight =
         SmeupListBox.getListHeight(widget.listHeight, _model, context);
 
     final container = Container(
@@ -410,11 +406,11 @@ class _SmeupListBoxState extends State<SmeupListBox>
     list = RefreshIndicator(
         onRefresh: _refreshList,
         child: ClickableListWheelScrollView(
-            scrollController: _scrollController,
-            itemHeight: widget.height,
+            scrollController: _scrollController!,
+            itemHeight: widget.height!,
             itemCount: cells.length,
             onItemTapCallback: (index) {
-              (cells[index] as SmeupBox).onItemTap();
+              (cells[index] as SmeupBox).onItemTap!();
             },
             child: ListWheelScrollView.useDelegate(
               physics: _executeBouncing
@@ -422,7 +418,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
                       parent: AlwaysScrollableScrollPhysics())
                   : null,
               controller: _scrollController,
-              itemExtent: widget.height,
+              itemExtent: widget.height!,
               onSelectedItemChanged: (index) {
                 print("onSelectedItemChanged index: $index");
               },
@@ -432,7 +428,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
               ),
             )));
 
-    double listboxHeight =
+    double? listboxHeight =
         SmeupListBox.getListHeight(widget.listHeight, _model, context);
 
     final container = Container(
@@ -452,22 +448,22 @@ class _SmeupListBoxState extends State<SmeupListBox>
   List<Widget> _getCells() {
     final cells = List<Widget>.empty(growable: true);
 
-    double boxHeight = widget.height;
-    double boxWidth = widget.width;
-    if (_model != null && _model.parent != null) {
+    double? boxHeight = widget.height;
+    double? boxWidth = widget.width;
+    if (_model != null && _model!.parent != null) {
       if (boxHeight == 0)
-        boxHeight = (_model.parent as SmeupSectionModel).height;
-      if (boxWidth == 0) boxWidth = (_model.parent as SmeupSectionModel).width;
+        boxHeight = (_model!.parent as SmeupSectionModel).height;
+      if (boxWidth == 0) boxWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
       if (boxHeight == 0) boxHeight = SmeupUtilities.getDeviceInfo().safeHeight;
       if (boxWidth == 0) boxWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
-    List _rows = _data['rows'];
+    List? _rows = _data['rows'];
 
-    if (widget.defaultSort.isNotEmpty) {
+    if (widget.defaultSort!.isNotEmpty) {
       //Manage defaultSort setup parameter
-      _rows.sort(
+      _rows!.sort(
           (a, b) => (a[widget.defaultSort]).compareTo(b[widget.defaultSort]));
       _data['rows'] = _rows;
     }
@@ -475,7 +471,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
     _data['rows'].asMap().forEach((i, dataElement) {
       var _backColor = widget.backColor;
       if (widget.backgroundColName != null &&
-          widget.backgroundColName.isNotEmpty) {
+          widget.backgroundColName!.isNotEmpty) {
         _backColor = SmeupUtilities.getColorFromRGB(
             dataElement[widget.backgroundColName]);
       }
@@ -485,18 +481,18 @@ class _SmeupListBoxState extends State<SmeupListBox>
       TextStyle captionStyle = _getCaptionStile(_backColor);
 
       Function _onItemTap = (int index, dynamic data) {
-        if (widget.clientOnItemTap != null) widget.clientOnItemTap(data);
+        if (widget.clientOnItemTap != null) widget.clientOnItemTap!(data);
         SmeupDynamismService.storeDynamicVariables(data, widget.formKey);
         if (_model != null)
-          SmeupDynamismService.run(_model.dynamisms, context, 'click',
+          SmeupDynamismService.run(_model!.dynamisms, context, 'click',
               widget.scaffoldKey, widget.formKey);
 
         _selectedRow = index;
 
-        SmeupConfigurationService.getLocalStorage().setString(
+        SmeupConfigurationService.getLocalStorage()!.setString(
             '${widget.formKey.hashCode}_${widget.id}', _selectedRow.toString());
 
-        if (widget.showSelection && widget.selectedRow != index) {
+        if (widget.showSelection! && widget.selectedRow != index) {
           setState(() {
             //widget.selectedRow = index;
           });
@@ -536,31 +532,33 @@ class _SmeupListBoxState extends State<SmeupListBox>
   }
 
   void onSizeChanged(Size size) {
-    SmeupConfigurationService.getLocalStorage().setDouble(
+    SmeupConfigurationService.getLocalStorage()!.setDouble(
         '${widget.formKey.hashCode}_${widget.id}_realBoxHeight', size.height);
   }
 
-  CardTheme _getCardStyle(Color backColor) {
-    var timeCardTheme = SmeupConfigurationService.getTheme().cardTheme.copyWith(
-          color: backColor,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(widget.borderRadius),
-              side: BorderSide(
-                  width: widget.borderWidth, color: widget.borderColor)),
-        );
+  CardTheme _getCardStyle(Color? backColor) {
+    var timeCardTheme =
+        SmeupConfigurationService.getTheme()!.cardTheme.copyWith(
+              color: backColor,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(widget.borderRadius!),
+                  side: BorderSide(
+                      width: widget.borderWidth!, color: widget.borderColor!)),
+            );
 
     return timeCardTheme;
   }
 
-  TextStyle _getTextStile(Color backColor) {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.headline4;
+  TextStyle _getTextStile(Color? backColor) {
+    TextStyle style =
+        SmeupConfigurationService.getTheme()!.textTheme.headline4!;
 
     style = style.copyWith(
         color: widget.fontColor,
         fontSize: widget.fontSize,
         backgroundColor: backColor);
 
-    if (widget.fontBold) {
+    if (widget.fontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -569,15 +567,16 @@ class _SmeupListBoxState extends State<SmeupListBox>
     return style;
   }
 
-  TextStyle _getCaptionStile(Color backColor) {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.headline5;
+  TextStyle _getCaptionStile(Color? backColor) {
+    TextStyle style =
+        SmeupConfigurationService.getTheme()!.textTheme.headline5!;
 
     style = style.copyWith(
         color: widget.captionFontColor,
         fontSize: widget.captionFontSize,
         backgroundColor: backColor);
 
-    if (widget.captionFontBold) {
+    if (widget.captionFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );

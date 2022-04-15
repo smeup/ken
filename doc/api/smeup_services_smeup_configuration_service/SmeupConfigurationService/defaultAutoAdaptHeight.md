@@ -6,9 +6,10 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
-[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html) defaultAutoAdaptHeight
+[bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? defaultAutoAdaptHeight
   
 _read / write_
 
@@ -20,7 +21,7 @@ _read / write_
 ## Implementation
 
 ```dart
-static bool defaultAutoAdaptHeight;
+static bool? defaultAutoAdaptHeight;
 
 
 ```

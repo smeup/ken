@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -25,8 +26,8 @@
 ```dart
 Future<void> getSectionsData() async {
   if (smeupSectionsModels != null)
-    for (var i = 0; i < smeupSectionsModels.length; i++) {
-      var section = smeupSectionsModels[i];
+    for (var i = 0; i < smeupSectionsModels!.length; i++) {
+      var section = smeupSectionsModels![i];
       await section.getSectionData();
     }
 }

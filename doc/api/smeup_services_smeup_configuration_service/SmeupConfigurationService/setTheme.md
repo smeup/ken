@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -29,7 +30,7 @@ static setTheme(String themeFile) async {
       String themeStr =
           await rootBundle.loadString('assets/jsons/themes/$themeFile');
       dynamic themeJson = json.decode(themeStr);
-      _theme = ThemeDecoder.decodeThemeData(themeJson, validate: true);
+      _theme = ThemeDecoder.decodeThemeData(themeJson, validate: false);
       SmeupLogService.writeDebugMessage('Loaded $themeFile theme file');
     }
   } catch (e) {

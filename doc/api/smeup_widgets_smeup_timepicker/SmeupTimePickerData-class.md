@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -16,14 +17,14 @@
 
 ## Constructors
 
-[SmeupTimePickerData](../smeup_widgets_smeup_timepicker/SmeupTimePickerData/SmeupTimePickerData.md) ({@[required](https://pub.dev/documentation/meta/1.7.0/meta/required-constant.html) [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) time, [String](https://api.flutter.dev/flutter/dart-core/String-class.html) formattedTime})
+[SmeupTimePickerData](../smeup_widgets_smeup_timepicker/SmeupTimePickerData/SmeupTimePickerData.md) ({required [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)? time, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? formattedTime})
 
     
 
 
 ## Properties
 
-##### [formattedTime](../smeup_widgets_smeup_timepicker/SmeupTimePickerData/formattedTime.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)
+##### [formattedTime](../smeup_widgets_smeup_timepicker/SmeupTimePickerData/formattedTime.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
 
 
 
@@ -50,7 +51,7 @@ _read-only, inherited_
 
 
 
-##### [time](../smeup_widgets_smeup_timepicker/SmeupTimePickerData/time.md) &#8596; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)
+##### [time](../smeup_widgets_smeup_timepicker/SmeupTimePickerData/time.md) &#8596; [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)?
 
 
 

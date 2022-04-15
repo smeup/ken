@@ -12,47 +12,49 @@ import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
+import '../models/dynamism.dart';
+
 // ignore: must_be_immutable
 class SmeupButtons extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupButtonsModel model;
+  SmeupButtonsModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
-  Color backColor;
-  Color borderColor;
-  double borderWidth;
-  double borderRadius;
-  double elevation;
-  double fontSize;
-  Color fontColor;
-  bool fontBold;
-  double iconSize;
-  Color iconColor;
+  Color? backColor;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
+  double? elevation;
+  double? fontSize;
+  Color? fontColor;
+  bool? fontBold;
+  double? iconSize;
+  Color? iconColor;
 
-  double width;
-  double height;
-  MainAxisAlignment position;
-  Alignment align;
-  EdgeInsetsGeometry padding;
+  double? width;
+  double? height;
+  MainAxisAlignment? position;
+  Alignment? align;
+  EdgeInsetsGeometry? padding;
   dynamic data;
-  String valueField;
-  int iconData;
-  String id;
-  String type;
-  String title;
-  WidgetOrientation orientation;
-  bool isLink;
-  double innerSpace;
-  Function clientOnPressed;
+  String? valueField;
+  int? iconData;
+  String? id;
+  String? type;
+  String? title;
+  WidgetOrientation? orientation;
+  bool? isLink;
+  double? innerSpace;
+  Function? clientOnPressed;
 
   SmeupButtons.withController(
-    this.model,
+    SmeupButtonsModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   SmeupButtons(this.scaffoldKey, this.formKey,
@@ -89,7 +91,7 @@ class SmeupButtons extends StatefulWidget
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupButtonsModel m = model;
+    SmeupButtonsModel m = model as SmeupButtonsModel;
     id = m.id;
     type = m.type;
     title = m.title;
@@ -119,7 +121,7 @@ class SmeupButtons extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupButtonsModel m = model;
+    SmeupButtonsModel m = model as SmeupButtonsModel;
 
     // change data format
     return formatDataFields(m);
@@ -132,8 +134,8 @@ class SmeupButtons extends StatefulWidget
 class SmeupButtonsState extends State<SmeupButtons>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  bool _isBusy;
-  SmeupButtonsModel _model;
+  bool? _isBusy;
+  SmeupButtonsModel? _model;
   dynamic _data;
 
   @override
@@ -141,7 +143,7 @@ class SmeupButtonsState extends State<SmeupButtons>
     _isBusy = false;
     _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -173,10 +175,10 @@ class SmeupButtonsState extends State<SmeupButtons>
 
   /// Buttons' structure:
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupButtonsDao.getData(_model);
-        _data = widget.treatData(_model);
+        await SmeupButtonsDao.getData(_model!);
+        _data = widget.treatData(_model!);
       }
 
       setDataLoad(widget.id, true);
@@ -188,7 +190,7 @@ class SmeupButtonsState extends State<SmeupButtons>
     List array = _model == null ? _data : _data['rows'];
     array.forEach((buttonData) {
       buttonIndex += 1;
-      String buttonText = _model == null ? buttonData : buttonData['value'];
+      String? buttonText = _model == null ? buttonData : buttonData['value'];
       final button = SmeupButton(
         id: '${SmeupUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
         type: widget.type,
@@ -216,11 +218,11 @@ class SmeupButtonsState extends State<SmeupButtons>
         isBusy: _isBusy,
         clientOnPressed: () {
           if (widget.clientOnPressed != null) {
-            widget.clientOnPressed(buttonIndex, buttonText);
+            widget.clientOnPressed!(buttonIndex, buttonText);
           }
           runDynamism(context, buttonData);
         },
-        isLink: widget.isLink,
+        isLink: widget.isLink!,
         model: _model,
       );
 
@@ -247,13 +249,14 @@ class SmeupButtonsState extends State<SmeupButtons>
   }
 
   void runDynamism(BuildContext context, dynamic child) async {
-    if (_isDinamismAsync()) {
+    if (_model != null &&
+        Dynamism.isDinamismAsync('click', _model!.dynamisms)) {
       execDynamismActions(child, true);
 
       SmeupLogService.writeDebugMessage('********************* ASYNC = TRUE',
           logType: LogType.info);
     } else {
-      if (_isBusy) {
+      if (_isBusy!) {
         SmeupLogService.writeDebugMessage(
             '********************* SKIPPED DOUBLE CLICK',
             logType: LogType.warning);
@@ -275,21 +278,15 @@ class SmeupButtonsState extends State<SmeupButtons>
     }
   }
 
-  bool _isDinamismAsync() {
-    return _model != null && _model.smeupFun != null
-        ? _model.smeupFun.isDinamismAsync(_model.dynamisms, 'click')
-        : false;
-  }
-
   Future<void> execDynamismActions(dynamic child, bool isAsync) async {
     SmeupDynamismService.storeDynamicVariables(child, widget.formKey);
 
     if (_model != null) {
       if (isAsync)
-        SmeupDynamismService.run(_model.dynamisms, context, 'click',
+        SmeupDynamismService.run(_model!.dynamisms, context, 'click',
             widget.scaffoldKey, widget.formKey);
       else
-        await SmeupDynamismService.run(_model.dynamisms, context, 'click',
+        await SmeupDynamismService.run(_model!.dynamisms, context, 'click',
             widget.scaffoldKey, widget.formKey);
     }
   }

@@ -6,12 +6,13 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
 
 void incrementDataFetch
-([String](https://api.flutter.dev/flutter/dart-core/String-class.html) id)
+([String](https://api.flutter.dev/flutter/dart-core/String-class.html)? id)
 
 
 
@@ -23,7 +24,7 @@ void incrementDataFetch
 ## Implementation
 
 ```dart
-static void incrementDataFetch(String id) {
+static void incrementDataFetch(String? id) {
   _activeDataFetch += 1;
 }
 ```

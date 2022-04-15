@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -26,15 +27,15 @@ _override_
 ```dart
 @override
 dynamic treatData(SmeupModel model) {
-  SmeupDatePickerModel m = model;
+  SmeupDatePickerModel m = model as SmeupDatePickerModel;
 
   // change data format
   var workData = formatDataFields(m);
 
   // set the widget data
   if (workData != null && (workData['rows'] as List).length > 0) {
-    DateTime value;
-    String text;
+    DateTime? value;
+    String? text;
     if (workData['rows'][0][valueField] != null) {
       value = DateFormat('dd/MM/yyyy').parse(workData['rows'][0][valueField]);
     }

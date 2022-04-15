@@ -4,8 +4,8 @@ import 'package:ken/smeup/models/widgets/smeup_chart_column.dart';
 import 'package:ken/smeup/models/widgets/smeup_chart_row.dart';
 
 class SmeupChartDatasource {
-  List<SmeupChartColumn> columns;
-  List<SmeupChartRow> rows;
+  List<SmeupChartColumn>? columns;
+  List<SmeupChartRow>? rows;
 
   SmeupChartDatasource(this.rows, this.columns);
 
@@ -16,9 +16,9 @@ class SmeupChartDatasource {
     if (jsonData['columns'] != null &&
         (jsonData['columns'] as List).length > 0) {
       jsonData['columns']
-          .forEach((c) => columns.add(SmeupChartColumn.fromMap(c)));
+          .forEach((c) => columns!.add(SmeupChartColumn.fromMap(c)));
       jsonData['rows']
-          .forEach((r) => rows.add(SmeupChartRow.fromMap(r, columns)));
+          .forEach((r) => rows!.add(SmeupChartRow.fromMap(r, columns!)));
     }
   }
 
@@ -33,12 +33,12 @@ class SmeupChartDatasource {
 
     columns = List<SmeupChartColumn>.empty(growable: true);
     jsonColumns.forEach((c) {
-      columns.add(SmeupChartColumn.fromInfluxDB(c, c, 0));
+      columns!.add(SmeupChartColumn.fromInfluxDB(c, c, 0));
     });
 
     rows = List<SmeupChartRow>.empty(growable: true);
     jsonValues.forEach((r) {
-      rows.add(SmeupChartRow.fromInfluxDB(r, columns));
+      rows!.add(SmeupChartRow.fromInfluxDB(r, columns!));
     });
   }
 }

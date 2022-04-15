@@ -6,6 +6,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -25,7 +26,7 @@ dynamic setDefaults
 ```dart
 static setDefaults(dynamic obj) {
   SliderThemeData sliderThemeData =
-      SmeupConfigurationService.getTheme().sliderTheme;
+      SmeupConfigurationService.getTheme()!.sliderTheme;
   defaultActiveTrackColor = sliderThemeData.activeTrackColor;
   defaultThumbColor = sliderThemeData.thumbColor;
   defaultInactiveTrackColor = sliderThemeData.inactiveTrackColor;

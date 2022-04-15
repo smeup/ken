@@ -8,6 +8,7 @@
 
 
 
+    *[<Null safety>](https://dart.dev/null-safety)*
 
 
 
@@ -16,7 +17,7 @@
 
 ## Constructors
 
-[SmeupChartRow](../smeup_models_widgets_smeup_chart_row/SmeupChartRow/SmeupChartRow.md) ([List](https://api.flutter.dev/flutter/dart-core/List-class.html) cells)
+[SmeupChartRow](../smeup_models_widgets_smeup_chart_row/SmeupChartRow/SmeupChartRow.md) ([List](https://api.flutter.dev/flutter/dart-core/List-class.html)? cells)
 
     
 
@@ -31,7 +32,7 @@
 
 ## Properties
 
-##### [cells](../smeup_models_widgets_smeup_chart_row/SmeupChartRow/cells.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)
+##### [cells](../smeup_models_widgets_smeup_chart_row/SmeupChartRow/cells.md) &#8596; [List](https://api.flutter.dev/flutter/dart-core/List-class.html)?
 
 
 

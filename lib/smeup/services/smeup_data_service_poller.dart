@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/smeup_fun.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
+
+import '../models/fun.dart';
 
 typedef bool UntilPredicate(dynamic data);
 
@@ -19,13 +20,13 @@ class SmeupDataServicePoller {
     this.formKey,
     this.scaffoldKey,
     this.context, {
-    @required this.interval,
-    @required this.fun,
+    required this.interval,
+    required this.fun,
     this.ignoreErrors = true,
   });
 
-  Future<dynamic> doPoll({@required UntilPredicate until}) async {
-    SmeupFun smeupFun = SmeupFun(fun, formKey, scaffoldKey, context);
+  Future<dynamic> doPoll({required UntilPredicate until}) async {
+    Fun smeupFun = Fun(fun, formKey, scaffoldKey, context);
     while (!_canceled) {
       await Future.delayed(interval);
       if (!_canceled) {
