@@ -11,9 +11,9 @@ import '../models/fun.dart';
 
 class SmeupScriptingServices {
   static JavascriptRuntime _createRuntime(
-      {@required BuildContext context,
-      @required GlobalKey<FormState> formKey,
-      @required GlobalKey<ScaffoldState> scaffoldKey}) {
+      {required BuildContext context,
+      required GlobalKey<FormState> formKey,
+      required GlobalKey<ScaffoldState> scaffoldKey}) {
     final js =
         getJavascriptRuntime(xhr: false, forceJavascriptCoreOnAndroid: true);
 
@@ -115,7 +115,7 @@ class SmeupScriptingServices {
               "Read from collection: ${args[2]} - filters: ${args[3]}",
               logType: LogType.debug);
 
-          SmeupFun fun = SmeupFun(
+          Fun fun = Fun(
               "F(EXB;FS_00_01;GET.DOCUMENTS) P(collection(${args[2]}) filters(${args[3]})))",
               formKey,
               scaffoldKey,
@@ -143,11 +143,11 @@ class SmeupScriptingServices {
   }
 
   static Future<bool> validate(
-      {@required BuildContext context,
-      @required GlobalKey<FormState> formKey,
-      @required GlobalKey<ScaffoldState> scaffoldKey,
-      @required String screenId,
-      @required String script}) async {
+      {required BuildContext context,
+      required GlobalKey<FormState> formKey,
+      required GlobalKey<ScaffoldState> scaffoldKey,
+      required String screenId,
+      required String script}) async {
     JavascriptRuntime js = _createRuntime(
         context: context, formKey: formKey, scaffoldKey: scaffoldKey);
 

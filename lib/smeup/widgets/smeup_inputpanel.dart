@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/daos/smeup_inputpanel_dao.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
@@ -10,6 +12,7 @@ import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
+import 'package:ken/smeup/services/smeup_scripting_services.dart';
 import 'package:ken/smeup/widgets/smeup_button.dart';
 import 'package:ken/smeup/widgets/smeup_combo.dart';
 import 'package:ken/smeup/widgets/smeup_label.dart';
@@ -329,21 +332,21 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     return false;
   }
 
-  _fireDynamism() {
+  _fireDynamism() async {
     if (widget.onSubmit != null) {
       widget.onSubmit!(widget.data);
     }
     widget.data!.forEach((field) => SmeupVariablesService.setVariable(
         field.id, field.value.code,
         formKey: widget.formKey));
-    if (_model != null && _validate()) {
+    if (_model != null && await _validate()) {
       SmeupDynamismService.run(_model!.dynamisms, context, "click",
           widget.scaffoldKey, widget.formKey);
     }
   }
 
-  bool _validate() {
-    return SmeupScriptingServices.validate(
+  Future<bool> _validate() async {
+    return await SmeupScriptingServices.validate(
         context: context,
         formKey: widget.formKey!,
         scaffoldKey: widget.scaffoldKey,

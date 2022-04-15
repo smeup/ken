@@ -59,7 +59,10 @@ class SmeupLogService {
     if (messageLevel <= logLevel || logType == LogType.error) {
       final pattern = RegExp('.{1,800}');
       pattern.allMatches(message).forEach((match) {
-        print(color + match.group(0) + '\x1B[0m');
+        String? group = match.group(0);
+        if (group != null) {
+          print(color + group + '\x1B[0m');
+        }
       });
       //print(color + message + '\x1B[0m');
 
