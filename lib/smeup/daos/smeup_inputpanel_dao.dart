@@ -21,7 +21,8 @@ class SmeupInputPanelDao extends SmeupDao {
     List columns = model.data["columns"];
     Map? rowFields = model.data["rows"][0];
 
-    model.fields = _createFields(columns, rowFields);
+    model.fields =
+        _createFields(columns, rowFields, formKey, scaffoldKey, context);
 
     var layoutData =
         await _getLayoutData(model.options!, formKey, scaffoldKey, context);
@@ -64,19 +65,54 @@ class SmeupInputPanelDao extends SmeupDao {
   }
 
   static List<SmeupInputPanelField> _createFields(
-      List columns, Map? rowFields) {
+      List columns, Map? rowFields, formKey, scaffoldKey, context) {
     List<SmeupInputPanelField> fields = columns
         .map((column) => SmeupInputPanelField(
             id: column["code"],
             label: column["text"],
             value: SmeupInputPanelValue(),
+            component: getComponent(column["component"]),
+            codeField: column["valueField"],
+            descriptionField: column["descriptionField"],
+            fun: column["fun"],
             visible: column["IO"] != 'H'))
         .toList();
     fields.forEach((field) {
       String? code = rowFields![field.id];
-      field.value = SmeupInputPanelValue(code: code, descr: code);
+      field.value = SmeupInputPanelValue(code: code, description: code);
+      getItems(field, formKey, scaffoldKey, context).then((value) {
+        field.items = value;
+      });
     });
     return fields;
+  }
+
+  static SmeupInputPanelSupportedComp getComponent(String? cmpStr) {
+    SmeupInputPanelSupportedComp ret = SmeupInputPanelSupportedComp.Itx;
+    if (cmpStr!.isNotEmpty) {
+      SmeupInputPanelSupportedComp.values.forEach((comp) {
+        String name = comp.toString().split('.').last;
+        if (name.toLowerCase() == cmpStr.toLowerCase()) {
+          ret = comp;
+        }
+      });
+    }
+    return ret;
+  }
+
+  static Future<List<SmeupInputPanelValue>?> getItems(
+      SmeupInputPanelField field,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context) async {
+    switch (field.component) {
+      case SmeupInputPanelSupportedComp.Cmb:
+        return await getComboData(field, formKey, scaffoldKey, context);
+      default:
+        return Future(() {
+          return null;
+        });
+    }
   }
 
   static Future<void> _applyLayout(
@@ -97,7 +133,7 @@ class SmeupInputPanelDao extends SmeupDao {
           if (fields[i].component == SmeupInputPanelSupportedComp.Cmb &&
               fields[i].fun != null) {
             fields[i].items =
-                await _getComboData(fields[i], formKey, scaffoldKey, context);
+                await getComboData(fields[i], formKey, scaffoldKey, context);
           }
         }
       }
@@ -105,7 +141,7 @@ class SmeupInputPanelDao extends SmeupDao {
     fields.sort((a, b) => a.position.compareTo(b.position));
   }
 
-  static Future<List<SmeupInputPanelValue>?> _getComboData(
+  static Future<List<SmeupInputPanelValue>?> getComboData(
       SmeupInputPanelField field,
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
@@ -122,8 +158,9 @@ class SmeupInputPanelDao extends SmeupDao {
       }
       if (rows != null) {
         rows.forEach((row) {
-          field.items!.add(
-              SmeupInputPanelValue(code: row["codice"], descr: row["testo"]));
+          field.items!.add(SmeupInputPanelValue(
+              code: row[field.codeField],
+              description: row[field.descriptionField]));
         });
       }
     }

@@ -15,7 +15,7 @@ import 'package:ken/smeup/services/transformers/null_transformer.dart';
 import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 
 import '../models/fun.dart';
-import 'firestore_shared.dart';
+import 'smeup_firestore_shared.dart';
 
 class SmeupJsonDataService extends SmeupDataServiceInterface {
   FirebaseFirestore? firestoreInstance;
@@ -99,7 +99,7 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
 
     List<Map<String, dynamic>> list = smeupFun.server;
 
-    final options = GetOptions(source: await FirestoreShared.getSource());
+    final options = GetOptions(source: await SmeupFirestoreShared.getSource());
 
     final collection =
         list.firstWhereOrNull((element) => element['key'] == 'collection');

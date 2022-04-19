@@ -66,16 +66,16 @@ class InputPanelScreen extends StatelessWidget {
       value: SmeupInputPanelValue(code: "asdadsasfasfasdfasdfasdfasf"),
     ));
     final items = [
-      {"code": "LANSTS", "descr": "Lanari Stefano"},
-      {"code": "PASCAR", "descr": "Pasere Carina"}
+      {"code": "LANSTS", "description": "Lanari Stefano"},
+      {"code": "PASCAR", "description": "Pasere Carina"}
     ];
     data.add(SmeupInputPanelField(
         id: "CMB",
         label: "Elenco collaboratori",
         value: new SmeupInputPanelValue(),
         items: items
-            .map((item) =>
-                SmeupInputPanelValue(code: item["code"], descr: item["descr"]))
+            .map((item) => SmeupInputPanelValue(
+                code: item["code"], description: item["description"]))
             .toList(),
         component: SmeupInputPanelSupportedComp.Cmb));
     return data;

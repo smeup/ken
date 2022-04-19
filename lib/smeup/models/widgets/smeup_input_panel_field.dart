@@ -4,9 +4,9 @@ enum SmeupInputPanelSupportedComp { Cmb, Rad, Itx, Bcd }
 
 class SmeupInputPanelValue {
   String? code;
-  String? descr;
+  String? description;
 
-  SmeupInputPanelValue({this.code = "", this.descr = ""});
+  SmeupInputPanelValue({this.code = "", this.description = ""});
 
   bool operator ==(o) => o is SmeupInputPanelValue && code == o.code;
 
@@ -19,7 +19,7 @@ class SmeupInputPanelValue {
 
   @override
   String toString() {
-    return "{$code,$descr}";
+    return "{$code,$description}";
   }
 }
 
@@ -32,22 +32,27 @@ class SmeupInputPanelField {
   late SmeupInputPanelValue value;
   List<SmeupInputPanelValue>? items;
   String? fun;
+  String? codeField;
+  String? descriptionField;
 
-  SmeupInputPanelField({
-    this.label = "",
-    required String this.id,
-    required this.value,
-    this.items,
-    this.component = SmeupInputPanelSupportedComp.Itx,
-    this.visible = true,
-    this.position = 0,
-  }) : assert(position >= 0);
+  SmeupInputPanelField(
+      {this.label = "",
+      required String this.id,
+      required this.value,
+      this.items,
+      this.component = SmeupInputPanelSupportedComp.Itx,
+      this.fun,
+      this.visible = true,
+      this.position = 0,
+      this.codeField = 'codice',
+      this.descriptionField = 'testo'})
+      : assert(position >= 0);
 
   SmeupInputPanelField.fromMap(dynamic dataList) {
     // assert((dataList as List).length > 0);
     // (dataList as List).forEach((dataRow) {
     //   (dataRow["items"] as List).forEach((item) {
-    //     value.add(SmeupInputPanelValue(item["code"], item["descr"]));
+    //     value.add(SmeupInputPanelValue(item["code"], item["description"]));
     //   });
     //   component = SmeupInputPanelSupportedComp.Itx;
     //   visible = dataRow["visible"] != null ? dataRow["visible"] : visible;
@@ -69,7 +74,8 @@ class SmeupInputPanelField {
     fun = _getAttributeFromLayout(fieldFromLayout, "PfK", fun);
     // TODOA Reload items
 
-    value.descr = _getAttributeFromLayout(fieldFromLayout, "Txt", value.descr);
+    value.description =
+        _getAttributeFromLayout(fieldFromLayout, "Txt", value.description);
   }
 
   String? _getAttributeFromLayout(

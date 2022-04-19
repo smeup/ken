@@ -231,7 +231,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
           ],
           selectedValue: field.value.code,
           clientOnPressed: (value) {
-            field.value.code = field.value.descr = value;
+            field.value.code = field.value.description = value;
           },
         );
 
@@ -266,7 +266,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
             id: field.id,
             data: field.value.code,
             clientOnChange: (value) {
-              field.value.code = field.value.descr = value;
+              field.value.code = field.value.description = value;
             },
           ),
         )
@@ -294,10 +294,10 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
           id: field.id,
           selectedValue: field.value.code == "" ? null : field.value.code,
           data: field.items!
-              .map((e) => SmeupComboItemModel(e.code, e.descr))
+              .map((e) => SmeupComboItemModel(e.code, e.description))
               .toList(),
           clientOnChange: (newValue) =>
-              field.value.code = field.value.descr = newValue,
+              field.value.code = field.value.description = newValue,
         ),
       ],
     );
