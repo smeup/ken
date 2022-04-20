@@ -113,7 +113,7 @@ class Fun {
       dynamic obj = newFun['fun'][objName];
       if (obj != null) {
         FunObject funObject = FunObject(objName, obj['t'], obj['p'], obj['k']);
-        objects.add(funObject);
+        objects[i - 1] = (funObject);
       }
     }
 
