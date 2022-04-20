@@ -1,6 +1,6 @@
 import 'package:xml/xml.dart';
 
-enum SmeupInputPanelSupportedComp { Cmb, Rad, Itx, Bcd }
+enum SmeupInputPanelSupportedComp { Cmb, Rad, Itx, Bcd, Acp }
 
 class SmeupInputPanelValue {
   String? code;
@@ -48,16 +48,7 @@ class SmeupInputPanelField {
       this.descriptionField = 'testo'})
       : assert(position >= 0);
 
-  SmeupInputPanelField.fromMap(dynamic dataList) {
-    // assert((dataList as List).length > 0);
-    // (dataList as List).forEach((dataRow) {
-    //   (dataRow["items"] as List).forEach((item) {
-    //     value.add(SmeupInputPanelValue(item["code"], item["description"]));
-    //   });
-    //   component = SmeupInputPanelSupportedComp.Itx;
-    //   visible = dataRow["visible"] != null ? dataRow["visible"] : visible;
-    // });
-  }
+  SmeupInputPanelField.fromMap(dynamic dataList);
 
   void update(XmlNode fieldFromLayout, int position) {
     this.visible = true;

@@ -16,6 +16,7 @@ import 'package:ken/smeup/widgets/smeup_combo.dart';
 import 'package:ken/smeup/widgets/smeup_label.dart';
 import 'package:ken/smeup/widgets/smeup_qrcode_reader.dart';
 import 'package:ken/smeup/widgets/smeup_radio_buttons.dart';
+import 'package:ken/smeup/widgets/smeup_text_autocomplete.dart';
 import 'package:ken/smeup/widgets/smeup_text_field.dart';
 import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
@@ -242,6 +243,9 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
       case SmeupInputPanelSupportedComp.Cmb:
         return _getComboWidget(field);
 
+      case SmeupInputPanelSupportedComp.Acp:
+        return _getTextAutocompleteWidget(field);
+
       default:
         return _getTextFieldWidget(field);
     }
@@ -298,6 +302,33 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
               .toList(),
           clientOnChange: (newValue) =>
               field.value.code = field.value.description = newValue,
+        ),
+      ],
+    );
+  }
+
+  Widget _getTextAutocompleteWidget(SmeupInputPanelField field) {
+    if (field.items == null) {
+      field.items = [];
+    }
+    return Column(
+      children: <Widget>[
+        SmeupTextAutocomplete(
+          widget.scaffoldKey,
+          widget.formKey,
+          label: field.label,
+          id: field.id,
+          valueField: "value",
+          data: field.items!
+              .map((e) => {"code": e.code, "value": e.description})
+              .toList(),
+          // TODO
+          clientOnSelected: (option) {
+            // TODO
+            field.value.code = option['code'];
+            // SmeupUtilities.invokeScaffoldMessenger(context,
+            //     'selected code: ${option['code']}, value: ${option['value']}');
+          },
         ),
       ],
     );

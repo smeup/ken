@@ -214,8 +214,8 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
           .where('name', isEqualTo: name!['value']);
 
       if (hasCondition) {
-        query =
-            query.where(fieldName!['value'], isEqualTo: condition!['value']);
+        query = query.where("fieldName", isEqualTo: fieldName!['value']);
+        query = query.where("condition", isEqualTo: condition!['value']);
       }
 
       QuerySnapshot<Map<String, dynamic>> snapshot = await query.get(options);
