@@ -77,10 +77,10 @@ class SmeupInputPanelDao extends SmeupDao {
             fun: column["fun"],
             visible: column["IO"] != 'H'))
         .toList();
-    fields.forEach((field) {
+    fields.forEach((field) async {
       String? code = rowFields![field.id];
       field.value = SmeupInputPanelValue(code: code, description: code);
-      getItems(field, formKey, scaffoldKey, context).then((value) {
+      await getItems(field, formKey, scaffoldKey, context).then((value) {
         field.items = value;
       });
     });
