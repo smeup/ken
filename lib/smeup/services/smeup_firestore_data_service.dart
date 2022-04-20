@@ -279,23 +279,6 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     }
   }
 
-  _getIO(String type) {
-    switch (type) {
-      case 'itx':
-        return 'B';
-      case 'acp':
-        return 'E';
-      case 'cmb':
-        return 'C';
-      case 'rad':
-        return 'R';
-      case 'bcd':
-        return 'Q';
-      default:
-        return 'B';
-    }
-  }
-
   Future<SmeupServiceResponse> getFieldSetting(Fun smeupFun) async {
     try {
       List<Map<String, dynamic>> parameters = smeupFun.parameters;
