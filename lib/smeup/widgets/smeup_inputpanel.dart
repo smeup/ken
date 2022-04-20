@@ -322,12 +322,9 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
           data: field.items!
               .map((e) => {"code": e.code, "value": e.description})
               .toList(),
-          // TODO
           clientOnSelected: (option) {
-            // TODO
             field.value.code = option['code'];
-            // SmeupUtilities.invokeScaffoldMessenger(context,
-            //     'selected code: ${option['code']}, value: ${option['value']}');
+            field.value.description = option['value'];
           },
         ),
       ],
