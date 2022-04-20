@@ -24,6 +24,9 @@ class SmeupInputPanelValue {
 }
 
 class SmeupInputPanelField {
+  static const String defaultCodeField = 'codice';
+  static const String defaultDescriptionField = 'testo';
+
   SmeupInputPanelSupportedComp? component;
   String? id;
   String? label;
@@ -44,11 +47,17 @@ class SmeupInputPanelField {
       this.fun,
       this.visible = true,
       this.position = 0,
-      this.codeField = 'codice',
-      this.descriptionField = 'testo'})
-      : assert(position >= 0);
+      this.codeField = defaultCodeField,
+      this.descriptionField = defaultDescriptionField})
+      : assert(position >= 0) {
+    this.codeField = defaultCodeField;
+    this.descriptionField = defaultDescriptionField;
+  }
 
-  SmeupInputPanelField.fromMap(dynamic dataList);
+  SmeupInputPanelField.fromMap(dynamic dataList) {
+    this.codeField = defaultCodeField;
+    this.descriptionField = defaultDescriptionField;
+  }
 
   void update(XmlNode fieldFromLayout, int position) {
     this.visible = true;

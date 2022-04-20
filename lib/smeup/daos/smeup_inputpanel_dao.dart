@@ -81,9 +81,11 @@ class SmeupInputPanelDao extends SmeupDao {
     for (var field in fields) {
       String? code = rowFields![field.id];
       field.value = SmeupInputPanelValue(code: code, description: code);
-      await getItems(field, formKey, scaffoldKey, context).then((value) {
-        field.items = value;
-      });
+      if (field.fun != null) {
+        await getItems(field, formKey, scaffoldKey, context).then((value) {
+          field.items = value;
+        });
+      }
     }
 
     return fields;
@@ -91,7 +93,7 @@ class SmeupInputPanelDao extends SmeupDao {
 
   static SmeupInputPanelSupportedComp getComponent(String? cmpStr) {
     SmeupInputPanelSupportedComp ret = SmeupInputPanelSupportedComp.Itx;
-    if (cmpStr!.isNotEmpty) {
+    if (cmpStr != null && cmpStr.isNotEmpty) {
       SmeupInputPanelSupportedComp.values.forEach((comp) {
         String name = comp.toString().split('.').last;
         if (name.toLowerCase() == cmpStr.toLowerCase()) {
