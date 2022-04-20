@@ -50,13 +50,17 @@ class SmeupInputPanelField {
       this.codeField = defaultCodeField,
       this.descriptionField = defaultDescriptionField})
       : assert(position >= 0) {
-    this.codeField = defaultCodeField;
-    this.descriptionField = defaultDescriptionField;
+    _setDefaults();
   }
 
   SmeupInputPanelField.fromMap(dynamic dataList) {
-    this.codeField = defaultCodeField;
-    this.descriptionField = defaultDescriptionField;
+    _setDefaults();
+  }
+
+  _setDefaults() {
+    if (this.codeField == null) this.codeField = defaultCodeField;
+    if (this.descriptionField == null)
+      this.descriptionField = defaultDescriptionField;
   }
 
   void update(XmlNode fieldFromLayout, int position) {
