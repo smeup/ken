@@ -13,7 +13,6 @@ import 'package:ken/smeup/models/widgets/smeup_form_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_screen_model.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
-import 'package:ken/smeup/services/smeup_scripting_services.dart';
 import 'package:ken/smeup/widgets/smeup_form.dart';
 import 'package:ken/smeup/widgets/smeup_appBar.dart';
 import 'package:ken/smeup/widgets/smeup_not_available.dart';
