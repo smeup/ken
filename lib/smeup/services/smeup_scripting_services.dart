@@ -86,7 +86,7 @@ import '../models/fun.dart';
 class SmeupScriptingServices {
   static JavascriptRuntime _createRuntime(
       {required BuildContext context,
-      required GlobalKey<FormState> formKey,
+      GlobalKey<FormState>? formKey,
       required GlobalKey<ScaffoldState> scaffoldKey}) {
     // For using JSCore on android set forceJavascriptCoreOnAndroid to true
     // and in app/build.gradle uncomment the dependency to
@@ -232,10 +232,16 @@ class SmeupScriptingServices {
 
   static Future<bool> validate(
       {required BuildContext context,
-      required GlobalKey<FormState> formKey,
+      GlobalKey<FormState>? formKey,
       required GlobalKey<ScaffoldState> scaffoldKey,
       required String fieldId,
       required String script}) async {
+    if (formKey == null) {
+      SmeupLogService.writeDebugMessage(
+          "Unable to validate because formKey is not specified",
+          logType: LogType.error);
+      return false;
+    }
     JavascriptRuntime js = _createRuntime(
         context: context, formKey: formKey, scaffoldKey: scaffoldKey);
 

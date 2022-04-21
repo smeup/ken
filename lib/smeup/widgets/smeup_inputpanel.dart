@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/daos/smeup_inputpanel_dao.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
@@ -12,7 +10,6 @@ import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
-import 'package:ken/smeup/services/smeup_scripting_services.dart';
 import 'package:ken/smeup/widgets/smeup_button.dart';
 import 'package:ken/smeup/widgets/smeup_combo.dart';
 import 'package:ken/smeup/widgets/smeup_label.dart';
@@ -346,11 +343,15 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
   }
 
   Future<bool> _validate() async {
-    return await SmeupScriptingServices.validate(
-        context: context,
-        formKey: widget.formKey!,
-        scaffoldKey: widget.scaffoldKey,
-        screenId: _model!.id ?? '', // TODO: it was: _model!.data['id']
-        script: _model!.validationScript);
+    // TODO foreach field with validation string not empty call this
+
+    // SmeupScriptingServices.validate(
+    //     context: context,
+    //     formKey: widget.formKey,
+    //     scaffoldKey: widget.scaffoldKey,
+    //     fieldId: "fieldId",
+    //     script: "script");
+
+    return true;
   }
 }
