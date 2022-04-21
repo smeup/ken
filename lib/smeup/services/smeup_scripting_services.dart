@@ -9,13 +9,90 @@ import 'package:ken/smeup/services/smeup_variables_service.dart';
 
 import '../models/fun.dart';
 
+/// JavaScript snippets supported
+///
+/// Read data
+/// ```javascript
+/// dataHelper.read(collectionName, filters);
+/// ```
+///
+/// In example below we read from a collection with name locked-surnames the first
+/// document with attribute surname, equals to variables.surname.
+/// The value returned is an empty map if the document is missing
+///
+/// ```javascript
+/// var record = await dataHelper.read('locked-surnames', {surname: variables.surname});
+/// ```
+///
+/// Insert data
+/// ```javascript
+/// dataHelper.insert(collection, data);
+/// ```
+///
+/// In the example below we insert some data into a collection with name audit
+///
+/// ```javascript
+/// dataHelper.insert('audit', {surname: variables.surname, time: Date.now(), operation: 'insert'});
+/// ```
+/// Display a message from javascript
+/// ```javascript
+/// helper.snackBar(message);
+/// ```
+///
+/// In the example below we display a message to the user informing him
+/// the object is locked
+///
+/// ```javascript
+/// helper.snackBar("You can't modify this object because is locked");
+/// ```
+/// Required fields
+/// ```javascript
+/// var validated = helper.validateRequiredField(fieldId, variables);
+/// ```
+///
+/// In the example below we check a field named surname in a map named variables,
+/// if field is empty or missing, "validated" variable value will be false
+///
+/// ```javascript
+/// var validated = helper.validateRequiredField('surname', variables);
+/// ```
+
+///
+/// How to implement a field validation script
+/// All functions must have this signature and returns always a boolean value
+/// ```javascript
+/// async validate(fieldId, variables);
+/// ```
+/// fieldId is the field identifier, and variables is a map which contains all
+/// form variables
+///
+/// In the example below we'll use all snippets previously described
+///
+/// ```javascript
+/// async function validate(fieldId, variables) {
+///   var validated = helper.validateRequiredField(fieldId, variables);
+///   if (validated) {
+///     var record = await dataHelper.read('locked-surnames', {surname: variables.surname});
+///     validated = record.surname != variables.surname;
+///     if (!validated) {
+///       helper.snackBar("You can't modify this customer, because " + record.surname + " is locked");
+///     } else {
+///       dataHelper.insert('audit', {surname: variables.surname, time: Date.now(), operation: 'insert'});
+///     }
+///   };
+///   return validated;
+/// }
+/// ```
 class SmeupScriptingServices {
   static JavascriptRuntime _createRuntime(
       {required BuildContext context,
       required GlobalKey<FormState> formKey,
       required GlobalKey<ScaffoldState> scaffoldKey}) {
+    // For using JSCore on android set forceJavascriptCoreOnAndroid to true
+    // and in app/build.gradle uncomment the dependency to
+    // com.github.fast-development.android-js-runtimes:fastdev-jsruntimes-jsc:0.1.3
     final js =
-        getJavascriptRuntime(xhr: false, forceJavascriptCoreOnAndroid: true);
+        getJavascriptRuntime(xhr: false, forceJavascriptCoreOnAndroid: false);
 
     String code = """
       const _f2js = {
@@ -52,23 +129,24 @@ class SmeupScriptingServices {
       const dataHelper = {
         insert: async function(collection, data) {
           const staticPromise = _f2js.registerPromise();
-          sendMessage('DataHelper', JSON.stringify([staticPromise.promiseId, 'insert', ...arguments]));
+          sendMessage('DataHelper', JSON.stringify([staticPromise.promiseId, 'insert', collection, JSON.stringify(data)]));
           return staticPromise.promise;
         },
         read: async function(collection, filters) {
           const staticPromise = _f2js.registerPromise();                
-          sendMessage('DataHelper', JSON.stringify([staticPromise.promiseId, 'read', ...arguments]));
+          sendMessage('DataHelper', JSON.stringify([staticPromise.promiseId, 'read', collection, JSON.stringify(filters)]));
           return staticPromise.promise;
         },
         readFake: async function(collection, filters) {
           const staticPromise = _f2js.registerPromise();                
-          sendMessage('DataHelper', JSON.stringify([staticPromise.promiseId, 'readFake', ...arguments]));
+          sendMessage('DataHelper', JSON.stringify([staticPromise.promiseId, 'readFake', collection, filters]));
           return staticPromise.promise;
         },        
       }
       const helper = {
         validateRequiredField: function(fieldId, variables) {
-          if (variables[fieldId].trim() === '') {
+          var value = variables[fieldId];          
+          if (value === undefined || value === null || value.trim() === '') {
             helper.snackBar(fieldId + ' is required');
             return false;
           }
@@ -76,8 +154,8 @@ class SmeupScriptingServices {
             return true;
           }
         },
-        snackBar: function() {
-          sendMessage('Helper', JSON.stringify(['snackBar', ...arguments]));
+        snackBar: function(message) {
+          sendMessage('Helper', JSON.stringify(['snackBar', message]));
         }            
       }
       """;
@@ -94,15 +172,18 @@ class SmeupScriptingServices {
       switch (args[1]) {
         case 'insert':
           SmeupLogService.writeDebugMessage(
-              "insert in collection: ${args[1]} - data: ${args[2]}",
+              "insert in collection: ${args[2]} - data: ${args[3]}",
               logType: LogType.debug);
-          dynamic _args = json.decode(args[2]);
-          SmeupVariablesService.setVariable("time", _args["time"],
-              formKey: formKey);
-          SmeupVariablesService.setVariable("operation", _args["operation"],
-              formKey: formKey);
+          dynamic _args = json.decode(args[3]);
+          var funParameter = StringBuffer();
+          (_args as Map).forEach((key, value) {
+            // I don't like very much, this can overwrite other variables
+            SmeupVariablesService.setVariable(key, value);
+            funParameter.write("$key([$key]) ");
+          });
+
           Fun fun = Fun(
-              "F(FBK;FS_00_01;WRITE.DOCUMENT) NOTIFY(CLOSE()) P(collection(${args[1]});firestoreFields(time,operation))",
+              "F(FBK;FS_00_01;WRITE.DOCUMENT) NOTIFY(CLOSE()) P(collection(${args[2]}) $funParameter)",
               formKey,
               scaffoldKey,
               context);
@@ -115,8 +196,15 @@ class SmeupScriptingServices {
               "Read from collection: ${args[2]} - filters: ${args[3]}",
               logType: LogType.debug);
 
+          dynamic _args = json.decode(args[3]);
+          var funParameter = StringBuffer();
+
+          (_args as Map).forEach((key, value) {
+            funParameter.write("$key($value)");
+          });
+
           Fun fun = Fun(
-              "F(EXB;FS_00_01;GET.DOCUMENTS) P(collection(${args[2]}) filters(${args[3]})))",
+              "F(EXB;FS_00_01;GET.DOCUMENTS) P(collection(${args[2]}) filters($funParameter)))",
               formKey,
               scaffoldKey,
               context);
@@ -146,7 +234,7 @@ class SmeupScriptingServices {
       {required BuildContext context,
       required GlobalKey<FormState> formKey,
       required GlobalKey<ScaffoldState> scaffoldKey,
-      required String screenId,
+      required String fieldId,
       required String script}) async {
     JavascriptRuntime js = _createRuntime(
         context: context, formKey: formKey, scaffoldKey: scaffoldKey);
@@ -160,7 +248,7 @@ class SmeupScriptingServices {
 
     var code = """        
         $script;
-        validate('$screenId', JSON.parse('${json.encode(jsMap)}'));
+        validate('$fieldId', JSON.parse('${json.encode(jsMap)}'));
         """;
 
     var asyncResult = await js.evaluateAsync(code);

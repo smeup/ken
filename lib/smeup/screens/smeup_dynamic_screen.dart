@@ -337,27 +337,6 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
             ),
           ),
           onTap: () async {
-            var validated = await SmeupScriptingServices.validate(
-                context: context,
-                formKey: widget._formKey,
-                scaffoldKey: widget._scaffoldKey,
-                screenId: smeupScreenModel.data['id'],
-                script: '''
-                  async function validate(screenId, variables) {                    
-                    var validated = helper.validateRequiredField('surname', variables);
-                    if (validated) {
-                      var record = await dataHelper.readz('locked-surnames', 'surname(' + variables.surname + ')');                      
-                      validated = record.surname != variables.surname;
-                      if (!validated) {
-                        helper.snackBar("You can't modify this customer, because " + record.surname + " is locked");
-                      };
-                    };
-                    return validated;                    
-                  }
-            ''');
-
-            if (!validated) return;
-
             var dynamisms =
                 Dynamism.getDynamismsList(button['dynamisms'] as List<dynamic>);
 
