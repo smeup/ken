@@ -304,8 +304,9 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
               data: messages,
               statusCode: HttpStatus.accepted,
               requestOptions: RequestOptions(path: '')));
-    } catch (e) {
-      SmeupLogService.writeDebugMessage('Error in updateDocument: $e',
+    } catch (e, stacktrace) {
+      SmeupLogService.writeDebugMessage(
+          'Error in updateDocument: $e $stacktrace',
           logType: LogType.error);
       final messages = {
         "messages": [
