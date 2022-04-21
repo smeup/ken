@@ -106,21 +106,21 @@ class SmeupComboModel extends SmeupInputFieldModel
     width = SmeupUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height =
         SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
-    iconSize =
-        SmeupUtilities.getDouble(optionsDefault!['iconSize']) ?? defaultIconSize;
+    iconSize = SmeupUtilities.getDouble(optionsDefault!['iconSize']) ??
+        defaultIconSize;
     iconColor = SmeupUtilities.getColorFromRGB(optionsDefault!['iconColor']) ??
         defaultIconColor;
 
-    fontSize =
-        SmeupUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
+    fontSize = SmeupUtilities.getDouble(optionsDefault!['fontSize']) ??
+        defaultFontSize;
     fontColor = SmeupUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
         defaultFontColor;
     fontBold = optionsDefault!['bold'] ?? defaultFontBold;
     backColor = SmeupUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
 
-    underline =
-        SmeupUtilities.getBool(optionsDefault!['underline']) ?? defaultUnderline;
+    underline = SmeupUtilities.getBool(optionsDefault!['underline']) ??
+        defaultUnderline;
 
     innerSpace = SmeupUtilities.getDouble(optionsDefault!['innerSpace']) ??
         defaultInnerSpace;

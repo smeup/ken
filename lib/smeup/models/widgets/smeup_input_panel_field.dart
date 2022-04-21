@@ -37,6 +37,8 @@ class SmeupInputPanelField {
   String? fun;
   String? codeField;
   String? descriptionField;
+  String? object;
+  bool isFirestore;
 
   SmeupInputPanelField(
       {this.label = "",
@@ -45,22 +47,34 @@ class SmeupInputPanelField {
       this.items,
       this.component = SmeupInputPanelSupportedComp.Itx,
       this.fun,
+      this.object,
       this.visible = true,
       this.position = 0,
-      this.codeField = defaultCodeField,
-      this.descriptionField = defaultDescriptionField})
+      this.codeField,
+      this.descriptionField,
+      this.isFirestore = false})
       : assert(position >= 0) {
     _setDefaults();
   }
 
-  SmeupInputPanelField.fromMap(dynamic dataList) {
-    _setDefaults();
-  }
+  // SmeupInputPanelField.fromMap(dynamic dataList) {
+  //   _setDefaults();
+  // }
 
   _setDefaults() {
-    if (this.codeField == null) this.codeField = defaultCodeField;
-    if (this.descriptionField == null)
-      this.descriptionField = defaultDescriptionField;
+    if (this.codeField == null) {
+      if (isFirestore)
+        this.codeField = 'code';
+      else
+        this.codeField = defaultCodeField;
+    }
+
+    if (this.descriptionField == null) {
+      if (isFirestore)
+        this.descriptionField = 'description';
+      else
+        this.descriptionField = defaultDescriptionField;
+    }
   }
 
   void update(XmlNode fieldFromLayout, int position) {

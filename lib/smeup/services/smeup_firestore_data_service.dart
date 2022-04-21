@@ -233,28 +233,20 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
         if ((res['rows'] as List).isNotEmpty) {
           dynamic row = res['rows'][0];
-          List inputPanelFields = row['inputPanelFields'];
+          List fields = row['fields'];
           var responseRow = Map();
           responseRow["fields"] = Map();
-          if (inputPanelFields.isNotEmpty) {
-            for (var inputPanelField in inputPanelFields) {
+          if (fields.isNotEmpty) {
+            for (var inputPanelField in fields) {
               (responseData["columns"] as List).add({
-                "code": inputPanelField["name"],
-                "IO": inputPanelField["hidden"] ? 'H' : 'O',
-                "text": inputPanelField["description"],
-                "component": inputPanelField["type"],
-                "fun": inputPanelField["fun"],
-                "valueField": inputPanelField["valueField"],
-                "descriptionField": inputPanelField["descriptionField"]
+                "code": inputPanelField["code"],
+                "IO": inputPanelField["io"],
+                "text": inputPanelField["text"]
               });
-              responseRow["fields"][inputPanelField["name"]] = {
-                "name": inputPanelField["name"],
-                // "smeupObject": {
-                //   "tipo": "",
-                //   "parametro": "",
-                //   "codice": "",
-                //   "testo": ""
-                // },
+              responseRow["fields"][inputPanelField["code"]] = {
+                "name": inputPanelField["code"],
+                "ogg": inputPanelField["ogg"],
+                "value": inputPanelField["value"],
               };
             }
           }
