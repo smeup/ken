@@ -8,7 +8,6 @@ import 'package:ken/smeup/models/widgets/smeup_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
-import 'package:ken/smeup/services/smeup_scripting_services.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
 import 'package:ken/smeup/widgets/smeup_button.dart';
@@ -358,25 +357,29 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     return false;
   }
 
-  _fireDynamism() {
+  _fireDynamism() async {
     if (widget.onSubmit != null) {
       widget.onSubmit!(widget.data);
     }
     widget.data!.forEach((field) => SmeupVariablesService.setVariable(
         field.id, field.value.code,
         formKey: widget.formKey));
-    if (_model != null && _validate()) {
+    if (_model != null && await _validate()) {
       SmeupDynamismService.run(_model!.dynamisms, context, "click",
           widget.scaffoldKey, widget.formKey);
     }
   }
 
-  bool _validate() {
-    return SmeupScriptingServices.validate(
-        context: context,
-        formKey: widget.formKey!,
-        scaffoldKey: widget.scaffoldKey,
-        screenId: _model!.id ?? '',
-        script: _model!.validationScript);
+  Future<bool> _validate() async {
+    // TODO foreach field with validation string not empty call this
+
+    // SmeupScriptingServices.validate(
+    //     context: context,
+    //     formKey: widget.formKey,
+    //     scaffoldKey: widget.scaffoldKey,
+    //     fieldId: "fieldId",
+    //     script: "script");
+
+    return true;
   }
 }

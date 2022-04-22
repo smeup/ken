@@ -336,37 +336,6 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
             ),
           ),
           onTap: () async {
-            // TODO - Left as reminder for stefano
-            // if (!SmeupScriptingServices.validate(
-            //     context: context,
-            //     formKey: widget._formKey,
-            //     scaffoldKey: widget._scaffoldKey,
-            //     screenId: smeupScreenModel.data['id'],
-            //     script: '''
-            //   function validateRequiredField(fieldId, variables) {
-            //     if (variables[fieldId].trim() === '') {
-            //       helper.snackBar(fieldId + ' is required');
-            //       return false;
-            //     }
-            //     else {
-            //       return true;
-            //     }
-            //   }
-
-            //   function validate(screenId, variables) {
-            //     if (screenId === 'TEST_FIRESTORE_DETAILS' || screenId === 'TEST_FIRESTORE_NEW') {
-            //       var validated =
-            //         validateRequiredField('name', variables) &&
-            //         validateRequiredField('surname', variables);
-            //       if (validated) {
-            //         dataHelper.insert('audit', JSON.stringify({time : Date.now(), operation : 'insert'}));
-            //       }
-            //       return validated;
-            //     }
-            //     return true;
-            //   }
-            // ''')) return;
-
             var dynamisms =
                 Dynamism.getDynamismsList(button['dynamisms'] as List<dynamic>);
 
