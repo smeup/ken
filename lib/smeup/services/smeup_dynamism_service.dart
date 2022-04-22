@@ -205,7 +205,7 @@ class SmeupDynamismService {
       if (formKey != null)
         key = key.replaceAll('${formKey.hashCode.toString()}_', '');
 
-      // TODO: to verify. old case where user enclose the variable name between quotation marks
+      // to verify: old case where the user encloses the variable's name between quotation marks
       // if (element.value is String) {
       //   funString = funString.replaceAll('[$key]', element.value.toString());
       // } else {

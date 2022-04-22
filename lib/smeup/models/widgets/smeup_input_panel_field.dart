@@ -1,12 +1,12 @@
 import 'package:xml/xml.dart';
 
-enum SmeupInputPanelSupportedComp { Cmb, Rad, Itx, Bcd }
+enum SmeupInputPanelSupportedComp { Cmb, Rad, Itx, Bcd, Acp }
 
 class SmeupInputPanelValue {
   String? code;
-  String? descr;
+  String? description;
 
-  SmeupInputPanelValue({this.code = "", this.descr = ""});
+  SmeupInputPanelValue({this.code = "", this.description = ""});
 
   bool operator ==(o) => o is SmeupInputPanelValue && code == o.code;
 
@@ -19,11 +19,14 @@ class SmeupInputPanelValue {
 
   @override
   String toString() {
-    return "{$code,$descr}";
+    return "{$code,$description}";
   }
 }
 
 class SmeupInputPanelField {
+  static const String defaultCodeField = 'codice';
+  static const String defaultDescriptionField = 'testo';
+
   SmeupInputPanelSupportedComp? component;
   String? id;
   String? label;
@@ -32,26 +35,46 @@ class SmeupInputPanelField {
   late SmeupInputPanelValue value;
   List<SmeupInputPanelValue>? items;
   String? fun;
+  String? codeField;
+  String? descriptionField;
+  String? object;
+  bool isFirestore;
 
-  SmeupInputPanelField({
-    this.label = "",
-    required String this.id,
-    required this.value,
-    this.items,
-    this.component = SmeupInputPanelSupportedComp.Itx,
-    this.visible = true,
-    this.position = 0,
-  }) : assert(position >= 0);
+  SmeupInputPanelField(
+      {this.label = "",
+      required String this.id,
+      required this.value,
+      this.items,
+      this.component = SmeupInputPanelSupportedComp.Itx,
+      this.fun,
+      this.object,
+      this.visible = true,
+      this.position = 0,
+      this.codeField,
+      this.descriptionField,
+      this.isFirestore = false})
+      : assert(position >= 0) {
+    _setDefaults();
+  }
 
-  SmeupInputPanelField.fromMap(dynamic dataList) {
-    // assert((dataList as List).length > 0);
-    // (dataList as List).forEach((dataRow) {
-    //   (dataRow["items"] as List).forEach((item) {
-    //     value.add(SmeupInputPanelValue(item["code"], item["descr"]));
-    //   });
-    //   component = SmeupInputPanelSupportedComp.Itx;
-    //   visible = dataRow["visible"] != null ? dataRow["visible"] : visible;
-    // });
+  // SmeupInputPanelField.fromMap(dynamic dataList) {
+  //   _setDefaults();
+  // }
+
+  _setDefaults() {
+    if (this.codeField == null) {
+      if (isFirestore)
+        this.codeField = 'code';
+      else
+        this.codeField = defaultCodeField;
+    }
+
+    if (this.descriptionField == null) {
+      if (isFirestore)
+        this.descriptionField = 'description';
+      else
+        this.descriptionField = defaultDescriptionField;
+    }
   }
 
   void update(XmlNode fieldFromLayout, int position) {
@@ -69,7 +92,8 @@ class SmeupInputPanelField {
     fun = _getAttributeFromLayout(fieldFromLayout, "PfK", fun);
     // TODOA Reload items
 
-    value.descr = _getAttributeFromLayout(fieldFromLayout, "Txt", value.descr);
+    value.description =
+        _getAttributeFromLayout(fieldFromLayout, "Txt", value.description);
   }
 
   String? _getAttributeFromLayout(

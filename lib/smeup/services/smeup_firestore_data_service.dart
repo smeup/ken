@@ -12,7 +12,8 @@ import 'package:ken/smeup/services/transformers/null_transformer.dart';
 import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 
 import '../models/fun.dart';
-import 'firestore_shared.dart';
+import 'smeup_data_service.dart';
+import 'smeup_firestore_shared.dart';
 
 class SmeupFirestoreDataService extends SmeupDataServiceInterface {
   FirebaseFirestore fsDatabase;
@@ -30,6 +31,8 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         return await getDocuments(fun);
       case "GET.DOCUMENT":
         return await getDocument(fun);
+      case "GET.INPUT.PANEL":
+        return await getInputPanel(fun);
       case "GET.FIELD.DEFAULT":
       case "GET.FIELD.VALIDATION":
         return await getFieldSetting(fun);
@@ -51,7 +54,8 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       List<Map<String, dynamic>> list = smeupFun.parameters;
       var checkResult = '';
 
-      final options = GetOptions(source: await FirestoreShared.getSource());
+      final options =
+          GetOptions(source: await SmeupFirestoreShared.getSource());
 
       final collection =
           list.firstWhereOrNull((element) => element['key'] == 'collection');
@@ -123,7 +127,8 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       List<Map<String, dynamic>> list = smeupFun.parameters;
       var checkResult = '';
 
-      final options = GetOptions(source: await FirestoreShared.getSource());
+      final options =
+          GetOptions(source: await SmeupFirestoreShared.getSource());
 
       final collection =
           list.firstWhereOrNull((element) => element['key'] == 'collection');
@@ -171,13 +176,109 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     }
   }
 
+  Future<SmeupServiceResponse> getInputPanel(Fun smeupFun) async {
+    try {
+      List<Map<String, dynamic>> list = smeupFun.parameters;
+      var checkResult = '';
+
+      final options =
+          GetOptions(source: await SmeupFirestoreShared.getSource());
+
+      final collection =
+          list.firstWhereOrNull((element) => element['key'] == 'collection');
+
+      final name = list.firstWhereOrNull((element) => element['key'] == 'name');
+      final condition =
+          list.firstWhereOrNull((element) => element['key'] == 'condition');
+      final fieldName =
+          list.firstWhereOrNull((element) => element['key'] == 'fieldName');
+      var hasCondition = false;
+
+      if (collection == null || collection.toString().isEmpty) {
+        checkResult = 'The collection is empty. FUN: $smeupFun';
+      }
+      if (name == null || name.toString().isEmpty) {
+        checkResult = 'The collection is empty. FUN: $smeupFun';
+      }
+
+      if (fieldName != null && fieldName.toString().isNotEmpty) {
+        hasCondition = true;
+      }
+
+      if (checkResult.isNotEmpty) {
+        return _getErrorResponse(checkResult);
+      }
+
+      Query<Map<String, dynamic>> query = fsDatabase
+          .collection(collection!['value'])
+          .where('name', isEqualTo: name!['value']);
+
+      if (hasCondition) {
+        query = query.where("fieldName", isEqualTo: fieldName!['value']);
+        query = query.where("condition", isEqualTo: condition!['value']);
+      }
+
+      QuerySnapshot<Map<String, dynamic>> snapshot = await query.get(options);
+
+      dynamic responseData;
+      dynamic res;
+
+      // Apply transformation to service response (only on success)
+      if (getTransformer() is NullTransformer == false) {
+        res = getTransformer()!.transform(smeupFun, snapshot);
+
+        responseData = SmeupDataService.getEmptyDataStructure();
+        responseData["columns"] = [];
+        responseData["rows"] = [];
+
+        if ((res['rows'] as List).isNotEmpty) {
+          dynamic row = res['rows'][0];
+          List fields = row['fields'];
+          var responseRow = Map();
+          responseRow["fields"] = Map();
+          if (fields.isNotEmpty) {
+            for (var inputPanelField in fields) {
+              (responseData["columns"] as List).add({
+                "code": inputPanelField["code"],
+                "IO": inputPanelField["io"],
+                "text": inputPanelField["text"]
+              });
+              responseRow["fields"][inputPanelField["code"]] = {
+                "name": inputPanelField["code"],
+                "ogg": inputPanelField["ogg"],
+                "value": inputPanelField["value"],
+              };
+            }
+          }
+          (responseData["rows"] as List).add(responseRow);
+        }
+      } else {
+        final message =
+            'SmeupFirestoreDataService.getInputPanel: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}';
+        responseData = _getErrorResponse(message);
+      }
+
+      return SmeupServiceResponse(
+          true,
+          Response(
+              data: responseData,
+              statusCode: HttpStatus.accepted,
+              requestOptions: RequestOptions(path: '')));
+    } catch (e) {
+      final message =
+          'SmeupFirestoreDataService.getInputPanel: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}: $e';
+      return _getErrorResponse(message);
+    }
+  }
+
   Future<SmeupServiceResponse> getFieldSetting(Fun smeupFun) async {
     try {
       List<Map<String, dynamic>> parameters = smeupFun.parameters;
       List<Map<String, dynamic>> server = smeupFun.server;
       var checkResult = '';
 
-      final options = GetOptions(source: await FirestoreShared.getSource());
+      final options =
+          GetOptions(source: await SmeupFirestoreShared.getSource());
 
       final collection = parameters
           .firstWhereOrNull((element) => element['key'] == 'collection');
@@ -275,7 +376,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         return _getErrorResponse(checkResult);
       }
 
-      bool isOnLine = await FirestoreShared.isInternetOn();
+      bool isOnLine = await SmeupFirestoreShared.isInternetOn();
 
       if (isOnLine) {
         await fsDatabase
@@ -348,7 +449,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         return _getErrorResponse(checkResult);
       }
 
-      bool isOnLine = await FirestoreShared.isInternetOn();
+      bool isOnLine = await SmeupFirestoreShared.isInternetOn();
 
       if (isOnLine) {
         await fsDatabase
@@ -416,7 +517,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     }
 
     try {
-      bool isOnLine = await FirestoreShared.isInternetOn();
+      bool isOnLine = await SmeupFirestoreShared.isInternetOn();
 
       if (isOnLine) {
         final docRef =

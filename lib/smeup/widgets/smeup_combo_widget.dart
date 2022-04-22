@@ -89,7 +89,7 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
       return DropdownMenuItem<String>(
         value: element.code,
         child: Text(
-          element.value!,
+          element.value ?? '',
           style: textStyle,
         ),
       );
@@ -106,7 +106,8 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
+    TextStyle style =
+        SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
 
     style = style.copyWith(
         color: widget.fontColor,
