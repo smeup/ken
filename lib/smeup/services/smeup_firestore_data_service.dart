@@ -42,6 +42,8 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         return await deleteDocument(fun);
       case "WRITE.DOCUMENT":
         return await writeDocument(fun);
+      case "WRITE.INPUT.PANEL":
+        return await writeInputPanel(fun);
       default:
         final message =
             'SmeupFirestoreDataService.invoke: function not implemented ${fun.toString()}';
@@ -187,7 +189,9 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       final collection =
           list.firstWhereOrNull((element) => element['key'] == 'collection');
 
-      final name = list.firstWhereOrNull((element) => element['key'] == 'name');
+      final name = SmeupVariablesService.getVariable("inputPanelId",
+          formKey: smeupFun.formKey);
+
       final condition =
           list.firstWhereOrNull((element) => element['key'] == 'condition');
       final fieldName =
@@ -211,7 +215,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
       Query<Map<String, dynamic>> query = fsDatabase
           .collection(collection!['value'])
-          .where('name', isEqualTo: name!['value']);
+          .where('name', isEqualTo: name);
 
       if (hasCondition) {
         query = query.where("fieldName", isEqualTo: fieldName!['value']);
@@ -371,8 +375,6 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         checkResult = 'The list of fields to update is empty. FUN: $smeupFun';
       }
 
-      //final checkResult = _checkDocument(formFields);
-
       if (checkResult.isNotEmpty) {
         return _getErrorResponse(checkResult);
       }
@@ -512,7 +514,6 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       checkResult = 'The list of fields to update is empty. FUN: $smeupFun';
     }
 
-    //final checkResult = _checkDocument(formFields);
     if (checkResult.isNotEmpty) {
       return _getErrorResponse(checkResult);
     }
@@ -582,9 +583,10 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     }
   }
 
-  // String _checkDocument(Map<String, dynamic> smeupFun) {
-  //   return '';
-  // }
+  Future<SmeupServiceResponse> writeInputPanel(Fun smeupFun) async {
+    //smeupFun.parameters.add();
+    return writeDocument(smeupFun);
+  }
 
   SmeupServiceResponse _getErrorResponse(String message) {
     final messages = {
