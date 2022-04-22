@@ -138,14 +138,14 @@ class SmeupScriptingServices {
       };
 
       const helper = {
-        validateObject: async function(field) {
+        validateObjectField: async function(field) {
           var value = field.value;
           var record = await dataHelper.read(field.ogg, {code: value});
           if (record.code === undefined) {
             record = await dataHelper.read(field.ogg, {description: value});                        
           }
           if (record.code === undefined) {
-            helper.snackBar("Code or description specified in field with label " + field.text + " is not valid");
+            helper.alert("Code or description specified in field with label " + field.text + " is not valid");
             return false;
           }
           else {
@@ -155,7 +155,7 @@ class SmeupScriptingServices {
         validateRequiredField: function(field) {
           var value = field.value;
           if (value === undefined || value === null || value.trim() === '') {
-            helper.snackBar("Field with label " + field.text + ' is required');
+            helper.alert("Field with label " + field.text + ' is required');
             return false;
           }
           else {
@@ -164,7 +164,10 @@ class SmeupScriptingServices {
         },
         snackBar: function(message) {
           sendMessage('Helper', JSON.stringify(['snackBar', message]));
-        }            
+        },
+        alert: function(message) {
+          sendMessage('Helper', JSON.stringify(['alert', message]));
+        },
       }
       """;
 
@@ -172,8 +175,18 @@ class SmeupScriptingServices {
     js.enableHandlePromises();
 
     js.onMessage('Helper', (dynamic args) async {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(args[1])));
+      switch (args[0]) {
+        case 'snackBar':
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(duration: Duration(seconds: 3), content: Text(args[1])));
+          break;
+        case 'alert':
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: Duration(seconds: 3),
+            backgroundColor: Colors.red.shade700,
+            content: Text(args[1]),
+          ));
+      }
     });
 
     js.onMessage('DataHelper', (dynamic args) async {
