@@ -47,21 +47,14 @@ import '../models/fun.dart';
 /// ```
 /// Required fields
 /// ```javascript
-/// var validated = helper.validateRequiredField(fieldId, variables);
+/// var validated = helper.validateRequiredField(field, variables);
 /// ```
 ///
-/// In the example below we check a field named surname in a map named variables,
-/// if field is empty or missing, "validated" variable value will be false
-///
-/// ```javascript
-/// var validated = helper.validateRequiredField('surname', variables);
-/// ```
-
 ///
 /// How to implement a field validation script
 /// All functions must have this signature and returns always a boolean value
 /// ```javascript
-/// async validate(fieldId, variables);
+/// async validate(field, variables);
 /// ```
 /// fieldId is the field identifier, and variables is a map which contains all
 /// form variables
@@ -69,8 +62,8 @@ import '../models/fun.dart';
 /// In the example below we'll use all snippets previously described
 ///
 /// ```javascript
-/// async function validate(fieldId, variables) {
-///   var validated = helper.validateRequiredField(fieldId, variables);
+/// async function validate(field, variables) {
+///   var validated = helper.validateRequiredField(field);
 ///   if (validated) {
 ///     var record = await dataHelper.read('locked-surnames', {surname: variables.surname});
 ///     validated = record.surname != variables.surname;
@@ -124,7 +117,7 @@ class SmeupScriptingServices {
           });
           return staticPromise;
         },
-      }
+      };
 
       const dataHelper = {
         insert: async function(collection, data) {
@@ -142,12 +135,27 @@ class SmeupScriptingServices {
           sendMessage('DataHelper', JSON.stringify([staticPromise.promiseId, 'readFake', collection, filters]));
           return staticPromise.promise;
         },        
-      }
+      };
+
       const helper = {
-        validateRequiredField: function(fieldId, variables) {
-          var value = variables[fieldId];          
+        validateObject: async function(field) {
+          var value = field.value;
+          var record = await dataHelper.read(field.ogg, {code: value});
+          if (record.code === undefined) {
+            record = await dataHelper.read(field.ogg, {description: value});                        
+          }
+          if (record.code === undefined) {
+            helper.snackBar("Code or description specified in field with label " + field.text + " is not valid");
+            return false;
+          }
+          else {
+            return true;
+          }
+        },
+        validateRequiredField: function(field) {
+          var value = field.value;
           if (value === undefined || value === null || value.trim() === '') {
-            helper.snackBar(fieldId + ' is required');
+            helper.snackBar("Field with label " + field.text + ' is required');
             return false;
           }
           else {
@@ -234,11 +242,11 @@ class SmeupScriptingServices {
       {required BuildContext context,
       GlobalKey<FormState>? formKey,
       required GlobalKey<ScaffoldState> scaffoldKey,
-      required String fieldId,
-      required String script}) async {
-    if (formKey == null) {
+      Map? field,
+      String? script}) async {
+    if (formKey == null || field == null || script == null) {
       SmeupLogService.writeDebugMessage(
-          "Unable to validate because formKey is not specified",
+          "Unable to validate because formKey or fieldId or script is not specified",
           logType: LogType.error);
       return false;
     }
@@ -251,10 +259,11 @@ class SmeupScriptingServices {
           .toString()
           .replaceFirst(formKey.hashCode.toString() + "_", "")] = value;
     });
+    field["value"] = jsMap[field["code"]];
 
-    var code = """        
-        $script;
-        validate('$fieldId', JSON.parse('${json.encode(jsMap)}'));
+    var code = """                
+        $script
+        validate(JSON.parse('${json.encode(field)}'), JSON.parse('${json.encode(jsMap)}'));        
         """;
 
     var asyncResult = await js.evaluateAsync(code);

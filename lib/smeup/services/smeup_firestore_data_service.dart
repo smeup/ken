@@ -247,6 +247,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
                 "name": inputPanelField["code"],
                 "ogg": inputPanelField["ogg"],
                 "value": inputPanelField["value"],
+                "validation": inputPanelField["validation"]
               };
             }
           }

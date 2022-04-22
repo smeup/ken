@@ -89,6 +89,7 @@ class SmeupInputPanelDao extends SmeupDao {
             // descriptionField: column["descriptionField"],
             fun: column["fun"],
             visible: column["IO"] != 'H',
+            validation: _getRowFieldValidation(row, column["code"]),
             isFirestore: isFirestore))
         .toList();
 
@@ -118,6 +119,12 @@ class SmeupInputPanelDao extends SmeupDao {
     final rowField = _getRowField(row, columnCode);
     final obj = rowField['value'];
     return obj;
+  }
+
+  static String _getRowFieldValidation(Map? row, String columnCode) {
+    final rowField = _getRowField(row, columnCode);
+    final obj = rowField['validation'];
+    return obj == null ? "" : obj;
   }
 
   static Map _getRowField(Map? row, String columnCode) {
