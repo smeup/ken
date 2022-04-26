@@ -53,7 +53,7 @@ class SmeupInputPanel extends StatefulWidget
       this.onSubmit})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
-    SmeupVariablesService.setVariable("inputPanelId", id);
+    SmeupVariablesService.setVariable("inputPanelId", id, formKey: formKey);
   }
 
   SmeupInputPanel.withController(

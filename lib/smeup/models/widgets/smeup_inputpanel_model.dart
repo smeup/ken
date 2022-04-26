@@ -61,7 +61,7 @@ class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
     height =
         SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 
-    SmeupVariablesService.setVariable("inputPanelId", id);
+    SmeupVariablesService.setVariable("inputPanelId", id, formKey: formKey);
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
