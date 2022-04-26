@@ -39,6 +39,7 @@ class SmeupInputPanelField {
   String? descriptionField;
   String? object;
   bool isFirestore;
+  String? validation;
 
   SmeupInputPanelField(
       {this.label = "",
@@ -52,7 +53,8 @@ class SmeupInputPanelField {
       this.position = 0,
       this.codeField,
       this.descriptionField,
-      this.isFirestore = false})
+      this.isFirestore = false,
+      this.validation})
       : assert(position >= 0) {
     _setDefaults();
   }

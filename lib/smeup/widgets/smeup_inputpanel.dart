@@ -22,6 +22,8 @@ import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
+import '../services/smeup_scripting_services.dart';
+
 // ignore: must_be_immutable
 class SmeupInputPanel extends StatefulWidget
     with SmeupWidgetMixin
@@ -326,6 +328,9 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
             field.value.code = option['code'];
             field.value.description = option['value'];
           },
+          clientOnChange: (value) {
+            field.value.code = value;
+          },
         ),
       ],
     );
@@ -372,15 +377,25 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
   }
 
   Future<bool> _validate() async {
-    // TODO foreach field with validation string not empty call this
-
-    // SmeupScriptingServices.validate(
-    //     context: context,
-    //     formKey: widget.formKey,
-    //     scaffoldKey: widget.scaffoldKey,
-    //     fieldId: "fieldId",
-    //     script: "script");
-
-    return true;
+    bool validated = true;
+    for (var field in (_model?.fields)!) {
+      if (field.validation != null && field.validation?.trim() != "") {
+        validated = validated &&
+            await SmeupScriptingServices.validate(
+                context: context,
+                formKey: widget.formKey,
+                scaffoldKey: widget.scaffoldKey,
+                field: {
+                  "code": field.id,
+                  "ogg": field.object,
+                  "text": field.label
+                },
+                script: field.validation);
+        if (!validated) {
+          return false;
+        }
+      }
+    }
+    return validated;
   }
 }
