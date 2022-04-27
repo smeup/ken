@@ -42,8 +42,6 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         return await deleteDocument(fun);
       case "WRITE.DOCUMENT":
         return await writeDocument(fun);
-      case "WRITE.INPUT.PANEL":
-        return await writeInputPanel(fun);
       default:
         final message =
             'SmeupFirestoreDataService.invoke: function not implemented ${fun.toString()}';
@@ -188,39 +186,30 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
       final collection =
           list.firstWhereOrNull((element) => element['key'] == 'collection');
-
-      final name = SmeupVariablesService.getVariable("inputPanelId",
-          formKey: smeupFun.formKey);
-
-      final condition =
-          list.firstWhereOrNull((element) => element['key'] == 'condition');
-      final fieldName =
-          list.firstWhereOrNull((element) => element['key'] == 'fieldName');
+      final fields =
+          list.firstWhereOrNull((element) => element['key'] == 'fields');
+      final conditionValue = list
+          .firstWhereOrNull((element) => element['key'] == 'conditionValue');
+      final conditionField = list
+          .firstWhereOrNull((element) => element['key'] == 'conditionField');
       var hasCondition = false;
+      if (conditionValue != null &&
+          conditionValue.toString().isNotEmpty &&
+          conditionField != null &&
+          conditionField.toString().isNotEmpty) {
+        hasCondition = true;
+      }
 
       if (collection == null || collection.toString().isEmpty) {
         checkResult = 'The collection is empty. FUN: $smeupFun';
-      }
-      if (name == null || name.toString().isEmpty) {
-        checkResult = 'The collection is empty. FUN: $smeupFun';
-      }
-
-      if (fieldName != null && fieldName.toString().isNotEmpty) {
-        hasCondition = true;
       }
 
       if (checkResult.isNotEmpty) {
         return _getErrorResponse(checkResult);
       }
 
-      Query<Map<String, dynamic>> query = fsDatabase
-          .collection(collection!['value'])
-          .where('name', isEqualTo: name);
-
-      if (hasCondition) {
-        query = query.where("fieldName", isEqualTo: fieldName!['value']);
-        query = query.where("condition", isEqualTo: condition!['value']);
-      }
+      Query<Map<String, dynamic>> query =
+          fsDatabase.collection(collection!['value']);
 
       QuerySnapshot<Map<String, dynamic>> snapshot = await query.get(options);
 
@@ -235,26 +224,58 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         responseData["columns"] = [];
         responseData["rows"] = [];
 
+        var responseRow = Map();
+
         if ((res['rows'] as List).isNotEmpty) {
-          dynamic row = res['rows'][0];
-          List fields = row['fields'];
-          var responseRow = Map();
-          responseRow["fields"] = Map();
-          if (fields.isNotEmpty) {
-            for (var inputPanelField in fields) {
-              (responseData["columns"] as List).add({
-                "code": inputPanelField["code"],
-                "IO": inputPanelField["io"],
-                "text": inputPanelField["text"]
-              });
-              responseRow["fields"][inputPanelField["code"]] = {
-                "name": inputPanelField["code"],
-                "ogg": inputPanelField["ogg"],
-                "value": inputPanelField["value"],
-                "validation": inputPanelField["validation"]
-              };
-            }
+          var fieldsArray = [];
+          if (fields != null && fields.toString().isNotEmpty) {
+            fieldsArray = fields['value'].toString().split(';');
           }
+
+          List cnd = [];
+
+          if (hasCondition) {
+            try {
+              Query<Map<String, dynamic>> queryCondition =
+                  fsDatabase.collection('inventoryConditions');
+              queryCondition = queryCondition.where("conditionValue",
+                  isEqualTo: conditionValue!['value']);
+              queryCondition = queryCondition.where("conditionField",
+                  isEqualTo: conditionField!['value']);
+              QuerySnapshot<Map<String, dynamic>> snapshotCondition =
+                  await queryCondition.get(options);
+              final resCondition =
+                  getTransformer()!.transform(smeupFun, snapshotCondition);
+              final conditionList = resCondition!['rows'] as List;
+              if (conditionList.isNotEmpty)
+                cnd = conditionList[0]['fields'].toString().split(';');
+            } catch (e) {}
+          }
+
+          responseRow["fields"] = Map();
+
+          for (var row in (res['rows'] as List)) {
+            if (hasCondition) {
+              if (!cnd.contains(row["code"])) {
+                continue;
+              }
+            } else {
+              if (!fieldsArray.contains(row["code"])) {
+                continue;
+              }
+            }
+
+            (responseData["columns"] as List).add(
+                {"code": row["code"], "IO": row["io"], "text": row["text"]});
+
+            responseRow["fields"][row["code"]] = {
+              "name": row["code"],
+              "ogg": row["ogg"],
+              "value": row["value"],
+              "validation": row["validation"]
+            };
+          }
+
           (responseData["rows"] as List).add(responseRow);
         }
       } else {
@@ -581,11 +602,6 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
               statusCode: HttpStatus.badRequest,
               requestOptions: RequestOptions(path: '')));
     }
-  }
-
-  Future<SmeupServiceResponse> writeInputPanel(Fun smeupFun) async {
-    //smeupFun.parameters.add();
-    return writeDocument(smeupFun);
   }
 
   SmeupServiceResponse _getErrorResponse(String message) {
