@@ -255,7 +255,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
             if (code.isNotEmpty && _data != null) {
               var currel = _data.firstWhere(
                   (element) => element['code'].toString() == code,
-                  orElse: () => null);
+                  orElse: () => null as Map<String, String?>);
               if (currel != null) {
                 textEditingController.text = currel['value'];
               }

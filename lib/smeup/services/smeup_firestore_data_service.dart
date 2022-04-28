@@ -188,20 +188,32 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
           list.firstWhereOrNull((element) => element['key'] == 'collection');
       final fields =
           list.firstWhereOrNull((element) => element['key'] == 'fields');
-      final conditionValue = list
-          .firstWhereOrNull((element) => element['key'] == 'conditionValue');
-      final conditionField = list
-          .firstWhereOrNull((element) => element['key'] == 'conditionField');
-      var hasCondition = false;
-      if (conditionValue != null &&
-          conditionValue.toString().isNotEmpty &&
-          conditionField != null &&
-          conditionField.toString().isNotEmpty) {
-        hasCondition = true;
-      }
+      final id = list.firstWhereOrNull((element) => element['key'] == 'id');
+      final idCollection =
+          list.firstWhereOrNull((element) => element['key'] == 'idCollection');
 
       if (collection == null || collection.toString().isEmpty) {
         checkResult = 'The collection is empty. FUN: $smeupFun';
+      }
+
+      var isModify = false;
+      var isIdPresent = false;
+      var isIdCollectionPresent = false;
+      if (id != null && id.toString().isNotEmpty) {
+        isIdPresent = true;
+      }
+      if (idCollection != null && idCollection.toString().isNotEmpty) {
+        isIdCollectionPresent = true;
+      }
+
+      if (isIdPresent & !isIdCollectionPresent ||
+          !isIdPresent & isIdCollectionPresent) {
+        checkResult =
+            'The idCollection and id must be either empty or filled. FUN: $smeupFun';
+      }
+
+      if (isIdPresent & isIdCollectionPresent) {
+        isModify = true;
       }
 
       if (checkResult.isNotEmpty) {
@@ -227,12 +239,24 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         var responseRow = Map();
 
         if ((res['rows'] as List).isNotEmpty) {
-          var fieldsArray = [];
+          List fieldsArray = [];
+          List cnd = [];
+
           if (fields != null && fields.toString().isNotEmpty) {
             fieldsArray = fields['value'].toString().split(';');
           }
 
-          List cnd = [];
+          final conditionValue = list.firstWhereOrNull(
+              (element) => element['key'] == 'conditionValue');
+          final conditionField = list.firstWhereOrNull(
+              (element) => element['key'] == 'conditionField');
+          var hasCondition = false;
+          if (conditionValue != null &&
+              conditionValue.toString().isNotEmpty &&
+              conditionField != null &&
+              conditionField.toString().isNotEmpty) {
+            hasCondition = true;
+          }
 
           if (hasCondition) {
             try {
@@ -252,26 +276,73 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
             } catch (e) {}
           }
 
+          var idRow = {};
+          if (isModify) {
+            DocumentSnapshot<Map<String, dynamic>> snapshotDocument =
+                await fsDatabase
+                    .collection(idCollection!['value'])
+                    .doc(id!['value'])
+                    .get(options);
+            final resId =
+                getTransformer()!.transform(smeupFun, snapshotDocument);
+            idRow = resId!['rows'][0];
+          }
+
           responseRow["fields"] = Map();
 
+          var positions = List<dynamic>.empty(growable: true);
           for (var row in (res['rows'] as List)) {
-            if (hasCondition) {
-              if (!cnd.contains(row["code"])) {
+            int position = 0;
+
+            if (cnd.isNotEmpty || fieldsArray.isNotEmpty) {
+              bool isCnd = false;
+              bool isFields = false;
+              if (cnd.contains(row["code"]))
+                isCnd = true;
+              else if (fieldsArray.contains(row["code"])) isFields = true;
+
+              if (!isCnd & !isFields) {
                 continue;
               }
-            } else {
-              if (!fieldsArray.contains(row["code"])) {
-                continue;
-              }
+
+              if (isFields)
+                position = fieldsArray.indexOf(row["code"]) + 1;
+              else
+                position = fieldsArray.length + cnd.indexOf(row["code"]) + 1;
             }
 
-            (responseData["columns"] as List).add(
-                {"code": row["code"], "IO": row["io"], "text": row["text"]});
+            if (position == 0) {
+              position = int.tryParse(row['id']) ?? 0;
+            }
+            positions.add({"code": row["code"], "position": position});
+          }
+
+          for (var row in (res['rows'] as List)) {
+            Map<String, dynamic>? col = positions.firstWhere(
+                (element) => element['code'] == row["code"],
+                orElse: () => null);
+            if (col == null) {
+              continue;
+            }
+
+            (responseData["columns"] as List).add({
+              "code": row["code"],
+              "IO": row["io"],
+              "text": row["text"],
+              "position": col['position']
+            });
+
+            var value = '';
+            if (isModify) {
+              value = idRow[row["code"]] ?? '';
+            } else {
+              value = row["value"] ?? '';
+            }
 
             responseRow["fields"][row["code"]] = {
               "name": row["code"],
               "ogg": row["ogg"],
-              "value": row["value"],
+              "value": value,
               "validation": row["validation"]
             };
           }

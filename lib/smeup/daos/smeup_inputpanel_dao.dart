@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:collection';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/widgets/smeup_input_panel_field.dart';
-import 'package:ken/smeup/models/widgets/smeup_inputpanel_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_input_panel_value.dart';
+import 'package:ken/smeup/models/widgets/smeup_input_panel_model.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_firestore_data_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:xml/xml.dart';
 
 import '../models/fun.dart';
@@ -35,6 +36,7 @@ class SmeupInputPanelDao extends SmeupDao {
       await _applyLayout(
           model.fields!, layoutData["data"], formKey, scaffoldKey, context);
     }
+    model.fields!.sort((a, b) => a.position.compareTo(b.position));
     SmeupDataService.decrementDataFetch(model.id);
   }
 
@@ -87,6 +89,7 @@ class SmeupInputPanelDao extends SmeupDao {
             component: _getFieldComponent(column["IO"]),
             // codeField: column["valueField"],
             // descriptionField: column["descriptionField"],
+            position: SmeupUtilities.getInt(column["position"]) ?? 0,
             fun: column["fun"],
             visible: column["IO"] != 'H',
             validation: _getRowFieldValidation(row, column["code"]),
@@ -230,7 +233,7 @@ class SmeupInputPanelDao extends SmeupDao {
         }
       }
     }
-    fields.sort((a, b) => a.position.compareTo(b.position));
+    //fields.sort((a, b) => a.position.compareTo(b.position));
   }
 
   static Future<List<SmeupInputPanelValue>?> _getComboData(

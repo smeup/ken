@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/daos/smeup_inputpanel_dao.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:ken/smeup/models/widgets/smeup_input_panel_field.dart';
+import 'package:ken/smeup/models/widgets/smeup_input_panel_value.dart';
 import 'package:ken/smeup/models/widgets/smeup_combo_item_model.dart';
-import 'package:ken/smeup/models/widgets/smeup_inputpanel_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_input_panel_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
@@ -320,6 +320,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
           label: field.label,
           id: field.id,
           valueField: "value",
+          defaultValue: field.id,
           data: field.items!
               .map((e) => {"code": e.code, "value": e.description})
               .toList(),

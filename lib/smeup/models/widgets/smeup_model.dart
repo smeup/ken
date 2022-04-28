@@ -23,6 +23,7 @@ abstract class SmeupModel {
   dynamic optionsType;
   LinkedHashMap<String, dynamic>? optionsDefault;
   String? title = '';
+  String? cmp = '';
   SmeupModel? parent;
 
   late List<Dynamism> dynamisms;
@@ -56,6 +57,7 @@ abstract class SmeupModel {
     type = myJsonMap['type'];
     dynamisms = Dynamism.getDynamismsList(myJsonMap['dynamisms'] ?? []);
     smeupFun = Fun(myJsonMap['fun'], formKey, scaffoldKey, context);
+    cmp = myJsonMap['cmp'];
 
     switch (myJsonMap['load']) {
       case 'D':

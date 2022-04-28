@@ -41,7 +41,7 @@ import '../models/widgets/smeup_datepicker_model.dart';
 import '../models/widgets/smeup_gauge_model.dart';
 import '../models/widgets/smeup_image_list_model.dart';
 import '../models/widgets/smeup_image_model.dart';
-import '../models/widgets/smeup_inputpanel_model.dart';
+import '../models/widgets/smeup_input_panel_model.dart';
 import '../models/widgets/smeup_label_model.dart';
 import '../models/widgets/smeup_line_model.dart';
 import '../models/widgets/smeup_list_box_model.dart';

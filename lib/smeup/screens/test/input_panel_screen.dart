@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/widgets/smeup_input_panel_field.dart';
+import 'package:ken/smeup/models/widgets/smeup_input_panel_value.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/widgets/smeup_inputpanel.dart';
