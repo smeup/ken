@@ -9,6 +9,7 @@ import 'package:ken/smeup/services/SmeupLocalizationService.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
+import 'package:ken/smeup/services/smeup_firestore_data_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_message_data_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
@@ -45,6 +46,7 @@ class SmeupBox extends StatefulWidget {
   final TextStyle? textStyle;
   final TextStyle? captionStyle;
   final Function? onSizeChanged;
+  final bool? isFirestore;
 
   SmeupBox(this.scaffoldKey, this.formKey, this.index,
       {this.id,
@@ -66,7 +68,8 @@ class SmeupBox extends StatefulWidget {
       this.cardTheme,
       this.textStyle,
       this.captionStyle,
-      this.onSizeChanged});
+      this.onSizeChanged,
+      this.isFirestore});
 
   @override
   _SmeupBoxState createState() => _SmeupBoxState();
@@ -253,51 +256,23 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
-                  height: widget.height,
-                  child: Row(
-                    children: () {
-                      var listOfRows = List<Widget>.empty(growable: true);
-
-                      cols!.forEach((col) {
-                        if (col['IO'] != 'H' &&
-                            !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']].toString();
-
-                          final colWidget = Expanded(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(rowData, style: widget.textStyle),
-                            ),
-                          );
-
-                          listOfRows.add(colWidget);
-                        }
-                      });
-
-                      Widget widgetImg = FutureBuilder<Widget>(
-                          future: _getImage(data),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<Widget> snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return SmeupWait(
-                                  widget.scaffoldKey, widget.formKey);
+                    height: widget.height,
+                    child: FutureBuilder<Widget>(
+                        future: _getImageAndData(data, cols),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<Widget> snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return SmeupWait(
+                                widget.scaffoldKey, widget.formKey);
+                          } else {
+                            if (snapshot.hasError) {
+                              return SmeupNotAvailable();
                             } else {
-                              if (snapshot.hasError) {
-                                return SmeupNotAvailable();
-                              } else {
-                                return snapshot.data!;
-                              }
+                              return snapshot.data!;
                             }
-                          });
-
-                      return [
-                        widgetImg,
-                        Expanded(child: Column(children: listOfRows))
-                      ];
-                    }(),
-                  ),
-                ))),
+                          }
+                        })))),
       );
     }
 
@@ -326,10 +301,10 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                     children: () {
                       var listOfRows = List<Widget>.empty(growable: true);
 
-                      cols!.forEach((col) {
+                      cols!.forEach((col) async {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']].toString();
+                          String rowData = await _getBoxData(data, col);
 
                           final colWidget = Container(
                               padding: EdgeInsets.all(1),
@@ -388,10 +363,10 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                     children: () {
                       var listOfRows = List<Widget>.empty(growable: true);
 
-                      cols!.forEach((col) {
+                      cols!.forEach((col) async {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']].toString();
+                          String rowData = await _getBoxData(data, col);
 
                           final colWidget = Expanded(
                             child: Align(
@@ -437,10 +412,10 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                     children: () {
                       var widgets = List<Widget>.empty(growable: true);
 
-                      cols!.forEach((col) {
+                      cols!.forEach((col) async {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']].toString();
+                          String rowData = await _getBoxData(data, col);
 
                           final textWidget = Container(
                             padding: EdgeInsets.all(1),
@@ -513,10 +488,10 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                     children: () {
                       var listOfRows = List<Widget>.empty(growable: true);
 
-                      cols!.forEach((col) {
+                      cols!.forEach((col) async {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']].toString();
+                          String rowData = await _getBoxData(data, col);
 
                           final colWidget = Container(
                               padding: EdgeInsets.all(1),
@@ -577,9 +552,9 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                     children: () {
                       var listOfRows = List<Widget>.empty(growable: true);
 
-                      cols!.forEach((col) {
+                      cols!.forEach((col) async {
                         if (col['IO'] != 'H') {
-                          String rowData = data[col['code']].toString();
+                          String rowData = await _getBoxData(data, col);
                           if (rowData.isNotEmpty) {
                             final colWidget = Expanded(
                               child: Align(
@@ -644,10 +619,10 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                     children: () {
                       var listOfRows = List<Widget>.empty(growable: true);
 
-                      cols!.forEach((col) {
+                      cols!.forEach((col) async {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']].toString();
+                          String rowData = await _getBoxData(data, col);
 
                           final colWidget = Expanded(
                             child: Align(
@@ -679,8 +654,6 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                               }
                             }
                           });
-
-                      //await _getImage(data);
 
                       return [
                         widgetImg,
@@ -782,6 +755,30 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
       widgetImg = _getSmeupImage(data);
     }
     return widgetImg ?? Container();
+  }
+
+  Future<Widget> _getImageAndData(dynamic data, cols) async {
+    Widget? widgetImg = await _getImage(data);
+
+    var listOfRows = List<Widget>.empty(growable: true);
+
+    for (var col in cols) {
+      if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
+        String rowData = await _getBoxData(data, col);
+        final colWidget = Expanded(
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(rowData, style: widget.textStyle),
+          ),
+        );
+
+        listOfRows.add(colWidget);
+      }
+    }
+
+    return Row(
+      children: [widgetImg, Expanded(child: Column(children: listOfRows))],
+    );
   }
 
   Widget? _getSmeupImage(data) {
@@ -934,5 +931,40 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     }
 
     return _columns;
+  }
+
+  Future<String> _getBoxData(Map data, Map col) async {
+    //return 'sss';
+    try {
+      if (widget.isFirestore! && col['cmp'] != null && col['ogg'] != null) {
+        switch (col['cmp']) {
+          case 'dec':
+            Fun smeupFun = Fun.empty();
+
+            smeupFun.identifier.component = 'TRE';
+            smeupFun.identifier.service =
+                SmeupDataService.services.entries.firstWhere((element) {
+              return element.value is SmeupFirestoreDataService;
+            }).key;
+            smeupFun.identifier.function = 'GET.DOCUMENTS';
+            smeupFun.parameters
+                .add({'key': 'dataCollection', 'value': col['ogg']});
+            final code = data[col['code']];
+            smeupFun.parameters.add({'key': 'filters', 'value': 'code($code)'});
+            final smeupServiceResponse =
+                await SmeupDataService.invoke(smeupFun);
+
+            if (smeupServiceResponse.succeded) {
+              final rows = smeupServiceResponse.result.data['rows'] as List;
+              if (rows.length > 0) {
+                return rows[0]['description'];
+              }
+            }
+            break;
+        }
+      }
+    } catch (e) {}
+
+    return data[col['code']].toString();
   }
 }

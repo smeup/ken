@@ -60,9 +60,6 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       final dataCollection = list
           .firstWhereOrNull((element) => element['key'] == 'dataCollection');
 
-      final fieldsCollection = list
-          .firstWhereOrNull((element) => element['key'] == 'fieldsCollection');
-
       final filters =
           list.firstWhereOrNull((element) => element['key'] == 'filters');
 
@@ -112,8 +109,32 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         responseData = _getErrorResponse(message);
       }
 
+      final fieldsCollection = list
+          .firstWhereOrNull((element) => element['key'] == 'fieldsCollection');
+
       if (_isParValid(fieldsCollection)) {
-        //(responseData["columns"] as List)
+        try {
+          Query<Map<String, dynamic>> queryFields =
+              fsDatabase.collection(fieldsCollection!['value']);
+          QuerySnapshot<Map<String, dynamic>> snapshotFields =
+              await queryFields.get(options);
+          final resFields =
+              getTransformer()!.transform(smeupFun, snapshotFields);
+          final fieldsList = resFields!['rows'] as List;
+          if (fieldsList.isNotEmpty) {
+            (responseData["columns"] as List).forEach((col) {
+              var field = fieldsList.firstWhere(
+                  (element) => element['code'] == col['code'],
+                  orElse: () => null);
+              if (field != null) {
+                col['cmp'] = field['cmp'];
+                col['text'] = field['text'];
+                col['ogg'] = field['ogg'];
+                col['IO'] = field['io'] == 'H' ? 'H' : 'O';
+              }
+            });
+          }
+        } catch (e) {}
       }
 
       return SmeupServiceResponse(
@@ -474,7 +495,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       var formFields = Map<String, dynamic>();
 
       for (var field in list) {
-        if (field['key'] == 'collection') continue;
+        if (field['key'] == 'dataCollection') continue;
         if (field['key'] == 'id') continue;
         formFields[field['key']] = field['value'];
       }
@@ -617,7 +638,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     var formFields = Map<String, dynamic>();
 
     for (var field in list) {
-      if (field['key'] == 'collection') continue;
+      if (field['key'] == 'dataCollection') continue;
       formFields[field['key']] = field['value'];
     }
 

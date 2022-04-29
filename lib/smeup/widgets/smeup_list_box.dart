@@ -523,6 +523,7 @@ class _SmeupListBoxState extends State<SmeupListBox>
         textStyle: textStyle,
         captionStyle: captionStyle,
         onSizeChanged: onSizeChanged,
+        isFirestore: _model!.isFirestore(),
       );
 
       cells.add(cell);

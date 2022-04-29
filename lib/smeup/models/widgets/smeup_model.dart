@@ -6,6 +6,9 @@ import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 
+import '../../services/smeup_data_service.dart';
+import '../../services/smeup_data_service_interface.dart';
+import '../../services/smeup_firestore_data_service.dart';
 import '../fun.dart';
 
 enum LoadType { Immediate, Delay }
@@ -106,5 +109,16 @@ abstract class SmeupModel {
     map.entries.forEach((element) {
       linkedHashMap![element.key] = element.value;
     });
+  }
+
+  bool isFirestore() {
+    var isFirestore = false;
+    SmeupDataServiceInterface? smeupDataService =
+        SmeupDataService.getServiceImplementation(
+            smeupFun == null ? null : smeupFun!.identifier.service);
+    if (smeupDataService is SmeupFirestoreDataService) {
+      isFirestore = true;
+    }
+    return isFirestore;
   }
 }
