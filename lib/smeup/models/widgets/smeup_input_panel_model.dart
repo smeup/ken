@@ -6,6 +6,8 @@ import 'package:ken/smeup/models/widgets/smeup_model.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 
+import '../../services/smeup_variables_service.dart';
+
 class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const double defaultFontSize = 16.0;
@@ -62,6 +64,9 @@ class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         await SmeupInputPanelDao.getData(this, formKey, scaffoldKey, context);
+        fields?.forEach((field) => SmeupVariablesService.setVariable(
+            field.id, field.value.code,
+            formKey: formKey));
       };
     }
 
