@@ -68,7 +68,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
       final sort = list.firstWhereOrNull((element) => element['key'] == 'sort');
 
-      if (dataCollection == null || dataCollection.toString().isEmpty) {
+      if (!_isParValid(dataCollection)) {
         checkResult = 'The dataCollection is empty. FUN: $smeupFun';
       }
 
@@ -79,8 +79,8 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       Query<Map<String, dynamic>> query =
           fsDatabase.collection(dataCollection!['value']);
 
-      if (filters != null && filters.toString().isNotEmpty) {
-        var parmsSplit = Fun.splitParameters(filters['value']);
+      if (_isParValid(filters)) {
+        var parmsSplit = Fun.splitParameters(filters!['value']);
         parmsSplit.forEach((element) {
           Map ds = Fun.deserilizeParameter(element);
           final key = ds['key'];
@@ -89,8 +89,8 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         });
       }
 
-      if (sort != null && sort.toString().isNotEmpty) {
-        var parmsSplit = Fun.splitParameters(sort['value']);
+      if (_isParValid(sort)) {
+        var parmsSplit = Fun.splitParameters(sort!['value']);
         parmsSplit.forEach((element) {
           Map ds = Fun.deserilizeParameter(element);
           final key = ds['key'];
@@ -112,7 +112,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         responseData = _getErrorResponse(message);
       }
 
-      if (fieldsCollection != null && fieldsCollection.toString().isEmpty) {
+      if (_isParValid(fieldsCollection)) {
         //(responseData["columns"] as List)
       }
 
@@ -129,6 +129,10 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     }
   }
 
+  bool _isParValid(dynamic par) {
+    return par != null || par.toString().isEmpty;
+  }
+
   Future<SmeupServiceResponse> getDocument(Fun smeupFun) async {
     try {
       List<Map<String, dynamic>> list = smeupFun.parameters;
@@ -142,11 +146,11 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
       final id = list.firstWhereOrNull((element) => element['key'] == 'id');
 
-      if (dataCollection == null || dataCollection.toString().isEmpty) {
+      if (!_isParValid(dataCollection)) {
         checkResult = 'The dataCollection is empty. FUN: $smeupFun';
       }
 
-      if (id == null || id.toString().isEmpty) {
+      if (!_isParValid(id)) {
         checkResult = 'The id is empty. FUN: $smeupFun';
       }
 
@@ -199,17 +203,17 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       final dataCollection = list
           .firstWhereOrNull((element) => element['key'] == 'dataCollection');
 
-      if (fieldsCollection == null || fieldsCollection.toString().isEmpty) {
+      if (!_isParValid(fieldsCollection)) {
         checkResult = 'The fieldsCollection is empty. FUN: $smeupFun';
       }
 
       var isModify = false;
       var isIdPresent = false;
       var isDataCollectionPresent = false;
-      if (id != null && id.toString().isNotEmpty) {
+      if (_isParValid(id)) {
         isIdPresent = true;
       }
-      if (dataCollection != null && dataCollection.toString().isNotEmpty) {
+      if (_isParValid(dataCollection)) {
         isDataCollectionPresent = true;
       }
 
@@ -249,8 +253,8 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
           List fieldsArray = [];
           List cnd = [];
 
-          if (fields != null && fields.toString().isNotEmpty) {
-            fieldsArray = fields['value'].toString().split(';');
+          if (_isParValid(fields)) {
+            fieldsArray = fields!['value'].toString().split(';');
           }
 
           final conditionValue = list.firstWhereOrNull(
@@ -260,12 +264,9 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
           final conditionsCollection = list.firstWhereOrNull(
               (element) => element['key'] == 'conditionsCollection');
           var hasCondition = false;
-          if (conditionValue != null &&
-              conditionValue.toString().isNotEmpty &&
-              conditionField != null &&
-              conditionField.toString().isNotEmpty &&
-              conditionsCollection != null &&
-              conditionsCollection.toString().isNotEmpty) {
+          if (_isParValid(conditionValue) &&
+              _isParValid(conditionField) &&
+              _isParValid(conditionsCollection)) {
             hasCondition = true;
           }
 
@@ -405,12 +406,11 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
             server.firstWhereOrNull((element) => element['key'] == 'fieldPath');
       }
 
-      if (fieldSettingsCollection == null ||
-          fieldSettingsCollection.toString().isEmpty) {
+      if (!_isParValid(fieldSettingsCollection)) {
         checkResult = 'The fieldSettingsCollection is empty. FUN: $smeupFun';
       }
 
-      if (fieldPath == null || fieldPath.toString().isEmpty) {
+      if (!_isParValid(fieldPath)) {
         checkResult = 'The fieldId is empty. FUN: $smeupFun';
       }
 
@@ -463,11 +463,11 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
       final id = list.firstWhereOrNull((element) => element['key'] == 'id');
 
-      if (dataCollection == null || dataCollection.toString().isEmpty) {
+      if (!_isParValid(dataCollection)) {
         checkResult = 'The dataCollection is empty. FUN: $smeupFun';
       }
 
-      if (id == null || id.toString().isEmpty) {
+      if (!_isParValid(id)) {
         checkResult = 'The id is empty. FUN: $smeupFun';
       }
 
@@ -548,11 +548,11 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       final dataCollection = list
           .firstWhereOrNull((element) => element['key'] == 'dataCollection');
 
-      if (id == null || id.toString().isEmpty) {
+      if (!_isParValid(id)) {
         checkResult = 'The id is empty. FUN: $smeupFun';
       }
 
-      if (dataCollection == null || dataCollection.toString().isEmpty) {
+      if (!_isParValid(dataCollection)) {
         checkResult = 'The dataCollection is empty. FUN: $smeupFun';
       }
 
@@ -610,7 +610,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     final dataCollection =
         list.firstWhereOrNull((element) => element['key'] == 'dataCollection');
 
-    if (dataCollection == null || dataCollection.toString().isEmpty) {
+    if (!_isParValid(dataCollection)) {
       checkResult = 'The dataCollection is empty. FUN: $smeupFun';
     }
 
