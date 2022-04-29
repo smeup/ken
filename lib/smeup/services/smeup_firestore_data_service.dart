@@ -270,13 +270,17 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
           }
 
           if (hasCondition) {
+            final conditionFieldName = conditionField!['value'];
+            final conditionFieldValue = SmeupVariablesService.getVariable(
+                conditionFieldName,
+                formKey: smeupFun.formKey);
             try {
               Query<Map<String, dynamic>> queryCondition =
                   fsDatabase.collection(conditionsCollection!['value']);
-              queryCondition = queryCondition.where("conditionValue",
-                  isEqualTo: conditionValue!['value']);
               queryCondition = queryCondition.where("conditionField",
-                  isEqualTo: conditionField!['value']);
+                  isEqualTo: conditionFieldName);
+              queryCondition = queryCondition.where("conditionValue",
+                  isEqualTo: conditionFieldValue);
               QuerySnapshot<Map<String, dynamic>> snapshotCondition =
                   await queryCondition.get(options);
               final resCondition =
