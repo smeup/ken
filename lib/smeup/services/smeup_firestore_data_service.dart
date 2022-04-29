@@ -57,16 +57,19 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       final options =
           GetOptions(source: await SmeupFirestoreShared.getSource());
 
-      final collection =
-          list.firstWhereOrNull((element) => element['key'] == 'collection');
+      final dataCollection = list
+          .firstWhereOrNull((element) => element['key'] == 'dataCollection');
+
+      final fieldsCollection = list
+          .firstWhereOrNull((element) => element['key'] == 'fieldsCollection');
 
       final filters =
           list.firstWhereOrNull((element) => element['key'] == 'filters');
 
       final sort = list.firstWhereOrNull((element) => element['key'] == 'sort');
 
-      if (collection == null || collection.toString().isEmpty) {
-        checkResult = 'The collection is empty. FUN: $smeupFun';
+      if (dataCollection == null || dataCollection.toString().isEmpty) {
+        checkResult = 'The dataCollection is empty. FUN: $smeupFun';
       }
 
       if (checkResult.isNotEmpty) {
@@ -74,7 +77,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       }
 
       Query<Map<String, dynamic>> query =
-          fsDatabase.collection(collection!['value']);
+          fsDatabase.collection(dataCollection!['value']);
 
       if (filters != null && filters.toString().isNotEmpty) {
         var parmsSplit = Fun.splitParameters(filters['value']);
@@ -109,6 +112,10 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         responseData = _getErrorResponse(message);
       }
 
+      if (fieldsCollection != null && fieldsCollection.toString().isEmpty) {
+        //(responseData["columns"] as List)
+      }
+
       return SmeupServiceResponse(
           true,
           Response(
@@ -130,13 +137,13 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       final options =
           GetOptions(source: await SmeupFirestoreShared.getSource());
 
-      final collection =
-          list.firstWhereOrNull((element) => element['key'] == 'collection');
+      final dataCollection = list
+          .firstWhereOrNull((element) => element['key'] == 'dataCollection');
 
       final id = list.firstWhereOrNull((element) => element['key'] == 'id');
 
-      if (collection == null || collection.toString().isEmpty) {
-        checkResult = 'The collection is empty. FUN: $smeupFun';
+      if (dataCollection == null || dataCollection.toString().isEmpty) {
+        checkResult = 'The dataCollection is empty. FUN: $smeupFun';
       }
 
       if (id == null || id.toString().isEmpty) {
@@ -148,7 +155,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       }
 
       DocumentSnapshot<Map<String, dynamic>> snapshot = await fsDatabase
-          .collection(collection!['value'])
+          .collection(dataCollection!['value'])
           .doc(id!['value'])
           .get(options);
 
@@ -184,35 +191,35 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       final options =
           GetOptions(source: await SmeupFirestoreShared.getSource());
 
-      final collection =
-          list.firstWhereOrNull((element) => element['key'] == 'collection');
+      final fieldsCollection = list
+          .firstWhereOrNull((element) => element['key'] == 'fieldsCollection');
       final fields =
           list.firstWhereOrNull((element) => element['key'] == 'fields');
       final id = list.firstWhereOrNull((element) => element['key'] == 'id');
-      final idCollection =
-          list.firstWhereOrNull((element) => element['key'] == 'idCollection');
+      final dataCollection = list
+          .firstWhereOrNull((element) => element['key'] == 'dataCollection');
 
-      if (collection == null || collection.toString().isEmpty) {
-        checkResult = 'The collection is empty. FUN: $smeupFun';
+      if (fieldsCollection == null || fieldsCollection.toString().isEmpty) {
+        checkResult = 'The fieldsCollection is empty. FUN: $smeupFun';
       }
 
       var isModify = false;
       var isIdPresent = false;
-      var isIdCollectionPresent = false;
+      var isDataCollectionPresent = false;
       if (id != null && id.toString().isNotEmpty) {
         isIdPresent = true;
       }
-      if (idCollection != null && idCollection.toString().isNotEmpty) {
-        isIdCollectionPresent = true;
+      if (dataCollection != null && dataCollection.toString().isNotEmpty) {
+        isDataCollectionPresent = true;
       }
 
-      if (isIdPresent & !isIdCollectionPresent ||
-          !isIdPresent & isIdCollectionPresent) {
+      if (isIdPresent & !isDataCollectionPresent ||
+          !isIdPresent & isDataCollectionPresent) {
         checkResult =
-            'The idCollection and id must be either empty or filled. FUN: $smeupFun';
+            'The idCollection and id must be both empty or filled. FUN: $smeupFun';
       }
 
-      if (isIdPresent & isIdCollectionPresent) {
+      if (isIdPresent & isDataCollectionPresent) {
         isModify = true;
       }
 
@@ -221,7 +228,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       }
 
       Query<Map<String, dynamic>> query =
-          fsDatabase.collection(collection!['value']);
+          fsDatabase.collection(fieldsCollection!['value']);
 
       QuerySnapshot<Map<String, dynamic>> snapshot = await query.get(options);
 
@@ -250,18 +257,22 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
               (element) => element['key'] == 'conditionValue');
           final conditionField = list.firstWhereOrNull(
               (element) => element['key'] == 'conditionField');
+          final conditionsCollection = list.firstWhereOrNull(
+              (element) => element['key'] == 'conditionsCollection');
           var hasCondition = false;
           if (conditionValue != null &&
               conditionValue.toString().isNotEmpty &&
               conditionField != null &&
-              conditionField.toString().isNotEmpty) {
+              conditionField.toString().isNotEmpty &&
+              conditionsCollection != null &&
+              conditionsCollection.toString().isNotEmpty) {
             hasCondition = true;
           }
 
           if (hasCondition) {
             try {
               Query<Map<String, dynamic>> queryCondition =
-                  fsDatabase.collection('inventoryConditions');
+                  fsDatabase.collection(conditionsCollection!['value']);
               queryCondition = queryCondition.where("conditionValue",
                   isEqualTo: conditionValue!['value']);
               queryCondition = queryCondition.where("conditionField",
@@ -280,7 +291,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
           if (isModify) {
             DocumentSnapshot<Map<String, dynamic>> snapshotDocument =
                 await fsDatabase
-                    .collection(idCollection!['value'])
+                    .collection(dataCollection!['value'])
                     .doc(id!['value'])
                     .get(options);
             final resId =
@@ -377,8 +388,8 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       final options =
           GetOptions(source: await SmeupFirestoreShared.getSource());
 
-      final collection = parameters
-          .firstWhereOrNull((element) => element['key'] == 'collection');
+      final fieldSettingsCollection = parameters.firstWhereOrNull(
+          (element) => element['key'] == 'fieldSettingsCollection');
 
       Map<String, dynamic>? fieldPath = Map<String, dynamic>();
 
@@ -390,8 +401,9 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
             server.firstWhereOrNull((element) => element['key'] == 'fieldPath');
       }
 
-      if (collection == null || collection.toString().isEmpty) {
-        checkResult = 'The collection is empty. FUN: $smeupFun';
+      if (fieldSettingsCollection == null ||
+          fieldSettingsCollection.toString().isEmpty) {
+        checkResult = 'The fieldSettingsCollection is empty. FUN: $smeupFun';
       }
 
       if (fieldPath == null || fieldPath.toString().isEmpty) {
@@ -403,7 +415,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       }
 
       QuerySnapshot<Map<String, dynamic>> snapshot = await fsDatabase
-          .collection(collection!['value'])
+          .collection(fieldSettingsCollection!['value'])
           //.where('key', isEqualTo: key)
           .where('fieldId', isEqualTo: fieldPath!['value'])
           .get(options);
@@ -442,13 +454,13 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       List<Map<String, dynamic>> list = smeupFun.parameters;
       var checkResult = '';
 
-      final collection =
-          list.firstWhereOrNull((element) => element['key'] == 'collection');
+      final dataCollection = list
+          .firstWhereOrNull((element) => element['key'] == 'dataCollection');
 
       final id = list.firstWhereOrNull((element) => element['key'] == 'id');
 
-      if (collection == null || collection.toString().isEmpty) {
-        checkResult = 'The collection is empty. FUN: $smeupFun';
+      if (dataCollection == null || dataCollection.toString().isEmpty) {
+        checkResult = 'The dataCollection is empty. FUN: $smeupFun';
       }
 
       if (id == null || id.toString().isEmpty) {
@@ -475,12 +487,12 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
       if (isOnLine) {
         await fsDatabase
-            .collection(collection!['value'])
+            .collection(dataCollection!['value'])
             .doc(id!['value'])
             .update(formFields);
       } else {
         fsDatabase
-            .collection(collection!['value'])
+            .collection(dataCollection!['value'])
             .doc(id!['value'])
             .update(formFields);
       }
@@ -529,15 +541,15 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
       final id = list.firstWhereOrNull((element) => element['key'] == 'id');
 
-      final collection =
-          list.firstWhereOrNull((element) => element['key'] == 'collection');
+      final dataCollection = list
+          .firstWhereOrNull((element) => element['key'] == 'dataCollection');
 
       if (id == null || id.toString().isEmpty) {
         checkResult = 'The id is empty. FUN: $smeupFun';
       }
 
-      if (collection == null || collection.toString().isEmpty) {
-        checkResult = 'The collection is empty. FUN: $smeupFun';
+      if (dataCollection == null || dataCollection.toString().isEmpty) {
+        checkResult = 'The dataCollection is empty. FUN: $smeupFun';
       }
 
       if (checkResult.isNotEmpty) {
@@ -548,11 +560,14 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
       if (isOnLine) {
         await fsDatabase
-            .collection(collection!['value'])
+            .collection(dataCollection!['value'])
             .doc(id!['value'])
             .delete();
       } else {
-        fsDatabase.collection(collection!['value']).doc(id!['value']).delete();
+        fsDatabase
+            .collection(dataCollection!['value'])
+            .doc(id!['value'])
+            .delete();
       }
 
       SmeupVariablesService.setVariable('id', '', formKey: smeupFun.formKey);
@@ -588,11 +603,11 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
   Future<SmeupServiceResponse> writeDocument(Fun smeupFun) async {
     List<Map<String, dynamic>> list = smeupFun.parameters;
     var checkResult = '';
-    final collection =
-        list.firstWhereOrNull((element) => element['key'] == 'collection');
+    final dataCollection =
+        list.firstWhereOrNull((element) => element['key'] == 'dataCollection');
 
-    if (collection == null || collection.toString().isEmpty) {
-      checkResult = 'The collection is empty. FUN: $smeupFun';
+    if (dataCollection == null || dataCollection.toString().isEmpty) {
+      checkResult = 'The dataCollection is empty. FUN: $smeupFun';
     }
 
     var formFields = Map<String, dynamic>();
@@ -614,8 +629,9 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       bool isOnLine = await SmeupFirestoreShared.isInternetOn();
 
       if (isOnLine) {
-        final docRef =
-            await fsDatabase.collection(collection!['value']).add(formFields);
+        final docRef = await fsDatabase
+            .collection(dataCollection!['value'])
+            .add(formFields);
 
         SmeupVariablesService.setVariable(
             'id', await docRef.get().then((snapshot) => snapshot.id),
@@ -637,7 +653,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
                 statusCode: HttpStatus.accepted,
                 requestOptions: RequestOptions(path: '')));
       } else {
-        fsDatabase.collection(collection!['value']).add(formFields);
+        fsDatabase.collection(dataCollection!['value']).add(formFields);
         final messages = {
           "messages": [
             {

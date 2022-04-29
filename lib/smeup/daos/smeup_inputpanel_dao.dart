@@ -157,7 +157,7 @@ class SmeupInputPanelDao extends SmeupDao {
     String funStr = '';
     if (isFirestore) {
       funStr =
-          'F(EXB;${model.smeupFun!.identifier.service};GET.DOCUMENTS) P(collection(${field.object}))';
+          'F(EXB;${model.smeupFun!.identifier.service};GET.DOCUMENTS) P(dataCollection(${field.object}))';
     } else {
       funStr = 'F(EXB;LOA10_SE;ELK.COM) 1(CN;SED;)';
     }

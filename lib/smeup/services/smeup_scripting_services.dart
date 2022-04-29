@@ -204,7 +204,7 @@ class SmeupScriptingServices {
           });
 
           Fun fun = Fun(
-              "F(FBK;FS_00_01;WRITE.DOCUMENT) NOTIFY(CLOSE()) P(collection(${args[2]}) $funParameter)",
+              "F(FBK;FS_00_01;WRITE.DOCUMENT) NOTIFY(CLOSE()) P(fieldSettingsCollection(${args[2]}) $funParameter)",
               formKey,
               scaffoldKey,
               context);
@@ -225,7 +225,7 @@ class SmeupScriptingServices {
           });
 
           Fun fun = Fun(
-              "F(EXB;FS_00_01;GET.DOCUMENTS) P(collection(${args[2]}) filters($funParameter)))",
+              "F(EXB;FS_00_01;GET.DOCUMENTS) P(dataCollection(${args[2]}) filters($funParameter)))",
               formKey,
               scaffoldKey,
               context);
