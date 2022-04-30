@@ -258,13 +258,14 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                 child: Container(
                     height: widget.height,
                     child: FutureBuilder<Widget>(
-                        future: _getImageAndData(data, cols),
+                        future: _getImageAndDataInRow(data, cols),
                         builder: (BuildContext context,
                             AsyncSnapshot<Widget> snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return SmeupWait(
-                                widget.scaffoldKey, widget.formKey);
+                            return widget.showLoader!
+                                ? SmeupWait(widget.scaffoldKey, widget.formKey)
+                                : Container();
                           } else {
                             if (snapshot.hasError) {
                               return SmeupNotAvailable();
@@ -304,7 +305,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                       cols!.forEach((col) async {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = await _getBoxData(data, col);
+                          String rowData = await _getBoxText(data, col);
 
                           final colWidget = Container(
                               padding: EdgeInsets.all(1),
@@ -366,7 +367,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                       cols!.forEach((col) async {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = await _getBoxData(data, col);
+                          String rowData = await _getBoxText(data, col);
 
                           final colWidget = Expanded(
                             child: Align(
@@ -415,7 +416,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                       cols!.forEach((col) async {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = await _getBoxData(data, col);
+                          String rowData = await _getBoxText(data, col);
 
                           final textWidget = Container(
                             padding: EdgeInsets.all(1),
@@ -491,7 +492,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                       cols!.forEach((col) async {
                         if (col['IO'] != 'H' &&
                             !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = await _getBoxData(data, col);
+                          String rowData = await _getBoxText(data, col);
 
                           final colWidget = Container(
                               padding: EdgeInsets.all(1),
@@ -548,49 +549,23 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
                   height: widget.height,
-                  child: Column(
-                    children: () {
-                      var listOfRows = List<Widget>.empty(growable: true);
-
-                      cols!.forEach((col) async {
-                        if (col['IO'] != 'H') {
-                          String rowData = await _getBoxData(data, col);
-                          if (rowData.isNotEmpty) {
-                            final colWidget = Expanded(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(rowData, style: widget.textStyle),
-                              ),
-                            );
-
-                            listOfRows.add(colWidget);
+                  child: FutureBuilder<Widget>(
+                      future: _getImageAndDataInColumn(data, cols),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<Widget> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return widget.showLoader!
+                              ? SmeupWait(widget.scaffoldKey, widget.formKey)
+                              : Container();
+                        } else {
+                          if (snapshot.hasError) {
+                            return SmeupNotAvailable();
+                          } else {
+                            return snapshot.data!;
                           }
                         }
-                      });
-
-                      Widget widgetImg = FutureBuilder<Widget>(
-                          future: _getImage(data),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<Widget> snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return SmeupWait(
-                                  widget.scaffoldKey, widget.formKey);
-                            } else {
-                              if (snapshot.hasError) {
-                                return SmeupNotAvailable();
-                              } else {
-                                return snapshot.data!;
-                              }
-                            }
-                          });
-
-                      return [
-                        widgetImg,
-                        Expanded(child: Column(children: listOfRows))
-                      ];
-                    }(),
-                  ),
+                      }),
                 ))),
       );
     }
@@ -615,52 +590,23 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
                   height: widget.height,
-                  child: Row(
-                    children: () {
-                      var listOfRows = List<Widget>.empty(growable: true);
-
-                      cols!.forEach((col) async {
-                        if (col['IO'] != 'H' &&
-                            !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = await _getBoxData(data, col);
-
-                          final colWidget = Expanded(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(rowData,
-                                  textAlign: TextAlign.center,
-                                  style: widget.textStyle),
-                            ),
-                          );
-
-                          listOfRows.add(colWidget);
+                  child: FutureBuilder<Widget>(
+                      future: _getImageAndDataInRow(data, cols),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<Widget> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return widget.showLoader!
+                              ? SmeupWait(widget.scaffoldKey, widget.formKey)
+                              : Container();
+                        } else {
+                          if (snapshot.hasError) {
+                            return SmeupNotAvailable();
+                          } else {
+                            return snapshot.data!;
+                          }
                         }
-                      });
-
-                      //return [Expanded(child: Column(children: listOfRows))];
-                      Widget widgetImg = FutureBuilder<Widget>(
-                          future: _getImage(data),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<Widget> snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return SmeupWait(
-                                  widget.scaffoldKey, widget.formKey);
-                            } else {
-                              if (snapshot.hasError) {
-                                return SmeupNotAvailable();
-                              } else {
-                                return snapshot.data!;
-                              }
-                            }
-                          });
-
-                      return [
-                        widgetImg,
-                        Expanded(child: Column(children: listOfRows))
-                      ];
-                    }(),
-                  ),
+                      }),
                 ))),
       );
     }
@@ -757,14 +703,32 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     return widgetImg ?? Container();
   }
 
-  Future<Widget> _getImageAndData(dynamic data, cols) async {
+  Future<Widget> _getImageAndDataInRow(dynamic data, cols) async {
     Widget? widgetImg = await _getImage(data);
 
+    var listOfRows = await _getBoxTexts(data, cols);
+
+    return Row(
+      children: [widgetImg, Expanded(child: Column(children: listOfRows))],
+    );
+  }
+
+  Future<Widget> _getImageAndDataInColumn(dynamic data, cols) async {
+    Widget? widgetImg = await _getImage(data);
+
+    var listOfRows = await _getBoxTexts(data, cols);
+
+    return Column(
+      children: [widgetImg, Expanded(child: Column(children: listOfRows))],
+    );
+  }
+
+  Future<List<Widget>> _getBoxTexts(dynamic data, cols) async {
     var listOfRows = List<Widget>.empty(growable: true);
 
     for (var col in cols) {
       if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
-        String rowData = await _getBoxData(data, col);
+        String rowData = await _getBoxText(data, col);
         final colWidget = Expanded(
           child: Align(
             alignment: Alignment.center,
@@ -775,10 +739,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
         listOfRows.add(colWidget);
       }
     }
-
-    return Row(
-      children: [widgetImg, Expanded(child: Column(children: listOfRows))],
-    );
+    return listOfRows;
   }
 
   Widget? _getSmeupImage(data) {
@@ -933,7 +894,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     return _columns;
   }
 
-  Future<String> _getBoxData(Map data, Map col) async {
+  Future<String> _getBoxText(Map data, Map col) async {
     //return 'sss';
     try {
       if (widget.isFirestore! && col['cmp'] != null && col['ogg'] != null) {
