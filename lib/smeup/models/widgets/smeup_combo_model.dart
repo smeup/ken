@@ -20,6 +20,9 @@ class SmeupComboModel extends SmeupInputFieldModel
   static double? defaultCaptionFontSize;
   static Color? defaultCaptionFontColor;
   static Color? defaultCaptionBackColor;
+  static Color? defaultBorderColor;
+  static double? defaultBorderWidth;
+  static double? defaultBorderRadius;
 
   // unsupported by json_theme
   static const double defaultWidth = 100;
@@ -31,6 +34,7 @@ class SmeupComboModel extends SmeupInputFieldModel
   static const Alignment defaultAlign = Alignment.centerLeft;
   static const double defaultInnerSpace = 10.0;
   static const bool defaultUnderline = false;
+  static const bool defaultShowBorder = false;
 
   double? fontSize;
   Color? fontColor;
@@ -42,6 +46,9 @@ class SmeupComboModel extends SmeupInputFieldModel
   Color? captionBackColor;
   double? iconSize;
   Color? iconColor;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
 
   bool? underline;
   double? width;
@@ -53,6 +60,7 @@ class SmeupComboModel extends SmeupInputFieldModel
   String? selectedValue;
   String? label;
   EdgeInsetsGeometry? padding;
+  bool? showBorder;
 
   SmeupComboModel(
       {id,
@@ -68,6 +76,9 @@ class SmeupComboModel extends SmeupInputFieldModel
       this.captionFontSize,
       this.captionFontColor,
       this.captionBackColor,
+      this.borderColor,
+      this.borderRadius,
+      this.borderWidth,
       this.iconSize,
       this.iconColor,
       this.underline = defaultUnderline,
@@ -80,6 +91,7 @@ class SmeupComboModel extends SmeupInputFieldModel
       this.label = defaultLabel,
       this.width = defaultWidth,
       this.height = defaultHeight,
+      this.showBorder = defaultShowBorder,
       title = ''})
       : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'cmb';
@@ -140,6 +152,16 @@ class SmeupComboModel extends SmeupInputFieldModel
     padding =
         SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
 
+    showBorder = SmeupUtilities.getBool(optionsDefault!['showborder']) ??
+        defaultShowBorder;
+    borderRadius = SmeupUtilities.getDouble(optionsDefault!['borderRadius']) ??
+        defaultBorderRadius;
+    borderWidth = SmeupUtilities.getDouble(optionsDefault!['borderWidth']) ??
+        defaultBorderWidth;
+    borderColor =
+        SmeupUtilities.getColorFromRGB(optionsDefault!['borderColor']) ??
+            defaultBorderColor;
+
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         await SmeupComboDao.getData(this);
@@ -165,9 +187,28 @@ class SmeupComboModel extends SmeupInputFieldModel
     var iconTheme = SmeupConfigurationService.getTheme()!.iconTheme;
     defaultIconSize = iconTheme.size;
     defaultIconColor = textStyle.color;
+
+    var timePickerTheme = SmeupConfigurationService.getTheme()!.timePickerTheme;
+    defaultBackColor = timePickerTheme.backgroundColor;
+    var shape = timePickerTheme.shape!;
+    defaultBorderRadius = (shape as ContinuousRectangleBorder)
+        .borderRadius
+        .resolve(TextDirection.ltr)
+        .topLeft
+        .x;
+    var side = timePickerTheme.dayPeriodBorderSide!;
+    defaultBorderColor = side.color;
+    defaultBorderWidth = side.width;
     //iconTheme.color;
 
     // ----------------- set properties from default
+    if (obj.borderColor == null)
+      obj.borderColor = SmeupComboModel.defaultBorderColor;
+    if (obj.borderWidth == null)
+      obj.borderWidth = SmeupComboModel.defaultBorderWidth;
+    if (obj.borderRadius == null)
+      obj.borderRadius = SmeupComboModel.defaultBorderRadius;
+
     if (obj.fontBold == null) obj.fontBold = SmeupComboModel.defaultFontBold;
     if (obj.fontColor == null) obj.fontColor = SmeupComboModel.defaultFontColor;
     if (obj.fontSize == null) obj.fontSize = SmeupComboModel.defaultFontSize;

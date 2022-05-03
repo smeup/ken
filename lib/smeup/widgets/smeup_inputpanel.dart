@@ -224,7 +224,6 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
           widget.scaffoldKey,
           widget.formKey,
           id: field.id,
-          fontSize: widget.fontSize,
           title: field.label,
           height: 55,
           data: [
@@ -255,14 +254,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
   Widget _getTextFieldWidget(SmeupInputPanelField field) {
     return Column(
       children: [
-        SmeupLabel(
-          widget.scaffoldKey,
-          widget.formKey,
-          [field.label],
-          align: Alignment.bottomLeft,
-          height: 8,
-          fontSize: widget.fontSize,
-        ),
+        _getLabel(field.label),
         SizedBox(
           height: 30,
           child: SmeupTextField(
@@ -285,18 +277,15 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     }
     return Column(
       children: <Widget>[
-        SmeupLabel(
-          widget.scaffoldKey,
-          widget.formKey,
-          [field.label],
-          align: Alignment.bottomLeft,
-          fontSize: widget.fontSize,
-          height: 8,
-        ),
+        _getLabel(field.label),
         SmeupCombo(
           widget.scaffoldKey,
           widget.formKey,
           id: field.id,
+          width: 0,
+          underline: false,
+          innerSpace: 0,
+          showBorder: true,
           selectedValue: field.value.code == "" ? null : field.value.code,
           data: field.items!
               .map((e) => SmeupComboItemModel(e.code, e.description))
@@ -314,13 +303,15 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     }
     return Column(
       children: <Widget>[
+        _getLabel(field.label),
         SmeupTextAutocomplete(
           widget.scaffoldKey,
           widget.formKey,
-          label: field.label,
           id: field.id,
           valueField: "value",
           defaultValue: field.id,
+          showborder: true,
+          underline: false,
           data: field.items!
               .map((e) => {"code": e.code, "value": e.description})
               .toList(),
@@ -345,7 +336,6 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
             Expanded(
               child: SmeupButton(
                 data: "Conferma",
-                fontSize: widget.fontSize,
                 clientOnPressed: () => _fireDynamism(),
               ),
             ),
@@ -355,6 +345,16 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     } else {
       return Container();
     }
+  }
+
+  SmeupLabel _getLabel(String? label) {
+    return SmeupLabel(
+      widget.scaffoldKey,
+      widget.formKey,
+      [label ?? ''],
+      align: Alignment.bottomLeft,
+      height: 8,
+    );
   }
 
   bool _isConfirmButtonEnabled() {

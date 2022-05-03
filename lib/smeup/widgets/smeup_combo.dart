@@ -14,6 +14,7 @@ import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
+import '../models/widgets/smeup_section_model.dart';
 import '../services/smeup_dynamism_service.dart';
 
 // ignore: must_be_immutable
@@ -33,6 +34,9 @@ class SmeupCombo extends StatefulWidget
   Color? captionBackColor;
   double? iconSize;
   Color? iconColor;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
 
   bool? underline;
   double? innerSpace;
@@ -49,6 +53,7 @@ class SmeupCombo extends StatefulWidget
   String? descriptionField;
   double? width;
   double? height;
+  bool? showBorder;
   void Function(String? newValue)? clientOnChange;
 
   SmeupCombo(
@@ -62,6 +67,9 @@ class SmeupCombo extends StatefulWidget
     this.captionFontSize,
     this.captionFontColor,
     this.captionBackColor,
+    this.borderColor,
+    this.borderRadius,
+    this.borderWidth,
     this.iconSize,
     this.iconColor,
     this.underline = SmeupComboModel.defaultUnderline,
@@ -78,6 +86,7 @@ class SmeupCombo extends StatefulWidget
     this.descriptionField = SmeupComboModel.defaultDescriptionField,
     this.width = SmeupComboModel.defaultWidth,
     this.height = SmeupComboModel.defaultHeight,
+    this.showBorder = SmeupComboModel.defaultShowBorder,
     this.clientOnChange,
   }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
@@ -114,10 +123,14 @@ class SmeupCombo extends StatefulWidget
     captionFontSize = m.captionFontSize;
     captionFontColor = m.captionFontColor;
     captionBackColor = m.captionBackColor;
+    borderColor = m.borderColor;
+    borderRadius = m.borderRadius;
+    borderWidth = m.borderWidth;
     align = m.align;
     innerSpace = m.innerSpace;
     width = m.width;
     height = m.height;
+    showBorder = m.showBorder;
     data = treatData(m);
   }
 
@@ -198,10 +211,35 @@ class _SmeupComboState extends State<SmeupCombo>
         : Text(widget.label!,
             textAlign: TextAlign.center, style: _getCaptionStile());
 
+    double boxHeight = widget.height!;
+    if (boxHeight == 0) {
+      if (_model != null && _model!.parent != null) {
+        boxHeight = (_model!.parent as SmeupSectionModel).height!;
+      } else {
+        boxHeight = MediaQuery.of(context).size.height;
+      }
+    }
+
+    double? boxWidth = widget.width;
+    if (boxWidth == 0) {
+      if (_model != null && _model!.parent != null) {
+        boxWidth = (_model!.parent as SmeupSectionModel).width;
+      } else {
+        boxWidth = MediaQuery.of(context).size.width;
+      }
+    }
+
     final combo = Align(
       alignment: Alignment.centerLeft,
       child: Container(
           padding: widget.padding,
+          width: boxWidth,
+          decoration: widget.showBorder!
+              ? BoxDecoration(
+                  borderRadius: BorderRadius.circular(widget.borderRadius!),
+                  border: Border.all(
+                      color: widget.borderColor!, width: widget.borderWidth!))
+              : null,
           child: SmeupComboWidget(
             widget.scaffoldKey,
             widget.formKey,
@@ -272,8 +310,8 @@ class _SmeupComboState extends State<SmeupCombo>
       );
     } else if (widget.align == Alignment.topCenter) {
       children = Container(
-        height: widget.height,
-        width: widget.width,
+        height: boxHeight,
+        width: boxWidth,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -293,8 +331,8 @@ class _SmeupComboState extends State<SmeupCombo>
       );
     } else if (widget.align == Alignment.bottomCenter) {
       children = Container(
-        height: widget.height,
-        width: widget.width,
+        height: boxHeight,
+        width: boxWidth,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

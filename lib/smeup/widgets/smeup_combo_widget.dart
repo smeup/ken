@@ -56,29 +56,35 @@ class _SmeupComboWidgetState extends State<SmeupComboWidget> {
     IconThemeData iconTheme = _getIconTheme();
     DividerThemeData dividerStyle = _getDividerStyle();
 
-    return DropdownButton<String>(
-      value: _selectedValue,
-      dropdownColor: widget.backColor,
-      style: _getTextStile(),
-      icon: Icon(
-        Icons.keyboard_arrow_down_sharp,
-        color: iconTheme.color,
-        size: iconTheme.size,
+    return DropdownButtonHideUnderline(
+      child: ButtonTheme(
+        alignedDropdown: false,
+        child: DropdownButton(
+          value: _selectedValue,
+          dropdownColor: widget.backColor,
+          style: _getTextStile(),
+          icon: Icon(
+            Icons.keyboard_arrow_down_sharp,
+            color: iconTheme.color,
+            size: iconTheme.size,
+          ),
+
+          //elevation: 20,
+          underline: Container(
+            height: dividerStyle.thickness,
+            color: dividerStyle.color,
+          ),
+          onChanged: (String? newValue) {
+            setState(() {
+              _selectedValue = newValue;
+              if (widget.clientOnChange != null) {
+                widget.clientOnChange!(newValue);
+              }
+            });
+          },
+          items: _getItems(_data!),
+        ),
       ),
-      //elevation: 20,
-      underline: Container(
-        height: dividerStyle.thickness,
-        color: dividerStyle.color,
-      ),
-      onChanged: (String? newValue) {
-        setState(() {
-          _selectedValue = newValue;
-          if (widget.clientOnChange != null) {
-            widget.clientOnChange!(newValue);
-          }
-        });
-      },
-      items: _getItems(_data!),
     );
   }
 

@@ -18,8 +18,6 @@ Future<void> main() async {
 }
 
 class MyApp extends StatefulWidget {
-  static bool loginEnabled = false;
-
   @override
   _MyAppState createState() => _MyAppState();
 }
