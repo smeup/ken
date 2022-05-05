@@ -39,8 +39,12 @@
                 "type": "cmb",
                 "defaultValue": "1",
                 "valueField": "code",
+                "showBorder": true,
+                "padding": {"left": 10},
+                "innerSpace": 10,
+                "width": 0,
                 "descriptionField": "description",
-                "label" : "City"
+                "label" : "City: "
               }
             }
           },

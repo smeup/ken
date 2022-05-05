@@ -93,7 +93,7 @@ class SmeupInputPanelDao extends SmeupDao {
 
     for (var field in fields) {
       //String? code = row!['fields']![field.id];
-      String? code = _getRowFieldValue(row, field.id!);
+      String? code = _getRowFieldValue(row, field.id!) ?? row![field.id];
       field.value = SmeupInputPanelValue(code: code, description: code);
       if (layoutData == null) {
         await _getFieldItems(field, formKey, scaffoldKey, context, model)
@@ -106,26 +106,30 @@ class SmeupInputPanelDao extends SmeupDao {
     return fields;
   }
 
-  static String _getRowFieldObject(Map? row, String columnCode) {
+  static String? _getRowFieldObject(Map? row, String columnCode) {
     final rowField = _getRowField(row, columnCode);
+    if (rowField == null) return null;
     final obj = rowField['ogg'];
     return obj;
   }
 
-  static String _getRowFieldValue(Map? row, String columnCode) {
+  static String? _getRowFieldValue(Map? row, String columnCode) {
     final rowField = _getRowField(row, columnCode);
+    if (rowField == null) return null;
     final obj = rowField['value'];
     return obj;
   }
 
-  static String _getRowFieldValidation(Map? row, String columnCode) {
+  static String? _getRowFieldValidation(Map? row, String columnCode) {
     final rowField = _getRowField(row, columnCode);
+    if (rowField == null) return null;
     final obj = rowField['validation'];
     return obj == null ? "" : obj;
   }
 
-  static Map _getRowField(Map? row, String columnCode) {
-    final rowField = row!['fields']![columnCode];
+  static Map? _getRowField(Map? row, String columnCode) {
+    if (row!['fields'] == null) return null;
+    final rowField = row['fields']![columnCode];
     return rowField;
   }
 

@@ -227,6 +227,12 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
       child: Column(
         children: [
           Container(
+            decoration: widget.showBorder!
+                ? BoxDecoration(
+                    borderRadius: BorderRadius.circular(widget.borderRadius!),
+                    border: Border.all(
+                        color: widget.borderColor!, width: widget.borderWidth!))
+                : null,
             child: Row(
               children: [
                 Expanded(
@@ -253,7 +259,7 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
                           inputFormatters: widget.inputFormatters,
                           padding: widget.padding,
                           showSubmit: widget.showSubmit,
-                          showBorder: widget.showBorder,
+                          showBorder: false,
                           width: widget.width,
                           underline: widget.underline,
                           data: _data,
@@ -273,7 +279,7 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
                 ),
                 Container(
                   color: widget.buttonBackColor,
-                  padding: EdgeInsets.all(iconTheme.size!.toDouble()),
+                  padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
                   child: GestureDetector(
                     child: Icon(
                       passwordFieldModel.passwordVisible
@@ -292,7 +298,7 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
                 ),
                 Container(
                   color: widget.buttonBackColor,
-                  padding: EdgeInsets.all(iconTheme.size!.toDouble()),
+                  padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
                   child: GestureDetector(
                     child: Icon(
                       Icons.close,
@@ -312,7 +318,7 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
           ),
           Column(
             children: [
-              if (!widget.underline!)
+              if (widget.underline!)
                 Divider(
                   thickness: dividerStyle.thickness,
                   color: dividerStyle.color,

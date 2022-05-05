@@ -26,13 +26,13 @@ class SmeupComboModel extends SmeupInputFieldModel
 
   // unsupported by json_theme
   static const double defaultWidth = 100;
-  static const double defaultHeight = 20;
+  static const double defaultHeight = 55;
   static const String defaultValueField = 'value';
   static const String defaultDescriptionField = 'description';
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const String defaultLabel = '';
   static const Alignment defaultAlign = Alignment.centerLeft;
-  static const double defaultInnerSpace = 10.0;
+  static const double defaultInnerSpace = 0.0;
   static const bool defaultUnderline = false;
   static const bool defaultShowBorder = false;
 

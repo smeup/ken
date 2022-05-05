@@ -234,6 +234,7 @@ class _SmeupComboState extends State<SmeupCombo>
       child: Container(
           padding: widget.padding,
           width: boxWidth,
+          height: boxHeight,
           decoration: widget.showBorder!
               ? BoxDecoration(
                   borderRadius: BorderRadius.circular(widget.borderRadius!),
@@ -286,9 +287,7 @@ class _SmeupComboState extends State<SmeupCombo>
           ],
         ),
         line
-      ]
-          //color: widget.backColor,
-          );
+      ]);
     } else if (widget.align == Alignment.centerRight) {
       children = Column(
         children: [
@@ -306,7 +305,6 @@ class _SmeupComboState extends State<SmeupCombo>
           ),
           line
         ],
-        //color: widget.backColor,
       );
     } else if (widget.align == Alignment.topCenter) {
       children = Container(
@@ -327,7 +325,6 @@ class _SmeupComboState extends State<SmeupCombo>
             line
           ],
         ),
-        //color: widget.backColor,
       );
     } else if (widget.align == Alignment.bottomCenter) {
       children = Container(
