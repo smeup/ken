@@ -232,6 +232,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                 border: Border.all(
                     color: widget.borderColor!, width: widget.borderWidth!))
             : null,
+        height: widget.height,
         child: RawAutocomplete<Map<dynamic, dynamic>>(
           optionsBuilder: (TextEditingValue textEditingValue) {
             return _options!.where((Map<dynamic, dynamic> option) {
@@ -255,7 +256,7 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
             if (code.isNotEmpty && _data != null) {
               var currel = _data.firstWhere(
                   (element) => element['code'].toString() == code,
-                  orElse: () => null);
+                  orElse: () => null as Map<String, String?>);
               if (currel != null) {
                 textEditingController.text = currel['value'];
               }
@@ -263,53 +264,57 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
 
             return Row(children: [
               Expanded(
-                child: TextFormField(
-                  style: textStyle,
-                  controller: textEditingController,
-                  focusNode: focusNode,
-                  onFieldSubmitted: (String value) {
-                    onFieldSubmitted();
-                  },
-                  inputFormatters: widget.inputFormatters,
-                  autofocus: widget.autoFocus!,
-                  maxLines: 1,
-                  key: Key('${widget.id}_text'),
-                  autocorrect: false,
-                  textCapitalization: TextCapitalization.none,
-                  textInputAction: TextInputAction.next,
-                  enableSuggestions: true,
-                  validator:
-                      widget.clientValidator as String? Function(String?)?,
-                  keyboardType: widget.keyboard,
-                  obscureText: widget.keyboard == TextInputType.visiblePassword
-                      ? true
-                      : false,
-                  onChanged: (value) {
-                    if (widget.clientOnChange != null)
-                      widget.clientOnChange!(value);
-                  },
-                  decoration: InputDecoration(
-                    labelStyle: captionStyle,
-                    labelText: widget.label,
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: widget.underline!
-                              ? widget.borderColor!
-                              : Colors.transparent),
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: TextFormField(
+                    style: textStyle,
+                    controller: textEditingController,
+                    focusNode: focusNode,
+                    onFieldSubmitted: (String value) {
+                      onFieldSubmitted();
+                    },
+                    inputFormatters: widget.inputFormatters,
+                    autofocus: widget.autoFocus!,
+                    maxLines: 1,
+                    key: Key('${widget.id}_text'),
+                    autocorrect: false,
+                    textCapitalization: TextCapitalization.none,
+                    textInputAction: TextInputAction.next,
+                    enableSuggestions: true,
+                    validator:
+                        widget.clientValidator as String? Function(String?)?,
+                    keyboardType: widget.keyboard,
+                    obscureText:
+                        widget.keyboard == TextInputType.visiblePassword
+                            ? true
+                            : false,
+                    onChanged: (value) {
+                      if (widget.clientOnChange != null)
+                        widget.clientOnChange!(value);
+                    },
+                    decoration: InputDecoration(
+                      labelStyle: captionStyle,
+                      labelText: widget.label,
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: widget.underline!
+                                ? widget.borderColor!
+                                : Colors.transparent),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: widget.underline!
+                                ? widget.borderColor!
+                                : Colors.transparent),
+                      ),
                     ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: widget.underline!
-                              ? widget.borderColor!
-                              : Colors.transparent),
-                    ),
+                    onSaved: widget.clientOnSave as void Function(String?)?,
                   ),
-                  onSaved: widget.clientOnSave as void Function(String?)?,
                 ),
               ),
               Container(
                 color: iconTheme.color,
-                padding: EdgeInsets.all(iconTheme.size!.toDouble()),
+                padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
                 child: GestureDetector(
                   child: Icon(
                     Icons.close,

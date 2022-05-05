@@ -71,7 +71,14 @@ static void writeDebugMessage(String message,
   // Errors must be always written in log
 
   if (messageLevel <= logLevel || logType == LogType.error) {
-    print(color + message + '\x1B[0m');
+    // For printing in console the full message without truncations
+    final pattern = RegExp('.{1,800}');
+    pattern.allMatches(message).forEach((match) {
+      String? group = match.group(0);
+      if (group != null) {
+        print(color + group + '\x1B[0m');
+      }
+    });
 
     if (SmeupConfigurationService.isLogEnabled || logType == LogType.error) {
       if (_logFile != null) {

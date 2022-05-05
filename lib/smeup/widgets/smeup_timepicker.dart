@@ -253,7 +253,7 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
 
     Widget icon = Container(
       color: iconTheme.color,
-      padding: EdgeInsets.all(iconTheme.size!.toDouble()),
+      padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
       child: Icon(
         Icons.access_time,
         color: Theme.of(context).primaryColor,

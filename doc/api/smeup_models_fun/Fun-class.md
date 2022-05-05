@@ -21,6 +21,10 @@
 
     
 
+[Fun.empty](../smeup_models_fun/Fun/Fun.empty.md) ()
+
+    
+
 [Fun.fromServiceName](../smeup_models_fun/Fun/Fun.fromServiceName.md) ([String](https://api.flutter.dev/flutter/dart-core/String-class.html) service)
 
     

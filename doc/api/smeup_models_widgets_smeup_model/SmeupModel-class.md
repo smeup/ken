@@ -31,7 +31,7 @@
 - [SmeupImageListModel](../smeup_models_widgets_smeup_image_list_model/SmeupImageListModel-class.md)
 - [SmeupImageModel](../smeup_models_widgets_smeup_image_model/SmeupImageModel-class.md)
 - [SmeupInputFieldModel](../smeup_models_widgets_smeup_input_field_model/SmeupInputFieldModel-class.md)
-- [SmeupInputPanelModel](../smeup_models_widgets_smeup_inputpanel_model/SmeupInputPanelModel-class.md)
+- [SmeupInputPanelModel](../smeup_models_widgets_smeup_input_panel_model/SmeupInputPanelModel-class.md)
 - [SmeupLabelModel](../smeup_models_widgets_smeup_label_model/SmeupLabelModel-class.md)
 - [SmeupLineModel](../smeup_models_widgets_smeup_line_model/SmeupLineModel-class.md)
 - [SmeupListBoxModel](../smeup_models_widgets_smeup_list_box_model/SmeupListBoxModel-class.md)
@@ -62,6 +62,15 @@
 
 
 ## Properties
+
+##### [cmp](../smeup_models_widgets_smeup_model/SmeupModel/cmp.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
+
+
+
+   
+_read / write_
+
+
 
 ##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)?
 
@@ -263,6 +272,15 @@ _read / write_
 
 
 ## Methods
+
+##### [isFirestore](../smeup_models_widgets_smeup_model/SmeupModel/isFirestore.md)() [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+
+
+
+   
+
+
+
 
 ##### [noSuchMethod](https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html)([Invocation](https://api.flutter.dev/flutter/dart-core/Invocation-class.html) invocation) dynamic
 

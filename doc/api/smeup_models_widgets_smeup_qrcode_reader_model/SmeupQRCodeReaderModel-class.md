@@ -42,6 +42,15 @@
 
 ## Properties
 
+##### [cmp](../smeup_models_widgets_smeup_model/SmeupModel/cmp.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
+
+
+
+   
+_read / write, inherited_
+
+
+
 ##### [context](../smeup_models_widgets_smeup_model/SmeupModel/context.md) &#8596; [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)?
 
 
@@ -314,6 +323,15 @@ _read / write, inherited_
 
 
 ## Methods
+
+##### [isFirestore](../smeup_models_widgets_smeup_model/SmeupModel/isFirestore.md)() [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+
+
+
+   
+_inherited_
+
+
 
 ##### [noSuchMethod](https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html)([Invocation](https://api.flutter.dev/flutter/dart-core/Invocation-class.html) invocation) dynamic
 

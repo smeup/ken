@@ -24,7 +24,7 @@ class SmeupTextAutocompleteModel extends SmeupModel
   // unsupported by json_theme
   static const String defaultLabel = '';
   static const double defaultWidth = 100;
-  static const double defaultHeight = 100;
+  static const double defaultHeight = 55;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const bool defaultShowBorder = false;
   static const bool defaultAutoFocus = false;
@@ -103,8 +103,8 @@ class SmeupTextAutocompleteModel extends SmeupModel
     setDefaults(this);
     backColor = SmeupUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
-    fontSize =
-        SmeupUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
+    fontSize = SmeupUtilities.getDouble(optionsDefault!['fontSize']) ??
+        defaultFontSize;
     fontColor = SmeupUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
         defaultFontColor;
     fontBold = optionsDefault!['bold'] ?? defaultFontBold;

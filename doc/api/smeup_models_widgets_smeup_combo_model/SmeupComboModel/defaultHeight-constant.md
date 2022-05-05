@@ -21,7 +21,7 @@
 ## Implementation
 
 ```dart
-static const double defaultHeight = 20;
+static const double defaultHeight = 55;
 
 
 ```

@@ -243,7 +243,7 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
 
     Widget icon = Container(
       color: iconTheme.color,
-      padding: EdgeInsets.all(iconTheme.size!.toDouble()),
+      padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
       child: Icon(
         Icons.calendar_today,
         color: Theme.of(context).primaryColor,

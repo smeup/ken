@@ -19,7 +19,8 @@ SmeupTextField.withController([SmeupTextFieldModel](../../smeup_models_widgets_s
 ## Implementation
 
 ```dart
-SmeupTextField.withController(SmeupTextFieldModel this.model, this.scaffoldKey, this.formKey)
+SmeupTextField.withController(
+    SmeupTextFieldModel this.model, this.scaffoldKey, this.formKey)
     : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
   runControllerActivities(model!);
 }

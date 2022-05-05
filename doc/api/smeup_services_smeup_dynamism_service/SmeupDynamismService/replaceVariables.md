@@ -33,12 +33,14 @@ static String replaceVariables(
     if (formKey != null)
       key = key.replaceAll('${formKey.hashCode.toString()}_', '');
 
-    if (element.value is String) {
-      funString = funString.replaceAll('[$key]', element.value.toString());
-    } else {
-      funString =
-          funString.replaceAll('\"[$key]\"', element.value.toString());
-    }
+    // to verify: old case where the user encloses the variable's name between quotation marks
+    // if (element.value is String) {
+    //   funString = funString.replaceAll('[$key]', element.value.toString());
+    // } else {
+    //   funString =
+    //       funString.replaceAll('\"[$key]\"', element.value.toString());
+    // }
+    funString = funString.replaceAll('[$key]', element.value.toString());
   });
   try {
     // remove not replacable variable
