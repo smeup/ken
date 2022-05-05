@@ -176,6 +176,7 @@ Its style depends on:
     - innerSpace            :   10.0
     - isLink                :   false
     - orientation           :   WidgetOrientation.Vertical
+    - iconData              :   0
 
 ### SmeupCalendar
 
@@ -229,6 +230,10 @@ Its style depends on:
     - fontBold              :   textTheme.bodyText1.fontWeight
     - backColor             :   textTheme.bodyText1.backgroundColor
 
+    - borderColor           :   timePickerTheme.dayPeriodBorderSide.color
+    - borderWidth           :   timePickerTheme.dayPeriodBorderSide.width
+    - borderRadius          :   timePickerTheme.shape.borderRadius (note: the button will be available only with a 'rectangle' shape)
+
     - iconSize              :   iconTheme.size
     - iconColor             :   iconTheme.color
 
@@ -247,6 +252,7 @@ Its style depends on:
     - align                 :   Alignment.centerLeft
     - innerSpace            :   10.0
     - underline             :   true
+    - showBorder            :   false
 
 ### SmeupDashboard
 
@@ -584,6 +590,7 @@ Its style depends on:
     - underline             :   true
     - submitLabel           :   ''
     - showSubmit            :   false
+    - iconData              :   0
 
 ### SmeupTextField
 

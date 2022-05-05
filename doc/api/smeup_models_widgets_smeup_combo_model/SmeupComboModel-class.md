@@ -31,7 +31,7 @@
 
 ## Constructors
 
-[SmeupComboModel](../smeup_models_widgets_smeup_combo_model/SmeupComboModel/SmeupComboModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>? scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)? context, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? fontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? fontSize, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? fontBold, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? backColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? captionFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionFontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionBackColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? iconSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? iconColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? underline = defaultUnderline, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)? align = defaultAlign, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? innerSpace = defaultInnerSpace, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? valueField = defaultValueField, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? descriptionField = defaultDescriptionField, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)? padding = defaultPadding, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? selectedValue = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? label = defaultLabel, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? height = defaultHeight, dynamic title = ''})
+[SmeupComboModel](../smeup_models_widgets_smeup_combo_model/SmeupComboModel/SmeupComboModel.md) ({dynamic id, dynamic type, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)>? formKey, [GlobalKey](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)&lt;[ScaffoldState](https://api.flutter.dev/flutter/material/ScaffoldState-class.html)>? scaffoldKey, [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html)? context, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? fontColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? fontSize, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? fontBold, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? backColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? captionFontBold, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? captionFontSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionFontColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? captionBackColor, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? borderColor, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? borderRadius, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? borderWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? iconSize, [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)? iconColor, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? underline = defaultUnderline, [Alignment](https://api.flutter.dev/flutter/painting/Alignment-class.html)? align = defaultAlign, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? innerSpace = defaultInnerSpace, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? valueField = defaultValueField, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? descriptionField = defaultDescriptionField, [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)? padding = defaultPadding, [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? selectedValue = '', [String](https://api.flutter.dev/flutter/dart-core/String-class.html)? label = defaultLabel, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? width = defaultWidth, [double](https://api.flutter.dev/flutter/dart-core/double-class.html)? height = defaultHeight, [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)? showBorder = defaultShowBorder, dynamic title = ''})
 
     
 
@@ -52,6 +52,33 @@ _read / write_
 
 
 ##### [backColor](../smeup_models_widgets_smeup_combo_model/SmeupComboModel/backColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
+
+
+
+   
+_read / write_
+
+
+
+##### [borderColor](../smeup_models_widgets_smeup_combo_model/SmeupComboModel/borderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
+
+
+
+   
+_read / write_
+
+
+
+##### [borderRadius](../smeup_models_widgets_smeup_combo_model/SmeupComboModel/borderRadius.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
+
+
+
+   
+_read / write_
+
+
+
+##### [borderWidth](../smeup_models_widgets_smeup_combo_model/SmeupComboModel/borderWidth.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -93,6 +120,15 @@ _read / write_
 
    
 _read / write_
+
+
+
+##### [cmp](../smeup_models_widgets_smeup_model/SmeupModel/cmp.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
+
+
+
+   
+_read / write, inherited_
 
 
 
@@ -339,6 +375,15 @@ _read / write, inherited_
 
 
 
+##### [showBorder](../smeup_models_widgets_smeup_combo_model/SmeupComboModel/showBorder.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
+
+
+
+   
+_read / write_
+
+
+
 ##### [showLoader](../smeup_models_widgets_smeup_model/SmeupModel/showLoader.md) &#8596; [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)?
 
 
@@ -450,6 +495,15 @@ _read / write_
 
 ## Methods
 
+##### [isFirestore](../smeup_models_widgets_smeup_model/SmeupModel/isFirestore.md)() [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+
+
+
+   
+_inherited_
+
+
+
 ##### [noSuchMethod](https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html)([Invocation](https://api.flutter.dev/flutter/dart-core/Invocation-class.html) invocation) dynamic
 
 
@@ -484,6 +538,33 @@ _inherited_
 ## Static Properties
 
 ##### [defaultBackColor](../smeup_models_widgets_smeup_combo_model/SmeupComboModel/defaultBackColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
+
+
+
+   
+_read / write_
+
+
+
+##### [defaultBorderColor](../smeup_models_widgets_smeup_combo_model/SmeupComboModel/defaultBorderColor.md) &#8596; [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)?
+
+
+
+   
+_read / write_
+
+
+
+##### [defaultBorderRadius](../smeup_models_widgets_smeup_combo_model/SmeupComboModel/defaultBorderRadius.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
+
+
+
+   
+_read / write_
+
+
+
+##### [defaultBorderWidth](../smeup_models_widgets_smeup_combo_model/SmeupComboModel/defaultBorderWidth.md) &#8596; [double](https://api.flutter.dev/flutter/dart-core/double-class.html)?
 
 
 
@@ -634,6 +715,15 @@ _read / write_
 
 
 ##### [defaultPadding](../smeup_models_widgets_smeup_combo_model/SmeupComboModel/defaultPadding-constant.md) const [EdgeInsetsGeometry](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)
+
+
+
+   
+
+
+
+
+##### [defaultShowBorder](../smeup_models_widgets_smeup_combo_model/SmeupComboModel/defaultShowBorder-constant.md) const [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
 
 
 

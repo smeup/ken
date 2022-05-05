@@ -30,19 +30,19 @@ Future<String> getFromFirestore(Fun smeupFun, fileName) async {
 
   List<Map<String, dynamic>> list = smeupFun.server;
 
-  final options = GetOptions(source: await FirestoreShared.getSource());
+  final options = GetOptions(source: await SmeupFirestoreShared.getSource());
 
-  final collection =
-      list.firstWhereOrNull((element) => element['key'] == 'collection');
+  final formsCollection =
+      list.firstWhereOrNull((element) => element['key'] == 'formsCollection');
 
-  if (collection == null) {
-    final msg = 'The collection is empty';
+  if (formsCollection == null) {
+    final msg = 'The formsCollection is empty';
     SmeupLogService.writeDebugMessage(msg, logType: LogType.error);
     throw Exception(msg);
   }
 
   QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance!
-      .collection(collection['value'])
+      .collection(formsCollection['value'])
       .where('formId', isEqualTo: fileName)
       .get(options);
 
@@ -58,7 +58,7 @@ Future<String> getFromFirestore(Fun smeupFun, fileName) async {
   }
 
   SmeupLogService.writeDebugMessage(
-      '*** \'SmeupJsonDataService\' getFromFirestore. collection: ${collection['value']}; form: $fileName');
+      '*** \'SmeupJsonDataService\' getFromFirestore. collection: ${formsCollection['value']}; form: $fileName');
 
   return jsonEncode(responseData);
 }

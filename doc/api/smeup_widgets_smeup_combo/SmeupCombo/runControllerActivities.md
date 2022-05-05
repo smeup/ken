@@ -47,10 +47,14 @@ runControllerActivities(SmeupModel model) {
   captionFontSize = m.captionFontSize;
   captionFontColor = m.captionFontColor;
   captionBackColor = m.captionBackColor;
+  borderColor = m.borderColor;
+  borderRadius = m.borderRadius;
+  borderWidth = m.borderWidth;
   align = m.align;
   innerSpace = m.innerSpace;
   width = m.width;
   height = m.height;
+  showBorder = m.showBorder;
   data = treatData(m);
 }
 ```

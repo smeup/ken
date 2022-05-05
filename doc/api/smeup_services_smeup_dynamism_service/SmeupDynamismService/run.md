@@ -83,13 +83,39 @@ static Future<void> run(
                   arguments: {'smeupFun': smeupFunExec});
               break;
             default:
-              if (smeupFunExec.G == 'DLG') {
-                _showDialog(smeupFunExec, context, notify, scaffoldKey);
-              } else {
-                Navigator.of(context).pushNamed(SmeupDynamicScreen.routeName,
-                    arguments: {'smeupFun': smeupFunExec}).then((value) {
+              switch (smeupFunExec.G) {
+                case 'DLG':
+                  _showDialog(smeupFunExec, context, notify, scaffoldKey);
+                  break;
+                case 'SFI':
+                  final initialFun = Fun(
+                      SmeupConfigurationService.getLocalStorage()!
+                          .getString('initialFun'),
+                      null,
+                      null,
+                      context);
+
+                  Navigator.of(context).popUntil((Route<dynamic> route) {
+                    final routeArgs =
+                        route.settings.arguments as Map<String, dynamic>?;
+                    if (routeArgs != null && routeArgs['smeupFun'] != null) {
+                      final routeFun = routeArgs['smeupFun'] as Fun;
+                      if (routeFun.objects[1].k == initialFun.objects[1].k) {
+                        return true;
+                      }
+                    }
+                    return route.isFirst ? true : false;
+                  });
+
                   _manageNotify(notify, context, scaffoldKey.hashCode);
-                });
+
+                  break;
+                default:
+                  Navigator.of(context).pushNamed(
+                      SmeupDynamicScreen.routeName,
+                      arguments: {'smeupFun': smeupFunExec}).then((value) {
+                    _manageNotify(notify, context, scaffoldKey.hashCode);
+                  });
               }
           }
 

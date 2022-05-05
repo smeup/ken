@@ -19,7 +19,8 @@ SmeupTextPassword.withController([SmeupTextPasswordModel](../../smeup_models_wid
 ## Implementation
 
 ```dart
-SmeupTextPassword.withController(SmeupTextPasswordModel this.model, this.scaffoldKey, this.formKey)
+SmeupTextPassword.withController(
+    SmeupTextPasswordModel this.model, this.scaffoldKey, this.formKey)
     : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
   runControllerActivities(model!);
 }

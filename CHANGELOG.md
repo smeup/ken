@@ -52,3 +52,14 @@
 - refactoring Firestore Data Service
 - refactoring smeup fun
 - added javascript validation
+
+## [0.0.4+14] - 05/05/2022
+
+- upgrade SDK and migrate the library to null safety 
+- upgrade dependencies
+- new offline service with Firestore 
+- new javascript validation on input panel fields
+- add autocomplete field to inputpanel
+- add smeupCombo borders attributes
+- bug fix
+- style improvements
