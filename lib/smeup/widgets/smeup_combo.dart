@@ -216,7 +216,7 @@ class _SmeupComboState extends State<SmeupCombo>
       if (_model != null && _model!.parent != null) {
         boxHeight = (_model!.parent as SmeupSectionModel).height!;
       } else {
-        boxHeight = MediaQuery.of(context).size.height;
+        boxHeight = SmeupUtilities.getDeviceInfo().safeHeight;
       }
     }
 
@@ -225,7 +225,7 @@ class _SmeupComboState extends State<SmeupCombo>
       if (_model != null && _model!.parent != null) {
         boxWidth = (_model!.parent as SmeupSectionModel).width;
       } else {
-        boxWidth = MediaQuery.of(context).size.width;
+        boxWidth = SmeupUtilities.getDeviceInfo().safeWidth;
       }
     }
 
