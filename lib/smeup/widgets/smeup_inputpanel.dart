@@ -142,14 +142,14 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
       if (_model != null && _model!.parent != null) {
         inputPanelWidth = (_model!.parent as SmeupSectionModel).width;
       } else {
-        inputPanelWidth = MediaQuery.of(context).size.width;
+        inputPanelWidth = SmeupUtilities.getDeviceInfo().safeWidth;
       }
     }
     if (inputPanelHeight == 0) {
       if (_model != null && _model!.parent != null) {
         inputPanelHeight = (_model!.parent as SmeupSectionModel).height;
       } else {
-        inputPanelHeight = MediaQuery.of(context).size.height;
+        inputPanelHeight = SmeupUtilities.getDeviceInfo().safeHeight;
       }
     }
 
