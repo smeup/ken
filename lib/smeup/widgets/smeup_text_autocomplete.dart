@@ -325,6 +325,8 @@ class _SmeupTextAutocompleteState extends State<SmeupTextAutocomplete>
                     setState(() {
                       SmeupVariablesService.setVariable(widget.valueField, '',
                           formKey: widget.formKey);
+                      SmeupVariablesService.setVariable(widget.id, code,
+                          formKey: widget.formKey);
                       if (_model != null)
                         SmeupDynamismService.run(_model!.dynamisms, context,
                             'change', widget.scaffoldKey, widget.formKey);

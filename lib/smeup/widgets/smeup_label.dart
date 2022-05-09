@@ -220,7 +220,7 @@ class _SmeupLabelState extends State<SmeupLabel>
         if (_model != null && _model!.parent != null) {
           labelWidth = (_model!.parent as SmeupSectionModel).width;
         } else {
-          labelWidth = MediaQuery.of(context).size.width;
+          labelWidth = SmeupUtilities.getDeviceInfo().safeWidth;
         }
       }
 
@@ -330,7 +330,8 @@ class _SmeupLabelState extends State<SmeupLabel>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.bodyText2!;
+    TextStyle style =
+        SmeupConfigurationService.getTheme()!.textTheme.bodyText2!;
 
     style = style.copyWith(
         color: widget.fontColor,
