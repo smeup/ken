@@ -32,45 +32,40 @@ class ImageListScreen extends StatelessWidget {
                   {
                     "rows": [
                       {
-                        "code":
-                            "packages/ken/assets/images/image_list_blue_Tavola disegno 1.png",
-                        "description": "I am a reveille",
+                        "code": "packages/ken/assets/images/IMG1.png",
+                        "description": "1st Illustration",
                         "info": "boh1",
                         "isRemote": false,
                         "width": 200,
                         "height": 200
                       },
                       {
-                        "code":
-                            "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 2.png",
-                        "description": "I am a ball",
+                        "code": "packages/ken/assets/images/IMG2.png",
+                        "description": "2nd Illustration",
                         "info": "boh2",
                         "isRemote": false,
                         "width": 200,
                         "height": 200
                       },
                       {
-                        "code":
-                            "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 3.png",
-                        "description": "I am a telephone",
+                        "code": "packages/ken/assets/images/IMG3.png",
+                        "description": "3rd Illustration",
                         "info": "boh3",
                         "isRemote": false,
                         "width": 200,
                         "height": 200
                       },
                       {
-                        "code":
-                            "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 4.png",
-                        "description": "I am a fruit",
+                        "code": "packages/ken/assets/images/IMG4.png",
+                        "description": "4th Illustration",
                         "info": "boh3",
                         "isRemote": false,
                         "width": 200,
                         "height": 200
                       },
                       {
-                        "code":
-                            "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 5.png",
-                        "description": "I am a cherry",
+                        "code": "packages/ken/assets/images/IMG5.png",
+                        "description": "5th Illustration",
                         "info": "boh2",
                         "isRemote": false,
                         "width": 200,
@@ -91,7 +86,8 @@ class ImageListScreen extends StatelessWidget {
                   id: 'imageList1',
                   height: 330,
                   width: 450,
-                  listHeight: 500,
+                  listHeight: 480,
+                  padding: const EdgeInsets.fromLTRB(this.left, this.top, this.right, this.bottom);
                   clientOnItemTap: (Map item) {
                     SmeupUtilities.invokeScaffoldMessenger(
                         context, 'you clicked the ${item['description']}');

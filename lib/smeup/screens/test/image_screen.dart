@@ -22,14 +22,14 @@ class ImageScreen extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(20),
               child: Padding(
-                padding: const EdgeInsets.only(top: 30.0),
+                padding: const EdgeInsets.only(top: 0.0),
                 child: Center(
                     child: Column(
                   children: [
                     ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
                         'This widget is used to show a single image'),
                     SmeupImage(_scaffoldKey, _formKey,
-                        'packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 5.png',
+                        'packages/ken/assets/images/IMG1.png',
                         id: 'img1', width: 300, height: 300, isRemote: false),
                   ],
                 )),

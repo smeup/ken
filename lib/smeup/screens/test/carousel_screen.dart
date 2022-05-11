@@ -35,29 +35,24 @@ class CarouselScreen extends StatelessWidget {
                       _formKey,
                       [
                         {
-                          "imageFile":
-                              "packages/ken/assets/images/image_list_blue_Tavola disegno 1.png",
-                          "text": "I am a reveille"
+                          "imageFile": "packages/ken/assets/images/IMG1.png",
+                          "text": "1st illustration"
                         },
                         {
-                          "imageFile":
-                              "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 2.png",
-                          "text": "I am a ball"
+                          "imageFile": "packages/ken/assets/images/IMG2.png",
+                          "text": "2nd illustration"
                         },
                         {
-                          "imageFile":
-                              "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 3.png",
-                          "text": "I am a telephone"
+                          "imageFile": "packages/ken/assets/images/IMG3.png",
+                          "text": "3rd illustration"
                         },
                         {
-                          "imageFile":
-                              "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 4.png",
-                          "text": "I am a fruit"
+                          "imageFile": "packages/ken/assets/images/IMG4.png",
+                          "text": "4th illustration"
                         },
                         {
-                          "imageFile":
-                              "packages/ken/assets/images/image_list_blue_Tavola disegno 1 copia 5.png",
-                          "text": "I am a cherry"
+                          "imageFile": "packages/ken/assets/images/IMG5.png",
+                          "text": "5th illustration"
                         }
                       ],
                       height: 300,
