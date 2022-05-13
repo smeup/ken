@@ -289,7 +289,9 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
                       size: iconTheme.size,
                     ),
                     onTap: () {
-                      passwordFieldModel.toggleVisible();
+                      setState(() {
+                        passwordFieldModel.toggleVisible();
+                      });
                     },
                   ),
                 ),
