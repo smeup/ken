@@ -176,8 +176,10 @@ class _SmeupChartState extends State<SmeupChart>
       if (chartWidth == 0)
         chartWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
-      if (chartHeight == 0) chartHeight = MediaQuery.of(context).size.height;
-      if (chartWidth == 0) chartWidth = MediaQuery.of(context).size.width;
+      if (chartHeight == 0)
+        chartHeight = SmeupUtilities.getDeviceInfo().safeHeight;
+      if (chartWidth == 0)
+        chartWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     return SizedBox(
@@ -205,8 +207,10 @@ class _SmeupChartState extends State<SmeupChart>
       if (chartWidth == 0)
         chartWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
-      if (chartHeight == 0) chartHeight = MediaQuery.of(context).size.height;
-      if (chartWidth == 0) chartWidth = MediaQuery.of(context).size.width;
+      if (chartHeight == 0)
+        chartHeight = SmeupUtilities.getDeviceInfo().safeHeight;
+      if (chartWidth == 0)
+        chartWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     return SizedBox(

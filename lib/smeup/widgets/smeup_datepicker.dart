@@ -226,9 +226,9 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
         datePickerWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
       if (datePickerHeight == 0)
-        datePickerHeight = MediaQuery.of(context).size.height;
+        datePickerHeight = SmeupUtilities.getDeviceInfo().safeHeight;
       if (datePickerWidth == 0)
-        datePickerWidth = MediaQuery.of(context).size.width;
+        datePickerWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     if (!widget.showborder!) {

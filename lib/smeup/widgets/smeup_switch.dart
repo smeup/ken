@@ -166,8 +166,10 @@ class _SmeupSwitchState extends State<SmeupSwitch>
       if (switchWidth == 0)
         switchWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
-      if (switchHeight == 0) switchHeight = MediaQuery.of(context).size.height;
-      if (switchWidth == 0) switchWidth = MediaQuery.of(context).size.width;
+      if (switchHeight == 0)
+        switchHeight = SmeupUtilities.getDeviceInfo().safeHeight;
+      if (switchWidth == 0)
+        switchWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     TextStyle captionStyle = _getCaptionStile();
