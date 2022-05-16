@@ -61,7 +61,7 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
   void initState() {
     SmeupDynamicScreen.onInit();
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       final SmeupErrorNotifier errorNotifier =
           Provider.of<SmeupErrorNotifier>(context, listen: false);
       errorNotifier.reset();

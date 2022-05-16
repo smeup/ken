@@ -15,7 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/external_configuration_model.dart';
 
-enum ALT_SERVICE_ENDPOINTS { DEFAULT, HTTP }
+enum AltServiceEndpoints { DEFAULT, HTTP }
 
 class SmeupConfigurationService {
   static const double STATIC_BUTTON_ROUNDNESS = 0.0;
@@ -170,7 +170,7 @@ class SmeupConfigurationService {
   static setDefaultServiceEndpoint() {
     // Load service endpoints from shared preferences
     final savedDefaultServiceEndpoint =
-        _loadAltServiceEndpoint(ALT_SERVICE_ENDPOINTS.DEFAULT);
+        _loadAltServiceEndpoint(AltServiceEndpoints.DEFAULT);
 
     if (savedDefaultServiceEndpoint != null &&
         savedDefaultServiceEndpoint.isNotEmpty)
@@ -187,7 +187,7 @@ class SmeupConfigurationService {
 
   static setHttpServiceEndpoint() {
     final savedHttpServiceEndpoint =
-        _loadAltServiceEndpoint(ALT_SERVICE_ENDPOINTS.HTTP);
+        _loadAltServiceEndpoint(AltServiceEndpoints.HTTP);
 
     if (savedHttpServiceEndpoint != null && savedHttpServiceEndpoint.isNotEmpty)
       _httpServiceEndpoint = savedHttpServiceEndpoint;
@@ -202,22 +202,22 @@ class SmeupConfigurationService {
   }
 
   static String? _loadAltServiceEndpoint(
-      ALT_SERVICE_ENDPOINTS serviceEndpointType) {
+      AltServiceEndpoints serviceEndpointType) {
     return SmeupConfigurationService.getLocalStorage()!
         .getString('$serviceEndpointType'.split('.').last);
   }
 
   static void saveAltServiceEndpoint(
-      ALT_SERVICE_ENDPOINTS serviceEndpointType, String value) {
+      AltServiceEndpoints serviceEndpointType, String value) {
     SmeupConfigurationService.getLocalStorage()!
         .setString('$serviceEndpointType'.split('.').last, value);
   }
 
   static void resetAltServiceEndpoint() {
     SmeupConfigurationService.getLocalStorage()!
-        .remove('$ALT_SERVICE_ENDPOINTS.DEFAULT'.split('.').last);
+        .remove('$AltServiceEndpoints.DEFAULT'.split('.').last);
     SmeupConfigurationService.getLocalStorage()!
-        .remove('$ALT_SERVICE_ENDPOINTS.HTTP'.split('.').last);
+        .remove('$AltServiceEndpoints.HTTP'.split('.').last);
   }
 
   static setLocalStorage() async {
