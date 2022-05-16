@@ -158,8 +158,9 @@ class SmeupDynamismService {
             switch (smeupFunExec.identifier.service.toString()) {
               case '*URL':
                 String url = smeupFunExec.input;
-                if (await canLaunch(url)) {
-                  await launch(url);
+                Uri uri = Uri.parse(url);
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri);
                 } else {
                   SmeupLogService.writeDebugMessage('Could not launch $url',
                       logType: LogType.error);
