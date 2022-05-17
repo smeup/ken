@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SmeupDrawerDataElement {
   String? text;
   String? route;
-  int iconCode;
+  dynamic iconCode;
   double fontSize;
   String group;
   int groupIcon;
@@ -12,7 +12,7 @@ class SmeupDrawerDataElement {
   Function? action;
 
   SmeupDrawerDataElement(this.text,
-      {this.iconCode = 0,
+      {this.iconCode,
       this.fontSize = 10,
       this.align = Alignment.center,
       this.route,

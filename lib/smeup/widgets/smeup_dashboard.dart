@@ -12,6 +12,8 @@ import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
+import '../services/smeup_icon_service.dart';
+
 // ignore: must_be_immutable
 class SmeupDashboard extends StatefulWidget
     with SmeupWidgetMixin
@@ -32,7 +34,7 @@ class SmeupDashboard extends StatefulWidget
   double? data;
   String? unitOfMeasure = '';
   String? text = '';
-  int? icon = 0;
+  dynamic icon;
   String? valueColName;
   String? selectLayout;
   double? width;
@@ -77,7 +79,8 @@ class SmeupDashboard extends StatefulWidget
     SmeupDashboardModel.setDefaults(this);
   }
 
-  SmeupDashboard.withController(SmeupDashboardModel this.model, this.scaffoldKey, this.formKey)
+  SmeupDashboard.withController(
+      SmeupDashboardModel this.model, this.scaffoldKey, this.formKey)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
@@ -124,7 +127,7 @@ class SmeupDashboard extends StatefulWidget
       data = SmeupUtilities.getDouble(workData['rows'][0][m.valueColName]);
       unitOfMeasure = workData['rows'][0][m.umColName];
       text = workData['rows'][0][m.textColName];
-      icon = SmeupUtilities.getInt(workData['rows'][0][m.iconColName]);
+      icon = workData['rows'][0][m.iconColName];
     }
 
     if (m.forceText!.isNotEmpty) {
@@ -132,7 +135,7 @@ class SmeupDashboard extends StatefulWidget
     }
 
     if (m.forceIcon!.isNotEmpty) {
-      icon = m.forceIcon as int?;
+      icon = m.forceIcon;
     }
 
     if (m.forceUm!.isNotEmpty) {
@@ -220,9 +223,9 @@ class _SmeupDashboardState extends State<SmeupDashboard>
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              if (widget.icon != null && widget.icon != 0)
+              if (widget.icon != null)
                 Icon(
-                  IconData(widget.icon!, fontFamily: 'MaterialIcons'),
+                  SmeupIconService.getIconData(widget.icon),
                   color: iconTheme.color,
                   size: iconTheme.size,
                 ),
@@ -281,7 +284,8 @@ class _SmeupDashboardState extends State<SmeupDashboard>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.headline1!;
+    TextStyle style =
+        SmeupConfigurationService.getTheme()!.textTheme.headline1!;
 
     style = style.copyWith(
       color: widget.fontColor,

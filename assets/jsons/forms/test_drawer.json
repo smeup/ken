@@ -47,43 +47,38 @@
               {
                 "text": "WIDGETS",
                 "route": "F(EXD;*JSN;) 2(;;app_home)  SERVER(source(packages/ken/assets/jsons/forms))",
-                "iconCode": 0,
                 "fontSize": 18
               },
               {
                 "text": "Label",
                 "route": "/LabelScreen",
-                "iconCode": 0,
                 "group": "STATIC",
                 "fontSize": 16,
-                "groupIcon": 59110,
+                "groupIcon": "0xe6e6",
                 "groupFontSize": 18
               },
               {
                 "text": "Dashboard",
                 "route": "F(EXD;*ROUTE;) 2(;;DashboardScreen)",
-                "iconCode": 0,
                 "group": "STATIC",
                 "fontSize": 16,
-                "groupIcon": 59110,
+                "groupIcon": "0xe6e6",
                 "groupFontSize": 18
               },
               {
                 "text": "Chart",
                 "route": "F(EXD;*JSN;) 2(;;test_chart) SERVER(source(packages/ken/assets/jsons/forms))",
-                "iconCode": 0,
                 "group": "DYNAMIC",
                 "fontSize": 16,
-                "groupIcon": 57873,
+                "groupIcon": "0xe211",
                 "groupFontSize": 18
               },
               {
                 "text": "Calendar",
                 "route": "F(EXD;*JSN;) 2(;;test_calendar) SERVER(source(packages/ken/assets/jsons/forms))",
-                "iconCode": 0,
                 "group": "DYNAMIC",
                 "fontSize": 16,
-                "groupIcon": 57873,
+                "groupIcon": "0xe211",
                 "groupFontSize": 18
               }
             ]

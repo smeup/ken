@@ -21,6 +21,7 @@ import 'package:ken/smeup/widgets/smeup_wait_fun.dart';
 
 import '../models/fun.dart';
 import '../models/dynamism.dart';
+import '../services/smeup_icon_service.dart';
 
 class SmeupDynamicScreen extends StatefulWidget {
   final Fun? initialFun;
@@ -329,11 +330,12 @@ class _SmeupDynamicScreenState extends State<SmeupDynamicScreen>
         final action = GestureDetector(
           child: Padding(
             padding: const EdgeInsets.only(right: 18.0),
-            child: Icon(
-              IconData(int.tryParse(button['icon']) ?? 0,
-                  fontFamily: 'MaterialIcons'),
-              key: Key('appbar_icon_${int.tryParse(button['icon']) ?? 0}'),
-            ),
+            child: button['icon'] == null
+                ? Container()
+                : Icon(
+                    SmeupIconService.getIconData(button['icon']),
+                    key: Key('appbar_icon_${button['icon'] ?? ''}'),
+                  ),
           ),
           onTap: () async {
             var dynamisms =

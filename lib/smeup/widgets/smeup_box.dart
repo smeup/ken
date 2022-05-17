@@ -886,7 +886,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
             child: SmeupButton(
               height: 50,
               width: buttonText.isEmpty ? 50 : 0,
-              iconData: int.tryParse(buttonIcon) ?? 0,
+              iconCode: buttonIcon,
               data: buttonText,
               clientOnPressed: () {
                 List<Dynamism> dynamisms = [

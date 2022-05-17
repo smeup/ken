@@ -39,7 +39,7 @@ class ButtonScreen extends StatelessWidget {
                     data: ['Click me'],
                     height: 80,
                     width: 260,
-                    iconData: 62371,
+                    iconCode: 62371,
                     iconSize: 25,
                     borderRadius: 30,
                     fontSize: 18,
