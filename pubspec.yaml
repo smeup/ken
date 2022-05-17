@@ -19,15 +19,7 @@ dependencies:
   provider: ^6.0.2
   permission_handler: ^9.2.0
   path_provider: ^2.0.9
-
-  # TODO: update ASAP the below reference to "syncfusion_flutter_gauges"
-  # see this issue: https://github.com/syncfusion/flutter-widgets/issues/718
-  # in the mean time replace the following code in the linear_gauge_scope.dart
-  # final Widget widget = context
-  #       .getElementForInheritedWidgetOfExactType<LinearGaugeScope>()!
-  #       .widget;
-  syncfusion_flutter_gauges: ^20.1.55
-
+  syncfusion_flutter_gauges: ^20.1.56
   carousel_slider: ^4.0.0
   table_calendar: ^3.0.5
   charts_flutter: ^0.12.0

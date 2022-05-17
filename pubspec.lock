@@ -754,14 +754,14 @@ packages:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "20.1.55"
+    version: "20.1.56"
   syncfusion_flutter_gauges:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_gauges
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "20.1.55"
+    version: "20.1.56"
   table_calendar:
     dependency: "direct main"
     description:

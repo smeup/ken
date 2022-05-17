@@ -3,11 +3,12 @@ import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
 
 import '../models/dynamism.dart';
+import '../services/smeup_icon_service.dart';
 
 class SmeupDrawerItem extends StatelessWidget {
   final String? text;
   final String? route;
-  final int iconCode;
+  final dynamic iconCode;
   final Function? action;
   final double? fontSize;
   final Color? fontColor;
@@ -51,10 +52,10 @@ class SmeupDrawerItem extends StatelessWidget {
           Divider(
             color: _getElementTextStile().color,
           ),
-        if (iconCode > 0)
+        if (iconCode != null)
           ListTile(
             leading: Icon(
-              IconData(iconCode, fontFamily: 'MaterialIcons'),
+              SmeupIconService.getIconData(iconCode),
               color: _getIconTheme().color,
               size: _getIconTheme().size,
             ),

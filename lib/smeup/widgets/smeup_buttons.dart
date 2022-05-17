@@ -40,7 +40,7 @@ class SmeupButtons extends StatefulWidget
   EdgeInsetsGeometry? padding;
   dynamic data;
   String? valueField;
-  int? iconData;
+  dynamic iconCode;
   String? id;
   String? type;
   String? title;
@@ -78,7 +78,7 @@ class SmeupButtons extends StatefulWidget
       this.align = SmeupButtonsModel.defaultAlign,
       this.padding = SmeupButtonsModel.defaultPadding,
       this.valueField = SmeupButtonsModel.defaultValueField,
-      this.iconData = 0,
+      this.iconCode,
       this.orientation = SmeupButtonsModel.defaultOrientation,
       this.isLink = SmeupButtonsModel.defaultIsLink,
       this.innerSpace = SmeupButtonsModel.defaultInnerSpace,
@@ -109,7 +109,7 @@ class SmeupButtons extends StatefulWidget
     borderWidth = m.borderWidth;
     elevation = m.elevation;
     fontBold = m.fontBold;
-    iconData = m.iconData;
+    iconCode = m.iconCode;
     iconSize = m.iconSize;
     iconColor = m.iconColor;
     orientation = m.orientation;
@@ -211,7 +211,7 @@ class SmeupButtonsState extends State<SmeupButtons>
         borderWidth: widget.borderWidth,
         elevation: widget.elevation,
         fontBold: widget.fontBold,
-        iconData: widget.iconData,
+        iconCode: widget.iconCode,
         iconSize: widget.iconSize,
         iconColor: widget.iconColor,
         icon: null,

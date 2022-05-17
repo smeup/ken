@@ -16,6 +16,7 @@ import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
 import '../models/dynamism.dart';
+import '../services/smeup_icon_service.dart';
 
 // ignore: must_be_immutable
 class SmeupDrawer extends StatefulWidget
@@ -105,7 +106,7 @@ class SmeupDrawer extends StatefulWidget
         final element = workData['rows'][i];
         newList.add(SmeupDrawerDataElement(element['text'],
             route: element['route'],
-            iconCode: SmeupUtilities.getInt(element['iconCode']) ?? 0,
+            iconCode: element['iconCode'],
             fontSize: SmeupUtilities.getDouble(element['fontSize']) ?? 0.0,
             align: SmeupUtilities.getAlignmentGeometry(element['align']) ??
                 Alignment.center,
@@ -161,12 +162,12 @@ class SmeupDrawer extends StatefulWidget
                   '/MainScreen', (Route<dynamic> route) => false);
             }
           },
-          iconCode: 58291,
+          iconCode: 0xe3b3,
           group: context != null
               ? SmeupLocalizationService.of(context)!.getLocalString('settings')
               : "SETTINGS",
           fontSize: 15,
-          groupIcon: 58751,
+          groupIcon: 0xe57f,
           groupFontSize: 20,
         )
       ]);
@@ -211,9 +212,9 @@ class _SmeupDrawerState extends State<SmeupDrawer>
 
   Widget _getCollpsed(e) {
     return ListTile(
-      leading: e.groupIcon > 0
+      leading: e.groupIcon != null
           ? Icon(
-              IconData(e.groupIcon, fontFamily: 'MaterialIcons'),
+              SmeupIconService.getIconData(e.groupIcon),
               color: _getIconTheme().color,
               size: _getIconTheme().size,
             )

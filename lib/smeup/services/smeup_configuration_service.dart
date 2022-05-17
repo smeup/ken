@@ -7,6 +7,7 @@ import 'package:ken/smeup/models/authentication_model.dart';
 import 'package:ken/smeup/services/smeup_cache_service.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_data_service_interface.dart';
+import 'package:ken/smeup/services/smeup_icon_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_variables_service.dart';
 import 'package:package_info/package_info.dart';
@@ -91,6 +92,8 @@ class SmeupConfigurationService {
     SmeupConfigurationService.setPackageInfo(packageInfoModel);
     if (context != null) SmeupConfigurationService.setHolidays(context);
     if (enableCache) SmeupCacheService.init();
+
+    await SmeupIconService.init();
   }
 
   static void setPackageInfo(PackageInfo packageInfo) {

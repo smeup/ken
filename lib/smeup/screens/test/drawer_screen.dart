@@ -46,8 +46,8 @@ class DrawerScreen extends StatelessWidget {
   SmeupDrawer _getDrawer(BuildContext context) {
     double groupFontSize = 18;
     double fontSize = 16;
-    int staticGroupIcon = 59110;
-    int dynamicGroupIcon = 57873;
+    int staticGroupIcon = 0xe6e6;
+    int dynamicGroupIcon = 0xe211;
 
     return SmeupDrawer(
       _scaffoldKey,
@@ -58,13 +58,11 @@ class DrawerScreen extends StatelessWidget {
         SmeupDrawerDataElement(
           'WIDGETS',
           route: '/',
-          iconCode: 0,
           fontSize: groupFontSize,
         ),
         SmeupDrawerDataElement(
           'Label',
           route: LabelScreen.routeName,
-          iconCode: 0,
           group: 'STATIC',
           fontSize: fontSize,
           groupIcon: staticGroupIcon,
@@ -73,7 +71,6 @@ class DrawerScreen extends StatelessWidget {
         SmeupDrawerDataElement(
           'Dashboard',
           route: 'F(EXD;*ROUTE;) 2(;;DashboardScreen)',
-          iconCode: 0,
           group: 'STATIC',
           fontSize: fontSize,
           groupIcon: staticGroupIcon,
@@ -83,7 +80,6 @@ class DrawerScreen extends StatelessWidget {
           'Chart',
           route:
               'F(EXD;*JSN;) 2(;;test_chart) SERVER(source(packages/ken/assets/jsons/forms))',
-          iconCode: 0,
           group: 'DYNAMIC',
           fontSize: fontSize,
           groupIcon: dynamicGroupIcon,
@@ -93,7 +89,6 @@ class DrawerScreen extends StatelessWidget {
           'Calendar',
           route:
               'F(EXD;*JSN;) 2(;;test_calendar) SERVER(source(packages/ken/assets/jsons/forms))',
-          iconCode: 0,
           group: 'DYNAMIC',
           fontSize: fontSize,
           groupIcon: dynamicGroupIcon,
