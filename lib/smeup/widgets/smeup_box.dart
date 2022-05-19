@@ -966,9 +966,8 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                 SmeupDataService.services.entries.firstWhere((element) {
               return element.value is SmeupFirestoreDataService;
             }).key;
-            smeupFun.identifier.function = 'GET.DOCUMENTS';
-            smeupFun.parameters
-                .add({'key': 'dataCollection', 'value': col['ogg']});
+            smeupFun.identifier.function = 'GET.LST';
+            smeupFun.parameters.add({'key': 'Dta', 'value': col['ogg']});
             final code = data[col['code']];
             smeupFun.parameters.add({'key': 'filters', 'value': 'code($code)'});
             final smeupServiceResponse =

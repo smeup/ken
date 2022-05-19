@@ -101,17 +101,16 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
 
     final options = GetOptions(source: await SmeupFirestoreShared.getSource());
 
-    final formsCollection =
-        list.firstWhereOrNull((element) => element['key'] == 'formsCollection');
+    final sch = list.firstWhereOrNull((element) => element['key'] == 'Sch');
 
-    if (formsCollection == null) {
-      final msg = 'The formsCollection is empty';
+    if (sch == null) {
+      final msg = 'The Sch is empty';
       SmeupLogService.writeDebugMessage(msg, logType: LogType.error);
       throw Exception(msg);
     }
 
     QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance!
-        .collection(formsCollection['value'])
+        .collection(sch['value'])
         .where('formId', isEqualTo: fileName)
         .get(options);
 
@@ -127,7 +126,7 @@ class SmeupJsonDataService extends SmeupDataServiceInterface {
     }
 
     SmeupLogService.writeDebugMessage(
-        '*** \'SmeupJsonDataService\' getFromFirestore. collection: ${formsCollection['value']}; form: $fileName');
+        '*** \'SmeupJsonDataService\' getFromFirestore. collection: ${sch['value']}; form: $fileName');
 
     return jsonEncode(responseData);
   }
