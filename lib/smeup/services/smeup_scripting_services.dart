@@ -87,7 +87,8 @@ class SmeupScriptingServices {
     final js =
         getJavascriptRuntime(xhr: false, forceJavascriptCoreOnAndroid: false);
 
-    String code = """
+    String code =
+        """
       const _f2js = {
         map: {},        
         id: 0,      
@@ -204,7 +205,7 @@ class SmeupScriptingServices {
           });
 
           Fun fun = Fun(
-              "F(FBK;FS_00_01;WRITE.DOCUMENT) NOTIFY(CLOSE()) P(fieldSettingsCollection(${args[2]}) $funParameter)",
+              "F(FBK;FS_00_01;WRT.DOC) NOTIFY(CLOSE()) P(Cfg(${args[2]}) $funParameter)",
               formKey,
               scaffoldKey,
               context);
@@ -225,7 +226,7 @@ class SmeupScriptingServices {
           });
 
           Fun fun = Fun(
-              "F(EXB;FS_00_01;GET.DOCUMENTS) P(dataCollection(${args[2]}) filters($funParameter)))",
+              "F(EXB;FS_00_01;GET.LST) P(Dta(${args[2]}) filters($funParameter)))",
               formKey,
               scaffoldKey,
               context);
@@ -274,7 +275,8 @@ class SmeupScriptingServices {
     });
     field["value"] = jsMap[field["code"]];
 
-    var code = """                
+    var code =
+        """                
         $script
         validate(JSON.parse('${json.encode(field)}'), JSON.parse('${json.encode(jsMap)}'));        
         """;
