@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter_js/flutter_js.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_js/flutter_js.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
@@ -275,7 +276,7 @@ class SmeupScriptingServices {
     field["value"] = jsMap[field["code"]];
 
     var code = """                
-        $script
+        ${_wrapScriptBody(script)}
         validate(JSON.parse('${json.encode(field)}'), JSON.parse('${json.encode(jsMap)}'));        
         """;
 
@@ -290,6 +291,17 @@ class SmeupScriptingServices {
       _logError(context, err.toString(), code);
       return false;
     }
+  }
+
+  static String _wrapScriptBody(String scriptBody) {
+    RegExp regExp = new RegExp(
+        r" *async +function +validate *\( *field *, *variables *\) *\{.*\}",
+        caseSensitive: true);
+
+    // Introduced for backward compatibility
+    return regExp.hasMatch(scriptBody)
+        ? scriptBody
+        : "async function validate(field, variables) { $scriptBody };";
   }
 
   static bool _jsEvaluate(
