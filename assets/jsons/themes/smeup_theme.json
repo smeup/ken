@@ -1,6 +1,12 @@
 {
   "_comment": "smeup_components_library: for further information about the supported styles read the document README.md",
   "primaryColor": "#06899b",
+  "secondaryColor": "#df8a04",
+  "primaryDarkColor": "#006074",
+  "secondaryDarkColor": "#b06100",
+  "primaryLightColor": "#3fbbd3",
+  "secondaryLightColor": "#ffbc00",
+
   "splashColor": "#06899b",
   "scaffoldBackgroundColor": "#ffffff",
   "elevatedButtonTheme": {
@@ -26,7 +32,7 @@
     },
     "caption": {
       "color": "#06899b",
-      "fontSize": 16.0,
+      "fontSize": 12.0,
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },

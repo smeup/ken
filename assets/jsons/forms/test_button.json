@@ -42,7 +42,7 @@
                     "icon": "0xf3a3",
                     "iconSize": 25,
                     "align": "right",
-                    "borderRadius": 30,
+                    "borderRadius": 15,
                     "fontSize": 18,
                     "backColor": "R006G140B154",
                     "textColor": "R006G140B154"
@@ -50,7 +50,7 @@
                 }
               },
               "data": {
-                "rows": [{ "value": "Click me" }]
+                "rows": [{ "value": "CLICK ME" }]
               },
               "dynamisms": [
                 {

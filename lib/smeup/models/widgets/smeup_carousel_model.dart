@@ -6,7 +6,7 @@ import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class SmeupCarouselModel extends SmeupModel implements SmeupDataInterface {
-  static const double defaultHeight = 100;
+  static const double defaultHeight = 300;
 
   bool? autoPlay;
   double? height;
@@ -26,7 +26,8 @@ class SmeupCarouselModel extends SmeupModel implements SmeupDataInterface {
 
   SmeupCarouselModel.fromMap(Map jsonMap, GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey, BuildContext? context)
-      : super.fromMap(jsonMap as Map<String, dynamic>, formKey, scaffoldKey, context) {
+      : super.fromMap(
+            jsonMap as Map<String, dynamic>, formKey, scaffoldKey, context) {
     height =
         SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     autoPlay = optionsDefault!['autoPlay'] ?? false;

@@ -161,20 +161,22 @@ class _SmeupGaugeState extends State<SmeupGauge>
       child: SfRadialGauge(
           title: GaugeTitle(
               text: 'Speedometer',
-              textStyle:
-                  const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+              textStyle: const TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromRGBO(6, 137, 155, 1))),
           axes: <RadialAxis>[
             RadialAxis(minimum: vMin, maximum: vMax, ranges: <GaugeRange>[
               GaugeRange(
                   startValue: vMin,
                   endValue: vWar,
-                  color: Colors.green,
+                  color: Color.fromRGBO(6, 137, 155, 1),
                   startWidth: 10,
                   endWidth: 10),
               GaugeRange(
                   startValue: vWar,
                   endValue: vAle,
-                  color: Colors.orange,
+                  color: Color.fromRGBO(223, 138, 4, 1),
                   startWidth: 10,
                   endWidth: 10),
               GaugeRange(
@@ -190,7 +192,9 @@ class _SmeupGaugeState extends State<SmeupGauge>
                   widget: Container(
                       child: Text(vVal.toString(),
                           style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold))),
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red))),
                   angle: 90,
                   positionFactor: 0.5)
             ])

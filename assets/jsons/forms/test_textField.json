@@ -38,9 +38,10 @@
             "FLD": {
               "default": {
                 "type": "itx",
+                "padding": 50,
                 "label": "description",
                 "showSubmit": true,
-                "submitLabel": "tap me"
+                "submitLabel": "TAP ME TO CONFIRM"
               }
             }
           },

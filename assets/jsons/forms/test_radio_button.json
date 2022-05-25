@@ -16,7 +16,6 @@
           "options": {
             "LAB": {
               "default": {
-                "padding": { "Top": 30},
                 "align": "center",
                 "height": 30
               }
@@ -37,7 +36,7 @@
           "id": "radio_buttons_1",
           "title": "",
           "data": {
-            "rows": [
+            "rows":  [
               {
                 "code": "1",
                 "value": "Yes"
@@ -45,6 +44,7 @@
               {
                 "code": "0",
                 "value": "No"
+
               },
               {
                 "code": "2",

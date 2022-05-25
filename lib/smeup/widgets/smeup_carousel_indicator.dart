@@ -28,8 +28,8 @@ class _SmeupCarouselIndicatorState extends State<SmeupCarouselIndicator> {
         decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: notifier.index == i
-                ? Color.fromRGBO(0, 0, 0, 0.9)
-                : Color.fromRGBO(0, 0, 0, 0.4)),
+                ? Color.fromRGBO(63, 187, 211, 1)
+                : Color.fromRGBO(0, 96, 116, 1)),
       );
 
       list.add(cont);
