@@ -11,6 +11,8 @@ import 'package:ken/smeup/widgets/smeup_line.dart';
 import 'package:ken/smeup/widgets/smeup_progress_indicator.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../services/smeup_utilities.dart';
+
 class SmeupCalendarWidget extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState>? formKey;
@@ -130,8 +132,9 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
         calendarWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
       if (calendarHeight == 0)
-        calendarHeight = MediaQuery.of(context).size.height;
-      if (calendarWidth == 0) calendarWidth = MediaQuery.of(context).size.width;
+        calendarHeight = SmeupUtilities.getDeviceInfo().safeHeight;
+      if (calendarWidth == 0)
+        calendarWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     double separatorHeight = 8.0;

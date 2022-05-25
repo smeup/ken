@@ -9,6 +9,7 @@ import 'package:ken/smeup/services/SmeupLocalizationService.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_dynamism_service.dart';
+import 'package:ken/smeup/services/smeup_firestore_data_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_message_data_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
@@ -45,6 +46,7 @@ class SmeupBox extends StatefulWidget {
   final TextStyle? textStyle;
   final TextStyle? captionStyle;
   final Function? onSizeChanged;
+  final bool? isFirestore;
 
   SmeupBox(this.scaffoldKey, this.formKey, this.index,
       {this.id,
@@ -66,7 +68,8 @@ class SmeupBox extends StatefulWidget {
       this.cardTheme,
       this.textStyle,
       this.captionStyle,
-      this.onSizeChanged});
+      this.onSizeChanged,
+      this.isFirestore});
 
   @override
   _SmeupBoxState createState() => _SmeupBoxState();
@@ -253,51 +256,24 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
-                  height: widget.height,
-                  child: Row(
-                    children: () {
-                      var listOfRows = List<Widget>.empty(growable: true);
-
-                      cols!.forEach((col) {
-                        if (col['IO'] != 'H' &&
-                            !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']].toString();
-
-                          final colWidget = Expanded(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(rowData, style: widget.textStyle),
-                            ),
-                          );
-
-                          listOfRows.add(colWidget);
-                        }
-                      });
-
-                      Widget widgetImg = FutureBuilder<Widget>(
-                          future: _getImage(data),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<Widget> snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return SmeupWait(
-                                  widget.scaffoldKey, widget.formKey);
+                    height: widget.height,
+                    child: FutureBuilder<Widget>(
+                        future: _getImageAndDataInRow(data, cols),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<Widget> snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return widget.showLoader!
+                                ? SmeupWait(widget.scaffoldKey, widget.formKey)
+                                : Container();
+                          } else {
+                            if (snapshot.hasError) {
+                              return SmeupNotAvailable();
                             } else {
-                              if (snapshot.hasError) {
-                                return SmeupNotAvailable();
-                              } else {
-                                return snapshot.data!;
-                              }
+                              return snapshot.data!;
                             }
-                          });
-
-                      return [
-                        widgetImg,
-                        Expanded(child: Column(children: listOfRows))
-                      ];
-                    }(),
-                  ),
-                ))),
+                          }
+                        })))),
       );
     }
 
@@ -322,44 +298,23 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                 child: Container(
                   padding: EdgeInsets.all(12),
                   height: widget.height,
-                  child: Row(
-                    children: () {
-                      var listOfRows = List<Widget>.empty(growable: true);
-
-                      cols!.forEach((col) {
-                        if (col['IO'] != 'H' &&
-                            !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']].toString();
-
-                          final colWidget = Container(
-                              padding: EdgeInsets.all(1),
-                              child: Row(children: [
-                                if (col['text'].isNotEmpty)
-                                  Expanded(
-                                    flex: 1,
-                                    child: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(col['text'],
-                                          style: widget.captionStyle),
-                                    ),
-                                  ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child:
-                                        Text(rowData, style: widget.textStyle),
-                                  ),
-                                ),
-                              ]));
-
-                          listOfRows.add(colWidget);
+                  child: FutureBuilder<Widget>(
+                      future: _getLayout2Async(data, cols),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<Widget> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return widget.showLoader!
+                              ? SmeupWait(widget.scaffoldKey, widget.formKey)
+                              : Container();
+                        } else {
+                          if (snapshot.hasError) {
+                            return SmeupNotAvailable();
+                          } else {
+                            return snapshot.data!;
+                          }
                         }
-                      });
-
-                      return [Expanded(child: Column(children: listOfRows))];
-                    }(),
-                  ),
+                      }),
                 ))),
       );
     }
@@ -384,29 +339,23 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
                   height: widget.height,
-                  child: Row(
-                    children: () {
-                      var listOfRows = List<Widget>.empty(growable: true);
-
-                      cols!.forEach((col) {
-                        if (col['IO'] != 'H' &&
-                            !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']].toString();
-
-                          final colWidget = Expanded(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(rowData, style: widget.textStyle),
-                            ),
-                          );
-
-                          listOfRows.add(colWidget);
+                  child: FutureBuilder<Widget>(
+                      future: _getLayout3Async(data, cols),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<Widget> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return widget.showLoader!
+                              ? SmeupWait(widget.scaffoldKey, widget.formKey)
+                              : Container();
+                        } else {
+                          if (snapshot.hasError) {
+                            return SmeupNotAvailable();
+                          } else {
+                            return snapshot.data!;
+                          }
                         }
-                      });
-
-                      return [Expanded(child: Column(children: listOfRows))];
-                    }(),
-                  ),
+                      }),
                 ))),
       );
     }
@@ -433,56 +382,23 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                 child: Container(
                   padding: EdgeInsets.all(12),
                   height: widget.height,
-                  child: Row(
-                    children: () {
-                      var widgets = List<Widget>.empty(growable: true);
-
-                      cols!.forEach((col) {
-                        if (col['IO'] != 'H' &&
-                            !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']].toString();
-
-                          final textWidget = Container(
-                            padding: EdgeInsets.all(1),
-                            child: Row(children: [
-                              if (col['text'].isNotEmpty)
-                                Expanded(
-                                  flex: 1,
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(col['text'],
-                                        style: widget.captionStyle),
-                                  ),
-                                ),
-                              Expanded(
-                                flex: 2,
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(rowData, style: widget.textStyle),
-                                ),
-                              ),
-                            ]),
-                          );
-
-                          widgets.add(textWidget);
+                  child: FutureBuilder<Widget>(
+                      future: _getLayout4Async(data, cols),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<Widget> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return widget.showLoader!
+                              ? SmeupWait(widget.scaffoldKey, widget.formKey)
+                              : Container();
+                        } else {
+                          if (snapshot.hasError) {
+                            return SmeupNotAvailable();
+                          } else {
+                            return snapshot.data!;
+                          }
                         }
-                      });
-
-                      var buttonWidgets = _getButtons(data);
-
-                      widgets.add(Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                        child: Row(
-                          //crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          //mainAxisSize: MainAxisSize.min,
-                          children: buttonWidgets,
-                        ),
-                      ));
-
-                      return [Expanded(child: Column(children: widgets))];
-                    }(),
-                  ),
+                      }),
                 ))),
       );
     }
@@ -509,44 +425,23 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                 child: Container(
                   padding: EdgeInsets.all(12),
                   height: widget.height,
-                  child: Row(
-                    children: () {
-                      var listOfRows = List<Widget>.empty(growable: true);
-
-                      cols!.forEach((col) {
-                        if (col['IO'] != 'H' &&
-                            !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']].toString();
-
-                          final colWidget = Container(
-                              padding: EdgeInsets.all(1),
-                              child: Row(children: [
-                                if (col['text'].isNotEmpty)
-                                  Expanded(
-                                    flex: 1,
-                                    child: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(col['text'],
-                                          style: widget.captionStyle),
-                                    ),
-                                  ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child:
-                                        Text(rowData, style: widget.textStyle),
-                                  ),
-                                ),
-                              ]));
-
-                          listOfRows.add(colWidget);
+                  child: FutureBuilder<Widget>(
+                      future: _getLayout5Async(data, cols),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<Widget> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return widget.showLoader!
+                              ? SmeupWait(widget.scaffoldKey, widget.formKey)
+                              : Container();
+                        } else {
+                          if (snapshot.hasError) {
+                            return SmeupNotAvailable();
+                          } else {
+                            return snapshot.data!;
+                          }
                         }
-                      });
-
-                      return [Expanded(child: Column(children: listOfRows))];
-                    }(),
-                  ),
+                      }),
                 ))),
       );
     }
@@ -573,49 +468,23 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
                   height: widget.height,
-                  child: Column(
-                    children: () {
-                      var listOfRows = List<Widget>.empty(growable: true);
-
-                      cols!.forEach((col) {
-                        if (col['IO'] != 'H') {
-                          String rowData = data[col['code']].toString();
-                          if (rowData.isNotEmpty) {
-                            final colWidget = Expanded(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(rowData, style: widget.textStyle),
-                              ),
-                            );
-
-                            listOfRows.add(colWidget);
+                  child: FutureBuilder<Widget>(
+                      future: _getImageAndDataInColumn(data, cols),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<Widget> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return widget.showLoader!
+                              ? SmeupWait(widget.scaffoldKey, widget.formKey)
+                              : Container();
+                        } else {
+                          if (snapshot.hasError) {
+                            return SmeupNotAvailable();
+                          } else {
+                            return snapshot.data!;
                           }
                         }
-                      });
-
-                      Widget widgetImg = FutureBuilder<Widget>(
-                          future: _getImage(data),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<Widget> snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return SmeupWait(
-                                  widget.scaffoldKey, widget.formKey);
-                            } else {
-                              if (snapshot.hasError) {
-                                return SmeupNotAvailable();
-                              } else {
-                                return snapshot.data!;
-                              }
-                            }
-                          });
-
-                      return [
-                        widgetImg,
-                        Expanded(child: Column(children: listOfRows))
-                      ];
-                    }(),
-                  ),
+                      }),
                 ))),
       );
     }
@@ -640,54 +509,23 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
                   height: widget.height,
-                  child: Row(
-                    children: () {
-                      var listOfRows = List<Widget>.empty(growable: true);
-
-                      cols!.forEach((col) {
-                        if (col['IO'] != 'H' &&
-                            !widget._excludedColumns.contains(col['ogg'])) {
-                          String rowData = data[col['code']].toString();
-
-                          final colWidget = Expanded(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(rowData,
-                                  textAlign: TextAlign.center,
-                                  style: widget.textStyle),
-                            ),
-                          );
-
-                          listOfRows.add(colWidget);
+                  child: FutureBuilder<Widget>(
+                      future: _getImageAndDataInRow(data, cols),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<Widget> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return widget.showLoader!
+                              ? SmeupWait(widget.scaffoldKey, widget.formKey)
+                              : Container();
+                        } else {
+                          if (snapshot.hasError) {
+                            return SmeupNotAvailable();
+                          } else {
+                            return snapshot.data!;
+                          }
                         }
-                      });
-
-                      //return [Expanded(child: Column(children: listOfRows))];
-                      Widget widgetImg = FutureBuilder<Widget>(
-                          future: _getImage(data),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<Widget> snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return SmeupWait(
-                                  widget.scaffoldKey, widget.formKey);
-                            } else {
-                              if (snapshot.hasError) {
-                                return SmeupNotAvailable();
-                              } else {
-                                return snapshot.data!;
-                              }
-                            }
-                          });
-
-                      //await _getImage(data);
-
-                      return [
-                        widgetImg,
-                        Expanded(child: Column(children: listOfRows))
-                      ];
-                    }(),
-                  ),
+                      }),
                 ))),
       );
     }
@@ -784,6 +622,185 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     return widgetImg ?? Container();
   }
 
+  Future<Widget> _getImageAndDataInRow(dynamic data, cols) async {
+    Widget? widgetImg = await _getImage(data);
+
+    var listOfRows = await _getBoxTexts(data, cols);
+
+    return Row(
+      children: [widgetImg, Expanded(child: Column(children: listOfRows))],
+    );
+  }
+
+  Future<Widget> _getImageAndDataInColumn(dynamic data, cols) async {
+    Widget? widgetImg = await _getImage(data);
+
+    var listOfRows = await _getBoxTexts(data, cols);
+
+    return Column(
+      children: [widgetImg, Expanded(child: Column(children: listOfRows))],
+    );
+  }
+
+  Future<Widget> _getLayout2Async(dynamic data, cols) async {
+    var listOfRows = List<Widget>.empty(growable: true);
+    for (var col in cols) {
+      if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
+        String rowData = await _getBoxText(data, col);
+
+        final colWidget = Container(
+            padding: EdgeInsets.all(1),
+            child: Row(children: [
+              if (col['text'].isNotEmpty)
+                Expanded(
+                  flex: 1,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(col['text'], style: widget.captionStyle),
+                  ),
+                ),
+              Expanded(
+                flex: 2,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(rowData, style: widget.textStyle),
+                ),
+              ),
+            ]));
+
+        listOfRows.add(colWidget);
+      }
+    }
+
+    return Row(
+      children: [Expanded(child: Column(children: listOfRows))],
+    );
+  }
+
+  Future<Widget> _getLayout3Async(dynamic data, cols) async {
+    var listOfRows = List<Widget>.empty(growable: true);
+    for (var col in cols) {
+      if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
+        String rowData = await _getBoxText(data, col);
+
+        final colWidget = Expanded(
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(rowData, style: widget.textStyle),
+          ),
+        );
+
+        listOfRows.add(colWidget);
+      }
+    }
+
+    return Row(
+      children: [Expanded(child: Column(children: listOfRows))],
+    );
+  }
+
+  Future<Widget> _getLayout4Async(dynamic data, cols) async {
+    var widgets = List<Widget>.empty(growable: true);
+    for (var col in cols) {
+      if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
+        String rowData = await _getBoxText(data, col);
+
+        final textWidget = Container(
+          padding: EdgeInsets.all(1),
+          child: Row(children: [
+            if (col['text'].isNotEmpty)
+              Expanded(
+                flex: 1,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(col['text'], style: widget.captionStyle),
+                ),
+              ),
+            Expanded(
+              flex: 2,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(rowData, style: widget.textStyle),
+              ),
+            ),
+          ]),
+        );
+
+        widgets.add(textWidget);
+      }
+    }
+
+    var buttonWidgets = _getButtons(data);
+
+    widgets.add(Padding(
+      padding: const EdgeInsets.only(top: 5),
+      child: Row(
+        //crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.end,
+        //mainAxisSize: MainAxisSize.min,
+        children: buttonWidgets,
+      ),
+    ));
+
+    return Row(
+      children: [Expanded(child: Column(children: widgets))],
+    );
+  }
+
+  Future<Widget> _getLayout5Async(dynamic data, cols) async {
+    var listOfRows = List<Widget>.empty(growable: true);
+    for (var col in cols) {
+      if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
+        String rowData = await _getBoxText(data, col);
+
+        final colWidget = Container(
+            padding: EdgeInsets.all(1),
+            child: Row(children: [
+              if (col['text'].isNotEmpty)
+                Expanded(
+                  flex: 1,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(col['text'], style: widget.captionStyle),
+                  ),
+                ),
+              Expanded(
+                flex: 2,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(rowData, style: widget.textStyle),
+                ),
+              ),
+            ]));
+
+        listOfRows.add(colWidget);
+      }
+    }
+
+    return Row(
+      children: [Expanded(child: Column(children: listOfRows))],
+    );
+  }
+
+  Future<List<Widget>> _getBoxTexts(dynamic data, cols) async {
+    var listOfRows = List<Widget>.empty(growable: true);
+
+    for (var col in cols) {
+      if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
+        String rowData = await _getBoxText(data, col);
+        final colWidget = Expanded(
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(rowData, style: widget.textStyle),
+          ),
+        );
+
+        listOfRows.add(colWidget);
+      }
+    }
+    return listOfRows;
+  }
+
   Widget? _getSmeupImage(data) {
     Widget? widgetImg;
     if (data['isRemote'] != null) {
@@ -869,7 +886,7 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
             child: SmeupButton(
               height: 50,
               width: buttonText.isEmpty ? 50 : 0,
-              iconData: int.tryParse(buttonIcon) ?? 0,
+              iconCode: buttonIcon,
               data: buttonText,
               clientOnPressed: () {
                 List<Dynamism> dynamisms = [
@@ -934,5 +951,39 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
     }
 
     return _columns;
+  }
+
+  Future<String> _getBoxText(Map data, Map col) async {
+    //return 'sss';
+    try {
+      if (widget.isFirestore! && col['cmp'] != null && col['ogg'] != null) {
+        switch (col['cmp']) {
+          case 'dec':
+            Fun smeupFun = Fun.empty();
+
+            smeupFun.identifier.component = 'TRE';
+            smeupFun.identifier.service =
+                SmeupDataService.services.entries.firstWhere((element) {
+              return element.value is SmeupFirestoreDataService;
+            }).key;
+            smeupFun.identifier.function = 'GET.LST';
+            smeupFun.parameters.add({'key': 'Dta', 'value': col['ogg']});
+            final code = data[col['code']];
+            smeupFun.parameters.add({'key': 'filters', 'value': 'code($code)'});
+            final smeupServiceResponse =
+                await SmeupDataService.invoke(smeupFun);
+
+            if (smeupServiceResponse.succeded) {
+              final rows = smeupServiceResponse.result.data['rows'] as List;
+              if (rows.length > 0) {
+                return rows[0]['description'];
+              }
+            }
+            break;
+        }
+      }
+    } catch (e) {}
+
+    return data[col['code']].toString();
   }
 }

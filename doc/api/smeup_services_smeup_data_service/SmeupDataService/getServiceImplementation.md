@@ -25,9 +25,9 @@
 
 ```dart
 static SmeupDataServiceInterface? getServiceImplementation(String? name) {
-  if (services[name!] == null) {
+  if (name == null || services[name] == null) {
     SmeupLogService.writeDebugMessage(
-        ' The server implementation \'$name\' does not exist, will be used SmeupDefaultDataService',
+        ' The server implementation \'${name ?? ''}\' does not exist, will be used SmeupDefaultDataService',
         logType: LogType.warning);
     return services['*DEFAULT'];
   } else {

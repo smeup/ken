@@ -57,7 +57,8 @@ class SmeupTextField extends StatefulWidget
 
   List<TextInputFormatter>? inputFormatters;
 
-  SmeupTextField.withController(SmeupTextFieldModel this.model, this.scaffoldKey, this.formKey)
+  SmeupTextField.withController(
+      SmeupTextFieldModel this.model, this.scaffoldKey, this.formKey)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
@@ -240,6 +241,9 @@ class _SmeupTextFieldState extends State<SmeupTextField>
           decoration: InputDecoration(
             labelStyle: captionStyle,
             labelText: widget.label,
+            // errorBorder: UnderlineInputBorder(
+            //   borderSide: BorderSide(color: Colors.transparent),
+            // ),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                   color: widget.underline!
@@ -308,7 +312,8 @@ class _SmeupTextFieldState extends State<SmeupTextField>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
+    TextStyle style =
+        SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
 
     style = style.copyWith(
         color: widget.fontColor,

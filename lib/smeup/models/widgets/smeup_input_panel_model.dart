@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/daos/smeup_inputpanel_dao.dart';
-import 'package:ken/smeup/models/widgets/smeup_input_panel_field.dart';
+import 'package:ken/smeup/models/widgets/smeup_input_panel_value.dart';
 import 'package:ken/smeup/models/widgets/smeup_data_interface.dart';
 import 'package:ken/smeup/models/widgets/smeup_model.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
+
+import '../../services/smeup_variables_service.dart';
 
 class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
@@ -62,6 +64,9 @@ class SmeupInputPanelModel extends SmeupModel implements SmeupDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         await SmeupInputPanelDao.getData(this, formKey, scaffoldKey, context);
+        fields?.forEach((field) => SmeupVariablesService.setVariable(
+            field.id, field.value.code,
+            formKey: formKey));
       };
     }
 

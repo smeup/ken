@@ -27,20 +27,20 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
   @override
   Future<SmeupServiceResponse> invoke(Fun fun) async {
     switch (fun.identifier.function) {
-      case "GET.DOCUMENTS":
+      case "GET.LST":
         return await getDocuments(fun);
-      case "GET.DOCUMENT":
+      case "GET.DOC":
         return await getDocument(fun);
-      case "GET.INPUT.PANEL":
+      case "GET.INP":
         return await getInputPanel(fun);
-      case "GET.FIELD.DEFAULT":
-      case "GET.FIELD.VALIDATION":
+      case "GET.DFT":
+      case "GET.VAL":
         return await getFieldSetting(fun);
-      case "UPDATE.DOCUMENT":
+      case "UPD.DOC":
         return await updateDocument(fun);
-      case "DELETE.DOCUMENT":
+      case "DLT.DOC":
         return await deleteDocument(fun);
-      case "WRITE.DOCUMENT":
+      case "WRT.DOC":
         return await writeDocument(fun);
       default:
         final message =
@@ -57,27 +57,25 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       final options =
           GetOptions(source: await SmeupFirestoreShared.getSource());
 
-      final collection =
-          list.firstWhereOrNull((element) => element['key'] == 'collection');
+      final dta = list.firstWhereOrNull((element) => element['key'] == 'Dta');
 
       final filters =
           list.firstWhereOrNull((element) => element['key'] == 'filters');
 
       final sort = list.firstWhereOrNull((element) => element['key'] == 'sort');
 
-      if (collection == null || collection.toString().isEmpty) {
-        checkResult = 'The collection is empty. FUN: $smeupFun';
+      if (!_isParValid(dta)) {
+        checkResult = 'The Dta is empty. FUN: $smeupFun';
       }
 
       if (checkResult.isNotEmpty) {
         return _getErrorResponse(checkResult);
       }
 
-      Query<Map<String, dynamic>> query =
-          fsDatabase.collection(collection!['value']);
+      Query<Map<String, dynamic>> query = fsDatabase.collection(dta!['value']);
 
-      if (filters != null && filters.toString().isNotEmpty) {
-        var parmsSplit = Fun.splitParameters(filters['value']);
+      if (_isParValid(filters)) {
+        var parmsSplit = Fun.splitParameters(filters!['value']);
         parmsSplit.forEach((element) {
           Map ds = Fun.deserilizeParameter(element);
           final key = ds['key'];
@@ -86,8 +84,8 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         });
       }
 
-      if (sort != null && sort.toString().isNotEmpty) {
-        var parmsSplit = Fun.splitParameters(sort['value']);
+      if (_isParValid(sort)) {
+        var parmsSplit = Fun.splitParameters(sort!['value']);
         parmsSplit.forEach((element) {
           Map ds = Fun.deserilizeParameter(element);
           final key = ds['key'];
@@ -109,6 +107,33 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         responseData = _getErrorResponse(message);
       }
 
+      final fld = list.firstWhereOrNull((element) => element['key'] == 'Fld');
+
+      if (_isParValid(fld)) {
+        try {
+          Query<Map<String, dynamic>> queryFields =
+              fsDatabase.collection(fld!['value']);
+          QuerySnapshot<Map<String, dynamic>> snapshotFields =
+              await queryFields.get(options);
+          final resFields =
+              getTransformer()!.transform(smeupFun, snapshotFields);
+          final fieldsList = resFields!['rows'] as List;
+          if (fieldsList.isNotEmpty) {
+            (responseData["columns"] as List).forEach((col) {
+              var field = fieldsList.firstWhere(
+                  (element) => element['code'] == col['code'],
+                  orElse: () => null);
+              if (field != null) {
+                col['cmp'] = field['cmp'];
+                col['text'] = field['text'];
+                col['ogg'] = field['ogg'];
+                col['IO'] = field['io'] == 'H' ? 'H' : 'O';
+              }
+            });
+          }
+        } catch (e) {}
+      }
+
       return SmeupServiceResponse(
           true,
           Response(
@@ -122,6 +147,10 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
     }
   }
 
+  bool _isParValid(dynamic par) {
+    return par != null || par.toString().isEmpty;
+  }
+
   Future<SmeupServiceResponse> getDocument(Fun smeupFun) async {
     try {
       List<Map<String, dynamic>> list = smeupFun.parameters;
@@ -130,16 +159,15 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       final options =
           GetOptions(source: await SmeupFirestoreShared.getSource());
 
-      final collection =
-          list.firstWhereOrNull((element) => element['key'] == 'collection');
+      final dta = list.firstWhereOrNull((element) => element['key'] == 'Dta');
 
       final id = list.firstWhereOrNull((element) => element['key'] == 'id');
 
-      if (collection == null || collection.toString().isEmpty) {
-        checkResult = 'The collection is empty. FUN: $smeupFun';
+      if (!_isParValid(dta)) {
+        checkResult = 'The Dta is empty. FUN: $smeupFun';
       }
 
-      if (id == null || id.toString().isEmpty) {
+      if (!_isParValid(id)) {
         checkResult = 'The id is empty. FUN: $smeupFun';
       }
 
@@ -148,7 +176,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       }
 
       DocumentSnapshot<Map<String, dynamic>> snapshot = await fsDatabase
-          .collection(collection!['value'])
+          .collection(dta!['value'])
           .doc(id!['value'])
           .get(options);
 
@@ -184,39 +212,41 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       final options =
           GetOptions(source: await SmeupFirestoreShared.getSource());
 
-      final collection =
-          list.firstWhereOrNull((element) => element['key'] == 'collection');
+      final fld = list.firstWhereOrNull((element) => element['key'] == 'Fld');
+      final fields =
+          list.firstWhereOrNull((element) => element['key'] == 'fields');
+      final id = list.firstWhereOrNull((element) => element['key'] == 'id');
+      final dta = list.firstWhereOrNull((element) => element['key'] == 'Dta');
 
-      final name = list.firstWhereOrNull((element) => element['key'] == 'name');
-      final condition =
-          list.firstWhereOrNull((element) => element['key'] == 'condition');
-      final fieldName =
-          list.firstWhereOrNull((element) => element['key'] == 'fieldName');
-      var hasCondition = false;
-
-      if (collection == null || collection.toString().isEmpty) {
-        checkResult = 'The collection is empty. FUN: $smeupFun';
-      }
-      if (name == null || name.toString().isEmpty) {
-        checkResult = 'The collection is empty. FUN: $smeupFun';
+      if (!_isParValid(fld)) {
+        checkResult = 'The Fld is empty. FUN: $smeupFun';
       }
 
-      if (fieldName != null && fieldName.toString().isNotEmpty) {
-        hasCondition = true;
+      var isModify = false;
+      var isIdPresent = false;
+      var isDataCollectionPresent = false;
+      if (_isParValid(id)) {
+        isIdPresent = true;
+      }
+      if (_isParValid(dta)) {
+        isDataCollectionPresent = true;
+      }
+
+      if (isIdPresent & !isDataCollectionPresent ||
+          !isIdPresent & isDataCollectionPresent) {
+        checkResult =
+            'The idCollection and id must be both empty or filled. FUN: $smeupFun';
+      }
+
+      if (isIdPresent & isDataCollectionPresent) {
+        isModify = true;
       }
 
       if (checkResult.isNotEmpty) {
         return _getErrorResponse(checkResult);
       }
 
-      Query<Map<String, dynamic>> query = fsDatabase
-          .collection(collection!['value'])
-          .where('name', isEqualTo: name!['value']);
-
-      if (hasCondition) {
-        query = query.where("fieldName", isEqualTo: fieldName!['value']);
-        query = query.where("condition", isEqualTo: condition!['value']);
-      }
+      Query<Map<String, dynamic>> query = fsDatabase.collection(fld!['value']);
 
       QuerySnapshot<Map<String, dynamic>> snapshot = await query.get(options);
 
@@ -231,25 +261,122 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
         responseData["columns"] = [];
         responseData["rows"] = [];
 
+        var responseRow = Map();
+
         if ((res['rows'] as List).isNotEmpty) {
-          dynamic row = res['rows'][0];
-          List fields = row['fields'];
-          var responseRow = Map();
-          responseRow["fields"] = Map();
-          if (fields.isNotEmpty) {
-            for (var inputPanelField in fields) {
-              (responseData["columns"] as List).add({
-                "code": inputPanelField["code"],
-                "IO": inputPanelField["io"],
-                "text": inputPanelField["text"]
-              });
-              responseRow["fields"][inputPanelField["code"]] = {
-                "name": inputPanelField["code"],
-                "ogg": inputPanelField["ogg"],
-                "value": inputPanelField["value"],
-              };
-            }
+          List fieldsArray = [];
+          List cnd = [];
+
+          if (_isParValid(fields)) {
+            fieldsArray = fields!['value'].toString().split(';');
           }
+
+          final conditionValue =
+              list.firstWhereOrNull((element) => element['key'] == 'Vcn');
+          final conditionField =
+              list.firstWhereOrNull((element) => element['key'] == 'Fcn');
+          final conditionsCollection =
+              list.firstWhereOrNull((element) => element['key'] == 'Cnd');
+          var hasCondition = false;
+          if (_isParValid(conditionValue) &&
+              _isParValid(conditionField) &&
+              _isParValid(conditionsCollection)) {
+            hasCondition = true;
+          }
+
+          if (hasCondition) {
+            final conditionFieldName = conditionField!['value'];
+            final conditionFieldValue = SmeupVariablesService.getVariable(
+                conditionFieldName,
+                formKey: smeupFun.formKey);
+            try {
+              Query<Map<String, dynamic>> queryCondition =
+                  fsDatabase.collection(conditionsCollection!['value']);
+              queryCondition = queryCondition.where("conditionField",
+                  isEqualTo: conditionFieldName);
+              queryCondition = queryCondition.where("conditionValue",
+                  isEqualTo: conditionFieldValue);
+              QuerySnapshot<Map<String, dynamic>> snapshotCondition =
+                  await queryCondition.get(options);
+              final resCondition =
+                  getTransformer()!.transform(smeupFun, snapshotCondition);
+              final conditionList = resCondition!['rows'] as List;
+              if (conditionList.isNotEmpty)
+                cnd = conditionList[0]['fields'].toString().split(';');
+            } catch (e) {}
+          }
+
+          var idRow = {};
+          if (isModify) {
+            DocumentSnapshot<Map<String, dynamic>> snapshotDocument =
+                await fsDatabase
+                    .collection(dta!['value'])
+                    .doc(id!['value'])
+                    .get(options);
+            final resId =
+                getTransformer()!.transform(smeupFun, snapshotDocument);
+            idRow = resId!['rows'][0];
+          }
+
+          responseRow["fields"] = Map();
+
+          var positions = List<dynamic>.empty(growable: true);
+          for (var row in (res['rows'] as List)) {
+            int position = 0;
+
+            if (cnd.isNotEmpty || fieldsArray.isNotEmpty) {
+              bool isCnd = false;
+              bool isFields = false;
+              if (cnd.contains(row["code"]))
+                isCnd = true;
+              else if (fieldsArray.contains(row["code"])) isFields = true;
+
+              if (!isCnd & !isFields) {
+                continue;
+              }
+
+              if (isFields)
+                position = fieldsArray.indexOf(row["code"]) + 1;
+              else
+                position = fieldsArray.length + cnd.indexOf(row["code"]) + 1;
+            }
+
+            if (position == 0) {
+              position = int.tryParse(row['id']) ?? 0;
+            }
+            positions.add({"code": row["code"], "position": position});
+          }
+
+          for (var row in (res['rows'] as List)) {
+            Map<String, dynamic>? col = positions.firstWhere(
+                (element) => element['code'] == row["code"],
+                orElse: () => null);
+            if (col == null) {
+              continue;
+            }
+
+            (responseData["columns"] as List).add({
+              "code": row["code"],
+              "IO": row["io"],
+              "text": row["text"],
+              "position": col['position']
+            });
+
+            var value = '';
+            if (isModify) {
+              value = idRow[row["code"]] ?? '';
+            } else {
+              value = row["value"] ?? '';
+            }
+
+            responseRow["fields"][row["code"]] = {
+              "name": row["code"],
+              "ogg": row["ogg"],
+              "value": value,
+              "validation": row["validation"]
+            };
+          }
+
           (responseData["rows"] as List).add(responseRow);
         }
       } else {
@@ -280,8 +407,8 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       final options =
           GetOptions(source: await SmeupFirestoreShared.getSource());
 
-      final collection = parameters
-          .firstWhereOrNull((element) => element['key'] == 'collection');
+      final cfg =
+          parameters.firstWhereOrNull((element) => element['key'] == 'Cfg');
 
       Map<String, dynamic>? fieldPath = Map<String, dynamic>();
 
@@ -293,11 +420,11 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
             server.firstWhereOrNull((element) => element['key'] == 'fieldPath');
       }
 
-      if (collection == null || collection.toString().isEmpty) {
-        checkResult = 'The collection is empty. FUN: $smeupFun';
+      if (!_isParValid(cfg)) {
+        checkResult = 'The Cfg is empty. FUN: $smeupFun';
       }
 
-      if (fieldPath == null || fieldPath.toString().isEmpty) {
+      if (!_isParValid(fieldPath)) {
         checkResult = 'The fieldId is empty. FUN: $smeupFun';
       }
 
@@ -306,7 +433,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       }
 
       QuerySnapshot<Map<String, dynamic>> snapshot = await fsDatabase
-          .collection(collection!['value'])
+          .collection(cfg!['value'])
           //.where('key', isEqualTo: key)
           .where('fieldId', isEqualTo: fieldPath!['value'])
           .get(options);
@@ -345,23 +472,22 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       List<Map<String, dynamic>> list = smeupFun.parameters;
       var checkResult = '';
 
-      final collection =
-          list.firstWhereOrNull((element) => element['key'] == 'collection');
+      final dta = list.firstWhereOrNull((element) => element['key'] == 'Dta');
 
       final id = list.firstWhereOrNull((element) => element['key'] == 'id');
 
-      if (collection == null || collection.toString().isEmpty) {
-        checkResult = 'The collection is empty. FUN: $smeupFun';
+      if (!_isParValid(dta)) {
+        checkResult = 'The Dta is empty. FUN: $smeupFun';
       }
 
-      if (id == null || id.toString().isEmpty) {
+      if (!_isParValid(id)) {
         checkResult = 'The id is empty. FUN: $smeupFun';
       }
 
       var formFields = Map<String, dynamic>();
 
       for (var field in list) {
-        if (field['key'] == 'collection') continue;
+        if (field['key'] == 'Dta') continue;
         if (field['key'] == 'id') continue;
         formFields[field['key']] = field['value'];
       }
@@ -369,8 +495,6 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       if (formFields.entries.isEmpty) {
         checkResult = 'The list of fields to update is empty. FUN: $smeupFun';
       }
-
-      //final checkResult = _checkDocument(formFields);
 
       if (checkResult.isNotEmpty) {
         return _getErrorResponse(checkResult);
@@ -380,12 +504,12 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
       if (isOnLine) {
         await fsDatabase
-            .collection(collection!['value'])
+            .collection(dta!['value'])
             .doc(id!['value'])
             .update(formFields);
       } else {
         fsDatabase
-            .collection(collection!['value'])
+            .collection(dta!['value'])
             .doc(id!['value'])
             .update(formFields);
       }
@@ -434,15 +558,14 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
       final id = list.firstWhereOrNull((element) => element['key'] == 'id');
 
-      final collection =
-          list.firstWhereOrNull((element) => element['key'] == 'collection');
+      final dta = list.firstWhereOrNull((element) => element['key'] == 'Dta');
 
-      if (id == null || id.toString().isEmpty) {
+      if (!_isParValid(id)) {
         checkResult = 'The id is empty. FUN: $smeupFun';
       }
 
-      if (collection == null || collection.toString().isEmpty) {
-        checkResult = 'The collection is empty. FUN: $smeupFun';
+      if (!_isParValid(dta)) {
+        checkResult = 'The Dta is empty. FUN: $smeupFun';
       }
 
       if (checkResult.isNotEmpty) {
@@ -452,12 +575,9 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       bool isOnLine = await SmeupFirestoreShared.isInternetOn();
 
       if (isOnLine) {
-        await fsDatabase
-            .collection(collection!['value'])
-            .doc(id!['value'])
-            .delete();
+        await fsDatabase.collection(dta!['value']).doc(id!['value']).delete();
       } else {
-        fsDatabase.collection(collection!['value']).doc(id!['value']).delete();
+        fsDatabase.collection(dta!['value']).doc(id!['value']).delete();
       }
 
       SmeupVariablesService.setVariable('id', '', formKey: smeupFun.formKey);
@@ -493,17 +613,16 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
   Future<SmeupServiceResponse> writeDocument(Fun smeupFun) async {
     List<Map<String, dynamic>> list = smeupFun.parameters;
     var checkResult = '';
-    final collection =
-        list.firstWhereOrNull((element) => element['key'] == 'collection');
+    final dta = list.firstWhereOrNull((element) => element['key'] == 'Dta');
 
-    if (collection == null || collection.toString().isEmpty) {
-      checkResult = 'The collection is empty. FUN: $smeupFun';
+    if (!_isParValid(dta)) {
+      checkResult = 'The Dta is empty. FUN: $smeupFun';
     }
 
     var formFields = Map<String, dynamic>();
 
     for (var field in list) {
-      if (field['key'] == 'collection') continue;
+      if (field['key'] == 'Dta') continue;
       formFields[field['key']] = field['value'];
     }
 
@@ -511,7 +630,6 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
       checkResult = 'The list of fields to update is empty. FUN: $smeupFun';
     }
 
-    //final checkResult = _checkDocument(formFields);
     if (checkResult.isNotEmpty) {
       return _getErrorResponse(checkResult);
     }
@@ -521,7 +639,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
 
       if (isOnLine) {
         final docRef =
-            await fsDatabase.collection(collection!['value']).add(formFields);
+            await fsDatabase.collection(dta!['value']).add(formFields);
 
         SmeupVariablesService.setVariable(
             'id', await docRef.get().then((snapshot) => snapshot.id),
@@ -543,7 +661,7 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
                 statusCode: HttpStatus.accepted,
                 requestOptions: RequestOptions(path: '')));
       } else {
-        fsDatabase.collection(collection!['value']).add(formFields);
+        fsDatabase.collection(dta!['value']).add(formFields);
         final messages = {
           "messages": [
             {
@@ -580,10 +698,6 @@ class SmeupFirestoreDataService extends SmeupDataServiceInterface {
               requestOptions: RequestOptions(path: '')));
     }
   }
-
-  // String _checkDocument(Map<String, dynamic> smeupFun) {
-  //   return '';
-  // }
 
   SmeupServiceResponse _getErrorResponse(String message) {
     final messages = {

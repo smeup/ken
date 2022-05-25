@@ -259,8 +259,8 @@ class SmeupCalendarState extends State<SmeupCalendar>
       if (calWidth == 0)
         calWidth = (widget.model!.parent as SmeupSectionModel).width;
     } else {
-      if (calHeight == 0) calHeight = MediaQuery.of(context).size.height;
-      if (calWidth == 0) calWidth = MediaQuery.of(context).size.width;
+      if (calHeight == 0) calHeight = SmeupUtilities.getDeviceInfo().safeHeight;
+      if (calWidth == 0) calWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     final calendar = Container(

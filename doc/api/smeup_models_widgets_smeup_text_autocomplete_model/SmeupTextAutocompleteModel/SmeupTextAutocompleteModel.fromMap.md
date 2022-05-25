@@ -33,8 +33,8 @@ SmeupTextAutocompleteModel.fromMap(
   setDefaults(this);
   backColor = SmeupUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
       defaultBackColor;
-  fontSize =
-      SmeupUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
+  fontSize = SmeupUtilities.getDouble(optionsDefault!['fontSize']) ??
+      defaultFontSize;
   fontColor = SmeupUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
       defaultFontColor;
   fontBold = optionsDefault!['bold'] ?? defaultFontBold;

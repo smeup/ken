@@ -236,9 +236,9 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
         timePickerWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
       if (timePickerHeight == 0)
-        timePickerHeight = MediaQuery.of(context).size.height;
+        timePickerHeight = SmeupUtilities.getDeviceInfo().safeHeight;
       if (timePickerWidth == 0)
-        timePickerWidth = MediaQuery.of(context).size.width;
+        timePickerWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     if (!widget.showborder!) {
@@ -253,7 +253,7 @@ class _SmeupTimePickerState extends State<SmeupTimePicker>
 
     Widget icon = Container(
       color: iconTheme.color,
-      padding: EdgeInsets.all(iconTheme.size!.toDouble()),
+      padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
       child: Icon(
         Icons.access_time,
         color: Theme.of(context).primaryColor,

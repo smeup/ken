@@ -68,6 +68,10 @@ class Fun {
     identifier.service = service;
   }
 
+  Fun.empty() {
+    _init();
+  }
+
   _init() {
     parameters = List<Map<String, dynamic>>.empty(growable: true);
     server = List<Map<String, dynamic>>.empty(growable: true);

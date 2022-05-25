@@ -20,7 +20,7 @@
 
 
 
- 
+JavaScript snippets supported [...](../smeup_services_smeup_scripting_services/SmeupScriptingServices-class.md)
 
 
 

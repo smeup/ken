@@ -49,7 +49,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   double? height;
   EdgeInsetsGeometry? padding;
   String? valueField;
-  int? iconData;
+  dynamic iconCode;
   WidgetOrientation? orientation;
   bool? isLink;
   double? innerSpace;
@@ -77,7 +77,7 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
       this.align = defaultAlign,
       this.padding = defaultPadding,
       this.valueField,
-      this.iconData = 0,
+      this.iconCode,
       this.orientation = defaultOrientation,
       this.isLink = defaultIsLink,
       this.innerSpace = defaultInnerSpace})
@@ -114,18 +114,15 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
 
     valueField = optionsDefault!['valueField'] ?? defaultValueField;
     position = SmeupUtilities.getMainAxisAlignment(optionsDefault!['position']);
-    iconSize =
-        SmeupUtilities.getDouble(optionsDefault!['iconSize']) ?? defaultIconSize;
-    if (optionsDefault!['icon'] != null)
-      iconData = SmeupUtilities.getInt(optionsDefault!['icon']) ?? 0;
-    else
-      iconData = 0;
+    iconSize = SmeupUtilities.getDouble(optionsDefault!['iconSize']) ??
+        defaultIconSize;
+    if (optionsDefault!['icon'] != null) iconCode = optionsDefault!['icon'];
     align = SmeupUtilities.getAlignmentGeometry(optionsDefault!['align']) ??
         defaultAlign;
     iconColor = SmeupUtilities.getColorFromRGB(optionsDefault!['iconColor']) ??
         defaultIconColor;
-    fontSize =
-        SmeupUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
+    fontSize = SmeupUtilities.getDouble(optionsDefault!['fontSize']) ??
+        defaultFontSize;
     borderRadius = SmeupUtilities.getDouble(optionsDefault!['borderRadius']) ??
         defaultBorderRadius;
     borderWidth = SmeupUtilities.getDouble(optionsDefault!['borderWidth']) ??

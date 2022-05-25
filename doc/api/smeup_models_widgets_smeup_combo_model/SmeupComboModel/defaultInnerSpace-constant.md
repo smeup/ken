@@ -21,7 +21,7 @@
 ## Implementation
 
 ```dart
-static const double defaultInnerSpace = 10.0;
+static const double defaultInnerSpace = 0.0;
 
 
 ```

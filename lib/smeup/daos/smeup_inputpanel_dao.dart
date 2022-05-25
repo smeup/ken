@@ -1,15 +1,14 @@
 import 'dart:async';
 import 'dart:collection';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/widgets/smeup_input_panel_field.dart';
-import 'package:ken/smeup/models/widgets/smeup_inputpanel_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_input_panel_value.dart';
+import 'package:ken/smeup/models/widgets/smeup_input_panel_model.dart';
 import 'package:ken/smeup/services/smeup_data_service.dart';
-import 'package:ken/smeup/services/smeup_firestore_data_service.dart';
 import 'package:ken/smeup/services/smeup_service_response.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:xml/xml.dart';
 
 import '../models/fun.dart';
-import '../services/smeup_data_service_interface.dart';
 import 'smeup_dao.dart';
 
 class SmeupInputPanelDao extends SmeupDao {
@@ -23,18 +22,17 @@ class SmeupInputPanelDao extends SmeupDao {
     List columns = model.data["columns"];
     Map? row = model.data["rows"][0];
 
-    bool isFirestore = _isFirestore(model);
-
     var layoutData =
         await _getLayoutData(model.options!, formKey, scaffoldKey, context);
 
-    model.fields = await _createFields(columns, row, formKey, scaffoldKey,
-        context, layoutData, model, isFirestore);
+    model.fields = await _createFields(
+        columns, row, formKey, scaffoldKey, context, layoutData, model);
 
     if (layoutData != null) {
       await _applyLayout(
           model.fields!, layoutData["data"], formKey, scaffoldKey, context);
     }
+    model.fields!.sort((a, b) => a.position.compareTo(b.position));
     SmeupDataService.decrementDataFetch(model.id);
   }
 
@@ -76,8 +74,7 @@ class SmeupInputPanelDao extends SmeupDao {
       scaffoldKey,
       context,
       Map? layoutData,
-      SmeupInputPanelModel model,
-      bool isFirestore) async {
+      SmeupInputPanelModel model) async {
     List<SmeupInputPanelField> fields = columns
         .map((column) => SmeupInputPanelField(
             id: column["code"],
@@ -87,18 +84,19 @@ class SmeupInputPanelDao extends SmeupDao {
             component: _getFieldComponent(column["IO"]),
             // codeField: column["valueField"],
             // descriptionField: column["descriptionField"],
+            position: SmeupUtilities.getInt(column["position"]) ?? 0,
             fun: column["fun"],
             visible: column["IO"] != 'H',
-            isFirestore: isFirestore))
+            validation: _getRowFieldValidation(row, column["code"]),
+            isFirestore: model.isFirestore()))
         .toList();
 
     for (var field in fields) {
       //String? code = row!['fields']![field.id];
-      String? code = _getRowFieldValue(row, field.id!);
+      String? code = _getRowFieldValue(row, field.id!) ?? row![field.id];
       field.value = SmeupInputPanelValue(code: code, description: code);
       if (layoutData == null) {
-        await _getFieldItems(
-                field, formKey, scaffoldKey, context, model, isFirestore)
+        await _getFieldItems(field, formKey, scaffoldKey, context, model)
             .then((value) {
           field.items = value;
         });
@@ -108,20 +106,30 @@ class SmeupInputPanelDao extends SmeupDao {
     return fields;
   }
 
-  static String _getRowFieldObject(Map? row, String columnCode) {
+  static String? _getRowFieldObject(Map? row, String columnCode) {
     final rowField = _getRowField(row, columnCode);
+    if (rowField == null) return null;
     final obj = rowField['ogg'];
     return obj;
   }
 
-  static String _getRowFieldValue(Map? row, String columnCode) {
+  static String? _getRowFieldValue(Map? row, String columnCode) {
     final rowField = _getRowField(row, columnCode);
+    if (rowField == null) return null;
     final obj = rowField['value'];
     return obj;
   }
 
-  static Map _getRowField(Map? row, String columnCode) {
-    final rowField = row!['fields']![columnCode];
+  static String? _getRowFieldValidation(Map? row, String columnCode) {
+    final rowField = _getRowField(row, columnCode);
+    if (rowField == null) return null;
+    final obj = rowField['validation'];
+    return obj == null ? "" : obj;
+  }
+
+  static Map? _getRowField(Map? row, String columnCode) {
+    if (row!['fields'] == null) return null;
+    final rowField = row['fields']![columnCode];
     return rowField;
   }
 
@@ -142,12 +150,12 @@ class SmeupInputPanelDao extends SmeupDao {
     }
   }
 
-  static String _autoGenerateFieldFun(SmeupInputPanelField field,
-      SmeupInputPanelModel model, bool isFirestore) {
+  static String _autoGenerateFieldFun(
+      SmeupInputPanelField field, SmeupInputPanelModel model) {
     String funStr = '';
-    if (isFirestore) {
+    if (model.isFirestore()) {
       funStr =
-          'F(EXB;${model.smeupFun!.identifier.service};GET.DOCUMENTS) P(collection(${field.object}))';
+          'F(EXB;${model.smeupFun!.identifier.service};GET.LST) P(Dta(${field.object}))';
     } else {
       funStr = 'F(EXB;LOA10_SE;ELK.COM) 1(CN;SED;)';
     }
@@ -155,29 +163,17 @@ class SmeupInputPanelDao extends SmeupDao {
     return funStr;
   }
 
-  static bool _isFirestore(SmeupInputPanelModel model) {
-    var isFirestore = false;
-    SmeupDataServiceInterface? smeupDataService =
-        SmeupDataService.getServiceImplementation(
-            model.smeupFun == null ? null : model.smeupFun!.identifier.service);
-    if (smeupDataService is SmeupFirestoreDataService) {
-      isFirestore = true;
-    }
-    return isFirestore;
-  }
-
   static Future<List<SmeupInputPanelValue>?> _getFieldItems(
       SmeupInputPanelField field,
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
-      SmeupInputPanelModel model,
-      bool isFirestore) async {
+      SmeupInputPanelModel model) async {
     //
     if (field.component == SmeupInputPanelSupportedComp.Cmb ||
         field.component == SmeupInputPanelSupportedComp.Acp) {
       if (field.fun == null) {
-        field.fun = _autoGenerateFieldFun(field, model, isFirestore);
+        field.fun = _autoGenerateFieldFun(field, model);
       }
     }
     switch (field.component) {
@@ -223,7 +219,7 @@ class SmeupInputPanelDao extends SmeupDao {
         }
       }
     }
-    fields.sort((a, b) => a.position.compareTo(b.position));
+    //fields.sort((a, b) => a.position.compareTo(b.position));
   }
 
   static Future<List<SmeupInputPanelValue>?> _getComboData(

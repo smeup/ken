@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/daos/smeup_inputpanel_dao.dart';
 import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:ken/smeup/models/widgets/smeup_input_panel_field.dart';
+import 'package:ken/smeup/models/widgets/smeup_input_panel_value.dart';
 import 'package:ken/smeup/models/widgets/smeup_combo_item_model.dart';
-import 'package:ken/smeup/models/widgets/smeup_inputpanel_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_input_panel_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_model.dart';
 import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
@@ -21,6 +21,8 @@ import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
 import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
+
+import '../services/smeup_scripting_services.dart';
 
 // ignore: must_be_immutable
 class SmeupInputPanel extends StatefulWidget
@@ -140,14 +142,14 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
       if (_model != null && _model!.parent != null) {
         inputPanelWidth = (_model!.parent as SmeupSectionModel).width;
       } else {
-        inputPanelWidth = MediaQuery.of(context).size.width;
+        inputPanelWidth = SmeupUtilities.getDeviceInfo().safeWidth;
       }
     }
     if (inputPanelHeight == 0) {
       if (_model != null && _model!.parent != null) {
         inputPanelHeight = (_model!.parent as SmeupSectionModel).height;
       } else {
-        inputPanelHeight = MediaQuery.of(context).size.height;
+        inputPanelHeight = SmeupUtilities.getDeviceInfo().safeHeight;
       }
     }
 
@@ -222,7 +224,6 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
           widget.scaffoldKey,
           widget.formKey,
           id: field.id,
-          fontSize: widget.fontSize,
           title: field.label,
           height: 55,
           data: [
@@ -253,14 +254,7 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
   Widget _getTextFieldWidget(SmeupInputPanelField field) {
     return Column(
       children: [
-        SmeupLabel(
-          widget.scaffoldKey,
-          widget.formKey,
-          [field.label],
-          align: Alignment.bottomLeft,
-          height: 8,
-          fontSize: widget.fontSize,
-        ),
+        _getLabel(field.label),
         SizedBox(
           height: 30,
           child: SmeupTextField(
@@ -283,18 +277,15 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     }
     return Column(
       children: <Widget>[
-        SmeupLabel(
-          widget.scaffoldKey,
-          widget.formKey,
-          [field.label],
-          align: Alignment.bottomLeft,
-          fontSize: widget.fontSize,
-          height: 8,
-        ),
+        _getLabel(field.label),
         SmeupCombo(
           widget.scaffoldKey,
           widget.formKey,
           id: field.id,
+          width: 0,
+          underline: false,
+          innerSpace: 0,
+          showBorder: true,
           selectedValue: field.value.code == "" ? null : field.value.code,
           data: field.items!
               .map((e) => SmeupComboItemModel(e.code, e.description))
@@ -312,18 +303,24 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     }
     return Column(
       children: <Widget>[
+        _getLabel(field.label),
         SmeupTextAutocomplete(
           widget.scaffoldKey,
           widget.formKey,
-          label: field.label,
           id: field.id,
           valueField: "value",
+          defaultValue: field.id,
+          showborder: true,
+          underline: false,
           data: field.items!
               .map((e) => {"code": e.code, "value": e.description})
               .toList(),
           clientOnSelected: (option) {
             field.value.code = option['code'];
             field.value.description = option['value'];
+          },
+          clientOnChange: (value) {
+            field.value.code = value;
           },
         ),
       ],
@@ -339,7 +336,6 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
             Expanded(
               child: SmeupButton(
                 data: "Conferma",
-                fontSize: widget.fontSize,
                 clientOnPressed: () => _fireDynamism(),
               ),
             ),
@@ -349,6 +345,16 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
     } else {
       return Container();
     }
+  }
+
+  SmeupLabel _getLabel(String? label) {
+    return SmeupLabel(
+      widget.scaffoldKey,
+      widget.formKey,
+      [label ?? ''],
+      align: Alignment.bottomLeft,
+      height: 8,
+    );
   }
 
   bool _isConfirmButtonEnabled() {
@@ -371,15 +377,25 @@ class _SmeupInputPanelState extends State<SmeupInputPanel>
   }
 
   Future<bool> _validate() async {
-    // TODO foreach field with validation string not empty call this
-
-    // SmeupScriptingServices.validate(
-    //     context: context,
-    //     formKey: widget.formKey,
-    //     scaffoldKey: widget.scaffoldKey,
-    //     fieldId: "fieldId",
-    //     script: "script");
-
-    return true;
+    bool validated = true;
+    for (var field in (_model?.fields)!) {
+      if (field.validation != null && field.validation?.trim() != "") {
+        validated = validated &&
+            await SmeupScriptingServices.validate(
+                context: context,
+                formKey: widget.formKey,
+                scaffoldKey: widget.scaffoldKey,
+                field: {
+                  "code": field.id,
+                  "ogg": field.object,
+                  "text": field.label
+                },
+                script: field.validation);
+        if (!validated) {
+          return false;
+        }
+      }
+    }
+    return validated;
   }
 }

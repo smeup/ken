@@ -37,7 +37,7 @@ class DashboardScreen extends StatelessWidget {
                     text: 'Temperature',
                     fontSize: 60.0,
                     captionFontSize: 20,
-                    icon: 59191,
+                    icon: 0xe737,
                     iconSize: 40,
                     iconColor: Colors.red,
                     width: 300,

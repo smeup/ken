@@ -40,9 +40,28 @@ static setDefaults(dynamic obj) {
   var iconTheme = SmeupConfigurationService.getTheme()!.iconTheme;
   defaultIconSize = iconTheme.size;
   defaultIconColor = textStyle.color;
+
+  var timePickerTheme = SmeupConfigurationService.getTheme()!.timePickerTheme;
+  defaultBackColor = timePickerTheme.backgroundColor;
+  var shape = timePickerTheme.shape!;
+  defaultBorderRadius = (shape as ContinuousRectangleBorder)
+      .borderRadius
+      .resolve(TextDirection.ltr)
+      .topLeft
+      .x;
+  var side = timePickerTheme.dayPeriodBorderSide!;
+  defaultBorderColor = side.color;
+  defaultBorderWidth = side.width;
   //iconTheme.color;
 
   // ----------------- set properties from default
+  if (obj.borderColor == null)
+    obj.borderColor = SmeupComboModel.defaultBorderColor;
+  if (obj.borderWidth == null)
+    obj.borderWidth = SmeupComboModel.defaultBorderWidth;
+  if (obj.borderRadius == null)
+    obj.borderRadius = SmeupComboModel.defaultBorderRadius;
+
   if (obj.fontBold == null) obj.fontBold = SmeupComboModel.defaultFontBold;
   if (obj.fontColor == null) obj.fontColor = SmeupComboModel.defaultFontColor;
   if (obj.fontSize == null) obj.fontSize = SmeupComboModel.defaultFontSize;

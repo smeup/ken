@@ -89,14 +89,6 @@ The dynamic use of the component is a definition of the widget in a json file, w
  
 
 
-##### [firestore_data_service](smeup_services_firestore_data_service/smeup_services_firestore_data_service-library.md)
- 
-
-
-##### [firestore_shared](smeup_services_firestore_shared/smeup_services_firestore_shared-library.md)
- 
-
-
 ##### [fun](smeup_models_fun/smeup_models_fun-library.md)
  
 
@@ -397,6 +389,14 @@ The dynamic use of the component is a definition of the widget in a json file, w
  
 
 
+##### [smeup_firestore_data_service](smeup_services_smeup_firestore_data_service/smeup_services_smeup_firestore_data_service-library.md)
+ 
+
+
+##### [smeup_firestore_shared](smeup_services_smeup_firestore_shared/smeup_services_smeup_firestore_shared-library.md)
+ 
+
+
 ##### [smeup_form](smeup_widgets_smeup_form/smeup_widgets_smeup_form-library.md)
  
 
@@ -453,7 +453,11 @@ The dynamic use of the component is a definition of the widget in a json file, w
  
 
 
-##### [smeup_input_panel_field](smeup_models_widgets_smeup_input_panel_field/smeup_models_widgets_smeup_input_panel_field-library.md)
+##### [smeup_input_panel_model](smeup_models_widgets_smeup_input_panel_model/smeup_models_widgets_smeup_input_panel_model-library.md)
+ 
+
+
+##### [smeup_input_panel_value](smeup_models_widgets_smeup_input_panel_value/smeup_models_widgets_smeup_input_panel_value-library.md)
  
 
 
@@ -462,10 +466,6 @@ The dynamic use of the component is a definition of the widget in a json file, w
 
 
 ##### [smeup_inputpanel_dao](smeup_daos_smeup_inputpanel_dao/smeup_daos_smeup_inputpanel_dao-library.md)
- 
-
-
-##### [smeup_inputpanel_model](smeup_models_widgets_smeup_inputpanel_model/smeup_models_widgets_smeup_inputpanel_model-library.md)
  
 
 

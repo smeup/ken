@@ -37,7 +37,8 @@ class SmeupTree extends StatefulWidget
   double? parentVerticalSpacing;
   double? parentHeight;
 
-  SmeupTree.withController(SmeupTreeModel this.model, this.scaffoldKey, this.formKey)
+  SmeupTree.withController(
+      SmeupTreeModel this.model, this.scaffoldKey, this.formKey)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
@@ -188,8 +189,9 @@ class _SmeupTreeState extends State<SmeupTree>
       if (treeWidth == 0)
         treeWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
-      if (treeHeight == 0) treeHeight = MediaQuery.of(context).size.height;
-      if (treeWidth == 0) treeWidth = MediaQuery.of(context).size.width;
+      if (treeHeight == 0)
+        treeHeight = SmeupUtilities.getDeviceInfo().safeHeight;
+      if (treeWidth == 0) treeWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     // TreeViewController _treeViewController =

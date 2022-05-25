@@ -87,8 +87,8 @@ Widget build(BuildContext context) {
                   label: "",
                   width: MediaQuery.of(context).size.width,
                   clientOnChange: (data) =>
-                      SmeupUtilities.invokeScaffoldMessenger(
-                          context, "You have selected the date"),
+                      SmeupUtilities.invokeScaffoldMessenger(context,
+                          "You have selected the date: ${(data as SmeupTimePickerData).formattedTime}"),
                 )
               ],
             )),

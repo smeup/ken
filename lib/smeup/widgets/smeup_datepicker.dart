@@ -226,9 +226,9 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
         datePickerWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
       if (datePickerHeight == 0)
-        datePickerHeight = MediaQuery.of(context).size.height;
+        datePickerHeight = SmeupUtilities.getDeviceInfo().safeHeight;
       if (datePickerWidth == 0)
-        datePickerWidth = MediaQuery.of(context).size.width;
+        datePickerWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     if (!widget.showborder!) {
@@ -243,7 +243,7 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
 
     Widget icon = Container(
       color: iconTheme.color,
-      padding: EdgeInsets.all(iconTheme.size!.toDouble()),
+      padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
       child: Icon(
         Icons.calendar_today,
         color: Theme.of(context).primaryColor,

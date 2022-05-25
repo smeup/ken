@@ -204,8 +204,10 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
       if (radioWidth == 0)
         radioWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
-      if (radioHeight == 0) radioHeight = MediaQuery.of(context).size.height;
-      if (radioWidth == 0) radioWidth = MediaQuery.of(context).size.width;
+      if (radioHeight == 0)
+        radioHeight = SmeupUtilities.getDeviceInfo().safeHeight;
+      if (radioWidth == 0)
+        radioWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     _data.forEach((radioButtonData) {

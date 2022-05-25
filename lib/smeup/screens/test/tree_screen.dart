@@ -21,7 +21,7 @@ SmeupTree _getTree(BuildContext context, scaffoldKey, formKey) {
   //     key: 'node1',
   //     data: 'data1',
   //     label: 'node 1',
-  //     icon: IconData(59191, fontFamily: 'MaterialIcons'),
+  //     icon: IconData(0xe737, fontFamily: 'MaterialIcons'),
   //     expanded: true,
   //     children: [
   //       Node(

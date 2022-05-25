@@ -20,7 +20,7 @@
 **Implementers**
 
 - [SmeupDefaultDataService](../smeup_services_smeup_default_data_service/SmeupDefaultDataService-class.md)
-- [SmeupFirestoreDataService](../smeup_services_firestore_data_service/SmeupFirestoreDataService-class.md)
+- [SmeupFirestoreDataService](../smeup_services_smeup_firestore_data_service/SmeupFirestoreDataService-class.md)
 - [SmeupHttpDataService](../smeup_services_smeup_http_data_service/SmeupHttpDataService-class.md)
 - [SmeupImageDataService](../smeup_services_smeup_image_data_service/SmeupImageDataService-class.md)
 - [SmeupJsonDataService](../smeup_services_smeup_json_data_service/SmeupJsonDataService-class.md)

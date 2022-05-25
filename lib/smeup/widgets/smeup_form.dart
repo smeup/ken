@@ -34,7 +34,7 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
   @override
   Widget build(BuildContext context) {
     currentFormReload = () {
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         Future.delayed(Duration(milliseconds: 300), () async {
           setState(() {});
         });
@@ -147,7 +147,9 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
         double formHeight = isDialog
             ? 300
             : SmeupUtilities.getDeviceInfo().safeHeight -
-                SmeupConfigurationService.getTheme()!.appBarTheme.toolbarHeight!;
+                SmeupConfigurationService.getTheme()!
+                    .appBarTheme
+                    .toolbarHeight!;
         double formWidth =
             isDialog ? 300 : SmeupUtilities.getDeviceInfo().safeWidth;
 

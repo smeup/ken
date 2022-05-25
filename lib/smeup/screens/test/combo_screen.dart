@@ -37,7 +37,11 @@ class ComboScreen extends StatelessWidget {
                     _formKey,
                     id: 'combo1',
                     selectedValue: '1',
-                    label: "City",
+                    innerSpace: 10,
+                    width: 0,
+                    padding: EdgeInsets.only(left: 10),
+                    label: "City: ",
+                    showBorder: true,
                     data: [
                       SmeupComboItemModel('1', 'Antwerp'),
                       SmeupComboItemModel('2', 'Boston'),

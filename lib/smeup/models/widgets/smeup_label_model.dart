@@ -36,7 +36,7 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
   String? valueColName;
   String? backColorColName;
   String? fontColorColName;
-  int? iconData;
+  dynamic iconCode;
   String? iconColname;
 
   SmeupLabelModel(
@@ -57,7 +57,7 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.backColorColName = '',
-      this.iconData = 0,
+      this.iconCode,
       this.iconColname = '',
       this.fontColorColName = '',
       title = ''})
@@ -88,10 +88,10 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
     fontColorColName = optionsDefault!['fontColorColName'] ?? '';
     padding =
         SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
-    fontSize =
-        SmeupUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
-    iconSize =
-        SmeupUtilities.getDouble(optionsDefault!['iconSize']) ?? defaultIconSize;
+    fontSize = SmeupUtilities.getDouble(optionsDefault!['fontSize']) ??
+        defaultFontSize;
+    iconSize = SmeupUtilities.getDouble(optionsDefault!['iconSize']) ??
+        defaultIconSize;
     iconColor = SmeupUtilities.getColorFromRGB(optionsDefault!['iconColor']) ??
         defaultIconColor;
     align = SmeupUtilities.getAlignmentGeometry(optionsDefault!['align']) ??
@@ -104,10 +104,7 @@ class SmeupLabelModel extends SmeupModel implements SmeupDataInterface {
         defaultBackColor;
     fontColor = SmeupUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
         defaultFontColor;
-    if (optionsDefault!['icon'] != null)
-      iconData = SmeupUtilities.getInt(optionsDefault!['icon']) ?? 0;
-    else
-      iconData = 0;
+    if (optionsDefault!['icon'] != null) iconCode = optionsDefault!['icon'];
     iconColname = optionsDefault!['iconColName'] ?? '';
     fontBold =
         SmeupUtilities.getBool(optionsDefault!['fontBold']) ?? defaultFontBold;

@@ -1,6 +1,6 @@
 name: ken
 description: super-rich dynamic components for Flutter applications
-version: 0.0.3+13
+version: 0.0.4+14
 homepage: 'https://github.com/smeup/ken'
 repository: 'https://github.com/smeup/ken'
 issue_tracker: 'https://github.com/smeup/ken/issues'
@@ -19,7 +19,7 @@ dependencies:
   provider: ^6.0.2
   permission_handler: ^9.2.0
   path_provider: ^2.0.9
-  syncfusion_flutter_gauges: ^20.1.47
+  syncfusion_flutter_gauges: ^20.1.56
   carousel_slider: ^4.0.0
   table_calendar: ^3.0.5
   charts_flutter: ^0.12.0
@@ -29,10 +29,10 @@ dependencies:
   intl: ^0.17.0
   qr_flutter: ^4.0.0
   package_info: ^2.0.2
-  clickable_list_wheel_view: ^0.0.4
+  clickable_list_wheel_view: ^0.1.0
   shared_preferences: ^2.0.13
-  xml: ^5.3.1
-  json_theme: ^3.3.1
+  xml: ^6.0.1
+  json_theme: ^4.0.0
   firebase_core: ^1.14.0
   firebase_auth: ^3.3.12
   cloud_firestore: ^3.1.11

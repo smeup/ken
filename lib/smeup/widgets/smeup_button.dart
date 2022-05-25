@@ -3,6 +3,9 @@ import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
 import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/models/widgets/smeup_buttons_model.dart';
 
+import '../services/smeup_icon_service.dart';
+import '../services/smeup_utilities.dart';
+
 // ignore: must_be_immutable
 class SmeupButton extends StatelessWidget {
   final int? buttonIndex;
@@ -24,7 +27,7 @@ class SmeupButton extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final String? data;
   final String? valueField;
-  final int? iconData;
+  final dynamic iconCode;
   final bool isLink;
   final IconData? icon;
   final Function? clientOnPressed;
@@ -56,7 +59,7 @@ class SmeupButton extends StatelessWidget {
       this.padding = SmeupButtonsModel.defaultPadding,
       this.valueField,
       this.elevation,
-      this.iconData = 0,
+      this.iconCode,
       this.buttonIndex,
       this.icon,
       this.clientOnPressed,
@@ -85,8 +88,10 @@ class SmeupButton extends StatelessWidget {
       if (buttonWidth == 0)
         buttonWidth = (model!.parent as SmeupSectionModel).width;
     } else {
-      if (buttonHeight == 0) buttonHeight = MediaQuery.of(context).size.height;
-      if (buttonWidth == 0) buttonWidth = MediaQuery.of(context).size.width;
+      if (buttonHeight == 0)
+        buttonHeight = SmeupUtilities.getDeviceInfo().safeHeight;
+      if (buttonWidth == 0)
+        buttonWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     return Container(
@@ -128,10 +133,10 @@ class SmeupButton extends StatelessWidget {
       isBusy!
           ? CircularProgressIndicator()
           : () {
-              final icon = iconData == 0
+              final icon = iconCode == null
                   ? Container()
                   : Icon(
-                      IconData(iconData!, fontFamily: 'MaterialIcons'),
+                      SmeupIconService.getIconData(iconCode),
                       color: iconTheme.color,
                       size: iconTheme.size,
                     );

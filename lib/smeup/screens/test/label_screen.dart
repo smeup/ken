@@ -35,7 +35,7 @@ class LabelScreen extends StatelessWidget {
                       id: 'lab2',
                       fontBold: false,
                       align: Alignment.centerRight,
-                      iconData: 62751,
+                      iconCode: "0xf51f",
                       fontSize: 30,
                       iconSize: 40,
                       iconColor: Colors.black,

@@ -39,7 +39,7 @@
                 "padding": {"left":0.0},
                 "forceText": "Temperature",
                 "fontsize": 60,
-                "icon": 59191,
+                "icon": "0xe737",
                 "iconSize": 40,
                 "iconColor": "R223G138B004",
                 "width": 350
@@ -51,7 +51,7 @@
               "value": 15.86,
               "um": "Kg",
               "description" : "My Value",
-              "icon": 59191
+              "icon": "0xe737"
             }
             ]
           } 

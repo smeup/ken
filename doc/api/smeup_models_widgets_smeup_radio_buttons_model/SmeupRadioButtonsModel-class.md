@@ -96,6 +96,15 @@ _read / write_
 
 
 
+##### [cmp](../smeup_models_widgets_smeup_model/SmeupModel/cmp.md) &#8596; [String](https://api.flutter.dev/flutter/dart-core/String-class.html)?
+
+
+
+   
+_read / write, inherited_
+
+
+
 ##### [columns](../smeup_models_widgets_smeup_radio_buttons_model/SmeupRadioButtonsModel/columns.md) &#8596; [int](https://api.flutter.dev/flutter/dart-core/int-class.html)?
 
 
@@ -422,6 +431,15 @@ _read / write_
 
 
 ## Methods
+
+##### [isFirestore](../smeup_models_widgets_smeup_model/SmeupModel/isFirestore.md)() [bool](https://api.flutter.dev/flutter/dart-core/bool-class.html)
+
+
+
+   
+_inherited_
+
+
 
 ##### [noSuchMethod](https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html)([Invocation](https://api.flutter.dev/flutter/dart-core/Invocation-class.html) invocation) dynamic
 
