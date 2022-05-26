@@ -55,7 +55,8 @@ class SmeupIconService {
       int searchCodeInt = int.tryParse(searchCode) ?? 0;
       if (searchCodeInt == 0) return null;
       var element = icons!.entries.cast<dynamic>().firstWhere((element) {
-        return element.value['hex'] == searchCodeInt;
+        int elCodeInt = int.tryParse(element.value['hex']) ?? 0;
+        return elCodeInt == searchCodeInt;
       }, orElse: () => null);
 
       if (element != null) {

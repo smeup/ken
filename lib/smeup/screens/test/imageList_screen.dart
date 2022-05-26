@@ -87,7 +87,6 @@ class ImageListScreen extends StatelessWidget {
                   height: 330,
                   width: 450,
                   listHeight: 480,
-                  padding: const EdgeInsets.fromLTRB(this.left, this.top, this.right, this.bottom);
                   clientOnItemTap: (Map item) {
                     SmeupUtilities.invokeScaffoldMessenger(
                         context, 'you clicked the ${item['description']}');
