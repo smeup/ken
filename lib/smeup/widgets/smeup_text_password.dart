@@ -261,7 +261,7 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
                           showSubmit: widget.showSubmit,
                           showBorder: false,
                           width: widget.width,
-                          underline: widget.underline,
+                          underline: false,
                           data: _data,
                           clientValidator: widget.clientValidator,
                           clientOnSave: widget.clientOnSave,

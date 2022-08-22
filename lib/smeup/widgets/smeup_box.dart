@@ -623,7 +623,8 @@ class _SmeupBoxState extends State<SmeupBox> with SmeupWidgetStateMixin {
   }
 
   Future<Widget> _getImageAndDataInRow(dynamic data, cols) async {
-    Widget? widgetImg = await _getImage(data);
+    Widget? widgetImg = SmeupNotAvailable();
+    // await _getImage(data);
 
     var listOfRows = await _getBoxTexts(data, cols);
 
