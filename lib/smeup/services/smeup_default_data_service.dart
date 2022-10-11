@@ -37,8 +37,12 @@ class SmeupDefaultDataService extends SmeupDataServiceInterface {
       String contentType;
 
       url = '${SmeupConfigurationService.getDefaultServiceEndpoint()}/jfun';
-      contentType = 'application/json';
-      data = smeupFun.getJson();
+
+      // contentType = 'application/json';
+      // data = smeupFun.getJson();
+
+      contentType = 'application/x-www-form-urlencoded';
+      data = {"fun": smeupFun.getSmeupFormatString()};
 
       SmeupLogService.writeDebugMessage(
           '*** http request \'SmeupDefaultDataService\': $data');

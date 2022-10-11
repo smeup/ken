@@ -11,7 +11,6 @@ import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'package:ken/smeup/services/smeup_log_service.dart';
 import 'package:ken/smeup/services/smeup_utilities.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../models/fun.dart';
 
 class SmeupDynamismService {
@@ -66,8 +65,9 @@ class SmeupDynamismService {
       GlobalKey<FormState>? formKey) async {
     if (dynamisms == null) return;
 
-    List<Dynamism> selectedDynamisms =
-        dynamisms.where((element) => element.event == event).toList();
+    List<Dynamism> selectedDynamisms = dynamisms
+        .where((element) => element.event.toLowerCase() == event.toLowerCase())
+        .toList();
 
     for (var i = 0; i < selectedDynamisms.length; i++) {
       final dynamism = selectedDynamisms[i];
