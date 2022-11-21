@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/widgets/smeup_carousel.dart';
+import 'package:ken/smeup/widgets/ken_carousel.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class CarouselScreen extends StatelessWidget {
   static const routeName = '/CarouselScreen';
@@ -13,7 +14,7 @@ class CarouselScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -30,7 +31,7 @@ class CarouselScreen extends StatelessWidget {
                 children: [
                   ShowCaseShared.getTestLabel(
                       _scaffoldKey, _formKey, description),
-                  SmeupCarousel(
+                  KenCarousel(
                       _scaffoldKey,
                       _formKey,
                       [

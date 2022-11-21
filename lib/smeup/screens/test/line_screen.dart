@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_line.dart';
+import 'package:ken/smeup/widgets/ken_line.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class LineScreen extends StatelessWidget {
   static const routeName = '/LineScreen';
@@ -11,7 +12,7 @@ class LineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -24,7 +25,7 @@ class LineScreen extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                SmeupLine(
+                KenLine(
                   _scaffoldKey,
                   _formKey,
                   id: 'lin1',
@@ -34,7 +35,7 @@ class LineScreen extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                SmeupLine(
+                KenLine(
                   _scaffoldKey,
                   _formKey,
                   id: 'lin2',
@@ -44,7 +45,7 @@ class LineScreen extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                SmeupLine(
+                KenLine(
                   _scaffoldKey,
                   _formKey,
                   id: 'lin3',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/widgets/smeup_dashboard.dart';
+import 'package:ken/smeup/widgets/ken_dashboard.dart';
+import '../../services/ken_theme_configuration_service.dart';
 
 class DashboardScreen extends StatelessWidget {
   static const routeName = '/DashboardScreen';
@@ -13,7 +13,7 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -30,14 +30,14 @@ class DashboardScreen extends StatelessWidget {
                 children: [
                   ShowCaseShared.getTestLabel(
                       _scaffoldKey, _formKey, description),
-                  SmeupDashboard(
+                  KenDashboard(
                     _scaffoldKey,
                     _formKey,
                     15.86,
                     text: 'Temperature',
                     fontSize: 60.0,
                     captionFontSize: 20,
-                    icon: 0xe737,
+                    // icon: 0xe737,
                     iconSize: 40,
                     iconColor: Colors.red,
                     width: 300,

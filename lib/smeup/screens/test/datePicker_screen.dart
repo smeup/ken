@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_datepicker.dart';
+import 'package:ken/smeup/widgets/ken_datepicker.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/services/ken_utilities.dart';
 
-import '../../widgets/smeup_timepicker.dart';
+import '../../services/ken_theme_configuration_service.dart';
+import '../../widgets/ken_timepicker.dart';
 
 class DatePickerScreen extends StatelessWidget {
   static const routeName = '/DatePickerScreen';
@@ -17,7 +17,7 @@ class DatePickerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -37,14 +37,14 @@ class DatePickerScreen extends StatelessWidget {
                   SmeupDatePicker(
                     _scaffoldKey,
                     _formKey,
-                    SmeupDatePickerData(value: DateTime(2021, 03, 21)),
+                    KenDatePickerData(value: DateTime(2021, 03, 21)),
                     id: datePickerId,
                     underline: true,
                     label: "",
                     width: MediaQuery.of(context).size.width,
                     clientOnChange: (data) =>
-                        SmeupUtilities.invokeScaffoldMessenger(context,
-                            "You have selected the date: ${(data as SmeupTimePickerData).formattedTime}"),
+                        KenUtilities.invokeScaffoldMessenger(context,
+                            "You have selected the date: ${(data as KenTimePickerData).formattedTime}"),
                   )
                 ],
               )),

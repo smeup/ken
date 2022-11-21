@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/widgets/smeup_tree.dart';
-import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/widgets/ken_tree.dart';
+import 'package:ken/smeup/services/ken_utilities.dart';
 
 // import 'package:flutter/material.dart';
-// import 'package:ken/smeup/services/smeup_configuration_service.dart';
-// import 'package:ken/smeup/widgets/smeup_tree.dart';
+// import 'package:ken/smeup/services/shiro_configuration_service.dart';
+// import 'package:ken/smeup/widgets/ken_tree.dart';
 // import 'package:flutter_treeview/tree_view.dart';
 
 // class TreeScreen extends StatelessWidget {
@@ -14,7 +14,7 @@ import 'package:ken/smeup/services/smeup_utilities.dart';
 //   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 // ignore: unused_element
-SmeupTree _getTree(BuildContext context, scaffoldKey, formKey) {
+KenTree _getTree(BuildContext context, scaffoldKey, formKey) {
   // var data = List<Node>.empty(growable: true);
 
   // var node1 = Node(
@@ -48,7 +48,7 @@ SmeupTree _getTree(BuildContext context, scaffoldKey, formKey) {
 
   // data.addAll([node1, node2]);
 
-  return SmeupTree(
+  return KenTree(
     scaffoldKey,
     formKey,
     data: null,
@@ -58,7 +58,7 @@ SmeupTree _getTree(BuildContext context, scaffoldKey, formKey) {
     labelFontColor: Colors.red,
     parentFontSize: 30,
     onClientClick: (node) {
-      SmeupUtilities.invokeScaffoldMessenger(context,
+      KenUtilities.invokeScaffoldMessenger(context,
           "selected the node with key: ${node.key} and data: ${node.data}");
     },
   );

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_combo.dart';
+import 'package:ken/smeup/widgets/ken_combo.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/models/widgets/smeup_combo_item_model.dart';
-import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/models/widgets/ken_combo_item_model.dart';
+import 'package:ken/smeup/services/ken_utilities.dart';
+import '../../services/ken_theme_configuration_service.dart';
 
 class ComboScreen extends StatelessWidget {
   static const routeName = '/ComboScreen';
@@ -15,7 +15,7 @@ class ComboScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -32,7 +32,7 @@ class ComboScreen extends StatelessWidget {
                 children: [
                   ShowCaseShared.getTestLabel(
                       _scaffoldKey, _formKey, description),
-                  SmeupCombo(
+                  KenCombo(
                     _scaffoldKey,
                     _formKey,
                     id: 'combo1',
@@ -43,13 +43,13 @@ class ComboScreen extends StatelessWidget {
                     label: "City: ",
                     showBorder: true,
                     data: [
-                      SmeupComboItemModel('1', 'Antwerp'),
-                      SmeupComboItemModel('2', 'Boston'),
-                      SmeupComboItemModel('3', 'Milan'),
-                      SmeupComboItemModel('4', 'Paris')
+                      KenComboItemModel('1', 'Antwerp'),
+                      KenComboItemModel('2', 'Boston'),
+                      KenComboItemModel('3', 'Milan'),
+                      KenComboItemModel('4', 'Paris')
                     ],
                     clientOnChange: (value) {
-                      SmeupUtilities.invokeScaffoldMessenger(
+                      KenUtilities.invokeScaffoldMessenger(
                           context, "You have changed the combo to: $value");
                     },
                   ),

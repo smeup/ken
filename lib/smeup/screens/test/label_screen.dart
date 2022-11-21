@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_label.dart';
+import 'package:ken/smeup/widgets/ken_label.dart';
+import '../../services/ken_theme_configuration_service.dart';
 
 class LabelScreen extends StatelessWidget {
   static const routeName = '/LabelScreen';
@@ -11,7 +11,7 @@ class LabelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -28,7 +28,7 @@ class LabelScreen extends StatelessWidget {
                   children: [
                     ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
                         'The label has the function to show a not editable descriptive text'),
-                    SmeupLabel(
+                    KenLabel(
                       _scaffoldKey,
                       _formKey,
                       ['Information'],

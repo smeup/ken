@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_splash.dart';
+import 'package:ken/smeup/widgets/ken_splash.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class SplashScreen extends StatelessWidget {
   static const routeName = '/SplashScreen';
@@ -11,14 +12,14 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
             title: Center(child: Text('Splash Screen')),
             actions: ShowCaseShared.getEmptyAction(),
           ),
-          body: SmeupSplash(
+          body: KenSplash(
             _scaffoldKey,
             _formKey,
             id: 'splash1',

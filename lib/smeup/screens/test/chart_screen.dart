@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/widgets/smeup_chart_column.dart';
-import 'package:ken/smeup/models/widgets/smeup_chart_datasource.dart';
-import 'package:ken/smeup/models/widgets/smeup_chart_model.dart';
-import 'package:ken/smeup/models/widgets/smeup_chart_row.dart';
+import 'package:ken/smeup/models/widgets/ken_chart_column.dart';
+import 'package:ken/smeup/models/widgets/ken_chart_datasource.dart';
+import 'package:ken/smeup/models/widgets/ken_chart_model.dart';
+import 'package:ken/smeup/models/widgets/ken_chart_row.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_chart.dart';
+import 'package:ken/smeup/widgets/ken_chart.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class ChartScreen extends StatelessWidget {
   static const routeName = '/ChartScreen';
@@ -21,7 +22,7 @@ class ChartScreen extends StatelessWidget {
     double deviceWidth = deviceInfo.size.height;
 
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -59,24 +60,24 @@ class ChartScreen extends StatelessWidget {
     );
   }
 
-  SmeupChart _getBarChart(double deviceHeight, double deviceWidth) {
-    var rows = List<SmeupChartRow>.empty(growable: true);
-    var columns = List<SmeupChartColumn>.empty(growable: true);
+  KenChart _getBarChart(double deviceHeight, double deviceWidth) {
+    var rows = List<KenChartRow>.empty(growable: true);
+    var columns = List<KenChartColumn>.empty(growable: true);
 
-    final row1 = SmeupChartRow(['Italy', 70, 50, 60]);
-    final row2 = SmeupChartRow(['France', 70, 40, 80]);
+    final row1 = KenChartRow(['Italy', 70, 50, 60]);
+    final row2 = KenChartRow(['France', 70, 40, 80]);
     rows.addAll([row1, row2]);
 
-    final col1 = SmeupChartColumn('col1', 'value1', ColumnType.Axes, 0);
-    final col2 = SmeupChartColumn('col2', 'Wine', ColumnType.Series, 0);
-    final col3 = SmeupChartColumn('col3', 'Cheese', ColumnType.Series, 0);
-    final col4 = SmeupChartColumn('col4', 'Fruit', ColumnType.Series, 0);
+    final col1 = KenChartColumn('col1', 'value1', ColumnType.Axes, 0);
+    final col2 = KenChartColumn('col2', 'Wine', ColumnType.Series, 0);
+    final col3 = KenChartColumn('col3', 'Cheese', ColumnType.Series, 0);
+    final col4 = KenChartColumn('col4', 'Fruit', ColumnType.Series, 0);
     columns.addAll([col1, col2, col3, col4]);
-    return SmeupChart(
+    return KenChart(
       _scaffoldKey,
       _formKey,
       id: 'chart1',
-      data: SmeupChartDatasource(rows, columns),
+      data: KenChartDatasource(rows, columns),
       chartType: ChartType.Bar,
       height: deviceHeight / 2,
       width: deviceWidth,
@@ -85,23 +86,23 @@ class ChartScreen extends StatelessWidget {
   }
 
   // ignore: unused_element
-  SmeupChart _getPieChart(double deviceHeight, double deviceWidth) {
-    var rows = List<SmeupChartRow>.empty(growable: true);
-    var columns = List<SmeupChartColumn>.empty(growable: true);
+  KenChart _getPieChart(double deviceHeight, double deviceWidth) {
+    var rows = List<KenChartRow>.empty(growable: true);
+    var columns = List<KenChartColumn>.empty(growable: true);
 
-    final row1 = SmeupChartRow(['pippo', 1]);
-    final row2 = SmeupChartRow(['pluto', 10]);
+    final row1 = KenChartRow(['pippo', 1]);
+    final row2 = KenChartRow(['pluto', 10]);
     rows.addAll([row1, row2]);
 
-    final col1 = SmeupChartColumn('col1', 'value1', ColumnType.Axes, 0);
-    final col2 = SmeupChartColumn('col2', 'value2', ColumnType.Series, 0);
+    final col1 = KenChartColumn('col1', 'value1', ColumnType.Axes, 0);
+    final col2 = KenChartColumn('col2', 'value2', ColumnType.Series, 0);
 
     columns.addAll([col1, col2]);
 
-    return SmeupChart(
+    return KenChart(
       _scaffoldKey,
       _formKey,
-      data: SmeupChartDatasource(rows, columns),
+      data: KenChartDatasource(rows, columns),
       chartType: ChartType.Pie,
       height: deviceHeight / 2,
       width: deviceWidth,

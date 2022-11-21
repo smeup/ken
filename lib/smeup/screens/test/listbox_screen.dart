@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/widgets/smeup_list_box_model.dart';
+import 'package:ken/smeup/models/widgets/ken_list_box_model.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_list_box.dart';
-import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/widgets/ken_list_box.dart';
+import 'package:ken/smeup/services/ken_utilities.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class ListBoxScreen extends StatelessWidget {
   static const routeName = '/ListBoxScreen';
@@ -13,7 +14,7 @@ class ListBoxScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -30,7 +31,7 @@ class ListBoxScreen extends StatelessWidget {
                   children: [
                     ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
                         'This widget is a list of boxes whose format is predetermined by a layout. It is also possible to decide the number of columns'),
-                    SmeupListBox(
+                    KenListBox(
                         _scaffoldKey,
                         _formKey,
                         {
@@ -71,13 +72,13 @@ class ListBoxScreen extends StatelessWidget {
                         },
                         height: 100,
                         listHeight: 300,
-                        listType: SmeupListType.oriented,
+                        listType: KenListType.oriented,
                         fontSize: 16.0,
                         backColor: Colors.white,
                         showSelection: false,
                         selectedRow: 1,
                         id: 'listbox1', clientOnItemTap: (item) {
-                      SmeupUtilities.invokeScaffoldMessenger(
+                      KenUtilities.invokeScaffoldMessenger(
                           context, 'item clicked: $item');
                     })
                   ],

@@ -1,4 +1,4 @@
-import '../services/smeup_log_service.dart';
+import '../services/ken_log_service.dart';
 
 class Dynamism {
   String event;
@@ -29,9 +29,9 @@ class Dynamism {
         list.add(funDynamism);
       }
     } catch (e) {
-      SmeupLogService.writeDebugMessage(
+      KenLogService.writeDebugMessage(
           'Error in _getDynamisms while extracting dynamisms: $dynFuns ',
-          logType: LogType.error);
+          logType: KenLogType.error);
     }
 
     return list;

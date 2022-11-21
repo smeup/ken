@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_text_field.dart';
-import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/widgets/ken_text_field.dart';
+import 'package:ken/smeup/services/ken_utilities.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class TextFieldScreen extends StatelessWidget {
   static const routeName = '/TextFieldScreen';
@@ -12,7 +13,7 @@ class TextFieldScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -28,7 +29,7 @@ class TextFieldScreen extends StatelessWidget {
                   ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
                       'A text field lets the user enter text and perform validation on it. It is also possible to add a submit button',
                       height: 30),
-                  SmeupTextField(
+                  KenTextField(
                     _scaffoldKey,
                     _formKey,
                     label: 'description',
@@ -37,15 +38,15 @@ class TextFieldScreen extends StatelessWidget {
                     showSubmit: true,
                     submitLabel: 'tap me',
                     clientOnChange: (value) {
-                      SmeupUtilities.invokeScaffoldMessenger(
+                      KenUtilities.invokeScaffoldMessenger(
                           context, 'value changed $value');
                     },
                     clientOnSave: (value) {
-                      SmeupUtilities.invokeScaffoldMessenger(
+                      KenUtilities.invokeScaffoldMessenger(
                           context, 'value saved $value');
                     },
                     clientOnSubmit: (buttonIndex, buttonText) {
-                      SmeupUtilities.invokeScaffoldMessenger(context,
+                      KenUtilities.invokeScaffoldMessenger(context,
                           'you tapped the submit button "$buttonText"');
                     },
                   ),
