@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/widgets/smeup_calendar_event_model.dart';
+import 'package:ken/smeup/models/widgets/ken_calendar_event_model.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_calendar.dart';
-import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/widgets/ken_calendar.dart';
+import 'package:ken/smeup/services/ken_utilities.dart';
+import '../../services/ken_theme_configuration_service.dart';
 
 class CalendarScreen extends StatelessWidget {
   static const routeName = '/CalendarScreen';
@@ -14,7 +14,7 @@ class CalendarScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     MediaQueryData deviceInfo = MediaQuery.of(context);
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -28,7 +28,7 @@ class CalendarScreen extends StatelessWidget {
                 children: [
                   ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
                       'Highly customizable, feature-packed calendar widget for Flutter'),
-                  SmeupCalendar(_scaffoldKey, _formKey,
+                  KenCalendar(_scaffoldKey, _formKey,
                       id: 'calendar1',
                       width: deviceInfo.size.width,
                       height: deviceInfo.size.height,
@@ -79,13 +79,13 @@ class CalendarScreen extends StatelessWidget {
                           "title": "Phone call with the martian"
                         }
                       ], clientOnDaySelected: (DateTime day) {
-                    SmeupUtilities.invokeScaffoldMessenger(
+                    KenUtilities.invokeScaffoldMessenger(
                         context, "my onDaySelected $day");
                   }, clientOnChangeMonth: (DateTime focusedDay) {
-                    SmeupUtilities.invokeScaffoldMessenger(
+                    KenUtilities.invokeScaffoldMessenger(
                         context, "my onChangeMonth. focusedDay $focusedDay");
-                  }, clientOnEventClick: (SmeupCalentarEventModel event) {
-                    SmeupUtilities.invokeScaffoldMessenger(
+                  }, clientOnEventClick: (KenCalendarEventModel event) {
+                    KenUtilities.invokeScaffoldMessenger(
                         context, "my onEventClick $event");
                   })
                 ],

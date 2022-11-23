@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_qrcode_reader.dart';
+import 'package:ken/smeup/widgets/ken_qrcode_reader.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class QrCodeReaderScreen extends StatelessWidget {
   static const routeName = '/QrCodeReaderScreen';
@@ -11,7 +12,7 @@ class QrCodeReaderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -26,7 +27,7 @@ class QrCodeReaderScreen extends StatelessWidget {
                 child: Center(
                     child: Column(
                   children: [
-                    SmeupQRCodeReader(_scaffoldKey, _formKey,
+                    KenQRCodeReader(_scaffoldKey, _formKey,
                         data: 'I am a qrcode', id: 'qrc1'),
                   ],
                 )),

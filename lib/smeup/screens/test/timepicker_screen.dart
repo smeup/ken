@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/widgets/smeup_timepicker.dart';
+import 'package:ken/smeup/widgets/ken_timepicker.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class TimePickerScreen extends StatelessWidget {
   static const routeName = '/TimePickerScreen';
@@ -14,7 +15,7 @@ class TimePickerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -34,7 +35,7 @@ class TimePickerScreen extends StatelessWidget {
                   SmeupTimePicker(
                     _scaffoldKey,
                     _formKey,
-                    SmeupTimePickerData(
+                    KenTimePickerData(
                         time: DateTime(2021, 1, 1, 17, 30),
                         formattedTime: "17:30"),
                     id: timePickerId,
@@ -44,7 +45,7 @@ class TimePickerScreen extends StatelessWidget {
                     clientOnChange: (data) => ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(
                             content: Text(
-                                "You have selected the time ${(data as SmeupTimePickerData).formattedTime}"))),
+                                "You have selected the time ${(data as KenTimePickerData).formattedTime}"))),
                   ),
                 ],
               )),

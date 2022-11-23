@@ -2,10 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/fun_SG.dart';
 import 'package:ken/smeup/models/fun_object.dart';
-
-import '../services/smeup_dynamism_service.dart';
-import '../services/smeup_log_service.dart';
-import '../services/smeup_variables_service.dart';
+import 'package:ken/smeup/services/ken_utilities.dart';
+import '../services/ken_log_service.dart';
 import 'fun_identifier.dart';
 
 class Fun {
@@ -182,9 +180,9 @@ class Fun {
     try {
       list = extractParametersList(arg, formKey);
     } catch (e) {
-      SmeupLogService.writeDebugMessage(
+      KenLogService.writeDebugMessage(
           'Error in _getParameters while extracting P: $arg ',
-          logType: LogType.error);
+          logType: KenLogType.error);
     }
 
     return list;
@@ -198,9 +196,9 @@ class Fun {
     try {
       list = extractParametersList(arg, formKey);
     } catch (e) {
-      SmeupLogService.writeDebugMessage(
+      KenLogService.writeDebugMessage(
           'Error in _getServer while extracting SERVER: $arg ',
-          logType: LogType.error);
+          logType: KenLogType.error);
     }
 
     return list;
@@ -259,7 +257,7 @@ class Fun {
           if (value.toString().startsWith('[')) {
             String varName =
                 value.toString().trim().replaceAll('[', '').replaceAll(']', '');
-            value = SmeupVariablesService.getVariable(varName, formKey: formKey)
+            value = KenUtilities.getVariable(varName, formKey: formKey)
                 .toString();
           } else {
             value = value;
@@ -271,6 +269,7 @@ class Fun {
 
     return list;
   }
+
 
   static List<String> splitParameters(String parms) {
     var parmsSplit = List<String>.empty(growable: true);
@@ -296,7 +295,7 @@ class Fun {
 
   void saveParametersToVariables(GlobalKey<FormState>? formKey) {
     parameters.forEach((element) {
-      SmeupVariablesService.setVariable(element['key'], element['value'],
+      KenUtilities.setVariable(element['key'], element['value'],
           formKey: formKey);
     });
   }
@@ -347,7 +346,7 @@ class Fun {
 
   replaceVariables() {
     String funString = this.getSmeupFormatString();
-    funString = SmeupDynamismService.replaceVariables(funString, formKey);
+    funString = KenUtilities.replaceVariables(funString, formKey);
     Fun newFun = Fun(funString, this.formKey, this.scaffoldKey, this.context);
     parameters = newFun.parameters;
     server = newFun.server;
@@ -478,9 +477,9 @@ class Fun {
       // ----
 
     } catch (e) {
-      SmeupLogService.writeDebugMessage(
+      KenLogService.writeDebugMessage(
           'Error in _parseFromSmeupSyntax while getSmeupFormatString : $this ',
-          logType: LogType.error);
+          logType: KenLogType.error);
     }
     return smeupFormatString;
   }

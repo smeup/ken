@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/widgets/smeup_input_panel_value.dart';
+import 'package:ken/smeup/models/widgets/ken_input_panel_value.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_inputpanel.dart';
+import 'package:ken/smeup/widgets/ken_inputpanel.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class InputPanelScreen extends StatelessWidget {
   static const routeName = '/InputPanelScreen';
@@ -12,7 +13,7 @@ class InputPanelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -30,8 +31,8 @@ class InputPanelScreen extends StatelessWidget {
     );
   }
 
-  SmeupInputPanel _getInputPanelWidget(BuildContext context) {
-    return SmeupInputPanel(
+  KenInputPanel _getInputPanelWidget(BuildContext context) {
+    return KenInputPanel(
       _scaffoldKey,
       _formKey,
       id: 'inputpanel',
@@ -50,19 +51,19 @@ class InputPanelScreen extends StatelessWidget {
     data.add(SmeupInputPanelField(
       id: "RAD",
       label: "Rilevato stato febbrile ?",
-      component: SmeupInputPanelSupportedComp.Rad,
+      component: KenInputPanelSupportedComp.Rad,
       value: SmeupInputPanelValue(),
     ));
     data.add(SmeupInputPanelField(
       id: "RAD",
       label: "Sintomi influenzali ?",
-      component: SmeupInputPanelSupportedComp.Rad,
+      component: KenInputPanelSupportedComp.Rad,
       value: SmeupInputPanelValue(),
     ));
     data.add(SmeupInputPanelField(
       id: "QRC",
       label: "QrCode",
-      component: SmeupInputPanelSupportedComp.Bcd,
+      component: KenInputPanelSupportedComp.Bcd,
       value: SmeupInputPanelValue(code: "asdadsasfasfasdfasdfasdfasf"),
     ));
     final items = [
@@ -77,7 +78,7 @@ class InputPanelScreen extends StatelessWidget {
             .map((item) => SmeupInputPanelValue(
                 code: item["code"], description: item["description"]))
             .toList(),
-        component: SmeupInputPanelSupportedComp.Cmb));
+        component: KenInputPanelSupportedComp.Cmb));
     return data;
   }
 }

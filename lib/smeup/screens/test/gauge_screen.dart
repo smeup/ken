@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_gauge.dart';
+import 'package:ken/smeup/widgets/ken_gauge.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class GaugeScreen extends StatelessWidget {
   static const routeName = '/GaugeScreen';
@@ -11,7 +12,7 @@ class GaugeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -28,7 +29,7 @@ class GaugeScreen extends StatelessWidget {
                 children: [
                   ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
                       'The Gauge is a visual element that helps to quickly visualize where a value falls on the axis'),
-                  SmeupGauge(_scaffoldKey, _formKey,
+                  KenGauge(_scaffoldKey, _formKey,
                       id: 'gau1',
                       value: 120,
                       maxValue: 150,

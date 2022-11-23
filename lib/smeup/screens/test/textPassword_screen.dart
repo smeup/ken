@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_text_password.dart';
-import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/widgets/ken_text_password.dart';
+import 'package:ken/smeup/services/ken_utilities.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class TextPasswordScreen extends StatelessWidget {
   static const routeName = '/TextPasswordScreen';
@@ -12,7 +13,7 @@ class TextPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -28,18 +29,18 @@ class TextPasswordScreen extends StatelessWidget {
                     child: Column(
                   children: [
                     Text('simple password'),
-                    SmeupTextPassword(
+                    KenTextPassword(
                       _scaffoldKey,
                       _formKey,
                       label: 'password 1',
                       id: 'password1',
                       showRules: false,
                       clientOnChange: (value) {
-                        SmeupUtilities.invokeScaffoldMessenger(
+                        KenUtilities.invokeScaffoldMessenger(
                             context, 'value changed $value');
                       },
                       clientOnSave: (value) {
-                        SmeupUtilities.invokeScaffoldMessenger(
+                        KenUtilities.invokeScaffoldMessenger(
                             context, 'value saved $value');
                       },
                     ),
@@ -47,17 +48,17 @@ class TextPasswordScreen extends StatelessWidget {
                       height: 20,
                     ),
                     Text('password with rules'),
-                    SmeupTextPassword(
+                    KenTextPassword(
                       _scaffoldKey,
                       _formKey,
                       label: 'password 1',
                       id: 'password2',
                       clientOnChange: (value) {
-                        SmeupUtilities.invokeScaffoldMessenger(
+                        KenUtilities.invokeScaffoldMessenger(
                             context, 'value changed $value');
                       },
                       clientOnSave: (value) {
-                        SmeupUtilities.invokeScaffoldMessenger(
+                        KenUtilities.invokeScaffoldMessenger(
                             context, 'value saved $value');
                       },
                     ),

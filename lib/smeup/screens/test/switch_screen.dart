@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_switch.dart';
-import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/widgets/ken_switch.dart';
+import 'package:ken/smeup/services/ken_utilities.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class SwitchScreen extends StatelessWidget {
   static const routeName = '/SwitchScreen';
@@ -12,7 +13,7 @@ class SwitchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -27,7 +28,7 @@ class SwitchScreen extends StatelessWidget {
                 children: [
                   ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
                       'A Switch is used to toggle a setting between on/off which is true/false respectively'),
-                  SmeupSwitch(
+                  KenSwitch(
                     _scaffoldKey,
                     _formKey,
                     text: 'Turn me on/off',
@@ -37,7 +38,7 @@ class SwitchScreen extends StatelessWidget {
                     height: 50,
                     captionFontSize: 20,
                     onClientChange: (value) {
-                      SmeupUtilities.invokeScaffoldMessenger(
+                      KenUtilities.invokeScaffoldMessenger(
                           context, "You have changed the switch to: $value");
                     },
                   ),

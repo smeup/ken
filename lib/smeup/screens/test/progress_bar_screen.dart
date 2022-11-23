@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_progress_bar.dart';
+import 'package:ken/smeup/widgets/ken_progress_bar.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class ProgressBarScreen extends StatelessWidget {
   static const routeName = '/ProgressBarScreen';
@@ -13,7 +14,7 @@ class ProgressBarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -30,7 +31,7 @@ class ProgressBarScreen extends StatelessWidget {
                   children: [
                     ShowCaseShared.getTestLabel(
                         _scaffoldKey, _formKey, description),
-                    SmeupProgressBar(
+                    KenProgressBar(
                       _scaffoldKey,
                       _formKey,
                       id: 'pgb1',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/widgets/smeup_drawer_data_element.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_drawer.dart';
+import 'package:ken/smeup/models/widgets/ken_drawer_data_element.dart';
+import 'package:ken/smeup/widgets/ken_drawer.dart';
+import '../../services/ken_theme_configuration_service.dart';
 import 'label_screen.dart';
 
 class DrawerScreen extends StatelessWidget {
@@ -13,7 +13,7 @@ class DrawerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -43,58 +43,58 @@ class DrawerScreen extends StatelessWidget {
     );
   }
 
-  SmeupDrawer _getDrawer(BuildContext context) {
+  KenDrawer _getDrawer(BuildContext context) {
     double groupFontSize = 18;
     double fontSize = 16;
     int staticGroupIcon = 0xe6e6;
     int dynamicGroupIcon = 0xe211;
 
-    return SmeupDrawer(
+    return KenDrawer(
       _scaffoldKey,
       _formKey,
       id: DrawerScreen.drawerId,
       title: "my drawer",
-      data: [
-        SmeupDrawerDataElement(
-          'WIDGETS',
-          route: '/',
-          fontSize: groupFontSize,
-        ),
-        SmeupDrawerDataElement(
-          'Label',
-          route: LabelScreen.routeName,
-          group: 'STATIC',
-          fontSize: fontSize,
-          groupIcon: staticGroupIcon,
-          groupFontSize: groupFontSize,
-        ),
-        SmeupDrawerDataElement(
-          'Dashboard',
-          route: 'F(EXD;*ROUTE;) 2(;;DashboardScreen)',
-          group: 'STATIC',
-          fontSize: fontSize,
-          groupIcon: staticGroupIcon,
-          groupFontSize: groupFontSize,
-        ),
-        SmeupDrawerDataElement(
-          'Chart',
-          route:
-              'F(EXD;*JSN;) 2(;;test_chart) SERVER(source(packages/ken/assets/jsons/forms))',
-          group: 'DYNAMIC',
-          fontSize: fontSize,
-          groupIcon: dynamicGroupIcon,
-          groupFontSize: groupFontSize,
-        ),
-        SmeupDrawerDataElement(
-          'Calendar',
-          route:
-              'F(EXD;*JSN;) 2(;;test_calendar) SERVER(source(packages/ken/assets/jsons/forms))',
-          group: 'DYNAMIC',
-          fontSize: fontSize,
-          groupIcon: dynamicGroupIcon,
-          groupFontSize: groupFontSize,
-        )
-      ],
+      // data: [
+      //   SmeupDrawerDataElement(
+      //     'WIDGETS',
+      //     route: '/',
+      //     fontSize: groupFontSize,
+      //   ),
+      //   SmeupDrawerDataElement(
+      //     'Label',
+      //     route: LabelScreen.routeName,
+      //     group: 'STATIC',
+      //     fontSize: fontSize,
+      //     groupIcon: staticGroupIcon,
+      //     groupFontSize: groupFontSize,
+      //   ),
+      //   SmeupDrawerDataElement(
+      //     'Dashboard',
+      //     route: 'F(EXD;*ROUTE;) 2(;;DashboardScreen)',
+      //     group: 'STATIC',
+      //     fontSize: fontSize,
+      //     groupIcon: staticGroupIcon,
+      //     groupFontSize: groupFontSize,
+      //   ),
+      //   SmeupDrawerDataElement(
+      //     'Chart',
+      //     route:
+      //         'F(EXD;*JSN;) 2(;;test_chart) SERVER(source(packages/ken/assets/jsons/forms))',
+      //     group: 'DYNAMIC',
+      //     fontSize: fontSize,
+      //     groupIcon: dynamicGroupIcon,
+      //     groupFontSize: groupFontSize,
+      //   ),
+      //   SmeupDrawerDataElement(
+      //     'Calendar',
+      //     route:
+      //         'F(EXD;*JSN;) 2(;;test_calendar) SERVER(source(packages/ken/assets/jsons/forms))',
+      //     group: 'DYNAMIC',
+      //     fontSize: fontSize,
+      //     groupIcon: dynamicGroupIcon,
+      //     groupFontSize: groupFontSize,
+      //   )
+      // ],
     );
   }
 }

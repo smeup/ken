@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_slider.dart';
-import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/widgets/ken_slider.dart';
+import 'package:ken/smeup/services/ken_utilities.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class SliderScreen extends StatelessWidget {
   static const routeName = '/SliderScreen';
@@ -12,7 +13,7 @@ class SliderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
             appBar: AppBar(
@@ -27,9 +28,9 @@ class SliderScreen extends StatelessWidget {
                         children: [
                           ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
                               'A slider can be used to select from either a continuous or a discrete set of values'),
-                          SmeupSlider(_scaffoldKey, _formKey,
+                          KenSlider(_scaffoldKey, _formKey,
                               id: 'sld1', value: 20, clientOnChange: (value) {
-                            SmeupUtilities.invokeScaffoldMessenger(context,
+                            KenUtilities.invokeScaffoldMessenger(context,
                                 "You have changed the slider to: $value");
                           })
                         ],

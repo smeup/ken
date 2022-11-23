@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_image.dart';
+import 'package:ken/smeup/widgets/ken_image.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class ImageScreen extends StatelessWidget {
   static const routeName = '/ImageScreen';
@@ -11,7 +12,7 @@ class ImageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -28,7 +29,7 @@ class ImageScreen extends StatelessWidget {
                   children: [
                     ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
                         'This widget is used to show a single image'),
-                    SmeupImage(_scaffoldKey, _formKey,
+                    KenImage(_scaffoldKey, _formKey,
                         'packages/ken/assets/images/IMG1.png',
                         id: 'img1', width: 300, height: 300, isRemote: false),
                   ],

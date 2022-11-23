@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
-import 'package:ken/smeup/widgets/smeup_radio_buttons.dart';
-import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/widgets/ken_radio_buttons.dart';
+import 'package:ken/smeup/services/ken_utilities.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class RadioScreen extends StatelessWidget {
   static const routeName = '/RadioScreen';
@@ -12,7 +13,7 @@ class RadioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -29,7 +30,7 @@ class RadioScreen extends StatelessWidget {
                 children: [
                   ShowCaseShared.getTestLabel(_scaffoldKey, _formKey,
                       'The Radio Button is used to select between a number of mutually exclusive values'),
-                  SmeupRadioButtons(
+                  KenRadioButtons(
                     _scaffoldKey,
                     _formKey,
                     title: '',
@@ -41,7 +42,7 @@ class RadioScreen extends StatelessWidget {
                     ],
                     id: 'radio_buttons_1',
                     clientOnPressed: (String value) {
-                      SmeupUtilities.invokeScaffoldMessenger(context,
+                      KenUtilities.invokeScaffoldMessenger(context,
                           "You have changed the radiobutton to: $value");
                     },
                     selectedValue: '0',

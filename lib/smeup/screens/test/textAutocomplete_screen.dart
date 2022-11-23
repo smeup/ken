@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/services/smeup_configuration_service.dart';
 import 'package:ken/smeup/screens/test/showcase_shared.dart';
-import 'package:ken/smeup/widgets/smeup_text_autocomplete.dart';
-import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/widgets/ken_text_autocomplete.dart';
+import 'package:ken/smeup/services/ken_utilities.dart';
+
+import '../../services/ken_theme_configuration_service.dart';
 
 class TextAutocompleteScreen extends StatelessWidget {
   static const routeName = '/TextAutocompleteScreen';
@@ -14,7 +15,7 @@ class TextAutocompleteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: SmeupConfigurationService.getTheme()!,
+      data: KenThemeConfigurationService.getTheme()!,
       child: Builder(
         builder: (BuildContext context) => Scaffold(
           appBar: AppBar(
@@ -31,7 +32,7 @@ class TextAutocompleteScreen extends StatelessWidget {
                 children: [
                   ShowCaseShared.getTestLabel(
                       _scaffoldKey, _formKey, description),
-                  SmeupTextAutocomplete(
+                  KenTextAutocomplete(
                     _scaffoldKey,
                     _formKey,
                     label: 'description',
@@ -83,7 +84,7 @@ class TextAutocompleteScreen extends StatelessWidget {
                       }
                     ],
                     clientOnSelected: (option) {
-                      SmeupUtilities.invokeScaffoldMessenger(context,
+                      KenUtilities.invokeScaffoldMessenger(context,
                           'selected code: ${option['code']}, value: ${option['value']}');
                     },
                   ),
