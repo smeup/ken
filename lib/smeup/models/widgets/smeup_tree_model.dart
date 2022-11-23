@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/daos/smeup_tree_dao.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_data_interface.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/daos/smeup_tree_dao.dart';
+import 'package:ken/smeup/models/widgets/smeup_data_interface.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/services/smeup_data_service.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class SmeupTreeModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultWidth = 100;
@@ -23,25 +23,27 @@ class SmeupTreeModel extends SmeupModel implements SmeupDataInterface {
   static const double defaultParentVerticalSpacing = 2;
   static const double defaultParentHeight = 10;
 
-  double width;
-  double height;
-  double labelFontSize;
-  Color labelBackColor;
-  Color labelFontColor;
-  bool labelFontbold;
-  double labelVerticalSpacing;
-  double labelHeight;
-  double parentFontSize;
-  Color parentBackColor;
-  Color parentFontColor;
-  bool parentFontbold;
-  double parentVerticalSpacing;
-  double parentHeight;
+  double? width;
+  double? height;
+  double? labelFontSize;
+  Color? labelBackColor;
+  Color? labelFontColor;
+  bool? labelFontbold;
+  double? labelVerticalSpacing;
+  double? labelHeight;
+  double? parentFontSize;
+  Color? parentBackColor;
+  Color? parentFontColor;
+  bool? parentFontbold;
+  double? parentVerticalSpacing;
+  double? parentHeight;
 
   SmeupTreeModel({
     id,
     type,
-    GlobalKey<FormState> formKey,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
     title = '',
     this.width = defaultWidth,
     this.height = defaultHeight,
@@ -57,16 +59,24 @@ class SmeupTreeModel extends SmeupModel implements SmeupDataInterface {
     this.parentFontbold = defaultParentFontbold,
     this.parentVerticalSpacing = defaultParentVerticalSpacing,
     this.parentHeight = defaultParentHeight,
-  }) : super(formKey, title: title, id: id, type: type) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     SmeupDataService.incrementDataFetch(id);
   }
 
   SmeupTreeModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
-    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
+    width = SmeupUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height =
-        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
+        SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {

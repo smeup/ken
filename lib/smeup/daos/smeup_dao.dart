@@ -1,5 +1,7 @@
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
+import 'dart:async';
+
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/services/smeup_data_service.dart';
 
 class SmeupDao {
   static dynamic getClientDataStructure(dynamic model) {
@@ -12,7 +14,6 @@ class SmeupDao {
           });
         });
         return newList;
-        break;
 
       case 'FLD':
         switch (model.optionsDefault['type']) {
@@ -29,19 +30,19 @@ class SmeupDao {
           default:
             return model.data;
         }
-        break;
 
       default:
         return {"rows": model.data};
     }
   }
 
-  static Future<void> getData(SmeupModel model) async {
-    if (model.smeupFun != null && model.smeupFun.isFunValid()) {
+  static Future<void> getData(SmeupModel model,
+      {bool executeDecrementDataFetch = true}) async {
+    if (model.smeupFun != null && model.smeupFun!.isFunValid()) {
       final smeupServiceResponse =
-          await SmeupDataService.invoke(model.smeupFun);
+          await (SmeupDataService.invoke(model.smeupFun));
       if (!smeupServiceResponse.succeded) {
-        SmeupDataService.decrementDataFetch(model.id);
+        _decrementDataFetch(model, executeDecrementDataFetch);
         return;
       }
       model.data = smeupServiceResponse.result.data;
@@ -51,6 +52,12 @@ class SmeupDao {
       res['rows'] = model.data;
       model.data = res;
     }
-    SmeupDataService.decrementDataFetch(model.id);
+    _decrementDataFetch(model, executeDecrementDataFetch);
+  }
+
+  static _decrementDataFetch(SmeupModel model, bool executeDecrementDataFetch) {
+    if (executeDecrementDataFetch) {
+      SmeupDataService.decrementDataFetch(model.id);
+    }
   }
 }

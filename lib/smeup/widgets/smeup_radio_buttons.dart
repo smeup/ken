@@ -1,60 +1,60 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/daos/smeup_radio_buttons_dao.dart';
-import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
-import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_radio_button.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
+import 'package:ken/smeup/daos/smeup_radio_buttons_dao.dart';
+import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_radio_buttons_model.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_dynamism_service.dart';
+import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/services/smeup_variables_service.dart';
+import 'package:ken/smeup/widgets/smeup_not_available.dart';
+import 'package:ken/smeup/widgets/smeup_radio_button.dart';
+import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
 // ignore: must_be_immutable
 class SmeupRadioButtons extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupRadioButtonsModel model;
-  SmeupRadioButtonsModel smeupRadioButtonsModel;
+  SmeupRadioButtonsModel? model;
+  SmeupRadioButtonsModel? smeupRadioButtonsModel;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
-  Color radioButtonColor;
-  Color fontColor;
-  double fontSize;
-  Color backColor;
-  bool fontBold;
-  bool captionFontBold;
-  double captionFontSize;
-  Color captionFontColor;
-  Color captionBackColor;
+  Color? radioButtonColor;
+  Color? fontColor;
+  double? fontSize;
+  Color? backColor;
+  bool? fontBold;
+  bool? captionFontBold;
+  double? captionFontSize;
+  Color? captionFontColor;
+  Color? captionBackColor;
 
-  Function clientOnPressed;
-  EdgeInsetsGeometry padding;
-  double width;
-  double height;
-  Alignment align;
-  List<dynamic> data;
-  String valueField;
-  String displayedField;
-  String selectedValue;
-  int columns;
-  String id;
-  String type;
-  String title;
+  Function? clientOnPressed;
+  EdgeInsetsGeometry? padding;
+  double? width;
+  double? height;
+  Alignment? align;
+  List<dynamic>? data;
+  String? valueField;
+  String? displayedField;
+  String? selectedValue;
+  int? columns;
+  String? id;
+  String? type;
+  String? title;
 
   SmeupRadioButtons.withController(
-    this.model,
+    SmeupRadioButtonsModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   SmeupRadioButtons(
@@ -80,7 +80,7 @@ class SmeupRadioButtons extends StatefulWidget
     this.valueField = SmeupRadioButtonsModel.defaultValueField,
     this.displayedField = SmeupRadioButtonsModel.defaultDisplayedField,
     this.selectedValue,
-    this.clientOnPressed(String value),
+    this.clientOnPressed(String value)?,
     this.columns = SmeupRadioButtonsModel.defaultColumns,
   }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
@@ -89,7 +89,7 @@ class SmeupRadioButtons extends StatefulWidget
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupRadioButtonsModel m = model;
+    SmeupRadioButtonsModel m = model as SmeupRadioButtonsModel;
     id = m.id;
     type = m.type;
     title = m.title;
@@ -116,7 +116,7 @@ class SmeupRadioButtons extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupRadioButtonsModel m = model;
+    SmeupRadioButtonsModel m = model as SmeupRadioButtonsModel;
 
     // change data format
     var workData = formatDataFields(m);
@@ -145,7 +145,7 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
   dynamic _data;
-  SmeupRadioButtonsModel _model;
+  SmeupRadioButtonsModel? _model;
 
   @override
   void initState() {
@@ -153,7 +153,7 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
         formKey: widget.formKey);
     _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -184,10 +184,10 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
   }
 
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupRadioButtonsDao.getData(_model);
-        _data = widget.treatData(_model);
+        await SmeupRadioButtonsDao.getData(_model!);
+        _data = widget.treatData(_model!);
       }
 
       setDataLoad(widget.id, true);
@@ -195,27 +195,19 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
 
     var buttons = List<Widget>.empty(growable: true);
 
-    TextStyle captionStyle = _getCaptionStile();
-
-    if (widget.title.isNotEmpty) {
-      buttons.add(Container(
-          child: Text(
-        widget.title,
-        style: captionStyle,
-      )));
-    }
-
     int buttonIndex = 0;
-    double radioHeight = widget.height;
-    double radioWidth = widget.width;
-    if (_model != null && _model.parent != null) {
+    double? radioHeight = widget.height;
+    double? radioWidth = widget.width;
+    if (_model != null && _model!.parent != null) {
       if (radioHeight == 0)
-        radioHeight = (_model.parent as SmeupSectionModel).height;
+        radioHeight = (_model!.parent as SmeupSectionModel).height;
       if (radioWidth == 0)
-        radioWidth = (_model.parent as SmeupSectionModel).width;
+        radioWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
-      if (radioHeight == 0) radioHeight = MediaQuery.of(context).size.height;
-      if (radioWidth == 0) radioWidth = MediaQuery.of(context).size.width;
+      if (radioHeight == 0)
+        radioHeight = SmeupUtilities.getDeviceInfo().safeHeight;
+      if (radioWidth == 0)
+        radioWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     _data.forEach((radioButtonData) {
@@ -249,17 +241,18 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
                   selData, widget.formKey);
               SmeupVariablesService.setVariable(widget.id, value,
                   formKey: widget.formKey);
-              if (widget.clientOnPressed != null) widget.clientOnPressed(value);
+              if (widget.clientOnPressed != null)
+                widget.clientOnPressed!(value);
               if (_model != null) {
-                SmeupDynamismService.run(_model.dynamisms, context, 'change',
+                SmeupDynamismService.run(_model!.dynamisms, context, 'change',
                     widget.scaffoldKey, widget.formKey);
               }
             }
           });
 
-      if (_model != null)
-        SmeupDynamismService.run(_model.dynamisms, context, 'change',
-            widget.scaffoldKey, widget.formKey);
+      // if (_model != null)
+      //   SmeupDynamismService.run(_model!.dynamisms, context, 'change',
+      //       widget.scaffoldKey, widget.formKey);
       buttons.add(button);
     });
 
@@ -269,7 +262,7 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
           var others = List<SmeupRadioButton>.empty(growable: true);
           for (var k = 0; k < buttons.length; k++) {
             if (i != k && buttons[k] is SmeupRadioButton) {
-              others.add(buttons[k]);
+              others.add(buttons[k] as SmeupRadioButton);
             }
           }
           (buttons[i] as SmeupRadioButton).others = others;
@@ -278,15 +271,30 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
 
       double childAspectRatio = 0;
       childAspectRatio =
-          (radioWidth / radioHeight * buttons.length * 3) / widget.columns;
+          (radioWidth! / radioHeight! * buttons.length * 3) / widget.columns!;
+
+      TextStyle captionStyle = _getCaptionStile();
+
+      var title = Container(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            widget.title!.isNotEmpty ? widget.title! : '',
+            style: captionStyle,
+          ));
 
       final container = Container(
           padding: widget.padding,
-          child: GridView.count(
-            shrinkWrap: true,
-            childAspectRatio: childAspectRatio,
-            crossAxisCount: widget.columns,
-            children: buttons,
+          child: Column(
+            children: [
+              title,
+              GridView.count(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                childAspectRatio: childAspectRatio,
+                crossAxisCount: widget.columns!,
+                children: buttons,
+              )
+            ],
           ));
 
       dynamic selData = (_data as List).firstWhere(
@@ -306,14 +314,14 @@ class _SmeupRadioButtonsState extends State<SmeupRadioButtons>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
+    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
         color: widget.captionFontColor,
         fontSize: widget.captionFontSize,
         backgroundColor: widget.captionBackColor);
 
-    if (widget.captionFontBold) {
+    if (widget.captionFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );

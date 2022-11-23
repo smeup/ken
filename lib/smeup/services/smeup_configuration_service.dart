@@ -3,42 +3,44 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:json_theme/json_theme.dart';
-import 'package:mobile_components_library/smeup/models/authentication_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_cache_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service_interface.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
+import 'package:ken/smeup/models/authentication_model.dart';
+import 'package:ken/smeup/services/smeup_cache_service.dart';
+import 'package:ken/smeup/services/smeup_data_service.dart';
+import 'package:ken/smeup/services/smeup_data_service_interface.dart';
+import 'package:ken/smeup/services/smeup_icon_service.dart';
+import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/services/smeup_variables_service.dart';
 import 'package:package_info/package_info.dart';
-import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
+import 'package:ken/smeup/services/SmeupLocalizationService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/external_configuration_model.dart';
 
-enum ALT_SERVICE_ENDPOINTS { DEFAULT, HTTP }
+enum AltServiceEndpoints { DEFAULT, HTTP }
 
 class SmeupConfigurationService {
   static const double STATIC_BUTTON_ROUNDNESS = 0.0;
 
-  static SharedPreferences _localStorge;
-  static ThemeData _theme;
-  static String _defaultServiceEndpoint;
-  static String _httpServiceEndpoint;
-  static PackageInfo _packageInfo;
-  static Map<DateTime, List> _holidays;
+  static SharedPreferences? _localStorge;
+  static ThemeData? _theme;
+  static String? _defaultServiceEndpoint;
+  static String? _httpServiceEndpoint;
+  static PackageInfo? _packageInfo;
+  static Map<DateTime, List?>? _holidays;
 
-  static LogType logLevel;
-  static bool isLoginEnabled = false;
+  static LogType? logLevel;
+
   static bool isOfflineEnabled = false;
   static bool isCacheEnabled = false;
   static bool isLogEnabled = false;
   static bool isLandscapeEnabled = true;
-  static String jsonsPath;
-  static String imagesPath;
+  static String? jsonsPath;
+  static String? imagesPath;
   static dynamic appDictionary;
-  static ExternalConfigurationModel _appConfiguration;
-  static String appBarImage;
-  static AuthenticationModel authenticationModel;
+  static ExternalConfigurationModel? _appConfiguration;
+  static late String appBarImage;
+  static AuthenticationModel? authenticationModel;
+  static bool? defaultAutoAdaptHeight;
 
   static PackageInfo packageInfoModel = PackageInfo(
     appName: 'Unknown',
@@ -47,22 +49,24 @@ class SmeupConfigurationService {
     buildNumber: 'Unknown',
   );
 
-  static Future<void> init(BuildContext context,
+  static Future<void> init(BuildContext? context,
       {LogType logLevel = LogType.none,
       dynamic localizationService,
-      Map<String, SmeupDataServiceInterface> customDataServices,
+      Map<String, SmeupDataServiceInterface>? customDataServices,
       bool enableCache = false,
-      AuthenticationModel authenticationModel,
-      String appBarImage = ''}) async {
+      AuthenticationModel? authenticationModel,
+      String appBarImage = '',
+      bool defaultAutoAdaptHeight = true}) async {
     await SmeupConfigurationService.setAppConfiguration();
 
+    SmeupConfigurationService.defaultAutoAdaptHeight = defaultAutoAdaptHeight;
     SmeupConfigurationService.logLevel = logLevel;
     SmeupConfigurationService.appBarImage = appBarImage;
 
     await SmeupConfigurationService.setLocalStorage();
 
     await SmeupConfigurationService.setTheme(
-        SmeupConfigurationService.getAppConfiguration().theme);
+        SmeupConfigurationService.getAppConfiguration()?.theme ?? '');
 
     SmeupConfigurationService.appDictionary = localizationService;
 
@@ -71,7 +75,6 @@ class SmeupConfigurationService {
 
     SmeupConfigurationService.jsonsPath = 'assets/jsons';
     SmeupConfigurationService.imagesPath = 'assets/images';
-
     SmeupDataService.initInternalService();
 
     if (customDataServices != null) {
@@ -89,22 +92,24 @@ class SmeupConfigurationService {
     SmeupConfigurationService.setPackageInfo(packageInfoModel);
     if (context != null) SmeupConfigurationService.setHolidays(context);
     if (enableCache) SmeupCacheService.init();
+
+    await SmeupIconService.init();
   }
 
   static void setPackageInfo(PackageInfo packageInfo) {
     _packageInfo = packageInfo;
     SmeupVariablesService.setVariable(
-        '*VERSION', _packageInfo != null ? _packageInfo.version : '');
+        '*VERSION', _packageInfo != null ? _packageInfo!.version : '');
   }
 
-  static PackageInfo getPackageInfo() {
+  static PackageInfo? getPackageInfo() {
     return _packageInfo;
   }
 
   static setHolidays(context) {
     try {
       if (SmeupLocalizationService.of(context) != null) {
-        SmeupLocalizationService.of(context)
+        SmeupLocalizationService.of(context)!
             .getHolidays(DateTime.now().year,
                 Localizations.localeOf(context).countryCode)
             .then((holidays) {
@@ -117,7 +122,7 @@ class SmeupConfigurationService {
     }
   }
 
-  static Map<DateTime, List<dynamic>> getHolidays() {
+  static Map<DateTime, List<dynamic>?>? getHolidays() {
     return SmeupConfigurationService._holidays;
   }
 
@@ -127,7 +132,7 @@ class SmeupConfigurationService {
         String themeStr =
             await rootBundle.loadString('assets/jsons/themes/$themeFile');
         dynamic themeJson = json.decode(themeStr);
-        _theme = ThemeDecoder.decodeThemeData(themeJson, validate: true);
+        _theme = ThemeDecoder.decodeThemeData(themeJson, validate: false);
         SmeupLogService.writeDebugMessage('Loaded $themeFile theme file');
       }
     } catch (e) {
@@ -135,16 +140,16 @@ class SmeupConfigurationService {
           logType: LogType.error);
     } finally {
       if (_theme == null) {
-        String themeStr = await rootBundle.loadString(
-            'packages/mobile_components_library/assets/jsons/themes/smeup_theme.json');
+        String themeStr = await rootBundle
+            .loadString('packages/ken/assets/jsons/themes/smeup_theme.json');
         dynamic themeJson = json.decode(themeStr);
         _theme = ThemeDecoder.decodeThemeData(themeJson);
-        print(_theme);
+        // print(_theme);
       }
     }
   }
 
-  static ThemeData getTheme() {
+  static ThemeData? getTheme() {
     return SmeupConfigurationService._theme;
   }
 
@@ -161,20 +166,22 @@ class SmeupConfigurationService {
     }
   }
 
-  static ExternalConfigurationModel getAppConfiguration() {
+  static ExternalConfigurationModel? getAppConfiguration() {
     return _appConfiguration;
   }
 
   static setDefaultServiceEndpoint() {
     // Load service endpoints from shared preferences
     final savedDefaultServiceEndpoint =
-        _loadAltServiceEndpoint(ALT_SERVICE_ENDPOINTS.DEFAULT);
+        _loadAltServiceEndpoint(AltServiceEndpoints.DEFAULT);
 
-    if (savedDefaultServiceEndpoint.isNotEmpty)
+    if (savedDefaultServiceEndpoint != null &&
+        savedDefaultServiceEndpoint.isNotEmpty)
       _defaultServiceEndpoint = savedDefaultServiceEndpoint;
     else
       _defaultServiceEndpoint = SmeupConfigurationService.getAppConfiguration()
-          .defaultServiceEndpoint;
+              ?.defaultServiceEndpoint ??
+          '';
   }
 
   static getDefaultServiceEndpoint() {
@@ -183,52 +190,48 @@ class SmeupConfigurationService {
 
   static setHttpServiceEndpoint() {
     final savedHttpServiceEndpoint =
-        _loadAltServiceEndpoint(ALT_SERVICE_ENDPOINTS.HTTP);
+        _loadAltServiceEndpoint(AltServiceEndpoints.HTTP);
 
-    if (savedHttpServiceEndpoint.isNotEmpty)
+    if (savedHttpServiceEndpoint != null && savedHttpServiceEndpoint.isNotEmpty)
       _httpServiceEndpoint = savedHttpServiceEndpoint;
     else
-      _httpServiceEndpoint =
-          SmeupConfigurationService.getAppConfiguration().httpServiceEndpoint;
+      _httpServiceEndpoint = SmeupConfigurationService.getAppConfiguration()
+              ?.httpServiceEndpoint ??
+          '';
   }
 
   static getHttpServiceEndpoint() {
     return _httpServiceEndpoint;
   }
 
-  static String _loadAltServiceEndpoint(
-      ALT_SERVICE_ENDPOINTS serviceEndpointType) {
-    return SmeupConfigurationService.getLocalStorage()
+  static String? _loadAltServiceEndpoint(
+      AltServiceEndpoints serviceEndpointType) {
+    return SmeupConfigurationService.getLocalStorage()!
         .getString('$serviceEndpointType'.split('.').last);
   }
 
   static void saveAltServiceEndpoint(
-      ALT_SERVICE_ENDPOINTS serviceEndpointType, String value) {
-    SmeupConfigurationService.getLocalStorage()
+      AltServiceEndpoints serviceEndpointType, String value) {
+    SmeupConfigurationService.getLocalStorage()!
         .setString('$serviceEndpointType'.split('.').last, value);
   }
 
   static void resetAltServiceEndpoint() {
-    SmeupConfigurationService.getLocalStorage()
-        .remove('$ALT_SERVICE_ENDPOINTS.DEFAULT'.split('.').last);
-    SmeupConfigurationService.getLocalStorage()
-        .remove('$ALT_SERVICE_ENDPOINTS.HTTP'.split('.').last);
+    SmeupConfigurationService.getLocalStorage()!
+        .remove('$AltServiceEndpoints.DEFAULT'.split('.').last);
+    SmeupConfigurationService.getLocalStorage()!
+        .remove('$AltServiceEndpoints.HTTP'.split('.').last);
   }
 
   static setLocalStorage() async {
     try {
-      // ignore: invalid_use_of_visible_for_testing_member
-      // SharedPreferences.setMockInitialValues(
-      //     <String, dynamic>{'DEFAULT': '', 'HTTP': ''});
       _localStorge = await SharedPreferences.getInstance();
-      _localStorge.setString('DEFAULT', '');
-      _localStorge.setString('HTTP', '');
     } catch (e) {
       SmeupLogService.writeDebugMessage('setLocalStorage failed: $e');
     }
   }
 
-  static SharedPreferences getLocalStorage() {
+  static SharedPreferences? getLocalStorage() {
     return _localStorge;
   }
 }

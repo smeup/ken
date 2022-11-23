@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_wait_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
+import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_wait_model.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'smeup_progress_indicator.dart';
 import 'smeup_splash.dart';
 
@@ -14,16 +15,16 @@ import 'smeup_splash.dart';
 class SmeupWait extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupWaitModel model;
+  SmeupWaitModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
-  String id;
-  String type;
-  String title;
-  Color splashColor;
-  Color loaderColor;
-  Color circularTrackColor;
+  String? id;
+  String? type;
+  String? title;
+  Color? splashColor;
+  Color? loaderColor;
+  Color? circularTrackColor;
 
   SmeupWait(this.scaffoldKey, this.formKey,
       {this.id = '',
@@ -34,19 +35,20 @@ class SmeupWait extends StatefulWidget
       this.circularTrackColor})
       : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
+    SmeupWaitModel.setDefaults(this);
   }
 
   SmeupWait.withController(
-    this.model,
+    SmeupWaitModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupWaitModel m = model;
+    SmeupWaitModel m = model as SmeupWaitModel;
     id = m.id;
     type = m.type;
     splashColor = m.splashColor;
@@ -56,7 +58,7 @@ class SmeupWait extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupWaitModel m = model;
+    SmeupWaitModel m = model as SmeupWaitModel;
 
     // change data format
     return formatDataFields(m);
@@ -69,12 +71,12 @@ class SmeupWait extends StatefulWidget
 class _SmeupWaitState extends State<SmeupWait>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupWaitModel _model;
+  SmeupWaitModel? _model;
 
   @override
   void initState() {
     _model = widget.model;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -103,6 +105,9 @@ class _SmeupWaitState extends State<SmeupWait>
 
     children = Stack(
       children: [
+        Container(
+          color: SmeupConfigurationService.getTheme()!.splashColor,
+        ),
         SmeupSplash(widget.scaffoldKey, widget.formKey,
             color: widget.splashColor,
             id: 'SmeupSplash_${widget.scaffoldKey.hashCode.toString()}'),

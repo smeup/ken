@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_radio_buttons_model.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/models/widgets/smeup_radio_buttons_model.dart';
 
 // ignore: must_be_immutable
 class SmeupRadioButton extends StatefulWidget {
-  Color radioButtonColor;
-  Color backColor;
-  Color fontColor;
-  double fontSize;
-  bool fontBold;
-  bool captionFontBold;
-  double captionFontSize;
-  Color captionFontColor;
-  Color captionBackColor;
+  Color? radioButtonColor;
+  Color? backColor;
+  Color? fontColor;
+  double? fontSize;
+  bool? fontBold;
+  bool? captionFontBold;
+  double? captionFontSize;
+  Color? captionFontColor;
+  Color? captionBackColor;
 
-  final IconData icon;
-  final Function onPressed;
-  final EdgeInsetsGeometry padding;
-  final double width;
-  final double height;
-  final Alignment align;
-  final Map<String, String> data;
-  final String valueField;
-  final String displayedField;
-  final String selectedValue;
+  final IconData? icon;
+  final Function? onPressed;
+  final EdgeInsetsGeometry? padding;
+  final double? width;
+  final double? height;
+  final Alignment? align;
+  final Map<String, String>? data;
+  final String? valueField;
+  final String? displayedField;
+  final String? selectedValue;
   final String id;
-  final String type;
-  final String title;
-  List<SmeupRadioButton> others;
-  Function changeState;
+  final String? type;
+  final String? title;
+  List<SmeupRadioButton>? others;
+  late Function changeState;
 
   SmeupRadioButton(
       {this.id = '',
@@ -61,7 +61,7 @@ class SmeupRadioButton extends StatefulWidget {
 }
 
 class _SmeupRadioButtonState extends State<SmeupRadioButton> {
-  String _selectedValue = '';
+  String? _selectedValue = '';
 
   @override
   void initState() {
@@ -87,25 +87,25 @@ class _SmeupRadioButtonState extends State<SmeupRadioButton> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Radio(
-                value: widget.data['code'],
+                value: widget.data!['code'],
                 groupValue: _selectedValue,
-                onChanged: (value) {
-                  widget.onPressed(value);
+                onChanged: (dynamic value) {
+                  widget.onPressed!(value);
                   _selectedValue = value;
                   setState(() {});
                   if (widget.others != null) {
-                    widget.others.forEach((element) {
+                    widget.others!.forEach((element) {
                       element.changeState(value);
                     });
                   }
                 },
                 activeColor:
-                    radioThemeData.fillColor.resolve(Set<MaterialState>()),
+                    radioThemeData.fillColor!.resolve(Set<MaterialState>()),
               ),
               Expanded(
                 child: Align(
-                    alignment: widget.align,
-                    child: Text(widget.data['value'],
+                    alignment: widget.align!,
+                    child: Text(widget.data!['value']!,
                         textAlign: TextAlign.left, style: _getTextStile())),
               )
             ],
@@ -114,24 +114,24 @@ class _SmeupRadioButtonState extends State<SmeupRadioButton> {
   }
 
   RadioThemeData _getRadioTheme() {
-    RadioThemeData themeData = SmeupConfigurationService.getTheme()
+    RadioThemeData themeData = SmeupConfigurationService.getTheme()!
         .radioTheme
         .copyWith(
             fillColor:
-                MaterialStateProperty.all<Color>(widget.radioButtonColor));
+                MaterialStateProperty.all<Color?>(widget.radioButtonColor));
 
     return themeData;
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.bodyText1;
+    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
 
     style = style.copyWith(
         color: widget.fontColor,
         fontSize: widget.fontSize,
         backgroundColor: widget.backColor);
 
-    if (widget.fontBold) {
+    if (widget.fontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );

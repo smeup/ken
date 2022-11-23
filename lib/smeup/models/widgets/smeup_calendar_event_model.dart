@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class SmeupCalentarEventModel {
@@ -8,22 +7,22 @@ class SmeupCalentarEventModel {
   Color markerBackgroundColor = Colors.blue;
   Color markerFontColor = Colors.black;
 
-  DateTime day;
-  String description;
-  DateTime initTime;
-  DateTime endTime;
-  dynamic fields;
+  DateTime? day;
+  String? description;
+  DateTime? initTime;
+  DateTime? endTime;
+  late dynamic fields;
 
   SmeupCalentarEventModel(
       this.day, this.description, this.initTime, this.endTime);
 
   SmeupCalentarEventModel.fromMap(
       this.fields,
-      String titleColumnName,
-      String dataColumnName,
-      String styleColumnName,
-      String initColumnName,
-      String endColumnName) {
+      String? titleColumnName,
+      String? dataColumnName,
+      String? styleColumnName,
+      String? initColumnName,
+      String? endColumnName) {
     this.day = DateTime.parse(fields[dataColumnName].toString());
     this.initTime = _toTime(fields[initColumnName]);
     this.endTime = _toTime(fields[endColumnName]);
@@ -31,39 +30,25 @@ class SmeupCalentarEventModel {
     String style = fields[styleColumnName] ?? '';
 
     switch (style) {
-      case '50G00':
-        backgroundColor = Color.fromRGBO(6, 138, 156, 1); // dark green
-        fontColor = Colors.white;
-        fontWeight = FontWeight.normal;
-        markerBackgroundColor = Colors.amber;
-        markerFontColor = Colors.black;
-        break;
-      case '00H00':
-        backgroundColor = Color.fromRGBO(148, 197, 154, 1); // clear green
+      case 'secondary': // secondary
+        backgroundColor = Color.fromRGBO(6, 137, 155, 1); // primary dark
         fontColor = Colors.black;
         fontWeight = FontWeight.normal;
-        markerBackgroundColor = Colors.lime;
+        markerBackgroundColor =
+            Color.fromRGBO(255, 186, 69, 1); // secondary light
         markerFontColor = Colors.black;
         break;
-      case '51G00':
-        backgroundColor = Color.fromRGBO(6, 138, 156, 1); // dark green
-        fontColor = Colors.white;
-        fontWeight = FontWeight.bold;
-        markerBackgroundColor = Colors.amber;
-        markerFontColor = Colors.black;
-        break;
-      case '01H00':
-        backgroundColor = Color.fromRGBO(148, 197, 154, 1); // clear green
+      default: // primary
+        backgroundColor = Color.fromRGBO(255, 186, 69, 1); // secondary light
         fontColor = Colors.black;
-        fontWeight = FontWeight.bold;
-        markerBackgroundColor = Colors.lime;
-        markerFontColor = Colors.black;
+        fontWeight = FontWeight.normal;
+        markerBackgroundColor = Color.fromRGBO(0, 92, 109, 1); // primary dark
+        markerFontColor = Colors.white;
         break;
-      default:
     }
   }
 
-  DateTime _toTime(String timeStr) {
+  DateTime? _toTime(String? timeStr) {
     if (timeStr != null && timeStr.length >= 4) {
       String parsableTime =
           "19700101 ${timeStr.substring(0, 2)}:${timeStr.substring(2, 4)}";

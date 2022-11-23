@@ -1,0 +1,57 @@
+{
+    "loaded": true,
+    "layout": "column",
+    "id": "myDialog",
+    "type": "EXD",
+    "title": "DIALOG",
+    "sections": [
+      {
+        "id": "S1",
+        "components": [
+          {
+            "type": "LAB",
+            "id": "lab1",
+            "options": {
+              "LAB": {
+                "default": {
+                  "align": "center",
+                  "padding": { "Bottom": 30},
+                  "height": 30
+                }
+              }
+            },
+            "data":{
+              "rows" :  [{ "value": "Tap the button below to go back" }]
+            } 
+          }
+        ]
+      },
+      {
+        "id": "S2",
+        "components": [
+          {
+            "type": "BTN",
+            "id": "buttons_1",
+            "options": {
+              "BTN": {
+                "default": {
+                  "fontSize": 16
+                }
+              }
+            },
+            "data": {
+              "rows": [
+                { "value": "Close the dialog" }
+              ]
+            },
+            "dynamisms": [
+              {
+                "event": "click",
+                "exec": "CLOSE"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }

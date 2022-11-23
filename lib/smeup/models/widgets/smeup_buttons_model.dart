@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/daos/smeup_buttons_dao.dart';
+import 'package:ken/smeup/daos/smeup_buttons_dao.dart';
 
-import 'package:mobile_components_library/smeup/models/widgets/smeup_data_interface.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/models/widgets/smeup_data_interface.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_data_service.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   // supported by json_theme
-  static Color defaultBackColor;
-  static Color defaultBorderColor;
-  static double defaultBorderWidth;
-  static double defaultBorderRadius;
-  static double defaultElevation;
-  static double defaultFontSize;
-  static Color defaultFontColor;
-  static bool defaultFontBold;
-  static double defaultIconSize;
-  static Color defaultIconColor;
+  static Color? defaultBackColor;
+  static Color? defaultBorderColor;
+  static double? defaultBorderWidth;
+  static double? defaultBorderRadius;
+  static double? defaultElevation;
+  static double? defaultFontSize;
+  static Color? defaultFontColor;
+  static bool? defaultFontBold;
+  static double? defaultIconSize;
+  static Color? defaultIconColor;
 
   // unsupported by json_theme
   static const double defaultWidth = 0;
@@ -32,33 +32,35 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
   static const WidgetOrientation defaultOrientation =
       WidgetOrientation.Vertical;
 
-  Color backColor;
-  Color borderColor;
-  double borderWidth;
-  double borderRadius;
-  double elevation;
-  double fontSize;
-  Color fontColor;
-  bool fontBold;
-  double iconSize;
-  Color iconColor;
+  Color? backColor;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
+  double? elevation;
+  double? fontSize;
+  Color? fontColor;
+  bool? fontBold;
+  double? iconSize;
+  Color? iconColor;
 
-  MainAxisAlignment position;
-  Alignment align;
-  double width;
-  double height;
-  EdgeInsetsGeometry padding;
-  String valueField;
-  int iconData;
-  WidgetOrientation orientation;
-  bool isLink;
-  double innerSpace;
+  MainAxisAlignment? position;
+  Alignment? align;
+  double? width;
+  double? height;
+  EdgeInsetsGeometry? padding;
+  String? valueField;
+  dynamic iconCode;
+  WidgetOrientation? orientation;
+  bool? isLink;
+  double? innerSpace;
 
   SmeupButtonsModel(
       {id,
       type,
       title = '',
-      GlobalKey<FormState> formKey,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
       this.backColor,
       this.borderColor,
       this.borderWidth,
@@ -75,72 +77,72 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
       this.align = defaultAlign,
       this.padding = defaultPadding,
       this.valueField,
-      this.iconData = 0,
+      this.iconCode,
       this.orientation = defaultOrientation,
       this.isLink = defaultIsLink,
       this.innerSpace = defaultInnerSpace})
-      : super(formKey, title: title) {
+      : super(formKey, scaffoldKey, context, title: title) {
     SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
 
   SmeupButtonsModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+      Map<String, dynamic> jsonMap,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context)
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';
     padding =
-        SmeupUtilities.getPadding(optionsDefault['padding']) ?? defaultPadding;
-    width = SmeupUtilities.getDouble(optionsDefault['width']) ?? defaultWidth;
-    if (SmeupUtilities.getBool(optionsDefault['fillSpace']) ?? false) {
+        SmeupUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
+    width = SmeupUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
+    if (SmeupUtilities.getBool(optionsDefault!['fillSpace']) ?? false) {
       width = 0;
     }
     height =
-        SmeupUtilities.getDouble(optionsDefault['height']) ?? defaultHeight;
-    innerSpace = SmeupUtilities.getDouble(optionsDefault['innerSpace']) ??
+        SmeupUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    innerSpace = SmeupUtilities.getDouble(optionsDefault!['innerSpace']) ??
         defaultInnerSpace;
 
-    if (SmeupUtilities.getBool(optionsDefault['horiz']) ?? false) {
+    if (SmeupUtilities.getBool(optionsDefault!['horiz']) ?? false) {
       orientation = WidgetOrientation.Horizontal;
     } else {
       orientation = defaultOrientation;
     }
 
-    valueField = optionsDefault['valueField'] ?? defaultValueField;
-    position = SmeupUtilities.getMainAxisAlignment(optionsDefault['position']);
-    iconSize =
-        SmeupUtilities.getDouble(optionsDefault['iconSize']) ?? defaultIconSize;
-    if (optionsDefault['icon'] != null)
-      iconData = SmeupUtilities.getInt(optionsDefault['icon']) ?? 0;
-    else
-      iconData = 0;
-    align = SmeupUtilities.getAlignmentGeometry(optionsDefault['align']) ??
+    valueField = optionsDefault!['valueField'] ?? defaultValueField;
+    position = SmeupUtilities.getMainAxisAlignment(optionsDefault!['position']);
+    iconSize = SmeupUtilities.getDouble(optionsDefault!['iconSize']) ??
+        defaultIconSize;
+    if (optionsDefault!['icon'] != null) iconCode = optionsDefault!['icon'];
+    align = SmeupUtilities.getAlignmentGeometry(optionsDefault!['align']) ??
         defaultAlign;
-    iconColor = SmeupUtilities.getColorFromRGB(optionsDefault['iconColor']) ??
+    iconColor = SmeupUtilities.getColorFromRGB(optionsDefault!['iconColor']) ??
         defaultIconColor;
-    fontSize =
-        SmeupUtilities.getDouble(optionsDefault['fontSize']) ?? defaultFontSize;
-    borderRadius = SmeupUtilities.getDouble(optionsDefault['borderRadius']) ??
+    fontSize = SmeupUtilities.getDouble(optionsDefault!['fontSize']) ??
+        defaultFontSize;
+    borderRadius = SmeupUtilities.getDouble(optionsDefault!['borderRadius']) ??
         defaultBorderRadius;
-    borderWidth = SmeupUtilities.getDouble(optionsDefault['borderWidth']) ??
+    borderWidth = SmeupUtilities.getDouble(optionsDefault!['borderWidth']) ??
         defaultBorderWidth;
-    elevation = SmeupUtilities.getDouble(optionsDefault['elevation']) ??
+    elevation = SmeupUtilities.getDouble(optionsDefault!['elevation']) ??
         defaultElevation;
 
-    fontBold = optionsDefault['bold'] ?? defaultFontBold;
+    fontBold = optionsDefault!['bold'] ?? defaultFontBold;
 
-    backColor = SmeupUtilities.getColorFromRGB(optionsDefault['backColor']) ??
+    backColor = SmeupUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
 
     borderColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['borderColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['borderColor']) ??
             defaultBorderColor;
 
-    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault['fontColor']) ??
+    fontColor = SmeupUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
         defaultFontColor;
 
-    isLink = SmeupUtilities.getBool(optionsDefault['flat']) ?? defaultIsLink;
+    isLink = SmeupUtilities.getBool(optionsDefault!['flat']) ?? defaultIsLink;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
@@ -153,29 +155,29 @@ class SmeupButtonsModel extends SmeupModel implements SmeupDataInterface {
 
   static setDefaults(dynamic obj) {
     var buttonStyle =
-        SmeupConfigurationService.getTheme().elevatedButtonTheme.style;
+        SmeupConfigurationService.getTheme()!.elevatedButtonTheme.style!;
 
     defaultBackColor =
-        buttonStyle.backgroundColor.resolve(Set<MaterialState>());
-    defaultElevation = buttonStyle.elevation.resolve(Set<MaterialState>());
+        buttonStyle.backgroundColor!.resolve(Set<MaterialState>());
+    defaultElevation = buttonStyle.elevation!.resolve(Set<MaterialState>());
 
-    var side = buttonStyle.side.resolve(Set<MaterialState>());
+    var side = buttonStyle.side!.resolve(Set<MaterialState>())!;
     defaultBorderColor = side.color;
     defaultBorderWidth = side.width;
 
-    var shape = buttonStyle.shape.resolve(Set<MaterialState>());
+    var shape = buttonStyle.shape!.resolve(Set<MaterialState>())!;
     defaultBorderRadius = (shape as ContinuousRectangleBorder)
         .borderRadius
         .resolve(TextDirection.ltr)
         .topLeft
         .x;
 
-    var textStyle = SmeupConfigurationService.getTheme().textTheme.button;
+    var textStyle = SmeupConfigurationService.getTheme()!.textTheme.button!;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
 
-    var iconTheme = SmeupConfigurationService.getTheme().iconTheme;
+    var iconTheme = SmeupConfigurationService.getTheme()!.iconTheme;
     defaultIconSize = iconTheme.size;
     defaultIconColor = iconTheme.color;
 

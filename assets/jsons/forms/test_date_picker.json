@@ -1,0 +1,63 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "Datepicker",
+  "padding": 30,
+  "sections": [
+    {
+      "id": "S1",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "padding": { "Top": 30},
+                "align": "center",
+                "height": 30
+              }
+            }
+          },
+          "data": {
+            "rows": [{ "value": "This datepicker is a widget used to select a single date" }]
+          }
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "components": [
+        {
+          "id": "datepicker1",
+          "type": "FLD",
+          "options": {
+            "FLD": {
+              "default": {
+                "type": "cal",
+                "label": "",
+                "underline" : true                
+              }
+            }
+          },
+          "data": {
+            "rows": [
+              {
+                "value": "21/03/2021",
+                "display": "21/03/2021"                
+              }
+            ]
+          },
+          "dynamisms": [
+            {
+              "event": "change",
+              "exec": "F(FBK;*MSG;) P(message('You have selected the date: [datepicker1]))"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

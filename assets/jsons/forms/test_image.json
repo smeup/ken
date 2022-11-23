@@ -1,0 +1,62 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "[description]",
+  "padding": 30,
+  "sections": [
+    {
+      "id": "S1",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "padding": {
+                  "Top": 30
+                },
+                "align": "center",
+                "height": 30
+              }
+            }
+          },
+          "data":{
+            "rows" :  [{ "value": "This widget is used to show a single image" }]
+          } 
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "components": [
+        {
+          "type": "IMG",
+          "id": "img1",
+          "options": {
+            "IMG": {
+              "default": {
+                "padding": {"left":0.0},
+                "width": 300,
+                "height": 300
+                
+              }
+            }
+          },
+          "data":{
+            "rows":[
+              {
+                "type":"J4",
+                "parameter":"IMG",
+                "code":";;packages/ken/assets/images/IMG1.png"
+              }
+          
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

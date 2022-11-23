@@ -1,17 +1,18 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
+import 'package:ken/smeup/services/smeup_data_service.dart';
+import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/services/smeup_variables_service.dart';
+
+import '../models/fun.dart';
 
 class SmeupMemoryService {
   static Map memory = Map();
   static bool _isMemoryBusy = false;
 
-  static Future<dynamic> getMemory(String key, String segment,
-      SmeupFun smeupFun, Function dataFunction) async {
+  static Future<dynamic> getMemory(
+      String key, String segment, Fun smeupFun, Function dataFunction) async {
     if (memory[key] != null) {
       SmeupLogService.writeDebugMessage(
           'response returned from the $key memory',
@@ -64,9 +65,9 @@ class SmeupMemoryService {
     });
   }
 
-  static Future<void> _getValue(String key, String segment, SmeupFun smeupFun,
-      Function dataFunction) async {
-    final urlProperties = 'devices/${smeupFun.fun['fun']['obj1']['k']}';
+  static Future<void> _getValue(
+      String key, String segment, Fun smeupFun, Function dataFunction) async {
+    final urlProperties = 'devices/${smeupFun.getObjectByName('obj1').k}';
     var responseProperties =
         await dataFunction(smeupFun, urlProperties, 'get', 'application/json');
     final responsePropertiesValid =
@@ -76,13 +77,13 @@ class SmeupMemoryService {
     if (SmeupVariablesService.getVariable('productId',
             formKey: smeupFun.formKey) ==
         '108') {
-      final urlZones = 'devices/${smeupFun.fun['fun']['obj1']['k']}/zones';
+      final urlZones = 'devices/${smeupFun.getObjectByName('obj1').k}/zones';
       var responseZones =
           await dataFunction(smeupFun, urlZones, 'get', 'application/json');
       final responseZonesValid =
           SmeupDataService.isValid(responseZones.statusCode);
 
-      final urlConfig = 'devices/${smeupFun.fun['fun']['obj1']['k']}/config';
+      final urlConfig = 'devices/${smeupFun.getObjectByName('obj1').k}/config';
       var responseConfig =
           await dataFunction(smeupFun, urlConfig, 'get', 'application/json');
       final responseConfigValid =
@@ -160,7 +161,7 @@ class SmeupMemoryService {
           break;
 
         case 'zones':
-          List zones = jsonDecode(jsonData['result']);
+          List? zones = jsonDecode(jsonData['result']);
           if (zones == null)
             zones = [
               {"id": property}
@@ -206,7 +207,7 @@ class SmeupMemoryService {
     jsonToKey[toSegment] = Response(
         data: jsonDecode(jsonFromSegment.toString()),
         statusCode: jsonFromSegment.statusCode,
-        requestOptions: null);
+        requestOptions: RequestOptions(path: ''));
 
     SmeupLogService.writeDebugMessage(
         'copied memory from $fromKey-$fromSegment to $toKey-$toSegment',

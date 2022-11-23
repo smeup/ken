@@ -1,0 +1,104 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "Autocomplete",
+  "padding": 30,
+  "sections": [
+    {
+      "id": "S1",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "padding": { "Top": 30},
+                "align": "center",
+                "height": 30
+              }
+            }
+          },
+          "data": {
+            "rows": [{ "value": "Example of autocomplete in flutter, it is possible to add confirmation key" }]
+          }
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "components": [
+        {
+          "id": "autocomplete1",
+          "type": "FLD",
+          "options": {
+            "FLD": {
+              "default": {
+                "type": "acp",
+                "align": "center",
+                "label": "description",
+                "valueField": "value",
+                "showSubmit": false,
+                "submitLabel": "Conferma"
+              }
+            }
+          },
+          "data": {
+            "rows": [
+              {
+                "code": "1",
+                "value": "Bari",
+                "type": "",
+                "parameter": ""
+              },
+              {
+                "code": "2",
+                "value": "Brescia",
+                "type": "",
+                "parameter": ""
+              },
+              {
+                "code": "3",
+                "value": "Como",
+                "type": "",
+                "parameter": ""
+              },
+              {
+                "code": "4",
+                "value": "Firenze",
+                "type": "",
+                "parameter": ""
+              },
+              {
+                "code": "5",
+                "value": "Milano",
+                "type": "",
+                "parameter": ""
+              },
+              {
+                "code": "6",
+                "value": "Napoli",
+                "type": "",
+                "parameter": ""
+              },
+              {
+                "code": "7",
+                "value": "Venezia",
+                "type": "",
+                "parameter": ""
+              }
+            ]
+          },
+          "dynamisms": [
+            {
+              "event": "change",
+              "exec": "F(FBK;*MSG;) P(message(you selected the option: \"[value]\"))"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

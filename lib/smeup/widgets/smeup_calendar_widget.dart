@@ -1,47 +1,51 @@
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_event_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_progress_indicator.dart';
+import 'package:ken/smeup/models/widgets/smeup_calendar_event_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_calendar_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_dynamism_service.dart';
+import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/widgets/smeup_line.dart';
+import 'package:ken/smeup/widgets/smeup_progress_indicator.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import '../services/smeup_utilities.dart';
 
 class SmeupCalendarWidget extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
-  final double dayFontSize;
-  final double titleFontSize;
-  final double eventFontSize;
-  final double markerFontSize;
+  final GlobalKey<FormState>? formKey;
+  final double? dayFontSize;
+  final double? titleFontSize;
+  final double? eventFontSize;
+  final double? markerFontSize;
 
-  final EdgeInsetsGeometry padding;
-  final Map<DateTime, List<SmeupCalentarEventModel>> events;
-  final double width;
-  final double height;
-  final DateTime firstWork;
-  final DateTime lastWork;
-  final DateTime focusDay;
-  final DateTime selectedDay;
-  final SmeupCalendarModel model;
-  final Map<DateTime, List> holidays;
-  final bool showNavigation;
-  final CalendarFormat calendarFormat;
-  final ValueNotifier<List<SmeupCalentarEventModel>> selectedEvents;
-  final List<Map<String, dynamic>> data;
-  final Function clientOnDaySelected;
-  final Function clientOnChangeMonth;
-  final Function clientOnEventClick;
-  final String dataColumnName;
-  final String titleColumnName;
-  final String styleColumnName;
-  final String initTimeColumnName;
-  final String endTimeColumnName;
-  final String id;
-  final Function setDataLoad;
-  final bool showPeriodButtons;
+  final EdgeInsetsGeometry? padding;
+  final Map<DateTime?, List<SmeupCalentarEventModel>>? events;
+  final double? width;
+  final double? height;
+  final DateTime? firstWork;
+  final DateTime? lastWork;
+  final DateTime? focusDay;
+  final DateTime? selectedDay;
+  final SmeupCalendarModel? model;
+  final Map<DateTime, List?>? holidays;
+  final bool? showNavigation;
+  final CalendarFormat? calendarFormat;
+  final ValueNotifier<List<SmeupCalentarEventModel>>? selectedEvents;
+  final List<Map<String, dynamic>>? data;
+  final Function? clientOnDaySelected;
+  final Function? clientOnChangeMonth;
+  final Function? clientOnEventClick;
+  final String? dataColumnName;
+  final String? titleColumnName;
+  final String? styleColumnName;
+  final String? initTimeColumnName;
+  final String? endTimeColumnName;
+  final String? id;
+  final Function? setDataLoad;
+  final bool? showPeriodButtons;
 
   SmeupCalendarWidget(this.scaffoldKey, this.formKey,
       {this.titleFontSize,
@@ -80,16 +84,16 @@ class SmeupCalendarWidget extends StatefulWidget {
 
 class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
     with TickerProviderStateMixin {
-  Map<DateTime, List<SmeupCalentarEventModel>> _events;
-  DateTime _firstWork;
-  DateTime _lastWork;
-  DateTime _focusDay;
-  DateTime _selectedDay;
-  SmeupCalendarModel _model;
-  CalendarFormat _calendarFormat;
-  AnimationController _animationController;
-  ValueNotifier<List<SmeupCalentarEventModel>> _selectedEvents;
-  List<Map<String, dynamic>> _data;
+  Map<DateTime?, List<SmeupCalentarEventModel>>? _events;
+  DateTime? _firstWork;
+  DateTime? _lastWork;
+  DateTime? _focusDay;
+  DateTime? _selectedDay;
+  SmeupCalendarModel? _model;
+  CalendarFormat? _calendarFormat;
+  late AnimationController _animationController;
+  ValueNotifier<List<SmeupCalentarEventModel>>? _selectedEvents;
+  List<Map<String, dynamic>>? _data;
   bool _isLoading = false;
 
   @override
@@ -119,31 +123,34 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
 
   @override
   Widget build(BuildContext context) {
-    double calendarHeight = widget.height;
-    double calendarWidth = widget.width;
-    if (_model != null && _model.parent != null) {
+    double? calendarHeight = widget.height;
+    double? calendarWidth = widget.width;
+    if (_model != null && _model!.parent != null) {
       if (calendarHeight == 0)
-        calendarHeight = (_model.parent as SmeupSectionModel).height;
+        calendarHeight = (_model!.parent as SmeupSectionModel).height;
       if (calendarWidth == 0)
-        calendarWidth = (_model.parent as SmeupSectionModel).width;
+        calendarWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
       if (calendarHeight == 0)
-        calendarHeight = MediaQuery.of(context).size.height;
-      if (calendarWidth == 0) calendarWidth = MediaQuery.of(context).size.width;
+        calendarHeight = SmeupUtilities.getDeviceInfo().safeHeight;
+      if (calendarWidth == 0)
+        calendarWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     double separatorHeight = 8.0;
     final titleTextStyle =
-        SmeupConfigurationService.getTheme().appBarTheme.titleTextStyle;
-    final iconTheme = SmeupConfigurationService.getTheme().iconTheme;
+        SmeupConfigurationService.getTheme()!.appBarTheme.titleTextStyle!;
+    final iconTheme = SmeupConfigurationService.getTheme()!.iconTheme;
     final daysHeaderTextStyle =
-        SmeupConfigurationService.getTheme().textTheme.bodyText1;
-    final dayTextStyle =
-        SmeupConfigurationService.getTheme().textTheme.bodyText2;
+        SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
+    final dayTextStyle = SmeupConfigurationService.getTheme()!
+        .textTheme
+        .bodyText2!
+        .copyWith(color: Colors.black);
     final markerStyle =
-        SmeupConfigurationService.getTheme().textTheme.headline4;
+        SmeupConfigurationService.getTheme()!.textTheme.headline4;
 
-    final pc = SmeupConfigurationService.getTheme().primaryColor;
+    final pc = SmeupConfigurationService.getTheme()!.primaryColor;
 
     return SingleChildScrollView(
       // Container(
@@ -153,13 +160,13 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
         children: [
           Stack(children: <Widget>[
             TableCalendar<SmeupCalentarEventModel>(
-              firstDay: _firstWork,
-              focusedDay: _focusDay,
-              lastDay: _lastWork,
+              firstDay: _firstWork!,
+              focusedDay: _focusDay!,
+              lastDay: _lastWork!,
               locale:
                   '${Localizations.localeOf(context).languageCode}_${Localizations.localeOf(context).countryCode}',
               selectedDayPredicate: (date) => isSameDay(
-                  _nomalizeDateTime(date), _nomalizeDateTime(_selectedDay)),
+                  _nomalizeDateTime(date), _nomalizeDateTime(_selectedDay!)),
               eventLoader: (day) {
                 return _getEventsForDay(day);
               },
@@ -167,7 +174,7 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                 return _isHoliday(date);
               },
 
-              calendarFormat: _calendarFormat,
+              calendarFormat: _calendarFormat!,
               startingDayOfWeek: StartingDayOfWeek.monday,
               availableGestures: AvailableGestures.all,
               availableCalendarFormats: const {
@@ -182,14 +189,14 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
               ),
 
               // navigation and title header
-              headerVisible: widget.showNavigation,
+              headerVisible: widget.showNavigation!,
               headerStyle: HeaderStyle(
                 titleTextStyle:
                     titleTextStyle.copyWith(fontSize: widget.titleFontSize),
                 titleCentered: true,
                 formatButtonVisible: false,
                 decoration: BoxDecoration(
-                    color: SmeupConfigurationService.getTheme().primaryColor),
+                    color: SmeupConfigurationService.getTheme()!.primaryColor),
                 leftChevronIcon:
                     Icon(Icons.arrow_back_ios, color: iconTheme.color),
                 rightChevronIcon:
@@ -206,7 +213,7 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
               calendarBuilders: CalendarBuilders(
                 // day builder
                 defaultBuilder: (context, day, focusedDay) {
-                  Color containerBackcolor = dayTextStyle.backgroundColor;
+                  Color? containerBackcolor = dayTextStyle.backgroundColor;
 
                   return _getDayContainer(
                     day,
@@ -250,7 +257,7 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                 setState(() {
                   _isLoading = true;
                 });
-                widget.clientOnChangeMonth(focusedDay).then((res) {
+                widget.clientOnChangeMonth!(focusedDay).then((res) {
                   _data = res['data'];
                   _events = res['events'];
                   setState(() {
@@ -267,15 +274,19 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                     size: 60),
               )
           ]),
-          SizedBox(height: separatorHeight),
+          SizedBox(
+            height: separatorHeight,
+            child: SmeupLine(widget.scaffoldKey, widget.formKey),
+          ),
           if (_selectedEvents != null)
             Container(
-              height: _selectedEvents.value.length.toDouble() *
+              height: _selectedEvents!.value.length.toDouble() *
                   55, // _getListHeight(separatorHeight),
               child: ValueListenableBuilder<List<SmeupCalentarEventModel>>(
-                valueListenable: _selectedEvents,
+                valueListenable: _selectedEvents!,
                 builder: (context, event, _) {
                   return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: event.length,
                     itemBuilder: (context, index) {
                       return Container(
@@ -284,17 +295,17 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
                           vertical: 4.0,
                         ),
                         decoration: BoxDecoration(
-                          border:
-                              Border.all(color: event[index].backgroundColor),
+                          border: Border.all(
+                              color: event[index].markerBackgroundColor),
                           borderRadius: BorderRadius.circular(12.0),
                           shape: BoxShape.rectangle,
-                          color: event[index].backgroundColor,
+                          color: event[index].markerBackgroundColor,
                         ),
                         child: ListTile(
                           visualDensity:
                               VisualDensity(horizontal: -3, vertical: -3),
                           onTap: () => _eventClicked(
-                              event[index].day, _focusDay,
+                              event[index].day!, _focusDay,
                               event: event[index]),
                           title: _getListTileWidget(event[index]),
                         ),
@@ -309,8 +320,8 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
     );
   }
 
-  Widget _getMarkerContainer(DateTime date, TextStyle markerStyle) {
-    var eventsInDay = _events[_nomalizeDateTime(date)];
+  Widget? _getMarkerContainer(DateTime date, TextStyle? markerStyle) {
+    var eventsInDay = _events![_nomalizeDateTime(date)];
     if (eventsInDay == null) return null;
     final ev = eventsInDay[0];
     return Container(
@@ -321,10 +332,10 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
           decoration: BoxDecoration(color: ev.markerBackgroundColor),
           child: Text(
               eventsInDay.length == 1
-                  ? ev.description
+                  ? ev.description!
                   : eventsInDay.length.toString(),
               textAlign: TextAlign.center,
-              style: markerStyle.copyWith(
+              style: markerStyle!.copyWith(
                   backgroundColor: ev.markerBackgroundColor,
                   color: ev.markerFontColor,
                   fontSize: widget.markerFontSize,
@@ -336,13 +347,13 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
   Widget _getDayContainer(
     DateTime date,
     TextStyle dayTextStyle,
-    Color containerBackcolor,
+    Color? containerBackcolor,
   ) {
-    Color textColor = dayTextStyle.color;
+    Color? textColor = dayTextStyle.color;
     if (date.weekday == 6 || date.weekday == 7) textColor = Colors.red[800];
 
     var list = _getEventsForDay(date);
-    if (list != null && list.length > 0) {
+    if (list.length > 0) {
       containerBackcolor = list[0].backgroundColor;
     }
 
@@ -365,16 +376,12 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
   bool _isHoliday(DateTime date) {
     DateTime key = DateTime(date.year, date.month, date.day);
     return widget.holidays != null &&
-        widget.holidays.length > 0 &&
-        widget.holidays.keys.contains(key);
+        widget.holidays!.length > 0 &&
+        widget.holidays!.keys.contains(key);
   }
 
   List<SmeupCalentarEventModel> _getEventsForDay(DateTime day) {
-    if (day == null) {
-      return [];
-    } else {
-      return _events[_nomalizeDateTime(day)] ?? [];
-    }
+    return _events![_nomalizeDateTime(day)] ?? [];
   }
 
   DateTime _nomalizeDateTime(DateTime date) {
@@ -384,12 +391,12 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
   Future<void> _onDaySelected(DateTime selectedDay, DateTime focusedDay) async {
     SmeupLogService.writeDebugMessage('CALLBACK: _onDaySelected');
     if (_isLoading) return;
-    _selectedEvents.value = _getEventsForDay(selectedDay);
-    widget.setDataLoad(widget.id, true);
+    _selectedEvents!.value = _getEventsForDay(selectedDay);
+    widget.setDataLoad!(widget.id, true);
     if (widget.clientOnDaySelected != null)
-      widget.clientOnDaySelected(selectedDay);
-    if (_selectedEvents.value.length == 1) {
-      _eventClicked(selectedDay, focusedDay, event: _selectedEvents.value[0]);
+      widget.clientOnDaySelected!(selectedDay);
+    if (_selectedEvents!.value.length == 1) {
+      _eventClicked(selectedDay, focusedDay, event: _selectedEvents!.value[0]);
     } else {
       setState(() {
         _selectedDay = selectedDay;
@@ -398,33 +405,32 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
     }
   }
 
-  Future<void> _eventClicked(DateTime selectedDay, DateTime focusedDay,
-      {SmeupCalentarEventModel event}) async {
+  Future<void> _eventClicked(DateTime selectedDay, DateTime? focusedDay,
+      {SmeupCalentarEventModel? event}) async {
     dynamic data;
-    String title;
-    String initTime;
-    String endTime;
+    String? title;
+    String? initTime;
+    String? endTime;
     try {
       String dayString = DateFormat('yyyyMMdd').format(selectedDay);
       title = event?.description;
       initTime = event?.initTime != null
-          ? DateFormat("HHmmss").format(event.initTime)
+          ? DateFormat("HHmmss").format(event!.initTime!)
           : null;
       endTime = event?.endTime != null
-          ? DateFormat("HHmmss").format(event.endTime)
+          ? DateFormat("HHmmss").format(event!.endTime!)
           : null;
 
       if (event == null) {
-        data = _data.firstWhere(
-            (element) => element[widget.dataColumnName] == dayString,
-            orElse: () => null);
+        data = _data!.firstWhereOrNull(
+            (element) => element[widget.dataColumnName!] == dayString);
       } else {
-        final sel = _data.firstWhere((element) {
-          return element[widget.dataColumnName] == dayString &&
-              element[widget.titleColumnName] == title &&
-              element[widget.initTimeColumnName] == initTime &&
-              element[widget.endTimeColumnName] == endTime;
-        }, orElse: () => null);
+        final sel = _data!.firstWhereOrNull((element) {
+          return element[widget.dataColumnName!] == dayString &&
+              element[widget.titleColumnName!] == title &&
+              element[widget.initTimeColumnName!] == initTime &&
+              element[widget.endTimeColumnName!] == endTime;
+        });
 
         if (sel != null) {
           data = sel['datarow'] != null ? sel['datarow'] : sel;
@@ -436,14 +442,14 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
         SmeupDynamismService.storeDynamicVariables(data, widget.formKey);
 
         if (widget.model != null)
-          SmeupDynamismService.run(widget.model.dynamisms, context, 'click',
+          SmeupDynamismService.run(widget.model!.dynamisms, context, 'click',
               widget.scaffoldKey, widget.formKey);
       }
     } catch (e) {
       SmeupLogService.writeDebugMessage('Error on calendar _eventClicked: $e',
           logType: LogType.error);
     } finally {
-      widget.setDataLoad(widget.id, true);
+      widget.setDataLoad!(widget.id, true);
       setState(() {
         _focusDay = focusedDay;
       });
@@ -451,20 +457,20 @@ class _SmeupCalendarWidgetState extends State<SmeupCalendarWidget>
   }
 
   Column _getListTileWidget(SmeupCalentarEventModel event) {
-    final style = SmeupConfigurationService.getTheme()
+    final style = SmeupConfigurationService.getTheme()!
         .textTheme
-        .headline3
+        .headline3!
         .copyWith(
-            backgroundColor: event.backgroundColor,
-            color: event.fontColor,
+            backgroundColor: event.markerBackgroundColor,
+            color: event.markerFontColor,
             fontSize: widget.eventFontSize,
             fontWeight: event.fontWeight);
 
     final initTimeStr = event.initTime != null
-        ? DateFormat("HH:mm").format(event.initTime)
+        ? DateFormat("HH:mm").format(event.initTime!)
         : null;
     final endTimeStr = event.endTime != null
-        ? DateFormat("HH:mm").format(event.endTime)
+        ? DateFormat("HH:mm").format(event.endTime!)
         : null;
 
     var period = initTimeStr != null ? initTimeStr : null;

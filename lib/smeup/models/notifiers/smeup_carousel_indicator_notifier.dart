@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SmeupCarouselIndicatorNotifier with ChangeNotifier {
-  int index;
+  int? index;
   void setIndex(int value) {
     index = value;
     notifyListeners();

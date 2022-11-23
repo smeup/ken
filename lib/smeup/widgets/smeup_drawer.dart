@@ -1,44 +1,46 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/daos/smeup_drawer_dao.dart';
-import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_drawer_data_element.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/screens/smeup_dynamic_screen.dart';
-import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_drawer_model.dart';
-import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_drawer_item.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
+import 'package:ken/smeup/daos/smeup_drawer_dao.dart';
+import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:ken/smeup/models/widgets/smeup_drawer_data_element.dart';
+import 'package:ken/smeup/models/widgets/smeup_drawer_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/services/SmeupLocalizationService.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_dynamism_service.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/widgets/smeup_drawer_item.dart';
+import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
+
+import '../models/dynamism.dart';
+import '../services/smeup_icon_service.dart';
 
 // ignore: must_be_immutable
 class SmeupDrawer extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupDrawerModel model;
+  SmeupDrawerModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
 
-  double titleFontSize;
-  Color titleFontColor;
-  bool titleFontBold;
-  double elementFontSize;
-  Color elementFontColor;
-  bool elementFontBold;
-  Color appBarBackColor;
-  bool showItemDivider;
-  double imageWidth;
-  double imageHeight;
-  String imageUrl;
-  String title;
-  String id;
-  String type;
-  List<SmeupDrawerDataElement> data;
+  double? titleFontSize;
+  Color? titleFontColor;
+  bool? titleFontBold;
+  double? elementFontSize;
+  Color? elementFontColor;
+  bool? elementFontBold;
+  Color? appBarBackColor;
+  bool? showItemDivider;
+  double? imageWidth;
+  double? imageHeight;
+  String? imageUrl;
+  String? title;
+  String? id;
+  String? type;
+  List<SmeupDrawerDataElement>? data;
 
   SmeupDrawer(this.scaffoldKey, this.formKey,
       {this.id = '',
@@ -62,16 +64,16 @@ class SmeupDrawer extends StatefulWidget
   }
 
   SmeupDrawer.withController(
-    this.model,
+    SmeupDrawerModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupDrawerModel m = model;
+    SmeupDrawerModel m = model as SmeupDrawerModel;
     id = m.id;
     type = m.type;
     title = m.title;
@@ -92,7 +94,7 @@ class SmeupDrawer extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupDrawerModel m = model;
+    SmeupDrawerModel m = model as SmeupDrawerModel;
 
     // change data format
     var workData = formatDataFields(m);
@@ -104,18 +106,36 @@ class SmeupDrawer extends StatefulWidget
         final element = workData['rows'][i];
         newList.add(SmeupDrawerDataElement(element['text'],
             route: element['route'],
-            iconCode: SmeupUtilities.getInt(element['iconCode']) ?? 0,
+            iconCode: element['iconCode'],
             fontSize: SmeupUtilities.getDouble(element['fontSize']) ?? 0.0,
             align: SmeupUtilities.getAlignmentGeometry(element['align']) ??
                 Alignment.center,
             action: element['route'] == null
                 ? null
                 : (context) {
-                    final smeupFun = SmeupFun(element['route'], formKey);
+                    String route = element['route'];
+                    if (route.trimLeft().toUpperCase().startsWith('F(')) {
+                      SmeupDynamismService.run([
+                        Dynamism(
+                            "click",
+                            "${element['route']}",
+                            false,
+                            List<dynamic>.empty(growable: true),
+                            List<dynamic>.empty(growable: true))
+                      ], context, 'click', scaffoldKey, formKey);
+                    } else {
+                      Navigator.of(context).pushNamed(route);
+                    }
+
+                    /*
+
+                    final smeupFun = SmeupFun(
+                        element['route'], formKey, scaffoldKey, context);
 
                     Navigator.of(context).pushNamed(
                         SmeupDynamicScreen.routeName,
                         arguments: {'isDialog': false, 'smeupFun': smeupFun});
+                    */
                   },
             group: element['group'] ?? '',
             groupFontSize:
@@ -129,24 +149,25 @@ class SmeupDrawer extends StatefulWidget
     return newList;
   }
 
-  static addInternalDrawerElements(newList, BuildContext context) {
-    if (SmeupConfigurationService.authenticationModel.managed) {
+  static addInternalDrawerElements(newList, BuildContext? context) {
+    if (SmeupConfigurationService.authenticationModel!.managed) {
       newList.addAll([
         SmeupDrawerDataElement(
           'Logout',
           action: (context) async {
-            bool loggedOut = await SmeupConfigurationService.authenticationModel
-                .logoutFunction();
-            if (loggedOut)
+            bool loggedOut = await SmeupConfigurationService
+                .authenticationModel!.logoutFunction!();
+            if (loggedOut) {
               Navigator.of(context).pushNamedAndRemoveUntil(
                   '/MainScreen', (Route<dynamic> route) => false);
+            }
           },
-          iconCode: 58291,
+          iconCode: 0xe3b3,
           group: context != null
-              ? SmeupLocalizationService.of(context).getLocalString('settings')
+              ? SmeupLocalizationService.of(context)!.getLocalString('settings')
               : "SETTINGS",
           fontSize: 15,
-          groupIcon: 58751,
+          groupIcon: 0xe57f,
           groupFontSize: 20,
         )
       ]);
@@ -160,14 +181,14 @@ class SmeupDrawer extends StatefulWidget
 class _SmeupDrawerState extends State<SmeupDrawer>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupDrawerModel _model;
-  List<SmeupDrawerDataElement> _data;
+  SmeupDrawerModel? _model;
+  List<SmeupDrawerDataElement>? _data;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -189,23 +210,36 @@ class _SmeupDrawerState extends State<SmeupDrawer>
     return drawer;
   }
 
+  Widget _getCollpsed(e) {
+    return ListTile(
+      leading: e.groupIcon != null
+          ? Icon(
+              SmeupIconService.getIconData(e.groupIcon),
+              color: _getIconTheme().color,
+              size: _getIconTheme().size,
+            )
+          : null,
+      title: Text(e.group, style: _getElementTextStile()),
+    );
+  }
+
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupDrawerDao.getData(_model);
-        _data = widget.treatData(_model);
+        await SmeupDrawerDao.getData(_model!);
+        _data = widget.treatData(_model!);
       }
       setDataLoad(widget.id, true);
     }
 
     final showTitle = widget.title != null;
-    final showImage = widget.imageUrl.isNotEmpty;
+    final showImage = widget.imageUrl!.isNotEmpty;
     final List<Widget> headers = [];
 
     if (showImage)
       headers.add(Image.asset(
-        widget.imageUrl,
+        widget.imageUrl!,
         height: widget.imageHeight,
         width: widget.imageWidth,
       ));
@@ -214,7 +248,7 @@ class _SmeupDrawerState extends State<SmeupDrawer>
         width: 10,
       ));
       headers.add(Text(
-        widget.title,
+        widget.title!,
         style: _getTitleStile(),
       ));
     }
@@ -233,42 +267,35 @@ class _SmeupDrawerState extends State<SmeupDrawer>
 
     var groups = Map<String, List<Widget>>();
 
-    for (SmeupDrawerDataElement e in _data) {
+    for (SmeupDrawerDataElement e in _data!) {
       if (e.group.isEmpty) {
-        list.add(SmeupDrawerItem(
-            e.text, e.route, e.iconCode, e.action, e.align, false,
+        list.add(SmeupDrawerItem(widget.scaffoldKey, widget.formKey, e.text,
+            e.route, e.iconCode, e.action, e.align, false,
             fontSize: e.fontSize));
       } else {
-        List<Widget> listInGroup;
+        List<Widget>? listInGroup;
         if (groups[e.group] == null) {
           groups[e.group] = List<Widget>.empty(growable: true);
           listInGroup = groups[e.group];
           list.add(ExpandablePanel(
-            header: ListTile(
-              leading: e.groupIcon > 0
-                  ? Icon(
-                      IconData(e.groupIcon, fontFamily: 'MaterialIcons'),
-                      color: _getIconTheme().color,
-                      size: _getIconTheme().size,
-                    )
-                  : null,
-              title: Text(e.group, style: _getElementTextStile()),
-            ),
-            theme: const ExpandableThemeData(
+            header: _getCollpsed(e),
+            theme: ExpandableThemeData(
                 headerAlignment: ExpandablePanelHeaderAlignment.center,
+                iconColor: _getIconTheme().color,
                 tapBodyToCollapse: true),
             expanded: Column(
-              children: listInGroup,
+              children: listInGroup!,
             ),
+            collapsed: Container(),
             // tapHeaderToExpand: true,
             // hasIcon: true,
           ));
         }
         listInGroup = groups[e.group];
-        listInGroup.add(Padding(
+        listInGroup!.add(Padding(
           padding: const EdgeInsets.only(left: 60.0),
-          child: SmeupDrawerItem(e.text, e.route, e.iconCode, e.action, e.align,
-              widget.showItemDivider,
+          child: SmeupDrawerItem(widget.scaffoldKey, widget.formKey, e.text,
+              e.route, e.iconCode, e.action, e.align, widget.showItemDivider,
               fontSize: e.fontSize),
         ));
       }
@@ -287,18 +314,18 @@ class _SmeupDrawerState extends State<SmeupDrawer>
   }
 
   AppBarTheme _getAppBarTheme() {
-    return SmeupConfigurationService.getTheme()
+    return SmeupConfigurationService.getTheme()!
         .appBarTheme
         .copyWith(backgroundColor: widget.appBarBackColor);
   }
 
   TextStyle _getTitleStile() {
-    TextStyle style = _getAppBarTheme().titleTextStyle;
+    TextStyle style = _getAppBarTheme().titleTextStyle!;
 
     style = style.copyWith(
         color: widget.titleFontColor, fontSize: widget.titleFontSize);
 
-    if (widget.titleFontBold) {
+    if (widget.titleFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -308,11 +335,11 @@ class _SmeupDrawerState extends State<SmeupDrawer>
   }
 
   TextStyle _getElementTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme()
+    TextStyle style = SmeupConfigurationService.getTheme()!
         .appBarTheme
-        .toolbarTextStyle
+        .toolbarTextStyle!
         .copyWith(
-            backgroundColor: SmeupConfigurationService.getTheme()
+            backgroundColor: SmeupConfigurationService.getTheme()!
                 .appBarTheme
                 .backgroundColor);
 
@@ -326,7 +353,7 @@ class _SmeupDrawerState extends State<SmeupDrawer>
         color: widget.elementFontColor,
       );
 
-    if (widget.elementFontBold != null && widget.elementFontBold)
+    if (widget.elementFontBold != null && widget.elementFontBold!)
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -335,7 +362,7 @@ class _SmeupDrawerState extends State<SmeupDrawer>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = SmeupConfigurationService.getTheme().iconTheme;
+    IconThemeData themeData = SmeupConfigurationService.getTheme()!.iconTheme;
 
     return themeData;
   }

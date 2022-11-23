@@ -1,0 +1,11 @@
+{
+    "OG_DO_RA": {"name": "plus", "hex": "0xe047"},
+    "J1_KEY_F17": {"name": "settings", "hex": "0xe57f"},
+    "???_1": {"name": "logout", "hex": "0xe3b3"},
+    "J1_KEY_F30": {"name": "save", "hex": "0xe550"},
+    "???_2": {"name": "ac unit", "hex": "0xe737"},
+    "???_3": {"name": "now widgets", "hex": "0xe6e6"},
+    "???_4": {"name": "slideshow", "hex": "0xf3a3"},
+    "???_5": {"name": "dynamic feed", "hex": "0xe211"},
+    "???_6": {"name": "account balance", "hex": "0xf51f"}
+  }

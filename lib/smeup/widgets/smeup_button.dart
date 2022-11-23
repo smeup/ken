@@ -1,41 +1,42 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_buttons_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/models/widgets/smeup_buttons_model.dart';
+
+import '../services/smeup_icon_service.dart';
+import '../services/smeup_utilities.dart';
 
 // ignore: must_be_immutable
 class SmeupButton extends StatelessWidget {
-  final int buttonIndex;
-  Color backColor;
-  Color borderColor;
-  double borderWidth;
-  double borderRadius;
-  double elevation;
-  double fontSize;
-  Color fontColor;
-  bool fontBold;
-  double iconSize;
-  Color iconColor;
+  final int? buttonIndex;
+  Color? backColor;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
+  double? elevation;
+  double? fontSize;
+  Color? fontColor;
+  bool? fontBold;
+  double? iconSize;
+  Color? iconColor;
 
-  final double width;
-  final double height;
-  final MainAxisAlignment position;
-  final Alignment align;
-  final EdgeInsetsGeometry padding;
-  final String data;
-  final String valueField;
-  final int iconData;
+  final double? width;
+  final double? height;
+  final MainAxisAlignment? position;
+  final Alignment? align;
+  final EdgeInsetsGeometry? padding;
+  final String? data;
+  final String? valueField;
+  final dynamic iconCode;
   final bool isLink;
-  final IconData icon;
-  final Function clientOnPressed;
+  final IconData? icon;
+  final Function? clientOnPressed;
   final double innerSpace;
-  final bool isBusy;
+  final bool? isBusy;
   final String id;
-  final String type;
-  final String title;
-  final SmeupButtonsModel model;
+  final String? type;
+  final String? title;
+  final SmeupButtonsModel? model;
 
   SmeupButton(
       {this.id = '',
@@ -58,7 +59,7 @@ class SmeupButton extends StatelessWidget {
       this.padding = SmeupButtonsModel.defaultPadding,
       this.valueField,
       this.elevation,
-      this.iconData = 0,
+      this.iconCode,
       this.buttonIndex,
       this.icon,
       this.clientOnPressed,
@@ -69,9 +70,9 @@ class SmeupButton extends StatelessWidget {
     SmeupButtonsModel.setDefaults(this);
     if (isLink) {
       borderColor =
-          SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
+          SmeupConfigurationService.getTheme()!.scaffoldBackgroundColor;
       fontColor = backColor;
-      backColor = SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
+      backColor = SmeupConfigurationService.getTheme()!.scaffoldBackgroundColor;
     }
   }
 
@@ -79,16 +80,18 @@ class SmeupButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var elevatedButtonStyle = _getButtonStyle();
 
-    double buttonHeight = height;
-    double buttonWidth = width;
-    if (model != null && model.parent != null) {
+    double? buttonHeight = height;
+    double? buttonWidth = width;
+    if (model != null && model!.parent != null) {
       if (buttonHeight == 0)
-        buttonHeight = (model.parent as SmeupSectionModel).height;
+        buttonHeight = (model!.parent as SmeupSectionModel).height;
       if (buttonWidth == 0)
-        buttonWidth = (model.parent as SmeupSectionModel).width;
+        buttonWidth = (model!.parent as SmeupSectionModel).width;
     } else {
-      if (buttonHeight == 0) buttonHeight = MediaQuery.of(context).size.height;
-      if (buttonWidth == 0) buttonWidth = MediaQuery.of(context).size.width;
+      if (buttonHeight == 0)
+        buttonHeight = SmeupUtilities.getDeviceInfo().safeHeight;
+      if (buttonWidth == 0)
+        buttonWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     return Container(
@@ -105,41 +108,41 @@ class SmeupButton extends StatelessWidget {
   }
 
   ElevatedButton _getElevatedButton(
-      elevatedButtonStyle, double buttonHeight, double buttonWidth) {
+      elevatedButtonStyle, double? buttonHeight, double? buttonWidth) {
     return ElevatedButton(
       key: Key(id),
       style: elevatedButtonStyle,
-      onPressed: clientOnPressed,
+      onPressed: clientOnPressed as void Function()?,
       child: _getButtonChildren(buttonHeight, buttonWidth),
     );
   }
 
   TextButton _getTextButton(
-      elevatedButtonStyle, double buttonHeight, double buttonWidth) {
+      elevatedButtonStyle, double? buttonHeight, double? buttonWidth) {
     return TextButton(
       key: Key(id),
       style: elevatedButtonStyle,
-      onPressed: clientOnPressed,
+      onPressed: clientOnPressed as void Function()?,
       child: _getButtonChildren(buttonHeight, buttonWidth),
     );
   }
 
-  Widget _getButtonChildren(double buttonHeight, double buttonWidth) {
+  Widget _getButtonChildren(double? buttonHeight, double? buttonWidth) {
     IconThemeData iconTheme = _getIconTheme();
-    return Column(mainAxisAlignment: position, children: <Widget>[
-      isBusy
+    return Column(mainAxisAlignment: position!, children: <Widget>[
+      isBusy!
           ? CircularProgressIndicator()
           : () {
-              final icon = iconData == 0
+              final icon = iconCode == null
                   ? Container()
                   : Icon(
-                      IconData(iconData, fontFamily: 'MaterialIcons'),
+                      SmeupIconService.getIconData(iconCode),
                       color: iconTheme.color,
                       size: iconTheme.size,
                     );
               var text = Align(
-                  alignment: align,
-                  child: Text(data,
+                  alignment: align!,
+                  child: Text(data!,
                       textAlign: TextAlign.center, style: _getTextStile()));
 
               var children;
@@ -199,7 +202,7 @@ class SmeupButton extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       icon,
-                      SizedBox(width: innerSpace),
+                      //SizedBox(width: innerSpace),
                       Expanded(child: text),
                     ],
                   ),
@@ -213,29 +216,30 @@ class SmeupButton extends StatelessWidget {
   }
 
   ButtonStyle _getButtonStyle() {
-    var elevatedButtonStyle = SmeupConfigurationService.getTheme()
+    var elevatedButtonStyle = SmeupConfigurationService.getTheme()!
         .elevatedButtonTheme
-        .style
+        .style!
         .copyWith(
-            backgroundColor: MaterialStateProperty.all<Color>(backColor),
-            elevation: MaterialStateProperty.all<double>(elevation),
+            overlayColor: MaterialStateProperty.all(backColor),
+            backgroundColor: MaterialStateProperty.all<Color?>(backColor),
+            elevation: MaterialStateProperty.all<double?>(elevation),
             padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                 EdgeInsets.all(0)),
             shape: MaterialStateProperty.all<OutlinedBorder>(
                 RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(borderRadius))),
+                    borderRadius: BorderRadius.circular(borderRadius!))),
             side: MaterialStateProperty.all<BorderSide>(
-                BorderSide(width: borderWidth, color: borderColor)));
+                BorderSide(width: borderWidth!, color: borderColor!)));
 
     return elevatedButtonStyle;
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.button;
+    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.button!;
 
     style = style.copyWith(color: fontColor, fontSize: fontSize);
 
-    if (fontBold) {
+    if (fontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -249,7 +253,7 @@ class SmeupButton extends StatelessWidget {
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = SmeupConfigurationService.getTheme()
+    IconThemeData themeData = SmeupConfigurationService.getTheme()!
         .iconTheme
         .copyWith(size: iconSize, color: iconColor);
 

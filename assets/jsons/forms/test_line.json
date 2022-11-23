@@ -1,0 +1,64 @@
+{
+    "loaded": true,
+    "layout": "column",
+    "id": "testForm",
+    "type": "EXD",
+    "title": "[description]",
+    "sections": [
+      {
+        "components": [
+          {
+            "type": "LIN",
+            "id": "lin1",
+            "options": {
+              "LIN": {
+                "default": {
+                  "padding": {"left":0.0},
+                  "color": "R000G000B000", 
+                  "thickness" : 30
+                }
+              }
+            }
+          }
+        ],
+        "id": "SL1"
+      },
+      {
+        "components": [
+          {
+            "type": "LIN",
+            "id": "lin2",
+            "options": {
+              "LIN": {
+                "default": {
+                  "padding": {"top":10.0},
+                  "color": "R255G040B005", 
+                  "thickness" : 24
+                }
+              }
+            }
+          }
+        ],
+        "id": "SL2"
+      },
+      {
+        "components": [
+          {
+            "type": "LIN",
+            "id": "lin3",
+            "options": {
+              "LIN": {
+                "default": {
+                  "padding": {"top":20.0},
+                  "color": "R057G255B020", 
+                  "thickness" : 20
+                }
+              }
+            }
+          }
+        ],
+        "id": "SL3"
+      }
+    ]
+  }
+  

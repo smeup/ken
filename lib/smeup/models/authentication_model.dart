@@ -1,6 +1,6 @@
 class AuthenticationModel {
   bool managed;
-  Function logoutFunction;
+  Function? logoutFunction;
 
-  AuthenticationModel({this.managed, this.logoutFunction});
+  AuthenticationModel({this.managed = false, this.logoutFunction});
 }

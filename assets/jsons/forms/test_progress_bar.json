@@ -1,0 +1,56 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "[description]",
+  "padding": 30,
+  "sections": [
+    {
+      "id": "S1",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "padding": {
+                  "Top": 30
+                },
+                "align": "center",
+                "height": 30
+              }
+            }
+          },
+          "data":{
+            "rows" :  [{ "value": "A progress bar is a graphical control element used to show the progress of a task" }]
+          } 
+        }
+      ]
+    }, 
+    {
+      "id": "S2",
+      "components": [
+        {
+          "type": "FLD",
+          "id": "pgb1",
+          "options": {
+            "FLD": {
+              "default": {
+                "type": "pgb",
+                "padding": {"top":30.0, "left":5.0, "right":5.0},
+                "height": 40,
+                "pgbMin": 0,
+                "pgbMax": 10
+              }
+            }
+          },
+          "data":{
+            "rows" :  [{ "value": 6 }]
+          } 
+        }
+      ]
+    }
+  ]
+}

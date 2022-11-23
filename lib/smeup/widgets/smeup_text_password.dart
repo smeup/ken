@@ -1,68 +1,72 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mobile_components_library/smeup/daos/smeup_text_password_dao.dart';
-import 'package:mobile_components_library/smeup/models/notifiers/smeup_text_password_visibility_notifier.dart';
-import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_text_password_model.dart';
-import 'package:mobile_components_library/smeup/models/notifiers/smeup_text_password_rule_notifier.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_text_field.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_text_password_indicators.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
+import 'package:ken/smeup/daos/smeup_text_password_dao.dart';
+import 'package:ken/smeup/models/notifiers/smeup_text_password_visibility_notifier.dart';
+import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_text_password_model.dart';
+import 'package:ken/smeup/models/notifiers/smeup_text_password_rule_notifier.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/widgets/smeup_text_field.dart';
+import 'package:ken/smeup/widgets/smeup_text_password_indicators.dart';
+import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class SmeupTextPassword extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupTextPasswordModel model;
+  SmeupTextPasswordModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
-  Color backColor;
-  double fontSize;
-  Color fontColor;
-  bool fontBold;
-  bool captionFontBold;
-  double captionFontSize;
-  Color captionFontColor;
-  Color captionBackColor;
-  Color borderColor;
-  double borderWidth;
-  double borderRadius;
+  Color? backColor;
+  double? fontSize;
+  Color? fontColor;
+  bool? fontBold;
+  bool? captionFontBold;
+  double? captionFontSize;
+  Color? captionFontColor;
+  Color? captionBackColor;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
+  double? iconSize;
+  Color? iconColor;
+  Color? buttonBackColor;
 
-  String label;
-  String submitLabel;
-  double width;
-  double height;
-  EdgeInsetsGeometry padding;
-  bool showBorder;
-  String data;
-  bool underline;
-  bool autoFocus;
-  String id;
-  String type;
-  String valueField;
-  bool showSubmit;
-  bool showRules;
-  bool showRulesIcon;
-  bool checkRules;
+  String? label;
+  String? submitLabel;
+  double? width;
+  double? height;
+  EdgeInsetsGeometry? padding;
+  bool? showBorder;
+  String? data;
+  bool? underline;
+  bool? autoFocus;
+  String? id;
+  String? type;
+  String? valueField;
+  bool? showSubmit;
+  bool? showRules;
+  bool? showRulesIcon;
+  bool? checkRules;
 
-  Function clientValidator;
-  Function clientOnSave;
-  Function clientOnChange;
-  Function clientOnSubmit;
+  Function? clientValidator;
+  Function? clientOnSave;
+  Function? clientOnChange;
+  Function? clientOnSubmit;
 
-  List<TextInputFormatter> inputFormatters;
+  List<TextInputFormatter>? inputFormatters;
 
-  SmeupTextPassword.withController(this.model, this.scaffoldKey, this.formKey)
+  SmeupTextPassword.withController(
+      SmeupTextPasswordModel this.model, this.scaffoldKey, this.formKey)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   SmeupTextPassword(this.scaffoldKey, this.formKey,
@@ -79,6 +83,9 @@ class SmeupTextPassword extends StatefulWidget
       this.borderColor,
       this.borderRadius,
       this.borderWidth,
+      this.iconSize,
+      this.iconColor,
+      this.buttonBackColor,
       this.label = SmeupTextPasswordModel.defaultLabel,
       this.submitLabel = SmeupTextPasswordModel.defaultSubmitLabel,
       this.width = SmeupTextPasswordModel.defaultWidth,
@@ -105,7 +112,7 @@ class SmeupTextPassword extends StatefulWidget
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupTextPasswordModel m = model;
+    SmeupTextPasswordModel m = model as SmeupTextPasswordModel;
     id = m.id;
     type = m.type;
     backColor = m.backColor;
@@ -132,13 +139,16 @@ class SmeupTextPassword extends StatefulWidget
     underline = m.underline;
     autoFocus = m.autoFocus;
     valueField = m.valueField;
+    iconSize = m.iconSize;
+    iconColor = m.iconColor;
+    buttonBackColor = m.buttonBackColor;
 
     data = treatData(m);
   }
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupTextPasswordModel m = model;
+    SmeupTextPasswordModel m = model as SmeupTextPasswordModel;
 
     // change data format
     var workData = formatDataFields(m);
@@ -160,7 +170,7 @@ class SmeupTextPassword extends StatefulWidget
 class _SmeupTextPasswordState extends State<SmeupTextPassword>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupTextPasswordModel _model;
+  SmeupTextPasswordModel? _model;
   dynamic _data;
   // bool _passwordVisible;
 
@@ -168,7 +178,7 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
   void initState() {
     _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -194,10 +204,10 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
   /// Input text's structure:
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupTextPasswordDao.getData(_model);
-        _data = widget.treatData(_model);
+        await SmeupTextPasswordDao.getData(_model!);
+        _data = widget.treatData(_model!);
       }
 
       setDataLoad(widget.id, true);
@@ -217,6 +227,12 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
       child: Column(
         children: [
           Container(
+            decoration: widget.showBorder!
+                ? BoxDecoration(
+                    borderRadius: BorderRadius.circular(widget.borderRadius!),
+                    border: Border.all(
+                        color: widget.borderColor!, width: widget.borderWidth!))
+                : null,
             child: Row(
               children: [
                 Expanded(
@@ -243,15 +259,15 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
                           inputFormatters: widget.inputFormatters,
                           padding: widget.padding,
                           showSubmit: widget.showSubmit,
-                          showBorder: widget.showBorder,
+                          showBorder: false,
                           width: widget.width,
-                          underline: widget.underline,
+                          underline: false,
                           data: _data,
                           clientValidator: widget.clientValidator,
                           clientOnSave: widget.clientOnSave,
                           clientOnChange: (value) {
                         if (widget.clientOnChange != null)
-                          widget.clientOnChange(value);
+                          widget.clientOnChange!(value);
                         passwordModel.checkProgress(value);
                         _data = value;
                       },
@@ -262,8 +278,8 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
                   ),
                 ),
                 Container(
-                  color: Theme.of(context).primaryColor,
-                  padding: EdgeInsets.all(iconTheme.size.toDouble()),
+                  color: widget.buttonBackColor,
+                  padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
                   child: GestureDetector(
                     child: Icon(
                       passwordFieldModel.passwordVisible
@@ -273,7 +289,9 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
                       size: iconTheme.size,
                     ),
                     onTap: () {
-                      passwordFieldModel.toggleVisible();
+                      setState(() {
+                        passwordFieldModel.toggleVisible();
+                      });
                     },
                   ),
                 ),
@@ -281,8 +299,8 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
                   width: 3,
                 ),
                 Container(
-                  color: Theme.of(context).primaryColor,
-                  padding: EdgeInsets.all(iconTheme.size.toDouble()),
+                  color: widget.buttonBackColor,
+                  padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
                   child: GestureDetector(
                     child: Icon(
                       Icons.close,
@@ -302,12 +320,12 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
           ),
           Column(
             children: [
-              if (!widget.underline)
+              if (widget.underline!)
                 Divider(
                   thickness: dividerStyle.thickness,
                   color: dividerStyle.color,
                 ),
-              if (widget.showRules)
+              if (widget.showRules!)
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: SmeupTextPasswordIndicators(
@@ -323,13 +341,15 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = SmeupConfigurationService.getTheme().iconTheme;
+    IconThemeData themeData = SmeupConfigurationService.getTheme()!
+        .iconTheme
+        .copyWith(size: widget.iconSize, color: widget.iconColor);
 
     return themeData;
   }
 
   DividerThemeData _getDividerStyle() {
-    DividerThemeData dividerData = SmeupConfigurationService.getTheme()
+    DividerThemeData dividerData = SmeupConfigurationService.getTheme()!
         .dividerTheme
         .copyWith(color: widget.fontColor);
 
@@ -337,14 +357,14 @@ class _SmeupTextPasswordState extends State<SmeupTextPassword>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
+    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
         color: widget.captionFontColor,
         fontSize: widget.captionFontSize,
         backgroundColor: widget.captionBackColor);
 
-    if (widget.captionFontBold) {
+    if (widget.captionFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );

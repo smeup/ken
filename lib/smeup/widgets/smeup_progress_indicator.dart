@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_progress_indicator_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
+import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_progress_indicator_model.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
 // ignore: must_be_immutable
 class SmeupProgressIndicator extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupProgressIndicatorModel model;
+  SmeupProgressIndicatorModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
-  Color color;
-  Color circularTrackColor;
-  String title;
-  String id;
-  String type;
-  double size;
+  Color? color;
+  Color? circularTrackColor;
+  String? title;
+  String? id;
+  String? type;
+  double? size;
 
   SmeupProgressIndicator.withController(
-    this.model,
+    SmeupProgressIndicatorModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   SmeupProgressIndicator(this.scaffoldKey, this.formKey,
@@ -45,7 +45,7 @@ class SmeupProgressIndicator extends StatefulWidget
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupProgressIndicatorModel m = model;
+    SmeupProgressIndicatorModel m = model as SmeupProgressIndicatorModel;
     id = m.id;
     type = m.type;
     color = m.color;
@@ -56,7 +56,7 @@ class SmeupProgressIndicator extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupProgressIndicatorModel m = model;
+    SmeupProgressIndicatorModel m = model as SmeupProgressIndicatorModel;
 
     // change data format
     return formatDataFields(m);
@@ -69,12 +69,12 @@ class SmeupProgressIndicator extends StatefulWidget
 class _SmeupProgressIndicatorState extends State<SmeupProgressIndicator>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupProgressIndicatorModel _model;
+  SmeupProgressIndicatorModel? _model;
 
   @override
   void initState() {
     _model = widget.model;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 

@@ -1,65 +1,82 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_dynamism_service.dart';
+
+import '../models/dynamism.dart';
+import '../services/smeup_icon_service.dart';
 
 class SmeupDrawerItem extends StatelessWidget {
-  final String text;
-  final String route;
-  final int iconCode;
-  final Function action;
-  final double fontSize;
-  final Color fontColor;
-  final bool fontBold;
+  final String? text;
+  final String? route;
+  final dynamic iconCode;
+  final Function? action;
+  final double? fontSize;
+  final Color? fontColor;
+  final bool? fontBold;
   final Alignment align;
-  final bool showItemDivider;
+  final bool? showItemDivider;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<FormState> formKey;
 
-  SmeupDrawerItem(this.text, this.route, this.iconCode, this.action, this.align,
-      this.showItemDivider,
+  SmeupDrawerItem(this.scaffoldKey, this.formKey, this.text, this.route,
+      this.iconCode, this.action, this.align, this.showItemDivider,
       {this.fontSize, this.fontBold, this.fontColor});
 
   @override
   Widget build(BuildContext context) {
     final title = Align(
-        alignment: align, child: Text(text, style: _getElementTextStile()));
+        alignment: align, child: Text(text!, style: _getElementTextStile()));
     Function function = () {
       if (action != null) {
-        action(context);
+        action!(context);
       } else {
-        Navigator.of(context).pushNamed(route);
+        if (route!.trimLeft().toUpperCase().startsWith('F(')) {
+          SmeupDynamismService.run([
+            Dynamism(
+                "click",
+                route ?? '',
+                false,
+                List<dynamic>.empty(growable: true),
+                List<dynamic>.empty(growable: true))
+          ], context, 'click', scaffoldKey, formKey);
+        } else {
+          Navigator.of(context).pushNamed(route!);
+        }
       }
     };
 
     return Container(
         child: Column(
       children: [
-        if (showItemDivider)
+        if (showItemDivider!)
           Divider(
             color: _getElementTextStile().color,
           ),
-        if (iconCode > 0)
+        if (iconCode != null)
           ListTile(
             leading: Icon(
-              IconData(iconCode, fontFamily: 'MaterialIcons'),
+              SmeupIconService.getIconData(iconCode),
               color: _getIconTheme().color,
               size: _getIconTheme().size,
             ),
             title: title,
-            onTap: function,
+            onTap: function as void Function()?,
           )
         else
           ListTile(
             title: title,
-            onTap: function,
+            onTap: function as void Function()?,
           ),
       ],
     ));
   }
 
   TextStyle _getElementTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme()
+    TextStyle style = SmeupConfigurationService.getTheme()!
         .appBarTheme
-        .toolbarTextStyle
+        .toolbarTextStyle!
         .copyWith(
-            backgroundColor: SmeupConfigurationService.getTheme()
+            backgroundColor: SmeupConfigurationService.getTheme()!
                 .appBarTheme
                 .backgroundColor);
 
@@ -73,7 +90,7 @@ class SmeupDrawerItem extends StatelessWidget {
         color: fontColor,
       );
 
-    if (fontBold != null && fontBold)
+    if (fontBold != null && fontBold!)
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -82,7 +99,7 @@ class SmeupDrawerItem extends StatelessWidget {
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = SmeupConfigurationService.getTheme()
+    IconThemeData themeData = SmeupConfigurationService.getTheme()!
         .iconTheme
         .copyWith(color: _getElementTextStile().color);
 

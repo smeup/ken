@@ -1,0 +1,34 @@
+
+
+
+# dim property
+
+
+
+
+    *[<Null safety>](https://dart.dev/null-safety)*
+
+
+[double](https://api.flutter.dev/flutter/dart-core/double-class.html)? dim
+  
+_read / write_
+
+
+
+
+
+
+## Implementation
+
+```dart
+double? dim;
+
+
+```
+
+
+
+
+
+
+

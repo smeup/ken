@@ -1,44 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/daos/smeup_drawer_dao.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/daos/smeup_drawer_dao.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/services/smeup_data_service.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class SmeupDrawerModel extends SmeupModel {
   // supported by json_theme
-  static double defaultTitleFontSize;
-  static Color defaultTitleFontColor;
-  static bool defaultTitleFontBold;
+  static double? defaultTitleFontSize;
+  static Color? defaultTitleFontColor;
+  static bool? defaultTitleFontBold;
 
-  static double defaultElementFontSize;
-  static Color defaultElementFontColor;
-  static bool defaultElementFontBold;
+  static double? defaultElementFontSize;
+  static Color? defaultElementFontColor;
+  static bool? defaultElementFontBold;
 
-  static Color defaultAppBarBackColor;
+  static Color? defaultAppBarBackColor;
 
   // unsupported by json_theme
   static const double defaultImageWidth = 40;
   static const double defaultImageHeight = 40;
   static const bool defaultShowItemDivider = true;
 
-  double titleFontSize;
-  Color titleFontColor;
-  bool titleFontBold;
-  double elementFontSize;
-  Color elementFontColor;
-  bool elementFontBold;
-  Color appBarBackColor;
-  bool showItemDivider;
+  double? titleFontSize;
+  Color? titleFontColor;
+  bool? titleFontBold;
+  double? elementFontSize;
+  Color? elementFontColor;
+  bool? elementFontBold;
+  Color? appBarBackColor;
+  bool? showItemDivider;
 
-  double imageWidth;
-  double imageHeight;
-  String imageUrl;
+  double? imageWidth;
+  double? imageHeight;
+  String? imageUrl;
 
   SmeupDrawerModel({
     id,
     type,
-    GlobalKey<FormState> formKey,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
     this.appBarBackColor,
     this.titleFontSize,
     this.titleFontColor,
@@ -51,48 +53,56 @@ class SmeupDrawerModel extends SmeupModel {
     this.imageWidth = defaultImageWidth,
     this.imageHeight = defaultImageHeight,
     this.showItemDivider = defaultShowItemDivider,
-  }) : super(formKey, title: title, id: id, type: type) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (appBarBackColor == null)
       appBarBackColor =
-          SmeupConfigurationService.getTheme().appBarTheme.backgroundColor;
+          SmeupConfigurationService.getTheme()!.appBarTheme.backgroundColor;
     SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
 
   SmeupDrawerModel.fromMap(
-      Map<String, dynamic> jsonMap, GlobalKey<FormState> formKey)
-      : super.fromMap(jsonMap, formKey) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState> formKey,
+    GlobalKey<ScaffoldState> scaffoldKey,
+    BuildContext context,
+  ) : super.fromMap(
+          jsonMap,
+          formKey,
+          scaffoldKey,
+          context,
+        ) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';
-    titleFontSize = SmeupUtilities.getDouble(optionsDefault['titleFontSize']) ??
+    titleFontSize = SmeupUtilities.getDouble(optionsDefault!['titleFontSize']) ??
         defaultTitleFontSize;
     titleFontColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['titleFontColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['titleFontColor']) ??
             defaultTitleFontColor;
-    titleFontBold = SmeupUtilities.getBool(optionsDefault['titleFontBold']) ??
+    titleFontBold = SmeupUtilities.getBool(optionsDefault!['titleFontBold']) ??
         defaultTitleFontBold;
 
     elementFontSize =
-        SmeupUtilities.getDouble(optionsDefault['elementFontSize']) ??
+        SmeupUtilities.getDouble(optionsDefault!['elementFontSize']) ??
             defaultElementFontSize;
     elementFontColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['elementFontColor']) ??
+        SmeupUtilities.getColorFromRGB(optionsDefault!['elementFontColor']) ??
             defaultElementFontColor;
     elementFontBold =
-        SmeupUtilities.getBool(optionsDefault['elementFontBold']) ??
+        SmeupUtilities.getBool(optionsDefault!['elementFontBold']) ??
             defaultElementFontBold;
 
-    imageUrl = optionsDefault['imageUrl'] ?? '';
-    imageWidth = SmeupUtilities.getDouble(optionsDefault['imageWidth']) ??
+    imageUrl = optionsDefault!['imageUrl'] ?? '';
+    imageWidth = SmeupUtilities.getDouble(optionsDefault!['imageWidth']) ??
         defaultImageWidth;
-    imageHeight = SmeupUtilities.getDouble(optionsDefault['imageHeight']) ??
+    imageHeight = SmeupUtilities.getDouble(optionsDefault!['imageHeight']) ??
         defaultImageHeight;
     appBarBackColor =
-        SmeupUtilities.getColorFromRGB(optionsDefault['appBarBackColor']);
+        SmeupUtilities.getColorFromRGB(optionsDefault!['appBarBackColor']);
 
     showItemDivider =
-        SmeupUtilities.getBool(optionsDefault['showItemDivider']) ??
+        SmeupUtilities.getBool(optionsDefault!['showItemDivider']) ??
             defaultShowItemDivider;
 
     if (widgetLoadType != LoadType.Delay) {
@@ -105,14 +115,14 @@ class SmeupDrawerModel extends SmeupModel {
   }
 
   static setDefaults(dynamic obj) {
-    AppBarTheme appBarTheme = SmeupConfigurationService.getTheme().appBarTheme;
+    AppBarTheme appBarTheme = SmeupConfigurationService.getTheme()!.appBarTheme;
 
-    TextStyle titleStyle = appBarTheme.titleTextStyle;
+    TextStyle titleStyle = appBarTheme.titleTextStyle!;
     defaultTitleFontSize = titleStyle.fontSize;
     defaultTitleFontColor = titleStyle.color;
     defaultTitleFontBold = titleStyle.fontWeight == FontWeight.bold;
 
-    TextStyle elementStyle = appBarTheme.toolbarTextStyle;
+    TextStyle elementStyle = appBarTheme.toolbarTextStyle!;
     defaultElementFontSize = elementStyle.fontSize;
     defaultElementFontColor = elementStyle.color;
     defaultElementFontBold = elementStyle.fontWeight == FontWeight.bold;

@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_form_model.dart';
-import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_wait.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/models/widgets/smeup_form_model.dart';
+import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:ken/smeup/services/smeup_dynamism_service.dart';
+import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/widgets/smeup_not_available.dart';
+import 'package:ken/smeup/widgets/smeup_wait.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'smeup_section.dart';
 
 class SmeupForm extends StatefulWidget {
-  final SmeupFormModel smeupFormModel;
+  final SmeupFormModel? smeupFormModel;
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
+  final GlobalKey<FormState>? formKey;
 
   SmeupForm(this.smeupFormModel, this.scaffoldKey, this.formKey);
 
@@ -21,14 +22,31 @@ class SmeupForm extends StatefulWidget {
 }
 
 class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
+  Function? currentFormReload;
+
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    currentFormReload = () {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Future.delayed(Duration(milliseconds: 300), () async {
+          setState(() {});
+        });
+      });
+    };
+
     return FutureBuilder<SmeupWidgetBuilderResponse>(
-      future: _getFormChildren(widget.smeupFormModel),
+      future: _getFormChildren(widget.smeupFormModel!),
       builder: (BuildContext context,
           AsyncSnapshot<SmeupWidgetBuilderResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return widget.smeupFormModel.showLoader
+          return widget.smeupFormModel!.showLoader!
               ? SmeupWait(widget.scaffoldKey, widget.formKey)
               : Container();
         } else {
@@ -38,7 +56,7 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
                 logType: LogType.error);
             return SmeupNotAvailable();
           } else {
-            return snapshot.data.children;
+            return snapshot.data!.children!;
           }
         }
       },
@@ -53,7 +71,7 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Il form deve essere di tipo EXD.'),
-          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
+          backgroundColor: SmeupConfigurationService.getTheme()!.errorColor,
         ),
       );
 
@@ -64,7 +82,7 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Non sono presenti sezioni nel form.'),
-          backgroundColor: SmeupConfigurationService.getTheme().errorColor,
+          backgroundColor: SmeupConfigurationService.getTheme()!.errorColor,
         ),
       );
 
@@ -72,7 +90,7 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
     }
 
     if (smeupFormModel.hasVariables()) {
-      smeupFormModel.formVariables.forEach((element) {
+      smeupFormModel.formVariables!.forEach((element) {
         SmeupDynamismService.storeFormVariables(
             element, smeupFormModel.formKey);
       });
@@ -86,18 +104,18 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
     double totalDim = 0;
     bool useDim = true;
     int sectionWithNoDim = 0;
-    smeupFormModel.smeupSectionsModels.forEach((section) {
-      totalDim += section.dim;
+    smeupFormModel.smeupSectionsModels!.forEach((section) {
+      totalDim += section.dim!;
       if (section.dim == 0) sectionWithNoDim += 1;
     });
     if (totalDim <= maxDim && sectionWithNoDim > 0) {
       double dimToSplit = maxDim - totalDim;
       double singleDim = (dimToSplit / sectionWithNoDim).floor().toDouble();
       double spareDim = dimToSplit - (singleDim * sectionWithNoDim);
-      for (var i = 0; i < smeupFormModel.smeupSectionsModels.length; i++) {
-        var s = smeupFormModel.smeupSectionsModels[i];
+      for (var i = 0; i < smeupFormModel.smeupSectionsModels!.length; i++) {
+        var s = smeupFormModel.smeupSectionsModels![i];
         if (s.dim == 0) {
-          if (i == smeupFormModel.smeupSectionsModels.length - 1) {
+          if (i == smeupFormModel.smeupSectionsModels!.length - 1) {
             s.dim = singleDim + spareDim;
           } else {
             s.dim = singleDim;
@@ -106,65 +124,66 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       }
       totalDim = maxDim;
     }
-    if (!smeupFormModel.autoAdaptHeight && totalDim > maxDim) {
+    if (!smeupFormModel.autoAdaptHeight! && totalDim > maxDim) {
       SmeupLogService.writeDebugMessage('Section \'dim\' greater than 100%',
           logType: LogType.error);
       useDim = false;
     }
-    if (!smeupFormModel.autoAdaptHeight && totalDim == 0) {
+    if (!smeupFormModel.autoAdaptHeight! && totalDim == 0) {
       SmeupLogService.writeDebugMessage('Section \'dim\' 0%',
           logType: LogType.error);
       useDim = false;
     }
 
-    smeupFormModel.smeupSectionsModels.forEach((s) {
-      MediaQueryData deviceInfo = MediaQuery.of(context);
+    smeupFormModel.smeupSectionsModels!.forEach((s) {
+      //MediaQueryData deviceInfo = MediaQuery.of(context);
 
       if (useDim && totalDim > 0) {
         final routeArgs =
-            ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
+            ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
         bool isDialog =
             routeArgs == null ? false : routeArgs['isDialog'] ?? false;
 
         double formHeight = isDialog
             ? 300
-            : deviceInfo.size.height -
-                SmeupConfigurationService.getTheme().appBarTheme.toolbarHeight -
-                24 -
-                widget.smeupFormModel.padding.vertical;
-        double formWidth = isDialog ? 300 : deviceInfo.size.width;
+            : SmeupUtilities.getDeviceInfo().safeHeight -
+                SmeupConfigurationService.getTheme()!
+                    .appBarTheme
+                    .toolbarHeight!;
+        double formWidth =
+            isDialog ? 300 : SmeupUtilities.getDeviceInfo().safeWidth;
 
         s.height = smeupFormModel.layout == 'column'
-            ? (formHeight) / totalDim * s.dim
+            ? (formHeight) / totalDim * s.dim!
             : formHeight;
 
         s.width = smeupFormModel.layout == 'row'
-            ? formWidth / totalDim * s.dim
+            ? formWidth / totalDim * s.dim!
             : formWidth;
       } else {
-        s.height = deviceInfo.size.height;
-        s.width = deviceInfo.size.width;
+        s.height = SmeupUtilities.getDeviceInfo().safeHeight;
+        s.width = SmeupUtilities.getDeviceInfo().safeWidth;
       }
     });
 
-    smeupFormModel.smeupSectionsModels.forEach((s) {
+    smeupFormModel.smeupSectionsModels!.forEach((s) {
       var section;
-      if (!smeupFormModel.autoAdaptHeight && useDim && totalDim > 0) {
+      if (!smeupFormModel.autoAdaptHeight! && useDim && totalDim > 0) {
         section = Container(
             height: s.height,
             width: s.width,
             child: SmeupSection(
-                s, widget.scaffoldKey, widget.smeupFormModel.formKey));
+                s, widget.scaffoldKey, widget.smeupFormModel!.formKey, this));
       } else {
         section = Container(
             child: SmeupSection(
-                s, widget.scaffoldKey, widget.smeupFormModel.formKey));
+                s, widget.scaffoldKey, widget.smeupFormModel!.formKey, this));
       }
       sections.add(section);
     });
 
     if (smeupFormModel.layout == 'column') {
-      if (smeupFormModel.autoAdaptHeight) {
+      if (smeupFormModel.autoAdaptHeight!) {
         container = Container(
           constraints: BoxConstraints(minHeight: 0),
           padding: smeupFormModel.padding,
@@ -177,9 +196,11 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       } else {
         container = Container(
           padding: smeupFormModel.padding,
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: sections),
+          child: SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: sections),
+          ),
         );
       }
     } else {
@@ -191,7 +212,7 @@ class _SmeupFormState extends State<SmeupForm> with SmeupWidgetStateMixin {
       );
     }
 
-    form = Form(key: widget.smeupFormModel.formKey, child: container);
+    form = Form(key: widget.smeupFormModel!.formKey, child: container);
 
     return SmeupWidgetBuilderResponse(smeupFormModel, form);
   }

@@ -1,63 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mobile_components_library/smeup/daos/smeup_calendar_dao.dart';
-import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
-import 'package:mobile_components_library/smeup/services/SmeupLocalizationService.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_calendar_event_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
-import 'package:mobile_components_library/smeup/services/smeup_dynamism_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_button.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_calendar_widget.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:ken/smeup/daos/smeup_calendar_dao.dart';
+import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
+import 'package:ken/smeup/services/SmeupLocalizationService.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/models/widgets/smeup_calendar_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_calendar_event_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/services/smeup_dynamism_service.dart';
+import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/widgets/smeup_button.dart';
+import 'package:ken/smeup/widgets/smeup_calendar_widget.dart';
+import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import 'smeup_widget_state_interface.dart';
 import 'smeup_widget_state_mixin.dart';
 
-final Map<DateTime, List> _holidays = SmeupConfigurationService.getHolidays();
+final Map<DateTime, List?>? _holidays = SmeupConfigurationService.getHolidays();
 
 // ignore: must_be_immutable
 class SmeupCalendar extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupCalendarModel model;
+  SmeupCalendarModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
   // graphic properties
-  double dayFontSize;
-  double eventFontSize;
-  double titleFontSize;
-  double markerFontSize;
+  double? dayFontSize;
+  double? eventFontSize;
+  double? titleFontSize;
+  double? markerFontSize;
 
-  EdgeInsetsGeometry padding;
-  String titleColumnName;
-  String dataColumnName;
-  String styleColumnName;
-  double width;
-  double height;
-  bool showPeriodButtons;
-  String title;
-  String id;
-  String type;
-  List<Map<String, dynamic>> data;
-  DateTime initialFirstWork;
-  DateTime initialLastWork;
-  DateTime initialDate;
-  bool showAsWeek;
-  bool showNavigation;
-  String initTimeColumnName;
-  String endTimeColumnName;
+  EdgeInsetsGeometry? padding;
+  String? titleColumnName;
+  String? dataColumnName;
+  String? styleColumnName;
+  double? width;
+  double? height;
+  bool? showPeriodButtons;
+  String? title;
+  String? id;
+  String? type;
+  List<Map<String, dynamic>>? data;
+  DateTime? initialFirstWork;
+  DateTime? initialLastWork;
+  DateTime? initialDate;
+  bool? showAsWeek;
+  bool? showNavigation;
+  String? initTimeColumnName;
+  String? endTimeColumnName;
 
-  Function clientOnDaySelected;
-  Function clientOnChangeMonth;
-  Function clientOnEventClick;
+  Function? clientOnDaySelected;
+  Function? clientOnChangeMonth;
+  Function? clientOnEventClick;
 
   SmeupCalendar(this.scaffoldKey, this.formKey,
       {this.id = '',
@@ -92,22 +92,23 @@ class SmeupCalendar extends StatefulWidget
 
     if (initialFirstWork == null) {
       this.initialFirstWork =
-          SmeupCalendarModel.getInitialFirstWork(initialDate);
+          SmeupCalendarModel.getInitialFirstWork(initialDate!);
     }
     if (initialLastWork == null) {
-      this.initialLastWork = SmeupCalendarModel.getInitialLastWork(initialDate);
+      this.initialLastWork =
+          SmeupCalendarModel.getInitialLastWork(initialDate!);
     }
   }
 
-  SmeupCalendar.withController(this.model, this.scaffoldKey, this.formKey,
-      this.initialFirstWork, this.initialLastWork)
+  SmeupCalendar.withController(SmeupCalendarModel this.model, this.scaffoldKey,
+      this.formKey, this.initialFirstWork, this.initialLastWork)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupCalendarModel m = model;
+    SmeupCalendarModel m = model as SmeupCalendarModel;
     eventFontSize = m.eventFontSize;
     titleFontSize = m.titleFontSize;
     dayFontSize = m.dayFontSize;
@@ -135,7 +136,7 @@ class SmeupCalendar extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupCalendarModel m = model;
+    SmeupCalendarModel m = model as SmeupCalendarModel;
 
     // change data format
     var workData = m.data;
@@ -143,7 +144,8 @@ class SmeupCalendar extends StatefulWidget
 
     // set the widget data
     if (workData != null) {
-      var newList = List<Map<String, dynamic>>.empty(growable: true);
+      List<Map<String, dynamic>> newList =
+          List<Map<String, dynamic>>.empty(growable: true);
       for (var i = 0; i < (workData['rows'] as List).length; i++) {
         final element = workData['rows'][i];
         newList.add({
@@ -168,20 +170,20 @@ class SmeupCalendar extends StatefulWidget
 class SmeupCalendarState extends State<SmeupCalendar>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupCalendarModel _model;
-  List<Map<String, dynamic>> _data;
+  SmeupCalendarModel? _model;
+  List<Map<String, dynamic>>? _data;
 
-  Map<DateTime, List<SmeupCalentarEventModel>> _events;
+  Map<DateTime?, List<SmeupCalentarEventModel>>? _events;
 
-  List<SmeupCalentarEventModel> _smeupCalendarEvents;
-  DateTime _firstWork;
-  DateTime _lastWork;
-  DateTime _focusDay;
-  DateTime _selectedDay;
-  DateTime _startFunDate;
-  DateTime _endFunDate;
-  CalendarFormat _calendarFormat;
-  ValueNotifier<List<SmeupCalentarEventModel>> _selectedEvents;
+  List<SmeupCalentarEventModel>? _smeupCalendarEvents;
+  DateTime? _firstWork;
+  DateTime? _lastWork;
+  DateTime? _focusDay;
+  DateTime? _selectedDay;
+  late DateTime _startFunDate;
+  late DateTime _endFunDate;
+  CalendarFormat? _calendarFormat;
+  ValueNotifier<List<SmeupCalentarEventModel>>? _selectedEvents;
 
   DateTime get startFunDate => _startFunDate;
   set startFunDate(DateTime startFunDate) {
@@ -207,13 +209,13 @@ class SmeupCalendarState extends State<SmeupCalendar>
     _data = widget.data;
     _firstWork = widget.initialFirstWork;
     _lastWork = widget.initialLastWork;
-    startFunDate = SmeupCalendarModel.getStartFunDate(widget.initialDate);
-    endFunDate = SmeupCalendarModel.getEndFunDate(widget.initialDate);
-    _events = Map<DateTime, List<SmeupCalentarEventModel>>();
+    startFunDate = SmeupCalendarModel.getStartFunDate(widget.initialDate!);
+    endFunDate = SmeupCalendarModel.getEndFunDate(widget.initialDate!);
+    _events = Map<DateTime?, List<SmeupCalentarEventModel>>();
     _focusDay = widget.initialDate ?? DateTime.now();
     _selectedDay = widget.initialDate ?? DateTime.now();
     _calendarFormat =
-        widget.showAsWeek ? CalendarFormat.week : CalendarFormat.month;
+        widget.showAsWeek! ? CalendarFormat.week : CalendarFormat.month;
   }
 
   @override
@@ -244,29 +246,29 @@ class SmeupCalendarState extends State<SmeupCalendar>
 
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       await _load();
     }
     setDataLoad(widget.id, false);
 
-    double calHeight = widget.height;
-    double calWidth = widget.width;
-    if (widget.model != null && widget.model.parent != null) {
+    double? calHeight = widget.height;
+    double? calWidth = widget.width;
+    if (widget.model != null && widget.model!.parent != null) {
       if (calHeight == 0)
-        calHeight = (widget.model.parent as SmeupSectionModel).height;
+        calHeight = (widget.model!.parent as SmeupSectionModel).height;
       if (calWidth == 0)
-        calWidth = (widget.model.parent as SmeupSectionModel).width;
+        calWidth = (widget.model!.parent as SmeupSectionModel).width;
     } else {
-      if (calHeight == 0) calHeight = MediaQuery.of(context).size.height;
-      if (calWidth == 0) calWidth = MediaQuery.of(context).size.width;
+      if (calHeight == 0) calHeight = SmeupUtilities.getDeviceInfo().safeHeight;
+      if (calWidth == 0) calWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     final calendar = Container(
       padding: widget.padding,
       child: Column(
         children: <Widget>[
-          if (widget.showPeriodButtons) _buildButtons(calHeight, calWidth),
-          if (widget.showPeriodButtons) SizedBox(height: 8),
+          if (widget.showPeriodButtons!) _buildButtons(calHeight, calWidth!),
+          if (widget.showPeriodButtons!) SizedBox(height: 8),
           SmeupCalendarWidget(
             widget.scaffoldKey,
             widget.formKey,
@@ -312,7 +314,7 @@ class SmeupCalendarState extends State<SmeupCalendar>
 
     try {
       if (_data != null) {
-        for (final row in _data) {
+        for (final row in _data!) {
           final smeupEventModel = SmeupCalentarEventModel.fromMap(
               row,
               widget.titleColumnName,
@@ -332,8 +334,8 @@ class SmeupCalendarState extends State<SmeupCalendar>
     return list;
   }
 
-  Widget _buildButtons(double calHeight, double calWidth) {
-    double buttonWidth = (calWidth - 50 - widget.padding.horizontal) / 3;
+  Widget _buildButtons(double? calHeight, double calWidth) {
+    double buttonWidth = (calWidth - 100 - widget.padding!.horizontal) / 3;
     return Container(
       width: calWidth,
       child: Row(
@@ -341,8 +343,9 @@ class SmeupCalendarState extends State<SmeupCalendar>
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           SmeupButton(
-            data: SmeupLocalizationService.of(context).getLocalString('month'),
+            data: SmeupLocalizationService.of(context)!.getLocalString('month'),
             width: buttonWidth,
+            align: Alignment.center,
             clientOnPressed: () {
               setState(() {
                 _calendarFormat = CalendarFormat.month;
@@ -350,8 +353,10 @@ class SmeupCalendarState extends State<SmeupCalendar>
             },
           ),
           SmeupButton(
-            data: SmeupLocalizationService.of(context).getLocalString('2weeks'),
+            data:
+                SmeupLocalizationService.of(context)!.getLocalString('2weeks'),
             width: buttonWidth,
+            align: Alignment.center,
             clientOnPressed: () {
               setState(() {
                 _calendarFormat = CalendarFormat.twoWeeks;
@@ -359,8 +364,9 @@ class SmeupCalendarState extends State<SmeupCalendar>
             },
           ),
           SmeupButton(
-            data: SmeupLocalizationService.of(context).getLocalString('week'),
+            data: SmeupLocalizationService.of(context)!.getLocalString('week'),
             width: buttonWidth,
+            align: Alignment.center,
             clientOnPressed: () {
               setState(() {
                 _calendarFormat = CalendarFormat.week;
@@ -374,14 +380,14 @@ class SmeupCalendarState extends State<SmeupCalendar>
 
   Future<void> _loadEvents() async {
     try {
-      _events.clear();
+      _events!.clear();
 
       _smeupCalendarEvents = _extractSmeupCalendarEvents();
 
-      for (final _event in _smeupCalendarEvents) {
-        List<SmeupCalentarEventModel> eventsList = _events[_event.day];
+      for (final _event in _smeupCalendarEvents!) {
+        List<SmeupCalentarEventModel>? eventsList = _events![_event.day];
         if (eventsList == null) {
-          _events[_event.day] =
+          _events![_event.day] =
               eventsList = List<SmeupCalentarEventModel>.empty(growable: true);
         }
         eventsList.add(_event);
@@ -406,10 +412,10 @@ class SmeupCalendarState extends State<SmeupCalendar>
     endFunDate = SmeupCalendarModel.getEndFunDate(focusedDay);
 
     if (widget.clientOnChangeMonth != null)
-      widget.clientOnChangeMonth(focusedDay);
+      widget.clientOnChangeMonth!(focusedDay);
 
     if (widget.model != null)
-      SmeupDynamismService.run(widget.model.dynamisms, context, 'changemonth',
+      SmeupDynamismService.run(widget.model!.dynamisms, context, 'changemonth',
           widget.scaffoldKey, widget.formKey);
     await _load();
 
@@ -418,8 +424,8 @@ class SmeupCalendarState extends State<SmeupCalendar>
 
   Future<void> _load() async {
     if (_model != null) {
-      await SmeupCalendarDao.getData(_model);
-      _data = widget.treatData(_model);
+      await SmeupCalendarDao.getData(_model!);
+      _data = widget.treatData(_model!);
       await _loadEvents();
     } else {
       _loadEvents();

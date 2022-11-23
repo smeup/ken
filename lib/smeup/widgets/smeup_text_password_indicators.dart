@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_text_password_rule.dart';
-import 'package:mobile_components_library/smeup/models/notifiers/smeup_text_password_rule_notifier.dart';
+import 'package:ken/smeup/widgets/smeup_text_password_rule.dart';
+import 'package:ken/smeup/models/notifiers/smeup_text_password_rule_notifier.dart';
 
 import 'package:provider/provider.dart';
 
 class SmeupTextPasswordIndicators extends StatefulWidget {
-  final bool showRulesIcon;
+  final bool? showRulesIcon;
   final TextStyle captionStyle;
   final IconThemeData iconTheme;
 
@@ -58,11 +58,7 @@ class _SmeupTextPasswordIndicatorsState
   }
 
   Color _getRuleColor(bool value) {
-    return value == null
-        ? Colors.grey
-        : value
-            ? Colors.green
-            : Colors.red;
+    return value ? Colors.green : Colors.red;
   }
 
   Color _getIndicatorColor(SmeupTextPasswordRuleNotifier passwordModel) {
@@ -79,10 +75,6 @@ class _SmeupTextPasswordIndicatorsState
   }
 
   IconData _getRuleIcon(bool value) {
-    return value == null
-        ? Icons.edit
-        : value
-            ? Icons.check
-            : Icons.error;
+    return value ? Icons.check : Icons.error;
   }
 }

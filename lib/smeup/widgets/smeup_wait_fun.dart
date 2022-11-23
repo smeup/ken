@@ -1,42 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
+import 'package:ken/smeup/models/widgets/smeup_wait_model.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_data_service.dart';
 import 'smeup_progress_indicator.dart';
 import 'smeup_splash.dart';
 
+// ignore: must_be_immutable
 class SmeupWaitFun extends StatelessWidget {
-  final Widget target;
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
+  Widget target;
+  GlobalKey<ScaffoldState> scaffoldKey;
+  GlobalKey<FormState> formKey;
 
-  final Color splashColor;
-  final Color loaderColor;
-  final Color circularTrackColor;
+  Color? splashColor;
+  Color? loaderColor;
+  Color? circularTrackColor;
 
   SmeupWaitFun(this.scaffoldKey, this.formKey, this.target,
-      {this.splashColor, this.loaderColor, this.circularTrackColor});
+      {this.splashColor, this.loaderColor, this.circularTrackColor}) {
+    SmeupWaitModel.setDefaults(this);
+  }
 
   @override
   Widget build(BuildContext context) {
     var start = DateTime.now();
 
     return FutureBuilder<Widget>(
+      key: Key('smeupWaitFun_${formKey.hashCode}'),
       future: _getWidget(3000, start),
       builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Stack(
             children: [
-              target,
-              SmeupSplash(
-                scaffoldKey,
-                formKey,
-                color: splashColor,
+              Container(
+                color: SmeupConfigurationService.getTheme()!.splashColor,
               ),
+              target,
+              SmeupSplash(scaffoldKey, formKey,
+                  color: splashColor,
+                  id: 'SmeupSplash_${scaffoldKey.hashCode.toString()}'),
               SmeupProgressIndicator(scaffoldKey, formKey,
-                  color: loaderColor, circularTrackColor: circularTrackColor),
+                  color: loaderColor,
+                  circularTrackColor: circularTrackColor,
+                  id: 'SmeupProgressIndicator_${scaffoldKey.hashCode.toString()}'),
             ],
           );
         } else {
-          return snapshot.data;
+          return snapshot.data!;
         }
       },
     );

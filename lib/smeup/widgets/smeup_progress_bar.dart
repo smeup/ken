@@ -1,42 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/daos/smeup_progress_bar_dao.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_progress_bar_model.dart';
-import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
-import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
+import 'package:ken/smeup/daos/smeup_progress_bar_dao.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_progress_bar_model.dart';
+import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/services/smeup_variables_service.dart';
+import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
 // ignore: must_be_immutable
 class SmeupProgressBar extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupProgressBarModel model;
+  SmeupProgressBarModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
-  Color color;
-  Color linearTrackColor;
-  String title;
-  String id;
-  String type;
-  String valueField;
-  double progressBarMinimun;
-  double progressBarMaximun;
-  double height;
-  EdgeInsetsGeometry padding;
+  Color? color;
+  Color? linearTrackColor;
+  String? title;
+  String? id;
+  String? type;
+  String? valueField;
+  double? progressBarMinimun;
+  double? progressBarMaximun;
+  double? height;
+  EdgeInsetsGeometry? padding;
 
-  double data;
+  double? data;
 
   SmeupProgressBar.withController(
-    this.model,
+    SmeupProgressBarModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   SmeupProgressBar(
@@ -60,7 +60,7 @@ class SmeupProgressBar extends StatefulWidget
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupProgressBarModel m = model;
+    SmeupProgressBarModel m = model as SmeupProgressBarModel;
     id = m.id;
     type = m.type;
     color = m.color;
@@ -77,7 +77,7 @@ class SmeupProgressBar extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupProgressBarModel m = model;
+    SmeupProgressBarModel m = model as SmeupProgressBarModel;
 
     return SmeupUtilities.getDouble(m.data['rows'][0][m.valueField]);
   }
@@ -89,14 +89,14 @@ class SmeupProgressBar extends StatefulWidget
 class _SmeupProgressBarState extends State<SmeupProgressBar>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupProgressBarModel _model;
-  double _data;
+  SmeupProgressBarModel? _model;
+  double? _data;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -121,10 +121,10 @@ class _SmeupProgressBarState extends State<SmeupProgressBar>
 
   @override
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupProgressBarDao.getData(_model);
-        _data = widget.treatData(_model);
+        await SmeupProgressBarDao.getData(_model!);
+        _data = widget.treatData(_model!);
       }
       setDataLoad(widget.id, true);
     }
@@ -144,7 +144,7 @@ class _SmeupProgressBarState extends State<SmeupProgressBar>
             key: ValueKey(widget.id),
             value: widget.progressBarMaximun == 0
                 ? 0
-                : _data / widget.progressBarMaximun,
+                : _data! / widget.progressBarMaximun!,
           )),
     );
 

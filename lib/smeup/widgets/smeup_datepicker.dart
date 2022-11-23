@@ -1,72 +1,72 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mobile_components_library/smeup/daos/smeup_datepicker_dao.dart';
-import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_datepicker_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
-import 'package:mobile_components_library/smeup/services/smeup_variables_service.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_datepicker_button.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_line.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
+import 'package:ken/smeup/daos/smeup_datepicker_dao.dart';
+import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:ken/smeup/models/widgets/smeup_datepicker_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/services/smeup_variables_service.dart';
+import 'package:ken/smeup/widgets/smeup_datepicker_button.dart';
+import 'package:ken/smeup/widgets/smeup_line.dart';
+import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
 class SmeupDatePickerData {
-  DateTime value;
-  String text;
-  SmeupDatePickerData({@required this.value, this.text});
+  DateTime? value;
+  String? text;
+  SmeupDatePickerData({required this.value, this.text});
 }
 
 // ignore: must_be_immutable
 class SmeupDatePicker extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupDatePickerModel model;
+  SmeupDatePickerModel? model;
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
+  final GlobalKey<FormState>? formKey;
 
-  Color borderColor;
-  double borderWidth;
-  double borderRadius;
-  bool fontBold;
-  double fontSize;
-  Color fontColor;
-  Color backColor;
-  bool captionFontBold;
-  double captionFontSize;
-  Color captionFontColor;
-  Color captionBackColor;
-  bool underline;
-  double innerSpace;
-  Alignment align;
-  SmeupDatePickerData data;
-  String title;
-  String id;
-  String type;
-  String valueField;
-  String displayField;
-  String label;
-  double width;
-  double height;
-  EdgeInsetsGeometry padding;
-  bool showborder;
-  double elevation;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
+  bool? fontBold;
+  double? fontSize;
+  Color? fontColor;
+  Color? backColor;
+  bool? captionFontBold;
+  double? captionFontSize;
+  Color? captionFontColor;
+  Color? captionBackColor;
+  bool? underline;
+  double? innerSpace;
+  Alignment? align;
+  SmeupDatePickerData? data;
+  String? title;
+  String? id;
+  String? type;
+  String? valueField;
+  String? displayField;
+  String? label;
+  double? width;
+  double? height;
+  EdgeInsetsGeometry? padding;
+  bool? showborder;
+  double? elevation;
 
   //Functions
-  Function clientValidator;
-  Function clientOnSave;
-  Function clientOnChange;
+  Function? clientValidator;
+  Function? clientOnSave;
+  Function? clientOnChange;
 
   SmeupDatePicker.withController(
-    this.model,
+    SmeupDatePickerModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   SmeupDatePicker(
@@ -104,13 +104,13 @@ class SmeupDatePicker extends StatefulWidget
   }) : super(key: Key(SmeupUtilities.getWidgetId(type, id))) {
     id = SmeupUtilities.getWidgetId(type, id);
     SmeupDatePickerModel.setDefaults(this);
-    if (data != null && data.value != null && data.text == null) {
-      data.text = DateFormat("dd/MM/yyyy").format(data.value);
+    if (data != null && data!.value != null && data!.text == null) {
+      data!.text = DateFormat("dd/MM/yyyy").format(data!.value!);
     }
   }
 
   runControllerActivities(SmeupModel model) {
-    SmeupDatePickerModel m = model;
+    SmeupDatePickerModel m = model as SmeupDatePickerModel;
     id = m.id;
     type = m.type;
     title = m.title;
@@ -142,15 +142,15 @@ class SmeupDatePicker extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupDatePickerModel m = model;
+    SmeupDatePickerModel m = model as SmeupDatePickerModel;
 
     // change data format
     var workData = formatDataFields(m);
 
     // set the widget data
     if (workData != null && (workData['rows'] as List).length > 0) {
-      DateTime value;
-      String text;
+      DateTime? value;
+      String? text;
       if (workData['rows'][0][valueField] != null) {
         value = DateFormat('dd/MM/yyyy').parse(workData['rows'][0][valueField]);
       }
@@ -170,14 +170,14 @@ class SmeupDatePicker extends StatefulWidget
 class _SmeupDatePickerState extends State<SmeupDatePicker>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupDatePickerModel _model;
-  SmeupDatePickerData _data;
+  SmeupDatePickerModel? _model;
+  SmeupDatePickerData? _data;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -201,10 +201,10 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
   }
 
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupDatePickerDao.getData(_model);
-        _data = widget.treatData(_model);
+        await SmeupDatePickerDao.getData(_model!);
+        _data = widget.treatData(_model!);
       }
       setDataLoad(widget.id, true);
     }
@@ -214,61 +214,79 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
     }
 
     SmeupVariablesService.setVariable(
-        widget.id, DateFormat("yyyyMMdd").format(_data.value));
+        widget.id, DateFormat("yyyyMMdd").format(_data!.value!),
+        formKey: widget.formKey);
 
-    double datePickerHeight = widget.height;
-    double datePickerWidth = widget.width;
-    if (_model != null && _model.parent != null) {
+    double? datePickerHeight = widget.height;
+    double? datePickerWidth = widget.width;
+    if (_model != null && _model!.parent != null) {
       if (datePickerHeight == 0)
-        datePickerHeight = (_model.parent as SmeupSectionModel).height;
+        datePickerHeight = (_model!.parent as SmeupSectionModel).height;
       if (datePickerWidth == 0)
-        datePickerWidth = (_model.parent as SmeupSectionModel).width;
+        datePickerWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
       if (datePickerHeight == 0)
-        datePickerHeight = MediaQuery.of(context).size.height;
+        datePickerHeight = SmeupUtilities.getDeviceInfo().safeHeight;
       if (datePickerWidth == 0)
-        datePickerWidth = MediaQuery.of(context).size.width;
+        datePickerWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
-    if (!widget.showborder) {
+    if (!widget.showborder!) {
       widget.borderColor =
-          SmeupConfigurationService.getTheme().scaffoldBackgroundColor;
+          SmeupConfigurationService.getTheme()!.scaffoldBackgroundColor;
     }
 
     ButtonStyle buttonStyle = _getButtonStyle();
     TextStyle textStyle = _getTextStile();
     TextStyle captionStyle = _getCaptionStile();
+    IconThemeData iconTheme = _getIconTheme();
 
-    var text = widget.label.isEmpty
+    Widget icon = Container(
+      color: iconTheme.color,
+      padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
+      child: Icon(
+        Icons.calendar_today,
+        color: Theme.of(context).primaryColor,
+        size: iconTheme.size,
+      ),
+    );
+
+    var text = widget.label!.isEmpty
         ? Container()
-        : Text(widget.label, textAlign: TextAlign.center, style: captionStyle);
+        : Text(widget.label!, textAlign: TextAlign.center, style: captionStyle);
 
-    var datepicker = SmeupDatePickerButton(widget.id, buttonStyle, textStyle,
-        scaffoldKey: widget.scaffoldKey,
-        formKey: widget.formKey,
-        value: _data.value,
-        display: _data.text,
-        backColor: widget.backColor,
-        fontSize: widget.fontSize,
-        fontColor: widget.fontColor,
-        label: widget.label,
-        width: datePickerWidth,
-        height: datePickerHeight,
-        padding: widget.padding,
-        showborder: widget.showborder,
-        borderRadius: widget.borderRadius,
-        borderWidth: widget.borderWidth,
-        borderColor: widget.borderColor,
-        fontBold: widget.fontBold,
-        align: widget.align,
-        underline: widget.underline,
-        elevation: widget.elevation,
-        captionFontBold: widget.captionFontBold,
-        captionFontSize: widget.captionFontSize,
-        captionFontColor: widget.captionFontColor,
-        captionBackColor: widget.captionBackColor);
+    var datepicker = SmeupDatePickerButton(
+      widget.id,
+      buttonStyle,
+      textStyle,
+      scaffoldKey: widget.scaffoldKey,
+      formKey: widget.formKey,
+      value: _data!.value,
+      display: _data!.text,
+      backColor: widget.backColor,
+      fontSize: widget.fontSize,
+      fontColor: widget.fontColor,
+      label: widget.label,
+      width: datePickerWidth,
+      height: datePickerHeight,
+      padding: widget.padding,
+      showborder: widget.showborder,
+      borderRadius: widget.borderRadius,
+      borderWidth: widget.borderWidth,
+      borderColor: widget.borderColor,
+      fontBold: widget.fontBold,
+      align: widget.align,
+      underline: widget.underline,
+      elevation: widget.elevation,
+      captionFontBold: widget.captionFontBold,
+      captionFontSize: widget.captionFontSize,
+      captionFontColor: widget.captionFontColor,
+      captionBackColor: widget.captionBackColor,
+      clientOnChange: widget.clientOnChange,
+      model: _model,
+    );
 
-    var line = widget.underline
+    var line = widget.underline!
         ? SmeupLine(widget.scaffoldKey, widget.formKey)
         : Container();
 
@@ -281,7 +299,19 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
           children: [
             text,
             SizedBox(width: widget.innerSpace),
-            Expanded(child: Align(child: datepicker, alignment: widget.align)),
+            Expanded(
+                child: Align(
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: Align(
+                          child: datepicker,
+                          alignment: Alignment.centerLeft,
+                        )),
+                        icon,
+                      ],
+                    ),
+                    alignment: widget.align!)),
           ],
         ),
         line
@@ -296,8 +326,17 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
             children: [
               Expanded(
                   child: Align(
-                child: datepicker,
-                alignment: widget.align,
+                child: Row(
+                  children: [
+                    icon,
+                    Expanded(
+                        child: Align(
+                      child: datepicker,
+                      alignment: Alignment.centerLeft,
+                    )),
+                  ],
+                ),
+                alignment: widget.align!,
               )),
               SizedBox(width: widget.innerSpace),
               text,
@@ -309,8 +348,8 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
       );
     } else if (widget.align == Alignment.topCenter) {
       children = Container(
-        height: widget.height,
-        width: widget.width,
+        height: datePickerHeight,
+        width: datePickerWidth,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -320,7 +359,16 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
             ),
             SizedBox(height: widget.innerSpace),
             Align(
-              child: datepicker,
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Align(
+                    child: datepicker,
+                    alignment: Alignment.centerLeft,
+                  )),
+                  icon
+                ],
+              ),
               alignment: Alignment.centerLeft,
             ),
             line
@@ -330,21 +378,29 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
       );
     } else if (widget.align == Alignment.bottomCenter) {
       children = Container(
-        height: widget.height,
-        width: widget.width,
+        height: datePickerHeight,
+        width: datePickerWidth,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Align(
-              child: datepicker,
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Align(
+                    child: datepicker,
+                    alignment: Alignment.centerLeft,
+                  )),
+                  icon
+                ],
+              ),
               alignment: Alignment.centerLeft,
             ),
             SizedBox(height: widget.innerSpace),
             Align(
               child: text,
               alignment: Alignment.centerLeft,
-            ),
-            line
+            )
           ],
         ),
         //color: widget.backColor,
@@ -360,50 +416,46 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
             Expanded(child: text),
           ],
         ),
-        //color: widget.backColor,
       );
     }
 
-// SizedBox(
-//         height: widget.height,
-//         width: widget.width,
-//         child:
     return SmeupWidgetBuilderResponse(_model, children);
   }
 
   ButtonStyle _getButtonStyle() {
-    var timePickerTheme = SmeupConfigurationService.getTheme()
+    var timePickerTheme = SmeupConfigurationService.getTheme()!
         .timePickerTheme
         .copyWith(
             backgroundColor: widget.backColor,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius)),
+                borderRadius: BorderRadius.circular(widget.borderRadius!)),
             dayPeriodBorderSide: BorderSide(
-                width: widget.borderWidth, color: widget.borderColor));
+                width: widget.borderWidth!, color: widget.borderColor!));
 
-    var elevatedButtonStyle = SmeupConfigurationService.getTheme()
+    var elevatedButtonStyle = SmeupConfigurationService.getTheme()!
         .elevatedButtonTheme
-        .style
+        .style!
         .copyWith(
-            backgroundColor: MaterialStateProperty.all<Color>(
+            backgroundColor: MaterialStateProperty.all<Color?>(
                 timePickerTheme.backgroundColor),
-            elevation: MaterialStateProperty.all<double>(widget.elevation),
+            elevation: MaterialStateProperty.all<double?>(widget.elevation),
             padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                 EdgeInsets.all(0)),
-            shape: MaterialStateProperty.all<OutlinedBorder>(
-                timePickerTheme.shape),
-            side: MaterialStateProperty.all<BorderSide>(
+            shape: MaterialStateProperty.all<OutlinedBorder?>(
+                timePickerTheme.shape as OutlinedBorder?),
+            side: MaterialStateProperty.all<BorderSide?>(
                 timePickerTheme.dayPeriodBorderSide));
 
     return elevatedButtonStyle;
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.bodyText1;
+    TextStyle style =
+        SmeupConfigurationService.getTheme()!.textTheme.bodyText1!;
 
     style = style.copyWith(color: widget.fontColor, fontSize: widget.fontSize);
 
-    if (widget.fontBold) {
+    if (widget.fontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -413,17 +465,25 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = SmeupConfigurationService.getTheme().textTheme.caption;
+    TextStyle style = SmeupConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
         color: widget.captionFontColor, fontSize: widget.captionFontSize);
 
-    if (widget.captionFontBold) {
+    if (widget.captionFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
     }
 
     return style;
+  }
+
+  IconThemeData _getIconTheme() {
+    IconThemeData themeData = SmeupConfigurationService.getTheme()!
+        .iconTheme
+        .copyWith(size: widget.fontSize);
+
+    return themeData;
   }
 }

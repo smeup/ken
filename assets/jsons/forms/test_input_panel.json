@@ -1,0 +1,155 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "test_input_panel",
+  "type": "EXD",
+  "title": "[description]",
+  "sections": [
+    {
+      "components": [
+        {
+          "type": "INP",
+          "id": "inputpanel",
+          "options": {
+            "INP": {
+              "default": {
+                "layoutData": {
+                  "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><UiSmeup Testo=\"  - \"> <Service Titolo1=\"\" Titolo2=\"\" Funzione=\"\" Servizio=\"LOSER_09\" TSep=\".\" DSep=\",\" IdFun=\"0000000000000\" NumSes=\"000005\"/><Layout Scheda=\"\" Lib=\"OJ;*LIB;OPNLIB\"> <Sez Name=\"S1\" Top=\"\" Dim=\"\" Pos=\"1\" Sty=\"\"><Fld  Nam=\"SED\" Ogg=\"CNSED\" Cmp=\"Cmb\" Ext=\"DescrMode(Both)\"/><Fld  Nam=\"SFE\" Ogg=\"\" Txt=\"Rilevato stato febbrile (+37.5°) ?\" Cmp=\"Rad\"/><\/Sez><Sez Name=\"S1\" Top=\"\" Dim=\"\" Pos=\"1\" Sty=\"\"><\/Sez><Sez Name=\"S2\" Top=\"\" Dim=\"\" Pos=\"2\" Sty=\"\"><Fld  Nam=\"SIN\" Ogg=\"\" Txt=\"Sintomi influenzali ?\" Cmp=\"Rad\" Ext=\"DescrMode(DescOnly)\"/><\/Sez><Sez Name=\"S3\" Top=\"50%\" Dim=\"50%\" Pos=\"3\" Sty=\"\"><Fld  Nam=\"DES\" Ogg=\"\" Txt=\"Aggiunga una descrizione\" Grp=\"GLUN(0050)\"/><\/Sez><\/Layout><\/UiSmeup>"
+                }             
+              }
+            }
+          },
+          "dynamisms": [
+            {
+              "event": "click",
+              "exec": "F(EXD;*ROUTE;) 2(;;StaticScreen)",
+              "async": false
+            }
+          ],
+          "data": {
+            "columns": [
+              {
+                "code": "ACC",
+                "IO": "H",
+                "text": "Accesso Sedi"
+              },
+              {
+                "code": "DES",
+                "IO": "B",
+                "text": "Descrizione"
+              },
+              {
+                "code": "COL",
+                "IO": "E",
+                "text": "Utente Compilazione"
+              },
+              {
+                "code": "SED",
+                "IO": "H",
+                "text": "Sede di accesso"
+              },
+              {
+                "code": "DAT",
+                "IO": "B",
+                "text": "Data di accesso"
+              },
+              {
+                "code": "SFE",
+                "IO": "C",
+                "text": "Rilevato stato febbrile ?"
+              },
+              {
+                "code": "SIN",
+                "IO": "C",
+                "text": "Sintomi influenzali?"
+              }
+            ],
+            "rows": [
+              {
+                "fields": {
+                  "ACC": {
+                    "name": "ACC",
+                    "smeupObject": {
+                      "tipo": "CF",
+                      "parametro": "X1004",
+                      "codice": "",
+                      "testo": ""
+                    }
+                  },
+                  "COL": {
+                    "name": "COL",
+                    "smeupObject": {
+                      "tipo": "CN",
+                      "parametro": "COL",
+                      "codice": "LANSTS"
+                    }
+                  },
+                  "RowId": {
+                    "name": "RowId",
+                    "smeupObject": {
+                      "tipo": "NR",
+                      "parametro": "",
+                      "codice": "0"
+                    }
+                  },
+                  "DES": {
+                    "name": "DES",
+                    "smeupObject": {
+                      "tipo": "",
+                      "parametro": "",
+                      "codice": "",
+                      "testo": ""
+                    }
+                  },
+                  "SED": {
+                    "name": "SED",
+                    "smeupObject": {
+                      "tipo": "CN",
+                      "parametro": "SED",
+                      "codice": "PAR"
+                    }
+                  },
+                  "SFE": {
+                    "name": "SFE",
+                    "smeupObject": {
+                      "tipo": "V2",
+                      "parametro": "ONOFF",
+                      "codice": "",
+                      "testo": ""
+                    }
+                  },
+                  "DAT": {
+                    "name": "DAT",
+                    "smeupObject": {
+                      "tipo": "D8",
+                      "parametro": "*YYMD",
+                      "codice": "20211022"
+                    }
+                  },
+                  "SIN": {
+                    "name": "SIN",
+                    "smeupObject": {
+                      "tipo": "V2",
+                      "parametro": "ONOFF",
+                      "codice": "",
+                      "testo": ""
+                    }
+                  },
+                  "ID": {
+                    "name": "ID",
+                    "smeupObject": {
+                      "tipo": "NR",
+                      "parametro": "",
+                      "codice": "1"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "id": "S1"
+    }
+  ]
+}

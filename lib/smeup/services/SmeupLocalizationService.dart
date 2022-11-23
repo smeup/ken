@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -5,10 +6,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_data_service.dart';
+import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
 
 class SmeupLocalizationService {
   SmeupLocalizationService(this.locale);
@@ -16,7 +17,7 @@ class SmeupLocalizationService {
 
   final Locale locale;
 
-  static SmeupLocalizationService of(BuildContext context) {
+  static SmeupLocalizationService? of(BuildContext context) {
     return Localizations.of<SmeupLocalizationService>(
         context, SmeupLocalizationService);
   }
@@ -61,7 +62,7 @@ class SmeupLocalizationService {
   };
 
   String getLocalString(stringCode) {
-    var localString = _localizedValues[locale.languageCode][stringCode];
+    var localString = _localizedValues[locale.languageCode]![stringCode];
 
     if (localString != null) {
       return localString;
@@ -70,10 +71,10 @@ class SmeupLocalizationService {
     }
   }
 
-  Future<Map<DateTime, List>> getHolidays(int year, String country) async {
-    var holidays = Map<DateTime, List>();
+  Future<Map<DateTime, List?>> getHolidays(int year, String? country) async {
+    var holidays = Map<DateTime, List?>();
     Function addHoliday = (DateTime date, String description) {
-      List holidayList;
+      List? holidayList;
 
       DateTime key = DateTime(date.year, date.month, date.day);
 
@@ -82,21 +83,21 @@ class SmeupLocalizationService {
       else
         holidayList = holidays[key];
 
-      holidayList.add(description);
+      holidayList!.add(description);
       holidays[key] = holidayList;
     };
 
     final listPublic = await _getPublicHolidaysFromNager(year, country);
     listPublic.forEach((holiday) {
-      DateTime date = DateTime.tryParse(holiday['date']);
-      String description = holiday['localName'];
+      DateTime? date = DateTime.tryParse(holiday['date']);
+      String? description = holiday['localName'];
       addHoliday(date, description);
     });
 
     final listCustom = await _getCustomHolidays();
     listCustom.forEach((holiday) {
-      DateTime date = DateTime.tryParse(holiday['date']);
-      String description = holiday['description'];
+      DateTime? date = DateTime.tryParse(holiday['date']);
+      String? description = holiday['description'];
       addHoliday(date, description);
     });
 
@@ -105,18 +106,18 @@ class SmeupLocalizationService {
     return holidays;
   }
 
-  Future<List> _getPublicHolidaysFromNager(int year, String country) async {
-    var list = List.empty(growable: true);
+  Future<List> _getPublicHolidaysFromNager(int year, String? country) async {
+    List<dynamic> list = List.empty(growable: true);
 
-    Dio dio;
+    Dio? dio;
     dio = Dio();
-    Response response;
+    Response? response;
 
     try {
       response = await dio.get('$_nagerUrl/$year/$country');
-    } catch (e) {
+    } on DioError catch (e) {
       SmeupLogService.writeDebugMessage(
-          '_getPublicHolidaysFromNager dio error: $e (${e.message != null ? e.message : ''})',
+          '_getPublicHolidaysFromNager dio error: $e (${e.message})',
           logType: LogType.error);
       if (e.response != null) {
         response = e.response;
@@ -124,14 +125,14 @@ class SmeupLocalizationService {
         response = Response(
             data: 'Unkwnown Error',
             statusCode: HttpStatus.badRequest,
-            requestOptions: null);
+            requestOptions: RequestOptions(path: ''));
       }
     } finally {
       dio.close();
       dio = null;
     }
 
-    bool isValid = SmeupDataService.isValid(response.statusCode);
+    bool isValid = SmeupDataService.isValid(response!.statusCode!);
     if (isValid) {
       list = response.data;
       SmeupLogService.writeDebugMessage(
@@ -146,7 +147,7 @@ class SmeupLocalizationService {
   }
 
   static Future<List> _getCustomHolidays() async {
-    var custom = List.empty(growable: true);
+    List<dynamic> custom = List.empty(growable: true);
     String jsonFilePath =
         '${SmeupConfigurationService.jsonsPath}/custom_holidays.json';
 
@@ -159,9 +160,9 @@ class SmeupLocalizationService {
 
       SmeupLogService.writeDebugMessage(
           'Loaded custom holidays from $jsonFilePath file');
-    } catch (e) {
+    } on DioError catch (e) {
       SmeupLogService.writeDebugMessage(
-          '_getCustomHolidays error: $e (${e.message != null ? e.message : ''})',
+          '_getCustomHolidays error: $e (${e.message})',
           logType: LogType.error);
       SmeupLogService.writeDebugMessage(
           'error loding custom holidays from $jsonFilePath file',

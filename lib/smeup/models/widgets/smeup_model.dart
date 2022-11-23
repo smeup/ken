@@ -1,10 +1,15 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/models/dynamism.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
+
+import '../../services/smeup_data_service.dart';
+import '../../services/smeup_data_service_interface.dart';
+import '../../services/smeup_firestore_data_service.dart';
+import '../fun.dart';
 
 enum LoadType { Immediate, Delay }
 enum WidgetOrientation { Vertical, Horizontal }
@@ -13,29 +18,33 @@ abstract class SmeupModel {
   //static const int defaultRefresh = 0;
 
   dynamic data;
-  String type;
-  String id;
-  SmeupFun smeupFun;
+  String? type;
+  String? id;
+  Fun? smeupFun;
   LoadType widgetLoadType = LoadType.Immediate;
-  LinkedHashMap<String, dynamic> options;
+  LinkedHashMap<String, dynamic>? options;
   dynamic optionsType;
-  LinkedHashMap<String, dynamic> optionsDefault;
-  String title = '';
-  SmeupModel parent;
+  LinkedHashMap<String, dynamic>? optionsDefault;
+  String? title = '';
+  String? cmp = '';
+  SmeupModel? parent;
 
-  dynamic dynamisms;
-  bool showLoader = false;
+  late List<Dynamism> dynamisms;
+  bool? showLoader = false;
   bool notificationEnabled = true;
   bool isNotified = false;
-  int serviceStatusCode = 0;
+  int? serviceStatusCode = 0;
   //int refresh;
-  GlobalKey<FormState> formKey;
-  Function onReady;
+  GlobalKey<FormState>? formKey;
+  GlobalKey<ScaffoldState>? scaffoldKey;
+  BuildContext? context;
+  Function? onReady;
 
-  List<SmeupSectionModel> smeupSectionsModels;
+  List<SmeupSectionModel>? smeupSectionsModels;
 
-  SmeupModel(this.formKey, {this.title, this.id, this.type}) {
-    showLoader = SmeupConfigurationService.getAppConfiguration().showLoader;
+  SmeupModel(this.formKey, this.scaffoldKey, this.context,
+      {this.title, this.id, this.type}) {
+    showLoader = SmeupConfigurationService.getAppConfiguration()!.showLoader;
     if (optionsDefault == null) {
       optionsDefault = _getNewLinkedHashMap();
       options = _getNewLinkedHashMap();
@@ -43,13 +52,15 @@ abstract class SmeupModel {
     }
   }
 
-  SmeupModel.fromMap(Map<String, dynamic> jsonMap, this.formKey) {
+  SmeupModel.fromMap(Map<String, dynamic> jsonMap, this.formKey,
+      this.scaffoldKey, this.context) {
     var myJsonMap = _getNewLinkedHashMap();
     _setLinkedHashMap(jsonMap, myJsonMap);
 
     type = myJsonMap['type'];
-    dynamisms = myJsonMap['dynamisms'];
-    smeupFun = SmeupFun(myJsonMap['fun'], formKey);
+    dynamisms = Dynamism.getDynamismsList(myJsonMap['dynamisms'] ?? []);
+    smeupFun = Fun(myJsonMap['fun'], formKey, scaffoldKey, context);
+    cmp = myJsonMap['cmp'];
 
     switch (myJsonMap['load']) {
       case 'D':
@@ -60,10 +71,10 @@ abstract class SmeupModel {
     }
 
     showLoader = myJsonMap['showLoader'] ??
-        SmeupConfigurationService.getAppConfiguration().showLoader;
+        SmeupConfigurationService.getAppConfiguration()!.showLoader;
     notificationEnabled = myJsonMap['notification'] ?? true;
 
-    if (type != null && (id == null || id.isEmpty)) {
+    if (type != null && (id == null || id!.isEmpty)) {
       id = SmeupUtilities.getWidgetId(myJsonMap['type'], myJsonMap['id']);
 
       optionsDefault = _getNewLinkedHashMap();
@@ -94,9 +105,20 @@ abstract class SmeupModel {
   }
 
   _setLinkedHashMap(
-      Map<String, dynamic> map, LinkedHashMap<String, dynamic> linkedHashMap) {
+      Map<String, dynamic> map, LinkedHashMap<String, dynamic>? linkedHashMap) {
     map.entries.forEach((element) {
-      linkedHashMap[element.key] = element.value;
+      linkedHashMap![element.key] = element.value;
     });
+  }
+
+  bool isFirestore() {
+    var isFirestore = false;
+    SmeupDataServiceInterface? smeupDataService =
+        SmeupDataService.getServiceImplementation(
+            smeupFun == null ? null : smeupFun!.identifier.service);
+    if (smeupDataService is SmeupFirestoreDataService) {
+      isFirestore = true;
+    }
+    return isFirestore;
   }
 }

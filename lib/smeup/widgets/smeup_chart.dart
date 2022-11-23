@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/daos/smeup_chart_dao.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_column.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_series.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_datasource.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_chart_model.dart';
-import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_section_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_not_available.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
+import 'package:ken/smeup/daos/smeup_chart_dao.dart';
+import 'package:ken/smeup/models/widgets/smeup_chart_column.dart';
+import 'package:ken/smeup/models/widgets/smeup_chart_series.dart';
+import 'package:ken/smeup/models/widgets/smeup_chart_datasource.dart';
+import 'package:ken/smeup/models/widgets/smeup_chart_model.dart';
+import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_section_model.dart';
+import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/widgets/smeup_not_available.dart';
+import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'dart:math';
 
@@ -21,20 +21,20 @@ import 'dart:math';
 class SmeupChart extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupChartModel model;
+  SmeupChartModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
-  String id;
-  String type;
-  String title;
-  double width;
-  double height;
-  ChartType chartType;
-  int refresh;
-  bool legend;
+  String? id;
+  String? type;
+  String? title;
+  double? width;
+  double? height;
+  ChartType? chartType;
+  int? refresh;
+  bool? legend;
 
-  SmeupChartDatasource data;
+  SmeupChartDatasource? data;
 
   SmeupChart(this.scaffoldKey, this.formKey,
       {this.id = '',
@@ -50,13 +50,14 @@ class SmeupChart extends StatefulWidget
     id = SmeupUtilities.getWidgetId(type, id);
   }
 
-  SmeupChart.withController(this.model, this.scaffoldKey, this.formKey)
+  SmeupChart.withController(
+      SmeupChartModel this.model, this.scaffoldKey, this.formKey)
       : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupChartModel m = model;
+    SmeupChartModel m = model as SmeupChartModel;
     id = m.id;
     type = m.type;
     title = m.title;
@@ -71,7 +72,7 @@ class SmeupChart extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupChartModel m = model;
+    SmeupChartModel m = model as SmeupChartModel;
 
     // change data format
     var workData = formatDataFields(m);
@@ -87,14 +88,14 @@ class SmeupChart extends StatefulWidget
 class _SmeupChartState extends State<SmeupChart>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupChartModel _model;
-  SmeupChartDatasource _data;
+  SmeupChartModel? _model;
+  SmeupChartDatasource? _data;
 
   @override
   void initState() {
     _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -117,10 +118,10 @@ class _SmeupChartState extends State<SmeupChart>
   }
 
   Future<SmeupWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id) && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await SmeupChartDao.getData(_model);
-        _data = widget.treatData(_model);
+        await SmeupChartDao.getData(_model!);
+        _data = widget.treatData(_model!);
       }
       setDataLoad(widget.id, true);
     }
@@ -138,10 +139,10 @@ class _SmeupChartState extends State<SmeupChart>
 
     switch (widget.chartType) {
       case ChartType.Bar:
-        children = _getBarChartComponent(_data);
+        children = _getBarChartComponent(_data!);
         break;
       case ChartType.Pie:
-        children = _getPieChartComponent(_data);
+        children = _getPieChartComponent(_data!);
         break;
       default:
         SmeupLogService.writeDebugMessage(
@@ -167,16 +168,18 @@ class _SmeupChartState extends State<SmeupChart>
     //   return SmeupNotAvailable();
     // }
 
-    double chartHeight = widget.height;
-    double chartWidth = widget.width;
-    if (_model != null && _model.parent != null) {
+    double? chartHeight = widget.height;
+    double? chartWidth = widget.width;
+    if (_model != null && _model!.parent != null) {
       if (chartHeight == 0)
-        chartHeight = (_model.parent as SmeupSectionModel).height;
+        chartHeight = (_model!.parent as SmeupSectionModel).height;
       if (chartWidth == 0)
-        chartWidth = (_model.parent as SmeupSectionModel).width;
+        chartWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
-      if (chartHeight == 0) chartHeight = MediaQuery.of(context).size.height;
-      if (chartWidth == 0) chartWidth = MediaQuery.of(context).size.width;
+      if (chartHeight == 0)
+        chartHeight = SmeupUtilities.getDeviceInfo().safeHeight;
+      if (chartWidth == 0)
+        chartWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     return SizedBox(
@@ -188,30 +191,26 @@ class _SmeupChartState extends State<SmeupChart>
         domainAxis: new charts.OrdinalAxisSpec(
           showAxisLine: true,
         ),
-        behaviors: widget.legend ? [new charts.SeriesLegend()] : null,
+        behaviors: widget.legend! ? [new charts.SeriesLegend()] : null,
       ),
     );
   }
 
   Widget _getPieChartComponent(SmeupChartDatasource _data) {
     var seriesList = _getSeriesList(_data, _model, null);
-    if (seriesList == null) {
-      SmeupLogService.writeDebugMessage(
-          'error in colAxes or colSeries definition',
-          logType: LogType.error);
-      return SmeupNotAvailable();
-    }
 
-    double chartHeight = widget.height;
-    double chartWidth = widget.width;
-    if (_model != null && _model.parent != null) {
+    double? chartHeight = widget.height;
+    double? chartWidth = widget.width;
+    if (_model != null && _model!.parent != null) {
       if (chartHeight == 0)
-        chartHeight = (_model.parent as SmeupSectionModel).height;
+        chartHeight = (_model!.parent as SmeupSectionModel).height;
       if (chartWidth == 0)
-        chartWidth = (_model.parent as SmeupSectionModel).width;
+        chartWidth = (_model!.parent as SmeupSectionModel).width;
     } else {
-      if (chartHeight == 0) chartHeight = MediaQuery.of(context).size.height;
-      if (chartWidth == 0) chartWidth = MediaQuery.of(context).size.width;
+      if (chartHeight == 0)
+        chartHeight = SmeupUtilities.getDeviceInfo().safeHeight;
+      if (chartWidth == 0)
+        chartWidth = SmeupUtilities.getDeviceInfo().safeWidth;
     }
 
     return SizedBox(
@@ -225,7 +224,9 @@ class _SmeupChartState extends State<SmeupChart>
   }
 
   List<charts.Series<SmeupChartSeries, String>> _getSeriesList(
-      SmeupChartDatasource _data, SmeupChartModel _model, Function getColor) {
+      SmeupChartDatasource _data,
+      SmeupChartModel? _model,
+      charts.Color Function(SmeupChartSeries, int?)? getColor) {
     int colAxes = -1;
     int colSeries = -1;
     int noAxes = 0;
@@ -236,10 +237,10 @@ class _SmeupChartState extends State<SmeupChart>
 
     // only 1 axes and at least 1 series
     try {
-      noAxes = _data.columns
+      noAxes = _data.columns!
           .where((element) => element.type == ColumnType.Axes)
           .length;
-      noSeries = _data.columns
+      noSeries = _data.columns!
           .where((element) => element.type == ColumnType.Series)
           .length;
     } catch (e) {
@@ -253,9 +254,9 @@ class _SmeupChartState extends State<SmeupChart>
     }
 
     try {
-      colAxes = _data.columns
+      colAxes = _data.columns!
           .indexWhere((element) => element.type == ColumnType.Axes);
-      colSeries = _data.columns
+      colSeries = _data.columns!
           .indexWhere((element) => element.type == ColumnType.Series);
     } catch (e) {
       return seriesList;
@@ -266,23 +267,23 @@ class _SmeupChartState extends State<SmeupChart>
       return seriesList;
     }
 
-    for (var i = 0; i < _data.columns.length; i++) {
-      final column = _data.columns[i];
+    for (var i = 0; i < _data.columns!.length; i++) {
+      final column = _data.columns![i];
       if (column.type != ColumnType.Series) continue;
 
       var color = _getRandomColor(i);
 
       var series = List<SmeupChartSeries>.empty(growable: true);
 
-      _data.rows.forEach((row) {
-        String code = row.cells[colAxes] ?? '';
-        double value = SmeupUtilities.getDouble(row.cells[i]) ?? 0;
+      _data.rows!.forEach((row) {
+        String code = row.cells![colAxes] ?? '';
+        double value = SmeupUtilities.getDouble(row.cells![i]) ?? 0;
         var graphSeries = SmeupChartSeries(code, value, color);
         series.add(graphSeries);
       });
 
       seriesList.add(charts.Series<SmeupChartSeries, String>(
-        id: column.title,
+        id: column.title!,
         colorFn: getColor,
         domainFn: (SmeupChartSeries seriesData, _) => seriesData.code,
         measureFn: (SmeupChartSeries seriesData, _) => seriesData.value,

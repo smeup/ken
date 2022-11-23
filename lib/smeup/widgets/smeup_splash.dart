@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_components_library/smeup/models/smeupWidgetBuilderResponse.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_model.dart';
-import 'package:mobile_components_library/smeup/models/widgets/smeup_splash_model.dart';
-import 'package:mobile_components_library/smeup/services/smeup_utilities.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_mixin.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_interface.dart';
-import 'package:mobile_components_library/smeup/widgets/smeup_widget_state_mixin.dart';
+import 'package:ken/smeup/models/smeupWidgetBuilderResponse.dart';
+import 'package:ken/smeup/models/widgets/smeup_model.dart';
+import 'package:ken/smeup/models/widgets/smeup_splash_model.dart';
+import 'package:ken/smeup/services/smeup_utilities.dart';
+import 'package:ken/smeup/widgets/smeup_widget_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_mixin.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_interface.dart';
+import 'package:ken/smeup/widgets/smeup_widget_state_mixin.dart';
 
 // ignore: must_be_immutable
 class SmeupSplash extends StatefulWidget
     with SmeupWidgetMixin
     implements SmeupWidgetInterface {
-  SmeupSplashModel model;
+  SmeupSplashModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  GlobalKey<FormState>? formKey;
 
-  Color color;
-  String id;
-  String type;
-  String title;
+  Color? color;
+  String? id;
+  String? type;
+  String? title;
 
   SmeupSplash(this.scaffoldKey, this.formKey,
       {this.id = '', this.type = 'FLD', this.color, this.title = ''})
@@ -29,16 +29,16 @@ class SmeupSplash extends StatefulWidget
   }
 
   SmeupSplash.withController(
-    this.model,
+    SmeupSplashModel this.model,
     this.scaffoldKey,
     this.formKey,
   ) : super(key: Key(SmeupUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model);
+    runControllerActivities(model!);
   }
 
   @override
   runControllerActivities(SmeupModel model) {
-    SmeupSplashModel m = model;
+    SmeupSplashModel m = model as SmeupSplashModel;
     id = m.id;
     type = m.type;
     color = m.color;
@@ -47,7 +47,7 @@ class SmeupSplash extends StatefulWidget
 
   @override
   dynamic treatData(SmeupModel model) {
-    SmeupSplashModel m = model;
+    SmeupSplashModel m = model as SmeupSplashModel;
 
     // change data format
     return formatDataFields(m);
@@ -60,12 +60,12 @@ class SmeupSplash extends StatefulWidget
 class _SmeupSplashState extends State<SmeupSplash>
     with SmeupWidgetStateMixin
     implements SmeupWidgetStateInterface {
-  SmeupSplashModel _model;
+  SmeupSplashModel? _model;
 
   @override
   void initState() {
     _model = widget.model;
-    if (_model != null) widgetLoadType = _model.widgetLoadType;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 

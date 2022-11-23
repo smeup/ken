@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:mobile_components_library/smeup/models/notifiers/smeup_carousel_indicator_notifier.dart';
+import 'package:ken/smeup/models/notifiers/smeup_carousel_indicator_notifier.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class SmeupCarouselIndicator extends StatefulWidget {
   final int initialIndex;
-  List<Map> data;
+  List<Map>? data;
   SmeupCarouselIndicator(this.initialIndex, this.data);
 
   @override
@@ -19,8 +19,8 @@ class _SmeupCarouselIndicatorState extends State<SmeupCarouselIndicator> {
         Provider.of<SmeupCarouselIndicatorNotifier>(context, listen: true);
 
     var list = List<Widget>.empty(growable: true);
-    (widget.data).forEach((element) {
-      int i = widget.data.indexOf(element);
+    widget.data!.forEach((element) {
+      int i = widget.data!.indexOf(element);
       var cont = Container(
         width: 8.0,
         height: 8.0,
@@ -28,8 +28,8 @@ class _SmeupCarouselIndicatorState extends State<SmeupCarouselIndicator> {
         decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: notifier.index == i
-                ? Color.fromRGBO(0, 0, 0, 0.9)
-                : Color.fromRGBO(0, 0, 0, 0.4)),
+                ? Color.fromRGBO(63, 187, 211, 1)
+                : Color.fromRGBO(0, 96, 116, 1)),
       );
 
       list.add(cont);

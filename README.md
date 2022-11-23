@@ -1,32 +1,48 @@
-# mobile-components-library
-Smeup mobile widgets' library is a set of widgets built on top of Flutter widgets.
+# ken: super-rich components for Flutter applications
 
-## Icons
+![ken Logo](https://github.com/smeup/ken/blob/develop/assets/images/logo_KEN.png)
 
-- Images and icons generator for ios
-    https://easyappicon.com/   
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-- IconData codes
-    https://api.flutter.dev/flutter/material/Icons-class.html#constants
-    https://raw.githubusercontent.com/flutter/flutter/flutter-1.22-candidate.13/packages/flutter/lib/src/material/icons.dart
-    
-## Dependencies:
-- dio:                      https://pub.dev/packages/dio
-- provider:                 https://pub.dev/packages/provider
-- permission_handler:       https://pub.dev/packages/permission_handler
-- path_provider:            https://pub.dev/packages/path_provider
-- flutter_speedometer:      https://pub.dev/packages/flutter_speedometer
-- carousel_slider:          https://pub.dev/packages/carousel_slider
-- table_calendar:           https://pub.dev/packages/table_calendar
-- charts_flutter:           https://pub.dev/packages/charts_flutter
-- expandable:               https://pub.dev/packages/expandable
-- url_launcher:             https://pub.dev/packages/url_launcher
-- flutter_datetime_picker:  https://pub.dev/packages/flutter_datetime_picker/
-- intl:                     https://pub.dev/packages/intl
+## Intro
 
-## Permissions
+Ken is a library for [Flutter](https://flutter.dev/) applications. All widgets in this library can be used both as static and dynamic.
+The static use of the widgets is a declaration of the widget in the page, like any other widget in Flutter.
+The dynamic use of the component is a definition of the widget in a json file, which can be received as input in a SmeupDynamicScreen. This methodology allows you to have a single page application where the content of the page could be sent from a backend.
 
-- storage
+## ken Showcase
 
-## Widgets default values
-The document [widgets_defaults_values.md](WIDGETS%20DEFAULT%20VALUES.md) contains the defaults values for each widget
+There is a project entirely dedicated to the [ken Showcase](https://github.com/smeup/ken-showcase). Feel free to download it and check out the examples provided.
+
+## ken API
+
+The [API documentation](https://github.com/smeup/ken/blob/develop/doc/api/index.md) provides a full description of classes, services, models and widgets included in the ken library.
+
+## ken Development
+
+The following documents will provide all the material you need to start using the ken library:
+
+- [Dependencies](https://github.com/smeup/ken/blob/develop/doc/development/dependencies.md)
+- [Widgets](https://github.com/smeup/ken/blob/develop/doc/development/widgets.md)
+- [Publish](https://github.com/smeup/ken/blob/develop/doc/development/publish_procedure.md)
+
+## How to use ken in your project
+
+Create a new Flutter app:
+
+    > flutter create myapp
+
+To install the ken library, add the following dependency into the pubspec.yaml:
+
+    dependencies:
+        ken: ^0.0.1
+
+Add the ken library initilization in the main.dart file. In the initialization statement, you can set many attributes. Follow a minimal configuration:
+
+    SmeupConfigurationService.init(
+        context,
+    );
+
+## Issues
+
+If you run into an error or an unexpected behavior, or you just want to give us feedback on how to improve, feel free to use the [issues](https://github.com/smeup/ken/issues) page.

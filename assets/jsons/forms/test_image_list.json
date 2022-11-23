@@ -1,0 +1,109 @@
+{
+  "loaded": true,
+  "layout": "column",
+  "id": "testForm",
+  "type": "EXD",
+  "title": "[description]",
+  "padding": 0,
+  "sections": [
+    {
+      "id": "S1",
+      "components": [
+        {
+          "type": "LAB",
+          "id": "lab1",
+          "options": {
+            "LAB": {
+              "default": {
+                "padding": 30,
+                "align": "center",
+                "height": 38
+              }
+            }
+          },
+          "data":{
+            "rows" :  [{ "value": "This widget is capable of showing images on one or more columns/rows" }]
+          } 
+        }
+      ]
+    },
+    {
+      "id": "S1",
+      "dim": "8%",
+      "components": [
+        {
+          "title": "",
+          "type": "IML",
+          "id": "imageList1",
+          "options": {
+            "IML": {
+              "default": {
+                "height": 330,
+                "listHeight": 480,
+                "columns": 1
+              }
+            }
+          },
+          "data": {
+            "rows": [
+              {
+                "code": "packages/ken/assets/images/IMG1.png",
+                "description": "1st Illustration",
+                "info": "boh1",
+                "isRemote": false,
+                "width": 200,
+                "height": 200
+              },
+              {
+                "code": "packages/ken/assets/images/IMG2.png",
+                "description": "2nd Illustration",
+                "info": "boh3",
+                "isRemote": false,
+                "width": 200,
+                "height": 200
+              },
+              {
+                "code": "packages/ken/assets/images/IMG3.png",
+                "description": "3rd Illustration",
+                "info": "boh2",
+                "isRemote": false,
+                "width": 200,
+                "height": 200
+              },
+              {
+                "code": "packages/ken/assets/images/IMG4.png",
+                "description": "4th Illustration",
+                "info": "boh3",
+                "isRemote": false,
+                "width": 200,
+                "height": 200
+              },
+              {
+                "code": "packages/ken/assets/images/IMG5.png",
+                "description": "5th Illustration",
+                "info": "boh2",
+                "isRemote": false,
+                "width": 200,
+                "height": 200
+              }
+            ],
+            "columns": [
+              { "code": "code", "text": "codice", "IO": "H" },
+              { "code": "description", "text": "descrizione", "IO": "O" },
+              { "code": "info", "text": "informazioni", "IO": "H" },
+              { "code": "isRemote", "text": "remote image", "IO": "H" },
+              { "code": "width", "text": "image width", "IO": "H" },
+              { "code": "height", "text": "image height", "IO": "H" }
+            ]
+          },
+          "dynamisms": [
+            {
+              "event": "click",
+              "exec": "F(FBK;*MSG;) P(message(you clicked the [description]))"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

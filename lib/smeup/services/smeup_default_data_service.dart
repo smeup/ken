@@ -1,21 +1,26 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:mobile_components_library/smeup/models/smeup_fun.dart';
-import 'package:mobile_components_library/smeup/services/smeup_configuration_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_cache_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_data_service_interface.dart';
-import 'package:mobile_components_library/smeup/services/smeup_log_service.dart';
-import 'package:mobile_components_library/smeup/services/smeup_service_response.dart';
+import 'package:ken/smeup/services/smeup_configuration_service.dart';
+import 'package:ken/smeup/services/smeup_cache_service.dart';
+import 'package:ken/smeup/services/smeup_data_service.dart';
+import 'package:ken/smeup/services/smeup_data_service_interface.dart';
+import 'package:ken/smeup/services/smeup_log_service.dart';
+import 'package:ken/smeup/services/smeup_service_response.dart';
+import 'package:ken/smeup/services/transformers/null_transformer.dart';
+import 'package:ken/smeup/services/transformers/smeup_data_transformer_interface.dart';
 
-class SmeupDefaultDataService implements SmeupDataServiceInterface {
-  Dio dio;
-  String server;
+import '../models/fun.dart';
+
+class SmeupDefaultDataService extends SmeupDataServiceInterface {
+  late Dio dio;
+  String? server;
   static const DEFAULD_TIMEOUT = 10000;
 
-  SmeupDefaultDataService() {
+  SmeupDefaultDataService({SmeupDataTransformerInterface? transformer})
+      : super(transformer) {
     BaseOptions options = new BaseOptions(
       connectTimeout: DEFAULD_TIMEOUT,
       receiveTimeout: DEFAULD_TIMEOUT,
@@ -24,19 +29,23 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
   }
 
   @override
-  Future<SmeupServiceResponse> invoke(SmeupFun smeupFun) async {
+  Future<SmeupServiceResponse> invoke(Fun smeupFun) async {
     try {
       dynamic data;
-      Response response;
+      Response? response;
       String url;
       String contentType;
 
       url = '${SmeupConfigurationService.getDefaultServiceEndpoint()}/jfun';
-      contentType = 'application/json';
-      data = smeupFun.fun;
+
+      // contentType = 'application/json';
+      // data = smeupFun.getJson();
+
+      contentType = 'application/x-www-form-urlencoded';
+      data = {"fun": smeupFun.getSmeupFormatString()};
 
       SmeupLogService.writeDebugMessage(
-          '*** http request \'SmeupDefaultDataService\': ${jsonEncode(data)}');
+          '*** http request \'SmeupDefaultDataService\': $data');
 
       response = await invokeDio(
           url: url,
@@ -48,31 +57,55 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
 
       SmeupDataService.writeResponseResult(response, 'SmeupDefaultDataService');
 
-      bool isValid = SmeupDataService.isValid(response.statusCode);
+      bool isValid = SmeupDataService.isValid(response!.statusCode!);
 
-      var responseData = _getResponseData(smeupFun, response, isValid);
+      dynamic responseData;
+
+// Apply transformation to service response (only on success)
+      if (isValid && getTransformer() is NullTransformer == false) {
+        responseData = getTransformer()!.transform(smeupFun, response.data);
+      } else {
+        final message =
+            'SmeupDefaultDataService: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}';
+        responseData = _getErrorResponse(message);
+      }
 
       return SmeupServiceResponse(
           isValid,
           Response(
               data: responseData,
               statusCode: response.statusCode,
-              requestOptions: null));
+              requestOptions: RequestOptions(path: '')));
     } catch (e) {
-      return SmeupServiceResponse(
-          false,
-          Response(
-              data: 'Error in SmeupDefaultDataService',
-              statusCode: HttpStatus.badRequest,
-              requestOptions: null));
+      final message =
+          'SmeupDefaultDataService: ${SmeupConfigurationService.appDictionary.getLocalString('errorRetreivingInformation')}: $e';
+      return _getErrorResponse(message);
     }
   }
 
-  Future<Response> invokeDio(
-      {String method,
-      String url,
+  SmeupServiceResponse _getErrorResponse(String message) {
+    final messages = {
+      "messages": [
+        {
+          "gravity": LogType.error,
+          "message": message,
+        }
+      ]
+    };
+    SmeupLogService.writeDebugMessage(message, logType: LogType.error);
+    return SmeupServiceResponse(
+        false,
+        Response(
+            data: messages,
+            statusCode: HttpStatus.badRequest,
+            requestOptions: RequestOptions(path: '')));
+  }
+
+  Future<Response?> invokeDio(
+      {String? method,
+      String? url,
       dynamic body,
-      String contentType,
+      String? contentType,
       int cache = 0,
       bool forceCache = false}) async {
     DateTime start = DateTime.now();
@@ -81,7 +114,7 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
       final cacheDuration = Duration(
           days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: cache);
 
-      Response responseFromCache =
+      Response? responseFromCache =
           await _getResposeFromCache(url, body, forceCache);
       if (responseFromCache != null) {
         SmeupDataService.printRequestDuration(start);
@@ -92,23 +125,23 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
       dio.options.headers['content-type'] = contentType;
 
       dio.options.headers['Authorization'] =
-          SmeupConfigurationService.getLocalStorage()
+          SmeupConfigurationService.getLocalStorage()!
               .getString('authorization');
 
-      Response response;
+      late Response response;
 
       switch (method) {
         case 'post':
-          response = await dio.post(url, data: body);
+          response = await dio.post(url!, data: body);
           break;
         case 'put':
-          response = await dio.put(url, data: body);
+          response = await dio.put(url!, data: body);
           break;
         case 'get':
-          response = await dio.get(url);
+          response = await dio.get(url!);
           break;
         case 'delete':
-          response = await dio.delete(url);
+          response = await dio.delete(url!);
           break;
       }
 
@@ -118,9 +151,8 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
         SmeupDataService.printRequestDuration(start);
         return response;
       });
-    } catch (e) {
-      SmeupLogService.writeDebugMessage(
-          '_invoke dio error: $e (${e.message != null ? e.message : ''})',
+    } on DioError catch (e) {
+      SmeupLogService.writeDebugMessage('_invoke dio error: $e (${e.message})',
           logType: LogType.error);
       SmeupDataService.printRequestDuration(start);
       if (e.response != null) {
@@ -129,13 +161,13 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
         return Response(
             data: 'Unkwnown Error',
             statusCode: HttpStatus.badRequest,
-            requestOptions: null);
+            requestOptions: RequestOptions(path: ''));
       }
     }
   }
 
-  Future<Response> _getResposeFromCache(
-      String url, dynamic body, bool forceCache) async {
+  Future<Response?> _getResposeFromCache(
+      String? url, dynamic body, bool forceCache) async {
     if (forceCache) {
       try {
         SmeupLogService.writeDebugMessage(
@@ -149,24 +181,18 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
         // if it doesn't exist return error
         if (cacheElement != null) {
           // otherwise I fetch the cache element and return the value
-          List<String> list = await cacheElement.fetch(() {
-            // if the element is expired: remove the cache element from the list and return null
-            return Future(() {
-              SmeupLogService.writeDebugMessage('no cache found ...');
-              return null;
-            });
-          });
+          List<String> list = await _fetch(cacheElement);
 
-          if (list != null) {
-            dynamic result = jsonDecode(list.first);
-            SmeupLogService.writeDebugMessage(
-                'response returned from the cache ...',
-                logType: LogType.warning);
-            return Response(
-                data: result,
-                statusCode: HttpStatus.accepted,
-                requestOptions: null);
-          }
+          //if (list != null) {
+          dynamic result = jsonDecode(list.first);
+          SmeupLogService.writeDebugMessage(
+              'response returned from the cache ...',
+              logType: LogType.warning);
+          return Response(
+              data: result,
+              statusCode: HttpStatus.accepted,
+              requestOptions: RequestOptions(path: ''));
+          //}
         }
       } catch (e) {
         SmeupLogService.writeDebugMessage(
@@ -180,9 +206,25 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
     });
   }
 
-  void _addResposeToCache(Response<dynamic> response, String url, dynamic body,
+  _fetch(cacheElement) {
+    try {
+      cacheElement.fetch(() {
+        // if the element is expired: remove the cache element from the list and return null
+        // return Future(() {
+        //   SmeupLogService.writeDebugMessage('no cache found ...');
+        //   return null;
+        // });
+        return Future(() {
+          SmeupLogService.writeDebugMessage('no cache found ...');
+          return null;
+        });
+      });
+    } catch (e) {}
+  }
+
+  void _addResposeToCache(Response<dynamic> response, String? url, dynamic body,
       Duration cacheExpireTime) async {
-    if (SmeupDataService.isValid(response.statusCode) &&
+    if (SmeupDataService.isValid(response.statusCode!) &&
         cacheExpireTime.inSeconds > 0) {
       SmeupLogService.writeDebugMessage('caching the response ....');
 
@@ -206,82 +248,6 @@ class SmeupDefaultDataService implements SmeupDataServiceInterface {
 
       // return the result from online
       SmeupLogService.writeDebugMessage('response cached');
-    }
-  }
-
-  dynamic _getResponseData(
-      SmeupFun smeupFun, Response<dynamic> response, bool isValid) {
-    switch (smeupFun.fun['fun']['component']) {
-      case 'EXD':
-        return response.data;
-
-      case 'EXB':
-        dynamic res = SmeupDataService.getEmptyDataStructure();
-
-        // columns
-        res['columns'] = response.data['columns'];
-        // (response.data['columns'] as List)
-        //     .map((e) => {
-        //           'code': e['code'],
-        //           'text': e['text'],
-        //           'hidden': e['IO'] == 'H' ? true : false
-        //         })
-        //     .toList();
-
-        // rows
-        List rows = List<dynamic>.empty(growable: true);
-
-        (response.data['rows'] as List).forEach((row) {
-          var newRow = Map();
-          (res['columns'] as List).forEach((column) {
-            final value =
-                row['fields'][column['code']]['smeupObject']['codice'];
-            newRow[column['code']] = value;
-            newRow['tipo'] =
-                row['fields'][column['code']]['smeupObject']['tipo'];
-            newRow['parametro'] =
-                row['fields'][column['code']]['smeupObject']['parametro'];
-            newRow['codice'] =
-                row['fields'][column['code']]['smeupObject']['codice'];
-            newRow['testo'] =
-                row['fields'][column['code']]['smeupObject']['testo'];
-          });
-          rows.add(newRow);
-        });
-
-        res['rows'] = rows;
-        res['type'] = 'SmeupDataTable';
-        return res;
-
-      case 'TRE':
-        dynamic res = SmeupDataService.getEmptyDataStructure();
-        List rows = List.empty(growable: true);
-        for (var i = 0; i < (response.data['children'] as List).length; i++) {
-          final child = (response.data['children'] as List)[i];
-          final tipo = child['content']['tipo'];
-          final parametro = child['content']['parametro'];
-          final codice = child['content']['codice'];
-          final testo = child['content']['testo'];
-
-          var newRow = {
-            'tipo': tipo,
-            'parametro': parametro,
-            'codice': codice,
-            'value': testo,
-            //'${child['content']['codice']}': testo
-          };
-
-          rows.add(newRow);
-        }
-
-        res['rows'] = rows;
-        res['type'] = 'SmeupTreeNode';
-        return res;
-      case 'FBK':
-        break;
-
-      default:
-        return response.data;
     }
   }
 }
