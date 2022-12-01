@@ -38,12 +38,13 @@ class KenThemeConfigurationService {
 
   static Future<void> init(BuildContext? context,
       {KenLogType logLevel = KenLogType.none,
-        dynamic localizationService,
-        String appBarImage = '',
-        bool defaultAutoAdaptHeight = true}) async {
+      dynamic localizationService,
+      String appBarImage = '',
+      bool defaultAutoAdaptHeight = true}) async {
     await KenThemeConfigurationService.setAppConfiguration();
 
-    KenThemeConfigurationService.defaultAutoAdaptHeight = defaultAutoAdaptHeight;
+    KenThemeConfigurationService.defaultAutoAdaptHeight =
+        defaultAutoAdaptHeight;
     KenThemeConfigurationService.logLevel = logLevel;
     KenThemeConfigurationService.appBarImage = appBarImage;
 
@@ -52,16 +53,13 @@ class KenThemeConfigurationService {
     await KenThemeConfigurationService.setTheme(
         KenThemeConfigurationService.getAppConfiguration()?.theme ?? '');
 
-
     KenThemeConfigurationService.jsonsPath = 'assets/jsons';
     KenThemeConfigurationService.imagesPath = 'assets/images';
 
     if (KenThemeConfigurationService.isLogEnabled)
       await KenLogService.setLogFile();
 
-
     if (context != null) KenThemeConfigurationService.setHolidays(context);
-
   }
 
   static setHolidays(context) {
@@ -98,8 +96,8 @@ class KenThemeConfigurationService {
           logType: KenLogType.error);
     } finally {
       if (_theme == null) {
-        String themeStr = await rootBundle
-            .loadString('assets/jsons/themes/smeup_theme.json');
+        String themeStr =
+            await rootBundle.loadString('assets/jsons/themes/smeup_theme.json');
         dynamic themeJson = json.decode(themeStr);
         _theme = ThemeDecoder.decodeThemeData(themeJson);
         // print(_theme);
@@ -114,7 +112,7 @@ class KenThemeConfigurationService {
   static setAppConfiguration() async {
     try {
       String jsonString =
-      await rootBundle.loadString('assets/jsons/config.json');
+          await rootBundle.loadString('assets/jsons/config.json');
       _appConfiguration =
           ExternalConfigurationModel.fromMap(jsonDecode(jsonString));
       KenLogService.writeDebugMessage('Loaded config.json');
@@ -127,5 +125,4 @@ class KenThemeConfigurationService {
   static ExternalConfigurationModel? getAppConfiguration() {
     return _appConfiguration;
   }
-
 }

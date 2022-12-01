@@ -13,7 +13,6 @@ import 'package:ken/smeup/widgets/ken_widget_state_mixin.dart';
 import '../models/fun.dart';
 import '../services/ken_theme_configuration_service.dart';
 
-
 class KenBox extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState>? formKey;
@@ -41,7 +40,7 @@ class KenBox extends StatefulWidget {
   final Function? onSizeChanged;
   final bool? isFirestore;
 
-  Future<dynamic> Function(Widget,KenCallbackType,dynamic,dynamic)? callBack;
+  Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
   KenBox(this.scaffoldKey, this.formKey, this.index,
       {this.id,
@@ -65,8 +64,7 @@ class KenBox extends StatefulWidget {
       this.captionStyle,
       this.onSizeChanged,
       this.isFirestore,
-        this.callBack
-      });
+      this.callBack});
 
   @override
   _KenBoxState createState() => _KenBoxState();
@@ -162,11 +160,11 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             key: Key('${widget.formKey.toString()}_${widget.id}'),
             direction: DismissDirection.endToStart,
             confirmDismiss: (DismissDirection direction) async {
-
               // SmeupDynamismService.storeDynamicVariables(
               //     widget.data, widget.formKey);
               if (widget.callBack != null) {
-                await widget.callBack!(widget,KenCallbackType.confirmDismiss,null,null);
+                await widget.callBack!(
+                    widget, KenCallbackType.confirmDismiss, null, null);
               }
 
               return await showDialog(
@@ -201,7 +199,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
                   widget.scaffoldKey, context);
 
               if (widget.callBack != null) {
-                  await widget.callBack!(widget, KenCallbackType.onDismissed, deleteDynamism, null);
+                await widget.callBack!(
+                    widget, KenCallbackType.onDismissed, deleteDynamism, null);
               }
               widget.onRefresh!();
             },
@@ -553,14 +552,13 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-
   Future<Widget> _getImage(dynamic data) async {
-
     if (widget.callBack != null) {
-      var imageWidget = await widget.callBack!(widget, KenCallbackType.getImage, null, null);
+      var imageWidget =
+          await widget.callBack!(widget, KenCallbackType.getImage, null, null);
 
       if (imageWidget != null && imageWidget is Future<Widget>) {
-          return imageWidget;
+        return imageWidget;
       } else {
         return Container();
       }
@@ -569,8 +567,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
   }
 
   Future<Widget> _getImageAndDataInRow(dynamic data, cols) async {
-    Widget? widgetImg = KenNotAvailable();
-    // await _getImage(data);//cosi in originale
+    //Widget? widgetImg = KenNotAvailable();
+    Widget? widgetImg = await _getImage(data);
 
     var listOfRows = await _getBoxTexts(data, cols);
 
@@ -748,18 +746,17 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return listOfRows;
   }
 
-
   List<Widget> _getButtons(dynamic data) {
-
     var widgetBtns = List<Widget>.empty(growable: true);
 
     var buttonCols = _getColumns(data)!
         .where((col) => col['ogg'] == 'J4BTN' && col['IO'] != 'H');
 
     if (widget.callBack != null) {
-      widgetBtns = widget.callBack!(widget, KenCallbackType.getButtons, data, buttonCols) as List<Widget>;
+      widgetBtns =
+          widget.callBack!(widget, KenCallbackType.getButtons, data, buttonCols)
+              as List<Widget>;
     }
-
 
     return widgetBtns;
   }
@@ -808,10 +805,11 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
   }
 
   Future<String> _getBoxText(Map data, Map col) async {
-
-    String dataText="";
+    String dataText = "";
     if (widget.callBack != null) {
-      dataText = await widget.callBack!(widget, KenCallbackType.getBoxText,data,col) as String;
+      dataText =
+          await widget.callBack!(widget, KenCallbackType.getBoxText, data, col)
+              as String;
     }
 
     return dataText;

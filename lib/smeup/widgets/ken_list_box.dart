@@ -16,7 +16,9 @@ import 'package:ken/smeup/widgets/ken_widget_state_mixin.dart';
 import '../services/ken_theme_configuration_service.dart';
 
 // ignore: must_be_immutable
-class KenListBox extends StatefulWidget with KenWidgetMixin implements KenWidgetInterface {
+class KenListBox extends StatefulWidget
+    with KenWidgetMixin
+    implements KenWidgetInterface {
   KenListBoxModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;
@@ -178,12 +180,15 @@ class KenListBox extends StatefulWidget with KenWidgetMixin implements KenWidget
     }
   }
 
-  static double? getListHeight(double? widgetListHeight, KenModel? model, BuildContext context) {
+  static double? getListHeight(
+      double? widgetListHeight, KenModel? model, BuildContext context) {
     double? listboxHeight = widgetListHeight;
     if (model != null && model.parent != null) {
-      if (listboxHeight == 0) listboxHeight = (model.parent as KenSectionModel).height;
+      if (listboxHeight == 0)
+        listboxHeight = (model.parent as KenSectionModel).height;
     } else {
-      if (listboxHeight == 0) listboxHeight = KenUtilities.getDeviceInfo().safeHeight;
+      if (listboxHeight == 0)
+        listboxHeight = KenUtilities.getDeviceInfo().safeHeight;
     }
     return listboxHeight;
   }
@@ -192,7 +197,9 @@ class KenListBox extends StatefulWidget with KenWidgetMixin implements KenWidget
   _KenListBoxState createState() => _KenListBoxState();
 }
 
-class _KenListBoxState extends State<KenListBox> with KenWidgetStateMixin implements KenWidgetStateInterface {
+class _KenListBoxState extends State<KenListBox>
+    with KenWidgetStateMixin
+    implements KenWidgetStateInterface {
   List<Widget>? cells;
   KenListBoxModel? _model;
   dynamic _data;
@@ -222,22 +229,29 @@ class _KenListBoxState extends State<KenListBox> with KenWidgetStateMixin implem
 
   void _runAutomaticScroll() {
     Future.delayed(Duration(milliseconds: 80), () async {
-
       double? realBoxHeight = widget.realBoxHeight;
 
-      if (widget.listType == KenListType.oriented && _selectedRow != -1 && realBoxHeight != null && _model != null) {
+      if (widget.listType == KenListType.oriented &&
+          _selectedRow != -1 &&
+          realBoxHeight != null &&
+          _model != null) {
         if (_orientation != null) {
-          int colsNumber = _orientation == Orientation.landscape ? _model!.landscapeColumns! : _model!.portraitColumns!;
+          int colsNumber = _orientation == Orientation.landscape
+              ? _model!.landscapeColumns!
+              : _model!.portraitColumns!;
           double? formSpace = KenUtilities.getDeviceInfo().safeHeight;
 
           if (_model != null && _model!.parent != null) {
             formSpace = (_model!.parent as KenSectionModel).height;
           }
 
-          double scrollPosition = ((_selectedRow! + 1) * realBoxHeight / colsNumber);
+          double scrollPosition =
+              ((_selectedRow! + 1) * realBoxHeight / colsNumber);
           if (scrollPosition > formSpace!) {
             if (_scrollController!.positions.isNotEmpty) {
-              _scrollController!.animateTo(scrollPosition, duration: Duration(milliseconds: 80), curve: Curves.bounceInOut);
+              _scrollController!.animateTo(scrollPosition,
+                  duration: Duration(milliseconds: 80),
+                  curve: Curves.bounceInOut);
             }
           }
         }
@@ -260,7 +274,8 @@ class _KenListBoxState extends State<KenListBox> with KenWidgetStateMixin implem
 
   @override
   Widget build(BuildContext context) {
-    var listbox = runBuild(context, widget.id, widget.type, widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
+    var listbox = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
+        getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
@@ -312,7 +327,10 @@ class _KenListBoxState extends State<KenListBox> with KenWidgetStateMixin implem
 
     _runAutomaticScroll();
 
-    if (_oldOrientation != null && _oldOrientation != _orientation && widget.parentForm != null && widget.parentForm.currentFormReload != null) {
+    if (_oldOrientation != null &&
+        _oldOrientation != _orientation &&
+        widget.parentForm != null &&
+        widget.parentForm.currentFormReload != null) {
       widget.parentForm.currentFormReload();
     }
     _oldOrientation = _orientation;
@@ -327,7 +345,9 @@ class _KenListBoxState extends State<KenListBox> with KenWidgetStateMixin implem
         key: ObjectKey("_list_${widget.id}"),
         controller: _scrollController,
         scrollDirection: widget.orientation!,
-        physics: _executeBouncing ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()) : null,
+        physics: _executeBouncing
+            ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+            : null,
         itemCount: cells.length,
         itemBuilder: (context, index) {
           return cells[index];
@@ -335,9 +355,14 @@ class _KenListBoxState extends State<KenListBox> with KenWidgetStateMixin implem
       ),
     );
 
-    double? listboxHeight = KenListBox.getListHeight(widget.listHeight, _model, context);
+    double? listboxHeight =
+        KenListBox.getListHeight(widget.listHeight, _model, context);
 
-    final container = Container(padding: widget.padding, color: Colors.transparent, height: listboxHeight, child: list);
+    final container = Container(
+        padding: widget.padding,
+        color: Colors.transparent,
+        height: listboxHeight,
+        child: list);
 
     return container;
   }
@@ -357,23 +382,31 @@ class _KenListBoxState extends State<KenListBox> with KenWidgetStateMixin implem
     }
 
     double childAspectRatio = 0;
-    childAspectRatio = KenUtilities.getDeviceInfo().safeWidth / boxHeight! * col!;
+    childAspectRatio =
+        KenUtilities.getDeviceInfo().safeWidth / boxHeight! * col!;
 
     list = RefreshIndicator(
       onRefresh: _refreshList,
       child: GridView.count(
         controller: _scrollController,
         childAspectRatio: childAspectRatio,
-        physics: _executeBouncing ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()) : null,
+        physics: _executeBouncing
+            ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+            : null,
         scrollDirection: widget.orientation!,
         crossAxisCount: col,
         children: cells,
       ),
     );
 
-    double? listboxHeight = KenListBox.getListHeight(widget.listHeight, _model, context);
+    double? listboxHeight =
+        KenListBox.getListHeight(widget.listHeight, _model, context);
 
-    final container = Container(padding: widget.padding, color: Colors.transparent, height: listboxHeight, child: list);
+    final container = Container(
+        padding: widget.padding,
+        color: Colors.transparent,
+        height: listboxHeight,
+        child: list);
 
     return container;
   }
@@ -392,7 +425,10 @@ class _KenListBoxState extends State<KenListBox> with KenWidgetStateMixin implem
               (cells[index] as KenBox).onItemTap!();
             },
             child: ListWheelScrollView.useDelegate(
-              physics: _executeBouncing ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()) : null,
+              physics: _executeBouncing
+                  ? BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics())
+                  : null,
               controller: _scrollController,
               itemExtent: widget.height!,
               onSelectedItemChanged: (index) {
@@ -404,9 +440,14 @@ class _KenListBoxState extends State<KenListBox> with KenWidgetStateMixin implem
               ),
             )));
 
-    double? listboxHeight = KenListBox.getListHeight(widget.listHeight, _model, context);
+    double? listboxHeight =
+        KenListBox.getListHeight(widget.listHeight, _model, context);
 
-    final container = Container(padding: widget.padding, color: Colors.transparent, height: listboxHeight, child: list);
+    final container = Container(
+        padding: widget.padding,
+        color: Colors.transparent,
+        height: listboxHeight,
+        child: list);
 
     return container;
   }
@@ -422,7 +463,8 @@ class _KenListBoxState extends State<KenListBox> with KenWidgetStateMixin implem
     double? boxHeight = widget.height;
     double? boxWidth = widget.width;
     if (_model != null && _model!.parent != null) {
-      if (boxHeight == 0) boxHeight = (_model!.parent as KenSectionModel).height;
+      if (boxHeight == 0)
+        boxHeight = (_model!.parent as KenSectionModel).height;
       if (boxWidth == 0) boxWidth = (_model!.parent as KenSectionModel).width;
     } else {
       if (boxHeight == 0) boxHeight = KenUtilities.getDeviceInfo().safeHeight;
@@ -433,14 +475,17 @@ class _KenListBoxState extends State<KenListBox> with KenWidgetStateMixin implem
 
     if (widget.defaultSort!.isNotEmpty) {
       //Manage defaultSort setup parameter
-      _rows!.sort((a, b) => (a[widget.defaultSort]).compareTo(b[widget.defaultSort]));
+      _rows!.sort(
+          (a, b) => (a[widget.defaultSort]).compareTo(b[widget.defaultSort]));
       _data['rows'] = _rows;
     }
 
     _data['rows'].asMap().forEach((i, dataElement) {
       var _backColor = widget.backColor;
-      if (widget.backgroundColName != null && widget.backgroundColName!.isNotEmpty) {
-        _backColor = KenUtilities.getColorFromRGB(dataElement[widget.backgroundColName]);
+      if (widget.backgroundColName != null &&
+          widget.backgroundColName!.isNotEmpty) {
+        _backColor =
+            KenUtilities.getColorFromRGB(dataElement[widget.backgroundColName]);
       }
 
       CardTheme cardTheme = _getCardStyle(_backColor);
@@ -457,9 +502,8 @@ class _KenListBoxState extends State<KenListBox> with KenWidgetStateMixin implem
         }
 
         if (widget.callBack != null) {
-          widget.callBack!(widget, KenCallbackType.onItemTap, null, null);
+          widget.callBack!(widget, KenCallbackType.onItemTap, data, context);
         }
-
       };
 
       final cell = KenBox(widget.scaffoldKey, widget.formKey, i,
@@ -484,8 +528,7 @@ class _KenListBoxState extends State<KenListBox> with KenWidgetStateMixin implem
           captionStyle: captionStyle,
           onSizeChanged: onSizeChanged,
           isFirestore: _model == null ? false : _model!.isFirestore(),
-          callBack: widget.callBack
-          );
+          callBack: widget.callBack);
 
       cells.add(cell);
     });
@@ -494,26 +537,32 @@ class _KenListBoxState extends State<KenListBox> with KenWidgetStateMixin implem
   }
 
   void onSizeChanged(Size size) {
-
     if (widget.callBack != null) {
       widget.callBack!(widget, KenCallbackType.onSizeChanged, size, null);
     }
   }
 
   CardTheme _getCardStyle(Color? backColor) {
-    var timeCardTheme = KenThemeConfigurationService.getTheme()!.cardTheme.copyWith(
-          color: backColor,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(widget.borderRadius!), side: BorderSide(width: widget.borderWidth!, color: widget.borderColor!)),
-        );
+    var timeCardTheme =
+        KenThemeConfigurationService.getTheme()!.cardTheme.copyWith(
+              color: backColor,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(widget.borderRadius!),
+                  side: BorderSide(
+                      width: widget.borderWidth!, color: widget.borderColor!)),
+            );
 
     return timeCardTheme;
   }
 
   TextStyle _getTextStile(Color? backColor) {
-    TextStyle style = KenThemeConfigurationService.getTheme()!.textTheme.headline4!;
+    TextStyle style =
+        KenThemeConfigurationService.getTheme()!.textTheme.headline4!;
 
-    style = style.copyWith(color: widget.fontColor, fontSize: widget.fontSize, backgroundColor: backColor);
+    style = style.copyWith(
+        color: widget.fontColor,
+        fontSize: widget.fontSize,
+        backgroundColor: backColor);
 
     if (widget.fontBold!) {
       style = style.copyWith(
@@ -525,9 +574,13 @@ class _KenListBoxState extends State<KenListBox> with KenWidgetStateMixin implem
   }
 
   TextStyle _getCaptionStile(Color? backColor) {
-    TextStyle style = KenThemeConfigurationService.getTheme()!.textTheme.headline5!;
+    TextStyle style =
+        KenThemeConfigurationService.getTheme()!.textTheme.headline5!;
 
-    style = style.copyWith(color: widget.captionFontColor, fontSize: widget.captionFontSize, backgroundColor: backColor);
+    style = style.copyWith(
+        color: widget.captionFontColor,
+        fontSize: widget.captionFontSize,
+        backgroundColor: backColor);
 
     if (widget.captionFontBold!) {
       style = style.copyWith(
