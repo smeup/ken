@@ -13,6 +13,7 @@ import 'package:table_calendar/table_calendar.dart';
 import '../services/ken_utilities.dart';
 import '../services/ken_theme_configuration_service.dart';
 
+// ignore: must_be_immutable
 class KenCalendarWidget extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState>? formKey;
@@ -47,7 +48,7 @@ class KenCalendarWidget extends StatefulWidget {
   final Function? setDataLoad;
   final bool? showPeriodButtons;
 
-  Function(dynamic,KenCallbackType,dynamic)? callBack;
+  Function(dynamic, KenCallbackType, dynamic)? callBack;
 
   KenCalendarWidget(this.scaffoldKey, this.formKey,
       {this.titleFontSize,
@@ -78,7 +79,8 @@ class KenCalendarWidget extends StatefulWidget {
       this.titleColumnName,
       this.setDataLoad,
       this.showPeriodButtons,
-      this.padding,this.callBack});
+      this.padding,
+      this.callBack});
 
   @override
   _KenCalendarWidgetState createState() => _KenCalendarWidgetState();
@@ -141,10 +143,10 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
 
     double separatorHeight = 8.0;
     final titleTextStyle =
-    KenThemeConfigurationService.getTheme()!.appBarTheme.titleTextStyle!;
+        KenThemeConfigurationService.getTheme()!.appBarTheme.titleTextStyle!;
     final iconTheme = KenThemeConfigurationService.getTheme()!.iconTheme;
     final daysHeaderTextStyle =
-    KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!;
+        KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!;
     final dayTextStyle = KenThemeConfigurationService.getTheme()!
         .textTheme
         .bodyText2!
@@ -198,7 +200,8 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
                 titleCentered: true,
                 formatButtonVisible: false,
                 decoration: BoxDecoration(
-                    color: KenThemeConfigurationService.getTheme()!.primaryColor),
+                    color:
+                        KenThemeConfigurationService.getTheme()!.primaryColor),
                 leftChevronIcon:
                     Icon(Icons.arrow_back_ios, color: iconTheme.color),
                 rightChevronIcon:
@@ -271,8 +274,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
             if (_isLoading)
               Padding(
                 padding: const EdgeInsets.only(top: 180.0),
-                child: KenProgressIndicator(
-                    widget.scaffoldKey, widget.formKey,
+                child: KenProgressIndicator(widget.scaffoldKey, widget.formKey,
                     size: 60),
               )
           ]),
@@ -409,7 +411,6 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
 
   Future<void> _eventClicked(DateTime selectedDay, DateTime? focusedDay,
       {KenCalendarEventModel? event}) async {
-
     dynamic data;
     String? title;
     String? initTime;
@@ -442,11 +443,9 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
       }
 
       if (data != null) {
-        
-        if (widget.callBack!= null) {
-          widget.callBack!(widget,KenCallbackType.eventClicked,data);
+        if (widget.callBack != null) {
+          widget.callBack!(widget, KenCallbackType.eventClicked, data);
         }
-        
       }
     } catch (e) {
       KenLogService.writeDebugMessage('Error on calendar _eventClicked: $e',

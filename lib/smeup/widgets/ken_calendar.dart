@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:ken/smeup/models/ken_widget_builder_response.dart';
 import 'package:ken/smeup/models/widgets/ken_section_model.dart';
 import 'package:ken/smeup/services/ken_localization_service.dart';
@@ -18,7 +17,8 @@ import 'package:table_calendar/table_calendar.dart';
 import 'ken_widget_state_interface.dart';
 import 'ken_widget_state_mixin.dart';
 
-final Map<DateTime, List?>? _holidays = KenThemeConfigurationService.getHolidays();
+// final Map<DateTime, List?>? _holidays =
+//     KenThemeConfigurationService.getHolidays();
 
 // ignore: must_be_immutable
 class KenCalendar extends StatefulWidget
@@ -57,7 +57,7 @@ class KenCalendar extends StatefulWidget
   Function? clientOnChangeMonth;
   Function? clientOnEventClick;
 
-  void Function(Widget,KenCallbackType, dynamic, dynamic)? callBack;
+  void Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
   KenCalendar(this.scaffoldKey, this.formKey,
       {this.id = '',
@@ -85,8 +85,7 @@ class KenCalendar extends StatefulWidget
       this.clientOnDaySelected,
       this.clientOnChangeMonth,
       this.clientOnEventClick,
-      this.callBack
-      })
+      this.callBack})
       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
 
@@ -97,13 +96,12 @@ class KenCalendar extends StatefulWidget
           KenCalendarModel.getInitialFirstWork(initialDate!);
     }
     if (initialLastWork == null) {
-      this.initialLastWork =
-          KenCalendarModel.getInitialLastWork(initialDate!);
+      this.initialLastWork = KenCalendarModel.getInitialLastWork(initialDate!);
     }
   }
 
   KenCalendar.withController(KenCalendarModel this.model, this.scaffoldKey,
-      this.formKey, this.initialFirstWork, this.initialLastWork,this.callBack)
+      this.formKey, this.initialFirstWork, this.initialLastWork, this.callBack)
       : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
@@ -191,8 +189,9 @@ class KenCalendarState extends State<KenCalendar>
   set startFunDate(DateTime startFunDate) {
     _startFunDate = startFunDate;
 
-    if (widget.callBack!= null) {
-      widget.callBack!(this.widget , KenCallbackType.startFunDate, _startFunDate,null);
+    if (widget.callBack != null) {
+      widget.callBack!(
+          this.widget, KenCallbackType.startFunDate, _startFunDate, null);
     }
   }
 
@@ -200,10 +199,10 @@ class KenCalendarState extends State<KenCalendar>
   set endFunDate(DateTime endFunDate) {
     _endFunDate = endFunDate;
 
-    if (widget.callBack!= null) {
-      widget.callBack!(this.widget, KenCallbackType.endFunDate, _endFunDate,null);
+    if (widget.callBack != null) {
+      widget.callBack!(
+          this.widget, KenCallbackType.endFunDate, _endFunDate, null);
     }
-
   }
 
   @override
@@ -291,7 +290,7 @@ class KenCalendarState extends State<KenCalendar>
             selectedDay: _selectedDay,
             model: _model,
             padding: widget.padding,
-            holidays: _holidays,
+            holidays: KenThemeConfigurationService.holidays,
             showNavigation: widget.showNavigation,
             calendarFormat: _calendarFormat,
             clientOnChangeMonth: _clientOnChangeMonth,
@@ -358,8 +357,7 @@ class KenCalendarState extends State<KenCalendar>
             },
           ),
           KenButton(
-            data:
-                KenLocalizationService.of(context)!.getLocalString('2weeks'),
+            data: KenLocalizationService.of(context)!.getLocalString('2weeks'),
             width: buttonWidth,
             align: Alignment.center,
             clientOnPressed: () {
@@ -420,7 +418,7 @@ class KenCalendarState extends State<KenCalendar>
       widget.clientOnChangeMonth!(focusedDay);
 
     if (widget.model != null) {
-      widget.callBack!(widget, KenCallbackType.clientOnChangeMonth, null,null);
+      widget.callBack!(widget, KenCallbackType.clientOnChangeMonth, null, null);
     }
 
     await _load();
@@ -430,7 +428,6 @@ class KenCalendarState extends State<KenCalendar>
 
   Future<void> _load() async {
     if (_model != null) {
-
       // await SmeupCalendarDao.getData(_model!);
       await _model!.getData(_model!.instanceCallBack);
       _data = widget.treatData(_model!);

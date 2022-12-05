@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ken/smeup/widgets/ken_enum_callback.dart';
 import '../services/ken_theme_configuration_service.dart';
 
+// ignore: must_be_immutable
 class KenDrawerItem extends StatelessWidget {
   final String? text;
   final String? route;
@@ -16,11 +17,10 @@ class KenDrawerItem extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final IconData? iconData;
 
-  Function(dynamic,KenCallbackType,dynamic)? callBack;
+  Function(dynamic, KenCallbackType, dynamic)? callBack;
 
   KenDrawerItem(this.scaffoldKey, this.formKey, this.text, this.route,
-      this.iconData,
-      this.action, this.align, this.showItemDivider,
+      this.iconData, this.action, this.align, this.showItemDivider,
       {this.fontSize, this.fontBold, this.fontColor, this.callBack});
 
   @override
@@ -28,16 +28,13 @@ class KenDrawerItem extends StatelessWidget {
     final title = Align(
         alignment: align, child: Text(text!, style: _getElementTextStile()));
 
-
-
     Function function = () {
       if (action != null) {
         action!(context);
       } else {
         if (route!.trimLeft().toUpperCase().startsWith('F(')) {
-
           if (callBack != null) {
-            callBack!(null, KenCallbackType.onTap,route);
+            callBack!(null, KenCallbackType.onTap, route);
           }
         } else {
           Navigator.of(context).pushNamed(route!);

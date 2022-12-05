@@ -96,7 +96,7 @@ class KenTree extends StatefulWidget
 
   @override
   dynamic treatData(KenModel model) {
-    KenTreeModel m = model as KenTreeModel;
+    //KenTreeModel m = model as KenTreeModel;
   }
 
   @override
@@ -125,11 +125,11 @@ class _KenTreeState extends State<KenTree>
   Widget build(BuildContext context) {
     Widget tree = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
         getInitialdataLoaded(_model), notifierFunction: () {
-          setState(() {
-            widgetLoadType = LoadType.Immediate;
-            setDataLoad(widget.id, false);
-          });
-        });
+      setState(() {
+        widgetLoadType = LoadType.Immediate;
+        setDataLoad(widget.id, false);
+      });
+    });
 
     return tree;
   }
@@ -143,19 +143,12 @@ class _KenTreeState extends State<KenTree>
     if (_model != null && _model!.parent != null) {
       if (treeHeight == 0)
         treeHeight = (_model!.parent as KenSectionModel).height;
-      if (treeWidth == 0)
-        treeWidth = (_model!.parent as KenSectionModel).width;
+      if (treeWidth == 0) treeWidth = (_model!.parent as KenSectionModel).width;
     } else {
-      if (treeHeight == 0)
-        treeHeight = KenUtilities
-            .getDeviceInfo()
-            .safeHeight;
-      if (treeWidth == 0) treeWidth = KenUtilities
-          .getDeviceInfo()
-          .safeWidth;
+      if (treeHeight == 0) treeHeight = KenUtilities.getDeviceInfo().safeHeight;
+      if (treeWidth == 0) treeWidth = KenUtilities.getDeviceInfo().safeWidth;
     }
 
     return KenWidgetBuilderResponse(_model, children);
   }
-
 }

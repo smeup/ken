@@ -21,7 +21,6 @@ import 'package:ken/smeup/widgets/ken_widget_state_interface.dart';
 import 'package:ken/smeup/widgets/ken_widget_state_mixin.dart';
 
 // ignore: must_be_immutable
-
 class KenInputPanel extends StatefulWidget
     with KenWidgetMixin
     implements KenWidgetInterface {
@@ -40,7 +39,7 @@ class KenInputPanel extends StatefulWidget
 
   void Function(List<SmeupInputPanelField>?)? onSubmit;
 
-  Function(Widget,KenCallbackType,dynamic,dynamic)? callBack;
+  Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
   KenInputPanel(this.scaffoldKey, this.formKey,
       {this.id = '',
@@ -51,17 +50,15 @@ class KenInputPanel extends StatefulWidget
       this.width = KenInputPanelModel.defaultWidth,
       this.height = KenInputPanelModel.defaultHeight,
       this.data,
-      this.onSubmit, this.callBack})
+      this.onSubmit,
+      this.callBack})
       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
   }
 
-  KenInputPanel.withController(
-    KenInputPanelModel this.model,
-    this.scaffoldKey,
-    this.formKey,
-      this.callBack
-  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+  KenInputPanel.withController(KenInputPanelModel this.model, this.scaffoldKey,
+      this.formKey, this.callBack)
+      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
@@ -112,11 +109,11 @@ class _KenInputPanelState extends State<KenInputPanel>
   Widget build(BuildContext context) {
     Widget inputPanel = runBuild(context, widget.id, widget.type,
         widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
-          setState(() {
-            widgetLoadType = LoadType.Immediate;
-            setDataLoad(widget.id, false);
-          });
-        });
+      setState(() {
+        widgetLoadType = LoadType.Immediate;
+        setDataLoad(widget.id, false);
+      });
+    });
 
     return inputPanel;
   }
@@ -125,7 +122,7 @@ class _KenInputPanelState extends State<KenInputPanel>
   Future<KenWidgetBuilderResponse> getChildren() async {
     //widget.callBack ?? (CallbackType.getChildren);
 
-    bool? autoAdaptHeight = true;// in originale è impostato sempre true
+    bool? autoAdaptHeight = true; // in originale è impostato sempre true
     //
     // bool? autoAdaptHeight = SmeupConfigurationService.defaultAutoAdaptHeight;
     // // autoadapt on input panel alway enabled
@@ -133,8 +130,8 @@ class _KenInputPanelState extends State<KenInputPanel>
 
     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-
-        await _model!.smeupInputPanelGetData(_model!.instanceCallBack, _model!, widget.formKey, widget.scaffoldKey, context);
+        await _model!.smeupInputPanelGetData(_model!.instanceCallBack, _model!,
+            widget.formKey, widget.scaffoldKey, context);
         _data = widget.treatData(_model!);
       }
       setDataLoad(widget.id, true);
@@ -146,18 +143,14 @@ class _KenInputPanelState extends State<KenInputPanel>
       if (_model != null && _model!.parent != null) {
         inputPanelWidth = (_model!.parent as KenSectionModel).width;
       } else {
-        inputPanelWidth = KenUtilities
-            .getDeviceInfo()
-            .safeWidth;
+        inputPanelWidth = KenUtilities.getDeviceInfo().safeWidth;
       }
     }
     if (inputPanelHeight == 0) {
       if (_model != null && _model!.parent != null) {
         inputPanelHeight = (_model!.parent as KenSectionModel).height;
       } else {
-        inputPanelHeight = KenUtilities
-            .getDeviceInfo()
-            .safeHeight;
+        inputPanelHeight = KenUtilities.getDeviceInfo().safeHeight;
       }
     }
 
@@ -175,7 +168,7 @@ class _KenInputPanelState extends State<KenInputPanel>
         width: inputPanelWidth,
         child: Scaffold(
             floatingActionButton:
-            autoAdaptHeight == true ? _getConfirmButton() : null,
+                autoAdaptHeight == true ? _getConfirmButton() : null,
             floatingActionButtonLocation: autoAdaptHeight == true
                 ? FloatingActionButtonLocation.centerDocked
                 : null,
@@ -299,7 +292,7 @@ class _KenInputPanelState extends State<KenInputPanel>
               .map((e) => KenComboItemModel(e.code, e.description))
               .toList(),
           clientOnChange: (newValue) =>
-          field.value.code = field.value.description = newValue,
+              field.value.code = field.value.description = newValue,
         ),
       ],
     );
@@ -345,11 +338,11 @@ class _KenInputPanelState extends State<KenInputPanel>
               child: KenButton(
                   data: "Conferma",
                   clientOnPressed: () {
-                    if (widget.callBack!= null) {
-                      widget.callBack!(widget,KenCallbackType.clientOnPressed,null,null);
+                    if (widget.callBack != null) {
+                      widget.callBack!(
+                          widget, KenCallbackType.clientOnPressed, null, null);
                     }
-                  }
-              ),
+                  }),
             ),
           ],
         ),
@@ -374,5 +367,4 @@ class _KenInputPanelState extends State<KenInputPanel>
         widget.onSubmit != null) return true;
     return false;
   }
-
 }

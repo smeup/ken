@@ -10,9 +10,9 @@ import 'package:ken/smeup/widgets/ken_enum_callback.dart';
 import 'package:ken/smeup/widgets/ken_not_available.dart';
 import 'package:ken/smeup/widgets/ken_widget_state_mixin.dart';
 
-import '../models/fun.dart';
 import '../services/ken_theme_configuration_service.dart';
 
+// ignore: must_be_immutable
 class KenBox extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState>? formKey;
@@ -195,8 +195,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
               );
             },
             onDismissed: (direction) async {
-              var smeupFun = Fun(deleteDynamism!.exec, widget.formKey,
-                  widget.scaffoldKey, context);
+              // var smeupFun = Fun(deleteDynamism!.exec, widget.formKey,
+              //     widget.scaffoldKey, context);
 
               if (widget.callBack != null) {
                 await widget.callBack!(

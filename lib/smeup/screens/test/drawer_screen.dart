@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/widgets/ken_drawer_data_element.dart';
 import 'package:ken/smeup/widgets/ken_drawer.dart';
 import '../../services/ken_theme_configuration_service.dart';
-import 'label_screen.dart';
 
 class DrawerScreen extends StatelessWidget {
   static const routeName = '/DrawerScreen';
@@ -44,10 +42,10 @@ class DrawerScreen extends StatelessWidget {
   }
 
   KenDrawer _getDrawer(BuildContext context) {
-    double groupFontSize = 18;
-    double fontSize = 16;
-    int staticGroupIcon = 0xe6e6;
-    int dynamicGroupIcon = 0xe211;
+    // double groupFontSize = 18;
+    // double fontSize = 16;
+    // int staticGroupIcon = 0xe6e6;
+    // int dynamicGroupIcon = 0xe211;
 
     return KenDrawer(
       _scaffoldKey,

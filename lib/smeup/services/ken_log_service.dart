@@ -1,10 +1,10 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:ken/smeup/services/ken_theme_configuration_service.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 enum KenLogType { none, debug, info, warning, error }
+
 enum MessagesPromptMode { snackbar }
 
 class KenLogService {
@@ -66,7 +66,8 @@ class KenLogService {
         }
       });
 
-      if (KenThemeConfigurationService.isLogEnabled || logType == KenLogType.error) {
+      if (KenThemeConfigurationService.isLogEnabled ||
+          logType == KenLogType.error) {
         if (_logFile != null) {
           _logFile!.writeAsString('${DateTime.now().toString()}: $message \n',
               mode: FileMode.append);

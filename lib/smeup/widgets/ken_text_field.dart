@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ken/smeup/models/widgets/ken_buttons_model.dart';
 import 'package:ken/smeup/models/ken_widget_builder_response.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/models/widgets/ken_text_field_model.dart';
@@ -58,16 +57,15 @@ class KenTextField extends StatefulWidget
 
   List<TextInputFormatter>? inputFormatters;
 
-  Future<dynamic> Function(Widget,KenCallbackType, dynamic,dynamic)? callBack;
+  Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
   KenTextField.withController(
-      KenTextFieldModel this.model,
-      this.scaffoldKey,
-      this.formKey,
-      this.smeupButtons,
-      this.callBack,
-      )
-      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+    KenTextFieldModel this.model,
+    this.scaffoldKey,
+    this.formKey,
+    this.smeupButtons,
+    this.callBack,
+  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
@@ -198,7 +196,6 @@ class _KenTextFieldState extends State<KenTextField>
   Future<KenWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-
         // await SmeupTextFieldDao.getData(_model!);
         await _model!.getData(_model!.instanceCallBack);
         _data = widget.treatData(_model!);
@@ -213,7 +210,7 @@ class _KenTextFieldState extends State<KenTextField>
     Widget textField;
 
     if (widget.callBack != null) {
-      widget.callBack!(widget,KenCallbackType.getChildren, _data,null);
+      widget.callBack!(widget, KenCallbackType.getChildren, _data, null);
     }
 
     textField = Container(
@@ -241,9 +238,8 @@ class _KenTextFieldState extends State<KenTextField>
           obscureText:
               widget.keyboard == TextInputType.visiblePassword ? true : false,
           onChanged: (value) {
-
             if (widget.callBack != null) {
-              widget.callBack!(widget,KenCallbackType.onChanged, value,null);
+              widget.callBack!(widget, KenCallbackType.onChanged, value, null);
             }
             //
             // if (widget.clientOnChange != null) widget.clientOnChange!(value);
@@ -275,9 +271,8 @@ class _KenTextFieldState extends State<KenTextField>
             ),
           ),
           onSaved: (value) {
-
             if (widget.callBack != null) {
-              widget.callBack!(widget,KenCallbackType.onSaved, value,null);
+              widget.callBack!(widget, KenCallbackType.onSaved, value, null);
             }
             //
             // if (widget.clientOnSave != null) widget.clientOnSave!(value);
@@ -286,7 +281,6 @@ class _KenTextFieldState extends State<KenTextField>
             // if (_model != null)
             //   SmeupDynamismService.run(_model!.dynamisms, context, 'lostfocus',
             //       widget.scaffoldKey, widget.formKey);
-
           }, // lostfocus
         ));
 
@@ -301,16 +295,13 @@ class _KenTextFieldState extends State<KenTextField>
           padding: EdgeInsets.all(0),
         );
       } else {
-
-
-        if (widget.smeupButtons!=null) {
+        if (widget.smeupButtons != null) {
           button = widget.smeupButtons!;
         }
-
       }
 
       final column;
-      if (button!= null) {
+      if (button != null) {
         column = Column(
           //mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -334,7 +325,7 @@ class _KenTextFieldState extends State<KenTextField>
 
   TextStyle _getTextStile() {
     TextStyle style =
-    KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!;
+        KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!;
 
     style = style.copyWith(
         color: widget.fontColor,
@@ -351,7 +342,8 @@ class _KenTextFieldState extends State<KenTextField>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = KenThemeConfigurationService.getTheme()!.textTheme.caption!;
+    TextStyle style =
+        KenThemeConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
         color: widget.captionFontColor,

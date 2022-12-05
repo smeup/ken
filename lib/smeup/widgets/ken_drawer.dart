@@ -4,7 +4,6 @@ import 'package:ken/smeup/models/ken_widget_builder_response.dart';
 import 'package:ken/smeup/models/widgets/ken_drawer_data_element.dart';
 import 'package:ken/smeup/models/widgets/ken_drawer_model.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
-import 'package:ken/smeup/services/ken_localization_service.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 import 'package:ken/smeup/widgets/ken_drawer_item.dart';
 import 'package:ken/smeup/widgets/ken_enum_callback.dart';
@@ -15,8 +14,8 @@ import '../services/ken_theme_configuration_service.dart';
 
 // ignore: must_be_immutable
 class KenDrawer extends StatefulWidget
-    // with SmeupWidgetMixin
-    // implements SmeupWidgetInterface//todo da togliere
+// with SmeupWidgetMixin
+// implements SmeupWidgetInterface//todo da togliere
 {
   KenDrawerModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
@@ -38,7 +37,7 @@ class KenDrawer extends StatefulWidget
   String? type;
   List<KenDrawerDataElement>? drawerDataElement;
 
-  Function(KenCallbackType type)? callBack;//todo
+  Function(KenCallbackType type)? callBack; //todo
 
   KenDrawer(this.scaffoldKey, this.formKey,
       {this.id = '',
@@ -52,7 +51,7 @@ class KenDrawer extends StatefulWidget
       this.elementFontBold,
       this.title = '',
       this.imageUrl = '',
-        this.drawerDataElement,
+      this.drawerDataElement,
       //this.data,
       this.imageWidth = KenDrawerModel.defaultImageWidth,
       this.imageHeight = KenDrawerModel.defaultImageHeight,
@@ -67,7 +66,7 @@ class KenDrawer extends StatefulWidget
     KenDrawerModel this.model,
     this.scaffoldKey,
     this.formKey,
-      this.drawerDataElement,
+    this.drawerDataElement,
   ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
@@ -90,7 +89,6 @@ class KenDrawer extends StatefulWidget
     elementFontColor = m.elementFontColor;
     showItemDivider = m.showItemDivider;
   }
-
 
   @override
   _KenDrawerState createState() => _KenDrawerState();
@@ -132,7 +130,8 @@ class _KenDrawerState extends State<KenDrawer>
   Widget _getCollpsed(e) {
     return ListTile(
       leading: e.groupIcon != null
-          ? Icon(e.groupIconData,
+          ? Icon(
+              e.groupIconData,
               color: _getIconTheme().color,
               size: _getIconTheme().size,
             )
@@ -144,7 +143,6 @@ class _KenDrawerState extends State<KenDrawer>
   @override
   Future<KenWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
-
       _data = widget.drawerDataElement;
 
       setDataLoad(widget.id, true);
@@ -186,11 +184,8 @@ class _KenDrawerState extends State<KenDrawer>
 
     for (KenDrawerDataElement e in _data!) {
       if (e.group.isEmpty) {
-
         list.add(KenDrawerItem(widget.scaffoldKey, widget.formKey, e.text,
-            e.route,
-            e.itemIconData,
-            e.action, e.align, false,
+            e.route, e.itemIconData, e.action, e.align, false,
             fontSize: e.fontSize));
       } else {
         List<Widget>? listInGroup;
@@ -214,10 +209,15 @@ class _KenDrawerState extends State<KenDrawer>
         listInGroup = groups[e.group];
         listInGroup!.add(Padding(
           padding: const EdgeInsets.only(left: 60.0),
-          child: KenDrawerItem(widget.scaffoldKey, widget.formKey, e.text,
+          child: KenDrawerItem(
+              widget.scaffoldKey,
+              widget.formKey,
+              e.text,
               e.route,
               e.itemIconData,
-              e.action, e.align, widget.showItemDivider,
+              e.action,
+              e.align,
+              widget.showItemDivider,
               fontSize: e.fontSize),
           // SmeupDrawerItem(widget.scaffoldKey, widget.formKey, e.text,
           //     e.route, e.iconCode, e.action, e.align, widget.showItemDivider,
@@ -287,7 +287,8 @@ class _KenDrawerState extends State<KenDrawer>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenThemeConfigurationService.getTheme()!.iconTheme;
+    IconThemeData themeData =
+        KenThemeConfigurationService.getTheme()!.iconTheme;
 
     return themeData;
   }

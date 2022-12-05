@@ -13,7 +13,9 @@ import '../services/ken_theme_configuration_service.dart';
 import 'ken_widget_state_interface.dart';
 
 // ignore: must_be_immutable
-class KenTextAutocomplete extends StatefulWidget with KenWidgetMixin implements KenWidgetInterface {
+class KenTextAutocomplete extends StatefulWidget
+    with KenWidgetMixin
+    implements KenWidgetInterface {
   KenTextAutocompleteModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;
@@ -60,7 +62,8 @@ class KenTextAutocomplete extends StatefulWidget with KenWidgetMixin implements 
 
   Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
-  KenTextAutocomplete.withController(KenTextAutocompleteModel this.model, this.scaffoldKey, this.formKey, this.smeupButtons,this.callBack)
+  KenTextAutocomplete.withController(KenTextAutocompleteModel this.model,
+      this.scaffoldKey, this.formKey, this.smeupButtons, this.callBack)
       : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
@@ -147,7 +150,10 @@ class KenTextAutocomplete extends StatefulWidget with KenWidgetMixin implements 
       var newList = List<Map<dynamic, dynamic>>.empty(growable: true);
       for (var i = 0; i < (workData['rows'] as List).length; i++) {
         final element = workData['rows'][i];
-        newList.add({'code': element['code'].toString(), 'value': element['value'].toString()});
+        newList.add({
+          'code': element['code'].toString(),
+          'value': element['value'].toString()
+        });
       }
       return newList;
     } else {
@@ -159,7 +165,9 @@ class KenTextAutocomplete extends StatefulWidget with KenWidgetMixin implements 
   _KenTextAutocompleteState createState() => _KenTextAutocompleteState();
 }
 
-class _KenTextAutocompleteState extends State<KenTextAutocomplete> with KenWidgetStateMixin implements KenWidgetStateInterface {
+class _KenTextAutocompleteState extends State<KenTextAutocomplete>
+    with KenWidgetStateMixin
+    implements KenWidgetStateInterface {
   KenTextAutocompleteModel? _model;
   dynamic _data;
 
@@ -182,7 +190,8 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> with KenWidge
 
   @override
   Widget build(BuildContext context) {
-    Widget autocomplete = runBuild(context, widget.id, widget.type, widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
+    Widget autocomplete = runBuild(context, widget.id, widget.type,
+        widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
         widgetLoadType = LoadType.Immediate;
         setDataLoad(widget.id, false);
@@ -211,7 +220,8 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> with KenWidge
     TextStyle captionStyle = _getCaptionStile();
     IconThemeData iconTheme = _getIconTheme();
 
-    String _displayStringForOption(Map<dynamic, dynamic> option) => option['value'];
+    String _displayStringForOption(Map<dynamic, dynamic> option) =>
+        option['value'];
 
     Widget children;
 
@@ -219,22 +229,31 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> with KenWidge
         padding: widget.padding,
         decoration: widget.showborder!
             ? BoxDecoration(
-                borderRadius: BorderRadius.circular(widget.borderRadius!), border: Border.all(color: widget.borderColor!, width: widget.borderWidth!))
+                borderRadius: BorderRadius.circular(widget.borderRadius!),
+                border: Border.all(
+                    color: widget.borderColor!, width: widget.borderWidth!))
             : null,
         height: widget.height,
         child: RawAutocomplete<Map<dynamic, dynamic>>(
           optionsBuilder: (TextEditingValue textEditingValue) {
             return _options!.where((Map<dynamic, dynamic> option) {
-              return option['value'].toString().toLowerCase().contains(textEditingValue.text.toLowerCase());
+              return option['value']
+                  .toString()
+                  .toLowerCase()
+                  .contains(textEditingValue.text.toLowerCase());
             });
           },
           displayStringForOption: _displayStringForOption,
-          fieldViewBuilder: (BuildContext context, TextEditingController textEditingController, FocusNode focusNode, VoidCallback onFieldSubmitted) {
-
+          fieldViewBuilder: (BuildContext context,
+              TextEditingController textEditingController,
+              FocusNode focusNode,
+              VoidCallback onFieldSubmitted) {
             String code = "";
-            if (widget != null) {
-              code = widget.callBack!(widget, KenCallbackType.fieldViewBuilder, _data,null) as String;
-            }
+            //if (widget != null) {
+            code = widget.callBack!(
+                    widget, KenCallbackType.fieldViewBuilder, _data, null)
+                as String;
+            //}
 
             if (code.isNotEmpty && _data != null) {
               var currel = _data.firstWhere(
@@ -264,20 +283,31 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> with KenWidge
                     textCapitalization: TextCapitalization.none,
                     textInputAction: TextInputAction.next,
                     enableSuggestions: true,
-                    validator: widget.clientValidator as String? Function(String?)?,
+                    validator:
+                        widget.clientValidator as String? Function(String?)?,
                     keyboardType: widget.keyboard,
-                    obscureText: widget.keyboard == TextInputType.visiblePassword ? true : false,
+                    obscureText:
+                        widget.keyboard == TextInputType.visiblePassword
+                            ? true
+                            : false,
                     onChanged: (value) {
-                      if (widget.clientOnChange != null) widget.clientOnChange!(value);
+                      if (widget.clientOnChange != null)
+                        widget.clientOnChange!(value);
                     },
                     decoration: InputDecoration(
                       labelStyle: captionStyle,
                       labelText: widget.label,
                       enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: widget.underline! ? widget.borderColor! : Colors.transparent),
+                        borderSide: BorderSide(
+                            color: widget.underline!
+                                ? widget.borderColor!
+                                : Colors.transparent),
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: widget.underline! ? widget.borderColor! : Colors.transparent),
+                        borderSide: BorderSide(
+                            color: widget.underline!
+                                ? widget.borderColor!
+                                : Colors.transparent),
                       ),
                     ),
                     onSaved: widget.clientOnSave as void Function(String?)?,
@@ -295,18 +325,19 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> with KenWidge
                   ),
                   onTap: () {
                     setState(() {
-
                       if (widget.callBack != null) {
-                        widget.callBack!(widget, KenCallbackType.onTapSetState,code,null);
+                        widget.callBack!(
+                            widget, KenCallbackType.onTapSetState, code, null);
                       }
-
                     });
                   },
                 ),
               )
             ]);
           },
-          optionsViewBuilder: (BuildContext context, AutocompleteOnSelected<Map<dynamic, dynamic>> onSelected, Iterable<Map<dynamic, dynamic>> options) {
+          optionsViewBuilder: (BuildContext context,
+              AutocompleteOnSelected<Map<dynamic, dynamic>> onSelected,
+              Iterable<Map<dynamic, dynamic>> options) {
             return Align(
               alignment: Alignment.topLeft,
               child: Material(
@@ -318,13 +349,15 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> with KenWidge
                     padding: const EdgeInsets.all(8.0),
                     itemCount: options.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final Map<dynamic, dynamic> option = options.elementAt(index);
+                      final Map<dynamic, dynamic> option =
+                          options.elementAt(index);
                       return GestureDetector(
                         onTap: () {
                           onSelected(option);
 
                           if (widget.callBack != null) {
-                            widget.callBack!(widget, KenCallbackType.onTapOnSelected,option,null);
+                            widget.callBack!(widget,
+                                KenCallbackType.onTapOnSelected, option, null);
                           }
 
                           // SmeupVariablesService.setVariable(
@@ -338,7 +371,6 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> with KenWidge
                           //       'change', widget.scaffoldKey, widget.formKey);
                           // if (widget.clientOnSelected != null)
                           //   widget.clientOnSelected!(option);
-
                         },
                         child: ListTile(
                           title: Text(
@@ -366,14 +398,13 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> with KenWidge
           padding: EdgeInsets.all(0),
         );
       } else {
-
-        if (widget.smeupButtons!=null) {
+        if (widget.smeupButtons != null) {
           button = widget.smeupButtons!;
         }
       }
 
       final column;
-      if (button!= null) {
+      if (button != null) {
         column = Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -395,9 +426,13 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> with KenWidge
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!;
+    TextStyle style =
+        KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!;
 
-    style = style.copyWith(color: widget.fontColor, fontSize: widget.fontSize, backgroundColor: widget.backColor);
+    style = style.copyWith(
+        color: widget.fontColor,
+        fontSize: widget.fontSize,
+        backgroundColor: widget.backColor);
 
     if (widget.fontBold!) {
       style = style.copyWith(
@@ -409,9 +444,13 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> with KenWidge
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = KenThemeConfigurationService.getTheme()!.textTheme.caption!;
+    TextStyle style =
+        KenThemeConfigurationService.getTheme()!.textTheme.caption!;
 
-    style = style.copyWith(color: widget.captionFontColor, fontSize: widget.captionFontSize, backgroundColor: widget.captionBackColor);
+    style = style.copyWith(
+        color: widget.captionFontColor,
+        fontSize: widget.captionFontSize,
+        backgroundColor: widget.captionBackColor);
 
     if (widget.captionFontBold!) {
       style = style.copyWith(
@@ -423,7 +462,8 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> with KenWidge
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenThemeConfigurationService.getTheme()!.iconTheme;
+    IconThemeData themeData =
+        KenThemeConfigurationService.getTheme()!.iconTheme;
 
     return themeData;
   }
