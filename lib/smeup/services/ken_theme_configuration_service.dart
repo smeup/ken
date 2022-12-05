@@ -26,6 +26,7 @@ class KenThemeConfigurationService {
       {KenLogType logLevel = KenLogType.none,
       dynamic localizationService,
       String appBarImage = '',
+      bool isLogEnabled = false,
       Map<DateTime, List?>? holidays,
       String? jsonsPath,
       String? imagesPath,
@@ -35,7 +36,7 @@ class KenThemeConfigurationService {
     KenThemeConfigurationService.externalConfigurationModel = appConfiguration;
     KenThemeConfigurationService.holidays = holidays;
     KenThemeConfigurationService._theme = theme;
-
+    KenThemeConfigurationService.isLogEnabled = isLogEnabled;
     KenThemeConfigurationService.defaultAutoAdaptHeight =
         defaultAutoAdaptHeight;
     KenThemeConfigurationService.logLevel = logLevel;
