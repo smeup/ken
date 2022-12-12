@@ -157,169 +157,173 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
     final pc = KenThemeConfigurationService.getTheme()!.primaryColor;
 
     return SingleChildScrollView(
-      // Container(
-      // height: calendarHeight,
-      // width: calendarWidth,
-      child: Column(
-        children: [
-          Stack(children: <Widget>[
-            TableCalendar<KenCalendarEventModel>(
-              firstDay: _firstWork!,
-              focusedDay: _focusDay!,
-              lastDay: _lastWork!,
-              locale:
-                  '${Localizations.localeOf(context).languageCode}_${Localizations.localeOf(context).countryCode}',
-              selectedDayPredicate: (date) => isSameDay(
-                  _nomalizeDateTime(date), _nomalizeDateTime(_selectedDay!)),
-              eventLoader: (day) {
-                return _getEventsForDay(day);
-              },
-              holidayPredicate: (date) {
-                return _isHoliday(date);
-              },
-
-              calendarFormat: _calendarFormat!,
-              startingDayOfWeek: StartingDayOfWeek.monday,
-              availableGestures: AvailableGestures.all,
-              availableCalendarFormats: const {
-                CalendarFormat.month: '',
-                CalendarFormat.week: '',
-                CalendarFormat.twoWeeks: '',
-              },
-
-              calendarStyle: CalendarStyle(
-                outsideDaysVisible: false,
-                holidayTextStyle: dayTextStyle.copyWith(color: Colors.red[600]),
-              ),
-
-              // navigation and title header
-              headerVisible: widget.showNavigation!,
-              headerStyle: HeaderStyle(
-                titleTextStyle:
-                    titleTextStyle.copyWith(fontSize: widget.titleFontSize),
-                titleCentered: true,
-                formatButtonVisible: false,
-                decoration: BoxDecoration(
-                    color:
-                        KenThemeConfigurationService.getTheme()!.primaryColor),
-                leftChevronIcon:
-                    Icon(Icons.arrow_back_ios, color: iconTheme.color),
-                rightChevronIcon:
-                    Icon(Icons.arrow_forward_ios, color: iconTheme.color),
-              ),
-
-              // days headers
-              daysOfWeekStyle: DaysOfWeekStyle(
-                weekendStyle:
-                    daysHeaderTextStyle.copyWith(color: Colors.red[800]),
-                weekdayStyle: daysHeaderTextStyle,
-              ),
-
-              calendarBuilders: CalendarBuilders(
-                // day builder
-                defaultBuilder: (context, day, focusedDay) {
-                  Color? containerBackcolor = dayTextStyle.backgroundColor;
-
-                  return _getDayContainer(
-                    day,
-                    dayTextStyle,
-                    containerBackcolor,
-                  );
+      child: Container(
+        color: dayTextStyle.backgroundColor, // <- Tony: background calendar
+        // height: calendarHeight,
+        // width: calendarWidth,
+        child: Column(
+          children: [
+            Stack(children: <Widget>[
+              TableCalendar<KenCalendarEventModel>(
+                firstDay: _firstWork!,
+                focusedDay: _focusDay!,
+                lastDay: _lastWork!,
+                locale:
+                    '${Localizations.localeOf(context).languageCode}_${Localizations.localeOf(context).countryCode}',
+                selectedDayPredicate: (date) => isSameDay(
+                    _nomalizeDateTime(date), _nomalizeDateTime(_selectedDay!)),
+                eventLoader: (day) {
+                  return _getEventsForDay(day);
+                },
+                holidayPredicate: (date) {
+                  return _isHoliday(date);
                 },
 
-                // selected day
-                selectedBuilder: (context, date, _) {
-                  Color containerBackcolor =
-                      Color.fromRGBO(pc.red, pc.green, pc.blue, 0.3);
-
-                  return FadeTransition(
-                      opacity: Tween(begin: 0.5, end: 1.0)
-                          .animate(_animationController),
-                      child: _getDayContainer(
-                          date, dayTextStyle, containerBackcolor));
+                calendarFormat: _calendarFormat!,
+                startingDayOfWeek: StartingDayOfWeek.monday,
+                availableGestures: AvailableGestures.all,
+                availableCalendarFormats: const {
+                  CalendarFormat.month: '',
+                  CalendarFormat.week: '',
+                  CalendarFormat.twoWeeks: '',
                 },
 
-                // today
-                todayBuilder: (context, date, _) {
-                  return _getDayContainer(
-                    date,
-                    dayTextStyle,
-                    Color.fromRGBO(pc.red, pc.green, pc.blue, 0.7),
-                  );
-                },
+                calendarStyle: CalendarStyle(
+                  outsideDaysVisible: false,
+                  holidayTextStyle:
+                      dayTextStyle.copyWith(color: Colors.red[600]),
+                ),
 
-                // markers
-                markerBuilder: (context, date, events) {
-                  return _getMarkerContainer(date, markerStyle);
+                // navigation and title header
+                headerVisible: widget.showNavigation!,
+                headerStyle: HeaderStyle(
+                  titleTextStyle:
+                      titleTextStyle.copyWith(fontSize: widget.titleFontSize),
+                  titleCentered: true,
+                  formatButtonVisible: false,
+                  decoration: BoxDecoration(
+                      color: KenThemeConfigurationService.getTheme()!
+                          .primaryColor),
+                  leftChevronIcon:
+                      Icon(Icons.arrow_back_ios, color: iconTheme.color),
+                  rightChevronIcon:
+                      Icon(Icons.arrow_forward_ios, color: iconTheme.color),
+                ),
+
+                // days headers
+                daysOfWeekStyle: DaysOfWeekStyle(
+                  weekendStyle:
+                      daysHeaderTextStyle.copyWith(color: Colors.red[800]),
+                  weekdayStyle: daysHeaderTextStyle,
+                ),
+                daysOfWeekHeight: 40, // <- Tony: header height
+                calendarBuilders: CalendarBuilders(
+                  // day builder
+                  defaultBuilder: (context, day, focusedDay) {
+                    Color? containerBackcolor = dayTextStyle.backgroundColor;
+
+                    return _getDayContainer(
+                      day,
+                      dayTextStyle,
+                      containerBackcolor,
+                    );
+                  },
+
+                  // selected day
+                  selectedBuilder: (context, date, _) {
+                    Color containerBackcolor =
+                        Color.fromRGBO(pc.red, pc.green, pc.blue, 0.3);
+
+                    return FadeTransition(
+                        opacity: Tween(begin: 0.5, end: 1.0)
+                            .animate(_animationController),
+                        child: _getDayContainer(
+                            date, dayTextStyle, containerBackcolor));
+                  },
+
+                  // today
+                  todayBuilder: (context, date, _) {
+                    return _getDayContainer(
+                      date,
+                      dayTextStyle,
+                      Color.fromRGBO(pc.red, pc.green, pc.blue, 0.7),
+                    );
+                  },
+
+                  // markers
+                  markerBuilder: (context, date, events) {
+                    return _getMarkerContainer(date, markerStyle);
+                  },
+                ),
+                onDaySelected: (selectedDay, focusedDay) {
+                  _onDaySelected(selectedDay, focusedDay);
+                  _animationController.forward(from: 0.0);
                 },
-              ),
-              onDaySelected: (selectedDay, focusedDay) {
-                _onDaySelected(selectedDay, focusedDay);
-                _animationController.forward(from: 0.0);
-              },
-              onPageChanged: (focusedDay) async {
-                _focusDay = focusedDay;
-                setState(() {
-                  _isLoading = true;
-                });
-                widget.clientOnChangeMonth!(focusedDay).then((res) {
-                  _data = res['data'];
-                  _events = res['events'];
+                onPageChanged: (focusedDay) async {
+                  _focusDay = focusedDay;
                   setState(() {
-                    _isLoading = false;
+                    _isLoading = true;
                   });
-                });
-              },
-            ),
-            if (_isLoading)
-              Padding(
-                padding: const EdgeInsets.only(top: 180.0),
-                child: KenProgressIndicator(widget.scaffoldKey, widget.formKey,
-                    size: 60),
-              )
-          ]),
-          SizedBox(
-            height: separatorHeight,
-            child: KenLine(widget.scaffoldKey, widget.formKey),
-          ),
-          if (_selectedEvents != null)
-            Container(
-              height: _selectedEvents!.value.length.toDouble() *
-                  55, // _getListHeight(separatorHeight),
-              child: ValueListenableBuilder<List<KenCalendarEventModel>>(
-                valueListenable: _selectedEvents!,
-                builder: (context, event, _) {
-                  return ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: event.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 12.0,
-                          vertical: 4.0,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: event[index].markerBackgroundColor),
-                          borderRadius: BorderRadius.circular(12.0),
-                          shape: BoxShape.rectangle,
-                          color: event[index].markerBackgroundColor,
-                        ),
-                        child: ListTile(
-                          visualDensity:
-                              VisualDensity(horizontal: -3, vertical: -3),
-                          onTap: () => _eventClicked(
-                              event[index].day!, _focusDay,
-                              event: event[index]),
-                          title: _getListTileWidget(event[index]),
-                        ),
-                      );
-                    },
-                  );
+                  widget.clientOnChangeMonth!(focusedDay).then((res) {
+                    _data = res['data'];
+                    _events = res['events'];
+                    setState(() {
+                      _isLoading = false;
+                    });
+                  });
                 },
               ),
+              if (_isLoading)
+                Padding(
+                  padding: const EdgeInsets.only(top: 180.0),
+                  child: KenProgressIndicator(
+                      widget.scaffoldKey, widget.formKey,
+                      size: 60),
+                )
+            ]),
+            SizedBox(
+              height: separatorHeight,
+              child: KenLine(widget.scaffoldKey, widget.formKey),
             ),
-        ],
+            if (_selectedEvents != null)
+              Container(
+                height: _selectedEvents!.value.length.toDouble() *
+                    55, // _getListHeight(separatorHeight),
+                child: ValueListenableBuilder<List<KenCalendarEventModel>>(
+                  valueListenable: _selectedEvents!,
+                  builder: (context, event, _) {
+                    return ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: event.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 12.0,
+                            vertical: 4.0,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: event[index].markerBackgroundColor),
+                            borderRadius: BorderRadius.circular(12.0),
+                            shape: BoxShape.rectangle,
+                            color: event[index].markerBackgroundColor,
+                          ),
+                          child: ListTile(
+                            visualDensity:
+                                VisualDensity(horizontal: -3, vertical: -3),
+                            onTap: () => _eventClicked(
+                                event[index].day!, _focusDay,
+                                event: event[index]),
+                            title: _getListTileWidget(event[index]),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
