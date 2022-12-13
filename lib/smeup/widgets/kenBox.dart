@@ -555,9 +555,9 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
   Future<Widget> _getImage(dynamic data) async {
     if (widget.callBack != null) {
       var imageWidget =
-          await widget.callBack!(widget, KenCallbackType.getImage, null, null);
+          await widget.callBack!(widget, KenCallbackType.getImage, data, null);
 
-      if (imageWidget != null && imageWidget is Future<Widget>) {
+      if (imageWidget != null) {
         return imageWidget;
       } else {
         return Container();
