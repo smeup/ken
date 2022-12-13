@@ -250,10 +250,10 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
               FocusNode focusNode,
               VoidCallback onFieldSubmitted) {
             String code = "";
-            if (widget != null) {
-              code = widget.callBack!(
-                      widget, KenCallbackType.fieldViewBuilder, _data, null)
-                  as String;
+            if (widget.callBack != null) {
+              widget.callBack!
+                      (widget, KenCallbackType.fieldViewBuilder, _data, null)
+                  .then((value) => code = value);
             }
 
             if (code.isNotEmpty && _data != null) {
