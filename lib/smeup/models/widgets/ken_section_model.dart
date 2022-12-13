@@ -49,17 +49,12 @@ class KenSectionModel extends KenModel with KenModelMixin {
       GlobalKey<FormState>? formKey,
       BuildContext? context,
       KenModel parent,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
+      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+              KenModel? instance)
+          instanceCallBack,
       GlobalKey<ScaffoldState>? scaffoldKey)
       : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-          instanceCallBack,
-          null
-        ) {
-
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     String tmp = jsonMap['dim'] ?? '';
     tmp = tmp.replaceAll('%', '');
     dim = double.tryParse(tmp) ?? 0;
@@ -75,7 +70,7 @@ class KenSectionModel extends KenModel with KenModelMixin {
       parentForm = parent.parentForm;
     }
 
-    // TODO nel futuro prevedere di eliminzare servizi anche in questo modell.
+    // ??? nel futuro prevedere di eliminzare servizi anche in questo modell.
     // this.instanceCallBack(ServicesCallbackType.replaceSelectedTabIndex, this);
     _replaceSelectedTabIndex(jsonMap);
 
@@ -111,46 +106,52 @@ class KenSectionModel extends KenModel with KenModelMixin {
         try {
           switch (v['type']) {
             case 'LAB': // ok
-              model = KenLabelModel.fromMap(v, formKey, scaffoldKey, context, instanceCallBack);
+              model = KenLabelModel.fromMap(
+                  v, formKey, scaffoldKey, context, instanceCallBack);
               break;
             case 'GAU':
-              model = KenGaugeModel.fromMap(v, formKey, scaffoldKey, context, instanceCallBack);
+              model = KenGaugeModel.fromMap(
+                  v, formKey, scaffoldKey, context, instanceCallBack);
               break;
             case 'CAU':
-              model =
-                  KenCarouselModel.fromMap(v, formKey, scaffoldKey, context, instanceCallBack);
+              model = KenCarouselModel.fromMap(
+                  v, formKey, scaffoldKey, context, instanceCallBack);
               break;
             case 'TRE':
-              model = KenTreeModel.fromMap(v, formKey, scaffoldKey, context, instanceCallBack);
+              model = KenTreeModel.fromMap(
+                  v, formKey, scaffoldKey, context, instanceCallBack);
               break;
             case 'CAL':
-              model =
-                  KenCalendarModel.fromMap(v, formKey, scaffoldKey, context, instanceCallBack);
+              model = KenCalendarModel.fromMap(
+                  v, formKey, scaffoldKey, context, instanceCallBack);
               break;
             case 'CHA':
-              model = KenChartModel.fromMap(v, formKey, scaffoldKey, context, instanceCallBack);
+              model = KenChartModel.fromMap(
+                  v, formKey, scaffoldKey, context, instanceCallBack);
               break;
             case 'BTN':
-              model =
-                  KenButtonsModel.fromMap(v, formKey, scaffoldKey, context, instanceCallBack);
+              model = KenButtonsModel.fromMap(
+                  v, formKey, scaffoldKey, context, instanceCallBack);
               break;
             case 'BOX':
-              model =
-                  KenListBoxModel.fromMap(v, formKey, scaffoldKey, context, instanceCallBack);
+              model = KenListBoxModel.fromMap(
+                  v, formKey, scaffoldKey, context, instanceCallBack);
               break;
             case 'DSH':
-              model =
-                  KenDashboardModel.fromMap(v, formKey, scaffoldKey, context, instanceCallBack);
+              model = KenDashboardModel.fromMap(
+                  v, formKey, scaffoldKey, context, instanceCallBack);
               break;
             case 'LIN':
-              model = KenLineModel.fromMap(v, formKey, scaffoldKey, context, instanceCallBack);
+              model = KenLineModel.fromMap(
+                  v, formKey, scaffoldKey, context, instanceCallBack);
               break;
             case 'IMG':
-              model = KenImageModel.fromMap(v, formKey, scaffoldKey, context, instanceCallBack);
+              model = KenImageModel.fromMap(
+                  v, formKey, scaffoldKey, context, instanceCallBack);
               break;
             case 'IML':
-              model =
-                  KenImageListModel.fromMap(v, formKey, scaffoldKey, context, instanceCallBack);
+              model = KenImageListModel.fromMap(
+                  v, formKey, scaffoldKey, context, instanceCallBack);
               break;
             case 'FLD':
               switch (v['options']['FLD']['default']['type']) {
@@ -212,7 +213,8 @@ class KenSectionModel extends KenModel with KenModelMixin {
 
               break;
             case 'SCH':
-              model = KenFormModel.fromMap(v, formKey, scaffoldKey, context, instanceCallBack );
+              model = KenFormModel.fromMap(
+                  v, formKey, scaffoldKey, context, instanceCallBack);
               break;
             case 'DRW':
               break;
