@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../services/ken_theme_configuration_service.dart';
+import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
 class KenSwitchWidget extends StatefulWidget {
@@ -48,7 +48,7 @@ class _KenSwitchWidgetState extends State<KenSwitchWidget> {
   }
 
   SwitchThemeData _getSwitchStile(bool data) {
-    SwitchThemeData style = KenThemeConfigurationService.getTheme()!
+    SwitchThemeData style = KenConfigurationService.getTheme()!
         .switchTheme
         .copyWith(
             thumbColor: MaterialStateProperty.all<Color?>(

@@ -3,7 +3,7 @@ import 'package:ken/smeup/services/ken_log_service.dart';
 
 import '../models/external_configuration_model.dart';
 
-class KenThemeConfigurationService {
+class KenConfigurationService {
   static const double STATIC_BUTTON_ROUNDNESS = 0.0;
 
   static ThemeData? _theme;
@@ -33,25 +33,23 @@ class KenThemeConfigurationService {
       ExternalConfigurationModel? appConfiguration,
       ThemeData? theme,
       bool defaultAutoAdaptHeight = true}) async {
-    KenThemeConfigurationService.externalConfigurationModel = appConfiguration;
-    KenThemeConfigurationService.holidays = holidays;
-    KenThemeConfigurationService._theme = theme;
-    KenThemeConfigurationService.isLogEnabled = isLogEnabled;
-    KenThemeConfigurationService.defaultAutoAdaptHeight =
-        defaultAutoAdaptHeight;
-    KenThemeConfigurationService.logLevel = logLevel;
-    KenThemeConfigurationService.appBarImage = appBarImage;
+    KenConfigurationService.externalConfigurationModel = appConfiguration;
+    KenConfigurationService.holidays = holidays;
+    KenConfigurationService._theme = theme;
+    KenConfigurationService.isLogEnabled = isLogEnabled;
+    KenConfigurationService.defaultAutoAdaptHeight = defaultAutoAdaptHeight;
+    KenConfigurationService.logLevel = logLevel;
+    KenConfigurationService.appBarImage = appBarImage;
 
-    KenThemeConfigurationService.appDictionary = localizationService;
+    KenConfigurationService.appDictionary = localizationService;
 
-    KenThemeConfigurationService.jsonsPath = jsonsPath;
-    KenThemeConfigurationService.imagesPath = imagesPath;
+    KenConfigurationService.jsonsPath = jsonsPath;
+    KenConfigurationService.imagesPath = imagesPath;
 
-    if (KenThemeConfigurationService.isLogEnabled)
-      await KenLogService.setLogFile();
+    if (KenConfigurationService.isLogEnabled) await KenLogService.setLogFile();
   }
 
   static ThemeData? getTheme() {
-    return KenThemeConfigurationService._theme;
+    return KenConfigurationService._theme;
   }
 }

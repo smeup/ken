@@ -11,7 +11,7 @@ import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
 
-import '../services/ken_theme_configuration_service.dart';
+import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
 class KenLabel extends StatefulWidget
@@ -323,8 +323,7 @@ class _KenLabelState extends State<KenLabel>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style =
-        KenThemeConfigurationService.getTheme()!.textTheme.bodyText2!;
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.bodyText2!;
 
     style = style.copyWith(
         color: widget.fontColor,
@@ -341,7 +340,7 @@ class _KenLabelState extends State<KenLabel>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenThemeConfigurationService.getTheme()!
+    IconThemeData themeData = KenConfigurationService.getTheme()!
         .iconTheme
         .copyWith(size: widget.iconSize, color: widget.iconColor);
 

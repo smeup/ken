@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:ken/smeup/services/ken_theme_configuration_service.dart';
+import 'package:ken/smeup/services/ken_configuration_service.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -37,7 +37,7 @@ class KenLogService {
     }
 
     int logLevel = 0;
-    switch (KenThemeConfigurationService.logLevel) {
+    switch (KenConfigurationService.logLevel) {
       case KenLogType.debug:
         logLevel = 4;
         break;
@@ -66,8 +66,7 @@ class KenLogService {
         }
       });
 
-      if (KenThemeConfigurationService.isLogEnabled ||
-          logType == KenLogType.error) {
+      if (KenConfigurationService.isLogEnabled || logType == KenLogType.error) {
         if (_logFile != null) {
           _logFile!.writeAsString('${DateTime.now().toString()}: $message \n',
               mode: FileMode.append);

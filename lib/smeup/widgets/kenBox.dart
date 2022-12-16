@@ -10,7 +10,7 @@ import 'package:ken/smeup/widgets/kenEnumCallback.dart';
 import 'package:ken/smeup/widgets/kenNotAvailable.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
 
-import '../services/ken_theme_configuration_service.dart';
+import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
 class KenBox extends StatefulWidget {
@@ -171,7 +171,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
                 context: context,
                 builder: (BuildContext context) {
                   return Theme(
-                    data: KenThemeConfigurationService.getTheme()!,
+                    data: KenConfigurationService.getTheme()!,
                     child: AlertDialog(
                       title: Text(KenLocalizationService.of(context)!
                           .getLocalString('confirm')),

@@ -4,11 +4,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/ken_device_info.dart';
 import 'package:ken/smeup/services/ken_log_service.dart';
-import 'package:ken/smeup/services/ken_theme_configuration_service.dart';
+import 'package:ken/smeup/services/ken_configuration_service.dart';
 import 'ken_widget_notification_service.dart';
 
 class KenUtilities {
-
   static Map _globalVariables = Map();
   static Map _formVariables = Map();
 
@@ -59,9 +58,7 @@ class KenUtilities {
 
   static String replaceVariables(
       String funString, GlobalKey<FormState>? formKey) {
-    KenUtilities.getVariables(formKey: formKey)
-        .entries
-        .forEach((element) {
+    KenUtilities.getVariables(formKey: formKey).entries.forEach((element) {
       String key = element.key;
       if (formKey != null)
         key = key.replaceAll('${formKey.hashCode.toString()}_', '');
@@ -125,7 +122,6 @@ class KenUtilities {
 
     return join;
   }
-
 
   static String? extractValueFromType(
       Map fields, String tipo, String parametro) {
@@ -337,7 +333,7 @@ class KenUtilities {
 
   static String replaceDictionaryPlaceHolders(String source) {
     String workString = source;
-    if (KenThemeConfigurationService.appDictionary != null) {
+    if (KenConfigurationService.appDictionary != null) {
       RegExp re = RegExp(r'\{\{.*\}\}');
       re.allMatches(source).forEach((match) {
         final placeHolder = source.substring(match.start, match.end);
@@ -345,12 +341,12 @@ class KenUtilities {
           final dictionaryKey =
               placeHolder.replaceFirst('{{', '').replaceFirst('}}', '');
 
-          if (KenThemeConfigurationService.appDictionary
+          if (KenConfigurationService.appDictionary
                   .getLocalString(dictionaryKey) !=
               null) {
             workString = workString.replaceAll(
                 placeHolder,
-                KenThemeConfigurationService.appDictionary
+                KenConfigurationService.appDictionary
                     .getLocalString(dictionaryKey));
           }
         }

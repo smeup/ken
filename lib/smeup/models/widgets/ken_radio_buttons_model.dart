@@ -4,7 +4,7 @@ import 'package:ken/smeup/models/widgets/ken_data_interface.dart';
 import 'package:ken/smeup/models/widgets/ken_input_field_model.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
-import '../../services/ken_theme_configuration_service.dart';
+import '../../services/ken_configuration_service.dart';
 
 class KenRadioButtonsModel extends KenInputFieldModel
     implements KenDataInterface {
@@ -70,12 +70,18 @@ class KenRadioButtonsModel extends KenInputFieldModel
       this.valueField = defaultValueField,
       this.displayedField = defaultDisplayedField,
       this.selectedValue,
-      this.columns = defaultColumns, required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack})
-      : super(formKey, scaffoldKey, context, title: title, id: id, type: type, instanceCallBack: instanceCallBack) {
+      this.columns = defaultColumns,
+      required Function(ServicesCallbackType type,
+              Map<dynamic, dynamic>? jsonMap, KenModel? instance)
+          instanceCallBack})
+      : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack) {
     setDefaults(this);
 
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'rad';
-
   }
 
   KenRadioButtonsModel.fromMap(
@@ -83,8 +89,12 @@ class KenRadioButtonsModel extends KenInputFieldModel
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
-      KenModel parent, Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack)
-      : super.fromMap(jsonMap, formKey, scaffoldKey, context, parent, instanceCallBack) {
+      KenModel parent,
+      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+              KenModel? instance)
+          instanceCallBack)
+      : super.fromMap(
+            jsonMap, formKey, scaffoldKey, context, parent, instanceCallBack) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';
@@ -92,21 +102,19 @@ class KenRadioButtonsModel extends KenInputFieldModel
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
 
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
-    height =
-        KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 
     valueField = optionsDefault!['valueField'] ?? defaultValueField;
     displayedField = optionsDefault!['displayedField'] ?? defaultDisplayedField;
-    selectedValue = '';//_replaceSelectedValue(jsonMap) ?? '';//todo
+    selectedValue = ''; //_replaceSelectedValue(jsonMap) ?? '';//todo
 
     align = KenUtilities.getAlignmentGeometry(optionsDefault!['align']) ??
         defaultAlign;
 
-    columns =
-        KenUtilities.getInt(optionsDefault!['radCol']) ?? defaultColumns;
+    columns = KenUtilities.getInt(optionsDefault!['radCol']) ?? defaultColumns;
 
-    fontSize = KenUtilities.getDouble(optionsDefault!['fontSize']) ??
-        defaultFontSize;
+    fontSize =
+        KenUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
 
     backColor = KenUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
@@ -138,7 +146,6 @@ class KenRadioButtonsModel extends KenInputFieldModel
         await this.getData(instanceCallBack);
       };
     }
-
   }
 
   // _replaceSelectedValue(dynamic jsonMap) {
@@ -149,18 +156,18 @@ class KenRadioButtonsModel extends KenInputFieldModel
   // }
 
   static setDefaults(dynamic obj) {
-    var radioTheme = KenThemeConfigurationService.getTheme()!.radioTheme;
+    var radioTheme = KenConfigurationService.getTheme()!.radioTheme;
 
     defaultRadioButtonColor =
         radioTheme.fillColor!.resolve(Set<MaterialState>());
 
-    var captionStyle = KenThemeConfigurationService.getTheme()!.textTheme.caption!;
+    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;
     defaultCaptionBackColor = captionStyle.backgroundColor;
 
-    var textStyle = KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!;
+    var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;

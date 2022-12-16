@@ -13,7 +13,7 @@ import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
 
-import '../services/ken_theme_configuration_service.dart';
+import '../services/ken_configuration_service.dart';
 
 class KenDatePickerData {
   DateTime? value;
@@ -232,7 +232,7 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
 
     if (!widget.showborder!) {
       widget.borderColor =
-          KenThemeConfigurationService.getTheme()!.scaffoldBackgroundColor;
+          KenConfigurationService.getTheme()!.scaffoldBackgroundColor;
     }
 
     ButtonStyle buttonStyle = _getButtonStyle();
@@ -422,7 +422,7 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
   }
 
   ButtonStyle _getButtonStyle() {
-    var timePickerTheme = KenThemeConfigurationService.getTheme()!
+    var timePickerTheme = KenConfigurationService.getTheme()!
         .timePickerTheme
         .copyWith(
             backgroundColor: widget.backColor,
@@ -431,7 +431,7 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
             dayPeriodBorderSide: BorderSide(
                 width: widget.borderWidth!, color: widget.borderColor!));
 
-    var elevatedButtonStyle = KenThemeConfigurationService.getTheme()!
+    var elevatedButtonStyle = KenConfigurationService.getTheme()!
         .elevatedButtonTheme
         .style!
         .copyWith(
@@ -449,8 +449,7 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style =
-        KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!;
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
 
     style = style.copyWith(color: widget.fontColor, fontSize: widget.fontSize);
 
@@ -464,8 +463,7 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style =
-        KenThemeConfigurationService.getTheme()!.textTheme.caption!;
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
         color: widget.captionFontColor, fontSize: widget.captionFontSize);
@@ -480,7 +478,7 @@ class _SmeupDatePickerState extends State<SmeupDatePicker>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenThemeConfigurationService.getTheme()!
+    IconThemeData themeData = KenConfigurationService.getTheme()!
         .iconTheme
         .copyWith(size: widget.fontSize);
 

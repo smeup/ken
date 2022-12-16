@@ -8,7 +8,7 @@ import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
 
-import '../services/ken_theme_configuration_service.dart';
+import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
 class KenLine extends StatefulWidget
@@ -120,7 +120,7 @@ class _KenLineState extends State<KenLine>
   }
 
   DividerThemeData _getDividerStile() {
-    DividerThemeData dividerData = KenThemeConfigurationService.getTheme()!
+    DividerThemeData dividerData = KenConfigurationService.getTheme()!
         .dividerTheme
         .copyWith(color: widget.color, thickness: widget.thickness);
 

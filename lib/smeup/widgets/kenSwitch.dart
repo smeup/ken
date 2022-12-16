@@ -11,7 +11,7 @@ import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
 
-import '../services/ken_theme_configuration_service.dart';
+import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
 class KenSwitch extends StatefulWidget
@@ -208,8 +208,7 @@ class _KenSwitchState extends State<KenSwitch>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style =
-        KenThemeConfigurationService.getTheme()!.textTheme.caption!;
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
         color: widget.captionFontColor,

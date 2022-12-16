@@ -13,7 +13,7 @@ import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
 
 import '../models/widgets/ken_section_model.dart';
-import '../services/ken_theme_configuration_service.dart';
+import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
 class KenCombo extends StatefulWidget
@@ -367,8 +367,7 @@ class _KenComboState extends State<KenCombo>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style =
-        KenThemeConfigurationService.getTheme()!.textTheme.caption!;
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
         color: widget.captionFontColor, fontSize: widget.captionFontSize);

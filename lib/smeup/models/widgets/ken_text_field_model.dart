@@ -5,10 +5,9 @@ import 'package:ken/smeup/models/widgets/ken_input_field_model.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 
-import '../../services/ken_theme_configuration_service.dart';
+import '../../services/ken_configuration_service.dart';
 
-class KenTextFieldModel extends KenInputFieldModel
-    implements KenDataInterface {
+class KenTextFieldModel extends KenInputFieldModel implements KenDataInterface {
   // supported by json_theme
   static double? defaultFontSize;
   static Color? defaultBackColor;
@@ -86,26 +85,37 @@ class KenTextFieldModel extends KenInputFieldModel
       title = '',
       this.autoFocus = defaultAutoFocus,
       this.valueField,
-      this.keyboard, required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack})
-      : super(formKey, scaffoldKey, context, title: title, id: id, type: type, instanceCallBack: instanceCallBack) {
+      this.keyboard,
+      required Function(ServicesCallbackType type,
+              Map<dynamic, dynamic>? jsonMap, KenModel? instance)
+          instanceCallBack})
+      : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'itx';
     id = KenUtilities.getWidgetId('FLD', id);
     setDefaults(this);
   }
 
   KenTextFieldModel.fromMap(
-      Map<String, dynamic> jsonMap,
-      GlobalKey<FormState>? formKey,
-      GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-      KenModel parent, Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,)
-      : super.fromMap(jsonMap, formKey, scaffoldKey, context, parent, instanceCallBack) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
+    KenModel parent,
+    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  ) : super.fromMap(
+            jsonMap, formKey, scaffoldKey, context, parent, instanceCallBack) {
     setDefaults(this);
 
     backColor = KenUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
-    fontSize = KenUtilities.getDouble(optionsDefault!['fontSize']) ??
-        defaultFontSize;
+    fontSize =
+        KenUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
     fontColor = KenUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
         defaultFontColor;
     fontBold = optionsDefault!['bold'] ?? defaultFontBold;
@@ -128,8 +138,7 @@ class KenTextFieldModel extends KenInputFieldModel
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
-    height =
-        KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     underline = optionsDefault!['showUnderline'] ?? defaultUnderline;
     autoFocus = optionsDefault!['autoFocus'] ?? false;
 
@@ -154,7 +163,7 @@ class KenTextFieldModel extends KenInputFieldModel
   }
 
   static setDefaults(dynamic obj) {
-    var timePickerTheme = KenThemeConfigurationService.getTheme()!.timePickerTheme;
+    var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
     defaultBackColor = timePickerTheme.backgroundColor;
     var shape = timePickerTheme.shape!;
     defaultBorderRadius = (shape as ContinuousRectangleBorder)
@@ -166,13 +175,13 @@ class KenTextFieldModel extends KenInputFieldModel
     defaultBorderColor = side.color;
     defaultBorderWidth = side.width;
 
-    var textStyle = KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!;
+    var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
     defaultBackColor = textStyle.backgroundColor;
 
-    var captionStyle = KenThemeConfigurationService.getTheme()!.textTheme.caption!;
+    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;
@@ -185,12 +194,10 @@ class KenTextFieldModel extends KenInputFieldModel
       obj.borderWidth = KenTextFieldModel.defaultBorderWidth;
     if (obj.borderRadius == null)
       obj.borderRadius = KenTextFieldModel.defaultBorderRadius;
-    if (obj.fontBold == null)
-      obj.fontBold = KenTextFieldModel.defaultFontBold;
+    if (obj.fontBold == null) obj.fontBold = KenTextFieldModel.defaultFontBold;
     if (obj.fontColor == null)
       obj.fontColor = KenTextFieldModel.defaultFontColor;
-    if (obj.fontSize == null)
-      obj.fontSize = KenTextFieldModel.defaultFontSize;
+    if (obj.fontSize == null) obj.fontSize = KenTextFieldModel.defaultFontSize;
     if (obj.backColor == null)
       obj.backColor = KenTextFieldModel.defaultBackColor;
     if (obj.captionFontBold == null)

@@ -6,7 +6,7 @@ import 'package:ken/smeup/models/widgets/ken_model_mixin.dart';
 import 'package:ken/smeup/models/widgets/ken_section_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 
-import '../../services/ken_theme_configuration_service.dart';
+import '../../services/ken_configuration_service.dart';
 
 class KenFormModel extends KenModel
     with KenModelMixin
@@ -24,10 +24,13 @@ class KenFormModel extends KenModel
   Color? backColor;
   bool? autoAdaptHeight;
 
-  Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack;
+  Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+      KenModel? instance) instanceCallBack;
 
-  KenFormModel.fromMap(response, this.formKey, this.scaffoldKey, this.context, this.instanceCallBack )
-      : super.fromMap(response, formKey, scaffoldKey, context, instanceCallBack, null) {
+  KenFormModel.fromMap(response, this.formKey, this.scaffoldKey, this.context,
+      this.instanceCallBack)
+      : super.fromMap(
+            response, formKey, scaffoldKey, context, instanceCallBack, null) {
     Map<String, dynamic> jsonMap = response;
 
     padding = KenUtilities.getPadding(jsonMap['padding']) ?? defaultPadding;
@@ -35,11 +38,11 @@ class KenFormModel extends KenModel
     if (optionsType != null) {
       backColor = KenUtilities.getColorFromRGB(optionsType['backColor']);
     } else {
-      backColor = KenThemeConfigurationService.getTheme()!.scaffoldBackgroundColor;
+      backColor = KenConfigurationService.getTheme()!.scaffoldBackgroundColor;
     }
 
     autoAdaptHeight = KenUtilities.getBool(jsonMap['autoAdaptHeight']) ??
-        KenThemeConfigurationService.defaultAutoAdaptHeight;
+        KenConfigurationService.defaultAutoAdaptHeight;
 
     layout = jsonMap['layout'] ?? defaultLayout;
     _replaceFormTitle(jsonMap);

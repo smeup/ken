@@ -9,7 +9,7 @@ import 'package:ken/smeup/widgets/kenWidgetInterface.dart';
 import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
-import '../services/ken_theme_configuration_service.dart';
+import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
 class KenDashboard extends StatefulWidget
@@ -269,8 +269,7 @@ class _KenDashboardState extends State<KenDashboard>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style =
-        KenThemeConfigurationService.getTheme()!.textTheme.caption!;
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
         color: widget.captionFontColor, fontSize: widget.captionFontSize);
@@ -285,8 +284,7 @@ class _KenDashboardState extends State<KenDashboard>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style =
-        KenThemeConfigurationService.getTheme()!.textTheme.headline1!;
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.headline1!;
 
     style = style.copyWith(
       color: widget.fontColor,
@@ -303,7 +301,7 @@ class _KenDashboardState extends State<KenDashboard>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenThemeConfigurationService.getTheme()!
+    IconThemeData themeData = KenConfigurationService.getTheme()!
         .iconTheme
         .copyWith(size: widget.iconSize, color: widget.iconColor);
 

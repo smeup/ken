@@ -4,10 +4,9 @@ import 'package:ken/smeup/models/widgets/ken_data_interface.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 
-import '../../services/ken_theme_configuration_service.dart';
+import '../../services/ken_configuration_service.dart';
 
-class KenTextAutocompleteModel extends KenModel
-    implements KenDataInterface {
+class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
   // supported by json_theme
   static double? defaultFontSize;
   static Color? defaultBackColor;
@@ -56,36 +55,41 @@ class KenTextAutocompleteModel extends KenModel
   String? submitLabel;
   bool? showSubmit;
 
-  KenTextAutocompleteModel(
-      {id,
-      type,
-      GlobalKey<FormState>? formKey,
-      GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-      this.backColor,
-      this.fontSize,
-      this.fontBold,
-      this.fontColor,
-      this.captionBackColor,
-      this.captionFontBold,
-      this.captionFontColor,
-      this.captionFontSize,
-      this.borderColor,
-      this.borderRadius,
-      this.borderWidth,
-      this.label = defaultLabel,
-      this.width = defaultWidth,
-      this.height = defaultHeight,
-      this.padding = defaultPadding,
-      this.showBorder = defaultShowBorder,
-      title = '',
-      this.showUnderline = defaultUnderline,
-      this.autoFocus = defaultAutoFocus,
-      this.defaultValue = '',
-      this.valueField = 'value',
-        required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-      })
-      : super(formKey, scaffoldKey, context, title: title, id: id, type: type, instanceCallBack: instanceCallBack) {
+  KenTextAutocompleteModel({
+    id,
+    type,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
+    this.backColor,
+    this.fontSize,
+    this.fontBold,
+    this.fontColor,
+    this.captionBackColor,
+    this.captionFontBold,
+    this.captionFontColor,
+    this.captionFontSize,
+    this.borderColor,
+    this.borderRadius,
+    this.borderWidth,
+    this.label = defaultLabel,
+    this.width = defaultWidth,
+    this.height = defaultHeight,
+    this.padding = defaultPadding,
+    this.showBorder = defaultShowBorder,
+    title = '',
+    this.showUnderline = defaultUnderline,
+    this.autoFocus = defaultAutoFocus,
+    this.defaultValue = '',
+    this.valueField = 'value',
+    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  }) : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'acp';
     setDefaults(this);
   }
@@ -95,20 +99,16 @@ class KenTextAutocompleteModel extends KenModel
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
+    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
   ) : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-          instanceCallBack,
-          null
-        ) {
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     setDefaults(this);
     backColor = KenUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
-    fontSize = KenUtilities.getDouble(optionsDefault!['fontSize']) ??
-        defaultFontSize;
+    fontSize =
+        KenUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
     fontColor = KenUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
         defaultFontColor;
     fontBold = optionsDefault!['bold'] ?? defaultFontBold;
@@ -128,8 +128,7 @@ class KenTextAutocompleteModel extends KenModel
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
-    height =
-        KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     showUnderline = optionsDefault!['showUnderline'] ?? true;
     autoFocus = optionsDefault!['autoFocus'] ?? false;
 
@@ -154,11 +153,10 @@ class KenTextAutocompleteModel extends KenModel
         await this.getData(instanceCallBack);
       };
     }
-
   }
 
   static setDefaults(dynamic obj) {
-    var timePickerTheme = KenThemeConfigurationService.getTheme()!.timePickerTheme;
+    var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
     defaultBackColor = timePickerTheme.backgroundColor;
     var shape = timePickerTheme.shape!;
     defaultBorderRadius = (shape as ContinuousRectangleBorder)
@@ -170,13 +168,13 @@ class KenTextAutocompleteModel extends KenModel
     defaultBorderColor = side.color;
     defaultBorderWidth = side.width;
 
-    var textStyle = KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!;
+    var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
     defaultBackColor = textStyle.backgroundColor;
 
-    var captionStyle = KenThemeConfigurationService.getTheme()!.textTheme.caption!;
+    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;

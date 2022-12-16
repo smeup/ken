@@ -3,7 +3,7 @@ import 'package:ken/smeup/models/widgets/ken_model_callback.dart';
 import 'package:ken/smeup/models/widgets/ken_data_interface.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
-import '../../services/ken_theme_configuration_service.dart';
+import '../../services/ken_configuration_service.dart';
 
 class KenWaitModel extends KenModel implements KenDataInterface {
   static Color? defaultSplashColor;
@@ -22,9 +22,14 @@ class KenWaitModel extends KenModel implements KenDataInterface {
       BuildContext? context,
       this.splashColor,
       title = '',
-        required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack
-      })
-      : super(formKey, scaffoldKey, context, title: title, id: id, type: type,instanceCallBack: instanceCallBack) {
+      required Function(ServicesCallbackType type,
+              Map<dynamic, dynamic>? jsonMap, KenModel? instance)
+          instanceCallBack})
+      : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'wai';
   }
 
@@ -33,16 +38,11 @@ class KenWaitModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState> formKey,
     GlobalKey<ScaffoldState> scaffoldKey,
     BuildContext context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-
+    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
   ) : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-          instanceCallBack,
-          null
-        ) {
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     setDefaults(this);
     title = jsonMap['title'] ?? '';
 
@@ -58,9 +58,9 @@ class KenWaitModel extends KenModel implements KenDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    defaultSplashColor = KenThemeConfigurationService.getTheme()!.splashColor;
-    defaultLoaderColor = KenThemeConfigurationService.getTheme()!.splashColor;
-    defaultcircularTrackColor = KenThemeConfigurationService.getTheme()!
+    defaultSplashColor = KenConfigurationService.getTheme()!.splashColor;
+    defaultLoaderColor = KenConfigurationService.getTheme()!.splashColor;
+    defaultcircularTrackColor = KenConfigurationService.getTheme()!
         .progressIndicatorTheme
         .circularTrackColor;
 

@@ -11,7 +11,7 @@ import 'package:ken/smeup/widgets/kenProgressIndicator.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../services/ken_utilities.dart';
-import '../services/ken_theme_configuration_service.dart';
+import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
 class KenCalendarWidget extends StatefulWidget {
@@ -143,18 +143,17 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
 
     double separatorHeight = 8.0;
     final titleTextStyle =
-        KenThemeConfigurationService.getTheme()!.appBarTheme.titleTextStyle!;
-    final iconTheme = KenThemeConfigurationService.getTheme()!.iconTheme;
+        KenConfigurationService.getTheme()!.appBarTheme.titleTextStyle!;
+    final iconTheme = KenConfigurationService.getTheme()!.iconTheme;
     final daysHeaderTextStyle =
-        KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!;
-    final dayTextStyle = KenThemeConfigurationService.getTheme()!
+        KenConfigurationService.getTheme()!.textTheme.bodyText1!;
+    final dayTextStyle = KenConfigurationService.getTheme()!
         .textTheme
         .bodyText2!
         .copyWith(color: Colors.black);
-    final markerStyle =
-        KenThemeConfigurationService.getTheme()!.textTheme.headline4;
+    final markerStyle = KenConfigurationService.getTheme()!.textTheme.headline4;
 
-    final pc = KenThemeConfigurationService.getTheme()!.primaryColor;
+    final pc = KenConfigurationService.getTheme()!.primaryColor;
 
     return SingleChildScrollView(
       child: Container(
@@ -202,8 +201,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
                   titleCentered: true,
                   formatButtonVisible: false,
                   decoration: BoxDecoration(
-                      color: KenThemeConfigurationService.getTheme()!
-                          .primaryColor),
+                      color: KenConfigurationService.getTheme()!.primaryColor),
                   leftChevronIcon:
                       Icon(Icons.arrow_back_ios, color: iconTheme.color),
                   rightChevronIcon:
@@ -463,7 +461,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
   }
 
   Column _getListTileWidget(KenCalendarEventModel event) {
-    final style = KenThemeConfigurationService.getTheme()!
+    final style = KenConfigurationService.getTheme()!
         .textTheme
         .headline3!
         .copyWith(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/widgets/kenEnumCallback.dart';
-import '../services/ken_theme_configuration_service.dart';
+import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
 class KenDrawerItem extends StatelessWidget {
@@ -69,11 +69,11 @@ class KenDrawerItem extends StatelessWidget {
   }
 
   TextStyle _getElementTextStile() {
-    TextStyle style = KenThemeConfigurationService.getTheme()!
+    TextStyle style = KenConfigurationService.getTheme()!
         .appBarTheme
         .toolbarTextStyle!
         .copyWith(
-            backgroundColor: KenThemeConfigurationService.getTheme()!
+            backgroundColor: KenConfigurationService.getTheme()!
                 .appBarTheme
                 .backgroundColor);
 
@@ -96,7 +96,7 @@ class KenDrawerItem extends StatelessWidget {
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenThemeConfigurationService.getTheme()!
+    IconThemeData themeData = KenConfigurationService.getTheme()!
         .iconTheme
         .copyWith(color: _getElementTextStile().color);
 

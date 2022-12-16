@@ -3,7 +3,7 @@ import 'package:ken/smeup/models/widgets/ken_model_callback.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 
-import '../../services/ken_theme_configuration_service.dart';
+import '../../services/ken_configuration_service.dart';
 
 class KenDrawerModel extends KenModel {
   // supported by json_theme
@@ -53,29 +53,30 @@ class KenDrawerModel extends KenModel {
     this.imageWidth = defaultImageWidth,
     this.imageHeight = defaultImageHeight,
     this.showItemDivider = defaultShowItemDivider,
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-
-  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type,instanceCallBack: instanceCallBack) {
+    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  }) : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack) {
     if (appBarBackColor == null)
       appBarBackColor =
-          KenThemeConfigurationService.getTheme()!.appBarTheme.backgroundColor;
+          KenConfigurationService.getTheme()!.appBarTheme.backgroundColor;
     setDefaults(this);
   }
 
   KenDrawerModel.fromMap(
-    Map<String, dynamic> jsonMap,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack
-      ) : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-          instanceCallBack,
-          null
-        ) {
+      Map<String, dynamic> jsonMap,
+      GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      BuildContext context,
+      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+              KenModel? instance)
+          instanceCallBack)
+      : super.fromMap(
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';
@@ -111,17 +112,14 @@ class KenDrawerModel extends KenModel {
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-
         // await SmeupDrawerDao.getData(this);
         await this.getData(instanceCallBack);
-
       };
     }
-
   }
 
   static setDefaults(dynamic obj) {
-    AppBarTheme appBarTheme = KenThemeConfigurationService.getTheme()!.appBarTheme;
+    AppBarTheme appBarTheme = KenConfigurationService.getTheme()!.appBarTheme;
 
     TextStyle titleStyle = appBarTheme.titleTextStyle!;
     defaultTitleFontSize = titleStyle.fontSize;

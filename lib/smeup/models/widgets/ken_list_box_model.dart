@@ -4,7 +4,7 @@ import 'package:ken/smeup/models/widgets/ken_data_interface.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 
-import '../../services/ken_theme_configuration_service.dart';
+import '../../services/ken_configuration_service.dart';
 
 enum KenListType { simple, oriented, wheel }
 
@@ -63,40 +63,45 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
   int? selectedRow;
   double? listHeight;
 
-  KenListBoxModel(
-      {id,
-      type,
-      GlobalKey<FormState>? formKey,
-      GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-      this.backColor,
-      this.borderColor,
-      this.borderWidth,
-      this.borderRadius,
-      this.fontSize,
-      this.fontColor,
-      this.fontBold,
-      this.captionFontBold,
-      this.captionFontSize,
-      this.captionFontColor,
-      this.layout = defaultLayout,
-      this.width = defaultWidth,
-      this.height = defaultHeight,
-      this.orientation = defaultOrientation,
-      this.padding = defaultPadding,
-      this.listType = defaultListType,
-      this.portraitColumns = defaultPortraitColumns,
-      this.landscapeColumns = defaultLandscapeColumns,
-      this.visibleColumns,
-      this.defaultSort = defaultDefaultSort,
-      this.listHeight = defaultListHeight,
-      this.backgroundColName = defaultBackgroundColName,
-      this.showSelection = defaultShowSelection,
-      this.selectedRow = defaultSelectedRow,
-      title = '',
-        required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-      })
-      : super(formKey, scaffoldKey, context, title: title, id: id, type: type, instanceCallBack: instanceCallBack) {
+  KenListBoxModel({
+    id,
+    type,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
+    this.backColor,
+    this.borderColor,
+    this.borderWidth,
+    this.borderRadius,
+    this.fontSize,
+    this.fontColor,
+    this.fontBold,
+    this.captionFontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.layout = defaultLayout,
+    this.width = defaultWidth,
+    this.height = defaultHeight,
+    this.orientation = defaultOrientation,
+    this.padding = defaultPadding,
+    this.listType = defaultListType,
+    this.portraitColumns = defaultPortraitColumns,
+    this.landscapeColumns = defaultLandscapeColumns,
+    this.visibleColumns,
+    this.defaultSort = defaultDefaultSort,
+    this.listHeight = defaultListHeight,
+    this.backgroundColName = defaultBackgroundColName,
+    this.showSelection = defaultShowSelection,
+    this.selectedRow = defaultSelectedRow,
+    title = '',
+    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  }) : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack) {
     if (visibleColumns == null)
       visibleColumns = List<String>.empty(growable: true);
     setDefaults(this);
@@ -106,16 +111,12 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
     Map<String, dynamic> jsonMap,
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
-    BuildContext? context, Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-
-      ) : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-          instanceCallBack,
-          null
-        ) {
+    BuildContext? context,
+    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  ) : super.fromMap(
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     setDefaults(this);
 
     layout = defaultLayout;
@@ -128,9 +129,8 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
 
     title = jsonMap['title'] ?? '';
     layout = optionsDefault!['Layout'] ?? defaultLayout;
-    portraitColumns =
-        KenUtilities.getInt(optionsDefault!['portraitColumns']) ??
-            defaultPortraitColumns;
+    portraitColumns = KenUtilities.getInt(optionsDefault!['portraitColumns']) ??
+        defaultPortraitColumns;
     landscapeColumns =
         KenUtilities.getInt(optionsDefault!['landscapeColumns']) ??
             defaultLandscapeColumns;
@@ -138,8 +138,7 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
-    height =
-        KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     listType = decodeListType(optionsDefault!['listType']);
     orientation = jsonMap['orientation'] == 'horizontal'
         ? Axis.horizontal
@@ -195,7 +194,6 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
         await this.getData(instanceCallBack);
       };
     }
-
   }
 
   static KenListType decodeListType(String? type) {
@@ -212,7 +210,7 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var cardTheme = KenThemeConfigurationService.getTheme()!.cardTheme;
+    var cardTheme = KenConfigurationService.getTheme()!.cardTheme;
     defaultBackColor = cardTheme.color;
     ContinuousRectangleBorder shape =
         cardTheme.shape as ContinuousRectangleBorder;
@@ -222,7 +220,7 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
     defaultBorderColor = side.color;
     defaultBorderWidth = side.width;
 
-    var textStyle = KenThemeConfigurationService.getTheme()!
+    var textStyle = KenConfigurationService.getTheme()!
         .textTheme
         .headline4!
         .copyWith(backgroundColor: defaultBackColor);
@@ -230,15 +228,13 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
 
-    var captionStyle =
-    KenThemeConfigurationService.getTheme()!.textTheme.headline5!;
+    var captionStyle = KenConfigurationService.getTheme()!.textTheme.headline5!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;
 
     // ----------------- set properties from default
-    if (obj.backColor == null)
-      obj.backColor = KenListBoxModel.defaultBackColor;
+    if (obj.backColor == null) obj.backColor = KenListBoxModel.defaultBackColor;
 
     if (obj.borderColor == null)
       obj.borderColor = KenListBoxModel.defaultBorderColor;
@@ -248,8 +244,7 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
       obj.borderRadius = KenListBoxModel.defaultBorderRadius;
 
     if (obj.fontBold == null) obj.fontBold = KenListBoxModel.defaultFontBold;
-    if (obj.fontColor == null)
-      obj.fontColor = KenListBoxModel.defaultFontColor;
+    if (obj.fontColor == null) obj.fontColor = KenListBoxModel.defaultFontColor;
     if (obj.fontSize == null) obj.fontSize = KenListBoxModel.defaultFontSize;
 
     if (obj.captionFontBold == null)

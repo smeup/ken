@@ -14,7 +14,7 @@ import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
 import 'package:provider/provider.dart';
 
-import '../services/ken_theme_configuration_service.dart';
+import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
 class KenTextPassword extends StatefulWidget
@@ -341,7 +341,7 @@ class _KenTextPasswordState extends State<KenTextPassword>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenThemeConfigurationService.getTheme()!
+    IconThemeData themeData = KenConfigurationService.getTheme()!
         .iconTheme
         .copyWith(size: widget.iconSize, color: widget.iconColor);
 
@@ -349,7 +349,7 @@ class _KenTextPasswordState extends State<KenTextPassword>
   }
 
   DividerThemeData _getDividerStyle() {
-    DividerThemeData dividerData = KenThemeConfigurationService.getTheme()!
+    DividerThemeData dividerData = KenConfigurationService.getTheme()!
         .dividerTheme
         .copyWith(color: widget.fontColor);
 
@@ -357,8 +357,7 @@ class _KenTextPasswordState extends State<KenTextPassword>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style =
-        KenThemeConfigurationService.getTheme()!.textTheme.caption!;
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
         color: widget.captionFontColor,

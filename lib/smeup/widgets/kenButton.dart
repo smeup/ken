@@ -3,7 +3,7 @@ import 'package:ken/smeup/models/widgets/ken_section_model.dart';
 import 'package:ken/smeup/models/widgets/ken_buttons_model.dart';
 
 import '../services/ken_utilities.dart';
-import '../services/ken_theme_configuration_service.dart';
+import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
 class KenButton extends StatelessWidget {
@@ -67,9 +67,9 @@ class KenButton extends StatelessWidget {
       this.model}) {
     KenButtonsModel.setDefaults(this);
     if (isLink) {
-      borderColor = KenThemeConfigurationService.getTheme()!.scaffoldBackgroundColor;
+      borderColor = KenConfigurationService.getTheme()!.scaffoldBackgroundColor;
       fontColor = backColor;
-      backColor = KenThemeConfigurationService.getTheme()!.scaffoldBackgroundColor;
+      backColor = KenConfigurationService.getTheme()!.scaffoldBackgroundColor;
     }
   }
 
@@ -80,11 +80,15 @@ class KenButton extends StatelessWidget {
     double? buttonHeight = height;
     double? buttonWidth = width;
     if (model != null && model!.parent != null) {
-      if (buttonHeight == 0) buttonHeight = (model!.parent as KenSectionModel).height;
-      if (buttonWidth == 0) buttonWidth = (model!.parent as KenSectionModel).width;
+      if (buttonHeight == 0)
+        buttonHeight = (model!.parent as KenSectionModel).height;
+      if (buttonWidth == 0)
+        buttonWidth = (model!.parent as KenSectionModel).width;
     } else {
-      if (buttonHeight == 0) buttonHeight = KenUtilities.getDeviceInfo().safeHeight;
-      if (buttonWidth == 0) buttonWidth = KenUtilities.getDeviceInfo().safeWidth;
+      if (buttonHeight == 0)
+        buttonHeight = KenUtilities.getDeviceInfo().safeHeight;
+      if (buttonWidth == 0)
+        buttonWidth = KenUtilities.getDeviceInfo().safeWidth;
     }
 
     return Container(
@@ -93,11 +97,15 @@ class KenButton extends StatelessWidget {
       child: SizedBox(
           height: buttonHeight,
           width: buttonWidth,
-          child: isLink ? _getTextButton(elevatedButtonStyle, buttonHeight, buttonWidth) : _getElevatedButton(elevatedButtonStyle, buttonHeight, buttonWidth)),
+          child: isLink
+              ? _getTextButton(elevatedButtonStyle, buttonHeight, buttonWidth)
+              : _getElevatedButton(
+                  elevatedButtonStyle, buttonHeight, buttonWidth)),
     );
   }
 
-  ElevatedButton _getElevatedButton(elevatedButtonStyle, double? buttonHeight, double? buttonWidth) {
+  ElevatedButton _getElevatedButton(
+      elevatedButtonStyle, double? buttonHeight, double? buttonWidth) {
     return ElevatedButton(
       key: Key(id),
       style: elevatedButtonStyle,
@@ -106,7 +114,8 @@ class KenButton extends StatelessWidget {
     );
   }
 
-  TextButton _getTextButton(elevatedButtonStyle, double? buttonHeight, double? buttonWidth) {
+  TextButton _getTextButton(
+      elevatedButtonStyle, double? buttonHeight, double? buttonWidth) {
     return TextButton(
       key: Key(id),
       style: elevatedButtonStyle,
@@ -129,7 +138,10 @@ class KenButton extends StatelessWidget {
                       color: iconTheme.color,
                       size: iconTheme.size,
                     );
-              var text = Align(alignment: align!, child: Text(data!, textAlign: TextAlign.center, style: _getTextStile()));
+              var text = Align(
+                  alignment: align!,
+                  child: Text(data!,
+                      textAlign: TextAlign.center, style: _getTextStile()));
 
               var children;
 
@@ -224,19 +236,26 @@ class KenButton extends StatelessWidget {
   }
 
   ButtonStyle _getButtonStyle() {
-    var elevatedButtonStyle = KenThemeConfigurationService.getTheme()!.elevatedButtonTheme.style!.copyWith(
-        overlayColor: MaterialStateProperty.all(backColor),
-        backgroundColor: MaterialStateProperty.all<Color?>(backColor),
-        elevation: MaterialStateProperty.all<double?>(elevation),
-        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.all(0)),
-        shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius!))),
-        side: MaterialStateProperty.all<BorderSide>(BorderSide(width: borderWidth!, color: borderColor!)));
+    var elevatedButtonStyle = KenConfigurationService.getTheme()!
+        .elevatedButtonTheme
+        .style!
+        .copyWith(
+            overlayColor: MaterialStateProperty.all(backColor),
+            backgroundColor: MaterialStateProperty.all<Color?>(backColor),
+            elevation: MaterialStateProperty.all<double?>(elevation),
+            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                EdgeInsets.all(0)),
+            shape: MaterialStateProperty.all<OutlinedBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(borderRadius!))),
+            side: MaterialStateProperty.all<BorderSide>(
+                BorderSide(width: borderWidth!, color: borderColor!)));
 
     return elevatedButtonStyle;
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = KenThemeConfigurationService.getTheme()!.textTheme.button!;
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.button!;
 
     style = style.copyWith(color: fontColor, fontSize: fontSize);
 
@@ -254,7 +273,9 @@ class KenButton extends StatelessWidget {
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenThemeConfigurationService.getTheme()!.iconTheme.copyWith(size: iconSize, color: iconColor);
+    IconThemeData themeData = KenConfigurationService.getTheme()!
+        .iconTheme
+        .copyWith(size: iconSize, color: iconColor);
 
     return themeData;
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/widgets/ken_combo_item_model.dart';
-import '../services/ken_theme_configuration_service.dart';
+import '../services/ken_configuration_service.dart';
 
 class KenComboWidget extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -104,7 +104,7 @@ class _KenComboWidgetState extends State<KenComboWidget> {
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenThemeConfigurationService.getTheme()!
+    IconThemeData themeData = KenConfigurationService.getTheme()!
         .iconTheme
         .copyWith(size: widget.iconSize, color: widget.iconColor);
 
@@ -112,8 +112,7 @@ class _KenComboWidgetState extends State<KenComboWidget> {
   }
 
   TextStyle _getTextStile() {
-    TextStyle style =
-    KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!;
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
 
     style = style.copyWith(
         color: widget.fontColor,
@@ -130,7 +129,7 @@ class _KenComboWidgetState extends State<KenComboWidget> {
   }
 
   DividerThemeData _getDividerStyle() {
-    DividerThemeData dividerData = KenThemeConfigurationService.getTheme()!
+    DividerThemeData dividerData = KenConfigurationService.getTheme()!
         .dividerTheme
         .copyWith(color: widget.fontColor);
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/widgets/ken_radio_buttons_model.dart';
 
-import '../services/ken_theme_configuration_service.dart';
+import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
 class KenRadioButton extends StatefulWidget {
@@ -115,7 +115,7 @@ class _KenRadioButtonState extends State<KenRadioButton> {
   }
 
   RadioThemeData _getRadioTheme() {
-    RadioThemeData themeData = KenThemeConfigurationService.getTheme()!
+    RadioThemeData themeData = KenConfigurationService.getTheme()!
         .radioTheme
         .copyWith(
             fillColor:
@@ -125,7 +125,7 @@ class _KenRadioButtonState extends State<KenRadioButton> {
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!;
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
 
     style = style.copyWith(
         color: widget.fontColor,

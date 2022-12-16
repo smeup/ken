@@ -4,7 +4,7 @@ import 'package:ken/smeup/models/widgets/ken_data_interface.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 
-import '../../services/ken_theme_configuration_service.dart';
+import '../../services/ken_configuration_service.dart';
 
 class KenTextPasswordModel extends KenModel implements KenDataInterface {
   // supported by json_theme
@@ -68,45 +68,50 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
   bool? showRulesIcon;
   bool? checkRules;
 
-  KenTextPasswordModel(
-      {id,
-      type,
-      GlobalKey<FormState>? formKey,
-      GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-      this.backColor,
-      this.fontSize,
-      this.fontBold,
-      this.fontColor,
-      this.captionBackColor,
-      this.captionFontBold,
-      this.captionFontColor,
-      this.captionFontSize,
-      this.borderColor,
-      this.borderRadius,
-      this.borderWidth,
-      this.iconSize,
-      this.iconColor,
-      this.buttonBackColor,
-      this.label = defaultLabel,
-      this.submitLabel = defaultSubmitLabel,
-      this.width = defaultWidth,
-      this.height = defaultHeight,
-      this.padding = defaultPadding,
-      this.showBorder = defaultShowBorder,
-      this.showSubmit = defaultShowSubmit,
-      this.showRulesIcon = defaultShowRulesIcon,
-      title = '',
-      this.underline = defaultUnderline,
-      this.autoFocus = defaultAutoFocus,
-      this.valueField,
-      this.showRules = defaultShowRules,
-      this.checkRules = defaultCheckRules,
-        required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-      })
-      : super(formKey, scaffoldKey, context, title: title, id: id, type: type,instanceCallBack: instanceCallBack) {
+  KenTextPasswordModel({
+    id,
+    type,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
+    this.backColor,
+    this.fontSize,
+    this.fontBold,
+    this.fontColor,
+    this.captionBackColor,
+    this.captionFontBold,
+    this.captionFontColor,
+    this.captionFontSize,
+    this.borderColor,
+    this.borderRadius,
+    this.borderWidth,
+    this.iconSize,
+    this.iconColor,
+    this.buttonBackColor,
+    this.label = defaultLabel,
+    this.submitLabel = defaultSubmitLabel,
+    this.width = defaultWidth,
+    this.height = defaultHeight,
+    this.padding = defaultPadding,
+    this.showBorder = defaultShowBorder,
+    this.showSubmit = defaultShowSubmit,
+    this.showRulesIcon = defaultShowRulesIcon,
+    title = '',
+    this.underline = defaultUnderline,
+    this.autoFocus = defaultAutoFocus,
+    this.valueField,
+    this.showRules = defaultShowRules,
+    this.checkRules = defaultCheckRules,
+    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  }) : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack) {
     if (backColor == null)
-      backColor = KenThemeConfigurationService.getTheme()!.backgroundColor;
+      backColor = KenConfigurationService.getTheme()!.backgroundColor;
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'pwd';
     id = KenUtilities.getWidgetId('FLD', id);
     setDefaults(this);
@@ -117,14 +122,11 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
+    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
   ) : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-          instanceCallBack, null
-        ) {
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     setDefaults(this);
     backColor = KenUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
@@ -159,8 +161,7 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
-    height =
-        KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     underline = optionsDefault!['showUnderline'] ?? true;
     autoFocus = optionsDefault!['autoFocus'] ?? false;
 
@@ -192,7 +193,7 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var timePickerTheme = KenThemeConfigurationService.getTheme()!.timePickerTheme;
+    var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
     defaultBackColor = timePickerTheme.backgroundColor;
     var shape = timePickerTheme.shape!;
     defaultBorderRadius = (shape as ContinuousRectangleBorder)
@@ -204,23 +205,23 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
     defaultBorderColor = side.color;
     defaultBorderWidth = side.width;
 
-    var textStyle = KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!;
+    var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
     defaultBackColor = textStyle.backgroundColor;
 
-    var captionStyle = KenThemeConfigurationService.getTheme()!.textTheme.caption!;
+    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;
     defaultCaptionBackColor = captionStyle.backgroundColor;
 
-    var iconTheme = KenThemeConfigurationService.getTheme()!.iconTheme;
+    var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
     defaultIconSize = iconTheme.size;
     defaultIconColor = iconTheme.color;
 
-    defaultButtonBackColor = KenThemeConfigurationService.getTheme()!.primaryColor;
+    defaultButtonBackColor = KenConfigurationService.getTheme()!.primaryColor;
 
     // ----------------- set properties from default
     if (obj.borderColor == null)

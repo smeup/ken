@@ -3,7 +3,7 @@ import 'package:ken/smeup/models/widgets/ken_model_callback.dart';
 import 'package:ken/smeup/models/widgets/ken_data_interface.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
-import '../../services/ken_theme_configuration_service.dart';
+import '../../services/ken_configuration_service.dart';
 
 class KenSwitchModel extends KenModel implements KenDataInterface {
   // supported by json_theme
@@ -49,9 +49,14 @@ class KenSwitchModel extends KenModel implements KenDataInterface {
     this.width = defaultWidth,
     this.height = defaultHeight,
     this.padding = defaultPadding,
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-
-  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type,instanceCallBack: instanceCallBack) {
+    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  }) : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'swt';
     setDefaults(this);
   }
@@ -61,21 +66,18 @@ class KenSwitchModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
+    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
   ) : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context, instanceCallBack, null
-        ) {
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     setDefaults(this);
     title = jsonMap['title'] ?? '';
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
 
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
-    height =
-        KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 
     captionFontSize = KenUtilities.getDouble(optionsDefault!['fontSize']) ??
         defaultCaptionFontSize;
@@ -105,12 +107,12 @@ class KenSwitchModel extends KenModel implements KenDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var radioTheme = KenThemeConfigurationService.getTheme()!.switchTheme;
+    var radioTheme = KenConfigurationService.getTheme()!.switchTheme;
 
     defaultThumbColor = radioTheme.thumbColor!.resolve(Set<MaterialState>());
     defaultTrackColor = radioTheme.trackColor!.resolve(Set<MaterialState>());
 
-    var captionStyle = KenThemeConfigurationService.getTheme()!.textTheme.caption!;
+    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;

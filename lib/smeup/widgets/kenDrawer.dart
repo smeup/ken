@@ -10,7 +10,7 @@ import 'package:ken/smeup/widgets/kenEnumCallback.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
 
-import '../services/ken_theme_configuration_service.dart';
+import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
 class KenDrawer extends StatefulWidget
@@ -239,7 +239,7 @@ class _KenDrawerState extends State<KenDrawer>
   }
 
   AppBarTheme _getAppBarTheme() {
-    return KenThemeConfigurationService.getTheme()!
+    return KenConfigurationService.getTheme()!
         .appBarTheme
         .copyWith(backgroundColor: widget.appBarBackColor);
   }
@@ -260,11 +260,11 @@ class _KenDrawerState extends State<KenDrawer>
   }
 
   TextStyle _getElementTextStile() {
-    TextStyle style = KenThemeConfigurationService.getTheme()!
+    TextStyle style = KenConfigurationService.getTheme()!
         .appBarTheme
         .toolbarTextStyle!
         .copyWith(
-            backgroundColor: KenThemeConfigurationService.getTheme()!
+            backgroundColor: KenConfigurationService.getTheme()!
                 .appBarTheme
                 .backgroundColor);
 
@@ -287,8 +287,7 @@ class _KenDrawerState extends State<KenDrawer>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData =
-        KenThemeConfigurationService.getTheme()!.iconTheme;
+    IconThemeData themeData = KenConfigurationService.getTheme()!.iconTheme;
 
     return themeData;
   }

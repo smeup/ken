@@ -13,7 +13,7 @@ import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
 
-import '../services/ken_theme_configuration_service.dart';
+import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
 class KenListBox extends StatefulWidget
@@ -543,21 +543,19 @@ class _KenListBoxState extends State<KenListBox>
   }
 
   CardTheme _getCardStyle(Color? backColor) {
-    var timeCardTheme =
-        KenThemeConfigurationService.getTheme()!.cardTheme.copyWith(
-              color: backColor,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(widget.borderRadius!),
-                  side: BorderSide(
-                      width: widget.borderWidth!, color: widget.borderColor!)),
-            );
+    var timeCardTheme = KenConfigurationService.getTheme()!.cardTheme.copyWith(
+          color: backColor,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius!),
+              side: BorderSide(
+                  width: widget.borderWidth!, color: widget.borderColor!)),
+        );
 
     return timeCardTheme;
   }
 
   TextStyle _getTextStile(Color? backColor) {
-    TextStyle style =
-        KenThemeConfigurationService.getTheme()!.textTheme.headline4!;
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.headline4!;
 
     style = style.copyWith(
         color: widget.fontColor,
@@ -574,8 +572,7 @@ class _KenListBoxState extends State<KenListBox>
   }
 
   TextStyle _getCaptionStile(Color? backColor) {
-    TextStyle style =
-        KenThemeConfigurationService.getTheme()!.textTheme.headline5!;
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.headline5!;
 
     style = style.copyWith(
         color: widget.captionFontColor,

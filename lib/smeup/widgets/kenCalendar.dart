@@ -7,7 +7,7 @@ import 'package:ken/smeup/models/widgets/ken_calendar_event_model.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 import 'package:ken/smeup/services/ken_log_service.dart';
-import 'package:ken/smeup/services/ken_theme_configuration_service.dart';
+import 'package:ken/smeup/services/ken_configuration_service.dart';
 import 'package:ken/smeup/widgets/kenButton.dart';
 import 'package:ken/smeup/widgets/kenCalendarWidget.dart';
 import 'package:ken/smeup/widgets/kenEnumCallback.dart';
@@ -290,7 +290,7 @@ class KenCalendarState extends State<KenCalendar>
             selectedDay: _selectedDay,
             model: _model,
             padding: widget.padding,
-            holidays: KenThemeConfigurationService.holidays,
+            holidays: KenConfigurationService.holidays,
             showNavigation: widget.showNavigation,
             calendarFormat: _calendarFormat,
             clientOnChangeMonth: _clientOnChangeMonth,

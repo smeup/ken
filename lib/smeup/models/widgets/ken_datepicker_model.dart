@@ -4,7 +4,7 @@ import 'package:ken/smeup/models/widgets/ken_data_interface.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 
-import '../../services/ken_theme_configuration_service.dart';
+import '../../services/ken_configuration_service.dart';
 
 class KenDatePickerModel extends KenModel implements KenDataInterface {
   // supported by json_theme
@@ -58,57 +58,58 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
 
   List<String>? minutesList;
 
-  KenDatePickerModel(
-      {GlobalKey<FormState>? formKey,
-      GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-      id,
-      type,
-      this.borderColor,
-      this.borderWidth,
-      this.borderRadius,
-      this.fontBold,
-      this.fontSize,
-      this.fontColor,
-      this.backColor,
-      this.captionFontBold,
-      this.captionFontSize,
-      this.captionFontColor,
-      this.captionBackColor,
-      this.elevation,
-      this.underline = defaultUnderline,
-      this.align = defaultAlign,
-      this.valueField = defaultValueField,
-      this.displayedField = defaultdisplayedField,
-      this.label = defaultLabel,
-      this.width = defaultWidth,
-      this.height = defaultHeight,
-      this.padding = defaultPadding,
-      this.showBorder = defaultShowBorder,
-      this.innerSpace = defaultInnerSpace,
-      title = '',
-      this.minutesList,
-        required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-      })
-      : super(formKey, scaffoldKey, context, id: id, type: type, title: title,instanceCallBack: instanceCallBack) {
+  KenDatePickerModel({
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
+    id,
+    type,
+    this.borderColor,
+    this.borderWidth,
+    this.borderRadius,
+    this.fontBold,
+    this.fontSize,
+    this.fontColor,
+    this.backColor,
+    this.captionFontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.captionBackColor,
+    this.elevation,
+    this.underline = defaultUnderline,
+    this.align = defaultAlign,
+    this.valueField = defaultValueField,
+    this.displayedField = defaultdisplayedField,
+    this.label = defaultLabel,
+    this.width = defaultWidth,
+    this.height = defaultHeight,
+    this.padding = defaultPadding,
+    this.showBorder = defaultShowBorder,
+    this.innerSpace = defaultInnerSpace,
+    title = '',
+    this.minutesList,
+    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  }) : super(formKey, scaffoldKey, context,
+            id: id,
+            type: type,
+            title: title,
+            instanceCallBack: instanceCallBack) {
     id = KenUtilities.getWidgetId('FLD', id);
     setDefaults(this);
   }
 
   KenDatePickerModel.fromMap(
-    Map<String, dynamic> jsonMap,
-    GlobalKey<FormState>? formKey,
-    GlobalKey<ScaffoldState>? scaffoldKey,
-    BuildContext? context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack
-      ) : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-          instanceCallBack,
-          null
-        ) {
+      Map<String, dynamic> jsonMap,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
+      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+              KenModel? instance)
+          instanceCallBack)
+      : super.fromMap(
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     setDefaults(this);
 
     valueField = optionsDefault!['valueField'] ?? defaultValueField;
@@ -136,8 +137,7 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
-    height =
-        KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     elevation = KenUtilities.getDouble(optionsDefault!['elevation']) ??
         defaultElevation;
     if (optionsDefault!['minutesList'] == null) {
@@ -168,16 +168,14 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-
         await this.getData(instanceCallBack);
         // await SmeupDatePickerDao.getData(this);
       };
     }
-
   }
 
   static setDefaults(dynamic obj) {
-    var timePickerTheme = KenThemeConfigurationService.getTheme()!.timePickerTheme;
+    var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
     defaultBackColor = timePickerTheme.backgroundColor;
     var shape = timePickerTheme.shape!;
     defaultBorderRadius = (shape as ContinuousRectangleBorder)
@@ -190,15 +188,15 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
     defaultBorderWidth = side.width;
 
     var buttonStyle =
-    KenThemeConfigurationService.getTheme()!.elevatedButtonTheme.style!;
+        KenConfigurationService.getTheme()!.elevatedButtonTheme.style!;
     defaultElevation = buttonStyle.elevation!.resolve(Set<MaterialState>());
 
-    var textStyle = KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!;
+    var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
 
-    var captionStyle = KenThemeConfigurationService.getTheme()!.textTheme.caption!;
+    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;
@@ -214,12 +212,10 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
       obj.borderWidth = KenDatePickerModel.defaultBorderWidth;
     if (obj.borderRadius == null)
       obj.borderRadius = KenDatePickerModel.defaultBorderRadius;
-    if (obj.fontBold == null)
-      obj.fontBold = KenDatePickerModel.defaultFontBold;
+    if (obj.fontBold == null) obj.fontBold = KenDatePickerModel.defaultFontBold;
     if (obj.fontColor == null)
       obj.fontColor = KenDatePickerModel.defaultFontColor;
-    if (obj.fontSize == null)
-      obj.fontSize = KenDatePickerModel.defaultFontSize;
+    if (obj.fontSize == null) obj.fontSize = KenDatePickerModel.defaultFontSize;
     if (obj.captionFontBold == null)
       obj.captionFontBold = KenDatePickerModel.defaultCaptionFontBold;
     if (obj.captionFontColor == null)

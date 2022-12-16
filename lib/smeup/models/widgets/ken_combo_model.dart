@@ -5,10 +5,9 @@ import 'package:ken/smeup/models/widgets/ken_input_field_model.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 
-import '../../services/ken_theme_configuration_service.dart';
+import '../../services/ken_configuration_service.dart';
 
-class KenComboModel extends KenInputFieldModel
-    implements KenDataInterface {
+class KenComboModel extends KenInputFieldModel implements KenDataInterface {
   // supported by json_theme
   static double? defaultIconSize;
   static Color? defaultIconColor;
@@ -92,12 +91,18 @@ class KenComboModel extends KenInputFieldModel
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.showBorder = defaultShowBorder,
-      title = '', required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack})
-      : super(formKey, scaffoldKey, context, title: title,instanceCallBack: instanceCallBack, id: id, type: type) {
+      title = '',
+      required Function(ServicesCallbackType type,
+              Map<dynamic, dynamic>? jsonMap, KenModel? instance)
+          instanceCallBack})
+      : super(formKey, scaffoldKey, context,
+            title: title,
+            instanceCallBack: instanceCallBack,
+            id: id,
+            type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'cmb';
     setDefaults(this);
   }
-
 
   KenComboModel.fromMap(
       Map<String, dynamic> jsonMap,
@@ -105,8 +110,11 @@ class KenComboModel extends KenInputFieldModel
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
       KenModel parent,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack)
-      : super.fromMap(jsonMap, formKey, scaffoldKey, context, parent, instanceCallBack) {
+      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+              KenModel? instance)
+          instanceCallBack)
+      : super.fromMap(
+            jsonMap, formKey, scaffoldKey, context, parent, instanceCallBack) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';
@@ -117,23 +125,22 @@ class KenComboModel extends KenInputFieldModel
     selectedValue = optionsDefault!['defaultValue'] ?? '';
     label = optionsDefault!['label'] ?? defaultLabel;
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
-    height =
-        KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
-    iconSize = KenUtilities.getDouble(optionsDefault!['iconSize']) ??
-        defaultIconSize;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    iconSize =
+        KenUtilities.getDouble(optionsDefault!['iconSize']) ?? defaultIconSize;
     iconColor = KenUtilities.getColorFromRGB(optionsDefault!['iconColor']) ??
         defaultIconColor;
 
-    fontSize = KenUtilities.getDouble(optionsDefault!['fontSize']) ??
-        defaultFontSize;
+    fontSize =
+        KenUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
     fontColor = KenUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
         defaultFontColor;
     fontBold = optionsDefault!['bold'] ?? defaultFontBold;
     backColor = KenUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
 
-    underline = KenUtilities.getBool(optionsDefault!['underline']) ??
-        defaultUnderline;
+    underline =
+        KenUtilities.getBool(optionsDefault!['underline']) ?? defaultUnderline;
 
     innerSpace = KenUtilities.getDouble(optionsDefault!['innerSpace']) ??
         defaultInnerSpace;
@@ -169,27 +176,26 @@ class KenComboModel extends KenInputFieldModel
         await this.getData(instanceCallBack);
       };
     }
-
   }
 
   static setDefaults(dynamic obj) {
-    var textStyle = KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!;
+    var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
     defaultBackColor = textStyle.backgroundColor;
 
-    var captionStyle = KenThemeConfigurationService.getTheme()!.textTheme.caption!;
+    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;
     defaultCaptionBackColor = captionStyle.backgroundColor;
 
-    var iconTheme = KenThemeConfigurationService.getTheme()!.iconTheme;
+    var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
     defaultIconSize = iconTheme.size;
     defaultIconColor = textStyle.color;
 
-    var timePickerTheme = KenThemeConfigurationService.getTheme()!.timePickerTheme;
+    var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
     defaultBackColor = timePickerTheme.backgroundColor;
     var shape = timePickerTheme.shape!;
     defaultBorderRadius = (shape as ContinuousRectangleBorder)
