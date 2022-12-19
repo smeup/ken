@@ -142,15 +142,28 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
     }
 
     double separatorHeight = 8.0;
-    final titleTextStyle =
-        KenConfigurationService.getTheme()!.appBarTheme.titleTextStyle!;
+    final titleTextStyle = KenConfigurationService.getTheme()! // months builder
+        .appBarTheme
+        .titleTextStyle!
+        .copyWith(
+            color: Colors.black,
+            backgroundColor: Colors.transparent,
+            fontWeight: FontWeight.bold);
     final iconTheme = KenConfigurationService.getTheme()!.iconTheme;
-    final daysHeaderTextStyle =
-        KenConfigurationService.getTheme()!.textTheme.bodyText1!;
+    final daysHeaderTextStyle = KenConfigurationService.getTheme()!
+        .textTheme
+        .bodyText1!
+        .copyWith(
+            color: Colors.black,
+            backgroundColor: Colors.transparent,
+            fontWeight: FontWeight.bold);
+    ;
     final dayTextStyle = KenConfigurationService.getTheme()!
         .textTheme
         .bodyText2!
-        .copyWith(color: Colors.black);
+        .copyWith(
+            color: Colors.black,
+            backgroundColor: Color.fromRGBO(6, 137, 155, 0.25));
     final markerStyle = KenConfigurationService.getTheme()!.textTheme.headline4;
 
     final pc = KenConfigurationService.getTheme()!.primaryColor;
@@ -200,8 +213,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
                       titleTextStyle.copyWith(fontSize: widget.titleFontSize),
                   titleCentered: true,
                   formatButtonVisible: false,
-                  decoration: BoxDecoration(
-                      color: KenConfigurationService.getTheme()!.primaryColor),
+                  decoration: BoxDecoration(color: Colors.transparent),
                   leftChevronIcon:
                       Icon(Icons.arrow_back_ios, color: iconTheme.color),
                   rightChevronIcon:
@@ -211,7 +223,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
                 // days headers
                 daysOfWeekStyle: DaysOfWeekStyle(
                   weekendStyle:
-                      daysHeaderTextStyle.copyWith(color: Colors.red[800]),
+                      daysHeaderTextStyle.copyWith(color: Colors.black54),
                   weekdayStyle: daysHeaderTextStyle,
                 ),
                 daysOfWeekHeight: 40, // <- Tony: header height
@@ -326,27 +338,43 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
     );
   }
 
+  // Widget? _getMarkerContainer(DateTime date, TextStyle? markerStyle) {
+  //   var eventsInDay = _events![_nomalizeDateTime(date)];
+  //   if (eventsInDay == null) return null;
+  //   final ev = eventsInDay[0];
+  //   return Container(
+  //     padding: EdgeInsets.only(right: 4, left: 4),
+  //     child: Container(
+  //         height: 16,
+  //         width: double.infinity,
+  //         decoration: BoxDecoration(color: ev.markerBackgroundColor),
+  //         child: Text(
+  //             eventsInDay.length == 1
+  //                 ? ev.description!
+  //                 : eventsInDay.length.toString(),
+  //             textAlign: TextAlign.center,
+  //             style: markerStyle!.copyWith(
+  //                 backgroundColor: ev.markerBackgroundColor,
+  //                 color: ev.markerFontColor,
+  //                 fontSize: widget.markerFontSize,
+  //                 fontWeight: ev.fontWeight,
+  //                 overflow: TextOverflow.ellipsis))),
+  //   );
+  // }
+
   Widget? _getMarkerContainer(DateTime date, TextStyle? markerStyle) {
     var eventsInDay = _events![_nomalizeDateTime(date)];
     if (eventsInDay == null) return null;
     final ev = eventsInDay[0];
     return Container(
-      padding: EdgeInsets.only(right: 4, left: 4),
+      padding: EdgeInsets.only(right: 0, left: 0, bottom: 22),
       child: Container(
-          height: 16,
-          width: double.infinity,
-          decoration: BoxDecoration(color: ev.markerBackgroundColor),
-          child: Text(
-              eventsInDay.length == 1
-                  ? ev.description!
-                  : eventsInDay.length.toString(),
-              textAlign: TextAlign.center,
-              style: markerStyle!.copyWith(
-                  backgroundColor: ev.markerBackgroundColor,
-                  color: ev.markerFontColor,
-                  fontSize: widget.markerFontSize,
-                  fontWeight: ev.fontWeight,
-                  overflow: TextOverflow.ellipsis))),
+        height: 6,
+        width: 6,
+        decoration: BoxDecoration(
+            color: ev.markerBackgroundColor,
+            borderRadius: BorderRadius.circular(10)),
+      ),
     );
   }
 
@@ -356,7 +384,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
     Color? containerBackcolor,
   ) {
     Color? textColor = dayTextStyle.color;
-    if (date.weekday == 6 || date.weekday == 7) textColor = Colors.red[800];
+    if (date.weekday == 6 || date.weekday == 7) textColor = Colors.black54;
 
     var list = _getEventsForDay(date);
     if (list.length > 0) {
@@ -364,17 +392,18 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
     }
 
     return Container(
-      margin: const EdgeInsets.all(4.0),
-      padding: const EdgeInsets.only(top: 5.0, left: 6.0),
-      color: containerBackcolor,
+      margin: const EdgeInsets.all(2), // margin of single cell
+      color: Colors.transparent,
       width: 100,
       height: 100,
+      alignment: Alignment.topCenter,
       child: Text(
         '${date.day}',
         style: dayTextStyle.copyWith(
-            fontSize: widget.dayFontSize,
-            backgroundColor: Colors.transparent,
-            color: textColor),
+          fontSize: widget.dayFontSize,
+          backgroundColor: Colors.transparent,
+          color: textColor,
+        ),
       ),
     );
   }

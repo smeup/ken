@@ -56,7 +56,7 @@ packages:
       name: carousel_slider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.2.0"
+    version: "4.2.1"
   characters:
     dependency: transitive
     description:
@@ -371,7 +371,7 @@ packages:
       name: json_theme
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.3+1"
+    version: "4.0.3+2"
   logging:
     dependency: transitive
     description:
@@ -560,7 +560,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.4"
+    version: "6.0.5"
   pub_semver:
     dependency: transitive
     description:
@@ -623,7 +623,7 @@ packages:
       name: shared_preferences_linux
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.2"
   shared_preferences_macos:
     dependency: transitive
     description:
@@ -651,7 +651,7 @@ packages:
       name: shared_preferences_windows
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.2"
   shelf:
     dependency: transitive
     description:
@@ -747,14 +747,14 @@ packages:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "20.3.60"
+    version: "20.3.61"
   syncfusion_flutter_gauges:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_gauges
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "20.3.60"
+    version: "20.3.61"
   table_calendar:
     dependency: "direct main"
     description:

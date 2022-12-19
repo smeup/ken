@@ -88,6 +88,7 @@ class KenButtons extends StatefulWidget
 
   @override
   runControllerActivities(KenModel model) {
+    // controller mvC - stato widget
     KenButtonsModel m = model as KenButtonsModel;
     id = m.id;
     type = m.type;
@@ -136,8 +137,9 @@ class KenButtonsState extends State<KenButtons>
 
   @override
   void initState() {
+    // inizializzazione v
     isBusy = false;
-    _model = widget.model;
+    _model = widget.model; //
     _data = widget.data;
     if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
@@ -145,6 +147,7 @@ class KenButtonsState extends State<KenButtons>
 
   @override
   void dispose() {
+    // pulizia
     runDispose(widget.scaffoldKey, widget.id);
     super.dispose();
   }
@@ -188,50 +191,50 @@ class KenButtonsState extends State<KenButtons>
           widget, KenCallbackType.getButtons, _model, _data);
     }
 
-    // vecchia versione
-    // int buttonIndex = 0;
-    // List array = _model == null ? _data : _data['rows'];
-    //
-    // array.forEach((buttonData) {
-    //   buttonIndex += 1;
-    //   String? buttonText = _model == null ? buttonData : buttonData['value'];
-    //   final button = KenButton(
-    //     id: '${KenUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
-    //     type: widget.type,
-    //     buttonIndex: buttonIndex,
-    //     title: widget.title,
-    //     data: buttonText,
-    //     backColor: widget.backColor,
-    //     borderColor: widget.borderColor,
-    //     width: widget.width,
-    //     height: widget.height,
-    //     position: widget.position,
-    //     align: widget.align,
-    //     fontColor: widget.fontColor,
-    //     fontSize: widget.fontSize,
-    //     padding: widget.padding,
-    //     valueField: widget.valueField,
-    //     borderRadius: widget.borderRadius,
-    //     borderWidth: widget.borderWidth,
-    //     elevation: widget.elevation,
-    //     fontBold: widget.fontBold,
-    //     //iconCode: widget.iconCode,
-    //     iconSize: widget.iconSize,
-    //     iconColor: widget.iconColor,
-    //     //icon: null,
-    //     //isBusy: _isBusy,
-    //     clientOnPressed: () {
-    //       if (widget.clientOnPressed != null) {
-    //         widget.clientOnPressed!(buttonIndex, buttonText);
-    //       }
-    //       //runDynamism(context, buttonData);
-    //     },
-    //     isLink: widget.isLink!,
-    //     model: _model,
-    //   );
-    //
-    //   buttons.add(button);
-    // });
+    int buttonIndex = 0;
+    List array = _model == null ? _data : _data['rows'];
+
+    array.forEach((buttonData) {
+      buttonIndex += 1;
+      String? buttonText = _model == null ? buttonData : buttonData['value'];
+      final button = KenButton(
+        id: '${KenUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
+        type: widget.type,
+        buttonIndex: buttonIndex,
+        title: widget.title,
+        data: buttonText,
+        backColor: widget.backColor,
+        borderColor: widget.borderColor,
+        width: widget.width,
+        height: widget.height,
+        position: widget.position,
+        align: widget.align,
+        fontColor: widget.fontColor,
+        fontSize: widget.fontSize,
+        padding: widget.padding,
+        valueField: widget.valueField,
+        borderRadius: widget.borderRadius,
+        borderWidth: widget.borderWidth,
+        elevation: widget.elevation,
+        fontBold: widget.fontBold,
+        //iconCode: widget.iconCode,
+        iconData: widget.iconData,
+        iconSize: widget.iconSize,
+        iconColor: widget.iconColor,
+        //icon: null,
+        //isBusy: _isBusy,
+        clientOnPressed: () {
+          if (widget.clientOnPressed != null) {
+            widget.clientOnPressed!(buttonIndex, buttonText);
+          }
+          //runDynamism(context, buttonData);
+        },
+        isLink: widget.isLink!,
+        model: _model,
+      );
+
+      buttons.add(button);
+    });
 
     if (buttons.length > 0) {
       var widgets;
