@@ -196,7 +196,7 @@ class KenButton extends StatelessWidget {
               } else if (align == Alignment.bottomCenter) {
                 children = Container(
                   height: buttonHeight,
-                  child: Column(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
@@ -206,6 +206,7 @@ class KenButton extends StatelessWidget {
                           size: iconTheme.size,
                         ),
                       ),
+                      SizedBox(width: innerSpace),
                       text,
                     ],
                   ),
@@ -216,14 +217,14 @@ class KenButton extends StatelessWidget {
                 children = Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Icon(
                         iconData,
                         color: iconTheme.color,
                         size: iconTheme.size,
                       ),
-                      //SizedBox(width: innerSpace),
-                      Expanded(child: text),
+                      text
                     ],
                   ),
                   color: backColor,
