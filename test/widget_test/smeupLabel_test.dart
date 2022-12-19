@@ -7,15 +7,12 @@ Future<void> main() async {
   testWidgets('Test static contructor ', (WidgetTester tester) async {
     await WidgetTestService.initTests();
 
-    final _scaffoldKey = GlobalKey<ScaffoldState>();
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
     Widget testWidget = new MediaQuery(
         data: new MediaQueryData(),
         child: new MaterialApp(
           home: KenLabel(
-            _scaffoldKey,
-            _formKey,
+            WidgetTestService.scaffoldKey,
+            WidgetTestService.formKey,
             const ['Information'],
             id: 'lab2',
             fontBold: false,

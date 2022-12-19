@@ -22,7 +22,7 @@ class KenDatePickerData {
 }
 
 // ignore: must_be_immutable
-class SmeupDatePicker extends StatefulWidget
+class KenDatePicker extends StatefulWidget
     with KenWidgetMixin
     implements KenWidgetInterface {
   KenDatePickerModel? model;
@@ -63,13 +63,13 @@ class SmeupDatePicker extends StatefulWidget
 
   Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
-  SmeupDatePicker.withController(KenDatePickerModel this.model,
-      this.scaffoldKey, this.formKey, this.callBack)
+  KenDatePicker.withController(KenDatePickerModel this.model, this.scaffoldKey,
+      this.formKey, this.callBack)
       : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
-  SmeupDatePicker(this.scaffoldKey, this.formKey, this.data,
+  KenDatePicker(this.scaffoldKey, this.formKey, this.data,
       {this.id = '',
       this.type = 'cal',
       this.title = '',
@@ -162,10 +162,10 @@ class SmeupDatePicker extends StatefulWidget
   }
 
   @override
-  _SmeupDatePickerState createState() => _SmeupDatePickerState();
+  _KenDatePickerState createState() => _KenDatePickerState();
 }
 
-class _SmeupDatePickerState extends State<SmeupDatePicker>
+class _KenDatePickerState extends State<KenDatePicker>
     with KenWidgetStateMixin
     implements KenWidgetStateInterface {
   KenDatePickerModel? _model;
