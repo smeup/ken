@@ -13,7 +13,34 @@ Future<void> main() async {
 
     Widget testWidget = new MediaQuery(
         data: new MediaQueryData(),
-        child: new MaterialApp(home: _getBarChart(600, 400)));
+        child: new MaterialApp(
+            home: Scaffold(
+          appBar: AppBar(),
+          body: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(30),
+              //child: Padding(
+              //padding: const EdgeInsets.only(top: 60.0),
+              child: Center(
+                  child: Column(
+                children: [
+                  // Text(
+                  //   'BarChart',
+                  //   style: TextStyle(fontSize: 30),
+                  // ),
+                  _getBarChart(600, 400)
+                  //SizedBox(height: 50),
+                  // Text(
+                  //   'PieChart',
+                  //   style: TextStyle(fontSize: 30),
+                  // ),
+                  // _getPieChart(deviceHeight, deviceWidth),
+                ],
+              )),
+              //),
+            ),
+          ),
+        )));
 
     await tester.pumpWidget(testWidget).then((value) async {
       await tester.pumpAndSettle();

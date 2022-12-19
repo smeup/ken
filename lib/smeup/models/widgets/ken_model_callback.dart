@@ -1,11 +1,10 @@
 enum ServicesCallbackType {
-
   isFirestore,
 
   fromMap,
   defaultInstance,
   setData,
-  // TODO
+  // ???
   // replaceSelectedTabIndex,
 
   // DAOS
@@ -13,5 +12,4 @@ enum ServicesCallbackType {
   getData,
   getClientDataStructure,
   getValidation,
-
 }

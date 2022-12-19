@@ -11,16 +11,33 @@ Future<void> main() async {
     Widget testWidget = new MediaQuery(
         data: new MediaQueryData(),
         child: new MaterialApp(
-            home: KenProgressBar(
-          WidgetTestService.scaffoldKey,
-          WidgetTestService.formKey,
-          id: 'pgb1',
-          data: 6,
-          height: 40,
-          progressBarMinimun: 0,
-          progressBarMaximun: 10,
-          callBack: pbCallBack,
-          padding: const EdgeInsets.only(top: 30, left: 5, right: 5),
+            home: Scaffold(
+          appBar: AppBar(),
+          body: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30.0),
+                child: Center(
+                    child: Column(
+                  children: [
+                    KenProgressBar(
+                      WidgetTestService.scaffoldKey,
+                      WidgetTestService.formKey,
+                      id: 'pgb1',
+                      data: 6,
+                      height: 40,
+                      progressBarMinimun: 0,
+                      progressBarMaximun: 10,
+                      callBack: pbCallBack,
+                      padding:
+                          const EdgeInsets.only(top: 30, left: 5, right: 5),
+                    )
+                  ],
+                )),
+              ),
+            ),
+          ),
         )));
 
     await tester.pumpWidget(testWidget).then((value) async {

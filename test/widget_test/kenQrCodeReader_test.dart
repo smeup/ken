@@ -12,10 +12,25 @@ Future<void> main() async {
     Widget testWidget = new MediaQuery(
         data: new MediaQueryData(),
         child: new MaterialApp(
-          home: KenQRCodeReader(
-              WidgetTestService.scaffoldKey, WidgetTestService.formKey,
-              data: 'I am a qrcode', id: 'qrc1'),
-        ));
+            home: Scaffold(
+          appBar: AppBar(),
+          body: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 60.0),
+                child: Center(
+                    child: Column(
+                  children: [
+                    KenQRCodeReader(WidgetTestService.scaffoldKey,
+                        WidgetTestService.formKey,
+                        data: 'I am a qrcode', id: 'qrc1'),
+                  ],
+                )),
+              ),
+            ),
+          ),
+        )));
 
     await tester.pumpWidget(testWidget).then((value) async {
       await tester.pumpAndSettle();

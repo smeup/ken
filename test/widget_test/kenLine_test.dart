@@ -10,10 +10,19 @@ Future<void> main() async {
     Widget testWidget = new MediaQuery(
         data: new MediaQueryData(),
         child: new MaterialApp(
-            home: KenLine(
-          WidgetTestService.scaffoldKey,
-          WidgetTestService.formKey,
-          id: 'lin1',
+            home: Scaffold(
+          appBar: AppBar(),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                KenLine(
+                  WidgetTestService.scaffoldKey,
+                  WidgetTestService.formKey,
+                  id: 'lin1',
+                ),
+              ],
+            ),
+          ),
         )));
 
     await tester.pumpWidget(testWidget).then((value) async {

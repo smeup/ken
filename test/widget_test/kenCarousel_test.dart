@@ -11,53 +11,55 @@ Future<void> main() async {
     await WidgetTestService.initTests();
 
     final screen = MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(
-          value: KenCarouselIndicatorNotifier(),
-        ),
-      ],
-      child: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(30),
-          //child: Padding(
-          //padding: const EdgeInsets.only(top: 60.0),
-          child: Center(
-              child: Column(
-            children: [
-              KenCarousel(
-                  WidgetTestService.scaffoldKey,
-                  WidgetTestService.formKey,
-                  const [
-                    {
-                      "imageFile": "packages/ken/assets/images/IMG1.png",
-                      "text": "1st illustration"
-                    },
-                    {
-                      "imageFile": "packages/ken/assets/images/IMG2.png",
-                      "text": "2nd illustration"
-                    },
-                    {
-                      "imageFile": "packages/ken/assets/images/IMG3.png",
-                      "text": "3rd illustration"
-                    },
-                    {
-                      "imageFile": "packages/ken/assets/images/IMG4.png",
-                      "text": "4th illustration"
-                    },
-                    {
-                      "imageFile": "packages/ken/assets/images/IMG5.png",
-                      "text": "5th illustration"
-                    }
-                  ],
-                  height: 300,
-                  autoPlay: false,
-                  id: 'cau1'),
-            ],
-          )),
-          //),
-        ),
-      ),
-    );
+        providers: [
+          ChangeNotifierProvider.value(
+            value: KenCarouselIndicatorNotifier(),
+          ),
+        ],
+        child: Scaffold(
+          appBar: AppBar(),
+          body: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(30),
+              //child: Padding(
+              //padding: const EdgeInsets.only(top: 60.0),
+              child: Center(
+                  child: Column(
+                children: [
+                  KenCarousel(
+                      WidgetTestService.scaffoldKey,
+                      WidgetTestService.formKey,
+                      const [
+                        {
+                          "imageFile": "packages/ken/assets/images/IMG1.png",
+                          "text": "1st illustration"
+                        },
+                        {
+                          "imageFile": "packages/ken/assets/images/IMG2.png",
+                          "text": "2nd illustration"
+                        },
+                        {
+                          "imageFile": "packages/ken/assets/images/IMG3.png",
+                          "text": "3rd illustration"
+                        },
+                        {
+                          "imageFile": "packages/ken/assets/images/IMG4.png",
+                          "text": "4th illustration"
+                        },
+                        {
+                          "imageFile": "packages/ken/assets/images/IMG5.png",
+                          "text": "5th illustration"
+                        }
+                      ],
+                      height: 300,
+                      autoPlay: false,
+                      id: 'cau1'),
+                ],
+              )),
+              //),
+            ),
+          ),
+        ));
 
     Widget testWidget = new MediaQuery(
         data: new MediaQueryData(), child: new MaterialApp(home: screen));

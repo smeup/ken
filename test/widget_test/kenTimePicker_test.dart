@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ken/smeup/widgets/kenGauge.dart';
+import 'package:ken/smeup/widgets/kenTimepicker.dart';
 import 'widget_test_service.dart';
 
+final timePickerDynamicScreen = 'test_time_picker';
+final timePickerData = new KenTimePickerData(
+  time: DateTime(2021, 1, 1, 17, 30),
+  formattedTime: "17:30",
+);
+
 Future<void> main() async {
-  // TODOA test failure
   testWidgets('Test static contructor ', (WidgetTester tester) async {
     await WidgetTestService.initTests();
 
@@ -17,18 +22,21 @@ Future<void> main() async {
             child: Container(
               padding: const EdgeInsets.all(30),
               //child: Padding(
-              //padding: const EdgeInsets.only(top: 30.0),
+              //padding: const EdgeInsets.only(top: 60.0),
               child: Center(
                   child: Column(
                 children: [
-                  KenGauge(
-                      WidgetTestService.scaffoldKey, WidgetTestService.formKey,
-                      id: 'gau1',
-                      value: 120,
-                      maxValue: 150,
-                      minValue: 50,
-                      warning: 100,
-                      alert: 110),
+                  KenTimePicker(
+                    WidgetTestService.scaffoldKey,
+                    WidgetTestService.formKey,
+                    KenTimePickerData(
+                        time: DateTime(2021, 1, 1, 17, 30),
+                        formattedTime: "17:30"),
+                    id: 'timePicker',
+                    width: 400,
+                    label: "",
+                    underline: true,
+                  ),
                 ],
               )),
               //),
@@ -46,7 +54,8 @@ Future<void> main() async {
   // testWidgets('Test dynamic contructor ', (WidgetTester tester) async {
   //   await WidgetTestService.initTests();
 
-  //   final testWidget = await WidgetTestService.getDynamicScreen('test_gauge');
+  //   final testWidget =
+  //       await WidgetTestService.getDynamicScreen(timePickerDynamicScreen);
 
   //   await tester.pumpWidget(testWidget).then((value) async {
   //     await tester.pumpAndSettle();
@@ -56,15 +65,12 @@ Future<void> main() async {
 }
 
 runTests() {
-  final findKey = find.byKey(Key('gau1'));
-  expect(findKey, findsWidgets);
-
-  var findWidget = find.byType(KenGauge);
+  var findWidget = find.byType(KenTimePicker);
   expect(findWidget, findsWidgets);
 
   var findText = find.byType(Text);
   expect(findText, findsWidgets);
 
-  var finderTextContent = find.text('120.0');
+  var finderTextContent = find.text(timePickerData.formattedTime!);
   expect(finderTextContent, findsWidgets);
 }

@@ -13,15 +13,31 @@ Future<void> main() async {
     Widget testWidget = new MediaQuery(
         data: new MediaQueryData(),
         child: new MaterialApp(
-            home: KenDatePicker(
-          WidgetTestService.scaffoldKey,
-          WidgetTestService.formKey,
-          KenDatePickerData(value: DateTime(2021, 03, 21)),
-          id: "datepicker1",
-          underline: true,
-          label: "",
-          width: 400,
-          height: 600,
+            home: Scaffold(
+          appBar: AppBar(),
+          body: SingleChildScrollView(
+            child: Container(
+              //padding: const EdgeInsets.all(30),
+              //child: Padding(
+              padding: const EdgeInsets.all(30),
+              child: Center(
+                  child: Column(
+                children: [
+                  KenDatePicker(
+                    WidgetTestService.scaffoldKey,
+                    WidgetTestService.formKey,
+                    KenDatePickerData(value: DateTime(2021, 03, 21)),
+                    id: "datepicker1",
+                    underline: true,
+                    label: "",
+                    width: 400,
+                    height: 600,
+                  )
+                ],
+              )),
+              //),
+            ),
+          ),
         )));
 
     await tester.pumpWidget(testWidget).then((value) async {

@@ -10,20 +10,37 @@ Future<void> main() async {
     Widget testWidget = new MediaQuery(
         data: new MediaQueryData(),
         child: new MaterialApp(
-            home: KenDashboard(
-          WidgetTestService.scaffoldKey,
-          WidgetTestService.formKey,
-          15.86,
-          text: 'Temperature',
-          fontSize: 60.0,
-          captionFontSize: 20,
-          // icon: 0xe737,
-          iconSize: 40,
-          iconColor: Colors.red,
-          width: 400,
-          height: 600,
-          id: 'dashboard1',
-        )));
+          home: Scaffold(
+            appBar: AppBar(),
+            body: SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.all(30),
+                //child: Padding(
+                //padding: const EdgeInsets.only(top: 60.0),
+                child: Center(
+                    child: Column(
+                  children: [
+                    KenDashboard(
+                      WidgetTestService.scaffoldKey,
+                      WidgetTestService.formKey,
+                      15.86,
+                      text: 'Temperature',
+                      fontSize: 60.0,
+                      captionFontSize: 20,
+                      // icon: 0xe737,
+                      iconSize: 40,
+                      iconColor: Colors.red,
+                      width: 400,
+                      height: 600,
+                      id: 'dashboard1',
+                    )
+                  ],
+                )),
+                //),
+              ),
+            ),
+          ),
+        ));
 
     await tester.pumpWidget(testWidget).then((value) async {
       await tester.pumpAndSettle();

@@ -12,21 +12,37 @@ Future<void> main() async {
     Widget testWidget = new MediaQuery(
         data: new MediaQueryData(),
         child: new MaterialApp(
-            home: KenButtons(
-          WidgetTestService.scaffoldKey,
-          WidgetTestService.formKey,
-          //width: double.infinity,
-          id: 'buttons',
-          height: 80,
-          width: 260,
-          //iconCode: 62371,
-          iconSize: 25,
-          borderRadius: 30,
-          fontSize: 18,
-          backColor: const Color.fromRGBO(6, 140, 154, 10),
-          fontColor: Colors.white,
-          align: Alignment.centerRight,
-          callBack: buttonsCallBack,
+            home: Scaffold(
+          appBar: AppBar(),
+          body: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(30),
+              //child: Padding(
+              //padding: const EdgeInsets.only(top: 30.0, left: 10, right: 10),
+              child: Center(
+                  child: Column(
+                children: [
+                  KenButtons(
+                    WidgetTestService.scaffoldKey,
+                    WidgetTestService.formKey,
+                    //width: double.infinity,
+                    id: 'buttons',
+                    height: 80,
+                    width: 260,
+                    //iconCode: 62371,
+                    iconSize: 25,
+                    borderRadius: 30,
+                    fontSize: 18,
+                    backColor: const Color.fromRGBO(6, 140, 154, 10),
+                    fontColor: Colors.white,
+                    align: Alignment.centerRight,
+                    callBack: buttonsCallBack,
+                  ),
+                ],
+              )),
+              //),
+            ),
+          ),
         )));
 
     await tester.pumpWidget(testWidget).then((value) async {

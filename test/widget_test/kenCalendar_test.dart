@@ -21,64 +21,72 @@ Future<void> main() async {
               GlobalCupertinoLocalizations.delegate,
               DefaultCupertinoLocalizations.delegate
             ],
-            home: SingleChildScrollView(
+            home: Scaffold(
+              appBar: AppBar(),
+              body: SingleChildScrollView(
                 child: Container(
-              padding: const EdgeInsets.all(20),
-              child: Column(children: [
-                KenCalendar(
-                    WidgetTestService.scaffoldKey, WidgetTestService.formKey,
-                    id: 'calendar1',
-                    width: 600,
-                    height: 400,
-                    initialFirstWork: DateTime(DateTime.now().year, 01, 01),
-                    initialLastWork: DateTime(DateTime.now().year, 12, 31),
-                    initialDate: DateTime(DateTime.now().year, 01, 01),
-                    dataColumnName: "value",
-                    titleColumnName: "title",
-                    styleColumnName: "style",
-                    showPeriodButtons: false,
-                    data: [
-                      {
-                        "value": "${DateTime.now().year}-01-18",
-                        "title": "Fase 2 project Alfa",
-                        "init": "100000",
-                        "end": "103000"
-                      },
-                      {
-                        "value": "${DateTime.now().year}-01-18",
-                        "title": "Metting call (13:20)",
-                        "init": "132000",
-                      },
-                      {
-                        "value": "${DateTime.now().year}-01-18",
-                        "title": "Flutter Tutorial",
-                        "init": "132000",
-                      },
-                      {
-                        "value": "${DateTime.now().year}-01-18",
-                        "title": "Meet the parents",
-                        "init": "132000",
-                      },
-                      {
-                        "value": "${DateTime.now().year}-01-18",
-                        "title": "Meet the Fockers",
-                        "init": "132000",
-                      },
-                      {
-                        "value": "${DateTime.now().year}-01-20",
-                        "title": "Get to Interstellar"
-                      },
-                      {
-                        "value": "${DateTime.now().year}-01-21",
-                        "title": "Choose a new avatar"
-                      },
-                      {
-                        "value": "${DateTime.now().year}-02-21",
-                        "title": "Phone call with the martian"
-                      }
-                    ])
-              ]),
-            ))));
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      KenCalendar(WidgetTestService.scaffoldKey,
+                          WidgetTestService.formKey,
+                          id: 'calendar1',
+                          width: 600,
+                          height: 400,
+                          initialFirstWork:
+                              DateTime(DateTime.now().year, 01, 01),
+                          initialLastWork:
+                              DateTime(DateTime.now().year, 12, 31),
+                          initialDate: DateTime(DateTime.now().year, 01, 01),
+                          dataColumnName: "value",
+                          titleColumnName: "title",
+                          styleColumnName: "style",
+                          showPeriodButtons: false,
+                          data: [
+                            {
+                              "value": "${DateTime.now().year}-01-18",
+                              "title": "Fase 2 project Alfa",
+                              "init": "100000",
+                              "end": "103000"
+                            },
+                            {
+                              "value": "${DateTime.now().year}-01-18",
+                              "title": "Metting call (13:20)",
+                              "init": "132000",
+                            },
+                            {
+                              "value": "${DateTime.now().year}-01-18",
+                              "title": "Flutter Tutorial",
+                              "init": "132000",
+                            },
+                            {
+                              "value": "${DateTime.now().year}-01-18",
+                              "title": "Meet the parents",
+                              "init": "132000",
+                            },
+                            {
+                              "value": "${DateTime.now().year}-01-18",
+                              "title": "Meet the Fockers",
+                              "init": "132000",
+                            },
+                            {
+                              "value": "${DateTime.now().year}-01-20",
+                              "title": "Get to Interstellar"
+                            },
+                            {
+                              "value": "${DateTime.now().year}-01-21",
+                              "title": "Choose a new avatar"
+                            },
+                            {
+                              "value": "${DateTime.now().year}-02-21",
+                              "title": "Phone call with the martian"
+                            }
+                          ])
+                    ],
+                  ),
+                ),
+              ),
+            )));
 
     await tester.pumpWidget(testWidget).then((value) async {
       await tester.pumpAndSettle();

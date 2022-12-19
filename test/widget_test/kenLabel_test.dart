@@ -10,17 +10,33 @@ Future<void> main() async {
     Widget testWidget = new MediaQuery(
         data: new MediaQueryData(),
         child: new MaterialApp(
-          home: KenLabel(
-            WidgetTestService.scaffoldKey,
-            WidgetTestService.formKey,
-            const ['Information'],
-            id: 'lab2',
-            fontBold: false,
-            align: Alignment.centerRight,
-            iconCode: "0xf51f",
-            fontSize: 30,
-            iconSize: 40,
-            iconColor: Colors.black,
+          home: Scaffold(
+            appBar: AppBar(),
+            body: SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Center(
+                      child: Column(
+                    children: [
+                      KenLabel(
+                        WidgetTestService.scaffoldKey,
+                        WidgetTestService.formKey,
+                        const ['Information'],
+                        id: 'lab2',
+                        fontBold: false,
+                        align: Alignment.centerRight,
+                        iconCode: "0xf51f",
+                        fontSize: 30,
+                        iconSize: 40,
+                        iconColor: Colors.black,
+                      ),
+                    ],
+                  )),
+                ),
+              ),
+            ),
           ),
         ));
 

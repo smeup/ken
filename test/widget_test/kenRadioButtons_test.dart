@@ -19,22 +19,38 @@ Future<void> main() async {
     Widget testWidget = new MediaQuery(
         data: new MediaQueryData(),
         child: new MaterialApp(
-            home: KenRadioButtons(
-          WidgetTestService.scaffoldKey,
-          WidgetTestService.formKey,
-          title: '',
-          data: const [
-            {"code": "1", "value": "Yes"},
-            {"code": "0", "value": "No"},
-            {"code": "2", "value": "Don't know"},
-            {"code": "3", "value": "Maybe"}
-          ],
-          id: 'radio_buttons_1',
-          // clientOnPressed: (String value) {
-          //   KenUtilities.invokeScaffoldMessenger(context,
-          //       "You have changed the radiobutton to: $value");
-          // },
-          selectedValue: '0',
+            home: Scaffold(
+          appBar: AppBar(),
+          body: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              // child: Padding(
+              //   padding: const EdgeInsets.only(top: 60.0),
+              child: Center(
+                  child: Column(
+                children: [
+                  KenRadioButtons(
+                    WidgetTestService.scaffoldKey,
+                    WidgetTestService.formKey,
+                    title: '',
+                    data: const [
+                      {"code": "1", "value": "Yes"},
+                      {"code": "0", "value": "No"},
+                      {"code": "2", "value": "Don't know"},
+                      {"code": "3", "value": "Maybe"}
+                    ],
+                    id: 'radio_buttons_1',
+                    // clientOnPressed: (String value) {
+                    //   KenUtilities.invokeScaffoldMessenger(context,
+                    //       "You have changed the radiobutton to: $value");
+                    // },
+                    selectedValue: '0',
+                  ),
+                ],
+              )),
+              //),
+            ),
+          ),
         )));
 
     await tester.pumpWidget(testWidget).then((value) async {

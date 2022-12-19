@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ken/smeup/widgets/kenProgressIndicator.dart';
+import 'package:ken/smeup/widgets/kenTextField.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {
@@ -18,9 +18,15 @@ Future<void> main() async {
               child: Center(
                   child: Column(
                 children: [
-                  KenProgressIndicator(
-                      WidgetTestService.scaffoldKey, WidgetTestService.formKey,
-                      id: 'pgi1', size: 200)
+                  KenTextField(
+                    WidgetTestService.scaffoldKey,
+                    WidgetTestService.formKey,
+                    label: 'description',
+                    id: 'text1',
+                    data: 'some text',
+                    showSubmit: true,
+                    submitLabel: 'tap me',
+                  ),
                 ],
               )),
             ),
@@ -28,11 +34,7 @@ Future<void> main() async {
         )));
 
     await tester.pumpWidget(testWidget).then((value) async {
-      try {
-        await tester.pumpAndSettle();
-      } catch (e) {
-        print(e);
-      }
+      await tester.pumpAndSettle();
 
       runTests();
     });
@@ -42,24 +44,25 @@ Future<void> main() async {
   //   await WidgetTestService.initTests();
 
   //   final testWidget =
-  //       await WidgetTestService.getDynamicScreen('test_progress_indicator');
+  //       await WidgetTestService.getDynamicScreen('test_textField');
 
   //   await tester.pumpWidget(testWidget).then((value) async {
-  //     try {
-  //       await tester.pumpAndSettle();
-  //     } catch (e) {
-  //       print(e);
-  //     }
-
+  //     await tester.pumpAndSettle();
   //     runTests();
   //   });
   // });
 }
 
 runTests() {
-  final findKey = find.byKey(Key('pgi1'));
+  final findKey = find.byKey(Key('text1'));
   expect(findKey, findsWidgets);
 
-  var findWidget = find.byType(KenProgressIndicator);
+  var findWidget = find.byType(KenTextField);
   expect(findWidget, findsWidgets);
+
+  var findText = find.byType(TextFormField);
+  expect(findText, findsWidgets);
+
+  var finderTextContent = find.text('some text');
+  expect(finderTextContent, findsWidgets);
 }
