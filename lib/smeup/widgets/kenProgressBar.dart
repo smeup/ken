@@ -27,6 +27,7 @@ class KenProgressBar extends StatefulWidget
   double? progressBarMaximun;
   double? height;
   EdgeInsetsGeometry? padding;
+  double? bordeRadius;
 
   double? data;
 
@@ -50,6 +51,7 @@ class KenProgressBar extends StatefulWidget
       this.padding = KenProgressBarModel.defaultPadding,
       this.progressBarMinimun = KenProgressBarModel.defaultProgressBarMinimun,
       this.progressBarMaximun = KenProgressBarModel.defaultProgressBarMaximun,
+      this.bordeRadius = KenProgressBarModel.defaultBorderRadius,
       this.callBack})
       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
@@ -67,6 +69,7 @@ class KenProgressBar extends StatefulWidget
     valueField = m.valueField;
     progressBarMinimun = m.progressBarMinimun;
     progressBarMaximun = m.progressBarMaximun;
+    bordeRadius = m.bordeRadius;
     height = m.height;
     padding = m.padding;
 

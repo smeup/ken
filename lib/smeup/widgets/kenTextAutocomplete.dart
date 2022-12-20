@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ken/smeup/models/ken_widget_builder_response.dart';
@@ -265,76 +267,84 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
               }
             }
 
-            return Row(children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: TextFormField(
-                    style: textStyle,
-                    controller: textEditingController,
-                    focusNode: focusNode,
-                    onFieldSubmitted: (String value) {
-                      onFieldSubmitted();
-                    },
-                    inputFormatters: widget.inputFormatters,
-                    autofocus: widget.autoFocus!,
-                    maxLines: 1,
-                    key: Key('${widget.id}_text'),
-                    autocorrect: false,
-                    textCapitalization: TextCapitalization.none,
-                    textInputAction: TextInputAction.next,
-                    enableSuggestions: true,
-                    validator:
-                        widget.clientValidator as String? Function(String?)?,
-                    keyboardType: widget.keyboard,
-                    obscureText:
-                        widget.keyboard == TextInputType.visiblePassword
-                            ? true
-                            : false,
-                    onChanged: (value) {
-                      if (widget.clientOnChange != null)
-                        widget.clientOnChange!(value);
-                    },
-                    decoration: InputDecoration(
-                      labelStyle: captionStyle,
-                      labelText: widget.label,
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                            color: widget.underline!
-                                ? widget.borderColor!
-                                : Colors.transparent),
+            return Container(
+              padding: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3),
+                  border: Border.all(
+                      width: 1,
+                      color: KenConfigurationService.getTheme()!.primaryColor)),
+              child: Row(children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 0.0),
+                    child: TextFormField(
+                      style: textStyle,
+                      controller: textEditingController,
+                      focusNode: focusNode,
+                      onFieldSubmitted: (String value) {
+                        onFieldSubmitted();
+                      },
+                      inputFormatters: widget.inputFormatters,
+                      autofocus: widget.autoFocus!,
+                      maxLines: 1,
+                      key: Key('${widget.id}_text'),
+                      autocorrect: false,
+                      textCapitalization: TextCapitalization.none,
+                      textInputAction: TextInputAction.next,
+                      enableSuggestions: true,
+                      validator:
+                          widget.clientValidator as String? Function(String?)?,
+                      keyboardType: widget.keyboard,
+                      obscureText:
+                          widget.keyboard == TextInputType.visiblePassword
+                              ? true
+                              : false,
+                      onChanged: (value) {
+                        if (widget.clientOnChange != null)
+                          widget.clientOnChange!(value);
+                      },
+                      decoration: InputDecoration(
+                        labelStyle: captionStyle,
+                        labelText: widget.label,
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: widget.underline!
+                                  ? widget.borderColor!
+                                  : Colors.transparent),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: widget.underline!
+                                  ? widget.borderColor!
+                                  : Colors.transparent),
+                        ),
                       ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                            color: widget.underline!
-                                ? widget.borderColor!
-                                : Colors.transparent),
-                      ),
+                      onSaved: widget.clientOnSave as void Function(String?)?,
                     ),
-                    onSaved: widget.clientOnSave as void Function(String?)?,
                   ),
                 ),
-              ),
-              Container(
-                color: iconTheme.color,
-                padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
-                child: GestureDetector(
-                  child: Icon(
-                    Icons.close,
-                    color: Theme.of(context).primaryColor,
-                    size: iconTheme.size,
+                Container(
+                  color: iconTheme.color,
+                  padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
+                  child: GestureDetector(
+                    child: Icon(
+                      Icons.close,
+                      color: Theme.of(context).primaryColor,
+                      size: iconTheme.size,
+                    ),
+                    onTap: () {
+                      setState(() {
+                        if (widget.callBack != null) {
+                          widget.callBack!(widget,
+                              KenCallbackType.onTapSetState, code, null);
+                        }
+                      });
+                    },
                   ),
-                  onTap: () {
-                    setState(() {
-                      if (widget.callBack != null) {
-                        widget.callBack!(
-                            widget, KenCallbackType.onTapSetState, code, null);
-                      }
-                    });
-                  },
-                ),
-              )
-            ]);
+                )
+              ]),
+            );
           },
           optionsViewBuilder: (BuildContext context,
               AutocompleteOnSelected<Map<dynamic, dynamic>> onSelected,
@@ -342,10 +352,11 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
             return Align(
               alignment: Alignment.topLeft,
               child: Material(
-                elevation: 4.0,
+                elevation: 2.0,
                 color: widget.backColor,
                 child: SizedBox(
-                  height: 200.0,
+                  height: 200,
+                  width: double.infinity,
                   child: ListView.builder(
                     padding: const EdgeInsets.all(8.0),
                     itemCount: options.length,

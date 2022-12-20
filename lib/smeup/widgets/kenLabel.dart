@@ -255,18 +255,53 @@ class _KenLabelState extends State<KenLabel>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 label,
-                icon,
+                Padding(padding: EdgeInsets.fromLTRB(5, 0, 0, 0)),
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+                  constraints: BoxConstraints(
+                      maxHeight: 60,
+                      minWidth: 0,
+                      maxWidth: double.infinity,
+                      minHeight: 60),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Align(
+                          child: icon,
+                        )
+                      ]),
+                ),
               ],
             ),
             //color: widget.backColor,
           );
-        } else if (widget.align == Alignment.centerRight) {
+        }
+        // else if (widget.align == Alignment.centerRight) {
+        //   children = Container(
+        //     padding: widget.padding,
+        //     child: Row(
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       children: [
+        //         icon,
+        //         Padding(padding: EdgeInsets.fromLTRB(0, 20, 10, 0)),
+        //         label,
+        //       ],
+        //     ),
+        //     //color: widget.backColor,
+        //   );
+        // }
+        else if (widget.align == Alignment.centerRight) {
           children = Container(
             padding: widget.padding,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                icon,
+                Container(
+                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0), child: icon),
+                Padding(padding: EdgeInsets.fromLTRB(0, 0, 5, 0)),
                 label,
               ],
             ),

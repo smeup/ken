@@ -15,6 +15,7 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
   static const String defaultValueField = 'value';
   static const double defaultProgressBarMinimun = 0;
   static const double defaultProgressBarMaximun = 0;
+  static const double defaultBorderRadius = 4;
   static const double defaultHeight = 10;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
 
@@ -25,6 +26,7 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
   double? progressBarMaximun;
   double? height;
   EdgeInsetsGeometry? padding;
+  double? bordeRadius;
 
   KenProgressBarModel({
     id,
@@ -39,6 +41,7 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
     this.padding = defaultPadding,
     this.progressBarMinimun = defaultProgressBarMinimun,
     this.progressBarMaximun = defaultProgressBarMaximun,
+    this.bordeRadius = defaultBorderRadius,
     title = '',
     required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
             KenModel? instance)
@@ -71,6 +74,9 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
         defaultProgressBarMinimun;
     progressBarMaximun = KenUtilities.getDouble(optionsDefault!['pgbMax']) ??
         defaultProgressBarMaximun;
+
+    bordeRadius = KenUtilities.getDouble(optionsDefault!['borderRadius']) ??
+        defaultBorderRadius;
     height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 
     padding =
@@ -82,7 +88,6 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
     linearTrackColor =
         KenUtilities.getColorFromRGB(optionsDefault!['linearTrackColor']) ??
             defaultLinearTrackColor;
-
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupProgressBarDao.getData(this);

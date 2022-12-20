@@ -292,7 +292,18 @@ class _KenTextFieldState extends State<KenTextField>
           widget.formKey,
           data: [widget.submitLabel],
           clientOnPressed: widget.clientOnSubmit,
-          padding: EdgeInsets.all(0),
+          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+          height: 50,
+          width: 180,
+          //iconSize: 25
+          borderRadius: 5,
+          fontSize: 14,
+          //backColor: Color.fromRGBO(6, 140, 154, 10),
+          fontColor: Colors.white,
+          iconData: const IconData(0xe901, fontFamily: 'icomoon'),
+          iconSize: 16,
+          iconColor: Colors.white,
+          align: Alignment.centerRight,
         );
       } else {
         if (widget.smeupButtons != null) {
