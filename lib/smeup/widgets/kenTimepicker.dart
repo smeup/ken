@@ -22,7 +22,7 @@ class KenTimePickerData {
 }
 
 // ignore: must_be_immutable
-class SmeupTimePicker extends StatefulWidget
+class KenTimePicker extends StatefulWidget
     with KenWidgetMixin
     implements KenWidgetInterface {
   KenTimePickerModel? model;
@@ -66,7 +66,7 @@ class SmeupTimePicker extends StatefulWidget
 
   Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
-  SmeupTimePicker(this.scaffoldKey, this.formKey, this.data,
+  KenTimePicker(this.scaffoldKey, this.formKey, this.data,
       {id = '',
       type = 'tpk',
       this.borderColor,
@@ -103,8 +103,8 @@ class SmeupTimePicker extends StatefulWidget
       this.minutesList = KenTimePickerModel.defaultMinutesList;
   }
 
-  SmeupTimePicker.withController(KenTimePickerModel this.model,
-      this.scaffoldKey, this.formKey, this.callBack)
+  KenTimePicker.withController(KenTimePickerModel this.model, this.scaffoldKey,
+      this.formKey, this.callBack)
       : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
@@ -168,10 +168,10 @@ class SmeupTimePicker extends StatefulWidget
   }
 
   @override
-  _SmeupTimePickerState createState() => _SmeupTimePickerState();
+  _KenTimePickerState createState() => _KenTimePickerState();
 }
 
-class _SmeupTimePickerState extends State<SmeupTimePicker>
+class _KenTimePickerState extends State<KenTimePicker>
     with KenWidgetStateMixin
     implements KenWidgetStateInterface {
   KenTimePickerModel? _model;

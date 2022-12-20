@@ -7,16 +7,22 @@ Future<void> main() async {
   testWidgets('Test static contructor ', (WidgetTester tester) async {
     await WidgetTestService.initTests();
 
-    final _scaffoldKey = GlobalKey<ScaffoldState>();
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
     Widget testWidget = new MediaQuery(
         data: new MediaQueryData(),
         child: new MaterialApp(
-            home: KenLine(
-          _scaffoldKey,
-          _formKey,
-          id: 'lin1',
+            home: Scaffold(
+          appBar: AppBar(),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                KenLine(
+                  WidgetTestService.scaffoldKey,
+                  WidgetTestService.formKey,
+                  id: 'lin1',
+                ),
+              ],
+            ),
+          ),
         )));
 
     await tester.pumpWidget(testWidget).then((value) async {
