@@ -1,5 +1,4 @@
 enum KenCallbackType {
-
   onDismissed,
   confirmDismiss,
   execDynamismActions,
@@ -7,6 +6,7 @@ enum KenCallbackType {
   getImage,
   getButtons,
   getBoxText,
+  getBack,
   getListBox,
   onSizeChanged,
 
@@ -31,5 +31,4 @@ enum KenCallbackType {
   endFunDate,
   clientOnChangeMonth,
   eventClicked,
-
 }

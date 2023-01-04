@@ -481,11 +481,59 @@ class _KenListBoxState extends State<KenListBox>
     }
 
     _data['rows'].asMap().forEach((i, dataElement) {
-      var _backColor = widget.backColor;
+      // var _backColor = widget.backColor;
+      var _backColor =
+          (dataElement["disabled"] != null && dataElement["disabled"] as bool)
+              ? Colors.grey[300]
+              : widget.backColor;
+
       if (widget.backgroundColName != null &&
           widget.backgroundColName!.isNotEmpty) {
         _backColor =
             KenUtilities.getColorFromRGB(dataElement[widget.backgroundColName]);
+      }
+
+      TextStyle _getTextStile(Color? _backColor) {
+        TextStyle style =
+            KenConfigurationService.getTheme()!.textTheme.headline4!;
+
+        if (dataElement["disabled"] != null &&
+            dataElement["disabled"] as bool) {
+          style = style.copyWith(
+              color: Colors.grey[500],
+              fontSize: widget.fontSize,
+              backgroundColor:
+                  _backColor); // se lo rimuovi rimane uno sfondo bianco, così prende il colore di sfondo
+        } else {
+          style = style.copyWith(
+              color: widget.fontColor,
+              fontSize: widget.fontSize,
+              backgroundColor: _backColor);
+        }
+        if (widget.fontBold!) {
+          style = style.copyWith(
+            fontWeight: FontWeight.bold,
+          );
+        }
+
+        return style;
+      }
+
+      CardTheme _getCardStyle(Color? backColor) {
+        var timeCardTheme =
+            KenConfigurationService.getTheme()!.cardTheme.copyWith(
+                  color: backColor,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(widget.borderRadius!),
+                      side: BorderSide(
+                          width: widget.borderWidth!,
+                          color: dataElement["disabled"] != null &&
+                                  dataElement["disabled"] as bool
+                              ? Colors.grey
+                              : widget.borderColor!)),
+                );
+
+        return timeCardTheme;
       }
 
       CardTheme cardTheme = _getCardStyle(_backColor);
@@ -540,35 +588,6 @@ class _KenListBoxState extends State<KenListBox>
     if (widget.callBack != null) {
       widget.callBack!(widget, KenCallbackType.onSizeChanged, size, null);
     }
-  }
-
-  CardTheme _getCardStyle(Color? backColor) {
-    var timeCardTheme = KenConfigurationService.getTheme()!.cardTheme.copyWith(
-          color: backColor,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(widget.borderRadius!),
-              side: BorderSide(
-                  width: widget.borderWidth!, color: widget.borderColor!)),
-        );
-
-    return timeCardTheme;
-  }
-
-  TextStyle _getTextStile(Color? backColor) {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.headline4!;
-
-    style = style.copyWith(
-        color: widget.fontColor,
-        fontSize: widget.fontSize,
-        backgroundColor: backColor);
-
-    if (widget.fontBold!) {
-      style = style.copyWith(
-        fontWeight: FontWeight.bold,
-      );
-    }
-
-    return style;
   }
 
   TextStyle _getCaptionStile(Color? backColor) {

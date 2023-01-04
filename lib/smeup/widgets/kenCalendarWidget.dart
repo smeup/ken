@@ -241,7 +241,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
                   // selected day
                   selectedBuilder: (context, date, _) {
                     Color containerBackcolor =
-                        Color.fromRGBO(pc.red, pc.green, pc.blue, 0.3);
+                        Color.fromRGBO(pc.red, pc.green, pc.blue, 1);
 
                     return FadeTransition(
                         opacity: Tween(begin: 0.5, end: 1.0)
@@ -337,12 +337,13 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
     );
   }
 
+// label
   // Widget? _getMarkerContainer(DateTime date, TextStyle? markerStyle) {
   //   var eventsInDay = _events![_nomalizeDateTime(date)];
   //   if (eventsInDay == null) return null;
   //   final ev = eventsInDay[0];
   //   return Container(
-  //     padding: EdgeInsets.only(right: 4, left: 4),
+  //     padding: EdgeInsets.only(right: 4, left: 4, bottom: 15),
   //     child: Container(
   //         height: 16,
   //         width: double.infinity,
