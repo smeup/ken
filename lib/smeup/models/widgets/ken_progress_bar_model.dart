@@ -4,7 +4,7 @@ import 'package:ken/smeup/models/widgets/ken_data_interface.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 
-import '../../services/ken_theme_configuration_service.dart';
+import '../../services/ken_configuration_service.dart';
 
 class KenProgressBarModel extends KenModel implements KenDataInterface {
   // supported by json_theme
@@ -15,6 +15,7 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
   static const String defaultValueField = 'value';
   static const double defaultProgressBarMinimun = 0;
   static const double defaultProgressBarMaximun = 0;
+  static const double defaultBorderRadius = 4;
   static const double defaultHeight = 10;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
 
@@ -25,24 +26,31 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
   double? progressBarMaximun;
   double? height;
   EdgeInsetsGeometry? padding;
+  double? bordeRadius;
 
-  KenProgressBarModel(
-      {id,
-      type,
-      GlobalKey<FormState>? formKey,
-      GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-      this.color,
-      this.linearTrackColor,
-      this.height = defaultHeight,
-      this.valueField = defaultValueField,
-      this.padding = defaultPadding,
-      this.progressBarMinimun = defaultProgressBarMinimun,
-      this.progressBarMaximun = defaultProgressBarMaximun,
-      title = '',
-        required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-      })
-      : super(formKey, scaffoldKey, context, title: title, id: id, type: type, instanceCallBack: instanceCallBack) {
+  KenProgressBarModel({
+    id,
+    type,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
+    this.color,
+    this.linearTrackColor,
+    this.height = defaultHeight,
+    this.valueField = defaultValueField,
+    this.padding = defaultPadding,
+    this.progressBarMinimun = defaultProgressBarMinimun,
+    this.progressBarMaximun = defaultProgressBarMaximun,
+    this.bordeRadius = defaultBorderRadius,
+    title = '',
+    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  }) : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'pgb';
     setDefaults(this);
   }
@@ -52,15 +60,11 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
+    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
   ) : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-          instanceCallBack,
-          null
-        ) {
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     setDefaults(this);
     title = jsonMap['title'] ?? '';
 
@@ -70,8 +74,10 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
         defaultProgressBarMinimun;
     progressBarMaximun = KenUtilities.getDouble(optionsDefault!['pgbMax']) ??
         defaultProgressBarMaximun;
-    height =
-        KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+
+    bordeRadius = KenUtilities.getDouble(optionsDefault!['borderRadius']) ??
+        defaultBorderRadius;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
@@ -82,19 +88,17 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
     linearTrackColor =
         KenUtilities.getColorFromRGB(optionsDefault!['linearTrackColor']) ??
             defaultLinearTrackColor;
-
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupProgressBarDao.getData(this);
         await this.getData(instanceCallBack);
       };
     }
-
   }
 
   static setDefaults(dynamic obj) {
     ProgressIndicatorThemeData progressIndicatorThemeData =
-        KenThemeConfigurationService.getTheme()!.progressIndicatorTheme;
+        KenConfigurationService.getTheme()!.progressIndicatorTheme;
     defaultColor = progressIndicatorThemeData.color;
     defaultLinearTrackColor = progressIndicatorThemeData.linearTrackColor;
 

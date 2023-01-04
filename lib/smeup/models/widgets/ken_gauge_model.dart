@@ -27,7 +27,6 @@ class KenGaugeModel extends KenModel implements KenDataInterface {
   String? maxColName;
   String? minColName;
 
-
   KenGaugeModel(
       {id,
       type,
@@ -39,24 +38,25 @@ class KenGaugeModel extends KenModel implements KenDataInterface {
       this.maxColName = defaultMaxColName,
       this.minColName = defaultMinColName,
       title = '',
-        required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack
-      })
-      : super(formKey, scaffoldKey, context, title: title, id: id, type: type, instanceCallBack: instanceCallBack) {
-  }
+      required Function(ServicesCallbackType type,
+              Map<dynamic, dynamic>? jsonMap, KenModel? instance)
+          instanceCallBack})
+      : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack);
 
   KenGaugeModel.fromMap(
-    Map<String, dynamic> jsonMap,
-    GlobalKey<FormState>? formKey,
-    GlobalKey<ScaffoldState>? scaffoldKey,
-    BuildContext? context, Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack
-
-      ) : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-          instanceCallBack, null
-        ) {
+      Map<String, dynamic> jsonMap,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
+      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+              KenModel? instance)
+          instanceCallBack)
+      : super.fromMap(
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     title = jsonMap['title'] ?? '';
     valueColName = optionsDefault!['valueColName'] ?? defaultValColName;
     maxColName = optionsDefault!['maxColName'] ?? defaultMaxColName;
@@ -70,6 +70,5 @@ class KenGaugeModel extends KenModel implements KenDataInterface {
         await this.getData(instanceCallBack);
       };
     }
-
   }
 }

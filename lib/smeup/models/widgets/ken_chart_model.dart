@@ -30,17 +30,25 @@ class KenChartModel extends KenModel {
     this.height = defaultHeight,
     this.width = defaultWidth,
     this.legend = defaultLegend,
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type,instanceCallBack: instanceCallBack) {
-  }
+    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  }) : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack);
 
   KenChartModel.fromMap(
       Map<String, dynamic> jsonMap,
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack)
-      : super.fromMap(jsonMap, formKey, scaffoldKey, context, instanceCallBack, null)  {
+      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+              KenModel? instance)
+          instanceCallBack)
+      : super.fromMap(
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     if (optionsDefault!['Typ'] == null) {
       chartType = defaultChartType;
     } else {
@@ -53,20 +61,17 @@ class KenChartModel extends KenModel {
     if (chartType == null) chartType = defaultChartType;
     //refresh = optionsDefault['refresh'] ?? defaultRefresh;
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
-    height =
-        KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 
     legend =
         KenUtilities.getBool(optionsDefault!['showMarks']) ?? defaultLegend;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-
         await this.getData(instanceCallBack);
         // await SmeupChartDao.getData(this);
       };
     }
-
   }
 
   ChartType? _getChartType(String? type) {

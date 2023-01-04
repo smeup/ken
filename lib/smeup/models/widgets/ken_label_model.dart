@@ -4,7 +4,7 @@ import 'package:ken/smeup/models/widgets/ken_data_interface.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 
-import '../../services/ken_theme_configuration_service.dart';
+import '../../services/ken_configuration_service.dart';
 
 class KenLabelModel extends KenModel implements KenDataInterface {
   // supported by json_theme
@@ -39,29 +39,36 @@ class KenLabelModel extends KenModel implements KenDataInterface {
   dynamic iconCode;
   String? iconColname;
 
-  KenLabelModel(
-      {id,
-      type,
-      GlobalKey<FormState>? formKey,
-      GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-      this.fontSize,
-      this.fontColor,
-      this.fontBold,
-      this.backColor,
-      this.iconSize,
-      this.iconColor,
-      this.valueColName = defaultValColName,
-      this.padding = defaultPadding,
-      this.align = defaultAlign,
-      this.width = defaultWidth,
-      this.height = defaultHeight,
-      this.backColorColName = '',
-      this.iconCode,
-      this.iconColname = '',
-      this.fontColorColName = '',
-      title = '', required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,})
-      : super(formKey, scaffoldKey, context, title: title, id: id, type: type,instanceCallBack: instanceCallBack) {
+  KenLabelModel({
+    id,
+    type,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
+    this.fontSize,
+    this.fontColor,
+    this.fontBold,
+    this.backColor,
+    this.iconSize,
+    this.iconColor,
+    this.valueColName = defaultValColName,
+    this.padding = defaultPadding,
+    this.align = defaultAlign,
+    this.width = defaultWidth,
+    this.height = defaultHeight,
+    this.backColorColName = '',
+    this.iconCode,
+    this.iconColname = '',
+    this.fontColorColName = '',
+    title = '',
+    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  }) : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack) {
     setDefaults(this);
   }
 
@@ -69,38 +76,33 @@ class KenLabelModel extends KenModel implements KenDataInterface {
     Map<String, dynamic> jsonMap,
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
-    BuildContext? context, Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-
-      ) : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-          instanceCallBack,
-          null
-        ) {
+    BuildContext? context,
+    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  ) : super.fromMap(
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     setDefaults(this);
 
     if (fontColor == null)
       fontColor =
-          KenThemeConfigurationService.getTheme()!.textTheme.bodyText1!.color;
+          KenConfigurationService.getTheme()!.textTheme.bodyText1!.color;
 
     valueColName = optionsDefault!['valueColName'] ?? defaultValColName;
     backColorColName = optionsDefault!['backColorColName'] ?? '';
     fontColorColName = optionsDefault!['fontColorColName'] ?? '';
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
-    fontSize = KenUtilities.getDouble(optionsDefault!['fontSize']) ??
-        defaultFontSize;
-    iconSize = KenUtilities.getDouble(optionsDefault!['iconSize']) ??
-        defaultIconSize;
+    fontSize =
+        KenUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
+    iconSize =
+        KenUtilities.getDouble(optionsDefault!['iconSize']) ?? defaultIconSize;
     iconColor = KenUtilities.getColorFromRGB(optionsDefault!['iconColor']) ??
         defaultIconColor;
     align = KenUtilities.getAlignmentGeometry(optionsDefault!['align']) ??
         defaultAlign;
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
-    height =
-        KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     title = jsonMap['title'] ?? '';
     backColor = KenUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
@@ -113,24 +115,21 @@ class KenLabelModel extends KenModel implements KenDataInterface {
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-
         // await SmeupLabelDao.getData(this);
         await this.getData(instanceCallBack);
-
       };
     }
-
   }
 
   static setDefaults(dynamic obj) {
     TextStyle textStyle =
-    KenThemeConfigurationService.getTheme()!.textTheme.bodyText2!;
+        KenConfigurationService.getTheme()!.textTheme.bodyText2!;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
     defaultBackColor = textStyle.backgroundColor;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
 
-    var iconTheme = KenThemeConfigurationService.getTheme()!.iconTheme;
+    var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
     defaultIconSize = iconTheme.size;
     defaultIconColor = iconTheme.color;
 

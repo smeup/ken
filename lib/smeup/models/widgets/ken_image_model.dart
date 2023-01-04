@@ -14,44 +14,43 @@ class KenImageModel extends KenModel implements KenDataInterface {
   double? height;
   EdgeInsetsGeometry? padding;
 
-  KenImageModel(
-      {id,
-      type,
+  KenImageModel({
+    id,
+    type,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
+    this.width = defaultWidth,
+    this.height = defaultHeight,
+    this.padding = defaultPadding,
+    title = '',
+    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  }) : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack);
+
+  KenImageModel.fromMap(
+      Map<String, dynamic> jsonMap,
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
-      this.width = defaultWidth,
-      this.height = defaultHeight,
-      this.padding = defaultPadding,
-      title = '',
-        required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-      })
-      : super(formKey, scaffoldKey, context, title: title, id: id, type: type, instanceCallBack: instanceCallBack) {
-  }
-
-  KenImageModel.fromMap(
-    Map<String, dynamic> jsonMap,
-    GlobalKey<FormState>? formKey,
-    GlobalKey<ScaffoldState>? scaffoldKey,
-    BuildContext? context, Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack
-      ) : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-          instanceCallBack,
-          null
-        ) {
+      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+              KenModel? instance)
+          instanceCallBack)
+      : super.fromMap(
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
-    height =
-        KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     title = jsonMap['title'] ?? '';
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-
         await this.getData(instanceCallBack);
         // await SmeupImageDao.getData(this);
       };

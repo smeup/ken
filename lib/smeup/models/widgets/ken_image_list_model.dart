@@ -4,7 +4,7 @@ import 'package:ken/smeup/models/widgets/ken_data_interface.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 
-import '../../services/ken_theme_configuration_service.dart';
+import '../../services/ken_configuration_service.dart';
 
 class KenImageListModel extends KenModel implements KenDataInterface {
   // supported by json_theme
@@ -72,30 +72,31 @@ class KenImageListModel extends KenModel implements KenDataInterface {
       this.orientation = defaultOrientation,
       this.rows = defaultRows,
       title = '',
-        required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack
-      })
-      : super(formKey, scaffoldKey, context, title: title, id: id, type: type, instanceCallBack: instanceCallBack) {
+      required Function(ServicesCallbackType type,
+              Map<dynamic, dynamic>? jsonMap, KenModel? instance)
+          instanceCallBack})
+      : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack) {
     setDefaults(this);
   }
 
   KenImageListModel.fromMap(
-    Map<String, dynamic> jsonMap,
-    GlobalKey<FormState>? formKey,
-    GlobalKey<ScaffoldState>? scaffoldKey,
-    BuildContext? context, Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack
-
-      ) : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-          instanceCallBack, null
-        ) {
+      Map<String, dynamic> jsonMap,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
+      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+              KenModel? instance)
+          instanceCallBack)
+      : super.fromMap(
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';
-    columns =
-        KenUtilities.getInt(optionsDefault!['columns']) ?? defaultColumns;
+    columns = KenUtilities.getInt(optionsDefault!['columns']) ?? defaultColumns;
     rows = KenUtilities.getInt(optionsDefault!['rows']) ?? defaultRows;
     if (columns == 0 && rows == 0) {
       columns = 1;
@@ -119,8 +120,7 @@ class KenImageListModel extends KenModel implements KenDataInterface {
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
-    height =
-        KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     orientation = jsonMap['orientation'] == 'horizontal'
         ? Axis.horizontal
         : Axis.vertical;
@@ -134,20 +134,20 @@ class KenImageListModel extends KenModel implements KenDataInterface {
         await this.getData(instanceCallBack);
       };
     }
-
   }
 
   static setDefaults(dynamic obj) {
-    var cardTheme = KenThemeConfigurationService.getTheme()!.cardTheme;
+    var cardTheme = KenConfigurationService.getTheme()!.cardTheme;
     defaultBackColor = cardTheme.color;
-    ContinuousRectangleBorder shape = cardTheme.shape as ContinuousRectangleBorder;
+    ContinuousRectangleBorder shape =
+        cardTheme.shape as ContinuousRectangleBorder;
     defaultBorderRadius =
         shape.borderRadius.resolve(TextDirection.ltr).topLeft.x;
     var side = shape.side;
     defaultBorderColor = side.color;
     defaultBorderWidth = side.width;
 
-    var textStyle = KenThemeConfigurationService.getTheme()!
+    var textStyle = KenConfigurationService.getTheme()!
         .textTheme
         .headline4!
         .copyWith(backgroundColor: defaultBackColor);
@@ -155,7 +155,7 @@ class KenImageListModel extends KenModel implements KenDataInterface {
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
 
-    var captionStyle = KenThemeConfigurationService.getTheme()!.textTheme.headline5!;
+    var captionStyle = KenConfigurationService.getTheme()!.textTheme.headline5!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;
@@ -171,12 +171,10 @@ class KenImageListModel extends KenModel implements KenDataInterface {
     if (obj.borderRadius == null)
       obj.borderRadius = KenImageListModel.defaultBorderRadius;
 
-    if (obj.fontBold == null)
-      obj.fontBold = KenImageListModel.defaultFontBold;
+    if (obj.fontBold == null) obj.fontBold = KenImageListModel.defaultFontBold;
     if (obj.fontColor == null)
       obj.fontColor = KenImageListModel.defaultFontColor;
-    if (obj.fontSize == null)
-      obj.fontSize = KenImageListModel.defaultFontSize;
+    if (obj.fontSize == null) obj.fontSize = KenImageListModel.defaultFontSize;
 
     if (obj.captionFontBold == null)
       obj.captionFontBold = KenImageListModel.defaultCaptionFontBold;

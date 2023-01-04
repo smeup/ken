@@ -4,7 +4,7 @@ import 'package:ken/smeup/models/widgets/ken_data_interface.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 
-import '../../services/ken_theme_configuration_service.dart';
+import '../../services/ken_configuration_service.dart';
 
 class KenDashboardModel extends KenModel implements KenDataInterface {
   // supported by json_theme
@@ -55,57 +55,58 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
   double? height;
   String? numberFormat;
 
-  KenDashboardModel(
-      {id,
-      type,
-      formKey,
-      scaffoldKey,
-      context,
-      this.fontColor,
-      this.fontSize,
-      this.fontBold,
-      this.captionFontBold,
-      this.captionFontSize,
-      this.captionFontColor,
-      this.iconSize,
-      this.iconColor,
-      this.valueColName = defaultValueColName,
-      this.umColName = defaultUmColName,
-      this.textColName = defaultTextColName,
-      this.iconColName = defaultIconColName,
-      this.padding = defaultPadding,
-      this.selectLayout = defaultSelectLayout,
-      this.width = defaultWidth,
-      this.height = defaultHeight,
-      this.forceText = defaultForceText,
-      this.forceValue = defaultForceValue,
-      this.forceUm = defaultForceUm,
-      this.forceIcon = defaultForceIcon,
-      this.numberFormat = defaultNumberFormat,
-      title = '',
-        required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-      })
-      : super(formKey, scaffoldKey, context, title: title, id: id, type: type, instanceCallBack: instanceCallBack) {
+  KenDashboardModel({
+    id,
+    type,
+    formKey,
+    scaffoldKey,
+    context,
+    this.fontColor,
+    this.fontSize,
+    this.fontBold,
+    this.captionFontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.iconSize,
+    this.iconColor,
+    this.valueColName = defaultValueColName,
+    this.umColName = defaultUmColName,
+    this.textColName = defaultTextColName,
+    this.iconColName = defaultIconColName,
+    this.padding = defaultPadding,
+    this.selectLayout = defaultSelectLayout,
+    this.width = defaultWidth,
+    this.height = defaultHeight,
+    this.forceText = defaultForceText,
+    this.forceValue = defaultForceValue,
+    this.forceUm = defaultForceUm,
+    this.forceIcon = defaultForceIcon,
+    this.numberFormat = defaultNumberFormat,
+    title = '',
+    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  }) : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack) {
     if (iconColor == null)
-      iconColor = KenThemeConfigurationService.getTheme()!.iconTheme.color;
+      iconColor = KenConfigurationService.getTheme()!.iconTheme.color;
     id = KenUtilities.getWidgetId('DSH', id);
     setDefaults(this);
   }
 
   KenDashboardModel.fromMap(
-    Map<String, dynamic> jsonMap,
-    GlobalKey<FormState>? formKey,
-    GlobalKey<ScaffoldState>? scaffoldKey,
-    BuildContext? context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack
-  ) : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-          instanceCallBack,
-          null
-    ) {
+      Map<String, dynamic> jsonMap,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
+      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+              KenModel? instance)
+          instanceCallBack)
+      : super.fromMap(
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     setDefaults(this);
     valueColName = optionsDefault!['ValueColName'] ?? defaultValueColName;
     iconColName = optionsDefault!['iconColName'] ?? defaultIconColName;
@@ -114,8 +115,7 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
-    height =
-        KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 
     if (optionsDefault!['FontSize'].toString().contains('%')) {
       double perc = KenUtilities.getDouble(
@@ -169,32 +169,29 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
         await this.getData(instanceCallBack);
       };
     }
-
   }
 
   static setDefaults(dynamic obj) {
-    var textStyle = KenThemeConfigurationService.getTheme()!.textTheme.headline1!;
+    var textStyle = KenConfigurationService.getTheme()!.textTheme.headline1!;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
 
-    var captionStyle = KenThemeConfigurationService.getTheme()!.textTheme.caption!;
+    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
     defaultCaptionFontSize = captionStyle.fontSize;
     defaultCaptionFontColor = captionStyle.color;
 
-    var iconTheme = KenThemeConfigurationService.getTheme()!.iconTheme;
+    var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
     defaultIconSize = iconTheme.size;
     defaultIconColor = iconTheme.color;
 
     // ----------------- set properties from default
 
-    if (obj.fontBold == null)
-      obj.fontBold = KenDashboardModel.defaultFontBold;
+    if (obj.fontBold == null) obj.fontBold = KenDashboardModel.defaultFontBold;
     if (obj.fontColor == null)
       obj.fontColor = KenDashboardModel.defaultFontColor;
-    if (obj.fontSize == null)
-      obj.fontSize = KenDashboardModel.defaultFontSize;
+    if (obj.fontSize == null) obj.fontSize = KenDashboardModel.defaultFontSize;
 
     if (obj.captionFontBold == null)
       obj.captionFontBold = KenDashboardModel.defaultCaptionFontBold;
@@ -203,8 +200,7 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
     if (obj.captionFontSize == null)
       obj.captionFontSize = KenDashboardModel.defaultCaptionFontSize;
 
-    if (obj.iconSize == null)
-      obj.iconSize = KenDashboardModel.defaultIconSize;
+    if (obj.iconSize == null) obj.iconSize = KenDashboardModel.defaultIconSize;
     if (obj.iconColor == null)
       obj.iconColor = KenDashboardModel.defaultIconColor;
   }

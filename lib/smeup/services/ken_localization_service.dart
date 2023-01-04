@@ -1,18 +1,7 @@
-import 'dart:async';
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'dart:io';
-
-import 'package:dio/dio.dart';
-import 'package:flutter/services.dart';
-import 'package:ken/smeup/services/ken_log_service.dart';
-import 'package:ken/smeup/services/ken_utilities.dart';
-import 'package:ken/smeup/services/ken_theme_configuration_service.dart';
 
 class KenLocalizationService {
   KenLocalizationService(this.locale);
-  final _nagerUrl = 'https://date.nager.at/api/v3/publicholidays';
 
   final Locale locale;
 
@@ -68,108 +57,5 @@ class KenLocalizationService {
     } else {
       return stringCode;
     }
-  }
-
-  Future<Map<DateTime, List?>> getHolidays(int year, String? country) async {
-    var holidays = Map<DateTime, List?>();
-    Function addHoliday = (DateTime date, String description) {
-      List? holidayList;
-
-      DateTime key = DateTime(date.year, date.month, date.day);
-
-      if (holidays[key] == null)
-        holidayList = List<String>.empty(growable: true);
-      else
-        holidayList = holidays[key];
-
-      holidayList!.add(description);
-      holidays[key] = holidayList;
-    };
-
-    final listPublic = await _getPublicHolidaysFromNager(year, country);
-    listPublic.forEach((holiday) {
-      DateTime? date = DateTime.tryParse(holiday['date']);
-      String? description = holiday['localName'];
-      addHoliday(date, description);
-    });
-
-    final listCustom = await _getCustomHolidays();
-    listCustom.forEach((holiday) {
-      DateTime? date = DateTime.tryParse(holiday['date']);
-      String? description = holiday['description'];
-      addHoliday(date, description);
-    });
-
-    //print(listPublic);
-    //print(listCustom);
-    return holidays;
-  }
-
-  Future<List> _getPublicHolidaysFromNager(int year, String? country) async {
-    List<dynamic> list = List.empty(growable: true);
-
-    Dio? dio;
-    dio = Dio();
-    Response? response;
-
-    try {
-      response = await dio.get('$_nagerUrl/$year/$country');
-    } on DioError catch (e) {
-      KenLogService.writeDebugMessage(
-          '_getPublicHolidaysFromNager dio error: $e (${e.message})',
-          logType: KenLogType.error);
-      if (e.response != null) {
-        response = e.response;
-      } else {
-        response = Response(
-            data: 'Unkwnown Error',
-            statusCode: HttpStatus.badRequest,
-            requestOptions: RequestOptions(path: ''));
-      }
-    } finally {
-      dio.close();
-      dio = null;
-    }
-
-    // bool isValid = SmeupDataService.isValid(response!.statusCode!);
-    var statusCode = response!.statusCode!;
-
-    if (statusCode >= 200 && statusCode < 300) {
-      list = response.data;
-      KenLogService.writeDebugMessage(
-          'Loaded public holidays from Nager.date website');
-    } else {
-      KenLogService.writeDebugMessage(
-          'error loding public holidays from Nager.date website',
-          logType: KenLogType.error);
-    }
-
-    return list;
-  }
-
-  static Future<List> _getCustomHolidays() async {
-    List<dynamic> custom = List.empty(growable: true);
-    String jsonFilePath =
-        '${KenThemeConfigurationService.jsonsPath}/custom_holidays.json';
-
-    try {
-      String jsonString = await rootBundle.loadString(jsonFilePath);
-
-      jsonString = KenUtilities.replaceDictionaryPlaceHolders(jsonString);
-
-      custom = jsonDecode(jsonString);
-
-      KenLogService.writeDebugMessage(
-          'Loaded custom holidays from $jsonFilePath file');
-    } on DioError catch (e) {
-      KenLogService.writeDebugMessage(
-          '_getCustomHolidays error: $e (${e.message})',
-          logType: KenLogType.error);
-      KenLogService.writeDebugMessage(
-          'error loding custom holidays from $jsonFilePath file',
-          logType: KenLogType.error);
-    }
-
-    return custom;
   }
 }

@@ -3,7 +3,7 @@ import 'package:ken/smeup/models/widgets/ken_model_callback.dart';
 
 import 'package:ken/smeup/models/widgets/ken_data_interface.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
-import 'package:ken/smeup/services/ken_theme_configuration_service.dart';
+import 'package:ken/smeup/services/ken_configuration_service.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 
 class KenButtonsModel extends KenModel implements KenDataInterface {
@@ -53,36 +53,38 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
   bool? isLink;
   double? innerSpace;
 
-  KenButtonsModel(
-      {id,
-        type,
-        title = '',
-        GlobalKey<FormState>? formKey,
-        GlobalKey<ScaffoldState>? scaffoldKey,
-        BuildContext? context,
-        this.backColor,
-        this.borderColor,
-        this.borderWidth,
-        this.borderRadius,
-        this.elevation,
-        this.fontSize,
-        this.fontColor,
-        this.fontBold,
-        this.iconSize,
-        this.iconColor,
-        this.width = defaultWidth,
-        this.height = defaultHeight,
-        this.position = defaultPosition,
-        this.align = defaultAlign,
-        this.padding = defaultPadding,
-        this.valueField,
-        this.iconCode,
-        this.orientation = defaultOrientation,
-        this.isLink = defaultIsLink,
-        this.innerSpace = defaultInnerSpace,
-        required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-      })
-      : super(formKey, scaffoldKey, context, title: title,instanceCallBack: instanceCallBack) {
+  KenButtonsModel({
+    id,
+    type,
+    title = '',
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
+    this.backColor,
+    this.borderColor,
+    this.borderWidth,
+    this.borderRadius,
+    this.elevation,
+    this.fontSize,
+    this.fontColor,
+    this.fontBold,
+    this.iconSize,
+    this.iconColor,
+    this.width = defaultWidth,
+    this.height = defaultHeight,
+    this.position = defaultPosition,
+    this.align = defaultAlign,
+    this.padding = defaultPadding,
+    this.valueField,
+    this.iconCode,
+    this.orientation = defaultOrientation,
+    this.isLink = defaultIsLink,
+    this.innerSpace = defaultInnerSpace,
+    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  }) : super(formKey, scaffoldKey, context,
+            title: title, instanceCallBack: instanceCallBack) {
     // SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
@@ -91,8 +93,12 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
       Map<String, dynamic> jsonMap,
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context, Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack)
-      : super.fromMap(jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
+      BuildContext? context,
+      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+              KenModel? instance)
+          instanceCallBack)
+      : super.fromMap(
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';
@@ -102,8 +108,7 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
     if (KenUtilities.getBool(optionsDefault!['fillSpace']) ?? false) {
       width = 0;
     }
-    height =
-        KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     innerSpace = KenUtilities.getDouble(optionsDefault!['innerSpace']) ??
         defaultInnerSpace;
 
@@ -115,15 +120,15 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
 
     valueField = optionsDefault!['valueField'] ?? defaultValueField;
     position = KenUtilities.getMainAxisAlignment(optionsDefault!['position']);
-    iconSize = KenUtilities.getDouble(optionsDefault!['iconSize']) ??
-        defaultIconSize;
+    iconSize =
+        KenUtilities.getDouble(optionsDefault!['iconSize']) ?? defaultIconSize;
     if (optionsDefault!['icon'] != null) iconCode = optionsDefault!['icon'];
     align = KenUtilities.getAlignmentGeometry(optionsDefault!['align']) ??
         defaultAlign;
     iconColor = KenUtilities.getColorFromRGB(optionsDefault!['iconColor']) ??
         defaultIconColor;
-    fontSize = KenUtilities.getDouble(optionsDefault!['fontSize']) ??
-        defaultFontSize;
+    fontSize =
+        KenUtilities.getDouble(optionsDefault!['fontSize']) ?? defaultFontSize;
     borderRadius = KenUtilities.getDouble(optionsDefault!['borderRadius']) ??
         defaultBorderRadius;
     borderWidth = KenUtilities.getDouble(optionsDefault!['borderWidth']) ??
@@ -147,7 +152,6 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-
         await this.getData(instanceCallBack);
         // await SmeupButtonsDao.getData(this);
       };
@@ -157,7 +161,7 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
 
   static setDefaults(dynamic obj) {
     var buttonStyle =
-    KenThemeConfigurationService.getTheme()!.elevatedButtonTheme.style!;
+        KenConfigurationService.getTheme()!.elevatedButtonTheme.style!;
 
     defaultBackColor =
         buttonStyle.backgroundColor!.resolve(Set<MaterialState>());
@@ -174,34 +178,29 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
         .topLeft
         .x;
 
-    var textStyle = KenThemeConfigurationService.getTheme()!.textTheme.button!;
+    var textStyle = KenConfigurationService.getTheme()!.textTheme.button!;
     defaultFontSize = textStyle.fontSize;
     defaultFontColor = textStyle.color;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
 
-    var iconTheme = KenThemeConfigurationService.getTheme()!.iconTheme;
+    var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
     defaultIconSize = iconTheme.size;
     defaultIconColor = iconTheme.color;
 
     // ----------------- set properties from default
 
-    if (obj.backColor == null)
-      obj.backColor = KenButtonsModel.defaultBackColor;
+    if (obj.backColor == null) obj.backColor = KenButtonsModel.defaultBackColor;
     if (obj.borderColor == null)
       obj.borderColor = KenButtonsModel.defaultBorderColor;
     if (obj.borderWidth == null)
       obj.borderWidth = KenButtonsModel.defaultBorderWidth;
     if (obj.borderRadius == null)
       obj.borderRadius = KenButtonsModel.defaultBorderRadius;
-    if (obj.elevation == null)
-      obj.elevation = KenButtonsModel.defaultElevation;
+    if (obj.elevation == null) obj.elevation = KenButtonsModel.defaultElevation;
     if (obj.fontSize == null) obj.fontSize = KenButtonsModel.defaultFontSize;
-    if (obj.fontColor == null)
-      obj.fontColor = KenButtonsModel.defaultFontColor;
+    if (obj.fontColor == null) obj.fontColor = KenButtonsModel.defaultFontColor;
     if (obj.fontBold == null) obj.fontBold = KenButtonsModel.defaultFontBold;
     if (obj.iconSize == null) obj.iconSize = KenButtonsModel.defaultIconSize;
-    if (obj.iconColor == null)
-      obj.iconColor = KenButtonsModel.defaultIconColor;
+    if (obj.iconColor == null) obj.iconColor = KenButtonsModel.defaultIconColor;
   }
 }
-

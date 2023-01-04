@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/widgets/ken_model_callback.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
-import '../../services/ken_theme_configuration_service.dart';
+import '../../services/ken_configuration_service.dart';
 
 class KenLineModel extends KenModel {
   // supported by json_theme
@@ -19,11 +19,14 @@ class KenLineModel extends KenModel {
     type,
     GlobalKey<FormState> formKey,
     GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context, Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-      {
+    BuildContext context,
+    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack, {
     this.color,
     this.thickness,
-  }) : super(formKey, scaffoldKey, context, title: '', id: id, type: type, instanceCallBack: instanceCallBack) {
+  }) : super(formKey, scaffoldKey, context,
+            title: '', id: id, type: type, instanceCallBack: instanceCallBack) {
     id = KenUtilities.getWidgetId('LIN', id);
     setDefaults(this);
   }
@@ -32,14 +35,12 @@ class KenLineModel extends KenModel {
     Map<String, dynamic> jsonMap,
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
-    BuildContext? context, Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-      ) : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-          instanceCallBack, null
-        ) {
+    BuildContext? context,
+    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  ) : super.fromMap(
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
     setDefaults(this);
 
     thickness = KenUtilities.getDouble(optionsDefault!['thickness']) ??
@@ -58,7 +59,7 @@ class KenLineModel extends KenModel {
 
   static setDefaults(dynamic obj) {
     DividerThemeData dividerData =
-        KenThemeConfigurationService.getTheme()!.dividerTheme;
+        KenConfigurationService.getTheme()!.dividerTheme;
 
     defaultColor = dividerData.color;
     defaultThickness = dividerData.thickness;

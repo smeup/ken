@@ -7,11 +7,11 @@ import 'package:ken/smeup/models/widgets/ken_section_model.dart';
 import '../fun.dart';
 
 enum LoadType { Immediate, Delay }
+
 enum WidgetOrientation { Vertical, Horizontal }
 
 // abstract class SmeupModel {
 class KenModel extends KenDao {
-
   dynamic data;
   String? type;
   String? id;
@@ -39,21 +39,23 @@ class KenModel extends KenDao {
 
   bool Function(ServicesCallbackType type, Fun? smeupFun)? firestoreCallBack;
 
-  Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack;
+  Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+      KenModel? instance) instanceCallBack;
 
   KenModel(this.formKey, this.scaffoldKey, this.context,
-      {this.title, this.id, this.type, required this.instanceCallBack, this.firestoreCallBack})
+      {this.title,
+      this.id,
+      this.type,
+      required this.instanceCallBack,
+      this.firestoreCallBack})
       : super(instanceCallBack: instanceCallBack) {
-
     this.smeupModel = this;
 
-    if (instanceCallBack != null) {
-      instanceCallBack(ServicesCallbackType.defaultInstance, null, this);
-    }
+    instanceCallBack(ServicesCallbackType.defaultInstance, null, this);
   }
 
-
-  KenModel.fromMap(Map<dynamic, dynamic> jsonMap,
+  KenModel.fromMap(
+      Map<dynamic, dynamic> jsonMap,
       this.formKey,
       this.scaffoldKey,
       this.context,
@@ -62,14 +64,13 @@ class KenModel extends KenDao {
       : super(instanceCallBack: instanceCallBack) {
     this.smeupModel = this;
 
-    if (instanceCallBack != null) {
-        instanceCallBack(ServicesCallbackType.fromMap, jsonMap, this);
-    }
+    instanceCallBack(ServicesCallbackType.fromMap, jsonMap, this);
   }
 
   bool isFirestore() {
     if (firestoreCallBack != null) {
-      var isFirestore = firestoreCallBack!(ServicesCallbackType.isFirestore, smeupFun);
+      var isFirestore =
+          firestoreCallBack!(ServicesCallbackType.isFirestore, smeupFun);
 
       return isFirestore;
     } else {

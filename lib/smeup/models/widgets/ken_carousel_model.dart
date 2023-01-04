@@ -10,35 +10,42 @@ class KenCarouselModel extends KenModel implements KenDataInterface {
   bool? autoPlay;
   double? height;
 
-  KenCarouselModel(
-      {id,
-      type,
+  KenCarouselModel({
+    id,
+    type,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
+    this.height = defaultHeight,
+    this.autoPlay = false,
+    title = '',
+    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  }) : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack);
+
+  KenCarouselModel.fromMap(
+      Map jsonMap,
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
-      this.height = defaultHeight,
-      this.autoPlay = false,
-      title = '',
-        required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-      })
-      : super(formKey, scaffoldKey, context, title: title, id: id, type: type, instanceCallBack: instanceCallBack) {
-  }
-
-  KenCarouselModel.fromMap(Map jsonMap, GlobalKey<FormState>? formKey,
-      GlobalKey<ScaffoldState>? scaffoldKey, BuildContext? context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack)
-      : super.fromMap(jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
-    height =
-        KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+              KenModel? instance)
+          instanceCallBack)
+      : super.fromMap(
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     autoPlay = optionsDefault!['autoPlay'] ?? false;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-
         await this.getData(instanceCallBack);
         // await SmeupCarouselDao.getData(this);
       };
     }
-
   }
 }
