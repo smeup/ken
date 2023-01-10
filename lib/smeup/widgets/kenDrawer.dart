@@ -71,7 +71,7 @@ class KenDrawer extends StatefulWidget
     runControllerActivities(model!);
   }
 
-  @override
+  //@override ???
   runControllerActivities(KenModel model) {
     KenDrawerModel m = model as KenDrawerModel;
     id = m.id;
