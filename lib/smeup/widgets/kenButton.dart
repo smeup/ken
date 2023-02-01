@@ -159,7 +159,7 @@ class KenButton extends StatelessWidget {
                       ),
                     ],
                   ),
-                  color: backColor,
+                  color: Colors.transparent,
                 );
               } else if (align == Alignment.centerRight) {
                 children = Container(
@@ -175,7 +175,7 @@ class KenButton extends StatelessWidget {
                       text,
                     ],
                   ),
-                  color: backColor,
+                  color: Colors.transparent,
                 );
               } else if (align == Alignment.topCenter) {
                 children = Container(
@@ -191,7 +191,7 @@ class KenButton extends StatelessWidget {
                       ),
                     ],
                   ),
-                  color: backColor,
+                  color: Colors.transparent,
                 );
               } else if (align == Alignment.bottomCenter) {
                 children = Container(
@@ -210,7 +210,7 @@ class KenButton extends StatelessWidget {
                       text,
                     ],
                   ),
-                  color: backColor,
+                  color: Colors.transparent,
                 );
               } else // center
               {
@@ -227,7 +227,7 @@ class KenButton extends StatelessWidget {
                       text
                     ],
                   ),
-                  color: backColor,
+                  color: Colors.transparent,
                 );
               }
 
@@ -241,7 +241,6 @@ class KenButton extends StatelessWidget {
         .elevatedButtonTheme
         .style!
         .copyWith(
-            overlayColor: MaterialStateProperty.all(backColor),
             backgroundColor: MaterialStateProperty.all<Color?>(backColor),
             elevation: MaterialStateProperty.all<double?>(elevation),
             padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
