@@ -51,8 +51,8 @@ class KenTextField extends StatefulWidget
 
   TextInputType? keyboard;
   Function? clientValidator;
-  Function? clientOnSave;
-  Function? clientOnChange;
+  //Function? clientOnSave;
+  //Function? clientOnChange;
   Function? clientOnSubmit;
 
   List<TextInputFormatter>? inputFormatters;
@@ -96,11 +96,11 @@ class KenTextField extends StatefulWidget
       this.data,
       this.keyboard,
       this.clientValidator, // ?
-      this.clientOnSave,
-      this.clientOnChange,
+      //this.clientOnSave,
+      //this.clientOnChange,
       this.clientOnSubmit,
-      this.inputFormatters // ?
-      })
+      this.inputFormatters, // ?
+      this.callBack})
       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenTextFieldModel.setDefaults(this);
