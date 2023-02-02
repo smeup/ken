@@ -151,12 +151,13 @@ class KenButton extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       text,
-                      SizedBox(width: innerSpace),
-                      Icon(
-                        iconData,
-                        color: iconTheme.color,
-                        size: iconTheme.size,
-                      ),
+                      if (iconData != null) SizedBox(width: innerSpace),
+                      if (iconData != null)
+                        Icon(
+                          iconData,
+                          color: iconTheme.color,
+                          size: iconTheme.size,
+                        ),
                     ],
                   ),
                   color: Colors.transparent,
@@ -166,12 +167,13 @@ class KenButton extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        iconData,
-                        color: iconTheme.color,
-                        size: iconTheme.size,
-                      ),
-                      SizedBox(width: innerSpace),
+                      if (iconData != null)
+                        Icon(
+                          iconData,
+                          color: iconTheme.color,
+                          size: iconTheme.size,
+                        ),
+                      if (iconData != null) SizedBox(width: innerSpace),
                       text,
                     ],
                   ),
@@ -183,12 +185,13 @@ class KenButton extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       text,
-                      SizedBox(height: innerSpace),
-                      Icon(
-                        iconData,
-                        color: iconTheme.color,
-                        size: iconTheme.size,
-                      ),
+                      if (iconData != null) SizedBox(height: innerSpace),
+                      if (iconData != null)
+                        Icon(
+                          iconData,
+                          color: iconTheme.color,
+                          size: iconTheme.size,
+                        ),
                     ],
                   ),
                   color: Colors.transparent,
@@ -199,14 +202,15 @@ class KenButton extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: Icon(
-                          iconData,
-                          color: iconTheme.color,
-                          size: iconTheme.size,
+                      if (iconData != null)
+                        Expanded(
+                          child: Icon(
+                            iconData,
+                            color: iconTheme.color,
+                            size: iconTheme.size,
+                          ),
                         ),
-                      ),
-                      SizedBox(width: innerSpace),
+                      if (iconData != null) SizedBox(width: innerSpace),
                       text,
                     ],
                   ),
@@ -219,11 +223,12 @@ class KenButton extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
-                        iconData,
-                        color: iconTheme.color,
-                        size: iconTheme.size,
-                      ),
+                      if (iconData != null)
+                        Icon(
+                          iconData,
+                          color: iconTheme.color,
+                          size: iconTheme.size,
+                        ),
                       text
                     ],
                   ),
