@@ -263,9 +263,9 @@ class _KenInputPanelState extends State<KenInputPanel>
             widget.formKey,
             id: field.id,
             data: field.value.code,
-            clientOnChange: (value) {
-              field.value.code = field.value.description = value;
-            },
+            // clientOnChange: (value) {
+            //   field.value.code = field.value.description = value;
+            // },
           ),
         )
       ],

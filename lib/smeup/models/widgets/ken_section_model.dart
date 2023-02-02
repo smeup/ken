@@ -224,6 +224,29 @@ class KenSectionModel extends KenModel with KenModelMixin {
                   v, formKey, scaffoldKey, context, instanceCallBack, null);
               break;
             default:
+              var v2 = {
+                "loaded": true,
+                "options": {
+                  "LAB": {
+                    "default": {
+                      "padding": {"Top": 30},
+                      "align": "center",
+                      "height": 30
+                    }
+                  }
+                },
+                "data": {
+                  "rows": [
+                    {"value": "Component '${v['type']}' not supported yet"}
+                  ]
+                },
+                "title": "Component unavailable",
+                "type": "LAB"
+              };
+
+              model = KenLabelModel.fromMap(
+                  v2, formKey, scaffoldKey, context, instanceCallBack);
+
               KenLogService.writeDebugMessage(
                   'component not defined: ${v['type']}',
                   logType: KenLogType.error);

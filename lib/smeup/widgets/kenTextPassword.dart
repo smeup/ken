@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ken/smeup/models/notifiers/ken_text_password_visibility_notifier.dart';
@@ -15,6 +17,7 @@ import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
 import 'package:provider/provider.dart';
 
 import '../services/ken_configuration_service.dart';
+import 'kenEnumCallback.dart';
 
 // ignore: must_be_immutable
 class KenTextPassword extends StatefulWidget
@@ -57,14 +60,16 @@ class KenTextPassword extends StatefulWidget
   bool? checkRules;
 
   Function? clientValidator;
-  Function? clientOnSave;
-  Function? clientOnChange;
+  //Function? clientOnSave;
+  //Function? clientOnChange;
   Function? clientOnSubmit;
+
+  Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
   List<TextInputFormatter>? inputFormatters;
 
-  KenTextPassword.withController(
-      KenTextPasswordModel this.model, this.scaffoldKey, this.formKey)
+  KenTextPassword.withController(KenTextPasswordModel this.model,
+      this.scaffoldKey, this.formKey, this.callBack)
       : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
@@ -101,10 +106,11 @@ class KenTextPassword extends StatefulWidget
       this.showRulesIcon = KenTextPasswordModel.defaultShowRulesIcon,
       this.checkRules = KenTextPasswordModel.defaultCheckRules,
       this.clientValidator, // ?
-      this.clientOnSave,
-      this.clientOnChange,
+      //this.clientOnSave,
+      //this.clientOnChange,
       this.inputFormatters, // ?
-      this.clientOnSubmit})
+      this.clientOnSubmit,
+      this.callBack})
       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenTextPasswordModel.setDefaults(this);
@@ -264,13 +270,14 @@ class _KenTextPasswordState extends State<KenTextPassword>
                           underline: false,
                           data: _data,
                           clientValidator: widget.clientValidator,
-                          clientOnSave: widget.clientOnSave,
-                          clientOnChange: (value) {
-                        if (widget.clientOnChange != null)
-                          widget.clientOnChange!(value);
-                        passwordModel.checkProgress(value);
-                        _data = value;
-                      },
+                          //clientOnSave: widget.clientOnSave,
+                          //clientOnChange: (value) {
+                          //if (widget.clientOnChange != null)
+                          //  widget.clientOnChange!(value);
+                          //passwordModel.checkProgress(value);
+                          //_data = value;
+                          //},
+                          callBack: widget.callBack,
                           keyboard: fieldmodel.passwordVisible
                               ? TextInputType.text
                               : TextInputType.visiblePassword);
