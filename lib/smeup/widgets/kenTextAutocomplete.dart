@@ -227,6 +227,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
     Widget children;
 
     children = Container(
+        width: 300, // it has to be as much as the list panel at line 367
         padding: widget.padding,
         decoration: widget.showborder!
             ? BoxDecoration(
@@ -266,7 +267,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
             }
 
             return Container(
-              padding: EdgeInsets.all(5),
+              padding: EdgeInsets.only(right: 5),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(3),
                   border: Border.all(
@@ -275,7 +276,8 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
               child: Row(children: [
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: 0.0),
+                    padding:
+                        const EdgeInsets.only(bottom: 0.0, left: 5, right: 5),
                     child: TextFormField(
                       style: textStyle,
                       controller: textEditingController,
@@ -303,6 +305,10 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                           widget.clientOnChange!(value);
                       },
                       decoration: InputDecoration(
+                        isDense: false,
+                        contentPadding: EdgeInsets.only(left: 5, top: -8),
+                        floatingLabelAlignment: FloatingLabelAlignment.start,
+                        floatingLabelBehavior: FloatingLabelBehavior.auto,
                         labelStyle: captionStyle,
                         labelText: widget.label,
                         enabledBorder: UnderlineInputBorder(
@@ -323,7 +329,6 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                   ),
                 ),
                 Container(
-                  color: iconTheme.color,
                   padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
                   child: GestureDetector(
                     child: Icon(
@@ -350,13 +355,18 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
             return Align(
               alignment: Alignment.topLeft,
               child: Material(
-                elevation: 2.0,
+                elevation: .75,
                 color: widget.backColor,
-                child: SizedBox(
-                  height: 200,
-                  width: double.infinity,
-                  child: ListView.builder(
-                    padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                              width: .5,
+                              color: Color.fromARGB(255, 246, 246, 246)))),
+                  height: 225,
+                  width: 300,
+                  child: ListView.separated(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8),
                     itemCount: options.length,
                     itemBuilder: (BuildContext context, int index) {
                       final Map<dynamic, dynamic> option =
@@ -383,11 +393,18 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                           //   widget.clientOnSelected!(option);
                         },
                         child: ListTile(
+                          // leading: Text('•'), -- Eventually something that can be displayed before the text
                           title: Text(
                             option['value'],
                             style: _getTextStile(),
                           ),
                         ),
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return Divider(
+                        color: Colors.grey[200],
+                        thickness: 1,
                       );
                     },
                   ),
@@ -405,7 +422,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
           widget.formKey,
           data: [widget.submitLabel],
           clientOnPressed: widget.clientOnSubmit,
-          padding: EdgeInsets.all(0),
+          padding: EdgeInsets.all(5),
         );
       } else {
         if (widget.smeupButtons != null) {
@@ -420,7 +437,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
           children: [
             children,
             SizedBox(
-              height: 5,
+              height: 2,
             ),
             button,
           ],

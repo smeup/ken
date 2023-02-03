@@ -22,7 +22,7 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
 
   // unsupported by json_theme
   static const String defaultLabel = '';
-  static const double defaultWidth = 100;
+  static const double defaultWidth = 300;
   static const double defaultHeight = 55;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const bool defaultShowBorder = false;
