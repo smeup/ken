@@ -96,11 +96,10 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
   KenCalendarModel? _model;
   CalendarFormat? _calendarFormat;
   late AnimationController _animationController;
-
   // **   late final AnimationController _controller = AnimationController ** //
   // ** General Model for animation **/ -- TO BE TAILORED
   late final AnimationController _controller = AnimationController(
-    duration: const Duration(milliseconds: 2000),
+    duration: const Duration(milliseconds: 400),
     vsync: this,
   );
   // )..repeat(reverse: true);
@@ -232,9 +231,9 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
                       color:
                           Colors.transparent), // bg header ( icon plus text )
                   leftChevronIcon: Icon(Icons.arrow_back_ios,
-                      color: /*iconTheme.color */ Colors.black45),
+                      color: /*iconTheme.color */ Colors.black87),
                   rightChevronIcon: Icon(Icons.arrow_forward_ios,
-                      color: /*iconTheme.color */ Colors.black45),
+                      color: /*iconTheme.color */ Colors.black87),
                 ),
 
                 // days headers
@@ -301,18 +300,14 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
                 },
                 onPageChanged: (focusedDay) async {
                   _focusDay = focusedDay;
-                  _animation.addListener(() {
-                    setState(() {
-                      _isLoading = true;
-                    });
+                  setState(() {
+                    _isLoading = true;
                   });
                   widget.clientOnChangeMonth!(focusedDay).then((res) {
                     _data = res['data'];
                     _events = res['events'];
-                    _animation.addListener(() {
-                      setState(() {
-                        _isLoading = false;
-                      });
+                    setState(() {
+                      _isLoading = false;
                     });
                   });
                 },
@@ -326,49 +321,53 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
                 )
             ]),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(
+                  left: 20.0, right: 20.0, top: 10, bottom: 10),
               child: SizedBox(
                 height: separatorHeight,
                 child: KenLine(widget.scaffoldKey, widget.formKey),
               ),
             ),
             if (_selectedEvents != null)
-              Container(
-                height: _selectedEvents!.value.length.toDouble() *
-                    70, // _getListHeight(separatorHeight),
-                child: ValueListenableBuilder<List<KenCalendarEventModel>>(
-                  valueListenable: _selectedEvents!,
-                  builder: (context, event, _) {
-                    return ListView.builder(
-                      reverse: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: event.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 12.0,
-                            vertical: 4.0,
-                          ),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: event[index].markerBackgroundColor),
-                            borderRadius: BorderRadius.circular(4.0),
-                            shape: BoxShape.rectangle,
-                            color: event[index].markerBackgroundColor,
-                          ),
-                          child: ListTile(
-                            // box event under calendar
-                            visualDensity:
-                                VisualDensity(horizontal: 0, vertical: 0),
-                            onTap: () => _eventClicked(
-                                event[index].day!, _focusDay,
-                                event: event[index]),
-                            title: _getListTileWidget(event[index]),
-                          ),
-                        );
-                      },
-                    );
-                  },
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: Container(
+                  height: _selectedEvents!.value.length.toInt() *
+                      70, // _getListHeight(separatorHeight),
+                  child: ValueListenableBuilder<List<KenCalendarEventModel>>(
+                    valueListenable: _selectedEvents!,
+                    builder: (context, event, _) {
+                      return ListView.builder(
+                        reverse: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: event.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 12.0,
+                              vertical: 4.0,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: event[index].markerBackgroundColor),
+                              borderRadius: BorderRadius.circular(4.0),
+                              shape: BoxShape.rectangle,
+                              color: event[index].markerBackgroundColor,
+                            ),
+                            child: ListTile(
+                              // box event under calendar
+                              visualDensity:
+                                  VisualDensity(horizontal: 0, vertical: 0),
+                              onTap: () => _eventClicked(
+                                  event[index].day!, _focusDay,
+                                  event: event[index]),
+                              title: _getListTileWidget(event[index]),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
           ],
