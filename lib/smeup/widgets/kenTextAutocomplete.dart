@@ -306,8 +306,9 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                       },
                       decoration: InputDecoration(
                         isDense: false,
-                        contentPadding: EdgeInsets.only(left: 5, top: -8),
+                        contentPadding: EdgeInsets.only(left: 5, top: -10),
                         floatingLabelAlignment: FloatingLabelAlignment.start,
+                        floatingLabelStyle: textStyle,
                         floatingLabelBehavior: FloatingLabelBehavior.auto,
                         labelStyle: captionStyle,
                         labelText: widget.label,
@@ -349,6 +350,8 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
               ]),
             );
           },
+          // ** Option list builder **
+          // ** here we can work on the option**
           optionsViewBuilder: (BuildContext context,
               AutocompleteOnSelected<Map<dynamic, dynamic>> onSelected,
               Iterable<Map<dynamic, dynamic>> options) {
