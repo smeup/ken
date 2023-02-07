@@ -224,9 +224,10 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
     String _displayStringForOption(Map<dynamic, dynamic> option) =>
         option['value'];
 
-    Widget children;
+    Widget children; // rinominerei il widget Autocomplete
 
     children = Container(
+        // e anche qua rinominerei Autocomplete
         width: 300, // it has to be as much as the list panel at line 367
         padding: widget.padding,
         decoration: widget.showborder!
