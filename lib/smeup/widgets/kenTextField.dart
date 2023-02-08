@@ -227,7 +227,7 @@ class _KenTextFieldState extends State<KenTextField>
           inputFormatters: widget.inputFormatters,
           autofocus: widget.autoFocus!,
           maxLines: 1,
-          // initialValue: _data,
+          initialValue: _data,
           key: Key('${widget.id}_text'),
           autocorrect: false,
           textCapitalization: TextCapitalization.none,
