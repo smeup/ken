@@ -104,10 +104,6 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
   );
   // )..repeat(reverse: true);
   // Specific animation for CalendaryDay
-  late final Animation<double> _animation = CurvedAnimation(
-    parent: _controller,
-    curve: Curves.easeIn,
-  );
   ValueNotifier<List<KenCalendarEventModel>>? _selectedEvents;
   List<Map<String, dynamic>>? _data;
   bool _isLoading = false;
@@ -163,7 +159,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
             color: Colors.black,
             backgroundColor: Colors.transparent,
             fontWeight: FontWeight.bold);
-    final iconTheme = KenConfigurationService.getTheme()!.iconTheme;
+    // final iconTheme = KenConfigurationService.getTheme()!.iconTheme;
     final daysHeaderTextStyle = KenConfigurationService.getTheme()!
         .textTheme
         .bodyText1!
@@ -332,8 +328,8 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
                 child: Container(
-                  height: _selectedEvents!.value.length.toInt() *
-                      70, // _getListHeight(separatorHeight),
+                  height: _selectedEvents!.value.length.toDouble() *
+                      76, // _getListHeight(separatorHeight),
                   child: ValueListenableBuilder<List<KenCalendarEventModel>>(
                     valueListenable: _selectedEvents!,
                     builder: (context, event, _) {
