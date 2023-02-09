@@ -373,7 +373,7 @@ class KenUtilities {
 
   static void invokeScaffoldMessenger(BuildContext context, String text) {
     ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(text), duration: Duration(milliseconds: 500)));
+        SnackBar(content: Text(text), duration: Duration(milliseconds: 4000)));
   }
 
   static KenDeviceInfo getDeviceInfo() {
