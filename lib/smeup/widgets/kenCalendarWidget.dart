@@ -328,8 +328,8 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
                 child: Container(
-                  height: _selectedEvents!.value.length.toDouble() *
-                      76, // _getListHeight(separatorHeight),
+                  height: _selectedEvents!.value.length.toInt() *
+                      63, // _getListHeight(separatorHeight),
                   child: ValueListenableBuilder<List<KenCalendarEventModel>>(
                     valueListenable: _selectedEvents!,
                     builder: (context, event, _) {
@@ -353,7 +353,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
                             child: ListTile(
                               // box event under calendar
                               visualDensity:
-                                  VisualDensity(horizontal: 0, vertical: 0),
+                                  VisualDensity(horizontal: -1, vertical: -1),
                               onTap: () => _eventClicked(
                                   event[index].day!, _focusDay,
                                   event: event[index]),
@@ -470,12 +470,9 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
     widget.setDataLoad!(widget.id, true);
     if (widget.clientOnDaySelected != null)
       widget.clientOnDaySelected!(selectedDay);
-    if (_selectedEvents!.value.length == 1) {
-      _eventClicked(selectedDay, focusedDay, event: _selectedEvents!.value[0]);
-    } else {
+    if (_selectedEvents!.value.length >= 0) {
       setState(() {
         _selectedDay = selectedDay;
-        //   _isLoading = false;
       });
     }
   }
