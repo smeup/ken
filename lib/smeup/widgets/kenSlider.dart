@@ -26,9 +26,12 @@ class KenSlider extends StatefulWidget
   double? sldMin;
   double? sldMax;
   String? id;
+  int? divisions;
   String? type;
   String? title;
+  String? label;
   Function? clientOnChange;
+  late Function onChanged;
 
   Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
@@ -39,11 +42,14 @@ class KenSlider extends StatefulWidget
       this.padding = KenSliderModel.defaultPadding,
       this.title,
       this.id = '',
+      this.label,
+      this.divisions = 10,
       this.type = 'SLD',
       this.value = 0,
       this.sldMax = KenSliderModel.defaultSldMax,
       this.sldMin = KenSliderModel.defaultSldMin,
       this.clientOnChange,
+      required this.onChanged,
       this.callBack})
       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
@@ -68,6 +74,7 @@ class KenSlider extends StatefulWidget
     activeTrackColor = m.activeTrackColor;
     thumbColor = m.thumbColor;
     inactiveTrackColor = m.inactiveTrackColor;
+    label = m.label;
 
     value = treatData(m);
   }
@@ -158,7 +165,10 @@ class _KenSliderState extends State<KenSlider>
             inactiveTrackColor: widget.inactiveTrackColor,
             sldMax: widget.sldMax,
             sldMin: widget.sldMin,
-            value: _value,
+            value: widget.value,
+            divisions: widget.divisions,
+            label: widget.label,
+            onChanged: widget.onChanged,
             clientOnChange: (value) {
               _value = value;
 
