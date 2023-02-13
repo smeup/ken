@@ -23,6 +23,8 @@ class KenSliderModel extends KenModel {
   double? sldMin;
   double? sldMax;
 
+  String? label;
+
   KenSliderModel({
     id,
     type,
