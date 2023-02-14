@@ -19,9 +19,13 @@ Future<void> main() async {
                       child: Center(
                         child: Column(
                           children: [
-                            KenSlider(WidgetTestService.scaffoldKey,
-                                WidgetTestService.formKey,
-                                id: 'sld1', value: 20)
+                            KenSlider(
+                              WidgetTestService.scaffoldKey,
+                              WidgetTestService.formKey,
+                              id: 'sld1',
+                              value: 20,
+                              onChanged: () {},
+                            )
                           ],
                         ),
                       )))),

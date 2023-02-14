@@ -102,7 +102,7 @@ class KenListBox extends StatefulWidget
       this.localSelectedRow,
       this.realBoxHeight,
       title = '',
-      showLoader: false,
+      showLoader = false,
       this.clientOnItemTap,
       this.dismissEnabled = false,
       this.defaultSort = KenListBoxModel.defaultDefaultSort,
