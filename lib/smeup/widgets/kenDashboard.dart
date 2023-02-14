@@ -210,39 +210,93 @@ class _KenDashboardState extends State<KenDashboard>
     final iconTheme = _getIconTheme();
     final captionStyle = _getCaptionStile();
     final textStyle = _getTextStile();
+    final unitOfMeasureStyle = _getUnitOfMeasureStyle();
 
     children = Container(
-      height: widget.height,
-      width: widget.width,
-      padding: widget.padding,
-      alignment: Alignment.center,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              if (widget.iconData != null)
-                Icon(
-                  widget.iconData,
-                  //SmeupIconService.getIconData(widget.icon),
-                  color: iconTheme.color,
-                  size: iconTheme.size,
+        height: widget.height,
+        width: widget.width,
+        padding: widget.padding,
+        alignment: Alignment.center,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Icon(
+                      widget.iconData,
+                      //SmeupIconService.getIconData(widget.icon),
+                      color: iconTheme.color,
+                      size: iconTheme.size,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      _getValue(_data),
+                      style: textStyle,
+                    ),
+                    SizedBox(
+                      width: 4,
+                    ),
+                    Text(
+                      widget.unitOfMeasure!,
+                      style: unitOfMeasureStyle,
+                    ),
+                  ],
                 ),
-              Text(
-                _getValue(_data),
-                style: textStyle,
-              )
-            ]),
-            if (widget.text != null)
-              Text(
-                widget.text!,
-                style: captionStyle,
-              )
-          ],
-        ),
-      ),
-    );
+                if (widget.text != null)
+                  Text(
+                    widget.text!,
+                    style: captionStyle,
+                  )
+              ]),
+        ));
+
+    // children = Container(
+    //   height: widget.height,
+    //   width: widget.width,
+    //   padding: widget.padding,
+    //   alignment: Alignment.center,
+    //   child: SingleChildScrollView(
+    //     scrollDirection: Axis.horizontal,
+    //     child: Row(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       children: <Widget>[
+    //         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+    //           if (widget.iconData != null)
+    //             Icon(
+    //               widget.iconData,
+    //               //SmeupIconService.getIconData(widget.icon),
+    //               color: iconTheme.color,
+    //               size: iconTheme.size,
+    //             ),
+    //           Text(
+    //             _getValue(_data),
+    //             style: textStyle,
+    //           ),
+    //           Column(
+    //             mainAxisAlignment: MainAxisAlignment.start,
+    //             children: [
+    //               Text(
+    //                 widget.unitOfMeasure!,
+    //                 textAlign: TextAlign.start,
+    //               ),
+    //             ],
+    //           )
+    //         ]),
+    //         if (widget.text != null)
+    //           Text(
+    //             widget.text!,
+    //             style: captionStyle,
+    //           )
+    //       ],
+    //     ),
+    //   ),
+    // );
 
     return KenWidgetBuilderResponse(_model, children);
   }
@@ -289,6 +343,23 @@ class _KenDashboardState extends State<KenDashboard>
     style = style.copyWith(
       color: widget.fontColor,
       fontSize: widget.fontSize,
+    );
+
+    if (widget.fontBold!) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    }
+
+    return style;
+  }
+
+  TextStyle _getUnitOfMeasureStyle() {
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
+
+    style = style.copyWith(
+      color: widget.captionFontColor,
+      fontSize: widget.captionFontSize,
     );
 
     if (widget.fontBold!) {

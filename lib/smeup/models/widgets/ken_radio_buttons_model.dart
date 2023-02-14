@@ -23,8 +23,8 @@ class KenRadioButtonsModel extends KenInputFieldModel
   static const String defaultValueField = 'code';
   static const String defaultDisplayedField = 'value';
   static const Alignment defaultAlign = Alignment.centerLeft;
-  static const double defaultWidth = 100;
-  static const double defaultHeight = 75;
+  static const double defaultWidth = 120;
+  static const double defaultHeight = 150;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const int defaultColumns = 1;
 
