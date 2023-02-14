@@ -87,21 +87,24 @@ class _KenRadioButtonState extends State<KenRadioButton> {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Radio(
-                value: widget.data!['code'],
-                groupValue: _selectedValue,
-                onChanged: (dynamic value) {
-                  widget.onPressed!(value);
-                  _selectedValue = value;
-                  setState(() {});
-                  if (widget.others != null) {
-                    widget.others!.forEach((element) {
-                      element.changeState(value);
-                    });
-                  }
-                },
-                activeColor:
-                    radioThemeData.fillColor!.resolve(Set<MaterialState>()),
+              Transform.scale(
+                scale: 1.2,
+                child: Radio(
+                  value: widget.data!['code'],
+                  groupValue: _selectedValue,
+                  onChanged: (dynamic value) {
+                    widget.onPressed!(value);
+                    _selectedValue = value;
+                    setState(() {});
+                    if (widget.others != null) {
+                      widget.others!.forEach((element) {
+                        element.changeState(value);
+                      });
+                    }
+                  },
+                  activeColor:
+                      radioThemeData.fillColor!.resolve(Set<MaterialState>()),
+                ),
               ),
               Expanded(
                 child: Align(
