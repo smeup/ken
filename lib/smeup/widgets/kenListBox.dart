@@ -540,21 +540,21 @@ class _KenListBoxState extends State<KenListBox>
       TextStyle textStyle = _getTextStile(_backColor);
       TextStyle captionStyle = _getCaptionStile(_backColor);
 
-      Function _onItemTap = (int index, dynamic data) {
+      Function _onItemTap = (int index, dynamic data, KenListBox listBox) {
         _selectedRow = index;
 
-        if (widget.showSelection! && widget.selectedRow != index) {
+        if (listBox.showSelection! && listBox.selectedRow != index) {
           setState(() {
             //widget.selectedRow = index;// così in originale
           });
         }
 
-        if (widget.callBack != null) {
-          widget.callBack!(widget, KenCallbackType.onItemTap, data, context);
+        if (listBox.callBack != null) {
+          listBox.callBack!(listBox, KenCallbackType.onItemTap, data, context);
         }
       };
 
-      final cell = KenBox(widget.scaffoldKey, widget.formKey, i,
+      final cell = KenBox(widget.scaffoldKey, widget.formKey, i, widget,
           isDynamic: _model != null,
           selectedRow: _selectedRow,
           onRefresh: _refreshList,

@@ -11,6 +11,7 @@ import 'package:ken/smeup/widgets/kenNotAvailable.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
 
 import '../services/ken_configuration_service.dart';
+import 'kenListBox.dart';
 
 // ignore: must_be_immutable
 class KenBox extends StatefulWidget {
@@ -39,10 +40,11 @@ class KenBox extends StatefulWidget {
   final TextStyle? captionStyle;
   final Function? onSizeChanged;
   final bool? isFirestore;
+  final KenListBox kenListBox;
 
   Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
-  KenBox(this.scaffoldKey, this.formKey, this.index,
+  KenBox(this.scaffoldKey, this.formKey, this.index, this.kenListBox,
       {this.id,
       this.isDynamic = false,
       this.selectedRow,
@@ -113,7 +115,6 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     }
 
     switch (widget.layout ?? '') {
-
       // layouts Smeup
       case '1':
         box = _getLayout1(widget.data, context);
@@ -763,7 +764,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
 
   void _manageTap(index, data) {
     if (widget.onItemTap != null) {
-      widget.onItemTap!(index, data);
+      widget.onItemTap!(index, data, widget.kenListBox);
     }
   }
 
