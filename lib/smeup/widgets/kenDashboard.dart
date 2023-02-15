@@ -240,11 +240,18 @@ class _KenDashboardState extends State<KenDashboard>
                       style: textStyle,
                     ),
                     SizedBox(
-                      width: 4,
+                      width: 8,
                     ),
-                    Text(
-                      widget.unitOfMeasure!,
-                      style: unitOfMeasureStyle,
+                    Column(
+                      children: [
+                        Text(
+                          widget.unitOfMeasure!,
+                          style: unitOfMeasureStyle,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -355,7 +362,7 @@ class _KenDashboardState extends State<KenDashboard>
   }
 
   TextStyle _getUnitOfMeasureStyle() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.headline6!;
 
     style = style.copyWith(
       color: widget.captionFontColor,
