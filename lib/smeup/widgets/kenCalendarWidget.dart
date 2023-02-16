@@ -327,43 +327,46 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
               ),
             ),
             if (_selectedEvents != null)
-              Container(
-                // height: _selectedEvents!.value.length.toInt() *
-                //     (Platform.isIOS ? 75 : 63),
-                child: ValueListenableBuilder<List<KenCalendarEventModel>>(
-                  valueListenable: _selectedEvents!,
-                  builder: (context, event, _) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      reverse: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: event.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 12.0,
-                            vertical: 4.0,
-                          ),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: event[index].markerBackgroundColor),
-                            borderRadius: BorderRadius.circular(4.0),
-                            shape: BoxShape.rectangle,
-                            color: event[index].markerBackgroundColor,
-                          ),
-                          child: ListTile(
-                            // box event under calendar
-                            visualDensity:
-                                VisualDensity(horizontal: -1, vertical: -1),
-                            onTap: () => _eventClicked(
-                                event[index].day!, _focusDay,
-                                event: event[index]),
-                            title: _getListTileWidget(event[index]),
-                          ),
-                        );
-                      },
-                    );
-                  },
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Container(
+                  // height: _selectedEvents!.value.length.toInt() *
+                  //     (Platform.isIOS ? 75 : 63),
+                  child: ValueListenableBuilder<List<KenCalendarEventModel>>(
+                    valueListenable: _selectedEvents!,
+                    builder: (context, event, _) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        reverse: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: event.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 12.0,
+                              vertical: 4.0,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: event[index].markerBackgroundColor),
+                              borderRadius: BorderRadius.circular(4.0),
+                              shape: BoxShape.rectangle,
+                              color: event[index].markerBackgroundColor,
+                            ),
+                            child: ListTile(
+                              // box event under calendar
+                              visualDensity:
+                                  VisualDensity(horizontal: -1, vertical: -1),
+                              onTap: () => _eventClicked(
+                                  event[index].day!, _focusDay,
+                                  event: event[index]),
+                              title: _getListTileWidget(event[index]),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
           ],
