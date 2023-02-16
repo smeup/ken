@@ -339,20 +339,17 @@ class _KenListBoxState extends State<KenListBox>
   }
 
   Widget _getSimpleList(List<Widget> cells) {
-    var list = RefreshIndicator(
-      onRefresh: _refreshList,
-      child: ListView.builder(
-        key: ObjectKey("_list_${widget.id}"),
-        controller: _scrollController,
-        scrollDirection: widget.orientation!,
-        physics: _executeBouncing
-            ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
-            : null,
-        itemCount: cells.length,
-        itemBuilder: (context, index) {
-          return cells[index];
-        },
-      ),
+    var list = ListView.builder(
+      key: ObjectKey("_list_${widget.id}"),
+      controller: _scrollController,
+      scrollDirection: widget.orientation!,
+      physics: _executeBouncing
+          ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+          : null,
+      itemCount: cells.length,
+      itemBuilder: (context, index) {
+        return cells[index];
+      },
     );
 
     double? listboxHeight =
@@ -385,18 +382,15 @@ class _KenListBoxState extends State<KenListBox>
     childAspectRatio =
         KenUtilities.getDeviceInfo().safeWidth / boxHeight! * col!;
 
-    list = RefreshIndicator(
-      onRefresh: _refreshList,
-      child: GridView.count(
-        controller: _scrollController,
-        childAspectRatio: childAspectRatio,
-        physics: _executeBouncing
-            ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
-            : null,
-        scrollDirection: widget.orientation!,
-        crossAxisCount: col,
-        children: cells,
-      ),
+    list = GridView.count(
+      controller: _scrollController,
+      childAspectRatio: childAspectRatio,
+      physics: _executeBouncing
+          ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+          : null,
+      scrollDirection: widget.orientation!,
+      crossAxisCount: col,
+      children: cells,
     );
 
     double? listboxHeight =
@@ -415,30 +409,31 @@ class _KenListBoxState extends State<KenListBox>
     var list;
 
     _scrollController = FixedExtentScrollController();
-    list = RefreshIndicator(
-        onRefresh: _refreshList,
-        child: ClickableListWheelScrollView(
-            scrollController: _scrollController!,
-            itemHeight: widget.height!,
-            itemCount: cells.length,
-            onItemTapCallback: (index) {
-              (cells[index] as KenBox).onItemTap!();
-            },
-            child: ListWheelScrollView.useDelegate(
-              physics: _executeBouncing
-                  ? BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics())
-                  : null,
-              controller: _scrollController,
-              itemExtent: widget.height!,
-              onSelectedItemChanged: (index) {
-                print("onSelectedItemChanged index: $index");
-              },
-              childDelegate: ListWheelChildBuilderDelegate(
-                builder: (context, index) => cells[index],
-                childCount: cells.length,
-              ),
-            )));
+    list = ClickableListWheelScrollView(
+        // RefreshIndicator(
+        // onRefresh: _refreshList,
+        // child: ClickableListWheelScrollView(
+        scrollController: _scrollController!,
+        itemHeight: widget.height!,
+        itemCount: cells.length,
+        onItemTapCallback: (index) {
+          (cells[index] as KenBox).onItemTap!();
+        },
+        child: ListWheelScrollView.useDelegate(
+          physics: _executeBouncing
+              ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+              : null,
+          controller: _scrollController,
+          itemExtent: widget.height!,
+          onSelectedItemChanged: (index) {
+            print("onSelectedItemChanged index: $index");
+          },
+          childDelegate: ListWheelChildBuilderDelegate(
+            builder: (context, index) => cells[index],
+            childCount: cells.length,
+          ),
+        ));
+    // );
 
     double? listboxHeight =
         KenListBox.getListHeight(widget.listHeight, _model, context);
