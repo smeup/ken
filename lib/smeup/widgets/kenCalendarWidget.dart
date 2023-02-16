@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -328,12 +330,13 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
                 child: Container(
-                  height: _selectedEvents!.value.length.toInt() *
-                      63, // _getListHeight(separatorHeight),
+                  // height: _selectedEvents!.value.length.toInt() *
+                  //     (Platform.isIOS ? 75 : 63),
                   child: ValueListenableBuilder<List<KenCalendarEventModel>>(
                     valueListenable: _selectedEvents!,
                     builder: (context, event, _) {
                       return ListView.builder(
+                        shrinkWrap: true,
                         reverse: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: event.length,
