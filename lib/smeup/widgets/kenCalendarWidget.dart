@@ -328,7 +328,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
             ),
             if (_selectedEvents != null)
               Padding(
-                padding: const EdgeInsets.only(bottom: 16),
+                padding: const EdgeInsets.only(bottom: 16.0),
                 child: Container(
                   // height: _selectedEvents!.value.length.toInt() *
                   //     (Platform.isIOS ? 75 : 63),
