@@ -76,6 +76,16 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
   List<dynamic>? _columns;
   double? borderSize;
 
+  bool component = true;
+
+  int manageIndex = -1;
+
+  @override
+  void initState() {
+    print('iniziallizato - $initState');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final box = FutureBuilder<KenWidgetBuilderResponse>(
@@ -203,7 +213,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
                 await widget.callBack!(
                     widget, KenCallbackType.onDismissed, deleteDynamism, null);
               }
-              widget.onRefresh!();
+              // widget.onRefresh!();
             },
             background: Container(
               color: Colors.red,
@@ -247,15 +257,27 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
 
   Widget _getLayout1(dynamic data, BuildContext context) {
     final cols = _getColumns(data);
-
     if (data.length > 0) {
       return GestureDetector(
         onTap: () {
           _manageTap(widget.index, data);
+          manageIndex = widget.index;
+
+          print(
+              '1. stato iniziale = $component and context : $context and widgetindex = $_manageTap');
+          setState(() {
+            component = !component;
+            print('stato dopo il click = $component e // ${widget.index}');
+          });
         },
         child: Card(
             color: widget.cardTheme!.color,
-            shape: widget.cardTheme!.shape,
+            shape: component
+                ? widget.cardTheme!.shape
+                : RoundedRectangleBorder(
+                    side: BorderSide(
+                        width: 3, color: Color.fromARGB(198, 246, 167, 101)),
+                    borderRadius: BorderRadius.circular(20)),
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
