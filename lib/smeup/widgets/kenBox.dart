@@ -74,7 +74,7 @@ class KenBox extends StatefulWidget {
 
 class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
   List<dynamic>? _columns;
-  double? borderSize;
+  double elevation = 0;
 
   bool component = true;
 
@@ -119,9 +119,9 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     Widget box;
 
     if (widget.showSelection! && widget.index == widget.selectedRow) {
-      borderSize = 4;
+      elevation = 4;
     } else {
-      borderSize = 2;
+      elevation = 0;
     }
 
     switch (widget.layout ?? '') {
@@ -271,6 +271,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
           });
         },
         child: Card(
+            elevation: elevation,
             color: widget.cardTheme!.color,
             shape: component
                 ? widget.cardTheme!.shape
