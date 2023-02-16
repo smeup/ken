@@ -98,7 +98,7 @@ class KenListBox extends StatefulWidget
       this.backgroundColName = KenListBoxModel.defaultBackgroundColName,
       this.listHeight = KenListBoxModel.defaultListHeight,
       this.showSelection = false,
-      this.selectedRow = -1,
+      this.selectedRow = 0,
       this.localSelectedRow,
       this.realBoxHeight,
       title = '',
@@ -541,13 +541,12 @@ class _KenListBoxState extends State<KenListBox>
       TextStyle captionStyle = _getCaptionStile(_backColor);
 
       Function _onItemTap = (int index, dynamic data, KenListBox listBox) {
-        _selectedRow = index;
-
-        if (listBox.showSelection! && listBox.selectedRow != index) {
+        if (listBox.showSelection! && _selectedRow != index) {
           setState(() {
             //widget.selectedRow = index;// così in originale
           });
         }
+        _selectedRow = index;
 
         if (listBox.callBack != null) {
           listBox.callBack!(listBox, KenCallbackType.onItemTap, data, context);
