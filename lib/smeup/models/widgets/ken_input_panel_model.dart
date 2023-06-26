@@ -20,8 +20,6 @@ class KenInputPanelModel extends KenModel implements KenDataInterface {
   List<SmeupInputPanelField>? fields;
   String validationScript = '';
 
-  bool Function(ServicesCallbackType type, Fun? smeupFun)? firestoreCallBack;
-
   KenInputPanelModel({
     id,
     type,
@@ -49,11 +47,9 @@ class KenInputPanelModel extends KenModel implements KenDataInterface {
       BuildContext? context,
       Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
               KenModel? instance)
-          instanceCallBack,
-      bool Function(ServicesCallbackType type, Fun? smeupFun)?
-          firestoreCallBack)
-      : super.fromMap(jsonMap, formKey, scaffoldKey, context, instanceCallBack,
-            firestoreCallBack) {
+          instanceCallBack)
+      : super.fromMap(
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     fontSize =

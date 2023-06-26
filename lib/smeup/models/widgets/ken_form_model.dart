@@ -30,7 +30,7 @@ class KenFormModel extends KenModel
   KenFormModel.fromMap(response, this.formKey, this.scaffoldKey, this.context,
       this.instanceCallBack)
       : super.fromMap(
-            response, formKey, scaffoldKey, context, instanceCallBack, null) {
+            response, formKey, scaffoldKey, context, instanceCallBack) {
     Map<String, dynamic> jsonMap = response;
 
     padding = KenUtilities.getPadding(jsonMap['padding']) ?? defaultPadding;

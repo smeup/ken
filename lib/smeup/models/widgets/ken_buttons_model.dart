@@ -98,7 +98,7 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
               KenModel? instance)
           instanceCallBack)
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';

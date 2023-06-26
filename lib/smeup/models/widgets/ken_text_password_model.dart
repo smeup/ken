@@ -125,8 +125,7 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
     Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
             KenModel? instance)
         instanceCallBack,
-  ) : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
+  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
     setDefaults(this);
     backColor = KenUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;

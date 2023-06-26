@@ -12,15 +12,21 @@ class KenInputFieldModel extends KenModel implements KenDataInterface {
   String? validation;
   String? validationField;
 
-  KenInputFieldModel(GlobalKey<FormState>? formKey,
-      GlobalKey<ScaffoldState>? scaffoldKey, BuildContext? context,
-      {title,
-        id,
-        type,
-        required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack,
-      })
-      : super(formKey, scaffoldKey, context, title: title, id: id, type: type,instanceCallBack: instanceCallBack);
-
+  KenInputFieldModel(
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context, {
+    title,
+    id,
+    type,
+    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+            KenModel? instance)
+        instanceCallBack,
+  }) : super(formKey, scaffoldKey, context,
+            title: title,
+            id: id,
+            type: type,
+            instanceCallBack: instanceCallBack);
 
   KenInputFieldModel.fromMap(
       Map<String, dynamic> jsonMap,
@@ -28,16 +34,11 @@ class KenInputFieldModel extends KenModel implements KenDataInterface {
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
       KenModel parent,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack
-      )
+      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+              KenModel? instance)
+          instanceCallBack)
       : super.fromMap(
-          jsonMap,
-          formKey,
-          scaffoldKey,
-          context,
-          instanceCallBack,
-          null
-        ) {
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
     this.parent = parent;
 
     validation = optionsDefault!['validation'];

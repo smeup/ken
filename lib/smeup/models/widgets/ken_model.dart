@@ -37,17 +37,11 @@ class KenModel extends KenDao {
 
   List<KenSectionModel>? smeupSectionsModels;
 
-  bool Function(ServicesCallbackType type, Fun? smeupFun)? firestoreCallBack;
-
   Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
       KenModel? instance) instanceCallBack;
 
   KenModel(this.formKey, this.scaffoldKey, this.context,
-      {this.title,
-      this.id,
-      this.type,
-      required this.instanceCallBack,
-      this.firestoreCallBack})
+      {this.title, this.id, this.type, required this.instanceCallBack})
       : super(instanceCallBack: instanceCallBack) {
     this.smeupModel = this;
 
@@ -55,26 +49,31 @@ class KenModel extends KenDao {
   }
 
   KenModel.fromMap(
-      Map<dynamic, dynamic> jsonMap,
-      this.formKey,
-      this.scaffoldKey,
-      this.context,
-      this.instanceCallBack,
-      this.firestoreCallBack)
-      : super(instanceCallBack: instanceCallBack) {
+    Map<dynamic, dynamic> jsonMap,
+    this.formKey,
+    this.scaffoldKey,
+    this.context,
+    this.instanceCallBack,
+  ) : super(instanceCallBack: instanceCallBack) {
     this.smeupModel = this;
 
     instanceCallBack(ServicesCallbackType.fromMap, jsonMap, this);
   }
 
   bool isFirestore() {
-    if (firestoreCallBack != null) {
-      var isFirestore =
-          firestoreCallBack!(ServicesCallbackType.isFirestore, smeupFun);
+    var isFirestore = false;
+    try {
+      if (smeupModel!.smeupFun!.server.length > 0) {
+        var el = smeupModel!.smeupFun!.server
+            .where((element) => element["key"] == "source")
+            .toList();
 
-      return isFirestore;
-    } else {
-      return false;
-    }
+        if (el.isEmpty) return false;
+        if (el[0]["value"].toString() == "firestore") {
+          return true;
+        }
+      }
+    } catch (e) {}
+    return isFirestore;
   }
 }
