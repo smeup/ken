@@ -75,8 +75,7 @@ class KenTreeModel extends KenModel implements KenDataInterface {
     Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
             KenModel? instance)
         instanceCallBack,
-  ) : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
+  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 

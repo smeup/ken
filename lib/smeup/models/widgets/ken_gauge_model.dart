@@ -56,7 +56,7 @@ class KenGaugeModel extends KenModel implements KenDataInterface {
               KenModel? instance)
           instanceCallBack)
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
     title = jsonMap['title'] ?? '';
     valueColName = optionsDefault!['valueColName'] ?? defaultValColName;
     maxColName = optionsDefault!['maxColName'] ?? defaultMaxColName;

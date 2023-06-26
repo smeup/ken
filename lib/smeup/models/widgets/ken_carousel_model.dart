@@ -37,7 +37,7 @@ class KenCarouselModel extends KenModel implements KenDataInterface {
               KenModel? instance)
           instanceCallBack)
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
     height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     autoPlay = optionsDefault!['autoPlay'] ?? false;
 

@@ -54,7 +54,7 @@ class KenSectionModel extends KenModel with KenModelMixin {
           instanceCallBack,
       GlobalKey<ScaffoldState>? scaffoldKey)
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
     String tmp = jsonMap['dim'] ?? '';
     tmp = tmp.replaceAll('%', '');
     dim = double.tryParse(tmp) ?? 0;
@@ -221,7 +221,7 @@ class KenSectionModel extends KenModel with KenModelMixin {
 
             case 'INP': // ok
               model = KenInputPanelModel.fromMap(
-                  v, formKey, scaffoldKey, context, instanceCallBack, null);
+                  v, formKey, scaffoldKey, context, instanceCallBack);
               break;
             default:
               var v2 = {

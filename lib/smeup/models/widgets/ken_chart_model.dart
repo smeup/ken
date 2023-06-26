@@ -48,7 +48,7 @@ class KenChartModel extends KenModel {
               KenModel? instance)
           instanceCallBack)
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
     if (optionsDefault!['Typ'] == null) {
       chartType = defaultChartType;
     } else {

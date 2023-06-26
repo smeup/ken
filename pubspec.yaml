@@ -38,8 +38,8 @@ dependencies:
   cloud_firestore: ^3.1.11
   connectivity: ^3.0.6
   collection: ^1.15.0
-  flutter_js:
-    git: https://github.com/madicd/flutter_js.git      
+  flutter_js: ^0.5.0+6
+#    git: https://github.com/madicd/flutter_js.git  this is not the original package but a forked repository    
 
 dev_dependencies:
   integration_test:

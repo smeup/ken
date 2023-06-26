@@ -99,7 +99,7 @@ class KenCalendarModel extends KenModel {
               KenModel? instance)
           instanceCallBack)
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack, null) {
+            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
     setDefaults(this);
 
     dayFontSize = KenUtilities.getDouble(optionsDefault!['todayFontSize']) ??
