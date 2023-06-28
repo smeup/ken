@@ -1,45 +1,43 @@
 name: ken
 description: super-rich dynamic components for Flutter applications
 version: 0.0.4+14
-homepage: 'https://github.com/smeup/ken'
-repository: 'https://github.com/smeup/ken'
-issue_tracker: 'https://github.com/smeup/ken/issues'
-documentation: 'https://github.com/smeup/ken'
+homepage: "https://github.com/smeup/ken"
+repository: "https://github.com/smeup/ken"
+issue_tracker: "https://github.com/smeup/ken/issues"
+documentation: "https://github.com/smeup/ken"
 
 environment:
-  sdk: '>=2.18.5 <3.0.0'
+  sdk: ">=3.0.5 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations: 
+  flutter_localizations:
     sdk: flutter
-  async: ^2.8.2
+  async: ^2.11.0
   dio: ^4.0.6
-  provider: ^6.0.2
+  provider: ^6.0.5
   permission_handler: ^9.2.0
-  path_provider: ^2.0.9
-  syncfusion_flutter_gauges: ^20.1.56
-  carousel_slider: ^4.0.0
-  table_calendar: ^3.0.5
-  charts_flutter: ^0.12.0
+  path_provider: ^2.0.15
+  carousel_slider: ^4.2.1
+  table_calendar: ^3.0.9
   expandable: ^5.0.1
-  url_launcher: ^6.1.4
+  url_launcher: ^6.1.11
   flutter_datetime_picker: ^1.5.1
-  intl: ^0.17.0
+  intl: ^0.18.0
   qr_flutter: ^4.0.0
-  #package_info: ^2.0.2
-  clickable_list_wheel_view: ^0.1.0
-  shared_preferences: ^2.0.13
-  xml: ^6.0.1
-  json_theme: ^4.0.0
-  firebase_core: ^1.14.0
-  firebase_auth: ^3.3.12
-  cloud_firestore: ^3.1.11
-  connectivity: ^3.0.6
-  collection: ^1.15.0
-  flutter_js: ^0.5.0+6
-#    git: https://github.com/madicd/flutter_js.git  this is not the original package but a forked repository    
+  clickable_list_wheel_view: ^0.2.0
+  shared_preferences: ^2.1.1
+  xml: ^6.3.0
+  json_theme: ^5.0.2+4
+  firebase_core: ^2.12.0
+  firebase_auth: ^4.6.0
+  cloud_firestore: ^4.8.2
+  collection: ^1.17.1
+  flutter_js: ^0.7.0
+  connectivity_plus: ^4.0.1
+  syncfusion_flutter_gauges: ^21.2.4
+#    git: https://github.com/madicd/flutter_js.git  this is not the original package but a forked repository
 
 dev_dependencies:
   integration_test:
