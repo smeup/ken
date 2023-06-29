@@ -17,7 +17,7 @@ dependencies:
   async: ^2.11.0
   dio: ^5.1.2
   provider: ^6.0.5
-  permission_handler: ^9.2.0
+  permission_handler: ^10.2.0
   path_provider: ^2.0.15
   carousel_slider: ^4.2.1
   table_calendar: ^3.0.9
