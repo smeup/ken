@@ -23,7 +23,7 @@ dependencies:
   table_calendar: ^3.0.9
   expandable: ^5.0.1
   url_launcher: ^6.1.11
-  flutter_datetime_picker: ^1.5.1
+  # flutter_datetime_picker: ^1.5.1
   intl: ^0.18.0
   qr_flutter: ^4.1.0
   clickable_list_wheel_view: ^0.2.0
@@ -37,6 +37,7 @@ dependencies:
   flutter_js: ^0.7.0
   connectivity_plus: ^4.0.1
   syncfusion_flutter_gauges: ^21.2.4
+  flutter_datetime_picker_plus: ^2.0.1
 #    git: https://github.com/madicd/flutter_js.git  this is not the original package but a forked repository
 
 dev_dependencies:
