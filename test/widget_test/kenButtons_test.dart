@@ -6,7 +6,8 @@ import 'package:ken/smeup/widgets/kenButtons.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {
-  testWidgets('Test static contructor with MessageBus', (WidgetTester tester) async {
+  testWidgets('Test static contructor with MessageBus',
+      (WidgetTester tester) async {
     await WidgetTestService.initTests();
 
     KenButtons buttons = KenButtons(
@@ -45,10 +46,13 @@ Future<void> main() async {
             ),
           ),
         )));
-    KenMessageBus.instance.request(
+
+    KenMessageBus.instance
+        .request(
       id: buttons.globallyUniqueId,
       topic: KenTopic.buttonsGetButtons,
-    ).listen((event) {
+    )
+        .listen((event) {
       KenMessageBus.instance.publishResponse(
         buttons.globallyUniqueId,
         KenTopic.buttonsGetButtons,
@@ -65,7 +69,8 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('Test static contructor without message bus', (WidgetTester tester) async {
+  testWidgets('Test static contructor without message bus',
+      (WidgetTester tester) async {
     await WidgetTestService.initTests();
 
     KenButtons buttons = KenButtons(
@@ -104,6 +109,7 @@ Future<void> main() async {
             ),
           ),
         )));
+
     await tester.pumpWidget(testWidget).then((value) async {
       await tester.pumpAndSettle();
       runTestsWithoutMessageBus();
@@ -136,7 +142,6 @@ runTestsWithMessageBus() {
   var finderTextContent1 = find.text('Click me');
   expect(finderTextContent1, findsWidgets);
 }
-
 
 runTestsWithoutMessageBus() {
   final findKey1 = find.byKey(Key('buttons'));
