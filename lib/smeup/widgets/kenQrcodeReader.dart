@@ -134,7 +134,7 @@ class _KenQRCodeReaderState extends State<KenQRCodeReader>
     children = Center(
       child: Container(
         padding: EdgeInsets.all(widget.padding!),
-        child: QrImage(
+        child: QrImageView(
           data: _data,
           size: widget.size,
           errorCorrectionLevel: QrErrorCorrectLevel.Q,

@@ -2,9 +2,7 @@ import 'package:intl/intl.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 
-
-class KenWidgetMixin {
-
+mixin KenWidgetMixin {
   runControllerActivities(KenModel model) {
     // print('setUIProperties in mixin');
   }
@@ -13,7 +11,6 @@ class KenWidgetMixin {
   // / by checking the corresponing "data.columns"
 
   dynamic formatDataFields(KenModel model) {
-
     if (!KenUtilities.isDataStructure(model.data)) return null;
 
     dynamic res = KenUtilities.getEmptyDataStructure();

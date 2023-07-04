@@ -3,8 +3,7 @@ import 'package:ken/smeup/models/widgets/ken_model_callback.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/models/widgets/ken_section_model.dart';
 
-class KenModelMixin {
-
+mixin KenModelMixin {
   List<KenSectionModel> getSections(
       jsonMap,
       sectionName,
@@ -13,7 +12,9 @@ class KenModelMixin {
       BuildContext? context,
       bool? autoAdaptHeight,
       KenModel parent,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap, KenModel? instance) instanceCallBack) {
+      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
+              KenModel? instance)
+          instanceCallBack) {
     final smeupSectionsModels = List<KenSectionModel>.empty(growable: true);
     List<dynamic>? sectionsJson;
 

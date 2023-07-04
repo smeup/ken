@@ -10,7 +10,7 @@ import 'package:ken/smeup/widgets/kenNotAvailable.dart';
 import 'package:provider/provider.dart';
 import '../services/ken_configuration_service.dart';
 
-class KenWidgetStateMixin {
+mixin KenWidgetStateMixin {
   LoadType widgetLoadType = LoadType.Immediate;
 
   Widget runBuild(BuildContext context, String? id, String? type,
@@ -103,7 +103,8 @@ class KenWidgetStateMixin {
         SnackBar(
           content: Text(
               '${KenLocalizationService.of(context)!.getLocalString('dataNotAvailable')}.  (${model == null ? '' : model.smeupFun!.identifier.function})'),
-          backgroundColor: KenConfigurationService.getTheme()!.errorColor,
+          backgroundColor:
+              KenConfigurationService.getTheme()!.colorScheme.error,
         ),
       );
       return KenWidgetBuilderResponse(model, KenNotAvailable());

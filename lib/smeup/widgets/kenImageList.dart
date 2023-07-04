@@ -79,7 +79,7 @@ class KenImageList extends StatefulWidget
       this.orientation = KenImageListModel.defaultOrientation,
       this.listHeight = KenImageListModel.defaultListHeight,
       this.title = '',
-      showLoader: false,
+      showLoader = false,
       this.clientOnItemTap,
       this.dismissEnabled = false,
       this.callBack,

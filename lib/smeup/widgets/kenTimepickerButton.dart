@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+// import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
+    as datepicker;
 import 'package:intl/intl.dart';
 import 'package:ken/smeup/models/widgets/ken_timepicker_model.dart';
 import 'package:ken/smeup/widgets/kenEnumCallback.dart';
@@ -96,13 +98,14 @@ class _KenTimePickerButtonState extends State<KenTimePickerButton> {
         child: ElevatedButton(
             style: widget.buttonStyle,
             onPressed: () {
-              DatePicker.showPicker(context,
-                  theme: DatePickerTheme(
-                      backgroundColor: widget.backColor!,
-                      headerColor: widget.textStyle.backgroundColor,
-                      doneStyle: widget.textStyle,
-                      cancelStyle: widget.textStyle,
-                      itemStyle: widget.textStyle),
+              datepicker.DatePicker.showPicker(context,
+                  theme: datepicker.DatePickerTheme(
+                    backgroundColor: widget.backColor!,
+                    // headerColor: widget.textStyle.backgroundColor,
+                    // doneStyle: widget.textStyle,
+                    // cancelStyle: widget.textStyle,
+                    // itemStyle: widget.textStyle
+                  ),
                   pickerModel: KenTimePickerCustomization(
                       currentTime: _currentValue,
                       showSecondsColumn: false,
