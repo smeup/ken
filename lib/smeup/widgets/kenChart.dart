@@ -1,132 +1,133 @@
-// -import 'package:flutter/material.dart';
-// import 'package:ken/smeup/models/widgets/ken_chart_column.dart';
-// import 'package:ken/smeup/models/widgets/ken_chart_series.dart';
-// import 'package:ken/smeup/models/widgets/ken_chart_datasource.dart';
-// import 'package:ken/smeup/models/widgets/ken_chart_model.dart';
-// import 'package:ken/smeup/models/ken_widget_builder_response.dart';
-// import 'package:ken/smeup/models/widgets/ken_model.dart';
-// import 'package:ken/smeup/models/widgets/ken_section_model.dart';
-// import 'package:ken/smeup/services/ken_log_service.dart';
-// import 'package:ken/smeup/services/ken_utilities.dart';
-// import 'package:ken/smeup/widgets/kenNotAvailable.dart';
-// import 'package:ken/smeup/widgets/kenWidgetInterface.dart';
-// import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
-// import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
-// import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
+import 'package:flutter/material.dart';
+import 'package:ken/smeup/models/widgets/ken_chart_column.dart';
+import 'package:ken/smeup/models/widgets/ken_chart_series.dart';
+import 'package:ken/smeup/models/widgets/ken_chart_datasource.dart';
+import 'package:ken/smeup/models/widgets/ken_chart_model.dart';
+import 'package:ken/smeup/models/ken_widget_builder_response.dart';
+import 'package:ken/smeup/models/widgets/ken_model.dart';
+import 'package:ken/smeup/models/widgets/ken_section_model.dart';
+import 'package:ken/smeup/services/ken_log_service.dart';
+import 'package:ken/smeup/services/ken_utilities.dart';
+import 'package:ken/smeup/widgets/kenNotAvailable.dart';
+import 'package:ken/smeup/widgets/kenWidgetInterface.dart';
+import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
+import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
+import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
+import 'package:graphic/graphic.dart' as charts;
 // import 'package:charts_flutter/flutter.dart' as charts;
-// import 'dart:math';
+import 'dart:math';
 
-// // ignore: must_be_immutable
-// class KenChart extends StatefulWidget
-//     with KenWidgetMixin
-//     implements KenWidgetInterface {
-//   KenChartModel? model;
-//   GlobalKey<ScaffoldState> scaffoldKey;
-//   GlobalKey<FormState>? formKey;
+// ignore: must_be_immutable
+class KenChart extends StatefulWidget
+    with KenWidgetMixin
+    implements KenWidgetInterface {
+  KenChartModel? model;
+  GlobalKey<ScaffoldState> scaffoldKey;
+  GlobalKey<FormState>? formKey;
 
-//   String? id;
-//   String? type;
-//   String? title;
-//   double? width;
-//   double? height;
-//   ChartType? chartType;
-//   int? refresh;
-//   bool? legend;
+  String? id;
+  String? type;
+  String? title;
+  double? width;
+  double? height;
+  ChartType? chartType;
+  int? refresh;
+  bool? legend;
 
-//   KenChartDatasource? data;
+  KenChartDatasource? data;
 
-//   KenChart(this.scaffoldKey, this.formKey,
-//       {this.id = '',
-//       this.type = 'CHA',
-//       this.title = '',
-//       this.chartType = KenChartModel.defaultChartType,
-//       this.refresh = KenChartModel.defaultRefresh,
-//       this.height = KenChartModel.defaultHeight,
-//       this.width = KenChartModel.defaultWidth,
-//       this.legend = KenChartModel.defaultLegend,
-//       this.data})
-//       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
-//     id = KenUtilities.getWidgetId(type, id);
-//   }
+  KenChart(this.scaffoldKey, this.formKey,
+      {this.id = '',
+      this.type = 'CHA',
+      this.title = '',
+      this.chartType = KenChartModel.defaultChartType,
+      this.refresh = KenChartModel.defaultRefresh,
+      this.height = KenChartModel.defaultHeight,
+      this.width = KenChartModel.defaultWidth,
+      this.legend = KenChartModel.defaultLegend,
+      this.data})
+      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
+    id = KenUtilities.getWidgetId(type, id);
+  }
 
-//   KenChart.withController(
-//       KenChartModel this.model, this.scaffoldKey, this.formKey)
-//       : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
-//     runControllerActivities(model!);
-//   }
-//   @override
-//   runControllerActivities(KenModel model) {
-//     KenChartModel m = model as KenChartModel;
-//     id = m.id;
-//     type = m.type;
-//     title = m.title;
-//     chartType = m.chartType;
-//     //refresh = m.refresh;
-//     width = m.width;
-//     height = m.height;
-//     legend = m.legend;
+  KenChart.withController(
+      KenChartModel this.model, this.scaffoldKey, this.formKey)
+      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+    runControllerActivities(model!);
+  }
+  @override
+  runControllerActivities(KenModel model) {
+    KenChartModel m = model as KenChartModel;
+    id = m.id;
+    type = m.type;
+    title = m.title;
+    chartType = m.chartType;
+    //refresh = m.refresh;
+    width = m.width;
+    height = m.height;
+    legend = m.legend;
 
-//     data = treatData(m);
-//   }
+    data = treatData(m);
+  }
 
-//   @override
-//   dynamic treatData(KenModel model) {
-//     KenChartModel m = model as KenChartModel;
+  @override
+  dynamic treatData(KenModel model) {
+    KenChartModel m = model as KenChartModel;
 
-//     // change data format
-//     var workData = formatDataFields(m);
+    // change data format
+    var workData = formatDataFields(m);
 
-//     final smeupChartDatasource = KenChartDatasource.fromMap(workData);
-//     return smeupChartDatasource;
-//   }
+    final smeupChartDatasource = KenChartDatasource.fromMap(workData);
+    return smeupChartDatasource;
+  }
 
-//   @override
-//   _KenChartState createState() => _KenChartState();
-// }
+  @override
+  _KenChartState createState() => _KenChartState();
+}
 
-// class _KenChartState extends State<KenChart>
-//     with KenWidgetStateMixin
-//     implements KenWidgetStateInterface {
-//   KenChartModel? _model;
-//   KenChartDatasource? _data;
+class _KenChartState extends State<KenChart>
+    with KenWidgetStateMixin
+    implements KenWidgetStateInterface {
+  KenChartModel? _model;
+  KenChartDatasource? _data;
 
-//   @override
-//   void initState() {
-//     _model = widget.model;
-//     _data = widget.data;
-//     if (_model != null) widgetLoadType = _model!.widgetLoadType;
-//     super.initState();
-//   }
+  @override
+  void initState() {
+    _model = widget.model;
+    _data = widget.data;
+    if (_model != null) widgetLoadType = _model!.widgetLoadType;
+    super.initState();
+  }
 
-//   @override
-//   void dispose() {
-//     super.dispose();
-//   }
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     final chart = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
-//         getInitialdataLoaded(_model), notifierFunction: () {
-//       setState(() {
-//         widgetLoadType = LoadType.Immediate;
-//         setDataLoad(widget.id, false);
-//       });
-//     });
+  @override
+  Widget build(BuildContext context) {
+    final chart = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
+        getInitialdataLoaded(_model), notifierFunction: () {
+      setState(() {
+        widgetLoadType = LoadType.Immediate;
+        setDataLoad(widget.id, false);
+      });
+    });
 
-//     return chart;
-//   }
+    return chart;
+  }
 
-//   Future<KenWidgetBuilderResponse> getChildren() async {
-//     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
-//       if (_model != null) {
-//         // await SmeupChartDao.getData(_model!);
-//         await _model!.getData(_model!.instanceCallBack);
-//         _data = widget.treatData(_model!);
-//       }
-//       setDataLoad(widget.id, true);
-//     }
+  // Future<KenWidgetBuilderResponse> getChildren() async {
+  //   if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
+  //     if (_model != null) {
+  //       // await SmeupChartDao.getData(_model!);
+  //       await _model!.getData(_model!.instanceCallBack);
+  //       _data = widget.treatData(_model!);
+  //     }
+  //     setDataLoad(widget.id, true);
+  //   }
 
-//     var children;
+  // var children;
 
 //     // TODOO: refresh
 //     // if(_model.refreshMilliseconds > 0)
@@ -301,4 +302,4 @@
 //         g: random.nextInt(256),
 //         b: random.nextInt(256));
 //   }
-// }
+}
