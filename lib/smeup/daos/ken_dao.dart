@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
+import 'package:ken/smeup/models/KenMessageBusEventData.dart';
 import 'package:ken/smeup/models/widgets/ken_model_callback.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 
@@ -15,7 +17,7 @@ class KenDao {
   KenDao({required this.instanceCallBack, this.id}) {
     KenMessageBus.instance.request(id: id, topic: KenTopic.getData).listen(
       (KenMessageBusEvent event) {
-        this.smeupModel = event.data as KenModel;
+        this.smeupModel = event.data.data as KenModel;
       },
     );
   }
@@ -36,7 +38,12 @@ class KenDao {
               KenModel? instance)
           servicesCallBack) async {
     // await servicesCallBack(ServicesCallbackType.getData, null, this.smeupModel);
-    KenMessageBus.instance
-        .publishRequest(id!, KenTopic.getData, this.smeupModel);
+    KenMessageBus.instance.publishRequest(
+      id!,
+      KenTopic.getData,
+      KenMessageBusEventData(
+        data: this.smeupModel,
+      ),
+    );
   }
 }

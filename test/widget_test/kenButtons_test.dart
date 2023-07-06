@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ken/smeup/models/KenMessageBusEventData.dart';
 import 'package:ken/smeup/services/ken_message_bus.dart';
 import 'package:ken/smeup/widgets/kenButton.dart';
 import 'package:ken/smeup/widgets/kenButtons.dart';
@@ -56,11 +57,15 @@ Future<void> main() async {
       KenMessageBus.instance.publishResponse(
         buttons.globallyUniqueId,
         KenTopic.buttonsGetChildren,
-        [
-          KenButton(
-            data: "Click me",
-          )
-        ],
+        KenMessageBusEventData(
+          context: event.data.context,
+          widget: event.data.widget,
+          data: [
+            KenButton(
+              data: "Click me",
+            )
+          ],
+        ),
       );
     });
     await tester.pumpWidget(testWidget).then((value) async {

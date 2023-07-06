@@ -1,6 +1,8 @@
 import 'package:ken/smeup/models/KenMessageBusEvent.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../models/KenMessageBusEventData.dart';
+
 class KenMessageBus {
   static KenMessageBus? _instance;
   Subject<KenMessageBusEvent> _subject = BehaviorSubject<KenMessageBusEvent>();
@@ -18,12 +20,12 @@ class KenMessageBus {
         messageType: messageType, id: id, topic: topic, data: data));
   }
 
-  publishRequest(String id, KenTopic topic, dynamic data) {
+  publishRequest(String id, KenTopic topic, KenMessageBusEventData data) {
     _subject.add(KenMessageBusEvent(
         messageType: KenMessageType.request, id: id, topic: topic, data: data));
   }
 
-  publishResponse(String id, KenTopic topic, dynamic data) {
+  publishResponse(String id, KenTopic topic, KenMessageBusEventData data) {
     _subject.add(KenMessageBusEvent(
         messageType: KenMessageType.response,
         id: id,

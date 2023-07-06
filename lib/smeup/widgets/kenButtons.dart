@@ -203,7 +203,12 @@ class KenButtonsState extends State<KenButtons>
             id: widget.globallyUniqueId, topic: KenTopic.buttonsGetChildren),
         initialData: KenMessageBusEvent(
           id: widget.globallyUniqueId,
-          data: <Widget>[],
+          data: KenMessageBusEventData(
+            data: <Widget>[],
+            context: context,
+            widget: widget,
+            model: _model,
+          ),
           topic: KenTopic.buttonsGetChildren,
           messageType: KenMessageType.response,
         ),
@@ -212,7 +217,7 @@ class KenButtonsState extends State<KenButtons>
             return Container();
           }
 
-          var buttons = snapshot.data!.data;
+          var buttons = snapshot.data!.data.data;
 
           if (buttons.length > 0) {
             var widgets;

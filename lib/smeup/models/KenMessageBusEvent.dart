@@ -1,10 +1,11 @@
 import '../services/ken_message_bus.dart';
+import 'KenMessageBusEventData.dart';
 
 class KenMessageBusEvent {
   KenTopic topic;
   KenMessageType messageType;
   String id;
-  dynamic data;
+  KenMessageBusEventData data;
 
   KenMessageBusEvent({
     required this.id,
