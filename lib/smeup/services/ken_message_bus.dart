@@ -1,9 +1,9 @@
+import 'package:ken/smeup/models/KenMessageBusEvent.dart';
 import 'package:rxdart/rxdart.dart';
 
 class KenMessageBus {
-
   static KenMessageBus? _instance;
-  Subject<KenEvent> _subject = BehaviorSubject<KenEvent>();
+  Subject<KenMessageBusEvent> _subject = BehaviorSubject<KenMessageBusEvent>();
 
   KenMessageBus._();
 
@@ -12,63 +12,60 @@ class KenMessageBus {
     return _instance!;
   }
 
-  _publish(KenMessageType messageType, String id, KenTopic topic, dynamic data) {
-    _subject.add(KenEvent(messageType: messageType, id: id, topic: topic, data: data));
+  _publish(
+      KenMessageType messageType, String id, KenTopic topic, dynamic data) {
+    _subject.add(KenMessageBusEvent(
+        messageType: messageType, id: id, topic: topic, data: data));
   }
 
   publishRequest(String id, KenTopic topic, dynamic data) {
-    _subject.add(KenEvent(messageType: KenMessageType.request, id: id, topic: topic, data: data));
+    _subject.add(KenMessageBusEvent(
+        messageType: KenMessageType.request, id: id, topic: topic, data: data));
   }
 
   publishResponse(String id, KenTopic topic, dynamic data) {
-    _subject.add(KenEvent(messageType: KenMessageType.response, id: id, topic: topic, data: data));
+    _subject.add(KenMessageBusEvent(
+        messageType: KenMessageType.response,
+        id: id,
+        topic: topic,
+        data: data));
   }
 
-  Stream<KenEvent> _stream({String? id, KenTopic? topic }) {
-    Stream<KenEvent> stream = _subject.stream;
+  Stream<KenMessageBusEvent> _stream({String? id, KenTopic? topic}) {
+    Stream<KenMessageBusEvent> stream = _subject.stream;
     if (id != null) {
       stream = stream.where(
-        (KenEvent event) => event.id == id,
+        (KenMessageBusEvent event) => event.id == id,
       );
     }
     if (topic != null) {
       stream = stream.where(
-        (KenEvent event) => event.topic == topic,
+        (KenMessageBusEvent event) => event.topic == topic,
       );
     }
     return stream;
   }
 
-  Stream<KenEvent> request({String? id, KenTopic? topic }) {
-    return _stream(id: id, topic: topic).where((event) => event.messageType == KenMessageType.request);
+  Stream<KenMessageBusEvent> request({String? id, KenTopic? topic}) {
+    return _stream(id: id, topic: topic)
+        .where((event) => event.messageType == KenMessageType.request);
   }
 
-  Stream<KenEvent> response({String? id, KenTopic? topic }) {
-    return _stream(id: id, topic: topic).where((event) => event.messageType == KenMessageType.response);
+  Stream<KenMessageBusEvent> response({String? id, KenTopic? topic}) {
+    return _stream(id: id, topic: topic)
+        .where((event) => event.messageType == KenMessageType.response);
   }
 }
 
 enum KenTopic {
   getData,
-  buttonsGetButtons,
+  buttonsGetChildren,
+  comboGetChildren,
   execDynamismActions,
+  comboOnClientChange
 }
 
 enum KenMessageType {
-  request, response,
+  request,
+  response,
 }
-
-class KenEvent {
-  KenTopic topic;
-  KenMessageType messageType;
-  String id;
-  dynamic data;
-
-  KenEvent({
-    required this.id,
-    required this.topic,
-    required this.data,
-    required this.messageType,
-  });
-}
-

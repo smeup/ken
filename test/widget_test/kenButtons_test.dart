@@ -50,12 +50,12 @@ Future<void> main() async {
     KenMessageBus.instance
         .request(
       id: buttons.globallyUniqueId,
-      topic: KenTopic.buttonsGetButtons,
+      topic: KenTopic.buttonsGetChildren,
     )
         .listen((event) {
       KenMessageBus.instance.publishResponse(
         buttons.globallyUniqueId,
-        KenTopic.buttonsGetButtons,
+        KenTopic.buttonsGetChildren,
         [
           KenButton(
             data: "Click me",

@@ -10,6 +10,9 @@ import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
 
+import '../models/KenMessageBusEvent.dart';
+import '../models/KenMessageBusEventData.dart';
+
 // ignore: must_be_immutable
 class KenButtons extends StatefulWidget
     with KenWidgetMixin
@@ -44,12 +47,10 @@ class KenButtons extends StatefulWidget
   double? innerSpace;
   Function? clientOnPressed;
   final IconData? iconData;
-  late bool useMessageBus;
 
   KenButtons.withController(
       KenButtonsModel this.model, this.scaffoldKey, this.formKey, this.iconData)
       : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
-    useMessageBus = true;
     runControllerActivities(model!);
   }
 
@@ -82,7 +83,6 @@ class KenButtons extends StatefulWidget
     this.innerSpace = KenButtonsModel.defaultInnerSpace,
     this.clientOnPressed,
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
-    useMessageBus = false;
     id = KenUtilities.getWidgetId(type, id);
     KenButtonsModel.setDefaults(this);
     if (data == null) data = List<String>.empty(growable: true);
@@ -189,8 +189,8 @@ class KenButtonsState extends State<KenButtons>
     // if (widget.callBack != null) {
     KenMessageBus.instance.publishRequest(
       widget.globallyUniqueId,
-      KenTopic.buttonsGetButtons,
-      ButtonsGetButtonsEvent(
+      KenTopic.buttonsGetChildren,
+      KenMessageBusEventData(
           context: context, widget: widget, model: _model, data: _data),
     );
     // buttons = await widget.callBack!(
@@ -200,11 +200,11 @@ class KenButtonsState extends State<KenButtons>
       _model,
       StreamBuilder(
         stream: KenMessageBus.instance.response(
-            id: widget.globallyUniqueId, topic: KenTopic.buttonsGetButtons),
-        initialData: KenEvent(
+            id: widget.globallyUniqueId, topic: KenTopic.buttonsGetChildren),
+        initialData: KenMessageBusEvent(
           id: widget.globallyUniqueId,
           data: <Widget>[],
-          topic: KenTopic.buttonsGetButtons,
+          topic: KenTopic.buttonsGetChildren,
           messageType: KenMessageType.response,
         ),
         builder: (context, snapshot) {
@@ -237,18 +237,4 @@ class KenButtonsState extends State<KenButtons>
       ),
     );
   }
-}
-
-class ButtonsGetButtonsEvent {
-  BuildContext context;
-  Widget widget;
-  KenButtonsModel? model;
-  dynamic data;
-
-  ButtonsGetButtonsEvent({
-    required this.context,
-    required this.widget,
-    this.model,
-    required this.data,
-  });
 }
