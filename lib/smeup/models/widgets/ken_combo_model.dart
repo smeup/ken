@@ -21,7 +21,7 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
   static Color? defaultCaptionBackColor = Colors.transparent;
   static Color? defaultBorderColor;
   static double? defaultBorderWidth;
-  static double? defaultBorderRadius;
+  static double? defaultBorderRadius = 4;
 
   // unsupported by json_theme
   static const double defaultWidth = 100;
