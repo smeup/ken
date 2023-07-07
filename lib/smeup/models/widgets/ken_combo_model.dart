@@ -18,7 +18,7 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
   static bool? defaultCaptionFontBold;
   static double? defaultCaptionFontSize;
   static Color? defaultCaptionFontColor;
-  static Color? defaultCaptionBackColor;
+  static Color? defaultCaptionBackColor = Colors.transparent;
   static Color? defaultBorderColor;
   static double? defaultBorderWidth;
   static double? defaultBorderRadius;

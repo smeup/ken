@@ -8,26 +8,26 @@ import '../../services/ken_configuration_service.dart';
 
 class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static double? defaultFontSize;
+  static double? defaultFontSize = 16;
   static Color? defaultBackColor;
   static Color? defaultFontColor;
   static bool? defaultFontBold;
   static bool? defaultCaptionFontBold;
-  static double? defaultCaptionFontSize;
+  static double? defaultCaptionFontSize = 16;
   static Color? defaultCaptionFontColor;
-  static Color? defaultCaptionBackColor;
+  static Color? defaultCaptionBackColor = Colors.transparent;
   static Color? defaultBorderColor;
-  static double? defaultBorderWidth;
+  static double? defaultBorderWidth = 0;
   static double? defaultBorderRadius;
 
   // unsupported by json_theme
   static const String defaultLabel = '';
-  static const double defaultWidth = 300;
+  static const double defaultWidth = double.maxFinite;
   static const double defaultHeight = 55;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const bool defaultShowBorder = false;
   static const bool defaultAutoFocus = false;
-  static const bool defaultUnderline = true;
+  static const bool defaultUnderline = false;
   static const String defaultSubmitLabel = '';
   static const bool defaultShowSubmit = false;
 

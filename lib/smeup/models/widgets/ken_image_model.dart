@@ -5,8 +5,8 @@ import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 
 class KenImageModel extends KenModel implements KenDataInterface {
-  static const double defaultWidth = 40;
-  static const double defaultHeight = 40;
+  static const double defaultWidth = 300;
+  static const double defaultHeight = 300;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const bool defaultIsRemote = false;
 

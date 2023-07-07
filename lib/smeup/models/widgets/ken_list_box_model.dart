@@ -10,32 +10,32 @@ enum KenListType { simple, oriented, wheel }
 
 class KenListBoxModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static Color? defaultBackColor;
+  static Color? defaultBackColor = Colors.transparent;
   static Color? defaultBorderColor;
   static double? defaultBorderWidth;
-  static double? defaultBorderRadius;
-  static double? defaultFontSize;
+  static double? defaultBorderRadius = 8;
+  static double? defaultFontSize = 16;
   static Color? defaultFontColor;
-  static bool? defaultFontBold;
+  static bool? defaultFontBold = true;
   static bool? defaultCaptionFontBold;
   static double? defaultCaptionFontSize;
   static Color? defaultCaptionFontColor;
 
   // unsupported by json_theme
   static const double defaultWidth = 0;
-  static const double defaultHeight = 170;
+  static const double defaultHeight = 100;
   static const EdgeInsetsGeometry defaultPadding =
       EdgeInsets.only(left: 5, right: 5);
   static const KenListType defaultListType = KenListType.oriented;
   static const int defaultPortraitColumns = 1;
   static const int defaultLandscapeColumns = 1;
-  static const String defaultLayout = '1';
+  static const String defaultLayout = '2';
   static const Axis defaultOrientation = Axis.vertical;
   static const String defaultDefaultSort = '';
   static const String defaultBackgroundColName = '';
   static const bool defaultShowSelection = false;
-  static const int defaultSelectedRow = -1;
-  static const double defaultListHeight = 0;
+  static const int defaultSelectedRow = 1;
+  static const double defaultListHeight = 300;
 
   Color? backColor;
   Color? borderColor;

@@ -10,9 +10,9 @@ class KenRadioButtonsModel extends KenInputFieldModel
     implements KenDataInterface {
   // supported by json_theme
   static Color? defaultRadioButtonColor;
-  static double? defaultFontSize;
+  static double? defaultFontSize = 14;
   static Color? defaultFontColor;
-  static Color? defaultBackColor;
+  static Color? defaultBackColor = Colors.transparent;
   static bool? defaultFontBold;
   static bool? defaultCaptionFontBold;
   static double? defaultCaptionFontSize;

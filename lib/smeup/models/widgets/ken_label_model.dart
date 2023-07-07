@@ -8,16 +8,16 @@ import '../../services/ken_configuration_service.dart';
 
 class KenLabelModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static double? defaultFontSize;
+  static double? defaultFontSize = 20;
   static Color? defaultFontColor;
-  static bool? defaultFontBold;
-  static Color? defaultBackColor;
-  static double? defaultIconSize;
+  static bool? defaultFontBold = false;
+  static Color? defaultBackColor = Colors.transparent;
+  static double? defaultIconSize = 20;
   static Color? defaultIconColor;
 
   // unsupported by json_theme
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
-  static const Alignment defaultAlign = Alignment.center;
+  static const Alignment defaultAlign = Alignment.centerRight;
   static const double defaultWidth = 0;
   static const double defaultHeight = 15;
   static const String defaultValColName = 'value';

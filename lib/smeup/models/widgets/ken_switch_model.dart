@@ -9,13 +9,13 @@ class KenSwitchModel extends KenModel implements KenDataInterface {
   // supported by json_theme
   static Color? defaultThumbColor;
   static Color? defaultTrackColor;
-  static double? defaultCaptionFontSize;
+  static double? defaultCaptionFontSize = 14;
   static Color? defaultCaptionFontColor;
-  static Color? defaultCaptionBackColor;
+  static Color? defaultCaptionBackColor = Colors.transparent;
   static bool? defaultCaptionFontBold;
 
   // unsupported by json_theme
-  static const double defaultWidth = 100;
+  static const double defaultWidth = 400;
   static const double defaultHeight = 50;
   static const Alignment defaultAlign = Alignment.center;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
