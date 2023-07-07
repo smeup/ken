@@ -1,12 +1,5 @@
 {
-  "_comment": "smeup_components_library: for further information about the supported styles read the document README.md",
   "primaryColor": "#06899b",
-  "secondaryColor": "#df8a04",
-  "primaryDarkColor": "#006074",
-  "secondaryDarkColor": "#b06100",
-  "primaryLightColor": "#3fbbd3",
-  "secondaryLightColor": "#ffbc00",
-
   "splashColor": "#06899b",
   "scaffoldBackgroundColor": "#ffffff",
   "elevatedButtonTheme": {
@@ -32,15 +25,11 @@
     },
     "caption": {
       "color": "#06899b",
-      "fontSize": 12.0,
+      "fontSize": 16.0,
       "fontWeight": "normal",
-      "backgroundColor": "#ffffff",
-      "labelPadding": 5.0
+      "backgroundColor": "#ffffff"
     },
     "bodyText1": {
-      "Autocomplete": {
-        "fontSize": 16.0
-      },
       "color": "#06899b",
       "fontSize": 16.0,
       "fontWeight": "normal",
@@ -91,8 +80,7 @@
   },
   "iconTheme": {
     "size": 20.0,
-    "color": "#333",
-    "iconColor": "333"
+    "color": "#ffffff"
   },
   "timePickerTheme": {
     "backgroundColor": "#ffffff",
@@ -142,11 +130,11 @@
     },
     "iconTheme": {
       "size": 20.0,
-      "color": "#333"
+      "color": "#ffffff"
     },
     "centerTitle": true,
     "elevation": 0,
-    "toolbarHeight": 70
+    "toolbarHeight": 50
   },
   "cardTheme": {
     "color": "#ffffff",
@@ -177,7 +165,7 @@
       "backgroundColor": "#ffffff"
     }
   },
-  "indicatorColor": "#06899b",
+  "indicatorColor" : "#06899b",
   "dialogTheme": {
     "backgroundColor": "#ffffff",
     "elevation": 0,

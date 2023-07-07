@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:ken/smeup/models/widgets/ken_buttons_model.dart';
 import 'package:ken/smeup/models/ken_widget_builder_response.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
+import 'package:ken/smeup/services/ken_message_bus.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 import 'package:ken/smeup/services/ken_log_service.dart';
-import 'package:ken/smeup/widgets/kenButton.dart';
-import 'package:ken/smeup/widgets/kenEnumCallback.dart';
 import 'package:ken/smeup/widgets/kenWidgetInterface.dart';
 import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
+
+import '../models/KenMessageBusEvent.dart';
+import '../models/KenMessageBusEventData.dart';
 
 // ignore: must_be_immutable
 class KenButtons extends StatefulWidget
@@ -45,42 +47,42 @@ class KenButtons extends StatefulWidget
   double? innerSpace;
   Function? clientOnPressed;
   final IconData? iconData;
-  Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
-  KenButtons.withController(KenButtonsModel this.model, this.scaffoldKey,
-      this.formKey, this.iconData, this.callBack)
+  KenButtons.withController(
+      KenButtonsModel this.model, this.scaffoldKey, this.formKey, this.iconData)
       : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
-  KenButtons(this.scaffoldKey, this.formKey,
-      {this.id = '',
-      this.type = 'BTN',
-      this.title = '',
-      this.data,
-      this.backColor,
-      this.borderColor,
-      this.borderRadius,
-      this.borderWidth,
-      this.elevation,
-      this.fontSize,
-      this.fontColor,
-      this.fontBold,
-      this.iconSize,
-      this.iconColor,
-      this.width = KenButtonsModel.defaultWidth,
-      this.height = KenButtonsModel.defaultHeight,
-      this.position = KenButtonsModel.defaultPosition,
-      this.align = KenButtonsModel.defaultAlign,
-      this.padding = KenButtonsModel.defaultPadding,
-      this.valueField = KenButtonsModel.defaultValueField,
-      this.iconData,
-      this.orientation = KenButtonsModel.defaultOrientation,
-      this.isLink = KenButtonsModel.defaultIsLink,
-      this.innerSpace = KenButtonsModel.defaultInnerSpace,
-      this.clientOnPressed,
-      this.callBack})
-      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
+  KenButtons(
+    this.scaffoldKey,
+    this.formKey, {
+    this.id = '',
+    this.type = 'BTN',
+    this.title = '',
+    this.data,
+    this.backColor,
+    this.borderColor,
+    this.borderRadius,
+    this.borderWidth,
+    this.elevation,
+    this.fontSize,
+    this.fontColor,
+    this.fontBold,
+    this.iconSize,
+    this.iconColor,
+    this.width = KenButtonsModel.defaultWidth,
+    this.height = KenButtonsModel.defaultHeight,
+    this.position = KenButtonsModel.defaultPosition,
+    this.align = KenButtonsModel.defaultAlign,
+    this.padding = KenButtonsModel.defaultPadding,
+    this.valueField = KenButtonsModel.defaultValueField,
+    this.iconData,
+    this.orientation = KenButtonsModel.defaultOrientation,
+    this.isLink = KenButtonsModel.defaultIsLink,
+    this.innerSpace = KenButtonsModel.defaultInnerSpace,
+    this.clientOnPressed,
+  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenButtonsModel.setDefaults(this);
     if (data == null) data = List<String>.empty(growable: true);
@@ -184,74 +186,60 @@ class KenButtonsState extends State<KenButtons>
       setDataLoad(widget.id, true);
     }
 
-    var buttons = List<KenButton>.empty(growable: true);
-
-    if (widget.callBack != null) {
-      buttons = await widget.callBack!(
-          widget, KenCallbackType.getButtons, _model, _data);
-    }
-
-    int buttonIndex = 0;
-    List array = _model == null ? _data : _data['rows'];
-
-    array.forEach((buttonData) {
-      buttonIndex += 1;
-      String? buttonText = _model == null ? buttonData : buttonData['value'];
-      final button = KenButton(
-        id: '${KenUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
-        type: widget.type,
-        buttonIndex: buttonIndex,
-        title: widget.title,
-        data: buttonText,
-        backColor: widget.backColor,
-        borderColor: widget.borderColor,
-        width: widget.width,
-        height: widget.height,
-        position: widget.position,
-        align: widget.align,
-        fontColor: widget.fontColor,
-        fontSize: widget.fontSize,
-        padding: widget.padding,
-        valueField: widget.valueField,
-        borderRadius: widget.borderRadius,
-        borderWidth: widget.borderWidth,
-        elevation: widget.elevation,
-        fontBold: widget.fontBold,
-        //iconCode: widget.iconCode,
-        iconData: widget.iconData,
-        iconSize: widget.iconSize,
-        iconColor: widget.iconColor,
-        //icon: null,
-        //isBusy: _isBusy,
-        clientOnPressed: () {
-          if (widget.clientOnPressed != null) {
-            widget.clientOnPressed!(buttonIndex, buttonText);
+    // if (widget.callBack != null) {
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.buttonsGetChildren,
+      KenMessageBusEventData(
+          context: context, widget: widget, model: _model, data: _data),
+    );
+    // buttons = await widget.callBack!(
+    //     widget, KenCallbackType.getButtons, _model, _data);
+    // }
+    return KenWidgetBuilderResponse(
+      _model,
+      StreamBuilder(
+        stream: KenMessageBus.instance.response(
+            id: widget.globallyUniqueId, topic: KenTopic.buttonsGetChildren),
+        initialData: KenMessageBusEvent(
+          id: widget.globallyUniqueId,
+          data: KenMessageBusEventData(
+            data: <Widget>[],
+            context: context,
+            widget: widget,
+            model: _model,
+          ),
+          topic: KenTopic.buttonsGetChildren,
+          messageType: KenMessageType.response,
+        ),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Container();
           }
-          //runDynamism(context, buttonData);
+
+          var buttons = snapshot.data!.data.data;
+
+          if (buttons.length > 0) {
+            var widgets;
+            if (widget.orientation == WidgetOrientation.Vertical)
+              widgets = SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(children: buttons));
+            else
+              widgets = SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(children: buttons));
+
+            return widgets;
+          } else {
+            KenLogService.writeDebugMessage(
+                'Error SmeupButtons no children \'button\' created',
+                logType: KenLogType.warning);
+            final column = Column(children: [Container()]);
+            return column;
+          }
         },
-        isLink: widget.isLink!,
-        model: _model,
-      );
-
-      buttons.add(button);
-    });
-
-    if (buttons.length > 0) {
-      var widgets;
-      if (widget.orientation == WidgetOrientation.Vertical)
-        widgets = SingleChildScrollView(
-            scrollDirection: Axis.vertical, child: Column(children: buttons));
-      else
-        widgets = SingleChildScrollView(
-            scrollDirection: Axis.horizontal, child: Row(children: buttons));
-
-      return KenWidgetBuilderResponse(_model, widgets);
-    } else {
-      KenLogService.writeDebugMessage(
-          'Error SmeupButtons no children \'button\' created',
-          logType: KenLogType.warning);
-      final column = Column(children: [Container()]);
-      return KenWidgetBuilderResponse(_model, column);
-    }
+      ),
+    );
   }
 }

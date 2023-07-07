@@ -84,7 +84,7 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
             KenModel? instance)
         instanceCallBack,
   }) : super(formKey, scaffoldKey, context,
-            title: title, instanceCallBack: instanceCallBack) {
+            title: title, instanceCallBack: instanceCallBack, id: id) {
     // SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }

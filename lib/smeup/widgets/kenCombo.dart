@@ -5,15 +5,16 @@ import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/models/ken_widget_builder_response.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
 import 'package:ken/smeup/widgets/kenComboWidget.dart';
-import 'package:ken/smeup/widgets/kenEnumCallback.dart';
 import 'package:ken/smeup/widgets/kenLine.dart';
 import 'package:ken/smeup/widgets/kenWidgetInterface.dart';
 import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
 
+import '../models/KenMessageBusEventData.dart';
 import '../models/widgets/ken_section_model.dart';
 import '../services/ken_configuration_service.dart';
+import '../services/ken_message_bus.dart';
 
 // ignore: must_be_immutable
 class KenCombo extends StatefulWidget
@@ -54,47 +55,52 @@ class KenCombo extends StatefulWidget
   bool? showBorder;
   void Function(String? newValue)? clientOnChange;
 
-  Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
+  //Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
-  KenCombo(this.scaffoldKey, this.formKey,
-      {this.fontColor,
-      this.fontSize,
-      this.fontBold,
-      this.backColor,
-      this.captionFontBold,
-      this.captionFontSize,
-      this.captionFontColor,
-      this.captionBackColor,
-      this.borderColor,
-      this.borderRadius,
-      this.borderWidth,
-      this.iconSize,
-      this.iconColor,
-      this.underline = KenComboModel.defaultUnderline,
-      this.title,
-      this.id = '',
-      this.type = 'CMB',
-      this.selectedValue = '',
-      this.data,
-      this.align = KenComboModel.defaultAlign,
-      this.innerSpace = KenComboModel.defaultInnerSpace,
-      this.padding = KenComboModel.defaultPadding,
-      this.label = KenComboModel.defaultLabel,
-      this.valueField = KenComboModel.defaultValueField,
-      this.descriptionField = KenComboModel.defaultDescriptionField,
-      this.width = KenComboModel.defaultWidth,
-      this.height = KenComboModel.defaultHeight,
-      this.showBorder = KenComboModel.defaultShowBorder,
-      this.clientOnChange,
-      this.callBack})
-      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
+  KenCombo(
+    this.scaffoldKey,
+    this.formKey, {
+    this.fontColor,
+    this.fontSize,
+    this.fontBold,
+    this.backColor,
+    this.captionFontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.captionBackColor,
+    this.borderColor,
+    this.borderRadius,
+    this.borderWidth,
+    this.iconSize,
+    this.iconColor,
+    this.underline = KenComboModel.defaultUnderline,
+    this.title,
+    this.id = '',
+    this.type = 'CMB',
+    this.selectedValue = '',
+    this.data,
+    this.align = KenComboModel.defaultAlign,
+    this.innerSpace = KenComboModel.defaultInnerSpace,
+    this.padding = KenComboModel.defaultPadding,
+    this.label = KenComboModel.defaultLabel,
+    this.valueField = KenComboModel.defaultValueField,
+    this.descriptionField = KenComboModel.defaultDescriptionField,
+    this.width = KenComboModel.defaultWidth,
+    this.height = KenComboModel.defaultHeight,
+    this.showBorder = KenComboModel.defaultShowBorder,
+    this.clientOnChange,
+    //this.callBack
+  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenComboModel.setDefaults(this);
   }
 
   KenCombo.withController(
-      KenComboModel this.model, this.scaffoldKey, this.formKey, this.callBack)
-      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+    KenComboModel this.model,
+    this.scaffoldKey,
+    this.formKey,
+    //this.callBack
+  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
@@ -201,10 +207,17 @@ class _KenComboState extends State<KenCombo>
       setDataLoad(widget.id, true);
     }
 
-    if (widget.callBack != null) {
-      widget.callBack!(
-          widget, KenCallbackType.getChildren, _selectedValue, null);
-    }
+    // if (widget.callBack != null) {
+    //   widget.callBack!(
+    //       widget, KenCallbackType.getChildren, _selectedValue, null);
+    // }
+
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.comboGetChildren,
+      KenMessageBusEventData(
+          context: context, widget: widget, model: _model, data: _data),
+    );
 
     var text = widget.label!.isEmpty
         ? Container()
@@ -259,10 +272,20 @@ class _KenComboState extends State<KenCombo>
             clientOnChange: (String? newValue) {
               _selectedValue = newValue;
 
-              if (widget.callBack != null) {
-                widget.callBack!(widget, KenCallbackType.onClientChange,
-                    _selectedValue, null);
-              }
+              // if (widget.callBack != null) {
+              //   widget.callBack!(widget, KenCallbackType.onClientChange,
+              //       _selectedValue, null);
+              // }
+
+              KenMessageBus.instance.publishRequest(
+                widget.globallyUniqueId,
+                KenTopic.comboOnClientChange,
+                KenMessageBusEventData(
+                    context: context,
+                    widget: widget,
+                    model: _model,
+                    data: _selectedValue),
+              );
 
               if (widget.clientOnChange != null) {
                 widget.clientOnChange!(newValue);

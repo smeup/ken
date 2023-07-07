@@ -1,8 +1,19 @@
 import 'package:intl/intl.dart';
 import 'package:ken/smeup/models/widgets/ken_model.dart';
 import 'package:ken/smeup/services/ken_utilities.dart';
+import 'package:uuid/uuid.dart';
 
+Uuid uuid = Uuid();
 mixin KenWidgetMixin {
+
+  static Map<int, String> widgetUniqueIds = {};
+  String get globallyUniqueId {
+    if (!widgetUniqueIds.containsKey(hashCode)) {
+      widgetUniqueIds[hashCode] = uuid.v4();
+    }
+    return widgetUniqueIds[hashCode]!;
+  }
+
   runControllerActivities(KenModel model) {
     // print('setUIProperties in mixin');
   }
