@@ -163,8 +163,9 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
 
     if (no > 0)
       deleteDynamism = widget.dynamisms!.firstWhere(
-          (element) => element.event == 'delete',
-          orElse: () => null as Dynamism);
+        (element) => element.event == 'delete',
+        //orElse: () => null as Dynamism
+      );
 
     Widget res = widget.dismissEnabled!
         ? Dismissible(
