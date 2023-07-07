@@ -43,13 +43,9 @@ dependencies:
 #    git: https://github.com/madicd/flutter_js.git  this is not the original package but a forked repository
 
 dev_dependencies:
-  integration_test:
-    sdk: flutter
   flutter_test:
     sdk: flutter
-  flutter_driver:
-    sdk: flutter
-  test: ^1.19.5
+  
 
 dependency_overrides:
   intl: ^0.18.1

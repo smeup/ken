@@ -120,18 +120,6 @@ Future<void> main() async {
       runTestsWithoutMessageBus();
     });
   });
-
-  // TODOA test failure
-  // testWidgets('Test dynamic contructor ', (WidgetTester tester) async {
-  //   await WidgetTestService.initTests();
-
-  //   final testWidget = await WidgetTestService.getDynamicScreen('test_button');
-
-  //   await tester.pumpWidget(testWidget).then((value) async {
-  //     await tester.pumpAndSettle();
-  //     runTests();
-  //   });
-  // });
 }
 
 runTestsWithMessageBus() {

@@ -51,31 +51,4 @@ class WidgetTestService {
       }
     }
   }
-
-  // static getDynamicScreen(String jsonFile) async {
-  //   var smeupFun = Fun('F(EXD;*JSN;) 2(;;$jsonFile)', null, null, null);
-  //   expect(smeupFun.identifier.service, '*JSN');
-
-  //   final res = await SmeupDataService.invoke(smeupFun);
-
-  //   expect(res.succeded, true);
-
-  //   final smeupDynamicScreen = MultiProvider(providers: [
-  //     ChangeNotifierProvider.value(
-  //       value: SmeupErrorNotifier(),
-  //     ),
-  //   ], child: SmeupDynamicScreen(initialFun: smeupFun));
-
-  //   Widget testWidget = new MediaQuery(
-  //       data: new MediaQueryData(),
-  //       child: new MaterialApp(localizationsDelegates: [
-  //         SmeupLocalizationDelegate(),
-  //         GlobalMaterialLocalizations.delegate,
-  //         GlobalWidgetsLocalizations.delegate,
-  //         GlobalCupertinoLocalizations.delegate,
-  //         DefaultCupertinoLocalizations.delegate
-  //       ], home: smeupDynamicScreen));
-
-  //   return testWidget;
-  // }
 }
