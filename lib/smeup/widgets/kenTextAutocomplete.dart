@@ -260,8 +260,9 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
 
             if (code.isNotEmpty && _data != null) {
               var currel = _data.firstWhere(
-                  (element) => element['code'].toString() == code,
-                  orElse: () => null as Map<String, String?>);
+                (element) => element['code'].toString() == code,
+                //orElse: () => null as Map<String, String?>
+              );
               if (currel != null) {
                 textEditingController.text = currel['value'];
               }

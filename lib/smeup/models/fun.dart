@@ -257,8 +257,8 @@ class Fun {
           if (value.toString().startsWith('[')) {
             String varName =
                 value.toString().trim().replaceAll('[', '').replaceAll(']', '');
-            value = KenUtilities.getVariable(varName, formKey: formKey)
-                .toString();
+            value =
+                KenUtilities.getVariable(varName, formKey: formKey).toString();
           } else {
             value = value;
           }
@@ -269,7 +269,6 @@ class Fun {
 
     return list;
   }
-
 
   static List<String> splitParameters(String parms) {
     var parmsSplit = List<String>.empty(growable: true);
@@ -340,8 +339,10 @@ class Fun {
   }
 
   FunObject getObjectByName(String name) {
-    return objects.firstWhere((element) => element.name == name,
-        orElse: () => null as FunObject);
+    return objects.firstWhere(
+      (element) => element.name == name,
+      //orElse: () =>
+    );
   }
 
   replaceVariables() {
@@ -475,7 +476,6 @@ class Fun {
       }
 
       // ----
-
     } catch (e) {
       KenLogService.writeDebugMessage(
           'Error in _parseFromSmeupSyntax while getSmeupFormatString : $this ',
