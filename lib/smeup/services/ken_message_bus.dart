@@ -63,6 +63,9 @@ enum KenTopic {
   getData,
   buttonsGetChildren,
   comboGetChildren,
+  textfieldGetChildren,
+  textfieldOnChanged,
+  textfieldOnSaved,
   execDynamismActions,
   comboOnClientChange
 }

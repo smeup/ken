@@ -11,7 +11,9 @@ import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
 import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
 
+import '../models/KenMessageBusEventData.dart';
 import '../services/ken_configuration_service.dart';
+import '../services/ken_message_bus.dart';
 
 // ignore: must_be_immutable
 class KenTextField extends StatefulWidget
@@ -57,51 +59,53 @@ class KenTextField extends StatefulWidget
 
   List<TextInputFormatter>? inputFormatters;
 
-  Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
+  // Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
   KenTextField.withController(
     KenTextFieldModel this.model,
     this.scaffoldKey,
     this.formKey,
     this.smeupButtons,
-    this.callBack,
+    // this.callBack,
   ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
-  KenTextField(this.scaffoldKey, this.formKey,
-      {this.id = '',
-      this.type = 'FLD',
-      this.backColor,
-      this.fontSize,
-      this.fontBold,
-      this.fontColor,
-      this.captionBackColor,
-      this.captionFontBold,
-      this.captionFontColor,
-      this.captionFontSize,
-      this.borderColor,
-      this.borderRadius,
-      this.borderWidth,
-      this.underline = KenTextFieldModel.defaultUnderline,
-      this.label = KenTextFieldModel.defaultLabel,
-      this.submitLabel = KenTextFieldModel.defaultSubmitLabel,
-      this.width = KenTextFieldModel.defaultWidth,
-      this.height = KenTextFieldModel.defaultHeight,
-      this.padding = KenTextFieldModel.defaultPadding,
-      this.showBorder = KenTextFieldModel.defaultShowBorder,
-      this.autoFocus = KenTextFieldModel.defaultAutoFocus,
-      this.valueField = KenTextFieldModel.defaultValueField,
-      this.showSubmit = KenTextFieldModel.defaultShowSubmit,
-      this.data,
-      this.keyboard,
-      this.clientValidator, // ?
-      //this.clientOnSave,
-      //this.clientOnChange,
-      this.clientOnSubmit,
-      this.inputFormatters, // ?
-      this.callBack})
-      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
+  KenTextField(
+    this.scaffoldKey,
+    this.formKey, {
+    this.id = '',
+    this.type = 'FLD',
+    this.backColor,
+    this.fontSize,
+    this.fontBold,
+    this.fontColor,
+    this.captionBackColor,
+    this.captionFontBold,
+    this.captionFontColor,
+    this.captionFontSize,
+    this.borderColor,
+    this.borderRadius,
+    this.borderWidth,
+    this.underline = KenTextFieldModel.defaultUnderline,
+    this.label = KenTextFieldModel.defaultLabel,
+    this.submitLabel = KenTextFieldModel.defaultSubmitLabel,
+    this.width = KenTextFieldModel.defaultWidth,
+    this.height = KenTextFieldModel.defaultHeight,
+    this.padding = KenTextFieldModel.defaultPadding,
+    this.showBorder = KenTextFieldModel.defaultShowBorder,
+    this.autoFocus = KenTextFieldModel.defaultAutoFocus,
+    this.valueField = KenTextFieldModel.defaultValueField,
+    this.showSubmit = KenTextFieldModel.defaultShowSubmit,
+    this.data,
+    this.keyboard,
+    this.clientValidator, // ?
+    //this.clientOnSave,
+    //this.clientOnChange,
+    this.clientOnSubmit,
+    this.inputFormatters, // ?
+    // this.callBack
+  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenTextFieldModel.setDefaults(this);
   }
@@ -209,9 +213,16 @@ class _KenTextFieldState extends State<KenTextField>
 
     Widget textField;
 
-    if (widget.callBack != null) {
-      widget.callBack!(widget, KenCallbackType.getChildren, _data, null);
-    }
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.textfieldGetChildren,
+      KenMessageBusEventData(
+          context: context, widget: widget, model: _model, data: _data),
+    );
+
+    // if (widget.callBack != null) {
+    //   widget.callBack!(widget, KenCallbackType.getChildren, _data, null);
+    // }
 
     textField = Container(
         alignment: Alignment.centerLeft,
@@ -238,9 +249,15 @@ class _KenTextFieldState extends State<KenTextField>
           obscureText:
               widget.keyboard == TextInputType.visiblePassword ? true : false,
           onChanged: (value) {
-            if (widget.callBack != null) {
-              widget.callBack!(widget, KenCallbackType.onChanged, value, null);
-            }
+            KenMessageBus.instance.publishRequest(
+              widget.globallyUniqueId,
+              KenTopic.textfieldOnChanged,
+              KenMessageBusEventData(
+                  context: context, widget: widget, model: _model, data: _data),
+            );
+            // if (widget.callBack != null) {
+            //   widget.callBack!(widget, KenCallbackType.onChanged, value, null);
+            // }
             //
             // if (widget.clientOnChange != null) widget.clientOnChange!(value);
             // SmeupVariablesService.setVariable(widget.id, value,
@@ -249,7 +266,7 @@ class _KenTextFieldState extends State<KenTextField>
             //   SmeupDynamismService.run(_model!.dynamisms, context, 'change',
             //       widget.scaffoldKey, widget.formKey);
 
-            _data = value;
+            // _data = value;
           },
           decoration: InputDecoration(
             labelStyle: captionStyle,
@@ -271,9 +288,16 @@ class _KenTextFieldState extends State<KenTextField>
             ),
           ),
           onSaved: (value) {
-            if (widget.callBack != null) {
-              widget.callBack!(widget, KenCallbackType.onSaved, value, null);
-            }
+            KenMessageBus.instance.publishRequest(
+              widget.globallyUniqueId,
+              KenTopic.textfieldOnSaved,
+              KenMessageBusEventData(
+                  context: context, widget: widget, model: _model, data: _data),
+            );
+
+            // if (widget.callBack != null) {
+            //   widget.callBack!(widget, KenCallbackType.onSaved, value, null);
+            // }
             //
             // if (widget.clientOnSave != null) widget.clientOnSave!(value);
             // SmeupVariablesService.setVariable(widget.id, value,

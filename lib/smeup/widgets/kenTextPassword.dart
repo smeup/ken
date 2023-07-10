@@ -277,7 +277,8 @@ class _KenTextPasswordState extends State<KenTextPassword>
                           //passwordModel.checkProgress(value);
                           //_data = value;
                           //},
-                          callBack: widget.callBack,
+
+                          // callBack: widget.callBack, -- refactoring kentextfield
                           keyboard: fieldmodel.passwordVisible
                               ? TextInputType.text
                               : TextInputType.visiblePassword);
