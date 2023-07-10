@@ -190,7 +190,7 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupListBoxDao.getData(this);
-        await this.getData(instanceCallBack);
+        await this.getData();
       };
     }
   }

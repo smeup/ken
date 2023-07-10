@@ -68,7 +68,7 @@ class KenChartModel extends KenModel {
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-        await this.getData(instanceCallBack);
+        await this.getData();
         // await SmeupChartDao.getData(this);
       };
     }

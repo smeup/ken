@@ -236,7 +236,7 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupTimePickerDao.getData(this);
-        await this.getData(instanceCallBack);
+        await this.getData();
       };
     }
   }

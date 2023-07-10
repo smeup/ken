@@ -132,7 +132,7 @@ class _KenImageState extends State<KenImage>
     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
         // await SmeupImageDao.getData(_model!);
-        await _model!.getData(_model!.instanceCallBack);
+        await _model!.getData();
         var res = widget.treatData(_model!);
         _data = res['data'];
         //isRemote = res['isRemote'];

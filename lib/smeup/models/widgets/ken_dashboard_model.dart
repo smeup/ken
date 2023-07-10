@@ -166,7 +166,7 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupDashboardDao.getData(this);
-        await this.getData(instanceCallBack);
+        await this.getData();
       };
     }
   }
