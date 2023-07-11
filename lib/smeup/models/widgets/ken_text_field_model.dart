@@ -157,7 +157,7 @@ class KenTextFieldModel extends KenInputFieldModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupTextFieldDao.getData(this);
-        await this.getData(instanceCallBack);
+        await this.getData();
       };
     }
   }

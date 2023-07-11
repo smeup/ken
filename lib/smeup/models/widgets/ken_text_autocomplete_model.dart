@@ -149,7 +149,7 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupTextAutocompleteDao.getData(this);
-        await this.getData(instanceCallBack);
+        await this.getData();
       };
     }
   }

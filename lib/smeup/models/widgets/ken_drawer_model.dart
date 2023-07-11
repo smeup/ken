@@ -113,7 +113,7 @@ class KenDrawerModel extends KenModel {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupDrawerDao.getData(this);
-        await this.getData(instanceCallBack);
+        await this.getData();
       };
     }
   }

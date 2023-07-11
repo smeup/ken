@@ -197,7 +197,7 @@ class _KenTextFieldState extends State<KenTextField>
     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
         // await SmeupTextFieldDao.getData(_model!);
-        await _model!.getData(_model!.instanceCallBack);
+        await _model!.getData();
         _data = widget.treatData(_model!);
       }
 

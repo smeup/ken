@@ -47,7 +47,7 @@ class KenQRCodeReaderModel extends KenInputFieldModel
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
 
-        await this.getData(instanceCallBack);
+        await this.getData();
         // await SmeupQRCodeReaderDao.getData(this);
       };
     }
