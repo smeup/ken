@@ -115,7 +115,7 @@ class KenLabelModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupLabelDao.getData(this);
-        await this.getData(instanceCallBack);
+        await this.getData();
       };
     }
   }

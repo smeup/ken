@@ -77,7 +77,7 @@ class KenSliderModel extends KenModel {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupSliderDao.getData(this);
-        await this.getData(instanceCallBack);
+        await this.getData();
       };
     }
   }

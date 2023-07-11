@@ -138,7 +138,7 @@ class _KenGaugeState extends State<KenGauge>
     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
         // await SmeupGaugeDao.getData(_model!);
-        await _model!.getData(_model!.instanceCallBack);
+        await _model!.getData();
         widget.treatData(_model!);
         _value = widget.value;
         _maxValue = widget.maxValue;

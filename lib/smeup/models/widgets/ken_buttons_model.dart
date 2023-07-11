@@ -152,7 +152,7 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-        await this.getData(instanceCallBack);
+        await this.getData();
         // await SmeupButtonsDao.getData(this);
       };
     }

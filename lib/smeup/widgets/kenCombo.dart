@@ -197,7 +197,7 @@ class _KenComboState extends State<KenCombo>
   Future<KenWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        await _model!.getData(_model!.instanceCallBack);
+        await _model!.getData();
         _data = widget.treatData(_model!);
       }
       setDataLoad(widget.id, true);

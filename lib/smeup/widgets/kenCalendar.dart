@@ -429,7 +429,7 @@ class KenCalendarState extends State<KenCalendar>
   Future<void> _load() async {
     if (_model != null) {
       // await SmeupCalendarDao.getData(_model!);
-      await _model!.getData(_model!.instanceCallBack);
+      await _model!.getData();
       _data = widget.treatData(_model!);
       await _loadEvents();
     } else {

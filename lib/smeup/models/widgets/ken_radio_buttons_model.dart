@@ -143,7 +143,7 @@ class KenRadioButtonsModel extends KenInputFieldModel
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupRadioButtonsDao.getData(this);
-        await this.getData(instanceCallBack);
+        await this.getData();
       };
     }
   }

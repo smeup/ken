@@ -139,7 +139,7 @@ class _KenSliderState extends State<KenSlider>
     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
         // await SmeupSliderDao.getData(_model!);
-        await _model!.getData(_model!.instanceCallBack);
+        await _model!.getData();
         _value = widget.treatData(_model!);
       }
       setDataLoad(widget.id, true);
