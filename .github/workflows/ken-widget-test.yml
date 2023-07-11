@@ -34,11 +34,11 @@ jobs:
     
     # Adjusts to the Flutter version you are working with
     - uses: subosito/flutter-action@v2
-        with:
-          # Runs a single command using the runner’s shell
-          flutter-version: "3.0.0"
-          channel: 'stable'
-          cache: true 
+      with:
+        # Runs a single command using the runner’s shell
+        flutter-version: "3.0.0"
+        channel: 'stable'
+        cache: true 
 
     - name: Get dependencies
         run: flutter pub get
