@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ken/smeup/widgets/kenTimepicker.dart';
+import '../../lib/smeup/widgets/kenTimepicker.dart';
 import 'widget_test_service.dart';
 
 final timePickerDynamicScreen = 'test_time_picker';

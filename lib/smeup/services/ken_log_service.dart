@@ -1,7 +1,9 @@
 import 'dart:io';
-import 'package:ken/smeup/services/ken_configuration_service.dart';
+
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+import 'ken_configuration_service.dart';
 
 enum KenLogType { none, debug, info, warning, error }
 

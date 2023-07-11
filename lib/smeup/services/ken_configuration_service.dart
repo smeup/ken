@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/services/ken_log_service.dart';
 
 import '../models/external_configuration_model.dart';
+import 'ken_log_service.dart';
 
 class KenConfigurationService {
   static const double STATIC_BUTTON_ROUNDNESS = 0.0;

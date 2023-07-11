@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as datepicker;
 import 'package:intl/intl.dart';
-import 'package:ken/smeup/models/widgets/ken_datepicker_model.dart';
-import 'package:ken/smeup/widgets/kenEnumCallback.dart';
-import 'package:ken/smeup/widgets/kenTimepicker.dart';
+import '../models/widgets/ken_datepicker_model.dart';
+import 'kenEnumCallback.dart';
+import 'kenTimepicker.dart';
 
 // ignore: must_be_immutable
 class KenDatePickerButton extends StatefulWidget {

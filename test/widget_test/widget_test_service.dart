@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ken/smeup/services/ken_configuration_service.dart';
-import 'package:ken/smeup/services/ken_log_service.dart';
+import '../../lib/smeup/services/ken_configuration_service.dart';
+import '../../lib/smeup/services/ken_log_service.dart';
 import 'package:json_theme/json_theme.dart';
 
 class WidgetTestService {

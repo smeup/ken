@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/widgets/kenTextPasswordRule.dart';
-import 'package:ken/smeup/models/notifiers/ken_text_password_rule_notifier.dart';
 import 'package:provider/provider.dart';
+
+import '../models/notifiers/ken_text_password_rule_notifier.dart';
+import 'kenTextPasswordRule.dart';
 
 class KenTextPasswordIndicators extends StatefulWidget {
   final bool? showRulesIcon;

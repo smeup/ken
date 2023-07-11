@@ -1,17 +1,17 @@
 import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/ken_widget_builder_response.dart';
-import 'package:ken/smeup/models/widgets/ken_list_box_model.dart';
-import 'package:ken/smeup/models/widgets/ken_model.dart';
-import 'package:ken/smeup/models/widgets/ken_section_model.dart';
-import 'package:ken/smeup/services/ken_utilities.dart';
-import 'package:ken/smeup/widgets/kenBox.dart';
-import 'package:ken/smeup/widgets/kenEnumCallback.dart';
-import 'package:ken/smeup/widgets/kenNotAvailable.dart';
-import 'package:ken/smeup/widgets/kenWidgetInterface.dart';
-import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
-import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
-import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
+import '../models/ken_widget_builder_response.dart';
+import '../models/widgets/ken_list_box_model.dart';
+import '../models/widgets/ken_model.dart';
+import '../models/widgets/ken_section_model.dart';
+import '../services/ken_utilities.dart';
+import 'kenBox.dart';
+import 'kenEnumCallback.dart';
+import 'kenNotAvailable.dart';
+import 'kenWidgetInterface.dart';
+import 'kenWidgetMixin.dart';
+import 'kenWidgetStateInterface.dart';
+import 'kenWidgetStateMixin.dart';
 
 import '../services/ken_configuration_service.dart';
 

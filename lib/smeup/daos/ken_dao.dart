@@ -1,10 +1,8 @@
 import 'dart:async';
-//import 'package:flutter/cupertino.dart';
-import 'package:ken/smeup/models/KenMessageBusEventData.dart';
-import 'package:ken/smeup/models/widgets/ken_model_callback.dart';
-import 'package:ken/smeup/models/widgets/ken_model.dart';
 
-import '../models/KenMessageBusEvent.dart';
+import '../models/KenMessageBusEventData.dart';
+import '../models/widgets/ken_model.dart';
+import '../models/widgets/ken_model_callback.dart';
 import '../services/ken_message_bus.dart';
 import 'package:uuid/uuid.dart';
 
@@ -36,9 +34,9 @@ class KenDao {
         .response(id: globallyUniqueId, topic: KenTopic.getData)
         .take(1)
         .listen((event) {
-          this.smeupModel = event.data.model;
-          completer.complete(event.data.data);
-        });
+      this.smeupModel = event.data.model;
+      completer.complete(event.data.data);
+    });
     // await servicesCallBack(ServicesCallbackType.getData, null, this.smeupModel);
     KenMessageBus.instance.publishRequest(
       globallyUniqueId,

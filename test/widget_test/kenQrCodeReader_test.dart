@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ken/smeup/widgets/kenQrcodeReader.dart';
+import '../../lib/smeup/widgets/kenQrcodeReader.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import 'widget_test_service.dart';

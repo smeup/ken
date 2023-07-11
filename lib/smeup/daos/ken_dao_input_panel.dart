@@ -1,5 +1,5 @@
-import 'package:ken/smeup/daos/ken_dao.dart';
-import 'package:ken/smeup/models/widgets/ken_model_callback.dart';
+import '../models/widgets/ken_model_callback.dart';
+import 'ken_dao.dart';
 
 extension KenDaoInputPanel on KenDao {
   Future<void> getDataQRCodeReader() async {

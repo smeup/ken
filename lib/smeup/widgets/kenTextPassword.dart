@@ -2,22 +2,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ken/smeup/models/notifiers/ken_text_password_visibility_notifier.dart';
-import 'package:ken/smeup/models/ken_widget_builder_response.dart';
-import 'package:ken/smeup/models/widgets/ken_model.dart';
-import 'package:ken/smeup/models/widgets/ken_text_password_model.dart';
-import 'package:ken/smeup/models/notifiers/ken_text_password_rule_notifier.dart';
-import 'package:ken/smeup/services/ken_utilities.dart';
-import 'package:ken/smeup/widgets/kenTextField.dart';
-import 'package:ken/smeup/widgets/kenTextPasswordIndicators.dart';
-import 'package:ken/smeup/widgets/kenWidgetInterface.dart';
-import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
-import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
-import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
+import '../models/ken_widget_builder_response.dart';
+import '../models/notifiers/ken_text_password_rule_notifier.dart';
+import '../models/notifiers/ken_text_password_visibility_notifier.dart';
+import '../models/widgets/ken_model.dart';
+import '../models/widgets/ken_text_password_model.dart';
+import '../services/ken_utilities.dart';
+import 'kenEnumCallback.dart';
+import 'kenTextField.dart';
+import 'kenTextPasswordIndicators.dart';
+import 'kenWidgetInterface.dart';
+import 'kenWidgetMixin.dart';
+import 'kenWidgetStateInterface.dart';
+import 'kenWidgetStateMixin.dart';
 import 'package:provider/provider.dart';
 
 import '../services/ken_configuration_service.dart';
-import 'kenEnumCallback.dart';
 
 // ignore: must_be_immutable
 class KenTextPassword extends StatefulWidget

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:ken/smeup/models/notifiers/ken_carousel_indicator_notifier.dart';
 import 'package:provider/provider.dart';
+
+import '../models/notifiers/ken_carousel_indicator_notifier.dart';
 
 // ignore: must_be_immutable
 class KenCarouselIndicator extends StatefulWidget {

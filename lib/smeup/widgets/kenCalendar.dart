@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/ken_widget_builder_response.dart';
-import 'package:ken/smeup/models/widgets/ken_section_model.dart';
-import 'package:ken/smeup/services/ken_localization_service.dart';
-import 'package:ken/smeup/models/widgets/ken_calendar_model.dart';
-import 'package:ken/smeup/models/widgets/ken_calendar_event_model.dart';
-import 'package:ken/smeup/models/widgets/ken_model.dart';
-import 'package:ken/smeup/services/ken_utilities.dart';
-import 'package:ken/smeup/services/ken_log_service.dart';
-import 'package:ken/smeup/services/ken_configuration_service.dart';
-import 'package:ken/smeup/widgets/kenButton.dart';
-import 'package:ken/smeup/widgets/kenCalendarWidget.dart';
-import 'package:ken/smeup/widgets/kenEnumCallback.dart';
-import 'package:ken/smeup/widgets/kenWidgetInterface.dart';
-import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
+import '../models/ken_widget_builder_response.dart';
+import '../models/widgets/ken_calendar_event_model.dart';
+import '../models/widgets/ken_calendar_model.dart';
+import '../models/widgets/ken_model.dart';
+import '../models/widgets/ken_section_model.dart';
+import '../services/ken_configuration_service.dart';
+import '../services/ken_localization_service.dart';
+import '../services/ken_log_service.dart';
+import '../services/ken_utilities.dart';
+import 'kenButton.dart';
+import 'kenCalendarWidget.dart';
+import 'kenEnumCallback.dart';
+import 'kenWidgetInterface.dart';
+import 'kenWidgetMixin.dart';
+import 'kenWidgetStateMixin.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'kenWidgetStateInterface.dart';
-import 'kenWidgetStateMixin.dart';
 
 // final Map<DateTime, List?>? _holidays =
 //     KenThemeConfigurationService.getHolidays();

@@ -1,6 +1,6 @@
-import 'package:ken/smeup/models/KenMessageBusEvent.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../models/KenMessageBusEvent.dart';
 import '../models/KenMessageBusEventData.dart';
 
 class KenMessageBus {

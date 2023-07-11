@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/ken_widget_builder_response.dart';
-import 'package:ken/smeup/models/widgets/ken_model.dart';
+
+import '../models/ken_widget_builder_response.dart';
+import '../models/widgets/ken_model.dart';
 
 abstract class KenWidgetStateInterface {
   Widget runBuild(BuildContext context, String id, String type,

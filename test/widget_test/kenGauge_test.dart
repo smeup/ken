@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ken/smeup/widgets/kenGauge.dart';
+import '../../lib/smeup/widgets/kenGauge.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {

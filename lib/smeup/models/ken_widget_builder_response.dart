@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/widgets/ken_model.dart';
+
+import 'widgets/ken_model.dart';
 
 class KenWidgetBuilderResponse {
   KenModel? parentState;

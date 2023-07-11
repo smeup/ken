@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/ken_widget_builder_response.dart';
-import 'package:ken/smeup/models/notifiers/ken_error_notifier.dart';
-import 'package:ken/smeup/models/widgets/ken_model.dart';
-import 'package:ken/smeup/models/widgets/ken_section_model.dart';
-import 'package:ken/smeup/services/ken_localization_service.dart';
-import 'package:ken/smeup/services/ken_log_service.dart';
-import 'package:ken/smeup/services/ken_widget_notification_service.dart';
-import 'package:ken/smeup/widgets/kenNotAvailable.dart';
+import '../models/ken_widget_builder_response.dart';
+import '../models/notifiers/ken_error_notifier.dart';
+import '../models/widgets/ken_model.dart';
+import '../models/widgets/ken_section_model.dart';
+
 import 'package:provider/provider.dart';
 
 import '../services/ken_configuration_service.dart';
+import '../services/ken_localization_service.dart';
+import '../services/ken_log_service.dart';
+import '../services/ken_widget_notification_service.dart';
+import 'kenNotAvailable.dart';
 
 mixin KenWidgetStateMixin {
   LoadType widgetLoadType = LoadType.Immediate;

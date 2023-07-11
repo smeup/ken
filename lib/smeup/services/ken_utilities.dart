@@ -2,9 +2,10 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/ken_device_info.dart';
-import 'package:ken/smeup/services/ken_log_service.dart';
-import 'package:ken/smeup/services/ken_configuration_service.dart';
+
+import '../models/ken_device_info.dart';
+import 'ken_configuration_service.dart';
+import 'ken_log_service.dart';
 import 'ken_widget_notification_service.dart';
 
 class KenUtilities {

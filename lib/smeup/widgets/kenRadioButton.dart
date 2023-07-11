@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/widgets/ken_radio_buttons_model.dart';
 
+import '../models/widgets/ken_radio_buttons_model.dart';
 import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
