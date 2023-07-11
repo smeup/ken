@@ -43,6 +43,9 @@ jobs:
     - name: disable telemetry
       run: flutter --disable-telemetry
 
+    - name: Clean dependencies
+      run: flutter clean
+      
     - name: Get dependencies
       run: flutter pub get
 
