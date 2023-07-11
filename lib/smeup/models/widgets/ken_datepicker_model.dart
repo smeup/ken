@@ -10,7 +10,7 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
   // supported by json_theme
   static Color? defaultBorderColor;
   static double? defaultBorderWidth;
-  static double? defaultBorderRadius;
+  static double? defaultBorderRadius = 4.0;
   static bool? defaultFontBold;
   static double? defaultFontSize;
   static Color? defaultFontColor;
@@ -31,7 +31,7 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
   static const String defaultdisplayedField = 'display';
   static const Alignment defaultAlign = Alignment.topCenter;
   static const double defaultInnerSpace = 10.0;
-  static const bool defaultUnderline = true;
+  static const bool defaultUnderline = false;
 
   Color? borderColor;
   double? borderWidth;

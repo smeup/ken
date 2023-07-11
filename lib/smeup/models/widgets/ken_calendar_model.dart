@@ -13,8 +13,8 @@ class KenCalendarModel extends KenModel {
   static double? defaultMarkerFontSize;
 
   // unsupported by json_theme
-  static const double defaultWidth = 0;
-  static const double defaultHeight = 0;
+  static const double defaultWidth = 300;
+  static const double defaultHeight = 250;
   static const bool defaultShowPeriodButtons = false;
   static const String defaultTitleColumnName = 'XXDESC';
   static const String defaultDataColumnName = 'XXDAT1';
@@ -23,7 +23,7 @@ class KenCalendarModel extends KenModel {
   static const String defaultEndTimeColumnName = 'end';
   static const bool defaultShowAsWeek = false;
   static const bool defaultShowNavigation = true;
-  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(8);
 
   double? dayFontSize;
   double? eventFontSize;

@@ -11,19 +11,19 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
   static Color? defaultBackColor;
   static Color? defaultBorderColor;
   static double? defaultBorderWidth;
-  static double? defaultBorderRadius;
-  static double? defaultElevation;
-  static double? defaultFontSize;
+  static double? defaultBorderRadius = 5;
+  static double? defaultElevation = 0;
+  static double? defaultFontSize = 14;
   static Color? defaultFontColor;
   static bool? defaultFontBold;
-  static double? defaultIconSize;
-  static Color? defaultIconColor;
+  static double? defaultIconSize = 16;
+  static Color? defaultIconColor = Colors.white;
 
   // unsupported by json_theme
-  static const double defaultWidth = 0;
-  static const double defaultHeight = 70;
+  static const double defaultWidth = 180;
+  static const double defaultHeight = 50;
   static const MainAxisAlignment defaultPosition = MainAxisAlignment.center;
-  static const Alignment defaultAlign = Alignment.center;
+  static const Alignment defaultAlign = Alignment.centerRight;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(5);
   static const String defaultValueField = 'value';
   static const double defaultInnerSpace = 10.0;

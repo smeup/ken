@@ -9,14 +9,14 @@ import '../../services/ken_configuration_service.dart';
 
 class KenTextFieldModel extends KenInputFieldModel implements KenDataInterface {
   // supported by json_theme
-  static double? defaultFontSize;
-  static Color? defaultBackColor;
+  static double? defaultFontSize = 16;
+  static Color? defaultBackColor = Colors.transparent;
   static Color? defaultFontColor;
-  static bool? defaultFontBold;
+  static bool? defaultFontBold = false;
   static bool? defaultCaptionFontBold;
-  static double? defaultCaptionFontSize;
+  static double? defaultCaptionFontSize = 14;
   static Color? defaultCaptionFontColor;
-  static Color? defaultCaptionBackColor;
+  static Color? defaultCaptionBackColor = Colors.transparent;
   static Color? defaultBorderColor;
   static double? defaultBorderWidth;
   static double? defaultBorderRadius;
@@ -25,13 +25,13 @@ class KenTextFieldModel extends KenInputFieldModel implements KenDataInterface {
   static const String defaultLabel = '';
   static const String defaultSubmitLabel = '';
   static const double defaultWidth = 100;
-  static const double defaultHeight = 100;
+  static const double defaultHeight = double.maxFinite;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const bool defaultShowBorder = false;
   static const bool defaultAutoFocus = false;
   static const String defaultValueField = 'value';
   static const bool defaultShowSubmit = false;
-  static const bool defaultUnderline = true;
+  static const bool defaultUnderline = false;
 
   Color? backColor;
   double? fontSize;

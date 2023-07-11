@@ -165,7 +165,7 @@
       "backgroundColor": "#ffffff"
     }
   },
-  "indicatorColor" : "#06899b",
+  "indicatorColor": "#06899b",
   "dialogTheme": {
     "backgroundColor": "#ffffff",
     "elevation": 0,

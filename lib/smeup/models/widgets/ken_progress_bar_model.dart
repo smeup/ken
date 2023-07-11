@@ -14,10 +14,11 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
   // unsupported by json_theme
   static const String defaultValueField = 'value';
   static const double defaultProgressBarMinimun = 0;
-  static const double defaultProgressBarMaximun = 0;
+  static const double defaultProgressBarMaximun = 10;
   static const double defaultBorderRadius = 4;
   static const double defaultHeight = 10;
-  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const EdgeInsetsGeometry defaultPadding =
+      EdgeInsets.only(top: 30, left: 5, right: 5);
 
   Color? color;
   Color? linearTrackColor;
