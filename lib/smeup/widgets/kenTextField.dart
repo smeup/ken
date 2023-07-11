@@ -59,8 +59,6 @@ class KenTextField extends StatefulWidget
 
   List<TextInputFormatter>? inputFormatters;
 
-  // Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
   KenTextField.withController(
     KenTextFieldModel this.model,
     this.scaffoldKey,
@@ -104,7 +102,6 @@ class KenTextField extends StatefulWidget
     //this.clientOnChange,
     this.clientOnSubmit,
     this.inputFormatters, // ?
-    // this.callBack
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenTextFieldModel.setDefaults(this);
@@ -200,7 +197,6 @@ class _KenTextFieldState extends State<KenTextField>
   Future<KenWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        // await SmeupTextFieldDao.getData(_model!);
         await _model!.getData(_model!.instanceCallBack);
         _data = widget.treatData(_model!);
       }
@@ -219,10 +215,6 @@ class _KenTextFieldState extends State<KenTextField>
       KenMessageBusEventData(
           context: context, widget: widget, model: _model, data: _data),
     );
-
-    // if (widget.callBack != null) {
-    //   widget.callBack!(widget, KenCallbackType.getChildren, _data, null);
-    // }
 
     textField = Container(
         alignment: Alignment.centerLeft,
@@ -255,18 +247,6 @@ class _KenTextFieldState extends State<KenTextField>
               KenMessageBusEventData(
                   context: context, widget: widget, model: _model, data: _data),
             );
-            // if (widget.callBack != null) {
-            //   widget.callBack!(widget, KenCallbackType.onChanged, value, null);
-            // }
-            //
-            // if (widget.clientOnChange != null) widget.clientOnChange!(value);
-            // SmeupVariablesService.setVariable(widget.id, value,
-            //     formKey: widget.formKey);
-            // if (_model != null)
-            //   SmeupDynamismService.run(_model!.dynamisms, context, 'change',
-            //       widget.scaffoldKey, widget.formKey);
-
-            // _data = value;
           },
           decoration: InputDecoration(
             labelStyle: captionStyle,
@@ -294,18 +274,7 @@ class _KenTextFieldState extends State<KenTextField>
               KenMessageBusEventData(
                   context: context, widget: widget, model: _model, data: _data),
             );
-
-            // if (widget.callBack != null) {
-            //   widget.callBack!(widget, KenCallbackType.onSaved, value, null);
-            // }
-            //
-            // if (widget.clientOnSave != null) widget.clientOnSave!(value);
-            // SmeupVariablesService.setVariable(widget.id, value,
-            //     formKey: widget.formKey);
-            // if (_model != null)
-            //   SmeupDynamismService.run(_model!.dynamisms, context, 'lostfocus',
-            //       widget.scaffoldKey, widget.formKey);
-          }, // lostfocus
+          },
         ));
 
     if (widget.showSubmit!) {

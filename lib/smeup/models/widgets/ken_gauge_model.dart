@@ -12,7 +12,7 @@ class KenGaugeModel extends KenModel implements KenDataInterface {
 
   static const String defaultValColName = 'value';
   static const String defaultMaxColName = 'maxValue';
-  static const String defaultMinColName = '0';
+  static const String defaultMinColName = 'minValue';
   static const String defaultWarningColName = 'warning';
   static const String defaultAlertColName = 'alert';
   static const double defaultMaxValue = 150;

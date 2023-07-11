@@ -179,23 +179,18 @@ class KenButtonsState extends State<KenButtons>
     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
         await _model!.getData(_model!.instanceCallBack);
-        // await SmeupButtonsDao.getData(_model!);
         _data = widget.treatData(_model!);
       }
 
       setDataLoad(widget.id, true);
     }
 
-    // if (widget.callBack != null) {
     KenMessageBus.instance.publishRequest(
       widget.globallyUniqueId,
       KenTopic.buttonsGetChildren,
       KenMessageBusEventData(
           context: context, widget: widget, model: _model, data: _data),
     );
-    // buttons = await widget.callBack!(
-    //     widget, KenCallbackType.getButtons, _model, _data);
-    // }
     return KenWidgetBuilderResponse(
       _model,
       StreamBuilder(

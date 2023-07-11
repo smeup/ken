@@ -55,8 +55,6 @@ class KenCombo extends StatefulWidget
   bool? showBorder;
   void Function(String? newValue)? clientOnChange;
 
-  //Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
   KenCombo(
     this.scaffoldKey,
     this.formKey, {
@@ -89,7 +87,6 @@ class KenCombo extends StatefulWidget
     this.height = KenComboModel.defaultHeight,
     this.showBorder = KenComboModel.defaultShowBorder,
     this.clientOnChange,
-    //this.callBack
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenComboModel.setDefaults(this);
@@ -200,18 +197,11 @@ class _KenComboState extends State<KenCombo>
   Future<KenWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
-        // await SmeupComboDao.getData(_model!);
         await _model!.getData(_model!.instanceCallBack);
         _data = widget.treatData(_model!);
       }
       setDataLoad(widget.id, true);
     }
-
-    // if (widget.callBack != null) {
-    //   widget.callBack!(
-    //       widget, KenCallbackType.getChildren, _selectedValue, null);
-    // }
-
     KenMessageBus.instance.publishRequest(
       widget.globallyUniqueId,
       KenTopic.comboGetChildren,
@@ -271,11 +261,6 @@ class _KenComboState extends State<KenCombo>
             selectedValue: _selectedValue,
             clientOnChange: (String? newValue) {
               _selectedValue = newValue;
-
-              // if (widget.callBack != null) {
-              //   widget.callBack!(widget, KenCallbackType.onClientChange,
-              //       _selectedValue, null);
-              // }
 
               KenMessageBus.instance.publishRequest(
                 widget.globallyUniqueId,
