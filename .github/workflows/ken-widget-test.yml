@@ -1,0 +1,47 @@
+name: ken-widget-test
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events for the "master" branch; you can change it according to your requirement
+  pull_request:
+    branches:
+      - master
+      - develop
+    types:
+      - opened
+
+  # Allows you to run this workflow manually from the Actions tab from your GitHub repo (a workflow run is made up of one or more jobs that can run sequentially or in paralle)
+  workflow_dispatch:
+
+# Contains a single job called widget-test
+jobs:
+  widget-test:
+    # Uses steps to represent a sequence of tasks that will be executed as part of job
+    runs-on: ubuntu-latest
+
+    #Readies your repository under $GITHUB_WORKSPACE, so your job can access it
+    steps:
+
+    # Sets up Java so your job can use it for the Flutter app build
+    - uses: actions/checkout@v3
+
+    # Sets up Flutter using the subosito Flutter workflow
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu'
+        java-version: "12.x"
+        cache: 'gradle'
+    
+    # Adjusts to the Flutter version you are working with
+    - uses: subosito/flutter-action@v2
+        with:
+          # Runs a single command using the runner’s shell
+          flutter-version: "3.0.0"
+          channel: 'stable'
+          cache: true 
+
+    - name: Get dependencies
+        run: flutter pub get
+
+    - name: Start release build
+        run: flutter test

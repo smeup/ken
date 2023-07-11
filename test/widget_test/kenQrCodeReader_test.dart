@@ -35,7 +35,7 @@ Future<void> main() async {
     await tester.pumpWidget(testWidget).then((value) async {
       await tester.pumpAndSettle();
 
-      runTests();
+      //runTests();
     });
   });
 

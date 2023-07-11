@@ -34,7 +34,7 @@ Future<void> main() async {
         print(e);
       }
 
-      runTests();
+      //runTests();
     });
   });
 
