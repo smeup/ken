@@ -1,14 +1,14 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/ken_widget_builder_response.dart';
-import 'package:ken/smeup/models/widgets/ken_drawer_data_element.dart';
-import 'package:ken/smeup/models/widgets/ken_drawer_model.dart';
-import 'package:ken/smeup/models/widgets/ken_model.dart';
-import 'package:ken/smeup/services/ken_utilities.dart';
-import 'package:ken/smeup/widgets/kenDrawerItem.dart';
-import 'package:ken/smeup/widgets/kenEnumCallback.dart';
-import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
-import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
+import '../models/ken_widget_builder_response.dart';
+import '../models/widgets/ken_drawer_data_element.dart';
+import '../models/widgets/ken_drawer_model.dart';
+import '../models/widgets/ken_model.dart';
+import '../services/ken_utilities.dart';
+import 'kenDrawerItem.dart';
+import 'kenEnumCallback.dart';
+import 'kenWidgetStateInterface.dart';
+import 'kenWidgetStateMixin.dart';
 
 import '../services/ken_configuration_service.dart';
 

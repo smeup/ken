@@ -3,17 +3,17 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:ken/smeup/models/widgets/ken_calendar_event_model.dart';
-import 'package:ken/smeup/models/widgets/ken_calendar_model.dart';
-import 'package:ken/smeup/models/widgets/ken_section_model.dart';
-import 'package:ken/smeup/services/ken_log_service.dart';
-import 'package:ken/smeup/widgets/kenEnumCallback.dart';
-import 'package:ken/smeup/widgets/kenLine.dart';
-import 'package:ken/smeup/widgets/kenProgressIndicator.dart';
+import '../models/widgets/ken_calendar_event_model.dart';
+import '../models/widgets/ken_calendar_model.dart';
+import '../models/widgets/ken_section_model.dart';
+import '../services/ken_configuration_service.dart';
+import '../services/ken_log_service.dart';
+import 'kenEnumCallback.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../services/ken_utilities.dart';
-import '../services/ken_configuration_service.dart';
+import 'kenLine.dart';
+import 'kenProgressIndicator.dart';
 
 // ignore: must_be_immutable
 class KenCalendarWidget extends StatefulWidget {

@@ -1,9 +1,9 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/daos/ken_dao.dart';
-import 'package:ken/smeup/models/dynamism.dart';
-import 'package:ken/smeup/models/widgets/ken_model_callback.dart';
-import 'package:ken/smeup/models/widgets/ken_section_model.dart';
+import '../../daos/ken_dao.dart';
+import '../dynamism.dart';
+import 'ken_model_callback.dart';
+import 'ken_section_model.dart';
 import '../fun.dart';
 
 enum LoadType { Immediate, Delay }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/widgets/ken_model_callback.dart';
-import 'package:ken/smeup/models/widgets/ken_model.dart';
-import 'package:ken/smeup/models/widgets/ken_section_model.dart';
+import 'ken_model.dart';
+import 'ken_model_callback.dart';
+import 'ken_section_model.dart';
 
 mixin KenModelMixin {
   List<KenSectionModel> getSections(

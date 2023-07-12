@@ -1,6 +1,5 @@
-import 'package:ken/smeup/services/transformers/ken_data_transformer_interface.dart';
-
 import '../../models/fun.dart';
+import 'ken_data_transformer_interface.dart';
 
 class NullTransformer implements KenDataTransformerInterface {
   @override

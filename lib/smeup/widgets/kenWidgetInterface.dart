@@ -1,4 +1,4 @@
-import 'package:ken/smeup/models/widgets/ken_model.dart';
+import '../models/widgets/ken_model.dart';
 
 abstract class KenWidgetInterface {
   runControllerActivities(KenModel model);

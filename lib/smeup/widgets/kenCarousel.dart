@@ -1,16 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/notifiers/ken_carousel_indicator_notifier.dart';
-import 'package:ken/smeup/models/ken_widget_builder_response.dart';
-import 'package:ken/smeup/models/widgets/ken_carousel_model.dart';
-import 'package:ken/smeup/models/widgets/ken_model.dart';
-import 'package:ken/smeup/services/ken_utilities.dart';
-import 'package:ken/smeup/widgets/kenCarouselIndicator.dart';
-import 'package:ken/smeup/widgets/kenCarouselItem.dart';
-import 'package:ken/smeup/widgets/kenWidgetInterface.dart';
-import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
-import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
-import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
+import '../models/ken_widget_builder_response.dart';
+import '../models/notifiers/ken_carousel_indicator_notifier.dart';
+import '../models/widgets/ken_carousel_model.dart';
+import '../models/widgets/ken_model.dart';
+import '../services/ken_utilities.dart';
+import 'kenCarouselIndicator.dart';
+import 'kenCarouselItem.dart';
+import 'kenWidgetInterface.dart';
+import 'kenWidgetMixin.dart';
+import 'kenWidgetStateInterface.dart';
+import 'kenWidgetStateMixin.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable

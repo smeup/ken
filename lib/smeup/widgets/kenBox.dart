@@ -2,16 +2,16 @@ import 'dart:async';
 
 import 'package:clickable_list_wheel_view/measure_size.dart';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/dynamism.dart';
-import 'package:ken/smeup/models/ken_widget_builder_response.dart';
-import 'package:ken/smeup/services/ken_localization_service.dart';
-import 'package:ken/smeup/services/ken_log_service.dart';
-import 'package:ken/smeup/widgets/kenEnumCallback.dart';
-import 'package:ken/smeup/widgets/kenNotAvailable.dart';
-import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
 
+import '../models/dynamism.dart';
+import '../models/ken_widget_builder_response.dart';
 import '../services/ken_configuration_service.dart';
+import '../services/ken_localization_service.dart';
+import '../services/ken_log_service.dart';
+import 'kenEnumCallback.dart';
 import 'kenListBox.dart';
+import 'kenNotAvailable.dart';
+import 'kenWidgetStateMixin.dart';
 
 // ignore: must_be_immutable
 class KenBox extends StatefulWidget {

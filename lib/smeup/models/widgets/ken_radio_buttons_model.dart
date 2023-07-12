@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/widgets/ken_model_callback.dart';
-import 'package:ken/smeup/models/widgets/ken_data_interface.dart';
-import 'package:ken/smeup/models/widgets/ken_input_field_model.dart';
-import 'package:ken/smeup/models/widgets/ken_model.dart';
-import 'package:ken/smeup/services/ken_utilities.dart';
+import '../../services/ken_utilities.dart';
+import 'ken_data_interface.dart';
+import 'ken_input_field_model.dart';
+import 'ken_model.dart';
+import 'ken_model_callback.dart';
 import '../../services/ken_configuration_service.dart';
 
 class KenRadioButtonsModel extends KenInputFieldModel

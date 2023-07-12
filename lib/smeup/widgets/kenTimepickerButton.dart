@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as datepicker;
 import 'package:intl/intl.dart';
-import 'package:ken/smeup/models/widgets/ken_timepicker_model.dart';
-import 'package:ken/smeup/widgets/kenEnumCallback.dart';
-import 'package:ken/smeup/widgets/kenTimepicker.dart';
-import 'package:ken/smeup/widgets/kenTimepickerCustomization.dart';
+
+import '../models/widgets/ken_timepicker_model.dart';
+import 'kenEnumCallback.dart';
+import 'kenTimepicker.dart';
+import 'kenTimepickerCustomization.dart';
 
 // ignore: must_be_immutable
 class KenTimePickerButton extends StatefulWidget {

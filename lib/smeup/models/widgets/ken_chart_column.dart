@@ -1,4 +1,4 @@
-import 'package:ken/smeup/services/ken_utilities.dart';
+import '../../services/ken_utilities.dart';
 
 enum ColumnType { Axes, Series }
 

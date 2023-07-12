@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/widgets/kenEnumCallback.dart';
+
 import '../services/ken_configuration_service.dart';
+import 'kenEnumCallback.dart';
 
 // ignore: must_be_immutable
 class KenDrawerItem extends StatelessWidget {

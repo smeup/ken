@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ken/smeup/models/widgets/ken_combo_item_model.dart';
-import 'package:ken/smeup/widgets/kenCombo.dart';
+import '../../lib/smeup/models/widgets/ken_combo_item_model.dart';
+import '../../lib/smeup/widgets/kenCombo.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {

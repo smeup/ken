@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/services/ken_log_service.dart';
+
+import 'ken_log_service.dart';
 
 class KenWidgetNotificationService {
   static List<dynamic> objects = List<dynamic>.empty(growable: true);

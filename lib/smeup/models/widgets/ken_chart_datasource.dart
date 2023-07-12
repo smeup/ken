@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:ken/smeup/models/widgets/ken_chart_column.dart';
-import 'package:ken/smeup/models/widgets/ken_chart_row.dart';
+import 'ken_chart_column.dart';
+import 'ken_chart_row.dart';
 
 class KenChartDatasource {
   List<KenChartColumn>? columns;

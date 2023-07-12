@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:ken/smeup/models/widgets/ken_model.dart';
+
+import 'widgets/ken_model.dart';
 
 class KenMessageBusEventData {
   BuildContext? context;

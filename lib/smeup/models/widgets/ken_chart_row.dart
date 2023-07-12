@@ -1,4 +1,4 @@
-import 'package:ken/smeup/models/widgets/ken_chart_column.dart';
+import 'ken_chart_column.dart';
 
 class KenChartRow {
   List<dynamic>? cells;

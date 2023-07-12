@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/daos/ken_dao_qrcode_reader.dart';
-import 'package:ken/smeup/models/ken_widget_builder_response.dart';
-import 'package:ken/smeup/models/widgets/ken_input_panel_value.dart';
-import 'package:ken/smeup/models/widgets/ken_combo_item_model.dart';
-import 'package:ken/smeup/models/widgets/ken_input_panel_model.dart';
-import 'package:ken/smeup/models/widgets/ken_model.dart';
-import 'package:ken/smeup/models/widgets/ken_section_model.dart';
-import 'package:ken/smeup/services/ken_utilities.dart';
-import 'package:ken/smeup/widgets/kenButton.dart';
-import 'package:ken/smeup/widgets/kenCombo.dart';
-import 'package:ken/smeup/widgets/kenEnumCallback.dart';
-import 'package:ken/smeup/widgets/kenLabel.dart';
-import 'package:ken/smeup/widgets/kenQrcodeReader.dart';
-import 'package:ken/smeup/widgets/kenRadioButtons.dart';
-import 'package:ken/smeup/widgets/kenTextAutocomplete.dart';
-import 'package:ken/smeup/widgets/kenTextField.dart';
-import 'package:ken/smeup/widgets/kenWidgetInterface.dart';
-import 'package:ken/smeup/widgets/kenWidgetMixin.dart';
-import 'package:ken/smeup/widgets/kenWidgetStateInterface.dart';
-import 'package:ken/smeup/widgets/kenWidgetStateMixin.dart';
+
+import '../models/ken_widget_builder_response.dart';
+import '../models/widgets/ken_combo_item_model.dart';
+import '../models/widgets/ken_input_panel_model.dart';
+import '../models/widgets/ken_input_panel_value.dart';
+import '../models/widgets/ken_model.dart';
+import '../models/widgets/ken_section_model.dart';
+import '../services/ken_utilities.dart';
+import 'kenButton.dart';
+import 'kenCombo.dart';
+import 'kenEnumCallback.dart';
+import 'kenLabel.dart';
+import 'kenQrcodeReader.dart';
+import 'kenRadioButtons.dart';
+import 'kenTextAutocomplete.dart';
+import 'kenTextField.dart';
+import 'kenWidgetInterface.dart';
+import 'kenWidgetMixin.dart';
+import 'kenWidgetStateInterface.dart';
+import 'kenWidgetStateMixin.dart';
 
 // ignore: must_be_immutable
 class KenInputPanel extends StatefulWidget
@@ -128,14 +128,16 @@ class _KenInputPanelState extends State<KenInputPanel>
     // // autoadapt on input panel alway enabled
     // autoAdaptHeight = true;
 
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
-      if (_model != null) {
-        await _model!.smeupInputPanelGetData(_model!.instanceCallBack, _model!,
-            widget.formKey, widget.scaffoldKey, context);
-        _data = widget.treatData(_model!);
-      }
-      setDataLoad(widget.id, true);
-    }
+    // Tony: TODO !!! start
+    // if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
+    //   if (_model != null) {
+    //     await _model! .smeupInputPanelGetData(_model!.instanceCallBack, _model!,
+    //         widget.formKey, widget.scaffoldKey, context);
+    //     _data = widget.treatData(_model!);
+    //   }
+    //   setDataLoad(widget.id, true);
+    // }
+    // Tony: TODO !!! end
 
     double? inputPanelHeight = widget.height;
     double? inputPanelWidth = widget.width;

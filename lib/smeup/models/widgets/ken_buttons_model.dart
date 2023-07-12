@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/models/widgets/ken_model_callback.dart';
 
-import 'package:ken/smeup/models/widgets/ken_data_interface.dart';
-import 'package:ken/smeup/models/widgets/ken_model.dart';
-import 'package:ken/smeup/services/ken_configuration_service.dart';
-import 'package:ken/smeup/services/ken_utilities.dart';
+import '../../services/ken_configuration_service.dart';
+import '../../services/ken_utilities.dart';
+import 'ken_data_interface.dart';
+import 'ken_model.dart';
+import 'ken_model_callback.dart';
 
 class KenButtonsModel extends KenModel implements KenDataInterface {
   // supported by json_theme
