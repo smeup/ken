@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/KenImage.dart';
+import '../../lib/smeup/widgets/kenImage.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {
