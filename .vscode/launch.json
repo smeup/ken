@@ -5,22 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "units tests",
-            "type": "dart",
-            "request": "launch",
-            "program": "./test/unit_test/"
-        },
-        {
             "name": "widgets tests",
             "type": "dart",
             "request": "launch",
             "program": "./test/widget_test/"
-        },
-        {
-            "name": "integration tests",
-            "type": "dart",
-            "request": "launch",
-            "program": "./test_driver/app.dart"
-        },
+        }
     ]
 }
