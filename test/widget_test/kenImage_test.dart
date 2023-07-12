@@ -23,7 +23,7 @@ Future<void> main() async {
                       KenImage(
                           WidgetTestService.scaffoldKey,
                           WidgetTestService.formKey,
-                          'packages/ken/assets/images/IMG1.png',
+                          '../../assets/images/IMG1.png',
                           id: 'img1',
                           width: 300,
                           height: 300,
