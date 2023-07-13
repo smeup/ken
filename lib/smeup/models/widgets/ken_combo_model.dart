@@ -91,13 +91,9 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.showBorder = defaultShowBorder,
-      title = '',
-      required Function(ServicesCallbackType type,
-              Map<dynamic, dynamic>? jsonMap, KenModel? instance)
-          instanceCallBack})
+      title = ''})
       : super(formKey, scaffoldKey, context,
             title: title,
-            instanceCallBack: instanceCallBack,
             id: id,
             type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'cmb';
@@ -109,12 +105,9 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
-      KenModel parent,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-              KenModel? instance)
-          instanceCallBack)
+      KenModel parent)
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, parent, instanceCallBack) {
+            jsonMap, formKey, scaffoldKey, context, parent) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';

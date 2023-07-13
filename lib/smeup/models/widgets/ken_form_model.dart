@@ -23,13 +23,9 @@ class KenFormModel extends KenModel
   Color? backColor;
   bool? autoAdaptHeight;
 
-  Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-      KenModel? instance) instanceCallBack;
-
-  KenFormModel.fromMap(response, this.formKey, this.scaffoldKey, this.context,
-      this.instanceCallBack)
+  KenFormModel.fromMap(response, this.formKey, this.scaffoldKey, this.context)
       : super.fromMap(
-            response, formKey, scaffoldKey, context, instanceCallBack) {
+            response, formKey, scaffoldKey, context) {
     Map<String, dynamic> jsonMap = response;
 
     padding = KenUtilities.getPadding(jsonMap['padding']) ?? defaultPadding;
@@ -48,7 +44,7 @@ class KenFormModel extends KenModel
     formVariables = _getFormVariables(jsonMap);
 
     smeupSectionsModels = getSections(jsonMap, 'sections', formKey, scaffoldKey,
-        context, autoAdaptHeight, this, instanceCallBack);
+        context, autoAdaptHeight, this);
   }
 
   void _replaceFormTitle(dynamic jsonMap) {

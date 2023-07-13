@@ -28,11 +28,8 @@ class KenQRCodeReaderModel extends KenInputFieldModel
     this.onDataRead,
     this.maxReads = defaultMaxReads,
     this.delayInMillis = defaultDealyInMillis,
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
   }) : super(formKey, scaffoldKey, context,
-            title: title, instanceCallBack: instanceCallBack) {
+            title: title) {
     id = KenUtilities.getWidgetId('FLD', id);
   }
 
@@ -41,12 +38,9 @@ class KenQRCodeReaderModel extends KenInputFieldModel
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
-      KenModel parent,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-              KenModel? instance)
-          instanceCallBack)
+      KenModel parent)
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, parent, instanceCallBack) {
+            jsonMap, formKey, scaffoldKey, context, parent) {
     padding =
         KenUtilities.getDouble(optionsDefault!['padding']) ?? defaultPadding;
     size = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultSize;

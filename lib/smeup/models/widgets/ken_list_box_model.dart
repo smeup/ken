@@ -93,14 +93,10 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
     this.showSelection = defaultShowSelection,
     this.selectedRow = defaultSelectedRow,
     title = '',
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
   }) : super(formKey, scaffoldKey, context,
             title: title,
             id: id,
-            type: type,
-            instanceCallBack: instanceCallBack) {
+            type: type) {
     if (visibleColumns == null)
       visibleColumns = List<String>.empty(growable: true);
     setDefaults(this);
@@ -111,10 +107,7 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
-  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     layout = defaultLayout;

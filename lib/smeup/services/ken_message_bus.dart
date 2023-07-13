@@ -60,7 +60,6 @@ class KenMessageBus {
 }
 
 enum KenTopic {
-  getData,
   buttonsGetChildren,
   comboGetChildren,
   textfieldGetChildren,

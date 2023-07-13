@@ -70,15 +70,11 @@ class KenImageListModel extends KenModel implements KenDataInterface {
       this.listHeight = defaultListHeight,
       this.orientation = defaultOrientation,
       this.rows = defaultRows,
-      title = '',
-      required Function(ServicesCallbackType type,
-              Map<dynamic, dynamic>? jsonMap, KenModel? instance)
-          instanceCallBack})
+      title = ''})
       : super(formKey, scaffoldKey, context,
             title: title,
             id: id,
-            type: type,
-            instanceCallBack: instanceCallBack) {
+            type: type) {
     setDefaults(this);
   }
 
@@ -86,12 +82,9 @@ class KenImageListModel extends KenModel implements KenDataInterface {
       Map<String, dynamic> jsonMap,
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-              KenModel? instance)
-          instanceCallBack)
+      BuildContext? context)
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+            jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';

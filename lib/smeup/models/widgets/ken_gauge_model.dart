@@ -37,26 +37,19 @@ class KenGaugeModel extends KenModel implements KenDataInterface {
       this.warningColName = defaultWarningColName,
       this.maxColName = defaultMaxColName,
       this.minColName = defaultMinColName,
-      title = '',
-      required Function(ServicesCallbackType type,
-              Map<dynamic, dynamic>? jsonMap, KenModel? instance)
-          instanceCallBack})
+      title = ''})
       : super(formKey, scaffoldKey, context,
             title: title,
             id: id,
-            type: type,
-            instanceCallBack: instanceCallBack);
+            type: type);
 
   KenGaugeModel.fromMap(
       Map<String, dynamic> jsonMap,
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-              KenModel? instance)
-          instanceCallBack)
+      BuildContext? context)
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+            jsonMap, formKey, scaffoldKey, context) {
     title = jsonMap['title'] ?? '';
     valueColName = optionsDefault!['valueColName'] ?? defaultValColName;
     maxColName = optionsDefault!['maxColName'] ?? defaultMaxColName;
