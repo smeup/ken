@@ -38,11 +38,8 @@ class KenSliderModel extends KenModel {
     this.padding = defaultPadding,
     this.sldMin = defaultSldMin,
     this.sldMax = defaultSldMax,
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
   }) : super(formKey, scaffoldKey, context,
-            title: '', id: id, type: type, instanceCallBack: instanceCallBack) {
+            title: '', id: id, type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'sld';
     id = KenUtilities.getWidgetId('FLD', id);
     setDefaults(this);
@@ -53,10 +50,7 @@ class KenSliderModel extends KenModel {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
-  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     sldMin = KenUtilities.getDouble(optionsDefault!['sldMin']) ?? defaultSldMin;

@@ -48,13 +48,11 @@ class KenImageList extends StatefulWidget
   // dynamisms functions
   Function? clientOnItemTap;
   Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-  Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-      KenModel? instance) instanceCallBack;
 
   dynamic parentForm;
 
   KenImageList.withController(KenImageListModel this.model, this.scaffoldKey,
-      this.formKey, this.parentForm, this.callBack, this.instanceCallBack)
+      this.formKey, this.parentForm, this.callBack)
       : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
@@ -82,8 +80,7 @@ class KenImageList extends StatefulWidget
       showLoader = false,
       this.clientOnItemTap,
       this.dismissEnabled = false,
-      this.callBack,
-      required this.instanceCallBack})
+      this.callBack})
       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
   }
@@ -257,8 +254,7 @@ class _KenImageListState extends State<KenImageList>
           landscapeColumns: noColl,
           width: widget.width,
           title: widget.title,
-          formKey: widget.formKey,
-          instanceCallBack: widget.instanceCallBack);
+          formKey: widget.formKey);
       _modelListBox.dynamisms = _model!.dynamisms;
       _modelListBox.data = _data;
 

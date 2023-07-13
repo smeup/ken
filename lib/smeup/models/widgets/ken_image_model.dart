@@ -24,25 +24,18 @@ class KenImageModel extends KenModel implements KenDataInterface {
     this.height = defaultHeight,
     this.padding = defaultPadding,
     title = '',
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
   }) : super(formKey, scaffoldKey, context,
             title: title,
             id: id,
-            type: type,
-            instanceCallBack: instanceCallBack);
+            type: type);
 
   KenImageModel.fromMap(
       Map<String, dynamic> jsonMap,
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-              KenModel? instance)
-          instanceCallBack)
+      BuildContext? context)
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+            jsonMap, formKey, scaffoldKey, context) {
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     padding =

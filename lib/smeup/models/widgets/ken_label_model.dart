@@ -60,14 +60,10 @@ class KenLabelModel extends KenModel implements KenDataInterface {
     this.iconColname = '',
     this.fontColorColName = '',
     title = '',
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
   }) : super(formKey, scaffoldKey, context,
             title: title,
             id: id,
-            type: type,
-            instanceCallBack: instanceCallBack) {
+            type: type) {
     setDefaults(this);
   }
 
@@ -76,10 +72,7 @@ class KenLabelModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
-  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     if (fontColor == null)
