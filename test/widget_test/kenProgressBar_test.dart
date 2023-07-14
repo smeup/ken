@@ -29,7 +29,6 @@ Future<void> main() async {
                       height: 40,
                       progressBarMinimun: 0,
                       progressBarMaximun: 10,
-                      callBack: pbCallBack,
                       padding:
                           const EdgeInsets.only(top: 30, left: 5, right: 5),
                     )

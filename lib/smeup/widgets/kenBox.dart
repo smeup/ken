@@ -3,11 +3,13 @@ import 'dart:async';
 import 'package:clickable_list_wheel_view/measure_size.dart';
 import 'package:flutter/material.dart';
 
+import '../models/KenMessageBusEventData.dart';
 import '../models/dynamism.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../services/ken_configuration_service.dart';
 import '../services/ken_localization_service.dart';
 import '../services/ken_log_service.dart';
+import '../services/ken_message_bus.dart';
 import 'kenEnumCallback.dart';
 import 'kenListBox.dart';
 import 'kenNotAvailable.dart';
@@ -41,6 +43,7 @@ class KenBox extends StatefulWidget {
   final Function? onSizeChanged;
   final bool? isFirestore;
   final KenListBox kenListBox;
+  final String? globallyUniqueId;
 
   Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
@@ -66,6 +69,7 @@ class KenBox extends StatefulWidget {
       this.captionStyle,
       this.onSizeChanged,
       this.isFirestore,
+      this.globallyUniqueId,
       this.callBack});
 
   @override
@@ -210,10 +214,30 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
               // var smeupFun = Fun(deleteDynamism!.exec, widget.formKey,
               //     widget.scaffoldKey, context);
 
-              if (widget.callBack != null) {
-                await widget.callBack!(
-                    widget, KenCallbackType.onDismissed, deleteDynamism, null);
-              }
+              // if (widget.callBack != null) {
+              //   await widget.callBack!(
+              //       widget, KenCallbackType.onDismissed, deleteDynamism, null);
+              // }
+
+              Completer<dynamic> completer = Completer();
+              KenMessageBus.instance
+                  .response(
+                      id: widget.globallyUniqueId,
+                      topic: KenTopic.kenboxOnDismissed)
+                  .take(1)
+                  .listen((event) {
+                completer.complete(); // resolve promise
+              });
+              KenMessageBus.instance.publishRequest(
+                widget.globallyUniqueId!,
+                KenTopic.kenboxOnDismissed,
+                KenMessageBusEventData(
+                    context: context,
+                    widget: widget,
+                    model: null,
+                    data: deleteDynamism),
+              );
+              await completer.future;
               // widget.onRefresh!();
             },
             background: Container(

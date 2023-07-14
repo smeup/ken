@@ -69,17 +69,18 @@ class KenImage extends StatefulWidget
     bool isRemote = KenImageModel.defaultIsRemote;
     dynamic data;
     if (m.data != null &&
-        (m.data['rows'] as List).length > 0 &&
+        (m.data['rows'] as List).isNotEmpty &&
         m.data['rows'][0]['code'] != null) {
       String code = m.data['rows'][0]['code'].toString();
       List<String> split = code.split(';');
       if (split.length == 3) {
         String url = split.getRange(2, split.length).join('');
         data = url;
-        if (split[0].toString() == 'J1' && split[1].toString() == 'URL')
+        if (split[0].toString() == 'J1' && split[1].toString() == 'URL') {
           isRemote = true;
-        else
+        } else {
           isRemote = false;
+        }
       } else {
         isRemote = true;
         data = code;
@@ -90,10 +91,10 @@ class KenImage extends StatefulWidget
   }
 
   @override
-  _KenImageState createState() => _KenImageState();
+  KenImageState createState() => KenImageState();
 }
 
-class _KenImageState extends State<KenImage>
+class KenImageState extends State<KenImage>
     with KenWidgetStateMixin
     implements KenWidgetStateInterface {
   KenImageModel? _model;
@@ -147,7 +148,7 @@ class _KenImageState extends State<KenImage>
 
     Widget children;
 
-    var image;
+    Image image;
     if (widget.isRemote!) {
       image = Image.network(
         _data,

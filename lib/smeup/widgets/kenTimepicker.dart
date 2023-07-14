@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../models/KenMessageBusEventData.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_model.dart';
 import '../models/widgets/ken_section_model.dart';
 import '../models/widgets/ken_timepicker_model.dart';
+import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
 import 'kenEnumCallback.dart';
 import 'kenLine.dart';
@@ -64,48 +66,50 @@ class KenTimePicker extends StatefulWidget
 
   TextInputType? keyboard;
 
-  Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
-  KenTimePicker(this.scaffoldKey, this.formKey, this.data,
-      {id = '',
-      type = 'tpk',
-      this.borderColor,
-      this.borderRadius,
-      this.borderWidth,
-      this.fontBold,
-      this.fontSize,
-      this.fontColor,
-      this.backColor,
-      this.elevation,
-      this.captionFontBold,
-      this.captionFontSize,
-      this.captionFontColor,
-      this.captionBackColor,
-      this.underline = KenTimePickerModel.defaultUnderline,
-      this.innerSpace = KenTimePickerModel.defaultInnerSpace,
-      this.align = KenTimePickerModel.defaultAlign,
-      this.label = KenTimePickerModel.defaultLabel,
-      this.width = KenTimePickerModel.defaultWidth,
-      this.height = KenTimePickerModel.defaultHeight,
-      this.padding = KenTimePickerModel.defaultPadding,
-      this.showborder = KenTimePickerModel.defaultShowBorder,
-      this.minutesList,
-      // They have to be mapped with all the dynamisms
-      //this.clientValidator,
-      //this.clientOnSave,
-      this.clientOnChange,
-      this.keyboard,
-      this.callBack})
-      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
+  KenTimePicker(
+    this.scaffoldKey,
+    this.formKey,
+    this.data, {
+    id = '',
+    type = 'tpk',
+    this.borderColor,
+    this.borderRadius,
+    this.borderWidth,
+    this.fontBold,
+    this.fontSize,
+    this.fontColor,
+    this.backColor,
+    this.elevation,
+    this.captionFontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.captionBackColor,
+    this.underline = KenTimePickerModel.defaultUnderline,
+    this.innerSpace = KenTimePickerModel.defaultInnerSpace,
+    this.align = KenTimePickerModel.defaultAlign,
+    this.label = KenTimePickerModel.defaultLabel,
+    this.width = KenTimePickerModel.defaultWidth,
+    this.height = KenTimePickerModel.defaultHeight,
+    this.padding = KenTimePickerModel.defaultPadding,
+    this.showborder = KenTimePickerModel.defaultShowBorder,
+    this.minutesList,
+    // They have to be mapped with all the dynamisms
+    //this.clientValidator,
+    //this.clientOnSave,
+    this.clientOnChange,
+    this.keyboard,
+  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenTimePickerModel.setDefaults(this);
     if (minutesList == null)
       this.minutesList = KenTimePickerModel.defaultMinutesList;
   }
 
-  KenTimePicker.withController(KenTimePickerModel this.model, this.scaffoldKey,
-      this.formKey, this.callBack)
-      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+  KenTimePicker.withController(
+    KenTimePickerModel this.model,
+    this.scaffoldKey,
+    this.formKey,
+  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
@@ -221,9 +225,12 @@ class _KenTimePickerState extends State<KenTimePicker>
       return getFunErrorResponse(context, _model);
     }
 
-    if (widget.callBack != null) {
-      widget.callBack!(widget, KenCallbackType.getChildren, _data, null);
-    }
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenTimePickerGetChildren,
+      KenMessageBusEventData(
+          context: context, widget: widget, model: _model, data: _data),
+    );
 
     double? timePickerHeight = widget.height;
     double? timePickerWidth = widget.width;

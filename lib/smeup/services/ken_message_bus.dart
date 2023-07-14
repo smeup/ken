@@ -67,7 +67,15 @@ enum KenTopic {
   textfieldOnChanged,
   textfieldOnSaved,
   execDynamismActions,
-  comboOnClientChange
+  comboOnClientChange,
+  confirmDismiss,
+  kenlistboxGetChildren,
+  kenlistboxOnSizeChange,
+  kenImageListGetChildren,
+  kenboxOnDismissed,
+  kenDatePickerGetChildren,
+  kenProgressBarGetChildren,
+  kenTimePickerGetChildren,
 }
 
 enum KenMessageType {
