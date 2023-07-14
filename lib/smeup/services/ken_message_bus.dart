@@ -77,7 +77,13 @@ enum KenTopic {
   kenProgressBarGetChildren,
   kenTimePickerGetChildren,
   kenSwitchInitState,
-  kenSwitchOnClientChange
+  kenSwitchOnClientChange,
+  kenCalendarStartFunDate,
+  kenCalendarEndFunDate,
+  kenCalendarClientOnChangeMonth,
+  kenCalendarWidgetEventClick,
+  kenSliderGetChildren,
+  kenSliderOnClientChange
 }
 
 enum KenMessageType {

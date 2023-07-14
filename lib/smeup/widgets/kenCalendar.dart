@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../models/KenMessageBusEventData.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_calendar_event_model.dart';
 import '../models/widgets/ken_calendar_model.dart';
@@ -7,6 +8,7 @@ import '../models/widgets/ken_section_model.dart';
 import '../services/ken_configuration_service.dart';
 import '../services/ken_localization_service.dart';
 import '../services/ken_log_service.dart';
+import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
 import 'kenButton.dart';
 import 'kenCalendarWidget.dart';
@@ -57,36 +59,37 @@ class KenCalendar extends StatefulWidget
   Function? clientOnChangeMonth;
   Function? clientOnEventClick;
 
-  void Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
+  // void Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
-  KenCalendar(this.scaffoldKey, this.formKey,
-      {this.id = '',
-      this.type = 'CAL',
-      this.eventFontSize,
-      this.titleFontSize,
-      this.dayFontSize,
-      this.markerFontSize,
-      this.data,
-      this.initialFirstWork,
-      this.initialLastWork,
-      this.initialDate,
-      this.titleColumnName = KenCalendarModel.defaultTitleColumnName,
-      this.dataColumnName = KenCalendarModel.defaultDataColumnName,
-      this.initTimeColumnName = KenCalendarModel.defaultInitTimeColumnName,
-      this.endTimeColumnName = KenCalendarModel.defaultEndTimeColumnName,
-      this.styleColumnName = KenCalendarModel.defaultStyleColumnName,
-      title = '',
-      this.showPeriodButtons = KenCalendarModel.defaultShowPeriodButtons,
-      this.height = KenCalendarModel.defaultHeight,
-      this.width = KenCalendarModel.defaultWidth,
-      this.showAsWeek = KenCalendarModel.defaultShowAsWeek,
-      this.showNavigation = KenCalendarModel.defaultShowNavigation,
-      this.padding = KenCalendarModel.defaultPadding,
-      this.clientOnDaySelected,
-      this.clientOnChangeMonth,
-      this.clientOnEventClick,
-      this.callBack})
-      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
+  KenCalendar(
+    this.scaffoldKey,
+    this.formKey, {
+    this.id = '',
+    this.type = 'CAL',
+    this.eventFontSize,
+    this.titleFontSize,
+    this.dayFontSize,
+    this.markerFontSize,
+    this.data,
+    this.initialFirstWork,
+    this.initialLastWork,
+    this.initialDate,
+    this.titleColumnName = KenCalendarModel.defaultTitleColumnName,
+    this.dataColumnName = KenCalendarModel.defaultDataColumnName,
+    this.initTimeColumnName = KenCalendarModel.defaultInitTimeColumnName,
+    this.endTimeColumnName = KenCalendarModel.defaultEndTimeColumnName,
+    this.styleColumnName = KenCalendarModel.defaultStyleColumnName,
+    title = '',
+    this.showPeriodButtons = KenCalendarModel.defaultShowPeriodButtons,
+    this.height = KenCalendarModel.defaultHeight,
+    this.width = KenCalendarModel.defaultWidth,
+    this.showAsWeek = KenCalendarModel.defaultShowAsWeek,
+    this.showNavigation = KenCalendarModel.defaultShowNavigation,
+    this.padding = KenCalendarModel.defaultPadding,
+    this.clientOnDaySelected,
+    this.clientOnChangeMonth,
+    this.clientOnEventClick,
+  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
 
     if (initialDate == null) initialDate = DateTime.now();
@@ -100,9 +103,13 @@ class KenCalendar extends StatefulWidget
     }
   }
 
-  KenCalendar.withController(KenCalendarModel this.model, this.scaffoldKey,
-      this.formKey, this.initialFirstWork, this.initialLastWork, this.callBack)
-      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+  KenCalendar.withController(
+    KenCalendarModel this.model,
+    this.scaffoldKey,
+    this.formKey,
+    this.initialFirstWork,
+    this.initialLastWork,
+  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
@@ -189,20 +196,24 @@ class KenCalendarState extends State<KenCalendar>
   set startFunDate(DateTime startFunDate) {
     _startFunDate = startFunDate;
 
-    if (widget.callBack != null) {
-      widget.callBack!(
-          this.widget, KenCallbackType.startFunDate, _startFunDate, null);
-    }
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenCalendarStartFunDate,
+      KenMessageBusEventData(
+          context: context, widget: widget, model: _model, data: _startFunDate),
+    );
   }
 
   DateTime get endFunDate => _endFunDate;
   set endFunDate(DateTime endFunDate) {
     _endFunDate = endFunDate;
 
-    if (widget.callBack != null) {
-      widget.callBack!(
-          this.widget, KenCallbackType.endFunDate, _endFunDate, null);
-    }
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenCalendarEndFunDate,
+      KenMessageBusEventData(
+          context: context, widget: widget, model: _model, data: _endFunDate),
+    );
   }
 
   @override
@@ -305,6 +316,7 @@ class KenCalendarState extends State<KenCalendar>
             styleColumnName: widget.styleColumnName,
             titleColumnName: widget.titleColumnName,
             showPeriodButtons: widget.showPeriodButtons,
+            globallyUniqueId: widget.globallyUniqueId,
           ),
         ],
       ),
@@ -418,7 +430,12 @@ class KenCalendarState extends State<KenCalendar>
       widget.clientOnChangeMonth!(focusedDay);
 
     if (widget.model != null) {
-      widget.callBack!(widget, KenCallbackType.clientOnChangeMonth, null, null);
+      KenMessageBus.instance.publishRequest(
+        widget.globallyUniqueId,
+        KenTopic.kenCalendarClientOnChangeMonth,
+        KenMessageBusEventData(
+            context: context, widget: widget, model: _model, data: _data),
+      );
     }
 
     await _load();

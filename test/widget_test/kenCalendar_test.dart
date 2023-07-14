@@ -46,7 +46,7 @@ Future<void> main() async {
                           data: [
                             {
                               "value": "${DateTime.now().year}-01-18",
-                              "title": "Fase 2 project Alfa",
+                              "title": "Fase",
                               "init": "100000",
                               "end": "103000"
                             },

@@ -3,11 +3,13 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../models/KenMessageBusEventData.dart';
 import '../models/widgets/ken_calendar_event_model.dart';
 import '../models/widgets/ken_calendar_model.dart';
 import '../models/widgets/ken_section_model.dart';
 import '../services/ken_configuration_service.dart';
 import '../services/ken_log_service.dart';
+import '../services/ken_message_bus.dart';
 import 'kenEnumCallback.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -49,40 +51,44 @@ class KenCalendarWidget extends StatefulWidget {
   final String? id;
   final Function? setDataLoad;
   final bool? showPeriodButtons;
+  final String? globallyUniqueId;
 
-  Function(dynamic, KenCallbackType, dynamic)? callBack;
+  // Function(dynamic, KenCallbackType, dynamic)? callBack;
 
-  KenCalendarWidget(this.scaffoldKey, this.formKey,
-      {this.titleFontSize,
-      this.eventFontSize,
-      this.dayFontSize,
-      this.markerFontSize,
-      this.id,
-      this.events,
-      this.height,
-      this.width,
-      this.firstWork,
-      this.lastWork,
-      this.focusDay,
-      this.selectedDay,
-      this.model,
-      this.holidays,
-      this.showNavigation,
-      this.calendarFormat,
-      this.selectedEvents,
-      this.data,
-      this.clientOnDaySelected,
-      this.clientOnChangeMonth,
-      this.clientOnEventClick,
-      this.dataColumnName,
-      this.endTimeColumnName,
-      this.initTimeColumnName,
-      this.styleColumnName,
-      this.titleColumnName,
-      this.setDataLoad,
-      this.showPeriodButtons,
-      this.padding,
-      this.callBack});
+  KenCalendarWidget(
+    this.scaffoldKey,
+    this.formKey, {
+    this.titleFontSize,
+    this.eventFontSize,
+    this.dayFontSize,
+    this.markerFontSize,
+    this.id,
+    this.events,
+    this.height,
+    this.width,
+    this.firstWork,
+    this.lastWork,
+    this.focusDay,
+    this.selectedDay,
+    this.model,
+    this.holidays,
+    this.showNavigation,
+    this.calendarFormat,
+    this.selectedEvents,
+    this.data,
+    this.clientOnDaySelected,
+    this.clientOnChangeMonth,
+    this.clientOnEventClick,
+    this.dataColumnName,
+    this.endTimeColumnName,
+    this.initTimeColumnName,
+    this.styleColumnName,
+    this.titleColumnName,
+    this.setDataLoad,
+    this.showPeriodButtons,
+    this.padding,
+    this.globallyUniqueId,
+  });
 
   @override
   _KenCalendarWidgetState createState() => _KenCalendarWidgetState();
@@ -514,9 +520,12 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
       }
 
       if (data != null) {
-        if (widget.callBack != null) {
-          widget.callBack!(widget, KenCallbackType.eventClicked, data);
-        }
+        KenMessageBus.instance.publishRequest(
+          widget.globallyUniqueId!,
+          KenTopic.kenCalendarWidgetEventClick,
+          KenMessageBusEventData(
+              context: context, widget: widget, model: _model, data: data),
+        );
       }
     } catch (e) {
       KenLogService.writeDebugMessage('Error on calendar _eventClicked: $e',
