@@ -16,7 +16,8 @@ class KenSliderWidget extends StatefulWidget {
   final Function? onChange;
   final Function onChanged;
   const KenSliderWidget(this.scaffoldKey, this.formKey,
-      {this.activeTrackColor,
+      {super.key,
+      this.activeTrackColor,
       this.thumbColor,
       this.inactiveTrackColor,
       this.id,
