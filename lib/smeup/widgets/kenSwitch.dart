@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../models/KenMessageBusEventData.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_model.dart';
 import '../models/widgets/ken_section_model.dart';
 import '../models/widgets/ken_switch_model.dart';
+import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
 import 'kenEnumCallback.dart';
 import 'kenSwitchWidget.dart';
@@ -38,11 +40,11 @@ class KenSwitch extends StatefulWidget
   bool? data;
   Function? onClientChange;
 
-  Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
   KenSwitch.withController(
-      KenSwitchModel this.model, this.scaffoldKey, this.formKey, this.callBack)
-      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+    KenSwitchModel this.model,
+    this.scaffoldKey,
+    this.formKey,
+  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
@@ -120,9 +122,12 @@ class _KenSwitchState extends State<KenSwitch>
 
   @override
   void initState() {
-    if (widget.callBack != null) {
-      widget.callBack!(widget, KenCallbackType.initState, _data, null);
-    }
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenSwitchInitState,
+      KenMessageBusEventData(
+          context: context, widget: widget, model: _model, data: _data),
+    );
 
     _model = widget.model;
     _data = widget.data;
@@ -194,10 +199,15 @@ class _KenSwitchState extends State<KenSwitch>
             onClientChange: (changedValue) {
               _data = changedValue;
 
-              if (widget.callBack != null) {
-                widget.callBack!(
-                    widget, KenCallbackType.onClientChange, _data, null);
-              }
+              KenMessageBus.instance.publishRequest(
+                widget.globallyUniqueId,
+                KenTopic.kenSwitchOnClientChange,
+                KenMessageBusEventData(
+                    context: context,
+                    widget: widget,
+                    model: _model,
+                    data: _data),
+              );
             },
           ),
         ],

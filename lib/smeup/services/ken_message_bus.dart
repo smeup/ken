@@ -76,6 +76,8 @@ enum KenTopic {
   kenDatePickerGetChildren,
   kenProgressBarGetChildren,
   kenTimePickerGetChildren,
+  kenSwitchInitState,
+  kenSwitchOnClientChange
 }
 
 enum KenMessageType {

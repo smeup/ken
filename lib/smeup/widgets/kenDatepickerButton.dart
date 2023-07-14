@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as datepicker;
 import 'package:intl/intl.dart';
-import '../models/KenMessageBusEventData.dart';
 import '../models/widgets/ken_datepicker_model.dart';
-import '../services/ken_message_bus.dart';
 import 'kenEnumCallback.dart';
 import 'kenTimepicker.dart';
 
@@ -29,6 +27,7 @@ class KenDatePickerButton extends StatefulWidget {
   bool? underline;
   KenDatePickerModel? model;
   final Function? clientOnChange;
+  Function(dynamic, KenCallbackType, dynamic)? callBack;
 
   final DateTime? value;
   final String? id;
@@ -86,12 +85,9 @@ class _KenDatePickerButtonState extends State<KenDatePickerButton> {
     _currentValue = widget.value;
     _currentDisplay = widget.display;
 
-    KenMessageBus.instance.publishRequest(
-      widget.globallyUniqueId,
-      KenTopic.kenTimePickerGetChildren,
-      KenMessageBusEventData(
-          context: context, widget: widget, model: _model, data: _data),
-    );
+    if (widget.callBack != null) {
+      widget.callBack!(widget, KenCallbackType.initState, null);
+    }
     super.initState();
   }
 

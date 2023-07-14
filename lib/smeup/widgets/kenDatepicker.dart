@@ -62,8 +62,6 @@ class KenDatePicker extends StatefulWidget
   Function? clientOnSave;
   Function? clientOnChange;
 
-  // Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
   KenDatePicker.withController(
     KenDatePickerModel this.model,
     this.scaffoldKey,

@@ -64,54 +64,55 @@ class KenTextPassword extends StatefulWidget
   //Function? clientOnChange;
   Function? clientOnSubmit;
 
-  Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
   List<TextInputFormatter>? inputFormatters;
 
-  KenTextPassword.withController(KenTextPasswordModel this.model,
-      this.scaffoldKey, this.formKey, this.callBack)
-      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+  KenTextPassword.withController(
+    KenTextPasswordModel this.model,
+    this.scaffoldKey,
+    this.formKey,
+  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
-  KenTextPassword(this.scaffoldKey, this.formKey,
-      {this.id = '',
-      this.type = 'FLD',
-      this.backColor,
-      this.fontSize,
-      this.fontBold,
-      this.fontColor,
-      this.captionBackColor,
-      this.captionFontBold,
-      this.captionFontColor,
-      this.captionFontSize,
-      this.borderColor,
-      this.borderRadius,
-      this.borderWidth,
-      this.iconSize,
-      this.iconColor,
-      this.buttonBackColor,
-      this.label = KenTextPasswordModel.defaultLabel,
-      this.submitLabel = KenTextPasswordModel.defaultSubmitLabel,
-      this.width = KenTextPasswordModel.defaultWidth,
-      this.height = KenTextPasswordModel.defaultHeight,
-      this.padding = KenTextPasswordModel.defaultPadding,
-      this.showBorder = KenTextPasswordModel.defaultShowBorder,
-      this.data,
-      this.underline = KenTextPasswordModel.defaultUnderline,
-      this.autoFocus = KenTextPasswordModel.defaultAutoFocus,
-      this.valueField = KenTextPasswordModel.defaultValueField,
-      this.showSubmit = KenTextPasswordModel.defaultShowSubmit,
-      this.showRules = KenTextPasswordModel.defaultShowRules,
-      this.showRulesIcon = KenTextPasswordModel.defaultShowRulesIcon,
-      this.checkRules = KenTextPasswordModel.defaultCheckRules,
-      this.clientValidator, // ?
-      //this.clientOnSave,
-      //this.clientOnChange,
-      this.inputFormatters, // ?
-      this.clientOnSubmit,
-      this.callBack})
-      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
+  KenTextPassword(
+    this.scaffoldKey,
+    this.formKey, {
+    this.id = '',
+    this.type = 'FLD',
+    this.backColor,
+    this.fontSize,
+    this.fontBold,
+    this.fontColor,
+    this.captionBackColor,
+    this.captionFontBold,
+    this.captionFontColor,
+    this.captionFontSize,
+    this.borderColor,
+    this.borderRadius,
+    this.borderWidth,
+    this.iconSize,
+    this.iconColor,
+    this.buttonBackColor,
+    this.label = KenTextPasswordModel.defaultLabel,
+    this.submitLabel = KenTextPasswordModel.defaultSubmitLabel,
+    this.width = KenTextPasswordModel.defaultWidth,
+    this.height = KenTextPasswordModel.defaultHeight,
+    this.padding = KenTextPasswordModel.defaultPadding,
+    this.showBorder = KenTextPasswordModel.defaultShowBorder,
+    this.data,
+    this.underline = KenTextPasswordModel.defaultUnderline,
+    this.autoFocus = KenTextPasswordModel.defaultAutoFocus,
+    this.valueField = KenTextPasswordModel.defaultValueField,
+    this.showSubmit = KenTextPasswordModel.defaultShowSubmit,
+    this.showRules = KenTextPasswordModel.defaultShowRules,
+    this.showRulesIcon = KenTextPasswordModel.defaultShowRulesIcon,
+    this.checkRules = KenTextPasswordModel.defaultCheckRules,
+    this.clientValidator, // ?
+    //this.clientOnSave,
+    //this.clientOnChange,
+    this.inputFormatters, // ?
+    this.clientOnSubmit,
+  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenTextPasswordModel.setDefaults(this);
   }
