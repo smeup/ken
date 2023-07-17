@@ -303,6 +303,7 @@ class _KenTimePickerState extends State<KenTimePicker>
       minutesList: widget.minutesList,
       clientOnChange: widget.clientOnChange,
       model: _model,
+      globallyUniqueId: widget.globallyUniqueId,
     );
 
     var line = widget.underline!

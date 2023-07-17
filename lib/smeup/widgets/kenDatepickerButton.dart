@@ -42,33 +42,40 @@ class KenDatePickerButton extends StatefulWidget {
   final ButtonStyle buttonStyle;
   final TextStyle textStyle;
 
-  KenDatePickerButton(this.id, this.buttonStyle, this.textStyle,
-      {this.scaffoldKey,
-      this.formKey,
-      this.value,
-      this.display,
-      this.borderColor,
-      this.borderWidth,
-      this.borderRadius,
-      this.fontBold,
-      this.fontSize,
-      this.fontColor,
-      this.backColor,
-      this.elevation,
-      this.captionFontBold,
-      this.captionFontSize,
-      this.captionFontColor,
-      this.captionBackColor,
-      this.underline = KenDatePickerModel.defaultUnderline,
-      this.align = KenDatePickerModel.defaultAlign,
-      this.label = KenDatePickerModel.defaultLabel,
-      this.width = KenDatePickerModel.defaultWidth,
-      this.height = KenDatePickerModel.defaultHeight,
-      this.padding = KenDatePickerModel.defaultPadding,
-      this.showborder = KenDatePickerModel.defaultShowBorder,
-      this.clientOnChange,
-      this.model,
-      this.callBack}) {
+  final String? globallyUniqueId;
+
+  KenDatePickerButton(
+    this.id,
+    this.buttonStyle,
+    this.textStyle, {
+    this.scaffoldKey,
+    this.formKey,
+    this.value,
+    this.display,
+    this.borderColor,
+    this.borderWidth,
+    this.borderRadius,
+    this.fontBold,
+    this.fontSize,
+    this.fontColor,
+    this.backColor,
+    this.elevation,
+    this.captionFontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.captionBackColor,
+    this.underline = KenDatePickerModel.defaultUnderline,
+    this.align = KenDatePickerModel.defaultAlign,
+    this.label = KenDatePickerModel.defaultLabel,
+    this.width = KenDatePickerModel.defaultWidth,
+    this.height = KenDatePickerModel.defaultHeight,
+    this.padding = KenDatePickerModel.defaultPadding,
+    this.showborder = KenDatePickerModel.defaultShowBorder,
+    this.clientOnChange,
+    this.model,
+    this.callBack,
+    this.globallyUniqueId,
+  }) {
     KenDatePickerModel.setDefaults(this);
   }
 

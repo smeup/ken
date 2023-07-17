@@ -296,6 +296,7 @@ class _KenDatePickerState extends State<KenDatePicker>
       captionBackColor: widget.captionBackColor,
       clientOnChange: widget.clientOnChange,
       model: _model,
+      globallyUniqueId: widget.globallyUniqueId,
     );
 
     var line = widget.underline!

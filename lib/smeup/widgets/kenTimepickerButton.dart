@@ -43,6 +43,8 @@ class KenTimePickerButton extends StatefulWidget {
   final ButtonStyle buttonStyle;
   final TextStyle textStyle;
 
+  final String? globallyUniqueId;
+
   Function(dynamic, KenCallbackType, dynamic)? callBack;
 
   KenTimePickerButton(this.data, this.buttonStyle, this.textStyle,
@@ -71,6 +73,7 @@ class KenTimePickerButton extends StatefulWidget {
       this.minutesList,
       this.clientOnChange,
       this.model,
+      this.globallyUniqueId,
       this.callBack}) {
     KenTimePickerModel.setDefaults(this);
   }
