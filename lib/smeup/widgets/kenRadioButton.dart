@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 import '../models/widgets/ken_radio_buttons_model.dart';
@@ -103,7 +105,7 @@ class _KenRadioButtonState extends State<KenRadioButton> {
                     }
                   },
                   activeColor:
-                      radioThemeData.fillColor!.resolve(Set<MaterialState>()),
+                      radioThemeData.fillColor!.resolve(<MaterialState>{}),
                 ),
               ),
               Expanded(

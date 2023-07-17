@@ -20,7 +20,7 @@ Future<void> main() async {
 }
 
 runTests() {
-  final findKey1 = find.byKey(Key('button1'));
+  final findKey1 = find.byKey(const Key('button1'));
   expect(findKey1, findsOneWidget);
 
   var findWidget = find.byType(KenButton);
@@ -34,7 +34,7 @@ runTests() {
 }
 
 runTestsWithoutMessageBus() {
-  final findKey1 = find.byKey(Key('button1'));
+  final findKey1 = find.byKey(const Key('button1'));
   expect(findKey1, findsOneWidget);
 
   var findWidget = find.byType(KenButton);
@@ -47,8 +47,8 @@ KenButton getButton() {
 
 Widget getTestWidget(KenButton button) {
   return MediaQuery(
-      data: new MediaQueryData(),
-      child: new MaterialApp(
+      data: const MediaQueryData(),
+      child: MaterialApp(
           home: Scaffold(
         appBar: AppBar(),
         body: SingleChildScrollView(

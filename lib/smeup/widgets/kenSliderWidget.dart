@@ -51,7 +51,7 @@ class _KenSliderWidgetState extends State<KenSliderWidget> {
     return SliderTheme(
       data: SliderThemeData(
         valueIndicatorColor: widget.activeTrackColor,
-        valueIndicatorTextStyle: TextStyle(
+        valueIndicatorTextStyle: const TextStyle(
             // color: _value == 0.0 ? Colors.grey : Colors.orange,
             color: Colors.white,
             fontWeight: FontWeight.bold),

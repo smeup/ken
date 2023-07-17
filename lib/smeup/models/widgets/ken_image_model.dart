@@ -51,7 +51,7 @@ class KenImageModel extends KenModel implements KenDataInterface {
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-        await this.getData();
+        await getData();
         // await SmeupImageDao.getData(this);
       };
     }

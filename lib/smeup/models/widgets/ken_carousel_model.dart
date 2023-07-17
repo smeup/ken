@@ -44,7 +44,7 @@ class KenCarouselModel extends KenModel implements KenDataInterface {
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-        await this.getData();
+        await getData();
         // await SmeupCarouselDao.getData(this);
       };
     }

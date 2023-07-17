@@ -104,6 +104,6 @@ class KenLogService {
 
   static Future<File> get _localFile async {
     final path = await _localPath;
-    return new File('$path/log_office_booking.txt');
+    return File('$path/log_office_booking.txt');
   }
 }

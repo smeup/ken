@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
@@ -82,9 +84,8 @@ class KenLabelModel extends KenModel implements KenDataInterface {
   ) : super.fromMap(jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
     setDefaults(this);
 
-    if (fontColor == null)
-      fontColor =
-          KenConfigurationService.getTheme()!.textTheme.bodyText1!.color;
+    fontColor ??=
+        KenConfigurationService.getTheme()!.textTheme.bodyText1!.color;
 
     valueColName = optionsDefault!['valueColName'] ?? defaultValColName;
     backColorColName = optionsDefault!['backColorColName'] ?? '';
@@ -114,7 +115,7 @@ class KenLabelModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupLabelDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }
@@ -133,11 +134,11 @@ class KenLabelModel extends KenModel implements KenDataInterface {
 
     // ----------------- set properties from default
 
-    if (obj.fontSize == null) obj.fontSize = KenLabelModel.defaultFontSize;
-    if (obj.fontColor == null) obj.fontColor = KenLabelModel.defaultFontColor;
-    if (obj.backColor == null) obj.backColor = KenLabelModel.defaultBackColor;
-    if (obj.fontBold == null) obj.fontBold = KenLabelModel.defaultFontBold;
-    if (obj.iconSize == null) obj.iconSize = KenLabelModel.defaultIconSize;
-    if (obj.iconColor == null) obj.iconColor = KenLabelModel.defaultIconColor;
+    obj.fontSize ??= KenLabelModel.defaultFontSize;
+    obj.fontColor ??= KenLabelModel.defaultFontColor;
+    obj.backColor ??= KenLabelModel.defaultBackColor;
+    obj.fontBold ??= KenLabelModel.defaultFontBold;
+    obj.iconSize ??= KenLabelModel.defaultIconSize;
+    obj.iconColor ??= KenLabelModel.defaultIconColor;
   }
 }

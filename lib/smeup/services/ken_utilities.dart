@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:math';
 import 'dart:ui';
 
@@ -9,8 +11,8 @@ import 'ken_log_service.dart';
 import 'ken_widget_notification_service.dart';
 
 class KenUtilities {
-  static Map _globalVariables = Map();
-  static Map _formVariables = Map();
+  static final Map _globalVariables = {};
+  static final Map _formVariables = {};
 
   static dynamic getEmptyDataStructure() {
     return {"messages": [], "columns": null, "rows": null, "type": ""};
@@ -61,8 +63,9 @@ class KenUtilities {
       String funString, GlobalKey<FormState>? formKey) {
     KenUtilities.getVariables(formKey: formKey).entries.forEach((element) {
       String key = element.key;
-      if (formKey != null)
+      if (formKey != null) {
         key = key.replaceAll('${formKey.hashCode.toString()}_', '');
+      }
 
       // to verify: old case where the user encloses the variable's name between quotation marks
       // if (element.value is String) {
@@ -100,9 +103,7 @@ class KenUtilities {
 
   static dynamic getVariable(String? key, {GlobalKey<FormState>? formKey}) {
     var value = _formVariables['${formKey.hashCode.toString()}_$key'];
-    if (value == null) {
-      value = _globalVariables[key];
-    }
+    value ??= _globalVariables[key];
     return value;
   }
 
@@ -111,15 +112,16 @@ class KenUtilities {
   }
 
   static Map _getJoinMap({GlobalKey<FormState>? formKey}) {
-    var join = Map();
+    var join = {};
 
     join.addEntries(_globalVariables.entries);
 
-    if (formKey == null)
+    if (formKey == null) {
       join.addEntries(_formVariables.entries);
-    else
+    } else {
       join.addEntries(_formVariables.entries.where((element) =>
           element.key.toString().startsWith(formKey.hashCode.toString())));
+    }
 
     return join;
   }
@@ -144,10 +146,11 @@ class KenUtilities {
     if (smeupObject != null) {
       switch (smeupObject['tipo']) {
         case 'NR':
-          if (smeupObject['codice'].toString().trim() == '')
+          if (smeupObject['codice'].toString().trim() == '') {
             fieldValue = '0';
-          else
+          } else {
             fieldValue = smeupObject['codice'].toString().trim();
+          }
           break;
         default:
           fieldValue = smeupObject['codice'];
@@ -177,8 +180,8 @@ class KenUtilities {
   }
 
   static bool isNumeric(String s) {
-    if (((int.tryParse(s) ?? null) != null) ||
-        ((double.tryParse(s) ?? null) != null)) return true;
+    if (((int.tryParse(s)) != null) || ((double.tryParse(s)) != null))
+      return true;
 
     return false;
   }
@@ -207,9 +210,9 @@ class KenUtilities {
   }
 
   static EdgeInsetsGeometry? getPadding(dynamic value) {
-    if (value == null)
+    if (value == null) {
       return null;
-    else if (value is double) {
+    } else if (value is double) {
       return EdgeInsets.all(KenUtilities.getDouble(value)!);
     } else if (value is int) {
       return EdgeInsets.all(KenUtilities.getDouble(value)!);
@@ -221,11 +224,13 @@ class KenUtilities {
       double? top = 0;
       double? bottom = 0;
       if (value['left'] != null) left = KenUtilities.getDouble(value['left']);
-      if (value['right'] != null)
+      if (value['right'] != null) {
         right = KenUtilities.getDouble(value['right']);
+      }
       if (value['top'] != null) top = KenUtilities.getDouble(value['top']);
-      if (value['bottom'] != null)
+      if (value['bottom'] != null) {
         bottom = KenUtilities.getDouble(value['bottom']);
+      }
       return EdgeInsets.only(
           top: top!, bottom: bottom!, left: left!, right: right!);
     }
@@ -374,8 +379,8 @@ class KenUtilities {
 
   static void invokeScaffoldMessenger(BuildContext context, String text) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
-    ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(text), duration: Duration(milliseconds: 4000)));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(text), duration: const Duration(milliseconds: 4000)));
   }
 
   static KenDeviceInfo getDeviceInfo() {

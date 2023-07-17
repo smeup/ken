@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
@@ -235,7 +237,7 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupTimePickerDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }
@@ -255,7 +257,7 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
 
     var buttonStyle =
         KenConfigurationService.getTheme()!.elevatedButtonTheme.style!;
-    defaultElevation = buttonStyle.elevation!.resolve(Set<MaterialState>());
+    defaultElevation = buttonStyle.elevation!.resolve(<MaterialState>{});
 
     var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
@@ -268,25 +270,16 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
     defaultCaptionFontColor = captionStyle.color;
 
     // ----------------- set properties from default
-    if (obj.backColor == null)
-      obj.backColor = KenTimePickerModel.defaultBackColor;
-    if (obj.elevation == null)
-      obj.elevation = KenTimePickerModel.defaultElevation;
-    if (obj.borderColor == null)
-      obj.borderColor = KenTimePickerModel.defaultBorderColor;
-    if (obj.borderWidth == null)
-      obj.borderWidth = KenTimePickerModel.defaultBorderWidth;
-    if (obj.borderRadius == null)
-      obj.borderRadius = KenTimePickerModel.defaultBorderRadius;
-    if (obj.fontBold == null) obj.fontBold = KenTimePickerModel.defaultFontBold;
-    if (obj.fontColor == null)
-      obj.fontColor = KenTimePickerModel.defaultFontColor;
-    if (obj.fontSize == null) obj.fontSize = KenTimePickerModel.defaultFontSize;
-    if (obj.captionFontBold == null)
-      obj.captionFontBold = KenTimePickerModel.defaultCaptionFontBold;
-    if (obj.captionFontColor == null)
-      obj.captionFontColor = KenTimePickerModel.defaultCaptionFontColor;
-    if (obj.captionFontSize == null)
-      obj.captionFontSize = KenTimePickerModel.defaultCaptionFontSize;
+    obj.backColor ??= KenTimePickerModel.defaultBackColor;
+    obj.elevation ??= KenTimePickerModel.defaultElevation;
+    obj.borderColor ??= KenTimePickerModel.defaultBorderColor;
+    obj.borderWidth ??= KenTimePickerModel.defaultBorderWidth;
+    obj.borderRadius ??= KenTimePickerModel.defaultBorderRadius;
+    obj.fontBold ??= KenTimePickerModel.defaultFontBold;
+    obj.fontColor ??= KenTimePickerModel.defaultFontColor;
+    obj.fontSize ??= KenTimePickerModel.defaultFontSize;
+    obj.captionFontBold ??= KenTimePickerModel.defaultCaptionFontBold;
+    obj.captionFontColor ??= KenTimePickerModel.defaultCaptionFontColor;
+    obj.captionFontSize ??= KenTimePickerModel.defaultCaptionFontSize;
   }
 }

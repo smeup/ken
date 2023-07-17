@@ -10,12 +10,12 @@ class KenTextPasswordRuleNotifier with ChangeNotifier {
   KenTextPasswordRuleNotifier(
     this.rules,
   ) {
-    this.totalRules = rules.length;
-    this.satisfiedRules = 0;
+    totalRules = rules.length;
+    satisfiedRules = 0;
     passwordRules = '';
-    rules.forEach((rule) {
-      passwordRules += "${rule['regex'].toString()}";
-    });
+    for (var rule in rules) {
+      passwordRules += rule['regex'].toString();
+    }
     passwordRules += '.*\$';
   }
 

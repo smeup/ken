@@ -16,21 +16,20 @@ class KenTimePickerCustomization extends CommonPickerModel {
       this.minutesList})
       : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
-    this.setLeftIndex(this.currentTime.hour);
+    setLeftIndex(this.currentTime.hour);
 
     if (minutesList != null) {
-      this.middleList = this.minutesList!;
-      this.setMiddleIndex(
-          this.middleList.indexOf(this.currentTime.minute.toString()));
+      middleList = minutesList!;
+      setMiddleIndex(middleList.indexOf(this.currentTime.minute.toString()));
     }
 
-    this.setRightIndex(this.currentTime.second);
+    setRightIndex(this.currentTime.second);
   }
 
   @override
   String? leftStringAtIndex(int index) {
     if (index >= 0 && index < 24) {
-      return this.digits(index, 2);
+      return digits(index, 2);
     } else {
       return null;
     }
@@ -47,7 +46,7 @@ class KenTimePickerCustomization extends CommonPickerModel {
   @override
   String? rightStringAtIndex(int index) {
     if (index >= 0 && index < 60) {
-      return this.digits(index, 2);
+      return digits(index, 2);
     } else {
       return null;
     }
@@ -71,19 +70,14 @@ class KenTimePickerCustomization extends CommonPickerModel {
   @override
   DateTime finalTime() {
     return currentTime.isUtc
-        ? DateTime.utc(
-            currentTime.year,
-            currentTime.month,
-            currentTime.day,
-            this.currentLeftIndex(),
-            this.currentMiddleIndex(),
-            this.currentRightIndex())
+        ? DateTime.utc(currentTime.year, currentTime.month, currentTime.day,
+            currentLeftIndex(), currentMiddleIndex(), currentRightIndex())
         : DateTime(
             currentTime.year,
             currentTime.month,
             currentTime.day,
-            this.currentLeftIndex(),
-            int.parse(this.middleList[this.currentMiddleIndex()]),
-            this.currentRightIndex());
+            currentLeftIndex(),
+            int.parse(middleList[currentMiddleIndex()]),
+            currentRightIndex());
   }
 }

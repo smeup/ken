@@ -64,23 +64,25 @@ class SmeupInputPanelField {
   // }
 
   _setDefaults() {
-    if (this.codeField == null) {
-      if (isFirestore)
-        this.codeField = 'code';
-      else
-        this.codeField = defaultCodeField;
+    if (codeField == null) {
+      if (isFirestore) {
+        codeField = 'code';
+      } else {
+        codeField = defaultCodeField;
+      }
     }
 
-    if (this.descriptionField == null) {
-      if (isFirestore)
-        this.descriptionField = 'description';
-      else
-        this.descriptionField = defaultDescriptionField;
+    if (descriptionField == null) {
+      if (isFirestore) {
+        descriptionField = 'description';
+      } else {
+        descriptionField = defaultDescriptionField;
+      }
     }
   }
 
   void update(XmlNode fieldFromLayout, int position) {
-    this.visible = true;
+    visible = true;
     this.position = position;
     if (fieldFromLayout.getAttribute("Cmp") != null) {
       KenInputPanelSupportedComp.values.forEach((comp) {

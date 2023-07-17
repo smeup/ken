@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 import '../../services/ken_configuration_service.dart';
@@ -152,7 +154,7 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-        await this.getData();
+        await getData();
         // await SmeupButtonsDao.getData(this);
       };
     }
@@ -163,15 +165,14 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
     var buttonStyle =
         KenConfigurationService.getTheme()!.elevatedButtonTheme.style!;
 
-    defaultBackColor =
-        buttonStyle.backgroundColor!.resolve(Set<MaterialState>());
-    defaultElevation = buttonStyle.elevation!.resolve(Set<MaterialState>());
+    defaultBackColor = buttonStyle.backgroundColor!.resolve(<MaterialState>{});
+    defaultElevation = buttonStyle.elevation!.resolve(<MaterialState>{});
 
-    var side = buttonStyle.side!.resolve(Set<MaterialState>())!;
+    var side = buttonStyle.side!.resolve(<MaterialState>{})!;
     defaultBorderColor = side.color;
     defaultBorderWidth = side.width;
 
-    var shape = buttonStyle.shape!.resolve(Set<MaterialState>())!;
+    var shape = buttonStyle.shape!.resolve(<MaterialState>{})!;
     defaultBorderRadius = (shape as ContinuousRectangleBorder)
         .borderRadius
         .resolve(TextDirection.ltr)
@@ -189,18 +190,15 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
 
     // ----------------- set properties from default
 
-    if (obj.backColor == null) obj.backColor = KenButtonsModel.defaultBackColor;
-    if (obj.borderColor == null)
-      obj.borderColor = KenButtonsModel.defaultBorderColor;
-    if (obj.borderWidth == null)
-      obj.borderWidth = KenButtonsModel.defaultBorderWidth;
-    if (obj.borderRadius == null)
-      obj.borderRadius = KenButtonsModel.defaultBorderRadius;
-    if (obj.elevation == null) obj.elevation = KenButtonsModel.defaultElevation;
-    if (obj.fontSize == null) obj.fontSize = KenButtonsModel.defaultFontSize;
-    if (obj.fontColor == null) obj.fontColor = KenButtonsModel.defaultFontColor;
-    if (obj.fontBold == null) obj.fontBold = KenButtonsModel.defaultFontBold;
-    if (obj.iconSize == null) obj.iconSize = KenButtonsModel.defaultIconSize;
-    if (obj.iconColor == null) obj.iconColor = KenButtonsModel.defaultIconColor;
+    obj.backColor ??= KenButtonsModel.defaultBackColor;
+    obj.borderColor ??= KenButtonsModel.defaultBorderColor;
+    obj.borderWidth ??= KenButtonsModel.defaultBorderWidth;
+    obj.borderRadius ??= KenButtonsModel.defaultBorderRadius;
+    obj.elevation ??= KenButtonsModel.defaultElevation;
+    obj.fontSize ??= KenButtonsModel.defaultFontSize;
+    obj.fontColor ??= KenButtonsModel.defaultFontColor;
+    obj.fontBold ??= KenButtonsModel.defaultFontBold;
+    obj.iconSize ??= KenButtonsModel.defaultIconSize;
+    obj.iconColor ??= KenButtonsModel.defaultIconColor;
   }
 }

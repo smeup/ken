@@ -5,7 +5,6 @@ import '../models/widgets/ken_model.dart';
 import '../models/widgets/ken_slider_model.dart';
 import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
-import 'kenEnumCallback.dart';
 import 'kenSliderWidget.dart';
 import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';
@@ -163,7 +162,7 @@ class _KenSliderState extends State<KenSlider>
 
     final children = Center(
       child: Container(
-          padding: EdgeInsets.only(left: 10, right: 10),
+          padding: const EdgeInsets.only(left: 10, right: 10),
           child: KenSliderWidget(
             widget.scaffoldKey,
             widget.formKey,

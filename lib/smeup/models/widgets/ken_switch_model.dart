@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
@@ -100,7 +102,7 @@ class KenSwitchModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupSwitchDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }
@@ -108,8 +110,8 @@ class KenSwitchModel extends KenModel implements KenDataInterface {
   static setDefaults(dynamic obj) {
     var radioTheme = KenConfigurationService.getTheme()!.switchTheme;
 
-    defaultThumbColor = radioTheme.thumbColor!.resolve(Set<MaterialState>());
-    defaultTrackColor = radioTheme.trackColor!.resolve(Set<MaterialState>());
+    defaultThumbColor = radioTheme.thumbColor!.resolve(<MaterialState>{});
+    defaultTrackColor = radioTheme.trackColor!.resolve(<MaterialState>{});
 
     var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
@@ -119,18 +121,12 @@ class KenSwitchModel extends KenModel implements KenDataInterface {
 
     // ----------------- set properties from default
 
-    if (obj.thumbColor == null)
-      obj.thumbColor = KenSwitchModel.defaultThumbColor;
-    if (obj.trackColor == null)
-      obj.trackColor = KenSwitchModel.defaultTrackColor;
+    obj.thumbColor ??= KenSwitchModel.defaultThumbColor;
+    obj.trackColor ??= KenSwitchModel.defaultTrackColor;
 
-    if (obj.captionFontColor == null)
-      obj.captionFontColor = KenSwitchModel.defaultCaptionFontColor;
-    if (obj.captionFontSize == null)
-      obj.captionFontSize = KenSwitchModel.defaultCaptionFontSize;
-    if (obj.captionBackColor == null)
-      obj.captionBackColor = KenSwitchModel.defaultCaptionBackColor;
-    if (obj.captionFontBold == null)
-      obj.captionFontBold = KenSwitchModel.defaultCaptionFontBold;
+    obj.captionFontColor ??= KenSwitchModel.defaultCaptionFontColor;
+    obj.captionFontSize ??= KenSwitchModel.defaultCaptionFontSize;
+    obj.captionBackColor ??= KenSwitchModel.defaultCaptionBackColor;
+    obj.captionFontBold ??= KenSwitchModel.defaultCaptionFontBold;
   }
 }

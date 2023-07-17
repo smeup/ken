@@ -17,15 +17,16 @@ class KenChartRow {
     cells = List<dynamic>.empty(growable: true);
     for (var i = 0; i < _columns.length; i++) {
       var jsonValue = jsonMap[i];
-      if (jsonValue == null) jsonValue = 0;
+      jsonValue ??= 0;
 
       double cellValue = 0;
-      if (jsonValue is double)
+      if (jsonValue is double) {
         cellValue = jsonValue;
-      else if (jsonValue is int)
+      } else if (jsonValue is int) {
         cellValue = double.parse(jsonValue.toString());
-      else
+      } else {
         cellValue = double.parse(jsonValue);
+      }
 
       cells!.add(cellValue);
     }

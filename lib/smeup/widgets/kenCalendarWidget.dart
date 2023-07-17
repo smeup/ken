@@ -1,5 +1,7 @@
 //import 'dart:io';
 
+// ignore_for_file: deprecated_member_use
+
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -10,7 +12,6 @@ import '../models/widgets/ken_section_model.dart';
 import '../services/ken_configuration_service.dart';
 import '../services/ken_log_service.dart';
 import '../services/ken_message_bus.dart';
-import 'kenEnumCallback.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../services/ken_utilities.dart';
@@ -148,15 +149,19 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
     double? calendarHeight = widget.height;
     double? calendarWidth = widget.width;
     if (_model != null && _model!.parent != null) {
-      if (calendarHeight == 0)
+      if (calendarHeight == 0) {
         calendarHeight = (_model!.parent as KenSectionModel).height;
-      if (calendarWidth == 0)
+      }
+      if (calendarWidth == 0) {
         calendarWidth = (_model!.parent as KenSectionModel).width;
+      }
     } else {
-      if (calendarHeight == 0)
+      if (calendarHeight == 0) {
         calendarHeight = KenUtilities.getDeviceInfo().safeHeight;
-      if (calendarWidth == 0)
+      }
+      if (calendarWidth == 0) {
         calendarWidth = KenUtilities.getDeviceInfo().safeWidth;
+      }
     }
 
     double separatorHeight = 8.0;
@@ -180,7 +185,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
         .bodyText2!
         .copyWith(
             color: Colors.black,
-            backgroundColor: Color.fromARGB(
+            backgroundColor: const Color.fromARGB(
                 255, 166, 202, 207)); // background of the calendar
     final markerStyle = KenConfigurationService.getTheme()!.textTheme.headline4;
 
@@ -231,12 +236,12 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
                       titleTextStyle.copyWith(fontSize: widget.titleFontSize),
                   titleCentered: true,
                   formatButtonVisible: false,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color:
                           Colors.transparent), // bg header ( icon plus text )
-                  leftChevronIcon: Icon(Icons.arrow_back_ios,
+                  leftChevronIcon: const Icon(Icons.arrow_back_ios,
                       color: /*iconTheme.color */ Colors.black87),
-                  rightChevronIcon: Icon(Icons.arrow_forward_ios,
+                  rightChevronIcon: const Icon(Icons.arrow_forward_ios,
                       color: /*iconTheme.color */ Colors.black87),
                 ),
 
@@ -266,11 +271,11 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
 
                     return AnimatedContainer(
                         duration: const Duration(seconds: 2),
-                        padding: EdgeInsets.all(0),
+                        padding: const EdgeInsets.all(0),
                         // color: Color.fromARGB(255, 161, 196, 201),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
-                            color: Color.fromARGB(255, 148, 181, 185)),
+                            color: const Color.fromARGB(255, 148, 181, 185)),
                         // decoration: BoxDecoration(
                         //     color: Color.fromARGB(255, 132, 49, 43)),
 
@@ -335,44 +340,40 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
             if (_selectedEvents != null)
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
-                child: Container(
-                  // height: _selectedEvents!.value.length.toInt() *
-                  //     (Platform.isIOS ? 75 : 63),
-                  child: ValueListenableBuilder<List<KenCalendarEventModel>>(
-                    valueListenable: _selectedEvents!,
-                    builder: (context, event, _) {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        reverse: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: event.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: const EdgeInsets.symmetric(
-                              horizontal: 12.0,
-                              vertical: 4.0,
-                            ),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: event[index].markerBackgroundColor),
-                              borderRadius: BorderRadius.circular(4.0),
-                              shape: BoxShape.rectangle,
-                              color: event[index].markerBackgroundColor,
-                            ),
-                            child: ListTile(
-                              // box event under calendar
-                              visualDensity:
-                                  VisualDensity(horizontal: -1, vertical: -1),
-                              onTap: () => _eventClicked(
-                                  event[index].day!, _focusDay,
-                                  event: event[index]),
-                              title: _getListTileWidget(event[index]),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ),
+                child: ValueListenableBuilder<List<KenCalendarEventModel>>(
+                  valueListenable: _selectedEvents!,
+                  builder: (context, event, _) {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      reverse: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: event.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 12.0,
+                            vertical: 4.0,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: event[index].markerBackgroundColor),
+                            borderRadius: BorderRadius.circular(4.0),
+                            shape: BoxShape.rectangle,
+                            color: event[index].markerBackgroundColor,
+                          ),
+                          child: ListTile(
+                            // box event under calendar
+                            visualDensity: const VisualDensity(
+                                horizontal: -1, vertical: -1),
+                            onTap: () => _eventClicked(
+                                event[index].day!, _focusDay,
+                                event: event[index]),
+                            title: _getListTileWidget(event[index]),
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
           ],
@@ -411,7 +412,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
     if (eventsInDay == null) return null;
     final ev = eventsInDay[0];
     return Container(
-      padding: EdgeInsets.only(right: 0, left: 0, bottom: 10),
+      padding: const EdgeInsets.only(right: 0, left: 0, bottom: 10),
       child: Container(
         height: 6,
         width: 6,
@@ -431,7 +432,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
     if (date.weekday == 6 || date.weekday == 7) textColor = Colors.black54;
 
     var list = _getEventsForDay(date);
-    if (list.length > 0) {
+    if (list.isNotEmpty) {
       containerBackcolor = list[0].backgroundColor;
     }
 
@@ -449,7 +450,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
           '${date.day}',
           style: dayTextStyle.copyWith(
             fontSize: widget.dayFontSize,
-            backgroundColor: Color(0xF206899B40),
+            backgroundColor: const Color(0xF206899B40),
             color: textColor,
           ),
         ),
@@ -460,7 +461,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
   bool _isHoliday(DateTime date) {
     DateTime key = DateTime(date.year, date.month, date.day);
     return widget.holidays != null &&
-        widget.holidays!.length > 0 &&
+        widget.holidays!.isNotEmpty &&
         widget.holidays!.keys.contains(key);
   }
 
@@ -477,8 +478,9 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
     if (_isLoading) return;
     _selectedEvents!.value = _getEventsForDay(selectedDay);
     widget.setDataLoad!(widget.id, true);
-    if (widget.clientOnDaySelected != null)
+    if (widget.clientOnDaySelected != null) {
       widget.clientOnDaySelected!(selectedDay);
+    }
     if (_selectedEvents!.value.length >= 0) {
       setState(() {
         _selectedDay = selectedDay;

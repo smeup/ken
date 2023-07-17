@@ -21,7 +21,7 @@ Future<void> main() async {
 }
 
 runTests(tester) async {
-  final findKey1 = find.byKey(Key('combo1'));
+  final findKey1 = find.byKey(const Key('combo1'));
   expect(findKey1, findsOneWidget);
 
   var findWidget = find.byType(KenCombo);
@@ -75,8 +75,8 @@ KenCombo getCombo() {
 
 Widget getTestWidget(KenCombo combo) {
   return MediaQuery(
-      data: new MediaQueryData(),
-      child: new MaterialApp(
+      data: const MediaQueryData(),
+      child: MaterialApp(
           home: Scaffold(
         appBar: AppBar(),
         body: SingleChildScrollView(

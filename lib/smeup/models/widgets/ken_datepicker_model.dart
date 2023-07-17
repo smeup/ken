@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
@@ -168,7 +170,7 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-        await this.getData();
+        await getData();
         // await SmeupDatePickerDao.getData(this);
       };
     }
@@ -189,7 +191,7 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
 
     var buttonStyle =
         KenConfigurationService.getTheme()!.elevatedButtonTheme.style!;
-    defaultElevation = buttonStyle.elevation!.resolve(Set<MaterialState>());
+    defaultElevation = buttonStyle.elevation!.resolve(<MaterialState>{});
 
     var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
@@ -202,25 +204,16 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
     defaultCaptionFontColor = captionStyle.color;
 
     // ----------------- set properties from default
-    if (obj.backColor == null)
-      obj.backColor = KenDatePickerModel.defaultBackColor;
-    if (obj.elevation == null)
-      obj.elevation = KenDatePickerModel.defaultElevation;
-    if (obj.borderColor == null)
-      obj.borderColor = KenDatePickerModel.defaultBorderColor;
-    if (obj.borderWidth == null)
-      obj.borderWidth = KenDatePickerModel.defaultBorderWidth;
-    if (obj.borderRadius == null)
-      obj.borderRadius = KenDatePickerModel.defaultBorderRadius;
-    if (obj.fontBold == null) obj.fontBold = KenDatePickerModel.defaultFontBold;
-    if (obj.fontColor == null)
-      obj.fontColor = KenDatePickerModel.defaultFontColor;
-    if (obj.fontSize == null) obj.fontSize = KenDatePickerModel.defaultFontSize;
-    if (obj.captionFontBold == null)
-      obj.captionFontBold = KenDatePickerModel.defaultCaptionFontBold;
-    if (obj.captionFontColor == null)
-      obj.captionFontColor = KenDatePickerModel.defaultCaptionFontColor;
-    if (obj.captionFontSize == null)
-      obj.captionFontSize = KenDatePickerModel.defaultCaptionFontSize;
+    obj.backColor ??= KenDatePickerModel.defaultBackColor;
+    obj.elevation ??= KenDatePickerModel.defaultElevation;
+    obj.borderColor ??= KenDatePickerModel.defaultBorderColor;
+    obj.borderWidth ??= KenDatePickerModel.defaultBorderWidth;
+    obj.borderRadius ??= KenDatePickerModel.defaultBorderRadius;
+    obj.fontBold ??= KenDatePickerModel.defaultFontBold;
+    obj.fontColor ??= KenDatePickerModel.defaultFontColor;
+    obj.fontSize ??= KenDatePickerModel.defaultFontSize;
+    obj.captionFontBold ??= KenDatePickerModel.defaultCaptionFontBold;
+    obj.captionFontColor ??= KenDatePickerModel.defaultCaptionFontColor;
+    obj.captionFontSize ??= KenDatePickerModel.defaultCaptionFontSize;
   }
 }

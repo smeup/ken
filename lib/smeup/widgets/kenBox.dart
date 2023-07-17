@@ -165,11 +165,12 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             .where((element) => element.event == 'delete')
             .length;
 
-    if (no > 0)
+    if (no > 0) {
       deleteDynamism = widget.dynamisms!.firstWhere(
         (element) => element.event == 'delete',
         //orElse: () => null as Dynamism
       );
+    }
 
     Widget res = widget.dismissEnabled!
         ? Dismissible(
@@ -242,10 +243,10 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             },
             background: Container(
               color: Colors.red,
-              margin: EdgeInsets.symmetric(horizontal: 15),
+              margin: const EdgeInsets.symmetric(horizontal: 15),
               alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
+              child: const Padding(
+                padding: EdgeInsets.all(20.0),
                 child: Icon(
                   Icons.delete,
                   color: Colors.white,
@@ -301,7 +302,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             shape: component
                 ? widget.cardTheme!.shape
                 : RoundedRectangleBorder(
-                    side: BorderSide(
+                    side: const BorderSide(
                         width: 3, color: Color.fromARGB(198, 246, 167, 101)),
                     borderRadius: BorderRadius.circular(20)),
             child: Padding(
@@ -349,7 +350,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   height: widget.height,
                   child: FutureBuilder<Widget>(
                       future: _getLayout2Async(data, cols),
@@ -437,7 +438,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   height: widget.height,
                   child: FutureBuilder<Widget>(
                       future: _getLayout4Async(data, cols),
@@ -482,7 +483,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   height: widget.height,
                   child: FutureBuilder<Widget>(
                       future: _getLayout5Async(data, cols),
@@ -643,7 +644,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
         String rowData = await _getBoxText(data, col);
 
         final colWidget = Container(
-            padding: EdgeInsets.all(1),
+            padding: const EdgeInsets.all(1),
             child: Row(children: [
               if (col['text'].isNotEmpty)
                 Expanded(
@@ -700,7 +701,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
         String rowData = await _getBoxText(data, col);
 
         final textWidget = Container(
-          padding: EdgeInsets.all(1),
+          padding: const EdgeInsets.all(1),
           child: Row(children: [
             if (col['text'].isNotEmpty)
               Expanded(
@@ -748,7 +749,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
         String rowData = await _getBoxText(data, col);
 
         final colWidget = Container(
-            padding: EdgeInsets.all(1),
+            padding: const EdgeInsets.all(1),
             child: Row(children: [
               if (col['text'].isNotEmpty)
                 Expanded(
@@ -818,9 +819,9 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
 
   List<dynamic>? _getColumns(dynamic data) {
     if (_columns == null) {
-      if (widget.columns != null)
+      if (widget.columns != null) {
         _columns = widget.columns;
-      else {
+      } else {
         _columns = List<dynamic>.empty(growable: true);
         (data as Map).keys.forEach((element) {
           _columns!.add({

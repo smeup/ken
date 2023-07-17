@@ -67,7 +67,7 @@ class KenGaugeModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupGaugeDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_combo_item_model.dart';
@@ -292,7 +294,7 @@ class _KenComboState extends State<KenCombo>
           children: [
             text,
             SizedBox(width: widget.innerSpace),
-            Expanded(child: Align(child: combo, alignment: widget.align!)),
+            Expanded(child: Align(alignment: widget.align!, child: combo)),
           ],
         ),
         line
@@ -305,8 +307,8 @@ class _KenComboState extends State<KenCombo>
             children: [
               Expanded(
                   child: Align(
-                child: combo,
                 alignment: widget.align!,
+                child: combo,
               )),
               SizedBox(width: widget.innerSpace),
               text,
@@ -323,13 +325,13 @@ class _KenComboState extends State<KenCombo>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Align(
-              child: text,
               alignment: Alignment.centerLeft,
+              child: text,
             ),
             SizedBox(height: widget.innerSpace),
             Align(
-              child: combo,
               alignment: Alignment.centerLeft,
+              child: combo,
             ),
             line
           ],
@@ -343,13 +345,13 @@ class _KenComboState extends State<KenCombo>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Align(
-              child: combo,
               alignment: Alignment.centerLeft,
+              child: combo,
             ),
             SizedBox(height: widget.innerSpace),
             Align(
-              child: text,
               alignment: Alignment.centerLeft,
+              child: text,
             ),
             line
           ],
@@ -358,16 +360,13 @@ class _KenComboState extends State<KenCombo>
       );
     } else // center
     {
-      children = Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            combo,
-            SizedBox(width: widget.innerSpace),
-            Expanded(child: text),
-          ],
-        ),
-        //color: widget.backColor,
+      children = Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          combo,
+          SizedBox(width: widget.innerSpace),
+          Expanded(child: text),
+        ],
       );
     }
 

@@ -65,11 +65,8 @@ class KenWaitModel extends KenModel implements KenDataInterface {
 
     // ----------------- set properties from default
 
-    if (obj.splashColor == null)
-      obj.splashColor = KenWaitModel.defaultSplashColor;
-    if (obj.loaderColor == null)
-      obj.loaderColor = KenWaitModel.defaultSplashColor;
-    if (obj.circularTrackColor == null)
-      obj.circularTrackColor = KenWaitModel.defaultcircularTrackColor;
+    obj.splashColor ??= KenWaitModel.defaultSplashColor;
+    obj.loaderColor ??= KenWaitModel.defaultSplashColor;
+    obj.circularTrackColor ??= KenWaitModel.defaultcircularTrackColor;
   }
 }

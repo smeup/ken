@@ -69,9 +69,8 @@ class KenProgressIndicatorModel extends KenModel implements KenDataInterface {
 
     // ----------------- set properties from default
 
-    if (obj.color == null) obj.color = KenProgressIndicatorModel.defaultColor;
-    if (obj.circularTrackColor == null)
-      obj.circularTrackColor =
-          KenProgressIndicatorModel.defaultCircularTrackColor;
+    obj.color ??= KenProgressIndicatorModel.defaultColor;
+    obj.circularTrackColor ??=
+        KenProgressIndicatorModel.defaultCircularTrackColor;
   }
 }

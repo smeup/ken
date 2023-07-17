@@ -8,9 +8,9 @@ Future<void> main() async {
   testWidgets('Test static contructor ', (WidgetTester tester) async {
     await WidgetTestService.initTests();
 
-    Widget testWidget = new MediaQuery(
-        data: new MediaQueryData(),
-        child: new MaterialApp(
+    Widget testWidget = MediaQuery(
+        data: const MediaQueryData(),
+        child: MaterialApp(
           home: Scaffold(
               appBar: AppBar(),
               body: SingleChildScrollView(
@@ -52,6 +52,6 @@ Future<void> main() async {
 }
 
 runTests() {
-  final findKey1 = find.byKey(Key('sld1'));
+  final findKey1 = find.byKey(const Key('sld1'));
   expect(findKey1, findsOneWidget);
 }

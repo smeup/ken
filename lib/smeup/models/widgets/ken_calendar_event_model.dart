@@ -1,7 +1,9 @@
+// ignore_for_file: unnecessary_string_interpolations
+
 import 'package:flutter/material.dart';
 
 class KenCalendarEventModel {
-  Color backgroundColor = Color.fromRGBO(224, 226, 109, 1);
+  Color backgroundColor = const Color.fromRGBO(224, 226, 109, 1);
   Color fontColor = Colors.black;
   FontWeight fontWeight = FontWeight.normal;
   Color markerBackgroundColor = Colors.blue;
@@ -23,26 +25,28 @@ class KenCalendarEventModel {
       String? styleColumnName,
       String? initColumnName,
       String? endColumnName) {
-    this.day = DateTime.parse(fields[dataColumnName].toString());
-    this.initTime = _toTime(fields[initColumnName]);
-    this.endTime = _toTime(fields[endColumnName]);
-    this.description = fields[titleColumnName] ?? '';
+    day = DateTime.parse(fields[dataColumnName].toString());
+    initTime = _toTime(fields[initColumnName]);
+    endTime = _toTime(fields[endColumnName]);
+    description = fields[titleColumnName] ?? '';
     String style = fields[styleColumnName] ?? '';
 
     switch (style) {
       case 'secondary': // secondary
-        backgroundColor = Color.fromRGBO(6, 137, 155, 1); // primary dark
+        backgroundColor = const Color.fromRGBO(6, 137, 155, 1); // primary dark
         fontColor = Colors.black;
         fontWeight = FontWeight.normal;
         markerBackgroundColor =
-            Color.fromRGBO(255, 186, 69, 1); // secondary light
+            const Color.fromRGBO(255, 186, 69, 1); // secondary light
         markerFontColor = Colors.black;
         break;
       default: // primary
-        backgroundColor = Color.fromRGBO(255, 186, 69, 1); // secondary light
+        backgroundColor =
+            const Color.fromRGBO(255, 186, 69, 1); // secondary light
         fontColor = Colors.black;
         fontWeight = FontWeight.normal;
-        markerBackgroundColor = Color.fromRGBO(0, 92, 109, 1); // primary dark
+        markerBackgroundColor =
+            const Color.fromRGBO(0, 92, 109, 1); // primary dark
         markerFontColor = Colors.white;
         break;
     }

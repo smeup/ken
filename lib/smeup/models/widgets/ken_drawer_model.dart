@@ -61,9 +61,8 @@ class KenDrawerModel extends KenModel {
             id: id,
             type: type,
             instanceCallBack: instanceCallBack) {
-    if (appBarBackColor == null)
-      appBarBackColor =
-          KenConfigurationService.getTheme()!.appBarTheme.backgroundColor;
+    appBarBackColor ??=
+        KenConfigurationService.getTheme()!.appBarTheme.backgroundColor;
     setDefaults(this);
   }
 
@@ -113,7 +112,7 @@ class KenDrawerModel extends KenModel {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupDrawerDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }
@@ -135,21 +134,14 @@ class KenDrawerModel extends KenModel {
 
     // ----------------- set properties from default
 
-    if (obj.titleFontSize == null)
-      obj.titleFontSize = KenDrawerModel.defaultTitleFontSize;
-    if (obj.titleFontColor == null)
-      obj.titleFontColor = KenDrawerModel.defaultTitleFontColor;
-    if (obj.titleFontBold == null)
-      obj.titleFontBold = KenDrawerModel.defaultTitleFontBold;
+    obj.titleFontSize ??= KenDrawerModel.defaultTitleFontSize;
+    obj.titleFontColor ??= KenDrawerModel.defaultTitleFontColor;
+    obj.titleFontBold ??= KenDrawerModel.defaultTitleFontBold;
 
-    if (obj.elementFontSize == null)
-      obj.elementFontSize = KenDrawerModel.defaultElementFontSize;
-    if (obj.elementFontColor == null)
-      obj.elementFontColor = KenDrawerModel.defaultElementFontColor;
-    if (obj.elementFontBold == null)
-      obj.elementFontBold = KenDrawerModel.defaultElementFontBold;
+    obj.elementFontSize ??= KenDrawerModel.defaultElementFontSize;
+    obj.elementFontColor ??= KenDrawerModel.defaultElementFontColor;
+    obj.elementFontBold ??= KenDrawerModel.defaultElementFontBold;
 
-    if (obj.appBarBackColor == null)
-      obj.appBarBackColor = KenDrawerModel.defaultAppBarBackColor;
+    obj.appBarBackColor ??= KenDrawerModel.defaultAppBarBackColor;
   }
 }

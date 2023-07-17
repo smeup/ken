@@ -147,7 +147,7 @@ class Fun {
 
   dynamic _checkFunElement(dynamicFun) {
     if (dynamicFun != null &&
-        (dynamicFun as Map).entries.length > 0 &&
+        (dynamicFun as Map).entries.isNotEmpty &&
         dynamicFun['fun'] == null) {
       Map newEl = {'fun': dynamicFun};
       dynamicFun = newEl;
@@ -160,7 +160,7 @@ class Fun {
     String arg = extractArg(funString, 'F');
     var argSplit = arg.split(';');
     var id = FunIdentifier('', '', '');
-    if (argSplit.length > 0) {
+    if (argSplit.isNotEmpty) {
       id.component = argSplit[0];
     }
     if (argSplit.length > 1) {
@@ -212,7 +212,7 @@ class Fun {
       String valT = '';
       String valP = '';
       String valK = '';
-      if (argSplit.length > 0) valT = argSplit[0];
+      if (argSplit.isNotEmpty) valT = argSplit[0];
       if (argSplit.length > 1) valP = argSplit[1];
       if (argSplit.length > 2) valK = argSplit[2];
       list.add(FunObject('obj$i', valT, valP, valK));
@@ -225,7 +225,7 @@ class Fun {
     var argSplit = arg.split(',');
     String val1 = '';
     String val2 = '';
-    if (argSplit.length > 0) val1 = argSplit[0].trim();
+    if (argSplit.isNotEmpty) val1 = argSplit[0].trim();
     if (argSplit.length > 1) val2 = argSplit[1].trim();
     String cache =
         extractArg(val1.contains('cache') ? val1 : val2, 'cache', prefix: '');
@@ -346,9 +346,9 @@ class Fun {
   }
 
   replaceVariables() {
-    String funString = this.getSmeupFormatString();
+    String funString = getSmeupFormatString();
     funString = KenUtilities.replaceVariables(funString, formKey);
-    Fun newFun = Fun(funString, this.formKey, this.scaffoldKey, this.context);
+    Fun newFun = Fun(funString, formKey, scaffoldKey, context);
     parameters = newFun.parameters;
     server = newFun.server;
     identifier = newFun.identifier;
@@ -360,8 +360,8 @@ class Fun {
   }
 
   getJson() {
-    var fun = Map();
-    fun['fun'] = Map();
+    var fun = {};
+    fun['fun'] = {};
 
     fun['fun']['component'] = identifier.component;
     fun['fun']['service'] = identifier.service;
@@ -369,13 +369,13 @@ class Fun {
 
     for (var i = 1; i < 7; i++) {
       FunObject funObject = getObjectByName('obj$i');
-      fun['fun']['obj$i'] = Map();
+      fun['fun']['obj$i'] = {};
       fun['fun']['obj$i']['t'] = funObject.t;
       fun['fun']['obj$i']['p'] = funObject.p;
       fun['fun']['obj$i']['k'] = funObject.k;
     }
 
-    if (parameters.length > 0) {
+    if (parameters.isNotEmpty) {
       String parmsStr = 'P(';
       for (var p = 0; p < parameters.length; p++) {
         final parm = parameters[p];
@@ -388,7 +388,7 @@ class Fun {
       fun['fun']['P'] = '';
     }
 
-    if (server.length > 0) {
+    if (server.isNotEmpty) {
       String serverStr = 'SERVER(';
       for (var p = 0; p < server.length; p++) {
         final parm = server[p];
@@ -432,8 +432,9 @@ class Fun {
         String valT = funObject.t.trim();
         String valP = funObject.p.trim();
         String valK = funObject.k.trim();
-        if (valT.isNotEmpty || valP.isNotEmpty || valK.isNotEmpty)
+        if (valT.isNotEmpty || valP.isNotEmpty || valK.isNotEmpty) {
           object = '$i($valT;$valP;$valK)';
+        }
 
         if (object.isNotEmpty) {
           smeupFormatString += ' $object';
@@ -441,7 +442,7 @@ class Fun {
       }
 
       // parameters
-      if (parameters.length > 0) {
+      if (parameters.isNotEmpty) {
         String parmsStr = 'P(';
         for (var p = 0; p < parameters.length; p++) {
           final parm = parameters[p];
@@ -464,7 +465,7 @@ class Fun {
 
       // SERVER
 
-      if (server.length > 0) {
+      if (server.isNotEmpty) {
         String serverStr = 'SERVER(';
         for (var p = 0; p < server.length; p++) {
           final parm = server[p];

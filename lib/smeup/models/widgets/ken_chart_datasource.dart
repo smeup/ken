@@ -14,7 +14,7 @@ class KenChartDatasource {
     rows = List<KenChartRow>.empty(growable: true);
 
     if (jsonData['columns'] != null &&
-        (jsonData['columns'] as List).length > 0) {
+        (jsonData['columns'] as List).isNotEmpty) {
       jsonData['columns']
           .forEach((c) => columns!.add(KenChartColumn.fromMap(c)));
       jsonData['rows']

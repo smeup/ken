@@ -90,7 +90,7 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupProgressBarDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }
@@ -103,8 +103,7 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
 
     // ----------------- set properties from default
 
-    if (obj.color == null) obj.color = KenProgressBarModel.defaultColor;
-    if (obj.linearTrackColor == null)
-      obj.linearTrackColor = KenProgressBarModel.defaultLinearTrackColor;
+    obj.color ??= KenProgressBarModel.defaultColor;
+    obj.linearTrackColor ??= KenProgressBarModel.defaultLinearTrackColor;
   }
 }

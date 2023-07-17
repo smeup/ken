@@ -63,7 +63,7 @@ class KenInputPanelModel extends KenModel implements KenDataInterface {
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-        await this.getData();
+        await getData();
 
         // missing SmeupVariablesService
 

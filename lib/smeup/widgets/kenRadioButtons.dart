@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_model.dart';
@@ -207,13 +209,16 @@ class _KenRadioButtonsState extends State<KenRadioButtons>
     double? radioHeight = widget.height;
     double? radioWidth = widget.width;
     if (_model != null && _model!.parent != null) {
-      if (radioHeight == 0)
+      if (radioHeight == 0) {
         radioHeight = (_model!.parent as KenSectionModel).height;
-      if (radioWidth == 0)
+      }
+      if (radioWidth == 0) {
         radioWidth = (_model!.parent as KenSectionModel).width;
+      }
     } else {
-      if (radioHeight == 0)
+      if (radioHeight == 0) {
         radioHeight = KenUtilities.getDeviceInfo().safeHeight;
+      }
       if (radioWidth == 0) radioWidth = KenUtilities.getDeviceInfo().safeWidth;
     }
 
@@ -254,7 +259,7 @@ class _KenRadioButtonsState extends State<KenRadioButtons>
       buttons.add(button);
     });
 
-    if (buttons.length > 0) {
+    if (buttons.isNotEmpty) {
       for (var i = 0; i < buttons.length; i++) {
         if (buttons[i] is KenRadioButton) {
           var others = List<KenRadioButton>.empty(growable: true);
@@ -286,7 +291,7 @@ class _KenRadioButtonsState extends State<KenRadioButtons>
             children: [
               title,
               GridView.count(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 childAspectRatio: childAspectRatio,
                 crossAxisCount: widget.columns!,

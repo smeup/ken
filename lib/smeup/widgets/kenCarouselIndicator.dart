@@ -25,12 +25,12 @@ class _KenCarouselIndicatorState extends State<KenCarouselIndicator> {
       var cont = Container(
         width: 8.0,
         height: 8.0,
-        margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+        margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
         decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: notifier.index == i
-                ? Color.fromRGBO(63, 187, 211, 1)
-                : Color.fromRGBO(0, 96, 116, 1)),
+                ? const Color.fromRGBO(63, 187, 211, 1)
+                : const Color.fromRGBO(0, 96, 116, 1)),
       );
 
       list.add(cont);

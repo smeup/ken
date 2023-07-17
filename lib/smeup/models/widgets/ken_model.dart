@@ -43,7 +43,7 @@ class KenModel extends KenDao {
   KenModel(this.formKey, this.scaffoldKey, this.context,
       {this.title, this.id, this.type, required this.instanceCallBack})
       : super(instanceCallBack: instanceCallBack) {
-    this.smeupModel = this;
+    smeupModel = this;
 
     instanceCallBack(ServicesCallbackType.defaultInstance, null, this);
   }
@@ -55,7 +55,7 @@ class KenModel extends KenDao {
     this.context,
     this.instanceCallBack,
   ) : super(instanceCallBack: instanceCallBack) {
-    this.smeupModel = this;
+    smeupModel = this;
 
     instanceCallBack(ServicesCallbackType.fromMap, jsonMap, this);
   }
@@ -63,7 +63,7 @@ class KenModel extends KenDao {
   bool isFirestore() {
     var isFirestore = false;
     try {
-      if (smeupModel!.smeupFun!.server.length > 0) {
+      if (smeupModel!.smeupFun!.server.isNotEmpty) {
         var el = smeupModel!.smeupFun!.server
             .where((element) => element["key"] == "source")
             .toList();

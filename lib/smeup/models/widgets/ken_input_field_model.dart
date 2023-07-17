@@ -52,7 +52,7 @@ class KenInputFieldModel extends KenModel implements KenDataInterface {
     _addFieldPathToFun(smeupFun);
 
     // SmeupInputFieldDao.getValidation(this);
-    this.getValidation();
+    getValidation();
   }
 
   _addFieldPathToFun(Fun? fun) {

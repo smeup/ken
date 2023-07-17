@@ -52,6 +52,6 @@ class KenSplashModel extends KenModel implements KenDataInterface {
 
     // ----------------- set properties from default
 
-    if (obj.color == null) obj.color = KenSplashModel.defaultColor;
+    obj.color ??= KenSplashModel.defaultColor;
   }
 }

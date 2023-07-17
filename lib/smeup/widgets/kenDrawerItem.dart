@@ -29,7 +29,7 @@ class KenDrawerItem extends StatelessWidget {
     final title = Align(
         alignment: align, child: Text(text!, style: _getElementTextStile()));
 
-    Function function = () {
+    function() {
       if (action != null) {
         action!(context);
       } else {
@@ -41,10 +41,9 @@ class KenDrawerItem extends StatelessWidget {
           Navigator.of(context).pushNamed(route!);
         }
       }
-    };
+    }
 
-    return Container(
-        child: Column(
+    return Column(
       children: [
         if (showItemDivider!)
           Divider(
@@ -58,15 +57,15 @@ class KenDrawerItem extends StatelessWidget {
               size: _getIconTheme().size,
             ),
             title: title,
-            onTap: function as void Function()?,
+            onTap: function,
           )
         else
           ListTile(
             title: title,
-            onTap: function as void Function()?,
+            onTap: function,
           ),
       ],
-    ));
+    );
   }
 
   TextStyle _getElementTextStile() {
@@ -78,20 +77,23 @@ class KenDrawerItem extends StatelessWidget {
                 .appBarTheme
                 .backgroundColor);
 
-    if (fontSize != null)
+    if (fontSize != null) {
       style = style.copyWith(
         fontSize: fontSize,
       );
+    }
 
-    if (fontColor != null)
+    if (fontColor != null) {
       style = style.copyWith(
         color: fontColor,
       );
+    }
 
-    if (fontBold != null && fontBold!)
+    if (fontBold != null && fontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
+    }
 
     return style;
   }

@@ -12,7 +12,6 @@ import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
 import 'kenButton.dart';
 import 'kenCalendarWidget.dart';
-import 'kenEnumCallback.dart';
 import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';
 import 'kenWidgetStateMixin.dart';
@@ -92,15 +91,10 @@ class KenCalendar extends StatefulWidget
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
 
-    if (initialDate == null) initialDate = DateTime.now();
+    initialDate ??= DateTime.now();
 
-    if (initialFirstWork == null) {
-      this.initialFirstWork =
-          KenCalendarModel.getInitialFirstWork(initialDate!);
-    }
-    if (initialLastWork == null) {
-      this.initialLastWork = KenCalendarModel.getInitialLastWork(initialDate!);
-    }
+    initialFirstWork ??= KenCalendarModel.getInitialFirstWork(initialDate!);
+    initialLastWork ??= KenCalendarModel.getInitialLastWork(initialDate!);
   }
 
   KenCalendar.withController(
@@ -226,7 +220,7 @@ class KenCalendarState extends State<KenCalendar>
     _lastWork = widget.initialLastWork;
     startFunDate = KenCalendarModel.getStartFunDate(widget.initialDate!);
     endFunDate = KenCalendarModel.getEndFunDate(widget.initialDate!);
-    _events = Map<DateTime?, List<KenCalendarEventModel>>();
+    _events = <DateTime?, List<KenCalendarEventModel>>{};
     _focusDay = widget.initialDate ?? DateTime.now();
     _selectedDay = widget.initialDate ?? DateTime.now();
     _calendarFormat =
@@ -269,10 +263,12 @@ class KenCalendarState extends State<KenCalendar>
     double? calHeight = widget.height;
     double? calWidth = widget.width;
     if (widget.model != null && widget.model!.parent != null) {
-      if (calHeight == 0)
+      if (calHeight == 0) {
         calHeight = (widget.model!.parent as KenSectionModel).height;
-      if (calWidth == 0)
+      }
+      if (calWidth == 0) {
         calWidth = (widget.model!.parent as KenSectionModel).width;
+      }
     } else {
       if (calHeight == 0) calHeight = KenUtilities.getDeviceInfo().safeHeight;
       if (calWidth == 0) calWidth = KenUtilities.getDeviceInfo().safeWidth;
@@ -283,7 +279,7 @@ class KenCalendarState extends State<KenCalendar>
       child: Column(
         children: <Widget>[
           if (widget.showPeriodButtons!) _buildButtons(calHeight, calWidth!),
-          if (widget.showPeriodButtons!) SizedBox(height: 8),
+          if (widget.showPeriodButtons!) const SizedBox(height: 8),
           KenCalendarWidget(
             widget.scaffoldKey,
             widget.formKey,
@@ -426,8 +422,9 @@ class KenCalendarState extends State<KenCalendar>
     startFunDate = KenCalendarModel.getStartFunDate(focusedDay);
     endFunDate = KenCalendarModel.getEndFunDate(focusedDay);
 
-    if (widget.clientOnChangeMonth != null)
+    if (widget.clientOnChangeMonth != null) {
       widget.clientOnChangeMonth!(focusedDay);
+    }
 
     if (widget.model != null) {
       KenMessageBus.instance.publishRequest(

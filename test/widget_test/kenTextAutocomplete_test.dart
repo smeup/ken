@@ -8,9 +8,9 @@ Future<void> main() async {
   testWidgets('Test static contructor ', (WidgetTester tester) async {
     await WidgetTestService.initTests();
 
-    Widget testWidget = new MediaQuery(
-        data: new MediaQueryData(),
-        child: new MaterialApp(
+    Widget testWidget = MediaQuery(
+        data: const MediaQueryData(),
+        child: MaterialApp(
             home: Scaffold(
           appBar: AppBar(),
           body: SingleChildScrollView(
@@ -112,10 +112,10 @@ Future<dynamic> autocompleteCallBack(Widget widget,
 }
 
 Future<void> runTests(WidgetTester tester) async {
-  final findKey = find.byKey(Key('autocomplete1'));
+  final findKey = find.byKey(const Key('autocomplete1'));
   expect(findKey, findsOneWidget);
 
-  final findKeyText = find.byKey(Key('autocomplete1_text'));
+  final findKeyText = find.byKey(const Key('autocomplete1_text'));
   expect(findKeyText, findsOneWidget);
 
   var findWidget = find.byType(KenTextAutocomplete);

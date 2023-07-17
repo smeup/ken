@@ -183,11 +183,11 @@ class _KenInputPanelState extends State<KenInputPanel>
                     if (widget.title!.isNotEmpty)
                       Text(
                         widget.title!,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                     if (widget.title!.isNotEmpty)
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                     _getFields(),
@@ -208,7 +208,7 @@ class _KenInputPanelState extends State<KenInputPanel>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _getInputFieldWidget(field),
-          SizedBox(
+          const SizedBox(
             height: 13,
           ),
         ],
@@ -275,9 +275,7 @@ class _KenInputPanelState extends State<KenInputPanel>
   }
 
   Widget _getComboWidget(SmeupInputPanelField field) {
-    if (field.items == null) {
-      field.items = [];
-    }
+    field.items ??= [];
     return Column(
       children: <Widget>[
         _getLabel(field.label),
@@ -301,9 +299,7 @@ class _KenInputPanelState extends State<KenInputPanel>
   }
 
   Widget _getTextAutocompleteWidget(SmeupInputPanelField field) {
-    if (field.items == null) {
-      field.items = [];
-    }
+    field.items ??= [];
     return Column(
       children: <Widget>[
         _getLabel(field.label),
@@ -365,7 +361,7 @@ class _KenInputPanelState extends State<KenInputPanel>
   }
 
   bool _isConfirmButtonEnabled() {
-    if ((_model != null && _model!.dynamisms.length > 0) ||
+    if ((_model != null && _model!.dynamisms.isNotEmpty) ||
         widget.onSubmit != null) return true;
     return false;
   }

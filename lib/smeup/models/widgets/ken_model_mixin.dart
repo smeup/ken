@@ -18,11 +18,13 @@ mixin KenModelMixin {
     final smeupSectionsModels = List<KenSectionModel>.empty(growable: true);
     List<dynamic>? sectionsJson;
 
-    if (jsonMap is Map && jsonMap.containsKey(sectionName))
+    if (jsonMap is Map && jsonMap.containsKey(sectionName)) {
       sectionsJson = jsonMap[sectionName];
-    else if (sectionName == "_sections_") sectionsJson = jsonMap;
+    } else if (sectionName == "_sections_") {
+      sectionsJson = jsonMap;
+    }
 
-    if (sectionsJson != null)
+    if (sectionsJson != null) {
       sectionsJson.forEach((v) {
         KenSectionModel smeupSectionModel = KenSectionModel.fromMap(
           v,
@@ -34,6 +36,7 @@ mixin KenModelMixin {
         );
         smeupSectionsModels.add(smeupSectionModel);
       });
+    }
 
     return smeupSectionsModels;
   }

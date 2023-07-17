@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/ken_widget_builder_response.dart';
@@ -149,7 +151,7 @@ class KenTextField extends StatefulWidget
 
     // set the widget data
     if (workData != null &&
-        (workData['rows'] as List).length > 0 &&
+        (workData['rows'] as List).isNotEmpty &&
         workData['rows'][0][m.valueField] != null) {
       return workData['rows'][0][m.valueField].toString();
     } else {
@@ -284,7 +286,7 @@ class _KenTextFieldState extends State<KenTextField>
           widget.formKey,
           data: [widget.submitLabel],
           clientOnPressed: widget.clientOnSubmit,
-          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+          padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
           height: 50,
           width: 180,
           //iconSize: 25
@@ -292,7 +294,7 @@ class _KenTextFieldState extends State<KenTextField>
           fontSize: 16,
           //backColor: Color.fromRGBO(6, 140, 154, 10),
           fontColor: Colors.white,
-          iconData: IconData(0xf04ba, fontFamily: 'MaterialIcons'),
+          iconData: const IconData(0xf04ba, fontFamily: 'MaterialIcons'),
           iconSize: 16,
           iconColor: Colors.white,
           align: Alignment.centerRight,
@@ -310,7 +312,7 @@ class _KenTextFieldState extends State<KenTextField>
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             textField,
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             button,

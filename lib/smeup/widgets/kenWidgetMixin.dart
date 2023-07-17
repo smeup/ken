@@ -4,7 +4,7 @@ import 'package:uuid/uuid.dart';
 import '../models/widgets/ken_model.dart';
 import '../services/ken_utilities.dart';
 
-Uuid uuid = Uuid();
+Uuid uuid = const Uuid();
 mixin KenWidgetMixin {
   static Map<int, String> widgetUniqueIds = {};
   String get globallyUniqueId {
@@ -31,9 +31,9 @@ mixin KenWidgetMixin {
     res['type'] = model.data['type'];
 
     if (res['rows'] != null &&
-        (res['rows'] as List).length > 0 &&
+        (res['rows'] as List).isNotEmpty &&
         res['columns'] != null &&
-        (res['columns'] as List).length > 0) {
+        (res['columns'] as List).isNotEmpty) {
       for (var z = 0; z < (res['rows'] as List).length; z++) {
         var row = res['rows'][z];
 
@@ -47,8 +47,9 @@ mixin KenWidgetMixin {
               switch (ogg) {
                 case 'D8*YYMD':
                   var dateToConvert = DateTime.tryParse(cell);
-                  if (dateToConvert != null)
+                  if (dateToConvert != null) {
                     cell = DateFormat("dd/MM/yyyy").format(dateToConvert);
+                  }
                   break;
                 default:
               }

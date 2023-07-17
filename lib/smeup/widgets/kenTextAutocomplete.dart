@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/ken_widget_builder_response.dart';
@@ -269,7 +271,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
             }
 
             return Container(
-              padding: EdgeInsets.only(right: 5),
+              padding: const EdgeInsets.only(right: 5),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(3),
                   border: Border.all(
@@ -303,12 +305,14 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                               ? true
                               : false,
                       onChanged: (value) {
-                        if (widget.clientOnChange != null)
+                        if (widget.clientOnChange != null) {
                           widget.clientOnChange!(value);
+                        }
                       },
                       decoration: InputDecoration(
                         isDense: false,
-                        contentPadding: EdgeInsets.only(left: 5, top: -10),
+                        contentPadding:
+                            const EdgeInsets.only(left: 5, top: -10),
                         floatingLabelAlignment: FloatingLabelAlignment.start,
                         floatingLabelStyle: textStyle,
                         floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -363,7 +367,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                 elevation: .75,
                 color: widget.backColor,
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       border: Border(
                           bottom: BorderSide(
                               width: .5,
@@ -427,7 +431,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
           widget.formKey,
           data: [widget.submitLabel],
           clientOnPressed: widget.clientOnSubmit,
-          padding: EdgeInsets.all(5),
+          padding: const EdgeInsets.all(5),
         );
       } else {
         if (widget.smeupButtons != null) {
@@ -441,7 +445,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             children,
-            SizedBox(
+            const SizedBox(
               height: 2,
             ),
             button,

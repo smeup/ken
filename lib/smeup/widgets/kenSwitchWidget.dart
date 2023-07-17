@@ -40,8 +40,9 @@ class _KenSwitchWidgetState extends State<KenSwitchWidget> {
       onChanged: (changedValue) {
         setState(() {
           _data = changedValue;
-          if (widget.onClientChange != null)
+          if (widget.onClientChange != null) {
             widget.onClientChange!(changedValue);
+          }
         });
       },
     );
@@ -52,9 +53,9 @@ class _KenSwitchWidgetState extends State<KenSwitchWidget> {
         .switchTheme
         .copyWith(
             thumbColor: MaterialStateProperty.all<Color?>(
-                data ? widget.thumbColor : Color(0xFFf2f2f2)),
+                data ? widget.thumbColor : const Color(0xFFf2f2f2)),
             trackColor: MaterialStateProperty.all<Color?>(
-                data ? widget.trackColor : Color(0xFFcccccc)));
+                data ? widget.trackColor : const Color(0xFFcccccc)));
     return style;
   }
 }

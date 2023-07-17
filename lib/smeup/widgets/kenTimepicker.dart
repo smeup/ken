@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/KenMessageBusEventData.dart';
@@ -7,7 +9,6 @@ import '../models/widgets/ken_section_model.dart';
 import '../models/widgets/ken_timepicker_model.dart';
 import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
-import 'kenEnumCallback.dart';
 import 'kenLine.dart';
 import 'kenTimepickerButton.dart';
 import 'kenWidgetInterface.dart';
@@ -101,8 +102,7 @@ class KenTimePicker extends StatefulWidget
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenTimePickerModel.setDefaults(this);
-    if (minutesList == null)
-      this.minutesList = KenTimePickerModel.defaultMinutesList;
+    minutesList ??= KenTimePickerModel.defaultMinutesList;
   }
 
   KenTimePicker.withController(
@@ -235,15 +235,19 @@ class _KenTimePickerState extends State<KenTimePicker>
     double? timePickerHeight = widget.height;
     double? timePickerWidth = widget.width;
     if (_model != null && _model!.parent != null) {
-      if (timePickerHeight == 0)
+      if (timePickerHeight == 0) {
         timePickerHeight = (_model!.parent as KenSectionModel).height;
-      if (timePickerWidth == 0)
+      }
+      if (timePickerWidth == 0) {
         timePickerWidth = (_model!.parent as KenSectionModel).width;
+      }
     } else {
-      if (timePickerHeight == 0)
+      if (timePickerHeight == 0) {
         timePickerHeight = KenUtilities.getDeviceInfo().safeHeight;
-      if (timePickerWidth == 0)
+      }
+      if (timePickerWidth == 0) {
         timePickerWidth = KenUtilities.getDeviceInfo().safeWidth;
+      }
     }
 
     if (!widget.showborder!) {
@@ -316,17 +320,17 @@ class _KenTimePickerState extends State<KenTimePicker>
             SizedBox(width: widget.innerSpace),
             Expanded(
                 child: Align(
+                    alignment: widget.align!,
                     child: Row(
                       children: [
                         Expanded(
                             child: Align(
-                          child: timepicker,
                           alignment: Alignment.centerLeft,
+                          child: timepicker,
                         )),
                         icon,
                       ],
-                    ),
-                    alignment: widget.align!)),
+                    ))),
           ],
         ),
         line
@@ -341,17 +345,17 @@ class _KenTimePickerState extends State<KenTimePicker>
             children: [
               Expanded(
                   child: Align(
+                alignment: widget.align!,
                 child: Row(
                   children: [
                     icon,
                     Expanded(
                         child: Align(
-                      child: timepicker,
                       alignment: Alignment.centerLeft,
+                      child: timepicker,
                     )),
                   ],
                 ),
-                alignment: widget.align!,
               )),
               SizedBox(width: widget.innerSpace),
               text,
@@ -369,22 +373,22 @@ class _KenTimePickerState extends State<KenTimePicker>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Align(
-              child: text,
               alignment: Alignment.centerLeft,
+              child: text,
             ),
             SizedBox(height: widget.innerSpace),
             Align(
+              alignment: Alignment.centerLeft,
               child: Row(
                 children: [
                   Expanded(
                       child: Align(
-                    child: timepicker,
                     alignment: Alignment.centerLeft,
+                    child: timepicker,
                   )),
                   icon
                 ],
               ),
-              alignment: Alignment.centerLeft,
             ),
             line
           ],
@@ -399,22 +403,22 @@ class _KenTimePickerState extends State<KenTimePicker>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Align(
+              alignment: Alignment.centerLeft,
               child: Row(
                 children: [
                   Expanded(
                       child: Align(
-                    child: timepicker,
                     alignment: Alignment.centerLeft,
+                    child: timepicker,
                   )),
                   icon
                 ],
               ),
-              alignment: Alignment.centerLeft,
             ),
             SizedBox(height: widget.innerSpace),
             Align(
-              child: text,
               alignment: Alignment.centerLeft,
+              child: text,
             ),
             line
           ],
@@ -423,16 +427,13 @@ class _KenTimePickerState extends State<KenTimePicker>
       );
     } else // center
     {
-      children = Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            timepicker,
-            SizedBox(width: widget.innerSpace),
-            Expanded(child: text),
-          ],
-        ),
-        //color: widget.backColor,
+      children = Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          timepicker,
+          SizedBox(width: widget.innerSpace),
+          Expanded(child: text),
+        ],
       );
     }
 
@@ -457,7 +458,7 @@ class _KenTimePickerState extends State<KenTimePicker>
                 timePickerTheme.backgroundColor),
             elevation: MaterialStateProperty.all<double?>(widget.elevation),
             padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                EdgeInsets.all(0)),
+                const EdgeInsets.all(0)),
             shape: MaterialStateProperty.all<OutlinedBorder?>(
                 timePickerTheme.shape as OutlinedBorder?),
             side: MaterialStateProperty.all<BorderSide?>(

@@ -29,13 +29,13 @@ class _KenTextPasswordIndicatorsState extends State<KenTextPasswordIndicators> {
     final passwordModel =
         Provider.of<KenTextPasswordRuleNotifier>(context, listen: true);
 
-    if (passwordModel.rules.length > 0) {
+    if (passwordModel.rules.isNotEmpty) {
       list.add(Padding(
         padding: const EdgeInsets.only(top: 10.0, bottom: 10),
         child: LinearProgressIndicator(
           minHeight: 10,
           value: passwordModel.satisfiedRules / passwordModel.totalRules,
-          backgroundColor: Color.fromRGBO(128, 128, 128, 0.5),
+          backgroundColor: const Color.fromRGBO(128, 128, 128, 0.5),
           valueColor:
               AlwaysStoppedAnimation<Color>(_getIndicatorColor(passwordModel)),
         ),

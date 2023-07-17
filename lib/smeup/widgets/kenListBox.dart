@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/material.dart';
 import '../models/KenMessageBusEventData.dart';
@@ -8,7 +10,6 @@ import '../models/widgets/ken_section_model.dart';
 import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
 import 'kenBox.dart';
-import 'kenEnumCallback.dart';
 import 'kenNotAvailable.dart';
 import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';
@@ -185,11 +186,13 @@ class KenListBox extends StatefulWidget
       double? widgetListHeight, KenModel? model, BuildContext context) {
     double? listboxHeight = widgetListHeight;
     if (model != null && model.parent != null) {
-      if (listboxHeight == 0)
+      if (listboxHeight == 0) {
         listboxHeight = (model.parent as KenSectionModel).height;
+      }
     } else {
-      if (listboxHeight == 0)
+      if (listboxHeight == 0) {
         listboxHeight = KenUtilities.getDeviceInfo().safeHeight;
+      }
     }
     return listboxHeight;
   }
@@ -216,7 +219,7 @@ class _KenListBoxState extends State<KenListBox>
     _data = widget.data;
     _selectedRow = widget.selectedRow;
     if (_model != null) widgetLoadType = _model!.widgetLoadType;
-    _scrollController = new ScrollController();
+    _scrollController = ScrollController();
 
     String? localSelectedRow = widget.localSelectedRow;
 
@@ -229,7 +232,7 @@ class _KenListBoxState extends State<KenListBox>
   }
 
   void _runAutomaticScroll() {
-    Future.delayed(Duration(milliseconds: 80), () async {
+    Future.delayed(const Duration(milliseconds: 80), () async {
       double? realBoxHeight = widget.realBoxHeight;
 
       if (widget.listType == KenListType.oriented &&
@@ -251,7 +254,7 @@ class _KenListBoxState extends State<KenListBox>
           if (scrollPosition > formSpace!) {
             if (_scrollController!.positions.isNotEmpty) {
               _scrollController!.animateTo(scrollPosition,
-                  duration: Duration(milliseconds: 80),
+                  duration: const Duration(milliseconds: 80),
                   curve: Curves.bounceInOut);
             }
           }
@@ -345,7 +348,7 @@ class _KenListBoxState extends State<KenListBox>
       controller: _scrollController,
       scrollDirection: widget.orientation!,
       physics: _executeBouncing
-          ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+          ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
           : null,
       itemCount: cells.length,
       itemBuilder: (context, index) {
@@ -369,10 +372,11 @@ class _KenListBoxState extends State<KenListBox>
     var list;
 
     double? boxHeight = 0;
-    if (cells.length > 0)
+    if (cells.isNotEmpty) {
       boxHeight = (cells[0] as KenBox).height;
-    else
+    } else {
       boxHeight = 1;
+    }
 
     int? col = widget.portraitColumns;
     if (_orientation == Orientation.landscape) {
@@ -387,7 +391,7 @@ class _KenListBoxState extends State<KenListBox>
       controller: _scrollController,
       childAspectRatio: childAspectRatio,
       physics: _executeBouncing
-          ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+          ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
           : null,
       scrollDirection: widget.orientation!,
       crossAxisCount: col,
@@ -422,7 +426,8 @@ class _KenListBoxState extends State<KenListBox>
         },
         child: ListWheelScrollView.useDelegate(
           physics: _executeBouncing
-              ? BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+              ? const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics())
               : null,
           controller: _scrollController,
           itemExtent: widget.height!,
@@ -459,8 +464,9 @@ class _KenListBoxState extends State<KenListBox>
     double? boxHeight = widget.height;
     double? boxWidth = widget.width;
     if (_model != null && _model!.parent != null) {
-      if (boxHeight == 0)
+      if (boxHeight == 0) {
         boxHeight = (_model!.parent as KenSectionModel).height;
+      }
       if (boxWidth == 0) boxWidth = (_model!.parent as KenSectionModel).width;
     } else {
       if (boxHeight == 0) boxHeight = KenUtilities.getDeviceInfo().safeHeight;

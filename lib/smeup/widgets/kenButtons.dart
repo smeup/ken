@@ -85,7 +85,7 @@ class KenButtons extends StatefulWidget
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenButtonsModel.setDefaults(this);
-    if (data == null) data = List<String>.empty(growable: true);
+    data ??= List<String>.empty(growable: true);
   }
 
   @override
@@ -216,14 +216,15 @@ class KenButtonsState extends State<KenButtons>
 
           if (buttons.length > 0) {
             var widgets;
-            if (widget.orientation == WidgetOrientation.Vertical)
+            if (widget.orientation == WidgetOrientation.Vertical) {
               widgets = SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Column(children: buttons));
-            else
+            } else {
               widgets = SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(children: buttons));
+            }
 
             return widgets;
           } else {

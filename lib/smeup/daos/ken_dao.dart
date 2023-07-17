@@ -6,7 +6,7 @@ import '../models/widgets/ken_model_callback.dart';
 import '../services/ken_message_bus.dart';
 import 'package:uuid/uuid.dart';
 
-Uuid uuid = Uuid();
+Uuid uuid = const Uuid();
 
 class KenDao {
   KenModel? smeupModel;
@@ -34,7 +34,7 @@ class KenDao {
         .response(id: globallyUniqueId, topic: KenTopic.getData)
         .take(1)
         .listen((event) {
-      this.smeupModel = event.data.model;
+      smeupModel = event.data.model;
       completer.complete(event.data.data);
     });
     // await servicesCallBack(ServicesCallbackType.getData, null, this.smeupModel);
@@ -43,7 +43,7 @@ class KenDao {
       KenTopic.getData,
       KenMessageBusEventData(
         data: null,
-        model: this.smeupModel,
+        model: smeupModel,
       ),
     );
     return completer.future;

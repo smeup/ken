@@ -82,7 +82,7 @@ class KenTreeModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupTreeDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }

@@ -82,18 +82,18 @@ class KenSectionModel extends KenModel with KenModelMixin {
 
   void _replaceSelectedTabIndex(dynamic jsonMap) {
     if (jsonMap['selectedTabColName'] != null) {
-      this.selectedTabIndex = int.tryParse(KenUtilities.replaceVariables(
-          '[${jsonMap['selectedTabColName']}]', this.formKey));
+      selectedTabIndex = int.tryParse(KenUtilities.replaceVariables(
+          '[${jsonMap['selectedTabColName']}]', formKey));
     }
-    if (this.selectedTabIndex == null) this.selectedTabIndex = 0;
+    selectedTabIndex ??= 0;
   }
 
   bool hasComponents() {
-    return components != null && components!.length > 0;
+    return components != null && components!.isNotEmpty;
   }
 
   bool hasSections() {
-    return smeupSectionsModels != null && smeupSectionsModels!.length > 0;
+    return smeupSectionsModels != null && smeupSectionsModels!.isNotEmpty;
   }
 
   List<KenModel> getComponents(jsonMap, componentName) {
@@ -260,7 +260,7 @@ class KenSectionModel extends KenModel with KenModelMixin {
         }
 
         if (model != null) {
-          if (model.parent == null) model.parent = this;
+          model.parent ??= this;
           components.add(model);
         }
       });

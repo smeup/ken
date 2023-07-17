@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_conditional_assignment
+
 import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_model.dart';
@@ -51,7 +53,7 @@ class KenLineModel extends KenModel {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupLineDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }

@@ -78,7 +78,7 @@ class KenSliderModel extends KenModel {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupSliderDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }
@@ -92,11 +92,8 @@ class KenSliderModel extends KenModel {
 
     // ----------------- set properties from default
 
-    if (obj.activeTrackColor == null)
-      obj.activeTrackColor = KenSliderModel.defaultActiveTrackColor;
-    if (obj.thumbColor == null)
-      obj.thumbColor = KenSliderModel.defaultThumbColor;
-    if (obj.inactiveTrackColor == null)
-      obj.inactiveTrackColor = KenSliderModel.defaultInactiveTrackColor;
+    obj.activeTrackColor ??= KenSliderModel.defaultActiveTrackColor;
+    obj.thumbColor ??= KenSliderModel.defaultThumbColor;
+    obj.inactiveTrackColor ??= KenSliderModel.defaultInactiveTrackColor;
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/KenMessageBusEventData.dart';
@@ -149,7 +151,7 @@ class KenDatePicker extends StatefulWidget
     var workData = formatDataFields(m);
 
     // set the widget data
-    if (workData != null && (workData['rows'] as List).length > 0) {
+    if (workData != null && (workData['rows'] as List).isNotEmpty) {
       DateTime? value;
       String? text;
       if (workData['rows'][0][valueField] != null) {
@@ -226,15 +228,19 @@ class _KenDatePickerState extends State<KenDatePicker>
     double? datePickerHeight = widget.height;
     double? datePickerWidth = widget.width;
     if (_model != null && _model!.parent != null) {
-      if (datePickerHeight == 0)
+      if (datePickerHeight == 0) {
         datePickerHeight = (_model!.parent as KenSectionModel).height;
-      if (datePickerWidth == 0)
+      }
+      if (datePickerWidth == 0) {
         datePickerWidth = (_model!.parent as KenSectionModel).width;
+      }
     } else {
-      if (datePickerHeight == 0)
+      if (datePickerHeight == 0) {
         datePickerHeight = KenUtilities.getDeviceInfo().safeHeight;
-      if (datePickerWidth == 0)
+      }
+      if (datePickerWidth == 0) {
         datePickerWidth = KenUtilities.getDeviceInfo().safeWidth;
+      }
     }
 
     if (!widget.showborder!) {
@@ -307,17 +313,17 @@ class _KenDatePickerState extends State<KenDatePicker>
             SizedBox(width: widget.innerSpace),
             Expanded(
                 child: Align(
+                    alignment: widget.align!,
                     child: Row(
                       children: [
                         Expanded(
                             child: Align(
-                          child: datepicker,
                           alignment: Alignment.centerLeft,
+                          child: datepicker,
                         )),
                         icon,
                       ],
-                    ),
-                    alignment: widget.align!)),
+                    ))),
           ],
         ),
         line
@@ -332,17 +338,17 @@ class _KenDatePickerState extends State<KenDatePicker>
             children: [
               Expanded(
                   child: Align(
+                alignment: widget.align!,
                 child: Row(
                   children: [
                     icon,
                     Expanded(
                         child: Align(
-                      child: datepicker,
                       alignment: Alignment.centerLeft,
+                      child: datepicker,
                     )),
                   ],
                 ),
-                alignment: widget.align!,
               )),
               SizedBox(width: widget.innerSpace),
               text,
@@ -360,22 +366,22 @@ class _KenDatePickerState extends State<KenDatePicker>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Align(
-              child: text,
               alignment: Alignment.centerLeft,
+              child: text,
             ),
             SizedBox(height: widget.innerSpace),
             Align(
+              alignment: Alignment.centerLeft,
               child: Row(
                 children: [
                   Expanded(
                       child: Align(
-                    child: datepicker,
                     alignment: Alignment.centerLeft,
+                    child: datepicker,
                   )),
                   icon
                 ],
               ),
-              alignment: Alignment.centerLeft,
             ),
             line
           ],
@@ -390,22 +396,22 @@ class _KenDatePickerState extends State<KenDatePicker>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Align(
+              alignment: Alignment.centerLeft,
               child: Row(
                 children: [
                   Expanded(
                       child: Align(
-                    child: datepicker,
                     alignment: Alignment.centerLeft,
+                    child: datepicker,
                   )),
                   icon
                 ],
               ),
-              alignment: Alignment.centerLeft,
             ),
             SizedBox(height: widget.innerSpace),
             Align(
-              child: text,
               alignment: Alignment.centerLeft,
+              child: text,
             )
           ],
         ),
@@ -413,15 +419,13 @@ class _KenDatePickerState extends State<KenDatePicker>
       );
     } else // center
     {
-      children = Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            datepicker,
-            SizedBox(width: widget.innerSpace),
-            Expanded(child: text),
-          ],
-        ),
+      children = Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          datepicker,
+          SizedBox(width: widget.innerSpace),
+          Expanded(child: text),
+        ],
       );
     }
 
@@ -448,7 +452,7 @@ class _KenDatePickerState extends State<KenDatePicker>
                 timePickerTheme.backgroundColor),
             elevation: MaterialStateProperty.all<double?>(widget.elevation),
             padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                EdgeInsets.all(0)),
+                const EdgeInsets.all(0)),
             shape: MaterialStateProperty.all<OutlinedBorder?>(
                 timePickerTheme.shape as OutlinedBorder?),
             side: MaterialStateProperty.all<BorderSide?>(

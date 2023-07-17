@@ -152,12 +152,13 @@ class _KenDrawerState extends State<KenDrawer>
     final showImage = widget.imageUrl!.isNotEmpty;
     final List<Widget> headers = [];
 
-    if (showImage)
+    if (showImage) {
       headers.add(Image.asset(
         widget.imageUrl!,
         height: widget.imageHeight,
         width: widget.imageWidth,
       ));
+    }
     if (showTitle) {
       headers.add(const SizedBox(
         width: 10,
@@ -180,7 +181,7 @@ class _KenDrawerState extends State<KenDrawer>
     var list = List<Widget>.empty(growable: true);
     list.add(header);
 
-    var groups = Map<String, List<Widget>>();
+    var groups = <String, List<Widget>>{};
 
     for (KenDrawerDataElement e in _data!) {
       if (e.group.isEmpty) {
@@ -268,20 +269,23 @@ class _KenDrawerState extends State<KenDrawer>
                 .appBarTheme
                 .backgroundColor);
 
-    if (widget.elementFontSize != null)
+    if (widget.elementFontSize != null) {
       style = style.copyWith(
         fontSize: widget.elementFontSize,
       );
+    }
 
-    if (widget.elementFontColor != null)
+    if (widget.elementFontColor != null) {
       style = style.copyWith(
         color: widget.elementFontColor,
       );
+    }
 
-    if (widget.elementFontBold != null && widget.elementFontBold!)
+    if (widget.elementFontBold != null && widget.elementFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
+    }
 
     return style;
   }

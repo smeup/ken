@@ -14,6 +14,6 @@ extension KenDaoQrCodeReader on KenDao {
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context) async {
-    await this.getData();
+    await getData();
   }
 }

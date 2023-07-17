@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 import '../../services/ken_configuration_service.dart';
@@ -173,7 +175,7 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupComboDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }
@@ -209,28 +211,21 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
     //iconTheme.color;
 
     // ----------------- set properties from default
-    if (obj.borderColor == null)
-      obj.borderColor = KenComboModel.defaultBorderColor;
-    if (obj.borderWidth == null)
-      obj.borderWidth = KenComboModel.defaultBorderWidth;
-    if (obj.borderRadius == null)
-      obj.borderRadius = KenComboModel.defaultBorderRadius;
+    obj.borderColor ??= KenComboModel.defaultBorderColor;
+    obj.borderWidth ??= KenComboModel.defaultBorderWidth;
+    obj.borderRadius ??= KenComboModel.defaultBorderRadius;
 
-    if (obj.fontBold == null) obj.fontBold = KenComboModel.defaultFontBold;
-    if (obj.fontColor == null) obj.fontColor = KenComboModel.defaultFontColor;
-    if (obj.fontSize == null) obj.fontSize = KenComboModel.defaultFontSize;
-    if (obj.backColor == null) obj.backColor = KenComboModel.defaultBackColor;
+    obj.fontBold ??= KenComboModel.defaultFontBold;
+    obj.fontColor ??= KenComboModel.defaultFontColor;
+    obj.fontSize ??= KenComboModel.defaultFontSize;
+    obj.backColor ??= KenComboModel.defaultBackColor;
 
-    if (obj.captionFontBold == null)
-      obj.captionFontBold = KenComboModel.defaultCaptionFontBold;
-    if (obj.captionFontColor == null)
-      obj.captionFontColor = KenComboModel.defaultCaptionFontColor;
-    if (obj.captionFontSize == null)
-      obj.captionFontSize = KenComboModel.defaultCaptionFontSize;
-    if (obj.captionBackColor == null)
-      obj.captionBackColor = KenComboModel.defaultCaptionBackColor;
+    obj.captionFontBold ??= KenComboModel.defaultCaptionFontBold;
+    obj.captionFontColor ??= KenComboModel.defaultCaptionFontColor;
+    obj.captionFontSize ??= KenComboModel.defaultCaptionFontSize;
+    obj.captionBackColor ??= KenComboModel.defaultCaptionBackColor;
 
-    if (obj.iconSize == null) obj.iconSize = KenComboModel.defaultIconSize;
-    if (obj.iconColor == null) obj.iconColor = KenComboModel.defaultIconColor;
+    obj.iconSize ??= KenComboModel.defaultIconSize;
+    obj.iconColor ??= KenComboModel.defaultIconColor;
   }
 }

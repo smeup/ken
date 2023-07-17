@@ -59,7 +59,7 @@ class KenChartModel extends KenModel {
         chartType = _getChartType(optionsDefault!['Typ']);
       }
     }
-    if (chartType == null) chartType = defaultChartType;
+    chartType ??= defaultChartType;
     //refresh = optionsDefault['refresh'] ?? defaultRefresh;
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
@@ -69,7 +69,7 @@ class KenChartModel extends KenModel {
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-        await this.getData();
+        await getData();
         // await SmeupChartDao.getData(this);
       };
     }

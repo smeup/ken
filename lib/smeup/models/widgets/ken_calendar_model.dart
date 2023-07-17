@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 import '../../services/ken_configuration_service.dart';
@@ -81,13 +83,9 @@ class KenCalendarModel extends KenModel {
     id = KenUtilities.getWidgetId('CAL', id);
     setDefaults(this);
 
-    if (initialDate == null) initialDate = DateTime.now();
-    if (initialFirstWork == null) {
-      this.initialFirstWork = getInitialFirstWork(initialDate!);
-    }
-    if (initialLastWork == null) {
-      this.initialLastWork = getInitialFirstWork(initialDate!);
-    }
+    initialDate ??= DateTime.now();
+    initialFirstWork ??= getInitialFirstWork(initialDate!);
+    initialLastWork ??= getInitialFirstWork(initialDate!);
   }
 
   KenCalendarModel.fromMap(
@@ -189,13 +187,9 @@ class KenCalendarModel extends KenModel {
 
     // ----------------- set properties from default
 
-    if (obj.dayFontSize == null)
-      obj.dayFontSize = KenCalendarModel.defaultDayFontSize;
-    if (obj.eventFontSize == null)
-      obj.eventFontSize = KenCalendarModel.defaultEventFontSize;
-    if (obj.titleFontSize == null)
-      obj.titleFontSize = KenCalendarModel.defaultTitleFontSize;
-    if (obj.markerFontSize == null)
-      obj.markerFontSize = KenCalendarModel.defaultMarkerFontSize;
+    obj.dayFontSize ??= KenCalendarModel.defaultDayFontSize;
+    obj.eventFontSize ??= KenCalendarModel.defaultEventFontSize;
+    obj.titleFontSize ??= KenCalendarModel.defaultTitleFontSize;
+    obj.markerFontSize ??= KenCalendarModel.defaultMarkerFontSize;
   }
 }

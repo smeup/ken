@@ -67,7 +67,7 @@ class KenFormModel extends KenModel
   }
 
   bool hasVariables() {
-    return formVariables != null && formVariables!.length > 0;
+    return formVariables != null && formVariables!.isNotEmpty;
   }
 
   Future<void> getSectionsData() async {

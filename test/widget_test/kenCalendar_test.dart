@@ -111,7 +111,7 @@ Future<void> main() async {
 }
 
 runTests(WidgetTester tester) async {
-  final findKey = find.byKey(Key('calendar1'));
+  final findKey = find.byKey(const Key('calendar1'));
   expect(findKey, findsWidgets);
 
   var findWidget = find.byType(KenCalendar);
