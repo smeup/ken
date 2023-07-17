@@ -865,7 +865,9 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     Completer<dynamic> completer = Completer();
     KenMessageBus.instance
         .response(
-            id: widget.globallyUniqueId! + widget.index.toString(),
+            id: widget.globallyUniqueId! +
+                widget.index.toString() +
+                col["code"].toString(),
             topic: KenTopic.kenboxGetText)
         .take(1)
         .listen((event) {
@@ -874,7 +876,9 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
       completer.complete(); // resolve promise
     });
     KenMessageBus.instance.publishRequest(
-      widget.globallyUniqueId! + widget.index.toString(),
+      widget.globallyUniqueId! +
+          widget.index.toString() +
+          col["code"].toString(),
       KenTopic.kenboxGetText,
       KenMessageBusEventData(
           context: context,
