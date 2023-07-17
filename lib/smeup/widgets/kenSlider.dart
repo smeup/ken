@@ -32,7 +32,7 @@ class KenSlider extends StatefulWidget
   String? title;
   String? label;
   Function? clientOnChange;
-  late Function onChanged;
+  Function? onChanged;
 
   // Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
@@ -52,7 +52,7 @@ class KenSlider extends StatefulWidget
     this.sldMax = KenSliderModel.defaultSldMax,
     this.sldMin = KenSliderModel.defaultSldMin,
     this.clientOnChange,
-    required this.onChanged,
+    this.onChanged,
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenSliderModel.setDefaults(this);
@@ -175,7 +175,7 @@ class _KenSliderState extends State<KenSlider>
             value: widget.value,
             divisions: widget.divisions,
             label: widget.label,
-            onChanged: widget.onChanged,
+            onChanged: widget.onChanged ?? () {},
             clientOnChange: (value) {
               _value = value;
 
