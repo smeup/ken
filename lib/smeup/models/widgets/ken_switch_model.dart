@@ -51,14 +51,10 @@ class KenSwitchModel extends KenModel implements KenDataInterface {
     this.width = defaultWidth,
     this.height = defaultHeight,
     this.padding = defaultPadding,
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
   }) : super(formKey, scaffoldKey, context,
             title: title,
             id: id,
-            type: type,
-            instanceCallBack: instanceCallBack) {
+            type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'swt';
     setDefaults(this);
   }
@@ -68,10 +64,7 @@ class KenSwitchModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
-  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
     title = jsonMap['title'] ?? '';
     padding =

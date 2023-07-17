@@ -151,14 +151,10 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
     this.showBorder = defaultShowBorder,
     title = '',
     this.minutesList,
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
   }) : super(formKey, scaffoldKey, context,
             title: title,
             id: id,
-            type: type,
-            instanceCallBack: instanceCallBack) {
+            type: type) {
     id = KenUtilities.getWidgetId('FLD', id);
     setDefaults(this);
   }
@@ -168,10 +164,7 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
-  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     valueField = optionsDefault!['valueField'] ?? defaultValueField;

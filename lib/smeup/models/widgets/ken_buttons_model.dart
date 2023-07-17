@@ -82,11 +82,8 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
     this.orientation = defaultOrientation,
     this.isLink = defaultIsLink,
     this.innerSpace = defaultInnerSpace,
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
   }) : super(formKey, scaffoldKey, context,
-            title: title, instanceCallBack: instanceCallBack, id: id) {
+            title: title, id: id) {
     // SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
@@ -96,11 +93,9 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-              KenModel? instance)
-          instanceCallBack)
+    )
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+            jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';

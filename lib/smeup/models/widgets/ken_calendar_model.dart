@@ -72,14 +72,10 @@ class KenCalendarModel extends KenModel {
     this.showAsWeek,
     this.showNavigation,
     this.padding = defaultPadding,
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
   }) : super(formKey, scaffoldKey, context,
             title: title,
             id: id,
-            type: type,
-            instanceCallBack: instanceCallBack) {
+            type: type,) {
     id = KenUtilities.getWidgetId('CAL', id);
     setDefaults(this);
 
@@ -92,12 +88,9 @@ class KenCalendarModel extends KenModel {
       Map<String, dynamic> jsonMap,
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-              KenModel? instance)
-          instanceCallBack)
+      BuildContext? context)
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+            jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     dayFontSize = KenUtilities.getDouble(optionsDefault!['todayFontSize']) ??

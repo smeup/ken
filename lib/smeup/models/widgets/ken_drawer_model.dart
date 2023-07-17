@@ -53,14 +53,7 @@ class KenDrawerModel extends KenModel {
     this.imageWidth = defaultImageWidth,
     this.imageHeight = defaultImageHeight,
     this.showItemDivider = defaultShowItemDivider,
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type,
-            instanceCallBack: instanceCallBack) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     appBarBackColor ??=
         KenConfigurationService.getTheme()!.appBarTheme.backgroundColor;
     setDefaults(this);
@@ -70,12 +63,8 @@ class KenDrawerModel extends KenModel {
       Map<String, dynamic> jsonMap,
       GlobalKey<FormState> formKey,
       GlobalKey<ScaffoldState> scaffoldKey,
-      BuildContext context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-              KenModel? instance)
-          instanceCallBack)
-      : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+      BuildContext context)
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';

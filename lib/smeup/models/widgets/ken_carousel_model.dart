@@ -20,25 +20,18 @@ class KenCarouselModel extends KenModel implements KenDataInterface {
     this.height = defaultHeight,
     this.autoPlay = false,
     title = '',
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
   }) : super(formKey, scaffoldKey, context,
             title: title,
             id: id,
-            type: type,
-            instanceCallBack: instanceCallBack);
+            type: type,);
 
   KenCarouselModel.fromMap(
       Map jsonMap,
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-              KenModel? instance)
-          instanceCallBack)
+      BuildContext? context)
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+            jsonMap, formKey, scaffoldKey, context) {
     height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     autoPlay = optionsDefault!['autoPlay'] ?? false;
 

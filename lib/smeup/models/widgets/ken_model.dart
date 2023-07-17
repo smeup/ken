@@ -1,6 +1,10 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
+import 'package:ken/smeup/widgets/globallyUniqueIdExtension.dart';
 import '../../daos/ken_dao.dart';
+import '../../services/ken_data_service.dart';
+import '../../services/ken_message_bus.dart';
+import '../KenMessageBusEventData.dart';
 import '../dynamism.dart';
 import 'ken_model_callback.dart';
 import 'ken_section_model.dart';
@@ -37,15 +41,11 @@ class KenModel extends KenDao {
 
   List<KenSectionModel>? smeupSectionsModels;
 
-  Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-      KenModel? instance) instanceCallBack;
-
   KenModel(this.formKey, this.scaffoldKey, this.context,
-      {this.title, this.id, this.type, required this.instanceCallBack})
-      : super(instanceCallBack: instanceCallBack) {
+      {this.title, this.id, this.type}) {
     smeupModel = this;
 
-    instanceCallBack(ServicesCallbackType.defaultInstance, null, this);
+    KenDataService.dataInitializer.defaultInstance(this);
   }
 
   KenModel.fromMap(
@@ -53,11 +53,10 @@ class KenModel extends KenDao {
     this.formKey,
     this.scaffoldKey,
     this.context,
-    this.instanceCallBack,
-  ) : super(instanceCallBack: instanceCallBack) {
+  ) {
     smeupModel = this;
 
-    instanceCallBack(ServicesCallbackType.fromMap, jsonMap, this);
+    KenDataService.dataInitializer.fromMap(jsonMap, this);
   }
 
   bool isFirestore() {

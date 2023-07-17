@@ -19,26 +19,19 @@ class KenInputFieldModel extends KenModel implements KenDataInterface {
     title,
     id,
     type,
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
   }) : super(formKey, scaffoldKey, context,
             title: title,
             id: id,
-            type: type,
-            instanceCallBack: instanceCallBack);
+            type: type);
 
   KenInputFieldModel.fromMap(
       Map<String, dynamic> jsonMap,
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
-      KenModel parent,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-              KenModel? instance)
-          instanceCallBack)
+      KenModel parent)
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+            jsonMap, formKey, scaffoldKey, context) {
     this.parent = parent;
 
     validation = optionsDefault!['validation'];

@@ -87,14 +87,11 @@ class KenTextFieldModel extends KenInputFieldModel implements KenDataInterface {
       this.autoFocus = defaultAutoFocus,
       this.valueField,
       this.keyboard,
-      required Function(ServicesCallbackType type,
-              Map<dynamic, dynamic>? jsonMap, KenModel? instance)
-          instanceCallBack})
+    })
       : super(formKey, scaffoldKey, context,
             title: title,
             id: id,
-            type: type,
-            instanceCallBack: instanceCallBack) {
+            type: type,) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'itx';
     id = KenUtilities.getWidgetId('FLD', id);
     setDefaults(this);
@@ -106,11 +103,8 @@ class KenTextFieldModel extends KenInputFieldModel implements KenDataInterface {
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
     KenModel parent,
-    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
   ) : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, parent, instanceCallBack) {
+            jsonMap, formKey, scaffoldKey, context, parent) {
     setDefaults(this);
 
     backColor = KenUtilities.getColorFromRGB(optionsDefault!['backColor']) ??

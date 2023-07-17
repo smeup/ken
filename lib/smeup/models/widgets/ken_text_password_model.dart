@@ -103,14 +103,7 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
     this.valueField,
     this.showRules = defaultShowRules,
     this.checkRules = defaultCheckRules,
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type,
-            instanceCallBack: instanceCallBack) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     backColor ??= KenConfigurationService.getTheme()!.backgroundColor;
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'pwd';
     id = KenUtilities.getWidgetId('FLD', id);
@@ -122,10 +115,7 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
-  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
     backColor = KenUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;

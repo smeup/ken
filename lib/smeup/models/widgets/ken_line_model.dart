@@ -21,14 +21,11 @@ class KenLineModel extends KenModel {
     type,
     GlobalKey<FormState> formKey,
     GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
-    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack, {
+    BuildContext context, {
     this.color,
     this.thickness,
   }) : super(formKey, scaffoldKey, context,
-            title: '', id: id, type: type, instanceCallBack: instanceCallBack) {
+            title: '', id: id, type: type) {
     id = KenUtilities.getWidgetId('LIN', id);
     setDefaults(this);
   }
@@ -38,10 +35,7 @@ class KenLineModel extends KenModel {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
-  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     thickness = KenUtilities.getDouble(optionsDefault!['thickness']) ??

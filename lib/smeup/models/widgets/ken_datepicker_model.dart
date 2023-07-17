@@ -90,14 +90,10 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
     this.innerSpace = defaultInnerSpace,
     title = '',
     this.minutesList,
-    required Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
   }) : super(formKey, scaffoldKey, context,
             id: id,
             type: type,
-            title: title,
-            instanceCallBack: instanceCallBack) {
+            title: title) {
     id = KenUtilities.getWidgetId('FLD', id);
     setDefaults(this);
   }
@@ -106,12 +102,9 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
       Map<String, dynamic> jsonMap,
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-              KenModel? instance)
-          instanceCallBack)
+      BuildContext? context)
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+            jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     valueField = optionsDefault!['valueField'] ?? defaultValueField;

@@ -73,14 +73,11 @@ class KenRadioButtonsModel extends KenInputFieldModel
       this.displayedField = defaultDisplayedField,
       this.selectedValue,
       this.columns = defaultColumns,
-      required Function(ServicesCallbackType type,
-              Map<dynamic, dynamic>? jsonMap, KenModel? instance)
-          instanceCallBack})
+    })
       : super(formKey, scaffoldKey, context,
             title: title,
             id: id,
-            type: type,
-            instanceCallBack: instanceCallBack) {
+            type: type) {
     setDefaults(this);
 
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'rad';
@@ -91,12 +88,9 @@ class KenRadioButtonsModel extends KenInputFieldModel
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
-      KenModel parent,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-              KenModel? instance)
-          instanceCallBack)
+      KenModel parent)
       : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, parent, instanceCallBack) {
+            jsonMap, formKey, scaffoldKey, context, parent) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';

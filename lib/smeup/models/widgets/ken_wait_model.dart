@@ -22,14 +22,11 @@ class KenWaitModel extends KenModel implements KenDataInterface {
       BuildContext? context,
       this.splashColor,
       title = '',
-      required Function(ServicesCallbackType type,
-              Map<dynamic, dynamic>? jsonMap, KenModel? instance)
-          instanceCallBack})
+    })
       : super(formKey, scaffoldKey, context,
             title: title,
             id: id,
-            type: type,
-            instanceCallBack: instanceCallBack) {
+            type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'wai';
   }
 
@@ -38,10 +35,7 @@ class KenWaitModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState> formKey,
     GlobalKey<ScaffoldState> scaffoldKey,
     BuildContext context,
-    Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-            KenModel? instance)
-        instanceCallBack,
-  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context, instanceCallBack) {
+  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
     title = jsonMap['title'] ?? '';
 

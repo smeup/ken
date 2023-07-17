@@ -11,10 +11,7 @@ mixin KenModelMixin {
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
       bool? autoAdaptHeight,
-      KenModel parent,
-      Function(ServicesCallbackType type, Map<dynamic, dynamic>? jsonMap,
-              KenModel? instance)
-          instanceCallBack) {
+      KenModel parent) {
     final smeupSectionsModels = List<KenSectionModel>.empty(growable: true);
     List<dynamic>? sectionsJson;
 
@@ -31,7 +28,6 @@ mixin KenModelMixin {
           formKey,
           context,
           parent,
-          instanceCallBack,
           scaffoldKey,
         );
         smeupSectionsModels.add(smeupSectionModel);
