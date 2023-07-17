@@ -82,7 +82,8 @@ enum KenTopic {
   kenCalendarClientOnChangeMonth,
   kenCalendarWidgetEventClick,
   kenSliderGetChildren,
-  kenSliderOnClientChange
+  kenSliderOnClientChange,
+  kenboxGetText
 }
 
 enum KenMessageType {

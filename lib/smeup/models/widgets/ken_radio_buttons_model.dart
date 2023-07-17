@@ -1,11 +1,10 @@
-// ignore_for_file: deprecated_member_use, unused_import
+// ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_input_field_model.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import '../../services/ken_configuration_service.dart';
 
 class KenRadioButtonsModel extends KenInputFieldModel

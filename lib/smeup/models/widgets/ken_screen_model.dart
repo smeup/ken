@@ -1,10 +1,9 @@
-// ignore_for_file: unnecessary_null_comparison, unused_import
+// ignore_for_file: unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
 import '../../services/ken_data_service.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import '../fun.dart';
 
 class KenScreenModel extends KenModel implements KenDataInterface {

@@ -856,11 +856,34 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
 
   Future<String> _getBoxText(Map data, Map col) async {
     String dataText = "";
-    if (widget.callBack != null) {
-      dataText =
-          await widget.callBack!(widget, KenCallbackType.getBoxText, data, col)
-              as String;
-    }
+    // if (widget.callBack != null) {
+    //   dataText =
+    //       await widget.callBack!(widget, KenCallbackType.getBoxText, data, col)
+    //           as String;
+    // }
+
+    Completer<dynamic> completer = Completer();
+    KenMessageBus.instance
+        .response(
+            id: widget.globallyUniqueId! + widget.index.toString(),
+            topic: KenTopic.kenboxGetText)
+        .take(1)
+        .listen((event) {
+      //print('xxxxxxxxxxxxxxx:' + event.data.data.toString());
+      dataText = event.data.data;
+      completer.complete(); // resolve promise
+    });
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId! + widget.index.toString(),
+      KenTopic.kenboxGetText,
+      KenMessageBusEventData(
+          context: context,
+          widget: widget,
+          model: null,
+          data: data,
+          parameters: [col]),
+    );
+    await completer.future;
 
     return dataText;
   }
