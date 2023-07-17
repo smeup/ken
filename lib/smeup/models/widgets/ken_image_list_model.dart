@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import '../../services/ken_configuration_service.dart';
 
 class KenImageListModel extends KenModel implements KenDataInterface {
@@ -73,10 +72,7 @@ class KenImageListModel extends KenModel implements KenDataInterface {
       this.orientation = defaultOrientation,
       this.rows = defaultRows,
       title = ''})
-      : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type) {
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     setDefaults(this);
   }
 
@@ -85,8 +81,7 @@ class KenImageListModel extends KenModel implements KenDataInterface {
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context)
-      : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context) {
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';

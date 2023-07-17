@@ -6,7 +6,6 @@ import '../../services/ken_configuration_service.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 
 class KenButtonsModel extends KenModel implements KenDataInterface {
   // supported by json_theme
@@ -82,20 +81,17 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
     this.orientation = defaultOrientation,
     this.isLink = defaultIsLink,
     this.innerSpace = defaultInnerSpace,
-  }) : super(formKey, scaffoldKey, context,
-            title: title, id: id) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id) {
     // SmeupDataService.incrementDataFetch(id);
     setDefaults(this);
   }
 
   KenButtonsModel.fromMap(
-      Map<String, dynamic> jsonMap,
-      GlobalKey<FormState>? formKey,
-      GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-    )
-      : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
+  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';

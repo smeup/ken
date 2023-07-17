@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, unused_import
 
 import 'package:flutter/material.dart';
 import '../../services/ken_data_service.dart';
@@ -15,13 +15,14 @@ class KenScreenModel extends KenModel implements KenDataInterface {
   bool? isDialog;
   bool? backButtonVisible;
 
-  KenScreenModel(this.context, Fun smeupFun,
-      {GlobalKey<FormState>? formKey,
-      GlobalKey<ScaffoldState>? scaffoldKey,
-      this.isDialog = defaultIsDialog,
-      this.backButtonVisible = defaultBackButtonVisible,})
-      : super(formKey, scaffoldKey, context,
-            title: null) {
+  KenScreenModel(
+    this.context,
+    Fun smeupFun, {
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    this.isDialog = defaultIsDialog,
+    this.backButtonVisible = defaultBackButtonVisible,
+  }) : super(formKey, scaffoldKey, context, title: null) {
     this.smeupFun = smeupFun;
   }
 

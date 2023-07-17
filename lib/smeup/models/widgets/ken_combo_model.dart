@@ -7,7 +7,6 @@ import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_input_field_model.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 
 class KenComboModel extends KenInputFieldModel implements KenDataInterface {
   // supported by json_theme
@@ -94,10 +93,7 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
       this.height = defaultHeight,
       this.showBorder = defaultShowBorder,
       title = ''})
-      : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type) {
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'cmb';
     setDefaults(this);
   }
@@ -108,8 +104,7 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
       KenModel parent)
-      : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, parent) {
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context, parent) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';

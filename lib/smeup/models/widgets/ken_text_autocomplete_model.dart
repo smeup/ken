@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, unused_import
 
 import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
@@ -83,10 +83,7 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
     this.autoFocus = defaultAutoFocus,
     this.defaultValue = '',
     this.valueField = 'value',
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'acp';
     setDefaults(this);
   }

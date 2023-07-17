@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import '../../services/ken_configuration_service.dart';
 
 class KenTimePickerModel extends KenModel implements KenDataInterface {
@@ -151,10 +150,7 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
     this.showBorder = defaultShowBorder,
     title = '',
     this.minutesList,
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     id = KenUtilities.getWidgetId('FLD', id);
     setDefaults(this);
   }

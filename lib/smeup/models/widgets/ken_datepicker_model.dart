@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 
 import '../../services/ken_configuration_service.dart';
 
@@ -90,10 +89,7 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
     this.innerSpace = defaultInnerSpace,
     title = '',
     this.minutesList,
-  }) : super(formKey, scaffoldKey, context,
-            id: id,
-            type: type,
-            title: title) {
+  }) : super(formKey, scaffoldKey, context, id: id, type: type, title: title) {
     id = KenUtilities.getWidgetId('FLD', id);
     setDefaults(this);
   }
@@ -103,8 +99,7 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context)
-      : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context) {
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     valueField = optionsDefault!['valueField'] ?? defaultValueField;

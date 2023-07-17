@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, unused_import
 
 import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
@@ -51,10 +51,7 @@ class KenSwitchModel extends KenModel implements KenDataInterface {
     this.width = defaultWidth,
     this.height = defaultHeight,
     this.padding = defaultPadding,
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'swt';
     setDefaults(this);
   }

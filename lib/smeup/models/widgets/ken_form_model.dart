@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import '../../services/ken_configuration_service.dart';
 import 'ken_model_mixin.dart';
 import 'ken_section_model.dart';
@@ -24,8 +23,7 @@ class KenFormModel extends KenModel
   bool? autoAdaptHeight;
 
   KenFormModel.fromMap(response, this.formKey, this.scaffoldKey, this.context)
-      : super.fromMap(
-            response, formKey, scaffoldKey, context) {
+      : super.fromMap(response, formKey, scaffoldKey, context) {
     Map<String, dynamic> jsonMap = response;
 
     padding = KenUtilities.getPadding(jsonMap['padding']) ?? defaultPadding;

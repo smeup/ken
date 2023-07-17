@@ -3,7 +3,6 @@ import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_input_field_model.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 
 class KenQRCodeReaderModel extends KenInputFieldModel
     implements KenDataInterface {
@@ -28,8 +27,7 @@ class KenQRCodeReaderModel extends KenInputFieldModel
     this.onDataRead,
     this.maxReads = defaultMaxReads,
     this.delayInMillis = defaultDealyInMillis,
-  }) : super(formKey, scaffoldKey, context,
-            title: title) {
+  }) : super(formKey, scaffoldKey, context, title: title) {
     id = KenUtilities.getWidgetId('FLD', id);
   }
 
@@ -39,8 +37,7 @@ class KenQRCodeReaderModel extends KenInputFieldModel
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
       KenModel parent)
-      : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, parent) {
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context, parent) {
     padding =
         KenUtilities.getDouble(optionsDefault!['padding']) ?? defaultPadding;
     size = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultSize;

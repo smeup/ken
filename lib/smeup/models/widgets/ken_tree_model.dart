@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 
 class KenTreeModel extends KenModel implements KenDataInterface {
   static const double defaultWidth = 100;
@@ -58,10 +57,7 @@ class KenTreeModel extends KenModel implements KenDataInterface {
     this.parentFontbold = defaultParentFontbold,
     this.parentVerticalSpacing = defaultParentVerticalSpacing,
     this.parentHeight = defaultParentHeight,
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type);
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type);
 
   KenTreeModel.fromMap(
     Map<String, dynamic> jsonMap,

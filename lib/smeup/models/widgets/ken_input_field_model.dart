@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import 'ken_section_model.dart';
 import '../fun.dart';
 
@@ -19,10 +18,7 @@ class KenInputFieldModel extends KenModel implements KenDataInterface {
     title,
     id,
     type,
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type);
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type);
 
   KenInputFieldModel.fromMap(
       Map<String, dynamic> jsonMap,
@@ -30,8 +26,7 @@ class KenInputFieldModel extends KenModel implements KenDataInterface {
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
       KenModel parent)
-      : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context) {
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     this.parent = parent;
 
     validation = optionsDefault!['validation'];

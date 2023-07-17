@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import 'ken_section_model.dart';
 
 mixin KenModelMixin {

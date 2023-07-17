@@ -6,7 +6,6 @@ import '../../services/ken_configuration_service.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 
 class KenDashboardModel extends KenModel implements KenDataInterface {
   // supported by json_theme

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../../services/ken_configuration_service.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 
 class KenCalendarModel extends KenModel {
   // supported by json_theme
@@ -72,10 +71,14 @@ class KenCalendarModel extends KenModel {
     this.showAsWeek,
     this.showNavigation,
     this.padding = defaultPadding,
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type,) {
+  }) : super(
+          formKey,
+          scaffoldKey,
+          context,
+          title: title,
+          id: id,
+          type: type,
+        ) {
     id = KenUtilities.getWidgetId('CAL', id);
     setDefaults(this);
 
@@ -89,8 +92,7 @@ class KenCalendarModel extends KenModel {
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context)
-      : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context) {
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     dayFontSize = KenUtilities.getDouble(optionsDefault!['todayFontSize']) ??
