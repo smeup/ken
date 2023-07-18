@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../lib/smeup/widgets/kenTimepicker.dart';
 import 'widget_test_service.dart';
 
-final timePickerDynamicScreen = 'test_time_picker';
+const timePickerDynamicScreen = 'test_time_picker';
 final timePickerData = KenTimePickerData(
   time: DateTime(2021, 1, 1, 17, 30),
   formattedTime: "17:30",

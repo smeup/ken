@@ -310,7 +310,7 @@ class _KenTimePickerState extends State<KenTimePicker>
         ? KenLine(widget.scaffoldKey, widget.formKey)
         : Container();
 
-    var children;
+    Widget children;
 
     if (widget.align == Alignment.centerLeft) {
       children = Column(children: [

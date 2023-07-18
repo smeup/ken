@@ -1,7 +1,7 @@
 import 'package:uuid/uuid.dart';
 
 final Map<int, String> widgetUniqueIds = {};
-Uuid uuid = Uuid();
+Uuid uuid = const Uuid();
 
 extension GloballyUniqueIdExtension on Object {
   String get globallyUniqueId {

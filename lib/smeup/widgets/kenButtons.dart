@@ -175,6 +175,7 @@ class KenButtonsState extends State<KenButtons>
   }
 
   /// Buttons' structure:
+  @override
   Future<KenWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
@@ -215,7 +216,7 @@ class KenButtonsState extends State<KenButtons>
           var buttons = snapshot.data!.data.data;
 
           if (buttons.length > 0) {
-            var widgets;
+            SingleChildScrollView widgets;
             if (widget.orientation == WidgetOrientation.Vertical) {
               widgets = SingleChildScrollView(
                   scrollDirection: Axis.vertical,

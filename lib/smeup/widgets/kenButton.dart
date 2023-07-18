@@ -148,7 +148,7 @@ class KenButton extends StatelessWidget {
                   child: Text(data!,
                       textAlign: TextAlign.center, style: _getTextStile()));
 
-              var children;
+              Container children;
 
               if (align == Alignment.centerLeft) {
                 children = Container(

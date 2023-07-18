@@ -4,7 +4,7 @@ import '../../lib/smeup/widgets/kenDatepicker.dart';
 
 import 'widget_test_service.dart';
 
-final datePickerDynamicScreen = 'test_date_picker';
+const datePickerDynamicScreen = 'test_date_picker';
 
 Future<void> main() async {
   testWidgets('Test static contructor ', (WidgetTester tester) async {

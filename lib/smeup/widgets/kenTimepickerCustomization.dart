@@ -35,6 +35,7 @@ class KenTimePickerCustomization extends CommonPickerModel {
     }
   }
 
+  @override
   String? middleStringAtIndex(int index) {
     if (index >= 0 && index < middleList.length) {
       return middleList[index];

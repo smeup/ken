@@ -121,7 +121,7 @@ runTests() {
   var findText = find.byType(Text);
   expect(findText, findsWidgets);
 
-  var finderTextContent;
+  Finder finderTextContent;
   finderTextContent = find.text('Wine');
   expect(finderTextContent, findsWidgets);
   finderTextContent = find.text('Cheese');

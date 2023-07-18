@@ -231,7 +231,7 @@ class _KenInputPanelState extends State<KenInputPanel>
           id: field.id,
           title: field.label,
           height: 55,
-          data: [
+          data: const [
             {"code": "0", "value": "No"},
             {"code": "1", "value": "Si"},
           ],

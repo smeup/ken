@@ -193,6 +193,7 @@ class _KenRadioButtonsState extends State<KenRadioButtons>
     return radioButtons;
   }
 
+  @override
   Future<KenWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {

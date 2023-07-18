@@ -369,7 +369,7 @@ class _KenListBoxState extends State<KenListBox>
   }
 
   Widget _getOrientedList(List<Widget> cells) {
-    var list;
+    GridView list;
 
     double? boxHeight = 0;
     if (cells.isNotEmpty) {
@@ -411,7 +411,7 @@ class _KenListBoxState extends State<KenListBox>
   }
 
   Widget _getWheelList(List<Widget> cells) {
-    var list;
+    ClickableListWheelScrollView list;
 
     _scrollController = FixedExtentScrollController();
     list = ClickableListWheelScrollView(

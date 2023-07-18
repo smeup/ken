@@ -439,7 +439,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
         }
       }
 
-      final column;
+      final Widget column;
       if (button != null) {
         column = Column(
           mainAxisAlignment: MainAxisAlignment.start,

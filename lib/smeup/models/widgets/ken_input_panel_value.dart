@@ -8,6 +8,7 @@ class SmeupInputPanelValue {
 
   SmeupInputPanelValue({this.code = "", this.description = ""});
 
+  @override
   bool operator ==(o) => o is SmeupInputPanelValue && code == o.code;
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ken/smeup/services/ken_log_service.dart';
 import '../../lib/smeup/widgets/kenSwitch.dart';
 
 import 'widget_test_service.dart';
@@ -38,7 +39,10 @@ Future<void> main() async {
     await tester.pumpWidget(testWidget).then((value) async {
       try {
         await tester.pumpAndSettle(const Duration(seconds: 2));
-      } catch (e) {}
+      } catch (e) {
+        KenLogService.writeDebugMessage(e.toString(),
+            logType: KenLogType.error);
+      }
 
       runTests();
     });

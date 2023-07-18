@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import '../../daos/ken_dao.dart';
 import '../../services/ken_data_service.dart';
+import '../../services/ken_log_service.dart';
 import '../dynamism.dart';
 import 'ken_section_model.dart';
 import '../fun.dart';
@@ -68,7 +69,9 @@ class KenModel extends KenDao {
           return true;
         }
       }
-    } catch (e) {}
+    } catch (e) {
+      KenLogService.writeDebugMessage(e.toString(), logType: KenLogType.error);
+    }
     return isFirestore;
   }
 }

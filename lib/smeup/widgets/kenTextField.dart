@@ -305,7 +305,7 @@ class _KenTextFieldState extends State<KenTextField>
         }
       }
 
-      final column;
+      final Widget column;
       if (button != null) {
         column = Column(
           //mainAxisSize: MainAxisSize.min,

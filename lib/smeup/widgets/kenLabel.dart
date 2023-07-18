@@ -247,7 +247,7 @@ class _KenLabelState extends State<KenLabel>
           size: iconTheme.size,
         );
 
-        var children;
+        Container children;
         double widgetHeight = labelHeight + iconTheme.size!;
 
         if (widget.align == Alignment.centerLeft) {

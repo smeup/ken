@@ -64,7 +64,7 @@ class KenLogService {
       pattern.allMatches(message).forEach((match) {
         String? group = match.group(0);
         if (group != null) {
-          print(color + group + '\x1B[0m');
+          print('$color$group\x1B[0m');
         }
       });
 

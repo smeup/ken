@@ -112,6 +112,7 @@ class KenDatePicker extends StatefulWidget
     }
   }
 
+  @override
   runControllerActivities(KenModel model) {
     KenDatePickerModel m = model as KenDatePickerModel;
     id = m.id;
@@ -303,7 +304,7 @@ class _KenDatePickerState extends State<KenDatePicker>
         ? KenLine(widget.scaffoldKey, widget.formKey)
         : Container();
 
-    var children;
+    Widget children;
 
     if (widget.align == Alignment.centerLeft) {
       children = Column(children: [
