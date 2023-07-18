@@ -823,7 +823,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
         _columns = widget.columns;
       } else {
         _columns = List<dynamic>.empty(growable: true);
-        (data as Map).keys.forEach((element) {
+        for (var element in (data as Map).keys) {
           _columns!.add({
             "code": element,
             "fieldNameForDecode": null,
@@ -847,7 +847,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             "filterValue": null,
             "IO": "O"
           });
-        });
+        }
       }
     }
 

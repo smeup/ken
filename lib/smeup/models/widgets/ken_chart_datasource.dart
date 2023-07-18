@@ -32,13 +32,13 @@ class KenChartDatasource {
     List<dynamic> jsonValues = jsonData["values"];
 
     columns = List<KenChartColumn>.empty(growable: true);
-    jsonColumns.forEach((c) {
+    for (var c in jsonColumns) {
       columns!.add(KenChartColumn.fromInfluxDB(c, c, 0));
-    });
+    }
 
     rows = List<KenChartRow>.empty(growable: true);
-    jsonValues.forEach((r) {
+    for (var r in jsonValues) {
       rows!.add(KenChartRow.fromInfluxDB(r, columns!));
-    });
+    }
   }
 }

@@ -41,7 +41,7 @@ class _KenTextPasswordIndicatorsState extends State<KenTextPasswordIndicators> {
         ),
       ));
 
-      passwordModel.rules.forEach((rule) {
+      for (var rule in passwordModel.rules) {
         final ruleWidget = KenTextPasswordRule(
             rule['description'],
             _getRuleColor(rule['isValid'] ?? false),
@@ -50,7 +50,7 @@ class _KenTextPasswordIndicatorsState extends State<KenTextPasswordIndicators> {
             widget.captionStyle,
             widget.iconTheme);
         list.add(ruleWidget);
-      });
+      }
     }
 
     return list;

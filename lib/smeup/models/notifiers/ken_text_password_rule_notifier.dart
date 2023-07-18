@@ -34,9 +34,9 @@ class KenTextPasswordRuleNotifier with ChangeNotifier {
   }
 
   checkProgress(String password) {
-    rules.forEach((rule) {
+    for (var rule in rules) {
       rule['isValid'] = false;
-    });
+    }
 
     satisfiedRules = 0;
 
@@ -45,10 +45,10 @@ class KenTextPasswordRuleNotifier with ChangeNotifier {
       return;
     }
 
-    rules.forEach((rule) {
+    for (var rule in rules) {
       rule['isValid'] = _isRuleSadisfied(rule['regex'], password);
       if (rule['isValid']) satisfiedRules += 1;
-    });
+    }
 
     notifyListeners();
   }
@@ -61,9 +61,9 @@ class KenTextPasswordRuleNotifier with ChangeNotifier {
 
   void reset() {
     satisfiedRules = 0;
-    rules.forEach((rule) {
+    for (var rule in rules) {
       rule['isValid'] = false;
-    });
+    }
     notifyListeners();
   }
 }

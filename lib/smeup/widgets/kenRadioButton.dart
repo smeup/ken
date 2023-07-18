@@ -99,9 +99,9 @@ class _KenRadioButtonState extends State<KenRadioButton> {
                     _selectedValue = value;
                     setState(() {});
                     if (widget.others != null) {
-                      widget.others!.forEach((element) {
+                      for (var element in widget.others!) {
                         element.changeState(value);
-                      });
+                      }
                     }
                   },
                   activeColor:

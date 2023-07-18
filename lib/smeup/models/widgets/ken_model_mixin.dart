@@ -21,7 +21,7 @@ mixin KenModelMixin {
     }
 
     if (sectionsJson != null) {
-      sectionsJson.forEach((v) {
+      for (var v in sectionsJson) {
         KenSectionModel smeupSectionModel = KenSectionModel.fromMap(
           v,
           formKey,
@@ -30,7 +30,7 @@ mixin KenModelMixin {
           scaffoldKey,
         );
         smeupSectionsModels.add(smeupSectionModel);
-      });
+      }
     }
 
     return smeupSectionsModels;

@@ -245,7 +245,7 @@ class Fun {
 
     if (parmsSplit.length == 0) return list;
 
-    parmsSplit.forEach((parm) {
+    for (var parm in parmsSplit) {
       parm = parm.trim();
       RegExp re = RegExp(r'\([^)]*\)');
       re.allMatches(parm).forEach((match) {
@@ -265,7 +265,7 @@ class Fun {
           list.add({'key': key, 'value': value});
         }
       });
-    });
+    }
 
     return list;
   }
@@ -293,10 +293,10 @@ class Fun {
   }
 
   void saveParametersToVariables(GlobalKey<FormState>? formKey) {
-    parameters.forEach((element) {
+    for (var element in parameters) {
       KenUtilities.setVariable(element['key'], element['value'],
           formKey: formKey);
-    });
+    }
   }
 
   static String extractArg(String funString, String parm,

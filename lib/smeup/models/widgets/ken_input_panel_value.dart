@@ -85,12 +85,12 @@ class SmeupInputPanelField {
     visible = true;
     this.position = position;
     if (fieldFromLayout.getAttribute("Cmp") != null) {
-      KenInputPanelSupportedComp.values.forEach((comp) {
+      for (var comp in KenInputPanelSupportedComp.values) {
         String name = comp.toString().split('.').last;
         if (name == fieldFromLayout.getAttribute("Cmp")) {
           component = comp;
         }
-      });
+      }
     }
 
     fun = _getAttributeFromLayout(fieldFromLayout, "PfK", fun);

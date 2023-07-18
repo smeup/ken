@@ -20,7 +20,7 @@ class _KenCarouselIndicatorState extends State<KenCarouselIndicator> {
         Provider.of<KenCarouselIndicatorNotifier>(context, listen: true);
 
     var list = List<Widget>.empty(growable: true);
-    widget.data!.forEach((element) {
+    for (var element in widget.data!) {
       int i = widget.data!.indexOf(element);
       var cont = Container(
         width: 8.0,
@@ -34,7 +34,7 @@ class _KenCarouselIndicatorState extends State<KenCarouselIndicator> {
       );
 
       list.add(cont);
-    });
+    }
 
     var indicator = Row(
       mainAxisAlignment: MainAxisAlignment.center,
