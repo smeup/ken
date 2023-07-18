@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../models/KenMessageBusEventData.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_combo_item_model.dart';
 import '../models/widgets/ken_input_panel_model.dart';
 import '../models/widgets/ken_input_panel_value.dart';
 import '../models/widgets/ken_model.dart';
 import '../models/widgets/ken_section_model.dart';
+import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
 import 'kenButton.dart';
 import 'kenCombo.dart';
@@ -336,10 +338,24 @@ class _KenInputPanelState extends State<KenInputPanel>
               child: KenButton(
                   data: "Conferma",
                   clientOnPressed: () {
-                    if (widget.callBack != null) {
-                      widget.callBack!(
-                          widget, KenCallbackType.clientOnPressed, null, null);
+                    // if (widget.callBack != null) {
+                    //   widget.callBack!(
+                    //       widget, KenCallbackType.clientOnPressed, null, null);
+                    // }
+
+                    if (widget.onSubmit != null) {
+                      widget.onSubmit!(widget.data);
                     }
+
+                    KenMessageBus.instance.publishRequest(
+                      widget.globallyUniqueId,
+                      KenTopic.kenInputPanelOnSubmit,
+                      KenMessageBusEventData(
+                          context: context,
+                          widget: widget,
+                          model: _model,
+                          data: null),
+                    );
                   }),
             ),
           ],

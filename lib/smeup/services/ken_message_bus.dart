@@ -72,6 +72,7 @@ enum KenTopic {
   kenlistboxOnSizeChange,
   kenlistboxOnItemTap,
   kenImageListGetChildren,
+  kenInputPanelOnSubmit,
   kenboxOnDismissed,
   kenDatePickerGetChildren,
   kenProgressBarGetChildren,
