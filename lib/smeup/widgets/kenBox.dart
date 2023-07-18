@@ -871,7 +871,6 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             topic: KenTopic.kenboxGetText)
         .take(1)
         .listen((event) {
-      //print('xxxxxxxxxxxxxxx:' + event.data.data.toString());
       dataText = event.data.data;
       completer.complete(); // resolve promise
     });

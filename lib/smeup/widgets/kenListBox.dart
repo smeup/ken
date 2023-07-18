@@ -552,9 +552,9 @@ class _KenListBoxState extends State<KenListBox>
 
         KenMessageBus.instance.publishRequest(
           widget.globallyUniqueId,
-          KenTopic.kenlistboxGetChildren,
+          KenTopic.kenlistboxOnItemTap,
           KenMessageBusEventData(
-              context: context, widget: widget, model: _model, data: _data),
+              context: context, widget: widget, model: _model, data: data),
         );
       }
 

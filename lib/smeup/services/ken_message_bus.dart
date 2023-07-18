@@ -70,6 +70,7 @@ enum KenTopic {
   confirmDismiss,
   kenlistboxGetChildren,
   kenlistboxOnSizeChange,
+  kenlistboxOnItemTap,
   kenImageListGetChildren,
   kenboxOnDismissed,
   kenDatePickerGetChildren,
