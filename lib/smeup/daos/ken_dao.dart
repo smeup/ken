@@ -20,6 +20,14 @@ class KenDao {
   }
 
   Future<dynamic> getData() {
+    if (smeupModel != null && smeupModel!.type == 'INP') {
+      return KenDataService.dataInitializer.smeupInputPanelGetData(
+        smeupModel!,
+        smeupModel!.formKey,
+        smeupModel!.scaffoldKey,
+        smeupModel!.context,
+      );
+    }
     return KenDataService.dataInitializer.getData(smeupModel!);
   }
 }
