@@ -24,7 +24,6 @@ Future<void> main() async {
                   KenTextAutocomplete(
                     WidgetTestService.scaffoldKey,
                     WidgetTestService.formKey,
-                    callBack: autocompleteCallBack,
                     label: 'description',
                     //padding: EdgeInsets.only(left: 10, right: 10),
                     id: 'autocomplete1',

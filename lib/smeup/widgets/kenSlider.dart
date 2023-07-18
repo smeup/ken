@@ -34,8 +34,6 @@ class KenSlider extends StatefulWidget
   Function? clientOnChange;
   Function? onChanged;
 
-  // Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
   KenSlider(
     this.scaffoldKey,
     this.formKey, {

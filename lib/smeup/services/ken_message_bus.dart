@@ -85,7 +85,17 @@ enum KenTopic {
   kenCalendarWidgetEventClick,
   kenSliderGetChildren,
   kenSliderOnClientChange,
-  kenboxGetText
+  kenboxGetText,
+  kenDatePickerInit,
+  kenDatePickerOnPressed,
+  kenTimePickerOnPressed,
+  kenRadioButtonInit,
+  kenRadioButtonOnPressed,
+  kenRadioButtonGetChildren,
+  kenRadioButtonSelData,
+  kenTextAutocompleteFieldViewBuilder,
+  kenTextAutocompleteOnTapSetState,
+  kenTextAutocompleteOnTapSelected
 }
 
 enum KenMessageType {

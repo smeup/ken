@@ -2,9 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../models/KenMessageBusEventData.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_model.dart';
 import '../models/widgets/ken_text_autocomplete_model.dart';
+import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
 import 'kenButtons.dart';
 import 'kenEnumCallback.dart';
@@ -62,49 +64,53 @@ class KenTextAutocomplete extends StatefulWidget
   TextInputType? keyboard;
   List<TextInputFormatter>? inputFormatters;
 
-  Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
+  // Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
-  KenTextAutocomplete.withController(KenTextAutocompleteModel this.model,
-      this.scaffoldKey, this.formKey, this.smeupButtons, this.callBack)
-      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+  KenTextAutocomplete.withController(
+    KenTextAutocompleteModel this.model,
+    this.scaffoldKey,
+    this.formKey,
+    this.smeupButtons,
+  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
-  KenTextAutocomplete(this.scaffoldKey, this.formKey,
-      {this.id = '',
-      this.type = 'FLD',
-      this.backColor,
-      this.fontSize,
-      this.fontBold,
-      this.fontColor,
-      this.captionBackColor,
-      this.captionFontBold,
-      this.captionFontColor,
-      this.captionFontSize,
-      this.borderColor,
-      this.borderRadius,
-      this.borderWidth,
-      this.label = KenTextAutocompleteModel.defaultLabel,
-      this.submitLabel = KenTextAutocompleteModel.defaultSubmitLabel,
-      this.width = KenTextAutocompleteModel.defaultWidth,
-      this.height = KenTextAutocompleteModel.defaultHeight,
-      this.padding = KenTextAutocompleteModel.defaultPadding,
-      this.showborder = KenTextAutocompleteModel.defaultShowBorder,
-      this.data,
-      this.underline = KenTextAutocompleteModel.defaultUnderline,
-      this.autoFocus = KenTextAutocompleteModel.defaultAutoFocus,
-      this.showSubmit = KenTextAutocompleteModel.defaultShowSubmit,
-      this.clientValidator,
-      this.clientOnSave,
-      this.clientOnChange,
-      this.clientOnSelected,
-      this.clientOnSubmit,
-      this.keyboard,
-      this.inputFormatters,
-      this.defaultValue,
-      this.valueField,
-      this.callBack})
-      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
+  KenTextAutocomplete(
+    this.scaffoldKey,
+    this.formKey, {
+    this.id = '',
+    this.type = 'FLD',
+    this.backColor,
+    this.fontSize,
+    this.fontBold,
+    this.fontColor,
+    this.captionBackColor,
+    this.captionFontBold,
+    this.captionFontColor,
+    this.captionFontSize,
+    this.borderColor,
+    this.borderRadius,
+    this.borderWidth,
+    this.label = KenTextAutocompleteModel.defaultLabel,
+    this.submitLabel = KenTextAutocompleteModel.defaultSubmitLabel,
+    this.width = KenTextAutocompleteModel.defaultWidth,
+    this.height = KenTextAutocompleteModel.defaultHeight,
+    this.padding = KenTextAutocompleteModel.defaultPadding,
+    this.showborder = KenTextAutocompleteModel.defaultShowBorder,
+    this.data,
+    this.underline = KenTextAutocompleteModel.defaultUnderline,
+    this.autoFocus = KenTextAutocompleteModel.defaultAutoFocus,
+    this.showSubmit = KenTextAutocompleteModel.defaultShowSubmit,
+    this.clientValidator,
+    this.clientOnSave,
+    this.clientOnChange,
+    this.clientOnSelected,
+    this.clientOnSubmit,
+    this.keyboard,
+    this.inputFormatters,
+    this.defaultValue,
+    this.valueField,
+  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenTextAutocompleteModel.setDefaults(this);
   }
@@ -254,11 +260,14 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
               FocusNode focusNode,
               VoidCallback onFieldSubmitted) {
             String code = "";
-            if (widget.callBack != null) {
-              widget.callBack!
-                      (widget, KenCallbackType.fieldViewBuilder, _data, null)
-                  .then((value) => code = value);
-            }
+
+            KenMessageBus.instance.publishRequest(
+              widget.globallyUniqueId,
+              KenTopic.kenTextAutocompleteFieldViewBuilder,
+              KenMessageBusEventData(
+                  context: context, widget: widget, model: _model, data: _data),
+            );
+            // .then((value) => code = value);
 
             if (code.isNotEmpty && _data != null) {
               var currel = _data.firstWhere(
@@ -345,10 +354,15 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                     ),
                     onTap: () {
                       setState(() {
-                        if (widget.callBack != null) {
-                          widget.callBack!(widget,
-                              KenCallbackType.onTapSetState, code, null);
-                        }
+                        KenMessageBus.instance.publishRequest(
+                          widget.globallyUniqueId,
+                          KenTopic.kenTextAutocompleteOnTapSetState,
+                          KenMessageBusEventData(
+                              context: context,
+                              widget: widget,
+                              model: _model,
+                              data: code),
+                        );
                       });
                     },
                   ),
@@ -384,10 +398,15 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                         onTap: () {
                           onSelected(option);
 
-                          if (widget.callBack != null) {
-                            widget.callBack!(widget,
-                                KenCallbackType.onTapOnSelected, option, null);
-                          }
+                          KenMessageBus.instance.publishRequest(
+                            widget.globallyUniqueId,
+                            KenTopic.kenTextAutocompleteOnTapSelected,
+                            KenMessageBusEventData(
+                                context: context,
+                                widget: widget,
+                                model: _model,
+                                data: option),
+                          );
 
                           // SmeupVariablesService.setVariable(
                           //     widget.id, option['code'],
