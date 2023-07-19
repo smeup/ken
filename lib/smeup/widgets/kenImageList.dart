@@ -6,7 +6,6 @@ import '../models/widgets/ken_list_box_model.dart';
 import '../models/widgets/ken_model.dart';
 import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
-import 'kenEnumCallback.dart';
 import 'kenListBox.dart';
 import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';
@@ -48,41 +47,46 @@ class KenImageList extends StatefulWidget
 
   // dynamisms functions
   Function? clientOnItemTap;
-  Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
   dynamic parentForm;
 
-  KenImageList.withController(KenImageListModel this.model, this.scaffoldKey,
-      this.formKey, this.parentForm, this.callBack)
-      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+  KenImageList.withController(
+    KenImageListModel this.model,
+    this.scaffoldKey,
+    this.formKey,
+    this.parentForm,
+  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
   KenImageList(
-      this.scaffoldKey, this.formKey, this.data, this.columns, this.rows,
-      {this.id = '',
-      this.type = 'IML',
-      this.backColor,
-      this.borderColor,
-      this.borderWidth,
-      this.borderRadius,
-      this.fontSize,
-      this.fontColor,
-      this.fontBold,
-      this.captionFontBold,
-      this.captionFontSize,
-      this.captionFontColor,
-      this.width = KenImageListModel.defaultWidth,
-      this.height = KenImageListModel.defaultHeight,
-      this.padding = KenImageListModel.defaultPadding,
-      this.orientation = KenImageListModel.defaultOrientation,
-      this.listHeight = KenImageListModel.defaultListHeight,
-      this.title = '',
-      showLoader = false,
-      this.clientOnItemTap,
-      this.dismissEnabled = false,
-      this.callBack})
-      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
+    this.scaffoldKey,
+    this.formKey,
+    this.data,
+    this.columns,
+    this.rows, {
+    this.id = '',
+    this.type = 'IML',
+    this.backColor,
+    this.borderColor,
+    this.borderWidth,
+    this.borderRadius,
+    this.fontSize,
+    this.fontColor,
+    this.fontBold,
+    this.captionFontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.width = KenImageListModel.defaultWidth,
+    this.height = KenImageListModel.defaultHeight,
+    this.padding = KenImageListModel.defaultPadding,
+    this.orientation = KenImageListModel.defaultOrientation,
+    this.listHeight = KenImageListModel.defaultListHeight,
+    this.title = '',
+    showLoader = false,
+    this.clientOnItemTap,
+    this.dismissEnabled = false,
+  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
   }
 
