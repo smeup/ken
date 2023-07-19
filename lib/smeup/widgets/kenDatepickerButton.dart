@@ -28,7 +28,6 @@ class KenDatePickerButton extends StatefulWidget {
   bool? underline;
   KenDatePickerModel? model;
   final Function? clientOnChange;
-  // Function(dynamic, KenCallbackType, dynamic)? callBack;
 
   final DateTime? value;
   final String? id;

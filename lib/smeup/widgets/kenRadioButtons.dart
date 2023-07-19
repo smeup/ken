@@ -53,8 +53,6 @@ class KenRadioButtons extends StatefulWidget
   String? type;
   String? title;
 
-  // Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
   KenRadioButtons.withController(
     KenRadioButtonsModel this.model,
     this.scaffoldKey,
@@ -207,7 +205,16 @@ class _KenRadioButtonsState extends State<KenRadioButtons>
 
       setDataLoad(widget.id, true);
     }
-
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenRadioButtonGetChildren,
+      KenMessageBusEventData(
+        context: context,
+        widget: widget,
+        model: null,
+        data: null,
+      ),
+    );
     var buttons = List<Widget>.empty(growable: true);
 
     int buttonIndex = 0;
@@ -229,16 +236,7 @@ class _KenRadioButtonsState extends State<KenRadioButtons>
 
     _data.forEach((radioButtonData) {
       buttonIndex += 1;
-      KenMessageBus.instance.publishRequest(
-        widget.globallyUniqueId,
-        KenTopic.kenRadioButtonGetChildren,
-        KenMessageBusEventData(
-          context: context,
-          widget: widget,
-          model: null,
-          data: null,
-        ),
-      );
+
       final button = KenRadioButton(
           id: '${KenUtilities.getWidgetId(widget.type, widget.id)}_${buttonIndex.toString()}',
           type: widget.type,
