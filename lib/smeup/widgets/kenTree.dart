@@ -67,9 +67,7 @@ class KenTree extends StatefulWidget
     this.parentHeight = KenTreeModel.defaultParentHeight,
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    if (data == null) {
-      data = List<dynamic>.empty(growable: true);
-    }
+    data ??= List<dynamic>.empty(growable: true);
   }
 
   @override
@@ -141,8 +139,9 @@ class _KenTreeState extends State<KenTree>
     double? treeHeight = widget.height;
     double? treeWidth = widget.width;
     if (_model != null && _model!.parent != null) {
-      if (treeHeight == 0)
+      if (treeHeight == 0) {
         treeHeight = (_model!.parent as KenSectionModel).height;
+      }
       if (treeWidth == 0) treeWidth = (_model!.parent as KenSectionModel).width;
     } else {
       if (treeHeight == 0) treeHeight = KenUtilities.getDeviceInfo().safeHeight;

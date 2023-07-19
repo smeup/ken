@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/kenEnumCallback.dart';
 import '../../lib/smeup/widgets/kenTextAutocomplete.dart';
 import 'widget_test_service.dart';
 
@@ -8,9 +7,9 @@ Future<void> main() async {
   testWidgets('Test static contructor ', (WidgetTester tester) async {
     await WidgetTestService.initTests();
 
-    Widget testWidget = new MediaQuery(
-        data: new MediaQueryData(),
-        child: new MaterialApp(
+    Widget testWidget = MediaQuery(
+        data: const MediaQueryData(),
+        child: MaterialApp(
             home: Scaffold(
           appBar: AppBar(),
           body: SingleChildScrollView(
@@ -24,7 +23,6 @@ Future<void> main() async {
                   KenTextAutocomplete(
                     WidgetTestService.scaffoldKey,
                     WidgetTestService.formKey,
-                    callBack: autocompleteCallBack,
                     label: 'description',
                     //padding: EdgeInsets.only(left: 10, right: 10),
                     id: 'autocomplete1',
@@ -101,21 +99,11 @@ Future<void> main() async {
   // });
 }
 
-Future<dynamic> autocompleteCallBack(Widget widget,
-    KenCallbackType kenCallbackType, dynamic data, dynamic col) async {
-  switch (kenCallbackType) {
-    case KenCallbackType.fieldViewBuilder:
-      String code = '';
-      return code;
-    default:
-  }
-}
-
 Future<void> runTests(WidgetTester tester) async {
-  final findKey = find.byKey(Key('autocomplete1'));
+  final findKey = find.byKey(const Key('autocomplete1'));
   expect(findKey, findsOneWidget);
 
-  final findKeyText = find.byKey(Key('autocomplete1_text'));
+  final findKeyText = find.byKey(const Key('autocomplete1_text'));
   expect(findKeyText, findsOneWidget);
 
   var findWidget = find.byType(KenTextAutocomplete);

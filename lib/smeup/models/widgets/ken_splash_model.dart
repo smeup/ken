@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import '../../services/ken_configuration_service.dart';
 
 class KenSplashModel extends KenModel implements KenDataInterface {
@@ -19,10 +18,7 @@ class KenSplashModel extends KenModel implements KenDataInterface {
     BuildContext? context,
     this.color,
     title = '',
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'spl';
     setDefaults(this);
   }
@@ -45,6 +41,6 @@ class KenSplashModel extends KenModel implements KenDataInterface {
 
     // ----------------- set properties from default
 
-    if (obj.color == null) obj.color = KenSplashModel.defaultColor;
+    obj.color ??= KenSplashModel.defaultColor;
   }
 }

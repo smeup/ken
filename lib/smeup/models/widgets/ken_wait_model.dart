@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import '../../services/ken_configuration_service.dart';
 
 class KenWaitModel extends KenModel implements KenDataInterface {
@@ -14,19 +13,15 @@ class KenWaitModel extends KenModel implements KenDataInterface {
   Color? loaderColor;
   Color? circularTrackColor;
 
-  KenWaitModel(
-      {id,
-      type,
-      GlobalKey<FormState>? formKey,
-      GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-      this.splashColor,
-      title = '',
-    })
-      : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type) {
+  KenWaitModel({
+    id,
+    type,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
+    this.splashColor,
+    title = '',
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'wai';
   }
 
@@ -59,11 +54,8 @@ class KenWaitModel extends KenModel implements KenDataInterface {
 
     // ----------------- set properties from default
 
-    if (obj.splashColor == null)
-      obj.splashColor = KenWaitModel.defaultSplashColor;
-    if (obj.loaderColor == null)
-      obj.loaderColor = KenWaitModel.defaultSplashColor;
-    if (obj.circularTrackColor == null)
-      obj.circularTrackColor = KenWaitModel.defaultcircularTrackColor;
+    obj.splashColor ??= KenWaitModel.defaultSplashColor;
+    obj.loaderColor ??= KenWaitModel.defaultSplashColor;
+    obj.circularTrackColor ??= KenWaitModel.defaultcircularTrackColor;
   }
 }

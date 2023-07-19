@@ -1,10 +1,11 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 import '../../services/ken_configuration_service.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 
 class KenDashboardModel extends KenModel implements KenDataInterface {
   // supported by json_theme
@@ -83,12 +84,8 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
     this.forceIcon = defaultForceIcon,
     this.numberFormat = defaultNumberFormat,
     title = '',
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type) {
-    if (iconColor == null)
-      iconColor = KenConfigurationService.getTheme()!.iconTheme.color;
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
+    iconColor ??= KenConfigurationService.getTheme()!.iconTheme.color;
     id = KenUtilities.getWidgetId('DSH', id);
     setDefaults(this);
   }
@@ -98,8 +95,7 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context)
-      : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context) {
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
     valueColName = optionsDefault!['ValueColName'] ?? defaultValueColName;
     iconColName = optionsDefault!['iconColName'] ?? defaultIconColName;
@@ -159,7 +155,7 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupDashboardDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }
@@ -181,20 +177,15 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
 
     // ----------------- set properties from default
 
-    if (obj.fontBold == null) obj.fontBold = KenDashboardModel.defaultFontBold;
-    if (obj.fontColor == null)
-      obj.fontColor = KenDashboardModel.defaultFontColor;
-    if (obj.fontSize == null) obj.fontSize = KenDashboardModel.defaultFontSize;
+    obj.fontBold ??= KenDashboardModel.defaultFontBold;
+    obj.fontColor ??= KenDashboardModel.defaultFontColor;
+    obj.fontSize ??= KenDashboardModel.defaultFontSize;
 
-    if (obj.captionFontBold == null)
-      obj.captionFontBold = KenDashboardModel.defaultCaptionFontBold;
-    if (obj.captionFontColor == null)
-      obj.captionFontColor = KenDashboardModel.defaultCaptionFontColor;
-    if (obj.captionFontSize == null)
-      obj.captionFontSize = KenDashboardModel.defaultCaptionFontSize;
+    obj.captionFontBold ??= KenDashboardModel.defaultCaptionFontBold;
+    obj.captionFontColor ??= KenDashboardModel.defaultCaptionFontColor;
+    obj.captionFontSize ??= KenDashboardModel.defaultCaptionFontSize;
 
-    if (obj.iconSize == null) obj.iconSize = KenDashboardModel.defaultIconSize;
-    if (obj.iconColor == null)
-      obj.iconColor = KenDashboardModel.defaultIconColor;
+    obj.iconSize ??= KenDashboardModel.defaultIconSize;
+    obj.iconColor ??= KenDashboardModel.defaultIconColor;
   }
 }

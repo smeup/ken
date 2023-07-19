@@ -13,8 +13,7 @@ class KenTextPasswordRule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Row(
+    return Row(
       children: [
         if (showRulesIcon!)
           Icon(
@@ -27,6 +26,6 @@ class KenTextPasswordRule extends StatelessWidget {
           style: captionStyle.copyWith(color: color),
         )
       ],
-    ));
+    );
   }
 }

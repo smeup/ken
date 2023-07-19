@@ -1,8 +1,10 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
+
 import '../../services/ken_configuration_service.dart';
 
 enum KenListType { simple, oriented, wheel }
@@ -93,12 +95,8 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
     this.showSelection = defaultShowSelection,
     this.selectedRow = defaultSelectedRow,
     title = '',
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type) {
-    if (visibleColumns == null)
-      visibleColumns = List<String>.empty(growable: true);
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
+    visibleColumns ??= List<String>.empty(growable: true);
     setDefaults(this);
   }
 
@@ -113,7 +111,7 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
     layout = defaultLayout;
     if (jsonMap['layout'] != null) {
       layout = jsonMap['layout'].toString();
-      if (layout.length > 0) {
+      if (layout.isNotEmpty) {
         layout = layout.substring(layout.length - 1);
       }
     }
@@ -182,7 +180,7 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupListBoxDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }
@@ -225,24 +223,18 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
     defaultCaptionFontColor = captionStyle.color;
 
     // ----------------- set properties from default
-    if (obj.backColor == null) obj.backColor = KenListBoxModel.defaultBackColor;
+    obj.backColor ??= KenListBoxModel.defaultBackColor;
 
-    if (obj.borderColor == null)
-      obj.borderColor = KenListBoxModel.defaultBorderColor;
-    if (obj.borderWidth == null)
-      obj.borderWidth = KenListBoxModel.defaultBorderWidth;
-    if (obj.borderRadius == null)
-      obj.borderRadius = KenListBoxModel.defaultBorderRadius;
+    obj.borderColor ??= KenListBoxModel.defaultBorderColor;
+    obj.borderWidth ??= KenListBoxModel.defaultBorderWidth;
+    obj.borderRadius ??= KenListBoxModel.defaultBorderRadius;
 
-    if (obj.fontBold == null) obj.fontBold = KenListBoxModel.defaultFontBold;
-    if (obj.fontColor == null) obj.fontColor = KenListBoxModel.defaultFontColor;
-    if (obj.fontSize == null) obj.fontSize = KenListBoxModel.defaultFontSize;
+    obj.fontBold ??= KenListBoxModel.defaultFontBold;
+    obj.fontColor ??= KenListBoxModel.defaultFontColor;
+    obj.fontSize ??= KenListBoxModel.defaultFontSize;
 
-    if (obj.captionFontBold == null)
-      obj.captionFontBold = KenListBoxModel.defaultCaptionFontBold;
-    if (obj.captionFontColor == null)
-      obj.captionFontColor = KenListBoxModel.defaultCaptionFontColor;
-    if (obj.captionFontSize == null)
-      obj.captionFontSize = KenListBoxModel.defaultCaptionFontSize;
+    obj.captionFontBold ??= KenListBoxModel.defaultCaptionFontBold;
+    obj.captionFontColor ??= KenListBoxModel.defaultCaptionFontColor;
+    obj.captionFontSize ??= KenListBoxModel.defaultCaptionFontSize;
   }
 }

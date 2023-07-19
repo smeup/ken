@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../services/ken_log_service.dart';
-import 'ken_model_callback.dart';
 import 'ken_buttons_model.dart';
 import 'ken_calendar_model.dart';
 import 'ken_carousel_model.dart';
@@ -51,8 +50,7 @@ class KenSectionModel extends KenModel with KenModelMixin {
       BuildContext? context,
       KenModel parent,
       GlobalKey<ScaffoldState>? scaffoldKey)
-      : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context) {
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     String tmp = jsonMap['dim'] ?? '';
     tmp = tmp.replaceAll('%', '');
     dim = double.tryParse(tmp) ?? 0;
@@ -68,8 +66,6 @@ class KenSectionModel extends KenModel with KenModelMixin {
       parentForm = parent.parentForm;
     }
 
-    // ??? nel futuro prevedere di eliminzare servizi anche in questo modell.
-    // this.instanceCallBack(ServicesCallbackType.replaceSelectedTabIndex, this);
     _replaceSelectedTabIndex(jsonMap);
 
     components = getComponents(jsonMap, 'components');
@@ -79,18 +75,18 @@ class KenSectionModel extends KenModel with KenModelMixin {
 
   void _replaceSelectedTabIndex(dynamic jsonMap) {
     if (jsonMap['selectedTabColName'] != null) {
-      this.selectedTabIndex = int.tryParse(KenUtilities.replaceVariables(
-          '[${jsonMap['selectedTabColName']}]', this.formKey));
+      selectedTabIndex = int.tryParse(KenUtilities.replaceVariables(
+          '[${jsonMap['selectedTabColName']}]', formKey));
     }
-    if (this.selectedTabIndex == null) this.selectedTabIndex = 0;
+    selectedTabIndex ??= 0;
   }
 
   bool hasComponents() {
-    return components != null && components!.length > 0;
+    return components != null && components!.isNotEmpty;
   }
 
   bool hasSections() {
-    return smeupSectionsModels != null && smeupSectionsModels!.length > 0;
+    return smeupSectionsModels != null && smeupSectionsModels!.isNotEmpty;
   }
 
   List<KenModel> getComponents(jsonMap, componentName) {
@@ -104,52 +100,44 @@ class KenSectionModel extends KenModel with KenModelMixin {
         try {
           switch (v['type']) {
             case 'LAB': // ok
-              model = KenLabelModel.fromMap(
-                  v, formKey, scaffoldKey, context);
+              model = KenLabelModel.fromMap(v, formKey, scaffoldKey, context);
               break;
             case 'GAU':
-              model = KenGaugeModel.fromMap(
-                  v, formKey, scaffoldKey, context);
+              model = KenGaugeModel.fromMap(v, formKey, scaffoldKey, context);
               break;
             case 'CAU':
-              model = KenCarouselModel.fromMap(
-                  v, formKey, scaffoldKey, context);
+              model =
+                  KenCarouselModel.fromMap(v, formKey, scaffoldKey, context);
               break;
             case 'TRE':
-              model = KenTreeModel.fromMap(
-                  v, formKey, scaffoldKey, context);
+              model = KenTreeModel.fromMap(v, formKey, scaffoldKey, context);
               break;
             case 'CAL':
-              model = KenCalendarModel.fromMap(
-                  v, formKey, scaffoldKey, context);
+              model =
+                  KenCalendarModel.fromMap(v, formKey, scaffoldKey, context);
               break;
             case 'CHA':
-              model = KenChartModel.fromMap(
-                  v, formKey, scaffoldKey, context);
+              model = KenChartModel.fromMap(v, formKey, scaffoldKey, context);
               break;
             case 'BTN':
-              model = KenButtonsModel.fromMap(
-                  v, formKey, scaffoldKey, context);
+              model = KenButtonsModel.fromMap(v, formKey, scaffoldKey, context);
               break;
             case 'BOX':
-              model = KenListBoxModel.fromMap(
-                  v, formKey, scaffoldKey, context);
+              model = KenListBoxModel.fromMap(v, formKey, scaffoldKey, context);
               break;
             case 'DSH':
-              model = KenDashboardModel.fromMap(
-                  v, formKey, scaffoldKey, context);
+              model =
+                  KenDashboardModel.fromMap(v, formKey, scaffoldKey, context);
               break;
             case 'LIN':
-              model = KenLineModel.fromMap(
-                  v, formKey, scaffoldKey, context);
+              model = KenLineModel.fromMap(v, formKey, scaffoldKey, context);
               break;
             case 'IMG':
-              model = KenImageModel.fromMap(
-                  v, formKey, scaffoldKey, context);
+              model = KenImageModel.fromMap(v, formKey, scaffoldKey, context);
               break;
             case 'IML':
-              model = KenImageListModel.fromMap(
-                  v, formKey, scaffoldKey, context);
+              model =
+                  KenImageListModel.fromMap(v, formKey, scaffoldKey, context);
               break;
             case 'FLD':
               switch (v['options']['FLD']['default']['type']) {
@@ -190,16 +178,16 @@ class KenSectionModel extends KenModel with KenModelMixin {
                       v, formKey, scaffoldKey, context, this);
                   break;
                 case 'sld':
-                  model = KenSliderModel.fromMap(
-                      v, formKey, scaffoldKey, context);
+                  model =
+                      KenSliderModel.fromMap(v, formKey, scaffoldKey, context);
                   break;
                 case 'spl':
-                  model = KenSplashModel.fromMap(
-                      v, formKey, scaffoldKey, context);
+                  model =
+                      KenSplashModel.fromMap(v, formKey, scaffoldKey, context);
                   break;
                 case 'swt':
-                  model = KenSwitchModel.fromMap(
-                      v, formKey, scaffoldKey, context);
+                  model =
+                      KenSwitchModel.fromMap(v, formKey, scaffoldKey, context);
                   break;
                 case 'tpk':
                   model = KenTimePickerModel.fromMap(
@@ -211,15 +199,14 @@ class KenSectionModel extends KenModel with KenModelMixin {
 
               break;
             case 'SCH':
-              model = KenFormModel.fromMap(
-                  v, formKey, scaffoldKey, context);
+              model = KenFormModel.fromMap(v, formKey, scaffoldKey, context);
               break;
             case 'DRW':
               break;
 
             case 'INP': // ok
-              model = KenInputPanelModel.fromMap(
-                  v, formKey, scaffoldKey, context);
+              model =
+                  KenInputPanelModel.fromMap(v, formKey, scaffoldKey, context);
               break;
             default:
               var v2 = {
@@ -242,8 +229,7 @@ class KenSectionModel extends KenModel with KenModelMixin {
                 "type": "LAB"
               };
 
-              model = KenLabelModel.fromMap(
-                  v2, formKey, scaffoldKey, context);
+              model = KenLabelModel.fromMap(v2, formKey, scaffoldKey, context);
 
               KenLogService.writeDebugMessage(
                   'component not defined: ${v['type']}',
@@ -257,7 +243,7 @@ class KenSectionModel extends KenModel with KenModelMixin {
         }
 
         if (model != null) {
-          if (model.parent == null) model.parent = this;
+          model.parent ??= this;
           components.add(model);
         }
       });

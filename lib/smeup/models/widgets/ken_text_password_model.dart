@@ -1,8 +1,9 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import '../../services/ken_configuration_service.dart';
 
 class KenTextPasswordModel extends KenModel implements KenDataInterface {
@@ -101,12 +102,8 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
     this.valueField,
     this.showRules = defaultShowRules,
     this.checkRules = defaultCheckRules,
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type) {
-    if (backColor == null)
-      backColor = KenConfigurationService.getTheme()!.backgroundColor;
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
+    backColor ??= KenConfigurationService.getTheme()!.backgroundColor;
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'pwd';
     id = KenUtilities.getWidgetId('FLD', id);
     setDefaults(this);
@@ -178,7 +175,7 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupTextPasswordDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }
@@ -215,33 +212,19 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
     defaultButtonBackColor = KenConfigurationService.getTheme()!.primaryColor;
 
     // ----------------- set properties from default
-    if (obj.borderColor == null)
-      obj.borderColor = KenTextPasswordModel.defaultBorderColor;
-    if (obj.borderWidth == null)
-      obj.borderWidth = KenTextPasswordModel.defaultBorderWidth;
-    if (obj.borderRadius == null)
-      obj.borderRadius = KenTextPasswordModel.defaultBorderRadius;
-    if (obj.fontBold == null)
-      obj.fontBold = KenTextPasswordModel.defaultFontBold;
-    if (obj.fontColor == null)
-      obj.fontColor = KenTextPasswordModel.defaultFontColor;
-    if (obj.fontSize == null)
-      obj.fontSize = KenTextPasswordModel.defaultFontSize;
-    if (obj.backColor == null)
-      obj.backColor = KenTextPasswordModel.defaultBackColor;
-    if (obj.captionFontBold == null)
-      obj.captionFontBold = KenTextPasswordModel.defaultCaptionFontBold;
-    if (obj.captionFontColor == null)
-      obj.captionFontColor = KenTextPasswordModel.defaultCaptionFontColor;
-    if (obj.captionFontSize == null)
-      obj.captionFontSize = KenTextPasswordModel.defaultCaptionFontSize;
-    if (obj.captionBackColor == null)
-      obj.captionBackColor = KenTextPasswordModel.defaultCaptionBackColor;
-    if (obj.iconSize == null)
-      obj.iconSize = KenTextPasswordModel.defaultIconSize;
-    if (obj.iconColor == null)
-      obj.iconColor = KenTextPasswordModel.defaultIconColor;
-    if (obj.buttonBackColor == null)
-      obj.buttonBackColor = KenTextPasswordModel.defaultButtonBackColor;
+    obj.borderColor ??= KenTextPasswordModel.defaultBorderColor;
+    obj.borderWidth ??= KenTextPasswordModel.defaultBorderWidth;
+    obj.borderRadius ??= KenTextPasswordModel.defaultBorderRadius;
+    obj.fontBold ??= KenTextPasswordModel.defaultFontBold;
+    obj.fontColor ??= KenTextPasswordModel.defaultFontColor;
+    obj.fontSize ??= KenTextPasswordModel.defaultFontSize;
+    obj.backColor ??= KenTextPasswordModel.defaultBackColor;
+    obj.captionFontBold ??= KenTextPasswordModel.defaultCaptionFontBold;
+    obj.captionFontColor ??= KenTextPasswordModel.defaultCaptionFontColor;
+    obj.captionFontSize ??= KenTextPasswordModel.defaultCaptionFontSize;
+    obj.captionBackColor ??= KenTextPasswordModel.defaultCaptionBackColor;
+    obj.iconSize ??= KenTextPasswordModel.defaultIconSize;
+    obj.iconColor ??= KenTextPasswordModel.defaultIconColor;
+    obj.buttonBackColor ??= KenTextPasswordModel.defaultButtonBackColor;
   }
 }

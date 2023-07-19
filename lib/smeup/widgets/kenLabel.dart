@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_label_model.dart';
@@ -208,7 +210,7 @@ class _KenLabelState extends State<KenLabel>
         mainAxisSize: MainAxisSize.max,
         children: alignes);
 
-    if (alignes.length > 0) {
+    if (alignes.isNotEmpty) {
       double labelHeight =
           widget.height! * alignes.length * (widget.fontSize! / 5);
 
@@ -245,7 +247,7 @@ class _KenLabelState extends State<KenLabel>
           size: iconTheme.size,
         );
 
-        var children;
+        Container children;
         double widgetHeight = labelHeight + iconTheme.size!;
 
         if (widget.align == Alignment.centerLeft) {
@@ -255,10 +257,10 @@ class _KenLabelState extends State<KenLabel>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 label,
-                Padding(padding: EdgeInsets.fromLTRB(5, 0, 0, 0)),
+                const Padding(padding: EdgeInsets.fromLTRB(5, 0, 0, 0)),
                 Container(
-                  padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
-                  constraints: BoxConstraints(
+                  padding: const EdgeInsets.fromLTRB(0, 3, 0, 0),
+                  constraints: const BoxConstraints(
                       maxHeight: 60,
                       minWidth: 0,
                       maxWidth: double.infinity,
@@ -300,8 +302,9 @@ class _KenLabelState extends State<KenLabel>
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0), child: icon),
-                Padding(padding: EdgeInsets.fromLTRB(0, 0, 5, 0)),
+                    padding: const EdgeInsets.fromLTRB(0, 3, 0, 0),
+                    child: icon),
+                const Padding(padding: EdgeInsets.fromLTRB(0, 0, 5, 0)),
                 label,
               ],
             ),

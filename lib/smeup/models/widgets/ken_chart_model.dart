@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../services/ken_utilities.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 
 enum ChartType { Pie, Bar }
 
@@ -31,18 +30,14 @@ class KenChartModel extends KenModel {
     this.height = defaultHeight,
     this.width = defaultWidth,
     this.legend = defaultLegend,
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type);
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type);
 
   KenChartModel.fromMap(
       Map<String, dynamic> jsonMap,
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context)
-      : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context) {
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     if (optionsDefault!['Typ'] == null) {
       chartType = defaultChartType;
     } else {
@@ -52,7 +47,7 @@ class KenChartModel extends KenModel {
         chartType = _getChartType(optionsDefault!['Typ']);
       }
     }
-    if (chartType == null) chartType = defaultChartType;
+    chartType ??= defaultChartType;
     //refresh = optionsDefault['refresh'] ?? defaultRefresh;
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
@@ -62,7 +57,7 @@ class KenChartModel extends KenModel {
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-        await this.getData();
+        await getData();
         // await SmeupChartDao.getData(this);
       };
     }

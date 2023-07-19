@@ -92,7 +92,7 @@ mixin KenWidgetStateMixin {
       errorNotifier.setError(true);
       KenLogService.writeDebugMessage('Notified error: $id',
           logType: KenLogType.error);
-      Future.delayed(Duration(seconds: 1), () async {
+      Future.delayed(const Duration(seconds: 1), () async {
         errorNotifier.notifyError();
       });
     }
@@ -117,7 +117,7 @@ mixin KenWidgetStateMixin {
 
   bool hasSections(KenSectionModel model) {
     return model.smeupSectionsModels != null &&
-        model.smeupSectionsModels!.length > 0;
+        model.smeupSectionsModels!.isNotEmpty;
   }
 
   bool hasData(KenModel model) {

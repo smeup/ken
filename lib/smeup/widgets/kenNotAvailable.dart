@@ -9,7 +9,7 @@ class KenNotAvailable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       child: Center(
         child: Image.asset(
           "packages/ken/assets/images/not_available.png",

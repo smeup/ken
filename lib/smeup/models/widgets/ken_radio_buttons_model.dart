@@ -1,9 +1,10 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_input_field_model.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import '../../services/ken_configuration_service.dart';
 
 class KenRadioButtonsModel extends KenInputFieldModel
@@ -47,35 +48,31 @@ class KenRadioButtonsModel extends KenInputFieldModel
   String? selectedValue;
   int? columns;
 
-  KenRadioButtonsModel(
-      {GlobalKey<FormState>? formKey,
-      GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-      id,
-      type,
-      title = '',
-      this.radioButtonColor,
-      this.fontColor,
-      this.fontSize,
-      this.backColor,
-      this.fontBold,
-      this.captionFontBold,
-      this.captionFontSize,
-      this.captionFontColor,
-      this.captionBackColor,
-      this.width = defaultWidth,
-      this.height = defaultHeight,
-      this.align = defaultAlign,
-      this.padding = defaultPadding,
-      this.valueField = defaultValueField,
-      this.displayedField = defaultDisplayedField,
-      this.selectedValue,
-      this.columns = defaultColumns,
-    })
-      : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type) {
+  KenRadioButtonsModel({
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
+    id,
+    type,
+    title = '',
+    this.radioButtonColor,
+    this.fontColor,
+    this.fontSize,
+    this.backColor,
+    this.fontBold,
+    this.captionFontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.captionBackColor,
+    this.width = defaultWidth,
+    this.height = defaultHeight,
+    this.align = defaultAlign,
+    this.padding = defaultPadding,
+    this.valueField = defaultValueField,
+    this.displayedField = defaultDisplayedField,
+    this.selectedValue,
+    this.columns = defaultColumns,
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     setDefaults(this);
 
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'rad';
@@ -87,8 +84,7 @@ class KenRadioButtonsModel extends KenInputFieldModel
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
       KenModel parent)
-      : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, parent) {
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context, parent) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';
@@ -137,7 +133,7 @@ class KenRadioButtonsModel extends KenInputFieldModel
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupRadioButtonsDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }
@@ -152,8 +148,7 @@ class KenRadioButtonsModel extends KenInputFieldModel
   static setDefaults(dynamic obj) {
     var radioTheme = KenConfigurationService.getTheme()!.radioTheme;
 
-    defaultRadioButtonColor =
-        radioTheme.fillColor!.resolve(Set<MaterialState>());
+    defaultRadioButtonColor = radioTheme.fillColor!.resolve(<MaterialState>{});
 
     var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
     defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
@@ -169,25 +164,16 @@ class KenRadioButtonsModel extends KenInputFieldModel
 
     // ----------------- set properties from default
 
-    if (obj.radioButtonColor == null)
-      obj.radioButtonColor = KenRadioButtonsModel.defaultRadioButtonColor;
+    obj.radioButtonColor ??= KenRadioButtonsModel.defaultRadioButtonColor;
 
-    if (obj.fontColor == null)
-      obj.fontColor = KenRadioButtonsModel.defaultFontColor;
-    if (obj.fontSize == null)
-      obj.fontSize = KenRadioButtonsModel.defaultFontSize;
-    if (obj.backColor == null)
-      obj.backColor = KenRadioButtonsModel.defaultBackColor;
-    if (obj.fontBold == null)
-      obj.fontBold = KenRadioButtonsModel.defaultFontBold;
+    obj.fontColor ??= KenRadioButtonsModel.defaultFontColor;
+    obj.fontSize ??= KenRadioButtonsModel.defaultFontSize;
+    obj.backColor ??= KenRadioButtonsModel.defaultBackColor;
+    obj.fontBold ??= KenRadioButtonsModel.defaultFontBold;
 
-    if (obj.captionFontColor == null)
-      obj.captionFontColor = KenRadioButtonsModel.defaultCaptionFontColor;
-    if (obj.captionFontSize == null)
-      obj.captionFontSize = KenRadioButtonsModel.defaultCaptionFontSize;
-    if (obj.captionBackColor == null)
-      obj.captionBackColor = KenRadioButtonsModel.defaultCaptionBackColor;
-    if (obj.captionFontBold == null)
-      obj.captionFontBold = KenRadioButtonsModel.defaultCaptionFontBold;
+    obj.captionFontColor ??= KenRadioButtonsModel.defaultCaptionFontColor;
+    obj.captionFontSize ??= KenRadioButtonsModel.defaultCaptionFontSize;
+    obj.captionBackColor ??= KenRadioButtonsModel.defaultCaptionBackColor;
+    obj.captionFontBold ??= KenRadioButtonsModel.defaultCaptionFontBold;
   }
 }

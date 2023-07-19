@@ -1,11 +1,14 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
+import '../models/KenMessageBusEventData.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_model.dart';
 import '../models/widgets/ken_radio_buttons_model.dart';
 import '../models/widgets/ken_section_model.dart';
 import '../services/ken_log_service.dart';
+import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
-import 'kenEnumCallback.dart';
 import 'kenNotAvailable.dart';
 import 'kenRadioButton.dart';
 import 'kenWidgetInterface.dart';
@@ -50,44 +53,42 @@ class KenRadioButtons extends StatefulWidget
   String? type;
   String? title;
 
-  Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
   KenRadioButtons.withController(
-      KenRadioButtonsModel this.model,
-      this.scaffoldKey,
-      this.formKey,
-      this.id,
-      this.selectedValue,
-      this.callBack)
-      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+    KenRadioButtonsModel this.model,
+    this.scaffoldKey,
+    this.formKey,
+    this.id,
+    this.selectedValue,
+  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
-  KenRadioButtons(this.scaffoldKey, this.formKey,
-      {this.id = '',
-      this.type = 'FLD',
-      this.title = '',
-      this.radioButtonColor,
-      this.fontSize,
-      this.fontColor,
-      this.backColor,
-      this.fontBold,
-      this.captionFontSize,
-      this.captionFontColor,
-      this.captionBackColor,
-      this.captionFontBold,
-      this.data,
-      this.width = KenRadioButtonsModel.defaultWidth,
-      this.height = KenRadioButtonsModel.defaultHeight,
-      this.align = KenRadioButtonsModel.defaultAlign,
-      this.padding = KenRadioButtonsModel.defaultPadding,
-      this.valueField = KenRadioButtonsModel.defaultValueField,
-      this.displayedField = KenRadioButtonsModel.defaultDisplayedField,
-      this.selectedValue,
-      this.clientOnPressed(String value)?,
-      this.columns = KenRadioButtonsModel.defaultColumns,
-      this.callBack})
-      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
+  KenRadioButtons(
+    this.scaffoldKey,
+    this.formKey, {
+    this.id = '',
+    this.type = 'FLD',
+    this.title = '',
+    this.radioButtonColor,
+    this.fontSize,
+    this.fontColor,
+    this.backColor,
+    this.fontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.captionBackColor,
+    this.captionFontBold,
+    this.data,
+    this.width = KenRadioButtonsModel.defaultWidth,
+    this.height = KenRadioButtonsModel.defaultHeight,
+    this.align = KenRadioButtonsModel.defaultAlign,
+    this.padding = KenRadioButtonsModel.defaultPadding,
+    this.valueField = KenRadioButtonsModel.defaultValueField,
+    this.displayedField = KenRadioButtonsModel.defaultDisplayedField,
+    this.selectedValue,
+    this.clientOnPressed(String value)?,
+    this.columns = KenRadioButtonsModel.defaultColumns,
+  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenRadioButtonsModel.setDefaults(this);
   }
@@ -154,9 +155,12 @@ class _KenRadioButtonsState extends State<KenRadioButtons>
 
   @override
   void initState() {
-    if (widget.callBack != null) {
-      widget.callBack!(widget, KenCallbackType.initState, null, null);
-    }
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenRadioButtonInit,
+      KenMessageBusEventData(
+          context: context, widget: widget, model: null, data: null),
+    );
 
     _model = widget.model;
     _data = widget.data;
@@ -191,6 +195,7 @@ class _KenRadioButtonsState extends State<KenRadioButtons>
     return radioButtons;
   }
 
+  @override
   Future<KenWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
@@ -200,20 +205,32 @@ class _KenRadioButtonsState extends State<KenRadioButtons>
 
       setDataLoad(widget.id, true);
     }
-
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenRadioButtonGetChildren,
+      KenMessageBusEventData(
+        context: context,
+        widget: widget,
+        model: null,
+        data: null,
+      ),
+    );
     var buttons = List<Widget>.empty(growable: true);
 
     int buttonIndex = 0;
     double? radioHeight = widget.height;
     double? radioWidth = widget.width;
     if (_model != null && _model!.parent != null) {
-      if (radioHeight == 0)
+      if (radioHeight == 0) {
         radioHeight = (_model!.parent as KenSectionModel).height;
-      if (radioWidth == 0)
+      }
+      if (radioWidth == 0) {
         radioWidth = (_model!.parent as KenSectionModel).width;
+      }
     } else {
-      if (radioHeight == 0)
+      if (radioHeight == 0) {
         radioHeight = KenUtilities.getDeviceInfo().safeHeight;
+      }
       if (radioWidth == 0) radioWidth = KenUtilities.getDeviceInfo().safeWidth;
     }
 
@@ -238,23 +255,22 @@ class _KenRadioButtonsState extends State<KenRadioButtons>
           selectedValue: widget.selectedValue,
           icon: null, // così anche in originale
           onPressed: (value) {
-            if (widget.callBack != null) {
-              widget.callBack!(
-                widget,
-                KenCallbackType.onPressed,
-                value,
-                _data,
-              );
-            }
+            KenMessageBus.instance.publishRequest(
+              widget.globallyUniqueId,
+              KenTopic.kenRadioButtonOnPressed,
+              KenMessageBusEventData(
+                context: context,
+                widget: widget,
+                model: _model,
+                parameters: [value],
+                data: _data,
+              ),
+            );
           });
-
-      if (widget.callBack != null) {
-        widget.callBack!(widget, KenCallbackType.getChildren, null, null);
-      }
       buttons.add(button);
     });
 
-    if (buttons.length > 0) {
+    if (buttons.isNotEmpty) {
       for (var i = 0; i < buttons.length; i++) {
         if (buttons[i] is KenRadioButton) {
           var others = List<KenRadioButton>.empty(growable: true);
@@ -286,7 +302,7 @@ class _KenRadioButtonsState extends State<KenRadioButtons>
             children: [
               title,
               GridView.count(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 childAspectRatio: childAspectRatio,
                 crossAxisCount: widget.columns!,
@@ -295,9 +311,16 @@ class _KenRadioButtonsState extends State<KenRadioButtons>
             ],
           ));
 
-      if (widget.callBack != null) {
-        widget.callBack!(widget, KenCallbackType.selData, _data, null);
-      }
+      KenMessageBus.instance.publishRequest(
+        widget.globallyUniqueId,
+        KenTopic.kenRadioButtonSelData,
+        KenMessageBusEventData(
+          context: context,
+          widget: widget,
+          model: _model,
+          data: _data,
+        ),
+      );
 
       return KenWidgetBuilderResponse(_model, container);
     } else {

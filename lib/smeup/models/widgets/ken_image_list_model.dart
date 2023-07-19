@@ -1,8 +1,9 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import '../../services/ken_configuration_service.dart';
 
 class KenImageListModel extends KenModel implements KenDataInterface {
@@ -71,10 +72,7 @@ class KenImageListModel extends KenModel implements KenDataInterface {
       this.orientation = defaultOrientation,
       this.rows = defaultRows,
       title = ''})
-      : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type) {
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     setDefaults(this);
   }
 
@@ -83,8 +81,7 @@ class KenImageListModel extends KenModel implements KenDataInterface {
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context)
-      : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context) {
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     setDefaults(this);
 
     title = jsonMap['title'] ?? '';
@@ -123,7 +120,7 @@ class KenImageListModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupListBoxDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }
@@ -153,26 +150,18 @@ class KenImageListModel extends KenModel implements KenDataInterface {
     defaultCaptionFontColor = captionStyle.color;
 
     // ----------------- set properties from default
-    if (obj.backColor == null)
-      obj.backColor = KenImageListModel.defaultBackColor;
+    obj.backColor ??= KenImageListModel.defaultBackColor;
 
-    if (obj.borderColor == null)
-      obj.borderColor = KenImageListModel.defaultBorderColor;
-    if (obj.borderWidth == null)
-      obj.borderWidth = KenImageListModel.defaultBorderWidth;
-    if (obj.borderRadius == null)
-      obj.borderRadius = KenImageListModel.defaultBorderRadius;
+    obj.borderColor ??= KenImageListModel.defaultBorderColor;
+    obj.borderWidth ??= KenImageListModel.defaultBorderWidth;
+    obj.borderRadius ??= KenImageListModel.defaultBorderRadius;
 
-    if (obj.fontBold == null) obj.fontBold = KenImageListModel.defaultFontBold;
-    if (obj.fontColor == null)
-      obj.fontColor = KenImageListModel.defaultFontColor;
-    if (obj.fontSize == null) obj.fontSize = KenImageListModel.defaultFontSize;
+    obj.fontBold ??= KenImageListModel.defaultFontBold;
+    obj.fontColor ??= KenImageListModel.defaultFontColor;
+    obj.fontSize ??= KenImageListModel.defaultFontSize;
 
-    if (obj.captionFontBold == null)
-      obj.captionFontBold = KenImageListModel.defaultCaptionFontBold;
-    if (obj.captionFontColor == null)
-      obj.captionFontColor = KenImageListModel.defaultCaptionFontColor;
-    if (obj.captionFontSize == null)
-      obj.captionFontSize = KenImageListModel.defaultCaptionFontSize;
+    obj.captionFontBold ??= KenImageListModel.defaultCaptionFontBold;
+    obj.captionFontColor ??= KenImageListModel.defaultCaptionFontColor;
+    obj.captionFontSize ??= KenImageListModel.defaultCaptionFontSize;
   }
 }

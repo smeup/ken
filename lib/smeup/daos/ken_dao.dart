@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import '../models/widgets/ken_model.dart';
+
 import '../services/ken_data_service.dart';
 
 class KenDao {
@@ -13,11 +14,24 @@ class KenDao {
   }
 
   dynamic getClientDataStructure() {
-    var structure = KenDataService.dataInitializer.getClientDataStructure(smeupModel!);
+    var structure =
+        KenDataService.dataInitializer.getClientDataStructure(smeupModel!);
     return structure;
   }
 
-  Future<dynamic> getData() {
-    return KenDataService.dataInitializer.getData(smeupModel!);
+  Future<dynamic>? getData() {
+    if (smeupModel != null) {
+      if (smeupModel!.type == 'INP') {
+        return KenDataService.dataInitializer.smeupInputPanelGetData(
+          smeupModel!,
+          smeupModel!.formKey,
+          smeupModel!.scaffoldKey,
+          smeupModel!.context,
+        );
+      } else {
+        return KenDataService.dataInitializer.getData(smeupModel!);
+      }
+    }
+    return null;
   }
 }

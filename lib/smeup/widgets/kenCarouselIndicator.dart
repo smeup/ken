@@ -20,21 +20,21 @@ class _KenCarouselIndicatorState extends State<KenCarouselIndicator> {
         Provider.of<KenCarouselIndicatorNotifier>(context, listen: true);
 
     var list = List<Widget>.empty(growable: true);
-    widget.data!.forEach((element) {
+    for (var element in widget.data!) {
       int i = widget.data!.indexOf(element);
       var cont = Container(
         width: 8.0,
         height: 8.0,
-        margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+        margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
         decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: notifier.index == i
-                ? Color.fromRGBO(63, 187, 211, 1)
-                : Color.fromRGBO(0, 96, 116, 1)),
+                ? const Color.fromRGBO(63, 187, 211, 1)
+                : const Color.fromRGBO(0, 96, 116, 1)),
       );
 
       list.add(cont);
-    });
+    }
 
     var indicator = Row(
       mainAxisAlignment: MainAxisAlignment.center,

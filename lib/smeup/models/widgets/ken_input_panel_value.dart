@@ -8,6 +8,7 @@ class SmeupInputPanelValue {
 
   SmeupInputPanelValue({this.code = "", this.description = ""});
 
+  @override
   bool operator ==(o) => o is SmeupInputPanelValue && code == o.code;
 
   @override
@@ -64,31 +65,33 @@ class SmeupInputPanelField {
   // }
 
   _setDefaults() {
-    if (this.codeField == null) {
-      if (isFirestore)
-        this.codeField = 'code';
-      else
-        this.codeField = defaultCodeField;
+    if (codeField == null) {
+      if (isFirestore) {
+        codeField = 'code';
+      } else {
+        codeField = defaultCodeField;
+      }
     }
 
-    if (this.descriptionField == null) {
-      if (isFirestore)
-        this.descriptionField = 'description';
-      else
-        this.descriptionField = defaultDescriptionField;
+    if (descriptionField == null) {
+      if (isFirestore) {
+        descriptionField = 'description';
+      } else {
+        descriptionField = defaultDescriptionField;
+      }
     }
   }
 
   void update(XmlNode fieldFromLayout, int position) {
-    this.visible = true;
+    visible = true;
     this.position = position;
     if (fieldFromLayout.getAttribute("Cmp") != null) {
-      KenInputPanelSupportedComp.values.forEach((comp) {
+      for (var comp in KenInputPanelSupportedComp.values) {
         String name = comp.toString().split('.').last;
         if (name == fieldFromLayout.getAttribute("Cmp")) {
           component = comp;
         }
-      });
+      }
     }
 
     fun = _getAttributeFromLayout(fieldFromLayout, "PfK", fun);

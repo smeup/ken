@@ -1,9 +1,10 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_input_field_model.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import '../../services/ken_configuration_service.dart';
 
 class KenTextFieldModel extends KenInputFieldModel implements KenDataInterface {
@@ -56,40 +57,43 @@ class KenTextFieldModel extends KenInputFieldModel implements KenDataInterface {
   bool? showSubmit;
   TextInputType? keyboard;
 
-  KenTextFieldModel(
-      {id,
-      type,
-      GlobalKey<FormState>? formKey,
-      GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,
-      this.backColor,
-      this.fontSize,
-      this.fontBold,
-      this.fontColor,
-      this.captionBackColor,
-      this.captionFontBold,
-      this.captionFontColor,
-      this.captionFontSize,
-      this.borderColor,
-      this.borderRadius,
-      this.borderWidth,
-      this.underline = defaultUnderline,
-      this.label = defaultLabel,
-      this.submitLabel = defaultSubmitLabel,
-      this.width = defaultWidth,
-      this.height = defaultHeight,
-      this.padding = defaultPadding,
-      this.showBorder = defaultShowBorder,
-      this.showSubmit = defaultShowSubmit,
-      title = '',
-      this.autoFocus = defaultAutoFocus,
-      this.valueField,
-      this.keyboard,
-    })
-      : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type,) {
+  KenTextFieldModel({
+    id,
+    type,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
+    this.backColor,
+    this.fontSize,
+    this.fontBold,
+    this.fontColor,
+    this.captionBackColor,
+    this.captionFontBold,
+    this.captionFontColor,
+    this.captionFontSize,
+    this.borderColor,
+    this.borderRadius,
+    this.borderWidth,
+    this.underline = defaultUnderline,
+    this.label = defaultLabel,
+    this.submitLabel = defaultSubmitLabel,
+    this.width = defaultWidth,
+    this.height = defaultHeight,
+    this.padding = defaultPadding,
+    this.showBorder = defaultShowBorder,
+    this.showSubmit = defaultShowSubmit,
+    title = '',
+    this.autoFocus = defaultAutoFocus,
+    this.valueField,
+    this.keyboard,
+  }) : super(
+          formKey,
+          scaffoldKey,
+          context,
+          title: title,
+          id: id,
+          type: type,
+        ) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'itx';
     id = KenUtilities.getWidgetId('FLD', id);
     setDefaults(this);
@@ -101,8 +105,7 @@ class KenTextFieldModel extends KenInputFieldModel implements KenDataInterface {
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
     KenModel parent,
-  ) : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context, parent) {
+  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context, parent) {
     setDefaults(this);
 
     backColor = KenUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
@@ -150,7 +153,7 @@ class KenTextFieldModel extends KenInputFieldModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupTextFieldDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }
@@ -181,25 +184,16 @@ class KenTextFieldModel extends KenInputFieldModel implements KenDataInterface {
     defaultCaptionBackColor = captionStyle.backgroundColor;
 
     // ----------------- set properties from default
-    if (obj.borderColor == null)
-      obj.borderColor = KenTextFieldModel.defaultBorderColor;
-    if (obj.borderWidth == null)
-      obj.borderWidth = KenTextFieldModel.defaultBorderWidth;
-    if (obj.borderRadius == null)
-      obj.borderRadius = KenTextFieldModel.defaultBorderRadius;
-    if (obj.fontBold == null) obj.fontBold = KenTextFieldModel.defaultFontBold;
-    if (obj.fontColor == null)
-      obj.fontColor = KenTextFieldModel.defaultFontColor;
-    if (obj.fontSize == null) obj.fontSize = KenTextFieldModel.defaultFontSize;
-    if (obj.backColor == null)
-      obj.backColor = KenTextFieldModel.defaultBackColor;
-    if (obj.captionFontBold == null)
-      obj.captionFontBold = KenTextFieldModel.defaultCaptionFontBold;
-    if (obj.captionFontColor == null)
-      obj.captionFontColor = KenTextFieldModel.defaultCaptionFontColor;
-    if (obj.captionFontSize == null)
-      obj.captionFontSize = KenTextFieldModel.defaultCaptionFontSize;
-    if (obj.captionBackColor == null)
-      obj.captionBackColor = KenTextFieldModel.defaultCaptionBackColor;
+    obj.borderColor ??= KenTextFieldModel.defaultBorderColor;
+    obj.borderWidth ??= KenTextFieldModel.defaultBorderWidth;
+    obj.borderRadius ??= KenTextFieldModel.defaultBorderRadius;
+    obj.fontBold ??= KenTextFieldModel.defaultFontBold;
+    obj.fontColor ??= KenTextFieldModel.defaultFontColor;
+    obj.fontSize ??= KenTextFieldModel.defaultFontSize;
+    obj.backColor ??= KenTextFieldModel.defaultBackColor;
+    obj.captionFontBold ??= KenTextFieldModel.defaultCaptionFontBold;
+    obj.captionFontColor ??= KenTextFieldModel.defaultCaptionFontColor;
+    obj.captionFontSize ??= KenTextFieldModel.defaultCaptionFontSize;
+    obj.captionBackColor ??= KenTextFieldModel.defaultCaptionBackColor;
   }
 }

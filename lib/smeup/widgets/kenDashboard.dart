@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_dashboard_model.dart';
@@ -121,7 +123,7 @@ class KenDashboard extends StatefulWidget
 
     // set the widget data
     if (workData != null &&
-        (workData['rows'] as List).length > 0 &&
+        (workData['rows'] as List).isNotEmpty &&
         workData['rows'][0][m.valueColName] != null) {
       data = KenUtilities.getDouble(workData['rows'][0][m.valueColName]);
       unitOfMeasure = workData['rows'][0][m.umColName];
@@ -232,14 +234,14 @@ class _KenDashboardState extends State<KenDashboard>
                       color: iconTheme.color,
                       size: iconTheme.size,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 8,
                     ),
                     Text(
                       _getValue(_data),
                       style: textStyle,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 8,
                     ),
                     Column(
@@ -248,7 +250,7 @@ class _KenDashboardState extends State<KenDashboard>
                           widget.unitOfMeasure!,
                           style: unitOfMeasureStyle,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                       ],

@@ -1,8 +1,9 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import '../../services/ken_configuration_service.dart';
 
 class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
@@ -81,10 +82,7 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
     this.autoFocus = defaultAutoFocus,
     this.defaultValue = '',
     this.valueField = 'value',
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'acp';
     setDefaults(this);
   }
@@ -141,7 +139,7 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupTextAutocompleteDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }
@@ -172,27 +170,16 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
     defaultCaptionBackColor = captionStyle.backgroundColor;
 
     // ----------------- set properties from default
-    if (obj.borderColor == null)
-      obj.borderColor = KenTextAutocompleteModel.defaultBorderColor;
-    if (obj.borderWidth == null)
-      obj.borderWidth = KenTextAutocompleteModel.defaultBorderWidth;
-    if (obj.borderRadius == null)
-      obj.borderRadius = KenTextAutocompleteModel.defaultBorderRadius;
-    if (obj.fontBold == null)
-      obj.fontBold = KenTextAutocompleteModel.defaultFontBold;
-    if (obj.fontColor == null)
-      obj.fontColor = KenTextAutocompleteModel.defaultFontColor;
-    if (obj.fontSize == null)
-      obj.fontSize = KenTextAutocompleteModel.defaultFontSize;
-    if (obj.backColor == null)
-      obj.backColor = KenTextAutocompleteModel.defaultBackColor;
-    if (obj.captionFontBold == null)
-      obj.captionFontBold = KenTextAutocompleteModel.defaultCaptionFontBold;
-    if (obj.captionFontColor == null)
-      obj.captionFontColor = KenTextAutocompleteModel.defaultCaptionFontColor;
-    if (obj.captionFontSize == null)
-      obj.captionFontSize = KenTextAutocompleteModel.defaultCaptionFontSize;
-    if (obj.captionBackColor == null)
-      obj.captionBackColor = KenTextAutocompleteModel.defaultCaptionBackColor;
+    obj.borderColor ??= KenTextAutocompleteModel.defaultBorderColor;
+    obj.borderWidth ??= KenTextAutocompleteModel.defaultBorderWidth;
+    obj.borderRadius ??= KenTextAutocompleteModel.defaultBorderRadius;
+    obj.fontBold ??= KenTextAutocompleteModel.defaultFontBold;
+    obj.fontColor ??= KenTextAutocompleteModel.defaultFontColor;
+    obj.fontSize ??= KenTextAutocompleteModel.defaultFontSize;
+    obj.backColor ??= KenTextAutocompleteModel.defaultBackColor;
+    obj.captionFontBold ??= KenTextAutocompleteModel.defaultCaptionFontBold;
+    obj.captionFontColor ??= KenTextAutocompleteModel.defaultCaptionFontColor;
+    obj.captionFontSize ??= KenTextAutocompleteModel.defaultCaptionFontSize;
+    obj.captionBackColor ??= KenTextAutocompleteModel.defaultCaptionBackColor;
   }
 }

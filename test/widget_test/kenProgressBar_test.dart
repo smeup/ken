@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/kenEnumCallback.dart';
 import '../../lib/smeup/widgets/kenProgressBar.dart';
 import 'widget_test_service.dart';
 
@@ -8,9 +7,9 @@ Future<void> main() async {
   testWidgets('Test static contructor ', (WidgetTester tester) async {
     await WidgetTestService.initTests();
 
-    Widget testWidget = new MediaQuery(
-        data: new MediaQueryData(),
-        child: new MaterialApp(
+    Widget testWidget = MediaQuery(
+        data: const MediaQueryData(),
+        child: MaterialApp(
             home: Scaffold(
           appBar: AppBar(),
           body: SingleChildScrollView(
@@ -29,7 +28,6 @@ Future<void> main() async {
                       height: 40,
                       progressBarMinimun: 0,
                       progressBarMaximun: 10,
-                      callBack: pbCallBack,
                       padding:
                           const EdgeInsets.only(top: 30, left: 5, right: 5),
                     )
@@ -60,20 +58,8 @@ Future<void> main() async {
   // });
 }
 
-Future<dynamic> pbCallBack(Widget widget, KenCallbackType kenCallbackType,
-    dynamic data, dynamic col) async {
-  switch (kenCallbackType) {
-    case KenCallbackType.getChildren:
-      //AppVariablesService.setVariable('pgb1', data, formKey: _formKey);
-
-      break;
-
-    default:
-  }
-}
-
 runTests() {
-  final findKey = find.byKey(Key('pgb1'));
+  final findKey = find.byKey(const Key('pgb1'));
   expect(findKey, findsWidgets);
 
   var findWidget = find.byType(KenProgressBar);

@@ -12,10 +12,10 @@ Future<void> main() async {
   testWidgets('Test static contructor ', (WidgetTester tester) async {
     await WidgetTestService.initTests();
 
-    Widget testWidget = new MediaQuery(
-        data: new MediaQueryData(),
-        child: new MaterialApp(
-            localizationsDelegates: [
+    Widget testWidget = MediaQuery(
+        data: const MediaQueryData(),
+        child: MaterialApp(
+            localizationsDelegates: const [
               KenLocalizationDelegate(),
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
@@ -46,7 +46,7 @@ Future<void> main() async {
                           data: [
                             {
                               "value": "${DateTime.now().year}-01-18",
-                              "title": "Fase 2 project Alfa",
+                              "title": "Fase",
                               "init": "100000",
                               "end": "103000"
                             },
@@ -111,7 +111,7 @@ Future<void> main() async {
 }
 
 runTests(WidgetTester tester) async {
-  final findKey = find.byKey(Key('calendar1'));
+  final findKey = find.byKey(const Key('calendar1'));
   expect(findKey, findsWidgets);
 
   var findWidget = find.byType(KenCalendar);

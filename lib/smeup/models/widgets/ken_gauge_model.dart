@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 
 class KenGaugeModel extends KenModel implements KenDataInterface {
   //SmeupGaugeModel(GlobalKey<FormState> formKey, {title = ''})
@@ -38,18 +37,14 @@ class KenGaugeModel extends KenModel implements KenDataInterface {
       this.maxColName = defaultMaxColName,
       this.minColName = defaultMinColName,
       title = ''})
-      : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type);
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type);
 
   KenGaugeModel.fromMap(
       Map<String, dynamic> jsonMap,
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context)
-      : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context) {
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     title = jsonMap['title'] ?? '';
     valueColName = optionsDefault!['valueColName'] ?? defaultValColName;
     maxColName = optionsDefault!['maxColName'] ?? defaultMaxColName;
@@ -60,7 +55,7 @@ class KenGaugeModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupGaugeDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }

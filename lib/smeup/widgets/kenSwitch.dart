@@ -1,10 +1,13 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
+import '../models/KenMessageBusEventData.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_model.dart';
 import '../models/widgets/ken_section_model.dart';
 import '../models/widgets/ken_switch_model.dart';
+import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
-import 'kenEnumCallback.dart';
 import 'kenSwitchWidget.dart';
 import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';
@@ -38,11 +41,11 @@ class KenSwitch extends StatefulWidget
   bool? data;
   Function? onClientChange;
 
-  Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
   KenSwitch.withController(
-      KenSwitchModel this.model, this.scaffoldKey, this.formKey, this.callBack)
-      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+    KenSwitchModel this.model,
+    this.scaffoldKey,
+    this.formKey,
+  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
@@ -99,10 +102,11 @@ class KenSwitch extends StatefulWidget
     if (workData != null) {
       text = workData['rows'][0]['txt'];
       final value = KenUtilities.getInt(workData['rows'][0]['value']);
-      if (value == 1)
+      if (value == 1) {
         return true;
-      else
+      } else {
         return false;
+      }
     } else {
       return model.data;
     }
@@ -120,9 +124,12 @@ class _KenSwitchState extends State<KenSwitch>
 
   @override
   void initState() {
-    if (widget.callBack != null) {
-      widget.callBack!(widget, KenCallbackType.initState, _data, null);
-    }
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenSwitchInitState,
+      KenMessageBusEventData(
+          context: context, widget: widget, model: _model, data: _data),
+    );
 
     _model = widget.model;
     _data = widget.data;
@@ -163,15 +170,19 @@ class _KenSwitchState extends State<KenSwitch>
     double? switchHeight = widget.height;
     double? switchWidth = widget.width;
     if (_model != null && _model!.parent != null) {
-      if (switchHeight == 0)
+      if (switchHeight == 0) {
         switchHeight = (_model!.parent as KenSectionModel).height;
-      if (switchWidth == 0)
+      }
+      if (switchWidth == 0) {
         switchWidth = (_model!.parent as KenSectionModel).width;
+      }
     } else {
-      if (switchHeight == 0)
+      if (switchHeight == 0) {
         switchHeight = KenUtilities.getDeviceInfo().safeHeight;
-      if (switchWidth == 0)
+      }
+      if (switchWidth == 0) {
         switchWidth = KenUtilities.getDeviceInfo().safeWidth;
+      }
     }
 
     TextStyle captionStyle = _getCaptionStile();
@@ -194,10 +205,15 @@ class _KenSwitchState extends State<KenSwitch>
             onClientChange: (changedValue) {
               _data = changedValue;
 
-              if (widget.callBack != null) {
-                widget.callBack!(
-                    widget, KenCallbackType.onClientChange, _data, null);
-              }
+              KenMessageBus.instance.publishRequest(
+                widget.globallyUniqueId,
+                KenTopic.kenSwitchOnClientChange,
+                KenMessageBusEventData(
+                    context: context,
+                    widget: widget,
+                    model: _model,
+                    data: _data),
+              );
             },
           ),
         ],

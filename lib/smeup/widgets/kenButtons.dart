@@ -85,7 +85,7 @@ class KenButtons extends StatefulWidget
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenButtonsModel.setDefaults(this);
-    if (data == null) data = List<String>.empty(growable: true);
+    data ??= List<String>.empty(growable: true);
   }
 
   @override
@@ -175,6 +175,7 @@ class KenButtonsState extends State<KenButtons>
   }
 
   /// Buttons' structure:
+  @override
   Future<KenWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
@@ -215,15 +216,16 @@ class KenButtonsState extends State<KenButtons>
           var buttons = snapshot.data!.data.data;
 
           if (buttons.length > 0) {
-            var widgets;
-            if (widget.orientation == WidgetOrientation.Vertical)
+            SingleChildScrollView widgets;
+            if (widget.orientation == WidgetOrientation.Vertical) {
               widgets = SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Column(children: buttons));
-            else
+            } else {
               widgets = SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(children: buttons));
+            }
 
             return widgets;
           } else {

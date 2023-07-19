@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../services/ken_utilities.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import '../../services/ken_configuration_service.dart';
 
 class KenSliderModel extends KenModel {
@@ -38,8 +37,7 @@ class KenSliderModel extends KenModel {
     this.padding = defaultPadding,
     this.sldMin = defaultSldMin,
     this.sldMax = defaultSldMax,
-  }) : super(formKey, scaffoldKey, context,
-            title: '', id: id, type: type) {
+  }) : super(formKey, scaffoldKey, context, title: '', id: id, type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'sld';
     id = KenUtilities.getWidgetId('FLD', id);
     setDefaults(this);
@@ -72,7 +70,7 @@ class KenSliderModel extends KenModel {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupSliderDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }
@@ -86,11 +84,8 @@ class KenSliderModel extends KenModel {
 
     // ----------------- set properties from default
 
-    if (obj.activeTrackColor == null)
-      obj.activeTrackColor = KenSliderModel.defaultActiveTrackColor;
-    if (obj.thumbColor == null)
-      obj.thumbColor = KenSliderModel.defaultThumbColor;
-    if (obj.inactiveTrackColor == null)
-      obj.inactiveTrackColor = KenSliderModel.defaultInactiveTrackColor;
+    obj.activeTrackColor ??= KenSliderModel.defaultActiveTrackColor;
+    obj.thumbColor ??= KenSliderModel.defaultThumbColor;
+    obj.inactiveTrackColor ??= KenSliderModel.defaultInactiveTrackColor;
   }
 }

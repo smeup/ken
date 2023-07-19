@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import '../models/KenMessageBusEventData.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_model.dart';
 import '../models/widgets/ken_slider_model.dart';
+import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
-import 'kenEnumCallback.dart';
 import 'kenSliderWidget.dart';
 import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';
@@ -31,34 +32,35 @@ class KenSlider extends StatefulWidget
   String? title;
   String? label;
   Function? clientOnChange;
-  late Function onChanged;
+  Function? onChanged;
 
-  Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
-  KenSlider(this.scaffoldKey, this.formKey,
-      {this.activeTrackColor,
-      this.thumbColor,
-      this.inactiveTrackColor,
-      this.padding = KenSliderModel.defaultPadding,
-      this.title,
-      this.id = '',
-      this.label,
-      this.divisions = 10,
-      this.type = 'SLD',
-      this.value = 0,
-      this.sldMax = KenSliderModel.defaultSldMax,
-      this.sldMin = KenSliderModel.defaultSldMin,
-      this.clientOnChange,
-      required this.onChanged,
-      this.callBack})
-      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
+  KenSlider(
+    this.scaffoldKey,
+    this.formKey, {
+    this.activeTrackColor,
+    this.thumbColor,
+    this.inactiveTrackColor,
+    this.padding = KenSliderModel.defaultPadding,
+    this.title,
+    this.id = '',
+    this.label,
+    this.divisions = 10,
+    this.type = 'SLD',
+    this.value = 0,
+    this.sldMax = KenSliderModel.defaultSldMax,
+    this.sldMin = KenSliderModel.defaultSldMin,
+    this.clientOnChange,
+    this.onChanged,
+  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenSliderModel.setDefaults(this);
   }
 
   KenSlider.withController(
-      KenSliderModel this.model, this.scaffoldKey, this.formKey, this.callBack)
-      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+    KenSliderModel this.model,
+    this.scaffoldKey,
+    this.formKey,
+  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
@@ -149,13 +151,16 @@ class _KenSliderState extends State<KenSlider>
       return getFunErrorResponse(context, _model);
     }
 
-    if (widget.callBack != null) {
-      widget.callBack!(widget, KenCallbackType.getChildren, null, null);
-    }
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenSliderGetChildren,
+      KenMessageBusEventData(
+          context: context, widget: widget, model: _model, data: null),
+    );
 
     final children = Center(
       child: Container(
-          padding: EdgeInsets.only(left: 10, right: 10),
+          padding: const EdgeInsets.only(left: 10, right: 10),
           child: KenSliderWidget(
             widget.scaffoldKey,
             widget.formKey,
@@ -168,14 +173,19 @@ class _KenSliderState extends State<KenSlider>
             value: widget.value,
             divisions: widget.divisions,
             label: widget.label,
-            onChanged: widget.onChanged,
+            onChanged: widget.onChanged ?? () {},
             clientOnChange: (value) {
               _value = value;
 
-              if (widget.callBack != null) {
-                widget.callBack!(
-                    widget, KenCallbackType.onClientChange, value, null);
-              }
+              KenMessageBus.instance.publishRequest(
+                widget.globallyUniqueId,
+                KenTopic.kenSliderOnClientChange,
+                KenMessageBusEventData(
+                    context: context,
+                    widget: widget,
+                    model: _model,
+                    data: value),
+              );
             },
           )),
     );

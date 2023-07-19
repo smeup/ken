@@ -6,7 +6,6 @@ import '../models/widgets/ken_drawer_model.dart';
 import '../models/widgets/ken_model.dart';
 import '../services/ken_utilities.dart';
 import 'kenDrawerItem.dart';
-import 'kenEnumCallback.dart';
 import 'kenWidgetStateInterface.dart';
 import 'kenWidgetStateMixin.dart';
 
@@ -37,8 +36,6 @@ class KenDrawer extends StatefulWidget
   String? type;
   List<KenDrawerDataElement>? drawerDataElement;
 
-  Function(KenCallbackType type)? callBack; //todo
-
   KenDrawer(this.scaffoldKey, this.formKey,
       {this.id = '',
       this.type = 'DRW',
@@ -55,8 +52,7 @@ class KenDrawer extends StatefulWidget
       //this.data,
       this.imageWidth = KenDrawerModel.defaultImageWidth,
       this.imageHeight = KenDrawerModel.defaultImageHeight,
-      this.showItemDivider = KenDrawerModel.defaultShowItemDivider,
-      this.callBack})
+      this.showItemDivider = KenDrawerModel.defaultShowItemDivider})
       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenDrawerModel.setDefaults(this);
@@ -152,12 +148,13 @@ class _KenDrawerState extends State<KenDrawer>
     final showImage = widget.imageUrl!.isNotEmpty;
     final List<Widget> headers = [];
 
-    if (showImage)
+    if (showImage) {
       headers.add(Image.asset(
         widget.imageUrl!,
         height: widget.imageHeight,
         width: widget.imageWidth,
       ));
+    }
     if (showTitle) {
       headers.add(const SizedBox(
         width: 10,
@@ -180,7 +177,7 @@ class _KenDrawerState extends State<KenDrawer>
     var list = List<Widget>.empty(growable: true);
     list.add(header);
 
-    var groups = Map<String, List<Widget>>();
+    var groups = <String, List<Widget>>{};
 
     for (KenDrawerDataElement e in _data!) {
       if (e.group.isEmpty) {
@@ -268,20 +265,23 @@ class _KenDrawerState extends State<KenDrawer>
                 .appBarTheme
                 .backgroundColor);
 
-    if (widget.elementFontSize != null)
+    if (widget.elementFontSize != null) {
       style = style.copyWith(
         fontSize: widget.elementFontSize,
       );
+    }
 
-    if (widget.elementFontColor != null)
+    if (widget.elementFontColor != null) {
       style = style.copyWith(
         color: widget.elementFontColor,
       );
+    }
 
-    if (widget.elementFontBold != null && widget.elementFontBold!)
+    if (widget.elementFontBold != null && widget.elementFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
+    }
 
     return style;
   }

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/ken_widget_builder_response.dart';
@@ -52,8 +54,8 @@ class KenTextField extends StatefulWidget
 
   TextInputType? keyboard;
   Function? clientValidator;
-  //Function? clientOnSave;
-  //Function? clientOnChange;
+  Function? clientOnSave;
+  Function? clientOnChange;
   Function? clientOnSubmit;
 
   List<TextInputFormatter>? inputFormatters;
@@ -63,7 +65,6 @@ class KenTextField extends StatefulWidget
     this.scaffoldKey,
     this.formKey,
     this.smeupButtons,
-    // this.callBack,
   ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
@@ -97,8 +98,8 @@ class KenTextField extends StatefulWidget
     this.data,
     this.keyboard,
     this.clientValidator, // ?
-    //this.clientOnSave,
-    //this.clientOnChange,
+    this.clientOnSave,
+    this.clientOnChange,
     this.clientOnSubmit,
     this.inputFormatters, // ?
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
@@ -149,7 +150,7 @@ class KenTextField extends StatefulWidget
 
     // set the widget data
     if (workData != null &&
-        (workData['rows'] as List).length > 0 &&
+        (workData['rows'] as List).isNotEmpty &&
         workData['rows'][0][m.valueField] != null) {
       return workData['rows'][0][m.valueField].toString();
     } else {
@@ -240,6 +241,7 @@ class _KenTextFieldState extends State<KenTextField>
           obscureText:
               widget.keyboard == TextInputType.visiblePassword ? true : false,
           onChanged: (value) {
+            if (widget.clientOnChange != null) widget.clientOnChange!(value);
             KenMessageBus.instance.publishRequest(
               widget.globallyUniqueId,
               KenTopic.textfieldOnChanged,
@@ -267,6 +269,7 @@ class _KenTextFieldState extends State<KenTextField>
             ),
           ),
           onSaved: (value) {
+            if (widget.clientOnSave != null) widget.clientOnSave!(value);
             KenMessageBus.instance.publishRequest(
               widget.globallyUniqueId,
               KenTopic.textfieldOnSaved,
@@ -284,7 +287,7 @@ class _KenTextFieldState extends State<KenTextField>
           widget.formKey,
           data: [widget.submitLabel],
           clientOnPressed: widget.clientOnSubmit,
-          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+          padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
           height: 50,
           width: 180,
           //iconSize: 25
@@ -292,7 +295,7 @@ class _KenTextFieldState extends State<KenTextField>
           fontSize: 16,
           //backColor: Color.fromRGBO(6, 140, 154, 10),
           fontColor: Colors.white,
-          iconData: IconData(0xf04ba, fontFamily: 'MaterialIcons'),
+          iconData: const IconData(0xf04ba, fontFamily: 'MaterialIcons'),
           iconSize: 16,
           iconColor: Colors.white,
           align: Alignment.centerRight,
@@ -303,14 +306,14 @@ class _KenTextFieldState extends State<KenTextField>
         }
       }
 
-      final column;
+      final Widget column;
       if (button != null) {
         column = Column(
           //mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             textField,
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             button,

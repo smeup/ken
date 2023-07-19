@@ -28,11 +28,12 @@ class KenWidgetNotificationService {
               logType: KenLogType.error);
         }
 
-        if (routeName.isNotEmpty)
+        if (routeName.isNotEmpty) {
           Navigator.of(context).pushNamedAndRemoveUntil(
               '/$routeName', (Route<dynamic> route) => false);
-        else
+        } else {
           Navigator.of(context).pop();
+        }
       } else if (widgetId.toLowerCase() == 'yes') {
         KenWidgetNotificationService._invokeFunction(
             scaffoldHashCode.toString());

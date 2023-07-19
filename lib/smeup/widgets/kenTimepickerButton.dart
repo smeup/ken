@@ -4,8 +4,9 @@ import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as datepicker;
 import 'package:intl/intl.dart';
 
+import '../models/KenMessageBusEventData.dart';
 import '../models/widgets/ken_timepicker_model.dart';
-import 'kenEnumCallback.dart';
+import '../services/ken_message_bus.dart';
 import 'kenTimepicker.dart';
 import 'kenTimepickerCustomization.dart';
 
@@ -43,35 +44,39 @@ class KenTimePickerButton extends StatefulWidget {
   final ButtonStyle buttonStyle;
   final TextStyle textStyle;
 
-  Function(dynamic, KenCallbackType, dynamic)? callBack;
+  final String globallyUniqueId;
 
-  KenTimePickerButton(this.data, this.buttonStyle, this.textStyle,
-      {this.scaffoldKey,
-      this.formKey,
-      this.id = '',
-      this.backColor,
-      this.fontSize,
-      this.fontColor,
-      this.borderColor,
-      this.borderWidth,
-      this.borderRadius,
-      this.fontBold,
-      this.elevation,
-      this.captionFontBold,
-      this.captionFontSize,
-      this.captionFontColor,
-      this.captionBackColor,
-      this.underline = KenTimePickerModel.defaultUnderline,
-      this.align = KenTimePickerModel.defaultAlign,
-      this.label = KenTimePickerModel.defaultLabel,
-      this.width = KenTimePickerModel.defaultWidth,
-      this.height = KenTimePickerModel.defaultHeight,
-      this.padding = KenTimePickerModel.defaultPadding,
-      this.showborder = KenTimePickerModel.defaultShowBorder,
-      this.minutesList,
-      this.clientOnChange,
-      this.model,
-      this.callBack}) {
+  KenTimePickerButton(
+    this.data,
+    this.buttonStyle,
+    this.textStyle, {
+    this.scaffoldKey,
+    this.formKey,
+    this.id = '',
+    this.backColor,
+    this.fontSize,
+    this.fontColor,
+    this.borderColor,
+    this.borderWidth,
+    this.borderRadius,
+    this.fontBold,
+    this.elevation,
+    this.captionFontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.captionBackColor,
+    this.underline = KenTimePickerModel.defaultUnderline,
+    this.align = KenTimePickerModel.defaultAlign,
+    this.label = KenTimePickerModel.defaultLabel,
+    this.width = KenTimePickerModel.defaultWidth,
+    this.height = KenTimePickerModel.defaultHeight,
+    this.padding = KenTimePickerModel.defaultPadding,
+    this.showborder = KenTimePickerModel.defaultShowBorder,
+    this.minutesList,
+    this.clientOnChange,
+    this.model,
+    required this.globallyUniqueId,
+  }) {
     KenTimePickerModel.setDefaults(this);
   }
 
@@ -117,10 +122,15 @@ class _KenTimePickerButtonState extends State<KenTimePickerButton> {
                   _currentDisplay = newTime;
                   _currentValue = date;
 
-                  if (widget.callBack != null) {
-                    widget.callBack!(
-                        widget, KenCallbackType.onPressed, newTime);
-                  }
+                  KenMessageBus.instance.publishRequest(
+                    widget.globallyUniqueId,
+                    KenTopic.kenTimePickerOnPressed,
+                    KenMessageBusEventData(
+                        context: context,
+                        widget: widget,
+                        model: null,
+                        data: newTime),
+                  );
 
                   if (widget.clientOnChange != null) {
                     widget.clientOnChange!(KenTimePickerData(

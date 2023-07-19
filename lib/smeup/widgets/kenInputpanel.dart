@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../models/KenMessageBusEventData.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_combo_item_model.dart';
 import '../models/widgets/ken_input_panel_model.dart';
 import '../models/widgets/ken_input_panel_value.dart';
 import '../models/widgets/ken_model.dart';
 import '../models/widgets/ken_section_model.dart';
+import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
 import 'kenButton.dart';
 import 'kenCombo.dart';
-import 'kenEnumCallback.dart';
 import 'kenLabel.dart';
 import 'kenQrcodeReader.dart';
 import 'kenRadioButtons.dart';
@@ -39,8 +40,6 @@ class KenInputPanel extends StatefulWidget
 
   void Function(List<SmeupInputPanelField>?)? onSubmit;
 
-  Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
   KenInputPanel(this.scaffoldKey, this.formKey,
       {this.id = '',
       this.type = 'INP',
@@ -50,14 +49,13 @@ class KenInputPanel extends StatefulWidget
       this.width = KenInputPanelModel.defaultWidth,
       this.height = KenInputPanelModel.defaultHeight,
       this.data,
-      this.onSubmit,
-      this.callBack})
+      this.onSubmit})
       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
   }
 
-  KenInputPanel.withController(KenInputPanelModel this.model, this.scaffoldKey,
-      this.formKey, this.callBack)
+  KenInputPanel.withController(
+      KenInputPanelModel this.model, this.scaffoldKey, this.formKey)
       : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
@@ -120,24 +118,15 @@ class _KenInputPanelState extends State<KenInputPanel>
 
   @override
   Future<KenWidgetBuilderResponse> getChildren() async {
-    //widget.callBack ?? (CallbackType.getChildren);
+    bool? autoAdaptHeight = true;
 
-    bool? autoAdaptHeight = true; // in originale è impostato sempre true
-    //
-    // bool? autoAdaptHeight = SmeupConfigurationService.defaultAutoAdaptHeight;
-    // // autoadapt on input panel alway enabled
-    // autoAdaptHeight = true;
-
-    // Tony: TODO !!! start
-    // if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
-    //   if (_model != null) {
-    //     await _model! .smeupInputPanelGetData(_model!.instanceCallBack, _model!,
-    //         widget.formKey, widget.scaffoldKey, context);
-    //     _data = widget.treatData(_model!);
-    //   }
-    //   setDataLoad(widget.id, true);
-    // }
-    // Tony: TODO !!! end
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
+      if (_model != null) {
+        await _model!.getData();
+        _data = widget.treatData(_model!);
+      }
+      setDataLoad(widget.id, true);
+    }
 
     double? inputPanelHeight = widget.height;
     double? inputPanelWidth = widget.width;
@@ -183,11 +172,11 @@ class _KenInputPanelState extends State<KenInputPanel>
                     if (widget.title!.isNotEmpty)
                       Text(
                         widget.title!,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                     if (widget.title!.isNotEmpty)
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                     _getFields(),
@@ -208,7 +197,7 @@ class _KenInputPanelState extends State<KenInputPanel>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _getInputFieldWidget(field),
-          SizedBox(
+          const SizedBox(
             height: 13,
           ),
         ],
@@ -229,7 +218,7 @@ class _KenInputPanelState extends State<KenInputPanel>
           id: field.id,
           title: field.label,
           height: 55,
-          data: [
+          data: const [
             {"code": "0", "value": "No"},
             {"code": "1", "value": "Si"},
           ],
@@ -275,9 +264,7 @@ class _KenInputPanelState extends State<KenInputPanel>
   }
 
   Widget _getComboWidget(SmeupInputPanelField field) {
-    if (field.items == null) {
-      field.items = [];
-    }
+    field.items ??= [];
     return Column(
       children: <Widget>[
         _getLabel(field.label),
@@ -301,9 +288,7 @@ class _KenInputPanelState extends State<KenInputPanel>
   }
 
   Widget _getTextAutocompleteWidget(SmeupInputPanelField field) {
-    if (field.items == null) {
-      field.items = [];
-    }
+    field.items ??= [];
     return Column(
       children: <Widget>[
         _getLabel(field.label),
@@ -340,10 +325,19 @@ class _KenInputPanelState extends State<KenInputPanel>
               child: KenButton(
                   data: "Conferma",
                   clientOnPressed: () {
-                    if (widget.callBack != null) {
-                      widget.callBack!(
-                          widget, KenCallbackType.clientOnPressed, null, null);
+                    if (widget.onSubmit != null) {
+                      widget.onSubmit!(widget.data);
                     }
+
+                    KenMessageBus.instance.publishRequest(
+                      widget.globallyUniqueId,
+                      KenTopic.kenInputPanelOnSubmit,
+                      KenMessageBusEventData(
+                          context: context,
+                          widget: widget,
+                          model: _model,
+                          data: null),
+                    );
                   }),
             ),
           ],
@@ -365,7 +359,7 @@ class _KenInputPanelState extends State<KenInputPanel>
   }
 
   bool _isConfirmButtonEnabled() {
-    if ((_model != null && _model!.dynamisms.length > 0) ||
+    if ((_model != null && _model!.dynamisms.isNotEmpty) ||
         widget.onSubmit != null) return true;
     return false;
   }

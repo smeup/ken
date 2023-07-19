@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../models/widgets/ken_buttons_model.dart';
 import '../models/widgets/ken_section_model.dart';
@@ -79,19 +81,23 @@ class KenButton extends StatelessWidget {
     double? buttonHeight = height;
     double? buttonWidth = width;
     if (model != null && model!.parent != null) {
-      if (buttonHeight == 0)
+      if (buttonHeight == 0) {
         buttonHeight = (model!.parent as KenSectionModel).height;
-      if (buttonWidth == 0)
+      }
+      if (buttonWidth == 0) {
         buttonWidth = (model!.parent as KenSectionModel).width;
+      }
     } else {
-      if (buttonHeight == 0)
+      if (buttonHeight == 0) {
         buttonHeight = KenUtilities.getDeviceInfo().safeHeight;
-      if (buttonWidth == 0)
+      }
+      if (buttonWidth == 0) {
         buttonWidth = KenUtilities.getDeviceInfo().safeWidth;
+      }
     }
 
     return Container(
-      color: Color.fromRGBO(0, 0, 0, 0),
+      color: const Color.fromRGBO(0, 0, 0, 0),
       padding: padding,
       child: SizedBox(
           height: buttonHeight,
@@ -127,7 +133,7 @@ class KenButton extends StatelessWidget {
     IconThemeData iconTheme = _getIconTheme();
     return Column(mainAxisAlignment: position!, children: <Widget>[
       isBusy!
-          ? CircularProgressIndicator()
+          ? const CircularProgressIndicator()
           : () {
               iconData == null
                   ? Container()
@@ -142,10 +148,11 @@ class KenButton extends StatelessWidget {
                   child: Text(data!,
                       textAlign: TextAlign.center, style: _getTextStile()));
 
-              var children;
+              Container children;
 
               if (align == Alignment.centerLeft) {
                 children = Container(
+                  color: Colors.transparent,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -159,10 +166,10 @@ class KenButton extends StatelessWidget {
                         ),
                     ],
                   ),
-                  color: Colors.transparent,
                 );
               } else if (align == Alignment.centerRight) {
                 children = Container(
+                  color: Colors.transparent,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -176,10 +183,10 @@ class KenButton extends StatelessWidget {
                       text,
                     ],
                   ),
-                  color: Colors.transparent,
                 );
               } else if (align == Alignment.topCenter) {
                 children = Container(
+                  color: Colors.transparent,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -193,11 +200,11 @@ class KenButton extends StatelessWidget {
                         ),
                     ],
                   ),
-                  color: Colors.transparent,
                 );
               } else if (align == Alignment.bottomCenter) {
                 children = Container(
                   height: buttonHeight,
+                  color: Colors.transparent,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -213,11 +220,11 @@ class KenButton extends StatelessWidget {
                       text,
                     ],
                   ),
-                  color: Colors.transparent,
                 );
               } else // center
               {
                 children = Container(
+                  color: Colors.transparent,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -231,7 +238,6 @@ class KenButton extends StatelessWidget {
                       text
                     ],
                   ),
-                  color: Colors.transparent,
                 );
               }
 
@@ -248,7 +254,7 @@ class KenButton extends StatelessWidget {
             backgroundColor: MaterialStateProperty.all<Color?>(backColor),
             elevation: MaterialStateProperty.all<double?>(elevation),
             padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                EdgeInsets.all(0)),
+                const EdgeInsets.all(0)),
             shape: MaterialStateProperty.all<OutlinedBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(borderRadius!))),

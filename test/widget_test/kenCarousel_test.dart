@@ -61,8 +61,8 @@ Future<void> main() async {
           ),
         ));
 
-    Widget testWidget = new MediaQuery(
-        data: new MediaQueryData(), child: new MaterialApp(home: screen));
+    Widget testWidget = MediaQuery(
+        data: const MediaQueryData(), child: MaterialApp(home: screen));
 
     await tester.pumpWidget(testWidget).then((value) async {
       await tester.pumpAndSettle();
@@ -92,7 +92,7 @@ Future<void> main() async {
 }
 
 runTests() {
-  final findKey = find.byKey(Key('cau1'));
+  final findKey = find.byKey(const Key('cau1'));
   expect(findKey, findsWidgets);
 
   var findWidget = find.byType(KenCarousel);

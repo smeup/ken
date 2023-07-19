@@ -3,12 +3,14 @@ import 'dart:async';
 import 'package:clickable_list_wheel_view/measure_size.dart';
 import 'package:flutter/material.dart';
 
+import '../models/KenMessageBusEventData.dart';
 import '../models/dynamism.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../services/ken_configuration_service.dart';
 import '../services/ken_localization_service.dart';
 import '../services/ken_log_service.dart';
-import 'kenEnumCallback.dart';
+import '../services/ken_message_bus.dart';
+
 import 'kenListBox.dart';
 import 'kenNotAvailable.dart';
 import 'kenWidgetStateMixin.dart';
@@ -41,32 +43,36 @@ class KenBox extends StatefulWidget {
   final Function? onSizeChanged;
   final bool? isFirestore;
   final KenListBox kenListBox;
+  final String globallyUniqueId;
 
-  Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
-  KenBox(this.scaffoldKey, this.formKey, this.index, this.kenListBox,
-      {this.id,
-      this.isDynamic = false,
-      this.selectedRow,
-      this.columns,
-      this.data,
-      this.onRefresh,
-      this.dynamisms,
-      this.showLoader,
-      this.layout,
-      this.onItemTap,
-      this.backColor,
-      this.fontColor,
-      this.width,
-      this.height,
-      this.dismissEnabled,
-      this.showSelection,
-      this.cardTheme,
-      this.textStyle,
-      this.captionStyle,
-      this.onSizeChanged,
-      this.isFirestore,
-      this.callBack});
+  KenBox(
+    this.scaffoldKey,
+    this.formKey,
+    this.index,
+    this.kenListBox, {
+    this.id,
+    this.isDynamic = false,
+    this.selectedRow,
+    this.columns,
+    this.data,
+    this.onRefresh,
+    this.dynamisms,
+    this.showLoader,
+    this.layout,
+    this.onItemTap,
+    this.backColor,
+    this.fontColor,
+    this.width,
+    this.height,
+    this.dismissEnabled,
+    this.showSelection,
+    this.cardTheme,
+    this.textStyle,
+    this.captionStyle,
+    this.onSizeChanged,
+    this.isFirestore,
+    required this.globallyUniqueId,
+  });
 
   @override
   _KenBoxState createState() => _KenBoxState();
@@ -127,29 +133,29 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     switch (widget.layout ?? '') {
       // layouts Smeup
       case '1':
-        box = _getLayout1(widget.data, context);
+        box = await _getLayout1(widget.data, context);
         break;
       case '2':
-        box = _getLayout2(widget.data, context);
+        box = await _getLayout2(widget.data, context);
         break;
       case '3':
-        box = _getLayout3(widget.data, context);
+        box = await _getLayout3(widget.data, context);
         break;
       case '4':
-        box = _getLayout4(widget.data, context);
+        box = await _getLayout4(widget.data, context);
         break;
       case '5':
-        box = _getLayout5(widget.data, context);
+        box = await _getLayout5(widget.data, context);
         break;
       case 'imageList':
-        box = _getLayoutImageList(widget.data, context);
+        box = await _getLayoutImageList(widget.data, context);
         break;
       default:
         KenLogService.writeDebugMessage(
             'No layout received. Used default layout',
             logType: KenLogType.warning);
 
-        box = _getLayoutDefault(widget.data, context);
+        box = await _getLayoutDefault(widget.data, context);
         break;
     }
     // bool dismissEnabled = //già presente in originale
@@ -161,23 +167,24 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             .where((element) => element.event == 'delete')
             .length;
 
-    if (no > 0)
+    if (no > 0) {
       deleteDynamism = widget.dynamisms!.firstWhere(
         (element) => element.event == 'delete',
         //orElse: () => null as Dynamism
       );
+    }
 
     Widget res = widget.dismissEnabled!
         ? Dismissible(
             key: Key('${widget.formKey.toString()}_${widget.id}'),
             direction: DismissDirection.endToStart,
             confirmDismiss: (DismissDirection direction) async {
-              // SmeupDynamismService.storeDynamicVariables(
-              //     widget.data, widget.formKey);
-              if (widget.callBack != null) {
-                await widget.callBack!(
-                    widget, KenCallbackType.confirmDismiss, null, null);
-              }
+              KenMessageBus.instance.publishRequest(
+                widget.globallyUniqueId,
+                KenTopic.kenBoxConfirmDismiss,
+                KenMessageBusEventData(
+                    context: context, widget: widget, model: null, data: null),
+              );
 
               return await showDialog(
                 context: context,
@@ -207,21 +214,33 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
               );
             },
             onDismissed: (direction) async {
-              // var smeupFun = Fun(deleteDynamism!.exec, widget.formKey,
-              //     widget.scaffoldKey, context);
-
-              if (widget.callBack != null) {
-                await widget.callBack!(
-                    widget, KenCallbackType.onDismissed, deleteDynamism, null);
-              }
+              Completer<dynamic> completer = Completer();
+              KenMessageBus.instance
+                  .response(
+                      id: widget.globallyUniqueId,
+                      topic: KenTopic.kenboxOnDismissed)
+                  .take(1)
+                  .listen((event) {
+                completer.complete(); // resolve promise
+              });
+              KenMessageBus.instance.publishRequest(
+                widget.globallyUniqueId,
+                KenTopic.kenboxOnDismissed,
+                KenMessageBusEventData(
+                    context: context,
+                    widget: widget,
+                    model: null,
+                    data: deleteDynamism),
+              );
+              await completer.future;
               // widget.onRefresh!();
             },
             background: Container(
               color: Colors.red,
-              margin: EdgeInsets.symmetric(horizontal: 15),
+              margin: const EdgeInsets.symmetric(horizontal: 15),
               alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
+              child: const Padding(
+                padding: EdgeInsets.all(20.0),
                 child: Icon(
                   Icons.delete,
                   color: Colors.white,
@@ -256,8 +275,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
         child: res);
   }
 
-  Widget _getLayout1(dynamic data, BuildContext context) {
-    final cols = _getColumns(data);
+  Future<Widget> _getLayout1(dynamic data, BuildContext context) async {
+    final cols = await _getColumns(data);
     if (data.length > 0) {
       return GestureDetector(
         onTap: () {
@@ -277,7 +296,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             shape: component
                 ? widget.cardTheme!.shape
                 : RoundedRectangleBorder(
-                    side: BorderSide(
+                    side: const BorderSide(
                         width: 3, color: Color.fromARGB(198, 246, 167, 101)),
                     borderRadius: BorderRadius.circular(20)),
             child: Padding(
@@ -312,8 +331,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-  Widget _getLayout2(dynamic data, BuildContext context) {
-    final cols = _getColumns(data);
+  Future<Widget> _getLayout2(dynamic data, BuildContext context) async {
+    final cols = await _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -325,7 +344,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   height: widget.height,
                   child: FutureBuilder<Widget>(
                       future: _getLayout2Async(data, cols),
@@ -356,8 +375,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-  Widget _getLayout3(dynamic data, BuildContext context) {
-    final cols = _getColumns(data);
+  Future<Widget> _getLayout3(dynamic data, BuildContext context) async {
+    final cols = await _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -399,8 +418,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-  Widget _getLayout4(dynamic data, BuildContext context) {
-    final cols = _getColumns(data);
+  Future<Widget> _getLayout4(dynamic data, BuildContext context) async {
+    final cols = await _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -413,7 +432,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   height: widget.height,
                   child: FutureBuilder<Widget>(
                       future: _getLayout4Async(data, cols),
@@ -444,8 +463,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-  Widget _getLayout5(dynamic data, BuildContext context) {
-    final cols = _getColumns(data);
+  Future<Widget> _getLayout5(dynamic data, BuildContext context) async {
+    final cols = await _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -458,7 +477,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   height: widget.height,
                   child: FutureBuilder<Widget>(
                       future: _getLayout5Async(data, cols),
@@ -489,8 +508,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-  Widget _getLayoutImageList(dynamic data, BuildContext context) {
-    final cols = _getColumns(data);
+  Future<Widget> _getLayoutImageList(dynamic data, BuildContext context) async {
+    final cols = await _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -534,8 +553,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-  Widget _getLayoutDefault(dynamic data, BuildContext context) {
-    final cols = _getColumns(data);
+  Future<Widget> _getLayoutDefault(dynamic data, BuildContext context) async {
+    final cols = await _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -578,17 +597,28 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
   }
 
   Future<Widget> _getImage(dynamic data) async {
-    if (widget.callBack != null) {
-      var imageWidget =
-          await widget.callBack!(widget, KenCallbackType.getImage, data, null);
-
-      if (imageWidget != null) {
-        return imageWidget;
-      } else {
-        return Container();
-      }
+    dynamic widgetImage;
+    Completer<dynamic> completer = Completer();
+    KenMessageBus.instance
+        .response(
+            id: widget.globallyUniqueId + data.toString(),
+            topic: KenTopic.kenboxGetText)
+        .take(1)
+        .listen((event) {
+      widgetImage = event.data.data;
+      completer.complete(); // resolve promise
+    });
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenBoxGetImage,
+      KenMessageBusEventData(
+          context: context, widget: widget, model: null, data: data),
+    );
+    if (widgetImage != null) {
+      return widgetImage;
+    } else {
+      return Container();
     }
-    return Container();
   }
 
   Future<Widget> _getImageAndDataInRow(dynamic data, cols) async {
@@ -619,7 +649,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
         String rowData = await _getBoxText(data, col);
 
         final colWidget = Container(
-            padding: EdgeInsets.all(1),
+            padding: const EdgeInsets.all(1),
             child: Row(children: [
               if (col['text'].isNotEmpty)
                 Expanded(
@@ -676,7 +706,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
         String rowData = await _getBoxText(data, col);
 
         final textWidget = Container(
-          padding: EdgeInsets.all(1),
+          padding: const EdgeInsets.all(1),
           child: Row(children: [
             if (col['text'].isNotEmpty)
               Expanded(
@@ -700,7 +730,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
       }
     }
 
-    var buttonWidgets = _getButtons(data);
+    var buttonWidgets = await _getButtons(data);
 
     widgets.add(Padding(
       padding: const EdgeInsets.only(top: 5),
@@ -724,7 +754,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
         String rowData = await _getBoxText(data, col);
 
         final colWidget = Container(
-            padding: EdgeInsets.all(1),
+            padding: const EdgeInsets.all(1),
             child: Row(children: [
               if (col['text'].isNotEmpty)
                 Expanded(
@@ -771,17 +801,54 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return listOfRows;
   }
 
-  List<Widget> _getButtons(dynamic data) {
+  Future<List<Widget>> _getButtons(dynamic data) async {
     var widgetBtns = List<Widget>.empty(growable: true);
 
-    var buttonCols = _getColumns(data)!
-        .where((col) => col['ogg'] == 'J4BTN' && col['IO'] != 'H');
+    List<dynamic>? buttonCols;
 
-    if (widget.callBack != null) {
-      widgetBtns =
-          widget.callBack!(widget, KenCallbackType.getButtons, data, buttonCols)
-              as List<Widget>;
-    }
+    var columns = await _getColumns(data);
+
+    Completer<dynamic> completer = Completer();
+    KenMessageBus.instance
+        .response(
+            id: widget.globallyUniqueId,
+            topic: KenTopic.kenBoxGetColumnsButtons)
+        .take(1)
+        .listen((event) {
+      buttonCols = event.data.data;
+      completer.complete(); // resolve promise
+    });
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenBoxGetColumnsButtons,
+      KenMessageBusEventData(
+          context: context,
+          widget: widget,
+          model: null,
+          data: columns,
+          parameters: [buttonCols]),
+    );
+    await completer.future;
+
+    completer = Completer();
+    KenMessageBus.instance
+        .response(id: widget.globallyUniqueId, topic: KenTopic.kenBoxGetButtons)
+        .take(1)
+        .listen((event) {
+      widgetBtns = event.data.data;
+      completer.complete(); // resolve promise
+    });
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenBoxGetButtons,
+      KenMessageBusEventData(
+          context: context,
+          widget: widget,
+          model: null,
+          data: data,
+          parameters: [buttonCols]),
+    );
+    await completer.future;
 
     return widgetBtns;
   }
@@ -792,37 +859,31 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     }
   }
 
-  List<dynamic>? _getColumns(dynamic data) {
+  Future<List?> _getColumns(dynamic data) async {
     if (_columns == null) {
-      if (widget.columns != null)
+      if (widget.columns != null) {
         _columns = widget.columns;
-      else {
-        _columns = List<dynamic>.empty(growable: true);
-        (data as Map).keys.forEach((element) {
-          _columns!.add({
-            "code": element,
-            "fieldNameForDecode": null,
-            "text": element,
-            "tip": null,
-            "dpy": null,
-            "aut": null,
-            "lun": null,
-            "lunNum": null,
-            "fill": null,
-            "ogg": null,
-            "obb": null,
-            "eTxt": null,
-            "grp": null,
-            "extension": null,
-            "formula": null,
-            "tfk": null,
-            "pfk": null,
-            "sfk": null,
-            "sortMode": null,
-            "filterValue": null,
-            "IO": "O"
-          });
+      } else {
+        Completer<dynamic> completer = Completer();
+        KenMessageBus.instance
+            .response(
+                id: widget.globallyUniqueId, topic: KenTopic.kenBoxGetButtons)
+            .take(1)
+            .listen((event) {
+          _columns = event.data.data;
+          completer.complete(); // resolve promise
         });
+        KenMessageBus.instance.publishRequest(
+          widget.globallyUniqueId,
+          KenTopic.kenBoxGetButtons,
+          KenMessageBusEventData(
+              context: context,
+              widget: widget,
+              model: null,
+              data: data,
+              parameters: [_columns]),
+        );
+        await completer.future;
       }
     }
 
@@ -831,11 +892,32 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
 
   Future<String> _getBoxText(Map data, Map col) async {
     String dataText = "";
-    if (widget.callBack != null) {
-      dataText =
-          await widget.callBack!(widget, KenCallbackType.getBoxText, data, col)
-              as String;
-    }
+
+    Completer<dynamic> completer = Completer();
+    KenMessageBus.instance
+        .response(
+            id: widget.globallyUniqueId +
+                widget.index.toString() +
+                col["code"].toString(),
+            topic: KenTopic.kenboxGetText)
+        .take(1)
+        .listen((event) {
+      dataText = event.data.data;
+      completer.complete(); // resolve promise
+    });
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId +
+          widget.index.toString() +
+          col["code"].toString(),
+      KenTopic.kenboxGetText,
+      KenMessageBusEventData(
+          context: context,
+          widget: widget,
+          model: null,
+          data: data,
+          parameters: [col]),
+    );
+    await completer.future;
 
     return dataText;
   }

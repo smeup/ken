@@ -81,7 +81,7 @@ class KenGauge extends StatefulWidget
     var workData = formatDataFields(m);
 
     // set the widget data
-    if (workData != null && (workData['rows'] as List).length > 0) {
+    if (workData != null && (workData['rows'] as List).isNotEmpty) {
       value = KenUtilities.getDouble(workData['rows'][0][m.valueColName]);
       maxValue = KenUtilities.getDouble(workData['rows'][0][m.maxColName]);
       minValue = KenUtilities.getDouble(workData['rows'][0][m.minColName]);
@@ -159,9 +159,9 @@ class _KenGaugeState extends State<KenGauge>
 
     children = Center(
       child: SfRadialGauge(
-          title: GaugeTitle(
+          title: const GaugeTitle(
               text: 'Speedometer',
-              textStyle: const TextStyle(
+              textStyle: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                   color: Color.fromRGBO(6, 137, 155, 1))),
@@ -170,13 +170,13 @@ class _KenGaugeState extends State<KenGauge>
               GaugeRange(
                   startValue: vMin,
                   endValue: vWar,
-                  color: Color.fromRGBO(6, 137, 155, 1),
+                  color: const Color.fromRGBO(6, 137, 155, 1),
                   startWidth: 10,
                   endWidth: 10),
               GaugeRange(
                   startValue: vWar,
                   endValue: vAle,
-                  color: Color.fromRGBO(223, 138, 4, 1),
+                  color: const Color.fromRGBO(223, 138, 4, 1),
                   startWidth: 10,
                   endWidth: 10),
               GaugeRange(
@@ -189,12 +189,11 @@ class _KenGaugeState extends State<KenGauge>
               NeedlePointer(value: vVal)
             ], annotations: <GaugeAnnotation>[
               GaugeAnnotation(
-                  widget: Container(
-                      child: Text(vVal.toString(),
-                          style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red))),
+                  widget: Text(vVal.toString(),
+                      style: const TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red)),
                   angle: 90,
                   positionFactor: 0.5)
             ])

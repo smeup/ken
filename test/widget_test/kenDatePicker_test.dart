@@ -4,15 +4,15 @@ import '../../lib/smeup/widgets/kenDatepicker.dart';
 
 import 'widget_test_service.dart';
 
-final datePickerDynamicScreen = 'test_date_picker';
+const datePickerDynamicScreen = 'test_date_picker';
 
 Future<void> main() async {
   testWidgets('Test static contructor ', (WidgetTester tester) async {
     await WidgetTestService.initTests();
 
-    Widget testWidget = new MediaQuery(
-        data: new MediaQueryData(),
-        child: new MaterialApp(
+    Widget testWidget = MediaQuery(
+        data: const MediaQueryData(),
+        child: MaterialApp(
             home: Scaffold(
           appBar: AppBar(),
           body: SingleChildScrollView(

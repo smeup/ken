@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 
 class KenImageModel extends KenModel implements KenDataInterface {
   static const double defaultWidth = 300;
@@ -24,18 +23,14 @@ class KenImageModel extends KenModel implements KenDataInterface {
     this.height = defaultHeight,
     this.padding = defaultPadding,
     title = '',
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type);
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type);
 
   KenImageModel.fromMap(
       Map<String, dynamic> jsonMap,
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context)
-      : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context) {
+      : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     padding =
@@ -44,7 +39,7 @@ class KenImageModel extends KenModel implements KenDataInterface {
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-        await this.getData();
+        await getData();
         // await SmeupImageDao.getData(this);
       };
     }

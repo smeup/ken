@@ -3,7 +3,6 @@ import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_input_panel_value.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 
 class KenInputPanelModel extends KenModel implements KenDataInterface {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
@@ -30,18 +29,14 @@ class KenInputPanelModel extends KenModel implements KenDataInterface {
     this.height = defaultHeight,
     this.padding = defaultPadding,
     this.fontSize = defaultFontSize,
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type);
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type);
 
   KenInputPanelModel.fromMap(
-      Map<String, dynamic> jsonMap,
-      GlobalKey<FormState>? formKey,
-      GlobalKey<ScaffoldState>? scaffoldKey,
-      BuildContext? context,)
-      : super.fromMap(
-            jsonMap, formKey, scaffoldKey, context) {
+    Map<String, dynamic> jsonMap,
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    BuildContext? context,
+  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     fontSize =
@@ -56,7 +51,7 @@ class KenInputPanelModel extends KenModel implements KenDataInterface {
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
-        await this.getData();
+        await getData();
 
         // missing SmeupVariablesService
 

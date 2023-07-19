@@ -1,7 +1,8 @@
+// ignore_for_file: prefer_conditional_assignment
+
 import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import '../../services/ken_configuration_service.dart';
 
 class KenLineModel extends KenModel {
@@ -22,8 +23,7 @@ class KenLineModel extends KenModel {
     BuildContext context, {
     this.color,
     this.thickness,
-  }) : super(formKey, scaffoldKey, context,
-            title: '', id: id, type: type) {
+  }) : super(formKey, scaffoldKey, context, title: '', id: id, type: type) {
     id = KenUtilities.getWidgetId('LIN', id);
     setDefaults(this);
   }
@@ -45,7 +45,7 @@ class KenLineModel extends KenModel {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupLineDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }

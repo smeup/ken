@@ -7,11 +7,13 @@ class KenMessageBusEventData {
   Widget? widget;
   KenModel? model;
   dynamic data;
+  List<dynamic>? parameters;
 
   KenMessageBusEventData({
     this.context,
     this.widget,
     this.model,
+    this.parameters,
     required this.data,
   });
 }

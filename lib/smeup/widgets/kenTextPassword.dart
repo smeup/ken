@@ -1,5 +1,7 @@
 // import 'dart:ui';
 
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/ken_widget_builder_response.dart';
@@ -8,7 +10,6 @@ import '../models/notifiers/ken_text_password_visibility_notifier.dart';
 import '../models/widgets/ken_model.dart';
 import '../models/widgets/ken_text_password_model.dart';
 import '../services/ken_utilities.dart';
-import 'kenEnumCallback.dart';
 import 'kenTextField.dart';
 import 'kenTextPasswordIndicators.dart';
 import 'kenWidgetInterface.dart';
@@ -60,58 +61,59 @@ class KenTextPassword extends StatefulWidget
   bool? checkRules;
 
   Function? clientValidator;
-  //Function? clientOnSave;
-  //Function? clientOnChange;
+  Function? clientOnSave;
+  Function? clientOnChange;
   Function? clientOnSubmit;
-
-  Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
   List<TextInputFormatter>? inputFormatters;
 
-  KenTextPassword.withController(KenTextPasswordModel this.model,
-      this.scaffoldKey, this.formKey, this.callBack)
-      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+  KenTextPassword.withController(
+    KenTextPasswordModel this.model,
+    this.scaffoldKey,
+    this.formKey,
+  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
-  KenTextPassword(this.scaffoldKey, this.formKey,
-      {this.id = '',
-      this.type = 'FLD',
-      this.backColor,
-      this.fontSize,
-      this.fontBold,
-      this.fontColor,
-      this.captionBackColor,
-      this.captionFontBold,
-      this.captionFontColor,
-      this.captionFontSize,
-      this.borderColor,
-      this.borderRadius,
-      this.borderWidth,
-      this.iconSize,
-      this.iconColor,
-      this.buttonBackColor,
-      this.label = KenTextPasswordModel.defaultLabel,
-      this.submitLabel = KenTextPasswordModel.defaultSubmitLabel,
-      this.width = KenTextPasswordModel.defaultWidth,
-      this.height = KenTextPasswordModel.defaultHeight,
-      this.padding = KenTextPasswordModel.defaultPadding,
-      this.showBorder = KenTextPasswordModel.defaultShowBorder,
-      this.data,
-      this.underline = KenTextPasswordModel.defaultUnderline,
-      this.autoFocus = KenTextPasswordModel.defaultAutoFocus,
-      this.valueField = KenTextPasswordModel.defaultValueField,
-      this.showSubmit = KenTextPasswordModel.defaultShowSubmit,
-      this.showRules = KenTextPasswordModel.defaultShowRules,
-      this.showRulesIcon = KenTextPasswordModel.defaultShowRulesIcon,
-      this.checkRules = KenTextPasswordModel.defaultCheckRules,
-      this.clientValidator, // ?
-      //this.clientOnSave,
-      //this.clientOnChange,
-      this.inputFormatters, // ?
-      this.clientOnSubmit,
-      this.callBack})
-      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
+  KenTextPassword(
+    this.scaffoldKey,
+    this.formKey, {
+    this.id = '',
+    this.type = 'FLD',
+    this.backColor,
+    this.fontSize,
+    this.fontBold,
+    this.fontColor,
+    this.captionBackColor,
+    this.captionFontBold,
+    this.captionFontColor,
+    this.captionFontSize,
+    this.borderColor,
+    this.borderRadius,
+    this.borderWidth,
+    this.iconSize,
+    this.iconColor,
+    this.buttonBackColor,
+    this.label = KenTextPasswordModel.defaultLabel,
+    this.submitLabel = KenTextPasswordModel.defaultSubmitLabel,
+    this.width = KenTextPasswordModel.defaultWidth,
+    this.height = KenTextPasswordModel.defaultHeight,
+    this.padding = KenTextPasswordModel.defaultPadding,
+    this.showBorder = KenTextPasswordModel.defaultShowBorder,
+    this.data,
+    this.underline = KenTextPasswordModel.defaultUnderline,
+    this.autoFocus = KenTextPasswordModel.defaultAutoFocus,
+    this.valueField = KenTextPasswordModel.defaultValueField,
+    this.showSubmit = KenTextPasswordModel.defaultShowSubmit,
+    this.showRules = KenTextPasswordModel.defaultShowRules,
+    this.showRulesIcon = KenTextPasswordModel.defaultShowRulesIcon,
+    this.checkRules = KenTextPasswordModel.defaultCheckRules,
+    this.clientValidator, // ?
+    this.clientOnSave,
+    this.clientOnChange,
+    this.inputFormatters, // ?
+    this.clientOnSubmit,
+  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenTextPasswordModel.setDefaults(this);
   }
@@ -161,7 +163,7 @@ class KenTextPassword extends StatefulWidget
 
     // set the widget data
     if (workData != null &&
-        (workData['rows'] as List).length > 0 &&
+        (workData['rows'] as List).isNotEmpty &&
         workData['rows'][0][m.valueField] != null) {
       return workData['rows'][0][m.valueField].toString();
     } else {
@@ -229,120 +231,117 @@ class _KenTextPasswordState extends State<KenTextPassword>
     final dividerStyle = _getDividerStyle();
     final captionStyle = _getCaptionStile();
 
-    final children = Container(
-      child: Column(
-        children: [
-          Container(
-            decoration: widget.showBorder!
-                ? BoxDecoration(
-                    borderRadius: BorderRadius.circular(widget.borderRadius!),
-                    border: Border.all(
-                        color: widget.borderColor!, width: widget.borderWidth!))
-                : null,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Consumer<KenTextPasswordVisibilityNotifier>(
-                    builder: (context, fieldmodel, child) {
-                      return KenTextField(widget.scaffoldKey, widget.formKey,
-                          id: widget.id,
-                          label: widget.label,
-                          autoFocus: widget.autoFocus,
-                          backColor: widget.backColor,
-                          fontSize: widget.fontSize,
-                          fontBold: widget.fontBold,
-                          fontColor: widget.fontColor,
-                          captionBackColor: widget.captionBackColor,
-                          captionFontBold: widget.captionFontBold,
-                          captionFontColor: widget.captionFontColor,
-                          captionFontSize: widget.captionFontSize,
-                          borderColor: widget.borderColor,
-                          borderRadius: widget.borderRadius,
-                          borderWidth: widget.borderWidth,
-                          submitLabel: widget.submitLabel,
-                          clientOnSubmit: widget.clientOnSubmit,
-                          height: widget.height,
-                          inputFormatters: widget.inputFormatters,
-                          padding: widget.padding,
-                          showSubmit: widget.showSubmit,
-                          showBorder: false,
-                          width: widget.width,
-                          underline: false,
-                          data: _data,
-                          clientValidator: widget.clientValidator,
-                          //clientOnSave: widget.clientOnSave,
-                          //clientOnChange: (value) {
-                          //if (widget.clientOnChange != null)
-                          //  widget.clientOnChange!(value);
-                          //passwordModel.checkProgress(value);
-                          //_data = value;
-                          //},
-
-                          // callBack: widget.callBack, -- refactoring kentextfield
-                          keyboard: fieldmodel.passwordVisible
-                              ? TextInputType.text
-                              : TextInputType.visiblePassword);
-                    },
-                  ),
-                ),
-                Container(
-                  color: widget.buttonBackColor,
-                  padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
-                  child: GestureDetector(
-                    child: Icon(
-                      passwordFieldModel.passwordVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                      color: iconTheme.color,
-                      size: iconTheme.size,
-                    ),
-                    onTap: () {
-                      setState(() {
-                        passwordFieldModel.toggleVisible();
-                      });
-                    },
-                  ),
-                ),
-                SizedBox(
-                  width: 3,
-                ),
-                Container(
-                  color: widget.buttonBackColor,
-                  padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
-                  child: GestureDetector(
-                    child: Icon(
-                      Icons.close,
-                      color: iconTheme.color,
-                      size: iconTheme.size,
-                    ),
-                    onTap: () {
-                      setState(() {
-                        _data = '';
-                        passwordModel.reset();
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Column(
+    final children = Column(
+      children: [
+        Container(
+          decoration: widget.showBorder!
+              ? BoxDecoration(
+                  borderRadius: BorderRadius.circular(widget.borderRadius!),
+                  border: Border.all(
+                      color: widget.borderColor!, width: widget.borderWidth!))
+              : null,
+          child: Row(
             children: [
-              if (widget.underline!)
-                Divider(
-                  thickness: dividerStyle.thickness,
-                  color: dividerStyle.color,
+              Expanded(
+                child: Consumer<KenTextPasswordVisibilityNotifier>(
+                  builder: (context, fieldmodel, child) {
+                    return KenTextField(widget.scaffoldKey, widget.formKey,
+                        id: widget.id,
+                        label: widget.label,
+                        autoFocus: widget.autoFocus,
+                        backColor: widget.backColor,
+                        fontSize: widget.fontSize,
+                        fontBold: widget.fontBold,
+                        fontColor: widget.fontColor,
+                        captionBackColor: widget.captionBackColor,
+                        captionFontBold: widget.captionFontBold,
+                        captionFontColor: widget.captionFontColor,
+                        captionFontSize: widget.captionFontSize,
+                        borderColor: widget.borderColor,
+                        borderRadius: widget.borderRadius,
+                        borderWidth: widget.borderWidth,
+                        submitLabel: widget.submitLabel,
+                        clientOnSubmit: widget.clientOnSubmit,
+                        height: widget.height,
+                        inputFormatters: widget.inputFormatters,
+                        padding: widget.padding,
+                        showSubmit: widget.showSubmit,
+                        showBorder: false,
+                        width: widget.width,
+                        underline: false,
+                        data: _data,
+                        clientValidator: widget.clientValidator,
+                        clientOnSave: widget.clientOnSave,
+                        clientOnChange: (value) {
+                      if (widget.clientOnChange != null) {
+                        widget.clientOnChange!(value);
+                      }
+                      passwordModel.checkProgress(value);
+                      _data = value;
+                    },
+                        keyboard: fieldmodel.passwordVisible
+                            ? TextInputType.text
+                            : TextInputType.visiblePassword);
+                  },
                 ),
-              if (widget.showRules!)
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: KenTextPasswordIndicators(
-                      widget.showRulesIcon, captionStyle, iconTheme),
-                )
+              ),
+              Container(
+                color: widget.buttonBackColor,
+                padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
+                child: GestureDetector(
+                  child: Icon(
+                    passwordFieldModel.passwordVisible
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: iconTheme.color,
+                    size: iconTheme.size,
+                  ),
+                  onTap: () {
+                    setState(() {
+                      passwordFieldModel.toggleVisible();
+                    });
+                  },
+                ),
+              ),
+              const SizedBox(
+                width: 3,
+              ),
+              Container(
+                color: widget.buttonBackColor,
+                padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
+                child: GestureDetector(
+                  child: Icon(
+                    Icons.close,
+                    color: iconTheme.color,
+                    size: iconTheme.size,
+                  ),
+                  onTap: () {
+                    setState(() {
+                      _data = '';
+                      passwordModel.reset();
+                    });
+                  },
+                ),
+              ),
             ],
-          )
-        ],
-      ),
+          ),
+        ),
+        Column(
+          children: [
+            if (widget.underline!)
+              Divider(
+                thickness: dividerStyle.thickness,
+                color: dividerStyle.color,
+              ),
+            if (widget.showRules!)
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: KenTextPasswordIndicators(
+                    widget.showRulesIcon, captionStyle, iconTheme),
+              )
+          ],
+        )
+      ],
     );
 
     return KenWidgetBuilderResponse(_model, children);

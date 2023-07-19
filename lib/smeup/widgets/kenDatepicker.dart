@@ -1,12 +1,15 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../models/KenMessageBusEventData.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_datepicker_model.dart';
 import '../models/widgets/ken_model.dart';
 import '../models/widgets/ken_section_model.dart';
+import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
 import 'kenDatepickerButton.dart';
-import 'kenEnumCallback.dart';
 import 'kenLine.dart';
 import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';
@@ -61,45 +64,47 @@ class KenDatePicker extends StatefulWidget
   Function? clientOnSave;
   Function? clientOnChange;
 
-  Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
-  KenDatePicker.withController(KenDatePickerModel this.model, this.scaffoldKey,
-      this.formKey, this.callBack)
-      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+  KenDatePicker.withController(
+    KenDatePickerModel this.model,
+    this.scaffoldKey,
+    this.formKey,
+  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
-  KenDatePicker(this.scaffoldKey, this.formKey, this.data,
-      {this.id = '',
-      this.type = 'cal',
-      this.title = '',
-      this.borderColor,
-      this.borderRadius,
-      this.borderWidth,
-      this.fontBold,
-      this.fontSize,
-      this.fontColor,
-      this.backColor,
-      this.elevation,
-      this.captionFontBold,
-      this.captionFontSize,
-      this.captionFontColor,
-      this.captionBackColor,
-      this.underline = KenDatePickerModel.defaultUnderline,
-      this.innerSpace = KenDatePickerModel.defaultInnerSpace,
-      this.align = KenDatePickerModel.defaultAlign,
-      this.valueField = KenDatePickerModel.defaultValueField,
-      this.displayField = KenDatePickerModel.defaultdisplayedField,
-      this.label = KenDatePickerModel.defaultLabel,
-      this.width = KenDatePickerModel.defaultWidth,
-      this.height = KenDatePickerModel.defaultHeight,
-      this.padding = KenDatePickerModel.defaultPadding,
-      this.showborder = KenDatePickerModel.defaultShowBorder,
-      this.clientValidator,
-      this.clientOnSave,
-      this.clientOnChange,
-      this.callBack})
-      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
+  KenDatePicker(
+    this.scaffoldKey,
+    this.formKey,
+    this.data, {
+    this.id = '',
+    this.type = 'cal',
+    this.title = '',
+    this.borderColor,
+    this.borderRadius,
+    this.borderWidth,
+    this.fontBold,
+    this.fontSize,
+    this.fontColor,
+    this.backColor,
+    this.elevation,
+    this.captionFontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.captionBackColor,
+    this.underline = KenDatePickerModel.defaultUnderline,
+    this.innerSpace = KenDatePickerModel.defaultInnerSpace,
+    this.align = KenDatePickerModel.defaultAlign,
+    this.valueField = KenDatePickerModel.defaultValueField,
+    this.displayField = KenDatePickerModel.defaultdisplayedField,
+    this.label = KenDatePickerModel.defaultLabel,
+    this.width = KenDatePickerModel.defaultWidth,
+    this.height = KenDatePickerModel.defaultHeight,
+    this.padding = KenDatePickerModel.defaultPadding,
+    this.showborder = KenDatePickerModel.defaultShowBorder,
+    this.clientValidator,
+    this.clientOnSave,
+    this.clientOnChange,
+  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenDatePickerModel.setDefaults(this);
     if (data != null && data!.value != null && data!.text == null) {
@@ -107,6 +112,7 @@ class KenDatePicker extends StatefulWidget
     }
   }
 
+  @override
   runControllerActivities(KenModel model) {
     KenDatePickerModel m = model as KenDatePickerModel;
     id = m.id;
@@ -146,7 +152,7 @@ class KenDatePicker extends StatefulWidget
     var workData = formatDataFields(m);
 
     // set the widget data
-    if (workData != null && (workData['rows'] as List).length > 0) {
+    if (workData != null && (workData['rows'] as List).isNotEmpty) {
       DateTime? value;
       String? text;
       if (workData['rows'][0][valueField] != null) {
@@ -198,6 +204,7 @@ class _KenDatePickerState extends State<KenDatePicker>
     return datePicker;
   }
 
+  @override
   Future<KenWidgetBuilderResponse> getChildren() async {
     if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
       if (_model != null) {
@@ -212,22 +219,29 @@ class _KenDatePickerState extends State<KenDatePicker>
       return getFunErrorResponse(context, _model);
     }
 
-    if (widget.callBack != null) {
-      widget.callBack!(widget, KenCallbackType.getChildren, _data, null);
-    }
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenDatePickerGetChildren,
+      KenMessageBusEventData(
+          context: context, widget: widget, model: _model, data: _data),
+    );
 
     double? datePickerHeight = widget.height;
     double? datePickerWidth = widget.width;
     if (_model != null && _model!.parent != null) {
-      if (datePickerHeight == 0)
+      if (datePickerHeight == 0) {
         datePickerHeight = (_model!.parent as KenSectionModel).height;
-      if (datePickerWidth == 0)
+      }
+      if (datePickerWidth == 0) {
         datePickerWidth = (_model!.parent as KenSectionModel).width;
+      }
     } else {
-      if (datePickerHeight == 0)
+      if (datePickerHeight == 0) {
         datePickerHeight = KenUtilities.getDeviceInfo().safeHeight;
-      if (datePickerWidth == 0)
+      }
+      if (datePickerWidth == 0) {
         datePickerWidth = KenUtilities.getDeviceInfo().safeWidth;
+      }
     }
 
     if (!widget.showborder!) {
@@ -283,13 +297,14 @@ class _KenDatePickerState extends State<KenDatePicker>
       captionBackColor: widget.captionBackColor,
       clientOnChange: widget.clientOnChange,
       model: _model,
+      globallyUniqueId: widget.globallyUniqueId,
     );
 
     var line = widget.underline!
         ? KenLine(widget.scaffoldKey, widget.formKey)
         : Container();
 
-    var children;
+    Widget children;
 
     if (widget.align == Alignment.centerLeft) {
       children = Column(children: [
@@ -300,17 +315,17 @@ class _KenDatePickerState extends State<KenDatePicker>
             SizedBox(width: widget.innerSpace),
             Expanded(
                 child: Align(
+                    alignment: widget.align!,
                     child: Row(
                       children: [
                         Expanded(
                             child: Align(
-                          child: datepicker,
                           alignment: Alignment.centerLeft,
+                          child: datepicker,
                         )),
                         icon,
                       ],
-                    ),
-                    alignment: widget.align!)),
+                    ))),
           ],
         ),
         line
@@ -325,17 +340,17 @@ class _KenDatePickerState extends State<KenDatePicker>
             children: [
               Expanded(
                   child: Align(
+                alignment: widget.align!,
                 child: Row(
                   children: [
                     icon,
                     Expanded(
                         child: Align(
-                      child: datepicker,
                       alignment: Alignment.centerLeft,
+                      child: datepicker,
                     )),
                   ],
                 ),
-                alignment: widget.align!,
               )),
               SizedBox(width: widget.innerSpace),
               text,
@@ -353,22 +368,22 @@ class _KenDatePickerState extends State<KenDatePicker>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Align(
-              child: text,
               alignment: Alignment.centerLeft,
+              child: text,
             ),
             SizedBox(height: widget.innerSpace),
             Align(
+              alignment: Alignment.centerLeft,
               child: Row(
                 children: [
                   Expanded(
                       child: Align(
-                    child: datepicker,
                     alignment: Alignment.centerLeft,
+                    child: datepicker,
                   )),
                   icon
                 ],
               ),
-              alignment: Alignment.centerLeft,
             ),
             line
           ],
@@ -383,22 +398,22 @@ class _KenDatePickerState extends State<KenDatePicker>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Align(
+              alignment: Alignment.centerLeft,
               child: Row(
                 children: [
                   Expanded(
                       child: Align(
-                    child: datepicker,
                     alignment: Alignment.centerLeft,
+                    child: datepicker,
                   )),
                   icon
                 ],
               ),
-              alignment: Alignment.centerLeft,
             ),
             SizedBox(height: widget.innerSpace),
             Align(
-              child: text,
               alignment: Alignment.centerLeft,
+              child: text,
             )
           ],
         ),
@@ -406,20 +421,20 @@ class _KenDatePickerState extends State<KenDatePicker>
       );
     } else // center
     {
-      children = Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            datepicker,
-            SizedBox(width: widget.innerSpace),
-            Expanded(child: text),
-          ],
-        ),
+      children = Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          datepicker,
+          SizedBox(width: widget.innerSpace),
+          Expanded(child: text),
+        ],
       );
     }
 
     return KenWidgetBuilderResponse(_model, children);
   }
+
+  /// Extended theme
 
   ButtonStyle _getButtonStyle() {
     var timePickerTheme = KenConfigurationService.getTheme()!
@@ -439,7 +454,7 @@ class _KenDatePickerState extends State<KenDatePicker>
                 timePickerTheme.backgroundColor),
             elevation: MaterialStateProperty.all<double?>(widget.elevation),
             padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                EdgeInsets.all(0)),
+                const EdgeInsets.all(0)),
             shape: MaterialStateProperty.all<OutlinedBorder?>(
                 timePickerTheme.shape as OutlinedBorder?),
             side: MaterialStateProperty.all<BorderSide?>(

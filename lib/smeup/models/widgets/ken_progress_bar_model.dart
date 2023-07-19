@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import '../../services/ken_configuration_service.dart';
 
 class KenProgressBarModel extends KenModel implements KenDataInterface {
@@ -43,10 +42,7 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
     this.progressBarMaximun = defaultProgressBarMaximun,
     this.bordeRadius = defaultBorderRadius,
     title = '',
-  }) : super(formKey, scaffoldKey, context,
-            title: title,
-            id: id,
-            type: type) {
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'pgb';
     setDefaults(this);
   }
@@ -83,7 +79,7 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupProgressBarDao.getData(this);
-        await this.getData();
+        await getData();
       };
     }
   }
@@ -96,8 +92,7 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
 
     // ----------------- set properties from default
 
-    if (obj.color == null) obj.color = KenProgressBarModel.defaultColor;
-    if (obj.linearTrackColor == null)
-      obj.linearTrackColor = KenProgressBarModel.defaultLinearTrackColor;
+    obj.color ??= KenProgressBarModel.defaultColor;
+    obj.linearTrackColor ??= KenProgressBarModel.defaultLinearTrackColor;
   }
 }

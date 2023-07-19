@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../lib/smeup/widgets/kenTimepicker.dart';
 import 'widget_test_service.dart';
 
-final timePickerDynamicScreen = 'test_time_picker';
-final timePickerData = new KenTimePickerData(
+const timePickerDynamicScreen = 'test_time_picker';
+final timePickerData = KenTimePickerData(
   time: DateTime(2021, 1, 1, 17, 30),
   formattedTime: "17:30",
 );
@@ -13,9 +13,9 @@ Future<void> main() async {
   testWidgets('Test static contructor ', (WidgetTester tester) async {
     await WidgetTestService.initTests();
 
-    Widget testWidget = new MediaQuery(
-        data: new MediaQueryData(),
-        child: new MaterialApp(
+    Widget testWidget = MediaQuery(
+        data: const MediaQueryData(),
+        child: MaterialApp(
             home: Scaffold(
           appBar: AppBar(),
           body: SingleChildScrollView(

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../services/ken_data_service.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import 'ken_model_callback.dart';
 import '../fun.dart';
 
 class KenScreenModel extends KenModel implements KenDataInterface {
@@ -15,13 +14,14 @@ class KenScreenModel extends KenModel implements KenDataInterface {
   bool? isDialog;
   bool? backButtonVisible;
 
-  KenScreenModel(this.context, Fun smeupFun,
-      {GlobalKey<FormState>? formKey,
-      GlobalKey<ScaffoldState>? scaffoldKey,
-      this.isDialog = defaultIsDialog,
-      this.backButtonVisible = defaultBackButtonVisible,})
-      : super(formKey, scaffoldKey, context,
-            title: null) {
+  KenScreenModel(
+    this.context,
+    Fun smeupFun, {
+    GlobalKey<FormState>? formKey,
+    GlobalKey<ScaffoldState>? scaffoldKey,
+    this.isDialog = defaultIsDialog,
+    this.backButtonVisible = defaultBackButtonVisible,
+  }) : super(formKey, scaffoldKey, context, title: null) {
     this.smeupFun = smeupFun;
   }
 

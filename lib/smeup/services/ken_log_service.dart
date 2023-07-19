@@ -64,7 +64,7 @@ class KenLogService {
       pattern.allMatches(message).forEach((match) {
         String? group = match.group(0);
         if (group != null) {
-          print(color + group + '\x1B[0m');
+          print('$color$group\x1B[0m');
         }
       });
 
@@ -104,6 +104,6 @@ class KenLogService {
 
   static Future<File> get _localFile async {
     final path = await _localPath;
-    return new File('$path/log_office_booking.txt');
+    return File('$path/log_office_booking.txt');
   }
 }

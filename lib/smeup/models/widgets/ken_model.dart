@@ -1,12 +1,9 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/widgets/globallyUniqueIdExtension.dart';
 import '../../daos/ken_dao.dart';
 import '../../services/ken_data_service.dart';
-import '../../services/ken_message_bus.dart';
-import '../KenMessageBusEventData.dart';
+import '../../services/ken_log_service.dart';
 import '../dynamism.dart';
-import 'ken_model_callback.dart';
 import 'ken_section_model.dart';
 import '../fun.dart';
 
@@ -41,10 +38,9 @@ class KenModel extends KenDao {
 
   List<KenSectionModel>? smeupSectionsModels;
 
-
   KenModel(this.formKey, this.scaffoldKey, this.context,
       {this.title, this.id, this.type}) {
-    this.smeupModel = this;
+    smeupModel = this;
 
     KenDataService.dataInitializer.defaultInstance(this);
   }
@@ -55,7 +51,7 @@ class KenModel extends KenDao {
     this.scaffoldKey,
     this.context,
   ) {
-    this.smeupModel = this;
+    smeupModel = this;
 
     KenDataService.dataInitializer.fromMap(jsonMap, this);
   }
@@ -63,7 +59,7 @@ class KenModel extends KenDao {
   bool isFirestore() {
     var isFirestore = false;
     try {
-      if (smeupModel!.smeupFun!.server.length > 0) {
+      if (smeupModel!.smeupFun!.server.isNotEmpty) {
         var el = smeupModel!.smeupFun!.server
             .where((element) => element["key"] == "source")
             .toList();
@@ -73,7 +69,9 @@ class KenModel extends KenDao {
           return true;
         }
       }
-    } catch (e) {}
+    } catch (e) {
+      KenLogService.writeDebugMessage(e.toString(), logType: KenLogType.error);
+    }
     return isFirestore;
   }
 }

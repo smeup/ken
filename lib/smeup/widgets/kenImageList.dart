@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import '../models/KenMessageBusEventData.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_image_list_model.dart';
 import '../models/widgets/ken_list_box_model.dart';
 import '../models/widgets/ken_model.dart';
-import '../models/widgets/ken_model_callback.dart';
+import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
-import 'kenEnumCallback.dart';
 import 'kenListBox.dart';
 import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';
@@ -47,41 +47,46 @@ class KenImageList extends StatefulWidget
 
   // dynamisms functions
   Function? clientOnItemTap;
-  Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
 
   dynamic parentForm;
 
-  KenImageList.withController(KenImageListModel this.model, this.scaffoldKey,
-      this.formKey, this.parentForm, this.callBack)
-      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+  KenImageList.withController(
+    KenImageListModel this.model,
+    this.scaffoldKey,
+    this.formKey,
+    this.parentForm,
+  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
   KenImageList(
-      this.scaffoldKey, this.formKey, this.data, this.columns, this.rows,
-      {this.id = '',
-      this.type = 'IML',
-      this.backColor,
-      this.borderColor,
-      this.borderWidth,
-      this.borderRadius,
-      this.fontSize,
-      this.fontColor,
-      this.fontBold,
-      this.captionFontBold,
-      this.captionFontSize,
-      this.captionFontColor,
-      this.width = KenImageListModel.defaultWidth,
-      this.height = KenImageListModel.defaultHeight,
-      this.padding = KenImageListModel.defaultPadding,
-      this.orientation = KenImageListModel.defaultOrientation,
-      this.listHeight = KenImageListModel.defaultListHeight,
-      this.title = '',
-      showLoader = false,
-      this.clientOnItemTap,
-      this.dismissEnabled = false,
-      this.callBack})
-      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
+    this.scaffoldKey,
+    this.formKey,
+    this.data,
+    this.columns,
+    this.rows, {
+    this.id = '',
+    this.type = 'IML',
+    this.backColor,
+    this.borderColor,
+    this.borderWidth,
+    this.borderRadius,
+    this.fontSize,
+    this.fontColor,
+    this.fontBold,
+    this.captionFontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.width = KenImageListModel.defaultWidth,
+    this.height = KenImageListModel.defaultHeight,
+    this.padding = KenImageListModel.defaultPadding,
+    this.orientation = KenImageListModel.defaultOrientation,
+    this.listHeight = KenImageListModel.defaultListHeight,
+    this.title = '',
+    showLoader = false,
+    this.clientOnItemTap,
+    this.dismissEnabled = false,
+  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
   }
 
@@ -126,10 +131,10 @@ class KenImageList extends StatefulWidget
   }
 
   @override
-  _KenImageListState createState() => _KenImageListState();
+  KenImageListState createState() => KenImageListState();
 }
 
-class _KenImageListState extends State<KenImageList>
+class KenImageListState extends State<KenImageList>
     with KenWidgetStateMixin
     implements KenWidgetStateInterface {
   List<Widget>? cells;
@@ -230,7 +235,6 @@ class _KenImageListState extends State<KenImageList>
         width: widget.width,
         showLoader: widget.showLoader,
         title: widget.title,
-        callBack: widget.callBack,
       );
     } else {
       final _modelListBox = KenListBoxModel(
@@ -258,10 +262,12 @@ class _KenImageListState extends State<KenImageList>
       _modelListBox.dynamisms = _model!.dynamisms;
       _modelListBox.data = _data;
 
-      if (widget.callBack != null) {
-        children = await widget.callBack!(
-            widget, KenCallbackType.getListBox, _modelListBox, widget.callBack);
-      }
+      KenMessageBus.instance.publishRequest(
+        widget.globallyUniqueId,
+        KenTopic.kenImageListGetChildren,
+        KenMessageBusEventData(
+            context: context, widget: widget, model: _model, data: _data),
+      );
     }
 
     return KenWidgetBuilderResponse(_model, children);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ken/smeup/services/ken_log_service.dart';
 import '../../lib/smeup/widgets/kenSwitch.dart';
 
 import 'widget_test_service.dart';
@@ -8,9 +9,9 @@ Future<void> main() async {
   testWidgets('Test static contructor ', (WidgetTester tester) async {
     await WidgetTestService.initTests();
 
-    Widget testWidget = new MediaQuery(
-        data: new MediaQueryData(),
-        child: new MaterialApp(
+    Widget testWidget = MediaQuery(
+        data: const MediaQueryData(),
+        child: MaterialApp(
             home: Scaffold(
           appBar: AppBar(),
           body: SingleChildScrollView(
@@ -37,8 +38,11 @@ Future<void> main() async {
 
     await tester.pumpWidget(testWidget).then((value) async {
       try {
-        await tester.pumpAndSettle(Duration(seconds: 2));
-      } catch (e) {}
+        await tester.pumpAndSettle(const Duration(seconds: 2));
+      } catch (e) {
+        KenLogService.writeDebugMessage(e.toString(),
+            logType: KenLogType.error);
+      }
 
       runTests();
     });
@@ -57,7 +61,7 @@ Future<void> main() async {
 }
 
 runTests() {
-  final findKey1 = find.byKey(Key('switch1'));
+  final findKey1 = find.byKey(const Key('switch1'));
   expect(findKey1, findsOneWidget);
 
   var findWidget = find.byType(KenSwitch);

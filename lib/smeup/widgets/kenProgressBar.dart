@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import '../models/KenMessageBusEventData.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_model.dart';
 import '../models/widgets/ken_progress_bar_model.dart';
+import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
-import 'kenEnumCallback.dart';
 import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';
 import 'kenWidgetStateInterface.dart';
@@ -31,29 +32,30 @@ class KenProgressBar extends StatefulWidget
 
   double? data;
 
-  Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
-  KenProgressBar.withController(KenProgressBarModel this.model,
-      this.scaffoldKey, this.formKey, this.callBack)
-      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
+  KenProgressBar.withController(
+    KenProgressBarModel this.model,
+    this.scaffoldKey,
+    this.formKey,
+  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }
 
-  KenProgressBar(this.scaffoldKey, this.formKey,
-      {this.color,
-      this.linearTrackColor,
-      this.id = '',
-      this.type = 'FLD',
-      this.valueField = KenProgressBarModel.defaultValueField,
-      this.title = '',
-      this.height = KenProgressBarModel.defaultHeight,
-      this.data = 0,
-      this.padding = KenProgressBarModel.defaultPadding,
-      this.progressBarMinimun = KenProgressBarModel.defaultProgressBarMinimun,
-      this.progressBarMaximun = KenProgressBarModel.defaultProgressBarMaximun,
-      this.bordeRadius = KenProgressBarModel.defaultBorderRadius,
-      this.callBack})
-      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
+  KenProgressBar(
+    this.scaffoldKey,
+    this.formKey, {
+    this.color,
+    this.linearTrackColor,
+    this.id = '',
+    this.type = 'FLD',
+    this.valueField = KenProgressBarModel.defaultValueField,
+    this.title = '',
+    this.height = KenProgressBarModel.defaultHeight,
+    this.data = 0,
+    this.padding = KenProgressBarModel.defaultPadding,
+    this.progressBarMinimun = KenProgressBarModel.defaultProgressBarMinimun,
+    this.progressBarMaximun = KenProgressBarModel.defaultProgressBarMaximun,
+    this.bordeRadius = KenProgressBarModel.defaultBorderRadius,
+  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenProgressBarModel.setDefaults(this);
   }
@@ -133,7 +135,12 @@ class _KenProgressBarState extends State<KenProgressBar>
       setDataLoad(widget.id, true);
     }
 
-    widget.callBack!(widget, KenCallbackType.getChildren, _data, null);
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenProgressBarGetChildren,
+      KenMessageBusEventData(
+          context: context, widget: widget, model: _model, data: _data),
+    );
 
     children = Center(
       child: Container(
