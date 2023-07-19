@@ -66,8 +66,6 @@ class KenSectionModel extends KenModel with KenModelMixin {
       parentForm = parent.parentForm;
     }
 
-    // ??? nel futuro prevedere di eliminzare servizi anche in questo modell.
-    // this.instanceCallBack(ServicesCallbackType.replaceSelectedTabIndex, this);
     _replaceSelectedTabIndex(jsonMap);
 
     components = getComponents(jsonMap, 'components');

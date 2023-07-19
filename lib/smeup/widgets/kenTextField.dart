@@ -54,8 +54,8 @@ class KenTextField extends StatefulWidget
 
   TextInputType? keyboard;
   Function? clientValidator;
-  //Function? clientOnSave;
-  //Function? clientOnChange;
+  Function? clientOnSave;
+  Function? clientOnChange;
   Function? clientOnSubmit;
 
   List<TextInputFormatter>? inputFormatters;
@@ -98,8 +98,8 @@ class KenTextField extends StatefulWidget
     this.data,
     this.keyboard,
     this.clientValidator, // ?
-    //this.clientOnSave,
-    //this.clientOnChange,
+    this.clientOnSave,
+    this.clientOnChange,
     this.clientOnSubmit,
     this.inputFormatters, // ?
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
@@ -241,6 +241,7 @@ class _KenTextFieldState extends State<KenTextField>
           obscureText:
               widget.keyboard == TextInputType.visiblePassword ? true : false,
           onChanged: (value) {
+            if (widget.clientOnChange != null) widget.clientOnChange!(value);
             KenMessageBus.instance.publishRequest(
               widget.globallyUniqueId,
               KenTopic.textfieldOnChanged,
@@ -268,6 +269,7 @@ class _KenTextFieldState extends State<KenTextField>
             ),
           ),
           onSaved: (value) {
+            if (widget.clientOnSave != null) widget.clientOnSave!(value);
             KenMessageBus.instance.publishRequest(
               widget.globallyUniqueId,
               KenTopic.textfieldOnSaved,

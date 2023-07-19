@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/kenEnumCallback.dart';
 import '../../lib/smeup/widgets/kenProgressBar.dart';
 import 'widget_test_service.dart';
 
@@ -57,18 +56,6 @@ Future<void> main() async {
   //     runTests();
   //   });
   // });
-}
-
-Future<dynamic> pbCallBack(Widget widget, KenCallbackType kenCallbackType,
-    dynamic data, dynamic col) async {
-  switch (kenCallbackType) {
-    case KenCallbackType.getChildren:
-      //AppVariablesService.setVariable('pgb1', data, formKey: _formKey);
-
-      break;
-
-    default:
-  }
 }
 
 runTests() {

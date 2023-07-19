@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/kenEnumCallback.dart';
 import '../../lib/smeup/widgets/kenTextAutocomplete.dart';
 import 'widget_test_service.dart';
 
@@ -98,16 +97,6 @@ Future<void> main() async {
   //     runTests(tester);
   //   });
   // });
-}
-
-Future<dynamic> autocompleteCallBack(Widget widget,
-    KenCallbackType kenCallbackType, dynamic data, dynamic col) async {
-  switch (kenCallbackType) {
-    case KenCallbackType.fieldViewBuilder:
-      String code = '';
-      return code;
-    default:
-  }
 }
 
 Future<void> runTests(WidgetTester tester) async {

@@ -472,7 +472,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
   }
 
   Future<void> _onDaySelected(DateTime selectedDay, DateTime focusedDay) async {
-    KenLogService.writeDebugMessage('CALLBACK: _onDaySelected');
+    KenLogService.writeDebugMessage('running _onDaySelected');
     if (_isLoading) return;
     _selectedEvents!.value = _getEventsForDay(selectedDay);
     widget.setDataLoad!(widget.id, true);

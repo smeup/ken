@@ -61,8 +61,8 @@ class KenTextPassword extends StatefulWidget
   bool? checkRules;
 
   Function? clientValidator;
-  //Function? clientOnSave;
-  //Function? clientOnChange;
+  Function? clientOnSave;
+  Function? clientOnChange;
   Function? clientOnSubmit;
 
   List<TextInputFormatter>? inputFormatters;
@@ -109,8 +109,8 @@ class KenTextPassword extends StatefulWidget
     this.showRulesIcon = KenTextPasswordModel.defaultShowRulesIcon,
     this.checkRules = KenTextPasswordModel.defaultCheckRules,
     this.clientValidator, // ?
-    //this.clientOnSave,
-    //this.clientOnChange,
+    this.clientOnSave,
+    this.clientOnChange,
     this.inputFormatters, // ?
     this.clientOnSubmit,
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
@@ -271,14 +271,14 @@ class _KenTextPasswordState extends State<KenTextPassword>
                         underline: false,
                         data: _data,
                         clientValidator: widget.clientValidator,
-                        //clientOnSave: widget.clientOnSave,
-                        //clientOnChange: (value) {
-                        //if (widget.clientOnChange != null)
-                        //  widget.clientOnChange!(value);
-                        //passwordModel.checkProgress(value);
-                        //_data = value;
-                        //},
-
+                        clientOnSave: widget.clientOnSave,
+                        clientOnChange: (value) {
+                      if (widget.clientOnChange != null) {
+                        widget.clientOnChange!(value);
+                      }
+                      passwordModel.checkProgress(value);
+                      _data = value;
+                    },
                         keyboard: fieldmodel.passwordVisible
                             ? TextInputType.text
                             : TextInputType.visiblePassword);

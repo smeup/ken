@@ -133,29 +133,29 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     switch (widget.layout ?? '') {
       // layouts Smeup
       case '1':
-        box = _getLayout1(widget.data, context);
+        box = await _getLayout1(widget.data, context);
         break;
       case '2':
-        box = _getLayout2(widget.data, context);
+        box = await _getLayout2(widget.data, context);
         break;
       case '3':
-        box = _getLayout3(widget.data, context);
+        box = await _getLayout3(widget.data, context);
         break;
       case '4':
-        box = _getLayout4(widget.data, context);
+        box = await _getLayout4(widget.data, context);
         break;
       case '5':
-        box = _getLayout5(widget.data, context);
+        box = await _getLayout5(widget.data, context);
         break;
       case 'imageList':
-        box = _getLayoutImageList(widget.data, context);
+        box = await _getLayoutImageList(widget.data, context);
         break;
       default:
         KenLogService.writeDebugMessage(
             'No layout received. Used default layout',
             logType: KenLogType.warning);
 
-        box = _getLayoutDefault(widget.data, context);
+        box = await _getLayoutDefault(widget.data, context);
         break;
     }
     // bool dismissEnabled = //già presente in originale
@@ -275,8 +275,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
         child: res);
   }
 
-  Widget _getLayout1(dynamic data, BuildContext context) {
-    final cols = _getColumns(data);
+  Future<Widget> _getLayout1(dynamic data, BuildContext context) async {
+    final cols = await _getColumns(data);
     if (data.length > 0) {
       return GestureDetector(
         onTap: () {
@@ -331,8 +331,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-  Widget _getLayout2(dynamic data, BuildContext context) {
-    final cols = _getColumns(data);
+  Future<Widget> _getLayout2(dynamic data, BuildContext context) async {
+    final cols = await _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -375,8 +375,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-  Widget _getLayout3(dynamic data, BuildContext context) {
-    final cols = _getColumns(data);
+  Future<Widget> _getLayout3(dynamic data, BuildContext context) async {
+    final cols = await _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -418,8 +418,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-  Widget _getLayout4(dynamic data, BuildContext context) {
-    final cols = _getColumns(data);
+  Future<Widget> _getLayout4(dynamic data, BuildContext context) async {
+    final cols = await _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -463,8 +463,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-  Widget _getLayout5(dynamic data, BuildContext context) {
-    final cols = _getColumns(data);
+  Future<Widget> _getLayout5(dynamic data, BuildContext context) async {
+    final cols = await _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -508,8 +508,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-  Widget _getLayoutImageList(dynamic data, BuildContext context) {
-    final cols = _getColumns(data);
+  Future<Widget> _getLayoutImageList(dynamic data, BuildContext context) async {
+    final cols = await _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -553,8 +553,8 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-  Widget _getLayoutDefault(dynamic data, BuildContext context) {
-    final cols = _getColumns(data);
+  Future<Widget> _getLayoutDefault(dynamic data, BuildContext context) async {
+    final cols = await _getColumns(data);
 
     if (data.length > 0) {
       return GestureDetector(
@@ -730,7 +730,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
       }
     }
 
-    var buttonWidgets = _getButtons(data);
+    var buttonWidgets = await _getButtons(data);
 
     widgets.add(Padding(
       padding: const EdgeInsets.only(top: 5),
@@ -801,17 +801,54 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return listOfRows;
   }
 
-  List<Widget> _getButtons(dynamic data) {
+  Future<List<Widget>> _getButtons(dynamic data) async {
     var widgetBtns = List<Widget>.empty(growable: true);
 
-    var buttonCols = _getColumns(data)!
-        .where((col) => col['ogg'] == 'J4BTN' && col['IO'] != 'H');
+    List<dynamic>? buttonCols;
 
-    // if (widget.callBack != null) {
-    //   widgetBtns =
-    //       widget.callBack!(widget, KenCallbackType.getButtons, data, buttonCols)
-    //           as List<Widget>;
-    // }
+    var columns = await _getColumns(data);
+
+    Completer<dynamic> completer = Completer();
+    KenMessageBus.instance
+        .response(
+            id: widget.globallyUniqueId,
+            topic: KenTopic.kenBoxGetColumnsButtons)
+        .take(1)
+        .listen((event) {
+      buttonCols = event.data.data;
+      completer.complete(); // resolve promise
+    });
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenBoxGetColumnsButtons,
+      KenMessageBusEventData(
+          context: context,
+          widget: widget,
+          model: null,
+          data: columns,
+          parameters: [buttonCols]),
+    );
+    await completer.future;
+
+    completer = Completer();
+    KenMessageBus.instance
+        .response(id: widget.globallyUniqueId, topic: KenTopic.kenBoxGetButtons)
+        .take(1)
+        .listen((event) {
+      widgetBtns = event.data.data;
+      completer.complete(); // resolve promise
+    });
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenBoxGetButtons,
+      KenMessageBusEventData(
+          context: context,
+          widget: widget,
+          model: null,
+          data: data,
+          parameters: [buttonCols]),
+    );
+    await completer.future;
 
     return widgetBtns;
   }
@@ -822,37 +859,31 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     }
   }
 
-  List<dynamic>? _getColumns(dynamic data) {
+  Future<List?> _getColumns(dynamic data) async {
     if (_columns == null) {
       if (widget.columns != null) {
         _columns = widget.columns;
       } else {
-        _columns = List<dynamic>.empty(growable: true);
-        for (var element in (data as Map).keys) {
-          _columns!.add({
-            "code": element,
-            "fieldNameForDecode": null,
-            "text": element,
-            "tip": null,
-            "dpy": null,
-            "aut": null,
-            "lun": null,
-            "lunNum": null,
-            "fill": null,
-            "ogg": null,
-            "obb": null,
-            "eTxt": null,
-            "grp": null,
-            "extension": null,
-            "formula": null,
-            "tfk": null,
-            "pfk": null,
-            "sfk": null,
-            "sortMode": null,
-            "filterValue": null,
-            "IO": "O"
-          });
-        }
+        Completer<dynamic> completer = Completer();
+        KenMessageBus.instance
+            .response(
+                id: widget.globallyUniqueId, topic: KenTopic.kenBoxGetButtons)
+            .take(1)
+            .listen((event) {
+          _columns = event.data.data;
+          completer.complete(); // resolve promise
+        });
+        KenMessageBus.instance.publishRequest(
+          widget.globallyUniqueId,
+          KenTopic.kenBoxGetButtons,
+          KenMessageBusEventData(
+              context: context,
+              widget: widget,
+              model: null,
+              data: data,
+              parameters: [_columns]),
+        );
+        await completer.future;
       }
     }
 
