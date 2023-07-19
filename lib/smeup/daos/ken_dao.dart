@@ -19,15 +19,19 @@ class KenDao {
     return structure;
   }
 
-  Future<dynamic> getData() {
-    if (smeupModel != null && smeupModel!.type == 'INP') {
-      return KenDataService.dataInitializer.smeupInputPanelGetData(
-        smeupModel!,
-        smeupModel!.formKey,
-        smeupModel!.scaffoldKey,
-        smeupModel!.context,
-      );
+  Future<dynamic>? getData() {
+    if (smeupModel != null) {
+      if (smeupModel!.type == 'INP') {
+        return KenDataService.dataInitializer.smeupInputPanelGetData(
+          smeupModel!,
+          smeupModel!.formKey,
+          smeupModel!.scaffoldKey,
+          smeupModel!.context,
+        );
+      } else {
+        return KenDataService.dataInitializer.getData(smeupModel!);
+      }
     }
-    return KenDataService.dataInitializer.getData(smeupModel!);
+    return null;
   }
 }

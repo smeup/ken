@@ -6,7 +6,6 @@ import '../models/widgets/ken_drawer_model.dart';
 import '../models/widgets/ken_model.dart';
 import '../services/ken_utilities.dart';
 import 'kenDrawerItem.dart';
-import 'kenEnumCallback.dart';
 import 'kenWidgetStateInterface.dart';
 import 'kenWidgetStateMixin.dart';
 
@@ -37,8 +36,6 @@ class KenDrawer extends StatefulWidget
   String? type;
   List<KenDrawerDataElement>? drawerDataElement;
 
-  Function(KenCallbackType type)? callBack; //todo
-
   KenDrawer(this.scaffoldKey, this.formKey,
       {this.id = '',
       this.type = 'DRW',
@@ -55,8 +52,7 @@ class KenDrawer extends StatefulWidget
       //this.data,
       this.imageWidth = KenDrawerModel.defaultImageWidth,
       this.imageHeight = KenDrawerModel.defaultImageHeight,
-      this.showItemDivider = KenDrawerModel.defaultShowItemDivider,
-      this.callBack})
+      this.showItemDivider = KenDrawerModel.defaultShowItemDivider})
       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
     KenDrawerModel.setDefaults(this);
