@@ -279,7 +279,6 @@ class _KenTextPasswordState extends State<KenTextPassword>
                         //_data = value;
                         //},
 
-                        // callBack: widget.callBack, -- refactoring kentextfield
                         keyboard: fieldmodel.passwordVisible
                             ? TextInputType.text
                             : TextInputType.visiblePassword);

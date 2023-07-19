@@ -98,7 +98,6 @@ class KenCombo extends StatefulWidget
     KenComboModel this.model,
     this.scaffoldKey,
     this.formKey,
-    //this.callBack
   ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }

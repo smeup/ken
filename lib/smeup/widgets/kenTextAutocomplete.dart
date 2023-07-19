@@ -63,8 +63,6 @@ class KenTextAutocomplete extends StatefulWidget
   TextInputType? keyboard;
   List<TextInputFormatter>? inputFormatters;
 
-  // Future<dynamic> Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
   KenTextAutocomplete.withController(
     KenTextAutocompleteModel this.model,
     this.scaffoldKey,

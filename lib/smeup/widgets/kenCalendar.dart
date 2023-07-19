@@ -58,8 +58,6 @@ class KenCalendar extends StatefulWidget
   Function? clientOnChangeMonth;
   Function? clientOnEventClick;
 
-  // void Function(Widget, KenCallbackType, dynamic, dynamic)? callBack;
-
   KenCalendar(
     this.scaffoldKey,
     this.formKey, {

@@ -95,7 +95,9 @@ enum KenTopic {
   kenRadioButtonSelData,
   kenTextAutocompleteFieldViewBuilder,
   kenTextAutocompleteOnTapSetState,
-  kenTextAutocompleteOnTapSelected
+  kenTextAutocompleteOnTapSelected,
+  kenBoxConfirmDismiss,
+  kenBoxGetImage
 }
 
 enum KenMessageType {

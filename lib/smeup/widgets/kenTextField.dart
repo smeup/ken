@@ -65,7 +65,6 @@ class KenTextField extends StatefulWidget
     this.scaffoldKey,
     this.formKey,
     this.smeupButtons,
-    // this.callBack,
   ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
     runControllerActivities(model!);
   }

@@ -54,8 +54,6 @@ class KenCalendarWidget extends StatefulWidget {
   final bool? showPeriodButtons;
   final String? globallyUniqueId;
 
-  // Function(dynamic, KenCallbackType, dynamic)? callBack;
-
   KenCalendarWidget(
     this.scaffoldKey,
     this.formKey, {
