@@ -850,7 +850,30 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     );
     await completer.future;
 
-    return widgetBtns;
+    // return widgetBtns;
+    Completer<dynamic> completer = Completer();
+    KenMessageBus.instance
+        .response(
+            id: widget.globallyUniqueId + widget.index.toString(),
+            topic: KenTopic.kenboxGetText)
+        .take(1)
+        .listen((event) {
+      data = event.data.data;
+      completer.complete(); // resolve promise
+    });
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId + widget.index.toString(),
+      KenTopic.kenboxGetText,
+      KenMessageBusEventData(
+          context: context,
+          widget: widget,
+          model: null,
+          data: data,
+          parameters: [widgetBtns, buttonCols]),
+    );
+    await completer.future;
+
+    return dataText;
   }
 
   void _manageTap(index, data) {
