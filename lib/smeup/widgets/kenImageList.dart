@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import '../models/KenMessageBusEventData.dart';
 import '../models/ken_widget_builder_response.dart';
@@ -262,12 +264,28 @@ class KenImageListState extends State<KenImageList>
       _modelListBox.dynamisms = _model!.dynamisms;
       _modelListBox.data = _data;
 
+      Completer<dynamic> completer = Completer();
+      KenMessageBus.instance
+          .response(
+              id: widget.globallyUniqueId,
+              topic: KenTopic.kenImageListGetChildren)
+          .take(1)
+          .listen((event) {
+        children = event.data.data;
+        completer.complete(); // resolve promise
+      });
+
       KenMessageBus.instance.publishRequest(
         widget.globallyUniqueId,
         KenTopic.kenImageListGetChildren,
         KenMessageBusEventData(
-            context: context, widget: widget, model: _model, data: _data),
+            context: context,
+            widget: widget,
+            model: _modelListBox,
+            data: _data),
       );
+
+      await completer.future;
     }
 
     return KenWidgetBuilderResponse(_model, children);
