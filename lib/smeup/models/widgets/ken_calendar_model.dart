@@ -8,10 +8,10 @@ import 'ken_model.dart';
 
 class KenCalendarModel extends KenModel {
   // supported by json_theme
-  static double? defaultDayFontSize;
-  static double? defaultEventFontSize;
-  static double? defaultTitleFontSize;
-  static double? defaultMarkerFontSize;
+  static double? defaultDayFontSize = 14;
+  static double? defaultEventFontSize = 14;
+  static double? defaultTitleFontSize = 18;
+  static double? defaultMarkerFontSize = 12;
 
   // unsupported by json_theme
   static const double defaultWidth = 300;
