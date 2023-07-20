@@ -6,19 +6,19 @@ import '../../services/ken_configuration_service.dart';
 
 class KenDrawerModel extends KenModel {
   // supported by json_theme
-  static double? defaultTitleFontSize;
-  static Color? defaultTitleFontColor;
-  static bool? defaultTitleFontBold;
+  static double? defaultTitleFontSize = 18;
+  static Color? defaultTitleFontColor = Colors.white;
+  static bool? defaultTitleFontBold = false;
 
-  static double? defaultElementFontSize;
-  static Color? defaultElementFontColor;
-  static bool? defaultElementFontBold;
+  static double? defaultElementFontSize = 16;
+  static Color? defaultElementFontColor = Colors.white;
+  static bool? defaultElementFontBold = false;
 
-  static Color? defaultAppBarBackColor;
+  static Color? defaultAppBarBackColor = KenModel.kButtonBackgroundColor;
 
   // unsupported by json_theme
-  static const double defaultImageWidth = 40;
-  static const double defaultImageHeight = 40;
+  static const double defaultImageWidth = 80;
+  static const double defaultImageHeight = 120;
   static const bool defaultShowItemDivider = true;
 
   double? titleFontSize;
