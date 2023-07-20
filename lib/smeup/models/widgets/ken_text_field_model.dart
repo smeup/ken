@@ -11,15 +11,15 @@ class KenTextFieldModel extends KenInputFieldModel implements KenDataInterface {
   // supported by json_theme
   static double? defaultFontSize = 16;
   static Color? defaultBackColor = Colors.transparent;
-  static Color? defaultFontColor;
+  static Color? defaultFontColor = KenModel.kButtonBackgroundColor;
   static bool? defaultFontBold = false;
-  static bool? defaultCaptionFontBold;
+  static bool? defaultCaptionFontBold = false;
   static double? defaultCaptionFontSize = 14;
-  static Color? defaultCaptionFontColor;
+  static Color? defaultCaptionFontColor = KenModel.kButtonBackgroundColor;
   static Color? defaultCaptionBackColor = Colors.transparent;
-  static Color? defaultBorderColor;
-  static double? defaultBorderWidth;
-  static double? defaultBorderRadius;
+  static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
+  static double? defaultBorderWidth = 2;
+  static double? defaultBorderRadius = 8;
 
   // unsupported by json_theme
   static const String defaultLabel = '';

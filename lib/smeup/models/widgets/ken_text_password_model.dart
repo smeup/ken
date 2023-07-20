@@ -8,20 +8,20 @@ import '../../services/ken_configuration_service.dart';
 
 class KenTextPasswordModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static double? defaultFontSize;
-  static Color? defaultBackColor;
-  static Color? defaultFontColor;
-  static bool? defaultFontBold;
-  static bool? defaultCaptionFontBold;
-  static double? defaultCaptionFontSize;
-  static Color? defaultCaptionFontColor;
-  static Color? defaultCaptionBackColor;
-  static Color? defaultBorderColor;
-  static double? defaultBorderWidth;
-  static double? defaultBorderRadius;
-  static Color? defaultButtonBackColor;
-  static double? defaultIconSize;
-  static Color? defaultIconColor;
+  static double? defaultFontSize = 16;
+  static Color? defaultBackColor = Colors.transparent;
+  static Color? defaultFontColor = KenModel.kButtonBackgroundColor;
+  static bool? defaultFontBold = false;
+  static bool? defaultCaptionFontBold = false;
+  static double? defaultCaptionFontSize = 14;
+  static Color? defaultCaptionFontColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultCaptionBackColor = Colors.transparent;
+  static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
+  static double? defaultBorderWidth = 2.0;
+  static double? defaultBorderRadius = 8;
+  static Color? defaultButtonBackColor = Colors.transparent;
+  static double? defaultIconSize = 20;
+  static Color? defaultIconColor = Colors.white;
 
   // unsupported by json_theme
 

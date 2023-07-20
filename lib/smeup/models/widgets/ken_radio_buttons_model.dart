@@ -12,13 +12,13 @@ class KenRadioButtonsModel extends KenInputFieldModel
   // supported by json_theme
   static Color? defaultRadioButtonColor;
   static double? defaultFontSize = 14;
-  static Color? defaultFontColor;
+  static Color? defaultFontColor = KenModel.kGray100;
   static Color? defaultBackColor = Colors.transparent;
-  static bool? defaultFontBold;
-  static bool? defaultCaptionFontBold;
-  static double? defaultCaptionFontSize;
-  static Color? defaultCaptionFontColor;
-  static Color? defaultCaptionBackColor;
+  static bool? defaultFontBold = false;
+  static bool? defaultCaptionFontBold = false;
+  static double? defaultCaptionFontSize = 16;
+  static Color? defaultCaptionFontColor = KenModel.kGray100;
+  static Color? defaultCaptionBackColor = Colors.transparent;
 
   // unsupported by json_theme
   static const String defaultValueField = 'code';
