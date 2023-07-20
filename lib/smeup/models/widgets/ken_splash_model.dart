@@ -6,7 +6,7 @@ import '../../services/ken_configuration_service.dart';
 
 class KenSplashModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static Color? defaultColor;
+  static Color? defaultColor = KenModel.kButtonBackgroundColor;
 
   Color? color;
 
