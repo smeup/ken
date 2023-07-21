@@ -93,7 +93,7 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
   static const String defaultdisplayedField = 'display';
   static const Alignment defaultAlign = Alignment.topCenter;
   static const double defaultInnerSpace = 10.0;
-  static const bool defaultUnderline = true;
+  static const bool defaultUnderline = false;
 
   Color? backColor;
   double? fontSize;

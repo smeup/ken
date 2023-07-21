@@ -17,7 +17,7 @@ class KenLabelModel extends KenModel implements KenDataInterface {
 
   // unsupported by json_theme
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
-  static const Alignment defaultAlign = Alignment.centerRight;
+  static const Alignment defaultAlign = Alignment.center;
   static const double defaultWidth = 0;
   static const double defaultHeight = 15;
   static const String defaultValColName = 'value';

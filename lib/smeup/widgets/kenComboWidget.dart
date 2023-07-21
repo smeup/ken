@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/widgets/ken_combo_item_model.dart';
+import '../models/widgets/ken_model.dart';
 import '../services/ken_configuration_service.dart';
 
 class KenComboWidget extends StatefulWidget {
@@ -64,7 +65,8 @@ class _KenComboWidgetState extends State<KenComboWidget> {
         alignedDropdown: false,
         child: DropdownButton(
           value: _selectedValue,
-          dropdownColor: widget.backColor,
+          dropdownColor:
+              KenConfigurationService.getTheme()!.scaffoldBackgroundColor,
           style: _getTextStile(),
           icon: Icon(
             Icons.keyboard_arrow_down_sharp,
