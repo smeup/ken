@@ -10,7 +10,7 @@ class KenProgressIndicatorModel extends KenModel implements KenDataInterface {
   static Color? defaultCircularTrackColor = KenModel.inactivePrimary;
 
   // unsupported by json_theme
-  static const double defaultSize = 30;
+  static const double defaultSize = 200;
 
   Color? color;
   Color? circularTrackColor;

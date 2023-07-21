@@ -47,7 +47,7 @@ class _KenSliderWidgetState extends State<KenSliderWidget> {
 
   @override
   Widget build(BuildContext context) {
-    print('label = $_label , value=$_value');
+    //print('label = $_label , value=$_value');
     return SliderTheme(
       data: SliderThemeData(
         valueIndicatorColor: widget.activeTrackColor,

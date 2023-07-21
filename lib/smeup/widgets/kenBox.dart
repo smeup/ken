@@ -88,7 +88,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
 
   @override
   void initState() {
-    print('iniziallizato - $initState');
+    //print('iniziallizato - $initState');
     super.initState();
   }
 
@@ -893,31 +893,35 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
   Future<String> _getBoxText(Map data, Map col) async {
     String dataText = "";
 
-    Completer<dynamic> completer = Completer();
-    KenMessageBus.instance
-        .response(
-            id: widget.globallyUniqueId +
-                widget.index.toString() +
-                col["code"].toString(),
-            topic: KenTopic.kenboxGetText)
-        .take(1)
-        .listen((event) {
-      dataText = event.data.data;
-      completer.complete(); // resolve promise
-    });
-    KenMessageBus.instance.publishRequest(
-      widget.globallyUniqueId +
-          widget.index.toString() +
-          col["code"].toString(),
-      KenTopic.kenboxGetText,
-      KenMessageBusEventData(
-          context: context,
-          widget: widget,
-          model: null,
-          data: data,
-          parameters: [col]),
-    );
-    await completer.future;
+    if (widget.isDynamic) {
+      Completer<dynamic> completer = Completer();
+      KenMessageBus.instance
+          .response(
+              id: widget.globallyUniqueId +
+                  widget.index.toString() +
+                  col["code"].toString(),
+              topic: KenTopic.kenboxGetText)
+          .take(1)
+          .listen((event) {
+        dataText = event.data.data;
+        completer.complete(); // resolve promise
+      });
+      KenMessageBus.instance.publishRequest(
+        widget.globallyUniqueId +
+            widget.index.toString() +
+            col["code"].toString(),
+        KenTopic.kenboxGetText,
+        KenMessageBusEventData(
+            context: context,
+            widget: widget,
+            model: null,
+            data: data,
+            parameters: [col]),
+      );
+      await completer.future;
+    } else {
+      dataText = data[col['code']].toString();
+    }
 
     return dataText;
   }

@@ -432,7 +432,7 @@ class _KenListBoxState extends State<KenListBox>
           controller: _scrollController,
           itemExtent: widget.height!,
           onSelectedItemChanged: (index) {
-            print("onSelectedItemChanged index: $index");
+            //print("onSelectedItemChanged index: $index");
           },
           childDelegate: ListWheelChildBuilderDelegate(
             builder: (context, index) => cells[index],
