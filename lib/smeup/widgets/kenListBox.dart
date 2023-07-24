@@ -551,7 +551,7 @@ class _KenListBoxState extends State<KenListBox>
         _selectedRow = index;
 
         KenMessageBus.instance.publishRequest(
-          widget.globallyUniqueId,
+          widget.globallyUniqueId + '_tap_' + index.toString(),
           KenTopic.kenlistboxOnItemTap,
           KenMessageBusEventData(
               context: context, widget: widget, model: _model, data: data),

@@ -117,7 +117,7 @@ class KenLabelModel extends KenModel implements KenDataInterface {
     defaultBackColor = textStyle.backgroundColor;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
 
-    var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
+    var iconTheme = KenConfigurationService.getTheme()!.appBarTheme.iconTheme!;
     defaultIconSize = iconTheme.size;
     defaultIconColor = iconTheme.color;
 

@@ -118,8 +118,8 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
-    showUnderline = optionsDefault!['showUnderline'] ?? true;
-    autoFocus = optionsDefault!['autoFocus'] ?? false;
+    showUnderline = optionsDefault!['showUnderline'] ?? defaultUnderline;
+    autoFocus = optionsDefault!['autoFocus'] ?? defaultAutoFocus;
 
     showBorder = KenUtilities.getBool(optionsDefault!['showborder']) ??
         defaultShowBorder;

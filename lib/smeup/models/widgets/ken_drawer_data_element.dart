@@ -6,7 +6,7 @@ class KenDrawerDataElement {
   dynamic iconCode;
   double fontSize;
   String group;
-  int groupIcon;
+  String groupIcon;
   double groupFontSize;
   Alignment align;
   Function? action;
@@ -21,6 +21,6 @@ class KenDrawerDataElement {
       this.route,
       this.action,
       this.group = '',
-      this.groupIcon = 0,
+      this.groupIcon = '',
       this.groupFontSize = 15});
 }

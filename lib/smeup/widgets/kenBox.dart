@@ -283,11 +283,11 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
           _manageTap(widget.index, data);
           manageIndex = widget.index;
 
-          print(
-              '1. stato iniziale = $component and context : $context and widgetindex = $_manageTap');
+          // print(
+          //     '1. stato iniziale = $component and context : $context and widgetindex = $_manageTap');
           setState(() {
             component = !component;
-            print('stato dopo il click = $component e // ${widget.index}');
+            //print('stato dopo il click = $component e // ${widget.index}');
           });
         },
         child: Card(

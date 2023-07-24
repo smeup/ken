@@ -175,7 +175,7 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
     defaultFontColor = textStyle.color;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
 
-    var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
+    var iconTheme = KenConfigurationService.getTheme()!.appBarTheme.iconTheme!;
     defaultIconSize = iconTheme.size;
     defaultIconColor = iconTheme.color;
 

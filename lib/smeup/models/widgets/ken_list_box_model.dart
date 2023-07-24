@@ -11,7 +11,7 @@ enum KenListType { simple, oriented, wheel }
 
 class KenListBoxModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static Color? defaultBackColor = Colors.transparent;
+  static Color? defaultBackColor = KenModel.kBlue200;
   static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
   static double? defaultBorderWidth = 2;
   static double? defaultBorderRadius = 8;

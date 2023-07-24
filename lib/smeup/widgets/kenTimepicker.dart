@@ -502,7 +502,8 @@ class _KenTimePickerState extends State<KenTimePicker>
 
   IconThemeData _getIconTheme() {
     IconThemeData themeData = KenConfigurationService.getTheme()!
-        .iconTheme
+        .appBarTheme
+        .iconTheme!
         .copyWith(size: widget.fontSize);
 
     return themeData;

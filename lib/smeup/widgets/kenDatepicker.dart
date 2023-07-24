@@ -497,7 +497,8 @@ class _KenDatePickerState extends State<KenDatePicker>
 
   IconThemeData _getIconTheme() {
     IconThemeData themeData = KenConfigurationService.getTheme()!
-        .iconTheme
+        .appBarTheme
+        .iconTheme!
         .copyWith(size: widget.fontSize);
 
     return themeData;

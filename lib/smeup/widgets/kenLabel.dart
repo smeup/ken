@@ -342,8 +342,8 @@ class _KenLabelState extends State<KenLabel>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                label,
                 icon,
+                label,
               ],
             ),
             //color: widget.backColor,

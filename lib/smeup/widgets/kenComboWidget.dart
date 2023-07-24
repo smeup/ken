@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 
 import '../models/widgets/ken_combo_item_model.dart';
-import '../models/widgets/ken_model.dart';
 import '../services/ken_configuration_service.dart';
 
 class KenComboWidget extends StatefulWidget {
