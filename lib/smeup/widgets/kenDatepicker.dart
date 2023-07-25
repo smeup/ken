@@ -466,7 +466,10 @@ class _KenDatePickerState extends State<KenDatePicker>
   TextStyle _getTextStile() {
     TextStyle style = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
 
-    style = style.copyWith(color: widget.fontColor, fontSize: widget.fontSize);
+    style = style.copyWith(
+        color: widget.fontColor,
+        fontSize: widget.fontSize,
+        backgroundColor: widget.backColor);
 
     if (widget.fontBold!) {
       style = style.copyWith(
@@ -494,7 +497,8 @@ class _KenDatePickerState extends State<KenDatePicker>
 
   IconThemeData _getIconTheme() {
     IconThemeData themeData = KenConfigurationService.getTheme()!
-        .iconTheme
+        .appBarTheme
+        .iconTheme!
         .copyWith(size: widget.fontSize);
 
     return themeData;

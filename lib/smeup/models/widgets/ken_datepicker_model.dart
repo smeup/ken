@@ -9,18 +9,18 @@ import '../../services/ken_configuration_service.dart';
 
 class KenDatePickerModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static Color? defaultBorderColor;
-  static double? defaultBorderWidth;
+  static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
+  static double? defaultBorderWidth = 2;
   static double? defaultBorderRadius = 4.0;
-  static bool? defaultFontBold;
-  static double? defaultFontSize;
-  static Color? defaultFontColor;
-  static Color? defaultBackColor;
-  static bool? defaultCaptionFontBold;
-  static double? defaultCaptionFontSize;
-  static Color? defaultCaptionFontColor;
+  static bool? defaultFontBold = false;
+  static double? defaultFontSize = 14;
+  static Color? defaultFontColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultBackColor = Colors.white;
+  static bool? defaultCaptionFontBold = false;
+  static double? defaultCaptionFontSize = 10;
+  static Color? defaultCaptionFontColor = KenModel.kButtonBackgroundColor;
   static Color? defaultCaptionBackColor;
-  static double? defaultElevation;
+  static double? defaultElevation = 0;
 
   // unsupported by json_theme
   static const String defaultLabel = '';

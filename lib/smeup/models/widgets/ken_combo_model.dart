@@ -10,31 +10,31 @@ import 'ken_model.dart';
 
 class KenComboModel extends KenInputFieldModel implements KenDataInterface {
   // supported by json_theme
-  static double? defaultIconSize;
-  static Color? defaultIconColor;
-  static double? defaultFontSize;
-  static Color? defaultFontColor;
-  static bool? defaultFontBold;
-  static Color? defaultBackColor;
-  static bool? defaultCaptionFontBold;
-  static double? defaultCaptionFontSize;
-  static Color? defaultCaptionFontColor;
-  static Color? defaultCaptionBackColor = Colors.transparent;
-  static Color? defaultBorderColor;
-  static double? defaultBorderWidth;
-  static double? defaultBorderRadius = 4;
+  static double? defaultIconSize = 20;
+  static Color? defaultIconColor = KenModel.kIconColor;
+  static double? defaultFontSize = 20;
+  static Color? defaultFontColor = KenModel.kIconColor;
+  static bool? defaultFontBold = false;
+  static Color? defaultBackColor = KenModel.kBlue100;
+  static bool? defaultCaptionFontBold = false;
+  static double? defaultCaptionFontSize = 10;
+  static Color? defaultCaptionFontColor = KenModel.kBlue100;
+  static Color? defaultCaptionBackColor = KenModel.kBlue100;
+  static Color? defaultBorderColor = KenModel.kBlue100;
+  static double? defaultBorderWidth = 2;
+  static double? defaultBorderRadius = 8;
 
   // unsupported by json_theme
-  static const double defaultWidth = 100;
+  static const double defaultWidth = 0;
   static const double defaultHeight = 55;
   static const String defaultValueField = 'value';
   static const String defaultDescriptionField = 'description';
-  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.only(left: 10);
   static const String defaultLabel = '';
   static const Alignment defaultAlign = Alignment.centerLeft;
-  static const double defaultInnerSpace = 0.0;
+  static const double defaultInnerSpace = 10.0;
   static const bool defaultUnderline = false;
-  static const bool defaultShowBorder = false;
+  static const bool defaultShowBorder = true;
 
   double? fontSize;
   Color? fontColor;
@@ -196,7 +196,7 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
     var side = timePickerTheme.dayPeriodBorderSide!;
     defaultBorderColor = side.color;
     defaultBorderWidth = side.width;
-    //iconTheme.color;
+    iconTheme.color;
 
     // ----------------- set properties from default
     obj.borderColor ??= KenComboModel.defaultBorderColor;

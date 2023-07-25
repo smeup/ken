@@ -8,26 +8,26 @@ import '../../services/ken_configuration_service.dart';
 
 class KenImageListModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static Color? defaultBackColor;
-  static Color? defaultBorderColor;
-  static double? defaultBorderWidth;
-  static double? defaultBorderRadius;
-  static double? defaultFontSize;
-  static Color? defaultFontColor;
-  static bool? defaultFontBold;
-  static bool? defaultCaptionFontBold;
-  static double? defaultCaptionFontSize;
-  static Color? defaultCaptionFontColor;
+  static Color? defaultBackColor = Colors.white;
+  static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
+  static double? defaultBorderWidth = 2;
+  static double? defaultBorderRadius = 20;
+  static double? defaultFontSize = 12;
+  static Color? defaultFontColor = KenModel.kButtonBackgroundColor;
+  static bool? defaultFontBold = false;
+  static bool? defaultCaptionFontBold = false;
+  static double? defaultCaptionFontSize = 10;
+  static Color? defaultCaptionFontColor = KenModel.kButtonBackgroundColor;
 
   // unsupported by json_theme
-  static const double defaultWidth = 0;
-  static const double defaultHeight = 300;
+  static const double defaultWidth = 200;
+  static const double defaultHeight = 200;
   static const EdgeInsetsGeometry defaultPadding =
       EdgeInsets.only(left: 5, right: 5);
   static const int defaultColumns = 0;
   static const int defaultRows = 0;
   static const Axis defaultOrientation = Axis.vertical;
-  static const double defaultListHeight = 0;
+  static const double defaultListHeight = 480;
 
   Color? backColor;
   Color? borderColor;

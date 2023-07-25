@@ -9,16 +9,16 @@ import '../../services/ken_configuration_service.dart';
 class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
   // supported by json_theme
   static double? defaultFontSize = 16;
-  static Color? defaultBackColor;
-  static Color? defaultFontColor;
-  static bool? defaultFontBold;
-  static bool? defaultCaptionFontBold;
+  static Color? defaultBackColor = KenModel.kBlue200;
+  static Color? defaultFontColor = KenModel.kGray100;
+  static bool? defaultFontBold = false;
+  static bool? defaultCaptionFontBold = false;
   static double? defaultCaptionFontSize = 16;
-  static Color? defaultCaptionFontColor;
+  static Color? defaultCaptionFontColor = KenModel.kGray100;
   static Color? defaultCaptionBackColor = Colors.transparent;
-  static Color? defaultBorderColor;
+  static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
   static double? defaultBorderWidth = 0;
-  static double? defaultBorderRadius;
+  static double? defaultBorderRadius = 10;
 
   // unsupported by json_theme
   static const String defaultLabel = '';
@@ -118,8 +118,8 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
-    showUnderline = optionsDefault!['showUnderline'] ?? true;
-    autoFocus = optionsDefault!['autoFocus'] ?? false;
+    showUnderline = optionsDefault!['showUnderline'] ?? defaultUnderline;
+    autoFocus = optionsDefault!['autoFocus'] ?? defaultAutoFocus;
 
     showBorder = KenUtilities.getBool(optionsDefault!['showborder']) ??
         defaultShowBorder;

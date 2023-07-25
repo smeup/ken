@@ -88,7 +88,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
 
   @override
   void initState() {
-    print('iniziallizato - $initState');
+    //print('iniziallizato - $initState');
     super.initState();
   }
 
@@ -283,11 +283,11 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
           _manageTap(widget.index, data);
           manageIndex = widget.index;
 
-          print(
-              '1. stato iniziale = $component and context : $context and widgetindex = $_manageTap');
+          // print(
+          //     '1. stato iniziale = $component and context : $context and widgetindex = $_manageTap');
           setState(() {
             component = !component;
-            print('stato dopo il click = $component e // ${widget.index}');
+            //print('stato dopo il click = $component e // ${widget.index}');
           });
         },
         child: Card(
@@ -598,26 +598,34 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
 
   Future<Widget> _getImage(dynamic data) async {
     dynamic widgetImage;
-    Completer<dynamic> completer = Completer();
-    KenMessageBus.instance
-        .response(
-            id: widget.globallyUniqueId + data.toString(),
-            topic: KenTopic.kenboxGetText)
-        .take(1)
-        .listen((event) {
-      widgetImage = event.data.data;
-      completer.complete(); // resolve promise
-    });
-    KenMessageBus.instance.publishRequest(
-      widget.globallyUniqueId,
-      KenTopic.kenBoxGetImage,
-      KenMessageBusEventData(
-          context: context, widget: widget, model: null, data: data),
-    );
-    if (widgetImage != null) {
-      return widgetImage;
+
+    if (widget.isDynamic) {
+      Completer<dynamic> completer = Completer();
+      KenMessageBus.instance
+          .response(
+              id: widget.globallyUniqueId + widget.index.toString(),
+              topic: KenTopic.kenBoxGetImage)
+          .take(1)
+          .listen((event) {
+        widgetImage = event.data.data;
+        completer.complete(); // resolve promise
+      });
+      KenMessageBus.instance.publishRequest(
+        widget.globallyUniqueId + widget.index.toString(),
+        KenTopic.kenBoxGetImage,
+        KenMessageBusEventData(
+            context: context, widget: widget, model: null, data: data),
+      );
+      await completer.future;
+
+      if (widgetImage != null) {
+        return widgetImage;
+      } else {
+        return Container();
+      }
     } else {
-      return Container();
+      // TODO static case
+      return widgetImage;
     }
   }
 
@@ -893,31 +901,35 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
   Future<String> _getBoxText(Map data, Map col) async {
     String dataText = "";
 
-    Completer<dynamic> completer = Completer();
-    KenMessageBus.instance
-        .response(
-            id: widget.globallyUniqueId +
-                widget.index.toString() +
-                col["code"].toString(),
-            topic: KenTopic.kenboxGetText)
-        .take(1)
-        .listen((event) {
-      dataText = event.data.data;
-      completer.complete(); // resolve promise
-    });
-    KenMessageBus.instance.publishRequest(
-      widget.globallyUniqueId +
-          widget.index.toString() +
-          col["code"].toString(),
-      KenTopic.kenboxGetText,
-      KenMessageBusEventData(
-          context: context,
-          widget: widget,
-          model: null,
-          data: data,
-          parameters: [col]),
-    );
-    await completer.future;
+    if (widget.isDynamic) {
+      Completer<dynamic> completer = Completer();
+      KenMessageBus.instance
+          .response(
+              id: widget.globallyUniqueId +
+                  widget.index.toString() +
+                  col["code"].toString(),
+              topic: KenTopic.kenboxGetText)
+          .take(1)
+          .listen((event) {
+        dataText = event.data.data;
+        completer.complete(); // resolve promise
+      });
+      KenMessageBus.instance.publishRequest(
+        widget.globallyUniqueId +
+            widget.index.toString() +
+            col["code"].toString(),
+        KenTopic.kenboxGetText,
+        KenMessageBusEventData(
+            context: context,
+            widget: widget,
+            model: null,
+            data: data,
+            parameters: [col]),
+      );
+      await completer.future;
+    } else {
+      dataText = data[col['code']].toString();
+    }
 
     return dataText;
   }

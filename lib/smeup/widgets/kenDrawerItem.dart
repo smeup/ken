@@ -98,7 +98,8 @@ class KenDrawerItem extends StatelessWidget {
 
   IconThemeData _getIconTheme() {
     IconThemeData themeData = KenConfigurationService.getTheme()!
-        .iconTheme
+        .appBarTheme
+        .iconTheme!
         .copyWith(color: _getElementTextStile().color);
 
     return themeData;

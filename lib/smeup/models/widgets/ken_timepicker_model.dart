@@ -8,18 +8,18 @@ import '../../services/ken_configuration_service.dart';
 
 class KenTimePickerModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static double? defaultFontSize;
-  static Color? defaultBackColor;
-  static Color? defaultFontColor;
-  static bool? defaultFontBold;
-  static Color? defaultBorderColor;
-  static double? defaultBorderWidth;
-  static double? defaultBorderRadius;
-  static double? defaultElevation;
-  static bool? defaultCaptionFontBold;
-  static double? defaultCaptionFontSize;
-  static Color? defaultCaptionFontColor;
-  static Color? defaultCaptionBackColor;
+  static double? defaultFontSize = 16;
+  static Color? defaultBackColor = Colors.white;
+  static Color? defaultFontColor = KenModel.kGray100;
+  static bool? defaultFontBold = false;
+  static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
+  static double? defaultBorderWidth = 2.0;
+  static double? defaultBorderRadius = 10;
+  static double? defaultElevation = 0.0;
+  static bool? defaultCaptionFontBold = false;
+  static double? defaultCaptionFontSize = 16;
+  static Color? defaultCaptionFontColor = KenModel.kGray100;
+  static Color? defaultCaptionBackColor = Colors.transparent;
   static List<String> defaultMinutesList = [
     '00',
     '01',
@@ -93,7 +93,7 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
   static const String defaultdisplayedField = 'display';
   static const Alignment defaultAlign = Alignment.topCenter;
   static const double defaultInnerSpace = 10.0;
-  static const bool defaultUnderline = true;
+  static const bool defaultUnderline = false;
 
   Color? backColor;
   double? fontSize;

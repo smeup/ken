@@ -6,11 +6,11 @@ import '../../services/ken_configuration_service.dart';
 
 class KenProgressIndicatorModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static Color? defaultColor;
-  static Color? defaultCircularTrackColor;
+  static Color? defaultColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultCircularTrackColor = KenModel.inactivePrimary;
 
   // unsupported by json_theme
-  static const double defaultSize = 30;
+  static const double defaultSize = 200;
 
   Color? color;
   Color? circularTrackColor;

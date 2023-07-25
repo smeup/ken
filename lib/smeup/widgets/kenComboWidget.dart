@@ -64,7 +64,8 @@ class _KenComboWidgetState extends State<KenComboWidget> {
         alignedDropdown: false,
         child: DropdownButton(
           value: _selectedValue,
-          dropdownColor: widget.backColor,
+          dropdownColor:
+              KenConfigurationService.getTheme()!.scaffoldBackgroundColor,
           style: _getTextStile(),
           icon: Icon(
             Icons.keyboard_arrow_down_sharp,

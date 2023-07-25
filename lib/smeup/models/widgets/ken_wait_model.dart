@@ -5,8 +5,8 @@ import 'ken_model.dart';
 import '../../services/ken_configuration_service.dart';
 
 class KenWaitModel extends KenModel implements KenDataInterface {
-  static Color? defaultSplashColor;
-  static Color? defaultLoaderColor;
+  static Color? defaultSplashColor = KenModel.kIconColor;
+  static Color? defaultLoaderColor = KenModel.kIconColor;
   static Color? defaultcircularTrackColor;
 
   Color? splashColor;

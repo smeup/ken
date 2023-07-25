@@ -9,15 +9,15 @@ import '../../services/ken_configuration_service.dart';
 class KenLabelModel extends KenModel implements KenDataInterface {
   // supported by json_theme
   static double? defaultFontSize = 20;
-  static Color? defaultFontColor;
+  static Color? defaultFontColor = KenModel.kGray100;
   static bool? defaultFontBold = false;
   static Color? defaultBackColor = Colors.transparent;
   static double? defaultIconSize = 20;
-  static Color? defaultIconColor;
+  static Color? defaultIconColor = KenModel.kGray100;
 
   // unsupported by json_theme
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
-  static const Alignment defaultAlign = Alignment.centerRight;
+  static const Alignment defaultAlign = Alignment.center;
   static const double defaultWidth = 0;
   static const double defaultHeight = 15;
   static const String defaultValColName = 'value';
@@ -117,7 +117,7 @@ class KenLabelModel extends KenModel implements KenDataInterface {
     defaultBackColor = textStyle.backgroundColor;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
 
-    var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
+    var iconTheme = KenConfigurationService.getTheme()!.appBarTheme.iconTheme!;
     defaultIconSize = iconTheme.size;
     defaultIconColor = iconTheme.color;
 

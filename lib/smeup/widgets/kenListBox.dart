@@ -432,7 +432,7 @@ class _KenListBoxState extends State<KenListBox>
           controller: _scrollController,
           itemExtent: widget.height!,
           onSelectedItemChanged: (index) {
-            print("onSelectedItemChanged index: $index");
+            //print("onSelectedItemChanged index: $index");
           },
           childDelegate: ListWheelChildBuilderDelegate(
             builder: (context, index) => cells[index],
@@ -551,7 +551,7 @@ class _KenListBoxState extends State<KenListBox>
         _selectedRow = index;
 
         KenMessageBus.instance.publishRequest(
-          widget.globallyUniqueId,
+          widget.globallyUniqueId + '_tap_' + index.toString(),
           KenTopic.kenlistboxOnItemTap,
           KenMessageBusEventData(
               context: context, widget: widget, model: _model, data: data),

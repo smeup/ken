@@ -330,7 +330,7 @@ class _KenTextFieldState extends State<KenTextField>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.bodyText2!;
 
     style = style.copyWith(
         color: widget.fontColor,

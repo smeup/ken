@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_model.dart';
 import '../models/widgets/ken_qrcode_reader_model.dart';
+import '../services/ken_configuration_service.dart';
 import '../services/ken_utilities.dart';
 import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';
@@ -140,6 +141,8 @@ class _KenQRCodeReaderState extends State<KenQRCodeReader>
           errorCorrectionLevel: QrErrorCorrectLevel.Q,
           gapless: false,
           version: 9,
+          foregroundColor:
+              KenConfigurationService.getTheme()!.textTheme.bodyText2!.color,
         ),
       ),
     );

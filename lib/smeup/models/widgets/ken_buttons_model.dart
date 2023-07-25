@@ -9,14 +9,14 @@ import 'ken_model.dart';
 
 class KenButtonsModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static Color? defaultBackColor;
-  static Color? defaultBorderColor;
-  static double? defaultBorderWidth;
+  static Color? defaultBackColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
+  static double? defaultBorderWidth = 2;
   static double? defaultBorderRadius = 5;
   static double? defaultElevation = 0;
   static double? defaultFontSize = 14;
-  static Color? defaultFontColor;
-  static bool? defaultFontBold;
+  static Color? defaultFontColor = Colors.white;
+  static bool? defaultFontBold = false;
   static double? defaultIconSize = 16;
   static Color? defaultIconColor = Colors.white;
 
@@ -175,7 +175,7 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
     defaultFontColor = textStyle.color;
     defaultFontBold = textStyle.fontWeight == FontWeight.bold;
 
-    var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
+    var iconTheme = KenConfigurationService.getTheme()!.appBarTheme.iconTheme!;
     defaultIconSize = iconTheme.size;
     defaultIconColor = iconTheme.color;
 

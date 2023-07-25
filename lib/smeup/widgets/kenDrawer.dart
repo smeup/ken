@@ -287,7 +287,8 @@ class _KenDrawerState extends State<KenDrawer>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenConfigurationService.getTheme()!.iconTheme;
+    IconThemeData themeData =
+        KenConfigurationService.getTheme()!.appBarTheme.iconTheme!;
 
     return themeData;
   }
