@@ -68,10 +68,7 @@
       "backgroundColor": "#ffffff"
     }
   },
-  "iconTheme": {
-    "size": 20.0,
-    "color": "#ffffff"
-  },
+  "iconTheme": {},
   "timePickerTheme": {
     "backgroundColor": "#ffffff",
     "shape": {
@@ -118,10 +115,7 @@
       "fontWeight": "normal",
       "backgroundColor": "#06899b"
     },
-    "iconTheme": {
-      "size": 20.0,
-      "color": "#ffffff"
-    },
+    "iconTheme": {},
     "centerTitle": true,
     "elevation": 0,
     "toolbarHeight": 50

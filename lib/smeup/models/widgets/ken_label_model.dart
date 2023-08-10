@@ -110,16 +110,16 @@ class KenLabelModel extends KenModel implements KenDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    TextStyle textStyle =
-        KenConfigurationService.getTheme()!.textTheme.bodyText2!;
-    defaultFontSize = textStyle.fontSize;
-    defaultFontColor = textStyle.color;
-    defaultBackColor = textStyle.backgroundColor;
-    defaultFontBold = textStyle.fontWeight == FontWeight.bold;
+    // TextStyle textStyle =
+    //     KenConfigurationService.getTheme()!.textTheme.bodyText2!;
+    // defaultFontSize = textStyle.fontSize;
+    // defaultFontColor = textStyle.color;
+    // defaultBackColor = textStyle.backgroundColor;
+    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
 
-    var iconTheme = KenConfigurationService.getTheme()!.appBarTheme.iconTheme!;
-    defaultIconSize = iconTheme.size;
-    defaultIconColor = iconTheme.color;
+    // var iconTheme = KenConfigurationService.getTheme()!.appBarTheme.iconTheme!;
+    // defaultIconSize = iconTheme.size;
+    // defaultIconColor = iconTheme.color;
 
     // ----------------- set properties from default
 

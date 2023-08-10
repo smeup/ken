@@ -259,7 +259,7 @@ class _KenDatePickerState extends State<KenDatePicker>
       padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
       child: Icon(
         Icons.calendar_today,
-        color: Theme.of(context).primaryColor,
+        color: widget.fontColor,
         size: iconTheme.size,
       ),
     );
@@ -499,7 +499,7 @@ class _KenDatePickerState extends State<KenDatePicker>
     IconThemeData themeData = KenConfigurationService.getTheme()!
         .appBarTheme
         .iconTheme!
-        .copyWith(size: widget.fontSize);
+        .copyWith(size: widget.fontSize, color: Colors.transparent);
 
     return themeData;
   }

@@ -103,7 +103,7 @@ class _KenDatePickerButtonState extends State<KenDatePickerButton> {
   @override
   Widget build(BuildContext context) {
     final button = Container(
-      height: 20,
+      height: 40,
       width: widget.width,
       padding: widget.padding,
       child: ElevatedButton(
@@ -111,7 +111,7 @@ class _KenDatePickerButtonState extends State<KenDatePickerButton> {
           onPressed: () {
             datepicker.DatePicker.showDatePicker(context,
                 theme: datepicker.DatePickerTheme(
-                  backgroundColor: widget.backColor!,
+                  backgroundColor: Colors.white!,
                   // headerColor: widget.textStyle.backgroundColor,
                   // doneStyle: widget.textStyle,
                   // cancelStyle: widget.textStyle,
@@ -146,7 +146,7 @@ class _KenDatePickerButtonState extends State<KenDatePickerButton> {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Padding(
-              padding: const EdgeInsets.only(left: 5.0),
+              padding: const EdgeInsets.only(left: 10.0),
               child: Text(_currentDisplay!, style: widget.textStyle),
             ),
           )),
