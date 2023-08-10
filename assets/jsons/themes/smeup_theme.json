@@ -23,12 +23,7 @@
       "fontWeight": "normal",
       "decoration": "none"
     },
-    "caption": {
-      "color": "#06899b",
-      "fontSize": 16.0,
-      "fontWeight": "normal",
-      "backgroundColor": "#ffffff"
-    },
+    "caption": {},
     "bodyText1": {
       "color": "#06899b",
       "fontSize": 16.0,

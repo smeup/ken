@@ -317,10 +317,9 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                       },
                       decoration: InputDecoration(
                         isDense: false,
-                        contentPadding:
-                            const EdgeInsets.only(left: 5, top: -10),
+                        contentPadding: const EdgeInsets.only(left: 5, top: -8),
                         floatingLabelAlignment: FloatingLabelAlignment.start,
-                        floatingLabelStyle: textStyle,
+                        floatingLabelStyle: captionStyle,
                         floatingLabelBehavior: FloatingLabelBehavior.auto,
                         labelStyle: captionStyle,
                         labelText: widget.label,
@@ -346,7 +345,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                   child: GestureDetector(
                     child: Icon(
                       Icons.close,
-                      color: Theme.of(context).primaryColor,
+                      color: KenModel.kButtonBackgroundColor,
                       size: iconTheme.size,
                     ),
                     onTap: () {

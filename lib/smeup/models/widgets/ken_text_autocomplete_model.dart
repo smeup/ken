@@ -13,9 +13,9 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
   static Color? defaultFontColor = KenModel.kGray100;
   static bool? defaultFontBold = false;
   static bool? defaultCaptionFontBold = false;
-  static double? defaultCaptionFontSize = 16;
-  static Color? defaultCaptionFontColor = KenModel.kGray100;
-  static Color? defaultCaptionBackColor = Colors.transparent;
+  static double? defaultCaptionFontSize = 14;
+  static Color? defaultCaptionFontColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultCaptionBackColor = KenModel.kBlue100;
   static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
   static double? defaultBorderWidth = 0;
   static double? defaultBorderRadius = 10;
@@ -145,29 +145,29 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
-    defaultBackColor = timePickerTheme.backgroundColor;
-    var shape = timePickerTheme.shape!;
-    defaultBorderRadius = (shape as ContinuousRectangleBorder)
-        .borderRadius
-        .resolve(TextDirection.ltr)
-        .topLeft
-        .x;
-    var side = timePickerTheme.dayPeriodBorderSide!;
-    defaultBorderColor = side.color;
-    defaultBorderWidth = side.width;
+    // var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
+    // defaultBackColor = timePickerTheme.backgroundColor;
+    // var shape = timePickerTheme.shape!;
+    // defaultBorderRadius = (shape as ContinuousRectangleBorder)
+    //     .borderRadius
+    //     .resolve(TextDirection.ltr)
+    //     .topLeft
+    //     .x;
+    // var side = timePickerTheme.dayPeriodBorderSide!;
+    // defaultBorderColor = side.color;
+    // defaultBorderWidth = side.width;
 
-    var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
-    defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-    defaultFontSize = textStyle.fontSize;
-    defaultFontColor = textStyle.color;
-    defaultBackColor = textStyle.backgroundColor;
+    // var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
+    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
+    // defaultFontSize = textStyle.fontSize;
+    // defaultFontColor = textStyle.color;
+    // defaultBackColor = textStyle.backgroundColor;
 
-    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
-    defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    defaultCaptionFontSize = captionStyle.fontSize;
-    defaultCaptionFontColor = captionStyle.color;
-    defaultCaptionBackColor = captionStyle.backgroundColor;
+    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
+    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
+    // defaultCaptionFontSize = captionStyle.fontSize;
+    // defaultCaptionFontColor = captionStyle.color;
+    // defaultCaptionBackColor = captionStyle.backgroundColor;
 
     // ----------------- set properties from default
     obj.borderColor ??= KenTextAutocompleteModel.defaultBorderColor;
