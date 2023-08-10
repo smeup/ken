@@ -29,6 +29,7 @@ class KenDashboard extends StatefulWidget
   Color? captionFontColor;
   double? iconSize;
   Color? iconColor;
+  Color? backgroundColor;
 
   double? data;
   String? unitOfMeasure = '';
@@ -61,6 +62,7 @@ class KenDashboard extends StatefulWidget
       this.iconData,
       this.iconSize,
       this.iconColor,
+      this.backgroundColor,
       this.forceIcon,
       this.forceText,
       this.forceUm,
@@ -96,6 +98,7 @@ class KenDashboard extends StatefulWidget
     captionFontColor = m.captionFontColor;
     captionFontBold = m.captionFontBold;
     iconColor = m.iconColor;
+    backgroundColor = m.backgroundColor;
     iconSize = m.iconSize;
     id = m.id;
     type = m.type;
@@ -335,7 +338,9 @@ class _KenDashboardState extends State<KenDashboard>
     TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
-        color: widget.captionFontColor, fontSize: widget.captionFontSize);
+        color: widget.captionFontColor,
+        fontSize: widget.captionFontSize,
+        backgroundColor: widget.backgroundColor);
 
     if (widget.captionFontBold!) {
       style = style.copyWith(
@@ -350,9 +355,9 @@ class _KenDashboardState extends State<KenDashboard>
     TextStyle style = KenConfigurationService.getTheme()!.textTheme.headline1!;
 
     style = style.copyWith(
-      color: widget.fontColor,
-      fontSize: widget.fontSize,
-    );
+        color: widget.fontColor,
+        fontSize: widget.fontSize,
+        backgroundColor: widget.backgroundColor);
 
     if (widget.fontBold!) {
       style = style.copyWith(
@@ -367,9 +372,9 @@ class _KenDashboardState extends State<KenDashboard>
     TextStyle style = KenConfigurationService.getTheme()!.textTheme.headline6!;
 
     style = style.copyWith(
-      color: widget.captionFontColor,
-      fontSize: widget.captionFontSize,
-    );
+        color: widget.captionFontColor,
+        fontSize: widget.captionFontSize,
+        backgroundColor: widget.backgroundColor);
 
     if (widget.fontBold!) {
       style = style.copyWith(

@@ -14,9 +14,10 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
   static bool? defaultFontBold = false;
   static double? defaultCaptionFontSize = 20;
   static Color? defaultCaptionFontColor = KenModel.kGray100;
-  static bool? defaultCaptionFontBold;
+  static bool? defaultCaptionFontBold = false;
   static double? defaultIconSize = 40;
   static Color? defaultIconColor = KenModel.kIconColor;
+  static Color? defaultBackgroundColor = Colors.transparent;
 
   // unsupported by json_theme
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
@@ -41,6 +42,7 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
   Color? captionFontColor;
   double? iconSize;
   Color? iconColor;
+  Color? backgroundColor;
 
   EdgeInsetsGeometry? padding;
   String? valueColName;
@@ -70,6 +72,7 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
     this.captionFontColor,
     this.iconSize,
     this.iconColor,
+    this.backgroundColor,
     this.valueColName = defaultValueColName,
     this.umColName = defaultUmColName,
     this.textColName = defaultTextColName,
@@ -133,6 +136,10 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
     fontColor = KenUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
         defaultFontColor;
 
+    backgroundColor =
+        KenUtilities.getColorFromRGB(optionsDefault!['backgroundColor']) ??
+            defaultBackgroundColor;
+
     fontBold = optionsDefault!['bold'] ?? defaultFontBold;
 
     captionFontColor =
@@ -162,24 +169,25 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
 
   static setDefaults(dynamic obj) {
     var textStyle = KenConfigurationService.getTheme()!.textTheme.headline1!;
-    defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-    defaultFontSize = textStyle.fontSize;
-    defaultFontColor = textStyle.color;
+    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
+    // defaultFontSize = textStyle.fontSize;
+    // defaultFontColor = textStyle.color;
 
     var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
-    defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    defaultCaptionFontSize = captionStyle.fontSize;
-    defaultCaptionFontColor = captionStyle.color;
+    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
+    // defaultCaptionFontSize = captionStyle.fontSize;
+    // defaultCaptionFontColor = captionStyle.color;
 
     var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
-    defaultIconSize = iconTheme.size;
-    defaultIconColor = iconTheme.color;
+    // defaultIconSize = iconTheme.size;
+    // defaultIconColor = iconTheme.color;
 
     // ----------------- set properties from default
 
     obj.fontBold ??= KenDashboardModel.defaultFontBold;
     obj.fontColor ??= KenDashboardModel.defaultFontColor;
     obj.fontSize ??= KenDashboardModel.defaultFontSize;
+    obj.backgroundColor ??= KenDashboardModel.defaultBackgroundColor;
 
     obj.captionFontBold ??= KenDashboardModel.defaultCaptionFontBold;
     obj.captionFontColor ??= KenDashboardModel.defaultCaptionFontColor;

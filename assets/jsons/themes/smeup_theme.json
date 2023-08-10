@@ -36,12 +36,7 @@
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
-    "headline1": {
-      "color": "#06899b",
-      "fontSize": 56.0,
-      "fontWeight": "normal",
-      "backgroundColor": "#ffffff"
-    },
+    "headline1": {},
     "headline2": {
       "color": "#06899b",
       "fontSize": 43.0,
