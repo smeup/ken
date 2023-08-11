@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import '../../services/ken_configuration_service.dart';
 
 class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
   // supported by json_theme
@@ -19,6 +18,7 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
   static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
   static double? defaultBorderWidth = 0;
   static double? defaultBorderRadius = 10;
+  static Color? defaultIconColor = KenModel.kButtonBackgroundColor;
 
   // unsupported by json_theme
   static const String defaultLabel = '';
@@ -42,6 +42,7 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
   Color? borderColor;
   double? borderWidth;
   double? borderRadius;
+  Color? iconColor;
 
   String? label;
   double? width;
@@ -70,6 +71,7 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
     this.captionFontColor,
     this.captionFontSize,
     this.borderColor,
+    this.iconColor,
     this.borderRadius,
     this.borderWidth,
     this.label = defaultLabel,
@@ -131,6 +133,9 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
         KenUtilities.getColorFromRGB(optionsDefault!['borderColor']) ??
             defaultBorderColor;
 
+    iconColor = KenUtilities.getColorFromRGB(optionsDefault!['iconColor']) ??
+        defaultIconColor;
+
     defaultValue = jsonMap['defaultValue'] ?? '';
     valueField = optionsDefault!['valueField'] ?? 'value';
     showSubmit = optionsDefault!['showSubmit'] ?? defaultShowSubmit;
@@ -171,6 +176,7 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
 
     // ----------------- set properties from default
     obj.borderColor ??= KenTextAutocompleteModel.defaultBorderColor;
+    obj.iconColor ??= KenTextAutocompleteModel.defaultIconColor;
     obj.borderWidth ??= KenTextAutocompleteModel.defaultBorderWidth;
     obj.borderRadius ??= KenTextAutocompleteModel.defaultBorderRadius;
     obj.fontBold ??= KenTextAutocompleteModel.defaultFontBold;

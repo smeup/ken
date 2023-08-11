@@ -35,6 +35,7 @@ class KenTextAutocomplete extends StatefulWidget
   Color? borderColor;
   double? borderWidth;
   double? borderRadius;
+  Color? iconColor;
 
   String? label;
   double? width;
@@ -86,6 +87,7 @@ class KenTextAutocomplete extends StatefulWidget
     this.captionFontColor,
     this.captionFontSize,
     this.borderColor,
+    this.iconColor,
     this.borderRadius,
     this.borderWidth,
     this.label = KenTextAutocompleteModel.defaultLabel,
@@ -126,6 +128,7 @@ class KenTextAutocomplete extends StatefulWidget
     captionFontColor = m.captionFontColor;
     captionFontSize = m.captionFontSize;
     borderColor = m.borderColor;
+    iconColor = m.iconColor;
     borderRadius = m.borderRadius;
     borderWidth = m.borderWidth;
     label = m.label;
@@ -279,10 +282,9 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
             return Container(
               padding: const EdgeInsets.only(right: 5),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3),
+                  borderRadius: BorderRadius.circular(widget.borderRadius!),
                   border: Border.all(
-                      width: 1,
-                      color: KenConfigurationService.getTheme()!.primaryColor)),
+                      width: widget.borderWidth!, color: widget.borderColor!)),
               child: Row(children: [
                 Expanded(
                   child: Padding(
@@ -345,7 +347,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                   child: GestureDetector(
                     child: Icon(
                       Icons.close,
-                      color: KenModel.kButtonBackgroundColor,
+                      color: widget.iconColor,
                       size: iconTheme.size,
                     ),
                     onTap: () {
