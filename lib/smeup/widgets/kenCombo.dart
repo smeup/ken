@@ -317,7 +317,7 @@ class _KenComboState extends State<KenCombo>
         ],
       );
     } else if (widget.align == Alignment.topCenter) {
-      children = Container(
+      children = SizedBox(
         height: boxHeight,
         width: boxWidth,
         child: Column(
@@ -337,7 +337,7 @@ class _KenComboState extends State<KenCombo>
         ),
       );
     } else if (widget.align == Alignment.bottomCenter) {
-      children = Container(
+      children = SizedBox(
         height: boxHeight,
         width: boxWidth,
         child: Column(
@@ -376,7 +376,9 @@ class _KenComboState extends State<KenCombo>
     TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
-        color: widget.captionFontColor, fontSize: widget.captionFontSize);
+        color: widget.captionFontColor,
+        fontSize: widget.captionFontSize,
+        backgroundColor: widget.captionBackColor);
 
     if (widget.captionFontBold!) {
       style = style.copyWith(

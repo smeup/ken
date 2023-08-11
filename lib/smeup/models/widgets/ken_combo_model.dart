@@ -13,14 +13,14 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
   static double? defaultIconSize = 20;
   static Color? defaultIconColor = KenModel.kIconColor;
   static double? defaultFontSize = 20;
-  static Color? defaultFontColor = KenModel.kIconColor;
+  static Color? defaultFontColor = KenModel.kButtonBackgroundColor;
   static bool? defaultFontBold = false;
-  static Color? defaultBackColor = KenModel.kBlue100;
+  static Color? defaultBackColor = Colors.transparent;
   static bool? defaultCaptionFontBold = false;
   static double? defaultCaptionFontSize = 10;
-  static Color? defaultCaptionFontColor = KenModel.kBlue100;
-  static Color? defaultCaptionBackColor = KenModel.kBlue100;
-  static Color? defaultBorderColor = KenModel.kBlue100;
+  static Color? defaultCaptionFontColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultCaptionBackColor = Colors.transparent;
+  static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
   static double? defaultBorderWidth = 2;
   static double? defaultBorderRadius = 8;
 
@@ -169,34 +169,34 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
-    defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-    defaultFontSize = textStyle.fontSize;
-    defaultFontColor = textStyle.color;
-    defaultBackColor = textStyle.backgroundColor;
+    // var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
+    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
+    // defaultFontSize = textStyle.fontSize;
+    // defaultFontColor = textStyle.color;
+    // defaultBackColor = textStyle.backgroundColor;
 
-    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
-    defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    defaultCaptionFontSize = captionStyle.fontSize;
-    defaultCaptionFontColor = captionStyle.color;
-    defaultCaptionBackColor = captionStyle.backgroundColor;
+    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
+    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
+    // defaultCaptionFontSize = captionStyle.fontSize;
+    // defaultCaptionFontColor = captionStyle.color;
+    // // defaultCaptionBackColor = captionStyle.backgroundColor;
 
-    var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
-    defaultIconSize = iconTheme.size;
-    defaultIconColor = textStyle.color;
+    // var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
+    // defaultIconSize = iconTheme.size;
+    // defaultIconColor = textStyle.color;
 
-    var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
-    defaultBackColor = timePickerTheme.backgroundColor;
-    var shape = timePickerTheme.shape!;
-    defaultBorderRadius = (shape as ContinuousRectangleBorder)
-        .borderRadius
-        .resolve(TextDirection.ltr)
-        .topLeft
-        .x;
-    var side = timePickerTheme.dayPeriodBorderSide!;
-    defaultBorderColor = side.color;
-    defaultBorderWidth = side.width;
-    iconTheme.color;
+    // var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
+    // defaultBackColor = timePickerTheme.backgroundColor;
+    // var shape = timePickerTheme.shape!;
+    // defaultBorderRadius = (shape as ContinuousRectangleBorder)
+    //     .borderRadius
+    //     .resolve(TextDirection.ltr)
+    //     .topLeft
+    //     .x;
+    // var side = timePickerTheme.dayPeriodBorderSide!;
+    // // defaultBorderColor = side.color;
+    // defaultBorderWidth = side.width;
+    // iconTheme.color;
 
     // ----------------- set properties from default
     obj.borderColor ??= KenComboModel.defaultBorderColor;
