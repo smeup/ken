@@ -25,7 +25,7 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
   double? progressBarMaximun;
   double? height;
   EdgeInsetsGeometry? padding;
-  double? bordeRadius;
+  double? borderRadius;
 
   KenProgressBarModel({
     id,
@@ -40,7 +40,7 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
     this.padding = defaultPadding,
     this.progressBarMinimun = defaultProgressBarMinimun,
     this.progressBarMaximun = defaultProgressBarMaximun,
-    this.bordeRadius = defaultBorderRadius,
+    this.borderRadius = defaultBorderRadius,
     title = '',
   }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'pgb';
@@ -63,7 +63,7 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
     progressBarMaximun = KenUtilities.getDouble(optionsDefault!['pgbMax']) ??
         defaultProgressBarMaximun;
 
-    bordeRadius = KenUtilities.getDouble(optionsDefault!['borderRadius']) ??
+    borderRadius = KenUtilities.getDouble(optionsDefault!['borderRadius']) ??
         defaultBorderRadius;
     height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
 
@@ -93,6 +93,8 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
     // ----------------- set properties from default
 
     obj.color ??= KenProgressBarModel.defaultColor;
+    obj.borderRadius ??= KenProgressBarModel.defaultBorderRadius;
+
     obj.linearTrackColor ??= KenProgressBarModel.defaultLinearTrackColor;
   }
 }
