@@ -14,7 +14,7 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
   static bool? defaultCaptionFontBold = false;
   static double? defaultCaptionFontSize = 14;
   static Color? defaultCaptionFontColor = KenModel.kButtonBackgroundColor;
-  static Color? defaultCaptionBackColor = KenModel.kBlue100;
+  static Color? defaultCaptionBackColor = KenModel.kBlue200;
   static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
   static double? defaultBorderWidth = 0;
   static double? defaultBorderRadius = 10;

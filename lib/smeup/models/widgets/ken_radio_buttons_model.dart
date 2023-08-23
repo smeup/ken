@@ -26,7 +26,7 @@ class KenRadioButtonsModel extends KenInputFieldModel
   static const Alignment defaultAlign = Alignment.centerLeft;
   static const double defaultWidth = 120;
   static const double defaultHeight = 150;
-  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(16);
   static const int defaultColumns = 1;
 
   Color? radioButtonColor;

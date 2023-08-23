@@ -8,17 +8,17 @@ import '../../services/ken_configuration_service.dart';
 
 class KenTimePickerModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static double? defaultFontSize = 16;
-  static Color? defaultBackColor = Colors.white;
-  static Color? defaultFontColor = KenModel.kGray100;
+  static double? defaultFontSize = 14;
+  static Color? defaultBackColor = Colors.transparent;
+  static Color? defaultFontColor = KenModel.kButtonBackgroundColor;
   static bool? defaultFontBold = false;
   static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
-  static double? defaultBorderWidth = 2.0;
-  static double? defaultBorderRadius = 10;
+  static double? defaultBorderWidth = 1.0;
+  static double? defaultBorderRadius = 4;
   static double? defaultElevation = 0.0;
   static bool? defaultCaptionFontBold = false;
-  static double? defaultCaptionFontSize = 16;
-  static Color? defaultCaptionFontColor = KenModel.kGray100;
+  static double? defaultCaptionFontSize = 10;
+  static Color? defaultCaptionFontColor = KenModel.kButtonBackgroundColor;
   static Color? defaultCaptionBackColor = Colors.transparent;
   static List<String> defaultMinutesList = [
     '00',
@@ -88,7 +88,7 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
   static const double defaultWidth = 0;
   static const double defaultHeight = 100;
   static const bool defaultShowBorder = false;
-  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(8);
   static const String defaultValueField = 'value';
   static const String defaultdisplayedField = 'display';
   static const Alignment defaultAlign = Alignment.topCenter;
@@ -232,31 +232,31 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
-    defaultBackColor = timePickerTheme.backgroundColor;
-    var shape = timePickerTheme.shape!;
-    defaultBorderRadius = (shape as ContinuousRectangleBorder)
-        .borderRadius
-        .resolve(TextDirection.ltr)
-        .topLeft
-        .x;
-    var side = timePickerTheme.dayPeriodBorderSide!;
-    defaultBorderColor = side.color;
-    defaultBorderWidth = side.width;
+    // var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
+    // defaultBackColor = timePickerTheme.backgroundColor;
+    // var shape = timePickerTheme.shape!;
+    // defaultBorderRadius = (shape as ContinuousRectangleBorder)
+    //     .borderRadius
+    //     .resolve(TextDirection.ltr)
+    //     .topLeft
+    //     .x;
+    // var side = timePickerTheme.dayPeriodBorderSide!;
+    // defaultBorderColor = side.color;
+    // defaultBorderWidth = side.width;
 
-    var buttonStyle =
-        KenConfigurationService.getTheme()!.elevatedButtonTheme.style!;
-    defaultElevation = buttonStyle.elevation!.resolve(<MaterialState>{});
+    // var buttonStyle =
+    //     KenConfigurationService.getTheme()!.elevatedButtonTheme.style!;
+    // defaultElevation = buttonStyle.elevation!.resolve(<MaterialState>{});
 
-    var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
-    defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-    defaultFontSize = textStyle.fontSize;
-    defaultFontColor = textStyle.color;
+    // var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
+    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
+    // defaultFontSize = textStyle.fontSize;
+    // defaultFontColor = textStyle.color;
 
-    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
-    defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    defaultCaptionFontSize = captionStyle.fontSize;
-    defaultCaptionFontColor = captionStyle.color;
+    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
+    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
+    // defaultCaptionFontSize = captionStyle.fontSize;
+    // defaultCaptionFontColor = captionStyle.color;
 
     // ----------------- set properties from default
     obj.backColor ??= KenTimePickerModel.defaultBackColor;

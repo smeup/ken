@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import '../../services/ken_configuration_service.dart';
 
 class KenSwitchModel extends KenModel implements KenDataInterface {
   // supported by json_theme
@@ -97,16 +96,16 @@ class KenSwitchModel extends KenModel implements KenDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var radioTheme = KenConfigurationService.getTheme()!.switchTheme;
+    // var radioTheme = KenConfigurationService.getTheme()!.switchTheme;
 
-    defaultThumbColor = radioTheme.thumbColor!.resolve(<MaterialState>{});
-    defaultTrackColor = radioTheme.trackColor!.resolve(<MaterialState>{});
+    // defaultThumbColor = radioTheme.thumbColor!.resolve(<MaterialState>{});
+    // defaultTrackColor = radioTheme.trackColor!.resolve(<MaterialState>{});
 
-    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
-    defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    defaultCaptionFontSize = captionStyle.fontSize;
-    defaultCaptionFontColor = captionStyle.color;
-    defaultCaptionBackColor = captionStyle.backgroundColor;
+    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
+    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
+    // defaultCaptionFontSize = captionStyle.fontSize;
+    // defaultCaptionFontColor = captionStyle.color;
+    // defaultCaptionBackColor = captionStyle.backgroundColor;
 
     // ----------------- set properties from default
 

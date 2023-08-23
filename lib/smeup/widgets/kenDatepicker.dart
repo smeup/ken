@@ -245,8 +245,7 @@ class _KenDatePickerState extends State<KenDatePicker>
     }
 
     if (!widget.showborder!) {
-      widget.borderColor =
-          KenConfigurationService.getTheme()!.scaffoldBackgroundColor;
+      widget.borderColor = widget.borderColor;
     }
 
     ButtonStyle buttonStyle = _getButtonStyle();

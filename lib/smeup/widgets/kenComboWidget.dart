@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/widgets/ken_combo_item_model.dart';
+import '../models/widgets/ken_model.dart';
 import '../services/ken_configuration_service.dart';
 
 class KenComboWidget extends StatefulWidget {
@@ -19,6 +20,7 @@ class KenComboWidget extends StatefulWidget {
   final Color? captionBackColor;
   final double? iconSize;
   final Color? iconColor;
+  final Color? dropdownColor;
 
   final String? selectedValue;
   final List<KenComboItemModel>? data;
@@ -37,7 +39,8 @@ class KenComboWidget extends StatefulWidget {
       this.iconColor,
       this.selectedValue,
       this.data,
-      this.clientOnChange});
+      this.clientOnChange,
+      this.dropdownColor});
 
   @override
   _KenComboWidgetState createState() => _KenComboWidgetState();
@@ -64,8 +67,8 @@ class _KenComboWidgetState extends State<KenComboWidget> {
         alignedDropdown: false,
         child: DropdownButton(
           value: _selectedValue,
-          dropdownColor:
-              KenConfigurationService.getTheme()!.scaffoldBackgroundColor,
+          // dropdownColor: widget.dropdownColor,
+          dropdownColor: KenModel.kBlue100,
           style: _getTextStile(),
           icon: Icon(
             Icons.keyboard_arrow_down_sharp,

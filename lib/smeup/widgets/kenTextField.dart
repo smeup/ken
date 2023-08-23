@@ -216,68 +216,76 @@ class _KenTextFieldState extends State<KenTextField>
           context: context, widget: widget, model: _model, data: _data),
     );
 
-    textField = Container(
-        alignment: Alignment.centerLeft,
-        padding: widget.padding,
-        decoration: widget.showBorder!
-            ? BoxDecoration(
-                borderRadius: BorderRadius.circular(widget.borderRadius!),
-                border: Border.all(
-                    color: widget.borderColor!, width: widget.borderWidth!))
-            : null,
-        child: TextFormField(
-          style: textStyle,
-          inputFormatters: widget.inputFormatters,
-          autofocus: widget.autoFocus!,
-          maxLines: 1,
-          initialValue: _data,
-          key: Key('${widget.id}_text'),
-          autocorrect: false,
-          textCapitalization: TextCapitalization.none,
-          textInputAction: TextInputAction.next,
-          enableSuggestions: true,
-          validator: widget.clientValidator as String? Function(String?)?,
-          keyboardType: widget.keyboard,
-          obscureText:
-              widget.keyboard == TextInputType.visiblePassword ? true : false,
-          onChanged: (value) {
-            if (widget.clientOnChange != null) widget.clientOnChange!(value);
-            KenMessageBus.instance.publishRequest(
-              widget.globallyUniqueId,
-              KenTopic.textfieldOnChanged,
-              KenMessageBusEventData(
-                  context: context, widget: widget, model: _model, data: _data),
-            );
-          },
-          decoration: InputDecoration(
-            labelStyle: captionStyle,
-            labelText: widget.label,
-            // errorBorder: UnderlineInputBorder(
-            //   borderSide: BorderSide(color: Colors.transparent),
-            // ),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                  color: widget.underline!
-                      ? widget.borderColor!
-                      : Colors.transparent),
+    textField = Padding(
+      padding: widget.padding!,
+      child: Container(
+          alignment: Alignment.centerLeft,
+          decoration: widget.showBorder!
+              ? BoxDecoration(
+                  borderRadius: BorderRadius.circular(widget.borderRadius!),
+                  border: Border.all(
+                      color: widget.borderColor!, width: widget.borderWidth!))
+              : null,
+          child: TextFormField(
+            style: textStyle,
+            inputFormatters: widget.inputFormatters,
+            autofocus: widget.autoFocus!,
+            maxLines: 1,
+            initialValue: _data,
+            key: Key('${widget.id}_text'),
+            autocorrect: false,
+            textCapitalization: TextCapitalization.none,
+            textInputAction: TextInputAction.next,
+            enableSuggestions: true,
+            validator: widget.clientValidator as String? Function(String?)?,
+            keyboardType: widget.keyboard,
+            obscureText:
+                widget.keyboard == TextInputType.visiblePassword ? true : false,
+            onChanged: (value) {
+              if (widget.clientOnChange != null) widget.clientOnChange!(value);
+              KenMessageBus.instance.publishRequest(
+                widget.globallyUniqueId,
+                KenTopic.textfieldOnChanged,
+                KenMessageBusEventData(
+                    context: context,
+                    widget: widget,
+                    model: _model,
+                    data: _data),
+              );
+            },
+            decoration: InputDecoration(
+              labelStyle: captionStyle,
+              labelText: widget.label,
+              // errorBorder: UnderlineInputBorder(
+              //   borderSide: BorderSide(color: Colors.transparent),
+              // ),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    color: widget.underline!
+                        ? widget.borderColor!
+                        : Colors.transparent),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    color: widget.underline!
+                        ? widget.borderColor!
+                        : Colors.transparent),
+              ),
             ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                  color: widget.underline!
-                      ? widget.borderColor!
-                      : Colors.transparent),
-            ),
-          ),
-          onSaved: (value) {
-            if (widget.clientOnSave != null) widget.clientOnSave!(value);
-            KenMessageBus.instance.publishRequest(
-              widget.globallyUniqueId,
-              KenTopic.textfieldOnSaved,
-              KenMessageBusEventData(
-                  context: context, widget: widget, model: _model, data: _data),
-            );
-          },
-        ));
+            onSaved: (value) {
+              if (widget.clientOnSave != null) widget.clientOnSave!(value);
+              KenMessageBus.instance.publishRequest(
+                widget.globallyUniqueId,
+                KenTopic.textfieldOnSaved,
+                KenMessageBusEventData(
+                    context: context,
+                    widget: widget,
+                    model: _model,
+                    data: _data),
+              );
+            },
+          )),
+    );
 
     if (widget.showSubmit!) {
       KenButtons? button;

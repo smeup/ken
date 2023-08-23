@@ -296,20 +296,21 @@ class _KenRadioButtonsState extends State<KenRadioButtons>
             style: captionStyle,
           ));
 
-      final container = Container(
-          padding: widget.padding,
-          child: Column(
-            children: [
-              title,
-              GridView.count(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                childAspectRatio: childAspectRatio,
-                crossAxisCount: widget.columns!,
-                children: buttons,
-              )
-            ],
-          ));
+      final container = Padding(
+        padding: widget.padding!,
+        child: Column(
+          children: [
+            title,
+            GridView.count(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              childAspectRatio: childAspectRatio,
+              crossAxisCount: widget.columns!,
+              children: buttons,
+            )
+          ],
+        ),
+      );
 
       KenMessageBus.instance.publishRequest(
         widget.globallyUniqueId,

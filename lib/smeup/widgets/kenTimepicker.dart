@@ -251,8 +251,7 @@ class _KenTimePickerState extends State<KenTimePicker>
     }
 
     if (!widget.showborder!) {
-      widget.borderColor =
-          KenConfigurationService.getTheme()!.scaffoldBackgroundColor;
+      widget.borderColor = widget.borderColor;
     }
 
     ButtonStyle buttonStyle = _getButtonStyle();
@@ -265,7 +264,7 @@ class _KenTimePickerState extends State<KenTimePicker>
       padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
       child: Icon(
         Icons.access_time,
-        color: Theme.of(context).primaryColor,
+        color: widget.fontColor,
         size: iconTheme.size,
       ),
     );
@@ -504,7 +503,7 @@ class _KenTimePickerState extends State<KenTimePicker>
     IconThemeData themeData = KenConfigurationService.getTheme()!
         .appBarTheme
         .iconTheme!
-        .copyWith(size: widget.fontSize);
+        .copyWith(size: widget.fontSize, color: Colors.transparent);
 
     return themeData;
   }

@@ -21,6 +21,7 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
   static Color? defaultCaptionFontColor = KenModel.kButtonBackgroundColor;
   static Color? defaultCaptionBackColor = Colors.transparent;
   static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultDropDownColor = KenModel.kBlue100;
   static double? defaultBorderWidth = 2;
   static double? defaultBorderRadius = 8;
 
@@ -29,7 +30,8 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
   static const double defaultHeight = 55;
   static const String defaultValueField = 'value';
   static const String defaultDescriptionField = 'description';
-  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.only(left: 10);
+  static const EdgeInsetsGeometry defaultPadding =
+      EdgeInsets.only(left: 10, right: 10);
   static const String defaultLabel = '';
   static const Alignment defaultAlign = Alignment.centerLeft;
   static const double defaultInnerSpace = 10.0;
@@ -49,6 +51,7 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
   Color? borderColor;
   double? borderWidth;
   double? borderRadius;
+  Color? dropdownColor;
 
   bool? underline;
   double? width;
@@ -78,6 +81,7 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
       this.captionBackColor,
       this.borderColor,
       this.borderRadius,
+      this.dropdownColor,
       this.borderWidth,
       this.iconSize,
       this.iconColor,
@@ -112,6 +116,9 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
     valueField = optionsDefault!['valueField'] ?? defaultValueField;
     descriptionField =
         optionsDefault!['descriptionField'] ?? defaultDescriptionField;
+    dropdownColor =
+        KenUtilities.getColorFromRGB(optionsDefault!['dropDownColor']) ??
+            defaultDropDownColor;
     selectedValue = optionsDefault!['defaultValue'] ?? '';
     label = optionsDefault!['label'] ?? defaultLabel;
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
@@ -207,6 +214,7 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
     obj.fontColor ??= KenComboModel.defaultFontColor;
     obj.fontSize ??= KenComboModel.defaultFontSize;
     obj.backColor ??= KenComboModel.defaultBackColor;
+    obj.dropdownColor ??= KenComboModel.defaultDropDownColor;
 
     obj.captionFontBold ??= KenComboModel.defaultCaptionFontBold;
     obj.captionFontColor ??= KenComboModel.defaultCaptionFontColor;
