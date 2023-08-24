@@ -10,15 +10,15 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
   // supported by json_theme
   static double? defaultFontSize = 14;
   static Color? defaultBackColor = Colors.transparent;
-  static Color? defaultFontColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultFontColor = KenModel.kPrimary;
   static bool? defaultFontBold = false;
-  static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultBorderColor = KenModel.kPrimary;
   static double? defaultBorderWidth = 1.0;
   static double? defaultBorderRadius = 4;
   static double? defaultElevation = 0.0;
   static bool? defaultCaptionFontBold = false;
   static double? defaultCaptionFontSize = 10;
-  static Color? defaultCaptionFontColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultCaptionFontColor = KenModel.kPrimary;
   static Color? defaultCaptionBackColor = Colors.transparent;
   static List<String> defaultMinutesList = [
     '00',

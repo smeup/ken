@@ -6,9 +6,9 @@ import '../../services/ken_configuration_service.dart';
 
 class KenSliderModel extends KenModel {
   // supported by json_theme
-  static Color? defaultActiveTrackColor = KenModel.kButtonBackgroundColor;
-  static Color? defaultThumbColor = KenModel.kButtonBackgroundColor;
-  static Color? defaultInactiveTrackColor = KenModel.inactivePrimary;
+  static Color? defaultActiveTrackColor = KenModel.kPrimary;
+  static Color? defaultThumbColor = KenModel.kPrimary;
+  static Color? defaultInactiveTrackColor = KenModel.kInactivePrimary;
 
   // unsupported by json_theme
   static const EdgeInsetsGeometry defaultPadding =

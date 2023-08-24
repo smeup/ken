@@ -9,8 +9,8 @@ import 'ken_model.dart';
 
 class KenButtonsModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static Color? defaultBackColor = KenModel.kButtonBackgroundColor;
-  static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultBackColor = KenModel.kPrimary;
+  static Color? defaultBorderColor = KenModel.kPrimary;
   static double? defaultBorderWidth = 2;
   static double? defaultBorderRadius = 5;
   static double? defaultElevation = 0;

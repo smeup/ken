@@ -6,8 +6,8 @@ import '../../services/ken_configuration_service.dart';
 
 class KenProgressBarModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static Color? defaultColor = KenModel.kButtonBackgroundColor;
-  static Color? defaultLinearTrackColor = KenModel.inactivePrimary;
+  static Color? defaultColor = KenModel.kPrimary;
+  static Color? defaultLinearTrackColor = KenModel.kInactivePrimary;
 
   // unsupported by json_theme
   static const String defaultValueField = 'value';

@@ -12,16 +12,16 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
   // supported by json_theme
   static double? defaultIconSize = 20;
   static Color? defaultIconColor = KenModel.kIconColor;
-  static double? defaultFontSize = 20;
-  static Color? defaultFontColor = KenModel.kButtonBackgroundColor;
+  static double? defaultFontSize = 16;
+  static Color? defaultFontColor = KenModel.kPrimary;
   static bool? defaultFontBold = false;
   static Color? defaultBackColor = Colors.transparent;
   static bool? defaultCaptionFontBold = false;
   static double? defaultCaptionFontSize = 10;
-  static Color? defaultCaptionFontColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultCaptionFontColor = KenModel.kPrimary;
   static Color? defaultCaptionBackColor = Colors.transparent;
-  static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
-  static Color? defaultDropDownColor = KenModel.kBlue100;
+  static Color? defaultBorderColor = KenModel.kPrimary;
+  static Color? defaultDropDownColor = KenModel.kBack100;
   static double? defaultBorderWidth = 2;
   static double? defaultBorderRadius = 8;
 

@@ -10,10 +10,10 @@ import 'ken_model.dart';
 class KenDashboardModel extends KenModel implements KenDataInterface {
   // supported by json_theme
   static double? defaultFontSize = 60;
-  static Color? defaultFontColor = KenModel.kGray100;
+  static Color? defaultFontColor = KenModel.kSecondary100;
   static bool? defaultFontBold = false;
   static double? defaultCaptionFontSize = 20;
-  static Color? defaultCaptionFontColor = KenModel.kGray100;
+  static Color? defaultCaptionFontColor = KenModel.kSecondary100;
   static bool? defaultCaptionFontBold = false;
   static double? defaultIconSize = 40;
   static Color? defaultIconColor = KenModel.kIconColor;

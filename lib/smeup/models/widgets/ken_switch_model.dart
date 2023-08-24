@@ -7,10 +7,10 @@ import 'ken_model.dart';
 
 class KenSwitchModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static Color? defaultThumbColor = KenModel.kButtonBackgroundColor;
-  static Color? defaultTrackColor = KenModel.kGray100;
+  static Color? defaultThumbColor = KenModel.kPrimary;
+  static Color? defaultTrackColor = KenModel.kSecondary100;
   static double? defaultCaptionFontSize = 14;
-  static Color? defaultCaptionFontColor = KenModel.kGray100;
+  static Color? defaultCaptionFontColor = KenModel.kSecondary100;
   static Color? defaultCaptionBackColor = Colors.transparent;
   static bool? defaultCaptionFontBold = false;
 

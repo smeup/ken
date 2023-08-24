@@ -14,7 +14,7 @@ class KenDrawerModel extends KenModel {
   static Color? defaultElementFontColor = Colors.white;
   static bool? defaultElementFontBold = false;
 
-  static Color? defaultAppBarBackColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultAppBarBackColor = KenModel.kPrimary;
 
   // unsupported by json_theme
   static const double defaultImageWidth = 80;

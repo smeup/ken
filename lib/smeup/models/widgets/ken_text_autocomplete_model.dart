@@ -8,17 +8,17 @@ import 'ken_model.dart';
 class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
   // supported by json_theme
   static double? defaultFontSize = 16;
-  static Color? defaultBackColor = KenModel.kBlue200;
-  static Color? defaultFontColor = KenModel.kGray100;
+  static Color? defaultBackColor = KenModel.kBack200;
+  static Color? defaultFontColor = KenModel.kSecondary100;
   static bool? defaultFontBold = false;
   static bool? defaultCaptionFontBold = false;
   static double? defaultCaptionFontSize = 14;
-  static Color? defaultCaptionFontColor = KenModel.kButtonBackgroundColor;
-  static Color? defaultCaptionBackColor = KenModel.kBlue200;
-  static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultCaptionFontColor = KenModel.kPrimary;
+  static Color? defaultCaptionBackColor = KenModel.kBack200;
+  static Color? defaultBorderColor = KenModel.kPrimary;
   static double? defaultBorderWidth = 0;
   static double? defaultBorderRadius = 10;
-  static Color? defaultIconColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultIconColor = KenModel.kPrimary;
 
   // unsupported by json_theme
   static const String defaultLabel = '';

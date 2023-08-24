@@ -7,7 +7,7 @@ import '../../services/ken_configuration_service.dart';
 
 class KenLineModel extends KenModel {
   // supported by json_theme
-  static Color? defaultColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultColor = KenModel.kPrimary;
   static double? defaultThickness = 1;
 
   // unsupported by json_theme

@@ -50,6 +50,7 @@ class KenTimePickerButton extends StatefulWidget {
     this.data,
     this.buttonStyle,
     this.textStyle, {
+    super.key,
     this.scaffoldKey,
     this.formKey,
     this.id = '',
@@ -81,10 +82,10 @@ class KenTimePickerButton extends StatefulWidget {
   }
 
   @override
-  _KenTimePickerButtonState createState() => _KenTimePickerButtonState();
+  KenTimePickerButtonState createState() => KenTimePickerButtonState();
 }
 
-class _KenTimePickerButtonState extends State<KenTimePickerButton> {
+class KenTimePickerButtonState extends State<KenTimePickerButton> {
   DateTime? _currentValue;
   String? _currentDisplay;
 
@@ -99,15 +100,15 @@ class _KenTimePickerButtonState extends State<KenTimePickerButton> {
   Widget build(BuildContext context) {
     final button = Padding(
       padding: widget.padding!,
-      child: Container(
+      child: SizedBox(
           height: 40,
           width: widget.width,
           child: ElevatedButton(
               style: widget.buttonStyle,
               onPressed: () {
                 datepicker.DatePicker.showPicker(context,
-                    theme: datepicker.DatePickerTheme(
-                      backgroundColor: Colors.white!,
+                    theme: const datepicker.DatePickerTheme(
+                      backgroundColor: Colors.white,
                       // headerColor: widget.textStyle.backgroundColor,
                       // doneStyle: widget.textStyle,
                       // cancelStyle: widget.textStyle,

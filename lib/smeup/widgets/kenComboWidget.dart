@@ -68,7 +68,7 @@ class _KenComboWidgetState extends State<KenComboWidget> {
         child: DropdownButton(
           value: _selectedValue,
           // dropdownColor: widget.dropdownColor,
-          dropdownColor: KenModel.kBlue100,
+          dropdownColor: KenModel.kBack100,
           style: _getTextStile(),
           icon: Icon(
             Icons.keyboard_arrow_down_sharp,
