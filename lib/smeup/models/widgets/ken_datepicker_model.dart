@@ -13,7 +13,7 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
   static double? defaultBorderWidth = 1;
   static double? defaultBorderRadius = 4.0;
   static bool? defaultFontBold = false;
-  static double? defaultFontSize = 14;
+  static double? defaultFontSize = 16;
   static Color? defaultFontColor = KenModel.kPrimary;
   static Color? defaultBackColor = Colors.transparent;
   static bool? defaultCaptionFontBold = false;
@@ -33,6 +33,7 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
   static const Alignment defaultAlign = Alignment.topCenter;
   static const double defaultInnerSpace = 10.0;
   static const bool defaultUnderline = false;
+  static const Color defaultDashColor = KenModel.kBack100;
 
   Color? borderColor;
   double? borderWidth;
@@ -56,6 +57,7 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
   double? height;
   EdgeInsetsGeometry? padding;
   bool? showBorder;
+  Color? dashColor;
 
   List<String>? minutesList;
 
@@ -87,6 +89,7 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
     this.padding = defaultPadding,
     this.showBorder = defaultShowBorder,
     this.innerSpace = defaultInnerSpace,
+    this.dashColor = defaultDashColor,
     title = '',
     this.minutesList,
   }) : super(formKey, scaffoldKey, context, id: id, type: type, title: title) {
@@ -118,6 +121,8 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
     captionFontSize =
         KenUtilities.getDouble(optionsDefault!['captionFontSize']) ??
             defaultCaptionFontSize;
+    dashColor = KenUtilities.getColorFromRGB(optionsDefault!['dashColor']) ??
+        defaultDashColor;
     captionFontColor =
         KenUtilities.getColorFromRGB(optionsDefault!['captionFontColor']) ??
             defaultCaptionFontColor;
@@ -203,5 +208,6 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
     obj.captionFontBold ??= KenDatePickerModel.defaultCaptionFontBold;
     obj.captionFontColor ??= KenDatePickerModel.defaultCaptionFontColor;
     obj.captionFontSize ??= KenDatePickerModel.defaultCaptionFontSize;
+    obj.dashColor ??= KenDatePickerModel.defaultDashColor;
   }
 }

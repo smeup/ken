@@ -28,6 +28,7 @@ class KenDatePickerButton extends StatefulWidget {
   bool? underline;
   KenDatePickerModel? model;
   final Function? clientOnChange;
+  Color? dashColor;
 
   final DateTime? value;
   final String? id;
@@ -73,6 +74,7 @@ class KenDatePickerButton extends StatefulWidget {
     this.showborder = KenDatePickerModel.defaultShowBorder,
     this.clientOnChange,
     this.model,
+    this.dashColor,
     required this.globallyUniqueId,
   }) {
     KenDatePickerModel.setDefaults(this);
@@ -111,13 +113,12 @@ class KenDatePickerButtonState extends State<KenDatePickerButton> {
             style: widget.buttonStyle,
             onPressed: () {
               datepicker.DatePicker.showDatePicker(context,
-                  theme: const datepicker.DatePickerTheme(
-                    backgroundColor: Colors.white,
-                    // headerColor: widget.textStyle.backgroundColor,
-                    // doneStyle: widget.textStyle,
-                    // cancelStyle: widget.textStyle,
-                    // itemStyle: widget.textStyle
-                  ),
+                  theme: datepicker.DatePickerTheme(
+                      backgroundColor: widget.dashColor!,
+                      // headerColor: widget.textStyle.backgroundColor,
+                      doneStyle: widget.textStyle,
+                      cancelStyle: widget.textStyle,
+                      itemStyle: widget.textStyle),
                   currentTime: _currentValue,
                   showTitleActions: true, onConfirm: (date) {
                 setState(() {

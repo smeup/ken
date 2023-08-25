@@ -58,6 +58,7 @@ class KenDatePicker extends StatefulWidget
   EdgeInsetsGeometry? padding;
   bool? showborder;
   double? elevation;
+  Color? dashColor;
 
   //Functions
   Function? clientValidator;
@@ -101,6 +102,7 @@ class KenDatePicker extends StatefulWidget
     this.height = KenDatePickerModel.defaultHeight,
     this.padding = KenDatePickerModel.defaultPadding,
     this.showborder = KenDatePickerModel.defaultShowBorder,
+    this.dashColor = KenDatePickerModel.defaultDashColor,
     this.clientValidator,
     this.clientOnSave,
     this.clientOnChange,
@@ -140,6 +142,7 @@ class KenDatePicker extends StatefulWidget
     captionFontSize = m.captionFontSize;
     captionFontColor = m.captionFontColor;
     captionBackColor = m.captionBackColor;
+    dashColor = m.dashColor;
 
     data = treatData(m);
   }
@@ -297,6 +300,7 @@ class _KenDatePickerState extends State<KenDatePicker>
       clientOnChange: widget.clientOnChange,
       model: _model,
       globallyUniqueId: widget.globallyUniqueId,
+      dashColor: widget.dashColor,
     );
 
     var line = widget.underline!

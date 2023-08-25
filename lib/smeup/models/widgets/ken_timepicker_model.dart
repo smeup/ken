@@ -8,7 +8,7 @@ import '../../services/ken_configuration_service.dart';
 
 class KenTimePickerModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static double? defaultFontSize = 14;
+  static double? defaultFontSize = 16;
   static Color? defaultBackColor = Colors.transparent;
   static Color? defaultFontColor = KenModel.kPrimary;
   static bool? defaultFontBold = false;
@@ -94,6 +94,7 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
   static const Alignment defaultAlign = Alignment.topCenter;
   static const double defaultInnerSpace = 10.0;
   static const bool defaultUnderline = false;
+  static const Color defaultDashColor = KenModel.kBack100;
 
   Color? backColor;
   double? fontSize;
@@ -107,6 +108,7 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
   double? captionFontSize;
   Color? captionFontColor;
   Color? captionBackColor;
+  Color? dashColor;
 
   bool? underline;
   String? label;
@@ -148,6 +150,7 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
     this.height = defaultHeight,
     this.padding = defaultPadding,
     this.showBorder = defaultShowBorder,
+    this.dashColor = defaultDashColor,
     title = '',
     this.minutesList,
   }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
@@ -202,7 +205,8 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
     borderColor =
         KenUtilities.getColorFromRGB(optionsDefault!['borderColor']) ??
             defaultBorderColor;
-
+    dashColor = KenUtilities.getColorFromRGB(optionsDefault!['dashColor']) ??
+        defaultDashColor;
     captionBackColor =
         KenUtilities.getColorFromRGB(optionsDefault!['captionBackColor']) ??
             defaultCaptionBackColor;
@@ -270,5 +274,6 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
     obj.captionFontBold ??= KenTimePickerModel.defaultCaptionFontBold;
     obj.captionFontColor ??= KenTimePickerModel.defaultCaptionFontColor;
     obj.captionFontSize ??= KenTimePickerModel.defaultCaptionFontSize;
+    obj.dashColor ??= KenTimePickerModel.defaultDashColor;
   }
 }
