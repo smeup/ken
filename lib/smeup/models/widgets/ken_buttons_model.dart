@@ -153,31 +153,31 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var buttonStyle =
-        KenConfigurationService.getTheme()!.elevatedButtonTheme.style!;
+    // var buttonStyle =
+    //     KenConfigurationService.getTheme()!.elevatedButtonTheme.style!;
 
-    defaultBackColor = buttonStyle.backgroundColor!.resolve(<MaterialState>{});
-    defaultElevation = buttonStyle.elevation!.resolve(<MaterialState>{});
+    // defaultBackColor = buttonStyle.backgroundColor!.resolve(<MaterialState>{});
+    // defaultElevation = buttonStyle.elevation!.resolve(<MaterialState>{});
 
-    var side = buttonStyle.side!.resolve(<MaterialState>{})!;
-    defaultBorderColor = side.color;
-    defaultBorderWidth = side.width;
+    // var side = buttonStyle.side!.resolve(<MaterialState>{})!;
+    // defaultBorderColor = side.color;
+    // defaultBorderWidth = side.width;
 
-    var shape = buttonStyle.shape!.resolve(<MaterialState>{})!;
-    defaultBorderRadius = (shape as ContinuousRectangleBorder)
-        .borderRadius
-        .resolve(TextDirection.ltr)
-        .topLeft
-        .x;
+    // var shape = buttonStyle.shape!.resolve(<MaterialState>{})!;
+    // defaultBorderRadius = (shape as ContinuousRectangleBorder)
+    //     .borderRadius
+    //     .resolve(TextDirection.ltr)
+    //     .topLeft
+    //     .x;
 
-    var textStyle = KenConfigurationService.getTheme()!.textTheme.button!;
-    defaultFontSize = textStyle.fontSize;
-    defaultFontColor = textStyle.color;
-    defaultFontBold = textStyle.fontWeight == FontWeight.bold;
+    // var textStyle = KenConfigurationService.getTheme()!.textTheme.button!;
+    // defaultFontSize = textStyle.fontSize;
+    // defaultFontColor = textStyle.color;
+    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
 
-    var iconTheme = KenConfigurationService.getTheme()!.appBarTheme.iconTheme!;
-    defaultIconSize = iconTheme.size;
-    defaultIconColor = iconTheme.color;
+    // var iconTheme = KenConfigurationService.getTheme()!.appBarTheme.iconTheme!;
+    // defaultIconSize = iconTheme.size;
+    // defaultIconColor = iconTheme.color;
 
     // ----------------- set properties from default
 
