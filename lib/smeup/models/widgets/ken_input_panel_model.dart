@@ -9,27 +9,30 @@ class KenInputPanelModel extends KenModel implements KenDataInterface {
   static const double defaultFontSize = 16.0;
   static const double defaultWidth = 0;
   static const double defaultHeight = 0;
+  static const Color defaultBackgroundColor = KenModel.kBack100;
 
   EdgeInsetsGeometry? padding;
   double? fontSize;
   double? iconSize;
   double? width;
   double? height;
+  Color? backgroundColor;
   List<SmeupInputPanelField>? fields;
   String validationScript = '';
 
-  KenInputPanelModel({
-    id,
-    type,
-    GlobalKey<FormState>? formKey,
-    GlobalKey<ScaffoldState>? scaffoldKey,
-    BuildContext? context,
-    title = '',
-    this.width = defaultWidth,
-    this.height = defaultHeight,
-    this.padding = defaultPadding,
-    this.fontSize = defaultFontSize,
-  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type);
+  KenInputPanelModel(
+      {id,
+      type,
+      GlobalKey<FormState>? formKey,
+      GlobalKey<ScaffoldState>? scaffoldKey,
+      BuildContext? context,
+      title = '',
+      this.width = defaultWidth,
+      this.height = defaultHeight,
+      this.padding = defaultPadding,
+      this.fontSize = defaultFontSize,
+      this.backgroundColor = defaultBackgroundColor})
+      : super(formKey, scaffoldKey, context, title: title, id: id, type: type);
 
   KenInputPanelModel.fromMap(
     Map<String, dynamic> jsonMap,
@@ -45,6 +48,9 @@ class KenInputPanelModel extends KenModel implements KenDataInterface {
     title = jsonMap['title'] == null || jsonMap['title'] == '*NONE'
         ? ''
         : jsonMap['title'];
+
+    backgroundColor = KenUtilities.getColorFromRGB(optionsDefault!['color']) ??
+        defaultBackgroundColor;
 
     width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
     height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;

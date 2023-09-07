@@ -38,6 +38,7 @@ class KenInputPanel extends StatefulWidget
   String? type;
   String? title;
   List<SmeupInputPanelField>? data;
+  Color? backgroundColor;
 
   void Function(List<SmeupInputPanelField>?)? onSubmit;
 
@@ -50,6 +51,7 @@ class KenInputPanel extends StatefulWidget
       this.width = KenInputPanelModel.defaultWidth,
       this.height = KenInputPanelModel.defaultHeight,
       this.data,
+      this.backgroundColor,
       this.onSubmit})
       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
@@ -71,6 +73,7 @@ class KenInputPanel extends StatefulWidget
     fontSize = m.fontSize;
     width = m.width;
     height = m.height;
+    backgroundColor = m.backgroundColor;
     data = treatData(model);
   }
 
@@ -205,10 +208,13 @@ class _KenInputPanelState extends State<KenInputPanel>
       );
     }).toList();
     return Container(
-      color: KenConfigurationService.getTheme()!.cardTheme.color,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: fields,
+      color: widget.backgroundColor, // background color input panel
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: fields,
+        ),
       ),
     );
   }
@@ -221,6 +227,7 @@ class _KenInputPanelState extends State<KenInputPanel>
           widget.formKey,
           id: field.id,
           title: field.label,
+          backColor: Colors.transparent,
           height: 55,
           data: const [
             {"code": "0", "value": "No"},

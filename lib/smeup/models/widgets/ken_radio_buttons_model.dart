@@ -12,13 +12,13 @@ class KenRadioButtonsModel extends KenInputFieldModel
   // supported by json_theme
   static Color? defaultRadioButtonColor;
   static double? defaultFontSize = 14;
-  static Color? defaultFontColor = KenModel.kSecondary100;
-  static Color? defaultBackColor = Colors.transparent;
+  static Color? defaultFontColor = KenModel.kPrimary;
+  static const Color defaultBackColor = Colors.transparent;
   static bool? defaultFontBold = false;
   static bool? defaultCaptionFontBold = false;
   static double? defaultCaptionFontSize = 16;
-  static Color? defaultCaptionFontColor = KenModel.kSecondary100;
-  static Color? defaultCaptionBackColor = Colors.transparent;
+  static Color? defaultCaptionFontColor = KenModel.kPrimary;
+  static const Color defaultCaptionBackColor = Colors.transparent;
 
   // unsupported by json_theme
   static const String defaultValueField = 'code';
@@ -58,12 +58,12 @@ class KenRadioButtonsModel extends KenInputFieldModel
     this.radioButtonColor,
     this.fontColor,
     this.fontSize,
-    this.backColor,
+    this.backColor = defaultBackColor,
     this.fontBold,
     this.captionFontBold,
     this.captionFontSize,
     this.captionFontColor,
-    this.captionBackColor,
+    this.captionBackColor = defaultCaptionBackColor,
     this.width = defaultWidth,
     this.height = defaultHeight,
     this.align = defaultAlign,
@@ -146,21 +146,21 @@ class KenRadioButtonsModel extends KenInputFieldModel
   // }
 
   static setDefaults(dynamic obj) {
-    var radioTheme = KenConfigurationService.getTheme()!.radioTheme;
+    // var radioTheme = KenConfigurationService.getTheme()!.radioTheme;
 
-    defaultRadioButtonColor = radioTheme.fillColor!.resolve(<MaterialState>{});
+    // defaultRadioButtonColor = radioTheme.fillColor!.resolve(<MaterialState>{});
 
-    var captionStyle = KenConfigurationService.getTheme()!.textTheme.bodyText2!;
-    defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    defaultCaptionFontSize = captionStyle.fontSize;
-    defaultCaptionFontColor = captionStyle.color;
-    defaultCaptionBackColor = captionStyle.backgroundColor;
+    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.bodyText2!;
+    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
+    // defaultCaptionFontSize = captionStyle.fontSize;
+    // defaultCaptionFontColor = captionStyle.color;
+    // defaultCaptionBackColor = captionStyle.backgroundColor;
 
-    var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText2!;
-    defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-    defaultFontSize = textStyle.fontSize;
-    defaultFontColor = textStyle.color;
-    defaultBackColor = captionStyle.backgroundColor;
+    // var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText2!;
+    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
+    // defaultFontSize = textStyle.fontSize;
+    // defaultFontColor = textStyle.color;
+    // defaultBackColor = captionStyle.backgroundColor;
 
     // ----------------- set properties from default
 
