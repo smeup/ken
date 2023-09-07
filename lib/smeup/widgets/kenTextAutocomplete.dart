@@ -343,7 +343,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
+                  padding: EdgeInsets.all(6),
                   child: GestureDetector(
                     child: Icon(
                       Icons.close,
@@ -515,7 +515,6 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
   IconThemeData _getIconTheme() {
     IconThemeData themeData = KenConfigurationService.getTheme()!.iconTheme;
 
-    themeData = themeData.copyWith(size: widget.fontSize);
     return themeData;
   }
 }
