@@ -193,7 +193,7 @@ class _KenSwitchState extends State<KenSwitch>
       width: switchWidth,
       height: switchHeight,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
             widget.text!,

@@ -9,16 +9,16 @@ import '../../services/ken_configuration_service.dart';
 
 class KenDatePickerModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
-  static double? defaultBorderWidth = 2;
+  static Color? defaultBorderColor = KenModel.kPrimary;
+  static double? defaultBorderWidth = 1;
   static double? defaultBorderRadius = 4.0;
   static bool? defaultFontBold = false;
-  static double? defaultFontSize = 14;
-  static Color? defaultFontColor = KenModel.kButtonBackgroundColor;
-  static Color? defaultBackColor = Colors.white;
+  static double? defaultFontSize = 16;
+  static Color? defaultFontColor = KenModel.kPrimary;
+  static Color? defaultBackColor = Colors.transparent;
   static bool? defaultCaptionFontBold = false;
   static double? defaultCaptionFontSize = 10;
-  static Color? defaultCaptionFontColor = KenModel.kButtonBackgroundColor;
+  static Color? defaultCaptionFontColor = KenModel.kPrimary;
   static Color? defaultCaptionBackColor;
   static double? defaultElevation = 0;
 
@@ -26,13 +26,14 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
   static const String defaultLabel = '';
   static const double defaultWidth = 0;
   static const double defaultHeight = 100;
-  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(8);
   static const bool defaultShowBorder = false;
   static const String defaultValueField = 'value';
   static const String defaultdisplayedField = 'display';
   static const Alignment defaultAlign = Alignment.topCenter;
   static const double defaultInnerSpace = 10.0;
   static const bool defaultUnderline = false;
+  static const Color defaultDashColor = KenModel.kBack100;
 
   Color? borderColor;
   double? borderWidth;
@@ -56,6 +57,7 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
   double? height;
   EdgeInsetsGeometry? padding;
   bool? showBorder;
+  Color? dashColor;
 
   List<String>? minutesList;
 
@@ -87,6 +89,7 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
     this.padding = defaultPadding,
     this.showBorder = defaultShowBorder,
     this.innerSpace = defaultInnerSpace,
+    this.dashColor = defaultDashColor,
     title = '',
     this.minutesList,
   }) : super(formKey, scaffoldKey, context, id: id, type: type, title: title) {
@@ -118,6 +121,8 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
     captionFontSize =
         KenUtilities.getDouble(optionsDefault!['captionFontSize']) ??
             defaultCaptionFontSize;
+    dashColor = KenUtilities.getColorFromRGB(optionsDefault!['dashColor']) ??
+        defaultDashColor;
     captionFontColor =
         KenUtilities.getColorFromRGB(optionsDefault!['captionFontColor']) ??
             defaultCaptionFontColor;
@@ -165,31 +170,31 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
-    defaultBackColor = timePickerTheme.backgroundColor;
-    var shape = timePickerTheme.shape!;
-    defaultBorderRadius = (shape as ContinuousRectangleBorder)
-        .borderRadius
-        .resolve(TextDirection.ltr)
-        .topLeft
-        .x;
-    var side = timePickerTheme.dayPeriodBorderSide!;
-    defaultBorderColor = side.color;
-    defaultBorderWidth = side.width;
+    // var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
+    // defaultBackColor = timePickerTheme.backgroundColor;
+    // var shape = timePickerTheme.shape!;
+    // defaultBorderRadius = (shape as ContinuousRectangleBorder)
+    //     .borderRadius
+    //     .resolve(TextDirection.ltr)
+    //     .topLeft
+    //     .x;
+    // var side = timePickerTheme.dayPeriodBorderSide!;
+    // defaultBorderColor = side.color;
+    // defaultBorderWidth = side.width;
 
-    var buttonStyle =
-        KenConfigurationService.getTheme()!.elevatedButtonTheme.style!;
-    defaultElevation = buttonStyle.elevation!.resolve(<MaterialState>{});
+    // var buttonStyle =
+    //     KenConfigurationService.getTheme()!.elevatedButtonTheme.style!;
+    // defaultElevation = buttonStyle.elevation!.resolve(<MaterialState>{});
 
-    var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
-    defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-    defaultFontSize = textStyle.fontSize;
-    defaultFontColor = textStyle.color;
+    // var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
+    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
+    // defaultFontSize = textStyle.fontSize;
+    // defaultFontColor = textStyle.color;
 
-    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
-    defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    defaultCaptionFontSize = captionStyle.fontSize;
-    defaultCaptionFontColor = captionStyle.color;
+    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
+    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
+    // defaultCaptionFontSize = captionStyle.fontSize;
+    // defaultCaptionFontColor = captionStyle.color;
 
     // ----------------- set properties from default
     obj.backColor ??= KenDatePickerModel.defaultBackColor;
@@ -203,5 +208,6 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
     obj.captionFontBold ??= KenDatePickerModel.defaultCaptionFontBold;
     obj.captionFontColor ??= KenDatePickerModel.defaultCaptionFontColor;
     obj.captionFontSize ??= KenDatePickerModel.defaultCaptionFontSize;
+    obj.dashColor ??= KenDatePickerModel.defaultDashColor;
   }
 }

@@ -4,14 +4,13 @@ import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import '../../services/ken_configuration_service.dart';
 
 class KenSwitchModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static Color? defaultThumbColor = KenModel.kButtonBackgroundColor;
-  static Color? defaultTrackColor = KenModel.kGray100;
+  static Color? defaultThumbColor = KenModel.kPrimary;
+  static Color? defaultTrackColor = KenModel.kSecondary100;
   static double? defaultCaptionFontSize = 14;
-  static Color? defaultCaptionFontColor = KenModel.kGray100;
+  static Color? defaultCaptionFontColor = KenModel.kSecondary100;
   static Color? defaultCaptionBackColor = Colors.transparent;
   static bool? defaultCaptionFontBold = false;
 
@@ -97,16 +96,16 @@ class KenSwitchModel extends KenModel implements KenDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var radioTheme = KenConfigurationService.getTheme()!.switchTheme;
+    // var radioTheme = KenConfigurationService.getTheme()!.switchTheme;
 
-    defaultThumbColor = radioTheme.thumbColor!.resolve(<MaterialState>{});
-    defaultTrackColor = radioTheme.trackColor!.resolve(<MaterialState>{});
+    // defaultThumbColor = radioTheme.thumbColor!.resolve(<MaterialState>{});
+    // defaultTrackColor = radioTheme.trackColor!.resolve(<MaterialState>{});
 
-    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
-    defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    defaultCaptionFontSize = captionStyle.fontSize;
-    defaultCaptionFontColor = captionStyle.color;
-    defaultCaptionBackColor = captionStyle.backgroundColor;
+    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
+    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
+    // defaultCaptionFontSize = captionStyle.fontSize;
+    // defaultCaptionFontColor = captionStyle.color;
+    // defaultCaptionBackColor = captionStyle.backgroundColor;
 
     // ----------------- set properties from default
 

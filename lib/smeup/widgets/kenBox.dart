@@ -344,6 +344,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
+                  // inserting here the part for the Container border color
                   padding: const EdgeInsets.all(12),
                   height: widget.height,
                   child: FutureBuilder<Widget>(
@@ -650,6 +651,9 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     );
   }
 
+  /// Layout 2
+  ///
+
   Future<Widget> _getLayout2Async(dynamic data, cols) async {
     var listOfRows = List<Widget>.empty(growable: true);
     for (var col in cols) {
@@ -664,14 +668,15 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
                   flex: 1,
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(col['text'], style: widget.captionStyle),
+                    child: Text(col['text'],
+                        style: widget.captionStyle), // Left side
                   ),
                 ),
               Expanded(
                 flex: 2,
                 child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(rowData, style: widget.textStyle),
+                  alignment: Alignment.centerLeft,
+                  child: Text(rowData, style: widget.textStyle), // Right side
                 ),
               ),
             ]));

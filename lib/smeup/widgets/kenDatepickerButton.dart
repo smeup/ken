@@ -28,6 +28,7 @@ class KenDatePickerButton extends StatefulWidget {
   bool? underline;
   KenDatePickerModel? model;
   final Function? clientOnChange;
+  Color? dashColor;
 
   final DateTime? value;
   final String? id;
@@ -73,16 +74,17 @@ class KenDatePickerButton extends StatefulWidget {
     this.showborder = KenDatePickerModel.defaultShowBorder,
     this.clientOnChange,
     this.model,
+    this.dashColor,
     required this.globallyUniqueId,
   }) {
     KenDatePickerModel.setDefaults(this);
   }
 
   @override
-  _KenDatePickerButtonState createState() => _KenDatePickerButtonState();
+  KenDatePickerButtonState createState() => KenDatePickerButtonState();
 }
 
-class _KenDatePickerButtonState extends State<KenDatePickerButton> {
+class KenDatePickerButtonState extends State<KenDatePickerButton> {
   DateTime? _currentValue;
   String? _currentDisplay;
 
@@ -102,54 +104,55 @@ class _KenDatePickerButtonState extends State<KenDatePickerButton> {
 
   @override
   Widget build(BuildContext context) {
-    final button = Container(
-      height: 20,
-      width: widget.width,
-      padding: widget.padding,
-      child: ElevatedButton(
-          style: widget.buttonStyle,
-          onPressed: () {
-            datepicker.DatePicker.showDatePicker(context,
-                theme: datepicker.DatePickerTheme(
-                  backgroundColor: widget.backColor!,
-                  // headerColor: widget.textStyle.backgroundColor,
-                  // doneStyle: widget.textStyle,
-                  // cancelStyle: widget.textStyle,
-                  // itemStyle: widget.textStyle
-                ),
-                currentTime: _currentValue,
-                showTitleActions: true, onConfirm: (date) {
-              setState(() {
-                final newDate = DateFormat('dd/MM/yyyy').format(date);
-                _currentDisplay = newDate;
-                _currentValue = date;
+    final button = Padding(
+      padding: widget.padding!,
+      child: SizedBox(
+        height: 40,
+        width: widget.width,
+        child: ElevatedButton(
+            style: widget.buttonStyle,
+            onPressed: () {
+              datepicker.DatePicker.showDatePicker(context,
+                  theme: datepicker.DatePickerTheme(
+                      backgroundColor: widget.dashColor!,
+                      // headerColor: widget.textStyle.backgroundColor,
+                      doneStyle: widget.textStyle,
+                      cancelStyle: widget.textStyle,
+                      itemStyle: widget.textStyle),
+                  currentTime: _currentValue,
+                  showTitleActions: true, onConfirm: (date) {
+                setState(() {
+                  final newDate = DateFormat('dd/MM/yyyy').format(date);
+                  _currentDisplay = newDate;
+                  _currentValue = date;
 
-                KenMessageBus.instance.publishRequest(
-                  widget.globallyUniqueId,
-                  KenTopic.kenDatePickerOnPressed,
-                  KenMessageBusEventData(
-                      context: context,
-                      widget: widget,
-                      model: null,
-                      data: newDate),
-                );
+                  KenMessageBus.instance.publishRequest(
+                    widget.globallyUniqueId,
+                    KenTopic.kenDatePickerOnPressed,
+                    KenMessageBusEventData(
+                        context: context,
+                        widget: widget,
+                        model: null,
+                        data: newDate),
+                  );
 
-                if (widget.clientOnChange != null) {
-                  widget.clientOnChange!(KenTimePickerData(
-                    time: _currentValue,
-                    formattedTime: _currentDisplay,
-                  ));
-                }
+                  if (widget.clientOnChange != null) {
+                    widget.clientOnChange!(KenTimePickerData(
+                      time: _currentValue,
+                      formattedTime: _currentDisplay,
+                    ));
+                  }
+                });
               });
-            });
-          },
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 5.0),
-              child: Text(_currentDisplay!, style: widget.textStyle),
-            ),
-          )),
+            },
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Text(_currentDisplay!, style: widget.textStyle),
+              ),
+            )),
+      ),
     );
 
     return button;

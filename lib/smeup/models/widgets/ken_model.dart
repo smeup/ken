@@ -14,18 +14,18 @@ enum WidgetOrientation { Vertical, Horizontal }
 // abstract class SmeupModel {
 class KenModel extends KenDao {
   ///GRAY COLOR
-  static const Color kGray100 = Color(0xffB9BBBD);
-  static const Color kGray200 = Color(0xff596776);
-  static const Color kGray300 = Color(0xff343841);
+  static const Color kSecondary100 = Color(0xffB9BBBD);
+  static const Color kSecondary200 = Color(0xff596776);
+  static const Color kSecondary300 = Color(0xff343841);
 
   /// NEUTRAL COLOR
-  static const Color kBlue100 = Color(0xff1E2128);
-  static const Color kBlue200 = Color(0xff15171C);
+  static const Color kBack100 = Color(0xff1E2128);
+  static const Color kBack200 = Color(0xff15171C);
 
   /// NORMAL
-  static const Color kIconColor = Color(0xff1c006876);
-  static const Color kButtonBackgroundColor = Color(0xff06899b);
-  static const Color inactivePrimary = Color(0xff53b9cc);
+  static const Color kIconColor = Color(0x1C006876);
+  static const Color kPrimary = Color(0xff06899b);
+  static const Color kInactivePrimary = Color(0xff53b9cc);
 
   dynamic data;
   String? type;

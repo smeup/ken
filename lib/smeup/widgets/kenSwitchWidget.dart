@@ -11,7 +11,8 @@ class KenSwitchWidget extends StatefulWidget {
   final Function? onClientChange;
 
   KenSwitchWidget(
-      {this.data,
+      {super.key,
+      this.data,
       this.id,
       this.onClientChange,
       this.thumbColor,

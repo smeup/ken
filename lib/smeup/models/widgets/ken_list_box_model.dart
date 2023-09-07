@@ -11,16 +11,16 @@ enum KenListType { simple, oriented, wheel }
 
 class KenListBoxModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static Color? defaultBackColor = KenModel.kBlue200;
-  static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
-  static double? defaultBorderWidth = 2;
+  static Color? defaultBackColor = KenModel.kBack100;
+  static Color? defaultBorderColor = KenModel.kPrimary;
+  static double? defaultBorderWidth = 1;
   static double? defaultBorderRadius = 8;
   static double? defaultFontSize = 16;
-  static Color? defaultFontColor = KenModel.kGray100;
+  static Color? defaultFontColor = KenModel.kSecondary100;
   static bool? defaultFontBold = true;
   static bool? defaultCaptionFontBold = false;
   static double? defaultCaptionFontSize = 10;
-  static Color? defaultCaptionFontColor = KenModel.kGray100;
+  static Color? defaultCaptionFontColor = KenModel.kSecondary100;
 
   // unsupported by json_theme
   static const double defaultWidth = 0;
@@ -199,28 +199,28 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var cardTheme = KenConfigurationService.getTheme()!.cardTheme;
-    defaultBackColor = cardTheme.color;
-    ContinuousRectangleBorder shape =
-        cardTheme.shape as ContinuousRectangleBorder;
-    defaultBorderRadius =
-        shape.borderRadius.resolve(TextDirection.ltr).topLeft.x;
-    var side = shape.side;
-    defaultBorderColor = side.color;
-    defaultBorderWidth = side.width;
+    // var cardTheme = KenConfigurationService.getTheme()!.cardTheme;
+    // defaultBackColor = cardTheme.color;
+    // ContinuousRectangleBorder shape =
+    //     cardTheme.shape as ContinuousRectangleBorder;
+    // defaultBorderRadius =
+    //     shape.borderRadius.resolve(TextDirection.ltr).topLeft.x;
+    // var side = shape.side;
+    // defaultBorderColor = side.color;
+    // defaultBorderWidth = side.width;
 
-    var textStyle = KenConfigurationService.getTheme()!
-        .textTheme
-        .headline4!
-        .copyWith(backgroundColor: defaultBackColor);
-    defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-    defaultFontSize = textStyle.fontSize;
-    defaultFontColor = textStyle.color;
+    // var textStyle = KenConfigurationService.getTheme()!
+    //     .textTheme
+    //     .headline4!
+    //     .copyWith(backgroundColor: defaultBackColor);
+    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
+    // defaultFontSize = textStyle.fontSize;
+    // defaultFontColor = textStyle.color;
 
-    var captionStyle = KenConfigurationService.getTheme()!.textTheme.headline5!;
-    defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    defaultCaptionFontSize = captionStyle.fontSize;
-    defaultCaptionFontColor = captionStyle.color;
+    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.headline5!;
+    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
+    // defaultCaptionFontSize = captionStyle.fontSize;
+    // defaultCaptionFontColor = captionStyle.color;
 
     // ----------------- set properties from default
     obj.backColor ??= KenListBoxModel.defaultBackColor;

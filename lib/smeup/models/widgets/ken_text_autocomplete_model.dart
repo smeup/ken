@@ -4,21 +4,21 @@ import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import '../../services/ken_configuration_service.dart';
 
 class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
   // supported by json_theme
   static double? defaultFontSize = 16;
-  static Color? defaultBackColor = KenModel.kBlue200;
-  static Color? defaultFontColor = KenModel.kGray100;
+  static Color? defaultBackColor = KenModel.kBack200;
+  static Color? defaultFontColor = KenModel.kSecondary100;
   static bool? defaultFontBold = false;
   static bool? defaultCaptionFontBold = false;
-  static double? defaultCaptionFontSize = 16;
-  static Color? defaultCaptionFontColor = KenModel.kGray100;
-  static Color? defaultCaptionBackColor = Colors.transparent;
-  static Color? defaultBorderColor = KenModel.kButtonBackgroundColor;
+  static double? defaultCaptionFontSize = 14;
+  static Color? defaultCaptionFontColor = KenModel.kPrimary;
+  static Color? defaultCaptionBackColor = KenModel.kBack200;
+  static Color? defaultBorderColor = KenModel.kPrimary;
   static double? defaultBorderWidth = 0;
   static double? defaultBorderRadius = 10;
+  static Color? defaultIconColor = KenModel.kPrimary;
 
   // unsupported by json_theme
   static const String defaultLabel = '';
@@ -42,6 +42,7 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
   Color? borderColor;
   double? borderWidth;
   double? borderRadius;
+  Color? iconColor;
 
   String? label;
   double? width;
@@ -70,6 +71,7 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
     this.captionFontColor,
     this.captionFontSize,
     this.borderColor,
+    this.iconColor,
     this.borderRadius,
     this.borderWidth,
     this.label = defaultLabel,
@@ -131,6 +133,9 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
         KenUtilities.getColorFromRGB(optionsDefault!['borderColor']) ??
             defaultBorderColor;
 
+    iconColor = KenUtilities.getColorFromRGB(optionsDefault!['iconColor']) ??
+        defaultIconColor;
+
     defaultValue = jsonMap['defaultValue'] ?? '';
     valueField = optionsDefault!['valueField'] ?? 'value';
     showSubmit = optionsDefault!['showSubmit'] ?? defaultShowSubmit;
@@ -145,32 +150,33 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
-    defaultBackColor = timePickerTheme.backgroundColor;
-    var shape = timePickerTheme.shape!;
-    defaultBorderRadius = (shape as ContinuousRectangleBorder)
-        .borderRadius
-        .resolve(TextDirection.ltr)
-        .topLeft
-        .x;
-    var side = timePickerTheme.dayPeriodBorderSide!;
-    defaultBorderColor = side.color;
-    defaultBorderWidth = side.width;
+    // var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
+    // defaultBackColor = timePickerTheme.backgroundColor;
+    // var shape = timePickerTheme.shape!;
+    // defaultBorderRadius = (shape as ContinuousRectangleBorder)
+    //     .borderRadius
+    //     .resolve(TextDirection.ltr)
+    //     .topLeft
+    //     .x;
+    // var side = timePickerTheme.dayPeriodBorderSide!;
+    // defaultBorderColor = side.color;
+    // defaultBorderWidth = side.width;
 
-    var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
-    defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-    defaultFontSize = textStyle.fontSize;
-    defaultFontColor = textStyle.color;
-    defaultBackColor = textStyle.backgroundColor;
+    // var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
+    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
+    // defaultFontSize = textStyle.fontSize;
+    // defaultFontColor = textStyle.color;
+    // defaultBackColor = textStyle.backgroundColor;
 
-    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
-    defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    defaultCaptionFontSize = captionStyle.fontSize;
-    defaultCaptionFontColor = captionStyle.color;
-    defaultCaptionBackColor = captionStyle.backgroundColor;
+    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
+    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
+    // defaultCaptionFontSize = captionStyle.fontSize;
+    // defaultCaptionFontColor = captionStyle.color;
+    // defaultCaptionBackColor = captionStyle.backgroundColor;
 
     // ----------------- set properties from default
     obj.borderColor ??= KenTextAutocompleteModel.defaultBorderColor;
+    obj.iconColor ??= KenTextAutocompleteModel.defaultIconColor;
     obj.borderWidth ??= KenTextAutocompleteModel.defaultBorderWidth;
     obj.borderRadius ??= KenTextAutocompleteModel.defaultBorderRadius;
     obj.fontBold ??= KenTextAutocompleteModel.defaultFontBold;

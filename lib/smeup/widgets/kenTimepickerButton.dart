@@ -29,6 +29,7 @@ class KenTimePickerButton extends StatefulWidget {
   Color? captionBackColor;
   bool? underline;
   KenTimePickerModel? model;
+  Color? dashColor;
 
   final String? id;
 
@@ -50,6 +51,7 @@ class KenTimePickerButton extends StatefulWidget {
     this.data,
     this.buttonStyle,
     this.textStyle, {
+    super.key,
     this.scaffoldKey,
     this.formKey,
     this.id = '',
@@ -75,16 +77,17 @@ class KenTimePickerButton extends StatefulWidget {
     this.minutesList,
     this.clientOnChange,
     this.model,
+    this.dashColor,
     required this.globallyUniqueId,
   }) {
     KenTimePickerModel.setDefaults(this);
   }
 
   @override
-  _KenTimePickerButtonState createState() => _KenTimePickerButtonState();
+  KenTimePickerButtonState createState() => KenTimePickerButtonState();
 }
 
-class _KenTimePickerButtonState extends State<KenTimePickerButton> {
+class KenTimePickerButtonState extends State<KenTimePickerButton> {
   DateTime? _currentValue;
   String? _currentDisplay;
 
@@ -97,57 +100,58 @@ class _KenTimePickerButtonState extends State<KenTimePickerButton> {
 
   @override
   Widget build(BuildContext context) {
-    final button = Container(
-        height: 20,
-        width: widget.width,
-        padding: widget.padding,
-        child: ElevatedButton(
-            style: widget.buttonStyle,
-            onPressed: () {
-              datepicker.DatePicker.showPicker(context,
-                  theme: datepicker.DatePickerTheme(
-                    backgroundColor: widget.backColor!,
-                    // headerColor: widget.textStyle.backgroundColor,
-                    // doneStyle: widget.textStyle,
-                    // cancelStyle: widget.textStyle,
-                    // itemStyle: widget.textStyle
-                  ),
-                  pickerModel: KenTimePickerCustomization(
-                      currentTime: _currentValue,
-                      showSecondsColumn: false,
-                      minutesList: widget.minutesList),
-                  showTitleActions: true, onConfirm: (date) {
-                setState(() {
-                  final newTime = DateFormat('HH:mm').format(date);
-                  _currentDisplay = newTime;
-                  _currentValue = date;
+    final button = Padding(
+      padding: widget.padding!,
+      child: SizedBox(
+          height: 40,
+          width: widget.width,
+          child: ElevatedButton(
+              style: widget.buttonStyle,
+              onPressed: () {
+                datepicker.DatePicker.showPicker(context,
+                    theme: datepicker.DatePickerTheme(
+                        backgroundColor: widget.dashColor!,
+                        // headerColor: widget.textStyle.backgroundColor,
+                        doneStyle: widget.textStyle,
+                        cancelStyle: widget.textStyle,
+                        itemStyle: widget.textStyle),
+                    pickerModel: KenTimePickerCustomization(
+                        currentTime: _currentValue,
+                        showSecondsColumn: false,
+                        minutesList: widget.minutesList),
+                    showTitleActions: true, onConfirm: (date) {
+                  setState(() {
+                    final newTime = DateFormat('HH:mm').format(date);
+                    _currentDisplay = newTime;
+                    _currentValue = date;
 
-                  KenMessageBus.instance.publishRequest(
-                    widget.globallyUniqueId,
-                    KenTopic.kenTimePickerOnPressed,
-                    KenMessageBusEventData(
-                        context: context,
-                        widget: widget,
-                        model: null,
-                        data: newTime),
-                  );
+                    KenMessageBus.instance.publishRequest(
+                      widget.globallyUniqueId,
+                      KenTopic.kenTimePickerOnPressed,
+                      KenMessageBusEventData(
+                          context: context,
+                          widget: widget,
+                          model: null,
+                          data: newTime),
+                    );
 
-                  if (widget.clientOnChange != null) {
-                    widget.clientOnChange!(KenTimePickerData(
-                      time: _currentValue,
-                      formattedTime: _currentDisplay,
-                    ));
-                  }
+                    if (widget.clientOnChange != null) {
+                      widget.clientOnChange!(KenTimePickerData(
+                        time: _currentValue,
+                        formattedTime: _currentDisplay,
+                      ));
+                    }
+                  });
                 });
-              });
-            },
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 5.0),
-                child: Text(_currentDisplay!, style: widget.textStyle),
-              ),
-            )));
+              },
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5.0),
+                  child: Text(_currentDisplay!, style: widget.textStyle),
+                ),
+              ))),
+    );
 
     return button;
   }

@@ -38,6 +38,7 @@ class KenCombo extends StatefulWidget
   Color? borderColor;
   double? borderWidth;
   double? borderRadius;
+  Color? dropdownColor;
 
   bool? underline;
   double? innerSpace;
@@ -78,6 +79,7 @@ class KenCombo extends StatefulWidget
     this.id = '',
     this.type = 'CMB',
     this.selectedValue = '',
+    this.dropdownColor,
     this.data,
     this.align = KenComboModel.defaultAlign,
     this.innerSpace = KenComboModel.defaultInnerSpace,
@@ -128,6 +130,7 @@ class KenCombo extends StatefulWidget
     borderRadius = m.borderRadius;
     borderWidth = m.borderWidth;
     align = m.align;
+    dropdownColor = m.dropdownColor;
     innerSpace = m.innerSpace;
     width = m.width;
     height = m.height;
@@ -287,37 +290,43 @@ class _KenComboState extends State<KenCombo>
     Widget children;
 
     if (widget.align == Alignment.centerLeft) {
-      children = Column(children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            text,
-            SizedBox(width: widget.innerSpace),
-            Expanded(child: Align(alignment: widget.align!, child: combo)),
-          ],
-        ),
-        line
-      ]);
-    } else if (widget.align == Alignment.centerRight) {
-      children = Column(
-        children: [
+      children = Padding(
+        padding: widget.padding!,
+        child: Column(children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
-                  child: Align(
-                alignment: widget.align!,
-                child: combo,
-              )),
-              SizedBox(width: widget.innerSpace),
               text,
+              SizedBox(width: widget.innerSpace),
+              Expanded(child: Align(alignment: widget.align!, child: combo)),
             ],
           ),
           line
-        ],
+        ]),
+      );
+    } else if (widget.align == Alignment.centerRight) {
+      children = Padding(
+        padding: widget.padding!,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                    child: Align(
+                  alignment: widget.align!,
+                  child: combo,
+                )),
+                SizedBox(width: widget.innerSpace),
+                text,
+              ],
+            ),
+            line
+          ],
+        ),
       );
     } else if (widget.align == Alignment.topCenter) {
-      children = Container(
+      children = SizedBox(
         height: boxHeight,
         width: boxWidth,
         child: Column(
@@ -337,23 +346,26 @@ class _KenComboState extends State<KenCombo>
         ),
       );
     } else if (widget.align == Alignment.bottomCenter) {
-      children = Container(
+      children = SizedBox(
         height: boxHeight,
         width: boxWidth,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: combo,
-            ),
-            SizedBox(height: widget.innerSpace),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: text,
-            ),
-            line
-          ],
+        child: Padding(
+          padding: widget.padding!,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: combo,
+              ),
+              SizedBox(height: widget.innerSpace),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: text,
+              ),
+              line
+            ],
+          ),
         ),
         //color: widget.backColor,
       );
@@ -376,7 +388,9 @@ class _KenComboState extends State<KenCombo>
     TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
 
     style = style.copyWith(
-        color: widget.captionFontColor, fontSize: widget.captionFontSize);
+        color: widget.captionFontColor,
+        fontSize: widget.captionFontSize,
+        backgroundColor: widget.captionBackColor);
 
     if (widget.captionFontBold!) {
       style = style.copyWith(

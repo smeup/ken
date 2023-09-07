@@ -1,7 +1,6 @@
 {
   "primaryColor": "#06899b",
   "splashColor": "#06899b",
-  "scaffoldBackgroundColor": "#ffffff",
   "elevatedButtonTheme": {
     "style": {
       "backgroundColor": "#06899b",
@@ -23,12 +22,7 @@
       "fontWeight": "normal",
       "decoration": "none"
     },
-    "caption": {
-      "color": "#06899b",
-      "fontSize": 16.0,
-      "fontWeight": "normal",
-      "backgroundColor": "#ffffff"
-    },
+    "caption": {},
     "bodyText1": {
       "color": "#06899b",
       "fontSize": 16.0,
@@ -41,12 +35,7 @@
       "fontWeight": "normal",
       "backgroundColor": "#ffffff"
     },
-    "headline1": {
-      "color": "#06899b",
-      "fontSize": 56.0,
-      "fontWeight": "normal",
-      "backgroundColor": "#ffffff"
-    },
+    "headline1": {},
     "headline2": {
       "color": "#06899b",
       "fontSize": 43.0,
@@ -78,10 +67,7 @@
       "backgroundColor": "#ffffff"
     }
   },
-  "iconTheme": {
-    "size": 20.0,
-    "color": "#ffffff"
-  },
+  "iconTheme": {},
   "timePickerTheme": {
     "backgroundColor": "#ffffff",
     "shape": {
@@ -96,10 +82,7 @@
   "radioTheme": {
     "fillColor": "#06899b"
   },
-  "switchTheme": {
-    "thumbColor": "#06899b",
-    "trackColor": "#53b9cc"
-  },
+  "switchTheme": {},
   "sliderTheme": {
     "activeTrackColor": "#06899b",
     "thumbColor": "#06899b",
@@ -128,10 +111,7 @@
       "fontWeight": "normal",
       "backgroundColor": "#06899b"
     },
-    "iconTheme": {
-      "size": 20.0,
-      "color": "#ffffff"
-    },
+    "iconTheme": {},
     "centerTitle": true,
     "elevation": 0,
     "toolbarHeight": 50

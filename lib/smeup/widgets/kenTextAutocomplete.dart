@@ -35,6 +35,7 @@ class KenTextAutocomplete extends StatefulWidget
   Color? borderColor;
   double? borderWidth;
   double? borderRadius;
+  Color? iconColor;
 
   String? label;
   double? width;
@@ -86,6 +87,7 @@ class KenTextAutocomplete extends StatefulWidget
     this.captionFontColor,
     this.captionFontSize,
     this.borderColor,
+    this.iconColor,
     this.borderRadius,
     this.borderWidth,
     this.label = KenTextAutocompleteModel.defaultLabel,
@@ -126,6 +128,7 @@ class KenTextAutocomplete extends StatefulWidget
     captionFontColor = m.captionFontColor;
     captionFontSize = m.captionFontSize;
     borderColor = m.borderColor;
+    iconColor = m.iconColor;
     borderRadius = m.borderRadius;
     borderWidth = m.borderWidth;
     label = m.label;
@@ -279,10 +282,9 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
             return Container(
               padding: const EdgeInsets.only(right: 5),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3),
+                  borderRadius: BorderRadius.circular(widget.borderRadius!),
                   border: Border.all(
-                      width: 1,
-                      color: KenConfigurationService.getTheme()!.primaryColor)),
+                      width: widget.borderWidth!, color: widget.borderColor!)),
               child: Row(children: [
                 Expanded(
                   child: Padding(
@@ -317,10 +319,9 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                       },
                       decoration: InputDecoration(
                         isDense: false,
-                        contentPadding:
-                            const EdgeInsets.only(left: 5, top: -10),
+                        contentPadding: const EdgeInsets.only(left: 5, top: -8),
                         floatingLabelAlignment: FloatingLabelAlignment.start,
-                        floatingLabelStyle: textStyle,
+                        floatingLabelStyle: captionStyle,
                         floatingLabelBehavior: FloatingLabelBehavior.auto,
                         labelStyle: captionStyle,
                         labelText: widget.label,
@@ -342,11 +343,11 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
+                  padding: EdgeInsets.all(6),
                   child: GestureDetector(
                     child: Icon(
                       Icons.close,
-                      color: Theme.of(context).primaryColor,
+                      color: widget.iconColor,
                       size: iconTheme.size,
                     ),
                     onTap: () {

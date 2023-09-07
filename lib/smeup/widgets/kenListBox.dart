@@ -489,11 +489,11 @@ class _KenListBoxState extends State<KenListBox>
               ? Colors.grey[300]
               : widget.backColor;
 
-      if (widget.backgroundColName != null &&
-          widget.backgroundColName!.isNotEmpty) {
-        _backColor =
-            KenUtilities.getColorFromRGB(dataElement[widget.backgroundColName]);
-      }
+      // if (widget.backgroundColName != null &&
+      //     widget.backgroundColName!.isNotEmpty) {
+      //   _backColor =
+      //       KenUtilities.getColorFromRGB(dataElement[widget.backgroundColName]);
+      // }
 
       TextStyle _getTextStile(Color? _backColor) {
         TextStyle style =
@@ -510,21 +510,21 @@ class _KenListBoxState extends State<KenListBox>
           style = style.copyWith(
               color: widget.fontColor,
               fontSize: widget.fontSize,
-              backgroundColor: _backColor);
+              backgroundColor: Colors.transparent);
         }
         if (widget.fontBold!) {
           style = style.copyWith(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.normal,
           );
         }
 
         return style;
       }
 
-      CardTheme _getCardStyle(Color? backColor) {
+      CardTheme _getCardStyle() {
         var timeCardTheme =
             KenConfigurationService.getTheme()!.cardTheme.copyWith(
-                  color: backColor,
+                  color: widget.backColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(widget.borderRadius!),
                       side: BorderSide(
@@ -538,7 +538,7 @@ class _KenListBoxState extends State<KenListBox>
         return timeCardTheme;
       }
 
-      CardTheme cardTheme = _getCardStyle(_backColor);
+      CardTheme cardTheme = _getCardStyle();
       TextStyle textStyle = _getTextStile(_backColor);
       TextStyle captionStyle = _getCaptionStile(_backColor);
 
@@ -603,7 +603,7 @@ class _KenListBoxState extends State<KenListBox>
     style = style.copyWith(
         color: widget.captionFontColor,
         fontSize: widget.captionFontSize,
-        backgroundColor: backColor);
+        backgroundColor: Colors.transparent);
 
     if (widget.captionFontBold!) {
       style = style.copyWith(

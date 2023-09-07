@@ -59,6 +59,7 @@ class KenTimePicker extends StatefulWidget
   double? elevation;
   List<String>? minutesList;
   KenTimePickerData? data;
+  Color? dashColor;
 
   // They have to be mapped with all the dynamisms
   // Function clientValidator;
@@ -94,6 +95,7 @@ class KenTimePicker extends StatefulWidget
     this.padding = KenTimePickerModel.defaultPadding,
     this.showborder = KenTimePickerModel.defaultShowBorder,
     this.minutesList,
+    this.dashColor = KenTimePickerModel.defaultDashColor,
     // They have to be mapped with all the dynamisms
     //this.clientValidator,
     //this.clientOnSave,
@@ -142,6 +144,7 @@ class KenTimePicker extends StatefulWidget
     captionFontSize = m.captionFontSize;
     captionFontColor = m.captionFontColor;
     captionBackColor = m.captionBackColor;
+    dashColor = m.dashColor;
 
     data = treatData(m);
   }
@@ -251,8 +254,7 @@ class _KenTimePickerState extends State<KenTimePicker>
     }
 
     if (!widget.showborder!) {
-      widget.borderColor =
-          KenConfigurationService.getTheme()!.scaffoldBackgroundColor;
+      widget.borderColor = widget.borderColor;
     }
 
     ButtonStyle buttonStyle = _getButtonStyle();
@@ -265,7 +267,7 @@ class _KenTimePickerState extends State<KenTimePicker>
       padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
       child: Icon(
         Icons.access_time,
-        color: Theme.of(context).primaryColor,
+        color: widget.fontColor,
         size: iconTheme.size,
       ),
     );
@@ -304,6 +306,7 @@ class _KenTimePickerState extends State<KenTimePicker>
       clientOnChange: widget.clientOnChange,
       model: _model,
       globallyUniqueId: widget.globallyUniqueId,
+      dashColor: widget.dashColor,
     );
 
     var line = widget.underline!
@@ -504,7 +507,7 @@ class _KenTimePickerState extends State<KenTimePicker>
     IconThemeData themeData = KenConfigurationService.getTheme()!
         .appBarTheme
         .iconTheme!
-        .copyWith(size: widget.fontSize);
+        .copyWith(size: widget.fontSize, color: Colors.transparent);
 
     return themeData;
   }
