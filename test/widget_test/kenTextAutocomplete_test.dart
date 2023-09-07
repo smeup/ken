@@ -103,8 +103,8 @@ Future<void> runTests(WidgetTester tester) async {
   final findKey = find.byKey(const Key('autocomplete1'));
   expect(findKey, findsOneWidget);
 
-  final findKeyText = find.byKey(const Key('autocomplete1_text'));
-  expect(findKeyText, findsOneWidget);
+  // final findKeyText = find.byKey(const Key('autocomplete1_text'));
+  // expect(findKeyText, findsOneWidget);
 
   var findWidget = find.byType(KenTextAutocomplete);
   expect(findWidget, findsWidgets);

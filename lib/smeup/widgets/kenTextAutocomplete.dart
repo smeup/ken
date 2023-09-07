@@ -515,6 +515,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
   IconThemeData _getIconTheme() {
     IconThemeData themeData = KenConfigurationService.getTheme()!.iconTheme;
 
+    themeData = themeData.copyWith(size: widget.fontSize);
     return themeData;
   }
 }
