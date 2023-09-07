@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ken/smeup/services/ken_log_service.dart';
-import '../../lib/smeup/widgets/kenSwitch.dart';
+import 'package:ken/smeup/widgets/kenSwitch.dart';
 
 import 'widget_test_service.dart';
 
