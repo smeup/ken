@@ -22,10 +22,16 @@ class KenModel extends KenDao {
   static const Color kBack100 = Color(0xff1E2128);
   static const Color kBack200 = Color(0xff15171C);
 
-  /// NORMAL
+  /// PRIMARY
   static const Color kIconColor = Color(0x1C006876);
   static const Color kPrimary = Color(0xff06899b);
   static const Color kInactivePrimary = Color(0xff53b9cc);
+
+  /// VARIANT
+  static const Color kRed = Color(0xFFC14B49);
+  static const Color kOrange = Color(0xFFE79821);
+  static const Color kYellow = Color(0xFFCFC034);
+  static const Color kGreen = Color(0xFF30AD34);
 
   dynamic data;
   String? type;

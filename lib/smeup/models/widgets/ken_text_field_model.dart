@@ -10,7 +10,7 @@ import '../../services/ken_configuration_service.dart';
 class KenTextFieldModel extends KenInputFieldModel implements KenDataInterface {
   // supported by json_theme
   static double? defaultFontSize = 16;
-  static Color? defaultBackColor = Colors.transparent;
+  static const Color? defaultBackColor = Colors.transparent;
   static Color? defaultFontColor = KenModel.kSecondary100;
   static bool? defaultFontBold = false;
   static bool? defaultCaptionFontBold = false;
@@ -63,7 +63,7 @@ class KenTextFieldModel extends KenInputFieldModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    this.backColor,
+    this.backColor = defaultBackColor,
     this.fontSize,
     this.fontBold,
     this.fontColor,

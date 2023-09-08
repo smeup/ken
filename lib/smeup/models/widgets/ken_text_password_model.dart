@@ -9,7 +9,7 @@ import '../../services/ken_configuration_service.dart';
 class KenTextPasswordModel extends KenModel implements KenDataInterface {
   // supported by json_theme
   static double? defaultFontSize = 16;
-  static Color? defaultBackColor = Colors.transparent;
+  static const Color defaultBackColor = Colors.transparent;
   static Color? defaultFontColor = KenModel.kPrimary;
   static bool? defaultFontBold = false;
   static bool? defaultCaptionFontBold = false;
@@ -21,7 +21,7 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
   static double? defaultBorderRadius = 8;
   static Color? defaultButtonBackColor = Colors.transparent;
   static double? defaultIconSize = 20;
-  static Color? defaultIconColor = Colors.white;
+  static Color? defaultIconColor = KenModel.kPrimary;
 
   // unsupported by json_theme
 
@@ -181,35 +181,35 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
   }
 
   static setDefaults(dynamic obj) {
-    var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
-    defaultBackColor = timePickerTheme.backgroundColor;
-    var shape = timePickerTheme.shape!;
-    defaultBorderRadius = (shape as ContinuousRectangleBorder)
-        .borderRadius
-        .resolve(TextDirection.ltr)
-        .topLeft
-        .x;
-    var side = timePickerTheme.dayPeriodBorderSide!;
-    defaultBorderColor = side.color;
-    defaultBorderWidth = side.width;
+    // var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
+    // defaultBackColor = timePickerTheme.backgroundColor;
+    // var shape = timePickerTheme.shape!;
+    // defaultBorderRadius = (shape as ContinuousRectangleBorder)
+    //     .borderRadius
+    //     .resolve(TextDirection.ltr)
+    //     .topLeft
+    //     .x;
+    // var side = timePickerTheme.dayPeriodBorderSide!;
+    // defaultBorderColor = side.color;
+    // defaultBorderWidth = side.width;
 
-    var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
-    defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-    defaultFontSize = textStyle.fontSize;
-    defaultFontColor = textStyle.color;
-    defaultBackColor = textStyle.backgroundColor;
+    // var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
+    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
+    // defaultFontSize = textStyle.fontSize;
+    // defaultFontColor = textStyle.color;
+    // defaultBackColor = textStyle.backgroundColor;
 
-    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
-    defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    defaultCaptionFontSize = captionStyle.fontSize;
-    defaultCaptionFontColor = captionStyle.color;
-    defaultCaptionBackColor = captionStyle.backgroundColor;
+    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
+    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
+    // defaultCaptionFontSize = captionStyle.fontSize;
+    // defaultCaptionFontColor = captionStyle.color;
+    // defaultCaptionBackColor = captionStyle.backgroundColor;
 
-    var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
-    defaultIconSize = iconTheme.size;
-    defaultIconColor = iconTheme.color;
+    // var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
+    // defaultIconSize = iconTheme.size;
+    // defaultIconColor = iconTheme.color;
 
-    defaultButtonBackColor = KenConfigurationService.getTheme()!.primaryColor;
+    // defaultButtonBackColor = KenConfigurationService.getTheme()!.primaryColor;
 
     // ----------------- set properties from default
     obj.borderColor ??= KenTextPasswordModel.defaultBorderColor;

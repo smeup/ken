@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/notifiers/ken_text_password_rule_notifier.dart';
+import '../models/widgets/ken_model.dart';
 import 'kenTextPasswordRule.dart';
 
 class KenTextPasswordIndicators extends StatefulWidget {
@@ -35,7 +36,7 @@ class _KenTextPasswordIndicatorsState extends State<KenTextPasswordIndicators> {
         child: LinearProgressIndicator(
           minHeight: 10,
           value: passwordModel.satisfiedRules / passwordModel.totalRules,
-          backgroundColor: const Color.fromRGBO(128, 128, 128, 0.5),
+          backgroundColor: KenModel.kSecondary200,
           valueColor:
               AlwaysStoppedAnimation<Color>(_getIndicatorColor(passwordModel)),
         ),
@@ -57,19 +58,19 @@ class _KenTextPasswordIndicatorsState extends State<KenTextPasswordIndicators> {
   }
 
   Color _getRuleColor(bool value) {
-    return value ? Colors.green : Colors.red;
+    return value ? Colors.green : KenModel.kSecondary200;
   }
 
   Color _getIndicatorColor(KenTextPasswordRuleNotifier passwordModel) {
     double perc = passwordModel.satisfiedRules / passwordModel.totalRules * 100;
     if (perc <= 50.0) {
-      return Colors.red;
+      return KenModel.kRed;
     } else if (perc <= 75.0) {
-      return Colors.orange;
+      return KenModel.kOrange;
     } else if (perc <= 99.0) {
-      return Colors.yellow;
+      return KenModel.kYellow;
     } else {
-      return Colors.green;
+      return KenModel.kGreen;
     }
   }
 
