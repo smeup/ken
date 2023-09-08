@@ -88,11 +88,6 @@
     "thumbColor": "#06899b",
     "inactiveTrackColor": "#53b9cc"
   },
-  "progressIndicatorTheme": {
-    "color": "#06899b",
-    "linearTrackColor": "#53b9cc",
-    "circularTrackColor": "#53b9cc"
-  },
   "dividerTheme": {
     "color": "#06899b",
     "thickness": 1

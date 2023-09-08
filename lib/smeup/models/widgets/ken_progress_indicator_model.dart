@@ -5,11 +5,8 @@ import 'ken_model.dart';
 import '../../services/ken_configuration_service.dart';
 
 class KenProgressIndicatorModel extends KenModel implements KenDataInterface {
-  // supported by json_theme
-  static Color? defaultColor = KenModel.kPrimary;
-  static Color? defaultCircularTrackColor = KenModel.kInactivePrimary;
-
-  // unsupported by json_theme
+  static const Color defaultColor = KenModel.kPrimary;
+  static const Color defaultCircularTrackColor = KenModel.kInactivePrimary;
   static const double defaultSize = 200;
 
   Color? color;
@@ -22,13 +19,12 @@ class KenProgressIndicatorModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    this.color,
-    this.circularTrackColor,
+    this.color = defaultColor,
+    this.circularTrackColor = defaultCircularTrackColor,
     this.size = defaultSize,
     title = '',
   }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'pgi';
-    setDefaults(this);
   }
 
   KenProgressIndicatorModel.fromMap(
@@ -36,30 +32,5 @@ class KenProgressIndicatorModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
-    setDefaults(this);
-    title = jsonMap['title'] ?? '';
-
-    size = KenUtilities.getDouble(optionsDefault!['size']) ?? defaultSize;
-
-    color =
-        KenUtilities.getColorFromRGB(optionsDefault!['color']) ?? defaultColor;
-
-    circularTrackColor =
-        KenUtilities.getColorFromRGB(optionsDefault!['circularTrackColor']) ??
-            defaultCircularTrackColor;
-  }
-
-  static setDefaults(dynamic obj) {
-    ProgressIndicatorThemeData progressIndicatorThemeData =
-        KenConfigurationService.getTheme()!.progressIndicatorTheme;
-    defaultColor = progressIndicatorThemeData.color;
-    defaultCircularTrackColor = progressIndicatorThemeData.circularTrackColor;
-
-    // ----------------- set properties from default
-
-    obj.color ??= KenProgressIndicatorModel.defaultColor;
-    obj.circularTrackColor ??=
-        KenProgressIndicatorModel.defaultCircularTrackColor;
-  }
+  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {}
 }
