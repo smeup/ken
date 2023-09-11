@@ -106,19 +106,19 @@ class KenDrawerModel extends KenModel {
   }
 
   static setDefaults(dynamic obj) {
-    AppBarTheme appBarTheme = KenConfigurationService.getTheme()!.appBarTheme;
+    // AppBarTheme appBarTheme = KenConfigurationService.getTheme()!.appBarTheme;
 
-    TextStyle titleStyle = appBarTheme.titleTextStyle!;
-    defaultTitleFontSize = titleStyle.fontSize;
-    defaultTitleFontColor = titleStyle.color;
-    defaultTitleFontBold = titleStyle.fontWeight == FontWeight.bold;
+    // TextStyle titleStyle = appBarTheme.titleTextStyle!;
+    // defaultTitleFontSize = titleStyle.fontSize;
+    // defaultTitleFontColor = titleStyle.color;
+    // defaultTitleFontBold = titleStyle.fontWeight == FontWeight.bold;
 
-    TextStyle elementStyle = appBarTheme.toolbarTextStyle!;
-    defaultElementFontSize = elementStyle.fontSize;
-    defaultElementFontColor = elementStyle.color;
-    defaultElementFontBold = elementStyle.fontWeight == FontWeight.bold;
+    // TextStyle elementStyle = appBarTheme.toolbarTextStyle!;
+    // defaultElementFontSize = elementStyle.fontSize;
+    // defaultElementFontColor = elementStyle.color;
+    // defaultElementFontBold = elementStyle.fontWeight == FontWeight.bold;
 
-    defaultAppBarBackColor = appBarTheme.backgroundColor;
+    // defaultAppBarBackColor = appBarTheme.backgroundColor;
 
     // ----------------- set properties from default
 
