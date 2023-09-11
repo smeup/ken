@@ -27,6 +27,7 @@ class KenCarousel extends StatefulWidget
   double? height;
   bool? autoPlay;
   String? title;
+  Color? fontColor; // Add fontColor parameter
 
   KenCarousel.withController(
     KenCarouselModel this.model,
@@ -41,7 +42,8 @@ class KenCarousel extends StatefulWidget
       this.type = 'CAU',
       this.height = KenCarouselModel.defaultHeight,
       this.autoPlay = false,
-      this.title = ''})
+      this.title = '',
+      this.fontColor}) // Add fontColor parameter to the constructor
       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
   }
@@ -153,7 +155,11 @@ class _KenCarouselState extends State<KenCarousel>
             notifier.setIndex(index);
           }),
       itemBuilder: (BuildContext context, int index, int realIndex) {
-        return KenCarouselItem(_data[index]['imageFile'], _data[index]['text']);
+        return KenCarouselItem(
+          _data[index]['imageFile'],
+          _data[index]['text'],
+          fontColor: widget.fontColor, // Pass the fontColor parameter
+        );
       },
     );
 

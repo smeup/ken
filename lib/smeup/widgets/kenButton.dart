@@ -253,6 +253,8 @@ class KenButton extends StatelessWidget {
         .copyWith(
             backgroundColor: MaterialStateProperty.all<Color?>(backColor),
             elevation: MaterialStateProperty.all<double?>(elevation),
+            overlayColor:
+                MaterialStateProperty.all<Color?>(Colors.black.withOpacity(.2)),
             padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                 const EdgeInsets.all(0)),
             shape: MaterialStateProperty.all<OutlinedBorder>(
