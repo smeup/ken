@@ -111,9 +111,7 @@ class _KenComboWidgetState extends State<KenComboWidget> {
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenConfigurationService.getTheme()!
-        .iconTheme
-        .copyWith(size: widget.iconSize, color: widget.iconColor);
+    IconThemeData themeData = IconThemeData(color: widget.iconColor);
 
     return themeData;
   }
