@@ -11,7 +11,7 @@ import 'ken_model.dart';
 class KenComboModel extends KenInputFieldModel implements KenDataInterface {
   // supported by json_theme
   static double? defaultIconSize = 20;
-  static Color? defaultIconColor = KenModel.kIconColor;
+  static Color? defaultIconColor = KenModel.kPrimary;
   static double? defaultFontSize = 16;
   static Color? defaultFontColor = KenModel.kPrimary;
   static bool? defaultFontBold = false;

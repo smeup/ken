@@ -54,12 +54,12 @@ class KenSwitch extends StatefulWidget
     this.formKey, {
     this.id = '',
     this.type = 'FLD',
-    this.captionFontSize,
-    this.captionFontColor,
-    this.captionBackColor,
-    this.captionFontBold,
-    this.thumbColor,
-    this.trackColor,
+    this.captionFontSize = KenSwitchModel.defaultCaptionFontSize,
+    this.captionFontColor = KenSwitchModel.defaultCaptionFontColor,
+    this.captionBackColor = KenSwitchModel.defaultCaptionBackColor,
+    this.captionFontBold = KenSwitchModel.defaultCaptionFontBold,
+    this.thumbColor = KenSwitchModel.defaultThumbColor,
+    this.trackColor = KenSwitchModel.defaultTrackColor,
     this.title = '',
     this.onClientChange,
     this.data = false,
@@ -200,6 +200,8 @@ class _KenSwitchState extends State<KenSwitch>
             style: captionStyle,
           ),
           KenSwitchWidget(
+            thumbColor: widget.thumbColor,
+            trackColor: widget.trackColor,
             data: _data,
             id: widget.id,
             onClientChange: (changedValue) {
@@ -224,9 +226,7 @@ class _KenSwitchState extends State<KenSwitch>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.captionFontColor,
         fontSize: widget.captionFontSize,
         backgroundColor: widget.captionBackColor);

@@ -34,13 +34,13 @@ class KenProgressIndicator extends StatefulWidget
   KenProgressIndicator(this.scaffoldKey, this.formKey,
       {this.id = '',
       this.type = 'FLD',
-      this.color,
-      this.circularTrackColor,
+      this.color = KenProgressIndicatorModel.defaultColor,
+      this.circularTrackColor =
+          KenProgressIndicatorModel.defaultCircularTrackColor,
       this.size = KenProgressIndicatorModel.defaultSize,
       this.title = ''})
       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    KenProgressIndicatorModel.setDefaults(this);
   }
 
   @override

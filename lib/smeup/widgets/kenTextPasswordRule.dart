@@ -21,6 +21,9 @@ class KenTextPasswordRule extends StatelessWidget {
             color: iconTheme.color,
             size: iconTheme.size,
           ),
+        SizedBox(
+          width: 5,
+        ),
         Text(
           text!,
           style: captionStyle.copyWith(color: color),

@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 class KenCarouselItem extends StatelessWidget {
   final String? imageFileName;
   final String? text;
-  KenCarouselItem(this.imageFileName, this.text);
+  final Color? fontColor; // Add fontColor parameter
+
+  KenCarouselItem(this.imageFileName, this.text,
+      {this.fontColor}); // Update the constructor
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,7 +20,15 @@ class KenCarouselItem extends StatelessWidget {
             "$imageFileName",
             fit: BoxFit.scaleDown,
           ),
-          Expanded(child: Text(text!))
+          SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            child: Text(
+              text!,
+              style: TextStyle(color: fontColor), // Use fontColor here
+            ),
+          ),
         ],
       ),
     );

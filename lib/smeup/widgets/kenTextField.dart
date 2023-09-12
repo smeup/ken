@@ -74,7 +74,7 @@ class KenTextField extends StatefulWidget
     this.formKey, {
     this.id = '',
     this.type = 'FLD',
-    this.backColor,
+    this.backColor = KenTextFieldModel.defaultBackColor,
     this.fontSize,
     this.fontBold,
     this.fontColor,

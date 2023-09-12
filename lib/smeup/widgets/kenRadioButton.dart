@@ -81,41 +81,37 @@ class _KenRadioButtonState extends State<KenRadioButton> {
   Widget build(BuildContext context) {
     RadioThemeData radioThemeData = _getRadioTheme();
 
-    return Container(
+    return SizedBox(
       height: widget.height,
-      child: SizedBox(
-          height: widget.height,
-          width: widget.width,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Transform.scale(
-                scale: 1.2,
-                child: Radio(
-                  value: widget.data!['code'],
-                  groupValue: _selectedValue,
-                  onChanged: (dynamic value) {
-                    widget.onPressed!(value);
-                    _selectedValue = value;
-                    setState(() {});
-                    if (widget.others != null) {
-                      for (var element in widget.others!) {
-                        element.changeState(value);
-                      }
-                    }
-                  },
-                  activeColor:
-                      radioThemeData.fillColor!.resolve(<MaterialState>{}),
-                ),
-              ),
-              Expanded(
-                child: Align(
-                    alignment: widget.align!,
-                    child: Text(widget.data!['value']!,
-                        textAlign: TextAlign.left, style: _getTextStile())),
-              )
-            ],
-          )),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Transform.scale(
+            scale: 1.2,
+            child: Radio(
+              value: widget.data!['code'],
+              groupValue: _selectedValue,
+              onChanged: (dynamic value) {
+                widget.onPressed!(value);
+                _selectedValue = value;
+                setState(() {});
+                if (widget.others != null) {
+                  for (var element in widget.others!) {
+                    element.changeState(value);
+                  }
+                }
+              },
+              activeColor: widget.fontColor,
+            ),
+          ),
+          Expanded(
+            child: Align(
+                alignment: widget.align!,
+                child: Text(widget.data!['value']!,
+                    textAlign: TextAlign.left, style: _getTextStile())),
+          )
+        ],
+      ),
     );
   }
 

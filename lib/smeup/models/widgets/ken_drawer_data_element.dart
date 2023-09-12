@@ -16,11 +16,11 @@ class KenDrawerDataElement {
 
   KenDrawerDataElement(this.text,
       {this.iconCode,
-      this.fontSize = 10,
+      this.fontSize = 14,
       this.align = Alignment.center,
       this.route,
       this.action,
       this.group = '',
       this.groupIcon = '',
-      this.groupFontSize = 15});
+      this.groupFontSize = 16});
 }
