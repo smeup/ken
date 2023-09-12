@@ -229,10 +229,10 @@ class _KenInputPanelState extends State<KenInputPanel>
           title: field.label,
           backColor: Colors.transparent,
           data: const [
-            {"code": "0", "value": "Male"},
-            {"code": "1", "value": "Female"},
-            {"code": "2", "value": 'Non-binary'},
-            {"code": "3", "value": 'Other'},
+            {"code": "0", "value": "< 18 years"},
+            {"code": "1", "value": "19 - 35 years"},
+            {"code": "2", "value": '36 - 54 years'},
+            {"code": "3", "value": '> 55 years'},
           ],
           selectedValue: field.value.code,
           clientOnPressed: (value) {
