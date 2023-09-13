@@ -15,11 +15,11 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
   static Color? defaultBorderColor = KenModel.kPrimary;
   static double? defaultBorderWidth = 1;
   static double? defaultBorderRadius = 8;
-  static double? defaultFontSize = 16;
+  static double? defaultFontSize = 12;
   static Color? defaultFontColor = KenModel.kSecondary100;
   static bool? defaultFontBold = true;
   static bool? defaultCaptionFontBold = false;
-  static double? defaultCaptionFontSize = 10;
+  static double? defaultCaptionFontSize = 12;
   static Color? defaultCaptionFontColor = KenModel.kSecondary100;
 
   // unsupported by json_theme

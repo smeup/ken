@@ -514,7 +514,7 @@ class _TestListBoxState extends State<TestListBox>
         }
         if (widget.fontBold!) {
           style = style.copyWith(
-            fontWeight: FontWeight.normal,
+            fontWeight: FontWeight.w600,
           );
         }
 
@@ -607,7 +607,7 @@ class _TestListBoxState extends State<TestListBox>
 
     if (widget.captionFontBold!) {
       style = style.copyWith(
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.normal,
       );
     }
 

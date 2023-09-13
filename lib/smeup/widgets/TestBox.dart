@@ -132,15 +132,18 @@ class _TestBoxState extends State<TestBox> with KenWidgetStateMixin {
 
     switch (widget.layout ?? '') {
       // layouts Smeup
-      case '1':
-        box = await _getLayout1(widget.data, context);
+      case '2':
+        box = await _getLayout2(
+          widget.data,
+        ); // Change the part of the layout based on the number
         break;
       default:
         KenLogService.writeDebugMessage(
             'No layout received. Used default layout',
             logType: KenLogType.warning);
 
-        box = await _getLayoutDefault(widget.data, context);
+        box = await _getLayoutDefault(
+            widget.data); // if not specified this is the default
         break;
     }
     // bool dismissEnabled = //già presente in originale
@@ -259,49 +262,32 @@ class _TestBoxState extends State<TestBox> with KenWidgetStateMixin {
         child: res);
   }
 
-  Future<Widget> _getLayout1(dynamic data, BuildContext context) async {
+  Future<Widget> _getLayout2(dynamic data) async {
     final cols = await _getColumns(data);
+
     if (data.length > 0) {
       return GestureDetector(
         onTap: () {
           _manageTap(widget.index, data);
-          manageIndex = widget.index;
-
-          setState(() {
-            component = !component;
-          });
         },
-        child: Container(
-          color: widget.cardTheme!
-              .color, // Set the color to the desired background color
-          child: Card(
-            elevation: elevation,
-            shape: component
-                ? widget.cardTheme!.shape
-                : RoundedRectangleBorder(
-                    side: const BorderSide(
-                        width: 3, color: Color.fromARGB(198, 246, 167, 101)),
-                    borderRadius: BorderRadius.circular(8)),
+        child: Card(
+            color: widget.backColor,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FutureBuilder<Widget>(
-                future: _getLayout1Async(data, cols),
-                builder:
-                    (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Container();
-                  } else {
-                    if (snapshot.hasError) {
-                      return KenNotAvailable();
-                    } else {
-                      return snapshot.data!;
-                    }
-                  }
-                },
-              ),
-            ),
-          ),
-        ),
+                padding: const EdgeInsets.all(14.0),
+                child: FutureBuilder<Widget>(
+                    future: _getLayout2Async(data, cols),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Container();
+                      } else {
+                        if (snapshot.hasError) {
+                          return KenNotAvailable();
+                        } else {
+                          return snapshot.data!;
+                        }
+                      }
+                    }))),
       );
     }
 
@@ -311,7 +297,7 @@ class _TestBoxState extends State<TestBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-  Future<Widget> _getLayoutDefault(dynamic data, BuildContext context) async {
+  Future<Widget> _getLayoutDefault(dynamic data) async {
     final cols = await _getColumns(data);
 
     if (data.length > 0) {
@@ -320,31 +306,23 @@ class _TestBoxState extends State<TestBox> with KenWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardTheme!.color,
+            color: widget.backColor,
             child: Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: Container(
-                  height: widget.height,
-                  child: FutureBuilder<Widget>(
-                      future: _getLayout1Async(data, cols),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<Widget> snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          //??? va gestito in shiro
-                          // return widget.showLoader!
-                          //     ? SmeupWait(widget.scaffoldKey, widget.formKey)
-                          //     : Container();
-                          return Container();
+                padding: const EdgeInsets.all(14.0),
+                child: FutureBuilder<Widget>(
+                    future: _getLayoutAsync(data, cols),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Container();
+                      } else {
+                        if (snapshot.hasError) {
+                          return KenNotAvailable();
                         } else {
-                          if (snapshot.hasError) {
-                            return KenNotAvailable();
-                          } else {
-                            return snapshot.data!;
-                          }
+                          return snapshot.data!;
                         }
-                      }),
-                ))),
+                      }
+                    }))),
       );
     }
 
@@ -357,30 +335,76 @@ class _TestBoxState extends State<TestBox> with KenWidgetStateMixin {
   /// Layout 2
   ///
 
-  Future<Widget> _getLayout1Async(dynamic data, cols) async {
+  Future<Widget> _getLayoutAsync(dynamic data, cols) async {
     var listOfRows = List<Widget>.empty(growable: true);
     for (var col in cols) {
       if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
         String rowData = await _getBoxText(data, col);
 
-        final colWidget = Row(children: [
-          if (col['text'].isNotEmpty)
-            Expanded(
-              flex: 1,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child:
-                    Text(col['text'], style: widget.captionStyle), // Left side
+        final colWidget = Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (col['text'].isNotEmpty)
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(col['text'], style: widget.captionStyle),
+                    ],
+                  ),
+                ),
+              Expanded(
+                flex: 2,
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(rowData, style: widget.textStyle), // Right side
+                ),
               ),
-            ),
-          Expanded(
-            flex: 2,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(rowData, style: widget.textStyle), // Right side
-            ),
-          ),
-        ]);
+            ]);
+
+        listOfRows.add(colWidget);
+      }
+    }
+
+    return Row(
+      children: [Expanded(child: Column(children: listOfRows))],
+    );
+  }
+
+  Future<Widget> _getLayout2Async(dynamic data, cols) async {
+    var listOfRows = List<Widget>.empty(growable: true);
+    for (var col in cols) {
+      if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
+        String rowData = await _getBoxText(data, col);
+
+        final colWidget = Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (col['text'].isNotEmpty)
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(col['text'], style: widget.captionStyle),
+                    ],
+                  ),
+                ),
+              Expanded(
+                flex: 2,
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Text(rowData, style: widget.textStyle), // Right side
+                ),
+              ),
+            ]);
 
         listOfRows.add(colWidget);
       }
