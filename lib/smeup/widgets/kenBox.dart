@@ -132,30 +132,15 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
 
     switch (widget.layout ?? '') {
       // layouts Smeup
-      case '1':
-        box = await _getLayout1(widget.data, context);
-        break;
-      case '2':
-        box = await _getLayout2(widget.data, context);
-        break;
-      case '3':
-        box = await _getLayout3(widget.data, context);
-        break;
       case '4':
-        box = await _getLayout4(widget.data, context);
-        break;
-      case '5':
-        box = await _getLayout5(widget.data, context);
-        break;
-      case 'imageList':
-        box = await _getLayoutImageList(widget.data, context);
+        box = await _getLayout4(widget.data);
         break;
       default:
         KenLogService.writeDebugMessage(
             'No layout received. Used default layout',
             logType: KenLogType.warning);
 
-        box = await _getLayoutDefault(widget.data, context);
+        box = await _getLayoutDefault(widget.data);
         break;
     }
     // bool dismissEnabled = //già presente in originale
@@ -270,68 +255,13 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return Container(
         padding: const EdgeInsets.all(5.0),
         color: Colors.transparent,
-        height: widget.height,
         width: widget.width,
         child: res);
   }
 
-  Future<Widget> _getLayout1(dynamic data, BuildContext context) async {
-    final cols = await _getColumns(data);
-    if (data.length > 0) {
-      return GestureDetector(
-        onTap: () {
-          _manageTap(widget.index, data);
-          manageIndex = widget.index;
+  // LAYOUT DEFAULT
 
-          // print(
-          //     '1. stato iniziale = $component and context : $context and widgetindex = $_manageTap');
-          setState(() {
-            component = !component;
-            //print('stato dopo il click = $component e // ${widget.index}');
-          });
-        },
-        child: Card(
-            elevation: elevation,
-            color: widget.cardTheme!.color,
-            shape: component
-                ? widget.cardTheme!.shape
-                : RoundedRectangleBorder(
-                    side: const BorderSide(
-                        width: 3, color: Color.fromARGB(198, 246, 167, 101)),
-                    borderRadius: BorderRadius.circular(20)),
-            child: Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: Container(
-                    height: widget.height,
-                    child: FutureBuilder<Widget>(
-                        future: _getImageAndDataInRow(data, cols),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<Widget> snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            //??? va gestito in shiro
-                            // return widget.showLoader!
-                            //     ? SmeupWait(widget.scaffoldKey, widget.formKey)
-                            //     : Container();
-                            return Container();
-                          } else {
-                            if (snapshot.hasError) {
-                              return KenNotAvailable();
-                            } else {
-                              return snapshot.data!;
-                            }
-                          }
-                        })))),
-      );
-    }
-
-    KenLogService.writeDebugMessage('Error SmeupBox widget not created',
-        logType: KenLogType.error);
-
-    return KenNotAvailable();
-  }
-
-  Future<Widget> _getLayout2(dynamic data, BuildContext context) async {
+  Future<Widget> _getLayoutDefault(dynamic data) async {
     final cols = await _getColumns(data);
 
     if (data.length > 0) {
@@ -340,33 +270,23 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardTheme!.color,
+            color: widget.backColor,
             child: Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: Container(
-                  // inserting here the part for the Container border color
-                  padding: const EdgeInsets.all(12),
-                  height: widget.height,
-                  child: FutureBuilder<Widget>(
-                      future: _getLayout2Async(data, cols),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<Widget> snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          //??? va gestito in shiro
-                          // return widget.showLoader!
-                          //     ? SmeupWait(widget.scaffoldKey, widget.formKey)
-                          //     : Container();
-                          return Container();
+                padding: const EdgeInsets.all(14.0),
+                child: FutureBuilder<Widget>(
+                    future: _getLayoutDefaultData(data, cols),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Container();
+                      } else {
+                        if (snapshot.hasError) {
+                          return KenNotAvailable();
                         } else {
-                          if (snapshot.hasError) {
-                            return KenNotAvailable();
-                          } else {
-                            return snapshot.data!;
-                          }
+                          return snapshot.data!;
                         }
-                      }),
-                ))),
+                      }
+                    }))),
       );
     }
 
@@ -376,7 +296,49 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-  Future<Widget> _getLayout3(dynamic data, BuildContext context) async {
+  Future<Widget> _getLayoutDefaultData(dynamic data, cols) async {
+    var listOfRows = List<Widget>.empty(growable: true);
+    for (var col in cols) {
+      if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
+        String rowData = await _getBoxText(data, col);
+
+        final colWidget = Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (col['text'].isNotEmpty)
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(col['text'], style: widget.captionStyle),
+                    ],
+                  ),
+                ),
+              Expanded(
+                flex: 2,
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(rowData, style: widget.textStyle), // Right side
+                ),
+              ),
+            ]);
+
+        listOfRows.add(colWidget);
+      }
+    }
+
+    return Row(
+      children: [Expanded(child: Column(children: listOfRows))],
+    );
+  }
+
+  // LAYOUT 4
+
+  Future<Widget> _getLayout4(dynamic data) async {
     final cols = await _getColumns(data);
 
     if (data.length > 0) {
@@ -385,31 +347,25 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.cardTheme!.color,
-            child: Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: Container(
-                  height: widget.height,
-                  child: FutureBuilder<Widget>(
-                      future: _getLayout3Async(data, cols),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<Widget> snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          //??? va gestito in shiro
-                          // return widget.showLoader!
-                          //     ? SmeupWait(widget.scaffoldKey, widget.formKey)
-                          //     : Container();
-                          return Container();
-                        } else {
-                          if (snapshot.hasError) {
-                            return KenNotAvailable();
-                          } else {
-                            return snapshot.data!;
-                          }
-                        }
-                      }),
-                ))),
+          color: widget.backColor,
+          child: Padding(
+            padding: const EdgeInsets.all(14.0),
+            child: FutureBuilder<Widget>(
+              future: _getLayout4Async(data, cols),
+              builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Container();
+                } else {
+                  if (snapshot.hasError) {
+                    return KenNotAvailable();
+                  } else {
+                    return snapshot.data!;
+                  }
+                }
+              },
+            ),
+          ),
+        ),
       );
     }
 
@@ -419,95 +375,50 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-  Future<Widget> _getLayout4(dynamic data, BuildContext context) async {
-    final cols = await _getColumns(data);
+  Future<Widget> _getLayout4Async(dynamic data, cols) async {
+    var listOfRows = List<Widget>.empty(growable: true);
 
-    if (data.length > 0) {
-      return GestureDetector(
-        onTap: () {
-          _manageTap(widget.index, data);
-        },
-        child: Card(
-            color: widget.cardTheme!.color,
-            shape: widget.cardTheme!.shape,
-            child: Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: Container(
-                  padding: const EdgeInsets.all(12),
-                  height: widget.height,
-                  child: FutureBuilder<Widget>(
-                      future: _getLayout4Async(data, cols),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<Widget> snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          //??? va gestito in shiro
-                          // return widget.showLoader!
-                          //     ? SmeupWait(widget.scaffoldKey, widget.formKey)
-                          //     : Container();
-                          return Container();
-                        } else {
-                          if (snapshot.hasError) {
-                            return KenNotAvailable();
-                          } else {
-                            return snapshot.data!;
-                          }
-                        }
-                      }),
-                ))),
-      );
+    for (var col in cols) {
+      if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
+        String rowData = await _getBoxText(data, col);
+
+        if (col['code'] == 'image') {
+          // Handle the image column
+          final imageWidget = Image.asset(
+            rowData, // Assuming rowData contains the path to the image
+            width: 100, // Adjust the width as needed
+            height: 100, // Adjust the height as needed
+          );
+
+          listOfRows.add(imageWidget);
+        } else if (col['text'].isNotEmpty) {
+          // Handle other columns (role and description)
+          final colWidget = Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (col['text'].isNotEmpty)
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Center(
+                        child: Text(rowData, style: widget.textStyle),
+                      ),
+                    ),
+                  ),
+              ]);
+
+          listOfRows.add(colWidget);
+        }
+      }
     }
 
-    KenLogService.writeDebugMessage('Error SmeupBox widget not created',
-        logType: KenLogType.error);
-
-    return KenNotAvailable();
+    return Column(
+      children: listOfRows,
+    );
   }
 
-  Future<Widget> _getLayout5(dynamic data, BuildContext context) async {
-    final cols = await _getColumns(data);
-
-    if (data.length > 0) {
-      return GestureDetector(
-        onTap: () {
-          _manageTap(widget.index, data);
-        },
-        child: Card(
-            color: widget.cardTheme!.color,
-            shape: widget.cardTheme!.shape,
-            child: Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: Container(
-                  padding: const EdgeInsets.all(12),
-                  height: widget.height,
-                  child: FutureBuilder<Widget>(
-                      future: _getLayout5Async(data, cols),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<Widget> snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          //??? va gestito in shiro
-                          // return widget.showLoader!
-                          //     ? SmeupWait(widget.scaffoldKey, widget.formKey)
-                          //     : Container();
-                          return Container();
-                        } else {
-                          if (snapshot.hasError) {
-                            return KenNotAvailable();
-                          } else {
-                            return snapshot.data!;
-                          }
-                        }
-                      }),
-                ))),
-      );
-    }
-
-    KenLogService.writeDebugMessage('Error SmeupBox widget not created',
-        logType: KenLogType.error);
-
-    return KenNotAvailable();
-  }
+  // OTHER
 
   Future<Widget> _getLayoutImageList(dynamic data, BuildContext context) async {
     final cols = await _getColumns(data);
@@ -527,49 +438,6 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
                   height: widget.height,
                   child: FutureBuilder<Widget>(
                       future: _getImageAndDataInColumn(data, cols),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<Widget> snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          //??? va gestito in shiro
-                          // return widget.showLoader!
-                          //     ? SmeupWait(widget.scaffoldKey, widget.formKey)
-                          //     : Container();
-                          return Container();
-                        } else {
-                          if (snapshot.hasError) {
-                            return KenNotAvailable();
-                          } else {
-                            return snapshot.data!;
-                          }
-                        }
-                      }),
-                ))),
-      );
-    }
-
-    KenLogService.writeDebugMessage('Error SmeupBox widget not created',
-        logType: KenLogType.error);
-
-    return KenNotAvailable();
-  }
-
-  Future<Widget> _getLayoutDefault(dynamic data, BuildContext context) async {
-    final cols = await _getColumns(data);
-
-    if (data.length > 0) {
-      return GestureDetector(
-        onTap: () {
-          _manageTap(widget.index, data);
-        },
-        child: Card(
-            color: widget.cardTheme!.color,
-            child: Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: Container(
-                  height: widget.height,
-                  child: FutureBuilder<Widget>(
-                      future: _getImageAndDataInRow(data, cols),
                       builder: (BuildContext context,
                           AsyncSnapshot<Widget> snapshot) {
                         if (snapshot.connectionState ==
@@ -654,146 +522,55 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
   /// Layout 2
   ///
 
-  Future<Widget> _getLayout2Async(dynamic data, cols) async {
-    var listOfRows = List<Widget>.empty(growable: true);
-    for (var col in cols) {
-      if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
-        String rowData = await _getBoxText(data, col);
+// comportament strano del widget, tuttavia non rispecchia il layout standard necessario
 
-        final colWidget = Container(
-            padding: const EdgeInsets.all(1),
-            child: Row(children: [
-              if (col['text'].isNotEmpty)
-                Expanded(
-                  flex: 1,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(col['text'],
-                        style: widget.captionStyle), // Left side
-                  ),
-                ),
-              Expanded(
-                flex: 2,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(rowData, style: widget.textStyle), // Right side
-                ),
-              ),
-            ]));
+  // Future<Widget> _getLayout4Async(dynamic data, cols) async {
+  //   var widgets = List<Widget>.empty(growable: true);
+  //   for (var col in cols) {
+  //     if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
+  //       String rowData = await _getBoxText(data, col);
 
-        listOfRows.add(colWidget);
-      }
-    }
+  //       final textWidget = Container(
+  //         padding: const EdgeInsets.all(1),
+  //         child: Row(children: [
+  //           if (col['text'].isNotEmpty)
+  //             Expanded(
+  //               flex: 1,
+  //               child: Align(
+  //                 alignment: Alignment.centerLeft,
+  //                 child: Text(col['text'], style: widget.captionStyle),
+  //               ),
+  //             ),
+  //           Expanded(
+  //             flex: 2,
+  //             child: Align(
+  //               alignment: Alignment.centerRight,
+  //               child: Text(rowData, style: widget.textStyle),
+  //             ),
+  //           ),
+  //         ]),
+  //       );
 
-    return Row(
-      children: [Expanded(child: Column(children: listOfRows))],
-    );
-  }
+  //       widgets.add(textWidget);
+  //     }
+  //   }
 
-  Future<Widget> _getLayout3Async(dynamic data, cols) async {
-    var listOfRows = List<Widget>.empty(growable: true);
-    for (var col in cols) {
-      if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
-        String rowData = await _getBoxText(data, col);
+  //   var buttonWidgets = await _getButtons(data);
 
-        final colWidget = Expanded(
-          child: Align(
-            alignment: Alignment.center,
-            child: Text(rowData, style: widget.textStyle),
-          ),
-        );
+  //   widgets.add(Padding(
+  //     padding: const EdgeInsets.only(top: 5),
+  //     child: Row(
+  //       //crossAxisAlignment: CrossAxisAlignment.start,
+  //       mainAxisAlignment: MainAxisAlignment.end,
+  //       //mainAxisSize: MainAxisSize.min,
+  //       children: buttonWidgets,
+  //     ),
+  //   ));
 
-        listOfRows.add(colWidget);
-      }
-    }
-
-    return Row(
-      children: [Expanded(child: Column(children: listOfRows))],
-    );
-  }
-
-  Future<Widget> _getLayout4Async(dynamic data, cols) async {
-    var widgets = List<Widget>.empty(growable: true);
-    for (var col in cols) {
-      if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
-        String rowData = await _getBoxText(data, col);
-
-        final textWidget = Container(
-          padding: const EdgeInsets.all(1),
-          child: Row(children: [
-            if (col['text'].isNotEmpty)
-              Expanded(
-                flex: 1,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(col['text'], style: widget.captionStyle),
-                ),
-              ),
-            Expanded(
-              flex: 2,
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: Text(rowData, style: widget.textStyle),
-              ),
-            ),
-          ]),
-        );
-
-        widgets.add(textWidget);
-      }
-    }
-
-    var buttonWidgets = await _getButtons(data);
-
-    widgets.add(Padding(
-      padding: const EdgeInsets.only(top: 5),
-      child: Row(
-        //crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.end,
-        //mainAxisSize: MainAxisSize.min,
-        children: buttonWidgets,
-      ),
-    ));
-
-    return Row(
-      children: [Expanded(child: Column(children: widgets))],
-    );
-  }
-
-  Future<Widget> _getLayout5Async(dynamic data, cols) async {
-    var listOfRows = List<Widget>.empty(growable: true);
-    for (var col in cols) {
-      if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
-        String rowData = await _getBoxText(data, col);
-
-        final colWidget = Container(
-            padding: const EdgeInsets.all(1),
-            child: Row(children: [
-              if (col['text'].isNotEmpty)
-                Expanded(
-                  flex: 1,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(col['text'], style: widget.captionStyle),
-                  ),
-                ),
-              Expanded(
-                flex: 2,
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(rowData, style: widget.textStyle),
-                ),
-              ),
-            ]));
-
-        listOfRows.add(colWidget);
-      }
-    }
-
-    return Row(
-      children: [Expanded(child: Column(children: listOfRows))],
-    );
-  }
+  //   return Row(
+  //     children: [Expanded(child: Column(children: widgets))],
+  //   );
+  // }
 
   Future<List<Widget>> _getBoxTexts(dynamic data, cols) async {
     var listOfRows = List<Widget>.empty(growable: true);
@@ -801,11 +578,15 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     for (var col in cols) {
       if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
         String rowData = await _getBoxText(data, col);
-        final colWidget = Expanded(
-          child: Align(
-            alignment: Alignment.center,
-            child: Text(rowData, style: widget.textStyle),
-          ),
+        final colWidget = Column(
+          children: [
+            Expanded(
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(rowData, style: widget.textStyle),
+              ),
+            ),
+          ],
         );
 
         listOfRows.add(colWidget);

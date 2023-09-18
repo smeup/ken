@@ -132,8 +132,8 @@ class _TestBoxState extends State<TestBox> with KenWidgetStateMixin {
 
     switch (widget.layout ?? '') {
       // layouts Smeup
-      case '2':
-        box = await _getLayout2(
+      case '4':
+        box = await _getLayout4(
           widget.data,
         ); // Change the part of the layout based on the number
         break;
@@ -262,7 +262,7 @@ class _TestBoxState extends State<TestBox> with KenWidgetStateMixin {
         child: res);
   }
 
-  Future<Widget> _getLayout2(dynamic data) async {
+  Future<Widget> _getLayout4(dynamic data) async {
     final cols = await _getColumns(data);
 
     if (data.length > 0) {
@@ -271,23 +271,25 @@ class _TestBoxState extends State<TestBox> with KenWidgetStateMixin {
           _manageTap(widget.index, data);
         },
         child: Card(
-            color: widget.backColor,
-            child: Padding(
-                padding: const EdgeInsets.all(14.0),
-                child: FutureBuilder<Widget>(
-                    future: _getLayout2Async(data, cols),
-                    builder:
-                        (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Container();
-                      } else {
-                        if (snapshot.hasError) {
-                          return KenNotAvailable();
-                        } else {
-                          return snapshot.data!;
-                        }
-                      }
-                    }))),
+          color: widget.backColor,
+          child: Padding(
+            padding: const EdgeInsets.all(14.0),
+            child: FutureBuilder<Widget>(
+              future: _getLayout4Async(data, cols),
+              builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Container();
+                } else {
+                  if (snapshot.hasError) {
+                    return KenNotAvailable();
+                  } else {
+                    return snapshot.data!;
+                  }
+                }
+              },
+            ),
+          ),
+        ),
       );
     }
 
@@ -375,43 +377,46 @@ class _TestBoxState extends State<TestBox> with KenWidgetStateMixin {
     );
   }
 
-  Future<Widget> _getLayout2Async(dynamic data, cols) async {
+  Future<Widget> _getLayout4Async(dynamic data, cols) async {
     var listOfRows = List<Widget>.empty(growable: true);
+
     for (var col in cols) {
       if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
         String rowData = await _getBoxText(data, col);
 
-        final colWidget = Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (col['text'].isNotEmpty)
-                Expanded(
-                  flex: 1,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(col['text'], style: widget.captionStyle),
-                    ],
-                  ),
-                ),
-              Expanded(
-                flex: 2,
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: Text(rowData, style: widget.textStyle), // Right side
-                ),
-              ),
-            ]);
+        if (col['code'] == 'image') {
+          // Handle the image column
+          final imageWidget = Image.asset(
+            rowData, // Assuming rowData contains the path to the image
+            width: 100, // Adjust the width as needed
+            height: 100, // Adjust the height as needed
+          );
 
-        listOfRows.add(colWidget);
+          listOfRows.add(imageWidget);
+        } else if (col['text'].isNotEmpty) {
+          // Handle other columns (role and description)
+          final colWidget = Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (col['text'].isNotEmpty)
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Center(
+                        child: Text(rowData, style: widget.textStyle),
+                      ),
+                    ),
+                  ),
+              ]);
+
+          listOfRows.add(colWidget);
+        }
       }
     }
 
-    return Row(
-      children: [Expanded(child: Column(children: listOfRows))],
+    return Column(
+      children: listOfRows,
     );
   }
 

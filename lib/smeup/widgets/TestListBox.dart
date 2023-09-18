@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/material.dart';
 import '../models/KenMessageBusEventData.dart';

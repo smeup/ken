@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/material.dart';
 import '../models/KenMessageBusEventData.dart';
@@ -356,8 +354,7 @@ class _KenListBoxState extends State<KenListBox>
       },
     );
 
-    double? listboxHeight =
-        KenListBox.getListHeight(widget.listHeight, _model, context);
+    double listboxHeight = MediaQuery.of(context).size.height;
 
     final container = Container(
         padding: widget.padding,
@@ -369,8 +366,6 @@ class _KenListBoxState extends State<KenListBox>
   }
 
   Widget _getOrientedList(List<Widget> cells) {
-    GridView list;
-
     double? boxHeight = 0;
     if (cells.isNotEmpty) {
       boxHeight = (cells[0] as KenBox).height;
@@ -387,25 +382,26 @@ class _KenListBoxState extends State<KenListBox>
     childAspectRatio =
         KenUtilities.getDeviceInfo().safeWidth / boxHeight! * col!;
 
-    list = GridView.count(
+    final list = ListView.builder(
+      key: ObjectKey("_list_${widget.id}"),
       controller: _scrollController,
-      childAspectRatio: childAspectRatio,
+      scrollDirection: widget.orientation!,
       physics: _executeBouncing
           ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
           : null,
-      scrollDirection: widget.orientation!,
-      crossAxisCount: col,
-      children: cells,
+      itemCount: cells.length,
+      itemBuilder: (context, index) {
+        return cells[index];
+      },
     );
 
-    double? listboxHeight =
-        KenListBox.getListHeight(widget.listHeight, _model, context);
-
-    final container = Container(
-        padding: widget.padding,
-        color: Colors.transparent,
-        height: listboxHeight,
-        child: list);
+    final container = Column(
+      children: [
+        Expanded(
+          child: list,
+        ),
+      ],
+    );
 
     return container;
   }
@@ -514,7 +510,7 @@ class _KenListBoxState extends State<KenListBox>
         }
         if (widget.fontBold!) {
           style = style.copyWith(
-            fontWeight: FontWeight.normal,
+            fontWeight: FontWeight.w600,
           );
         }
 
@@ -607,7 +603,7 @@ class _KenListBoxState extends State<KenListBox>
 
     if (widget.captionFontBold!) {
       style = style.copyWith(
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.normal,
       );
     }
 
