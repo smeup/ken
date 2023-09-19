@@ -247,6 +247,11 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
         height: widget.height,
         child: RawAutocomplete<Map<dynamic, dynamic>>(
           optionsBuilder: (TextEditingValue textEditingValue) {
+            final String query = textEditingValue.text.toLowerCase();
+            if (query.length < 3) {
+              return [];
+            }
+
             return _options!.where((Map<dynamic, dynamic> option) {
               return option['value']
                   .toString()
