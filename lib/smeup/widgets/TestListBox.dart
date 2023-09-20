@@ -7,7 +7,7 @@ import '../models/widgets/ken_model.dart';
 import '../models/widgets/ken_section_model.dart';
 import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
-import 'kenBox.dart';
+import 'TestBox.dart';
 import 'kenNotAvailable.dart';
 import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';
@@ -17,7 +17,7 @@ import 'kenWidgetStateMixin.dart';
 import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
-class KenListBox extends StatefulWidget
+class TestListBox extends StatefulWidget
     with KenWidgetMixin
     implements KenWidgetInterface {
   KenListBoxModel? model;
@@ -61,7 +61,7 @@ class KenListBox extends StatefulWidget
   // dynamisms functions
   Function? clientOnItemTap;
 
-  KenListBox.withController(
+  TestListBox.withController(
     KenListBoxModel this.model,
     this.scaffoldKey,
     this.formKey,
@@ -72,7 +72,7 @@ class KenListBox extends StatefulWidget
     runControllerActivities(model!);
   }
 
-  KenListBox(
+  TestListBox(
     this.scaffoldKey,
     this.formKey,
     this.data, {
@@ -196,10 +196,10 @@ class KenListBox extends StatefulWidget
   }
 
   @override
-  _KenListBoxState createState() => _KenListBoxState();
+  _TestListBoxState createState() => _TestListBoxState();
 }
 
-class _KenListBoxState extends State<KenListBox>
+class _TestListBoxState extends State<TestListBox>
     with KenWidgetStateMixin
     implements KenWidgetStateInterface {
   List<Widget>? cells;
@@ -354,21 +354,23 @@ class _KenListBoxState extends State<KenListBox>
       },
     );
 
-    double listboxHeight = MediaQuery.of(context).size.height;
+    double listboxheight = MediaQuery.of(context).size.height;
 
     final container = Container(
         padding: widget.padding,
         color: Colors.transparent,
-        height: listboxHeight,
+        height: listboxheight,
         child: list);
 
     return container;
   }
 
   Widget _getOrientedList(List<Widget> cells) {
-    double? boxHeight = 0;
+    double? boxHeight = widget.height;
+    double? boxWidth = widget.width;
+
     if (cells.isNotEmpty) {
-      boxHeight = (cells[0] as KenBox).height;
+      boxHeight = (cells[0] as TestBox).height;
     } else {
       boxHeight = 1;
     }
@@ -395,12 +397,12 @@ class _KenListBoxState extends State<KenListBox>
       },
     );
 
-    final container = Column(
-      children: [
-        Expanded(
-          child: list,
-        ),
-      ],
+    final container = Expanded(
+      child: Container(
+        padding: widget.padding,
+        color: Colors.transparent,
+        child: list,
+      ),
     );
 
     return container;
@@ -418,7 +420,7 @@ class _KenListBoxState extends State<KenListBox>
         itemHeight: widget.height!,
         itemCount: cells.length,
         onItemTapCallback: (index) {
-          (cells[index] as KenBox).onItemTap!();
+          (cells[index] as TestBox).onItemTap!();
         },
         child: ListWheelScrollView.useDelegate(
           physics: _executeBouncing
@@ -438,7 +440,7 @@ class _KenListBoxState extends State<KenListBox>
     // );
 
     double? listboxHeight =
-        KenListBox.getListHeight(widget.listHeight, _model, context);
+        TestListBox.getListHeight(widget.listHeight, _model, context);
 
     final container = Container(
         padding: widget.padding,
@@ -538,7 +540,7 @@ class _KenListBoxState extends State<KenListBox>
       TextStyle textStyle = _getTextStile(_backColor);
       TextStyle captionStyle = _getCaptionStile(_backColor);
 
-      _onItemTap(int index, dynamic data, KenListBox listBox) {
+      _onItemTap(int index, dynamic data, TestListBox listBox) {
         if (listBox.showSelection! && _selectedRow != index) {
           setState(() {
             //widget.selectedRow = index;// così in originale
@@ -554,7 +556,7 @@ class _KenListBoxState extends State<KenListBox>
         );
       }
 
-      final cell = KenBox(widget.scaffoldKey, widget.formKey, i, widget,
+      final cell = TestBox(widget.scaffoldKey, widget.formKey, i, widget,
           isDynamic: _model != null,
           selectedRow: _selectedRow,
           onRefresh: _refreshList,

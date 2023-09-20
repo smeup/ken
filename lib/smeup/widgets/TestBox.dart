@@ -11,12 +11,12 @@ import '../services/ken_localization_service.dart';
 import '../services/ken_log_service.dart';
 import '../services/ken_message_bus.dart';
 
-import 'kenListBox.dart';
+import 'TestListBox.dart';
 import 'kenNotAvailable.dart';
 import 'kenWidgetStateMixin.dart';
 
 // ignore: must_be_immutable
-class KenBox extends StatefulWidget {
+class TestBox extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState>? formKey;
   final Function? onItemTap;
@@ -42,14 +42,14 @@ class KenBox extends StatefulWidget {
   final TextStyle? captionStyle;
   final Function? onSizeChanged;
   final bool? isFirestore;
-  final KenListBox kenListBox;
+  final TestListBox testListBox;
   final String globallyUniqueId;
 
-  KenBox(
+  TestBox(
     this.scaffoldKey,
     this.formKey,
     this.index,
-    this.kenListBox, {
+    this.testListBox, {
     this.id,
     this.isDynamic = false,
     this.selectedRow,
@@ -75,10 +75,10 @@ class KenBox extends StatefulWidget {
   });
 
   @override
-  _KenBoxState createState() => _KenBoxState();
+  _TestBoxState createState() => _TestBoxState();
 }
 
-class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
+class _TestBoxState extends State<TestBox> with KenWidgetStateMixin {
   List<dynamic>? _columns;
   double elevation = 0;
 
@@ -133,14 +133,17 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     switch (widget.layout ?? '') {
       // layouts Smeup
       case '4':
-        box = await _getLayout4(widget.data);
+        box = await _getLayout4(
+          widget.data,
+        ); // Change the part of the layout based on the number
         break;
       default:
         KenLogService.writeDebugMessage(
             'No layout received. Used default layout',
             logType: KenLogType.warning);
 
-        box = await _getLayoutDefault(widget.data);
+        box = await _getLayoutDefault(
+            widget.data); // if not specified this is the default
         break;
     }
     // bool dismissEnabled = //già presente in originale
@@ -259,7 +262,42 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
         child: res);
   }
 
-  // LAYOUT DEFAULT
+  Future<Widget> _getLayout4(dynamic data) async {
+    final cols = await _getColumns(data);
+
+    if (data.length > 0) {
+      return GestureDetector(
+        onTap: () {
+          _manageTap(widget.index, data);
+        },
+        child: Card(
+          color: widget.backColor,
+          child: Padding(
+            padding: const EdgeInsets.all(14.0),
+            child: FutureBuilder<Widget>(
+              future: _getLayout4Async(data, cols),
+              builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Container();
+                } else {
+                  if (snapshot.hasError) {
+                    return KenNotAvailable();
+                  } else {
+                    return snapshot.data!;
+                  }
+                }
+              },
+            ),
+          ),
+        ),
+      );
+    }
+
+    KenLogService.writeDebugMessage('Error SmeupBox widget not created',
+        logType: KenLogType.error);
+
+    return KenNotAvailable();
+  }
 
   Future<Widget> _getLayoutDefault(dynamic data) async {
     final cols = await _getColumns(data);
@@ -274,7 +312,7 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             child: Padding(
                 padding: const EdgeInsets.all(14.0),
                 child: FutureBuilder<Widget>(
-                    future: _getLayoutDefaultData(data, cols),
+                    future: _getLayoutAsync(data, cols),
                     builder:
                         (BuildContext context, AsyncSnapshot<Widget> snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
@@ -296,7 +334,10 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return KenNotAvailable();
   }
 
-  Future<Widget> _getLayoutDefaultData(dynamic data, cols) async {
+  /// Layout 2
+  ///
+
+  Future<Widget> _getLayoutAsync(dynamic data, cols) async {
     var listOfRows = List<Widget>.empty(growable: true);
     for (var col in cols) {
       if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
@@ -334,45 +375,6 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return Row(
       children: [Expanded(child: Column(children: listOfRows))],
     );
-  }
-
-  // LAYOUT 4
-
-  Future<Widget> _getLayout4(dynamic data) async {
-    final cols = await _getColumns(data);
-
-    if (data.length > 0) {
-      return GestureDetector(
-        onTap: () {
-          _manageTap(widget.index, data);
-        },
-        child: Card(
-          color: widget.backColor,
-          child: Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: FutureBuilder<Widget>(
-              future: _getLayout4Async(data, cols),
-              builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Container();
-                } else {
-                  if (snapshot.hasError) {
-                    return KenNotAvailable();
-                  } else {
-                    return snapshot.data!;
-                  }
-                }
-              },
-            ),
-          ),
-        ),
-      );
-    }
-
-    KenLogService.writeDebugMessage('Error SmeupBox widget not created',
-        logType: KenLogType.error);
-
-    return KenNotAvailable();
   }
 
   Future<Widget> _getLayout4Async(dynamic data, cols) async {
@@ -418,175 +420,17 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     );
   }
 
-  // OTHER
-
-  Future<Widget> _getLayoutImageList(dynamic data, BuildContext context) async {
-    final cols = await _getColumns(data);
-
-    if (data.length > 0) {
-      return GestureDetector(
-        onTap: () {
-          _manageTap(widget.index, data);
-        },
-        child: Card(
-            color: widget.cardTheme!.color,
-            shape: (widget.cardTheme!.shape as RoundedRectangleBorder)
-                .copyWith(side: BorderSide(color: widget.cardTheme!.color!)),
-            child: Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: Container(
-                  height: widget.height,
-                  child: FutureBuilder<Widget>(
-                      future: _getImageAndDataInColumn(data, cols),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<Widget> snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          //??? va gestito in shiro
-                          // return widget.showLoader!
-                          //     ? SmeupWait(widget.scaffoldKey, widget.formKey)
-                          //     : Container();
-                          return Container();
-                        } else {
-                          if (snapshot.hasError) {
-                            return KenNotAvailable();
-                          } else {
-                            return snapshot.data!;
-                          }
-                        }
-                      }),
-                ))),
-      );
-    }
-
-    KenLogService.writeDebugMessage('Error SmeupBox widget not created',
-        logType: KenLogType.error);
-
-    return KenNotAvailable();
-  }
-
-  Future<Widget> _getImage(dynamic data) async {
-    dynamic widgetImage;
-
-    if (widget.isDynamic) {
-      Completer<dynamic> completer = Completer();
-      KenMessageBus.instance
-          .response(
-              id: widget.globallyUniqueId + widget.index.toString(),
-              topic: KenTopic.kenBoxGetImage)
-          .take(1)
-          .listen((event) {
-        widgetImage = event.data.data;
-        completer.complete(); // resolve promise
-      });
-      KenMessageBus.instance.publishRequest(
-        widget.globallyUniqueId + widget.index.toString(),
-        KenTopic.kenBoxGetImage,
-        KenMessageBusEventData(
-            context: context, widget: widget, model: null, data: data),
-      );
-      await completer.future;
-
-      if (widgetImage != null) {
-        return widgetImage;
-      } else {
-        return Container();
-      }
-    } else {
-      // TODO static case
-      return widgetImage;
-    }
-  }
-
-  Future<Widget> _getImageAndDataInRow(dynamic data, cols) async {
-    //Widget? widgetImg = KenNotAvailable();
-    Widget? widgetImg = await _getImage(data);
-
-    var listOfRows = await _getBoxTexts(data, cols);
-
-    return Row(
-      children: [widgetImg, Expanded(child: Column(children: listOfRows))],
-    );
-  }
-
-  Future<Widget> _getImageAndDataInColumn(dynamic data, cols) async {
-    Widget widgetImg = await _getImage(data);
-
-    var listOfRows = await _getBoxTexts(data, cols);
-
-    return Column(
-      children: [widgetImg, Expanded(child: Column(children: listOfRows))],
-    );
-  }
-
-  /// Layout 2
-  ///
-
-// comportament strano del widget, tuttavia non rispecchia il layout standard necessario
-
-  // Future<Widget> _getLayout4Async(dynamic data, cols) async {
-  //   var widgets = List<Widget>.empty(growable: true);
-  //   for (var col in cols) {
-  //     if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
-  //       String rowData = await _getBoxText(data, col);
-
-  //       final textWidget = Container(
-  //         padding: const EdgeInsets.all(1),
-  //         child: Row(children: [
-  //           if (col['text'].isNotEmpty)
-  //             Expanded(
-  //               flex: 1,
-  //               child: Align(
-  //                 alignment: Alignment.centerLeft,
-  //                 child: Text(col['text'], style: widget.captionStyle),
-  //               ),
-  //             ),
-  //           Expanded(
-  //             flex: 2,
-  //             child: Align(
-  //               alignment: Alignment.centerRight,
-  //               child: Text(rowData, style: widget.textStyle),
-  //             ),
-  //           ),
-  //         ]),
-  //       );
-
-  //       widgets.add(textWidget);
-  //     }
-  //   }
-
-  //   var buttonWidgets = await _getButtons(data);
-
-  //   widgets.add(Padding(
-  //     padding: const EdgeInsets.only(top: 5),
-  //     child: Row(
-  //       //crossAxisAlignment: CrossAxisAlignment.start,
-  //       mainAxisAlignment: MainAxisAlignment.end,
-  //       //mainAxisSize: MainAxisSize.min,
-  //       children: buttonWidgets,
-  //     ),
-  //   ));
-
-  //   return Row(
-  //     children: [Expanded(child: Column(children: widgets))],
-  //   );
-  // }
-
   Future<List<Widget>> _getBoxTexts(dynamic data, cols) async {
     var listOfRows = List<Widget>.empty(growable: true);
 
     for (var col in cols) {
       if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
         String rowData = await _getBoxText(data, col);
-        final colWidget = Column(
-          children: [
-            Expanded(
-              child: Align(
-                alignment: Alignment.center,
-                child: Text(rowData, style: widget.textStyle),
-              ),
-            ),
-          ],
+        final colWidget = Expanded(
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(rowData, style: widget.textStyle),
+          ),
         );
 
         listOfRows.add(colWidget);
@@ -595,61 +439,9 @@ class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return listOfRows;
   }
 
-  Future<List<Widget>> _getButtons(dynamic data) async {
-    var widgetBtns = List<Widget>.empty(growable: true);
-
-    List<dynamic>? buttonCols;
-
-    var columns = await _getColumns(data);
-
-    Completer<dynamic> completer = Completer();
-    KenMessageBus.instance
-        .response(
-            id: widget.globallyUniqueId,
-            topic: KenTopic.kenBoxGetColumnsButtons)
-        .take(1)
-        .listen((event) {
-      buttonCols = event.data.data;
-      completer.complete(); // resolve promise
-    });
-    KenMessageBus.instance.publishRequest(
-      widget.globallyUniqueId,
-      KenTopic.kenBoxGetColumnsButtons,
-      KenMessageBusEventData(
-          context: context,
-          widget: widget,
-          model: null,
-          data: columns,
-          parameters: [buttonCols]),
-    );
-    await completer.future;
-
-    completer = Completer();
-    KenMessageBus.instance
-        .response(id: widget.globallyUniqueId, topic: KenTopic.kenBoxGetButtons)
-        .take(1)
-        .listen((event) {
-      widgetBtns = event.data.data;
-      completer.complete(); // resolve promise
-    });
-    KenMessageBus.instance.publishRequest(
-      widget.globallyUniqueId,
-      KenTopic.kenBoxGetButtons,
-      KenMessageBusEventData(
-          context: context,
-          widget: widget,
-          model: null,
-          data: data,
-          parameters: [buttonCols]),
-    );
-    await completer.future;
-
-    return widgetBtns;
-  }
-
   void _manageTap(index, data) {
     if (widget.onItemTap != null) {
-      widget.onItemTap!(index, data, widget.kenListBox);
+      widget.onItemTap!(index, data, widget.testListBox);
     }
   }
 

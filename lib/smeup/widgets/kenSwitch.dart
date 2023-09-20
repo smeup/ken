@@ -185,6 +185,8 @@ class _KenSwitchState extends State<KenSwitch>
       }
     }
 
+    // textstyle caption
+
     TextStyle captionStyle = _getCaptionStile();
 
     final children = Center(
@@ -227,11 +229,19 @@ class _KenSwitchState extends State<KenSwitch>
 
   TextStyle _getCaptionStile() {
     TextStyle style = TextStyle(
-        color: widget.captionFontColor,
-        fontSize: widget.captionFontSize,
-        backgroundColor: widget.captionBackColor);
+      color: widget.captionFontColor ??
+          Colors.black, // Provide a default color if it's null
+      fontSize: widget.captionFontSize ??
+          14, // Provide a default font size if it's null
+      backgroundColor: widget.captionBackColor ?? Colors.transparent,
+    );
 
-    if (widget.captionFontBold!) {
+    if (widget.captionFontBold == false) {
+      // Provide a default value for fontBold if it's null
+      style = style.copyWith(
+        fontWeight: FontWeight.normal,
+      );
+    } else {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );

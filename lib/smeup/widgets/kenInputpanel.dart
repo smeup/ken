@@ -222,23 +222,7 @@ class _KenInputPanelState extends State<KenInputPanel>
   Widget _getInputFieldWidget(SmeupInputPanelField field) {
     switch (field.component) {
       case KenInputPanelSupportedComp.Rad:
-        return KenRadioButtons(
-          widget.scaffoldKey,
-          widget.formKey,
-          id: field.id,
-          title: field.label,
-          backColor: Colors.transparent,
-          data: const [
-            {"code": "0", "value": "< 18 years"},
-            {"code": "1", "value": "19 - 35 years"},
-            {"code": "2", "value": '36 - 54 years'},
-            {"code": "3", "value": '> 55 years'},
-          ],
-          selectedValue: field.value.code,
-          clientOnPressed: (value) {
-            field.value.code = field.value.description = value;
-          },
-        );
+        return _getRadioList(field);
 
       case KenInputPanelSupportedComp.Bcd:
         return KenQRCodeReader(widget.scaffoldKey, widget.formKey,
@@ -273,6 +257,30 @@ class _KenInputPanelState extends State<KenInputPanel>
         )
       ],
     );
+  }
+
+  Widget _getRadioList(SmeupInputPanelField field) {
+    field.items ??= [];
+    return Column(children: <Widget>[
+      _getLabel(field.label),
+      KenRadioButtons(
+        widget.scaffoldKey,
+        widget.formKey,
+        id: field.id,
+        // title: field.label,
+        backColor: Colors.transparent,
+        data: const [
+          {"code": "0", "value": "< 3 people"},
+          {"code": "1", "value": "4 - 7 people"},
+          {"code": "2", "value": '8 - 10 people'},
+          {"code": "3", "value": '> 11 people'},
+        ],
+        selectedValue: field.value.code,
+        clientOnPressed: (value) {
+          field.value.code = field.value.description = value;
+        },
+      )
+    ]);
   }
 
   Widget _getComboWidget(SmeupInputPanelField field) {
