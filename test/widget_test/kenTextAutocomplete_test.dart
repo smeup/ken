@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import '../../lib/smeup/widgets/kenTextAutocomplete.dart';
 import 'widget_test_service.dart';
@@ -116,8 +117,20 @@ Future<void> runTests(WidgetTester tester) async {
   await tester.tap(findText.first);
   await tester.pump();
 
+  await tester.enterText(findText.first, "Bar");
+  await tester.pump();
+
   var finderTextContent1 = find.text('Bari');
   expect(finderTextContent1, findsWidgets);
+
+  for (int i = 0; i < 3; i++) {
+    await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+    await tester.pump();
+  }
+
+// Now, enter "Bres" into the TextFormField
+  await tester.enterText(findText.first, "Bres");
+  await tester.pump();
 
   var finderTextContent2 = find.text('Brescia');
   expect(finderTextContent2, findsWidgets);
