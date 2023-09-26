@@ -78,18 +78,18 @@ class KenTextAutocomplete extends StatefulWidget
     this.formKey, {
     this.id = '',
     this.type = 'FLD',
-    this.backColor = KenTextAutocompleteModel.defaultBackColor,
-    this.fontSize = KenTextAutocompleteModel.defaultFontSize,
-    this.fontBold = KenTextAutocompleteModel.defaultFontBold,
-    this.fontColor = KenTextAutocompleteModel.defaultFontColor,
-    this.captionBackColor = KenTextAutocompleteModel.defaultCaptionBackColor,
-    this.captionFontBold = KenTextAutocompleteModel.defaultCaptionFontBold,
-    this.captionFontColor = KenTextAutocompleteModel.defaultCaptionFontColor,
-    this.captionFontSize = KenTextAutocompleteModel.defaultCaptionFontSize,
-    this.borderColor = KenTextAutocompleteModel.defaultBorderColor,
-    this.iconColor = KenTextAutocompleteModel.defaultIconColor,
-    this.borderRadius = KenTextAutocompleteModel.defaultBorderRadius,
-    this.borderWidth = KenTextAutocompleteModel.defaultBorderWidth,
+    this.backColor,
+    this.fontSize,
+    this.fontBold,
+    this.fontColor,
+    this.captionBackColor,
+    this.captionFontBold,
+    this.captionFontColor,
+    this.captionFontSize,
+    this.borderColor,
+    this.iconColor,
+    this.borderRadius,
+    this.borderWidth,
     this.label = KenTextAutocompleteModel.defaultLabel,
     this.submitLabel = KenTextAutocompleteModel.defaultSubmitLabel,
     this.width = KenTextAutocompleteModel.defaultWidth,
@@ -111,6 +111,7 @@ class KenTextAutocomplete extends StatefulWidget
     this.valueField,
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
+    KenTextAutocompleteModel.setDefaults(this);
   }
 
   @override
@@ -483,8 +484,10 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
   }
 
   TextStyle _getTextStile() {
-    
-  TextStyle style = TextStyle(color: widget.fontColor,
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
+
+    style = style.copyWith(
+        color: widget.fontColor,
         fontSize: widget.fontSize,
         backgroundColor: widget.backColor);
 
@@ -498,7 +501,12 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = TextStyle(color: widget.captionFontColor, fontSize: widget.captionFontSize, backgroundColor: widget.captionBackColor);
+    TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
+
+    style = style.copyWith(
+        color: widget.captionFontColor,
+        fontSize: widget.captionFontSize,
+        backgroundColor: widget.captionBackColor);
 
     if (widget.captionFontBold!) {
       style = style.copyWith(

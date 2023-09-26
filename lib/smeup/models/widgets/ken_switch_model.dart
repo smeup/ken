@@ -64,4 +64,27 @@ class KenSwitchModel extends KenModel implements KenDataInterface {
       };
     }
   }
+
+  static setDefaults(dynamic obj) {
+    // var radioTheme = KenConfigurationService.getTheme()!.switchTheme;
+
+    // defaultThumbColor = radioTheme.thumbColor!.resolve(<MaterialState>{});
+    // defaultTrackColor = radioTheme.trackColor!.resolve(<MaterialState>{});
+
+    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
+    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
+    // defaultCaptionFontSize = captionStyle.fontSize;
+    // defaultCaptionFontColor = captionStyle.color;
+    // defaultCaptionBackColor = captionStyle.backgroundColor;
+
+    // ----------------- set properties from default
+
+    // obj.thumbColor ??= KenSwitchModel.defaultThumbColor;
+    // obj.trackColor ??= KenSwitchModel.defaultTrackColor;
+
+    // obj.captionFontColor ??= KenSwitchModel.defaultCaptionFontColor;
+    // obj.captionFontSize ??= KenSwitchModel.defaultCaptionFontSize;
+    // obj.captionBackColor ??= KenSwitchModel.defaultCaptionBackColor;
+    // obj.captionFontBold ??= KenSwitchModel.defaultCaptionFontBold;
+  }
 }
