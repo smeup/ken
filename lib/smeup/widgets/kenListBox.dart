@@ -189,7 +189,7 @@ class KenListBox extends StatefulWidget
       }
     } else {
       if (listboxHeight == 0) {
-        listboxHeight = KenUtilities.getDeviceInfo().safeHeight;
+        listboxHeight = KenUtilities.getDeviceInfo().safeHeight; // modify the height of the listbox
       }
     }
     return listboxHeight;
@@ -284,10 +284,7 @@ class _KenListBoxState extends State<KenListBox>
       });
     });
 
-    return Container(
-    height: 500.0, // Imposta l'altezza a 500 pixel
-    child: listbox,
-  );
+    return listbox;
   }
 
   /// Label's structure:
@@ -357,7 +354,8 @@ class _KenListBoxState extends State<KenListBox>
       },
     );
 
-    double listboxHeight = MediaQuery.of(context).size.height;
+        double? listboxHeight =
+        KenListBox.getListHeight(widget.listHeight, _model, context);
 
     final container = Container(
         padding: widget.padding,
@@ -398,13 +396,14 @@ class _KenListBoxState extends State<KenListBox>
       },
     );
 
-    final container = Column(
-      children: [
-        Expanded(
-          child: list,
-        ),
-      ],
-    );
+    double? listboxHeight =
+        KenListBox.getListHeight(widget.listHeight, _model, context);
+
+    final container = Container(
+        padding: widget.padding,
+        color: Colors.transparent,
+        height: listboxHeight,
+        child: list);
 
     return container;
   }
