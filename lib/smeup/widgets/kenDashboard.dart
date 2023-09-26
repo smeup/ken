@@ -267,48 +267,6 @@ class _KenDashboardState extends State<KenDashboard>
               ]),
         ));
 
-    // children = Container(
-    //   height: widget.height,
-    //   width: widget.width,
-    //   padding: widget.padding,
-    //   alignment: Alignment.center,
-    //   child: SingleChildScrollView(
-    //     scrollDirection: Axis.horizontal,
-    //     child: Row(
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       children: <Widget>[
-    //         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-    //           if (widget.iconData != null)
-    //             Icon(
-    //               widget.iconData,
-    //               //SmeupIconService.getIconData(widget.icon),
-    //               color: iconTheme.color,
-    //               size: iconTheme.size,
-    //             ),
-    //           Text(
-    //             _getValue(_data),
-    //             style: textStyle,
-    //           ),
-    //           Column(
-    //             mainAxisAlignment: MainAxisAlignment.start,
-    //             children: [
-    //               Text(
-    //                 widget.unitOfMeasure!,
-    //                 textAlign: TextAlign.start,
-    //               ),
-    //             ],
-    //           )
-    //         ]),
-    //         if (widget.text != null)
-    //           Text(
-    //             widget.text!,
-    //             style: captionStyle,
-    //           )
-    //       ],
-    //     ),
-    //   ),
-    // );
-
     return KenWidgetBuilderResponse(_model, children);
   }
 
@@ -339,9 +297,14 @@ class _KenDashboardState extends State<KenDashboard>
         fontSize: widget.captionFontSize,
         backgroundColor: widget.backgroundColor);
 
-    if (widget.captionFontBold!) {
+    if (widget.captionFontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    }
+    else{
+            style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 
@@ -354,9 +317,12 @@ class _KenDashboardState extends State<KenDashboard>
         fontSize: widget.fontSize,
         backgroundColor: widget.backgroundColor);
 
-    if (widget.fontBold!) {
+    if (widget.fontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+            style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 
@@ -369,9 +335,14 @@ class _KenDashboardState extends State<KenDashboard>
         fontSize: widget.captionFontSize,
         backgroundColor: widget.backgroundColor);
 
-    if (widget.fontBold!) {
+    if (widget.fontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    }
+    else{
+            style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 

@@ -96,6 +96,65 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context)
       : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
+        
+            valueColName = optionsDefault!['ValueColName'] ?? defaultValueColName;
+    iconColName = optionsDefault!['iconColName'] ?? defaultIconColName;
+    textColName = optionsDefault!['textColName'] ?? defaultTextColName;
+    umColName = optionsDefault!['umColName'] ?? defaultUmColName;
+    padding =
+        KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
+    width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+
+    if (optionsDefault!['FontSize'].toString().contains('%')) {
+      double perc = KenUtilities.getDouble(
+              optionsDefault!['FontSize'].toString().replaceAll("%", "")) ??
+          defaultFontSize!;
+      fontSize = defaultFontSize! * perc / 100;
+
+      iconSize = KenUtilities.getDouble(optionsDefault!['iconSize']) ??
+          defaultIconSize! * perc / 100;
+
+      captionFontSize =
+          KenUtilities.getDouble(optionsDefault!['labelFontSize']) ??
+              defaultCaptionFontSize! * perc / 100;
+    } else {
+      fontSize = KenUtilities.getDouble(optionsDefault!['FontSize']) ??
+          defaultFontSize;
+
+      iconSize = KenUtilities.getDouble(optionsDefault!['iconSize']) ??
+          defaultIconSize;
+
+      captionFontSize =
+          KenUtilities.getDouble(optionsDefault!['labelFontSize']) ??
+              defaultCaptionFontSize;
+    }
+
+    fontColor = KenUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
+        defaultFontColor;
+
+    backgroundColor =
+        KenUtilities.getColorFromRGB(optionsDefault!['backgroundColor']) ??
+            defaultBackgroundColor;
+
+    fontBold = optionsDefault!['bold'] ?? defaultFontBold;
+
+    captionFontColor =
+        KenUtilities.getColorFromRGB(optionsDefault!['captionFontColor']) ??
+            defaultCaptionFontColor;
+
+    captionFontBold = optionsDefault!['captionBold'] ?? defaultCaptionFontBold;
+
+    iconColor = KenUtilities.getColorFromRGB(optionsDefault!['iconColor']) ??
+        defaultIconColor;
+
+    selectLayout = optionsDefault!['selectLayout'] ?? '';
+    forceText = optionsDefault!['forceText'] ?? '';
+    forceUm = optionsDefault!['forceUm'] ?? '';
+    forceIcon = optionsDefault!['forceIcon'] ?? '';
+    forceValue = optionsDefault!['forceValue'] ?? '';
+
+    numberFormat = optionsDefault!['numberFormat'] ?? defaultNumberFormat;
 
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
