@@ -1,7 +1,4 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
-
 import '../../services/ken_configuration_service.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
@@ -10,25 +7,24 @@ import 'ken_model.dart';
 
 class KenComboModel extends KenInputFieldModel implements KenDataInterface {
   // supported by json_theme
-  static double? defaultIconSize = 20;
-  static Color? defaultIconColor = KenModel.kPrimary;
-  static double? defaultFontSize = 16;
-  static Color? defaultFontColor = KenModel.kPrimary;
-  static bool? defaultFontBold = false;
-  static Color? defaultBackColor = Colors.transparent;
-  static bool? defaultCaptionFontBold = false;
-  static double? defaultCaptionFontSize = 10;
-  static Color? defaultCaptionFontColor = KenModel.kPrimary;
-  static Color? defaultCaptionBackColor = Colors.transparent;
-  static Color? defaultBorderColor = KenModel.kPrimary;
-  static Color? defaultDropDownColor = KenModel.kBack100;
-  static double? defaultBorderWidth = 2;
-  static double? defaultBorderRadius = 8;
-
-  // unsupported by json_theme
+  static const double defaultIconSize = 20;
+  static const Color defaultIconColor = KenModel.kPrimary;
+  static const double defaultFontSize = 16;
+  static const Color defaultFontColor = KenModel.kPrimary;
+  static const bool defaultFontBold = false;
+  static const Color defaultBackColor = Colors.transparent;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultCaptionFontSize = 10;
+  static const Color defaultCaptionFontColor = KenModel.kPrimary;
+  static const Color defaultCaptionBackColor = Colors.transparent;
+  static const Color defaultBorderColor = KenModel.kPrimary;
+  static const Color defaultDropDownColor = KenModel.kBack100;
+  static const double defaultBorderWidth = 2;
+  static const double defaultBorderRadius = 8;
+  static const String defaultTitle = 'title';
   static const double defaultWidth = 0;
   static const double defaultHeight = 55;
-  static const String defaultValueField = 'value';
+  static const String defaultValueField = 'code';
   static const String defaultDescriptionField = 'description';
   static const EdgeInsetsGeometry defaultPadding =
       EdgeInsets.only(left: 10, right: 10);
@@ -71,20 +67,20 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
-      this.fontColor,
-      this.fontSize,
-      this.fontBold,
-      this.backColor,
-      this.captionFontBold,
-      this.captionFontSize,
-      this.captionFontColor,
-      this.captionBackColor,
-      this.borderColor,
-      this.borderRadius,
-      this.dropdownColor,
-      this.borderWidth,
-      this.iconSize,
-      this.iconColor,
+      this.fontColor = defaultFontColor,
+      this.fontSize = defaultFontSize,
+      this.fontBold = defaultFontBold,
+      this.backColor = defaultBackColor,
+      this.captionFontBold = defaultCaptionFontBold,
+      this.captionFontSize = defaultCaptionFontSize,
+      this.captionFontColor = defaultCaptionFontColor,
+      this.captionBackColor = defaultCaptionBackColor,
+      this.borderColor = defaultBorderColor,
+      this.borderRadius = defaultBorderRadius,
+      this.dropdownColor = defaultDropDownColor,
+      this.borderWidth = defaultBorderWidth,
+      this.iconSize = defaultIconSize,
+      this.iconColor = defaultIconColor,
       this.underline = defaultUnderline,
       this.align = defaultAlign,
       this.innerSpace = defaultInnerSpace,
@@ -99,7 +95,6 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
       title = ''})
       : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'cmb';
-    setDefaults(this);
   }
 
   KenComboModel.fromMap(
@@ -109,7 +104,6 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
       BuildContext? context,
       KenModel parent)
       : super.fromMap(jsonMap, formKey, scaffoldKey, context, parent) {
-    setDefaults(this);
 
     title = jsonMap['title'] ?? '';
 
@@ -173,55 +167,5 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
         await getData();
       };
     }
-  }
-
-  static setDefaults(dynamic obj) {
-    // var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
-    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-    // defaultFontSize = textStyle.fontSize;
-    // defaultFontColor = textStyle.color;
-    // defaultBackColor = textStyle.backgroundColor;
-
-    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
-    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    // defaultCaptionFontSize = captionStyle.fontSize;
-    // defaultCaptionFontColor = captionStyle.color;
-    // // defaultCaptionBackColor = captionStyle.backgroundColor;
-
-    // var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
-    // defaultIconSize = iconTheme.size;
-    // defaultIconColor = textStyle.color;
-
-    // var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
-    // defaultBackColor = timePickerTheme.backgroundColor;
-    // var shape = timePickerTheme.shape!;
-    // defaultBorderRadius = (shape as ContinuousRectangleBorder)
-    //     .borderRadius
-    //     .resolve(TextDirection.ltr)
-    //     .topLeft
-    //     .x;
-    // var side = timePickerTheme.dayPeriodBorderSide!;
-    // // defaultBorderColor = side.color;
-    // defaultBorderWidth = side.width;
-    // iconTheme.color;
-
-    // ----------------- set properties from default
-    obj.borderColor ??= KenComboModel.defaultBorderColor;
-    obj.borderWidth ??= KenComboModel.defaultBorderWidth;
-    obj.borderRadius ??= KenComboModel.defaultBorderRadius;
-
-    obj.fontBold ??= KenComboModel.defaultFontBold;
-    obj.fontColor ??= KenComboModel.defaultFontColor;
-    obj.fontSize ??= KenComboModel.defaultFontSize;
-    obj.backColor ??= KenComboModel.defaultBackColor;
-    obj.dropdownColor ??= KenComboModel.defaultDropDownColor;
-
-    obj.captionFontBold ??= KenComboModel.defaultCaptionFontBold;
-    obj.captionFontColor ??= KenComboModel.defaultCaptionFontColor;
-    obj.captionFontSize ??= KenComboModel.defaultCaptionFontSize;
-    obj.captionBackColor ??= KenComboModel.defaultCaptionBackColor;
-
-    obj.iconSize ??= KenComboModel.defaultIconSize;
-    obj.iconColor ??= KenComboModel.defaultIconColor;
   }
 }

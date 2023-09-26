@@ -57,6 +57,32 @@ class KenSwitchModel extends KenModel implements KenDataInterface {
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
   ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
+    title = jsonMap['title'] ?? '';
+    padding =
+        KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
+
+    width = KenUtilities.getDouble(optionsDefault!['width']) ?? defaultWidth;
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
+
+    captionFontSize = KenUtilities.getDouble(optionsDefault!['fontSize']) ??
+        defaultCaptionFontSize;
+
+    captionBackColor =
+        KenUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
+            defaultCaptionBackColor;
+
+    captionFontColor =
+        KenUtilities.getColorFromRGB(optionsDefault!['fontColor']) ??
+            defaultCaptionFontColor;
+
+    captionFontBold = optionsDefault!['bold'] ?? defaultCaptionFontBold;
+
+    thumbColor = KenUtilities.getColorFromRGB(optionsDefault!['thumbColor']) ??
+        defaultThumbColor;
+
+    trackColor = KenUtilities.getColorFromRGB(optionsDefault!['trackColor']) ??
+        defaultTrackColor;
+
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         // await SmeupSwitchDao.getData(this);
@@ -65,26 +91,4 @@ class KenSwitchModel extends KenModel implements KenDataInterface {
     }
   }
 
-  static setDefaults(dynamic obj) {
-    // var radioTheme = KenConfigurationService.getTheme()!.switchTheme;
-
-    // defaultThumbColor = radioTheme.thumbColor!.resolve(<MaterialState>{});
-    // defaultTrackColor = radioTheme.trackColor!.resolve(<MaterialState>{});
-
-    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
-    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    // defaultCaptionFontSize = captionStyle.fontSize;
-    // defaultCaptionFontColor = captionStyle.color;
-    // defaultCaptionBackColor = captionStyle.backgroundColor;
-
-    // ----------------- set properties from default
-
-    // obj.thumbColor ??= KenSwitchModel.defaultThumbColor;
-    // obj.trackColor ??= KenSwitchModel.defaultTrackColor;
-
-    // obj.captionFontColor ??= KenSwitchModel.defaultCaptionFontColor;
-    // obj.captionFontSize ??= KenSwitchModel.defaultCaptionFontSize;
-    // obj.captionBackColor ??= KenSwitchModel.defaultCaptionBackColor;
-    // obj.captionFontBold ??= KenSwitchModel.defaultCaptionFontBold;
-  }
 }

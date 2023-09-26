@@ -32,5 +32,17 @@ class KenProgressIndicatorModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {}
+    ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
+    title = jsonMap['title'] ?? '';
+
+    size = KenUtilities.getDouble(optionsDefault!['size']) ?? defaultSize;
+
+    color =
+        KenUtilities.getColorFromRGB(optionsDefault!['color']) ?? defaultColor;
+
+    circularTrackColor =
+        KenUtilities.getColorFromRGB(optionsDefault!['circularTrackColor']) ??
+            defaultCircularTrackColor;
+  }
+
 }
