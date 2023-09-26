@@ -284,7 +284,10 @@ class _KenListBoxState extends State<KenListBox>
       });
     });
 
-    return listbox;
+    return Container(
+    height: 500.0, // Imposta l'altezza a 500 pixel
+    child: listbox,
+  );
   }
 
   /// Label's structure:
