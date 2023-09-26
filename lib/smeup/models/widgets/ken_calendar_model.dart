@@ -8,10 +8,10 @@ import 'ken_model.dart';
 
 class KenCalendarModel extends KenModel {
   // supported by json_theme
-  static double? defaultDayFontSize = 14;
-  static double? defaultEventFontSize = 14;
-  static double? defaultTitleFontSize = 18;
-  static double? defaultMarkerFontSize = 12;
+  static const double defaultDayFontSize = 14;
+  static const double defaultEventFontSize = 14;
+  static const double defaultTitleFontSize = 18;
+  static const double defaultMarkerFontSize = 12;
 
   // unsupported by json_theme
   static const double defaultWidth = 300;
@@ -52,10 +52,10 @@ class KenCalendarModel extends KenModel {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    this.dayFontSize,
-    this.eventFontSize,
-    this.titleFontSize,
-    this.markerFontSize,
+    this.dayFontSize = defaultDayFontSize,
+    this.eventFontSize = defaultEventFontSize,
+    this.titleFontSize = defaultTitleFontSize,
+    this.markerFontSize = defaultMarkerFontSize,
     this.titleColumnName = defaultTitleColumnName,
     this.dataColumnName = defaultDataColumnName,
     this.initTimeColumnName = defaultInitTimeColumnName,
@@ -80,7 +80,6 @@ class KenCalendarModel extends KenModel {
           type: type,
         ) {
     id = KenUtilities.getWidgetId('CAL', id);
-    setDefaults(this);
 
     initialDate ??= DateTime.now();
     initialFirstWork ??= getInitialFirstWork(initialDate!);
@@ -93,17 +92,7 @@ class KenCalendarModel extends KenModel {
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context)
       : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
-    setDefaults(this);
 
-    dayFontSize = KenUtilities.getDouble(optionsDefault!['todayFontSize']) ??
-        defaultDayFontSize;
-    eventFontSize = KenUtilities.getDouble(optionsDefault!['eventFontSize']) ??
-        defaultEventFontSize;
-    titleFontSize = KenUtilities.getDouble(optionsDefault!['titleFontSize']) ??
-        defaultTitleFontSize;
-    markerFontSize =
-        KenUtilities.getDouble(optionsDefault!['markerFontSize']) ??
-            defaultMarkerFontSize;
 
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
@@ -164,27 +153,5 @@ class KenCalendarModel extends KenModel {
     var dt = DateTime(focusedDay.year, focusedDay.month + 1, 0);
 
     return dt;
-  }
-
-  static setDefaults(dynamic obj) {
-    var dayTextStyle = KenConfigurationService.getTheme()!.textTheme.bodyText2!;
-    defaultDayFontSize = dayTextStyle.fontSize;
-
-    var markerStyle = KenConfigurationService.getTheme()!.textTheme.headline4!;
-    defaultMarkerFontSize = markerStyle.fontSize;
-
-    var eventStyle = KenConfigurationService.getTheme()!.textTheme.headline3!;
-    defaultEventFontSize = eventStyle.fontSize;
-
-    var titleTextStyle =
-        KenConfigurationService.getTheme()!.appBarTheme.titleTextStyle!;
-    defaultTitleFontSize = titleTextStyle.fontSize;
-
-    // ----------------- set properties from default
-
-    obj.dayFontSize ??= KenCalendarModel.defaultDayFontSize;
-    obj.eventFontSize ??= KenCalendarModel.defaultEventFontSize;
-    obj.titleFontSize ??= KenCalendarModel.defaultTitleFontSize;
-    obj.markerFontSize ??= KenCalendarModel.defaultMarkerFontSize;
   }
 }
