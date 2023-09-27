@@ -6,10 +6,8 @@ import '../../services/ken_configuration_service.dart';
 
 class KenProgressBarModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static Color? defaultColor = KenModel.kPrimary;
-  static Color? defaultLinearTrackColor = KenModel.kInactivePrimary;
-
-  // unsupported by json_theme
+  static const Color defaultColor = KenModel.kPrimary;
+  static const Color defaultLinearTrackColor = KenModel.kInactivePrimary;
   static const String defaultValueField = 'value';
   static const double defaultProgressBarMinimun = 0;
   static const double defaultProgressBarMaximun = 10;
@@ -33,8 +31,8 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    this.color,
-    this.linearTrackColor,
+    this.color = defaultColor,
+    this.linearTrackColor = defaultLinearTrackColor,
     this.height = defaultHeight,
     this.valueField = defaultValueField,
     this.padding = defaultPadding,
@@ -44,7 +42,6 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
     title = '',
   }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'pgb';
-    setDefaults(this);
   }
 
   KenProgressBarModel.fromMap(
@@ -53,7 +50,6 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
   ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
-    setDefaults(this);
     title = jsonMap['title'] ?? '';
 
     valueField = optionsDefault!['valueField'] ?? defaultValueField;
@@ -82,19 +78,5 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
         await getData();
       };
     }
-  }
-
-  static setDefaults(dynamic obj) {
-    ProgressIndicatorThemeData progressIndicatorThemeData =
-        KenConfigurationService.getTheme()!.progressIndicatorTheme;
-    defaultColor = progressIndicatorThemeData.color;
-    defaultLinearTrackColor = progressIndicatorThemeData.linearTrackColor;
-
-    // ----------------- set properties from default
-
-    obj.color ??= KenProgressBarModel.defaultColor;
-    obj.borderRadius ??= KenProgressBarModel.defaultBorderRadius;
-
-    obj.linearTrackColor ??= KenProgressBarModel.defaultLinearTrackColor;
   }
 }
