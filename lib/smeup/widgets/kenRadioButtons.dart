@@ -69,15 +69,15 @@ class KenRadioButtons extends StatefulWidget
     this.id = '',
     this.type = 'FLD',
     this.title = '',
-    this.radioButtonColor,
-    this.fontSize,
-    this.fontColor,
+    this.radioButtonColor = KenRadioButtonsModel.defaultRadioButtonColor,
+    this.fontSize = KenRadioButtonsModel.defaultFontSize,
+    this.fontColor = KenRadioButtonsModel.defaultFontColor,
     this.backColor = KenRadioButtonsModel.defaultBackColor,
-    this.fontBold,
-    this.captionFontSize,
-    this.captionFontColor,
+    this.fontBold = KenRadioButtonsModel.defaultFontBold,
+    this.captionFontSize = KenRadioButtonsModel.defaultCaptionFontSize,
+    this.captionFontColor = KenRadioButtonsModel.defaultFontColor,
     this.captionBackColor = KenRadioButtonsModel.defaultCaptionBackColor,
-    this.captionFontBold,
+    this.captionFontBold = KenRadioButtonsModel.defaultFontBold,
     this.data,
     this.width = KenRadioButtonsModel.defaultWidth,
     this.height = KenRadioButtonsModel.defaultHeight,
@@ -90,7 +90,6 @@ class KenRadioButtons extends StatefulWidget
     this.columns = KenRadioButtonsModel.defaultColumns,
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    KenRadioButtonsModel.setDefaults(this);
   }
 
   @override
@@ -333,16 +332,18 @@ class _KenRadioButtonsState extends State<KenRadioButtons>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.captionFontColor,
         fontSize: widget.captionFontSize,
         backgroundColor: widget.captionBackColor);
 
-    if (widget.captionFontBold!) {
+    if (widget.captionFontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    } else {
+      style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 

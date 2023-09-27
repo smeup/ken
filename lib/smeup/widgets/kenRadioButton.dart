@@ -34,18 +34,19 @@ class KenRadioButton extends StatefulWidget {
   late Function changeState;
 
   KenRadioButton(
-      {this.id = '',
+      {super.key,
+      this.id = '',
       this.type = 'rad',
       this.title = '',
-      this.radioButtonColor,
-      this.fontSize,
-      this.fontColor,
-      this.backColor,
-      this.fontBold,
-      this.captionFontSize,
-      this.captionFontColor,
-      this.captionBackColor,
-      this.captionFontBold,
+      this.radioButtonColor = KenRadioButtonsModel.defaultRadioButtonColor,
+      this.fontSize = KenRadioButtonsModel.defaultFontSize,
+      this.fontColor = KenRadioButtonsModel.defaultFontColor,
+      this.backColor = KenRadioButtonsModel.defaultBackColor,
+      this.fontBold = KenRadioButtonsModel.defaultFontBold,
+      this.captionFontSize = KenRadioButtonsModel.defaultCaptionFontSize,
+      this.captionFontColor = KenRadioButtonsModel.defaultFontColor,
+      this.captionBackColor = KenRadioButtonsModel.defaultCaptionBackColor,
+      this.captionFontBold = KenRadioButtonsModel.defaultCaptionFontBold,
       this.data,
       this.width = KenRadioButtonsModel.defaultWidth,
       this.height = KenRadioButtonsModel.defaultHeight,
@@ -55,9 +56,7 @@ class KenRadioButton extends StatefulWidget {
       this.displayedField = KenRadioButtonsModel.defaultDisplayedField,
       this.selectedValue,
       this.icon,
-      this.onPressed}) {
-    KenRadioButtonsModel.setDefaults(this);
-  }
+      this.onPressed});
 
   @override
   State<KenRadioButton> createState() => _KenRadioButtonState();
@@ -116,19 +115,14 @@ class _KenRadioButtonState extends State<KenRadioButton> {
   }
 
   RadioThemeData _getRadioTheme() {
-    RadioThemeData themeData = KenConfigurationService.getTheme()!
-        .radioTheme
-        .copyWith(
-            fillColor:
-                MaterialStateProperty.all<Color?>(widget.radioButtonColor));
+    RadioThemeData themeData = RadioThemeData(
+        fillColor: MaterialStateProperty.all<Color?>(widget.radioButtonColor));
 
     return themeData;
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.fontColor,
         fontSize: widget.fontSize,
         backgroundColor: widget.backColor);
@@ -136,6 +130,10 @@ class _KenRadioButtonState extends State<KenRadioButton> {
     if (widget.fontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    } else {
+      style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 
