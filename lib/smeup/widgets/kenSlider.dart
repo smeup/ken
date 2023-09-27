@@ -37,9 +37,9 @@ class KenSlider extends StatefulWidget
   KenSlider(
     this.scaffoldKey,
     this.formKey, {
-    this.activeTrackColor,
-    this.thumbColor,
-    this.inactiveTrackColor,
+    this.activeTrackColor = KenSliderModel.defaultActiveTrackColor,
+    this.thumbColor = KenSliderModel.defaultThumbColor,
+    this.inactiveTrackColor = KenSliderModel.defaultInactiveTrackColor,
     this.padding = KenSliderModel.defaultPadding,
     this.title,
     this.id = '',
@@ -53,7 +53,6 @@ class KenSlider extends StatefulWidget
     this.onChanged,
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    KenSliderModel.setDefaults(this);
   }
 
   KenSlider.withController(

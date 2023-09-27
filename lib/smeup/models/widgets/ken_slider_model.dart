@@ -6,11 +6,9 @@ import '../../services/ken_configuration_service.dart';
 
 class KenSliderModel extends KenModel {
   // supported by json_theme
-  static Color? defaultActiveTrackColor = KenModel.kPrimary;
-  static Color? defaultThumbColor = KenModel.kPrimary;
-  static Color? defaultInactiveTrackColor = KenModel.kInactivePrimary;
-
-  // unsupported by json_theme
+  static const Color defaultActiveTrackColor = KenModel.kPrimary;
+  static const Color defaultThumbColor = KenModel.kPrimary;
+  static const Color defaultInactiveTrackColor = KenModel.kInactivePrimary;
   static const EdgeInsetsGeometry defaultPadding =
       EdgeInsets.only(left: 10, right: 10);
   static const double defaultSldMin = 0;
@@ -31,16 +29,15 @@ class KenSliderModel extends KenModel {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    this.activeTrackColor,
-    this.thumbColor,
-    this.inactiveTrackColor,
+    this.activeTrackColor = defaultActiveTrackColor,
+    this.thumbColor = defaultThumbColor,
+    this.inactiveTrackColor = defaultInactiveTrackColor,
     this.padding = defaultPadding,
     this.sldMin = defaultSldMin,
     this.sldMax = defaultSldMax,
   }) : super(formKey, scaffoldKey, context, title: '', id: id, type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'sld';
     id = KenUtilities.getWidgetId('FLD', id);
-    setDefaults(this);
   }
 
   KenSliderModel.fromMap(
@@ -49,8 +46,6 @@ class KenSliderModel extends KenModel {
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
   ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
-    setDefaults(this);
-
     sldMin = KenUtilities.getDouble(optionsDefault!['sldMin']) ?? defaultSldMin;
     sldMax = KenUtilities.getDouble(optionsDefault!['sldMax']) ?? defaultSldMax;
     padding =
@@ -73,19 +68,5 @@ class KenSliderModel extends KenModel {
         await getData();
       };
     }
-  }
-
-  static setDefaults(dynamic obj) {
-    SliderThemeData sliderThemeData =
-        KenConfigurationService.getTheme()!.sliderTheme;
-    defaultActiveTrackColor = sliderThemeData.activeTrackColor;
-    defaultThumbColor = sliderThemeData.thumbColor;
-    defaultInactiveTrackColor = sliderThemeData.inactiveTrackColor;
-
-    // ----------------- set properties from default
-
-    obj.activeTrackColor ??= KenSliderModel.defaultActiveTrackColor;
-    obj.thumbColor ??= KenSliderModel.defaultThumbColor;
-    obj.inactiveTrackColor ??= KenSliderModel.defaultInactiveTrackColor;
   }
 }
