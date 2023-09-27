@@ -34,18 +34,24 @@ class KenDrawer extends StatefulWidget
   String? title;
   String? id;
   String? type;
+  Color? iconColor;
+  double? iconSize;
+  Color? drawerBackColor;
   List<KenDrawerDataElement>? drawerDataElement;
 
   KenDrawer(this.scaffoldKey, this.formKey,
       {this.id = '',
       this.type = 'DRW',
-      this.appBarBackColor,
-      this.titleFontSize,
-      this.titleFontColor,
-      this.titleFontBold,
-      this.elementFontSize,
-      this.elementFontColor,
-      this.elementFontBold,
+      this.appBarBackColor = KenDrawerModel.defaultAppBarBackColor,
+      this.titleFontSize = KenDrawerModel.defaultTitleFontSize,
+      this.titleFontColor = KenDrawerModel.defaultTitleFontColor,
+      this.titleFontBold = KenDrawerModel.defaultTitleFontBold,
+      this.elementFontSize = KenDrawerModel.defaultElementFontSize,
+      this.elementFontColor = KenDrawerModel.defaultTitleFontColor,
+      this.elementFontBold = KenDrawerModel.defaultElementFontBold,
+      this.iconColor = KenDrawerModel.defaultIconColor,
+      this.iconSize = KenDrawerModel.defaultIconSize,
+      this.drawerBackColor = KenDrawerModel.defaultDrawerBackColor,
       this.title = '',
       this.imageUrl = '',
       this.drawerDataElement,
@@ -55,7 +61,6 @@ class KenDrawer extends StatefulWidget
       this.showItemDivider = KenDrawerModel.defaultShowItemDivider})
       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    KenDrawerModel.setDefaults(this);
   }
 
   KenDrawer.withController(
@@ -84,6 +89,9 @@ class KenDrawer extends StatefulWidget
     elementFontBold = m.elementFontBold;
     elementFontColor = m.elementFontColor;
     showItemDivider = m.showItemDivider;
+    drawerBackColor = m.drawerBackColor;
+    iconColor = m.iconColor;
+    iconSize = m.iconSize;
   }
 
   @override
@@ -128,8 +136,8 @@ class _KenDrawerState extends State<KenDrawer>
       leading: e.groupIcon != null
           ? Icon(
               e.groupIconData,
-              color: _getIconTheme().color,
-              size: _getIconTheme().size,
+              color: widget.iconColor,
+              size: widget.iconSize,
             )
           : null,
       title: Text(e.group, style: _getElementTextStile()),
@@ -166,7 +174,7 @@ class _KenDrawerState extends State<KenDrawer>
     }
 
     var header = AppBar(
-        backgroundColor: _getAppBarTheme().backgroundColor,
+        backgroundColor: widget.appBarBackColor,
         //elevation: 0,
         automaticallyImplyLeading: false,
         title: Row(
@@ -193,7 +201,7 @@ class _KenDrawerState extends State<KenDrawer>
             header: _getCollpsed(e),
             theme: ExpandableThemeData(
                 headerAlignment: ExpandablePanelHeaderAlignment.center,
-                iconColor: _getIconTheme().color,
+                iconColor: widget.iconColor,
                 tapBodyToCollapse: true),
             expanded: Column(
               children: listInGroup!,
@@ -226,30 +234,27 @@ class _KenDrawerState extends State<KenDrawer>
     return KenWidgetBuilderResponse(
       _model,
       Drawer(
+          backgroundColor: widget.drawerBackColor,
           child: Container(
-        color: _getAppBarTheme().backgroundColor,
-        child: Column(
-          children: list,
-        ),
-      )),
+            color: widget.appBarBackColor,
+            child: Column(
+              children: list,
+            ),
+          )),
     );
   }
 
-  AppBarTheme _getAppBarTheme() {
-    return KenConfigurationService.getTheme()!
-        .appBarTheme
-        .copyWith(backgroundColor: widget.appBarBackColor);
-  }
-
   TextStyle _getTitleStile() {
-    TextStyle style = _getAppBarTheme().titleTextStyle!;
-
-    style = style.copyWith(
-        color: widget.titleFontColor, fontSize: widget.titleFontSize);
+    TextStyle style =
+        TextStyle(color: widget.titleFontColor, fontSize: widget.titleFontSize);
 
     if (widget.titleFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    } else {
+      style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 
@@ -257,13 +262,7 @@ class _KenDrawerState extends State<KenDrawer>
   }
 
   TextStyle _getElementTextStile() {
-    TextStyle style = KenConfigurationService.getTheme()!
-        .appBarTheme
-        .toolbarTextStyle!
-        .copyWith(
-            backgroundColor: KenConfigurationService.getTheme()!
-                .appBarTheme
-                .backgroundColor);
+    TextStyle style = const TextStyle(backgroundColor: Colors.transparent);
 
     if (widget.elementFontSize != null) {
       style = style.copyWith(
@@ -284,12 +283,5 @@ class _KenDrawerState extends State<KenDrawer>
     }
 
     return style;
-  }
-
-  IconThemeData _getIconTheme() {
-    IconThemeData themeData =
-        KenConfigurationService.getTheme()!.appBarTheme.iconTheme!;
-
-    return themeData;
   }
 }

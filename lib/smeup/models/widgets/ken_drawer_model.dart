@@ -6,20 +6,19 @@ import '../../services/ken_configuration_service.dart';
 
 class KenDrawerModel extends KenModel {
   // supported by json_theme
-  static double? defaultTitleFontSize = 18;
-  static Color? defaultTitleFontColor = Colors.white;
-  static bool? defaultTitleFontBold = false;
-
-  static double? defaultElementFontSize = 16;
-  static Color? defaultElementFontColor = Colors.white;
-  static bool? defaultElementFontBold = false;
-
-  static Color? defaultAppBarBackColor = KenModel.kPrimary;
-
-  // unsupported by json_theme
+  static const double defaultTitleFontSize = 18;
+  static const Color defaultTitleFontColor = KenModel.kPrimary;
+  static const bool defaultTitleFontBold = false;
+  static const double defaultElementFontSize = 16;
+  static const Color defaultElementFontColor = KenModel.kPrimary;
+  static const bool defaultElementFontBold = false;
+  static const Color defaultAppBarBackColor = KenModel.kPrimary;
   static const double defaultImageWidth = 80;
   static const double defaultImageHeight = 120;
   static const bool defaultShowItemDivider = true;
+  static const Color defaultIconColor = KenModel.kPrimary;
+  static const double defaultIconSize = 16;
+  static const Color defaultDrawerBackColor = KenModel.kSecondary100;
 
   double? titleFontSize;
   Color? titleFontColor;
@@ -29,10 +28,12 @@ class KenDrawerModel extends KenModel {
   bool? elementFontBold;
   Color? appBarBackColor;
   bool? showItemDivider;
-
   double? imageWidth;
   double? imageHeight;
   String? imageUrl;
+  Color? iconColor;
+  double? iconSize;
+  Color? drawerBackColor;
 
   KenDrawerModel({
     id,
@@ -40,23 +41,22 @@ class KenDrawerModel extends KenModel {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    this.appBarBackColor,
-    this.titleFontSize,
-    this.titleFontColor,
-    this.titleFontBold,
-    this.elementFontSize,
-    this.elementFontColor,
-    this.elementFontBold,
+    this.appBarBackColor = defaultAppBarBackColor,
+    this.titleFontSize = defaultTitleFontSize,
+    this.titleFontColor = defaultTitleFontColor,
+    this.titleFontBold = defaultTitleFontBold,
+    this.elementFontSize = defaultElementFontSize,
+    this.elementFontColor = defaultElementFontColor,
+    this.elementFontBold = defaultElementFontBold,
+    this.iconColor = defaultIconColor,
+    this.iconSize = defaultIconSize,
+    this.drawerBackColor = defaultDrawerBackColor,
     title,
     this.imageUrl = '',
     this.imageWidth = defaultImageWidth,
     this.imageHeight = defaultImageHeight,
     this.showItemDivider = defaultShowItemDivider,
-  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
-    appBarBackColor ??=
-        KenConfigurationService.getTheme()!.appBarTheme.backgroundColor;
-    setDefaults(this);
-  }
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {}
 
   KenDrawerModel.fromMap(
       Map<String, dynamic> jsonMap,
@@ -64,8 +64,6 @@ class KenDrawerModel extends KenModel {
       GlobalKey<ScaffoldState> scaffoldKey,
       BuildContext context)
       : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
-    setDefaults(this);
-
     title = jsonMap['title'] ?? '';
     titleFontSize = KenUtilities.getDouble(optionsDefault!['titleFontSize']) ??
         defaultTitleFontSize;
@@ -93,6 +91,13 @@ class KenDrawerModel extends KenModel {
     appBarBackColor =
         KenUtilities.getColorFromRGB(optionsDefault!['appBarBackColor']);
 
+    iconColor = KenUtilities.getColorFromRGB(optionsDefault!['iconColor']);
+
+    drawerBackColor =
+        KenUtilities.getColorFromRGB(optionsDefault!['drawerBackColor']);
+
+    iconSize = KenUtilities.getDouble(optionsDefault!['iconSize']);
+
     showItemDivider =
         KenUtilities.getBool(optionsDefault!['showItemDivider']) ??
             defaultShowItemDivider;
@@ -103,33 +108,5 @@ class KenDrawerModel extends KenModel {
         await getData();
       };
     }
-  }
-
-  static setDefaults(dynamic obj) {
-    // AppBarTheme appBarTheme = KenConfigurationService.getTheme()!.appBarTheme;
-
-    // TextStyle titleStyle = appBarTheme.titleTextStyle!;
-    // defaultTitleFontSize = titleStyle.fontSize;
-    // defaultTitleFontColor = titleStyle.color;
-    // defaultTitleFontBold = titleStyle.fontWeight == FontWeight.bold;
-
-    // TextStyle elementStyle = appBarTheme.toolbarTextStyle!;
-    // defaultElementFontSize = elementStyle.fontSize;
-    // defaultElementFontColor = elementStyle.color;
-    // defaultElementFontBold = elementStyle.fontWeight == FontWeight.bold;
-
-    // defaultAppBarBackColor = appBarTheme.backgroundColor;
-
-    // ----------------- set properties from default
-
-    obj.titleFontSize ??= KenDrawerModel.defaultTitleFontSize;
-    obj.titleFontColor ??= KenDrawerModel.defaultTitleFontColor;
-    obj.titleFontBold ??= KenDrawerModel.defaultTitleFontBold;
-
-    obj.elementFontSize ??= KenDrawerModel.defaultElementFontSize;
-    obj.elementFontColor ??= KenDrawerModel.defaultElementFontColor;
-    obj.elementFontBold ??= KenDrawerModel.defaultElementFontBold;
-
-    obj.appBarBackColor ??= KenDrawerModel.defaultAppBarBackColor;
   }
 }
