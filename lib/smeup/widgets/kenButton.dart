@@ -39,26 +39,27 @@ class KenButton extends StatelessWidget {
   final IconData? iconData;
 
   KenButton(
-      {this.id = '',
+      {super.key,
+      this.id = '',
       this.type = 'BTN',
       this.title = '',
       this.data = '',
-      this.backColor,
-      this.borderColor,
-      this.borderWidth,
-      this.borderRadius,
-      this.fontSize,
-      this.fontColor,
-      this.fontBold,
-      this.iconSize,
-      this.iconColor,
+      this.backColor = KenButtonsModel.defaultBackColor,
+      this.borderColor = KenButtonsModel.defaultBorderColor,
+      this.borderRadius = KenButtonsModel.defaultBorderRadius,
+      this.borderWidth = KenButtonsModel.defaultBorderWidth,
+      this.elevation = KenButtonsModel.defaultElevation,
+      this.fontSize = KenButtonsModel.defaultFontSize,
+      this.fontColor = KenButtonsModel.defaultFontColor,
+      this.fontBold = KenButtonsModel.defaultFontBold,
+      this.iconSize = KenButtonsModel.defaultIconSize,
+      this.iconColor = KenButtonsModel.defaultIconColor,
       this.width = KenButtonsModel.defaultWidth,
       this.height = KenButtonsModel.defaultHeight,
       this.position = KenButtonsModel.defaultPosition,
       this.align = KenButtonsModel.defaultAlign,
       this.padding = KenButtonsModel.defaultPadding,
-      this.valueField,
-      this.elevation,
+      this.valueField = KenButtonsModel.defaultValueField,
       this.buttonIndex,
       this.iconData,
       this.clientOnPressed,
@@ -66,12 +67,12 @@ class KenButton extends StatelessWidget {
       this.isLink = KenButtonsModel.defaultIsLink,
       this.innerSpace = KenButtonsModel.defaultInnerSpace,
       this.model}) {
-    KenButtonsModel.setDefaults(this);
-    if (isLink) {
-      borderColor = KenConfigurationService.getTheme()!.scaffoldBackgroundColor;
-      fontColor = backColor;
-      backColor = KenConfigurationService.getTheme()!.scaffoldBackgroundColor;
-    }
+    // Gestione del button link è preferibile con una icona e testo sottolineato
+    // if (isLink) {
+    //   borderColor = KenConfigurationService.getTheme()!.scaffoldBackgroundColor;
+    //   fontColor = backColor;
+    //   backColor = KenConfigurationService.getTheme()!.scaffoldBackgroundColor;
+    // }
   }
 
   @override
@@ -247,33 +248,31 @@ class KenButton extends StatelessWidget {
   }
 
   ButtonStyle _getButtonStyle() {
-    var elevatedButtonStyle = KenConfigurationService.getTheme()!
-        .elevatedButtonTheme
-        .style!
-        .copyWith(
-            backgroundColor: MaterialStateProperty.all<Color?>(backColor),
-            elevation: MaterialStateProperty.all<double?>(elevation),
-            overlayColor:
-                MaterialStateProperty.all<Color?>(Colors.black.withOpacity(.2)),
-            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                const EdgeInsets.all(0)),
-            shape: MaterialStateProperty.all<OutlinedBorder>(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(borderRadius!))),
-            side: MaterialStateProperty.all<BorderSide>(
-                BorderSide(width: borderWidth!, color: borderColor!)));
+    var elevatedButtonStyle = ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color?>(backColor),
+        elevation: MaterialStateProperty.all<double?>(elevation),
+        overlayColor:
+            MaterialStateProperty.all<Color?>(Colors.black.withOpacity(.2)),
+        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+            const EdgeInsets.all(0)),
+        shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadius!))),
+        side: MaterialStateProperty.all<BorderSide>(
+            BorderSide(width: borderWidth!, color: borderColor!)));
 
     return elevatedButtonStyle;
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.button!;
+    TextStyle style = TextStyle(color: fontColor, fontSize: fontSize);
 
-    style = style.copyWith(color: fontColor, fontSize: fontSize);
-
-    if (fontBold!) {
+    if (fontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    } else {
+      style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 
@@ -285,9 +284,7 @@ class KenButton extends StatelessWidget {
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenConfigurationService.getTheme()!
-        .iconTheme
-        .copyWith(size: iconSize, color: iconColor);
+    IconThemeData themeData = IconThemeData(size: iconSize, color: iconColor);
 
     return themeData;
   }

@@ -86,7 +86,6 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
     this.numberFormat = defaultNumberFormat,
     title = '',
   }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
-    iconColor ??= KenConfigurationService.getTheme()!.iconTheme.color;
     id = KenUtilities.getWidgetId('DSH', id);
   }
 

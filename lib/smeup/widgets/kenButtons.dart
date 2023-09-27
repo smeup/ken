@@ -61,16 +61,16 @@ class KenButtons extends StatefulWidget
     this.type = 'BTN',
     this.title = '',
     this.data,
-    this.backColor,
-    this.borderColor,
-    this.borderRadius,
-    this.borderWidth,
-    this.elevation,
-    this.fontSize,
-    this.fontColor,
-    this.fontBold,
-    this.iconSize,
-    this.iconColor,
+    this.backColor = KenButtonsModel.defaultBackColor,
+    this.borderColor = KenButtonsModel.defaultBorderColor,
+    this.borderRadius = KenButtonsModel.defaultBorderRadius,
+    this.borderWidth = KenButtonsModel.defaultBorderWidth,
+    this.elevation = KenButtonsModel.defaultElevation,
+    this.fontSize = KenButtonsModel.defaultFontSize,
+    this.fontColor = KenButtonsModel.defaultFontColor,
+    this.fontBold = KenButtonsModel.defaultFontBold,
+    this.iconSize = KenButtonsModel.defaultIconSize,
+    this.iconColor = KenButtonsModel.defaultIconColor,
     this.width = KenButtonsModel.defaultWidth,
     this.height = KenButtonsModel.defaultHeight,
     this.position = KenButtonsModel.defaultPosition,
@@ -84,7 +84,6 @@ class KenButtons extends StatefulWidget
     this.clientOnPressed,
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    KenButtonsModel.setDefaults(this);
     data ??= List<String>.empty(growable: true);
   }
 
@@ -149,7 +148,7 @@ class KenButtonsState extends State<KenButtons>
 
   @override
   void dispose() {
-    // pulizia
+    // clean
     runDispose(widget.scaffoldKey, widget.id);
     super.dispose();
   }
@@ -189,6 +188,7 @@ class KenButtonsState extends State<KenButtons>
     KenMessageBus.instance.publishRequest(
       widget.globallyUniqueId,
       KenTopic.buttonsGetChildren,
+      // ignore: use_build_context_synchronously
       KenMessageBusEventData(
           context: context, widget: widget, model: _model, data: _data),
     );
@@ -199,6 +199,7 @@ class KenButtonsState extends State<KenButtons>
             id: widget.globallyUniqueId, topic: KenTopic.buttonsGetChildren),
         initialData: KenMessageBusEvent(
           id: widget.globallyUniqueId,
+          // ignore: use_build_context_synchronously
           data: KenMessageBusEventData(
             data: <Widget>[],
             context: context,
