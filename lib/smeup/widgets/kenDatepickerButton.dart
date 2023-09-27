@@ -49,22 +49,23 @@ class KenDatePickerButton extends StatefulWidget {
     this.id,
     this.buttonStyle,
     this.textStyle, {
+    super.key,
     this.scaffoldKey,
     this.formKey,
     this.value,
-    this.display,
-    this.borderColor,
-    this.borderWidth,
-    this.borderRadius,
-    this.fontBold,
-    this.fontSize,
-    this.fontColor,
-    this.backColor,
-    this.elevation,
-    this.captionFontBold,
-    this.captionFontSize,
-    this.captionFontColor,
-    this.captionBackColor,
+    this.display = KenDatePickerModel.defaultdisplayedField,
+    this.borderColor = KenDatePickerModel.defaultBorderColor,
+    this.borderWidth = KenDatePickerModel.defaultBorderWidth,
+    this.borderRadius = KenDatePickerModel.defaultBorderRadius,
+    this.fontBold = KenDatePickerModel.defaultFontBold,
+    this.fontSize = KenDatePickerModel.defaultFontSize,
+    this.fontColor = KenDatePickerModel.defaultFontColor,
+    this.backColor = KenDatePickerModel.defaultBackColor,
+    this.elevation = KenDatePickerModel.defaultElevation,
+    this.captionFontBold = KenDatePickerModel.defaultCaptionFontBold,
+    this.captionFontSize = KenDatePickerModel.defaultCaptionFontSize,
+    this.captionFontColor = KenDatePickerModel.defaultCaptionFontColor,
+    this.captionBackColor = KenDatePickerModel.defaultCaptionBackColor,
     this.underline = KenDatePickerModel.defaultUnderline,
     this.align = KenDatePickerModel.defaultAlign,
     this.label = KenDatePickerModel.defaultLabel,
@@ -74,11 +75,9 @@ class KenDatePickerButton extends StatefulWidget {
     this.showborder = KenDatePickerModel.defaultShowBorder,
     this.clientOnChange,
     this.model,
-    this.dashColor,
+    this.dashColor = KenDatePickerModel.defaultDashColor,
     required this.globallyUniqueId,
-  }) {
-    KenDatePickerModel.setDefaults(this);
-  }
+  }) {}
 
   @override
   KenDatePickerButtonState createState() => KenDatePickerButtonState();
