@@ -120,9 +120,8 @@ class _KenLineState extends State<KenLine>
   }
 
   DividerThemeData _getDividerStile() {
-    DividerThemeData dividerData = KenConfigurationService.getTheme()!
-        .dividerTheme
-        .copyWith(color: widget.color, thickness: widget.thickness);
+    DividerThemeData dividerData =
+        DividerThemeData(color: widget.color, thickness: widget.thickness);
 
     return dividerData;
   }
