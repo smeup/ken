@@ -50,6 +50,7 @@ class KenBox extends StatefulWidget {
     this.formKey,
     this.index,
     this.kenListBox, {
+    super.key,
     this.id,
     this.isDynamic = false,
     this.selectedRow,
@@ -75,10 +76,10 @@ class KenBox extends StatefulWidget {
   });
 
   @override
-  _KenBoxState createState() => _KenBoxState();
+  KenBoxState createState() => KenBoxState();
 }
 
-class _KenBoxState extends State<KenBox> with KenWidgetStateMixin {
+class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
   List<dynamic>? _columns;
   double elevation = 0;
 

@@ -78,16 +78,16 @@ class KenListBox extends StatefulWidget
     this.data, {
     this.id = '',
     this.type = 'BOX',
-    this.borderColor,
-    this.borderWidth,
-    this.borderRadius,
-    this.backColor,
-    this.fontSize,
-    this.fontColor,
-    this.fontBold,
-    this.captionFontBold,
-    this.captionFontSize,
-    this.captionFontColor,
+    this.borderColor = KenListBoxModel.defaultBorderColor,
+    this.borderWidth = KenListBoxModel.defaultBorderRadius,
+    this.borderRadius = KenListBoxModel.defaultBorderRadius,
+    this.backColor = KenListBoxModel.defaultBackColor,
+    this.fontSize = KenListBoxModel.defaultFontSize,
+    this.fontColor = KenListBoxModel.defaultFontColor,
+    this.fontBold = KenListBoxModel.defaultFontBold,
+    this.captionFontBold = KenListBoxModel.defaultCaptionFontBold,
+    this.captionFontSize = KenListBoxModel.defaultCaptionFontSize,
+    this.captionFontColor = KenListBoxModel.defaultCaptionFontColor,
     this.layout = KenListBoxModel.defaultLayout,
     this.width = KenListBoxModel.defaultWidth,
     this.height = KenListBoxModel.defaultHeight,
@@ -109,7 +109,6 @@ class KenListBox extends StatefulWidget
     this.defaultSort = KenListBoxModel.defaultDefaultSort,
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    KenListBoxModel.setDefaults(this);
   }
 
   @override
@@ -189,7 +188,8 @@ class KenListBox extends StatefulWidget
       }
     } else {
       if (listboxHeight == 0) {
-        listboxHeight = KenUtilities.getDeviceInfo().safeHeight; // modify the height of the listbox
+        listboxHeight = KenUtilities.getDeviceInfo()
+            .safeHeight; // modify the height of the listbox
       }
     }
     return listboxHeight;
@@ -354,7 +354,7 @@ class _KenListBoxState extends State<KenListBox>
       },
     );
 
-        double? listboxHeight =
+    double? listboxHeight =
         KenListBox.getListHeight(widget.listHeight, _model, context);
 
     final container = Container(
@@ -493,9 +493,8 @@ class _KenListBoxState extends State<KenListBox>
       //       KenUtilities.getColorFromRGB(dataElement[widget.backgroundColName]);
       // }
 
-      TextStyle _getTextStile(Color? _backColor) {
-        TextStyle style =
-            KenConfigurationService.getTheme()!.textTheme.headline4!;
+      TextStyle getTextStile(Color? backColor) {
+        TextStyle style = TextStyle(fontSize: widget.fontSize);
 
         if (dataElement["disabled"] != null &&
             dataElement["disabled"] as bool) {
@@ -503,44 +502,47 @@ class _KenListBoxState extends State<KenListBox>
               color: Colors.grey[500],
               fontSize: widget.fontSize,
               backgroundColor:
-                  _backColor); // se lo rimuovi rimane uno sfondo bianco, così prende il colore di sfondo
+                  backColor); // se lo rimuovi rimane uno sfondo bianco, così prende il colore di sfondo
         } else {
           style = style.copyWith(
               color: widget.fontColor,
               fontSize: widget.fontSize,
               backgroundColor: Colors.transparent);
         }
-        if (widget.fontBold!) {
+        if (widget.fontBold == true) {
           style = style.copyWith(
             fontWeight: FontWeight.w600,
+          );
+        } else {
+          style = style.copyWith(
+            fontWeight: FontWeight.normal,
           );
         }
 
         return style;
       }
 
-      CardTheme _getCardStyle() {
-        var timeCardTheme =
-            KenConfigurationService.getTheme()!.cardTheme.copyWith(
-                  color: widget.backColor,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(widget.borderRadius!),
-                      side: BorderSide(
-                          width: widget.borderWidth!,
-                          color: dataElement["disabled"] != null &&
-                                  dataElement["disabled"] as bool
-                              ? Colors.grey
-                              : widget.borderColor!)),
-                );
+      CardTheme getCardStyle() {
+        var timeCardTheme = CardTheme(
+          color: widget.backColor,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius!),
+              side: BorderSide(
+                  width: widget.borderWidth!,
+                  color: dataElement["disabled"] != null &&
+                          dataElement["disabled"] as bool
+                      ? Colors.grey
+                      : widget.borderColor!)),
+        );
 
         return timeCardTheme;
       }
 
-      CardTheme cardTheme = _getCardStyle();
-      TextStyle textStyle = _getTextStile(_backColor);
+      CardTheme cardTheme = getCardStyle();
+      TextStyle textStyle = getTextStile(_backColor);
       TextStyle captionStyle = _getCaptionStile(_backColor);
 
-      _onItemTap(int index, dynamic data, KenListBox listBox) {
+      onItemTap(int index, dynamic data, KenListBox listBox) {
         if (listBox.showSelection! && _selectedRow != index) {
           setState(() {
             //widget.selectedRow = index;// così in originale
@@ -572,7 +574,7 @@ class _KenListBoxState extends State<KenListBox>
           backColor: _backColor,
           showSelection: widget.showSelection,
           dismissEnabled: widget.dismissEnabled,
-          onItemTap: _onItemTap,
+          onItemTap: onItemTap,
           cardTheme: cardTheme,
           textStyle: textStyle,
           captionStyle: captionStyle,
@@ -596,14 +598,16 @@ class _KenListBoxState extends State<KenListBox>
   }
 
   TextStyle _getCaptionStile(Color? backColor) {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.headline5!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.captionFontColor,
         fontSize: widget.captionFontSize,
         backgroundColor: Colors.transparent);
 
-    if (widget.captionFontBold!) {
+    if (widget.captionFontBold == true) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    } else {
       style = style.copyWith(
         fontWeight: FontWeight.normal,
       );
