@@ -8,12 +8,12 @@ import '../../services/ken_configuration_service.dart';
 
 class KenLabelModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static double? defaultFontSize = 20;
-  static Color? defaultFontColor = KenModel.kSecondary100;
-  static bool? defaultFontBold = false;
-  static Color? defaultBackColor = Colors.transparent;
-  static double? defaultIconSize = 20;
-  static Color? defaultIconColor = KenModel.kSecondary100;
+  static const double defaultFontSize = 20;
+  static const Color defaultFontColor = KenModel.kSecondary100;
+  static const bool defaultFontBold = false;
+  static const Color defaultBackColor = Colors.transparent;
+  static const double defaultIconSize = 20;
+  static const Color defaultIconColor = KenModel.kSecondary100;
 
   // unsupported by json_theme
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
@@ -45,12 +45,12 @@ class KenLabelModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    this.fontSize,
-    this.fontColor,
-    this.fontBold,
-    this.backColor,
-    this.iconSize,
-    this.iconColor,
+    this.fontSize = defaultFontSize,
+    this.fontColor = defaultFontColor,
+    this.fontBold = defaultFontBold,
+    this.backColor = defaultBackColor,
+    this.iconSize = defaultIconSize,
+    this.iconColor = defaultIconColor,
     this.valueColName = defaultValColName,
     this.padding = defaultPadding,
     this.align = defaultAlign,
@@ -61,9 +61,7 @@ class KenLabelModel extends KenModel implements KenDataInterface {
     this.iconColname = '',
     this.fontColorColName = '',
     title = '',
-  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
-    setDefaults(this);
-  }
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {}
 
   KenLabelModel.fromMap(
     Map<String, dynamic> jsonMap,
@@ -71,8 +69,6 @@ class KenLabelModel extends KenModel implements KenDataInterface {
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
   ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
-    setDefaults(this);
-
     fontColor ??=
         KenConfigurationService.getTheme()!.textTheme.bodyText1!.color;
 
@@ -107,27 +103,5 @@ class KenLabelModel extends KenModel implements KenDataInterface {
         await getData();
       };
     }
-  }
-
-  static setDefaults(dynamic obj) {
-    // TextStyle textStyle =
-    //     KenConfigurationService.getTheme()!.textTheme.bodyText2!;
-    // defaultFontSize = textStyle.fontSize;
-    // defaultFontColor = textStyle.color;
-    // defaultBackColor = textStyle.backgroundColor;
-    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-
-    // var iconTheme = KenConfigurationService.getTheme()!.appBarTheme.iconTheme!;
-    // defaultIconSize = iconTheme.size;
-    // defaultIconColor = iconTheme.color;
-
-    // ----------------- set properties from default
-
-    obj.fontSize ??= KenLabelModel.defaultFontSize;
-    obj.fontColor ??= KenLabelModel.defaultFontColor;
-    obj.backColor ??= KenLabelModel.defaultBackColor;
-    obj.fontBold ??= KenLabelModel.defaultFontBold;
-    obj.iconSize ??= KenLabelModel.defaultIconSize;
-    obj.iconColor ??= KenLabelModel.defaultIconColor;
   }
 }
