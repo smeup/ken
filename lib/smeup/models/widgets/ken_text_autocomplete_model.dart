@@ -7,20 +7,19 @@ import 'ken_model.dart';
 
 class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static double? defaultFontSize = 16;
-  static Color? defaultBackColor = KenModel.kBack200;
-  static Color? defaultFontColor = KenModel.kSecondary100;
-  static bool? defaultFontBold = false;
-  static bool? defaultCaptionFontBold = false;
-  static double? defaultCaptionFontSize = 14;
-  static Color? defaultCaptionFontColor = KenModel.kPrimary;
-  static Color? defaultCaptionBackColor = KenModel.kBack200;
-  static Color? defaultBorderColor = KenModel.kPrimary;
-  static double? defaultBorderWidth = 0;
-  static double? defaultBorderRadius = 10;
-  static Color? defaultIconColor = KenModel.kPrimary;
-
-  // unsupported by json_theme
+  static const double defaultFontSize = 16;
+  static const Color defaultBackColor = KenModel.kBack200;
+  static const Color defaultFontColor = KenModel.kSecondary100;
+  static const bool defaultFontBold = false;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultCaptionFontSize = 14;
+  static const Color defaultCaptionFontColor = KenModel.kPrimary;
+  static const Color defaultCaptionBackColor = KenModel.kBack200;
+  static const Color defaultBorderColor = KenModel.kPrimary;
+  static const double defaultBorderWidth = 0;
+  static const double defaultBorderRadius = 10;
+  static const Color defaultIconColor = KenModel.kPrimary;
+  static const double defaultIconSize = 10;
   static const String defaultLabel = '';
   static const double defaultWidth = double.maxFinite;
   static const double defaultHeight = 55;
@@ -43,6 +42,7 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
   double? borderWidth;
   double? borderRadius;
   Color? iconColor;
+  double? iconSize;
 
   String? label;
   double? width;
@@ -62,18 +62,19 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    this.backColor,
-    this.fontSize,
-    this.fontBold,
-    this.fontColor,
-    this.captionBackColor,
-    this.captionFontBold,
-    this.captionFontColor,
-    this.captionFontSize,
-    this.borderColor,
-    this.iconColor,
-    this.borderRadius,
-    this.borderWidth,
+    this.backColor = defaultBackColor,
+    this.fontSize = defaultFontSize,
+    this.fontBold = defaultFontBold,
+    this.fontColor = defaultFontColor,
+    this.captionBackColor = defaultCaptionBackColor,
+    this.captionFontBold = defaultCaptionFontBold,
+    this.captionFontColor = defaultCaptionFontColor,
+    this.captionFontSize = defaultCaptionFontSize,
+    this.borderColor = defaultBorderColor,
+    this.iconColor = defaultIconColor,
+    this.iconSize = defaultIconSize,
+    this.borderRadius = defaultBorderRadius,
+    this.borderWidth = defaultBorderWidth,
     this.label = defaultLabel,
     this.width = defaultWidth,
     this.height = defaultHeight,
@@ -86,7 +87,6 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
     this.valueField = 'value',
   }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'acp';
-    setDefaults(this);
   }
 
   KenTextAutocompleteModel.fromMap(
@@ -95,7 +95,6 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
   ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
-    setDefaults(this);
     backColor = KenUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
     fontSize =
@@ -129,6 +128,8 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
         defaultBorderRadius;
     borderWidth = KenUtilities.getDouble(optionsDefault!['borderWidth']) ??
         defaultBorderWidth;
+    iconSize =
+        KenUtilities.getDouble(optionsDefault!['iconSize']) ?? defaultIconSize;
     borderColor =
         KenUtilities.getColorFromRGB(optionsDefault!['borderColor']) ??
             defaultBorderColor;
@@ -147,45 +148,5 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
         await getData();
       };
     }
-  }
-
-  static setDefaults(dynamic obj) {
-    // var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
-    // defaultBackColor = timePickerTheme.backgroundColor;
-    // var shape = timePickerTheme.shape!;
-    // defaultBorderRadius = (shape as ContinuousRectangleBorder)
-    //     .borderRadius
-    //     .resolve(TextDirection.ltr)
-    //     .topLeft
-    //     .x;
-    // var side = timePickerTheme.dayPeriodBorderSide!;
-    // defaultBorderColor = side.color;
-    // defaultBorderWidth = side.width;
-
-    // var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
-    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-    // defaultFontSize = textStyle.fontSize;
-    // defaultFontColor = textStyle.color;
-    // defaultBackColor = textStyle.backgroundColor;
-
-    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
-    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    // defaultCaptionFontSize = captionStyle.fontSize;
-    // defaultCaptionFontColor = captionStyle.color;
-    // defaultCaptionBackColor = captionStyle.backgroundColor;
-
-    // ----------------- set properties from default
-    obj.borderColor ??= KenTextAutocompleteModel.defaultBorderColor;
-    obj.iconColor ??= KenTextAutocompleteModel.defaultIconColor;
-    obj.borderWidth ??= KenTextAutocompleteModel.defaultBorderWidth;
-    obj.borderRadius ??= KenTextAutocompleteModel.defaultBorderRadius;
-    obj.fontBold ??= KenTextAutocompleteModel.defaultFontBold;
-    obj.fontColor ??= KenTextAutocompleteModel.defaultFontColor;
-    obj.fontSize ??= KenTextAutocompleteModel.defaultFontSize;
-    obj.backColor ??= KenTextAutocompleteModel.defaultBackColor;
-    obj.captionFontBold ??= KenTextAutocompleteModel.defaultCaptionFontBold;
-    obj.captionFontColor ??= KenTextAutocompleteModel.defaultCaptionFontColor;
-    obj.captionFontSize ??= KenTextAutocompleteModel.defaultCaptionFontSize;
-    obj.captionBackColor ??= KenTextAutocompleteModel.defaultCaptionBackColor;
   }
 }

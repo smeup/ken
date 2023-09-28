@@ -36,6 +36,7 @@ class KenTextAutocomplete extends StatefulWidget
   double? borderWidth;
   double? borderRadius;
   Color? iconColor;
+  double? iconSize;
 
   String? label;
   double? width;
@@ -78,18 +79,18 @@ class KenTextAutocomplete extends StatefulWidget
     this.formKey, {
     this.id = '',
     this.type = 'FLD',
-    this.backColor,
-    this.fontSize,
-    this.fontBold,
-    this.fontColor,
-    this.captionBackColor,
-    this.captionFontBold,
-    this.captionFontColor,
-    this.captionFontSize,
-    this.borderColor,
-    this.iconColor,
-    this.borderRadius,
-    this.borderWidth,
+    this.backColor = KenTextAutocompleteModel.defaultBackColor,
+    this.fontSize = KenTextAutocompleteModel.defaultFontSize,
+    this.fontBold = KenTextAutocompleteModel.defaultFontBold,
+    this.fontColor = KenTextAutocompleteModel.defaultFontColor,
+    this.captionBackColor = KenTextAutocompleteModel.defaultCaptionBackColor,
+    this.captionFontBold = KenTextAutocompleteModel.defaultFontBold,
+    this.captionFontColor = KenTextAutocompleteModel.defaultCaptionFontColor,
+    this.captionFontSize = KenTextAutocompleteModel.defaultCaptionFontSize,
+    this.borderColor = KenTextAutocompleteModel.defaultBorderColor,
+    this.iconColor = KenTextAutocompleteModel.defaultIconColor,
+    this.borderRadius = KenTextAutocompleteModel.defaultBorderRadius,
+    this.borderWidth = KenTextAutocompleteModel.defaultBorderWidth,
     this.label = KenTextAutocompleteModel.defaultLabel,
     this.submitLabel = KenTextAutocompleteModel.defaultSubmitLabel,
     this.width = KenTextAutocompleteModel.defaultWidth,
@@ -97,6 +98,7 @@ class KenTextAutocomplete extends StatefulWidget
     this.padding = KenTextAutocompleteModel.defaultPadding,
     this.showborder = KenTextAutocompleteModel.defaultShowBorder,
     this.data,
+    this.iconSize = KenTextAutocompleteModel.defaultIconSize,
     this.underline = KenTextAutocompleteModel.defaultUnderline,
     this.autoFocus = KenTextAutocompleteModel.defaultAutoFocus,
     this.showSubmit = KenTextAutocompleteModel.defaultShowSubmit,
@@ -111,7 +113,6 @@ class KenTextAutocomplete extends StatefulWidget
     this.valueField,
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    KenTextAutocompleteModel.setDefaults(this);
   }
 
   @override
@@ -142,6 +143,7 @@ class KenTextAutocomplete extends StatefulWidget
     defaultValue = m.defaultValue;
     valueField = m.valueField;
     submitLabel = m.submitLabel;
+    iconSize = m.iconSize;
     showSubmit = m.showSubmit;
 
     data = treatData(m);
@@ -227,7 +229,6 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
 
     TextStyle textStyle = _getTextStile();
     TextStyle captionStyle = _getCaptionStile();
-    IconThemeData iconTheme = _getIconTheme();
 
     String _displayStringForOption(Map<dynamic, dynamic> option) =>
         option['value'];
@@ -353,7 +354,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                     child: Icon(
                       Icons.close,
                       color: widget.iconColor,
-                      size: iconTheme.size,
+                      size: widget.iconSize,
                     ),
                     onTap: () {
                       setState(() {
@@ -484,16 +485,18 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.fontColor,
         fontSize: widget.fontSize,
         backgroundColor: widget.backColor);
 
-    if (widget.fontBold!) {
+    if (widget.fontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    } else {
+      style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 
@@ -501,25 +504,21 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.captionFontColor,
         fontSize: widget.captionFontSize,
         backgroundColor: widget.captionBackColor);
 
-    if (widget.captionFontBold!) {
+    if (widget.captionFontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    } else {
+      style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 
     return style;
-  }
-
-  IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenConfigurationService.getTheme()!.iconTheme;
-
-    return themeData;
   }
 }
