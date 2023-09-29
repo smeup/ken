@@ -61,7 +61,7 @@ class KenCombo extends StatefulWidget
   KenCombo(
     this.scaffoldKey,
     this.formKey, {
-        this.fontColor = KenComboModel.defaultFontColor,
+    this.fontColor = KenComboModel.defaultFontColor,
     this.fontSize = KenComboModel.defaultFontSize,
     this.fontBold = KenComboModel.defaultFontBold,
     this.backColor = KenComboModel.defaultBackColor,
@@ -241,14 +241,15 @@ class KenComboState extends State<KenCombo>
           padding: widget.padding,
           width: boxWidth,
           height: boxHeight,
-decoration: widget.showBorder == true
-    ? BoxDecoration(
-        borderRadius: BorderRadius.circular(widget.borderRadius ?? 0.0),
-        border: Border.all(
-            color: widget.borderColor ?? Colors.transparent,
-            width: widget.borderWidth ?? 0.0),
-      )
-    : null,
+          decoration: widget.showBorder == true
+              ? BoxDecoration(
+                  borderRadius:
+                      BorderRadius.circular(widget.borderRadius ?? 0.0),
+                  border: Border.all(
+                      color: widget.borderColor ?? Colors.transparent,
+                      width: widget.borderWidth ?? 0.0),
+                )
+              : null,
           child: KenComboWidget(
             widget.scaffoldKey,
             widget.formKey,
@@ -259,6 +260,7 @@ decoration: widget.showBorder == true
             backColor: widget.backColor,
             iconColor: widget.iconColor,
             iconSize: widget.iconSize,
+            dropdownColor: widget.dropdownColor,
             captionFontBold: widget.captionFontBold,
             captionFontColor: widget.captionFontColor,
             captionFontSize: widget.captionFontSize,
@@ -391,13 +393,12 @@ decoration: widget.showBorder == true
         fontSize: widget.captionFontSize,
         backgroundColor: widget.captionBackColor);
 
-    if (widget.captionFontBold== true) {
+    if (widget.captionFontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
-    }
-    else{
-            style = style.copyWith(
+    } else {
+      style = style.copyWith(
         fontWeight: FontWeight.normal,
       );
     }
