@@ -136,6 +136,11 @@ class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
       case '4':
         box = await _getLayout4(widget.data);
         break;
+      case 'button':
+        box = await _getLayoutButtons(widget.data);
+      case 'imagelist':
+        box = await _getLayoutImageList(widget.data);
+        break;
       default:
         KenLogService.writeDebugMessage(
             'No layout received. Used default layout',
@@ -419,9 +424,104 @@ class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     );
   }
 
+  // LAYOUT WITH BUTTONS
+
+  Future<Widget> _getLayoutButtons(dynamic data) async {
+    final cols = await _getColumns(data);
+
+    if (data.length > 0) {
+      return GestureDetector(
+        onTap: () {
+          _manageTap(widget.index, data);
+        },
+        child: Card(
+            color: widget.cardTheme!.color,
+            shape: widget.cardTheme!.shape,
+            child: Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  height: widget.height,
+                  child: FutureBuilder<Widget>(
+                      future: _getLayoutButtonAsync(data, cols),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<Widget> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          //??? va gestito in shiro
+                          // return widget.showLoader!
+                          //     ? SmeupWait(widget.scaffoldKey, widget.formKey)
+                          //     : Container();
+                          return Container();
+                        } else {
+                          if (snapshot.hasError) {
+                            return KenNotAvailable();
+                          } else {
+                            return snapshot.data!;
+                          }
+                        }
+                      }),
+                ))),
+      );
+    }
+
+    KenLogService.writeDebugMessage('Error SmeupBox widget not created',
+        logType: KenLogType.error);
+
+    return KenNotAvailable();
+  }
+
+  Future<Widget> _getLayoutButtonAsync(dynamic data, cols) async {
+    var widgets = List<Widget>.empty(growable: true);
+    for (var col in cols) {
+      if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
+        String rowData = await _getBoxText(data, col);
+
+        final textWidget = Container(
+          padding: const EdgeInsets.all(1),
+          child: Row(children: [
+            if (col['text'].isNotEmpty)
+              Expanded(
+                flex: 1,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(col['text'], style: widget.captionStyle),
+                ),
+              ),
+            Expanded(
+              flex: 2,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(rowData, style: widget.textStyle),
+              ),
+            ),
+          ]),
+        );
+
+        widgets.add(textWidget);
+      }
+    }
+
+    var buttonWidgets = await _getButtons(data);
+
+    widgets.add(Padding(
+      padding: const EdgeInsets.only(top: 5),
+      child: Row(
+        //crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.end,
+        //mainAxisSize: MainAxisSize.min,
+        children: buttonWidgets,
+      ),
+    ));
+
+    return Row(
+      children: [Expanded(child: Column(children: widgets))],
+    );
+  }
+
   // OTHER
 
-  Future<Widget> _getLayoutImageList(dynamic data, BuildContext context) async {
+  Future<Widget> _getLayoutImageList(dynamic data) async {
     final cols = await _getColumns(data);
 
     if (data.length > 0) {

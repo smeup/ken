@@ -196,10 +196,10 @@ class KenListBox extends StatefulWidget
   }
 
   @override
-  _KenListBoxState createState() => _KenListBoxState();
+  KenListBoxState createState() => KenListBoxState();
 }
 
-class _KenListBoxState extends State<KenListBox>
+class KenListBoxState extends State<KenListBox>
     with KenWidgetStateMixin
     implements KenWidgetStateInterface {
   List<Widget>? cells;
@@ -207,7 +207,7 @@ class _KenListBoxState extends State<KenListBox>
   dynamic _data;
   ScrollController? _scrollController;
   int? _selectedRow = -1;
-  bool _executeBouncing = false;
+  final bool _executeBouncing = false;
   Orientation? _orientation;
   Orientation? _oldOrientation;
 
