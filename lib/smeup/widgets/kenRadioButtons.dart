@@ -143,10 +143,10 @@ class KenRadioButtons extends StatefulWidget
   }
 
   @override
-  _KenRadioButtonsState createState() => _KenRadioButtonsState();
+  KenRadioButtonsState createState() => KenRadioButtonsState();
 }
 
-class _KenRadioButtonsState extends State<KenRadioButtons>
+class KenRadioButtonsState extends State<KenRadioButtons>
     with KenWidgetStateMixin
     implements KenWidgetStateInterface {
   dynamic _data;

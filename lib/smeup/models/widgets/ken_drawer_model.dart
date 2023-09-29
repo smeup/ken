@@ -56,7 +56,7 @@ class KenDrawerModel extends KenModel {
     this.imageWidth = defaultImageWidth,
     this.imageHeight = defaultImageHeight,
     this.showItemDivider = defaultShowItemDivider,
-  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {}
+  }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type);
 
   KenDrawerModel.fromMap(
       Map<String, dynamic> jsonMap,
