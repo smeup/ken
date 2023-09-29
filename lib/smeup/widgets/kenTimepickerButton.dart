@@ -55,18 +55,18 @@ class KenTimePickerButton extends StatefulWidget {
     this.scaffoldKey,
     this.formKey,
     this.id = '',
-    this.backColor,
-    this.fontSize,
-    this.fontColor,
-    this.borderColor,
-    this.borderWidth,
-    this.borderRadius,
-    this.fontBold,
-    this.elevation,
-    this.captionFontBold,
-    this.captionFontSize,
-    this.captionFontColor,
-    this.captionBackColor,
+    this.backColor = KenTimePickerModel.defaultBackColor,
+    this.fontSize = KenTimePickerModel.defaultFontSize,
+    this.fontColor = KenTimePickerModel.defaultFontColor,
+    this.borderColor = KenTimePickerModel.defaultBorderColor,
+    this.borderWidth = KenTimePickerModel.defaultBorderWidth,
+    this.borderRadius = KenTimePickerModel.defaultBorderRadius,
+    this.fontBold = KenTimePickerModel.defaultFontBold,
+    this.elevation = KenTimePickerModel.defaultElevation,
+    this.captionFontBold = KenTimePickerModel.defaultFontBold,
+    this.captionFontSize = KenTimePickerModel.defaultFontSize,
+    this.captionFontColor = KenTimePickerModel.defaultCaptionFontColor,
+    this.captionBackColor = KenTimePickerModel.defaultCaptionBackColor,
     this.underline = KenTimePickerModel.defaultUnderline,
     this.align = KenTimePickerModel.defaultAlign,
     this.label = KenTimePickerModel.defaultLabel,
@@ -74,14 +74,12 @@ class KenTimePickerButton extends StatefulWidget {
     this.height = KenTimePickerModel.defaultHeight,
     this.padding = KenTimePickerModel.defaultPadding,
     this.showborder = KenTimePickerModel.defaultShowBorder,
-    this.minutesList,
+    this.minutesList = KenTimePickerModel.defaultMinutesList,
     this.clientOnChange,
     this.model,
     this.dashColor,
     required this.globallyUniqueId,
-  }) {
-    KenTimePickerModel.setDefaults(this);
-  }
+  }) {}
 
   @override
   KenTimePickerButtonState createState() => KenTimePickerButtonState();

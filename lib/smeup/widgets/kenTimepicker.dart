@@ -74,18 +74,18 @@ class KenTimePicker extends StatefulWidget
     this.data, {
     id = '',
     type = 'tpk',
-    this.borderColor,
-    this.borderRadius,
-    this.borderWidth,
-    this.fontBold,
-    this.fontSize,
-    this.fontColor,
-    this.backColor,
-    this.elevation,
-    this.captionFontBold,
-    this.captionFontSize,
-    this.captionFontColor,
-    this.captionBackColor,
+    this.borderColor = KenTimePickerModel.defaultBorderColor,
+    this.borderRadius = KenTimePickerModel.defaultBorderRadius,
+    this.borderWidth = KenTimePickerModel.defaultBorderWidth,
+    this.fontBold = KenTimePickerModel.defaultFontBold,
+    this.fontSize = KenTimePickerModel.defaultFontSize,
+    this.fontColor = KenTimePickerModel.defaultFontColor,
+    this.backColor = KenTimePickerModel.defaultBackColor,
+    this.elevation = KenTimePickerModel.defaultElevation,
+    this.captionFontBold = KenTimePickerModel.defaultCaptionFontBold,
+    this.captionFontSize = KenTimePickerModel.defaultCaptionFontSize,
+    this.captionFontColor = KenTimePickerModel.defaultCaptionFontColor,
+    this.captionBackColor = KenTimePickerModel.defaultCaptionBackColor,
     this.underline = KenTimePickerModel.defaultUnderline,
     this.innerSpace = KenTimePickerModel.defaultInnerSpace,
     this.align = KenTimePickerModel.defaultAlign,
@@ -94,7 +94,7 @@ class KenTimePicker extends StatefulWidget
     this.height = KenTimePickerModel.defaultHeight,
     this.padding = KenTimePickerModel.defaultPadding,
     this.showborder = KenTimePickerModel.defaultShowBorder,
-    this.minutesList,
+    this.minutesList = KenTimePickerModel.defaultMinutesList,
     this.dashColor = KenTimePickerModel.defaultDashColor,
     // They have to be mapped with all the dynamisms
     //this.clientValidator,
@@ -103,7 +103,6 @@ class KenTimePicker extends StatefulWidget
     this.keyboard,
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    KenTimePickerModel.setDefaults(this);
     minutesList ??= KenTimePickerModel.defaultMinutesList;
   }
 
@@ -472,16 +471,18 @@ class _KenTimePickerState extends State<KenTimePicker>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.fontColor,
         fontSize: widget.fontSize,
         backgroundColor: widget.backColor);
 
-    if (widget.fontBold!) {
+    if (widget.fontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    } else {
+      style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 
@@ -489,14 +490,16 @@ class _KenTimePickerState extends State<KenTimePicker>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.captionFontColor, fontSize: widget.captionFontSize);
 
-    if (widget.captionFontBold!) {
+    if (widget.captionFontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    } else {
+      style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 
@@ -504,10 +507,8 @@ class _KenTimePickerState extends State<KenTimePicker>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenConfigurationService.getTheme()!
-        .appBarTheme
-        .iconTheme!
-        .copyWith(size: widget.fontSize, color: Colors.transparent);
+    IconThemeData themeData =
+        IconThemeData(size: widget.fontSize, color: Colors.transparent);
 
     return themeData;
   }
