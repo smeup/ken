@@ -17,6 +17,8 @@ class KenDrawerItem extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState> formKey;
   final IconData? iconData;
+  final Color? iconColor;
+  final double? iconSize;
 
   static Map<int, String> widgetUniqueIds = {};
   String get globallyUniqueId {
@@ -28,7 +30,12 @@ class KenDrawerItem extends StatelessWidget {
 
   const KenDrawerItem(this.scaffoldKey, this.formKey, this.text, this.route,
       this.iconData, this.action, this.align, this.showItemDivider,
-      {super.key, this.fontSize, this.fontBold, this.fontColor});
+      {super.key,
+      this.fontSize,
+      this.fontBold,
+      this.fontColor,
+      this.iconColor,
+      this.iconSize});
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +52,14 @@ class KenDrawerItem extends StatelessWidget {
       children: [
         if (showItemDivider!)
           Divider(
-            color: _getElementTextStile().color,
+            color: fontColor,
           ),
         if (iconData != null)
           ListTile(
             leading: Icon(
               iconData,
-              color: _getIconTheme().color,
-              size: _getIconTheme().size,
+              color: iconColor,
+              size: iconSize,
             ),
             title: title,
             onTap: function,
@@ -67,13 +74,7 @@ class KenDrawerItem extends StatelessWidget {
   }
 
   TextStyle _getElementTextStile() {
-    TextStyle style = KenConfigurationService.getTheme()!
-        .appBarTheme
-        .toolbarTextStyle!
-        .copyWith(
-            backgroundColor: KenConfigurationService.getTheme()!
-                .appBarTheme
-                .backgroundColor);
+    TextStyle style = const TextStyle(backgroundColor: Colors.transparent);
 
     if (fontSize != null) {
       style = style.copyWith(
@@ -94,14 +95,5 @@ class KenDrawerItem extends StatelessWidget {
     }
 
     return style;
-  }
-
-  IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenConfigurationService.getTheme()!
-        .appBarTheme
-        .iconTheme!
-        .copyWith(color: _getElementTextStile().color);
-
-    return themeData;
   }
 }

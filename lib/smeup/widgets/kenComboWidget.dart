@@ -27,7 +27,7 @@ class KenComboWidget extends StatefulWidget {
   final void Function(String? newValue)? clientOnChange;
 
   const KenComboWidget(this.scaffoldKey, this.formKey,
-      {this.fontColor,
+      {super.key, this.fontColor,
       this.fontSize,
       this.fontBold,
       this.backColor,
@@ -43,10 +43,10 @@ class KenComboWidget extends StatefulWidget {
       this.dropdownColor});
 
   @override
-  _KenComboWidgetState createState() => _KenComboWidgetState();
+  KenComboWidgetState createState() => KenComboWidgetState();
 }
 
-class _KenComboWidgetState extends State<KenComboWidget> {
+class KenComboWidgetState extends State<KenComboWidget> {
   String? _selectedValue;
   List<KenComboItemModel>? _data;
 
@@ -67,8 +67,7 @@ class _KenComboWidgetState extends State<KenComboWidget> {
         alignedDropdown: false,
         child: DropdownButton(
           value: _selectedValue,
-          // dropdownColor: widget.dropdownColor,
-          dropdownColor: KenModel.kBack100,
+          dropdownColor: widget.dropdownColor,
           style: _getTextStile(),
           icon: Icon(
             Icons.keyboard_arrow_down_sharp,
@@ -95,10 +94,10 @@ class _KenComboWidgetState extends State<KenComboWidget> {
     );
   }
 
-  List<DropdownMenuItem<String>> _getItems(List<KenComboItemModel> _data) {
+  List<DropdownMenuItem<String>> _getItems(List<KenComboItemModel> data) {
     final textStyle = _getTextStile();
     var items =
-        _data.map<DropdownMenuItem<String>>((KenComboItemModel element) {
+        data.map<DropdownMenuItem<String>>((KenComboItemModel element) {
       return DropdownMenuItem<String>(
         value: element.code,
         child: Text(
@@ -117,9 +116,7 @@ class _KenComboWidgetState extends State<KenComboWidget> {
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.fontColor,
         fontSize: widget.fontSize,
         backgroundColor: Colors.transparent);
@@ -129,14 +126,17 @@ class _KenComboWidgetState extends State<KenComboWidget> {
         fontWeight: FontWeight.bold,
       );
     }
+    else{
+            style = style.copyWith(
+        fontWeight: FontWeight.normal,
+      );
+    }
 
     return style;
   }
 
   DividerThemeData _getDividerStyle() {
-    DividerThemeData dividerData = KenConfigurationService.getTheme()!
-        .dividerTheme
-        .copyWith(color: widget.fontColor);
+    DividerThemeData dividerData = DividerThemeData(color: widget.fontColor);
 
     return dividerData;
   }

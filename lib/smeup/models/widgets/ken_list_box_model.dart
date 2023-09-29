@@ -11,18 +11,16 @@ enum KenListType { simple, oriented, wheel }
 
 class KenListBoxModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static Color? defaultBackColor = KenModel.kBack100;
-  static Color? defaultBorderColor = KenModel.kPrimary;
-  static double? defaultBorderWidth = 1;
-  static double? defaultBorderRadius = 8;
-  static double? defaultFontSize = 12;
-  static Color? defaultFontColor = KenModel.kSecondary100;
-  static bool? defaultFontBold = true;
-  static bool? defaultCaptionFontBold = false;
-  static double? defaultCaptionFontSize = 12;
-  static Color? defaultCaptionFontColor = KenModel.kSecondary100;
-
-  // unsupported by json_theme
+  static const Color defaultBackColor = KenModel.kBack100;
+  static const Color defaultBorderColor = KenModel.kPrimary;
+  static const double defaultBorderWidth = 1;
+  static const double defaultBorderRadius = 8.0;
+  static const double defaultFontSize = 12;
+  static const Color defaultFontColor = KenModel.kSecondary100;
+  static const bool defaultFontBold = true;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultCaptionFontSize = 12;
+  static const Color defaultCaptionFontColor = KenModel.kSecondary100;
   static const double defaultWidth = 0;
   static const double defaultHeight = 130;
   static const EdgeInsetsGeometry defaultPadding =
@@ -37,6 +35,7 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
   static const bool defaultShowSelection = false;
   static const int defaultSelectedRow = 1;
   static const double defaultListHeight = 300;
+  static const double defaultRealBoxHeight = 400;
 
   Color? backColor;
   Color? borderColor;
@@ -62,6 +61,7 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
   String? backgroundColName;
   bool? showSelection;
   int? selectedRow;
+  double? realBoxHeight;
   double? listHeight;
 
   KenListBoxModel({
@@ -70,16 +70,16 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    this.backColor,
-    this.borderColor,
-    this.borderWidth,
-    this.borderRadius,
-    this.fontSize,
-    this.fontColor,
-    this.fontBold,
-    this.captionFontBold,
-    this.captionFontSize,
-    this.captionFontColor,
+    this.backColor = defaultBackColor,
+    this.borderColor = defaultBorderColor,
+    this.borderWidth = defaultBorderWidth,
+    this.borderRadius = defaultBorderRadius,
+    this.fontSize = defaultFontSize,
+    this.fontColor = defaultFontColor,
+    this.fontBold = defaultFontBold,
+    this.captionFontBold = defaultCaptionFontBold,
+    this.captionFontSize = defaultCaptionFontSize,
+    this.captionFontColor = defaultCaptionFontColor,
     this.layout = defaultLayout,
     this.width = defaultWidth,
     this.height = defaultHeight,
@@ -94,10 +94,10 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
     this.backgroundColName = defaultBackgroundColName,
     this.showSelection = defaultShowSelection,
     this.selectedRow = defaultSelectedRow,
+    this.realBoxHeight = defaultRealBoxHeight,
     title = '',
   }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     visibleColumns ??= List<String>.empty(growable: true);
-    setDefaults(this);
   }
 
   KenListBoxModel.fromMap(
@@ -106,8 +106,6 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
   ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
-    setDefaults(this);
-
     layout = defaultLayout;
     if (jsonMap['layout'] != null) {
       layout = jsonMap['layout'].toString();
@@ -161,6 +159,9 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
     listHeight = KenUtilities.getDouble(optionsDefault!['listHeight']) ??
         defaultListHeight;
 
+    realBoxHeight = KenUtilities.getDouble(optionsDefault!['realBoxHeight']) ??
+        defaultRealBoxHeight;
+
     borderRadius = KenUtilities.getDouble(optionsDefault!['borderRadius']) ??
         defaultBorderRadius;
     borderWidth = KenUtilities.getDouble(optionsDefault!['borderWidth']) ??
@@ -196,45 +197,5 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
       default:
         return defaultListType;
     }
-  }
-
-  static setDefaults(dynamic obj) {
-    // var cardTheme = KenConfigurationService.getTheme()!.cardTheme;
-    // defaultBackColor = cardTheme.color;
-    // ContinuousRectangleBorder shape =
-    //     cardTheme.shape as ContinuousRectangleBorder;
-    // defaultBorderRadius =
-    //     shape.borderRadius.resolve(TextDirection.ltr).topLeft.x;
-    // var side = shape.side;
-    // defaultBorderColor = side.color;
-    // defaultBorderWidth = side.width;
-
-    // var textStyle = KenConfigurationService.getTheme()!
-    //     .textTheme
-    //     .headline4!
-    //     .copyWith(backgroundColor: defaultBackColor);
-    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-    // defaultFontSize = textStyle.fontSize;
-    // defaultFontColor = textStyle.color;
-
-    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.headline5!;
-    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    // defaultCaptionFontSize = captionStyle.fontSize;
-    // defaultCaptionFontColor = captionStyle.color;
-
-    // ----------------- set properties from default
-    obj.backColor ??= KenListBoxModel.defaultBackColor;
-
-    obj.borderColor ??= KenListBoxModel.defaultBorderColor;
-    obj.borderWidth ??= KenListBoxModel.defaultBorderWidth;
-    obj.borderRadius ??= KenListBoxModel.defaultBorderRadius;
-
-    obj.fontBold ??= KenListBoxModel.defaultFontBold;
-    obj.fontColor ??= KenListBoxModel.defaultFontColor;
-    obj.fontSize ??= KenListBoxModel.defaultFontSize;
-
-    obj.captionFontBold ??= KenListBoxModel.defaultCaptionFontBold;
-    obj.captionFontColor ??= KenListBoxModel.defaultCaptionFontColor;
-    obj.captionFontSize ??= KenListBoxModel.defaultCaptionFontSize;
   }
 }

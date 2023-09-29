@@ -69,7 +69,6 @@ class KenSwitch extends StatefulWidget
     this.padding = KenSwitchModel.defaultPadding,
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    KenSwitchModel.setDefaults(this);
   }
 
   @override

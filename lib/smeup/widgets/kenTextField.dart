@@ -75,16 +75,16 @@ class KenTextField extends StatefulWidget
     this.id = '',
     this.type = 'FLD',
     this.backColor = KenTextFieldModel.defaultBackColor,
-    this.fontSize,
-    this.fontBold,
-    this.fontColor,
-    this.captionBackColor,
-    this.captionFontBold,
-    this.captionFontColor,
-    this.captionFontSize,
-    this.borderColor,
-    this.borderRadius,
-    this.borderWidth,
+    this.fontSize = KenTextFieldModel.defaultFontSize,
+    this.fontBold = KenTextFieldModel.defaultFontBold,
+    this.fontColor = KenTextFieldModel.defaultFontColor,
+    this.captionBackColor = KenTextFieldModel.defaultCaptionBackColor,
+    this.captionFontBold = KenTextFieldModel.defaultCaptionFontBold,
+    this.captionFontColor = KenTextFieldModel.defaultCaptionFontColor,
+    this.captionFontSize = KenTextFieldModel.defaultCaptionFontSize,
+    this.borderColor = KenTextFieldModel.defaultBorderColor,
+    this.borderRadius = KenTextFieldModel.defaultBorderRadius,
+    this.borderWidth = KenTextFieldModel.defaultBorderWidth,
     this.underline = KenTextFieldModel.defaultUnderline,
     this.label = KenTextFieldModel.defaultLabel,
     this.submitLabel = KenTextFieldModel.defaultSubmitLabel,
@@ -104,7 +104,6 @@ class KenTextField extends StatefulWidget
     this.inputFormatters, // ?
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    KenTextFieldModel.setDefaults(this);
   }
 
   @override
@@ -338,16 +337,18 @@ class _KenTextFieldState extends State<KenTextField>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.bodyText2!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.fontColor,
         fontSize: widget.fontSize,
         backgroundColor: widget.backColor);
 
-    if (widget.fontBold!) {
+    if (widget.fontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    } else {
+      style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 
@@ -355,16 +356,18 @@ class _KenTextFieldState extends State<KenTextField>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.captionFontColor,
         fontSize: widget.captionFontSize,
         backgroundColor: widget.captionBackColor);
 
-    if (widget.captionFontBold!) {
+    if (widget.captionFontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    } else {
+      style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 

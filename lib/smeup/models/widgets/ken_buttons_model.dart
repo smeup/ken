@@ -9,16 +9,16 @@ import 'ken_model.dart';
 
 class KenButtonsModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static Color? defaultBackColor = KenModel.kPrimary;
-  static Color? defaultBorderColor = KenModel.kPrimary;
-  static double? defaultBorderWidth = 2;
-  static double? defaultBorderRadius = 5;
-  static double? defaultElevation = 0;
-  static double? defaultFontSize = 14;
-  static Color? defaultFontColor = Colors.white;
-  static bool? defaultFontBold = false;
-  static double? defaultIconSize = 16;
-  static Color? defaultIconColor = Colors.white;
+  static const Color defaultBackColor = KenModel.kPrimary;
+  static const Color defaultBorderColor = KenModel.kPrimary;
+  static const double defaultBorderWidth = 2;
+  static const double defaultBorderRadius = 5;
+  static const double defaultElevation = 0;
+  static const double defaultFontSize = 14;
+  static const Color defaultFontColor = Colors.white;
+  static const bool defaultFontBold = false;
+  static const double defaultIconSize = 16;
+  static const Color defaultIconColor = Colors.white;
 
   // unsupported by json_theme
   static const double defaultWidth = 180;
@@ -61,29 +61,28 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    this.backColor,
-    this.borderColor,
-    this.borderWidth,
-    this.borderRadius,
-    this.elevation,
-    this.fontSize,
-    this.fontColor,
-    this.fontBold,
-    this.iconSize,
-    this.iconColor,
+    this.backColor = defaultBackColor,
+    this.borderColor = defaultBorderColor,
+    this.borderWidth = defaultBorderWidth,
+    this.borderRadius = defaultBorderRadius,
+    this.elevation = defaultElevation,
+    this.fontSize = defaultFontSize,
+    this.fontColor = defaultFontColor,
+    this.fontBold = defaultFontBold,
+    this.iconSize = defaultFontSize,
+    this.iconColor = defaultIconColor,
     this.width = defaultWidth,
     this.height = defaultHeight,
     this.position = defaultPosition,
     this.align = defaultAlign,
     this.padding = defaultPadding,
-    this.valueField,
+    this.valueField = defaultValueField,
     this.iconCode,
     this.orientation = defaultOrientation,
     this.isLink = defaultIsLink,
     this.innerSpace = defaultInnerSpace,
   }) : super(formKey, scaffoldKey, context, title: title, id: id) {
     // SmeupDataService.incrementDataFetch(id);
-    setDefaults(this);
   }
 
   KenButtonsModel.fromMap(
@@ -92,8 +91,6 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
   ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
-    setDefaults(this);
-
     title = jsonMap['title'] ?? '';
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
@@ -150,46 +147,5 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
       };
     }
     // SmeupDataService.incrementDataFetch(id);
-  }
-
-  static setDefaults(dynamic obj) {
-    // var buttonStyle =
-    //     KenConfigurationService.getTheme()!.elevatedButtonTheme.style!;
-
-    // defaultBackColor = buttonStyle.backgroundColor!.resolve(<MaterialState>{});
-    // defaultElevation = buttonStyle.elevation!.resolve(<MaterialState>{});
-
-    // var side = buttonStyle.side!.resolve(<MaterialState>{})!;
-    // defaultBorderColor = side.color;
-    // defaultBorderWidth = side.width;
-
-    // var shape = buttonStyle.shape!.resolve(<MaterialState>{})!;
-    // defaultBorderRadius = (shape as ContinuousRectangleBorder)
-    //     .borderRadius
-    //     .resolve(TextDirection.ltr)
-    //     .topLeft
-    //     .x;
-
-    // var textStyle = KenConfigurationService.getTheme()!.textTheme.button!;
-    // defaultFontSize = textStyle.fontSize;
-    // defaultFontColor = textStyle.color;
-    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-
-    // var iconTheme = KenConfigurationService.getTheme()!.appBarTheme.iconTheme!;
-    // defaultIconSize = iconTheme.size;
-    // defaultIconColor = iconTheme.color;
-
-    // ----------------- set properties from default
-
-    obj.backColor ??= KenButtonsModel.defaultBackColor;
-    obj.borderColor ??= KenButtonsModel.defaultBorderColor;
-    obj.borderWidth ??= KenButtonsModel.defaultBorderWidth;
-    obj.borderRadius ??= KenButtonsModel.defaultBorderRadius;
-    obj.elevation ??= KenButtonsModel.defaultElevation;
-    obj.fontSize ??= KenButtonsModel.defaultFontSize;
-    obj.fontColor ??= KenButtonsModel.defaultFontColor;
-    obj.fontBold ??= KenButtonsModel.defaultFontBold;
-    obj.iconSize ??= KenButtonsModel.defaultIconSize;
-    obj.iconColor ??= KenButtonsModel.defaultIconColor;
   }
 }

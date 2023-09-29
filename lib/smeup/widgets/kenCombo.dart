@@ -61,25 +61,25 @@ class KenCombo extends StatefulWidget
   KenCombo(
     this.scaffoldKey,
     this.formKey, {
-    this.fontColor,
-    this.fontSize,
-    this.fontBold,
-    this.backColor,
-    this.captionFontBold,
-    this.captionFontSize,
-    this.captionFontColor,
-    this.captionBackColor,
-    this.borderColor,
-    this.borderRadius,
-    this.borderWidth,
-    this.iconSize,
-    this.iconColor,
+    this.fontColor = KenComboModel.defaultFontColor,
+    this.fontSize = KenComboModel.defaultFontSize,
+    this.fontBold = KenComboModel.defaultFontBold,
+    this.backColor = KenComboModel.defaultBackColor,
+    this.captionFontBold = KenComboModel.defaultCaptionFontBold,
+    this.captionFontSize = KenComboModel.defaultCaptionFontSize,
+    this.captionFontColor = KenComboModel.defaultCaptionFontColor,
+    this.captionBackColor = KenComboModel.defaultCaptionBackColor,
+    this.borderColor = KenComboModel.defaultBorderColor,
+    this.borderRadius = KenComboModel.defaultBorderRadius,
+    this.borderWidth = KenComboModel.defaultBorderWidth,
+    this.iconSize = KenComboModel.defaultIconSize,
+    this.iconColor = KenComboModel.defaultIconColor,
     this.underline = KenComboModel.defaultUnderline,
     this.title,
     this.id = '',
     this.type = 'CMB',
     this.selectedValue = '',
-    this.dropdownColor,
+    this.dropdownColor = KenComboModel.defaultDropDownColor,
     this.data,
     this.align = KenComboModel.defaultAlign,
     this.innerSpace = KenComboModel.defaultInnerSpace,
@@ -93,7 +93,6 @@ class KenCombo extends StatefulWidget
     this.clientOnChange,
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    KenComboModel.setDefaults(this);
   }
 
   KenCombo.withController(
@@ -160,10 +159,10 @@ class KenCombo extends StatefulWidget
   }
 
   @override
-  _KenComboState createState() => _KenComboState();
+  KenComboState createState() => KenComboState();
 }
 
-class _KenComboState extends State<KenCombo>
+class KenComboState extends State<KenCombo>
     with KenWidgetStateMixin
     implements KenWidgetStateInterface {
   KenComboModel? _model;
@@ -242,11 +241,14 @@ class _KenComboState extends State<KenCombo>
           padding: widget.padding,
           width: boxWidth,
           height: boxHeight,
-          decoration: widget.showBorder!
+          decoration: widget.showBorder == true
               ? BoxDecoration(
-                  borderRadius: BorderRadius.circular(widget.borderRadius!),
+                  borderRadius:
+                      BorderRadius.circular(widget.borderRadius ?? 0.0),
                   border: Border.all(
-                      color: widget.borderColor!, width: widget.borderWidth!))
+                      color: widget.borderColor ?? Colors.transparent,
+                      width: widget.borderWidth ?? 0.0),
+                )
               : null,
           child: KenComboWidget(
             widget.scaffoldKey,
@@ -258,6 +260,7 @@ class _KenComboState extends State<KenCombo>
             backColor: widget.backColor,
             iconColor: widget.iconColor,
             iconSize: widget.iconSize,
+            dropdownColor: widget.dropdownColor,
             captionFontBold: widget.captionFontBold,
             captionFontColor: widget.captionFontColor,
             captionFontSize: widget.captionFontSize,
@@ -291,7 +294,7 @@ class _KenComboState extends State<KenCombo>
 
     if (widget.align == Alignment.centerLeft) {
       children = Padding(
-        padding: widget.padding!,
+        padding: widget.padding ?? const EdgeInsets.only(left: 10, right: 10),
         child: Column(children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -385,16 +388,18 @@ class _KenComboState extends State<KenCombo>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.captionFontColor,
         fontSize: widget.captionFontSize,
         backgroundColor: widget.captionBackColor);
 
-    if (widget.captionFontBold!) {
+    if (widget.captionFontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    } else {
+      style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 

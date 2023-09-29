@@ -43,8 +43,8 @@ class KenProgressBar extends StatefulWidget
   KenProgressBar(
     this.scaffoldKey,
     this.formKey, {
-    this.color,
-    this.linearTrackColor,
+    this.color = KenProgressBarModel.defaultColor,
+    this.linearTrackColor = KenProgressBarModel.defaultLinearTrackColor,
     this.id = '',
     this.type = 'FLD',
     this.valueField = KenProgressBarModel.defaultValueField,
@@ -57,7 +57,6 @@ class KenProgressBar extends StatefulWidget
     this.borderRadius = KenProgressBarModel.defaultBorderRadius,
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    KenProgressBarModel.setDefaults(this);
   }
 
   @override

@@ -54,13 +54,13 @@ class KenLabel extends StatefulWidget
   KenLabel(this.scaffoldKey, this.formKey, this.data,
       {this.id = '',
       this.type = 'LAB',
-      this.fontSize,
-      this.fontBold,
-      this.fontColor,
-      this.backColor,
+      this.fontSize = KenLabelModel.defaultFontSize,
+      this.fontBold = KenLabelModel.defaultFontBold,
+      this.fontColor = KenLabelModel.defaultFontColor,
+      this.backColor = KenLabelModel.defaultBackColor,
       this.iconData,
-      this.iconSize,
-      this.iconColor,
+      this.iconSize = KenLabelModel.defaultIconSize,
+      this.iconColor = KenLabelModel.defaultIconColor,
       this.valueColName = KenLabelModel.defaultValColName,
       this.padding = KenLabelModel.defaultPadding,
       this.align = KenLabelModel.defaultAlign,
@@ -72,7 +72,6 @@ class KenLabel extends StatefulWidget
       this.title = ''})
       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    KenLabelModel.setDefaults(this);
   }
 
   @override
@@ -361,9 +360,7 @@ class _KenLabelState extends State<KenLabel>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.bodyText2!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.fontColor,
         fontSize: widget.fontSize,
         backgroundColor: widget.backColor);
@@ -372,15 +369,17 @@ class _KenLabelState extends State<KenLabel>
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
+      style = style.copyWith(
+        fontWeight: FontWeight.normal,
+      );
     }
 
     return style;
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenConfigurationService.getTheme()!
-        .iconTheme
-        .copyWith(size: widget.iconSize, color: widget.iconColor);
+    IconThemeData themeData =
+        IconThemeData(size: widget.iconSize, color: widget.iconColor);
 
     return themeData;
   }

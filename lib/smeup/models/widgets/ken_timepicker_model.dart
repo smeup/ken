@@ -8,19 +8,19 @@ import '../../services/ken_configuration_service.dart';
 
 class KenTimePickerModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static double? defaultFontSize = 16;
-  static Color? defaultBackColor = Colors.transparent;
-  static Color? defaultFontColor = KenModel.kPrimary;
-  static bool? defaultFontBold = false;
-  static Color? defaultBorderColor = KenModel.kPrimary;
-  static double? defaultBorderWidth = 1.0;
-  static double? defaultBorderRadius = 4;
-  static double? defaultElevation = 0.0;
-  static bool? defaultCaptionFontBold = false;
-  static double? defaultCaptionFontSize = 10;
-  static Color? defaultCaptionFontColor = KenModel.kPrimary;
-  static Color? defaultCaptionBackColor = Colors.transparent;
-  static List<String> defaultMinutesList = [
+  static const double defaultFontSize = 16;
+  static const Color defaultBackColor = Colors.transparent;
+  static const Color defaultFontColor = KenModel.kPrimary;
+  static const bool defaultFontBold = false;
+  static const Color defaultBorderColor = KenModel.kPrimary;
+  static const double defaultBorderWidth = 1.0;
+  static const double defaultBorderRadius = 4;
+  static const double defaultElevation = 0.0;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultCaptionFontSize = 10;
+  static const Color defaultCaptionFontColor = KenModel.kPrimary;
+  static const Color defaultCaptionBackColor = Colors.transparent;
+  static const List<String> defaultMinutesList = [
     '00',
     '01',
     '02',
@@ -128,18 +128,18 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    this.backColor,
-    this.fontSize,
-    this.fontColor,
-    this.fontBold,
-    this.borderColor,
-    this.borderWidth,
-    this.borderRadius,
-    this.elevation,
-    this.captionFontBold,
-    this.captionFontSize,
-    this.captionFontColor,
-    this.captionBackColor,
+    this.backColor = defaultBackColor,
+    this.fontSize = defaultFontSize,
+    this.fontColor = defaultFontColor,
+    this.fontBold = defaultFontBold,
+    this.borderColor = defaultBorderColor,
+    this.borderWidth = defaultBorderWidth,
+    this.borderRadius = defaultBorderRadius,
+    this.elevation = defaultElevation,
+    this.captionFontBold = defaultCaptionFontBold,
+    this.captionFontSize = defaultCaptionFontSize,
+    this.captionFontColor = defaultCaptionFontColor,
+    this.captionBackColor = defaultCaptionBackColor,
     this.underline = defaultUnderline,
     this.align = defaultAlign,
     this.innerSpace = defaultInnerSpace,
@@ -152,10 +152,9 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
     this.showBorder = defaultShowBorder,
     this.dashColor = defaultDashColor,
     title = '',
-    this.minutesList,
+    this.minutesList = defaultMinutesList,
   }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     id = KenUtilities.getWidgetId('FLD', id);
-    setDefaults(this);
   }
 
   KenTimePickerModel.fromMap(
@@ -164,8 +163,6 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
   ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
-    setDefaults(this);
-
     valueField = optionsDefault!['valueField'] ?? defaultValueField;
     displayedField = optionsDefault!['displayedField'] ?? defaultdisplayedField;
 
@@ -233,47 +230,5 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
         await getData();
       };
     }
-  }
-
-  static setDefaults(dynamic obj) {
-    // var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
-    // defaultBackColor = timePickerTheme.backgroundColor;
-    // var shape = timePickerTheme.shape!;
-    // defaultBorderRadius = (shape as ContinuousRectangleBorder)
-    //     .borderRadius
-    //     .resolve(TextDirection.ltr)
-    //     .topLeft
-    //     .x;
-    // var side = timePickerTheme.dayPeriodBorderSide!;
-    // defaultBorderColor = side.color;
-    // defaultBorderWidth = side.width;
-
-    // var buttonStyle =
-    //     KenConfigurationService.getTheme()!.elevatedButtonTheme.style!;
-    // defaultElevation = buttonStyle.elevation!.resolve(<MaterialState>{});
-
-    // var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
-    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-    // defaultFontSize = textStyle.fontSize;
-    // defaultFontColor = textStyle.color;
-
-    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
-    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    // defaultCaptionFontSize = captionStyle.fontSize;
-    // defaultCaptionFontColor = captionStyle.color;
-
-    // ----------------- set properties from default
-    obj.backColor ??= KenTimePickerModel.defaultBackColor;
-    obj.elevation ??= KenTimePickerModel.defaultElevation;
-    obj.borderColor ??= KenTimePickerModel.defaultBorderColor;
-    obj.borderWidth ??= KenTimePickerModel.defaultBorderWidth;
-    obj.borderRadius ??= KenTimePickerModel.defaultBorderRadius;
-    obj.fontBold ??= KenTimePickerModel.defaultFontBold;
-    obj.fontColor ??= KenTimePickerModel.defaultFontColor;
-    obj.fontSize ??= KenTimePickerModel.defaultFontSize;
-    obj.captionFontBold ??= KenTimePickerModel.defaultCaptionFontBold;
-    obj.captionFontColor ??= KenTimePickerModel.defaultCaptionFontColor;
-    obj.captionFontSize ??= KenTimePickerModel.defaultCaptionFontSize;
-    obj.dashColor ??= KenTimePickerModel.defaultDashColor;
   }
 }

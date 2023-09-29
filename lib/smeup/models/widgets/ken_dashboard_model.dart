@@ -8,18 +8,15 @@ import 'ken_data_interface.dart';
 import 'ken_model.dart';
 
 class KenDashboardModel extends KenModel implements KenDataInterface {
-  // supported by json_theme
-  static double? defaultFontSize = 60;
-  static Color? defaultFontColor = KenModel.kSecondary100;
-  static bool? defaultFontBold = false;
-  static double? defaultCaptionFontSize = 20;
-  static Color? defaultCaptionFontColor = KenModel.kSecondary100;
-  static bool? defaultCaptionFontBold = false;
-  static double? defaultIconSize = 40;
-  static Color? defaultIconColor = KenModel.kIconColor;
-  static Color? defaultBackgroundColor = Colors.transparent;
-
-  // unsupported by json_theme
+  static const double defaultFontSize = 60;
+  static const Color defaultFontColor = KenModel.kPrimary;
+  static const bool defaultFontBold = false;
+  static const double defaultCaptionFontSize = 20;
+  static const Color defaultCaptionFontColor = KenModel.kPrimary;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultIconSize = 40;
+  static const Color defaultIconColor = KenModel.kPrimary;
+  static const Color defaultBackgroundColor = Colors.transparent;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const double defaultWidth = 300;
   static const double defaultHeight = 120;
@@ -64,15 +61,15 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
     formKey,
     scaffoldKey,
     context,
-    this.fontColor,
-    this.fontSize,
-    this.fontBold,
-    this.captionFontBold,
-    this.captionFontSize,
-    this.captionFontColor,
-    this.iconSize,
-    this.iconColor,
-    this.backgroundColor,
+    this.fontColor = defaultFontColor,
+    this.fontSize = defaultFontSize,
+    this.fontBold = defaultFontBold,
+    this.captionFontBold = defaultCaptionFontBold,
+    this.captionFontSize = defaultCaptionFontSize,
+    this.captionFontColor = defaultCaptionFontColor,
+    this.iconSize = defaultIconSize,
+    this.iconColor = defaultIconColor,
+    this.backgroundColor = defaultBackgroundColor,
     this.valueColName = defaultValueColName,
     this.umColName = defaultUmColName,
     this.textColName = defaultTextColName,
@@ -88,9 +85,7 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
     this.numberFormat = defaultNumberFormat,
     title = '',
   }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
-    iconColor ??= KenConfigurationService.getTheme()!.iconTheme.color;
     id = KenUtilities.getWidgetId('DSH', id);
-    setDefaults(this);
   }
 
   KenDashboardModel.fromMap(
@@ -99,7 +94,6 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context)
       : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
-    setDefaults(this);
     valueColName = optionsDefault!['ValueColName'] ?? defaultValueColName;
     iconColName = optionsDefault!['iconColName'] ?? defaultIconColName;
     textColName = optionsDefault!['textColName'] ?? defaultTextColName;
@@ -112,15 +106,15 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
     if (optionsDefault!['FontSize'].toString().contains('%')) {
       double perc = KenUtilities.getDouble(
               optionsDefault!['FontSize'].toString().replaceAll("%", "")) ??
-          defaultFontSize!;
-      fontSize = defaultFontSize! * perc / 100;
+          defaultFontSize;
+      fontSize = defaultFontSize * perc / 100;
 
       iconSize = KenUtilities.getDouble(optionsDefault!['iconSize']) ??
-          defaultIconSize! * perc / 100;
+          defaultIconSize * perc / 100;
 
       captionFontSize =
           KenUtilities.getDouble(optionsDefault!['labelFontSize']) ??
-              defaultCaptionFontSize! * perc / 100;
+              defaultCaptionFontSize * perc / 100;
     } else {
       fontSize = KenUtilities.getDouble(optionsDefault!['FontSize']) ??
           defaultFontSize;
@@ -165,35 +159,5 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
         await getData();
       };
     }
-  }
-
-  static setDefaults(dynamic obj) {
-    var textStyle = KenConfigurationService.getTheme()!.textTheme.headline1!;
-    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-    // defaultFontSize = textStyle.fontSize;
-    // defaultFontColor = textStyle.color;
-
-    var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
-    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    // defaultCaptionFontSize = captionStyle.fontSize;
-    // defaultCaptionFontColor = captionStyle.color;
-
-    var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
-    // defaultIconSize = iconTheme.size;
-    // defaultIconColor = iconTheme.color;
-
-    // ----------------- set properties from default
-
-    obj.fontBold ??= KenDashboardModel.defaultFontBold;
-    obj.fontColor ??= KenDashboardModel.defaultFontColor;
-    obj.fontSize ??= KenDashboardModel.defaultFontSize;
-    obj.backgroundColor ??= KenDashboardModel.defaultBackgroundColor;
-
-    obj.captionFontBold ??= KenDashboardModel.defaultCaptionFontBold;
-    obj.captionFontColor ??= KenDashboardModel.defaultCaptionFontColor;
-    obj.captionFontSize ??= KenDashboardModel.defaultCaptionFontSize;
-
-    obj.iconSize ??= KenDashboardModel.defaultIconSize;
-    obj.iconColor ??= KenDashboardModel.defaultIconColor;
   }
 }

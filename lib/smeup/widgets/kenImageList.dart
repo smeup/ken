@@ -69,16 +69,16 @@ class KenImageList extends StatefulWidget
     this.rows, {
     this.id = '',
     this.type = 'IML',
-    this.backColor,
-    this.borderColor,
-    this.borderWidth,
-    this.borderRadius,
-    this.fontSize,
-    this.fontColor,
-    this.fontBold,
-    this.captionFontBold,
-    this.captionFontSize,
-    this.captionFontColor,
+    this.backColor = KenImageListModel.defaultBackColor,
+    this.borderColor = KenImageListModel.defaultBorderColor,
+    this.borderWidth = KenImageListModel.defaultBorderWidth,
+    this.borderRadius = KenImageListModel.defaultBorderRadius,
+    this.fontSize = KenImageListModel.defaultFontSize,
+    this.fontColor = KenImageListModel.defaultFontColor,
+    this.fontBold = KenImageListModel.defaultFontBold,
+    this.captionFontBold = KenImageListModel.defaultCaptionFontBold,
+    this.captionFontSize = KenImageListModel.defaultCaptionFontSize,
+    this.captionFontColor = KenImageListModel.defaultCaptionFontColor,
     this.width = KenImageListModel.defaultWidth,
     this.height = KenImageListModel.defaultHeight,
     this.padding = KenImageListModel.defaultPadding,
@@ -99,6 +99,9 @@ class KenImageList extends StatefulWidget
     type = m.type;
     width = m.width;
     height = m.height;
+    borderRadius = m.borderRadius;
+    borderColor = m.borderColor;
+    borderWidth = m.borderWidth;
     fontSize = m.fontSize;
     fontColor = m.fontColor;
     fontBold = m.fontBold;

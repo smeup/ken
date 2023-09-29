@@ -80,18 +80,18 @@ class KenDatePicker extends StatefulWidget
     this.id = '',
     this.type = 'cal',
     this.title = '',
-    this.borderColor,
-    this.borderRadius,
-    this.borderWidth,
-    this.fontBold,
-    this.fontSize,
-    this.fontColor,
-    this.backColor,
-    this.elevation,
-    this.captionFontBold,
-    this.captionFontSize,
-    this.captionFontColor,
-    this.captionBackColor,
+    this.borderColor = KenDatePickerModel.defaultBorderColor,
+    this.borderWidth = KenDatePickerModel.defaultBorderWidth,
+    this.borderRadius = KenDatePickerModel.defaultBorderRadius,
+    this.fontBold = KenDatePickerModel.defaultFontBold,
+    this.fontSize = KenDatePickerModel.defaultFontSize,
+    this.fontColor = KenDatePickerModel.defaultFontColor,
+    this.backColor = KenDatePickerModel.defaultBackColor,
+    this.elevation = KenDatePickerModel.defaultElevation,
+    this.captionFontBold = KenDatePickerModel.defaultCaptionFontBold,
+    this.captionFontSize = KenDatePickerModel.defaultCaptionFontSize,
+    this.captionFontColor = KenDatePickerModel.defaultCaptionFontColor,
+    this.captionBackColor = KenDatePickerModel.defaultCaptionBackColor,
     this.underline = KenDatePickerModel.defaultUnderline,
     this.innerSpace = KenDatePickerModel.defaultInnerSpace,
     this.align = KenDatePickerModel.defaultAlign,
@@ -108,7 +108,6 @@ class KenDatePicker extends StatefulWidget
     this.clientOnChange,
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    KenDatePickerModel.setDefaults(this);
     if (data != null && data!.value != null && data!.text == null) {
       data!.text = DateFormat("dd/MM/yyyy").format(data!.value!);
     }
@@ -364,7 +363,7 @@ class _KenDatePickerState extends State<KenDatePicker>
         //color: widget.backColor,
       );
     } else if (widget.align == Alignment.topCenter) {
-      children = Container(
+      children = SizedBox(
         height: datePickerHeight,
         width: datePickerWidth,
         child: Column(
@@ -394,7 +393,7 @@ class _KenDatePickerState extends State<KenDatePicker>
         //color: widget.backColor,
       );
     } else if (widget.align == Alignment.bottomCenter) {
-      children = Container(
+      children = SizedBox(
         height: datePickerHeight,
         width: datePickerWidth,
         child: Column(
@@ -440,43 +439,39 @@ class _KenDatePickerState extends State<KenDatePicker>
   /// Extended theme
 
   ButtonStyle _getButtonStyle() {
-    var timePickerTheme = KenConfigurationService.getTheme()!
-        .timePickerTheme
-        .copyWith(
-            backgroundColor: widget.backColor,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius!)),
-            dayPeriodBorderSide: BorderSide(
-                width: widget.borderWidth!, color: widget.borderColor!));
-
-    var elevatedButtonStyle = KenConfigurationService.getTheme()!
-        .elevatedButtonTheme
-        .style!
-        .copyWith(
-            backgroundColor: MaterialStateProperty.all<Color?>(
-                timePickerTheme.backgroundColor),
-            elevation: MaterialStateProperty.all<double?>(widget.elevation),
-            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                const EdgeInsets.all(0)),
-            shape: MaterialStateProperty.all<OutlinedBorder?>(
-                timePickerTheme.shape as OutlinedBorder?),
-            side: MaterialStateProperty.all<BorderSide?>(
-                timePickerTheme.dayPeriodBorderSide));
-
-    return elevatedButtonStyle;
+    return ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color?>(widget.backColor),
+      shape: MaterialStateProperty.all<OutlinedBorder?>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(widget.borderRadius!),
+        ),
+      ),
+      side: MaterialStateProperty.all<BorderSide?>(
+        BorderSide(
+          width: widget.borderWidth!,
+          color: widget.borderColor!,
+        ),
+      ),
+      elevation: MaterialStateProperty.all<double?>(widget.elevation),
+      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+        const EdgeInsets.all(0),
+      ),
+    );
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.fontColor,
         fontSize: widget.fontSize,
         backgroundColor: widget.backColor);
 
-    if (widget.fontBold!) {
+    if (widget.fontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    } else {
+      style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 
@@ -484,14 +479,16 @@ class _KenDatePickerState extends State<KenDatePicker>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.captionFontColor, fontSize: widget.captionFontSize);
 
-    if (widget.captionFontBold!) {
+    if (widget.captionFontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    } else {
+      style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 
@@ -499,10 +496,8 @@ class _KenDatePickerState extends State<KenDatePicker>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenConfigurationService.getTheme()!
-        .appBarTheme
-        .iconTheme!
-        .copyWith(size: widget.fontSize, color: Colors.transparent);
+    IconThemeData themeData =
+        IconThemeData(size: widget.fontSize, color: Colors.transparent);
 
     return themeData;
   }

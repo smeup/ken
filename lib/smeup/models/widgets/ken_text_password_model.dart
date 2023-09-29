@@ -8,20 +8,20 @@ import '../../services/ken_configuration_service.dart';
 
 class KenTextPasswordModel extends KenModel implements KenDataInterface {
   // supported by json_theme
-  static double? defaultFontSize = 16;
+  static const double defaultFontSize = 16;
   static const Color defaultBackColor = Colors.transparent;
-  static Color? defaultFontColor = KenModel.kPrimary;
-  static bool? defaultFontBold = false;
-  static bool? defaultCaptionFontBold = false;
-  static double? defaultCaptionFontSize = 14;
-  static Color? defaultCaptionFontColor = KenModel.kPrimary;
-  static Color? defaultCaptionBackColor = Colors.transparent;
-  static Color? defaultBorderColor = KenModel.kPrimary;
-  static double? defaultBorderWidth = 2.0;
-  static double? defaultBorderRadius = 8;
-  static Color? defaultButtonBackColor = Colors.transparent;
-  static double? defaultIconSize = 20;
-  static Color? defaultIconColor = KenModel.kPrimary;
+  static const Color defaultFontColor = KenModel.kPrimary;
+  static const bool defaultFontBold = false;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultCaptionFontSize = 14;
+  static const Color defaultCaptionFontColor = KenModel.kPrimary;
+  static const Color defaultCaptionBackColor = Colors.transparent;
+  static const Color defaultBorderColor = KenModel.kPrimary;
+  static const double defaultBorderWidth = 2.0;
+  static const double defaultBorderRadius = 8;
+  static const Color defaultButtonBackColor = Colors.transparent;
+  static const double defaultIconSize = 20;
+  static const Color defaultIconColor = KenModel.kPrimary;
 
   // unsupported by json_theme
 
@@ -74,20 +74,20 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    this.backColor,
-    this.fontSize,
-    this.fontBold,
-    this.fontColor,
-    this.captionBackColor,
-    this.captionFontBold,
-    this.captionFontColor,
-    this.captionFontSize,
-    this.borderColor,
-    this.borderRadius,
-    this.borderWidth,
-    this.iconSize,
-    this.iconColor,
-    this.buttonBackColor,
+    this.backColor = defaultBackColor,
+    this.fontSize = defaultFontSize,
+    this.fontBold = defaultFontBold,
+    this.fontColor = defaultFontColor,
+    this.captionBackColor = defaultCaptionBackColor,
+    this.captionFontBold = defaultCaptionFontBold,
+    this.captionFontColor = defaultCaptionFontColor,
+    this.captionFontSize = defaultCaptionFontSize,
+    this.borderColor = defaultBorderColor,
+    this.borderRadius = defaultBorderRadius,
+    this.borderWidth = defaultBorderWidth,
+    this.iconSize = defaultIconSize,
+    this.iconColor = defaultIconColor,
+    this.buttonBackColor = defaultButtonBackColor,
     this.label = defaultLabel,
     this.submitLabel = defaultSubmitLabel,
     this.width = defaultWidth,
@@ -99,14 +99,13 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
     title = '',
     this.underline = defaultUnderline,
     this.autoFocus = defaultAutoFocus,
-    this.valueField,
+    this.valueField = defaultValueField,
     this.showRules = defaultShowRules,
     this.checkRules = defaultCheckRules,
   }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     backColor ??= KenConfigurationService.getTheme()!.backgroundColor;
     if (optionsDefault!['type'] == null) optionsDefault!['type'] = 'pwd';
     id = KenUtilities.getWidgetId('FLD', id);
-    setDefaults(this);
   }
 
   KenTextPasswordModel.fromMap(
@@ -115,7 +114,6 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
   ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
-    setDefaults(this);
     backColor = KenUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
     fontSize =
@@ -178,53 +176,5 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
         await getData();
       };
     }
-  }
-
-  static setDefaults(dynamic obj) {
-    // var timePickerTheme = KenConfigurationService.getTheme()!.timePickerTheme;
-    // defaultBackColor = timePickerTheme.backgroundColor;
-    // var shape = timePickerTheme.shape!;
-    // defaultBorderRadius = (shape as ContinuousRectangleBorder)
-    //     .borderRadius
-    //     .resolve(TextDirection.ltr)
-    //     .topLeft
-    //     .x;
-    // var side = timePickerTheme.dayPeriodBorderSide!;
-    // defaultBorderColor = side.color;
-    // defaultBorderWidth = side.width;
-
-    // var textStyle = KenConfigurationService.getTheme()!.textTheme.bodyText1!;
-    // defaultFontBold = textStyle.fontWeight == FontWeight.bold;
-    // defaultFontSize = textStyle.fontSize;
-    // defaultFontColor = textStyle.color;
-    // defaultBackColor = textStyle.backgroundColor;
-
-    // var captionStyle = KenConfigurationService.getTheme()!.textTheme.caption!;
-    // defaultCaptionFontBold = captionStyle.fontWeight == FontWeight.bold;
-    // defaultCaptionFontSize = captionStyle.fontSize;
-    // defaultCaptionFontColor = captionStyle.color;
-    // defaultCaptionBackColor = captionStyle.backgroundColor;
-
-    // var iconTheme = KenConfigurationService.getTheme()!.iconTheme;
-    // defaultIconSize = iconTheme.size;
-    // defaultIconColor = iconTheme.color;
-
-    // defaultButtonBackColor = KenConfigurationService.getTheme()!.primaryColor;
-
-    // ----------------- set properties from default
-    obj.borderColor ??= KenTextPasswordModel.defaultBorderColor;
-    obj.borderWidth ??= KenTextPasswordModel.defaultBorderWidth;
-    obj.borderRadius ??= KenTextPasswordModel.defaultBorderRadius;
-    obj.fontBold ??= KenTextPasswordModel.defaultFontBold;
-    obj.fontColor ??= KenTextPasswordModel.defaultFontColor;
-    obj.fontSize ??= KenTextPasswordModel.defaultFontSize;
-    obj.backColor ??= KenTextPasswordModel.defaultBackColor;
-    obj.captionFontBold ??= KenTextPasswordModel.defaultCaptionFontBold;
-    obj.captionFontColor ??= KenTextPasswordModel.defaultCaptionFontColor;
-    obj.captionFontSize ??= KenTextPasswordModel.defaultCaptionFontSize;
-    obj.captionBackColor ??= KenTextPasswordModel.defaultCaptionBackColor;
-    obj.iconSize ??= KenTextPasswordModel.defaultIconSize;
-    obj.iconColor ??= KenTextPasswordModel.defaultIconColor;
-    obj.buttonBackColor ??= KenTextPasswordModel.defaultButtonBackColor;
   }
 }

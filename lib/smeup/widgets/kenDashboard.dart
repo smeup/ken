@@ -53,20 +53,20 @@ class KenDashboard extends StatefulWidget
   KenDashboard(this.scaffoldKey, this.formKey, this.data,
       {id = '',
       type = 'DSH',
-      this.fontColor,
-      this.fontSize,
-      this.fontBold,
-      this.captionFontBold,
-      this.captionFontSize,
-      this.captionFontColor,
+      this.fontColor = KenDashboardModel.defaultFontColor,
+      this.fontSize = KenDashboardModel.defaultFontSize,
+      this.fontBold = KenDashboardModel.defaultFontBold,
+      this.captionFontBold = KenDashboardModel.defaultCaptionFontBold,
+      this.captionFontSize = KenDashboardModel.defaultCaptionFontSize,
+      this.captionFontColor = KenDashboardModel.defaultCaptionFontColor,
       this.iconData,
-      this.iconSize,
-      this.iconColor,
-      this.backgroundColor,
-      this.forceIcon,
-      this.forceText,
-      this.forceUm,
-      this.forceValue,
+      this.iconSize = KenDashboardModel.defaultIconSize,
+      this.iconColor = KenDashboardModel.defaultIconColor,
+      this.backgroundColor = KenDashboardModel.defaultBackgroundColor,
+      this.forceIcon = KenDashboardModel.defaultForceIcon,
+      this.forceText = KenDashboardModel.defaultForceText,
+      this.forceUm = KenDashboardModel.defaultForceUm,
+      this.forceValue = KenDashboardModel.defaultForceValue,
       this.valueColName = KenDashboardModel.defaultValueColName,
       this.text = '',
       this.unitOfMeasure = '',
@@ -79,7 +79,6 @@ class KenDashboard extends StatefulWidget
       this.title = ''})
       : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    KenDashboardModel.setDefaults(this);
   }
 
   KenDashboard.withController(KenDashboardModel this.model, this.scaffoldKey,
@@ -268,48 +267,6 @@ class _KenDashboardState extends State<KenDashboard>
               ]),
         ));
 
-    // children = Container(
-    //   height: widget.height,
-    //   width: widget.width,
-    //   padding: widget.padding,
-    //   alignment: Alignment.center,
-    //   child: SingleChildScrollView(
-    //     scrollDirection: Axis.horizontal,
-    //     child: Row(
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       children: <Widget>[
-    //         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-    //           if (widget.iconData != null)
-    //             Icon(
-    //               widget.iconData,
-    //               //SmeupIconService.getIconData(widget.icon),
-    //               color: iconTheme.color,
-    //               size: iconTheme.size,
-    //             ),
-    //           Text(
-    //             _getValue(_data),
-    //             style: textStyle,
-    //           ),
-    //           Column(
-    //             mainAxisAlignment: MainAxisAlignment.start,
-    //             children: [
-    //               Text(
-    //                 widget.unitOfMeasure!,
-    //                 textAlign: TextAlign.start,
-    //               ),
-    //             ],
-    //           )
-    //         ]),
-    //         if (widget.text != null)
-    //           Text(
-    //             widget.text!,
-    //             style: captionStyle,
-    //           )
-    //       ],
-    //     ),
-    //   ),
-    // );
-
     return KenWidgetBuilderResponse(_model, children);
   }
 
@@ -335,16 +292,19 @@ class _KenDashboardState extends State<KenDashboard>
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.caption!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.captionFontColor,
         fontSize: widget.captionFontSize,
         backgroundColor: widget.backgroundColor);
 
-    if (widget.captionFontBold!) {
+    if (widget.captionFontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    }
+    else{
+            style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 
@@ -352,16 +312,17 @@ class _KenDashboardState extends State<KenDashboard>
   }
 
   TextStyle _getTextStile() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.headline1!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.fontColor,
         fontSize: widget.fontSize,
         backgroundColor: widget.backgroundColor);
 
-    if (widget.fontBold!) {
+    if (widget.fontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+            style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 
@@ -369,16 +330,19 @@ class _KenDashboardState extends State<KenDashboard>
   }
 
   TextStyle _getUnitOfMeasureStyle() {
-    TextStyle style = KenConfigurationService.getTheme()!.textTheme.headline6!;
-
-    style = style.copyWith(
+    TextStyle style = TextStyle(
         color: widget.captionFontColor,
         fontSize: widget.captionFontSize,
         backgroundColor: widget.backgroundColor);
 
-    if (widget.fontBold!) {
+    if (widget.fontBold == true) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
+      );
+    }
+    else{
+            style = style.copyWith(
+        fontWeight: FontWeight.normal,
       );
     }
 
@@ -386,9 +350,7 @@ class _KenDashboardState extends State<KenDashboard>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = KenConfigurationService.getTheme()!
-        .iconTheme
-        .copyWith(size: widget.iconSize, color: widget.iconColor);
+    IconThemeData themeData = IconThemeData(size: widget.iconSize, color: widget.iconColor);
 
     return themeData;
   }
