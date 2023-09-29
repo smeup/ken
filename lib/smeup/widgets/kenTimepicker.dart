@@ -369,7 +369,7 @@ class _KenTimePickerState extends State<KenTimePicker>
         //color: widget.backColor,
       );
     } else if (widget.align == Alignment.topCenter) {
-      children = Container(
+      children = SizedBox(
         height: widget.height,
         width: widget.width,
         child: Column(
@@ -399,7 +399,7 @@ class _KenTimePickerState extends State<KenTimePicker>
         //color: widget.backColor,
       );
     } else if (widget.align == Alignment.bottomCenter) {
-      children = Container(
+      children = SizedBox(
         height: widget.height,
         width: widget.width,
         child: Column(
@@ -444,28 +444,23 @@ class _KenTimePickerState extends State<KenTimePicker>
   }
 
   ButtonStyle _getButtonStyle() {
-    var timePickerTheme = KenConfigurationService.getTheme()!
-        .timePickerTheme
-        .copyWith(
-            backgroundColor: widget.backColor,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius!)),
-            dayPeriodBorderSide: BorderSide(
-                width: widget.borderWidth!, color: widget.borderColor!));
+    var timePickerTheme = TimePickerThemeData(
+        backgroundColor: widget.backColor,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(widget.borderRadius!)),
+        dayPeriodBorderSide:
+            BorderSide(width: widget.borderWidth!, color: widget.borderColor!));
 
-    var elevatedButtonStyle = KenConfigurationService.getTheme()!
-        .elevatedButtonTheme
-        .style!
-        .copyWith(
-            backgroundColor: MaterialStateProperty.all<Color?>(
-                timePickerTheme.backgroundColor),
-            elevation: MaterialStateProperty.all<double?>(widget.elevation),
-            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                const EdgeInsets.all(0)),
-            shape: MaterialStateProperty.all<OutlinedBorder?>(
-                timePickerTheme.shape as OutlinedBorder?),
-            side: MaterialStateProperty.all<BorderSide?>(
-                timePickerTheme.dayPeriodBorderSide));
+    var elevatedButtonStyle = ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.all<Color?>(timePickerTheme.backgroundColor),
+        elevation: MaterialStateProperty.all<double?>(widget.elevation),
+        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+            const EdgeInsets.all(0)),
+        shape: MaterialStateProperty.all<OutlinedBorder?>(
+            timePickerTheme.shape as OutlinedBorder?),
+        side: MaterialStateProperty.all<BorderSide?>(
+            timePickerTheme.dayPeriodBorderSide));
 
     return elevatedButtonStyle;
   }

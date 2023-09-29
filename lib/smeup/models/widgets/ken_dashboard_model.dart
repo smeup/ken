@@ -95,8 +95,7 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context)
       : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
-        
-            valueColName = optionsDefault!['ValueColName'] ?? defaultValueColName;
+    valueColName = optionsDefault!['ValueColName'] ?? defaultValueColName;
     iconColName = optionsDefault!['iconColName'] ?? defaultIconColName;
     textColName = optionsDefault!['textColName'] ?? defaultTextColName;
     umColName = optionsDefault!['umColName'] ?? defaultUmColName;
@@ -108,15 +107,15 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
     if (optionsDefault!['FontSize'].toString().contains('%')) {
       double perc = KenUtilities.getDouble(
               optionsDefault!['FontSize'].toString().replaceAll("%", "")) ??
-          defaultFontSize!;
-      fontSize = defaultFontSize! * perc / 100;
+          defaultFontSize;
+      fontSize = defaultFontSize * perc / 100;
 
       iconSize = KenUtilities.getDouble(optionsDefault!['iconSize']) ??
-          defaultIconSize! * perc / 100;
+          defaultIconSize * perc / 100;
 
       captionFontSize =
           KenUtilities.getDouble(optionsDefault!['labelFontSize']) ??
-              defaultCaptionFontSize! * perc / 100;
+              defaultCaptionFontSize * perc / 100;
     } else {
       fontSize = KenUtilities.getDouble(optionsDefault!['FontSize']) ??
           defaultFontSize;
