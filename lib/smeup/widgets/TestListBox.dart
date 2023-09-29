@@ -109,7 +109,7 @@ class TestListBox extends StatefulWidget
     this.defaultSort = KenListBoxModel.defaultDefaultSort,
   }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
     id = KenUtilities.getWidgetId(type, id);
-    KenListBoxModel.setDefaults(this);
+    // KenListBoxModel.setDefaults(this);
   }
 
   @override

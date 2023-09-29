@@ -138,7 +138,7 @@ class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
         break;
       case 'button':
         box = await _getLayoutButtons(widget.data);
-      case 'imagelist':
+      case 'imageList':
         box = await _getLayoutImageList(widget.data);
         break;
       default:
