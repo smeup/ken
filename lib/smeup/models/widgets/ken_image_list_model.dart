@@ -52,16 +52,16 @@ class KenImageListModel extends KenModel implements KenDataInterface {
       GlobalKey<FormState>? formKey,
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context,
-      this.backColor,
-      this.borderColor,
-      this.borderWidth,
-      this.borderRadius,
-      this.fontSize,
-      this.fontColor,
-      this.fontBold,
-      this.captionFontBold,
-      this.captionFontSize,
-      this.captionFontColor,
+      this.backColor = defaultBackColor,
+      this.borderColor = defaultBorderColor,
+      this.borderWidth = defaultBorderWidth,
+      this.borderRadius = defaultBorderRadius,
+      this.fontSize = defaultFontSize,
+      this.fontColor = defaultFontColor,
+      this.fontBold = defaultFontBold,
+      this.captionFontBold = defaultCaptionFontBold,
+      this.captionFontSize = defaultCaptionFontSize,
+      this.captionFontColor = defaultCaptionFontColor,
       this.width = defaultWidth,
       this.height = defaultHeight,
       this.padding = defaultPadding,
@@ -92,6 +92,15 @@ class KenImageListModel extends KenModel implements KenDataInterface {
     backColor = KenUtilities.getColorFromRGB(optionsDefault!['backColor']) ??
         defaultBackColor;
 
+    borderRadius = KenUtilities.getDouble(optionsDefault!['borderRadius']) ??
+        defaultBorderRadius;
+
+    borderWidth = KenUtilities.getDouble(optionsDefault!['borderWidth']) ??
+        defaultBorderWidth;
+
+    borderColor =
+        KenUtilities.getColorFromRGB(optionsDefault!['borderColor']) ??
+            defaultBorderColor;
     captionFontSize =
         KenUtilities.getDouble(optionsDefault!['captionFontSize']) ??
             defaultCaptionFontSize;

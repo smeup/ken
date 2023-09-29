@@ -14,7 +14,7 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
   static const Color defaultBackColor = KenModel.kBack100;
   static const Color defaultBorderColor = KenModel.kPrimary;
   static const double defaultBorderWidth = 1;
-  static const double defaultBorderRadius = 8;
+  static const double defaultBorderRadius = 8.0;
   static const double defaultFontSize = 12;
   static const Color defaultFontColor = KenModel.kSecondary100;
   static const bool defaultFontBold = true;
@@ -35,6 +35,7 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
   static const bool defaultShowSelection = false;
   static const int defaultSelectedRow = 1;
   static const double defaultListHeight = 300;
+  static const double defaultRealBoxHeight = 400;
 
   Color? backColor;
   Color? borderColor;
@@ -60,6 +61,7 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
   String? backgroundColName;
   bool? showSelection;
   int? selectedRow;
+  double? realBoxHeight;
   double? listHeight;
 
   KenListBoxModel({
@@ -92,6 +94,7 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
     this.backgroundColName = defaultBackgroundColName,
     this.showSelection = defaultShowSelection,
     this.selectedRow = defaultSelectedRow,
+    this.realBoxHeight = defaultRealBoxHeight,
     title = '',
   }) : super(formKey, scaffoldKey, context, title: title, id: id, type: type) {
     visibleColumns ??= List<String>.empty(growable: true);
@@ -155,6 +158,9 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
 
     listHeight = KenUtilities.getDouble(optionsDefault!['listHeight']) ??
         defaultListHeight;
+
+    realBoxHeight = KenUtilities.getDouble(optionsDefault!['realBoxHeight']) ??
+        defaultRealBoxHeight;
 
     borderRadius = KenUtilities.getDouble(optionsDefault!['borderRadius']) ??
         defaultBorderRadius;

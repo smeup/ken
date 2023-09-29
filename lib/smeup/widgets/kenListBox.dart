@@ -101,7 +101,7 @@ class KenListBox extends StatefulWidget
     this.showSelection = false,
     this.selectedRow = 0,
     this.localSelectedRow,
-    this.realBoxHeight,
+    this.realBoxHeight = KenListBoxModel.defaultRealBoxHeight,
     title = '',
     showLoader = false,
     this.clientOnItemTap,
@@ -141,6 +141,7 @@ class KenListBox extends StatefulWidget
     captionFontBold = m.captionFontBold;
     captionFontSize = m.captionFontSize;
     captionFontColor = m.captionFontColor;
+    realBoxHeight = m.realBoxHeight;
 
     int no = m.dynamisms.where((element) => element.event == 'delete').length;
 

@@ -535,7 +535,7 @@ class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
                 .copyWith(side: BorderSide(color: widget.cardTheme!.color!)),
             child: Padding(
                 padding: const EdgeInsets.all(1.0),
-                child: Container(
+                child: SizedBox(
                   height: widget.height,
                   child: FutureBuilder<Widget>(
                       future: _getImageAndDataInColumn(data, cols),
