@@ -24,7 +24,7 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
   static const String defaultTitle = 'title';
   static const double defaultWidth = 0;
   static const double defaultHeight = 55;
-  static const String defaultValueField = 'code';
+  static const String defaultValueField = 'value';
   static const String defaultDescriptionField = 'description';
   static const EdgeInsetsGeometry defaultPadding =
       EdgeInsets.only(left: 10, right: 10);
@@ -104,7 +104,6 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
       BuildContext? context,
       KenModel parent)
       : super.fromMap(jsonMap, formKey, scaffoldKey, context, parent) {
-
     title = jsonMap['title'] ?? '';
 
     valueField = optionsDefault!['valueField'] ?? defaultValueField;
