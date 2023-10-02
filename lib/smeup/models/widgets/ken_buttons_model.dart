@@ -19,8 +19,6 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
   static const bool defaultFontBold = false;
   static const double defaultIconSize = 16;
   static const Color defaultIconColor = Colors.white;
-
-  // unsupported by json_theme
   static const double defaultWidth = 180;
   static const double defaultHeight = 50;
   static const MainAxisAlignment defaultPosition = MainAxisAlignment.center;

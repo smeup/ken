@@ -266,7 +266,7 @@ class KenButton extends StatelessWidget {
   TextStyle _getTextStile() {
     TextStyle style = TextStyle(color: fontColor, fontSize: fontSize);
 
-    if (fontBold == true) {
+    if (fontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );

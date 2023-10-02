@@ -297,13 +297,12 @@ class _KenDashboardState extends State<KenDashboard>
         fontSize: widget.captionFontSize,
         backgroundColor: widget.backgroundColor);
 
-    if (widget.captionFontBold == true) {
+    if (widget.captionFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
-    }
-    else{
-            style = style.copyWith(
+    } else {
+      style = style.copyWith(
         fontWeight: FontWeight.normal,
       );
     }
@@ -317,11 +316,11 @@ class _KenDashboardState extends State<KenDashboard>
         fontSize: widget.fontSize,
         backgroundColor: widget.backgroundColor);
 
-    if (widget.fontBold == true) {
+    if (widget.fontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
-            style = style.copyWith(
+      style = style.copyWith(
         fontWeight: FontWeight.normal,
       );
     }
@@ -335,13 +334,12 @@ class _KenDashboardState extends State<KenDashboard>
         fontSize: widget.captionFontSize,
         backgroundColor: widget.backgroundColor);
 
-    if (widget.fontBold == true) {
+    if (widget.fontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
-    }
-    else{
-            style = style.copyWith(
+    } else {
+      style = style.copyWith(
         fontWeight: FontWeight.normal,
       );
     }
@@ -350,7 +348,8 @@ class _KenDashboardState extends State<KenDashboard>
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData = IconThemeData(size: widget.iconSize, color: widget.iconColor);
+    IconThemeData themeData =
+        IconThemeData(size: widget.iconSize, color: widget.iconColor);
 
     return themeData;
   }

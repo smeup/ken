@@ -337,7 +337,7 @@ class KenRadioButtonsState extends State<KenRadioButtons>
         fontSize: widget.captionFontSize,
         backgroundColor: widget.captionBackColor);
 
-    if (widget.captionFontBold == true) {
+    if (widget.captionFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
