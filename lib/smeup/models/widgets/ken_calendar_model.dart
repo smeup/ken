@@ -12,8 +12,6 @@ class KenCalendarModel extends KenModel {
   static const double defaultEventFontSize = 14;
   static const double defaultTitleFontSize = 18;
   static const double defaultMarkerFontSize = 12;
-
-  // unsupported by json_theme
   static const double defaultWidth = 300;
   static const double defaultHeight = 250;
   static const bool defaultShowPeriodButtons = false;
@@ -92,8 +90,15 @@ class KenCalendarModel extends KenModel {
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context)
       : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
-
-
+    dayFontSize = KenUtilities.getDouble(optionsDefault!['todayFontSize']) ??
+        defaultDayFontSize;
+    eventFontSize = KenUtilities.getDouble(optionsDefault!['eventFontSize']) ??
+        defaultEventFontSize;
+    titleFontSize = KenUtilities.getDouble(optionsDefault!['titleFontSize']) ??
+        defaultTitleFontSize;
+    markerFontSize =
+        KenUtilities.getDouble(optionsDefault!['markerFontSize']) ??
+            defaultMarkerFontSize;
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     titleColumnName =

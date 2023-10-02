@@ -33,6 +33,7 @@ class KenCarouselModel extends KenModel implements KenDataInterface {
       : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     autoPlay = optionsDefault!['autoPlay'] ?? false;
 
+    height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
     if (widgetLoadType != LoadType.Delay) {
       onReady = () async {
         await getData();

@@ -465,7 +465,7 @@ class _KenDatePickerState extends State<KenDatePicker>
         fontSize: widget.fontSize,
         backgroundColor: widget.backColor);
 
-    if (widget.fontBold == true) {
+    if (widget.fontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -482,7 +482,7 @@ class _KenDatePickerState extends State<KenDatePicker>
     TextStyle style = TextStyle(
         color: widget.captionFontColor, fontSize: widget.captionFontSize);
 
-    if (widget.captionFontBold == true) {
+    if (widget.captionFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );

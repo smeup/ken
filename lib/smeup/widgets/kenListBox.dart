@@ -510,7 +510,7 @@ class KenListBoxState extends State<KenListBox>
               fontSize: widget.fontSize,
               backgroundColor: Colors.transparent);
         }
-        if (widget.fontBold == true) {
+        if (widget.fontBold!) {
           style = style.copyWith(
             fontWeight: FontWeight.w600,
           );
@@ -604,7 +604,7 @@ class KenListBoxState extends State<KenListBox>
         fontSize: widget.captionFontSize,
         backgroundColor: Colors.transparent);
 
-    if (widget.captionFontBold == true) {
+    if (widget.captionFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
