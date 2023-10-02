@@ -90,6 +90,15 @@ class KenCalendarModel extends KenModel {
       GlobalKey<ScaffoldState>? scaffoldKey,
       BuildContext? context)
       : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
+    dayFontSize = KenUtilities.getDouble(optionsDefault!['todayFontSize']) ??
+        defaultDayFontSize;
+    eventFontSize = KenUtilities.getDouble(optionsDefault!['eventFontSize']) ??
+        defaultEventFontSize;
+    titleFontSize = KenUtilities.getDouble(optionsDefault!['titleFontSize']) ??
+        defaultTitleFontSize;
+    markerFontSize =
+        KenUtilities.getDouble(optionsDefault!['markerFontSize']) ??
+            defaultMarkerFontSize;
     padding =
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     titleColumnName =
