@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-import '../../services/ken_configuration_service.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_model.dart';
 

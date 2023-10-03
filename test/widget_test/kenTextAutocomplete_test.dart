@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import '../../lib/smeup/widgets/kenTextAutocomplete.dart';
 import 'widget_test_service.dart';
-import '../../lib/smeup/models/notifiers/ken_error_notifier.dart';
 
 Future<void> main() async {
   testWidgets('Test static contructor ', (WidgetTester tester) async {

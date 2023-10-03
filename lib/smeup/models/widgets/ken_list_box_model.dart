@@ -5,8 +5,6 @@ import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
 
-import '../../services/ken_configuration_service.dart';
-
 enum KenListType { simple, oriented, wheel }
 
 class KenListBoxModel extends KenModel implements KenDataInterface {

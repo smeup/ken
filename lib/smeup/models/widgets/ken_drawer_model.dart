@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_model.dart';
 
-import '../../services/ken_configuration_service.dart';
-
 class KenDrawerModel extends KenModel {
   // supported by json_theme
   static const double defaultTitleFontSize = 18;

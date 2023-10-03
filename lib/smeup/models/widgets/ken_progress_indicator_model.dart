@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
-import '../../services/ken_configuration_service.dart';
 
 class KenProgressIndicatorModel extends KenModel implements KenDataInterface {
   static const Color defaultColor = KenModel.kPrimary;
@@ -32,7 +31,7 @@ class KenProgressIndicatorModel extends KenModel implements KenDataInterface {
     GlobalKey<FormState>? formKey,
     GlobalKey<ScaffoldState>? scaffoldKey,
     BuildContext? context,
-    ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
+  ) : super.fromMap(jsonMap, formKey, scaffoldKey, context) {
     title = jsonMap['title'] ?? '';
 
     size = KenUtilities.getDouble(optionsDefault!['size']) ?? defaultSize;
@@ -44,5 +43,4 @@ class KenProgressIndicatorModel extends KenModel implements KenDataInterface {
         KenUtilities.getColorFromRGB(optionsDefault!['circularTrackColor']) ??
             defaultCircularTrackColor;
   }
-
 }

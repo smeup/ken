@@ -5,8 +5,6 @@ import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_model.dart';
 
-import '../../services/ken_configuration_service.dart';
-
 class KenDatePickerModel extends KenModel implements KenDataInterface {
   // supported by json_theme
   static const Color defaultBorderColor = KenModel.kPrimary;

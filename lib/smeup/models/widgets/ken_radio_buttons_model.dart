@@ -5,7 +5,6 @@ import '../../services/ken_utilities.dart';
 import 'ken_data_interface.dart';
 import 'ken_input_field_model.dart';
 import 'ken_model.dart';
-import '../../services/ken_configuration_service.dart';
 
 class KenRadioButtonsModel extends KenInputFieldModel
     implements KenDataInterface {
