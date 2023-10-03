@@ -102,7 +102,6 @@ class KenDashboard extends StatefulWidget
     id = m.id;
     type = m.type;
     valueColName = m.valueColName;
-    unitOfMeasure = m.selectLayout = m.selectLayout;
     width = m.width;
     height = m.height;
     padding = m.padding;
@@ -128,7 +127,7 @@ class KenDashboard extends StatefulWidget
         (workData['rows'] as List).isNotEmpty &&
         workData['rows'][0][m.valueColName] != null) {
       data = KenUtilities.getDouble(workData['rows'][0][m.valueColName]);
-      unitOfMeasure = workData['rows'][0][m.umColName];
+      unitOfMeasure = workData['rows'][0][m.umColName] ?? '';
       text = workData['rows'][0][m.textColName];
     }
 
