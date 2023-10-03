@@ -16,8 +16,6 @@ import 'kenWidgetMixin.dart';
 import 'kenWidgetStateInterface.dart';
 import 'kenWidgetStateMixin.dart';
 
-import '../services/ken_configuration_service.dart';
-
 // import '../services/ken_theme_configuration_service.dart';
 
 // ignore: must_be_immutable

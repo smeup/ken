@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../services/ken_configuration_service.dart';
 import 'globallyUniqueIdExtension.dart';
 
 // ignore: must_be_immutable

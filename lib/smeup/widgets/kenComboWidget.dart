@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 
 import '../models/widgets/ken_combo_item_model.dart';
-import '../models/widgets/ken_model.dart';
-import '../services/ken_configuration_service.dart';
 
 class KenComboWidget extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -27,7 +25,8 @@ class KenComboWidget extends StatefulWidget {
   final void Function(String? newValue)? clientOnChange;
 
   const KenComboWidget(this.scaffoldKey, this.formKey,
-      {super.key, this.fontColor,
+      {super.key,
+      this.fontColor,
       this.fontSize,
       this.fontBold,
       this.backColor,
@@ -96,8 +95,7 @@ class KenComboWidgetState extends State<KenComboWidget> {
 
   List<DropdownMenuItem<String>> _getItems(List<KenComboItemModel> data) {
     final textStyle = _getTextStile();
-    var items =
-        data.map<DropdownMenuItem<String>>((KenComboItemModel element) {
+    var items = data.map<DropdownMenuItem<String>>((KenComboItemModel element) {
       return DropdownMenuItem<String>(
         value: element.code,
         child: Text(
@@ -125,9 +123,8 @@ class KenComboWidgetState extends State<KenComboWidget> {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
-    }
-    else{
-            style = style.copyWith(
+    } else {
+      style = style.copyWith(
         fontWeight: FontWeight.normal,
       );
     }

@@ -18,8 +18,6 @@ import 'kenWidgetStateInterface.dart';
 import 'kenWidgetStateMixin.dart';
 import 'package:provider/provider.dart';
 
-import '../services/ken_configuration_service.dart';
-
 // ignore: must_be_immutable
 class KenTextPassword extends StatefulWidget
     with KenWidgetMixin

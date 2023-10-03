@@ -13,7 +13,6 @@ import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';
 import 'kenWidgetStateInterface.dart';
 import 'kenWidgetStateMixin.dart';
-import '../services/ken_configuration_service.dart';
 
 // ignore: must_be_immutable
 class KenTextAutocomplete extends StatefulWidget

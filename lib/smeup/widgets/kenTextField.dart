@@ -13,7 +13,6 @@ import 'kenWidgetStateInterface.dart';
 import 'kenWidgetStateMixin.dart';
 
 import '../models/KenMessageBusEventData.dart';
-import '../services/ken_configuration_service.dart';
 import '../services/ken_message_bus.dart';
 
 // ignore: must_be_immutable
