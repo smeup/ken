@@ -60,12 +60,12 @@ class KenMessageBus {
 }
 
 enum KenTopic {
-  buttonsGetChildren,
+  kenButtonsGetChildren,
+  kenButtonsOnClick,
   comboGetChildren,
   textfieldGetChildren,
   textfieldOnChanged,
   textfieldOnSaved,
-  execDynamismActions,
   comboOnClientChange,
   confirmDismiss,
   kenlistboxGetChildren,

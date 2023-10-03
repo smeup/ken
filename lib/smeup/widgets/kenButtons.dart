@@ -187,7 +187,7 @@ class KenButtonsState extends State<KenButtons>
 
     KenMessageBus.instance.publishRequest(
       widget.globallyUniqueId,
-      KenTopic.buttonsGetChildren,
+      KenTopic.kenButtonsGetChildren,
       // ignore: use_build_context_synchronously
       KenMessageBusEventData(
           context: context, widget: widget, model: _model, data: _data),
@@ -196,7 +196,7 @@ class KenButtonsState extends State<KenButtons>
       _model,
       StreamBuilder(
         stream: KenMessageBus.instance.response(
-            id: widget.globallyUniqueId, topic: KenTopic.buttonsGetChildren),
+            id: widget.globallyUniqueId, topic: KenTopic.kenButtonsGetChildren),
         initialData: KenMessageBusEvent(
           id: widget.globallyUniqueId,
           // ignore: use_build_context_synchronously
@@ -206,7 +206,7 @@ class KenButtonsState extends State<KenButtons>
             widget: widget,
             model: _model,
           ),
-          topic: KenTopic.buttonsGetChildren,
+          topic: KenTopic.kenButtonsGetChildren,
           messageType: KenMessageType.response,
         ),
         builder: (context, snapshot) {
