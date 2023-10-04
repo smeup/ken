@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../services/ken_log_service.dart';
+import '../../widgets/kenSpotLight.dart';
 import 'ken_buttons_model.dart';
 import 'ken_calendar_model.dart';
 import 'ken_carousel_model.dart';
@@ -22,6 +23,7 @@ import 'ken_qrcode_reader_model.dart';
 import 'ken_radio_buttons_model.dart';
 import 'ken_slider_model.dart';
 import 'ken_splash_model.dart';
+import 'ken_spotlight_model.dart';
 import 'ken_switch_model.dart';
 import 'ken_text_autocomplete_model.dart';
 import 'ken_text_field_model.dart';
@@ -200,6 +202,10 @@ class KenSectionModel extends KenModel with KenModelMixin {
               break;
             case 'SCH':
               model = KenFormModel.fromMap(v, formKey, scaffoldKey, context);
+              break;
+            case 'SPL':
+              model =
+                  KenSpotLightModel.fromMap(v, formKey, scaffoldKey, context);
               break;
             case 'DRW':
               break;

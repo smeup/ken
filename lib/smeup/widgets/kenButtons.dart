@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_buttons_model.dart';
@@ -192,52 +194,46 @@ class KenButtonsState extends State<KenButtons>
       KenMessageBusEventData(
           context: context, widget: widget, model: _model, data: _data),
     );
-    return KenWidgetBuilderResponse(
-      _model,
-      StreamBuilder(
-        stream: KenMessageBus.instance.response(
-            id: widget.globallyUniqueId, topic: KenTopic.kenButtonsGetChildren),
-        initialData: KenMessageBusEvent(
-          id: widget.globallyUniqueId,
-          // ignore: use_build_context_synchronously
-          data: KenMessageBusEventData(
-            data: <Widget>[],
-            context: context,
-            widget: widget,
-            model: _model,
-          ),
-          topic: KenTopic.kenButtonsGetChildren,
-          messageType: KenMessageType.response,
-        ),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Container();
-          }
 
-          var buttons = snapshot.data!.data.data;
+    List<Widget> buttons = [];
 
-          if (buttons.length > 0) {
-            SingleChildScrollView widgets;
-            if (widget.orientation == WidgetOrientation.Vertical) {
-              widgets = SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(children: buttons));
-            } else {
-              widgets = SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(children: buttons));
-            }
+    Completer<dynamic> completer = Completer();
+    KenMessageBus.instance
+        .response(
+            id: widget.globallyUniqueId, topic: KenTopic.kenButtonsGetChildren)
+        .take(1)
+        .listen((event) {
+      buttons = event.data.data;
+      completer.complete(); // resolve promise
+    });
 
-            return widgets;
-          } else {
-            KenLogService.writeDebugMessage(
-                'Error SmeupButtons no children \'button\' created',
-                logType: KenLogType.warning);
-            final column = Column(children: [Container()]);
-            return column;
-          }
-        },
-      ),
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenButtonsGetChildren,
+      // ignore: use_build_context_synchronously
+      KenMessageBusEventData(
+          context: context, widget: widget, model: _model, data: _data),
     );
+
+    await completer.future;
+
+    Widget widgets;
+
+    if (buttons.isNotEmpty) {
+      if (widget.orientation == WidgetOrientation.Vertical) {
+        widgets = SingleChildScrollView(
+            scrollDirection: Axis.vertical, child: Column(children: buttons));
+      } else {
+        widgets = SingleChildScrollView(
+            scrollDirection: Axis.horizontal, child: Row(children: buttons));
+      }
+    } else {
+      KenLogService.writeDebugMessage(
+          'Error SmeupButtons no children \'button\' created',
+          logType: KenLogType.warning);
+      widgets = Column(children: [Container()]);
+    }
+
+    return KenWidgetBuilderResponse(_model, widgets);
   }
 }
