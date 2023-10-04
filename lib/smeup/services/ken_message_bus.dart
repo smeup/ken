@@ -77,6 +77,7 @@ enum KenTopic {
   kenBoxGetButtons,
   kenBoxGetColumns,
   kenBoxGetColumnsButtons,
+  kenDashboardOnClick,
   kenDatePickerGetChildren,
   kenProgressBarGetChildren,
   kenTimePickerGetChildren,

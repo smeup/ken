@@ -1,10 +1,12 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import '../models/KenMessageBusEventData.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_dashboard_model.dart';
 import '../models/widgets/ken_model.dart';
 import '../services/ken_log_service.dart';
+import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
 import 'kenNotAvailable.dart';
 import 'kenWidgetInterface.dart';
@@ -214,56 +216,66 @@ class _KenDashboardState extends State<KenDashboard>
     final textStyle = _getTextStile();
     final unitOfMeasureStyle = _getUnitOfMeasureStyle();
 
-    children = Container(
-        height: widget.height,
-        width: widget.width,
-        padding: widget.padding,
-        alignment: Alignment.center,
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Icon(
-                      widget.iconData,
-                      //SmeupIconService.getIconData(widget.icon),
-                      color: iconTheme.color,
-                      size: iconTheme.size,
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
+    children = GestureDetector(
+      onTap: () {
+        KenMessageBus.instance.publishRequest(
+          widget.globallyUniqueId,
+          KenTopic.kenDashboardOnClick,
+          KenMessageBusEventData(
+              context: context, widget: widget, model: _model, data: _data),
+        );
+      },
+      child: Container(
+          height: widget.height,
+          width: widget.width,
+          padding: widget.padding,
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Icon(
+                        widget.iconData,
+                        //SmeupIconService.getIconData(widget.icon),
+                        color: iconTheme.color,
+                        size: iconTheme.size,
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        _getValue(_data),
+                        style: textStyle,
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            widget.unitOfMeasure!,
+                            style: unitOfMeasureStyle,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  if (widget.text != null)
                     Text(
-                      _getValue(_data),
-                      style: textStyle,
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          widget.unitOfMeasure!,
-                          style: unitOfMeasureStyle,
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                if (widget.text != null)
-                  Text(
-                    widget.text!,
-                    style: captionStyle,
-                  )
-              ]),
-        ));
+                      widget.text!,
+                      style: captionStyle,
+                    )
+                ]),
+          )),
+    );
 
     return KenWidgetBuilderResponse(_model, children);
   }
