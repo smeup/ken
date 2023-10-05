@@ -100,6 +100,7 @@ enum KenTopic {
   kenSpotLightFieldViewBuilder,
   kenSpotLightOnTapSetState,
   kenSpotLightOnTapSelected,
+  kenSpotLightOnSubmit,
   kenTextAutocompleteFieldViewBuilder,
   kenTextAutocompleteOnTapSetState,
   kenTextAutocompleteOnTapSelected,

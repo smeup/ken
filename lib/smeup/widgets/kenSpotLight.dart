@@ -312,55 +312,67 @@ class _KenSpotLightState extends State<KenSpotLight>
                     padding:
                         const EdgeInsets.only(bottom: 0.0, left: 5, right: 5),
                     child: TextFormField(
-                      style: textStyle,
-                      controller: textEditingController,
-                      focusNode: focusNode,
-                      onFieldSubmitted: (String value) {
-                        onFieldSubmitted();
-                      },
-                      inputFormatters: widget.inputFormatters,
-                      autofocus: widget.autoFocus!,
-                      maxLines: 1,
-                      key: Key('${widget.id}_text'),
-                      autocorrect: false,
-                      textCapitalization: TextCapitalization.none,
-                      textInputAction: TextInputAction.next,
-                      enableSuggestions: true,
-                      validator:
-                          widget.clientValidator as String? Function(String?)?,
-                      keyboardType: widget.keyboard,
-                      obscureText:
-                          widget.keyboard == TextInputType.visiblePassword
-                              ? true
-                              : false,
-                      onChanged: (value) {
-                        if (widget.clientOnChange != null) {
-                          widget.clientOnChange!(value);
-                        }
-                      },
-                      decoration: InputDecoration(
-                        isDense: false,
-                        contentPadding: const EdgeInsets.only(left: 5, top: -8),
-                        floatingLabelAlignment: FloatingLabelAlignment.start,
-                        floatingLabelStyle: captionStyle,
-                        floatingLabelBehavior: FloatingLabelBehavior.auto,
-                        labelStyle: captionStyle,
-                        labelText: widget.label,
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: widget.underline!
-                                  ? widget.borderColor!
-                                  : Colors.transparent),
+                        style: textStyle,
+                        controller: textEditingController,
+                        focusNode: focusNode,
+                        onFieldSubmitted: (String value) {
+                          onFieldSubmitted();
+
+                          KenMessageBus.instance.publishRequest(
+                            widget.globallyUniqueId,
+                            KenTopic.kenSpotLightOnSubmit,
+                            KenMessageBusEventData(
+                                context: context,
+                                widget: widget,
+                                model: _model,
+                                data: value),
+                          );
+                        },
+                        inputFormatters: widget.inputFormatters,
+                        autofocus: widget.autoFocus!,
+                        maxLines: 1,
+                        key: Key('${widget.id}_text'),
+                        autocorrect: false,
+                        textCapitalization: TextCapitalization.none,
+                        textInputAction: TextInputAction.next,
+                        enableSuggestions: true,
+                        validator: widget.clientValidator as String? Function(
+                            String?)?,
+                        keyboardType: widget.keyboard,
+                        obscureText:
+                            widget.keyboard == TextInputType.visiblePassword
+                                ? true
+                                : false,
+                        onChanged: (value) {
+                          if (widget.clientOnChange != null) {
+                            widget.clientOnChange!(value);
+                          }
+                        },
+                        decoration: InputDecoration(
+                          isDense: false,
+                          contentPadding:
+                              const EdgeInsets.only(left: 5, top: -8),
+                          floatingLabelAlignment: FloatingLabelAlignment.start,
+                          floatingLabelStyle: captionStyle,
+                          floatingLabelBehavior: FloatingLabelBehavior.auto,
+                          labelStyle: captionStyle,
+                          labelText: widget.label,
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: widget.underline!
+                                    ? widget.borderColor!
+                                    : Colors.transparent),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: widget.underline!
+                                    ? widget.borderColor!
+                                    : Colors.transparent),
+                          ),
                         ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: widget.underline!
-                                  ? widget.borderColor!
-                                  : Colors.transparent),
-                        ),
-                      ),
-                      onSaved: widget.clientOnSave as void Function(String?)?,
-                    ),
+                        onSaved: (String? value) {
+                          widget.clientOnSave!(value);
+                        }),
                   ),
                 ),
                 Container(
