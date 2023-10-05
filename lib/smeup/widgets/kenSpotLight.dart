@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/KenMessageBusEventData.dart';
@@ -234,6 +236,36 @@ class _KenSpotLightState extends State<KenSpotLight>
 
     Widget children; // rinominerei il widget Autocomplete
 
+    String code = "";
+    dynamic currel;
+
+    Completer<dynamic> completer = Completer();
+
+    KenMessageBus.instance
+        .response(
+            id: widget.globallyUniqueId,
+            topic: KenTopic.kenSpotLightFieldViewBuilder)
+        .take(1)
+        .listen((event) {
+      if (code.isNotEmpty && _data != null) {
+        currel = _data.firstWhere(
+          (element) => element['code'].toString() == code,
+          //orElse: () => null as Map<String, String?>
+        );
+      }
+
+      completer.complete(); // resolve promise
+    });
+
+    KenMessageBus.instance.publishRequest(
+      widget.globallyUniqueId,
+      KenTopic.kenSpotLightFieldViewBuilder,
+      KenMessageBusEventData(
+          context: context, widget: widget, model: _model, data: _data),
+    );
+
+    await completer.future;
+
     children = Container(
         // e anche qua rinominerei Autocomplete
         width: 300, // it has to be as much as the list panel at line 367
@@ -264,24 +296,8 @@ class _KenSpotLightState extends State<KenSpotLight>
               TextEditingController textEditingController,
               FocusNode focusNode,
               VoidCallback onFieldSubmitted) {
-            String code = "";
-
-            KenMessageBus.instance.publishRequest(
-              widget.globallyUniqueId,
-              KenTopic.kenSpotLightFieldViewBuilder,
-              KenMessageBusEventData(
-                  context: context, widget: widget, model: _model, data: _data),
-            );
-            // .then((value) => code = value);
-
-            if (code.isNotEmpty && _data != null) {
-              var currel = _data.firstWhere(
-                (element) => element['code'].toString() == code,
-                //orElse: () => null as Map<String, String?>
-              );
-              if (currel != null) {
-                textEditingController.text = currel['value'];
-              }
+            if (currel != null) {
+              textEditingController.text = currel['value'];
             }
 
             return Container(
