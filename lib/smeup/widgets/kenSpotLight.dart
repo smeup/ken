@@ -239,32 +239,18 @@ class _KenSpotLightState extends State<KenSpotLight>
     String code = "";
     dynamic currel;
 
-    Completer<dynamic> completer = Completer();
-
-    KenMessageBus.instance
-        .response(
-            id: widget.globallyUniqueId,
-            topic: KenTopic.kenSpotLightFieldViewBuilder)
-        .take(1)
-        .listen((event) {
-      if (code.isNotEmpty && _data != null) {
-        currel = _data.firstWhere(
-          (element) => element['code'].toString() == code,
-          //orElse: () => null as Map<String, String?>
-        );
-      }
-
-      completer.complete(); // resolve promise
-    });
-
-    KenMessageBus.instance.publishRequest(
+    await KenMessageBus.instance.publishRequestAndAwait(
       widget.globallyUniqueId,
       KenTopic.kenSpotLightFieldViewBuilder,
       KenMessageBusEventData(
           context: context, widget: widget, model: _model, data: _data),
     );
-
-    await completer.future;
+    if (code.isNotEmpty && _data != null) {
+      currel = _data.firstWhere(
+            (element) => element['code'].toString() == code,
+        //orElse: () => null as Map<String, String?>
+      );
+    }
 
     children = Container(
         // e anche qua rinominerei Autocomplete

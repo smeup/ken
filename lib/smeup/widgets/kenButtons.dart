@@ -197,25 +197,14 @@ class KenButtonsState extends State<KenButtons>
 
     List<Widget> buttons = [];
 
-    Completer<dynamic> completer = Completer();
-    KenMessageBus.instance
-        .response(
-            id: widget.globallyUniqueId, topic: KenTopic.kenButtonsGetChildren)
-        .take(1)
-        .listen((event) {
-      buttons = event.data.data;
-      completer.complete(); // resolve promise
-    });
-
-    KenMessageBus.instance.publishRequest(
+    final response = await KenMessageBus.instance.publishRequestAndAwait(
       widget.globallyUniqueId,
       KenTopic.kenButtonsGetChildren,
       // ignore: use_build_context_synchronously
       KenMessageBusEventData(
           context: context, widget: widget, model: _model, data: _data),
     );
-
-    await completer.future;
+    buttons = response.data.data;
 
     Widget widgets;
 

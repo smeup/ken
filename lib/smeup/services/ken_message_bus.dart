@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:rxdart/rxdart.dart';
 
 import '../models/KenMessageBusEvent.dart';
@@ -20,12 +22,26 @@ class KenMessageBus {
         messageType: messageType, id: id, topic: topic, data: data));
   }
 
-  publishRequest(String id, KenTopic topic, KenMessageBusEventData data) {
+  void publishRequest(String id, KenTopic topic, KenMessageBusEventData data) {
     _subject.add(KenMessageBusEvent(
         messageType: KenMessageType.request, id: id, topic: topic, data: data));
   }
 
-  publishResponse(String id, KenTopic topic, KenMessageBusEventData data) {
+  Future<KenMessageBusEvent> publishRequestAndAwait(String id, KenTopic topic, KenMessageBusEventData data) {
+    Completer<KenMessageBusEvent> completer = Completer();
+    response(id: id, topic: topic)
+      .take(1)
+      .handleError((event) {
+        completer.completeError(event);
+      })
+      .listen((event) {
+        completer.complete(event);
+      });
+    publishRequest(id, topic, data);
+    return completer.future;
+  }
+
+  void publishResponse(String id, KenTopic topic, KenMessageBusEventData data) {
     _subject.add(KenMessageBusEvent(
         messageType: KenMessageType.response,
         id: id,

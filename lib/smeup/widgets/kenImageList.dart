@@ -267,18 +267,7 @@ class KenImageListState extends State<KenImageList>
       _modelListBox.dynamisms = _model!.dynamisms;
       _modelListBox.data = _data;
 
-      Completer<dynamic> completer = Completer();
-      KenMessageBus.instance
-          .response(
-              id: widget.globallyUniqueId,
-              topic: KenTopic.kenImageListGetChildren)
-          .take(1)
-          .listen((event) {
-        children = event.data.data;
-        completer.complete(); // resolve promise
-      });
-
-      KenMessageBus.instance.publishRequest(
+      final response = await KenMessageBus.instance.publishRequestAndAwait(
         widget.globallyUniqueId,
         KenTopic.kenImageListGetChildren,
         KenMessageBusEventData(
@@ -288,7 +277,7 @@ class KenImageListState extends State<KenImageList>
             data: _data),
       );
 
-      await completer.future;
+      children = response.data.data;
     }
 
     return KenWidgetBuilderResponse(_model, children);

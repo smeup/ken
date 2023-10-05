@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:clickable_list_wheel_view/measure_size.dart';
 import 'package:flutter/material.dart';
 
+import '../models/KenMessageBusEvent.dart';
 import '../models/KenMessageBusEventData.dart';
 import '../models/dynamism.dart';
 import '../models/ken_widget_builder_response.dart';
@@ -202,25 +203,16 @@ class _TestBoxState extends State<TestBox> with KenWidgetStateMixin {
               );
             },
             onDismissed: (direction) async {
-              Completer<dynamic> completer = Completer();
-              KenMessageBus.instance
-                  .response(
-                      id: widget.globallyUniqueId,
-                      topic: KenTopic.kenboxOnDismissed)
-                  .take(1)
-                  .listen((event) {
-                completer.complete(); // resolve promise
-              });
-              KenMessageBus.instance.publishRequest(
+              await KenMessageBus.instance.publishRequestAndAwait(
                 widget.globallyUniqueId,
                 KenTopic.kenboxOnDismissed,
                 KenMessageBusEventData(
-                    context: context,
-                    widget: widget,
-                    model: null,
-                    data: deleteDynamism),
+                  context: context,
+                  widget: widget,
+                  model: null,
+                  data: deleteDynamism,
+                ),
               );
-              await completer.future;
               // widget.onRefresh!();
             },
             background: Container(
@@ -450,16 +442,7 @@ class _TestBoxState extends State<TestBox> with KenWidgetStateMixin {
       if (widget.columns != null) {
         _columns = widget.columns;
       } else {
-        Completer<dynamic> completer = Completer();
-        KenMessageBus.instance
-            .response(
-                id: widget.globallyUniqueId, topic: KenTopic.kenBoxGetButtons)
-            .take(1)
-            .listen((event) {
-          _columns = event.data.data;
-          completer.complete(); // resolve promise
-        });
-        KenMessageBus.instance.publishRequest(
+        final response = await KenMessageBus.instance.publishRequestAndAwait(
           widget.globallyUniqueId,
           KenTopic.kenBoxGetButtons,
           KenMessageBusEventData(
@@ -469,7 +452,7 @@ class _TestBoxState extends State<TestBox> with KenWidgetStateMixin {
               data: data,
               parameters: [_columns]),
         );
-        await completer.future;
+        _columns = response.data.data;
       }
     }
 
@@ -480,19 +463,7 @@ class _TestBoxState extends State<TestBox> with KenWidgetStateMixin {
     String dataText = "";
 
     if (widget.isDynamic) {
-      Completer<dynamic> completer = Completer();
-      KenMessageBus.instance
-          .response(
-              id: widget.globallyUniqueId +
-                  widget.index.toString() +
-                  col["code"].toString(),
-              topic: KenTopic.kenboxGetText)
-          .take(1)
-          .listen((event) {
-        dataText = event.data.data;
-        completer.complete(); // resolve promise
-      });
-      KenMessageBus.instance.publishRequest(
+      final response = await KenMessageBus.instance.publishRequestAndAwait(
         widget.globallyUniqueId +
             widget.index.toString() +
             col["code"].toString(),
@@ -504,7 +475,7 @@ class _TestBoxState extends State<TestBox> with KenWidgetStateMixin {
             data: data,
             parameters: [col]),
       );
-      await completer.future;
+      dataText = response.data.data;
     } else {
       dataText = data[col['code']].toString();
     }
