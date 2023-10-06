@@ -12,7 +12,6 @@ import 'kenWidgetMixin.dart';
 import 'kenWidgetStateInterface.dart';
 import 'kenWidgetStateMixin.dart';
 
-import '../models/KenMessageBusEvent.dart';
 import '../models/KenMessageBusEventData.dart';
 
 // ignore: must_be_immutable
