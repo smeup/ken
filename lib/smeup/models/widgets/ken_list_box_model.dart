@@ -176,7 +176,7 @@ class KenListBoxModel extends KenModel implements KenDataInterface {
             defaultCaptionFontColor;
     captionFontBold = optionsDefault!['captionBold'] ?? defaultCaptionFontBold;
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         // await SmeupListBoxDao.getData(this);
         await getData();

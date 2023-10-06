@@ -43,7 +43,7 @@ class KenQRCodeReaderModel extends KenInputFieldModel
     size = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultSize;
     title = jsonMap['title'] ?? '';
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         await getData();
         // await SmeupQRCodeReaderDao.getData(this);

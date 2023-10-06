@@ -34,7 +34,7 @@ class KenCarouselModel extends KenModel implements KenDataInterface {
     autoPlay = optionsDefault!['autoPlay'] ?? false;
 
     height = KenUtilities.getDouble(optionsDefault!['height']) ?? defaultHeight;
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         await getData();
         // await SmeupCarouselDao.getData(this);

@@ -119,7 +119,7 @@ class KenImageListModel extends KenModel implements KenDataInterface {
     listHeight = KenUtilities.getDouble(optionsDefault!['listHeight']) ??
         defaultListHeight;
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         // await SmeupListBoxDao.getData(this);
         await getData();

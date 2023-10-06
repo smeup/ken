@@ -134,7 +134,7 @@ class KenCalendarModel extends KenModel {
         ? defaultShowNavigation
         : optionsDefault!['showNavigation'].toString().toLowerCase() == "true";
 
-    widgetLoadType = LoadType.Immediate;
+    widgetLoadType = LoadType.immediate;
   }
 
   static DateTime getInitialFirstWork(DateTime focusedDay) {

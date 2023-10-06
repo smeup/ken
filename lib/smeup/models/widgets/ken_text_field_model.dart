@@ -146,7 +146,7 @@ class KenTextFieldModel extends KenInputFieldModel implements KenDataInterface {
 
     keyboard = KenUtilities.getKeyboard(optionsDefault!['keyboard']);
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         // await SmeupTextFieldDao.getData(this);
         await getData();

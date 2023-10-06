@@ -122,7 +122,7 @@ class _KenDrawerState extends State<KenDrawer>
     var drawer = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
         getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
-        widgetLoadType = LoadType.Immediate;
+        widgetLoadType = LoadType.immediate;
         setDataLoad(widget.id, false);
       });
     });
@@ -144,7 +144,7 @@ class _KenDrawerState extends State<KenDrawer>
 
   @override
   Future<KenWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
       _data = widget.drawerDataElement;
 
       setDataLoad(widget.id, true);

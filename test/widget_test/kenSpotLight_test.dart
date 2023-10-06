@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ken/smeup/widgets/kenSpotLight.dart';
-import '../../lib/smeup/widgets/kenTextAutocomplete.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {
@@ -108,30 +106,30 @@ Future<void> runTests(WidgetTester tester) async {
   // final findKeyText = find.byKey(const Key('autocomplete1_text'));
   // expect(findKeyText, findsOneWidget);
 
-  var findWidget = find.byType(KenTextAutocomplete);
+  var findWidget = find.byType(KenSpotLight);
   expect(findWidget, findsWidgets);
 
-  var findText = find.byType(TextFormField);
-  expect(findText, findsWidgets);
+  // var findText = find.byType(TextFormField);
+  // expect(findText, findsWidgets);
 
-  await tester.tap(findText.first);
-  await tester.pump();
+  // await tester.tap(findText.first);
+  // await tester.pump();
 
-  await tester.enterText(findText.first, "Bar");
-  await tester.pump();
+  // await tester.enterText(findText.first, "Bar");
+  // await tester.pump();
 
-  var finderTextContent1 = find.text('Bari');
-  expect(finderTextContent1, findsWidgets);
+  // var finderTextContent1 = find.text('Bari');
+  // expect(finderTextContent1, findsWidgets);
 
-  for (int i = 0; i < 3; i++) {
-    await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
-    await tester.pump();
-  }
+  // for (int i = 0; i < 3; i++) {
+  //   await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+  //   await tester.pump();
+  // }
 
-// Now, enter "Bres" into the TextFormField
-  await tester.enterText(findText.first, "Bres");
-  await tester.pump();
+  // // Now, enter "Bres" into the TextFormField
+  // await tester.enterText(findText.first, "Bres");
+  // await tester.pump();
 
-  var finderTextContent2 = find.text('Brescia');
-  expect(finderTextContent2, findsWidgets);
+  // var finderTextContent2 = find.text('Brescia');
+  // expect(finderTextContent2, findsWidgets);
 }

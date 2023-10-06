@@ -37,7 +37,7 @@ class KenImageModel extends KenModel implements KenDataInterface {
         KenUtilities.getPadding(optionsDefault!['padding']) ?? defaultPadding;
     title = jsonMap['title'] ?? '';
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         await getData();
         // await SmeupImageDao.getData(this);

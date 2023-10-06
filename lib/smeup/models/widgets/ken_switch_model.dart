@@ -83,12 +83,11 @@ class KenSwitchModel extends KenModel implements KenDataInterface {
     trackColor = KenUtilities.getColorFromRGB(optionsDefault!['trackColor']) ??
         defaultTrackColor;
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         // await SmeupSwitchDao.getData(this);
         await getData();
       };
     }
   }
-
 }

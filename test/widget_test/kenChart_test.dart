@@ -70,17 +70,17 @@ KenChart _getBarChart(double deviceHeight, double deviceWidth) {
   final row2 = KenChartRow(['France', 70, 40, 80]);
   rows.addAll([row1, row2]);
 
-  final col1 = KenChartColumn('col1', 'value1', ColumnType.Axes, 0);
-  final col2 = KenChartColumn('col2', 'Wine', ColumnType.Series, 0);
-  final col3 = KenChartColumn('col3', 'Cheese', ColumnType.Series, 0);
-  final col4 = KenChartColumn('col4', 'Fruit', ColumnType.Series, 0);
+  final col1 = KenChartColumn('col1', 'value1', ColumnType.axes, 0);
+  final col2 = KenChartColumn('col2', 'Wine', ColumnType.series, 0);
+  final col3 = KenChartColumn('col3', 'Cheese', ColumnType.series, 0);
+  final col4 = KenChartColumn('col4', 'Fruit', ColumnType.series, 0);
   columns.addAll([col1, col2, col3, col4]);
   return KenChart(
     WidgetTestService.scaffoldKey,
     WidgetTestService.formKey,
     id: 'chart1',
     data: KenChartDatasource(rows, columns),
-    chartType: ChartType.Bar,
+    chartType: ChartType.bar,
     height: deviceHeight / 2,
     width: deviceWidth,
     legend: true,
@@ -96,8 +96,8 @@ KenChart _getPieChart(double deviceHeight, double deviceWidth) {
   final row2 = KenChartRow(['pluto', 10]);
   rows.addAll([row1, row2]);
 
-  final col1 = KenChartColumn('col1', 'value1', ColumnType.Axes, 0);
-  final col2 = KenChartColumn('col2', 'value2', ColumnType.Series, 0);
+  final col1 = KenChartColumn('col1', 'value1', ColumnType.axes, 0);
+  final col2 = KenChartColumn('col2', 'value2', ColumnType.series, 0);
 
   columns.addAll([col1, col2]);
 
@@ -105,7 +105,7 @@ KenChart _getPieChart(double deviceHeight, double deviceWidth) {
     WidgetTestService.scaffoldKey,
     WidgetTestService.formKey,
     data: KenChartDatasource(rows, columns),
-    chartType: ChartType.Pie,
+    chartType: ChartType.pie,
     height: deviceHeight / 2,
     width: deviceWidth,
   );

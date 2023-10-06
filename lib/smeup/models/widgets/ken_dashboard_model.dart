@@ -152,7 +152,7 @@ class KenDashboardModel extends KenModel implements KenDataInterface {
 
     numberFormat = optionsDefault!['numberFormat'] ?? defaultNumberFormat;
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         // await SmeupDashboardDao.getData(this);
         await getData();

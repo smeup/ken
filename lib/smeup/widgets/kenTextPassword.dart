@@ -198,7 +198,7 @@ class _KenTextPasswordState extends State<KenTextPassword>
     final password = runBuild(context, widget.id, widget.type,
         widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
-        widgetLoadType = LoadType.Immediate;
+        widgetLoadType = LoadType.immediate;
         setDataLoad(widget.id, false);
       });
     });
@@ -209,7 +209,7 @@ class _KenTextPasswordState extends State<KenTextPassword>
   /// Input text's structure:
   @override
   Future<KenWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
       if (_model != null) {
         // await SmeupTextPasswordDao.getData(_model!);
         await _model!.getData();

@@ -97,7 +97,7 @@ class KenLabelModel extends KenModel implements KenDataInterface {
     fontBold =
         KenUtilities.getBool(optionsDefault!['fontBold']) ?? defaultFontBold;
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         // await SmeupLabelDao.getData(this);
         await getData();

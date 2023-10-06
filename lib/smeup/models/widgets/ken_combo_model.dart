@@ -159,7 +159,7 @@ class KenComboModel extends KenInputFieldModel implements KenDataInterface {
         KenUtilities.getColorFromRGB(optionsDefault!['borderColor']) ??
             defaultBorderColor;
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         // await SmeupComboDao.getData(this);
         await getData();

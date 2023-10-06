@@ -145,7 +145,7 @@ class _KenSwitchState extends State<KenSwitch>
     final radioButtons = runBuild(context, widget.id, widget.type,
         widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
-        widgetLoadType = LoadType.Immediate;
+        widgetLoadType = LoadType.immediate;
         setDataLoad(widget.id, false);
       });
     });
@@ -154,7 +154,7 @@ class _KenSwitchState extends State<KenSwitch>
   }
 
   Future<KenWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
       if (_model != null) {
         // await SmeupSwitchDao.getData(_model!);
         await _model!.getData();

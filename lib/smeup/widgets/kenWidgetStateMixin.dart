@@ -13,7 +13,7 @@ import '../services/ken_widget_notification_service.dart';
 import 'kenNotAvailable.dart';
 
 mixin KenWidgetStateMixin {
-  LoadType widgetLoadType = LoadType.Immediate;
+  LoadType widgetLoadType = LoadType.immediate;
 
   Widget runBuild(BuildContext context, String? id, String? type,
       GlobalKey<ScaffoldState>? scaffoldKey, bool initialDataLoad,
@@ -39,7 +39,7 @@ mixin KenWidgetStateMixin {
       });
     }
 
-    return widgetLoadType == LoadType.Delay
+    return widgetLoadType == LoadType.delay
         ? Container()
         : FutureBuilder<KenWidgetBuilderResponse>(
             future: getChildren(),

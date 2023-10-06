@@ -126,7 +126,7 @@ class _KenGaugeState extends State<KenGauge>
     final gauge = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
         getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
-        widgetLoadType = LoadType.Immediate;
+        widgetLoadType = LoadType.immediate;
         setDataLoad(widget.id, false);
       });
     });
@@ -136,7 +136,7 @@ class _KenGaugeState extends State<KenGauge>
 
   @override
   Future<KenWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
       if (_model != null) {
         // await SmeupGaugeDao.getData(_model!);
         await _model!.getData();

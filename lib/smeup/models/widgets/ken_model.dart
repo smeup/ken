@@ -7,9 +7,9 @@ import '../dynamism.dart';
 import 'ken_section_model.dart';
 import '../fun.dart';
 
-enum LoadType { Immediate, Delay }
+enum LoadType { immediate, delay }
 
-enum WidgetOrientation { Vertical, Horizontal }
+enum WidgetOrientation { vertical, horizontal }
 
 // abstract class SmeupModel {
 class KenModel extends KenDao {
@@ -37,7 +37,7 @@ class KenModel extends KenDao {
   String? type;
   String? id;
   Fun? smeupFun;
-  LoadType widgetLoadType = LoadType.Immediate;
+  LoadType widgetLoadType = LoadType.immediate;
   LinkedHashMap<String, dynamic>? options;
   dynamic optionsType;
   LinkedHashMap<String, dynamic>? optionsDefault;

@@ -113,7 +113,7 @@ class _KenProgressBarState extends State<KenProgressBar>
     Widget pgb = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
         getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
-        widgetLoadType = LoadType.Immediate;
+        widgetLoadType = LoadType.immediate;
         setDataLoad(widget.id, false);
       });
     });
@@ -125,7 +125,7 @@ class _KenProgressBarState extends State<KenProgressBar>
   Future<KenWidgetBuilderResponse> getChildren() async {
     Widget children;
 
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
       if (_model != null) {
         // await SmeupProgressBarDao.getData(_model!);
         await _model!.getData();

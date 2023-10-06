@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import '../../services/ken_utilities.dart';
 import 'ken_model.dart';
 
-enum ChartType { Pie, Bar }
+enum ChartType { pie, bar }
 
 class KenChartModel extends KenModel {
-  static const ChartType defaultChartType = ChartType.Bar;
+  static const ChartType defaultChartType = ChartType.bar;
   static const int defaultRefresh = -1;
   static const double defaultWidth = 100;
   static const double defaultHeight = 100;
@@ -55,7 +55,7 @@ class KenChartModel extends KenModel {
     legend =
         KenUtilities.getBool(optionsDefault!['showMarks']) ?? defaultLegend;
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         await getData();
         // await SmeupChartDao.getData(this);
@@ -66,9 +66,9 @@ class KenChartModel extends KenModel {
   ChartType? _getChartType(String? type) {
     switch (type) {
       case 'VBAR':
-        return ChartType.Bar;
+        return ChartType.bar;
       case 'pie':
-        return ChartType.Pie;
+        return ChartType.pie;
       default:
         return null;
     }

@@ -52,7 +52,7 @@ class KenGaugeModel extends KenModel implements KenDataInterface {
     warningColName = optionsDefault!['warningColName'] ?? defaultWarningColName;
     alertColName = optionsDefault!['alertColName'] ?? defaultAlertColName;
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         // await SmeupGaugeDao.getData(this);
         await getData();

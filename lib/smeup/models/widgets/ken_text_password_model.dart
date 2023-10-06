@@ -170,7 +170,7 @@ class KenTextPasswordModel extends KenModel implements KenDataInterface {
     checkRules = KenUtilities.getBool(optionsDefault!['checkRules']) ??
         defaultCheckRules;
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         // await SmeupTextPasswordDao.getData(this);
         await getData();

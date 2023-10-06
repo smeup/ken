@@ -42,7 +42,7 @@ class KenLineModel extends KenModel {
     color =
         KenUtilities.getColorFromRGB(optionsDefault!['color']) ?? defaultColor;
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         // await SmeupLineDao.getData(this);
         await getData();

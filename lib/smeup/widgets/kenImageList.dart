@@ -172,7 +172,7 @@ class KenImageListState extends State<KenImageList>
     var listbox = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
         getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
-        widgetLoadType = LoadType.Immediate;
+        widgetLoadType = LoadType.immediate;
         setDataLoad(widget.id, false);
       });
     });
@@ -184,7 +184,7 @@ class KenImageListState extends State<KenImageList>
   /// define the structure ...
   @override
   Future<KenWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
       if (_model != null) {
         await _model!.getData();
         // await SmeupListBoxDao.getData(_model!);

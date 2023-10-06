@@ -142,7 +142,7 @@ class KenTextAutocompleteModel extends KenModel implements KenDataInterface {
     showSubmit = optionsDefault!['showSubmit'] ?? defaultShowSubmit;
     submitLabel = optionsDefault!['submitLabel'] ?? defaultSubmitLabel;
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         // await SmeupTextAutocompleteDao.getData(this);
         await getData();

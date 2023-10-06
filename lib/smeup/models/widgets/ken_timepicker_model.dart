@@ -223,7 +223,7 @@ class KenTimePickerModel extends KenModel implements KenDataInterface {
     innerSpace = KenUtilities.getDouble(optionsDefault!['innerSpace']) ??
         defaultInnerSpace;
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         // await SmeupTimePickerDao.getData(this);
         await getData();

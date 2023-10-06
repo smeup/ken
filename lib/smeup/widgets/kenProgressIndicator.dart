@@ -89,7 +89,7 @@ class _KenProgressIndicatorState extends State<KenProgressIndicator>
     Widget pgi = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
         getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
-        widgetLoadType = LoadType.Immediate;
+        widgetLoadType = LoadType.immediate;
         setDataLoad(widget.id, false);
       });
     });

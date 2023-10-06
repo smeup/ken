@@ -71,7 +71,7 @@ class KenProgressBarModel extends KenModel implements KenDataInterface {
     linearTrackColor =
         KenUtilities.getColorFromRGB(optionsDefault!['linearTrackColor']) ??
             defaultLinearTrackColor;
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         // await SmeupProgressBarDao.getData(this);
         await getData();

@@ -100,7 +100,7 @@ class KenDrawerModel extends KenModel {
         KenUtilities.getBool(optionsDefault!['showItemDivider']) ??
             defaultShowItemDivider;
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         // await SmeupDrawerDao.getData(this);
         await getData();

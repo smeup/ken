@@ -27,7 +27,7 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
   static const double defaultInnerSpace = 10.0;
   static const bool defaultIsLink = false;
   static const WidgetOrientation defaultOrientation =
-      WidgetOrientation.Vertical;
+      WidgetOrientation.vertical;
 
   Color? backColor;
   Color? borderColor;
@@ -100,7 +100,7 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
         defaultInnerSpace;
 
     if (KenUtilities.getBool(optionsDefault!['horiz']) ?? false) {
-      orientation = WidgetOrientation.Horizontal;
+      orientation = WidgetOrientation.horizontal;
     } else {
       orientation = defaultOrientation;
     }
@@ -137,7 +137,7 @@ class KenButtonsModel extends KenModel implements KenDataInterface {
 
     isLink = KenUtilities.getBool(optionsDefault!['flat']) ?? defaultIsLink;
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         await getData();
         // await SmeupButtonsDao.getData(this);

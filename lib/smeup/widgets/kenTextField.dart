@@ -182,7 +182,7 @@ class _KenTextFieldState extends State<KenTextField>
     final input = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
         getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
-        widgetLoadType = LoadType.Immediate;
+        widgetLoadType = LoadType.immediate;
         setDataLoad(widget.id, false);
       });
     });
@@ -193,7 +193,7 @@ class _KenTextFieldState extends State<KenTextField>
   /// Input text's structure:
   @override
   Future<KenWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
       if (_model != null) {
         await _model!.getData();
         _data = widget.treatData(_model!);

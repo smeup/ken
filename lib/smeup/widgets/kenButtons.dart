@@ -166,7 +166,7 @@ class KenButtonsState extends State<KenButtons>
     final buttons = runBuild(context, widget.id, widget.type,
         widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
-        widgetLoadType = LoadType.Immediate;
+        widgetLoadType = LoadType.immediate;
         setDataLoad(widget.id, false);
       });
     });
@@ -177,7 +177,7 @@ class KenButtonsState extends State<KenButtons>
   /// Buttons' structure:
   @override
   Future<KenWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
       if (_model != null) {
         await _model!.getData();
         _data = widget.treatData(_model!);
@@ -208,7 +208,7 @@ class KenButtonsState extends State<KenButtons>
     Widget widgets;
 
     if (buttons.isNotEmpty) {
-      if (widget.orientation == WidgetOrientation.Vertical) {
+      if (widget.orientation == WidgetOrientation.vertical) {
         widgets = SingleChildScrollView(
             scrollDirection: Axis.vertical, child: Column(children: buttons));
       } else {

@@ -4,7 +4,7 @@ import '../models/external_configuration_model.dart';
 import 'ken_log_service.dart';
 
 class KenConfigurationService {
-  static const double STATIC_BUTTON_ROUNDNESS = 0.0;
+  static const double staticButtonRoundness = 0.0;
 
   static ThemeData? _theme;
   static Map<DateTime, List?>? holidays;

@@ -243,7 +243,7 @@ class KenCalendarState extends State<KenCalendar>
         //getInitialdataLoaded(_model),
         false, notifierFunction: () {
       //setState(() {
-      widgetLoadType = LoadType.Immediate;
+      widgetLoadType = LoadType.immediate;
       setDataLoad(widget.id, false);
       //});
     });
@@ -253,7 +253,7 @@ class KenCalendarState extends State<KenCalendar>
 
   @override
   Future<KenWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
       await _load();
     }
     setDataLoad(widget.id, false);

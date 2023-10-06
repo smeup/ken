@@ -123,7 +123,7 @@ class KenRadioButtonsModel extends KenInputFieldModel
 
     captionFontBold = optionsDefault!['captionBold'] ?? defaultCaptionFontBold;
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         // await SmeupRadioButtonsDao.getData(this);
         await getData();

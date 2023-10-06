@@ -111,7 +111,7 @@ class _KenInputPanelState extends State<KenInputPanel>
     Widget inputPanel = runBuild(context, widget.id, widget.type,
         widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
-        widgetLoadType = LoadType.Immediate;
+        widgetLoadType = LoadType.immediate;
         setDataLoad(widget.id, false);
       });
     });
@@ -123,7 +123,7 @@ class _KenInputPanelState extends State<KenInputPanel>
   Future<KenWidgetBuilderResponse> getChildren() async {
     bool? autoAdaptHeight = true;
 
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
       if (_model != null) {
         await _model!.getData();
         _data = widget.treatData(_model!);
@@ -220,17 +220,17 @@ class _KenInputPanelState extends State<KenInputPanel>
 
   Widget _getInputFieldWidget(SmeupInputPanelField field) {
     switch (field.component) {
-      case KenInputPanelSupportedComp.Rad:
+      case KenInputPanelSupportedComp.rad:
         return _getRadioList(field);
 
-      case KenInputPanelSupportedComp.Bcd:
+      case KenInputPanelSupportedComp.bcd:
         return KenQRCodeReader(widget.scaffoldKey, widget.formKey,
             id: field.id, data: field.value.code);
 
-      case KenInputPanelSupportedComp.Cmb:
+      case KenInputPanelSupportedComp.cmb:
         return _getComboWidget(field);
 
-      case KenInputPanelSupportedComp.Acp:
+      case KenInputPanelSupportedComp.acp:
         return _getTextAutocompleteWidget(field);
 
       default:

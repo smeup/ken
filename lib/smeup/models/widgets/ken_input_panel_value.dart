@@ -1,6 +1,6 @@
 import 'package:xml/xml.dart';
 
-enum KenInputPanelSupportedComp { Cmb, Rad, Itx, Bcd, Acp }
+enum KenInputPanelSupportedComp { cmb, rad, itx, bcd, acp }
 
 class SmeupInputPanelValue {
   String? code;
@@ -47,7 +47,7 @@ class SmeupInputPanelField {
       required String this.id,
       required this.value,
       this.items,
-      this.component = KenInputPanelSupportedComp.Itx,
+      this.component = KenInputPanelSupportedComp.itx,
       this.fun,
       this.object,
       this.visible = true,

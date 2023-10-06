@@ -205,7 +205,7 @@ class _KenSpotLightState extends State<KenSpotLight>
     Widget autocomplete = runBuild(context, widget.id, widget.type,
         widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
       setState(() {
-        widgetLoadType = LoadType.Immediate;
+        widgetLoadType = LoadType.immediate;
         setDataLoad(widget.id, false);
       });
     });
@@ -217,7 +217,7 @@ class _KenSpotLightState extends State<KenSpotLight>
   /// define the structure ...
   @override
   Future<KenWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.Delay) {
+    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
       if (_model != null) {
         // await SmeupTextAutocompleteDao.getData(_model!);
         await _model!.getData();
@@ -247,7 +247,7 @@ class _KenSpotLightState extends State<KenSpotLight>
     );
     if (code.isNotEmpty && _data != null) {
       currel = _data.firstWhere(
-            (element) => element['code'].toString() == code,
+        (element) => element['code'].toString() == code,
         //orElse: () => null as Map<String, String?>
       );
     }

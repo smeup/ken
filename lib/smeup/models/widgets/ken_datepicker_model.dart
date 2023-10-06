@@ -156,7 +156,7 @@ class KenDatePickerModel extends KenModel implements KenDataInterface {
     align = KenUtilities.getAlignmentGeometry(optionsDefault!['align']) ??
         defaultAlign;
 
-    if (widgetLoadType != LoadType.Delay) {
+    if (widgetLoadType != LoadType.delay) {
       onReady = () async {
         await getData();
         // await SmeupDatePickerDao.getData(this);
