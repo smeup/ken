@@ -366,23 +366,23 @@ class _TestListBoxState extends State<TestListBox>
   }
 
   Widget _getOrientedList(List<Widget> cells) {
-    double? boxHeight = widget.height;
-    double? boxWidth = widget.width;
+    // double? boxHeight = widget.height;
+    //double? boxWidth = widget.width;
 
-    if (cells.isNotEmpty) {
-      boxHeight = (cells[0] as TestBox).height;
-    } else {
-      boxHeight = 1;
-    }
+    // if (cells.isNotEmpty) {
+    //   boxHeight = (cells[0] as TestBox).height;
+    // } else {
+    //   boxHeight = 1;
+    // }
 
-    int? col = widget.portraitColumns;
-    if (_orientation == Orientation.landscape) {
-      col = widget.landscapeColumns;
-    }
+    // int? col = widget.portraitColumns;
+    // if (_orientation == Orientation.landscape) {
+    //   col = widget.landscapeColumns;
+    // }
 
-    double childAspectRatio = 0;
-    childAspectRatio =
-        KenUtilities.getDeviceInfo().safeWidth / boxHeight! * col!;
+    // double childAspectRatio = 0;
+    // childAspectRatio =
+    //     KenUtilities.getDeviceInfo().safeWidth / boxHeight! * col!;
 
     final list = ListView.builder(
       key: ObjectKey("_list_${widget.id}"),

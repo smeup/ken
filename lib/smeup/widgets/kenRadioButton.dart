@@ -77,7 +77,7 @@ class _KenRadioButtonState extends State<KenRadioButton> {
 
   @override
   Widget build(BuildContext context) {
-    RadioThemeData radioThemeData = _getRadioTheme();
+    //RadioThemeData radioThemeData = _getRadioTheme();
 
     return SizedBox(
       height: widget.height,
