@@ -5,13 +5,8 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../models/KenMessageBusEventData.dart';
 import '../models/widgets/ken_calendar_event_model.dart';
-import '../models/widgets/ken_calendar_model.dart';
-import '../models/widgets/ken_section_model.dart';
 import '../services/ken_configuration_service.dart';
-import '../services/ken_log_service.dart';
-import '../services/ken_message_bus.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../services/ken_utilities.dart';
@@ -35,7 +30,6 @@ class KenCalendarWidget extends StatefulWidget {
   final DateTime? lastWork;
   final DateTime? focusDay;
   final DateTime? selectedDay;
-  final KenCalendarModel? model;
   final Map<DateTime, List?>? holidays;
   final bool? showNavigation;
   final CalendarFormat? calendarFormat;
@@ -52,7 +46,7 @@ class KenCalendarWidget extends StatefulWidget {
   final String? id;
   final Function? setDataLoad;
   final bool? showPeriodButtons;
-  final String? globallyUniqueId;
+  //final String? globallyUniqueId;
 
   KenCalendarWidget(
     this.scaffoldKey,
@@ -69,7 +63,6 @@ class KenCalendarWidget extends StatefulWidget {
     this.lastWork,
     this.focusDay,
     this.selectedDay,
-    this.model,
     this.holidays,
     this.showNavigation,
     this.calendarFormat,
@@ -86,7 +79,7 @@ class KenCalendarWidget extends StatefulWidget {
     this.setDataLoad,
     this.showPeriodButtons,
     this.padding,
-    this.globallyUniqueId,
+    //this.globallyUniqueId,
   });
 
   @override
@@ -100,7 +93,6 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
   DateTime? _lastWork;
   DateTime? _focusDay;
   DateTime? _selectedDay;
-  KenCalendarModel? _model;
   CalendarFormat? _calendarFormat;
   late AnimationController _animationController;
   // **   late final AnimationController _controller = AnimationController ** //
@@ -122,7 +114,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
     _lastWork = widget.lastWork;
     _focusDay = widget.focusDay;
     _selectedDay = widget.selectedDay;
-    _model = widget.model;
+
     _calendarFormat = widget.calendarFormat;
     _animationController = AnimationController(
       vsync: this,
@@ -144,23 +136,23 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
 
   @override
   Widget build(BuildContext context) {
-    double? calendarHeight = widget.height;
-    double? calendarWidth = widget.width;
-    if (_model != null && _model!.parent != null) {
-      if (calendarHeight == 0) {
-        calendarHeight = (_model!.parent as KenSectionModel).height;
-      }
-      if (calendarWidth == 0) {
-        calendarWidth = (_model!.parent as KenSectionModel).width;
-      }
-    } else {
-      if (calendarHeight == 0) {
-        calendarHeight = KenUtilities.getDeviceInfo().safeHeight;
-      }
-      if (calendarWidth == 0) {
-        calendarWidth = KenUtilities.getDeviceInfo().safeWidth;
-      }
-    }
+    // double? calendarHeight = widget.height;
+    // double? calendarWidth = widget.width;
+    // if (_model != null && _model!.parent != null) {
+    //   if (calendarHeight == 0) {
+    //     calendarHeight = (_model!.parent as KenSectionModel).height;
+    //   }
+    //   if (calendarWidth == 0) {
+    //     calendarWidth = (_model!.parent as KenSectionModel).width;
+    //   }
+    // } else {
+    //   if (calendarHeight == 0) {
+    //     calendarHeight = KenUtilities.getDeviceInfo().safeHeight;
+    //   }
+    //   if (calendarWidth == 0) {
+    //     calendarWidth = KenUtilities.getDeviceInfo().safeWidth;
+    //   }
+    // }
 
     double separatorHeight = 8.0;
     final titleTextStyle = KenConfigurationService.getTheme()! // months builder
@@ -472,7 +464,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
   }
 
   Future<void> _onDaySelected(DateTime selectedDay, DateTime focusedDay) async {
-    KenLogService.writeDebugMessage('running _onDaySelected');
+    //KenLogService.writeDebugMessage('running _onDaySelected');
     if (_isLoading) return;
     _selectedEvents!.value = _getEventsForDay(selectedDay);
     widget.setDataLoad!(widget.id, true);
@@ -519,17 +511,18 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
         widget.clientOnEventClick?.call(event);
       }
 
-      if (data != null) {
-        KenMessageBus.instance.publishRequest(
-          widget.globallyUniqueId!,
-          KenTopic.kenCalendarWidgetEventClick,
-          KenMessageBusEventData(
-              context: context, widget: widget, model: _model, data: data),
-        );
-      }
+      // tony: TODO !!!
+      // if (data != null) {
+      //   KenMessageBus.instance.publishRequest(
+      //     widget.globallyUniqueId!,
+      //     KenTopic.kenCalendarWidgetEventClick,
+      //     KenMessageBusEventData(
+      //         context: context, widget: widget, model: _model, data: data),
+      //   );
+      // }
     } catch (e) {
-      KenLogService.writeDebugMessage('Error on calendar _eventClicked: $e',
-          logType: KenLogType.error);
+      // KenLogService.writeDebugMessage('Error on calendar _eventClicked: $e',
+      //     logType: KenLogType.error);
     } finally {
       widget.setDataLoad!(widget.id, true);
       setState(() {

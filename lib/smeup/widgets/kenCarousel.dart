@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/notifiers/ken_carousel_indicator_notifier.dart';
-import '../models/widgets/ken_carousel_model.dart';
+import '../../../../shiro/lib/models/ken_carousel_model.dart';
 import '../models/widgets/ken_model.dart';
 import '../services/ken_utilities.dart';
 import 'kenCarouselIndicator.dart';

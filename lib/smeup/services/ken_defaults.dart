@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'ken_widget_orientation.dart';
 
-
 // TODO verificare se creare un repo a parte con il design system
 //      da utilizzare eventualmente sia su ken che su shiro
 class KenLabelDefaults {
@@ -45,6 +44,27 @@ class KenButtonsDefaults {
   static const bool defaultIsLink = false;
   static const WidgetOrientation defaultOrientation =
       WidgetOrientation.vertical;
+}
+
+class KenCarouselDefaults {}
+
+class KenCalendarDefaults {
+  // supported by json_theme
+  static const double defaultDayFontSize = 14;
+  static const double defaultEventFontSize = 14;
+  static const double defaultTitleFontSize = 18;
+  static const double defaultMarkerFontSize = 12;
+  static const double defaultWidth = 300;
+  static const double defaultHeight = 250;
+  static const bool defaultShowPeriodButtons = false;
+  static const String defaultTitleColumnName = 'XXDESC';
+  static const String defaultDataColumnName = 'XXDAT1';
+  static const String defaultStyleColumnName = 'XXGRAF';
+  static const String defaultInitTimeColumnName = 'init';
+  static const String defaultEndTimeColumnName = 'end';
+  static const bool defaultShowAsWeek = false;
+  static const bool defaultShowNavigation = true;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(8);
 }
 
 ///GRAY COLOR
