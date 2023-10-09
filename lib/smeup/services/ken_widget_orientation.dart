@@ -1,0 +1,3 @@
+
+
+enum WidgetOrientation { vertical, horizontal }

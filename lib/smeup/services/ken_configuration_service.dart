@@ -9,8 +9,6 @@ class KenConfigurationService {
   static ThemeData? _theme;
   static Map<DateTime, List?>? holidays;
 
-  static KenLogType? logLevel;
-
   static dynamic appDictionary;
   static bool isOfflineEnabled = false;
   static bool isCacheEnabled = false;

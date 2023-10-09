@@ -10,7 +10,7 @@ import '../services/ken_localization_service.dart';
 import '../services/ken_log_service.dart';
 import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
-import 'kenButton.dart';
+import 'ken_button.dart';
 import 'kenCalendarWidget.dart';
 import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';

@@ -8,7 +8,7 @@ import '../models/widgets/ken_model.dart';
 import '../models/widgets/ken_text_autocomplete_model.dart';
 import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
-import 'kenButtons.dart';
+import 'ken_buttons.dart';
 import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';
 import 'kenWidgetStateInterface.dart';

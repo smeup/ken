@@ -1,8 +1,8 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import '../models/widgets/ken_buttons_model.dart';
-import '../models/widgets/ken_section_model.dart';
+
+import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
 
 // ignore: must_be_immutable
@@ -34,8 +34,9 @@ class KenButton extends StatelessWidget {
   final String id;
   final String? type;
   final String? title;
-  final KenButtonsModel? model;
   final IconData? iconData;
+  final double? parentWidth;
+  final double? parentHeight;
 
   KenButton(
       {super.key,
@@ -43,29 +44,31 @@ class KenButton extends StatelessWidget {
       this.type = 'BTN',
       this.title = '',
       this.data = '',
-      this.backColor = KenButtonsModel.defaultBackColor,
-      this.borderColor = KenButtonsModel.defaultBorderColor,
-      this.borderRadius = KenButtonsModel.defaultBorderRadius,
-      this.borderWidth = KenButtonsModel.defaultBorderWidth,
-      this.elevation = KenButtonsModel.defaultElevation,
-      this.fontSize = KenButtonsModel.defaultFontSize,
-      this.fontColor = KenButtonsModel.defaultFontColor,
-      this.fontBold = KenButtonsModel.defaultFontBold,
-      this.iconSize = KenButtonsModel.defaultIconSize,
-      this.iconColor = KenButtonsModel.defaultIconColor,
-      this.width = KenButtonsModel.defaultWidth,
-      this.height = KenButtonsModel.defaultHeight,
-      this.position = KenButtonsModel.defaultPosition,
-      this.align = KenButtonsModel.defaultAlign,
-      this.padding = KenButtonsModel.defaultPadding,
-      this.valueField = KenButtonsModel.defaultValueField,
+      this.backColor = KenButtonsDefaults.defaultBackColor,
+      this.borderColor = KenButtonsDefaults.defaultBorderColor,
+      this.borderRadius = KenButtonsDefaults.defaultBorderRadius,
+      this.borderWidth = KenButtonsDefaults.defaultBorderWidth,
+      this.elevation = KenButtonsDefaults.defaultElevation,
+      this.fontSize = KenButtonsDefaults.defaultFontSize,
+      this.fontColor = KenButtonsDefaults.defaultFontColor,
+      this.fontBold = KenButtonsDefaults.defaultFontBold,
+      this.iconSize = KenButtonsDefaults.defaultIconSize,
+      this.iconColor = KenButtonsDefaults.defaultIconColor,
+      this.width = KenButtonsDefaults.defaultWidth,
+      this.height = KenButtonsDefaults.defaultHeight,
+      this.position = KenButtonsDefaults.defaultPosition,
+      this.align = KenButtonsDefaults.defaultAlign,
+      this.padding = KenButtonsDefaults.defaultPadding,
+      this.valueField = KenButtonsDefaults.defaultValueField,
       this.buttonIndex,
       this.iconData,
       this.clientOnPressed,
       this.isBusy = false,
-      this.isLink = KenButtonsModel.defaultIsLink,
-      this.innerSpace = KenButtonsModel.defaultInnerSpace,
-      this.model}) {
+      this.isLink = KenButtonsDefaults.defaultIsLink,
+      this.innerSpace = KenButtonsDefaults.defaultInnerSpace,
+      this.parentWidth,
+      this.parentHeight,
+    }) {
     // Gestione del button link è preferibile con una icona e testo sottolineato
     // if (isLink) {
     //   borderColor = KenConfigurationService.getTheme()!.scaffoldBackgroundColor;
@@ -80,12 +83,12 @@ class KenButton extends StatelessWidget {
 
     double? buttonHeight = height;
     double? buttonWidth = width;
-    if (model != null && model!.parent != null) {
+    if (parentWidth != null && parentHeight != null) {
       if (buttonHeight == 0) {
-        buttonHeight = (model!.parent as KenSectionModel).height;
+        buttonHeight = parentHeight;
       }
       if (buttonWidth == 0) {
-        buttonWidth = (model!.parent as KenSectionModel).width;
+        buttonWidth = parentWidth;
       }
     } else {
       if (buttonHeight == 0) {

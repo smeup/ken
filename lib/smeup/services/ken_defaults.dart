@@ -1,0 +1,68 @@
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
+
+import 'ken_widget_orientation.dart';
+
+
+// TODO verificare se creare un repo a parte con il design system
+//      da utilizzare eventualmente sia su ken che su shiro
+class KenLabelDefaults {
+  // supported by json_theme
+  static const double defaultFontSize = 20;
+  static const Color defaultFontColor = kSecondary100;
+  static const bool defaultFontBold = false;
+  static const Color defaultBackColor = Colors.transparent;
+  static const double defaultIconSize = 20;
+  static const Color defaultIconColor = kSecondary100;
+
+  // unsupported by json_theme
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const Alignment defaultAlign = Alignment.center;
+  static const double defaultWidth = 0;
+  static const double defaultHeight = 15;
+}
+
+class KenButtonsDefaults {
+  // supported by json_theme
+  static const Color defaultBackColor = kPrimary;
+  static const Color defaultBorderColor = kPrimary;
+  static const double defaultBorderWidth = 2;
+  static const double defaultBorderRadius = 5;
+  static const double defaultElevation = 0;
+  static const double defaultFontSize = 14;
+  static const Color defaultFontColor = Colors.white;
+  static const bool defaultFontBold = false;
+  static const double defaultIconSize = 16;
+  static const Color defaultIconColor = Colors.white;
+  static const double defaultWidth = 180;
+  static const double defaultHeight = 50;
+  static const MainAxisAlignment defaultPosition = MainAxisAlignment.center;
+  static const Alignment defaultAlign = Alignment.centerRight;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(5);
+  static const String defaultValueField = 'value';
+  static const double defaultInnerSpace = 10.0;
+  static const bool defaultIsLink = false;
+  static const WidgetOrientation defaultOrientation =
+      WidgetOrientation.vertical;
+}
+
+///GRAY COLOR
+const Color kSecondary100 = Color(0xffB9BBBD);
+const Color kSecondary200 = Color(0xff596776);
+const Color kSecondary300 = Color(0xff343841);
+
+/// NEUTRAL COLOR
+const Color kBack100 = Color(0xff1E2128);
+const Color kBack200 = Color(0xff15171C);
+
+/// PRIMARY
+const Color kIconColor = Color(0x1C006876);
+const Color kPrimary = Color(0xff06899b);
+const Color kInactivePrimary = Color(0xff53b9cc);
+
+/// VARIANT
+const Color kRed = Color(0xFFC14B49);
+const Color kOrange = Color(0xFFE79821);
+const Color kYellow = Color(0xFFCFC034);
+const Color kGreen = Color(0xFF30AD34);
