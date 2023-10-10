@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/kenDatepicker.dart';
+import '../../lib/smeup/widgets/ken_datepicker.dart';
 
 import 'widget_test_service.dart';
 

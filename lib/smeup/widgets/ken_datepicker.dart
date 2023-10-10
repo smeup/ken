@@ -2,19 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../models/KenMessageBusEventData.dart';
-import '../models/ken_widget_builder_response.dart';
-import '../models/widgets/ken_datepicker_model.dart';
-import '../models/widgets/ken_model.dart';
-import '../models/widgets/ken_section_model.dart';
-import '../services/ken_message_bus.dart';
-import '../services/ken_utilities.dart';
+import '../services/ken_defaults.dart';
 import 'kenDatepickerButton.dart';
 import 'kenLine.dart';
-import 'kenWidgetInterface.dart';
-import 'kenWidgetMixin.dart';
-import 'kenWidgetStateInterface.dart';
-import 'kenWidgetStateMixin.dart';
 
 class KenDatePickerData {
   DateTime? value;
@@ -23,10 +13,7 @@ class KenDatePickerData {
 }
 
 // ignore: must_be_immutable
-class KenDatePicker extends StatefulWidget
-    with KenWidgetMixin
-    implements KenWidgetInterface {
-  KenDatePickerModel? model;
+class KenDatePicker extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState>? formKey;
 
@@ -63,14 +50,6 @@ class KenDatePicker extends StatefulWidget
   Function? clientOnSave;
   Function? clientOnChange;
 
-  KenDatePicker.withController(
-    KenDatePickerModel this.model,
-    this.scaffoldKey,
-    this.formKey,
-  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model!);
-  }
-
   KenDatePicker(
     this.scaffoldKey,
     this.formKey,
@@ -78,92 +57,35 @@ class KenDatePicker extends StatefulWidget
     this.id = '',
     this.type = 'cal',
     this.title = '',
-    this.borderColor = KenDatePickerModel.defaultBorderColor,
-    this.borderWidth = KenDatePickerModel.defaultBorderWidth,
-    this.borderRadius = KenDatePickerModel.defaultBorderRadius,
-    this.fontBold = KenDatePickerModel.defaultFontBold,
-    this.fontSize = KenDatePickerModel.defaultFontSize,
-    this.fontColor = KenDatePickerModel.defaultFontColor,
-    this.backColor = KenDatePickerModel.defaultBackColor,
-    this.elevation = KenDatePickerModel.defaultElevation,
-    this.captionFontBold = KenDatePickerModel.defaultCaptionFontBold,
-    this.captionFontSize = KenDatePickerModel.defaultCaptionFontSize,
-    this.captionFontColor = KenDatePickerModel.defaultCaptionFontColor,
-    this.captionBackColor = KenDatePickerModel.defaultCaptionBackColor,
-    this.underline = KenDatePickerModel.defaultUnderline,
-    this.innerSpace = KenDatePickerModel.defaultInnerSpace,
-    this.align = KenDatePickerModel.defaultAlign,
-    this.valueField = KenDatePickerModel.defaultValueField,
-    this.displayField = KenDatePickerModel.defaultdisplayedField,
-    this.label = KenDatePickerModel.defaultLabel,
-    this.width = KenDatePickerModel.defaultWidth,
-    this.height = KenDatePickerModel.defaultHeight,
-    this.padding = KenDatePickerModel.defaultPadding,
-    this.showborder = KenDatePickerModel.defaultShowBorder,
-    this.dashColor = KenDatePickerModel.defaultDashColor,
+    this.borderColor = KenDatepickerDefaults.defaultBorderColor,
+    this.borderWidth = KenDatepickerDefaults.defaultBorderWidth,
+    this.borderRadius = KenDatepickerDefaults.defaultBorderRadius,
+    this.fontBold = KenDatepickerDefaults.defaultFontBold,
+    this.fontSize = KenDatepickerDefaults.defaultFontSize,
+    this.fontColor = KenDatepickerDefaults.defaultFontColor,
+    this.backColor = KenDatepickerDefaults.defaultBackColor,
+    this.elevation = KenDatepickerDefaults.defaultElevation,
+    this.captionFontBold = KenDatepickerDefaults.defaultCaptionFontBold,
+    this.captionFontSize = KenDatepickerDefaults.defaultCaptionFontSize,
+    this.captionFontColor = KenDatepickerDefaults.defaultCaptionFontColor,
+    this.captionBackColor = KenDatepickerDefaults.defaultCaptionBackColor,
+    this.underline = KenDatepickerDefaults.defaultUnderline,
+    this.innerSpace = KenDatepickerDefaults.defaultInnerSpace,
+    this.align = KenDatepickerDefaults.defaultAlign,
+    this.valueField = KenDatepickerDefaults.defaultValueField,
+    this.displayField = KenDatepickerDefaults.defaultdisplayedField,
+    this.label = KenDatepickerDefaults.defaultLabel,
+    this.width = KenDatepickerDefaults.defaultWidth,
+    this.height = KenDatepickerDefaults.defaultHeight,
+    this.padding = KenDatepickerDefaults.defaultPadding,
+    this.showborder = KenDatepickerDefaults.defaultShowBorder,
+    this.dashColor = KenDatepickerDefaults.defaultDashColor,
     this.clientValidator,
     this.clientOnSave,
     this.clientOnChange,
-  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
-    id = KenUtilities.getWidgetId(type, id);
+  }) : super() {
     if (data != null && data!.value != null && data!.text == null) {
       data!.text = DateFormat("dd/MM/yyyy").format(data!.value!);
-    }
-  }
-
-  @override
-  runControllerActivities(KenModel model) {
-    KenDatePickerModel m = model as KenDatePickerModel;
-    id = m.id;
-    type = m.type;
-    title = m.title;
-    valueField = m.valueField;
-    displayField = m.displayedField;
-    backColor = m.backColor;
-    fontSize = m.fontSize;
-    fontColor = m.fontColor;
-    label = m.label;
-    width = m.width;
-    height = m.height;
-    padding = m.padding;
-    showborder = m.showBorder;
-    elevation = m.elevation;
-    borderRadius = m.borderRadius;
-    borderWidth = m.borderWidth;
-    borderColor = m.borderColor;
-    fontBold = m.fontBold;
-    underline = m.underline;
-    align = m.align;
-    innerSpace = m.innerSpace;
-    captionFontBold = m.captionFontBold;
-    captionFontSize = m.captionFontSize;
-    captionFontColor = m.captionFontColor;
-    captionBackColor = m.captionBackColor;
-    dashColor = m.dashColor;
-
-    data = treatData(m);
-  }
-
-  @override
-  dynamic treatData(KenModel model) {
-    KenDatePickerModel m = model as KenDatePickerModel;
-
-    // change data format
-    var workData = formatDataFields(m);
-
-    // set the widget data
-    if (workData != null && (workData['rows'] as List).isNotEmpty) {
-      DateTime? value;
-      String? text;
-      if (workData['rows'][0][valueField] != null) {
-        value = DateFormat('dd/MM/yyyy').parse(workData['rows'][0][valueField]);
-      }
-      if (workData['rows'][0][displayField] != null) {
-        text = workData['rows'][0][displayField];
-      }
-      return KenDatePickerData(value: value, text: text);
-    } else {
-      return model.data;
     }
   }
 
@@ -171,83 +93,22 @@ class KenDatePicker extends StatefulWidget
   _KenDatePickerState createState() => _KenDatePickerState();
 }
 
-class _KenDatePickerState extends State<KenDatePicker>
-    with KenWidgetStateMixin
-    implements KenWidgetStateInterface {
-  KenDatePickerModel? _model;
+class _KenDatePickerState extends State<KenDatePicker> {
   KenDatePickerData? _data;
 
   @override
   void initState() {
-    _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
   @override
   void dispose() {
-    runDispose(widget.scaffoldKey, widget.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget datePicker = runBuild(context, widget.id, widget.type,
-        widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
-      setState(() {
-        widgetLoadType = LoadType.immediate;
-        setDataLoad(widget.id, false);
-      });
-    });
-
-    return datePicker;
-  }
-
-  @override
-  Future<KenWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
-      if (_model != null) {
-        // await SmeupDatePickerDao.getData(_model!);
-        await _model!.getData();
-        _data = widget.treatData(_model!);
-      }
-      setDataLoad(widget.id, true);
-    }
-
-    if (_data == null) {
-      return getFunErrorResponse(context, _model);
-    }
-
-    KenMessageBus.instance.publishRequest(
-      widget.globallyUniqueId,
-      KenTopic.kenDatePickerGetChildren,
-      KenMessageBusEventData(
-          context: context, widget: widget, model: _model, data: _data),
-    );
-
-    double? datePickerHeight = widget.height;
-    double? datePickerWidth = widget.width;
-    if (_model != null && _model!.parent != null) {
-      if (datePickerHeight == 0) {
-        datePickerHeight = (_model!.parent as KenSectionModel).height;
-      }
-      if (datePickerWidth == 0) {
-        datePickerWidth = (_model!.parent as KenSectionModel).width;
-      }
-    } else {
-      if (datePickerHeight == 0) {
-        datePickerHeight = KenUtilities.getDeviceInfo().safeHeight;
-      }
-      if (datePickerWidth == 0) {
-        datePickerWidth = KenUtilities.getDeviceInfo().safeWidth;
-      }
-    }
-
-    if (!widget.showborder!) {
-      widget.borderColor = widget.borderColor;
-    }
-
     ButtonStyle buttonStyle = _getButtonStyle();
     TextStyle textStyle = _getTextStile();
     TextStyle captionStyle = _getCaptionStile();
@@ -279,8 +140,8 @@ class _KenDatePickerState extends State<KenDatePicker>
       fontSize: widget.fontSize,
       fontColor: widget.fontColor,
       label: widget.label,
-      width: datePickerWidth,
-      height: datePickerHeight,
+      height: widget.height,
+      width: widget.width,
       padding: widget.padding,
       showborder: widget.showborder,
       borderRadius: widget.borderRadius,
@@ -295,8 +156,6 @@ class _KenDatePickerState extends State<KenDatePicker>
       captionFontColor: widget.captionFontColor,
       captionBackColor: widget.captionBackColor,
       clientOnChange: widget.clientOnChange,
-      model: _model,
-      globallyUniqueId: widget.globallyUniqueId,
       dashColor: widget.dashColor,
     );
 
@@ -362,8 +221,8 @@ class _KenDatePickerState extends State<KenDatePicker>
       );
     } else if (widget.align == Alignment.topCenter) {
       children = SizedBox(
-        height: datePickerHeight,
-        width: datePickerWidth,
+        height: widget.height,
+        width: widget.width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -392,8 +251,8 @@ class _KenDatePickerState extends State<KenDatePicker>
       );
     } else if (widget.align == Alignment.bottomCenter) {
       children = SizedBox(
-        height: datePickerHeight,
-        width: datePickerWidth,
+        height: widget.height,
+        width: widget.width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -431,10 +290,8 @@ class _KenDatePickerState extends State<KenDatePicker>
       );
     }
 
-    return KenWidgetBuilderResponse(_model, children);
+    return children;
   }
-
-  /// Extended theme
 
   ButtonStyle _getButtonStyle() {
     return ButtonStyle(
