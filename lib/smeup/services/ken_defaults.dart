@@ -166,6 +166,35 @@ class KenSwitchDefaults {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
 }
 
+class KenComboDefaults {
+  static const double defaultIconSize = 20;
+  static const Color defaultIconColor = kPrimary;
+  static const double defaultFontSize = 16;
+  static const Color defaultFontColor = kPrimary;
+  static const bool defaultFontBold = false;
+  static const Color defaultBackColor = Colors.transparent;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultCaptionFontSize = 10;
+  static const Color defaultCaptionFontColor = kPrimary;
+  static const Color defaultCaptionBackColor = Colors.transparent;
+  static const Color defaultBorderColor = kPrimary;
+  static const Color defaultDropDownColor = kBack100;
+  static const double defaultBorderWidth = 2;
+  static const double defaultBorderRadius = 8;
+  static const String defaultTitle = 'title';
+  static const double defaultWidth = 0;
+  static const double defaultHeight = 55;
+  static const String defaultValueField = 'value';
+  static const String defaultDescriptionField = 'description';
+  static const EdgeInsetsGeometry defaultPadding =
+  EdgeInsets.only(left: 10, right: 10);
+  static const String defaultLabel = '';
+  static const Alignment defaultAlign = Alignment.centerLeft;
+  static const double defaultInnerSpace = 10.0;
+  static const bool defaultUnderline = false;
+  static const bool defaultShowBorder = true;
+}
+
 class KenDrawerDefaults {
   // supported by json_theme
   static const double defaultTitleFontSize = 18;

@@ -1,0 +1,269 @@
+// ignore_for_file: deprecated_member_use
+
+import 'package:flutter/material.dart';
+import '../models/widgets/ken_combo_item_model.dart';
+import '../models/widgets/ken_combo_model.dart';
+import '../services/ken_utilities.dart';
+import 'kenComboWidget.dart';
+import 'kenLine.dart';
+
+// ignore: must_be_immutable
+class KenCombo extends StatelessWidget {
+  GlobalKey<ScaffoldState> scaffoldKey;
+  GlobalKey<FormState>? formKey;
+
+  double? fontSize;
+  Color? fontColor;
+  bool? fontBold;
+  Color? backColor;
+  bool? captionFontBold;
+  double? captionFontSize;
+  Color? captionFontColor;
+  Color? captionBackColor;
+  double? iconSize;
+  Color? iconColor;
+  Color? borderColor;
+  double? borderWidth;
+  double? borderRadius;
+  Color? dropdownColor;
+
+  bool? underline;
+  double? innerSpace;
+  Alignment? align;
+  EdgeInsetsGeometry? padding;
+  List<KenComboItemModel>? items;
+  String? id;
+  String? type;
+  String? title;
+  String? selectedValue;
+  String? valueField;
+  String? label;
+  String? descriptionField;
+  double? width;
+  double? height;
+  bool? showBorder;
+  void Function(String? newValue)? clientOnChange;
+  double? parentHeight;
+  double? parentWidth;
+
+  KenCombo(
+    this.scaffoldKey,
+    this.formKey, {
+    this.fontColor = KenComboModel.defaultFontColor,
+    this.fontSize = KenComboModel.defaultFontSize,
+    this.fontBold = KenComboModel.defaultFontBold,
+    this.backColor = KenComboModel.defaultBackColor,
+    this.captionFontBold = KenComboModel.defaultCaptionFontBold,
+    this.captionFontSize = KenComboModel.defaultCaptionFontSize,
+    this.captionFontColor = KenComboModel.defaultCaptionFontColor,
+    this.captionBackColor = KenComboModel.defaultCaptionBackColor,
+    this.borderColor = KenComboModel.defaultBorderColor,
+    this.borderRadius = KenComboModel.defaultBorderRadius,
+    this.borderWidth = KenComboModel.defaultBorderWidth,
+    this.iconSize = KenComboModel.defaultIconSize,
+    this.iconColor = KenComboModel.defaultIconColor,
+    this.underline = KenComboModel.defaultUnderline,
+    this.title,
+    this.id = '',
+    this.type = 'CMB',
+    this.selectedValue = '',
+    this.dropdownColor = KenComboModel.defaultDropDownColor,
+    this.items = const [],
+    this.align = KenComboModel.defaultAlign,
+    this.innerSpace = KenComboModel.defaultInnerSpace,
+    this.padding = KenComboModel.defaultPadding,
+    this.label = KenComboModel.defaultLabel,
+    this.valueField = KenComboModel.defaultValueField,
+    this.descriptionField = KenComboModel.defaultDescriptionField,
+    this.width = KenComboModel.defaultWidth,
+    this.height = KenComboModel.defaultHeight,
+    this.showBorder = KenComboModel.defaultShowBorder,
+    this.clientOnChange,
+    this.parentWidth,
+    this.parentHeight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    var text = label!.isEmpty
+        ? Container()
+        : Text(label!,
+            textAlign: TextAlign.center, style: _getCaptionStile());
+
+    double boxHeight = height!;
+    if (boxHeight == 0) {
+      if (parentHeight != null) {
+        boxHeight = parentHeight!;
+      } else {
+        boxHeight = KenUtilities.getDeviceInfo().safeHeight;
+      }
+    }
+
+    double? boxWidth = width;
+    if (boxWidth == 0) {
+      if (parentWidth != null) {
+        boxWidth = parentWidth;
+      } else {
+        boxWidth = KenUtilities.getDeviceInfo().safeWidth;
+      }
+    }
+
+    final combo = Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+          padding: padding,
+          width: boxWidth,
+          height: boxHeight,
+          decoration: showBorder == true
+              ? BoxDecoration(
+                  borderRadius:
+                      BorderRadius.circular(borderRadius ?? 0.0),
+                  border: Border.all(
+                      color: borderColor ?? Colors.transparent,
+                      width: borderWidth ?? 0.0),
+                )
+              : null,
+          child: KenComboWidget(
+            scaffoldKey,
+            formKey,
+            data: items,
+            fontColor: fontColor,
+            fontSize: fontSize,
+            fontBold: fontBold,
+            backColor: backColor,
+            iconColor: iconColor,
+            iconSize: iconSize,
+            dropdownColor: dropdownColor,
+            captionFontBold: captionFontBold,
+            captionFontColor: captionFontColor,
+            captionFontSize: captionFontSize,
+            captionBackColor: captionBackColor,
+            selectedValue: selectedValue,
+            clientOnChange: (String? newValue) {
+              if (clientOnChange != null) {
+                clientOnChange!(newValue);
+              }
+            },
+          )),
+    );
+
+    var line = underline!
+        ? KenLine(scaffoldKey, formKey)
+        : Container();
+
+    Widget children;
+
+    if (align == Alignment.centerLeft) {
+      children = Padding(
+        padding: padding ?? const EdgeInsets.only(left: 10, right: 10),
+        child: Column(children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              text,
+              SizedBox(width: innerSpace),
+              Expanded(child: Align(alignment: align!, child: combo)),
+            ],
+          ),
+          line
+        ]),
+      );
+    } else if (align == Alignment.centerRight) {
+      children = Padding(
+        padding: padding!,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                    child: Align(
+                  alignment: align!,
+                  child: combo,
+                )),
+                SizedBox(width: innerSpace),
+                text,
+              ],
+            ),
+            line
+          ],
+        ),
+      );
+    } else if (align == Alignment.topCenter) {
+      children = SizedBox(
+        height: boxHeight,
+        width: boxWidth,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: text,
+            ),
+            SizedBox(height: innerSpace),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: combo,
+            ),
+            line
+          ],
+        ),
+      );
+    } else if (align == Alignment.bottomCenter) {
+      children = SizedBox(
+        height: boxHeight,
+        width: boxWidth,
+        child: Padding(
+          padding: padding!,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: combo,
+              ),
+              SizedBox(height: innerSpace),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: text,
+              ),
+              line
+            ],
+          ),
+        ),
+        //color: backColor,
+      );
+    } else // center
+    {
+      children = Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          combo,
+          SizedBox(width: innerSpace),
+          Expanded(child: text),
+        ],
+      );
+    }
+
+    return children;
+  }
+
+  TextStyle _getCaptionStile() {
+    TextStyle style = TextStyle(
+        color: captionFontColor,
+        fontSize: captionFontSize,
+        backgroundColor: captionBackColor);
+
+    if (captionFontBold!) {
+      style = style.copyWith(
+        fontWeight: FontWeight.bold,
+      );
+    } else {
+      style = style.copyWith(
+        fontWeight: FontWeight.normal,
+      );
+    }
+
+    return style;
+  }
+}

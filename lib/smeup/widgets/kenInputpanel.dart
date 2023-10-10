@@ -10,7 +10,7 @@ import '../models/widgets/ken_section_model.dart';
 import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
 import 'ken_button.dart';
-import 'kenCombo.dart';
+import 'ken_combo.dart';
 import 'ken_label.dart';
 import 'kenQrcodeReader.dart';
 import 'kenRadioButtons.dart';
