@@ -1,20 +1,10 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import '../models/KenMessageBusEventData.dart';
-import '../models/ken_widget_builder_response.dart';
-import '../models/widgets/ken_model.dart';
-import '../models/widgets/ken_section_model.dart';
 import '../models/widgets/ken_timepicker_model.dart';
-import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
 import 'ken_line.dart';
-import 'kenTimepickerButton.dart';
-import 'kenWidgetInterface.dart';
-import 'kenWidgetMixin.dart';
-import 'kenWidgetStateInterface.dart';
-import 'kenWidgetStateMixin.dart';
+import 'ken_timepicker_button.dart';
 
 class KenTimePickerData {
   DateTime? time;
@@ -24,9 +14,7 @@ class KenTimePickerData {
 }
 
 // ignore: must_be_immutable
-class KenTimePicker extends StatefulWidget
-    with KenWidgetMixin
-    implements KenWidgetInterface {
+class KenTimePicker extends StatelessWidget {
   KenTimePickerModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;
@@ -56,7 +44,7 @@ class KenTimePicker extends StatefulWidget
   Alignment? align;
   String? title;
   double? elevation;
-  List<String>? minutesList;
+  List<String> minutesList;
   KenTimePickerData? data;
   Color? dashColor;
 
@@ -66,6 +54,8 @@ class KenTimePicker extends StatefulWidget
   Function? clientOnChange;
 
   TextInputType? keyboard;
+  double? parentWidth;
+  double? parentHeight;
 
   KenTimePicker(
     this.scaffoldKey,
@@ -100,147 +90,20 @@ class KenTimePicker extends StatefulWidget
     //this.clientOnSave,
     this.clientOnChange,
     this.keyboard,
-  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
-    id = KenUtilities.getWidgetId(type, id);
-    minutesList ??= KenTimePickerModel.defaultMinutesList;
-  }
-
-  KenTimePicker.withController(
-    KenTimePickerModel this.model,
-    this.scaffoldKey,
-    this.formKey,
-  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model!);
-  }
-
-  @override
-  runControllerActivities(KenModel model) {
-    KenTimePickerModel m = model as KenTimePickerModel;
-    id = m.id;
-    type = m.type;
-    title = m.title;
-    valueField = m.valueField;
-    displayField = m.displayedField;
-    backColor = m.backColor;
-    fontSize = m.fontSize;
-    fontColor = m.fontColor;
-    label = m.label;
-    width = m.width;
-    height = m.height;
-    padding = m.padding;
-    showborder = m.showBorder;
-    minutesList = m.minutesList;
-    elevation = m.elevation;
-    borderRadius = m.borderRadius;
-    borderWidth = m.borderWidth;
-    borderColor = m.borderColor;
-    fontBold = m.fontBold;
-    underline = m.underline;
-    align = m.align;
-    innerSpace = m.innerSpace;
-    captionFontBold = m.captionFontBold;
-    captionFontSize = m.captionFontSize;
-    captionFontColor = m.captionFontColor;
-    captionBackColor = m.captionBackColor;
-    dashColor = m.dashColor;
-
-    data = treatData(m);
-  }
-
-  @override
-  dynamic treatData(KenModel model) {
-    // change data format
-    final workData = formatDataFields(model);
-
-    String? display;
-    DateTime value;
-
-    final now = DateTime.now();
-
-    if (workData != null) {
-      final valueString = workData['rows'][0][valueField];
-      final split = valueString.split(':');
-      value = DateTime.parse(
-          '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')} ${split[0]}:${split[1]}:00');
-
-      display = workData['rows'][0][displayField];
-    } else {
-      value = now;
-      display = DateFormat('HH:mm').format(value);
-    }
-
-    return KenTimePickerData(time: value, formattedTime: display);
-  }
-
-  @override
-  _KenTimePickerState createState() => _KenTimePickerState();
-}
-
-class _KenTimePickerState extends State<KenTimePicker>
-    with KenWidgetStateMixin
-    implements KenWidgetStateInterface {
-  KenTimePickerModel? _model;
-  KenTimePickerData? _data;
-
-  @override
-  void initState() {
-    _model = widget.model;
-    _data = widget.data;
-    if (_model != null) widgetLoadType = _model!.widgetLoadType;
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    runDispose(widget.scaffoldKey, widget.id);
-    super.dispose();
-  }
+    this.parentWidth,
+    this.parentHeight,
+  });
 
   @override
   Widget build(BuildContext context) {
-    Widget timePicker = runBuild(context, widget.id, widget.type,
-        widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
-      setState(() {
-        widgetLoadType = LoadType.immediate;
-        setDataLoad(widget.id, false);
-      });
-    });
-
-    return timePicker;
-  }
-
-  @override
-  Future<KenWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
-      if (_model != null) {
-        // await SmeupTimePickerDao.getData(_model!);
-        await _model!.getData();
-        _data = widget.treatData(_model!);
-      }
-      setDataLoad(widget.id, true);
-    }
-
-    Widget timepicker;
-
-    if (_data == null) {
-      return getFunErrorResponse(context, _model);
-    }
-
-    KenMessageBus.instance.publishRequest(
-      widget.globallyUniqueId,
-      KenTopic.kenTimePickerGetChildren,
-      KenMessageBusEventData(
-          context: context, widget: widget, model: _model, data: _data),
-    );
-
-    double? timePickerHeight = widget.height;
-    double? timePickerWidth = widget.width;
-    if (_model != null && _model!.parent != null) {
+    double? timePickerHeight = height;
+    double? timePickerWidth = width;
+    if (parentHeight != null && parentWidth != null) {
       if (timePickerHeight == 0) {
-        timePickerHeight = (_model!.parent as KenSectionModel).height;
+        timePickerHeight = parentHeight;
       }
       if (timePickerWidth == 0) {
-        timePickerWidth = (_model!.parent as KenSectionModel).width;
+        timePickerWidth = parentWidth;
       }
     } else {
       if (timePickerHeight == 0) {
@@ -251,8 +114,8 @@ class _KenTimePickerState extends State<KenTimePicker>
       }
     }
 
-    if (!widget.showborder!) {
-      widget.borderColor = widget.borderColor;
+    if (!showborder!) {
+      borderColor = borderColor;
     }
 
     ButtonStyle buttonStyle = _getButtonStyle();
@@ -265,64 +128,62 @@ class _KenTimePickerState extends State<KenTimePicker>
       padding: EdgeInsets.all(iconTheme.size!.toDouble() - 10),
       child: Icon(
         Icons.access_time,
-        color: widget.fontColor,
+        color: fontColor,
         size: iconTheme.size,
       ),
     );
 
-    var text = widget.label!.isEmpty
+    var text = label!.isEmpty
         ? Container()
-        : Text(widget.label!, textAlign: TextAlign.center, style: captionStyle);
+        : Text(label!, textAlign: TextAlign.center, style: captionStyle);
 
-    timepicker = KenTimePickerButton(
-      _data,
+    Widget timepicker = KenTimePickerButton(
+      data,
       buttonStyle,
       textStyle,
-      scaffoldKey: widget.scaffoldKey,
-      formKey: widget.formKey,
-      id: widget.id,
-      backColor: widget.backColor,
-      fontSize: widget.fontSize,
-      fontColor: widget.fontColor,
-      borderRadius: widget.borderRadius,
-      borderWidth: widget.borderWidth,
-      borderColor: widget.borderColor,
-      fontBold: widget.fontBold,
-      align: widget.align,
-      underline: widget.underline,
-      elevation: widget.elevation,
-      captionFontBold: widget.captionFontBold,
-      captionFontSize: widget.captionFontSize,
-      captionFontColor: widget.captionFontColor,
-      captionBackColor: widget.captionBackColor,
-      label: widget.label,
+      scaffoldKey: scaffoldKey,
+      formKey: formKey,
+      id: id,
+      backColor: backColor,
+      fontSize: fontSize,
+      fontColor: fontColor,
+      borderRadius: borderRadius,
+      borderWidth: borderWidth,
+      borderColor: borderColor,
+      fontBold: fontBold,
+      align: align,
+      underline: underline,
+      elevation: elevation,
+      captionFontBold: captionFontBold,
+      captionFontSize: captionFontSize,
+      captionFontColor: captionFontColor,
+      captionBackColor: captionBackColor,
+      label: label,
       width: timePickerWidth,
       height: timePickerHeight,
-      padding: widget.padding,
-      showborder: widget.showborder,
-      minutesList: widget.minutesList,
-      clientOnChange: widget.clientOnChange,
-      model: _model,
-      globallyUniqueId: widget.globallyUniqueId,
-      dashColor: widget.dashColor,
+      padding: padding,
+      showborder: showborder,
+      minutesList: minutesList,
+      clientOnChange: clientOnChange,
+      dashColor: dashColor,
     );
 
-    var line = widget.underline!
-        ? KenLine(widget.scaffoldKey, widget.formKey)
+    var line = underline!
+        ? KenLine(scaffoldKey, formKey)
         : Container();
 
     Widget children;
 
-    if (widget.align == Alignment.centerLeft) {
+    if (align == Alignment.centerLeft) {
       children = Column(children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             text,
-            SizedBox(width: widget.innerSpace),
+            SizedBox(width: innerSpace),
             Expanded(
                 child: Align(
-                    alignment: widget.align!,
+                    alignment: align!,
                     child: Row(
                       children: [
                         Expanded(
@@ -337,9 +198,9 @@ class _KenTimePickerState extends State<KenTimePicker>
         ),
         line
       ]
-          //color: widget.backColor,
+          //color: backColor,
           );
-    } else if (widget.align == Alignment.centerRight) {
+    } else if (align == Alignment.centerRight) {
       children = Column(
         children: [
           Row(
@@ -347,7 +208,7 @@ class _KenTimePickerState extends State<KenTimePicker>
             children: [
               Expanded(
                   child: Align(
-                alignment: widget.align!,
+                alignment: align!,
                 child: Row(
                   children: [
                     icon,
@@ -359,18 +220,18 @@ class _KenTimePickerState extends State<KenTimePicker>
                   ],
                 ),
               )),
-              SizedBox(width: widget.innerSpace),
+              SizedBox(width: innerSpace),
               text,
             ],
           ),
           line
         ],
-        //color: widget.backColor,
+        //color: backColor,
       );
-    } else if (widget.align == Alignment.topCenter) {
+    } else if (align == Alignment.topCenter) {
       children = SizedBox(
-        height: widget.height,
-        width: widget.width,
+        height: height,
+        width: width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -378,7 +239,7 @@ class _KenTimePickerState extends State<KenTimePicker>
               alignment: Alignment.centerLeft,
               child: text,
             ),
-            SizedBox(height: widget.innerSpace),
+            SizedBox(height: innerSpace),
             Align(
               alignment: Alignment.centerLeft,
               child: Row(
@@ -395,12 +256,12 @@ class _KenTimePickerState extends State<KenTimePicker>
             line
           ],
         ),
-        //color: widget.backColor,
+        //color: backColor,
       );
-    } else if (widget.align == Alignment.bottomCenter) {
+    } else if (align == Alignment.bottomCenter) {
       children = SizedBox(
-        height: widget.height,
-        width: widget.width,
+        height: height,
+        width: width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -417,7 +278,7 @@ class _KenTimePickerState extends State<KenTimePicker>
                 ],
               ),
             ),
-            SizedBox(height: widget.innerSpace),
+            SizedBox(height: innerSpace),
             Align(
               alignment: Alignment.centerLeft,
               child: text,
@@ -425,7 +286,7 @@ class _KenTimePickerState extends State<KenTimePicker>
             line
           ],
         ),
-        //color: widget.backColor,
+        //color: backColor,
       );
     } else // center
     {
@@ -433,27 +294,26 @@ class _KenTimePickerState extends State<KenTimePicker>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           timepicker,
-          SizedBox(width: widget.innerSpace),
+          SizedBox(width: innerSpace),
           Expanded(child: text),
         ],
       );
     }
-
-    return KenWidgetBuilderResponse(_model, children);
+    return children;
   }
 
   ButtonStyle _getButtonStyle() {
     var timePickerTheme = TimePickerThemeData(
-        backgroundColor: widget.backColor,
+        backgroundColor: backColor,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(widget.borderRadius!)),
+            borderRadius: BorderRadius.circular(borderRadius!)),
         dayPeriodBorderSide:
-            BorderSide(width: widget.borderWidth!, color: widget.borderColor!));
+            BorderSide(width: borderWidth!, color: borderColor!));
 
     var elevatedButtonStyle = ButtonStyle(
         backgroundColor:
             MaterialStateProperty.all<Color?>(timePickerTheme.backgroundColor),
-        elevation: MaterialStateProperty.all<double?>(widget.elevation),
+        elevation: MaterialStateProperty.all<double?>(elevation),
         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
             const EdgeInsets.all(0)),
         shape: MaterialStateProperty.all<OutlinedBorder?>(
@@ -466,11 +326,11 @@ class _KenTimePickerState extends State<KenTimePicker>
 
   TextStyle _getTextStile() {
     TextStyle style = TextStyle(
-        color: widget.fontColor,
-        fontSize: widget.fontSize,
-        backgroundColor: widget.backColor);
+        color: fontColor,
+        fontSize: fontSize,
+        backgroundColor: backColor);
 
-    if (widget.fontBold!) {
+    if (fontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -485,9 +345,9 @@ class _KenTimePickerState extends State<KenTimePicker>
 
   TextStyle _getCaptionStile() {
     TextStyle style = TextStyle(
-        color: widget.captionFontColor, fontSize: widget.captionFontSize);
+        color: captionFontColor, fontSize: captionFontSize);
 
-    if (widget.captionFontBold!) {
+    if (captionFontBold!) {
       style = style.copyWith(
         fontWeight: FontWeight.bold,
       );
@@ -502,7 +362,7 @@ class _KenTimePickerState extends State<KenTimePicker>
 
   IconThemeData _getIconTheme() {
     IconThemeData themeData =
-        IconThemeData(size: widget.fontSize, color: Colors.transparent);
+        IconThemeData(size: fontSize, color: Colors.transparent);
 
     return themeData;
   }

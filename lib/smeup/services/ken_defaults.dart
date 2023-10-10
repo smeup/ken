@@ -259,6 +259,98 @@ class KenTreeDefaults {
   static const double defaultParentHeight = 10;
 }
 
+class KenTimepickerDefaults {
+
+  // supported by json_theme
+  static const double defaultFontSize = 16;
+  static const Color defaultBackColor = Colors.transparent;
+  static const Color defaultFontColor = kPrimary;
+  static const bool defaultFontBold = false;
+  static const Color defaultBorderColor = kPrimary;
+  static const double defaultBorderWidth = 1.0;
+  static const double defaultBorderRadius = 4;
+  static const double defaultElevation = 0.0;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultCaptionFontSize = 10;
+  static const Color defaultCaptionFontColor = kPrimary;
+  static const Color defaultCaptionBackColor = Colors.transparent;
+  static const List<String> defaultMinutesList = [
+    '00',
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23',
+    '24',
+    '25',
+    '26',
+    '27',
+    '28',
+    '29',
+    '30',
+    '31',
+    '32',
+    '33',
+    '34',
+    '35',
+    '36',
+    '37',
+    '38',
+    '39',
+    '40',
+    '41',
+    '42',
+    '43',
+    '44',
+    '45',
+    '46',
+    '47',
+    '48',
+    '49',
+    '50',
+    '51',
+    '52',
+    '53',
+    '54',
+    '55',
+    '56',
+    '57',
+    '58',
+    '59'
+  ];
+
+  // unsupported by json_theme
+  static const String defaultLabel = '';
+  static const double defaultWidth = 0;
+  static const double defaultHeight = 100;
+  static const bool defaultShowBorder = false;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(8);
+  static const String defaultValueField = 'value';
+  static const String defaultdisplayedField = 'display';
+  static const Alignment defaultAlign = Alignment.topCenter;
+  static const double defaultInnerSpace = 10.0;
+  static const bool defaultUnderline = false;
+  static const Color defaultDashColor = kBack100;
+}
+
 ///GRAY COLOR
 const Color kSecondary100 = Color(0xffB9BBBD);
 const Color kSecondary200 = Color(0xff596776);
