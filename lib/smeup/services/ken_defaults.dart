@@ -130,9 +130,21 @@ class KenDatepickerDefaults {
   static const Color defaultDashColor = kBack100;
 }
 
-class KenLineDefault {
+class KenLineDefaults {
   static const Color defaultColor = kPrimary;
   static const double defaultThickness = 1;
+}
+
+class KenProgressBarDefaults {
+  static const Color defaultColor = kPrimary;
+  static const Color defaultLinearTrackColor = kInactivePrimary;
+  static const String defaultValueField = 'value';
+  static const double defaultProgressBarMinimun = 0;
+  static const double defaultProgressBarMaximun = 10;
+  static const double defaultBorderRadius = 4;
+  static const double defaultHeight = 10;
+  static const EdgeInsetsGeometry defaultPadding =
+      EdgeInsets.only(top: 30, left: 5, right: 5);
 }
 
 class KenSwitchDefaults {

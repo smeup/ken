@@ -21,8 +21,8 @@ class KenLine extends StatelessWidget {
       this.title,
       this.id = '',
       this.type = 'LIN',
-      this.color = KenLineDefault.defaultColor,
-      this.thickness = KenLineDefault.defaultThickness});
+      this.color = KenLineDefaults.defaultColor,
+      this.thickness = KenLineDefaults.defaultThickness});
 
   @override
   Widget build(BuildContext context) {
