@@ -1,6 +1,6 @@
 import 'package:xml/xml.dart';
 
-enum KenInputPanelSupportedComp { cmb, rad, itx, bcd, acp }
+enum ShiroInputPanelSupportedComp { cmb, rad, itx, bcd, acp }
 
 class SmeupInputPanelValue {
   String? code;
@@ -28,7 +28,7 @@ class SmeupInputPanelField {
   static const String defaultCodeField = 'codice';
   static const String defaultDescriptionField = 'testo';
 
-  KenInputPanelSupportedComp? component;
+  ShiroInputPanelSupportedComp? component;
   String? id;
   String? label;
   bool? visible;
@@ -47,7 +47,7 @@ class SmeupInputPanelField {
       required String this.id,
       required this.value,
       this.items,
-      this.component = KenInputPanelSupportedComp.itx,
+      this.component = ShiroInputPanelSupportedComp.itx,
       this.fun,
       this.object,
       this.visible = true,
@@ -86,7 +86,7 @@ class SmeupInputPanelField {
     visible = true;
     this.position = position;
     if (fieldFromLayout.getAttribute("Cmp") != null) {
-      for (var comp in KenInputPanelSupportedComp.values) {
+      for (var comp in ShiroInputPanelSupportedComp.values) {
         String name = comp.toString().split('.').last;
         if (name == fieldFromLayout.getAttribute("Cmp")) {
           component = comp;

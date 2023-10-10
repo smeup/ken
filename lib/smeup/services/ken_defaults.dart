@@ -130,6 +130,14 @@ class KenDatepickerDefaults {
   static const Color defaultDashColor = kBack100;
 }
 
+class KenInputPanelDefaults {
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const double defaultFontSize = 16.0;
+  static const double defaultWidth = 0;
+  static const double defaultHeight = 0;
+  static const Color defaultBackgroundColor = kBack100;
+}
+
 class KenLineDefaults {
   static const Color defaultColor = kPrimary;
   static const double defaultThickness = 1;
@@ -151,6 +159,13 @@ class KenProgressIndicatorDefaults {
   static const Color defaultColor = kPrimary;
   static const Color defaultCircularTrackColor = kInactivePrimary;
   static const double defaultSize = 200;
+}
+
+class KenQRCodeReaderDefaults {
+  static const double defaultPadding = 5.0;
+  static const double defaultSize = 200;
+  static const int defaultMaxReads = 1;
+  static const int defaultDealyInMillis = 0;
 }
 
 class KenSwitchDefaults {
