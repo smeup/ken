@@ -123,6 +123,19 @@ class KenDatepickerDefaults {
   static const Color defaultDashColor = kBack100;
 }
 
+class KenSwitchDefaults {
+  static const Color defaultThumbColor = kPrimary;
+  static const Color defaultTrackColor = kInactivePrimary;
+  static const double defaultCaptionFontSize = 14;
+  static const Color defaultCaptionFontColor = kSecondary100;
+  static const Color defaultCaptionBackColor = Colors.transparent;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultWidth = 400;
+  static const double defaultHeight = 50;
+  static const Alignment defaultAlign = Alignment.center;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+}
+
 ///GRAY COLOR
 const Color kSecondary100 = Color(0xffB9BBBD);
 const Color kSecondary200 = Color(0xff596776);
