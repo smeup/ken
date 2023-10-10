@@ -1,20 +1,11 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_drawer_data_element.dart';
-import '../models/widgets/ken_drawer_model.dart';
-import '../models/widgets/ken_model.dart';
-import '../services/ken_utilities.dart';
+import '../services/ken_defaults.dart';
 import 'kenDrawerItem.dart';
-import 'kenWidgetStateInterface.dart';
-import 'kenWidgetStateMixin.dart';
 
 // ignore: must_be_immutable
-class KenDrawer extends StatefulWidget
-// with SmeupWidgetMixin
-// implements SmeupWidgetInterface//todo da togliere
-{
-  KenDrawerModel? model;
+class KenDrawer extends StatefulWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
 
@@ -35,121 +26,48 @@ class KenDrawer extends StatefulWidget
   Color? iconColor;
   double? iconSize;
   Color? drawerBackColor;
-  List<KenDrawerDataElement>? drawerDataElement;
+  List<KenDrawerDataElement>? data;
 
   KenDrawer(this.scaffoldKey, this.formKey,
       {this.id = '',
       this.type = 'DRW',
-      this.appBarBackColor = KenDrawerModel.defaultAppBarBackColor,
-      this.titleFontSize = KenDrawerModel.defaultTitleFontSize,
-      this.titleFontColor = KenDrawerModel.defaultTitleFontColor,
-      this.titleFontBold = KenDrawerModel.defaultTitleFontBold,
-      this.elementFontSize = KenDrawerModel.defaultElementFontSize,
-      this.elementFontColor = KenDrawerModel.defaultTitleFontColor,
-      this.elementFontBold = KenDrawerModel.defaultElementFontBold,
-      this.iconColor = KenDrawerModel.defaultIconColor,
-      this.iconSize = KenDrawerModel.defaultIconSize,
-      this.drawerBackColor = KenDrawerModel.defaultDrawerBackColor,
+      this.appBarBackColor = KenDrawerDefaults.defaultAppBarBackColor,
+      this.titleFontSize = KenDrawerDefaults.defaultTitleFontSize,
+      this.titleFontColor = KenDrawerDefaults.defaultTitleFontColor,
+      this.titleFontBold = KenDrawerDefaults.defaultTitleFontBold,
+      this.elementFontSize = KenDrawerDefaults.defaultElementFontSize,
+      this.elementFontColor = KenDrawerDefaults.defaultTitleFontColor,
+      this.elementFontBold = KenDrawerDefaults.defaultElementFontBold,
+      this.iconColor = KenDrawerDefaults.defaultIconColor,
+      this.iconSize = KenDrawerDefaults.defaultIconSize,
+      this.drawerBackColor = KenDrawerDefaults.defaultDrawerBackColor,
       this.title = '',
       this.imageUrl = '',
-      this.drawerDataElement,
-      //this.data,
-      this.imageWidth = KenDrawerModel.defaultImageWidth,
-      this.imageHeight = KenDrawerModel.defaultImageHeight,
-      this.showItemDivider = KenDrawerModel.defaultShowItemDivider})
-      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
-    id = KenUtilities.getWidgetId(type, id);
-  }
-
-  KenDrawer.withController(
-    KenDrawerModel this.model,
-    this.scaffoldKey,
-    this.formKey,
-    this.drawerDataElement,
-  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model!);
-  }
-
-  //@override ???
-  runControllerActivities(KenModel model) {
-    KenDrawerModel m = model as KenDrawerModel;
-    id = m.id;
-    type = m.type;
-    title = m.title;
-    imageUrl = m.imageUrl;
-    imageWidth = m.imageWidth;
-    imageHeight = m.imageHeight;
-    appBarBackColor = m.appBarBackColor;
-    titleFontSize = m.titleFontSize;
-    titleFontBold = m.titleFontBold;
-    titleFontColor = m.titleFontColor;
-    elementFontSize = m.elementFontSize;
-    elementFontBold = m.elementFontBold;
-    elementFontColor = m.elementFontColor;
-    showItemDivider = m.showItemDivider;
-    drawerBackColor = m.drawerBackColor;
-    iconColor = m.iconColor;
-    iconSize = m.iconSize;
-  }
+      this.data,
+      this.imageWidth = KenDrawerDefaults.defaultImageWidth,
+      this.imageHeight = KenDrawerDefaults.defaultImageHeight,
+      this.showItemDivider = KenDrawerDefaults.defaultShowItemDivider});
 
   @override
   _KenDrawerState createState() => _KenDrawerState();
 }
 
-class _KenDrawerState extends State<KenDrawer>
-    with KenWidgetStateMixin
-    implements KenWidgetStateInterface {
-  KenDrawerModel? _model;
+class _KenDrawerState extends State<KenDrawer> {
   List<KenDrawerDataElement>? _data;
 
   @override
   void initState() {
-    _model = widget.model;
-    // _data = widget.data;
-    _data = widget.drawerDataElement;
-    if (_model != null) widgetLoadType = _model!.widgetLoadType;
+    _data = widget.data;
     super.initState();
   }
 
   @override
   void dispose() {
-    runDispose(widget.scaffoldKey, widget.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var drawer = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
-        getInitialdataLoaded(_model), notifierFunction: () {
-      setState(() {
-        widgetLoadType = LoadType.immediate;
-        setDataLoad(widget.id, false);
-      });
-    });
-    return drawer;
-  }
-
-  Widget _getCollpsed(e) {
-    return ListTile(
-      leading: e.groupIcon != null
-          ? Icon(
-              e.groupIconData,
-              color: widget.iconColor,
-              size: widget.iconSize,
-            )
-          : null,
-      title: Text(e.group, style: _getElementTextStile()),
-    );
-  }
-
-  @override
-  Future<KenWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
-      _data = widget.drawerDataElement;
-
-      setDataLoad(widget.id, true);
-    }
-
     final showTitle = widget.title != null;
     final showImage = widget.imageUrl!.isNotEmpty;
     final List<Widget> headers = [];
@@ -228,18 +146,16 @@ class _KenDrawerState extends State<KenDrawer>
         ));
       }
     }
+    ;
 
-    return KenWidgetBuilderResponse(
-      _model,
-      Drawer(
-          backgroundColor: widget.drawerBackColor,
-          child: Container(
-            color: widget.appBarBackColor,
-            child: Column(
-              children: list,
-            ),
-          )),
-    );
+    return Drawer(
+        backgroundColor: widget.drawerBackColor,
+        child: Container(
+          color: widget.appBarBackColor,
+          child: Column(
+            children: list,
+          ),
+        ));
   }
 
   TextStyle _getTitleStile() {
@@ -257,6 +173,19 @@ class _KenDrawerState extends State<KenDrawer>
     }
 
     return style;
+  }
+
+  Widget _getCollpsed(e) {
+    return ListTile(
+      leading: e.groupIcon != null
+          ? Icon(
+              e.groupIconData,
+              color: widget.iconColor,
+              size: widget.iconSize,
+            )
+          : null,
+      title: Text(e.group, style: _getElementTextStile()),
+    );
   }
 
   TextStyle _getElementTextStile() {

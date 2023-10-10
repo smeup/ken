@@ -136,6 +136,23 @@ class KenSwitchDefaults {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
 }
 
+class KenDrawerDefaults {
+  // supported by json_theme
+  static const double defaultTitleFontSize = 18;
+  static const Color defaultTitleFontColor = kPrimary;
+  static const bool defaultTitleFontBold = false;
+  static const double defaultElementFontSize = 16;
+  static const Color defaultElementFontColor = kPrimary;
+  static const bool defaultElementFontBold = false;
+  static const Color defaultAppBarBackColor = kPrimary;
+  static const double defaultImageWidth = 80;
+  static const double defaultImageHeight = 120;
+  static const bool defaultShowItemDivider = true;
+  static const Color defaultIconColor = kPrimary;
+  static const double defaultIconSize = 16;
+  static const Color defaultDrawerBackColor = kSecondary100;
+}
+
 ///GRAY COLOR
 const Color kSecondary100 = Color(0xffB9BBBD);
 const Color kSecondary200 = Color(0xff596776);
