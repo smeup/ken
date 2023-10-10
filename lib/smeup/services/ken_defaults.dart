@@ -94,6 +94,13 @@ class KenCalendarDefaults {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(8);
 }
 
+class KenImageDefaults {
+  static const double defaultWidth = 300;
+  static const double defaultHeight = 300;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const bool defaultIsRemote = false;
+}
+
 class KenDatepickerDefaults {
   // supported by json_theme
   static const Color defaultBorderColor = kPrimary;
@@ -121,6 +128,11 @@ class KenDatepickerDefaults {
   static const double defaultInnerSpace = 10.0;
   static const bool defaultUnderline = false;
   static const Color defaultDashColor = kBack100;
+}
+
+class KenLineDefault {
+  static const Color defaultColor = kPrimary;
+  static const double defaultThickness = 1;
 }
 
 class KenSwitchDefaults {

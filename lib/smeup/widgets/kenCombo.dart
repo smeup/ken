@@ -7,7 +7,7 @@ import '../models/widgets/ken_combo_model.dart';
 import '../models/widgets/ken_model.dart';
 import '../services/ken_utilities.dart';
 import 'kenComboWidget.dart';
-import 'kenLine.dart';
+import 'ken_line.dart';
 import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';
 import 'kenWidgetStateInterface.dart';

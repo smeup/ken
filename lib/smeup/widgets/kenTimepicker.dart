@@ -9,7 +9,7 @@ import '../models/widgets/ken_section_model.dart';
 import '../models/widgets/ken_timepicker_model.dart';
 import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';
-import 'kenLine.dart';
+import 'ken_line.dart';
 import 'kenTimepickerButton.dart';
 import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';

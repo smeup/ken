@@ -10,7 +10,7 @@ import '../services/ken_configuration_service.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../services/ken_utilities.dart';
-import 'kenLine.dart';
+import 'ken_line.dart';
 import 'kenProgressIndicator.dart';
 
 // ignore: must_be_immutable
