@@ -4,10 +4,8 @@ import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as datepicker;
 import 'package:intl/intl.dart';
 
-import '../models/KenMessageBusEventData.dart';
 import '../models/widgets/ken_timepicker_model.dart';
-import '../services/ken_message_bus.dart';
-import 'kenTimepicker.dart';
+import 'ken_timepicker.dart';
 import 'kenTimepickerCustomization.dart';
 
 // ignore: must_be_immutable
@@ -28,7 +26,6 @@ class KenTimePickerButton extends StatefulWidget {
   Color? captionFontColor;
   Color? captionBackColor;
   bool? underline;
-  KenTimePickerModel? model;
   Color? dashColor;
 
   final String? id;
@@ -44,8 +41,6 @@ class KenTimePickerButton extends StatefulWidget {
   final Function? clientOnChange;
   final ButtonStyle buttonStyle;
   final TextStyle textStyle;
-
-  final String globallyUniqueId;
 
   KenTimePickerButton(
     this.data,
@@ -76,9 +71,7 @@ class KenTimePickerButton extends StatefulWidget {
     this.showborder = KenTimePickerModel.defaultShowBorder,
     this.minutesList = KenTimePickerModel.defaultMinutesList,
     this.clientOnChange,
-    this.model,
     this.dashColor,
-    required this.globallyUniqueId,
   }) {}
 
   @override
@@ -122,16 +115,6 @@ class KenTimePickerButtonState extends State<KenTimePickerButton> {
                     final newTime = DateFormat('HH:mm').format(date);
                     _currentDisplay = newTime;
                     _currentValue = date;
-
-                    KenMessageBus.instance.publishRequest(
-                      widget.globallyUniqueId,
-                      KenTopic.kenTimePickerOnPressed,
-                      KenMessageBusEventData(
-                          context: context,
-                          widget: widget,
-                          model: null,
-                          data: newTime),
-                    );
 
                     if (widget.clientOnChange != null) {
                       widget.clientOnChange!(KenTimePickerData(

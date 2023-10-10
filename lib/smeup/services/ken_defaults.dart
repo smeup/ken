@@ -131,9 +131,42 @@ class KenDatepickerDefaults {
   static const Color defaultDashColor = kBack100;
 }
 
-class KenLineDefault {
+class KenInputPanelDefaults {
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const double defaultFontSize = 16.0;
+  static const double defaultWidth = 0;
+  static const double defaultHeight = 0;
+  static const Color defaultBackgroundColor = kBack100;
+}
+
+class KenLineDefaults {
   static const Color defaultColor = kPrimary;
   static const double defaultThickness = 1;
+}
+
+class KenProgressBarDefaults {
+  static const Color defaultColor = kPrimary;
+  static const Color defaultLinearTrackColor = kInactivePrimary;
+  static const String defaultValueField = 'value';
+  static const double defaultProgressBarMinimun = 0;
+  static const double defaultProgressBarMaximun = 10;
+  static const double defaultBorderRadius = 4;
+  static const double defaultHeight = 10;
+  static const EdgeInsetsGeometry defaultPadding =
+      EdgeInsets.only(top: 30, left: 5, right: 5);
+}
+
+class KenProgressIndicatorDefaults {
+  static const Color defaultColor = kPrimary;
+  static const Color defaultCircularTrackColor = kInactivePrimary;
+  static const double defaultSize = 200;
+}
+
+class KenQRCodeReaderDefaults {
+  static const double defaultPadding = 5.0;
+  static const double defaultSize = 200;
+  static const int defaultMaxReads = 1;
+  static const int defaultDealyInMillis = 0;
 }
 
 class KenSwitchDefaults {
@@ -147,6 +180,35 @@ class KenSwitchDefaults {
   static const double defaultHeight = 50;
   static const Alignment defaultAlign = Alignment.center;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+}
+
+class KenComboDefaults {
+  static const double defaultIconSize = 20;
+  static const Color defaultIconColor = kPrimary;
+  static const double defaultFontSize = 16;
+  static const Color defaultFontColor = kPrimary;
+  static const bool defaultFontBold = false;
+  static const Color defaultBackColor = Colors.transparent;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultCaptionFontSize = 10;
+  static const Color defaultCaptionFontColor = kPrimary;
+  static const Color defaultCaptionBackColor = Colors.transparent;
+  static const Color defaultBorderColor = kPrimary;
+  static const Color defaultDropDownColor = kBack100;
+  static const double defaultBorderWidth = 2;
+  static const double defaultBorderRadius = 8;
+  static const String defaultTitle = 'title';
+  static const double defaultWidth = 0;
+  static const double defaultHeight = 55;
+  static const String defaultValueField = 'value';
+  static const String defaultDescriptionField = 'description';
+  static const EdgeInsetsGeometry defaultPadding =
+      EdgeInsets.only(left: 10, right: 10);
+  static const String defaultLabel = '';
+  static const Alignment defaultAlign = Alignment.centerLeft;
+  static const double defaultInnerSpace = 10.0;
+  static const bool defaultUnderline = false;
+  static const bool defaultShowBorder = true;
 }
 
 class KenDrawerDefaults {
@@ -206,6 +268,116 @@ class KenListBoxDefaults {
   static const int defaultSelectedRow = 1;
   static const double defaultListHeight = 300;
   static const double defaultRealBoxHeight = 400;
+}
+
+class KenTreeDefaults {
+  static const double defaultWidth = 100;
+  static const double defaultHeight = 100;
+
+  static const double defaultLabelFontSize = 16;
+  static const Color defaultLabelBackColor = Colors.white;
+  static const Color defaultLabelFontColor = Colors.black;
+  static const bool defaultLabelFontbold = false;
+  static const double defaultLabelVerticalSpacing = 2;
+  static const double defaultLabelHeight = 10;
+
+  static const double defaultParentFontSize = 20;
+  static const Color defaultParentBackColor = Colors.white;
+  static const Color defaultParentFontColor = Colors.black;
+  static const bool defaultParentFontbold = true;
+  static const double defaultParentVerticalSpacing = 2;
+  static const double defaultParentHeight = 10;
+}
+
+class KenTimepickerDefaults {
+  // supported by json_theme
+  static const double defaultFontSize = 16;
+  static const Color defaultBackColor = Colors.transparent;
+  static const Color defaultFontColor = kPrimary;
+  static const bool defaultFontBold = false;
+  static const Color defaultBorderColor = kPrimary;
+  static const double defaultBorderWidth = 1.0;
+  static const double defaultBorderRadius = 4;
+  static const double defaultElevation = 0.0;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultCaptionFontSize = 10;
+  static const Color defaultCaptionFontColor = kPrimary;
+  static const Color defaultCaptionBackColor = Colors.transparent;
+  static const List<String> defaultMinutesList = [
+    '00',
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23',
+    '24',
+    '25',
+    '26',
+    '27',
+    '28',
+    '29',
+    '30',
+    '31',
+    '32',
+    '33',
+    '34',
+    '35',
+    '36',
+    '37',
+    '38',
+    '39',
+    '40',
+    '41',
+    '42',
+    '43',
+    '44',
+    '45',
+    '46',
+    '47',
+    '48',
+    '49',
+    '50',
+    '51',
+    '52',
+    '53',
+    '54',
+    '55',
+    '56',
+    '57',
+    '58',
+    '59'
+  ];
+
+  // unsupported by json_theme
+  static const String defaultLabel = '';
+  static const double defaultWidth = 0;
+  static const double defaultHeight = 100;
+  static const bool defaultShowBorder = false;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(8);
+  static const String defaultValueField = 'value';
+  static const String defaultdisplayedField = 'display';
+  static const Alignment defaultAlign = Alignment.topCenter;
+  static const double defaultInnerSpace = 10.0;
+  static const bool defaultUnderline = false;
+  static const Color defaultDashColor = kBack100;
 }
 
 ///GRAY COLOR
