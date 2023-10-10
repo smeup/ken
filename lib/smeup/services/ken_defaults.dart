@@ -147,6 +147,12 @@ class KenProgressBarDefaults {
       EdgeInsets.only(top: 30, left: 5, right: 5);
 }
 
+class KenProgressIndicatorDefaults {
+  static const Color defaultColor = kPrimary;
+  static const Color defaultCircularTrackColor = kInactivePrimary;
+  static const double defaultSize = 200;
+}
+
 class KenSwitchDefaults {
   static const Color defaultThumbColor = kPrimary;
   static const Color defaultTrackColor = kInactivePrimary;

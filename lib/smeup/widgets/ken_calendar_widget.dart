@@ -11,7 +11,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../services/ken_utilities.dart';
 import 'ken_line.dart';
-import 'kenProgressIndicator.dart';
+import 'ken_progress_indicator.dart';
 
 // ignore: must_be_immutable
 class KenCalendarWidget extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/kenProgressBar.dart';
+import '../../lib/smeup/widgets/ken_progress_bar.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {
@@ -21,8 +21,6 @@ Future<void> main() async {
                     child: Column(
                   children: [
                     KenProgressBar(
-                      WidgetTestService.scaffoldKey,
-                      WidgetTestService.formKey,
                       id: 'pgb1',
                       data: 6,
                       height: 40,
