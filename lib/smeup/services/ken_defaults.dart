@@ -46,7 +46,9 @@ class KenButtonsDefaults {
       WidgetOrientation.vertical;
 }
 
-class KenCarouselDefaults {}
+class KenCarouselDefaults {
+  static const double defaultHeight = 300;
+}
 
 class KenCalendarDefaults {
   // supported by json_theme
