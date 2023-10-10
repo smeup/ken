@@ -165,6 +165,19 @@ class KenDrawerDefaults {
   static const Color defaultDrawerBackColor = kSecondary100;
 }
 
+class KenGaugeDefaults {
+  static const String defaultValColName = 'value';
+  static const String defaultMaxColName = 'maxValue';
+  static const String defaultMinColName = 'minValue';
+  static const String defaultWarningColName = 'warning';
+  static const String defaultAlertColName = 'alert';
+  static const double defaultMaxValue = 150;
+  static const double defaultMinValue = 50;
+  static const double defaultWarning = 100;
+  static const double defaultAlert = 110;
+  static const double defaultValue = 0;
+}
+
 ///GRAY COLOR
 const Color kSecondary100 = Color(0xffB9BBBD);
 const Color kSecondary200 = Color(0xff596776);
