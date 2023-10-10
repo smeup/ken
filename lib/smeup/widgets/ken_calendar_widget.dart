@@ -510,16 +510,6 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
         }
         widget.clientOnEventClick?.call(event);
       }
-
-      // tony: TODO !!!
-      // if (data != null) {
-      //   KenMessageBus.instance.publishRequest(
-      //     widget.globallyUniqueId!,
-      //     KenTopic.kenCalendarWidgetEventClick,
-      //     KenMessageBusEventData(
-      //         context: context, widget: widget, model: _model, data: data),
-      //   );
-      // }
     } catch (e) {
       // KenLogService.writeDebugMessage('Error on calendar _eventClicked: $e',
       //     logType: KenLogType.error);
