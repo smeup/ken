@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import '../widgets/ken_list_box.dart';
 import 'ken_widget_orientation.dart';
 
 // TODO verificare se creare un repo a parte con il design system
@@ -176,6 +177,35 @@ class KenGaugeDefaults {
   static const double defaultWarning = 100;
   static const double defaultAlert = 110;
   static const double defaultValue = 0;
+}
+
+class KenListBoxDefaults {
+  // supported by json_theme
+  static const Color defaultBackColor = kBack100;
+  static const Color defaultBorderColor = kPrimary;
+  static const double defaultBorderWidth = 1;
+  static const double defaultBorderRadius = 8.0;
+  static const double defaultFontSize = 12;
+  static const Color defaultFontColor = kSecondary100;
+  static const bool defaultFontBold = true;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultCaptionFontSize = 12;
+  static const Color defaultCaptionFontColor = kSecondary100;
+  static const double defaultWidth = 0;
+  static const double defaultHeight = 130;
+  static const EdgeInsetsGeometry defaultPadding =
+      EdgeInsets.only(left: 5, right: 5);
+  static const KenListType defaultListType = KenListType.oriented;
+  static const int defaultPortraitColumns = 1;
+  static const int defaultLandscapeColumns = 1;
+  static const String defaultLayout = '2';
+  static const Axis defaultOrientation = Axis.vertical;
+  static const String defaultDefaultSort = '';
+  static const String defaultBackgroundColName = '';
+  static const bool defaultShowSelection = false;
+  static const int defaultSelectedRow = 1;
+  static const double defaultListHeight = 300;
+  static const double defaultRealBoxHeight = 400;
 }
 
 ///GRAY COLOR

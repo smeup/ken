@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../models/KenMessageBusEventData.dart';
 import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_image_list_model.dart';
-import '../models/widgets/ken_list_box_model.dart';
+import '../../../../shiro/lib/models/ken_list_box_model.dart';
 import '../models/widgets/ken_model.dart';
 import '../services/ken_message_bus.dart';
 import '../services/ken_utilities.dart';

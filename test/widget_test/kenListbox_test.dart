@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/models/widgets/ken_list_box_model.dart';
+import '../../../shiro/lib/models/ken_list_box_model.dart';
 import '../../lib/smeup/widgets/kenListBox.dart';
 import 'widget_test_service.dart';
 
