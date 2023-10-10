@@ -50,6 +50,31 @@ class KenCarouselDefaults {
   static const double defaultHeight = 300;
 }
 
+class KenDashboardDefaults {
+  static const double defaultFontSize = 60;
+  static const Color defaultFontColor = kPrimary;
+  static const bool defaultFontBold = false;
+  static const double defaultCaptionFontSize = 20;
+  static const Color defaultCaptionFontColor = kPrimary;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultIconSize = 40;
+  static const Color defaultIconColor = kPrimary;
+  static const Color defaultBackgroundColor = Colors.transparent;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const double defaultWidth = 300;
+  static const double defaultHeight = 120;
+  static const String defaultValueColName = 'value';
+  static const String defaultIconColName = 'icon';
+  static const String defaultTextColName = 'description';
+  static const String defaultUmColName = 'um';
+  static const String defaultSelectLayout = '';
+  static const String defaultForceText = '';
+  static const String defaultForceIcon = '';
+  static const String defaultForceValue = '';
+  static const String defaultForceUm = '';
+  static const String defaultNumberFormat = '*;0';
+}
+
 class KenCalendarDefaults {
   // supported by json_theme
   static const double defaultDayFontSize = 14;
