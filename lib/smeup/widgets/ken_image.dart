@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/ken_widget_builder_response.dart';
 import '../models/widgets/ken_image_model.dart';
-import '../models/widgets/ken_model.dart';
-import '../services/ken_utilities.dart';
-import 'kenWidgetInterface.dart';
-import 'kenWidgetMixin.dart';
-import 'kenWidgetStateInterface.dart';
-import 'kenWidgetStateMixin.dart';
 
 // ignore: must_be_immutable
 class KenImage extends StatelessWidget {
@@ -31,57 +24,23 @@ class KenImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final box = runBuild(context, id, type, getInitialdataLoaded(_model),
-        notifierFunction: () {
-      setState(() {
-        widgetLoadType = LoadType.immediate;
-        setDataLoad(widget.id, false);
-      });
-    });
-    return box;
-  }
-
-  /// Label's structure:
-  /// define the structure ...
-  @override
-  Future<KenWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
-      if (_model != null) {
-        // await SmeupImageDao.getData(_model!);
-        await _model!.getData();
-        var res = widget.treatData(_model!);
-        _data = res['data'];
-        //isRemote = res['isRemote'];
-      }
-
-      setDataLoad(widget.id, true);
-    }
-
-    // if (_model.data == null) {
-    //   return getFunErrorResponse(context, _model);
-    // }
-
-    Widget children;
-
     Image image;
     if (isRemote!) {
       image = Image.network(
-        _data,
-        height: widget.height,
+        data!,
+        height: height,
         width: width,
       );
     } else {
       image = Image.asset(
-        _data,
-        height: widget.height,
-        width: widget.width,
+        data!,
+        height: height,
+        width: width,
       );
     }
-    children = Container(
-      padding: widget.padding,
+    return Container(
+      padding: padding,
       child: image,
     );
-
-    return KenWidgetBuilderResponse(_model, children);
   }
 }

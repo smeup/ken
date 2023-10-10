@@ -130,6 +130,11 @@ class KenDatepickerDefaults {
   static const Color defaultDashColor = kBack100;
 }
 
+class KenLineDefault {
+  static const Color defaultColor = kPrimary;
+  static const double defaultThickness = 1;
+}
+
 class KenSwitchDefaults {
   static const Color defaultThumbColor = kPrimary;
   static const Color defaultTrackColor = kInactivePrimary;
