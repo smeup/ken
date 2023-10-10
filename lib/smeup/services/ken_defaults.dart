@@ -94,6 +94,35 @@ class KenCalendarDefaults {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(8);
 }
 
+class KenDatepickerDefaults {
+  // supported by json_theme
+  static const Color defaultBorderColor = kPrimary;
+  static const double defaultBorderWidth = 1;
+  static const double defaultBorderRadius = 4.0;
+  static const bool defaultFontBold = false;
+  static const double defaultFontSize = 16;
+  static const Color defaultFontColor = kPrimary;
+  static const Color defaultBackColor = Colors.transparent;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultCaptionFontSize = 10;
+  static const Color defaultCaptionFontColor = kPrimary;
+  static const Color defaultCaptionBackColor = Colors.transparent;
+  static const double defaultElevation = 0;
+
+  // unsupported by json_theme
+  static const String defaultLabel = '';
+  static const double defaultWidth = 0;
+  static const double defaultHeight = 100;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(8);
+  static const bool defaultShowBorder = false;
+  static const String defaultValueField = 'value';
+  static const String defaultdisplayedField = 'display';
+  static const Alignment defaultAlign = Alignment.topCenter;
+  static const double defaultInnerSpace = 10.0;
+  static const bool defaultUnderline = false;
+  static const Color defaultDashColor = kBack100;
+}
+
 ///GRAY COLOR
 const Color kSecondary100 = Color(0xffB9BBBD);
 const Color kSecondary200 = Color(0xff596776);

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_datetime_picker/flutter_datetime_picker.dart'
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as datepicker;
 import 'package:intl/intl.dart';
-import '../models/KenMessageBusEventData.dart';
-import '../models/widgets/ken_datepicker_model.dart';
-import '../services/ken_message_bus.dart';
 import 'kenTimepicker.dart';
 
 // ignore: must_be_immutable
@@ -26,7 +22,6 @@ class KenDatePickerButton extends StatefulWidget {
   Color? captionFontColor;
   Color? captionBackColor;
   bool? underline;
-  KenDatePickerModel? model;
   final Function? clientOnChange;
   Color? dashColor;
 
@@ -43,8 +38,6 @@ class KenDatePickerButton extends StatefulWidget {
   final ButtonStyle buttonStyle;
   final TextStyle textStyle;
 
-  final String globallyUniqueId;
-
   KenDatePickerButton(
     this.id,
     this.buttonStyle,
@@ -53,31 +46,29 @@ class KenDatePickerButton extends StatefulWidget {
     this.scaffoldKey,
     this.formKey,
     this.value,
-    this.display = KenDatePickerModel.defaultdisplayedField,
-    this.borderColor = KenDatePickerModel.defaultBorderColor,
-    this.borderWidth = KenDatePickerModel.defaultBorderWidth,
-    this.borderRadius = KenDatePickerModel.defaultBorderRadius,
-    this.fontBold = KenDatePickerModel.defaultFontBold,
-    this.fontSize = KenDatePickerModel.defaultFontSize,
-    this.fontColor = KenDatePickerModel.defaultFontColor,
-    this.backColor = KenDatePickerModel.defaultBackColor,
-    this.elevation = KenDatePickerModel.defaultElevation,
-    this.captionFontBold = KenDatePickerModel.defaultCaptionFontBold,
-    this.captionFontSize = KenDatePickerModel.defaultCaptionFontSize,
-    this.captionFontColor = KenDatePickerModel.defaultCaptionFontColor,
-    this.captionBackColor = KenDatePickerModel.defaultCaptionBackColor,
-    this.underline = KenDatePickerModel.defaultUnderline,
-    this.align = KenDatePickerModel.defaultAlign,
-    this.label = KenDatePickerModel.defaultLabel,
-    this.width = KenDatePickerModel.defaultWidth,
-    this.height = KenDatePickerModel.defaultHeight,
-    this.padding = KenDatePickerModel.defaultPadding,
-    this.showborder = KenDatePickerModel.defaultShowBorder,
+    this.display,
+    this.borderColor,
+    this.borderWidth,
+    this.borderRadius,
+    this.fontBold,
+    this.fontSize,
+    this.fontColor,
+    this.backColor,
+    this.elevation,
+    this.captionFontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.captionBackColor,
+    this.underline,
+    this.align,
+    this.label,
+    this.width,
+    this.height,
+    this.padding,
+    this.showborder,
     this.clientOnChange,
-    this.model,
-    this.dashColor = KenDatePickerModel.defaultDashColor,
-    required this.globallyUniqueId,
-  }) {}
+    this.dashColor,
+  });
 
   @override
   KenDatePickerButtonState createState() => KenDatePickerButtonState();
@@ -92,12 +83,6 @@ class KenDatePickerButtonState extends State<KenDatePickerButton> {
     _currentValue = widget.value;
     _currentDisplay = widget.display;
 
-    KenMessageBus.instance.publishRequest(
-      widget.globallyUniqueId,
-      KenTopic.kenDatePickerInit,
-      KenMessageBusEventData(
-          context: context, widget: widget, model: null, data: null),
-    );
     super.initState();
   }
 
@@ -124,16 +109,6 @@ class KenDatePickerButtonState extends State<KenDatePickerButton> {
                   final newDate = DateFormat('dd/MM/yyyy').format(date);
                   _currentDisplay = newDate;
                   _currentValue = date;
-
-                  KenMessageBus.instance.publishRequest(
-                    widget.globallyUniqueId,
-                    KenTopic.kenDatePickerOnPressed,
-                    KenMessageBusEventData(
-                        context: context,
-                        widget: widget,
-                        model: null,
-                        data: newDate),
-                  );
 
                   if (widget.clientOnChange != null) {
                     widget.clientOnChange!(KenTimePickerData(
