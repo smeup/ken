@@ -225,6 +225,25 @@ class KenGaugeDefaults {
   static const double defaultValue = 0;
 }
 
+class KenTreeDefaults {
+  static const double defaultWidth = 100;
+  static const double defaultHeight = 100;
+
+  static const double defaultLabelFontSize = 16;
+  static const Color defaultLabelBackColor = Colors.white;
+  static const Color defaultLabelFontColor = Colors.black;
+  static const bool defaultLabelFontbold = false;
+  static const double defaultLabelVerticalSpacing = 2;
+  static const double defaultLabelHeight = 10;
+
+  static const double defaultParentFontSize = 20;
+  static const Color defaultParentBackColor = Colors.white;
+  static const Color defaultParentFontColor = Colors.black;
+  static const bool defaultParentFontbold = true;
+  static const double defaultParentVerticalSpacing = 2;
+  static const double defaultParentHeight = 10;
+}
+
 ///GRAY COLOR
 const Color kSecondary100 = Color(0xffB9BBBD);
 const Color kSecondary200 = Color(0xff596776);
