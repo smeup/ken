@@ -19,7 +19,8 @@ class KenQRCodeReader extends StatelessWidget {
   String? type;
   String? data;
 
-  KenQRCodeReader(
+  KenQRCodeReader(smeupModel, GlobalKey<ScaffoldState> scaffoldKey,
+      GlobalKey<FormState>? formKey,
       {super.key,
       this.id = '',
       this.type = 'QRC',
