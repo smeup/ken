@@ -5,7 +5,7 @@ import '../models/widgets/ken_combo_item_model.dart';
 import '../models/widgets/ken_combo_model.dart';
 import '../services/ken_utilities.dart';
 import 'kenComboWidget.dart';
-import 'kenLine.dart';
+import 'ken_line.dart';
 
 // ignore: must_be_immutable
 class KenCombo extends StatelessWidget {
@@ -87,8 +87,7 @@ class KenCombo extends StatelessWidget {
   Widget build(BuildContext context) {
     var text = label!.isEmpty
         ? Container()
-        : Text(label!,
-            textAlign: TextAlign.center, style: _getCaptionStile());
+        : Text(label!, textAlign: TextAlign.center, style: _getCaptionStile());
 
     double boxHeight = height!;
     if (boxHeight == 0) {
@@ -116,8 +115,7 @@ class KenCombo extends StatelessWidget {
           height: boxHeight,
           decoration: showBorder == true
               ? BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(borderRadius ?? 0.0),
+                  borderRadius: BorderRadius.circular(borderRadius ?? 0.0),
                   border: Border.all(
                       color: borderColor ?? Colors.transparent,
                       width: borderWidth ?? 0.0),
@@ -147,9 +145,7 @@ class KenCombo extends StatelessWidget {
           )),
     );
 
-    var line = underline!
-        ? KenLine(scaffoldKey, formKey)
-        : Container();
+    var line = underline! ? KenLine(scaffoldKey, formKey) : Container();
 
     Widget children;
 

@@ -314,9 +314,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
               if (_isLoading)
                 Padding(
                   padding: const EdgeInsets.only(top: 180.0),
-                  child: KenProgressIndicator(
-                      widget.scaffoldKey, widget.formKey,
-                      size: 60),
+                  child: KenProgressIndicator(size: 60),
                 )
             ]),
             Padding(

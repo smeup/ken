@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'globallyUniqueIdExtension.dart';
+import 'package:uuid/uuid.dart';
 
 // ignore: must_be_immutable
 class KenDrawerItem extends StatelessWidget {
@@ -20,6 +19,8 @@ class KenDrawerItem extends StatelessWidget {
   final double? iconSize;
 
   static Map<int, String> widgetUniqueIds = {};
+  Uuid uuid = const Uuid();
+
   String get globallyUniqueId {
     if (!widgetUniqueIds.containsKey(hashCode)) {
       widgetUniqueIds[hashCode] = uuid.v4();
@@ -27,7 +28,7 @@ class KenDrawerItem extends StatelessWidget {
     return widgetUniqueIds[hashCode]!;
   }
 
-  const KenDrawerItem(this.scaffoldKey, this.formKey, this.text, this.route,
+  KenDrawerItem(this.scaffoldKey, this.formKey, this.text, this.route,
       this.iconData, this.action, this.align, this.showItemDivider,
       {super.key,
       this.fontSize,

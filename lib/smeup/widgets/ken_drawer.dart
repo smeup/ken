@@ -2,7 +2,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import '../models/widgets/ken_drawer_data_element.dart';
 import '../services/ken_defaults.dart';
-import 'kenDrawerItem.dart';
+import 'ken_drawer_item.dart';
 
 // ignore: must_be_immutable
 class KenDrawer extends StatefulWidget {
