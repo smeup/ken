@@ -211,6 +211,8 @@ class KenSliderDefaults {
 
 class KenSplashDefaults {
   static const Color defaultColor = kIconColor;
+  static const String type = 'spl';
+  static const String title = '';
 }
 
 class KenComboDefaults {
