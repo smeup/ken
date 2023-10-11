@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import '../models/widgets/ken_image_model.dart';
+import '../services/ken_utilities.dart';
 
 // ignore: must_be_immutable
-class KenImage extends StatelessWidget {
+class KenImage extends StatefulWidget {
+  KenImageModel? model;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<FormState>? formKey;
+
   // graphic properties
   double? width;
   double? height;
@@ -13,7 +18,7 @@ class KenImage extends StatelessWidget {
   String? type;
   bool? isRemote;
 
-  KenImage(this.data,
+  KenImage(this.scaffoldKey, this.formKey, this.data,
       {this.id = '',
       this.type = 'IMG',
       this.width = KenImageModel.defaultWidth,
@@ -23,24 +28,46 @@ class KenImage extends StatelessWidget {
       title = ''});
 
   @override
+  KenImageState createState() => KenImageState();
+}
+
+class KenImageState extends State<KenImage> {
+  dynamic _data;
+
+  @override
+  void initState() {
+    _data = widget.data;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Widget children;
+
     Image image;
-    if (isRemote!) {
+    if (widget.isRemote!) {
       image = Image.network(
-        data!,
-        height: height,
-        width: width,
+        _data,
+        height: widget.height,
+        width: widget.width,
       );
     } else {
       image = Image.asset(
-        data!,
-        height: height,
-        width: width,
+        _data,
+        height: widget.height,
+        width: widget.width,
       );
     }
-    return Container(
-      padding: padding,
+    children = Container(
+      padding: widget.padding,
       child: image,
     );
+
+    return children;
   }
 }
