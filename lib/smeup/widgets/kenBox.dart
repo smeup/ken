@@ -36,44 +36,45 @@ class KenBox extends StatefulWidget {
   final bool? isFirestore;
   final KenListBox kenListBox;
   final Function? onDismissed;
+  final Function? onConfirmDismiss;
   final Function? onGetBoxImage;
   final Function? onGetBoxText;
+  final Function? onGetButtons;
+  final Function? onGetButtonsColumns;
 
-  KenBox(
-    this.scaffoldKey,
-    this.formKey,
-    this.index,
-    this.kenListBox, {
-    super.key,
-    this.id,
-    this.selectedRow,
-    this.columns,
-    this.data,
-    this.onRefresh,
-    this.showLoader,
-    this.layout,
-    this.onItemTap,
-    this.backColor,
-    this.fontColor,
-    this.width,
-    this.height,
-    this.dismissEnabled,
-    this.showSelection,
-    this.cardTheme,
-    this.textStyle,
-    this.captionStyle,
-    this.onSizeChanged,
-    this.isFirestore,
-    this.onDismissed,
-    this.onGetBoxImage,
-    this.onGetBoxText,
-  });
+  KenBox(this.scaffoldKey, this.formKey, this.index, this.kenListBox,
+      {super.key,
+      this.id,
+      this.selectedRow,
+      this.columns,
+      this.data,
+      this.onRefresh,
+      this.showLoader,
+      this.layout,
+      this.onItemTap,
+      this.backColor,
+      this.fontColor,
+      this.width,
+      this.height,
+      this.dismissEnabled,
+      this.showSelection,
+      this.cardTheme,
+      this.textStyle,
+      this.captionStyle,
+      this.onSizeChanged,
+      this.isFirestore,
+      this.onDismissed,
+      this.onConfirmDismiss,
+      this.onGetBoxImage,
+      this.onGetBoxText,
+      this.onGetButtons,
+      this.onGetButtonsColumns});
 
   @override
   KenBoxState createState() => KenBoxState();
 }
 
-class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
+class KenBoxState extends State<KenBox> {
   List<dynamic>? _columns;
   double elevation = 0;
 
@@ -89,10 +90,9 @@ class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final box = FutureBuilder<KenWidgetBuilderResponse>(
+    final box = FutureBuilder<Widget>(
       future: _getBoxComponent(),
-      builder: (BuildContext context,
-          AsyncSnapshot<KenWidgetBuilderResponse> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           //??? va gestito in shiro
           // return widget.showLoader!
@@ -101,13 +101,14 @@ class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
           return Container();
         } else {
           if (snapshot.hasError) {
-            KenLogService.writeDebugMessage(
-                'Error SmeupBox: ${snapshot.error} ${snapshot.stackTrace}. StackTrace: ${snapshot.stackTrace}',
-                logType: KenLogType.error);
-            notifyError(context, widget.id, snapshot.error);
+            // TODO writeDebugMessage
+            // KenLogService.writeDebugMessage(
+            //     'Error SmeupBox: ${snapshot.error} ${snapshot.stackTrace}. StackTrace: ${snapshot.stackTrace}',
+            //     logType: KenLogType.error);
+            // notifyError(context, widget.id, snapshot.error);
             return Container();
           } else {
-            return snapshot.data!.children!;
+            return snapshot.data!;
           }
         }
       },
@@ -116,7 +117,7 @@ class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
     return box;
   }
 
-  Future<KenWidgetBuilderResponse> _getBoxComponent() async {
+  Future<Widget> _getBoxComponent() async {
     Widget box;
 
     if (widget.showSelection! && widget.index == widget.selectedRow) {
@@ -136,9 +137,10 @@ class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
         box = await _getLayoutImageList(widget.data);
         break;
       default:
-        KenLogService.writeDebugMessage(
-            'No layout received. Used default layout',
-            logType: KenLogType.warning);
+        // TODO writeDebugMessage
+        // KenLogService.writeDebugMessage(
+        //     'No layout received. Used default layout',
+        //     logType: KenLogType.warning);
 
         box = await _getLayoutDefault(widget.data);
         break;
@@ -149,12 +151,9 @@ class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
             key: Key('${widget.formKey.toString()}_${widget.id}'),
             direction: DismissDirection.endToStart,
             confirmDismiss: (DismissDirection direction) async {
-              KenMessageBus.instance.publishRequest(
-                widget.globallyUniqueId,
-                KenTopic.kenBoxConfirmDismiss,
-                KenMessageBusEventData(
-                    context: context, widget: widget, model: null, data: null),
-              );
+              if (widget.onConfirmDismiss != null) {
+                widget.onConfirmDismiss!();
+              }
 
               return await showDialog(
                 context: context,
@@ -214,7 +213,7 @@ class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
       container = _getContainer(res);
     }
 
-    return KenWidgetBuilderResponse(null, container);
+    return container;
   }
 
   Container _getContainer(res) {
@@ -256,8 +255,9 @@ class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
       );
     }
 
-    KenLogService.writeDebugMessage('Error SmeupBox widget not created',
-        logType: KenLogType.error);
+    // TODO writeDebugMessage
+    // KenLogService.writeDebugMessage('Error SmeupBox widget not created',
+    //     logType: KenLogType.error);
 
     return KenNotAvailable();
   }
@@ -335,8 +335,9 @@ class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
       );
     }
 
-    KenLogService.writeDebugMessage('Error SmeupBox widget not created',
-        logType: KenLogType.error);
+    // TODO writeDebugMessage
+    // KenLogService.writeDebugMessage('Error SmeupBox widget not created',
+    //     logType: KenLogType.error);
 
     return KenNotAvailable();
   }
@@ -425,8 +426,9 @@ class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
       );
     }
 
-    KenLogService.writeDebugMessage('Error SmeupBox widget not created',
-        logType: KenLogType.error);
+    // TODO writeDebugMessage
+    // KenLogService.writeDebugMessage('Error SmeupBox widget not created',
+    //     logType: KenLogType.error);
 
     return KenNotAvailable();
   }
@@ -520,6 +522,7 @@ class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
       );
     }
 
+    // TODO writeDebugMessage
     // KenLogService.writeDebugMessage('Error SmeupBox widget not created',
     //     logType: KenLogType.error);
 
@@ -640,30 +643,13 @@ class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
 
     var columns = await _getColumns(data);
 
-    KenMessageBusEvent response =
-        await KenMessageBus.instance.publishRequestAndAwait(
-      widget.globallyUniqueId,
-      KenTopic.kenBoxGetColumnsButtons,
-      KenMessageBusEventData(
-          context: context,
-          widget: widget,
-          model: null,
-          data: columns,
-          parameters: [buttonCols]),
-    );
-    buttonCols = response.data.data;
+    if (widget.onGetButtonsColumns != null) {
+      buttonCols = widget.onGetButtonsColumns!(columns);
+    }
 
-    response = await KenMessageBus.instance.publishRequestAndAwait(
-      widget.globallyUniqueId,
-      KenTopic.kenBoxGetButtons,
-      KenMessageBusEventData(
-          context: context,
-          widget: widget,
-          model: null,
-          data: data,
-          parameters: [buttonCols]),
-    );
-    widgetBtns = response.data.data;
+    if (widget.onGetButtons != null) {
+      widgetBtns = widget.onGetButtons!(data, buttonCols);
+    }
 
     return widgetBtns;
   }
@@ -679,17 +665,7 @@ class KenBoxState extends State<KenBox> with KenWidgetStateMixin {
       if (widget.columns != null) {
         _columns = widget.columns;
       } else {
-        final response = await KenMessageBus.instance.publishRequestAndAwait(
-          widget.globallyUniqueId,
-          KenTopic.kenBoxGetButtons,
-          KenMessageBusEventData(
-              context: context,
-              widget: widget,
-              model: null,
-              data: data,
-              parameters: [_columns]),
-        );
-        _columns = response.data.data;
+        _columns = widget.onGetButtons!(data, _columns);
       }
     }
 
