@@ -169,6 +169,25 @@ class KenQRCodeReaderDefaults {
   static const int defaultDealyInMillis = 0;
 }
 
+// class KenRadioButtonsDefaults {
+//   static const Color defaultRadioButtonColor = kPrimary;
+//   static const double defaultFontSize = 14;
+//   static const Color defaultFontColor = kPrimary;
+//   static const Color defaultBackColor = Colors.transparent;
+//   static const bool defaultFontBold = false;
+//   static const bool defaultCaptionFontBold = false;
+//   static const double defaultCaptionFontSize = 16;
+//   static const Color defaultCaptionFontColor = kPrimary;
+//   static const Color defaultCaptionBackColor = Colors.transparent;
+//   static const String defaultValueField = 'code';
+//   static const String defaultDisplayedField = 'value';
+//   static const Alignment defaultAlign = Alignment.centerLeft;
+//   static const double defaultWidth = 120;
+//   static const double defaultHeight = 150;
+//   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(16);
+//   static const int defaultColumns = 1;
+// }
+
 class KenSwitchDefaults {
   static const Color defaultThumbColor = kPrimary;
   static const Color defaultTrackColor = kInactivePrimary;
@@ -180,6 +199,20 @@ class KenSwitchDefaults {
   static const double defaultHeight = 50;
   static const Alignment defaultAlign = Alignment.center;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+}
+
+class KenSliderDefaults {
+  static const Color defaultActiveTrackColor = kPrimary;
+  static const Color defaultThumbColor = kPrimary;
+  static const Color defaultInactiveTrackColor = kInactivePrimary;
+  static const EdgeInsetsGeometry defaultPadding =
+      EdgeInsets.only(left: 10, right: 10);
+  static const double defaultSldMin = 0;
+  static const double defaultSldMax = 100;
+}
+
+class KenSplashDefaults {
+  static const Color defaultColor = kIconColor;
 }
 
 class KenComboDefaults {
@@ -268,6 +301,31 @@ class KenListBoxDefaults {
   static const int defaultSelectedRow = 1;
   static const double defaultListHeight = 300;
   static const double defaultRealBoxHeight = 400;
+}
+
+class KenSpotlightDefaults {
+  static const double defaultFontSize = 16;
+  static const Color defaultBackColor = kBack200;
+  static const Color defaultFontColor = kSecondary100;
+  static const bool defaultFontBold = false;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultCaptionFontSize = 14;
+  static const Color defaultCaptionFontColor = kPrimary;
+  static const Color defaultCaptionBackColor = kBack200;
+  static const Color defaultBorderColor = kPrimary;
+  static const double defaultBorderWidth = 0;
+  static const double defaultBorderRadius = 10;
+  static const Color defaultIconColor = kPrimary;
+  static const double defaultIconSize = 10;
+  static const String defaultLabel = '';
+  static const double defaultWidth = double.maxFinite;
+  static const double defaultHeight = 55;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const bool defaultShowBorder = false;
+  static const bool defaultAutoFocus = false;
+  static const bool defaultUnderline = false;
+  static const String defaultSubmitLabel = '';
+  static const bool defaultShowSubmit = false;
 }
 
 class KenTreeDefaults {
