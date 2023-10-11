@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../../shiro/lib/models/ken_radio_buttons_model.dart';
+import '../services/ken_defaults.dart';
+import 'ken_radio_buttons.dart';
 
 // ignore: must_be_immutable
 class KenRadioButton extends StatefulWidget {
@@ -37,22 +38,22 @@ class KenRadioButton extends StatefulWidget {
       this.id = '',
       this.type = 'rad',
       this.title = '',
-      this.radioButtonColor = KenRadioButtonsModel.defaultRadioButtonColor,
-      this.fontSize = KenRadioButtonsModel.defaultFontSize,
-      this.fontColor = KenRadioButtonsModel.defaultFontColor,
-      this.backColor = KenRadioButtonsModel.defaultBackColor,
-      this.fontBold = KenRadioButtonsModel.defaultFontBold,
-      this.captionFontSize = KenRadioButtonsModel.defaultCaptionFontSize,
-      this.captionFontColor = KenRadioButtonsModel.defaultFontColor,
-      this.captionBackColor = KenRadioButtonsModel.defaultCaptionBackColor,
-      this.captionFontBold = KenRadioButtonsModel.defaultCaptionFontBold,
+      this.radioButtonColor = KenRadioButtonsDefaults.defaultRadioButtonColor,
+      this.fontSize = KenRadioButtonsDefaults.defaultFontSize,
+      this.fontColor = KenRadioButtonsDefaults.defaultFontColor,
+      this.backColor = KenRadioButtonsDefaults.defaultBackColor,
+      this.fontBold = KenRadioButtonsDefaults.defaultFontBold,
+      this.captionFontSize = KenRadioButtonsDefaults.defaultCaptionFontSize,
+      this.captionFontColor = KenRadioButtonsDefaults.defaultFontColor,
+      this.captionBackColor = KenRadioButtonsDefaults.defaultCaptionBackColor,
+      this.captionFontBold = KenRadioButtonsDefaults.defaultCaptionFontBold,
       this.data,
-      this.width = KenRadioButtonsModel.defaultWidth,
-      this.height = KenRadioButtonsModel.defaultHeight,
-      this.align = KenRadioButtonsModel.defaultAlign,
-      this.padding = KenRadioButtonsModel.defaultPadding,
-      this.valueField = KenRadioButtonsModel.defaultValueField,
-      this.displayedField = KenRadioButtonsModel.defaultDisplayedField,
+      this.width = KenRadioButtonsDefaults.defaultWidth,
+      this.height = KenRadioButtonsDefaults.defaultHeight,
+      this.align = KenRadioButtonsDefaults.defaultAlign,
+      this.padding = KenRadioButtonsDefaults.defaultPadding,
+      this.valueField = KenRadioButtonsDefaults.defaultValueField,
+      this.displayedField = KenRadioButtonsDefaults.defaultDisplayedField,
       this.selectedValue,
       this.icon,
       this.onPressed});

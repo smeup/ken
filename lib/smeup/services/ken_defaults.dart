@@ -169,24 +169,24 @@ class KenQRCodeReaderDefaults {
   static const int defaultDealyInMillis = 0;
 }
 
-class KenRadioButtonsDefaults {
-  static const Color defaultRadioButtonColor = kPrimary;
-  static const double defaultFontSize = 14;
-  static const Color defaultFontColor = kPrimary;
-  static const Color defaultBackColor = Colors.transparent;
-  static const bool defaultFontBold = false;
-  static const bool defaultCaptionFontBold = false;
-  static const double defaultCaptionFontSize = 16;
-  static const Color defaultCaptionFontColor = kPrimary;
-  static const Color defaultCaptionBackColor = Colors.transparent;
-  static const String defaultValueField = 'code';
-  static const String defaultDisplayedField = 'value';
-  static const Alignment defaultAlign = Alignment.centerLeft;
-  static const double defaultWidth = 120;
-  static const double defaultHeight = 150;
-  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(16);
-  static const int defaultColumns = 1;
-}
+// class KenRadioButtonsDefaults {
+//   static const Color defaultRadioButtonColor = kPrimary;
+//   static const double defaultFontSize = 14;
+//   static const Color defaultFontColor = kPrimary;
+//   static const Color defaultBackColor = Colors.transparent;
+//   static const bool defaultFontBold = false;
+//   static const bool defaultCaptionFontBold = false;
+//   static const double defaultCaptionFontSize = 16;
+//   static const Color defaultCaptionFontColor = kPrimary;
+//   static const Color defaultCaptionBackColor = Colors.transparent;
+//   static const String defaultValueField = 'code';
+//   static const String defaultDisplayedField = 'value';
+//   static const Alignment defaultAlign = Alignment.centerLeft;
+//   static const double defaultWidth = 120;
+//   static const double defaultHeight = 150;
+//   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(16);
+//   static const int defaultColumns = 1;
+// }
 
 class KenSwitchDefaults {
   static const Color defaultThumbColor = kPrimary;

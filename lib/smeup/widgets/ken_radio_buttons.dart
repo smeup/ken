@@ -36,6 +36,7 @@ class KenRadioButtons extends StatefulWidget {
   Function? onInit;
   Function? onGetChildren;
   Function? onPressed;
+  Function? onSelData;
 
   KenRadioButtons(this.scaffoldKey, this.formKey,
       {this.id = '',
@@ -58,10 +59,11 @@ class KenRadioButtons extends StatefulWidget {
       this.valueField = KenRadioButtonsDefaults.defaultValueField,
       this.displayedField = KenRadioButtonsDefaults.defaultDisplayedField,
       this.selectedValue,
-      this.clientOnPressed(String value)?,
+      this.clientOnPressed,
       this.columns = KenRadioButtonsDefaults.defaultColumns,
       this.onInit,
       this.onGetChildren,
+      this.onSelData,
       this.onPressed});
 
   @override
@@ -172,16 +174,9 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
         ),
       );
 
-      KenMessageBus.instance.publishRequest(
-        widget.globallyUniqueId,
-        KenTopic.kenRadioButtonSelData,
-        KenMessageBusEventData(
-          context: context,
-          widget: widget,
-          model: _model,
-          data: _data,
-        ),
-      );
+      if (widget.onSelData != null) {
+        widget.onSelData!(_data);
+      }
 
       return container;
     } else {
