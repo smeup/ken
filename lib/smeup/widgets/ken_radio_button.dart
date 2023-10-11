@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../models/widgets/ken_radio_buttons_model.dart';
+import '../../../../shiro/lib/models/ken_radio_buttons_model.dart';
 
 // ignore: must_be_immutable
 class KenRadioButton extends StatefulWidget {

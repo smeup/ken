@@ -7,8 +7,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/kenRadioButton.dart';
-import '../../lib/smeup/widgets/kenRadioButtons.dart';
+import '../../lib/smeup/widgets/ken_radio_button.dart';
+import '../../lib/smeup/widgets/ken_radio_buttons.dart';
 
 import 'widget_test_service.dart';
 
