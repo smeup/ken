@@ -511,6 +511,40 @@ class KenTextFieldDefaults {
   static const bool defaultUnderline = false;
 }
 
+class KenTextFieldPasswordDefaults {
+  // supported by json_theme
+  static const double defaultFontSize = 16;
+  static const Color defaultBackColor = Colors.transparent;
+  static const Color defaultFontColor = kPrimary;
+  static const bool defaultFontBold = false;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultCaptionFontSize = 14;
+  static const Color defaultCaptionFontColor = kPrimary;
+  static const Color defaultCaptionBackColor = Colors.transparent;
+  static const Color defaultBorderColor = kPrimary;
+  static const double defaultBorderWidth = 2.0;
+  static const double defaultBorderRadius = 8;
+  static const Color defaultButtonBackColor = Colors.transparent;
+  static const double defaultIconSize = 20;
+  static const Color defaultIconColor = kPrimary;
+
+  // unsupported by json_theme
+
+  static const String defaultLabel = '';
+  static const String defaultSubmitLabel = '';
+  static const double defaultWidth = 100;
+  static const double defaultHeight = 100;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const bool defaultShowBorder = false;
+  static const bool defaultAutoFocus = false;
+  static const String defaultValueField = 'value';
+  static const bool defaultShowSubmit = false;
+  static const bool defaultUnderline = true;
+  static const bool defaultShowRules = true;
+  static const bool defaultShowRulesIcon = true;
+  static const bool defaultCheckRules = true;
+}
+
 ///GRAY COLOR
 const Color kSecondary100 = Color(0xffB9BBBD);
 const Color kSecondary200 = Color(0xff596776);

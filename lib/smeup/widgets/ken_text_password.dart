@@ -4,25 +4,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../models/ken_widget_builder_response.dart';
 import '../models/notifiers/ken_text_password_rule_notifier.dart';
 import '../models/notifiers/ken_text_password_visibility_notifier.dart';
-import '../models/widgets/ken_model.dart';
-import '../models/widgets/ken_text_password_model.dart';
+import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
 import 'ken_text_field.dart';
-import 'kenTextPasswordIndicators.dart';
-import 'kenWidgetInterface.dart';
-import 'kenWidgetMixin.dart';
-import 'kenWidgetStateInterface.dart';
-import 'kenWidgetStateMixin.dart';
+import 'ken_text_password_indicators.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
-class KenTextPassword extends StatefulWidget
-    with KenWidgetMixin
-    implements KenWidgetInterface {
-  KenTextPasswordModel? model;
+class KenTextPassword extends StatefulWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;
 
@@ -65,160 +56,68 @@ class KenTextPassword extends StatefulWidget
 
   List<TextInputFormatter>? inputFormatters;
 
-  KenTextPassword.withController(
-    KenTextPasswordModel this.model,
-    this.scaffoldKey,
-    this.formKey,
-  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model!);
-  }
-
   KenTextPassword(
     this.scaffoldKey,
     this.formKey, {
     this.id = '',
     this.type = 'FLD',
-    this.backColor = KenTextPasswordModel.defaultBackColor,
-    this.fontSize = KenTextPasswordModel.defaultFontSize,
-    this.fontBold = KenTextPasswordModel.defaultFontBold,
-    this.fontColor = KenTextPasswordModel.defaultFontColor,
-    this.captionBackColor = KenTextPasswordModel.defaultCaptionBackColor,
-    this.captionFontBold = KenTextPasswordModel.defaultFontBold,
-    this.captionFontColor = KenTextPasswordModel.defaultFontColor,
-    this.captionFontSize = KenTextPasswordModel.defaultFontSize,
-    this.borderColor = KenTextPasswordModel.defaultBorderColor,
-    this.borderRadius = KenTextPasswordModel.defaultBorderRadius,
-    this.borderWidth = KenTextPasswordModel.defaultBorderWidth,
-    this.iconSize = KenTextPasswordModel.defaultIconSize,
-    this.iconColor = KenTextPasswordModel.defaultIconColor,
-    this.buttonBackColor = KenTextPasswordModel.defaultButtonBackColor,
-    this.label = KenTextPasswordModel.defaultLabel,
-    this.submitLabel = KenTextPasswordModel.defaultSubmitLabel,
-    this.width = KenTextPasswordModel.defaultWidth,
-    this.height = KenTextPasswordModel.defaultHeight,
-    this.padding = KenTextPasswordModel.defaultPadding,
-    this.showBorder = KenTextPasswordModel.defaultShowBorder,
+    this.backColor = KenTextFieldPasswordDefaults.defaultBackColor,
+    this.fontSize = KenTextFieldPasswordDefaults.defaultFontSize,
+    this.fontBold = KenTextFieldPasswordDefaults.defaultFontBold,
+    this.fontColor = KenTextFieldPasswordDefaults.defaultFontColor,
+    this.captionBackColor =
+        KenTextFieldPasswordDefaults.defaultCaptionBackColor,
+    this.captionFontBold = KenTextFieldPasswordDefaults.defaultFontBold,
+    this.captionFontColor = KenTextFieldPasswordDefaults.defaultFontColor,
+    this.captionFontSize = KenTextFieldPasswordDefaults.defaultFontSize,
+    this.borderColor = KenTextFieldPasswordDefaults.defaultBorderColor,
+    this.borderRadius = KenTextFieldPasswordDefaults.defaultBorderRadius,
+    this.borderWidth = KenTextFieldPasswordDefaults.defaultBorderWidth,
+    this.iconSize = KenTextFieldPasswordDefaults.defaultIconSize,
+    this.iconColor = KenTextFieldPasswordDefaults.defaultIconColor,
+    this.buttonBackColor = KenTextFieldPasswordDefaults.defaultButtonBackColor,
+    this.label = KenTextFieldPasswordDefaults.defaultLabel,
+    this.submitLabel = KenTextFieldPasswordDefaults.defaultSubmitLabel,
+    this.width = KenTextFieldPasswordDefaults.defaultWidth,
+    this.height = KenTextFieldPasswordDefaults.defaultHeight,
+    this.padding = KenTextFieldPasswordDefaults.defaultPadding,
+    this.showBorder = KenTextFieldPasswordDefaults.defaultShowBorder,
     this.data,
-    this.underline = KenTextPasswordModel.defaultUnderline,
-    this.autoFocus = KenTextPasswordModel.defaultAutoFocus,
-    this.valueField = KenTextPasswordModel.defaultValueField,
-    this.showSubmit = KenTextPasswordModel.defaultShowSubmit,
-    this.showRules = KenTextPasswordModel.defaultShowRules,
-    this.showRulesIcon = KenTextPasswordModel.defaultShowRulesIcon,
-    this.checkRules = KenTextPasswordModel.defaultCheckRules,
+    this.underline = KenTextFieldPasswordDefaults.defaultUnderline,
+    this.autoFocus = KenTextFieldPasswordDefaults.defaultAutoFocus,
+    this.valueField = KenTextFieldPasswordDefaults.defaultValueField,
+    this.showSubmit = KenTextFieldPasswordDefaults.defaultShowSubmit,
+    this.showRules = KenTextFieldPasswordDefaults.defaultShowRules,
+    this.showRulesIcon = KenTextFieldPasswordDefaults.defaultShowRulesIcon,
+    this.checkRules = KenTextFieldPasswordDefaults.defaultCheckRules,
     this.clientValidator, // ?
     this.clientOnSave,
     this.clientOnChange,
     this.inputFormatters, // ?
     this.clientOnSubmit,
-  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
-    id = KenUtilities.getWidgetId(type, id);
-  }
-
-  @override
-  runControllerActivities(KenModel model) {
-    KenTextPasswordModel m = model as KenTextPasswordModel;
-    id = m.id;
-    type = m.type;
-    backColor = m.backColor;
-    fontSize = m.fontSize;
-    fontBold = m.fontBold;
-    fontColor = m.fontColor;
-    captionBackColor = m.captionBackColor;
-    captionFontBold = m.captionFontBold;
-    captionFontColor = m.captionFontColor;
-    captionFontSize = m.captionFontSize;
-    borderColor = m.borderColor;
-    borderRadius = m.borderRadius;
-    borderWidth = m.borderWidth;
-    label = m.label;
-    submitLabel = m.submitLabel;
-    width = m.width;
-    height = m.height;
-    padding = m.padding;
-    showBorder = m.showBorder;
-    showRules = m.showRules;
-    checkRules = m.checkRules;
-    showRulesIcon = m.showRulesIcon;
-    showSubmit = m.showSubmit;
-    underline = m.underline;
-    autoFocus = m.autoFocus;
-    valueField = m.valueField;
-    iconSize = m.iconSize;
-    iconColor = m.iconColor;
-    buttonBackColor = m.buttonBackColor;
-
-    data = treatData(m);
-  }
-
-  @override
-  dynamic treatData(KenModel model) {
-    KenTextPasswordModel m = model as KenTextPasswordModel;
-
-    // change data format
-    var workData = formatDataFields(m);
-
-    // set the widget data
-    if (workData != null &&
-        (workData['rows'] as List).isNotEmpty &&
-        workData['rows'][0][m.valueField] != null) {
-      return workData['rows'][0][m.valueField].toString();
-    } else {
-      return '';
-    }
-  }
+  });
 
   @override
   _KenTextPasswordState createState() => _KenTextPasswordState();
 }
 
-class _KenTextPasswordState extends State<KenTextPassword>
-    with KenWidgetStateMixin
-    implements KenWidgetStateInterface {
-  KenTextPasswordModel? _model;
+class _KenTextPasswordState extends State<KenTextPassword> {
   dynamic _data;
   // bool _passwordVisible;
 
   @override
   void initState() {
-    _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
   @override
   void dispose() {
-    runDispose(widget.scaffoldKey, widget.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final password = runBuild(context, widget.id, widget.type,
-        widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
-      setState(() {
-        widgetLoadType = LoadType.immediate;
-        setDataLoad(widget.id, false);
-      });
-    });
-
-    return password;
-  }
-
-  /// Input text's structure:
-  @override
-  Future<KenWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
-      if (_model != null) {
-        // await SmeupTextPasswordDao.getData(_model!);
-        await _model!.getData();
-        _data = widget.treatData(_model!);
-      }
-
-      setDataLoad(widget.id, true);
-    }
-
     final passwordModel =
         Provider.of<KenTextPasswordRuleNotifier>(context, listen: false);
     final passwordFieldModel =
@@ -341,7 +240,7 @@ class _KenTextPasswordState extends State<KenTextPassword>
       ],
     );
 
-    return KenWidgetBuilderResponse(_model, children);
+    return children;
   }
 
   IconThemeData _getIconTheme() {
