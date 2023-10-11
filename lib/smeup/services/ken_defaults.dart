@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import '../widgets/ken_list_box.dart';
@@ -482,6 +480,33 @@ class KenTextAutocompleteDefaults {
   static const bool defaultUnderline = false;
   static const String defaultSubmitLabel = '';
   static const bool defaultShowSubmit = false;
+}
+
+class KenTextFieldDefaults {
+  // supported by json_theme
+  static const double defaultFontSize = 16;
+  static const Color defaultBackColor = Colors.transparent;
+  static const Color defaultFontColor = kSecondary100;
+  static const bool defaultFontBold = false;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultCaptionFontSize = 14;
+  static const Color defaultCaptionFontColor = kPrimary;
+  static const Color defaultCaptionBackColor = Colors.transparent;
+  static const Color defaultBorderColor = kPrimary;
+  static const double defaultBorderWidth = 2;
+  static const double defaultBorderRadius = 8;
+
+  // unsupported by json_theme
+  static const String defaultLabel = '';
+  static const String defaultSubmitLabel = '';
+  static const double defaultWidth = 100;
+  static const double defaultHeight = double.maxFinite;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(8);
+  static const bool defaultShowBorder = false;
+  static const bool defaultAutoFocus = false;
+  static const String defaultValueField = 'value';
+  static const bool defaultShowSubmit = false;
+  static const bool defaultUnderline = false;
 }
 
 ///GRAY COLOR

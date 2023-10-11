@@ -10,7 +10,7 @@ import '../models/notifiers/ken_text_password_visibility_notifier.dart';
 import '../models/widgets/ken_model.dart';
 import '../models/widgets/ken_text_password_model.dart';
 import '../services/ken_utilities.dart';
-import 'kenTextField.dart';
+import 'ken_text_field.dart';
 import 'kenTextPasswordIndicators.dart';
 import 'kenWidgetInterface.dart';
 import 'kenWidgetMixin.dart';

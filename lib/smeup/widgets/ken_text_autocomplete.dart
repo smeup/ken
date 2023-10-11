@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
+import 'ken_button.dart';
 import 'ken_buttons.dart';
 
 // ignore: must_be_immutable
@@ -308,7 +309,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> {
         ));
 
     if (widget.showSubmit!) {
-      KenButtons? button;
+      KenButton? button;
       if (widget.onGetSubmitButton != null) {
         button = widget.onGetSubmitButton!();
       }
