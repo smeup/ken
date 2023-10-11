@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../models/widgets/ken_timepicker_model.dart';
 import 'ken_timepicker.dart';
-import 'kenTimepickerCustomization.dart';
+import 'ken_timepicker_customization.dart';
 
 // ignore: must_be_immutable
 class KenTimePickerButton extends StatefulWidget {
