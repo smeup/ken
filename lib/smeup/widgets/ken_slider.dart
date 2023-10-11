@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import '../models/widgets/ken_slider_model.dart';
+import '../services/ken_defaults.dart';
 import 'ken_slider_widget.dart';
 
 // ignore: must_be_immutable
 class KenSlider extends StatefulWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;
-  KenSliderModel? model;
 
   Color? activeTrackColor;
   Color? thumbColor;
@@ -26,18 +25,18 @@ class KenSlider extends StatefulWidget {
   Function? onClientChange;
 
   KenSlider(this.scaffoldKey, this.formKey,
-      {this.activeTrackColor = KenSliderModel.defaultActiveTrackColor,
-      this.thumbColor = KenSliderModel.defaultThumbColor,
-      this.inactiveTrackColor = KenSliderModel.defaultInactiveTrackColor,
-      this.padding = KenSliderModel.defaultPadding,
+      {this.activeTrackColor = KenSliderDefaults.defaultActiveTrackColor,
+      this.thumbColor = KenSliderDefaults.defaultThumbColor,
+      this.inactiveTrackColor = KenSliderDefaults.defaultInactiveTrackColor,
+      this.padding = KenSliderDefaults.defaultPadding,
       this.title,
       this.id = '',
       this.label,
       this.divisions = 10,
       this.type = 'SLD',
       this.value = 0,
-      this.sldMax = KenSliderModel.defaultSldMax,
-      this.sldMin = KenSliderModel.defaultSldMin,
+      this.sldMax = KenSliderDefaults.defaultSldMax,
+      this.sldMin = KenSliderDefaults.defaultSldMin,
       this.clientOnChange,
       this.onChanged,
       this.onGetChildren,
