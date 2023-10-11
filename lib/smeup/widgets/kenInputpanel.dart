@@ -11,7 +11,7 @@ import 'ken_combo.dart';
 import 'ken_label.dart';
 import 'kenQrcodeReader.dart';
 import 'ken_radio_buttons.dart';
-import 'kenTextAutocomplete.dart';
+import 'ken_text_autocomplete.dart';
 import 'kenTextField.dart';
 
 // ignore: must_be_immutable

@@ -2,23 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../models/KenMessageBusEventData.dart';
-import '../models/ken_widget_builder_response.dart';
-import '../models/widgets/ken_model.dart';
-import '../models/widgets/ken_text_autocomplete_model.dart';
-import '../services/ken_message_bus.dart';
+import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
 import 'ken_buttons.dart';
-import 'kenWidgetInterface.dart';
-import 'kenWidgetMixin.dart';
-import 'kenWidgetStateInterface.dart';
-import 'kenWidgetStateMixin.dart';
 
 // ignore: must_be_immutable
-class KenTextAutocomplete extends StatefulWidget
-    with KenWidgetMixin
-    implements KenWidgetInterface {
-  KenTextAutocompleteModel? model;
+class KenTextAutocomplete extends StatefulWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;
 
@@ -61,171 +50,76 @@ class KenTextAutocomplete extends StatefulWidget
   Function? clientOnSelected;
   Function? clientOnSubmit;
 
+  Function? onFieldViewBuilder;
+  Function? onTapSetState;
+  Function? onGetSubmitButton;
+
   TextInputType? keyboard;
   List<TextInputFormatter>? inputFormatters;
 
-  KenTextAutocomplete.withController(
-    KenTextAutocompleteModel this.model,
-    this.scaffoldKey,
-    this.formKey,
-    this.smeupButtons,
-  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model!);
-  }
-
-  KenTextAutocomplete(
-    this.scaffoldKey,
-    this.formKey, {
-    this.id = '',
-    this.type = 'FLD',
-    this.backColor = KenTextAutocompleteModel.defaultBackColor,
-    this.fontSize = KenTextAutocompleteModel.defaultFontSize,
-    this.fontBold = KenTextAutocompleteModel.defaultFontBold,
-    this.fontColor = KenTextAutocompleteModel.defaultFontColor,
-    this.captionBackColor = KenTextAutocompleteModel.defaultCaptionBackColor,
-    this.captionFontBold = KenTextAutocompleteModel.defaultFontBold,
-    this.captionFontColor = KenTextAutocompleteModel.defaultCaptionFontColor,
-    this.captionFontSize = KenTextAutocompleteModel.defaultCaptionFontSize,
-    this.borderColor = KenTextAutocompleteModel.defaultBorderColor,
-    this.iconColor = KenTextAutocompleteModel.defaultIconColor,
-    this.borderRadius = KenTextAutocompleteModel.defaultBorderRadius,
-    this.borderWidth = KenTextAutocompleteModel.defaultBorderWidth,
-    this.label = KenTextAutocompleteModel.defaultLabel,
-    this.submitLabel = KenTextAutocompleteModel.defaultSubmitLabel,
-    this.width = KenTextAutocompleteModel.defaultWidth,
-    this.height = KenTextAutocompleteModel.defaultHeight,
-    this.padding = KenTextAutocompleteModel.defaultPadding,
-    this.showborder = KenTextAutocompleteModel.defaultShowBorder,
-    this.data,
-    this.iconSize = KenTextAutocompleteModel.defaultIconSize,
-    this.underline = KenTextAutocompleteModel.defaultUnderline,
-    this.autoFocus = KenTextAutocompleteModel.defaultAutoFocus,
-    this.showSubmit = KenTextAutocompleteModel.defaultShowSubmit,
-    this.clientValidator,
-    this.clientOnSave,
-    this.clientOnChange,
-    this.clientOnSelected,
-    this.clientOnSubmit,
-    this.keyboard,
-    this.inputFormatters,
-    this.defaultValue,
-    this.valueField,
-  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
-    id = KenUtilities.getWidgetId(type, id);
-  }
-
-  @override
-  runControllerActivities(KenModel model) {
-    KenTextAutocompleteModel m = model as KenTextAutocompleteModel;
-    id = m.id;
-    type = m.type;
-    backColor = m.backColor;
-    fontSize = m.fontSize;
-    fontBold = m.fontBold;
-    fontColor = m.fontColor;
-    captionBackColor = m.captionBackColor;
-    captionFontBold = m.captionFontBold;
-    captionFontColor = m.captionFontColor;
-    captionFontSize = m.captionFontSize;
-    borderColor = m.borderColor;
-    iconColor = m.iconColor;
-    borderRadius = m.borderRadius;
-    borderWidth = m.borderWidth;
-    label = m.label;
-    width = m.width;
-    height = m.height;
-    padding = m.padding;
-    showborder = m.showBorder;
-    title = m.title;
-    underline = m.showUnderline;
-    autoFocus = m.autoFocus;
-    defaultValue = m.defaultValue;
-    valueField = m.valueField;
-    submitLabel = m.submitLabel;
-    iconSize = m.iconSize;
-    showSubmit = m.showSubmit;
-
-    data = treatData(m);
-  }
-
-  @override
-  dynamic treatData(KenModel model) {
-    KenTextAutocompleteModel m = model as KenTextAutocompleteModel;
-
-    // change data format
-    var workData = formatDataFields(m);
-
-    // set the widget data
-    if (workData != null) {
-      var newList = List<Map<dynamic, dynamic>>.empty(growable: true);
-      for (var i = 0; i < (workData['rows'] as List).length; i++) {
-        final element = workData['rows'][i];
-        newList.add({
-          'code': element['code'].toString(),
-          'value': element['value'].toString()
-        });
-      }
-      return newList;
-    } else {
-      return model.data;
-    }
-  }
+  KenTextAutocomplete(this.scaffoldKey, this.formKey,
+      {this.id = '',
+      this.type = 'FLD',
+      this.backColor = KenTextAutocompleteDefaults.defaultBackColor,
+      this.fontSize = KenTextAutocompleteDefaults.defaultFontSize,
+      this.fontBold = KenTextAutocompleteDefaults.defaultFontBold,
+      this.fontColor = KenTextAutocompleteDefaults.defaultFontColor,
+      this.captionBackColor =
+          KenTextAutocompleteDefaults.defaultCaptionBackColor,
+      this.captionFontBold = KenTextAutocompleteDefaults.defaultFontBold,
+      this.captionFontColor =
+          KenTextAutocompleteDefaults.defaultCaptionFontColor,
+      this.captionFontSize = KenTextAutocompleteDefaults.defaultCaptionFontSize,
+      this.borderColor = KenTextAutocompleteDefaults.defaultBorderColor,
+      this.iconColor = KenTextAutocompleteDefaults.defaultIconColor,
+      this.borderRadius = KenTextAutocompleteDefaults.defaultBorderRadius,
+      this.borderWidth = KenTextAutocompleteDefaults.defaultBorderWidth,
+      this.label = KenTextAutocompleteDefaults.defaultLabel,
+      this.submitLabel = KenTextAutocompleteDefaults.defaultSubmitLabel,
+      this.width = KenTextAutocompleteDefaults.defaultWidth,
+      this.height = KenTextAutocompleteDefaults.defaultHeight,
+      this.padding = KenTextAutocompleteDefaults.defaultPadding,
+      this.showborder = KenTextAutocompleteDefaults.defaultShowBorder,
+      this.data,
+      this.iconSize = KenTextAutocompleteDefaults.defaultIconSize,
+      this.underline = KenTextAutocompleteDefaults.defaultUnderline,
+      this.autoFocus = KenTextAutocompleteDefaults.defaultAutoFocus,
+      this.showSubmit = KenTextAutocompleteDefaults.defaultShowSubmit,
+      this.clientValidator,
+      this.clientOnSave,
+      this.clientOnChange,
+      this.clientOnSelected,
+      this.clientOnSubmit,
+      this.keyboard,
+      this.inputFormatters,
+      this.defaultValue,
+      this.valueField,
+      this.onFieldViewBuilder,
+      this.onTapSetState,
+      this.onGetSubmitButton});
 
   @override
   _KenTextAutocompleteState createState() => _KenTextAutocompleteState();
 }
 
-class _KenTextAutocompleteState extends State<KenTextAutocomplete>
-    with KenWidgetStateMixin
-    implements KenWidgetStateInterface {
-  KenTextAutocompleteModel? _model;
+class _KenTextAutocompleteState extends State<KenTextAutocomplete> {
   dynamic _data;
 
   List<Map<dynamic, dynamic>>? _options;
 
   @override
   void initState() {
-    _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model!.widgetLoadType;
-    _options = _data == null ? [] : _data;
     super.initState();
   }
 
   @override
   void dispose() {
-    runDispose(widget.scaffoldKey, widget.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget autocomplete = runBuild(context, widget.id, widget.type,
-        widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
-      setState(() {
-        widgetLoadType = LoadType.immediate;
-        setDataLoad(widget.id, false);
-      });
-    });
-
-    return autocomplete;
-  }
-
-  /// Label's structure:
-  /// define the structure ...
-  @override
-  Future<KenWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
-      if (_model != null) {
-        // await SmeupTextAutocompleteDao.getData(_model!);
-        await _model!.getData();
-        _data = widget.treatData(_model!);
-        _options = _model!.data['rows'];
-      }
-
-      setDataLoad(widget.id, true);
-    }
-
     TextStyle textStyle = _getTextStile();
     TextStyle captionStyle = _getCaptionStile();
 
@@ -266,13 +160,9 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
               VoidCallback onFieldSubmitted) {
             String code = "";
 
-            KenMessageBus.instance.publishRequest(
-              widget.globallyUniqueId,
-              KenTopic.kenTextAutocompleteFieldViewBuilder,
-              KenMessageBusEventData(
-                  context: context, widget: widget, model: _model, data: _data),
-            );
-            // .then((value) => code = value);
+            if (widget.onFieldViewBuilder != null) {
+              code = widget.onFieldViewBuilder!();
+            }
 
             if (code.isNotEmpty && _data != null) {
               var currel = _data.firstWhere(
@@ -357,15 +247,9 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                     ),
                     onTap: () {
                       setState(() {
-                        KenMessageBus.instance.publishRequest(
-                          widget.globallyUniqueId,
-                          KenTopic.kenTextAutocompleteOnTapSetState,
-                          KenMessageBusEventData(
-                              context: context,
-                              widget: widget,
-                              model: _model,
-                              data: code),
-                        );
+                        if (widget.onTapSetState != null) {
+                          widget.onTapSetState!(code);
+                        }
                       });
                     },
                   ),
@@ -400,28 +284,6 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
                       return GestureDetector(
                         onTap: () {
                           onSelected(option);
-
-                          KenMessageBus.instance.publishRequest(
-                            widget.globallyUniqueId,
-                            KenTopic.kenTextAutocompleteOnTapSelected,
-                            KenMessageBusEventData(
-                                context: context,
-                                widget: widget,
-                                model: _model,
-                                data: option),
-                          );
-
-                          // SmeupVariablesService.setVariable(
-                          //     widget.id, option['code'],
-                          //     formKey: widget.formKey);
-                          // SmeupVariablesService.setVariable(
-                          //     "value", option['value'],
-                          //     formKey: widget.formKey);
-                          // if (_model != null)
-                          //   SmeupDynamismService.run(_model!.dynamisms, context,
-                          //       'change', widget.scaffoldKey, widget.formKey);
-                          // if (widget.clientOnSelected != null)
-                          //   widget.clientOnSelected!(option);
                         },
                         child: ListTile(
                           // leading: Text('•'), -- Eventually something that can be displayed before the text
@@ -447,18 +309,8 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
 
     if (widget.showSubmit!) {
       KenButtons? button;
-      if (_model == null) {
-        button = KenButtons(
-          widget.scaffoldKey,
-          widget.formKey,
-          data: [widget.submitLabel],
-          clientOnPressed: widget.clientOnSubmit,
-          padding: const EdgeInsets.all(5),
-        );
-      } else {
-        if (widget.smeupButtons != null) {
-          button = widget.smeupButtons!;
-        }
+      if (widget.onGetSubmitButton != null) {
+        button = widget.onGetSubmitButton!();
       }
 
       final Widget column;
@@ -477,9 +329,9 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete>
         column = Container();
       }
 
-      return KenWidgetBuilderResponse(_model, column);
+      return column;
     } else {
-      return KenWidgetBuilderResponse(_model, children);
+      return children;
     }
   }
 

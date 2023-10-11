@@ -239,12 +239,14 @@ class _KenSpotLightState extends State<KenSpotLight>
     String code = "";
     dynamic currel;
 
-    await KenMessageBus.instance.publishRequestAndAwait(
+    final response = await KenMessageBus.instance.publishRequestAndAwait(
       widget.globallyUniqueId,
       KenTopic.kenSpotLightFieldViewBuilder,
       KenMessageBusEventData(
           context: context, widget: widget, model: _model, data: _data),
     );
+    code = response.data.data as String;
+
     if (code.isNotEmpty && _data != null) {
       currel = _data.firstWhere(
         (element) => element['code'].toString() == code,

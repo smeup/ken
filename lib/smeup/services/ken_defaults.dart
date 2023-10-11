@@ -460,6 +460,32 @@ class KenRadioButtonsDefaults {
   static const int defaultColumns = 1;
 }
 
+class KenTextAutocompleteDefaults {
+  // supported by json_theme
+  static const double defaultFontSize = 16;
+  static const Color defaultBackColor = kBack200;
+  static const Color defaultFontColor = kSecondary100;
+  static const bool defaultFontBold = false;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultCaptionFontSize = 14;
+  static const Color defaultCaptionFontColor = kPrimary;
+  static const Color defaultCaptionBackColor = kBack200;
+  static const Color defaultBorderColor = kPrimary;
+  static const double defaultBorderWidth = 0;
+  static const double defaultBorderRadius = 10;
+  static const Color defaultIconColor = kPrimary;
+  static const double defaultIconSize = 10;
+  static const String defaultLabel = '';
+  static const double defaultWidth = double.maxFinite;
+  static const double defaultHeight = 55;
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const bool defaultShowBorder = false;
+  static const bool defaultAutoFocus = false;
+  static const bool defaultUnderline = false;
+  static const String defaultSubmitLabel = '';
+  static const bool defaultShowSubmit = false;
+}
+
 ///GRAY COLOR
 const Color kSecondary100 = Color(0xffB9BBBD);
 const Color kSecondary200 = Color(0xff596776);

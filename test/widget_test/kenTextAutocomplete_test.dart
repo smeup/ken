@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/kenTextAutocomplete.dart';
+import '../../lib/smeup/widgets/ken_text_autocomplete.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {
