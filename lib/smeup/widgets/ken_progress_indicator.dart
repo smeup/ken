@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/widgets/ken_progress_indicator_model.dart';
+import '../services/ken_utilities.dart';
 
 // ignore: must_be_immutable
 class KenProgressIndicator extends StatelessWidget {
