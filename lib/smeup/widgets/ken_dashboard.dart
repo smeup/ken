@@ -75,7 +75,9 @@ class KenDashboard extends StatelessWidget {
     final unitOfMeasureStyle = _getUnitOfMeasureStyle();
 
     final dashboard = GestureDetector(
-      onTap: clientOnTap!(),
+      onTap: () {
+        if (clientOnTap != null) clientOnTap!();
+      },
       child: Container(
           height: height,
           width: width,
