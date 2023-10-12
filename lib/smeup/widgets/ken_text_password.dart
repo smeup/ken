@@ -14,9 +14,6 @@ import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class KenTextPassword extends StatefulWidget {
-  GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState>? formKey;
-
   Color? backColor;
   double? fontSize;
   Color? fontColor;
@@ -56,9 +53,7 @@ class KenTextPassword extends StatefulWidget {
 
   List<TextInputFormatter>? inputFormatters;
 
-  KenTextPassword(
-    this.scaffoldKey,
-    this.formKey, {
+  KenTextPassword({
     this.id = '',
     this.type = 'FLD',
     this.backColor = KenTextFieldPasswordDefaults.defaultBackColor,
@@ -141,7 +136,7 @@ class _KenTextPasswordState extends State<KenTextPassword> {
               Expanded(
                 child: Consumer<KenTextPasswordVisibilityNotifier>(
                   builder: (context, fieldmodel, child) {
-                    return KenTextField(widget.scaffoldKey, widget.formKey,
+                    return KenTextField(
                         id: widget.id,
                         label: widget.label,
                         autoFocus: widget.autoFocus,
@@ -169,12 +164,12 @@ class _KenTextPasswordState extends State<KenTextPassword> {
                         clientValidator: widget.clientValidator,
                         clientOnSave: widget.clientOnSave,
                         clientOnChange: (value) {
-                      if (widget.clientOnChange != null) {
-                        widget.clientOnChange!(value);
-                      }
-                      passwordModel.checkProgress(value);
-                      _data = value;
-                    },
+                          if (widget.clientOnChange != null) {
+                            widget.clientOnChange!(value);
+                          }
+                          passwordModel.checkProgress(value);
+                          _data = value;
+                        },
                         keyboard: fieldmodel.passwordVisible
                             ? TextInputType.text
                             : TextInputType.visiblePassword);

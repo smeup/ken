@@ -6,9 +6,6 @@ import 'ken_timepicker.dart';
 
 // ignore: must_be_immutable
 class KenDatePickerButton extends StatefulWidget {
-  final GlobalKey<ScaffoldState>? scaffoldKey;
-  final GlobalKey<FormState>? formKey;
-
   Color? borderColor;
   double? borderWidth;
   double? borderRadius;
@@ -43,8 +40,6 @@ class KenDatePickerButton extends StatefulWidget {
     this.buttonStyle,
     this.textStyle, {
     super.key,
-    this.scaffoldKey,
-    this.formKey,
     this.value,
     this.display,
     this.borderColor,

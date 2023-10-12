@@ -14,9 +14,6 @@ class KenDatePickerData {
 
 // ignore: must_be_immutable
 class KenDatePicker extends StatefulWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState>? formKey;
-
   Color? borderColor;
   double? borderWidth;
   double? borderRadius;
@@ -51,8 +48,6 @@ class KenDatePicker extends StatefulWidget {
   Function? clientOnChange;
 
   KenDatePicker(
-    this.scaffoldKey,
-    this.formKey,
     this.data, {
     this.id = '',
     this.type = 'cal',
@@ -132,8 +127,6 @@ class _KenDatePickerState extends State<KenDatePicker> {
       widget.id,
       buttonStyle,
       textStyle,
-      scaffoldKey: widget.scaffoldKey,
-      formKey: widget.formKey,
       value: _data!.value,
       display: _data!.text,
       backColor: widget.backColor,
@@ -159,9 +152,7 @@ class _KenDatePickerState extends State<KenDatePicker> {
       dashColor: widget.dashColor,
     );
 
-    var line = widget.underline!
-        ? KenLine(widget.scaffoldKey, widget.formKey)
-        : Container();
+    var line = widget.underline! ? KenLine() : Container();
 
     Widget children;
 

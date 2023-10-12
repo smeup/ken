@@ -7,9 +7,6 @@ import 'kenNotAvailable.dart';
 import 'ken_radio_button.dart';
 
 class KenRadioButtons extends StatefulWidget {
-  GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState>? formKey;
-
   Color? radioButtonColor;
   Color? fontColor;
   double? fontSize;
@@ -38,7 +35,7 @@ class KenRadioButtons extends StatefulWidget {
   Function? onPressed;
   Function? onSelData;
 
-  KenRadioButtons(this.scaffoldKey, this.formKey,
+  KenRadioButtons(
       {this.id = '',
       this.type = 'FLD',
       this.title = '',

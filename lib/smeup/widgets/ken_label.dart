@@ -7,8 +7,6 @@ import '../services/ken_utilities.dart';
 
 // ignore: must_be_immutable
 class KenLabel extends StatelessWidget {
-  GlobalKey<FormState>? formKey;
-
   // graphic properties
   double? fontSize;
   Color? fontColor;
@@ -31,40 +29,43 @@ class KenLabel extends StatelessWidget {
   IconData? iconData;
   double? parentWidth;
 
-  KenLabel(this.formKey, this.data,
-      {this.id = '',
-      this.type = 'LAB',
-      this.fontSize = KenLabelDefaults.defaultFontSize,
-      this.fontBold = KenLabelDefaults.defaultFontBold,
-      this.fontColor = KenLabelDefaults.defaultFontColor,
-      this.backColor = KenLabelDefaults.defaultBackColor,
-      this.iconData,
-      this.iconSize = KenLabelDefaults.defaultIconSize,
-      this.iconColor = KenLabelDefaults.defaultIconColor,
-      this.padding = KenLabelDefaults.defaultPadding,
-      this.align = KenLabelDefaults.defaultAlign,
-      this.width = KenLabelDefaults.defaultWidth,
-      this.height = KenLabelDefaults.defaultHeight,
-      this.backColorColName = '',
-      this.iconCode,
-      this.fontColorColName = '',
-      this.title = '',
-      this.parentWidth,
-      super.key,
-    });
+  KenLabel(
+    this.data, {
+    this.id = '',
+    this.type = 'LAB',
+    this.fontSize = KenLabelDefaults.defaultFontSize,
+    this.fontBold = KenLabelDefaults.defaultFontBold,
+    this.fontColor = KenLabelDefaults.defaultFontColor,
+    this.backColor = KenLabelDefaults.defaultBackColor,
+    this.iconData,
+    this.iconSize = KenLabelDefaults.defaultIconSize,
+    this.iconColor = KenLabelDefaults.defaultIconColor,
+    this.padding = KenLabelDefaults.defaultPadding,
+    this.align = KenLabelDefaults.defaultAlign,
+    this.width = KenLabelDefaults.defaultWidth,
+    this.height = KenLabelDefaults.defaultHeight,
+    this.backColorColName = '',
+    this.iconCode,
+    this.fontColorColName = '',
+    this.title = '',
+    this.parentWidth,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     assert(data != null, 'Data must not be null');
-    List<Align> alignes = data!.map(
-      (text) => Align(
-        alignment: align!,
-        child: Text(
-          text ?? '',
-          style: _getTextStile(),
-        ),
-      ),
-    ).toList();
+    List<Align> alignes = data!
+        .map(
+          (text) => Align(
+            alignment: align!,
+            child: Text(
+              text ?? '',
+              style: _getTextStile(),
+            ),
+          ),
+        )
+        .toList();
 
     final col = Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -93,7 +94,7 @@ class KenLabel extends StatelessWidget {
       );
     } else {
       final label = Container(
-        //color: widget.backColor,
+          //color: widget.backColor,
           height: labelHeight,
           child: col);
 
@@ -161,8 +162,7 @@ class KenLabel extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                  padding: const EdgeInsets.fromLTRB(0, 3, 0, 0),
-                  child: icon),
+                  padding: const EdgeInsets.fromLTRB(0, 3, 0, 0), child: icon),
               const Padding(padding: EdgeInsets.fromLTRB(0, 0, 5, 0)),
               label,
             ],
@@ -195,7 +195,7 @@ class KenLabel extends StatelessWidget {
           //color: widget.backColor,
         );
       } else // center
-          {
+      {
         children = Container(
           padding: padding,
           child: Row(
@@ -215,9 +215,7 @@ class KenLabel extends StatelessWidget {
 
   TextStyle _getTextStile() {
     TextStyle style = TextStyle(
-        color: fontColor,
-        fontSize: fontSize,
-        backgroundColor: backColor);
+        color: fontColor, fontSize: fontSize, backgroundColor: backColor);
 
     if (fontBold!) {
       style = style.copyWith(
@@ -232,8 +230,7 @@ class KenLabel extends StatelessWidget {
   }
 
   IconThemeData _getIconTheme() {
-    IconThemeData themeData =
-        IconThemeData(size: iconSize, color: iconColor);
+    IconThemeData themeData = IconThemeData(size: iconSize, color: iconColor);
 
     return themeData;
   }

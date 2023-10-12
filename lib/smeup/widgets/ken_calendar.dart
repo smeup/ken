@@ -13,9 +13,6 @@ import 'package:table_calendar/table_calendar.dart';
 
 // ignore: must_be_immutable
 class KenCalendar extends StatefulWidget {
-  GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState>? formKey;
-
   // graphic properties
   double? dayFontSize;
   double? eventFontSize;
@@ -52,7 +49,7 @@ class KenCalendar extends StatefulWidget {
 
   Map<DateTime?, List<KenCalendarEventModel>>? events;
 
-  KenCalendar(this.scaffoldKey, this.formKey,
+  KenCalendar(
       {this.id = '',
       this.type = 'CAL',
       this.eventFontSize = KenCalendarDefaults.defaultEventFontSize,
@@ -159,8 +156,6 @@ class KenCalendarState extends State<KenCalendar> {
           if (widget.showPeriodButtons!) _buildButtons(calHeight, calWidth!),
           if (widget.showPeriodButtons!) const SizedBox(height: 8),
           KenCalendarWidget(
-            widget.scaffoldKey,
-            widget.formKey,
             eventFontSize: widget.eventFontSize,
             titleFontSize: widget.titleFontSize,
             dayFontSize: widget.dayFontSize,

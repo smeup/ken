@@ -4,10 +4,6 @@ import '../services/ken_defaults.dart';
 
 // ignore: must_be_immutable
 class KenLine extends StatelessWidget {
-  KenLineModel? model;
-  GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState>? formKey;
-
   Color? color;
   double? thickness;
   String? title;
@@ -16,7 +12,7 @@ class KenLine extends StatelessWidget {
 
   dynamic data;
 
-  KenLine(this.scaffoldKey, this.formKey,
+  KenLine(
       {super.key,
       this.title,
       this.id = '',

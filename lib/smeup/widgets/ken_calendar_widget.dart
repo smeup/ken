@@ -15,8 +15,6 @@ import 'ken_progress_indicator.dart';
 
 // ignore: must_be_immutable
 class KenCalendarWidget extends StatefulWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState>? formKey;
   final double? dayFontSize;
   final double? titleFontSize;
   final double? eventFontSize;
@@ -48,9 +46,7 @@ class KenCalendarWidget extends StatefulWidget {
   final bool? showPeriodButtons;
   //final String? globallyUniqueId;
 
-  KenCalendarWidget(
-    this.scaffoldKey,
-    this.formKey, {
+  KenCalendarWidget({
     this.titleFontSize,
     this.eventFontSize,
     this.dayFontSize,
@@ -322,7 +318,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
                   left: 20.0, right: 20.0, top: 10, bottom: 10),
               child: SizedBox(
                 height: separatorHeight,
-                child: KenLine(widget.scaffoldKey, widget.formKey),
+                child: KenLine(),
               ),
             ),
             if (_selectedEvents != null)

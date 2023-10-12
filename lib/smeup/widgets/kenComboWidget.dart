@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 import '../models/widgets/ken_combo_item_model.dart';
 
 class KenComboWidget extends StatefulWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState>? formKey;
-
   final double? fontSize;
   final Color? fontColor;
   final bool? fontBold;
@@ -24,7 +21,7 @@ class KenComboWidget extends StatefulWidget {
   final List<KenComboItemModel>? data;
   final void Function(String? newValue)? clientOnChange;
 
-  const KenComboWidget(this.scaffoldKey, this.formKey,
+  const KenComboWidget(
       {super.key,
       this.fontColor,
       this.fontSize,

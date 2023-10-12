@@ -14,13 +14,11 @@ class KenQRCodeReader extends StatelessWidget {
   int? delayInMillis;
   bool? showLoader;
 
-  KenQRCodeReaderModel? model;
   String? id;
   String? type;
   String? data;
 
-  KenQRCodeReader(smeupModel, GlobalKey<ScaffoldState> scaffoldKey,
-      GlobalKey<FormState>? formKey,
+  KenQRCodeReader(
       {super.key,
       this.id = '',
       this.type = 'QRC',

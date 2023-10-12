@@ -9,9 +9,6 @@ import 'ken_line.dart';
 
 // ignore: must_be_immutable
 class KenCombo extends StatelessWidget {
-  GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState>? formKey;
-
   double? fontSize;
   Color? fontColor;
   bool? fontBold;
@@ -46,9 +43,7 @@ class KenCombo extends StatelessWidget {
   double? parentHeight;
   double? parentWidth;
 
-  KenCombo(
-    this.scaffoldKey,
-    this.formKey, {
+  KenCombo({
     this.fontColor = KenComboDefaults.defaultFontColor,
     this.fontSize = KenComboDefaults.defaultFontSize,
     this.fontBold = KenComboDefaults.defaultFontBold,
@@ -122,8 +117,6 @@ class KenCombo extends StatelessWidget {
                 )
               : null,
           child: KenComboWidget(
-            scaffoldKey,
-            formKey,
             data: items,
             fontColor: fontColor,
             fontSize: fontSize,
@@ -145,7 +138,7 @@ class KenCombo extends StatelessWidget {
           )),
     );
 
-    var line = underline! ? KenLine(scaffoldKey, formKey) : Container();
+    var line = underline! ? KenLine() : Container();
 
     Widget children;
 

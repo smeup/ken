@@ -9,9 +9,6 @@ import 'ken_buttons.dart';
 
 // ignore: must_be_immutable
 class KenTextAutocomplete extends StatefulWidget {
-  GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState>? formKey;
-
   // graphic properties
   Color? backColor;
   double? fontSize;
@@ -58,7 +55,7 @@ class KenTextAutocomplete extends StatefulWidget {
   TextInputType? keyboard;
   List<TextInputFormatter>? inputFormatters;
 
-  KenTextAutocomplete(this.scaffoldKey, this.formKey,
+  KenTextAutocomplete(
       {this.id = '',
       this.type = 'FLD',
       this.backColor = KenTextAutocompleteDefaults.defaultBackColor,

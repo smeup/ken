@@ -15,9 +15,6 @@ class KenTimePickerData {
 
 // ignore: must_be_immutable
 class KenTimePicker extends StatelessWidget {
-  GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState>? formKey;
-
   String? id;
   String? type;
   Color? backColor;
@@ -57,8 +54,6 @@ class KenTimePicker extends StatelessWidget {
   double? parentHeight;
 
   KenTimePicker(
-    this.scaffoldKey,
-    this.formKey,
     this.data, {
     id = '',
     type = 'tpk',
@@ -140,8 +135,6 @@ class KenTimePicker extends StatelessWidget {
       data,
       buttonStyle,
       textStyle,
-      scaffoldKey: scaffoldKey,
-      formKey: formKey,
       id: id,
       backColor: backColor,
       fontSize: fontSize,
@@ -167,7 +160,7 @@ class KenTimePicker extends StatelessWidget {
       dashColor: dashColor,
     );
 
-    var line = underline! ? KenLine(scaffoldKey, formKey) : Container();
+    var line = underline! ? KenLine() : Container();
 
     Widget children;
 

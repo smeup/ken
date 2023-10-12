@@ -145,17 +145,19 @@ class KenInputPanel extends StatelessWidget {
         return _getTextAutocompleteWidget(field);
 
       default:
-        return _getTextFieldWidget(field);
+        return _getTextFieldWidget(GlobalKey, FormState, field);
     }
   }
 
-  Widget _getTextFieldWidget(SmeupInputPanelField field) {
+  Widget _getTextFieldWidget(scaffoldKey, formKey, SmeupInputPanelField field) {
     return Column(
       children: [
         _getLabel(field.label),
         SizedBox(
           height: 30,
           child: KenTextField(
+            scaffoldKey,
+            formKey,
             id: field.id,
             data: field.value.code,
             // clientOnChange: (value) {
