@@ -4,23 +4,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../models/KenMessageBusEventData.dart';
-import '../models/ken_widget_builder_response.dart';
-import '../models/widgets/ken_model.dart';
-import '../models/widgets/ken_spotlight_model.dart';
-import '../services/ken_message_bus.dart';
+import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
 import 'ken_buttons.dart';
-import 'kenWidgetInterface.dart';
-import 'kenWidgetMixin.dart';
-import 'kenWidgetStateInterface.dart';
-import 'kenWidgetStateMixin.dart';
 
 // ignore: must_be_immutable
-class KenSpotLight extends StatefulWidget
-    with KenWidgetMixin
-    implements KenWidgetInterface {
-  KenSpotLightModel? model;
+class KenSpotLight extends StatefulWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;
 
@@ -63,171 +52,76 @@ class KenSpotLight extends StatefulWidget
   Function? clientOnSelected;
   Function? clientOnSubmit;
 
+  Function? onFieldViewBuilder;
+  Function? onTapSetState;
+  Function? onGetSubmitButton;
+
   TextInputType? keyboard;
   List<TextInputFormatter>? inputFormatters;
 
-  KenSpotLight.withController(
-    KenSpotLightModel this.model,
-    this.scaffoldKey,
-    this.formKey,
-    this.smeupButtons,
-  ) : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model!);
-  }
-
-  KenSpotLight(
-    this.scaffoldKey,
-    this.formKey, {
-    this.id = '',
-    this.type = 'SPL',
-    this.backColor = KenSpotLightModel.defaultBackColor,
-    this.fontSize = KenSpotLightModel.defaultFontSize,
-    this.fontBold = KenSpotLightModel.defaultFontBold,
-    this.fontColor = KenSpotLightModel.defaultFontColor,
-    this.captionBackColor = KenSpotLightModel.defaultCaptionBackColor,
-    this.captionFontBold = KenSpotLightModel.defaultFontBold,
-    this.captionFontColor = KenSpotLightModel.defaultCaptionFontColor,
-    this.captionFontSize = KenSpotLightModel.defaultCaptionFontSize,
-    this.borderColor = KenSpotLightModel.defaultBorderColor,
-    this.iconColor = KenSpotLightModel.defaultIconColor,
-    this.borderRadius = KenSpotLightModel.defaultBorderRadius,
-    this.borderWidth = KenSpotLightModel.defaultBorderWidth,
-    this.label = KenSpotLightModel.defaultLabel,
-    this.submitLabel = KenSpotLightModel.defaultSubmitLabel,
-    this.width = KenSpotLightModel.defaultWidth,
-    this.height = KenSpotLightModel.defaultHeight,
-    this.padding = KenSpotLightModel.defaultPadding,
-    this.showborder = KenSpotLightModel.defaultShowBorder,
-    this.data,
-    this.iconSize = KenSpotLightModel.defaultIconSize,
-    this.underline = KenSpotLightModel.defaultUnderline,
-    this.autoFocus = KenSpotLightModel.defaultAutoFocus,
-    this.showSubmit = KenSpotLightModel.defaultShowSubmit,
-    this.clientValidator,
-    this.clientOnSave,
-    this.clientOnChange,
-    this.clientOnSelected,
-    this.clientOnSubmit,
-    this.keyboard,
-    this.inputFormatters,
-    this.defaultValue,
-    this.valueField,
-  }) : super(key: Key(KenUtilities.getWidgetId(type, id))) {
-    id = KenUtilities.getWidgetId(type, id);
-  }
-
-  @override
-  runControllerActivities(KenModel model) {
-    KenSpotLightModel m = model as KenSpotLightModel;
-    id = m.id;
-    type = m.type;
-    backColor = m.backColor;
-    fontSize = m.fontSize;
-    fontBold = m.fontBold;
-    fontColor = m.fontColor;
-    captionBackColor = m.captionBackColor;
-    captionFontBold = m.captionFontBold;
-    captionFontColor = m.captionFontColor;
-    captionFontSize = m.captionFontSize;
-    borderColor = m.borderColor;
-    iconColor = m.iconColor;
-    borderRadius = m.borderRadius;
-    borderWidth = m.borderWidth;
-    label = m.label;
-    width = m.width;
-    height = m.height;
-    padding = m.padding;
-    showborder = m.showBorder;
-    title = m.title;
-    underline = m.showUnderline;
-    autoFocus = m.autoFocus;
-    defaultValue = m.defaultValue;
-    valueField = m.valueField;
-    submitLabel = m.submitLabel;
-    iconSize = m.iconSize;
-    showSubmit = m.showSubmit;
-
-    data = treatData(m);
-  }
-
-  @override
-  dynamic treatData(KenModel model) {
-    KenSpotLightModel m = model as KenSpotLightModel;
-
-    // change data format
-    var workData = formatDataFields(m);
-
-    // set the widget data
-    if (workData != null) {
-      var newList = List<Map<dynamic, dynamic>>.empty(growable: true);
-      for (var i = 0; i < (workData['rows'] as List).length; i++) {
-        final element = workData['rows'][i];
-        newList.add({
-          'code': element['code'].toString(),
-          'value': element['value'].toString()
-        });
-      }
-      return newList;
-    } else {
-      return model.data["rows"];
-    }
-  }
+  KenSpotLight(this.scaffoldKey, this.formKey,
+      {this.id = '',
+      this.type = 'SPL',
+      this.backColor = KenSpotlightDefaults.defaultBackColor,
+      this.fontSize = KenSpotlightDefaults.defaultFontSize,
+      this.fontBold = KenSpotlightDefaults.defaultFontBold,
+      this.fontColor = KenSpotlightDefaults.defaultFontColor,
+      this.captionBackColor = KenSpotlightDefaults.defaultCaptionBackColor,
+      this.captionFontBold = KenSpotlightDefaults.defaultFontBold,
+      this.captionFontColor = KenSpotlightDefaults.defaultCaptionFontColor,
+      this.captionFontSize = KenSpotlightDefaults.defaultCaptionFontSize,
+      this.borderColor = KenSpotlightDefaults.defaultBorderColor,
+      this.iconColor = KenSpotlightDefaults.defaultIconColor,
+      this.borderRadius = KenSpotlightDefaults.defaultBorderRadius,
+      this.borderWidth = KenSpotlightDefaults.defaultBorderWidth,
+      this.label = KenSpotlightDefaults.defaultLabel,
+      this.submitLabel = KenSpotlightDefaults.defaultSubmitLabel,
+      this.width = KenSpotlightDefaults.defaultWidth,
+      this.height = KenSpotlightDefaults.defaultHeight,
+      this.padding = KenSpotlightDefaults.defaultPadding,
+      this.showborder = KenSpotlightDefaults.defaultShowBorder,
+      this.data,
+      this.iconSize = KenSpotlightDefaults.defaultIconSize,
+      this.underline = KenSpotlightDefaults.defaultUnderline,
+      this.autoFocus = KenSpotlightDefaults.defaultAutoFocus,
+      this.showSubmit = KenSpotlightDefaults.defaultShowSubmit,
+      this.clientValidator,
+      this.clientOnSave,
+      this.clientOnChange,
+      this.clientOnSelected,
+      this.clientOnSubmit,
+      this.keyboard,
+      this.inputFormatters,
+      this.defaultValue,
+      this.valueField,
+      this.onFieldViewBuilder,
+      this.onGetSubmitButton,
+      this.onTapSetState,
+      this.smeupButtons});
 
   @override
   _KenSpotLightState createState() => _KenSpotLightState();
 }
 
-class _KenSpotLightState extends State<KenSpotLight>
-    with KenWidgetStateMixin
-    implements KenWidgetStateInterface {
-  KenSpotLightModel? _model;
+class _KenSpotLightState extends State<KenSpotLight> {
   dynamic _data;
 
   List<Map<dynamic, dynamic>>? _options;
 
   @override
   void initState() {
-    _model = widget.model;
     _data = widget.data;
-    if (_model != null) widgetLoadType = _model!.widgetLoadType;
-    _options = _data == null ? [] : _data;
+    _options = _data ?? [];
     super.initState();
   }
 
   @override
   void dispose() {
-    runDispose(widget.scaffoldKey, widget.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget autocomplete = runBuild(context, widget.id, widget.type,
-        widget.scaffoldKey, getInitialdataLoaded(_model), notifierFunction: () {
-      setState(() {
-        widgetLoadType = LoadType.immediate;
-        setDataLoad(widget.id, false);
-      });
-    });
-
-    return autocomplete;
-  }
-
-  /// Label's structure:
-  /// define the structure ...
-  @override
-  Future<KenWidgetBuilderResponse> getChildren() async {
-    if (!getDataLoaded(widget.id)! && widgetLoadType != LoadType.delay) {
-      if (_model != null) {
-        // await SmeupTextAutocompleteDao.getData(_model!);
-        await _model!.getData();
-        _data = widget.treatData(_model!);
-        _options = _model!.data['rows'];
-      }
-
-      setDataLoad(widget.id, true);
-    }
-
     TextStyle textStyle = _getTextStile();
     TextStyle captionStyle = _getCaptionStile();
 
@@ -238,21 +132,6 @@ class _KenSpotLightState extends State<KenSpotLight>
 
     String code = "";
     dynamic currel;
-
-    final response = await KenMessageBus.instance.publishRequestAndAwait(
-      widget.globallyUniqueId,
-      KenTopic.kenSpotLightFieldViewBuilder,
-      KenMessageBusEventData(
-          context: context, widget: widget, model: _model, data: _data),
-    );
-    code = response.data.data as String;
-
-    if (code.isNotEmpty && _data != null) {
-      currel = _data.firstWhere(
-        (element) => element['code'].toString() == code,
-        //orElse: () => null as Map<String, String?>
-      );
-    }
 
     children = Container(
         // e anche qua rinominerei Autocomplete
@@ -306,15 +185,15 @@ class _KenSpotLightState extends State<KenSpotLight>
                         onFieldSubmitted: (String value) {
                           onFieldSubmitted();
 
-                          KenMessageBus.instance.publishRequest(
-                            widget.globallyUniqueId,
-                            KenTopic.kenSpotLightOnSubmit,
-                            KenMessageBusEventData(
-                                context: context,
-                                widget: widget,
-                                model: _model,
-                                data: value),
-                          );
+                          // KenMessageBus.instance.publishRequest(
+                          //   widget.globallyUniqueId,
+                          //   KenTopic.kenSpotLightOnSubmit,
+                          //   KenMessageBusEventData(
+                          //       context: context,
+                          //       widget: widget,
+                          //       model: _model,
+                          //       data: value),
+                          // );
                         },
                         inputFormatters: widget.inputFormatters,
                         autofocus: widget.autoFocus!,
@@ -373,15 +252,9 @@ class _KenSpotLightState extends State<KenSpotLight>
                     ),
                     onTap: () {
                       setState(() {
-                        KenMessageBus.instance.publishRequest(
-                          widget.globallyUniqueId,
-                          KenTopic.kenSpotLightOnTapSetState,
-                          KenMessageBusEventData(
-                              context: context,
-                              widget: widget,
-                              model: _model,
-                              data: code),
-                        );
+                        if (widget.onTapSetState != null) {
+                          widget.onTapSetState!(code);
+                        }
                       });
                     },
                   ),
@@ -417,15 +290,15 @@ class _KenSpotLightState extends State<KenSpotLight>
                         onTap: () {
                           onSelected(option);
 
-                          KenMessageBus.instance.publishRequest(
-                            widget.globallyUniqueId,
-                            KenTopic.kenSpotLightOnTapSelected,
-                            KenMessageBusEventData(
-                                context: context,
-                                widget: widget,
-                                model: _model,
-                                data: option),
-                          );
+                          // KenMessageBus.instance.publishRequest(
+                          //   widget.globallyUniqueId,
+                          //   KenTopic.kenSpotLightOnTapSelected,
+                          //   KenMessageBusEventData(
+                          //       context: context,
+                          //       widget: widget,
+                          //       model: _model,
+                          //       data: option),
+                          // );
                         },
                         child: ListTile(
                           // leading: Text('•'), -- Eventually something that can be displayed before the text
@@ -451,18 +324,8 @@ class _KenSpotLightState extends State<KenSpotLight>
 
     if (widget.showSubmit!) {
       KenButtons? button;
-      if (_model == null) {
-        button = KenButtons(
-          widget.scaffoldKey,
-          widget.formKey,
-          data: [widget.submitLabel],
-          clientOnPressed: widget.clientOnSubmit,
-          padding: const EdgeInsets.all(5),
-        );
-      } else {
-        if (widget.smeupButtons != null) {
-          button = widget.smeupButtons!;
-        }
+      if (widget.onGetSubmitButton != null) {
+        button = widget.onGetSubmitButton!();
       }
 
       final Widget column;
@@ -480,10 +343,9 @@ class _KenSpotLightState extends State<KenSpotLight>
       } else {
         column = Container();
       }
-
-      return KenWidgetBuilderResponse(_model, column);
+      return column;
     } else {
-      return KenWidgetBuilderResponse(_model, children);
+      return children;
     }
   }
 
