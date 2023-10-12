@@ -155,7 +155,7 @@ class KenInputPanel extends StatelessWidget {
         SizedBox(
           height: 30,
           child: KenTextField(
-            id: field.id,
+            id: field.id!,
             data: field.value.code,
             // clientOnChange: (value) {
             //   field.value.code = field.value.description = value;

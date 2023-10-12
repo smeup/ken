@@ -2,11 +2,15 @@
 
 // ignore_for_file: deprecated_member_use
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/notifiers/ken_text_password_rule_notifier.dart';
 import '../models/notifiers/ken_text_password_visibility_notifier.dart';
 import '../services/ken_defaults.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_text_field.dart';
 import 'ken_text_password_indicators.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +40,7 @@ class KenTextPassword extends StatefulWidget {
   String? data;
   bool? underline;
   bool? autoFocus;
-  String? id;
+  String id;
   String? type;
   String? valueField;
   bool? showSubmit;
@@ -52,7 +56,7 @@ class KenTextPassword extends StatefulWidget {
   List<TextInputFormatter>? inputFormatters;
 
   KenTextPassword({
-    this.id = '',
+    required this.id,
     this.type = 'FLD',
     this.backColor = KenTextFieldPasswordDefaults.defaultBackColor,
     this.fontSize = KenTextFieldPasswordDefaults.defaultFontSize,
@@ -96,6 +100,7 @@ class KenTextPassword extends StatefulWidget {
 
 class _KenTextPasswordState extends State<KenTextPassword> {
   dynamic _data;
+  late StreamSubscription changeSubscription;
   // bool _passwordVisible;
 
   @override
@@ -106,6 +111,7 @@ class _KenTextPasswordState extends State<KenTextPassword> {
 
   @override
   void dispose() {
+    changeSubscription.cancel();
     super.dispose();
   }
 
@@ -119,6 +125,13 @@ class _KenTextPasswordState extends State<KenTextPassword> {
     final iconTheme = _getIconTheme();
     final dividerStyle = _getDividerStyle();
     final captionStyle = _getCaptionStile();
+
+    changeSubscription = KenMessageBus.instance.event<TextFieldOnChangeEvent>(widget.id).listen(
+      (event) {
+        passwordModel.checkProgress(event.value);
+        _data = event.value;
+      },
+    );
 
     final children = Column(
       children: [
@@ -150,24 +163,15 @@ class _KenTextPasswordState extends State<KenTextPassword> {
                         borderRadius: widget.borderRadius,
                         borderWidth: widget.borderWidth,
                         submitLabel: widget.submitLabel,
-                        clientOnSubmit: widget.clientOnSubmit,
                         height: widget.height,
                         inputFormatters: widget.inputFormatters,
                         padding: widget.padding,
-                        showSubmit: widget.showSubmit,
+                        showSubmit: widget.showSubmit ?? false,
                         showBorder: false,
                         width: widget.width,
                         underline: false,
                         data: _data,
                         clientValidator: widget.clientValidator,
-                        clientOnSave: widget.clientOnSave,
-                        clientOnChange: (value) {
-                          if (widget.clientOnChange != null) {
-                            widget.clientOnChange!(value);
-                          }
-                          passwordModel.checkProgress(value);
-                          _data = value;
-                        },
                         keyboard: fieldmodel.passwordVisible
                             ? TextInputType.text
                             : TextInputType.visiblePassword);

@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../services/ken_defaults.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_button.dart';
 import 'ken_buttons.dart';
 
@@ -28,26 +30,20 @@ class KenTextField extends StatefulWidget {
   bool? showBorder;
   String? data;
   bool? autoFocus;
-  String? id;
+  String id;
   String? type;
   String? valueField;
-  bool? showSubmit;
+  bool showSubmit;
   String? submitLabel;
-  KenButtons? smeupButtons;
+  Widget? submitButton;
 
   TextInputType? keyboard;
   Function? clientValidator;
-  Function? clientOnSave;
-  Function? clientOnChange;
-  Function? clientOnSubmit;
-
-  Function? onGetChildren;
-  Function? onGetSubmitButton;
 
   List<TextInputFormatter>? inputFormatters;
 
   KenTextField({
-    this.id = '',
+    required this.id,
     this.type = 'FLD',
     this.backColor = KenTextFieldDefaults.defaultBackColor,
     this.fontSize = KenTextFieldDefaults.defaultFontSize,
@@ -73,12 +69,8 @@ class KenTextField extends StatefulWidget {
     this.data,
     this.keyboard,
     this.clientValidator, // ?
-    this.clientOnSave,
-    this.clientOnChange,
-    this.clientOnSubmit,
     this.inputFormatters, // ?
-    this.onGetChildren,
-    this.onGetSubmitButton,
+    this.submitButton,
   });
 
   @override
@@ -106,10 +98,6 @@ class _KenTextFieldState extends State<KenTextField> {
 
     Widget textField;
 
-    if (widget.onGetChildren != null) {
-      widget.onGetChildren!();
-    }
-
     textField = Padding(
       padding: widget.padding!,
       child: Container(
@@ -136,7 +124,12 @@ class _KenTextFieldState extends State<KenTextField> {
             obscureText:
                 widget.keyboard == TextInputType.visiblePassword ? true : false,
             onChanged: (value) {
-              if (widget.clientOnChange != null) widget.clientOnChange!(value);
+              KenMessageBus.instance.fireEvent(
+                TextFieldOnChangeEvent(
+                  widgetId: widget.id!,
+                  value: value ?? '',
+                ),
+              );
             },
             decoration: InputDecoration(
               labelStyle: captionStyle,
@@ -158,19 +151,19 @@ class _KenTextFieldState extends State<KenTextField> {
               ),
             ),
             onSaved: (value) {
-              if (widget.clientOnSave != null) widget.clientOnSave!(value);
+              KenMessageBus.instance.fireEvent(
+                TextFieldOnSavedEvent(
+                  widgetId: widget.id!,
+                  value: value ?? '',
+                ),
+              );
             },
           )),
     );
 
-    if (widget.showSubmit!) {
-      KenButton? button;
-      if (widget.onGetSubmitButton != null) {
-        button = widget.onGetSubmitButton!();
-      }
-
+    if (widget.showSubmit) {
       final Widget column;
-      if (button != null) {
+      if (widget.submitButton != null) {
         column = Column(
           //mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -179,7 +172,7 @@ class _KenTextFieldState extends State<KenTextField> {
             const SizedBox(
               height: 5,
             ),
-            button,
+            widget.submitButton!,
           ],
         );
       } else {
