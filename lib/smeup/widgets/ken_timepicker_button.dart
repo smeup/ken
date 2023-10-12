@@ -4,7 +4,7 @@ import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as datepicker;
 import 'package:intl/intl.dart';
 
-import '../models/widgets/ken_timepicker_model.dart';
+import '../services/ken_defaults.dart';
 import 'ken_timepicker.dart';
 import 'ken_timepicker_customization.dart';
 
@@ -50,26 +50,26 @@ class KenTimePickerButton extends StatefulWidget {
     this.scaffoldKey,
     this.formKey,
     this.id = '',
-    this.backColor = KenTimePickerModel.defaultBackColor,
-    this.fontSize = KenTimePickerModel.defaultFontSize,
-    this.fontColor = KenTimePickerModel.defaultFontColor,
-    this.borderColor = KenTimePickerModel.defaultBorderColor,
-    this.borderWidth = KenTimePickerModel.defaultBorderWidth,
-    this.borderRadius = KenTimePickerModel.defaultBorderRadius,
-    this.fontBold = KenTimePickerModel.defaultFontBold,
-    this.elevation = KenTimePickerModel.defaultElevation,
-    this.captionFontBold = KenTimePickerModel.defaultFontBold,
-    this.captionFontSize = KenTimePickerModel.defaultFontSize,
-    this.captionFontColor = KenTimePickerModel.defaultCaptionFontColor,
-    this.captionBackColor = KenTimePickerModel.defaultCaptionBackColor,
-    this.underline = KenTimePickerModel.defaultUnderline,
-    this.align = KenTimePickerModel.defaultAlign,
-    this.label = KenTimePickerModel.defaultLabel,
-    this.width = KenTimePickerModel.defaultWidth,
-    this.height = KenTimePickerModel.defaultHeight,
-    this.padding = KenTimePickerModel.defaultPadding,
-    this.showborder = KenTimePickerModel.defaultShowBorder,
-    this.minutesList = KenTimePickerModel.defaultMinutesList,
+    this.backColor = KenTimepickerDefaults.defaultBackColor,
+    this.fontSize = KenTimepickerDefaults.defaultFontSize,
+    this.fontColor = KenTimepickerDefaults.defaultFontColor,
+    this.borderColor = KenTimepickerDefaults.defaultBorderColor,
+    this.borderWidth = KenTimepickerDefaults.defaultBorderWidth,
+    this.borderRadius = KenTimepickerDefaults.defaultBorderRadius,
+    this.fontBold = KenTimepickerDefaults.defaultFontBold,
+    this.elevation = KenTimepickerDefaults.defaultElevation,
+    this.captionFontBold = KenTimepickerDefaults.defaultFontBold,
+    this.captionFontSize = KenTimepickerDefaults.defaultFontSize,
+    this.captionFontColor = KenTimepickerDefaults.defaultCaptionFontColor,
+    this.captionBackColor = KenTimepickerDefaults.defaultCaptionBackColor,
+    this.underline = KenTimepickerDefaults.defaultUnderline,
+    this.align = KenTimepickerDefaults.defaultAlign,
+    this.label = KenTimepickerDefaults.defaultLabel,
+    this.width = KenTimepickerDefaults.defaultWidth,
+    this.height = KenTimepickerDefaults.defaultHeight,
+    this.padding = KenTimepickerDefaults.defaultPadding,
+    this.showborder = KenTimepickerDefaults.defaultShowBorder,
+    this.minutesList = KenTimepickerDefaults.defaultMinutesList,
     this.clientOnChange,
     this.dashColor,
   }) {}

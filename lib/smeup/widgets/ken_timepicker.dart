@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import '../models/widgets/ken_timepicker_model.dart';
+import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
 import 'ken_line.dart';
 import 'ken_timepicker_button.dart';
@@ -15,7 +15,6 @@ class KenTimePickerData {
 
 // ignore: must_be_immutable
 class KenTimePicker extends StatelessWidget {
-  KenTimePickerModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;
 
@@ -63,28 +62,28 @@ class KenTimePicker extends StatelessWidget {
     this.data, {
     id = '',
     type = 'tpk',
-    this.borderColor = KenTimePickerModel.defaultBorderColor,
-    this.borderRadius = KenTimePickerModel.defaultBorderRadius,
-    this.borderWidth = KenTimePickerModel.defaultBorderWidth,
-    this.fontBold = KenTimePickerModel.defaultFontBold,
-    this.fontSize = KenTimePickerModel.defaultFontSize,
-    this.fontColor = KenTimePickerModel.defaultFontColor,
-    this.backColor = KenTimePickerModel.defaultBackColor,
-    this.elevation = KenTimePickerModel.defaultElevation,
-    this.captionFontBold = KenTimePickerModel.defaultCaptionFontBold,
-    this.captionFontSize = KenTimePickerModel.defaultCaptionFontSize,
-    this.captionFontColor = KenTimePickerModel.defaultCaptionFontColor,
-    this.captionBackColor = KenTimePickerModel.defaultCaptionBackColor,
-    this.underline = KenTimePickerModel.defaultUnderline,
-    this.innerSpace = KenTimePickerModel.defaultInnerSpace,
-    this.align = KenTimePickerModel.defaultAlign,
-    this.label = KenTimePickerModel.defaultLabel,
-    this.width = KenTimePickerModel.defaultWidth,
-    this.height = KenTimePickerModel.defaultHeight,
-    this.padding = KenTimePickerModel.defaultPadding,
-    this.showborder = KenTimePickerModel.defaultShowBorder,
-    this.minutesList = KenTimePickerModel.defaultMinutesList,
-    this.dashColor = KenTimePickerModel.defaultDashColor,
+    this.borderColor = KenTimepickerDefaults.defaultBorderColor,
+    this.borderRadius = KenTimepickerDefaults.defaultBorderRadius,
+    this.borderWidth = KenTimepickerDefaults.defaultBorderWidth,
+    this.fontBold = KenTimepickerDefaults.defaultFontBold,
+    this.fontSize = KenTimepickerDefaults.defaultFontSize,
+    this.fontColor = KenTimepickerDefaults.defaultFontColor,
+    this.backColor = KenTimepickerDefaults.defaultBackColor,
+    this.elevation = KenTimepickerDefaults.defaultElevation,
+    this.captionFontBold = KenTimepickerDefaults.defaultCaptionFontBold,
+    this.captionFontSize = KenTimepickerDefaults.defaultCaptionFontSize,
+    this.captionFontColor = KenTimepickerDefaults.defaultCaptionFontColor,
+    this.captionBackColor = KenTimepickerDefaults.defaultCaptionBackColor,
+    this.underline = KenTimepickerDefaults.defaultUnderline,
+    this.innerSpace = KenTimepickerDefaults.defaultInnerSpace,
+    this.align = KenTimepickerDefaults.defaultAlign,
+    this.label = KenTimepickerDefaults.defaultLabel,
+    this.width = KenTimepickerDefaults.defaultWidth,
+    this.height = KenTimepickerDefaults.defaultHeight,
+    this.padding = KenTimepickerDefaults.defaultPadding,
+    this.showborder = KenTimepickerDefaults.defaultShowBorder,
+    this.minutesList = KenTimepickerDefaults.defaultMinutesList,
+    this.dashColor = KenTimepickerDefaults.defaultDashColor,
     // They have to be mapped with all the dynamisms
     //this.clientValidator,
     //this.clientOnSave,
@@ -168,9 +167,7 @@ class KenTimePicker extends StatelessWidget {
       dashColor: dashColor,
     );
 
-    var line = underline!
-        ? KenLine(scaffoldKey, formKey)
-        : Container();
+    var line = underline! ? KenLine(scaffoldKey, formKey) : Container();
 
     Widget children;
 
@@ -326,9 +323,7 @@ class KenTimePicker extends StatelessWidget {
 
   TextStyle _getTextStile() {
     TextStyle style = TextStyle(
-        color: fontColor,
-        fontSize: fontSize,
-        backgroundColor: backColor);
+        color: fontColor, fontSize: fontSize, backgroundColor: backColor);
 
     if (fontBold!) {
       style = style.copyWith(
@@ -344,8 +339,8 @@ class KenTimePicker extends StatelessWidget {
   }
 
   TextStyle _getCaptionStile() {
-    TextStyle style = TextStyle(
-        color: captionFontColor, fontSize: captionFontSize);
+    TextStyle style =
+        TextStyle(color: captionFontColor, fontSize: captionFontSize);
 
     if (captionFontBold!) {
       style = style.copyWith(
