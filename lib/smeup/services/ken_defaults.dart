@@ -130,6 +130,27 @@ class KenDatepickerDefaults {
   static const Color defaultDashColor = kBack100;
 }
 
+class KenImageListDefaults {
+  static const Color defaultBackColor = Colors.white;
+  static const Color defaultBorderColor = kPrimary;
+  static const double defaultBorderWidth = 2;
+  static const double defaultBorderRadius = 20;
+  static const double defaultFontSize = 12;
+  static const Color defaultFontColor = kPrimary;
+  static const bool defaultFontBold = false;
+  static const bool defaultCaptionFontBold = false;
+  static const double defaultCaptionFontSize = 10;
+  static const Color defaultCaptionFontColor = kPrimary;
+  static const double defaultWidth = 200;
+  static const double defaultHeight = 200;
+  static const EdgeInsetsGeometry defaultPadding =
+      EdgeInsets.only(left: 5, right: 5);
+  static const int defaultColumns = 0;
+  static const int defaultRows = 0;
+  static const Axis defaultOrientation = Axis.vertical;
+  static const double defaultListHeight = 480;
+}
+
 class KenInputPanelDefaults {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const double defaultFontSize = 16.0;
