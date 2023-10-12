@@ -14,7 +14,18 @@ class KenChartColumn {
     type = _getColumnType(jsonMap['fill']);
     name = jsonMap['code'];
     title = jsonMap['text'];
-    size = KenUtilities.getInt(jsonMap['lun']);
+    size = _getInt(jsonMap['lun']);
+  }
+
+  int? _getInt(dynamic value) {
+    if (value is int) {
+      return value;
+    } else if (value is double) {
+      return value.toInt();
+    } else if (value is String) {
+      return int.tryParse(value);
+    }
+    return value;
   }
 
   _getColumnType(String? fill) {
