@@ -60,7 +60,7 @@ KenCombo getCombo() {
     padding: const EdgeInsets.only(left: 10),
     label: "City:",
     showBorder: true,
-    data: [
+    items: [
       KenComboItemModel('1', 'Antwerp'),
       KenComboItemModel('2', 'Boston'),
       KenComboItemModel('3', 'Milan'),

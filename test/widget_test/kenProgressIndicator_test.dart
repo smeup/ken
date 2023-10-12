@@ -17,11 +17,7 @@ Future<void> main() async {
               padding: const EdgeInsets.all(20),
               child: Center(
                   child: Column(
-                children: [
-                  KenProgressIndicator(
-                      WidgetTestService.scaffoldKey, WidgetTestService.formKey,
-                      id: 'pgi1', size: 200)
-                ],
+                children: [KenProgressIndicator(id: 'pgi1', size: 200)],
               )),
             ),
           ),

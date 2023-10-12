@@ -21,7 +21,6 @@ Future<void> main() async {
                       child: Column(
                     children: [
                       KenLabel(
-                        WidgetTestService.scaffoldKey,
                         WidgetTestService.formKey,
                         const ['Information'],
                         id: 'lab2',

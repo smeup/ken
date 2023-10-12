@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ken/smeup/services/ken_log_service.dart';
-import '../../lib/smeup/widgets/kenSwitch.dart';
+import 'package:ken/smeup/widgets/ken_switch.dart';
 
 import 'widget_test_service.dart';
 
@@ -21,8 +20,6 @@ Future<void> main() async {
                   child: Column(
                 children: [
                   KenSwitch(
-                    WidgetTestService.scaffoldKey,
-                    WidgetTestService.formKey,
                     text: 'Turn me on/off',
                     data: true,
                     id: 'switch1',
@@ -40,8 +37,8 @@ Future<void> main() async {
       try {
         await tester.pumpAndSettle(const Duration(seconds: 2));
       } catch (e) {
-        KenLogService.writeDebugMessage(e.toString(),
-            logType: KenLogType.error);
+        // KenLogService.writeDebugMessage(e.toString(),
+        //     logType: KenLogType.error);
       }
 
       runTests();

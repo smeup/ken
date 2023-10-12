@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../../shiro/lib/models/ken_list_box_model.dart';
-import '../../lib/smeup/widgets/kenListBox.dart';
+import 'package:ken/smeup/widgets/ken_list_box.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {
