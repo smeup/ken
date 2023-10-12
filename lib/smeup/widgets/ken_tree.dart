@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import '../models/widgets/ken_tree_model.dart';
+import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
 
 // ignore: must_be_immutable
 class KenTree extends StatelessWidget {
-  KenTreeModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;
 
@@ -37,20 +36,20 @@ class KenTree extends StatelessWidget {
     this.title = '',
     this.data = const [],
     this.onClientClick,
-    this.width = KenTreeModel.defaultWidth,
-    this.height = KenTreeModel.defaultHeight,
-    this.labelFontSize = KenTreeModel.defaultLabelFontSize,
-    this.labelBackColor = KenTreeModel.defaultLabelBackColor,
-    this.labelFontColor = KenTreeModel.defaultLabelFontColor,
-    this.labelFontbold = KenTreeModel.defaultLabelFontbold,
-    this.labelVerticalSpacing = KenTreeModel.defaultLabelVerticalSpacing,
-    this.labelHeight = KenTreeModel.defaultLabelHeight,
-    this.parentFontSize = KenTreeModel.defaultParentFontSize,
-    this.parentBackColor = KenTreeModel.defaultParentBackColor,
-    this.parentFontColor = KenTreeModel.defaultParentFontColor,
-    this.parentFontbold = KenTreeModel.defaultParentFontbold,
-    this.parentVerticalSpacing = KenTreeModel.defaultParentVerticalSpacing,
-    this.parentHeight = KenTreeModel.defaultParentHeight,
+    this.width = KenTreeDefaults.defaultWidth,
+    this.height = KenTreeDefaults.defaultHeight,
+    this.labelFontSize = KenTreeDefaults.defaultLabelFontSize,
+    this.labelBackColor = KenTreeDefaults.defaultLabelBackColor,
+    this.labelFontColor = KenTreeDefaults.defaultLabelFontColor,
+    this.labelFontbold = KenTreeDefaults.defaultLabelFontbold,
+    this.labelVerticalSpacing = KenTreeDefaults.defaultLabelVerticalSpacing,
+    this.labelHeight = KenTreeDefaults.defaultLabelHeight,
+    this.parentFontSize = KenTreeDefaults.defaultParentFontSize,
+    this.parentBackColor = KenTreeDefaults.defaultParentBackColor,
+    this.parentFontColor = KenTreeDefaults.defaultParentFontColor,
+    this.parentFontbold = KenTreeDefaults.defaultParentFontbold,
+    this.parentVerticalSpacing = KenTreeDefaults.defaultParentVerticalSpacing,
+    this.parentHeight = KenTreeDefaults.defaultParentHeight,
   });
   @override
   Widget build(BuildContext context) {
