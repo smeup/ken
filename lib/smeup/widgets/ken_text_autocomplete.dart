@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../services/ken_defaults.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_button.dart';
 import 'ken_buttons.dart';
 
@@ -46,12 +48,12 @@ class KenTextAutocomplete extends StatefulWidget {
   Function? clientOnSelected;
   Function? clientOnSubmit;
 
-  Function? onFieldViewBuilder;
-  Function? onTapSetState;
-  Function? onGetSubmitButton;
+  Widget? submitButton;
 
   TextInputType? keyboard;
   List<TextInputFormatter>? inputFormatters;
+
+  String? code;
 
   KenTextAutocomplete(
       {this.id = '',
@@ -90,9 +92,9 @@ class KenTextAutocomplete extends StatefulWidget {
       this.inputFormatters,
       this.defaultValue,
       this.valueField,
-      this.onFieldViewBuilder,
-      this.onTapSetState,
-      this.onGetSubmitButton});
+      this.submitButton,
+      this.code,
+    });
 
   @override
   _KenTextAutocompleteState createState() => _KenTextAutocompleteState();
@@ -154,15 +156,10 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> {
               TextEditingController textEditingController,
               FocusNode focusNode,
               VoidCallback onFieldSubmitted) {
-            String code = "";
 
-            if (widget.onFieldViewBuilder != null) {
-              code = widget.onFieldViewBuilder!();
-            }
-
-            if (code.isNotEmpty && _data != null) {
+            if ((widget.code?.isNotEmpty ?? false) && _data != null) {
               var currel = _data.firstWhere(
-                (element) => element['code'].toString() == code,
+                (element) => element['code'].toString() == widget.code,
                 //orElse: () => null as Map<String, String?>
               );
               if (currel != null) {
@@ -243,9 +240,12 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> {
                     ),
                     onTap: () {
                       setState(() {
-                        if (widget.onTapSetState != null) {
-                          widget.onTapSetState!(code);
-                        }
+                        KenMessageBus.instance.fireEvent(
+                          TextAutocompleteOnTapSetStateEvent(
+                            widgetId: widget.id!,
+                            value: widget.code!,
+                          ),
+                        );
                       });
                     },
                   ),
@@ -280,6 +280,12 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> {
                       return GestureDetector(
                         onTap: () {
                           onSelected(option);
+                          KenMessageBus.instance.fireEvent(
+                            TextAutocompleteOnTapSelectedEvent(
+                              widgetId: widget.id!,
+                              value: option,
+                            ),
+                          );
                         },
                         child: ListTile(
                           // leading: Text('•'), -- Eventually something that can be displayed before the text
@@ -304,13 +310,8 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> {
         ));
 
     if (widget.showSubmit!) {
-      KenButton? button;
-      if (widget.onGetSubmitButton != null) {
-        button = widget.onGetSubmitButton!();
-      }
-
       final Widget column;
-      if (button != null) {
+      if (widget.submitButton != null) {
         column = Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -318,7 +319,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> {
             const SizedBox(
               height: 2,
             ),
-            button,
+            widget.submitButton!,
           ],
         );
       } else {

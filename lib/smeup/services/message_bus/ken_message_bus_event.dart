@@ -21,3 +21,21 @@ class TextFieldOnChangeEvent extends KenMessageBusEvent {
     required this.value,
   });
 }
+
+class TextAutocompleteOnTapSelectedEvent extends KenMessageBusEvent {
+  dynamic value;
+
+  TextAutocompleteOnTapSelectedEvent({
+    required super.widgetId,
+    required this.value,
+  });
+}
+
+class TextAutocompleteOnTapSetStateEvent extends KenMessageBusEvent {
+  String value;
+
+  TextAutocompleteOnTapSetStateEvent({
+    required super.widgetId,
+    required this.value,
+  });
+}
