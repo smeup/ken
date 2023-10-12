@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import '../../lib/smeup/models/widgets/ken_chart_column.dart';
 import '../../lib/smeup/models/widgets/ken_chart_datasource.dart';
-import '../../lib/smeup/models/widgets/ken_chart_model.dart';
 import '../../lib/smeup/models/widgets/ken_chart_row.dart';
-import '../../lib/smeup/widgets/kenChart.dart';
+import '../../lib/smeup/widgets/ken_chart.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {

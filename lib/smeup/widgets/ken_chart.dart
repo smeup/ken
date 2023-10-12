@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import '../models/widgets/ken_chart_datasource.dart';
-import '../models/widgets/ken_chart_model.dart';
-import '../models/widgets/ken_model.dart';
+import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
-import 'kenWidgetInterface.dart';
-import 'kenWidgetMixin.dart';
-import 'kenWidgetStateInterface.dart';
-import 'kenWidgetStateMixin.dart';
+
+enum ChartType { pie, bar }
 
 // ignore: must_be_immutable
-class KenChart extends StatefulWidget
-    with KenWidgetMixin
-    implements KenWidgetInterface {
-  KenChartModel? model;
+class KenChart extends StatefulWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;
 
@@ -31,62 +25,22 @@ class KenChart extends StatefulWidget
       {this.id = '',
       this.type = 'CHA',
       this.title = '',
-      this.chartType = KenChartModel.defaultChartType,
-      this.refresh = KenChartModel.defaultRefresh,
-      this.height = KenChartModel.defaultHeight,
-      this.width = KenChartModel.defaultWidth,
-      this.legend = KenChartModel.defaultLegend,
-      this.data})
-      : super(key: Key(KenUtilities.getWidgetId(type, id))) {
-    id = KenUtilities.getWidgetId(type, id);
-  }
-
-  KenChart.withController(
-      KenChartModel this.model, this.scaffoldKey, this.formKey)
-      : super(key: Key(KenUtilities.getWidgetId(model.type, model.id))) {
-    runControllerActivities(model!);
-  }
-  @override
-  runControllerActivities(KenModel model) {
-    KenChartModel m = model as KenChartModel;
-    id = m.id;
-    type = m.type;
-    title = m.title;
-    chartType = m.chartType;
-    //refresh = m.refresh;
-    width = m.width;
-    height = m.height;
-    legend = m.legend;
-
-    data = treatData(m);
-  }
-
-  @override
-  dynamic treatData(KenModel model) {
-    KenChartModel m = model as KenChartModel;
-
-    // change data format
-    var workData = formatDataFields(m);
-
-    final smeupChartDatasource = KenChartDatasource.fromMap(workData);
-    return smeupChartDatasource;
-  }
+      this.chartType = KenChartDefaults.defaultChartType,
+      this.refresh = KenChartDefaults.defaultRefresh,
+      this.height = KenChartDefaults.defaultHeight,
+      this.width = KenChartDefaults.defaultWidth,
+      this.legend = KenChartDefaults.defaultLegend,
+      this.data});
 
   @override
   _KenChartState createState() => _KenChartState();
 }
 
-class _KenChartState extends State<KenChart>
-    with KenWidgetStateMixin
-    implements KenWidgetStateInterface {
-  KenChartModel? _model;
+class _KenChartState extends State<KenChart> {
   //KenChartDatasource? _data;
 
   @override
   void initState() {
-    _model = widget.model;
-    //_data = widget.data;
-    if (_model != null) widgetLoadType = _model!.widgetLoadType;
     super.initState();
   }
 
@@ -97,15 +51,7 @@ class _KenChartState extends State<KenChart>
 
   @override
   Widget build(BuildContext context) {
-    final chart = runBuild(context, widget.id, widget.type, widget.scaffoldKey,
-        getInitialdataLoaded(_model), notifierFunction: () {
-      setState(() {
-        widgetLoadType = LoadType.immediate;
-        setDataLoad(widget.id, false);
-      });
-    });
-
-    return chart;
+    return Container();
   }
 
   // Future<KenWidgetBuilderResponse> getChildren() async {

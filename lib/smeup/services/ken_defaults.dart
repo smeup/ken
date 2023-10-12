@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/ken_chart.dart';
 import '../widgets/ken_list_box.dart';
 import 'ken_widget_orientation.dart';
 
@@ -543,6 +544,14 @@ class KenTextFieldPasswordDefaults {
   static const bool defaultShowRules = true;
   static const bool defaultShowRulesIcon = true;
   static const bool defaultCheckRules = true;
+}
+
+class KenChartDefaults {
+  static const ChartType defaultChartType = ChartType.bar;
+  static const int defaultRefresh = -1;
+  static const double defaultWidth = 100;
+  static const double defaultHeight = 100;
+  static const bool defaultLegend = true;
 }
 
 ///GRAY COLOR
