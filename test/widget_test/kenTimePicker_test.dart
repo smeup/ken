@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/ken_timepicker.dart';
+import 'package:ken/smeup/widgets/ken_timepicker.dart';
 import 'widget_test_service.dart';
 
 const timePickerDynamicScreen = 'test_time_picker';
@@ -27,8 +27,6 @@ Future<void> main() async {
                   child: Column(
                 children: [
                   KenTimePicker(
-                    WidgetTestService.scaffoldKey,
-                    WidgetTestService.formKey,
                     KenTimePickerData(
                         time: DateTime(2021, 1, 1, 17, 30),
                         formattedTime: "17:30"),

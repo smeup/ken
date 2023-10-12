@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/ken_line.dart';
+import 'package:ken/smeup/widgets/ken_line.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {
@@ -16,8 +16,6 @@ Future<void> main() async {
             child: Column(
               children: [
                 KenLine(
-                  WidgetTestService.scaffoldKey,
-                  WidgetTestService.formKey,
                   id: 'lin1',
                 ),
               ],

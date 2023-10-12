@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
-import '../services/ken_utilities.dart';
 
 // ignore: must_be_immutable
 class KenProgressIndicator extends StatelessWidget {
@@ -22,10 +21,7 @@ class KenProgressIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    @override
-    Widget children;
-
-    return children = Center(
+    return Center(
       child: SizedBox(
         height: size,
         width: size,

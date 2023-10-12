@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/ken_progress_bar.dart';
+import 'package:ken/smeup/widgets/ken_progress_bar.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {

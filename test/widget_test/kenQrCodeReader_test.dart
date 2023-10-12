@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/kenQrcodeReader.dart';
+import 'package:ken/smeup/widgets/kenQrcodeReader.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import 'widget_test_service.dart';
@@ -22,9 +22,7 @@ Future<void> main() async {
                 child: Center(
                     child: Column(
                   children: [
-                    KenQRCodeReader(WidgetTestService.scaffoldKey,
-                        WidgetTestService.formKey,
-                        data: 'I am a qrcode', id: 'qrc1'),
+                    KenQRCodeReader(data: 'I am a qrcode', id: 'qrc1'),
                   ],
                 )),
               ),

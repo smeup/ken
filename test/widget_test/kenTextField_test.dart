@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/ken_text_field.dart';
+import 'package:ken/smeup/widgets/ken_text_field.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {
@@ -19,8 +19,6 @@ Future<void> main() async {
                   child: Column(
                 children: [
                   KenTextField(
-                    WidgetTestService.scaffoldKey,
-                    WidgetTestService.formKey,
                     label: 'description',
                     id: 'text1',
                     data: 'some text',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/ken_text_autocomplete.dart';
+import 'package:ken/smeup/widgets/ken_text_autocomplete.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {
@@ -22,8 +22,6 @@ Future<void> main() async {
                   child: Column(
                 children: [
                   KenTextAutocomplete(
-                    WidgetTestService.scaffoldKey,
-                    WidgetTestService.formKey,
                     label: 'description',
                     //padding: EdgeInsets.only(left: 10, right: 10),
                     id: 'autocomplete1',

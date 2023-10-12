@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/ken_datepicker.dart';
+import 'package:ken/smeup/widgets/ken_datepicker.dart';
 
 import 'widget_test_service.dart';
 
@@ -24,8 +24,6 @@ Future<void> main() async {
                   child: Column(
                 children: [
                   KenDatePicker(
-                    WidgetTestService.scaffoldKey,
-                    WidgetTestService.formKey,
                     KenDatePickerData(value: DateTime(2021, 03, 21)),
                     id: "datepicker1",
                     underline: true,

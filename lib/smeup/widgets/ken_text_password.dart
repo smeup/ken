@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import '../models/notifiers/ken_text_password_rule_notifier.dart';
 import '../models/notifiers/ken_text_password_visibility_notifier.dart';
 import '../services/ken_defaults.dart';
-import '../services/ken_utilities.dart';
 import 'ken_text_field.dart';
 import 'ken_text_password_indicators.dart';
 import 'package:provider/provider.dart';

@@ -7,8 +7,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/ken_radio_button.dart';
-import '../../lib/smeup/widgets/ken_radio_buttons.dart';
+import 'package:ken/smeup/widgets/ken_radio_button.dart';
+import 'package:ken/smeup/widgets/ken_radio_buttons.dart';
 
 import 'widget_test_service.dart';
 
@@ -30,8 +30,6 @@ Future<void> main() async {
                   child: Column(
                 children: [
                   KenRadioButtons(
-                    WidgetTestService.scaffoldKey,
-                    WidgetTestService.formKey,
                     title: '',
                     data: const [
                       {"code": "1", "value": "Yes"},

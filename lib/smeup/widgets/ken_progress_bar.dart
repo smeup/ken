@@ -35,9 +35,7 @@ class KenProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget children;
-
-    return children = Center(
+    return Center(
       child: Container(
           decoration:
               BoxDecoration(borderRadius: BorderRadius.circular(borderRadius!)),

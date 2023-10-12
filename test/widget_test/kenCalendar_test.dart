@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/services/ken_localization_delegate.dart';
-import '../../lib/smeup/widgets/ken_calendar.dart';
+import 'package:ken/smeup/services/ken_localization_delegate.dart';
+import 'package:ken/smeup/widgets/ken_calendar.dart';
 
 import 'widget_test_service.dart';
 
@@ -29,8 +29,7 @@ Future<void> main() async {
                   padding: const EdgeInsets.all(20),
                   child: Column(
                     children: [
-                      KenCalendar(WidgetTestService.scaffoldKey,
-                          WidgetTestService.formKey,
+                      KenCalendar(
                           id: 'calendar1',
                           width: 600,
                           height: 400,

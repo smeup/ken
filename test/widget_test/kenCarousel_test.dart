@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/models/notifiers/ken_carousel_indicator_notifier.dart';
-import '../../lib/smeup/widgets/ken_carousel.dart';
+import 'package:ken/smeup/models/notifiers/ken_carousel_indicator_notifier.dart';
+import 'package:ken/smeup/widgets/ken_carousel.dart';
 import 'package:provider/provider.dart';
 
 import 'widget_test_service.dart';

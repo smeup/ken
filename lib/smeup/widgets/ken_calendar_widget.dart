@@ -9,7 +9,6 @@ import '../models/widgets/ken_calendar_event_model.dart';
 import '../services/ken_configuration_service.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../services/ken_utilities.dart';
 import 'ken_line.dart';
 import 'ken_progress_indicator.dart';
 
@@ -474,6 +473,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
 
   Future<void> _eventClicked(DateTime selectedDay, DateTime? focusedDay,
       {KenCalendarEventModel? event}) async {
+    // TODO Tony
     dynamic data;
     String? title;
     String? initTime;

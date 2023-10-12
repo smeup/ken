@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/widgets/ken_chart_datasource.dart';
 import '../services/ken_defaults.dart';
-import '../services/ken_utilities.dart';
 
 enum ChartType { pie, bar }
 

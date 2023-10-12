@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/widgets/ken_label.dart';
+import 'package:ken/smeup/widgets/ken_label.dart';
 import 'widget_test_service.dart';
 
 Future<void> main() async {
@@ -21,7 +21,6 @@ Future<void> main() async {
                       child: Column(
                     children: [
                       KenLabel(
-                        WidgetTestService.formKey,
                         const ['Information'],
                         id: 'lab2',
                         fontBold: false,

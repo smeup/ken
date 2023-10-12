@@ -1,12 +1,12 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:ken/smeup/services/ken_defaults.dart';
+import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
 import 'ken_switch_widget.dart';
+
 // ignore: must_be_immutable
 class KenSwitch extends StatelessWidget {
-
   double? captionFontSize;
   Color? captionFontColor;
   Color? captionBackColor;
@@ -102,8 +102,8 @@ class KenSwitch extends StatelessWidget {
     TextStyle style = TextStyle(
       color: captionFontColor ??
           Colors.black, // Provide a default color if it's null
-      fontSize: captionFontSize ??
-          14, // Provide a default font size if it's null
+      fontSize:
+          captionFontSize ?? 14, // Provide a default font size if it's null
       backgroundColor: captionBackColor ?? Colors.transparent,
     );
 
