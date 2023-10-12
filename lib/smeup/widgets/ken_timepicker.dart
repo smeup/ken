@@ -13,7 +13,6 @@ class KenTimePickerData {
   KenTimePickerData({required this.time, this.formattedTime});
 }
 
-// ignore: must_be_immutable
 class KenTimePicker extends StatelessWidget {
   String? id;
   String? type;

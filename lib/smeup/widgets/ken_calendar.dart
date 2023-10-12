@@ -11,7 +11,6 @@ import 'package:table_calendar/table_calendar.dart';
 // final Map<DateTime, List?>? _holidays =
 //     KenThemeConfigurationService.getHolidays();
 
-// ignore: must_be_immutable
 class KenCalendar extends StatefulWidget {
   // graphic properties
   double? dayFontSize;

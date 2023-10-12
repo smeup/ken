@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-// ignore: must_be_immutable
 class KenDrawerItem extends StatelessWidget {
   final String? text;
   final String? route;

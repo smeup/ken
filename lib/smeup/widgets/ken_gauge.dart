@@ -3,7 +3,6 @@ import '../services/ken_defaults.dart';
 
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-// ignore: must_be_immutable
 class KenGauge extends StatefulWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;

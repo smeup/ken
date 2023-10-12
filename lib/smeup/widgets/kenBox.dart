@@ -9,7 +9,6 @@ import '../services/ken_localization_service.dart';
 import 'kenNotAvailable.dart';
 import 'ken_list_box.dart';
 
-// ignore: must_be_immutable
 class KenBox extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState>? formKey;

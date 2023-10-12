@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
 
-// ignore: must_be_immutable
 class KenTree extends StatelessWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;

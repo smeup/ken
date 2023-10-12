@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
 
-// ignore: must_be_immutable
 class KenLabel extends StatelessWidget {
   // graphic properties
   double? fontSize;

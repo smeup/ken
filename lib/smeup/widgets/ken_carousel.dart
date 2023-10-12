@@ -6,7 +6,6 @@ import 'kenCarouselIndicator.dart';
 import 'kenCarouselItem.dart';
 import 'package:provider/provider.dart';
 
-// ignore: must_be_immutable
 class KenCarousel extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState>? formKey;

@@ -4,7 +4,6 @@ import '../services/ken_defaults.dart';
 
 enum ChartType { pie, bar }
 
-// ignore: must_be_immutable
 class KenChart extends StatefulWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;

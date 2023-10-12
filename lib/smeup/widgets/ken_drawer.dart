@@ -4,7 +4,6 @@ import '../models/widgets/ken_drawer_data_element.dart';
 import '../services/ken_defaults.dart';
 import 'ken_drawer_item.dart';
 
-// ignore: must_be_immutable
 class KenDrawer extends StatefulWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;

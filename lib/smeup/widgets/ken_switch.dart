@@ -5,7 +5,6 @@ import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
 import 'ken_switch_widget.dart';
 
-// ignore: must_be_immutable
 class KenSwitch extends StatelessWidget {
   double? captionFontSize;
   Color? captionFontColor;

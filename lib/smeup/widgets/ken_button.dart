@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
 
-// ignore: must_be_immutable
 class KenButton extends StatelessWidget {
   final int? buttonIndex;
   Color? backColor;
@@ -38,37 +37,37 @@ class KenButton extends StatelessWidget {
   final double? parentWidth;
   final double? parentHeight;
 
-  KenButton(
-      {super.key,
-      this.id = '',
-      this.type = 'BTN',
-      this.title = '',
-      this.data = '',
-      this.backColor = KenButtonsDefaults.defaultBackColor,
-      this.borderColor = KenButtonsDefaults.defaultBorderColor,
-      this.borderRadius = KenButtonsDefaults.defaultBorderRadius,
-      this.borderWidth = KenButtonsDefaults.defaultBorderWidth,
-      this.elevation = KenButtonsDefaults.defaultElevation,
-      this.fontSize = KenButtonsDefaults.defaultFontSize,
-      this.fontColor = KenButtonsDefaults.defaultFontColor,
-      this.fontBold = KenButtonsDefaults.defaultFontBold,
-      this.iconSize = KenButtonsDefaults.defaultIconSize,
-      this.iconColor = KenButtonsDefaults.defaultIconColor,
-      this.width = KenButtonsDefaults.defaultWidth,
-      this.height = KenButtonsDefaults.defaultHeight,
-      this.position = KenButtonsDefaults.defaultPosition,
-      this.align = KenButtonsDefaults.defaultAlign,
-      this.padding = KenButtonsDefaults.defaultPadding,
-      this.valueField = KenButtonsDefaults.defaultValueField,
-      this.buttonIndex,
-      this.iconData,
-      this.clientOnPressed,
-      this.isBusy = false,
-      this.isLink = KenButtonsDefaults.defaultIsLink,
-      this.innerSpace = KenButtonsDefaults.defaultInnerSpace,
-      this.parentWidth,
-      this.parentHeight,
-    }) {
+  KenButton({
+    super.key,
+    this.id = '',
+    this.type = 'BTN',
+    this.title = '',
+    this.data = '',
+    this.backColor = KenButtonsDefaults.defaultBackColor,
+    this.borderColor = KenButtonsDefaults.defaultBorderColor,
+    this.borderRadius = KenButtonsDefaults.defaultBorderRadius,
+    this.borderWidth = KenButtonsDefaults.defaultBorderWidth,
+    this.elevation = KenButtonsDefaults.defaultElevation,
+    this.fontSize = KenButtonsDefaults.defaultFontSize,
+    this.fontColor = KenButtonsDefaults.defaultFontColor,
+    this.fontBold = KenButtonsDefaults.defaultFontBold,
+    this.iconSize = KenButtonsDefaults.defaultIconSize,
+    this.iconColor = KenButtonsDefaults.defaultIconColor,
+    this.width = KenButtonsDefaults.defaultWidth,
+    this.height = KenButtonsDefaults.defaultHeight,
+    this.position = KenButtonsDefaults.defaultPosition,
+    this.align = KenButtonsDefaults.defaultAlign,
+    this.padding = KenButtonsDefaults.defaultPadding,
+    this.valueField = KenButtonsDefaults.defaultValueField,
+    this.buttonIndex,
+    this.iconData,
+    this.clientOnPressed,
+    this.isBusy = false,
+    this.isLink = KenButtonsDefaults.defaultIsLink,
+    this.innerSpace = KenButtonsDefaults.defaultInnerSpace,
+    this.parentWidth,
+    this.parentHeight,
+  }) {
     // Gestione del button link è preferibile con una icona e testo sottolineato
     // if (isLink) {
     //   borderColor = KenConfigurationService.getTheme()!.scaffoldBackgroundColor;

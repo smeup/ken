@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
 
-// ignore: must_be_immutable
 class KenSplash extends StatefulWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;

@@ -3,7 +3,6 @@ import '../services/ken_configuration_service.dart';
 import '../services/ken_defaults.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-// ignore: must_be_immutable
 class KenQRCodeReader extends StatelessWidget {
   double? padding;
   double? size;

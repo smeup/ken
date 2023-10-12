@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import '../services/ken_defaults.dart';
 import 'ken_buttons.dart';
 
-// ignore: must_be_immutable
 class KenSpotLight extends StatefulWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;

@@ -12,7 +12,6 @@ class KenDatePickerData {
   KenDatePickerData({required this.value, this.text});
 }
 
-// ignore: must_be_immutable
 class KenDatePicker extends StatefulWidget {
   Color? borderColor;
   double? borderWidth;

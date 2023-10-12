@@ -7,7 +7,6 @@ import '../services/ken_utilities.dart';
 import 'kenComboWidget.dart';
 import 'ken_line.dart';
 
-// ignore: must_be_immutable
 class KenCombo extends StatelessWidget {
   double? fontSize;
   Color? fontColor;

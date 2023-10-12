@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/ken_configuration_service.dart';
 
-// ignore: must_be_immutable
 class KenSwitchWidget extends StatefulWidget {
   Color? thumbColor;
   Color? trackColor;

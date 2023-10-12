@@ -8,7 +8,6 @@ import '../services/ken_defaults.dart';
 import 'ken_timepicker.dart';
 import 'ken_timepicker_customization.dart';
 
-// ignore: must_be_immutable
 class KenTimePickerButton extends StatefulWidget {
   final GlobalKey<ScaffoldState>? scaffoldKey;
   final GlobalKey<FormState>? formKey;

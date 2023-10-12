@@ -11,7 +11,6 @@ import 'ken_text_field.dart';
 import 'ken_text_password_indicators.dart';
 import 'package:provider/provider.dart';
 
-// ignore: must_be_immutable
 class KenTextPassword extends StatefulWidget {
   Color? backColor;
   double? fontSize;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
 
-// ignore: must_be_immutable
 class KenLine extends StatelessWidget {
   Color? color;
   double? thickness;

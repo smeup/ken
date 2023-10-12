@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
 import 'ken_slider_widget.dart';
 
-// ignore: must_be_immutable
 class KenSlider extends StatefulWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;

@@ -6,7 +6,6 @@ import '../services/ken_defaults.dart';
 import 'ken_button.dart';
 import 'ken_buttons.dart';
 
-// ignore: must_be_immutable
 class KenTextAutocomplete extends StatefulWidget {
   // graphic properties
   Color? backColor;

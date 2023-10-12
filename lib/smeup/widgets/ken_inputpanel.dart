@@ -12,7 +12,6 @@ import 'ken_radio_buttons.dart';
 import 'ken_text_autocomplete.dart';
 import 'ken_text_field.dart';
 
-// ignore: must_be_immutable
 class KenInputPanel extends StatelessWidget {
   EdgeInsetsGeometry? padding;
   double? fontSize;

@@ -12,7 +12,6 @@ import 'package:table_calendar/table_calendar.dart';
 import 'ken_line.dart';
 import 'ken_progress_indicator.dart';
 
-// ignore: must_be_immutable
 class KenCalendarWidget extends StatefulWidget {
   final double? dayFontSize;
   final double? titleFontSize;

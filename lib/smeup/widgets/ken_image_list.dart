@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
 import 'ken_list_box.dart';
 
-// ignore: must_be_immutable
 class KenImageList extends StatefulWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;

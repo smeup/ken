@@ -4,7 +4,6 @@ import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
 import 'package:intl/intl.dart';
 import 'ken_timepicker.dart';
 
-// ignore: must_be_immutable
 class KenDatePickerButton extends StatefulWidget {
   Color? borderColor;
   double? borderWidth;

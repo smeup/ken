@@ -7,7 +7,6 @@ import 'kenNotAvailable.dart';
 
 enum KenListType { simple, oriented, wheel }
 
-// ignore: must_be_immutable
 class KenListBox extends StatefulWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;
