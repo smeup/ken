@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/widgets/ken_image_model.dart';
-import '../services/ken_utilities.dart';
+import '../services/ken_defaults.dart';
 
 // ignore: must_be_immutable
 class KenImage extends StatefulWidget {
-  KenImageModel? model;
   final GlobalKey<ScaffoldState>? scaffoldKey;
   final GlobalKey<FormState>? formKey;
 
@@ -21,10 +19,10 @@ class KenImage extends StatefulWidget {
   KenImage(this.scaffoldKey, this.formKey, this.data,
       {this.id = '',
       this.type = 'IMG',
-      this.width = KenImageModel.defaultWidth,
-      this.height = KenImageModel.defaultHeight,
-      this.padding = KenImageModel.defaultPadding,
-      this.isRemote = KenImageModel.defaultIsRemote,
+      this.width = KenImageDefaults.defaultWidth,
+      this.height = KenImageDefaults.defaultHeight,
+      this.padding = KenImageDefaults.defaultPadding,
+      this.isRemote = KenImageDefaults.defaultIsRemote,
       title = ''});
 
   @override

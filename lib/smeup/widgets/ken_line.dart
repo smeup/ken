@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../models/widgets/ken_line_model.dart';
 import '../services/ken_defaults.dart';
 
 // ignore: must_be_immutable

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/widgets/ken_progress_indicator_model.dart';
+import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
 
 // ignore: must_be_immutable
@@ -14,10 +14,10 @@ class KenProgressIndicator extends StatelessWidget {
   KenProgressIndicator(
       {this.id = '',
       this.type = 'FLD',
-      this.color = KenProgressIndicatorModel.defaultColor,
+      this.color = KenProgressIndicatorDefaults.defaultColor,
       this.circularTrackColor =
-          KenProgressIndicatorModel.defaultCircularTrackColor,
-      this.size = KenProgressIndicatorModel.defaultSize,
+          KenProgressIndicatorDefaults.defaultCircularTrackColor,
+      this.size = KenProgressIndicatorDefaults.defaultSize,
       this.title = ''});
 
   @override

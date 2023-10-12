@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:xml/xml.dart';
 
 import '../models/widgets/ken_combo_item_model.dart';
-import '../models/widgets/ken_input_panel_model.dart';
 import '../models/widgets/ken_input_panel_value.dart';
 import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
@@ -29,6 +27,7 @@ class KenInputPanel extends StatelessWidget {
   double? parentHeight;
   double confirmButtonRowHeight = 110;
   bool? autoAdaptHeight = true;
+  bool? isConfirmedEnabled = false;
 
   void Function(List<SmeupInputPanelField>?)? onSubmit;
 
@@ -44,7 +43,8 @@ class KenInputPanel extends StatelessWidget {
       this.backgroundColor,
       this.onSubmit,
       this.parentWidth,
-      this.parentHeight});
+      this.parentHeight,
+      this.isConfirmedEnabled});
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class KenInputPanel extends StatelessWidget {
 
     double? innerPanelHeight = inputPanelHeight;
 
-    if (autoAdaptHeight! && _isConfirmButtonEnabled()) {
+    if (autoAdaptHeight! && isConfirmedEnabled!) {
       innerPanelHeight = innerPanelHeight! - confirmButtonRowHeight;
     }
 
@@ -77,7 +77,7 @@ class KenInputPanel extends StatelessWidget {
       width: inputPanelWidth,
       child: Scaffold(
           floatingActionButton:
-              autoAdaptHeight == true ? _getConfirmButton() : null,
+              autoAdaptHeight == true ? _getConfirmButton(this) : null,
           floatingActionButtonLocation: autoAdaptHeight == true
               ? FloatingActionButtonLocation.centerDocked
               : null,
@@ -98,7 +98,7 @@ class KenInputPanel extends StatelessWidget {
                       height: 16,
                     ),
                   _getFields(),
-                  if (autoAdaptHeight == false) _getConfirmButton()
+                  if (autoAdaptHeight == false) _getConfirmButton(this)
                 ],
               ),
             ),
@@ -145,19 +145,17 @@ class KenInputPanel extends StatelessWidget {
         return _getTextAutocompleteWidget(field);
 
       default:
-        return _getTextFieldWidget(GlobalKey, FormState, field);
+        return _getTextFieldWidget(field);
     }
   }
 
-  Widget _getTextFieldWidget(scaffoldKey, formKey, SmeupInputPanelField field) {
+  Widget _getTextFieldWidget(SmeupInputPanelField field) {
     return Column(
       children: [
         _getLabel(field.label),
         SizedBox(
           height: 30,
           child: KenTextField(
-            scaffoldKey,
-            formKey,
             id: field.id,
             data: field.value.code,
             // clientOnChange: (value) {
@@ -203,7 +201,7 @@ class KenInputPanel extends StatelessWidget {
           innerSpace: 0,
           showBorder: true,
           selectedValue: field.value.code == "" ? null : field.value.code,
-          data: field.items!
+          items: field.items!
               .map((e) => KenComboItemModel(e.code, e.description))
               .toList(),
           clientOnChange: (newValue) =>
@@ -239,8 +237,8 @@ class KenInputPanel extends StatelessWidget {
     );
   }
 
-  Widget _getConfirmButton() {
-    if (_isConfirmButtonEnabled()) {
+  Widget _getConfirmButton(widget) {
+    if (widget.isConfirmedEnabled) {
       return SizedBox(
         height: confirmButtonRowHeight,
         child: Row(
@@ -252,16 +250,6 @@ class KenInputPanel extends StatelessWidget {
                     if (widget.onSubmit != null) {
                       widget.onSubmit!(widget.data);
                     }
-
-                    KenMessageBus.instance.publishRequest(
-                      widget.globallyUniqueId,
-                      KenTopic.kenInputPanelOnSubmit,
-                      KenMessageBusEventData(
-                          context: context,
-                          widget: widget,
-                          model: _model,
-                          data: null),
-                    );
                   }),
             ),
           ],
@@ -274,17 +262,9 @@ class KenInputPanel extends StatelessWidget {
 
   KenLabel _getLabel(String? label) {
     return KenLabel(
-      widget.scaffoldKey,
-      widget.formKey,
       [label ?? ''],
       align: Alignment.bottomLeft,
       height: 8,
     );
-  }
-
-  bool _isConfirmButtonEnabled() {
-    if ((_model != null && _model!.dynamisms.isNotEmpty) ||
-        widget.onSubmit != null) return true;
-    return false;
   }
 }

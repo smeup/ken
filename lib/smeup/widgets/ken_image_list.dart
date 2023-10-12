@@ -1,13 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import '../models/widgets/ken_image_list_model.dart';
+import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
 import 'ken_list_box.dart';
 
 // ignore: must_be_immutable
 class KenImageList extends StatefulWidget {
-  KenImageListModel? model;
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState>? formKey;
 
@@ -51,21 +50,21 @@ class KenImageList extends StatefulWidget {
     this.rows, {
     this.id = '',
     this.type = 'IML',
-    this.backColor = KenImageListModel.defaultBackColor,
-    this.borderColor = KenImageListModel.defaultBorderColor,
-    this.borderWidth = KenImageListModel.defaultBorderWidth,
-    this.borderRadius = KenImageListModel.defaultBorderRadius,
-    this.fontSize = KenImageListModel.defaultFontSize,
-    this.fontColor = KenImageListModel.defaultFontColor,
-    this.fontBold = KenImageListModel.defaultFontBold,
-    this.captionFontBold = KenImageListModel.defaultCaptionFontBold,
-    this.captionFontSize = KenImageListModel.defaultCaptionFontSize,
-    this.captionFontColor = KenImageListModel.defaultCaptionFontColor,
-    this.width = KenImageListModel.defaultWidth,
-    this.height = KenImageListModel.defaultHeight,
-    this.padding = KenImageListModel.defaultPadding,
-    this.orientation = KenImageListModel.defaultOrientation,
-    this.listHeight = KenImageListModel.defaultListHeight,
+    this.backColor = KenImageListDefaults.defaultBackColor,
+    this.borderColor = KenImageListDefaults.defaultBorderColor,
+    this.borderWidth = KenImageListDefaults.defaultBorderWidth,
+    this.borderRadius = KenImageListDefaults.defaultBorderRadius,
+    this.fontSize = KenImageListDefaults.defaultFontSize,
+    this.fontColor = KenImageListDefaults.defaultFontColor,
+    this.fontBold = KenImageListDefaults.defaultFontBold,
+    this.captionFontBold = KenImageListDefaults.defaultCaptionFontBold,
+    this.captionFontSize = KenImageListDefaults.defaultCaptionFontSize,
+    this.captionFontColor = KenImageListDefaults.defaultCaptionFontColor,
+    this.width = KenImageListDefaults.defaultWidth,
+    this.height = KenImageListDefaults.defaultHeight,
+    this.padding = KenImageListDefaults.defaultPadding,
+    this.orientation = KenImageListDefaults.defaultOrientation,
+    this.listHeight = KenImageListDefaults.defaultListHeight,
     this.title = '',
     showLoader = false,
     this.onItemTap,

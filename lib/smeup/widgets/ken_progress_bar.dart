@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/widgets/ken_progress_bar_model.dart';
 import '../services/ken_defaults.dart';
-import '../services/ken_utilities.dart';
 
 // ignore: must_be_immutable
 class KenProgressBar extends StatelessWidget {

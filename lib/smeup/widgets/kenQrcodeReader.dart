@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../models/widgets/ken_qrcode_reader_model.dart';
 import '../services/ken_configuration_service.dart';
 import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
