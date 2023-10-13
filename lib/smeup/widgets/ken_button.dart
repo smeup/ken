@@ -116,7 +116,7 @@ class KenButton extends StatelessWidget {
     return ElevatedButton(
       key: Key(id),
       style: elevatedButtonStyle,
-      onPressed: clientOnPressed as void Function()?,
+      onPressed: handleTap,
       child: _getButtonChildren(buttonHeight, buttonWidth),
     );
   }
@@ -126,12 +126,12 @@ class KenButton extends StatelessWidget {
     return TextButton(
       key: Key(id),
       style: elevatedButtonStyle,
-      onPressed: clientOnPressed as void Function()?,
+      onPressed: handleTap,
       child: _getButtonChildren(buttonHeight, buttonWidth),
     );
   }
 
-  void clientOnPressed() {
+  void handleTap() {
     KenMessageBus.instance.fireEvent(
       ButtonOnPressedEvent(widgetId: id),
     );

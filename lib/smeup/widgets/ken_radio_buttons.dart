@@ -18,7 +18,6 @@ class KenRadioButtons extends StatefulWidget {
   Color? captionFontColor;
   Color? captionBackColor;
 
-  Function? clientOnPressed;
   EdgeInsetsGeometry? padding;
   double? width;
   double? height;
@@ -53,7 +52,6 @@ class KenRadioButtons extends StatefulWidget {
     this.valueField = KenRadioButtonsDefaults.defaultValueField,
     this.displayedField = KenRadioButtonsDefaults.defaultDisplayedField,
     this.selectedValue,
-    this.clientOnPressed,
     this.columns = KenRadioButtonsDefaults.defaultColumns,
   });
 
@@ -91,9 +89,15 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
 
     _data.forEach((radioButtonData) {
       buttonIndex += 1;
-
+      final buttonId = '${widget.id}_${buttonIndex.toString()}';
+      KenMessageBus.instance.event<RadioButtonOnPressedEvent>(buttonId)
+      .takeWhile((element) => context.mounted)
+      .listen((event) {
+        event.widgetId = widget.id!;
+        KenMessageBus.instance.fireEvent(event);
+      });
       final button = KenRadioButton(
-        id: '${widget.id}_${buttonIndex.toString()}',
+        id: buttonId,
         type: widget.type,
         title: widget.title,
         data: radioButtonData,
