@@ -215,3 +215,16 @@ class TimePickerOnChangeEvent extends KenMessageBusEvent {
     required this.data,
   });
 }
+
+class DashboardOnTapEvent extends KenMessageBusEvent {
+  DashboardOnTapEvent({required super.widgetId});
+}
+
+class SwitchOnChangeEvent extends KenMessageBusEvent {
+  bool value;
+
+  SwitchOnChangeEvent({
+    required super.widgetId,
+    required this.value,
+  });
+}

@@ -1,46 +1,47 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+
 import '../services/ken_defaults.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 
 class KenDashboard extends StatelessWidget {
-  GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState>? formKey;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<FormState>? formKey;
 
-  double? fontSize;
-  Color? fontColor;
-  bool? fontBold;
-  double? captionFontSize;
-  bool? captionFontBold;
-  Color? captionFontColor;
-  double? iconSize;
-  Color? iconColor;
-  Color? backgroundColor;
+  final double? fontSize;
+  final Color? fontColor;
+  final bool? fontBold;
+  final double? captionFontSize;
+  final bool? captionFontBold;
+  final Color? captionFontColor;
+  final double? iconSize;
+  final Color? iconColor;
+  final Color? backgroundColor;
 
-  double? data;
-  String? unitOfMeasure = '';
-  String? text = '';
+  final double? data;
+  final String? unitOfMeasure;
+  final String? text;
   //dynamic icon;
-  String? valueColName;
-  String? selectLayout;
-  double? width;
-  double? height;
-  EdgeInsetsGeometry? padding;
-  String? title;
-  String? id;
-  String? type;
-  String? forceText;
-  String? forceUm;
-  String? forceValue;
-  String? forceIcon;
-  String? numberFormat;
-  IconData? iconData;
-
-  Function? clientOnTap;
+  final String? valueColName;
+  final String? selectLayout;
+  final double? width;
+  final double? height;
+  final EdgeInsetsGeometry? padding;
+  final String? title;
+  final String? id;
+  final String? type;
+  final String? forceText;
+  final String? forceUm;
+  final String? forceValue;
+  final String? forceIcon;
+  final String? numberFormat;
+  final IconData? iconData;
 
   KenDashboard(this.scaffoldKey, this.formKey, this.data,
-      {id = '',
-      type = 'DSH',
+      {this.id = '',
+      this.type = 'DSH',
       this.fontColor = KenDashboardDefaults.defaultFontColor,
       this.fontSize = KenDashboardDefaults.defaultFontSize,
       this.fontBold = KenDashboardDefaults.defaultFontBold,
@@ -65,7 +66,7 @@ class KenDashboard extends StatelessWidget {
       this.padding = KenDashboardDefaults.defaultPadding,
       this.numberFormat = KenDashboardDefaults.defaultNumberFormat,
       this.title = '',
-      this.clientOnTap});
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +77,9 @@ class KenDashboard extends StatelessWidget {
 
     final dashboard = GestureDetector(
       onTap: () {
-        if (clientOnTap != null) clientOnTap!();
+        KenMessageBus.instance.fireEvent(
+          DashboardOnTapEvent(widgetId: id!),
+        );
       },
       child: Container(
           height: height,
