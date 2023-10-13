@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_slider_widget.dart';
 
 class KenSlider extends StatefulWidget {
-  GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState>? formKey;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<FormState>? formKey;
 
-  Color? activeTrackColor;
-  Color? thumbColor;
-  Color? inactiveTrackColor;
-  EdgeInsetsGeometry? padding;
-  double? value;
-  double? sldMin;
-  double? sldMax;
-  String? id;
-  int? divisions;
-  String? type;
-  String? title;
-  String? label;
-  Function? clientOnChange;
-  Function? onChanged;
-  Function? onGetChildren;
-  Function? onClientChange;
+  final Color? activeTrackColor;
+  final Color? thumbColor;
+  final Color? inactiveTrackColor;
+  final EdgeInsetsGeometry? padding;
+  final double? value;
+  final double? sldMin;
+  final double? sldMax;
+  final String? id;
+  final int? divisions;
+  final String? type;
+  final String? title;
+  final String? label;
 
-  KenSlider(this.scaffoldKey, this.formKey,
-      {this.activeTrackColor = KenSliderDefaults.defaultActiveTrackColor,
+  const KenSlider(this.scaffoldKey, this.formKey,
+      {super.key, this.activeTrackColor = KenSliderDefaults.defaultActiveTrackColor,
       this.thumbColor = KenSliderDefaults.defaultThumbColor,
       this.inactiveTrackColor = KenSliderDefaults.defaultInactiveTrackColor,
       this.padding = KenSliderDefaults.defaultPadding,
@@ -36,10 +34,7 @@ class KenSlider extends StatefulWidget {
       this.value = 0,
       this.sldMax = KenSliderDefaults.defaultSldMax,
       this.sldMin = KenSliderDefaults.defaultSldMin,
-      this.clientOnChange,
-      this.onChanged,
-      this.onGetChildren,
-      this.onClientChange});
+      });
 
   @override
   KenSliderState createState() => KenSliderState();
@@ -61,17 +56,18 @@ class KenSliderState extends State<KenSlider> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.onGetChildren != null) {
-      widget.onGetChildren!();
-    }
-
+    KenMessageBus.instance.event<SliderOnChangedEvent>(widget.id!)
+    .takeWhile((element) => context.mounted)
+    .listen((event) {
+      value = event.value;
+    });
     final children = Center(
       child: Container(
           padding: const EdgeInsets.only(left: 10, right: 10),
           child: KenSliderWidget(
             widget.scaffoldKey,
             widget.formKey,
-            id: widget.id,
+            id: widget.id!,
             activeTrackColor: widget.activeTrackColor,
             thumbColor: widget.thumbColor,
             inactiveTrackColor: widget.inactiveTrackColor,
@@ -80,13 +76,6 @@ class KenSliderState extends State<KenSlider> {
             value: widget.value,
             divisions: widget.divisions,
             label: widget.label,
-            onChanged: widget.onChanged ?? () {},
-            clientOnChange: (value) {
-              value = value;
-              if (widget.onClientChange != null) {
-                widget.onClientChange!(value);
-              }
-            },
           )),
     );
 

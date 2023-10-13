@@ -186,3 +186,21 @@ class ImageListOnItemTapEvent extends KenBoxOnItemTapEvent {
     required super.showSelection,
   });
 }
+
+class SliderOnChangeRealtimeEvent extends KenMessageBusEvent {
+  double value;
+
+  SliderOnChangeRealtimeEvent({
+    required super.widgetId,
+    required this.value,
+  });
+}
+
+class SliderOnChangedEvent extends KenMessageBusEvent {
+  double value;
+
+  SliderOnChangedEvent({
+    required super.widgetId,
+    required this.value,
+  });
+}
