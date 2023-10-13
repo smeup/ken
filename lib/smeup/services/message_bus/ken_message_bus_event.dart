@@ -2,7 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
 
+import '../../models/widgets/ken_calendar_event_model.dart';
 import '../../models/widgets/ken_input_panel_value.dart';
+import '../../widgets/ken_calendar_widget.dart';
 import '../../widgets/ken_datepicker.dart';
 import '../../widgets/ken_timepicker.dart';
 
@@ -226,5 +228,41 @@ class SwitchOnChangeEvent extends KenMessageBusEvent {
   SwitchOnChangeEvent({
     required super.widgetId,
     required this.value,
+  });
+}
+
+class CalendarOnDaySelectedEvent extends KenMessageBusEvent {
+  DateTime selectedDay;
+
+  CalendarOnDaySelectedEvent({
+    required super.widgetId,
+    required this.selectedDay,
+  });
+}
+
+class CalendarOnMonthChangedEvent extends KenMessageBusEvent {
+  DateTime focusedDay;
+
+  CalendarOnMonthChangedEvent({
+    required super.widgetId,
+    required this.focusedDay,
+  });
+}
+
+class CalendarOnClickEvent extends KenMessageBusEvent {
+  KenCalendarEventModel event;
+
+  CalendarOnClickEvent({
+    required super.widgetId,
+    required this.event,
+  });
+}
+
+class CalendarUpdateEventsAndDataEvent extends KenMessageBusEvent {
+  KenCalendarEventsAndData infos;
+
+  CalendarUpdateEventsAndDataEvent({
+    required super.widgetId,
+    required this.infos,
   });
 }

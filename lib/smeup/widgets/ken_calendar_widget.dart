@@ -9,6 +9,8 @@ import '../models/widgets/ken_calendar_event_model.dart';
 import '../services/ken_configuration_service.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_line.dart';
 import 'ken_progress_indicator.dart';
 
@@ -31,9 +33,6 @@ class KenCalendarWidget extends StatefulWidget {
   final CalendarFormat? calendarFormat;
   final ValueNotifier<List<KenCalendarEventModel>>? selectedEvents;
   final List<Map<String, dynamic>>? data;
-  final Function? clientOnDaySelected;
-  final Function? clientOnChangeMonth;
-  final Function? clientOnEventClick;
   final String? dataColumnName;
   final String? titleColumnName;
   final String? styleColumnName;
@@ -62,9 +61,6 @@ class KenCalendarWidget extends StatefulWidget {
     this.calendarFormat,
     this.selectedEvents,
     this.data,
-    this.clientOnDaySelected,
-    this.clientOnChangeMonth,
-    this.clientOnEventClick,
     this.dataColumnName,
     this.endTimeColumnName,
     this.initTimeColumnName,
@@ -296,13 +292,21 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
                   setState(() {
                     _isLoading = true;
                   });
-                  widget.clientOnChangeMonth!(focusedDay).then((res) {
-                    _data = res['data'];
-                    _events = res['events'];
+                  KenMessageBus.instance
+                  .event<CalendarUpdateEventsAndDataEvent>(widget.id!)
+                  .take(1).listen((event) {
+                    _data = event.infos.data;
+                    _events = event.infos.events;
                     setState(() {
                       _isLoading = false;
                     });
                   });
+                  KenMessageBus.instance.fireEvent(
+                    CalendarOnMonthChangedEvent(
+                      widgetId: widget.id!,
+                      focusedDay: focusedDay,
+                    ),
+                  );
                 },
               ),
               if (_isLoading)
@@ -460,9 +464,12 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
     if (_isLoading) return;
     _selectedEvents!.value = _getEventsForDay(selectedDay);
     widget.setDataLoad!(widget.id, true);
-    if (widget.clientOnDaySelected != null) {
-      widget.clientOnDaySelected!(selectedDay);
-    }
+    KenMessageBus.instance.fireEvent(
+      CalendarOnDaySelectedEvent(
+        widgetId: widget.id!,
+        selectedDay: selectedDay,
+      ),
+    );
     if (_selectedEvents!.value.length >= 0) {
       setState(() {
         _selectedDay = selectedDay;
@@ -501,7 +508,9 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
         if (sel != null) {
           data = sel['datarow'] != null ? sel['datarow'] : sel;
         }
-        widget.clientOnEventClick?.call(event);
+        KenMessageBus.instance.fireEvent(
+          CalendarOnClickEvent(widgetId: widget.id!, event: event),
+        );
       }
     } catch (e) {
       // KenLogService.writeDebugMessage('Error on calendar _eventClicked: $e',
@@ -559,4 +568,14 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
           : Container(),
     ]);
   }
+}
+
+class KenCalendarEventsAndData {
+  final Map<DateTime?, List<KenCalendarEventModel>>? events;
+  final List<Map<String, dynamic>>? data;
+
+  KenCalendarEventsAndData({
+    required this.events,
+    required this.data,
+  });
 }

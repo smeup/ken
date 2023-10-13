@@ -15,33 +15,29 @@ import 'package:table_calendar/table_calendar.dart';
 
 class KenCalendar extends StatefulWidget {
   // graphic properties
-  double? dayFontSize;
-  double? eventFontSize;
-  double? titleFontSize;
-  double? markerFontSize;
+  final double? dayFontSize;
+  final double? eventFontSize;
+  final double? titleFontSize;
+  final double? markerFontSize;
 
-  EdgeInsetsGeometry? padding;
-  String? titleColumnName;
-  String? dataColumnName;
-  String? styleColumnName;
-  double? width;
-  double? height;
-  bool? showPeriodButtons;
+  final EdgeInsetsGeometry? padding;
+  final String? titleColumnName;
+  final String? dataColumnName;
+  final String? styleColumnName;
+  final double? width;
+  final double? height;
+  final bool? showPeriodButtons;
   String? title;
-  String? id;
-  String? type;
-  List<Map<String, dynamic>>? data;
+  final String? id;
+  final String? type;
+  final List<Map<String, dynamic>>? data;
   DateTime? initialFirstWork;
   DateTime? initialLastWork;
   DateTime? initialDate;
-  bool? showAsWeek;
-  bool? showNavigation;
-  String? initTimeColumnName;
-  String? endTimeColumnName;
-
-  Function? clientOnDaySelected;
-  Function? clientOnChangeMonth;
-  Function? clientOnEventClick;
+  final bool? showAsWeek;
+  final bool? showNavigation;
+  final String? initTimeColumnName;
+  final String? endTimeColumnName;
 
   final double? parentWidth;
   final double? parentHeight;
@@ -51,7 +47,7 @@ class KenCalendar extends StatefulWidget {
   Map<DateTime?, List<KenCalendarEventModel>>? events;
 
   KenCalendar(
-      {this.id = '',
+      {super.key, this.id = '',
       this.type = 'CAL',
       this.eventFontSize = KenCalendarDefaults.defaultEventFontSize,
       this.titleFontSize = KenCalendarDefaults.defaultTitleFontSize,
@@ -72,9 +68,6 @@ class KenCalendar extends StatefulWidget {
       this.showAsWeek = KenCalendarDefaults.defaultShowAsWeek,
       this.showNavigation = KenCalendarDefaults.defaultShowNavigation,
       this.padding = KenCalendarDefaults.defaultPadding,
-      this.clientOnDaySelected,
-      this.clientOnChangeMonth,
-      this.clientOnEventClick,
       this.events,
       this.data,
       this.parentWidth,
@@ -173,9 +166,6 @@ class KenCalendarState extends State<KenCalendar> {
             holidays: KenConfigurationService.holidays,
             showNavigation: widget.showNavigation,
             calendarFormat: _calendarFormat,
-            clientOnChangeMonth: widget.clientOnChangeMonth,
-            clientOnDaySelected: widget.clientOnDaySelected,
-            clientOnEventClick: widget.clientOnEventClick,
             data: _data,
             selectedEvents: _selectedEvents,
             dataColumnName: widget.dataColumnName,
@@ -199,21 +189,27 @@ class KenCalendarState extends State<KenCalendar> {
     final monthButtonId = '${widget.id}_monthButton';
     final twoWeeksButtonId = '${widget.id}_2weeksButton';
     final weekButtonId = '${widget.id}_weekButton';
-    KenMessageBus.instance.event<ButtonOnPressedEvent>(monthButtonId).listen(
+    KenMessageBus.instance.event<ButtonOnPressedEvent>(monthButtonId)
+    .takeWhile((element) => context.mounted)
+    .listen(
       (event) {
         setState(() {
           _calendarFormat = CalendarFormat.month;
         });
       },
     );
-    KenMessageBus.instance.event<ButtonOnPressedEvent>(twoWeeksButtonId).listen(
+    KenMessageBus.instance.event<ButtonOnPressedEvent>(twoWeeksButtonId)
+    .takeWhile((element) => context.mounted)
+    .listen(
       (event) {
         setState(() {
           _calendarFormat = CalendarFormat.twoWeeks;
         });
       },
     );
-    KenMessageBus.instance.event<ButtonOnPressedEvent>(weekButtonId).listen(
+    KenMessageBus.instance.event<ButtonOnPressedEvent>(weekButtonId)
+    .takeWhile((element) => context.mounted)
+    .listen(
       (event) {
         setState(() {
           _calendarFormat = CalendarFormat.week;
