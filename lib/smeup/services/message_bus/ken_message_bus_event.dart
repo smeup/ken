@@ -84,9 +84,11 @@ class SpotlightOnTapSelectedEvent extends KenMessageBusEvent {
 }
 
 class SpotlightOnSubmitEvent extends KenMessageBusEvent {
+  String value;
 
   SpotlightOnSubmitEvent({
     required super.widgetId,
+    required this.value,
   });
 }
 

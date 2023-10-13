@@ -170,16 +170,12 @@ class _KenSpotLightState extends State<KenSpotLight> {
                         focusNode: focusNode,
                         onFieldSubmitted: (String value) {
                           onFieldSubmitted();
-
-                          // KenMessageBus.instance.publishRequest(
-                          //   widget.globallyUniqueId,
-                          //   KenTopic.kenSpotLightOnSubmit,
-                          //   KenMessageBusEventData(
-                          //       context: context,
-                          //       widget: widget,
-                          //       model: _model,
-                          //       data: value),
-                          // );
+                          KenMessageBus.instance.fireEvent(
+                            SpotlightOnSubmitEvent(
+                              widgetId: widget.id!,
+                              value: value,
+                            )
+                          );
                         },
                         inputFormatters: widget.inputFormatters,
                         autofocus: widget.autoFocus!,
