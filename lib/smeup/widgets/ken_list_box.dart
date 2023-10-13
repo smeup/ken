@@ -4,8 +4,8 @@ import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
-import 'kenBox.dart';
-import 'kenNotAvailable.dart';
+import 'ken_box.dart';
+import 'ken_not_available.dart';
 
 enum KenListType { simple, oriented, wheel }
 

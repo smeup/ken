@@ -10,7 +10,7 @@ import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_button.dart';
 import 'ken_combo.dart';
 import 'ken_label.dart';
-import 'kenQrcodeReader.dart';
+import 'ken_qr_code_reader.dart';
 import 'ken_radio_buttons.dart';
 import 'ken_text_autocomplete.dart';
 import 'ken_text_field.dart';
@@ -129,7 +129,8 @@ class KenInputPanel extends StatelessWidget {
     );
   }
 
-  Widget _getInputFieldWidget(SmeupInputPanelField field, BuildContext context) {
+  Widget _getInputFieldWidget(
+      SmeupInputPanelField field, BuildContext context) {
     switch (field.component) {
       case ShiroInputPanelSupportedComp.rad:
         return _getRadioList(field);
@@ -189,8 +190,10 @@ class KenInputPanel extends StatelessWidget {
   }
 
   Widget _getComboWidget(SmeupInputPanelField field, BuildContext context) {
-    KenMessageBus.instance.event<ComboOnChangeEvent>(field.id!)
-      .takeWhile((element) => context.mounted).listen(
+    KenMessageBus.instance
+        .event<ComboOnChangeEvent>(field.id!)
+        .takeWhile((element) => context.mounted)
+        .listen(
       (event) {
         field.value.code = field.value.description = event.value;
       },
@@ -221,7 +224,9 @@ class KenInputPanel extends StatelessWidget {
         field.value.code = event.value;
       },
     );
-    KenMessageBus.instance.event<TextAutocompleteOnTapSelectedEvent>(field.id!).listen(
+    KenMessageBus.instance
+        .event<TextAutocompleteOnTapSelectedEvent>(field.id!)
+        .listen(
       (event) {
         field.value.code = event.value['code'];
         field.value.description = event.value['value'];
@@ -237,8 +242,8 @@ class KenInputPanel extends StatelessWidget {
           showborder: true,
           underline: false,
           data: field.items!
-            .map((e) => {"code": e.code, "value": e.description})
-            .toList(),
+              .map((e) => {"code": e.code, "value": e.description})
+              .toList(),
         ),
       ],
     );

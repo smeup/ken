@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../models/widgets/ken_combo_item_model.dart';
 import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
-import 'kenComboWidget.dart';
+import 'ken_combo_widget.dart';
 import 'ken_line.dart';
 
 class KenCombo extends StatelessWidget {

@@ -2,8 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
 import '../models/notifiers/ken_carousel_indicator_notifier.dart';
-import 'kenCarouselIndicator.dart';
-import 'kenCarouselItem.dart';
+import 'ken_carousel_indicator.dart';
+import 'ken_carousel_item.dart';
 import 'package:provider/provider.dart';
 
 class KenCarousel extends StatelessWidget {

@@ -8,7 +8,7 @@ import '../services/ken_localization_service.dart';
 
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
-import 'kenNotAvailable.dart';
+import 'ken_not_available.dart';
 import 'ken_list_box.dart';
 
 class KenBox extends StatefulWidget {
@@ -178,12 +178,10 @@ class KenBoxState extends State<KenBox> {
               );
             },
             onDismissed: (direction) {
-              KenMessageBus.instance.fireEvent(
-                KenBoxOnDismissedEvent(
-                  widgetId: widget.id!,
-                  direction: direction,
-                )
-              );
+              KenMessageBus.instance.fireEvent(KenBoxOnDismissedEvent(
+                widgetId: widget.id!,
+                direction: direction,
+              ));
             },
             background: Container(
               color: Colors.red,
@@ -205,15 +203,15 @@ class KenBoxState extends State<KenBox> {
     Widget container;
     if (widget.index == 0) {
       container = MeasureSize(
-        onChange: (Size size) {
-          KenMessageBus.instance.fireEvent(
-            KenBoxOnSizeChangeEvent(
-              widgetId: widget.id!,
-              size: size,
-            ),
-          );
-        },
-        child: _getContainer(res));
+          onChange: (Size size) {
+            KenMessageBus.instance.fireEvent(
+              KenBoxOnSizeChangeEvent(
+                widgetId: widget.id!,
+                size: size,
+              ),
+            );
+          },
+          child: _getContainer(res));
     } else {
       container = _getContainer(res);
     }
