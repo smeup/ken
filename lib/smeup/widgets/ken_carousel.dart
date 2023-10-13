@@ -10,15 +10,15 @@ class KenCarousel extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState>? formKey;
 
-  List<Map>? data;
-  String? id;
-  String? type;
-  double? height;
-  bool? autoPlay;
-  String? title;
-  Color? fontColor; // Add fontColor parameter
+  final List<Map>? data;
+  final String? id;
+  final String? type;
+  final double? height;
+  final bool? autoPlay;
+  final String? title;
+  final Color? fontColor; // Add fontColor parameter
 
-  KenCarousel(this.scaffoldKey, this.formKey, this.data,
+  const KenCarousel(this.scaffoldKey, this.formKey, this.data,
       {this.id = '',
       this.type = 'CAU',
       this.height = KenCarouselDefaults.defaultHeight,

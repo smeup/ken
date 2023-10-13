@@ -9,16 +9,16 @@ import '../services/message_bus/ken_message_bus_event.dart';
 
 class KenButton extends StatelessWidget {
   final int? buttonIndex;
-  Color? backColor;
-  Color? borderColor;
-  double? borderWidth;
-  double? borderRadius;
-  double? elevation;
-  double? fontSize;
-  Color? fontColor;
-  bool? fontBold;
-  double? iconSize;
-  Color? iconColor;
+  final Color? backColor;
+  final Color? borderColor;
+  final double? borderWidth;
+  final double? borderRadius;
+  final double? elevation;
+  final double? fontSize;
+  final Color? fontColor;
+  final bool? fontBold;
+  final double? iconSize;
+  final Color? iconColor;
 
   final double? width;
   final double? height;

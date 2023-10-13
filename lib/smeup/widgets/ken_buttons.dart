@@ -5,8 +5,8 @@ import '../services/ken_widget_orientation.dart';
 import 'ken_button.dart';
 
 class KenButtons extends StatelessWidget {
-  WidgetOrientation? orientation;
-  List<KenButton> children;
+  final WidgetOrientation? orientation;
+  final List<KenButton> children;
 
   KenButtons({
     this.orientation = KenButtonsDefaults.defaultOrientation,

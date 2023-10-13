@@ -4,46 +4,45 @@ import 'package:flutter/material.dart';
 import '../models/widgets/ken_combo_item_model.dart';
 import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
-import '../services/message_bus/ken_message_bus.dart';
-import '../services/message_bus/ken_message_bus_event.dart';
 import 'kenComboWidget.dart';
 import 'ken_line.dart';
 
 class KenCombo extends StatelessWidget {
-  double? fontSize;
-  Color? fontColor;
-  bool? fontBold;
-  Color? backColor;
-  bool? captionFontBold;
-  double? captionFontSize;
-  Color? captionFontColor;
-  Color? captionBackColor;
-  double? iconSize;
-  Color? iconColor;
-  Color? borderColor;
-  double? borderWidth;
-  double? borderRadius;
-  Color? dropdownColor;
+  final double? fontSize;
+  final Color? fontColor;
+  final bool? fontBold;
+  final Color? backColor;
+  final bool? captionFontBold;
+  final double? captionFontSize;
+  final Color? captionFontColor;
+  final Color? captionBackColor;
+  final double? iconSize;
+  final Color? iconColor;
+  final Color? borderColor;
+  final double? borderWidth;
+  final double? borderRadius;
+  final Color? dropdownColor;
 
-  bool? underline;
-  double? innerSpace;
-  Alignment? align;
-  EdgeInsetsGeometry? padding;
-  List<KenComboItemModel>? items;
-  String? id;
-  String? type;
-  String? title;
-  String? selectedValue;
-  String? valueField;
-  String? label;
-  String? descriptionField;
-  double? width;
-  double? height;
-  bool? showBorder;
-  double? parentHeight;
-  double? parentWidth;
+  final bool? underline;
+  final double? innerSpace;
+  final Alignment? align;
+  final EdgeInsetsGeometry? padding;
+  final List<KenComboItemModel>? items;
+  final String? id;
+  final String? type;
+  final String? title;
+  final String? selectedValue;
+  final String? valueField;
+  final String? label;
+  final String? descriptionField;
+  final double? width;
+  final double? height;
+  final bool? showBorder;
+  final double? parentHeight;
+  final double? parentWidth;
 
-  KenCombo({
+  const KenCombo({
+    super.key,
     this.fontColor = KenComboDefaults.defaultFontColor,
     this.fontSize = KenComboDefaults.defaultFontSize,
     this.fontBold = KenComboDefaults.defaultFontBold,

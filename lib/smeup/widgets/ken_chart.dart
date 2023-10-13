@@ -5,22 +5,23 @@ import '../services/ken_defaults.dart';
 enum ChartType { pie, bar }
 
 class KenChart extends StatefulWidget {
-  GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState>? formKey;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<FormState>? formKey;
 
-  String? id;
-  String? type;
-  String? title;
-  double? width;
-  double? height;
-  ChartType? chartType;
-  int? refresh;
-  bool? legend;
+  final String? id;
+  final String? type;
+  final String? title;
+  final double? width;
+  final double? height;
+  final ChartType? chartType;
+  final int? refresh;
+  final bool? legend;
 
-  KenChartDatasource? data;
+  final KenChartDatasource? data;
 
-  KenChart(this.scaffoldKey, this.formKey,
-      {this.id = '',
+  const KenChart(this.scaffoldKey, this.formKey,
+      {super.key,
+      this.id = '',
       this.type = 'CHA',
       this.title = '',
       this.chartType = KenChartDefaults.defaultChartType,
