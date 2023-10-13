@@ -266,3 +266,12 @@ class CalendarUpdateEventsAndDataEvent extends KenMessageBusEvent {
     required this.infos,
   });
 }
+
+class TreeNodeOnTapEvent extends KenMessageBusEvent {
+  dynamic data;
+
+  TreeNodeOnTapEvent({
+    required super.widgetId,
+    required this.data,
+  });
+}
