@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import '../models/widgets/ken_combo_item_model.dart';
 import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 import 'kenComboWidget.dart';
 import 'ken_line.dart';
 
@@ -38,7 +40,6 @@ class KenCombo extends StatelessWidget {
   double? width;
   double? height;
   bool? showBorder;
-  void Function(String? newValue)? clientOnChange;
   double? parentHeight;
   double? parentWidth;
 
@@ -72,7 +73,6 @@ class KenCombo extends StatelessWidget {
     this.width = KenComboDefaults.defaultWidth,
     this.height = KenComboDefaults.defaultHeight,
     this.showBorder = KenComboDefaults.defaultShowBorder,
-    this.clientOnChange,
     this.parentWidth,
     this.parentHeight,
   });
@@ -116,6 +116,7 @@ class KenCombo extends StatelessWidget {
                 )
               : null,
           child: KenComboWidget(
+            id: id,
             data: items,
             fontColor: fontColor,
             fontSize: fontSize,
@@ -129,11 +130,6 @@ class KenCombo extends StatelessWidget {
             captionFontSize: captionFontSize,
             captionBackColor: captionBackColor,
             selectedValue: selectedValue,
-            clientOnChange: (String? newValue) {
-              if (clientOnChange != null) {
-                clientOnChange!(newValue);
-              }
-            },
           )),
     );
 

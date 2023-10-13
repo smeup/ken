@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../models/widgets/ken_combo_item_model.dart';
 import '../models/widgets/ken_input_panel_value.dart';
 import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_button.dart';
 import 'ken_combo.dart';
 import 'ken_label.dart';
@@ -28,8 +31,6 @@ class KenInputPanel extends StatelessWidget {
   bool? autoAdaptHeight = true;
   bool? isConfirmedEnabled = false;
 
-  void Function(List<SmeupInputPanelField>?)? onSubmit;
-
   KenInputPanel(
       {this.id = '',
       this.type = 'INP',
@@ -40,7 +41,6 @@ class KenInputPanel extends StatelessWidget {
       this.height = KenInputPanelDefaults.defaultHeight,
       this.data,
       this.backgroundColor,
-      this.onSubmit,
       this.parentWidth,
       this.parentHeight,
       this.isConfirmedEnabled});
@@ -96,7 +96,7 @@ class KenInputPanel extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
-                  _getFields(),
+                  _getFields(context),
                   if (autoAdaptHeight == false) _getConfirmButton(this)
                 ],
               ),
@@ -105,12 +105,12 @@ class KenInputPanel extends StatelessWidget {
     );
   }
 
-  Widget _getFields() {
+  Widget _getFields(BuildContext context) {
     List<Widget> fields = data!.where((field) => field.visible!).map((field) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _getInputFieldWidget(field),
+          _getInputFieldWidget(field, context),
           const SizedBox(
             height: 13,
           ),
@@ -129,7 +129,7 @@ class KenInputPanel extends StatelessWidget {
     );
   }
 
-  Widget _getInputFieldWidget(SmeupInputPanelField field) {
+  Widget _getInputFieldWidget(SmeupInputPanelField field, BuildContext context) {
     switch (field.component) {
       case ShiroInputPanelSupportedComp.rad:
         return _getRadioList(field);
@@ -138,7 +138,7 @@ class KenInputPanel extends StatelessWidget {
         return KenQRCodeReader(id: field.id, data: field.value.code);
 
       case ShiroInputPanelSupportedComp.cmb:
-        return _getComboWidget(field);
+        return _getComboWidget(field, context);
 
       case ShiroInputPanelSupportedComp.acp:
         return _getTextAutocompleteWidget(field);
@@ -188,7 +188,13 @@ class KenInputPanel extends StatelessWidget {
     ]);
   }
 
-  Widget _getComboWidget(SmeupInputPanelField field) {
+  Widget _getComboWidget(SmeupInputPanelField field, BuildContext context) {
+    KenMessageBus.instance.event<ComboOnChangeEvent>(field.id!)
+      .takeWhile((element) => context.mounted).listen(
+      (event) {
+        field.value.code = field.value.description = event.value;
+      },
+    );
     field.items ??= [];
     return Column(
       children: <Widget>[
@@ -203,8 +209,6 @@ class KenInputPanel extends StatelessWidget {
           items: field.items!
               .map((e) => KenComboItemModel(e.code, e.description))
               .toList(),
-          clientOnChange: (newValue) =>
-              field.value.code = field.value.description = newValue,
         ),
       ],
     );
@@ -212,6 +216,17 @@ class KenInputPanel extends StatelessWidget {
 
   Widget _getTextAutocompleteWidget(SmeupInputPanelField field) {
     field.items ??= [];
+    KenMessageBus.instance.event<TextAutocompleteOnChange>(field.id!).listen(
+      (event) {
+        field.value.code = event.value;
+      },
+    );
+    KenMessageBus.instance.event<TextAutocompleteOnTapSelectedEvent>(field.id!).listen(
+      (event) {
+        field.value.code = event.value['code'];
+        field.value.description = event.value['value'];
+      },
+    );
     return Column(
       children: <Widget>[
         _getLabel(field.label),
@@ -222,21 +237,25 @@ class KenInputPanel extends StatelessWidget {
           showborder: true,
           underline: false,
           data: field.items!
-              .map((e) => {"code": e.code, "value": e.description})
-              .toList(),
-          clientOnSelected: (option) {
-            field.value.code = option['code'];
-            field.value.description = option['value'];
-          },
-          clientOnChange: (value) {
-            field.value.code = value;
-          },
+            .map((e) => {"code": e.code, "value": e.description})
+            .toList(),
         ),
       ],
     );
   }
 
   Widget _getConfirmButton(widget) {
+    final buttonId = '${widget.id}_confirmButton';
+    KenMessageBus.instance.event<ButtonOnPressedEvent>(buttonId).listen(
+      (event) {
+        KenMessageBus.instance.fireEvent(
+          InputPanelSubmittedEvent(
+            widgetId: widget.id!,
+            value: widget.data,
+          ),
+        );
+      },
+    );
     if (widget.isConfirmedEnabled) {
       return SizedBox(
         height: confirmButtonRowHeight,
@@ -244,12 +263,9 @@ class KenInputPanel extends StatelessWidget {
           children: [
             Expanded(
               child: KenButton(
-                  data: "Conferma",
-                  clientOnPressed: () {
-                    if (widget.onSubmit != null) {
-                      widget.onSubmit!(widget.data);
-                    }
-                  }),
+                id: buttonId,
+                data: "Conferma",
+              ),
             ),
           ],
         ),

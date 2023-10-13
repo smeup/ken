@@ -64,10 +64,6 @@ KenCombo getCombo() {
       KenComboItemModel('3', 'Milan'),
       KenComboItemModel('4', 'Paris')
     ],
-    clientOnChange: (value) {
-      // KenUtilities.invokeScaffoldMessenger(
-      //     context, "You have changed the combo to: $value");
-    },
   );
 }
 

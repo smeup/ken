@@ -3,8 +3,11 @@
 import 'package:flutter/material.dart';
 
 import '../models/widgets/ken_combo_item_model.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 
 class KenComboWidget extends StatefulWidget {
+  final String? id;
   final double? fontSize;
   final Color? fontColor;
   final bool? fontBold;
@@ -19,10 +22,10 @@ class KenComboWidget extends StatefulWidget {
 
   final String? selectedValue;
   final List<KenComboItemModel>? data;
-  final void Function(String? newValue)? clientOnChange;
 
   const KenComboWidget(
       {super.key,
+      this.id,
       this.fontColor,
       this.fontSize,
       this.fontBold,
@@ -35,7 +38,6 @@ class KenComboWidget extends StatefulWidget {
       this.iconColor,
       this.selectedValue,
       this.data,
-      this.clientOnChange,
       this.dropdownColor});
 
   @override
@@ -79,9 +81,9 @@ class KenComboWidgetState extends State<KenComboWidget> {
           onChanged: (String? newValue) {
             setState(() {
               _selectedValue = newValue;
-              if (widget.clientOnChange != null) {
-                widget.clientOnChange!(newValue);
-              }
+              KenMessageBus.instance.fireEvent(
+                ComboOnChangeEvent(widgetId: widget.id!, value: newValue),
+              );
             });
           },
           items: _getItems(_data!),

@@ -4,6 +4,8 @@ import '../services/ken_configuration_service.dart';
 import '../services/ken_defaults.dart';
 import '../services/ken_localization_service.dart';
 import '../services/ken_utilities.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_button.dart';
 import 'ken_calendar_widget.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -194,6 +196,30 @@ class KenCalendarState extends State<KenCalendar> {
 
   Widget _buildButtons(double? calHeight, double calWidth) {
     double buttonWidth = (calWidth - 100 - widget.padding!.horizontal) / 3;
+    final monthButtonId = '${widget.id}_monthButton';
+    final twoWeeksButtonId = '${widget.id}_2weeksButton';
+    final weekButtonId = '${widget.id}_weekButton';
+    KenMessageBus.instance.event<ButtonOnPressedEvent>(monthButtonId).listen(
+      (event) {
+        setState(() {
+          _calendarFormat = CalendarFormat.month;
+        });
+      },
+    );
+    KenMessageBus.instance.event<ButtonOnPressedEvent>(twoWeeksButtonId).listen(
+      (event) {
+        setState(() {
+          _calendarFormat = CalendarFormat.twoWeeks;
+        });
+      },
+    );
+    KenMessageBus.instance.event<ButtonOnPressedEvent>(weekButtonId).listen(
+      (event) {
+        setState(() {
+          _calendarFormat = CalendarFormat.week;
+        });
+      },
+    );
     return Container(
       width: calWidth,
       child: Row(
@@ -201,34 +227,22 @@ class KenCalendarState extends State<KenCalendar> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           KenButton(
+            id: monthButtonId,
             data: KenLocalizationService.of(context)!.getLocalString('month'),
             width: buttonWidth,
             align: Alignment.center,
-            clientOnPressed: () {
-              setState(() {
-                _calendarFormat = CalendarFormat.month;
-              });
-            },
           ),
           KenButton(
+            id: twoWeeksButtonId,
             data: KenLocalizationService.of(context)!.getLocalString('2weeks'),
             width: buttonWidth,
             align: Alignment.center,
-            clientOnPressed: () {
-              setState(() {
-                _calendarFormat = CalendarFormat.twoWeeks;
-              });
-            },
           ),
           KenButton(
+            id: weekButtonId,
             data: KenLocalizationService.of(context)!.getLocalString('week'),
             width: buttonWidth,
             align: Alignment.center,
-            clientOnPressed: () {
-              setState(() {
-                _calendarFormat = CalendarFormat.week;
-              });
-            },
           ),
         ],
       ),

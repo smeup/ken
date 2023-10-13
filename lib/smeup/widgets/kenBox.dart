@@ -6,13 +6,14 @@ import 'package:flutter/material.dart';
 import '../services/ken_configuration_service.dart';
 import '../services/ken_localization_service.dart';
 
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 import 'kenNotAvailable.dart';
 import 'ken_list_box.dart';
 
 class KenBox extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState>? formKey;
-  final Function? onItemTap;
   final Function? onRefresh;
   final Color? backColor;
   final Color? fontColor;
@@ -31,10 +32,8 @@ class KenBox extends StatefulWidget {
   final CardTheme? cardTheme;
   final TextStyle? textStyle;
   final TextStyle? captionStyle;
-  final Function? onSizeChanged;
   final bool? isFirestore;
   final KenListBox kenListBox;
-  final Function? onDismissed;
   final Function? onConfirmDismiss;
   final Function? onGetBoxImage;
   final Function? onGetBoxText;
@@ -50,7 +49,6 @@ class KenBox extends StatefulWidget {
       this.onRefresh,
       this.showLoader,
       this.layout,
-      this.onItemTap,
       this.backColor,
       this.fontColor,
       this.width,
@@ -60,9 +58,7 @@ class KenBox extends StatefulWidget {
       this.cardTheme,
       this.textStyle,
       this.captionStyle,
-      this.onSizeChanged,
       this.isFirestore,
-      this.onDismissed,
       this.onConfirmDismiss,
       this.onGetBoxImage,
       this.onGetBoxText,
@@ -182,7 +178,12 @@ class KenBoxState extends State<KenBox> {
               );
             },
             onDismissed: (direction) {
-              if (widget.onDismissed != null) widget.onDismissed!(direction);
+              KenMessageBus.instance.fireEvent(
+                KenBoxOnDismissedEvent(
+                  widgetId: widget.id!,
+                  direction: direction,
+                )
+              );
             },
             background: Container(
               color: Colors.red,
@@ -204,10 +205,15 @@ class KenBoxState extends State<KenBox> {
     Widget container;
     if (widget.index == 0) {
       container = MeasureSize(
-          onChange: (Size size) {
-            if (widget.onSizeChanged != null) widget.onSizeChanged!(size);
-          },
-          child: _getContainer(res));
+        onChange: (Size size) {
+          KenMessageBus.instance.fireEvent(
+            KenBoxOnSizeChangeEvent(
+              widgetId: widget.id!,
+              size: size,
+            ),
+          );
+        },
+        child: _getContainer(res));
     } else {
       container = _getContainer(res);
     }
@@ -654,9 +660,14 @@ class KenBoxState extends State<KenBox> {
   }
 
   void _manageTap(index, data) {
-    if (widget.onItemTap != null) {
-      widget.onItemTap!(index, data, widget.kenListBox);
-    }
+    KenMessageBus.instance.fireEvent(
+      KenBoxOnItemTapEvent(
+        widgetId: widget.id!,
+        index: index,
+        data: data,
+        showSelection: widget.kenListBox.showSelection ?? false,
+      ),
+    );
   }
 
   Future<List?> _getColumns(dynamic data) async {

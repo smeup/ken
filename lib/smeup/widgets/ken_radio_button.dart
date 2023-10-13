@@ -1,8 +1,10 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:ken/smeup/services/message_bus/ken_message_bus.dart';
 
 import '../services/ken_defaults.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 
 class KenRadioButton extends StatefulWidget {
   Color? radioButtonColor;
@@ -16,7 +18,6 @@ class KenRadioButton extends StatefulWidget {
   Color? captionBackColor;
 
   final IconData? icon;
-  final Function? onPressed;
   final EdgeInsetsGeometry? padding;
   final double? width;
   final double? height;
@@ -54,7 +55,7 @@ class KenRadioButton extends StatefulWidget {
       this.displayedField = KenRadioButtonsDefaults.defaultDisplayedField,
       this.selectedValue,
       this.icon,
-      this.onPressed});
+    });
 
   @override
   State<KenRadioButton> createState() => _KenRadioButtonState();
@@ -89,7 +90,9 @@ class _KenRadioButtonState extends State<KenRadioButton> {
               value: widget.data!['code'],
               groupValue: _selectedValue,
               onChanged: (dynamic value) {
-                widget.onPressed!(value);
+                KenMessageBus.instance.fireEvent(
+                  RadioButtonOnPressedEvent(widgetId: widget.id, value: value),
+                );
                 _selectedValue = value;
                 setState(() {});
                 if (widget.others != null) {

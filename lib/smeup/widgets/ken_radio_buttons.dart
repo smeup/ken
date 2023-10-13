@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 import 'kenNotAvailable.dart';
 import 'ken_radio_button.dart';
 
@@ -29,38 +31,31 @@ class KenRadioButtons extends StatefulWidget {
   String? id;
   String? type;
   String? title;
-  Function? onInit;
-  Function? onGetChildren;
-  Function? onPressed;
-  Function? onSelData;
 
   KenRadioButtons(
-      {this.id = '',
-      this.type = 'FLD',
-      this.title = '',
-      this.radioButtonColor = KenRadioButtonsDefaults.defaultRadioButtonColor,
-      this.fontSize = KenRadioButtonsDefaults.defaultFontSize,
-      this.fontColor = KenRadioButtonsDefaults.defaultFontColor,
-      this.backColor = KenRadioButtonsDefaults.defaultBackColor,
-      this.fontBold = KenRadioButtonsDefaults.defaultFontBold,
-      this.captionFontSize = KenRadioButtonsDefaults.defaultCaptionFontSize,
-      this.captionFontColor = KenRadioButtonsDefaults.defaultFontColor,
-      this.captionBackColor = KenRadioButtonsDefaults.defaultCaptionBackColor,
-      this.captionFontBold = KenRadioButtonsDefaults.defaultFontBold,
-      this.data,
-      this.width = KenRadioButtonsDefaults.defaultWidth,
-      this.height = KenRadioButtonsDefaults.defaultHeight,
-      this.align = KenRadioButtonsDefaults.defaultAlign,
-      this.padding = KenRadioButtonsDefaults.defaultPadding,
-      this.valueField = KenRadioButtonsDefaults.defaultValueField,
-      this.displayedField = KenRadioButtonsDefaults.defaultDisplayedField,
-      this.selectedValue,
-      this.clientOnPressed,
-      this.columns = KenRadioButtonsDefaults.defaultColumns,
-      this.onInit,
-      this.onGetChildren,
-      this.onSelData,
-      this.onPressed});
+    {this.id = '',
+    this.type = 'FLD',
+    this.title = '',
+    this.radioButtonColor = KenRadioButtonsDefaults.defaultRadioButtonColor,
+    this.fontSize = KenRadioButtonsDefaults.defaultFontSize,
+    this.fontColor = KenRadioButtonsDefaults.defaultFontColor,
+    this.backColor = KenRadioButtonsDefaults.defaultBackColor,
+    this.fontBold = KenRadioButtonsDefaults.defaultFontBold,
+    this.captionFontSize = KenRadioButtonsDefaults.defaultCaptionFontSize,
+    this.captionFontColor = KenRadioButtonsDefaults.defaultFontColor,
+    this.captionBackColor = KenRadioButtonsDefaults.defaultCaptionBackColor,
+    this.captionFontBold = KenRadioButtonsDefaults.defaultFontBold,
+    this.data,
+    this.width = KenRadioButtonsDefaults.defaultWidth,
+    this.height = KenRadioButtonsDefaults.defaultHeight,
+    this.align = KenRadioButtonsDefaults.defaultAlign,
+    this.padding = KenRadioButtonsDefaults.defaultPadding,
+    this.valueField = KenRadioButtonsDefaults.defaultValueField,
+    this.displayedField = KenRadioButtonsDefaults.defaultDisplayedField,
+    this.selectedValue,
+    this.clientOnPressed,
+    this.columns = KenRadioButtonsDefaults.defaultColumns,
+  });
 
   @override
   KenRadioButtonsState createState() => KenRadioButtonsState();
@@ -71,8 +66,6 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
 
   @override
   void initState() {
-    if (widget.onInit != null) widget.onInit!();
-
     _data = widget.data;
 
     super.initState();
@@ -92,10 +85,6 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.onGetChildren != null) {
-      widget.onGetChildren!();
-    }
-
     var buttons = List<Widget>.empty(growable: true);
 
     int buttonIndex = 0;
@@ -104,27 +93,23 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
       buttonIndex += 1;
 
       final button = KenRadioButton(
-          id: '${widget.id}_${buttonIndex.toString()}',
-          type: widget.type,
-          title: widget.title,
-          data: radioButtonData,
-          backColor: widget.backColor,
-          width: widget.width,
-          height: widget.height,
-          align: widget.align,
-          fontColor: widget.fontColor,
-          fontSize: widget.fontSize,
-          padding: widget.padding,
-          valueField: widget.valueField,
-          displayedField: widget.displayedField,
-          radioButtonColor: widget.radioButtonColor,
-          selectedValue: widget.selectedValue,
-          icon: null, // così anche in originale
-          onPressed: (value) {
-            if (widget.onPressed != null) {
-              widget.onPressed!(value);
-            }
-          });
+        id: '${widget.id}_${buttonIndex.toString()}',
+        type: widget.type,
+        title: widget.title,
+        data: radioButtonData,
+        backColor: widget.backColor,
+        width: widget.width,
+        height: widget.height,
+        align: widget.align,
+        fontColor: widget.fontColor,
+        fontSize: widget.fontSize,
+        padding: widget.padding,
+        valueField: widget.valueField,
+        displayedField: widget.displayedField,
+        radioButtonColor: widget.radioButtonColor,
+        selectedValue: widget.selectedValue,
+        icon: null, // così anche in originale
+      );
       buttons.add(button);
     });
 
@@ -170,9 +155,12 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
         ),
       );
 
-      if (widget.onSelData != null) {
-        widget.onSelData!(_data);
-      }
+      KenMessageBus.instance.fireEvent(
+        RadioButtonSelDataEvent(
+          widgetId: widget.id!,
+          value: _data,
+        ),
+      );
 
       return container;
     } else {

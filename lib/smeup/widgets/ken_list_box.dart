@@ -2,6 +2,8 @@ import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 import 'kenBox.dart';
 import 'kenNotAvailable.dart';
 
@@ -47,12 +49,8 @@ class KenListBox extends StatefulWidget {
 
   double? availableSpace;
   Function? onRefresh;
-  Function? onSizeChanged;
 
-  Function? onItemTap;
   bool? isFirestore;
-  Function? onDismissed;
-  final Function? onConfirmDismiss;
   final Function? onGetBoxImage;
   final Function? onGetBoxText;
   final Function? onGetButtons;
@@ -87,15 +85,11 @@ class KenListBox extends StatefulWidget {
       this.realBoxHeight = KenListBoxDefaults.defaultRealBoxHeight,
       title = '',
       showLoader = false,
-      this.onItemTap,
       this.dismissEnabled = false,
       this.defaultSort = KenListBoxDefaults.defaultDefaultSort,
       this.availableSpace,
       this.onRefresh,
       this.isFirestore,
-      this.onSizeChanged,
-      this.onDismissed,
-      this.onConfirmDismiss,
       this.onGetBoxImage,
       this.onGetBoxText,
       this.onGetButtons,
@@ -265,9 +259,6 @@ class KenListBoxState extends State<KenListBox> {
         scrollController: _scrollController!,
         itemHeight: widget.height!,
         itemCount: cells.length,
-        onItemTapCallback: (index) {
-          (cells[index] as KenBox).onItemTap!();
-        },
         child: ListWheelScrollView.useDelegate(
           physics: _executeBouncing
               ? const BouncingScrollPhysics(
@@ -386,13 +377,10 @@ class KenListBoxState extends State<KenListBox> {
         backColor: _backColor,
         showSelection: widget.showSelection,
         dismissEnabled: widget.dismissEnabled,
-        onItemTap: widget.onItemTap,
         cardTheme: cardTheme,
         textStyle: textStyle,
         captionStyle: captionStyle,
-        onSizeChanged: widget.onSizeChanged,
         isFirestore: widget.isFirestore,
-        onDismissed: widget.onDismissed,
         onGetBoxImage: widget.onGetBoxImage,
         onGetBoxText: widget.onGetBoxText,
       );

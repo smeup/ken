@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../services/ken_defaults.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_buttons.dart';
 
 class KenSpotLight extends StatefulWidget {
@@ -41,14 +43,8 @@ class KenSpotLight extends StatefulWidget {
 
   // other properties
   Function? clientValidator;
-  Function? clientOnSave;
-  Function? clientOnChange;
-  Function? clientOnSelected;
-  Function? clientOnSubmit;
 
-  Function? onFieldViewBuilder;
-  Function? onTapSetState;
-  Function? onGetSubmitButton;
+  Widget? submitButton;
 
   TextInputType? keyboard;
   List<TextInputFormatter>? inputFormatters;
@@ -80,17 +76,11 @@ class KenSpotLight extends StatefulWidget {
       this.autoFocus = KenSpotlightDefaults.defaultAutoFocus,
       this.showSubmit = KenSpotlightDefaults.defaultShowSubmit,
       this.clientValidator,
-      this.clientOnSave,
-      this.clientOnChange,
-      this.clientOnSelected,
-      this.clientOnSubmit,
       this.keyboard,
       this.inputFormatters,
       this.defaultValue,
       this.valueField,
-      this.onFieldViewBuilder,
-      this.onGetSubmitButton,
-      this.onTapSetState,
+      this.submitButton,
       this.smeupButtons});
 
   @override
@@ -205,9 +195,12 @@ class _KenSpotLightState extends State<KenSpotLight> {
                                 ? true
                                 : false,
                         onChanged: (value) {
-                          if (widget.clientOnChange != null) {
-                            widget.clientOnChange!(value);
-                          }
+                          KenMessageBus.instance.fireEvent(
+                            SpotlightOnChangeEvent(
+                              widgetId: widget.id!,
+                              value: value,
+                            ),
+                          );
                         },
                         decoration: InputDecoration(
                           isDense: false,
@@ -232,7 +225,12 @@ class _KenSpotLightState extends State<KenSpotLight> {
                           ),
                         ),
                         onSaved: (String? value) {
-                          widget.clientOnSave!(value);
+                          KenMessageBus.instance.fireEvent(
+                            SpotlightOnSavedEvent(
+                              widgetId: widget.id!,
+                              value: value,
+                            ),
+                          );
                         }),
                   ),
                 ),
@@ -246,9 +244,12 @@ class _KenSpotLightState extends State<KenSpotLight> {
                     ),
                     onTap: () {
                       setState(() {
-                        if (widget.onTapSetState != null) {
-                          widget.onTapSetState!(code);
-                        }
+                        KenMessageBus.instance.fireEvent(
+                          SpotlightOnTapSetStateEvent(
+                            widgetId: widget.id!,
+                            value: code,
+                          ),
+                        );
                       });
                     },
                   ),
@@ -284,15 +285,12 @@ class _KenSpotLightState extends State<KenSpotLight> {
                         onTap: () {
                           onSelected(option);
 
-                          // KenMessageBus.instance.publishRequest(
-                          //   widget.globallyUniqueId,
-                          //   KenTopic.kenSpotLightOnTapSelected,
-                          //   KenMessageBusEventData(
-                          //       context: context,
-                          //       widget: widget,
-                          //       model: _model,
-                          //       data: option),
-                          // );
+                          KenMessageBus.instance.fireEvent(
+                            SpotlightOnTapSelectedEvent(
+                              widgetId: widget.id!,
+                              value: option,
+                            ),
+                          );
                         },
                         child: ListTile(
                           // leading: Text('•'), -- Eventually something that can be displayed before the text
@@ -317,13 +315,8 @@ class _KenSpotLightState extends State<KenSpotLight> {
         ));
 
     if (widget.showSubmit!) {
-      KenButtons? button;
-      if (widget.onGetSubmitButton != null) {
-        button = widget.onGetSubmitButton!();
-      }
-
       final Widget column;
-      if (button != null) {
+      if (widget.submitButton != null) {
         column = Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -331,7 +324,7 @@ class _KenSpotLightState extends State<KenSpotLight> {
             const SizedBox(
               height: 2,
             ),
-            button,
+            widget.submitButton!,
           ],
         );
       } else {

@@ -43,10 +43,6 @@ class KenTextAutocomplete extends StatefulWidget {
 
   // other properties
   Function? clientValidator;
-  Function? clientOnSave;
-  Function? clientOnChange;
-  Function? clientOnSelected;
-  Function? clientOnSubmit;
 
   Widget? submitButton;
 
@@ -84,10 +80,6 @@ class KenTextAutocomplete extends StatefulWidget {
       this.autoFocus = KenTextAutocompleteDefaults.defaultAutoFocus,
       this.showSubmit = KenTextAutocompleteDefaults.defaultShowSubmit,
       this.clientValidator,
-      this.clientOnSave,
-      this.clientOnChange,
-      this.clientOnSelected,
-      this.clientOnSubmit,
       this.keyboard,
       this.inputFormatters,
       this.defaultValue,
@@ -201,9 +193,12 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> {
                               ? true
                               : false,
                       onChanged: (value) {
-                        if (widget.clientOnChange != null) {
-                          widget.clientOnChange!(value);
-                        }
+                        KenMessageBus.instance.fireEvent(
+                          TextAutocompleteOnChange(
+                            widgetId: widget.id!,
+                            value: value,
+                          ),
+                        );
                       },
                       decoration: InputDecoration(
                         isDense: false,
@@ -226,7 +221,14 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> {
                                   : Colors.transparent),
                         ),
                       ),
-                      onSaved: widget.clientOnSave as void Function(String?)?,
+                      onSaved: (value) {
+                        KenMessageBus.instance.fireEvent(
+                          TextAutocompleteOnSaved(
+                            widgetId: widget.id!,
+                            value: value ?? '',
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),

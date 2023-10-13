@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_list_box.dart';
 
 class KenImageList extends StatefulWidget {
@@ -99,12 +101,23 @@ class KenImageListState extends State<KenImageList> {
     if (noColl == 0) {
       noColl = widget.rows;
     }
+    KenMessageBus.instance.event<KenBoxOnItemTapEvent>(widget.id!)
+      .takeWhile((element) => context.mounted)
+      .listen((event) {
+        KenMessageBus.instance.fireEvent(
+          ImageListOnItemTapEvent(
+            widgetId: event.widgetId,
+            showSelection: event.showSelection,
+            data: event.data,
+            index: event.index,
+          ),
+        );
+    });
 
     return KenListBox(
       widget.scaffoldKey,
       widget.formKey,
       _data,
-      onItemTap: widget.onItemTap,
       dismissEnabled: widget.dismissEnabled,
       borderColor: widget.borderColor,
       borderWidth: widget.borderWidth,

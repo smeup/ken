@@ -42,7 +42,7 @@ runTestsWithoutMessageBus() {
 }
 
 KenButton getButton() {
-  return KenButton(id: "button1", data: "Click me", clientOnPressed: () {});
+  return KenButton(id: "button1", data: "Click me");
 }
 
 Widget getTestWidget(KenButton button) {

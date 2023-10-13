@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 
 class KenButton extends StatelessWidget {
   final int? buttonIndex;
@@ -27,7 +29,6 @@ class KenButton extends StatelessWidget {
   final String? valueField;
   //final dynamic iconCode;
   final bool isLink;
-  final Function? clientOnPressed;
   final double innerSpace;
   final bool? isBusy;
   final String id;
@@ -61,7 +62,6 @@ class KenButton extends StatelessWidget {
     this.valueField = KenButtonsDefaults.defaultValueField,
     this.buttonIndex,
     this.iconData,
-    this.clientOnPressed,
     this.isBusy = false,
     this.isLink = KenButtonsDefaults.defaultIsLink,
     this.innerSpace = KenButtonsDefaults.defaultInnerSpace,
@@ -128,6 +128,12 @@ class KenButton extends StatelessWidget {
       style: elevatedButtonStyle,
       onPressed: clientOnPressed as void Function()?,
       child: _getButtonChildren(buttonHeight, buttonWidth),
+    );
+  }
+
+  void clientOnPressed() {
+    KenMessageBus.instance.fireEvent(
+      ButtonOnPressedEvent(widgetId: id),
     );
   }
 
