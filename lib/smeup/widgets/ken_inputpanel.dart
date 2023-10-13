@@ -133,7 +133,7 @@ class KenInputPanel extends StatelessWidget {
       SmeupInputPanelField field, BuildContext context) {
     switch (field.component) {
       case ShiroInputPanelSupportedComp.rad:
-        return _getRadioList(field);
+        return _getRadioList(field, context);
 
       case ShiroInputPanelSupportedComp.bcd:
         return KenQRCodeReader(id: field.id, data: field.value.code);
@@ -167,8 +167,13 @@ class KenInputPanel extends StatelessWidget {
     );
   }
 
-  Widget _getRadioList(SmeupInputPanelField field) {
+  Widget _getRadioList(SmeupInputPanelField field, BuildContext context) {
     field.items ??= [];
+    KenMessageBus.instance.event<RadioButtonOnPressedEvent>(field.id!)
+    .takeWhile((element) => context.mounted)
+    .listen(
+      (event) => field.value.code = field.value.description = event.value,
+    );
     return Column(children: <Widget>[
       _getLabel(field.label),
       KenRadioButtons(
@@ -182,9 +187,6 @@ class KenInputPanel extends StatelessWidget {
           {"code": "3", "value": '> 11 people'},
         ],
         selectedValue: field.value.code,
-        clientOnPressed: (value) {
-          field.value.code = field.value.description = value;
-        },
       )
     ]);
   }

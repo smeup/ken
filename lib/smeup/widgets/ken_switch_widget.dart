@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/ken_configuration_service.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 
 class KenSwitchWidget extends StatefulWidget {
   Color? thumbColor;
@@ -7,13 +9,11 @@ class KenSwitchWidget extends StatefulWidget {
 
   final bool? data;
   final String? id;
-  final Function? onClientChange;
 
   KenSwitchWidget(
       {super.key,
       this.data,
       this.id,
-      this.onClientChange,
       this.thumbColor,
       this.trackColor});
 
@@ -40,9 +40,12 @@ class _KenSwitchWidgetState extends State<KenSwitchWidget> {
       onChanged: (changedValue) {
         setState(() {
           _data = changedValue;
-          if (widget.onClientChange != null) {
-            widget.onClientChange!(changedValue);
-          }
+          KenMessageBus.instance.fireEvent(
+            SwitchOnChangeEvent(
+              widgetId: widget.id!,
+              value: changedValue,
+            )
+          );
         });
       },
     );

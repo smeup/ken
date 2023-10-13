@@ -1,31 +1,32 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+
 import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
 import 'ken_switch_widget.dart';
 
 class KenSwitch extends StatelessWidget {
-  double? captionFontSize;
-  Color? captionFontColor;
-  Color? captionBackColor;
-  bool? captionFontBold;
-  Color? thumbColor;
-  Color? trackColor;
+  final double? captionFontSize;
+  final Color? captionFontColor;
+  final Color? captionBackColor;
+  final bool? captionFontBold;
+  final Color? thumbColor;
+  final Color? trackColor;
 
-  double? width;
-  double? height;
-  EdgeInsetsGeometry? padding;
-  String? text;
-  String? id;
-  String? type;
-  String? title;
-  bool? data;
-  Function? onClientChange;
-  double? parentWidth;
-  double? parentHeight;
+  final double? width;
+  final double? height;
+  final EdgeInsetsGeometry? padding;
+  final String? text;
+  final String? id;
+  final String? type;
+  final String? title;
+  final bool? data;
+  final double? parentWidth;
+  final double? parentHeight;
 
-  KenSwitch({
+  const KenSwitch({
+    super.key,
     this.id = '',
     this.type = 'FLD',
     this.captionFontSize = KenSwitchDefaults.defaultCaptionFontSize,
@@ -35,7 +36,6 @@ class KenSwitch extends StatelessWidget {
     this.thumbColor = KenSwitchDefaults.defaultThumbColor,
     this.trackColor = KenSwitchDefaults.defaultTrackColor,
     this.title = '',
-    this.onClientChange,
     this.data = false,
     this.text = '',
     this.width = KenSwitchDefaults.defaultWidth,
@@ -87,10 +87,10 @@ class KenSwitch extends StatelessWidget {
             trackColor: trackColor,
             data: data,
             id: id,
-            onClientChange: (changedValue) {
-              data = changedValue;
-              onClientChange!(changedValue);
-            },
+            // onClientChange: (changedValue) {
+            // // TODO in uno statelesswidget non ha valore, può servire?
+            //   data = changedValue;
+            // },
           ),
         ],
       ),

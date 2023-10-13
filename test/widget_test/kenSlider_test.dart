@@ -24,7 +24,6 @@ Future<void> main() async {
                               WidgetTestService.formKey,
                               id: 'sld1',
                               value: 20,
-                              onChanged: () {},
                             )
                           ],
                         ),

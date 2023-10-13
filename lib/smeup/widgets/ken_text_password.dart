@@ -49,9 +49,6 @@ class KenTextPassword extends StatefulWidget {
   bool? checkRules;
 
   Function? clientValidator;
-  Function? clientOnSave;
-  Function? clientOnChange;
-  Function? clientOnSubmit;
 
   List<TextInputFormatter>? inputFormatters;
 
@@ -88,10 +85,7 @@ class KenTextPassword extends StatefulWidget {
     this.showRulesIcon = KenTextFieldPasswordDefaults.defaultShowRulesIcon,
     this.checkRules = KenTextFieldPasswordDefaults.defaultCheckRules,
     this.clientValidator, // ?
-    this.clientOnSave,
-    this.clientOnChange,
     this.inputFormatters, // ?
-    this.clientOnSubmit,
   });
 
   @override

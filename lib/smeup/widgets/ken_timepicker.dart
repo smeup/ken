@@ -46,7 +46,6 @@ class KenTimePicker extends StatelessWidget {
   // They have to be mapped with all the dynamisms
   // Function clientValidator;
   // Function clientOnSave;
-  Function? clientOnChange;
 
   TextInputType? keyboard;
   double? parentWidth;
@@ -81,7 +80,6 @@ class KenTimePicker extends StatelessWidget {
     // They have to be mapped with all the dynamisms
     //this.clientValidator,
     //this.clientOnSave,
-    this.clientOnChange,
     this.keyboard,
     this.parentWidth,
     this.parentHeight,
@@ -155,7 +153,6 @@ class KenTimePicker extends StatelessWidget {
       padding: padding,
       showborder: showborder,
       minutesList: minutesList,
-      clientOnChange: clientOnChange,
       dashColor: dashColor,
     );
 

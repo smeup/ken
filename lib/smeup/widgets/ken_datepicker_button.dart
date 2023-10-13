@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as datepicker;
 import 'package:intl/intl.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_timepicker.dart';
 
 class KenDatePickerButton extends StatefulWidget {
@@ -18,7 +20,6 @@ class KenDatePickerButton extends StatefulWidget {
   Color? captionFontColor;
   Color? captionBackColor;
   bool? underline;
-  final Function? clientOnChange;
   Color? dashColor;
 
   final DateTime? value;
@@ -60,7 +61,6 @@ class KenDatePickerButton extends StatefulWidget {
     this.height,
     this.padding,
     this.showborder,
-    this.clientOnChange,
     this.dashColor,
   });
 
@@ -103,13 +103,15 @@ class KenDatePickerButtonState extends State<KenDatePickerButton> {
                   final newDate = DateFormat('dd/MM/yyyy').format(date);
                   _currentDisplay = newDate;
                   _currentValue = date;
-
-                  if (widget.clientOnChange != null) {
-                    widget.clientOnChange!(KenTimePickerData(
-                      time: _currentValue,
-                      formattedTime: _currentDisplay,
-                    ));
-                  }
+                  KenMessageBus.instance.fireEvent(
+                    TimePickerOnChangeEvent(
+                      widgetId: widget.id!,
+                      data: KenTimePickerData(
+                        time: _currentValue,
+                        formattedTime: _currentDisplay,
+                      ),
+                    ),
+                  );
                 });
               });
             },
