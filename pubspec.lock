@@ -256,6 +256,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_treeview:
+    dependency: "direct main"
+    description:
+      name: flutter_treeview
+      sha256: ce7a66452e02877700890cb674773ea0af28d914192acfb5bf55a50ce35b5819
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.7+1"
   flutter_web_plugins:
     dependency: transitive
     description: flutter

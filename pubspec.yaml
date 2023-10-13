@@ -37,6 +37,7 @@ dependencies:
   connectivity_plus: ^4.0.1
   syncfusion_flutter_gauges: ^21.2.4
   flutter_datetime_picker_plus: ^2.0.1
+  flutter_treeview: ^1.0.7+1
   rxdart: ^0.27.7
   uuid: ^3.0.7
   graphic: ^2.2.0
