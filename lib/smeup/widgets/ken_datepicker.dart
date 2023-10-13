@@ -43,8 +43,6 @@ class KenDatePicker extends StatefulWidget {
 
   //Functions
   Function? clientValidator;
-  Function? clientOnSave;
-  Function? clientOnChange;
 
   KenDatePicker(
     this.data, {
@@ -75,8 +73,6 @@ class KenDatePicker extends StatefulWidget {
     this.showborder = KenDatepickerDefaults.defaultShowBorder,
     this.dashColor = KenDatepickerDefaults.defaultDashColor,
     this.clientValidator,
-    this.clientOnSave,
-    this.clientOnChange,
   }) : super() {
     if (data != null && data!.value != null && data!.text == null) {
       data!.text = DateFormat("dd/MM/yyyy").format(data!.value!);
@@ -147,7 +143,6 @@ class _KenDatePickerState extends State<KenDatePicker> {
       captionFontSize: widget.captionFontSize,
       captionFontColor: widget.captionFontColor,
       captionBackColor: widget.captionBackColor,
-      clientOnChange: widget.clientOnChange,
       dashColor: widget.dashColor,
     );
 

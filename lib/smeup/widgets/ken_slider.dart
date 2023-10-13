@@ -63,20 +63,21 @@ class KenSliderState extends State<KenSlider> {
     });
     final children = Center(
       child: Container(
-          padding: const EdgeInsets.only(left: 10, right: 10),
-          child: KenSliderWidget(
-            widget.scaffoldKey,
-            widget.formKey,
-            id: widget.id!,
-            activeTrackColor: widget.activeTrackColor,
-            thumbColor: widget.thumbColor,
-            inactiveTrackColor: widget.inactiveTrackColor,
-            sldMax: widget.sldMax,
-            sldMin: widget.sldMin,
-            value: widget.value,
-            divisions: widget.divisions,
-            label: widget.label,
-          )),
+        padding: const EdgeInsets.only(left: 10, right: 10),
+        child: KenSliderWidget(
+          widget.scaffoldKey,
+          widget.formKey,
+          id: widget.id!,
+          activeTrackColor: widget.activeTrackColor,
+          thumbColor: widget.thumbColor,
+          inactiveTrackColor: widget.inactiveTrackColor,
+          sldMax: widget.sldMax,
+          sldMin: widget.sldMin,
+          value: widget.value,
+          divisions: widget.divisions,
+          label: widget.label,
+        ),
+      ),
     );
 
     return children;

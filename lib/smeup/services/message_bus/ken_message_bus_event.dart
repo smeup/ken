@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/widgets.dart';
 
 import '../../models/widgets/ken_input_panel_value.dart';
+import '../../widgets/ken_datepicker.dart';
+import '../../widgets/ken_timepicker.dart';
 
 abstract class KenMessageBusEvent {
   String widgetId;
@@ -202,5 +204,14 @@ class SliderOnChangedEvent extends KenMessageBusEvent {
   SliderOnChangedEvent({
     required super.widgetId,
     required this.value,
+  });
+}
+
+class TimePickerOnChangeEvent extends KenMessageBusEvent {
+  KenTimePickerData data;
+
+  TimePickerOnChangeEvent({
+    required super.widgetId,
+    required this.data,
   });
 }

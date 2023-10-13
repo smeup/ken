@@ -5,6 +5,8 @@ import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
 import 'package:intl/intl.dart';
 
 import '../services/ken_defaults.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_timepicker.dart';
 import 'ken_timepicker_customization.dart';
 
@@ -37,7 +39,6 @@ class KenTimePickerButton extends StatefulWidget {
   final Alignment? align;
   final List<String>? minutesList;
   final KenTimePickerData? data;
-  final Function? clientOnChange;
   final ButtonStyle buttonStyle;
   final TextStyle textStyle;
 
@@ -69,7 +70,6 @@ class KenTimePickerButton extends StatefulWidget {
     this.padding = KenTimepickerDefaults.defaultPadding,
     this.showborder = KenTimepickerDefaults.defaultShowBorder,
     this.minutesList = KenTimepickerDefaults.defaultMinutesList,
-    this.clientOnChange,
     this.dashColor,
   }) {}
 
@@ -114,13 +114,15 @@ class KenTimePickerButtonState extends State<KenTimePickerButton> {
                     final newTime = DateFormat('HH:mm').format(date);
                     _currentDisplay = newTime;
                     _currentValue = date;
-
-                    if (widget.clientOnChange != null) {
-                      widget.clientOnChange!(KenTimePickerData(
-                        time: _currentValue,
-                        formattedTime: _currentDisplay,
-                      ));
-                    }
+                    KenMessageBus.instance.fireEvent(
+                      TimePickerOnChangeEvent(
+                        widgetId: widget.id!,
+                        data: KenTimePickerData(
+                          time: _currentValue,
+                          formattedTime: _currentDisplay,
+                        ),
+                      ),
+                    );
                   });
                 });
               },
