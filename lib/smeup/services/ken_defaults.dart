@@ -320,7 +320,7 @@ class KenListBoxDefaults {
   static const String defaultDefaultSort = '';
   static const String defaultBackgroundColName = '';
   static const bool defaultShowSelection = false;
-  static const int defaultSelectedRow = 1;
+  static const int defaultSelectedRow = -1;
   static const double defaultListHeight = 300;
   static const double defaultRealBoxHeight = 400;
 }

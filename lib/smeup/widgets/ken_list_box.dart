@@ -2,62 +2,61 @@ import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
 import '../services/ken_utilities.dart';
-import '../services/message_bus/ken_message_bus.dart';
-import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_box.dart';
 import 'ken_not_available.dart';
 
 enum KenListType { simple, oriented, wheel }
 
 class KenListBox extends StatefulWidget {
-  GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState>? formKey;
-  dynamic parentForm;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<FormState>? formKey;
+  final dynamic parentForm;
 
-  Color? backColor;
-  Color? borderColor;
-  double? borderWidth;
-  double? borderRadius;
-  double? fontSize;
-  Color? fontColor;
-  bool? fontBold;
-  bool? captionFontBold;
-  double? captionFontSize;
-  Color? captionFontColor;
+  final Color? backColor;
+  final Color? borderColor;
+  final double? borderWidth;
+  final double? borderRadius;
+  final double? fontSize;
+  final Color? fontColor;
+  final bool? fontBold;
+  final bool? captionFontBold;
+  final double? captionFontSize;
+  final Color? captionFontColor;
 
-  double? width;
-  double? height;
-  Axis? orientation;
-  EdgeInsetsGeometry? padding;
-  KenListType? listType;
-  String? layout;
-  String? title;
-  int? portraitColumns;
-  int? landscapeColumns;
-  String? id;
-  String? type;
-  bool dismissEnabled = false;
-  dynamic data;
-  bool? showLoader = false;
-  String? defaultSort;
-  String? backgroundColName;
-  bool? showSelection = false;
-  int? selectedRow = -1;
-  double? listHeight;
-  String? localSelectedRow;
-  double? realBoxHeight;
+  final double? width;
+  final double? height;
+  final Axis? orientation;
+  final EdgeInsetsGeometry? padding;
+  final KenListType? listType;
+  final String? layout;
+  final String? title;
+  final int? portraitColumns;
+  final int? landscapeColumns;
+  final String? id;
+  final String? type;
+  final bool dismissEnabled;
+  final dynamic data;
+  final bool? showLoader;
+  final String? defaultSort;
+  final String? backgroundColName;
+  final bool? showSelection;
+  final int? selectedRow;
+  final double? listHeight;
+  final String? localSelectedRow;
+  final double? realBoxHeight;
 
-  double? availableSpace;
-  Function? onRefresh;
+  final double? availableSpace;
+  final Function? onRefresh;
 
-  bool? isFirestore;
+  final bool? isFirestore;
   final Function? onGetBoxImage;
   final Function? onGetBoxText;
   final Function? onGetButtons;
   final Function? onGetButtonsColumns;
 
-  KenListBox(this.scaffoldKey, this.formKey, this.data,
-      {this.id = '',
+  const KenListBox(this.scaffoldKey, this.formKey, this.data,
+      {super.key,
+      this.id = '',
       this.type = 'BOX',
       this.borderColor = KenListBoxDefaults.defaultBorderColor,
       this.borderWidth = KenListBoxDefaults.defaultBorderRadius,
@@ -79,12 +78,10 @@ class KenListBox extends StatefulWidget {
       this.landscapeColumns = KenListBoxDefaults.defaultLandscapeColumns,
       this.backgroundColName = KenListBoxDefaults.defaultBackgroundColName,
       this.listHeight = KenListBoxDefaults.defaultListHeight,
-      this.showSelection = false,
-      this.selectedRow = 0,
+      this.showSelection = KenListBoxDefaults.defaultShowSelection,
+      this.selectedRow = KenListBoxDefaults.defaultSelectedRow,
       this.localSelectedRow,
       this.realBoxHeight = KenListBoxDefaults.defaultRealBoxHeight,
-      title = '',
-      showLoader = false,
       this.dismissEnabled = false,
       this.defaultSort = KenListBoxDefaults.defaultDefaultSort,
       this.availableSpace,
@@ -93,7 +90,10 @@ class KenListBox extends StatefulWidget {
       this.onGetBoxImage,
       this.onGetBoxText,
       this.onGetButtons,
-      this.onGetButtonsColumns});
+      this.onGetButtonsColumns,
+      this.parentForm,
+      this.title,
+      this.showLoader});
 
   @override
   KenListBoxState createState() => KenListBoxState();
