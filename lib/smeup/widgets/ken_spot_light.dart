@@ -6,51 +6,52 @@ import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_buttons.dart';
 
 class KenSpotLight extends StatefulWidget {
-  GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState>? formKey;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<FormState>? formKey;
 
   // graphic properties
-  Color? backColor;
-  double? fontSize;
-  Color? fontColor;
-  bool? fontBold;
-  bool? captionFontBold;
-  double? captionFontSize;
-  Color? captionFontColor;
-  Color? captionBackColor;
-  Color? borderColor;
-  double? borderWidth;
-  double? borderRadius;
-  Color? iconColor;
-  double? iconSize;
+  final Color? backColor;
+  final double? fontSize;
+  final Color? fontColor;
+  final bool? fontBold;
+  final bool? captionFontBold;
+  final double? captionFontSize;
+  final Color? captionFontColor;
+  final Color? captionBackColor;
+  final Color? borderColor;
+  final double? borderWidth;
+  final double? borderRadius;
+  final Color? iconColor;
+  final double? iconSize;
 
-  String? label;
-  double? width;
-  double? height;
-  EdgeInsetsGeometry? padding;
-  bool? showborder;
-  List<Map<dynamic, dynamic>>? data;
-  bool? underline;
-  bool? autoFocus;
-  String? title;
-  String? defaultValue;
-  String? valueField;
-  String? id;
-  String? type;
-  bool? showSubmit;
-  String? submitLabel;
-  KenButtons? smeupButtons;
+  final String? label;
+  final double? width;
+  final double? height;
+  final EdgeInsetsGeometry? padding;
+  final bool? showborder;
+  final List<Map<dynamic, dynamic>>? data;
+  final bool? underline;
+  final bool? autoFocus;
+  final String? title;
+  final String? defaultValue;
+  final String? valueField;
+  final String? id;
+  final String? type;
+  final bool? showSubmit;
+  final String? submitLabel;
+  final KenButtons? smeupButtons;
 
   // other properties
-  Function? clientValidator;
+  final Function? clientValidator;
 
-  Widget? submitButton;
+  final Widget? submitButton;
 
-  TextInputType? keyboard;
-  List<TextInputFormatter>? inputFormatters;
+  final TextInputType? keyboard;
+  final List<TextInputFormatter>? inputFormatters;
 
-  KenSpotLight(this.scaffoldKey, this.formKey,
-      {this.id = '',
+  const KenSpotLight(this.scaffoldKey, this.formKey,
+      {super.key,
+      this.id = '',
       this.type = 'SPL',
       this.backColor = KenSpotlightDefaults.defaultBackColor,
       this.fontSize = KenSpotlightDefaults.defaultFontSize,
@@ -81,7 +82,8 @@ class KenSpotLight extends StatefulWidget {
       this.defaultValue,
       this.valueField,
       this.submitButton,
-      this.smeupButtons});
+      this.smeupButtons,
+      this.title});
 
   @override
   _KenSpotLightState createState() => _KenSpotLightState();
