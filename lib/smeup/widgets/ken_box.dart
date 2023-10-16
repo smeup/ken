@@ -143,7 +143,7 @@ class KenBoxState extends State<KenBox> {
 
     Widget res = widget.dismissEnabled!
         ? Dismissible(
-            key: Key('${widget.formKey.toString()}_${widget.id}'),
+            key: Key('${widget.scaffoldKey.toString()}_${widget.id}'),
             direction: DismissDirection.endToStart,
             confirmDismiss: (DismissDirection direction) async {
               if (widget.onConfirmDismiss != null) {
