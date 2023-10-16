@@ -6,9 +6,6 @@ import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 
 class KenTree extends StatefulWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState>? formKey;
-
   final List<Node> data;
   final String? title;
   final String? id;
@@ -29,9 +26,7 @@ class KenTree extends StatefulWidget {
   final double? parentHeight;
   final bool? expanded;
 
-  const KenTree(
-    this.scaffoldKey,
-    this.formKey, {
+  const KenTree({
     super.key,
     this.id = '',
     this.type = 'TRE',

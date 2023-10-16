@@ -21,20 +21,23 @@ class KenSlider extends StatefulWidget {
   final String? title;
   final String? label;
 
-  const KenSlider(this.scaffoldKey, this.formKey,
-      {super.key, this.activeTrackColor = KenSliderDefaults.defaultActiveTrackColor,
-      this.thumbColor = KenSliderDefaults.defaultThumbColor,
-      this.inactiveTrackColor = KenSliderDefaults.defaultInactiveTrackColor,
-      this.padding = KenSliderDefaults.defaultPadding,
-      this.title,
-      this.id = '',
-      this.label,
-      this.divisions = 10,
-      this.type = 'SLD',
-      this.value = 0,
-      this.sldMax = KenSliderDefaults.defaultSldMax,
-      this.sldMin = KenSliderDefaults.defaultSldMin,
-      });
+  const KenSlider(
+    this.scaffoldKey,
+    this.formKey, {
+    super.key,
+    this.activeTrackColor = KenSliderDefaults.defaultActiveTrackColor,
+    this.thumbColor = KenSliderDefaults.defaultThumbColor,
+    this.inactiveTrackColor = KenSliderDefaults.defaultInactiveTrackColor,
+    this.padding = KenSliderDefaults.defaultPadding,
+    this.title,
+    this.id = '',
+    this.label,
+    this.divisions = 10,
+    this.type = 'SLD',
+    this.value = 0,
+    this.sldMax = KenSliderDefaults.defaultSldMax,
+    this.sldMin = KenSliderDefaults.defaultSldMin,
+  });
 
   @override
   KenSliderState createState() => KenSliderState();
@@ -56,9 +59,10 @@ class KenSliderState extends State<KenSlider> {
 
   @override
   Widget build(BuildContext context) {
-    KenMessageBus.instance.event<SliderOnChangedEvent>(widget.id!)
-    .takeWhile((element) => context.mounted)
-    .listen((event) {
+    KenMessageBus.instance
+        .event<SliderOnChangedEvent>(widget.id!)
+        .takeWhile((element) => context.mounted)
+        .listen((event) {
       value = event.value;
     });
     final children = Center(

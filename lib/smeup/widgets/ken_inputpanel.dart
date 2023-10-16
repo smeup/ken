@@ -15,20 +15,21 @@ import 'ken_radio_buttons.dart';
 import 'ken_text_autocomplete.dart';
 import 'ken_text_field.dart';
 
+// ignore: must_be_immutable
 class KenInputPanel extends StatelessWidget {
-  EdgeInsetsGeometry? padding;
-  double? fontSize;
-  double? width;
-  double? height;
-  String? id;
-  String? type;
-  String? title;
-  List<SmeupInputPanelField>? data;
-  Color? backgroundColor;
-  double? parentWidth;
-  double? parentHeight;
-  double confirmButtonRowHeight = 110;
-  bool? autoAdaptHeight = true;
+  final EdgeInsetsGeometry? padding;
+  final double? fontSize;
+  final double? width;
+  final double? height;
+  final String? id;
+  final String? type;
+  final String? title;
+  final List<SmeupInputPanelField>? data;
+  final Color? backgroundColor;
+  final double? parentWidth;
+  final double? parentHeight;
+  final double confirmButtonRowHeight = 110;
+  final bool? autoAdaptHeight = true;
   bool? isConfirmedEnabled = false;
 
   KenInputPanel(
@@ -169,11 +170,12 @@ class KenInputPanel extends StatelessWidget {
 
   Widget _getRadioList(SmeupInputPanelField field, BuildContext context) {
     field.items ??= [];
-    KenMessageBus.instance.event<RadioButtonOnPressedEvent>(field.id!)
-    .takeWhile((element) => context.mounted)
-    .listen(
-      (event) => field.value.code = field.value.description = event.value,
-    );
+    KenMessageBus.instance
+        .event<RadioButtonOnPressedEvent>(field.id!)
+        .takeWhile((element) => context.mounted)
+        .listen(
+          (event) => field.value.code = field.value.description = event.value,
+        );
     return Column(children: <Widget>[
       _getLabel(field.label),
       KenRadioButtons(

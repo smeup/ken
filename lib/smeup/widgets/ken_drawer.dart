@@ -145,7 +145,6 @@ class _KenDrawerState extends State<KenDrawer> {
         ));
       }
     }
-    ;
 
     return Drawer(
         backgroundColor: widget.drawerBackColor,
