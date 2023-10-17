@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../models/widgets/ken_combo_item_model.dart';
 import '../models/widgets/ken_input_panel_value.dart';
 import '../services/ken_defaults.dart';
-import '../services/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_button.dart';
@@ -25,8 +24,6 @@ class KenInputPanel extends StatelessWidget {
   final String? title;
   final List<SmeupInputPanelField>? data;
   final Color? backgroundColor;
-  final double? parentWidth;
-  final double? parentHeight;
   final double confirmButtonRowHeight = 110;
   final bool? autoAdaptHeight = true;
   bool? isConfirmedEnabled = false;
@@ -41,39 +38,19 @@ class KenInputPanel extends StatelessWidget {
       this.height = KenInputPanelDefaults.defaultHeight,
       this.data,
       this.backgroundColor,
-      this.parentWidth,
-      this.parentHeight,
       this.isConfirmedEnabled});
 
   @override
   Widget build(BuildContext context) {
-    double? inputPanelHeight = height;
-    double? inputPanelWidth = width;
-    if (parentWidth != null && parentHeight != null) {
-      if (inputPanelWidth == 0) {
-        inputPanelWidth = parentWidth;
-      }
-      if (inputPanelHeight == 0) {
-        inputPanelHeight = parentHeight;
-      }
-    } else {
-      if (inputPanelWidth == 0) {
-        inputPanelWidth = KenUtilities.getDeviceInfo().safeWidth;
-      }
-      if (inputPanelHeight == 0) {
-        inputPanelWidth = KenUtilities.getDeviceInfo().safeHeight;
-      }
-    }
-
-    double? innerPanelHeight = inputPanelHeight;
+    double? innerPanelHeight = height;
 
     if (autoAdaptHeight! && isConfirmedEnabled!) {
       innerPanelHeight = innerPanelHeight! - confirmButtonRowHeight;
     }
 
     return SizedBox(
-      height: inputPanelHeight,
-      width: inputPanelWidth,
+      height: height,
+      width: width,
       child: Scaffold(
           floatingActionButton:
               autoAdaptHeight == true ? _getConfirmButton(this) : null,
