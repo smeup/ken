@@ -16,43 +16,44 @@ import 'ken_text_password_indicators.dart';
 import 'package:provider/provider.dart';
 
 class KenTextPassword extends StatefulWidget {
-  Color? backColor;
-  double? fontSize;
-  Color? fontColor;
-  bool? fontBold;
-  bool? captionFontBold;
-  double? captionFontSize;
-  Color? captionFontColor;
-  Color? captionBackColor;
-  Color? borderColor;
-  double? borderWidth;
-  double? borderRadius;
-  double? iconSize;
-  Color? iconColor;
-  Color? buttonBackColor;
+  final Color? backColor;
+  final double? fontSize;
+  final Color? fontColor;
+  final bool? fontBold;
+  final bool? captionFontBold;
+  final double? captionFontSize;
+  final Color? captionFontColor;
+  final Color? captionBackColor;
+  final Color? borderColor;
+  final double? borderWidth;
+  final double? borderRadius;
+  final double? iconSize;
+  final Color? iconColor;
+  final Color? buttonBackColor;
 
-  String? label;
-  String? submitLabel;
-  double? width;
-  double? height;
-  EdgeInsetsGeometry? padding;
-  bool? showBorder;
-  String? data;
-  bool? underline;
-  bool? autoFocus;
-  String id;
-  String? type;
-  String? valueField;
-  bool? showSubmit;
-  bool? showRules;
-  bool? showRulesIcon;
-  bool? checkRules;
+  final String? label;
+  final String? submitLabel;
+  final double? width;
+  final double? height;
+  final EdgeInsetsGeometry? padding;
+  final bool? showBorder;
+  final String? data;
+  final bool? underline;
+  final bool? autoFocus;
+  final String id;
+  final String? type;
+  final String? valueField;
+  final bool? showSubmit;
+  final bool? showRules;
+  final bool? showRulesIcon;
+  final bool? checkRules;
 
-  Function? clientValidator;
+  final Function? clientValidator;
 
-  List<TextInputFormatter>? inputFormatters;
+  final List<TextInputFormatter>? inputFormatters;
 
-  KenTextPassword({
+  const KenTextPassword({
+    super.key,
     required this.id,
     this.type = 'FLD',
     this.backColor = KenTextFieldPasswordDefaults.defaultBackColor,
@@ -89,10 +90,10 @@ class KenTextPassword extends StatefulWidget {
   });
 
   @override
-  _KenTextPasswordState createState() => _KenTextPasswordState();
+  KenTextPasswordState createState() => KenTextPasswordState();
 }
 
-class _KenTextPasswordState extends State<KenTextPassword> {
+class KenTextPasswordState extends State<KenTextPassword> {
   dynamic _data;
   late StreamSubscription changeSubscription;
   // bool _passwordVisible;
@@ -120,7 +121,8 @@ class _KenTextPasswordState extends State<KenTextPassword> {
     final dividerStyle = _getDividerStyle();
     final captionStyle = _getCaptionStile();
 
-    changeSubscription = KenMessageBus.instance.event<TextFieldOnChangeEvent>(widget.id).listen(
+    changeSubscription =
+        KenMessageBus.instance.event<TextFieldOnChangeEvent>(widget.id).listen(
       (event) {
         passwordModel.checkProgress(event.value);
         _data = event.value;

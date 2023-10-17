@@ -7,28 +7,28 @@ import '../services/ken_utilities.dart';
 
 class KenLabel extends StatelessWidget {
   // graphic properties
-  double? fontSize;
-  Color? fontColor;
-  bool? fontBold;
-  Color? backColor;
-  double? iconSize;
-  Color? iconColor;
+  final double? fontSize;
+  final Color? fontColor;
+  final bool? fontBold;
+  final Color? backColor;
+  final double? iconSize;
+  final Color? iconColor;
 
-  EdgeInsetsGeometry? padding;
-  Alignment? align;
-  double width;
-  double? height;
-  List<String?>? data;
-  String? backColorColName;
-  String? fontColorColName;
-  dynamic iconCode;
-  String? title;
-  String? id;
-  String? type;
-  IconData? iconData;
-  double? parentWidth;
+  final EdgeInsetsGeometry? padding;
+  final Alignment? align;
+  final double width;
+  final double? height;
+  final List<String?>? data;
+  final String? backColorColName;
+  final String? fontColorColName;
+  final dynamic iconCode;
+  final String? title;
+  final String? id;
+  final String? type;
+  final IconData? iconData;
+  final double? parentWidth;
 
-  KenLabel(
+  const KenLabel(
     this.data, {
     this.id = '',
     this.type = 'LAB',
@@ -92,7 +92,7 @@ class KenLabel extends StatelessWidget {
         child: col,
       );
     } else {
-      final label = Container(
+      final label = SizedBox(
           //color: widget.backColor,
           height: labelHeight,
           child: col);

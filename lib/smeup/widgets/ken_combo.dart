@@ -132,7 +132,7 @@ class KenCombo extends StatelessWidget {
           )),
     );
 
-    var line = underline! ? KenLine() : Container();
+    var line = underline! ? const KenLine() : Container();
 
     Widget children;
 

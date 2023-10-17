@@ -13,39 +13,40 @@ class KenDatePickerData {
 }
 
 class KenDatePicker extends StatefulWidget {
-  Color? borderColor;
-  double? borderWidth;
-  double? borderRadius;
-  bool? fontBold;
-  double? fontSize;
-  Color? fontColor;
-  Color? backColor;
-  bool? captionFontBold;
-  double? captionFontSize;
-  Color? captionFontColor;
-  Color? captionBackColor;
-  bool? underline;
-  double? innerSpace;
-  Alignment? align;
-  KenDatePickerData? data;
-  String? title;
-  String? id;
-  String? type;
-  String? valueField;
-  String? displayField;
-  String? label;
-  double? width;
-  double? height;
-  EdgeInsetsGeometry? padding;
-  bool? showborder;
-  double? elevation;
-  Color? dashColor;
+  final Color? borderColor;
+  final double? borderWidth;
+  final double? borderRadius;
+  final bool? fontBold;
+  final double? fontSize;
+  final Color? fontColor;
+  final Color? backColor;
+  final bool? captionFontBold;
+  final double? captionFontSize;
+  final Color? captionFontColor;
+  final Color? captionBackColor;
+  final bool? underline;
+  final double? innerSpace;
+  final Alignment? align;
+  final KenDatePickerData? data;
+  final String? title;
+  final String? id;
+  final String? type;
+  final String? valueField;
+  final String? displayField;
+  final String? label;
+  final double? width;
+  final double? height;
+  final EdgeInsetsGeometry? padding;
+  final bool? showborder;
+  final double? elevation;
+  final Color? dashColor;
 
   //Functions
-  Function? clientValidator;
+  final Function? clientValidator;
 
   KenDatePicker(
     this.data, {
+    super.key,
     this.id = '',
     this.type = 'cal',
     this.title = '',
@@ -73,17 +74,17 @@ class KenDatePicker extends StatefulWidget {
     this.showborder = KenDatepickerDefaults.defaultShowBorder,
     this.dashColor = KenDatepickerDefaults.defaultDashColor,
     this.clientValidator,
-  }) : super() {
+  }) {
     if (data != null && data!.value != null && data!.text == null) {
       data!.text = DateFormat("dd/MM/yyyy").format(data!.value!);
     }
   }
 
   @override
-  _KenDatePickerState createState() => _KenDatePickerState();
+  KenDatePickerState createState() => KenDatePickerState();
 }
 
-class _KenDatePickerState extends State<KenDatePicker> {
+class KenDatePickerState extends State<KenDatePicker> {
   KenDatePickerData? _data;
 
   @override
@@ -146,7 +147,7 @@ class _KenDatePickerState extends State<KenDatePicker> {
       dashColor: widget.dashColor,
     );
 
-    var line = widget.underline! ? KenLine() : Container();
+    var line = widget.underline! ? const KenLine() : Container();
 
     Widget children;
 

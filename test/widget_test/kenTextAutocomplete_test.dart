@@ -18,7 +18,7 @@ Future<void> main() async {
               padding: const EdgeInsets.all(30),
               //child: Padding(
               //padding: const EdgeInsets.only(top: 30.0, left: 10, right: 10),
-              child: Center(
+              child: const Center(
                   child: Column(
                 children: [
                   KenTextAutocomplete(
@@ -26,7 +26,7 @@ Future<void> main() async {
                     //padding: EdgeInsets.only(left: 10, right: 10),
                     id: 'autocomplete1',
                     valueField: "value",
-                    data: const [
+                    data: [
                       {
                         "code": "1",
                         "value": "Bari",

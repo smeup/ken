@@ -8,30 +8,31 @@ import 'ken_not_available.dart';
 import 'ken_radio_button.dart';
 
 class KenRadioButtons extends StatefulWidget {
-  Color? radioButtonColor;
-  Color? fontColor;
-  double? fontSize;
-  Color? backColor;
-  bool? fontBold;
-  bool? captionFontBold;
-  double? captionFontSize;
-  Color? captionFontColor;
-  Color? captionBackColor;
+  final Color? radioButtonColor;
+  final Color? fontColor;
+  final double? fontSize;
+  final Color? backColor;
+  final bool? fontBold;
+  final bool? captionFontBold;
+  final double? captionFontSize;
+  final Color? captionFontColor;
+  final Color? captionBackColor;
 
-  EdgeInsetsGeometry? padding;
-  double? width;
-  double? height;
-  Alignment? align;
-  List<dynamic>? data;
-  String? valueField;
-  String? displayedField;
-  String? selectedValue;
-  int? columns;
-  String? id;
-  String? type;
-  String? title;
+  final EdgeInsetsGeometry? padding;
+  final double? width;
+  final double? height;
+  final Alignment? align;
+  final List<dynamic>? data;
+  final String? valueField;
+  final String? displayedField;
+  final String? selectedValue;
+  final int? columns;
+  final String? id;
+  final String? type;
+  final String? title;
 
-  KenRadioButtons({
+  const KenRadioButtons({
+    super.key,
     this.id = '',
     this.type = 'FLD',
     this.title = '',
@@ -90,9 +91,10 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
     _data.forEach((radioButtonData) {
       buttonIndex += 1;
       final buttonId = '${widget.id}_${buttonIndex.toString()}';
-      KenMessageBus.instance.event<RadioButtonOnPressedEvent>(buttonId)
-      .takeWhile((element) => context.mounted)
-      .listen((event) {
+      KenMessageBus.instance
+          .event<RadioButtonOnPressedEvent>(buttonId)
+          .takeWhile((element) => context.mounted)
+          .listen((event) {
         event.widgetId = widget.id!;
         KenMessageBus.instance.fireEvent(event);
       });
@@ -172,7 +174,7 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
       //     'Error SmeupRadioButtons no children \'radio button\' created',
       //     logType: KenLogType.error);
       // return KenWidgetBuilderResponse(_model, KenNotAvailable());
-      return KenNotAvailable();
+      return const KenNotAvailable();
     }
   }
 

@@ -8,7 +8,8 @@ class KenButtons extends StatelessWidget {
   final WidgetOrientation? orientation;
   final List<KenButton> children;
 
-  KenButtons({
+  const KenButtons({
+    super.key,
     this.orientation = KenButtonsDefaults.defaultOrientation,
     this.children = const [],
   });

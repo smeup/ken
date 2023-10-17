@@ -15,24 +15,26 @@ class KenSliderWidget extends StatefulWidget {
   final double? sldMax;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState>? formKey;
-  const KenSliderWidget(this.scaffoldKey, this.formKey,
-      {super.key,
-      this.activeTrackColor,
-      this.thumbColor,
-      this.inactiveTrackColor,
-      required this.id,
-      this.divisions,
-      this.label,
-      required this.value,
-      this.sldMax,
-      this.sldMin,
-      });
+  const KenSliderWidget(
+    this.scaffoldKey,
+    this.formKey, {
+    super.key,
+    this.activeTrackColor,
+    this.thumbColor,
+    this.inactiveTrackColor,
+    required this.id,
+    this.divisions,
+    this.label,
+    required this.value,
+    this.sldMax,
+    this.sldMin,
+  });
 
   @override
-  _KenSliderWidgetState createState() => _KenSliderWidgetState();
+  KenSliderWidgetState createState() => KenSliderWidgetState();
 }
 
-class _KenSliderWidgetState extends State<KenSliderWidget> {
+class KenSliderWidgetState extends State<KenSliderWidget> {
   double? _value;
   String? _label;
 

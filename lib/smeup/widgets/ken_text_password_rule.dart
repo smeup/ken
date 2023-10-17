@@ -8,8 +8,9 @@ class KenTextPasswordRule extends StatelessWidget {
   final TextStyle captionStyle;
   final IconThemeData iconTheme;
 
-  KenTextPasswordRule(this.text, this.color, this.icon, this.showRulesIcon,
-      this.captionStyle, this.iconTheme);
+  const KenTextPasswordRule(this.text, this.color, this.icon,
+      this.showRulesIcon, this.captionStyle, this.iconTheme,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class KenTextPasswordRule extends StatelessWidget {
             color: iconTheme.color,
             size: iconTheme.size,
           ),
-        SizedBox(
+        const SizedBox(
           width: 5,
         ),
         Text(

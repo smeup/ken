@@ -48,7 +48,7 @@ runTests(tester) async {
 
 KenCombo getCombo() {
   return KenCombo(
-    id: 'combo1',
+    key: const Key('combo1'),
     selectedValue: '1',
     innerSpace: 10,
     width: 0,

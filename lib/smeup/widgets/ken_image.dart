@@ -6,23 +6,24 @@ class KenImage extends StatefulWidget {
   final GlobalKey<FormState>? formKey;
 
   // graphic properties
-  double? width;
-  double? height;
-  EdgeInsetsGeometry? padding;
-  String? data;
-  String? title;
-  String? id;
-  String? type;
-  bool? isRemote;
+  final double? width;
+  final double? height;
+  final EdgeInsetsGeometry? padding;
+  final String? data;
+  final String? title;
+  final String? id;
+  final String? type;
+  final bool? isRemote;
 
-  KenImage(this.scaffoldKey, this.formKey, this.data,
-      {this.id = '',
+  const KenImage(this.scaffoldKey, this.formKey, this.data,
+      {super.key,
+      this.id = '',
       this.type = 'IMG',
       this.width = KenImageDefaults.defaultWidth,
       this.height = KenImageDefaults.defaultHeight,
       this.padding = KenImageDefaults.defaultPadding,
       this.isRemote = KenImageDefaults.defaultIsRemote,
-      title = ''});
+      this.title = ''});
 
   @override
   KenImageState createState() => KenImageState();

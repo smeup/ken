@@ -4,24 +4,20 @@ import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 
 class KenSwitchWidget extends StatefulWidget {
-  Color? thumbColor;
-  Color? trackColor;
+  final Color? thumbColor;
+  final Color? trackColor;
 
   final bool? data;
   final String? id;
 
-  KenSwitchWidget(
-      {super.key,
-      this.data,
-      this.id,
-      this.thumbColor,
-      this.trackColor});
+  const KenSwitchWidget(
+      {super.key, this.data, this.id, this.thumbColor, this.trackColor});
 
   @override
-  _KenSwitchWidgetState createState() => _KenSwitchWidgetState();
+  KenSwitchWidgetState createState() => KenSwitchWidgetState();
 }
 
-class _KenSwitchWidgetState extends State<KenSwitchWidget> {
+class KenSwitchWidgetState extends State<KenSwitchWidget> {
   bool? _data;
 
   @override
@@ -40,12 +36,10 @@ class _KenSwitchWidgetState extends State<KenSwitchWidget> {
       onChanged: (changedValue) {
         setState(() {
           _data = changedValue;
-          KenMessageBus.instance.fireEvent(
-            SwitchOnChangeEvent(
-              widgetId: widget.id!,
-              value: changedValue,
-            )
-          );
+          KenMessageBus.instance.fireEvent(SwitchOnChangeEvent(
+            widgetId: widget.id!,
+            value: changedValue,
+          ));
         });
       },
     );

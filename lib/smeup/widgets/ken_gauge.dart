@@ -4,33 +4,34 @@ import '../services/ken_defaults.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class KenGauge extends StatefulWidget {
-  GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState>? formKey;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<FormState>? formKey;
 
-  String? id;
-  String? type;
-  String? title;
-  String? valueColName;
-  String? warningColName;
-  String? alertColName;
-  String? maxColName;
-  String? minColName;
+  final String? id;
+  final String? type;
+  final String? title;
+  final String? valueColName;
+  final String? warningColName;
+  final String? alertColName;
+  final String? maxColName;
+  final String? minColName;
 
   //dynamic data;
-  double? minValue;
-  double? maxValue;
-  double? value;
-  double? warning;
-  double? alert;
+  final double? minValue;
+  final double? maxValue;
+  final double? value;
+  final double? warning;
+  final double? alert;
 
-  KenGauge(this.scaffoldKey, this.formKey,
-      {this.value = KenGaugeDefaults.defaultValue,
+  const KenGauge(this.scaffoldKey, this.formKey,
+      {super.key,
+      this.value = KenGaugeDefaults.defaultValue,
       this.maxValue = KenGaugeDefaults.defaultMaxValue,
       this.minValue = KenGaugeDefaults.defaultMinValue,
       this.warning = KenGaugeDefaults.defaultWarning,
       this.alert = KenGaugeDefaults.defaultAlert,
-      id = '',
-      type = 'GAU',
+      this.id = '',
+      this.type = 'GAU',
       this.valueColName = KenGaugeDefaults.defaultValColName,
       this.maxColName = KenGaugeDefaults.defaultMaxColName,
       this.minColName = KenGaugeDefaults.defaultMinColName,
@@ -39,10 +40,10 @@ class KenGauge extends StatefulWidget {
       this.title = ''});
 
   @override
-  _KenGaugeState createState() => _KenGaugeState();
+  KenGaugeState createState() => KenGaugeState();
 }
 
-class _KenGaugeState extends State<KenGauge> {
+class KenGaugeState extends State<KenGauge> {
   double? _maxValue;
   double? _minValue;
   double? _value;

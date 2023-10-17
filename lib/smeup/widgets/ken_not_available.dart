@@ -4,7 +4,7 @@ class KenNotAvailable extends StatelessWidget {
   final double height;
   final double width;
 
-  KenNotAvailable({this.height = 50, this.width = 50});
+  const KenNotAvailable({super.key, this.height = 50, this.width = 50});
 
   @override
   Widget build(BuildContext context) {

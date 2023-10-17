@@ -5,14 +5,14 @@ import '../models/notifiers/ken_carousel_indicator_notifier.dart';
 
 class KenCarouselIndicator extends StatefulWidget {
   final int initialIndex;
-  List<Map>? data;
-  KenCarouselIndicator(this.initialIndex, this.data);
+  final List<Map>? data;
+  const KenCarouselIndicator(this.initialIndex, this.data, {super.key});
 
   @override
-  _KenCarouselIndicatorState createState() => _KenCarouselIndicatorState();
+  KenCarouselIndicatorState createState() => KenCarouselIndicatorState();
 }
 
-class _KenCarouselIndicatorState extends State<KenCarouselIndicator> {
+class KenCarouselIndicatorState extends State<KenCarouselIndicator> {
   @override
   Widget build(BuildContext context) {
     final KenCarouselIndicatorNotifier notifier =

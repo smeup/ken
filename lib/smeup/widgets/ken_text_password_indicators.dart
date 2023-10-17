@@ -10,15 +10,16 @@ class KenTextPasswordIndicators extends StatefulWidget {
   final TextStyle captionStyle;
   final IconThemeData iconTheme;
 
-  KenTextPasswordIndicators(
-      this.showRulesIcon, this.captionStyle, this.iconTheme);
+  const KenTextPasswordIndicators(
+      this.showRulesIcon, this.captionStyle, this.iconTheme,
+      {super.key});
 
   @override
-  _KenTextPasswordIndicatorsState createState() =>
-      _KenTextPasswordIndicatorsState();
+  KenTextPasswordIndicatorsState createState() =>
+      KenTextPasswordIndicatorsState();
 }
 
-class _KenTextPasswordIndicatorsState extends State<KenTextPasswordIndicators> {
+class KenTextPasswordIndicatorsState extends State<KenTextPasswordIndicators> {
   @override
   Widget build(BuildContext context) {
     return Column(children: getColumns());

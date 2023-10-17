@@ -4,18 +4,18 @@ import '../services/ken_defaults.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class KenQRCodeReader extends StatelessWidget {
-  double? padding;
-  double? size;
-  Function? onDataRead;
-  int? maxReads;
-  int? delayInMillis;
-  bool? showLoader;
+  final double? padding;
+  final double? size;
+  final Function? onDataRead;
+  final int? maxReads;
+  final int? delayInMillis;
+  final bool? showLoader;
 
-  String? id;
-  String? type;
-  String? data;
+  final String? id;
+  final String? type;
+  final String? data;
 
-  KenQRCodeReader(
+  const KenQRCodeReader(
       {super.key,
       this.id = '',
       this.type = 'QRC',
@@ -24,12 +24,12 @@ class KenQRCodeReader extends StatelessWidget {
       this.size = KenQRCodeReaderDefaults.defaultSize,
       this.maxReads = KenQRCodeReaderDefaults.defaultMaxReads,
       this.delayInMillis = KenQRCodeReaderDefaults.defaultDealyInMillis,
-      title = ''});
+      title = '',
+      this.onDataRead,
+      this.showLoader});
 
   @override
   Widget build(BuildContext context) {
-    Widget children;
-
     return Center(
       child: Container(
         padding: EdgeInsets.all(padding!),

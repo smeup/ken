@@ -32,10 +32,10 @@ class KenChart extends StatefulWidget {
       this.data});
 
   @override
-  _KenChartState createState() => _KenChartState();
+  KenChartState createState() => KenChartState();
 }
 
-class _KenChartState extends State<KenChart> {
+class KenChartState extends State<KenChart> {
   //KenChartDatasource? _data;
 
   @override

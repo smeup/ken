@@ -7,20 +7,20 @@ import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_timepicker.dart';
 
 class KenDatePickerButton extends StatefulWidget {
-  Color? borderColor;
-  double? borderWidth;
-  double? borderRadius;
-  bool? fontBold;
-  double? fontSize;
-  Color? fontColor;
-  Color? backColor;
-  double? elevation;
-  bool? captionFontBold;
-  double? captionFontSize;
-  Color? captionFontColor;
-  Color? captionBackColor;
-  bool? underline;
-  Color? dashColor;
+  final Color? borderColor;
+  final double? borderWidth;
+  final double? borderRadius;
+  final bool? fontBold;
+  final double? fontSize;
+  final Color? fontColor;
+  final Color? backColor;
+  final double? elevation;
+  final bool? captionFontBold;
+  final double? captionFontSize;
+  final Color? captionFontColor;
+  final Color? captionBackColor;
+  final bool? underline;
+  final Color? dashColor;
 
   final DateTime? value;
   final String? id;
@@ -35,7 +35,7 @@ class KenDatePickerButton extends StatefulWidget {
   final ButtonStyle buttonStyle;
   final TextStyle textStyle;
 
-  KenDatePickerButton(
+  const KenDatePickerButton(
     this.id,
     this.buttonStyle,
     this.textStyle, {

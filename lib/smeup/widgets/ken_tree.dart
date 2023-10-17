@@ -165,24 +165,23 @@ class _KenTreeState extends State<KenTree> {
     String msg = '${expanded ? "Expanded" : "Collapsed"}: $key';
     debugPrint(msg);
     Node node = _treeViewController.getNode(key)!;
-    if (node != null) {
-      List<Node> updated;
-      if (key == 'docs') {
-        updated = _treeViewController.updateNode(
-            key,
-            node.copyWith(
-              expanded: expanded,
-              icon: expanded ? Icons.folder_open : Icons.folder,
-            ));
-      } else {
-        updated = _treeViewController.updateNode(
-            key, node.copyWith(expanded: expanded));
-      }
-      setState(() {
-        if (key == 'docs') docsOpen = expanded;
-        _treeViewController = _treeViewController.copyWith(children: updated);
-      });
+
+    List<Node> updated;
+    if (key == 'docs') {
+      updated = _treeViewController.updateNode(
+          key,
+          node.copyWith(
+            expanded: expanded,
+            icon: expanded ? Icons.folder_open : Icons.folder,
+          ));
+    } else {
+      updated = _treeViewController.updateNode(
+          key, node.copyWith(expanded: expanded));
     }
+    setState(() {
+      if (key == 'docs') docsOpen = expanded;
+      _treeViewController = _treeViewController.copyWith(children: updated);
+    });
   }
 }
 

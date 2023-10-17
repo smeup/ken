@@ -26,12 +26,12 @@ Future<void> main() async {
               padding: const EdgeInsets.all(20),
               // child: Padding(
               //   padding: const EdgeInsets.only(top: 60.0),
-              child: Center(
+              child: const Center(
                   child: Column(
                 children: [
                   KenRadioButtons(
                     title: '',
-                    data: const [
+                    data: [
                       {"code": "1", "value": "Yes"},
                       {"code": "0", "value": "No"},
                       {"code": "2", "value": "Don't know"},

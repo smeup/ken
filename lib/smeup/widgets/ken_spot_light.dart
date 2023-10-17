@@ -86,10 +86,10 @@ class KenSpotLight extends StatefulWidget {
       this.title});
 
   @override
-  _KenSpotLightState createState() => _KenSpotLightState();
+  KenSpotLightState createState() => KenSpotLightState();
 }
 
-class _KenSpotLightState extends State<KenSpotLight> {
+class KenSpotLightState extends State<KenSpotLight> {
   dynamic _data;
 
   List<Map<dynamic, dynamic>>? _options;
@@ -111,7 +111,7 @@ class _KenSpotLightState extends State<KenSpotLight> {
     TextStyle textStyle = _getTextStile();
     TextStyle captionStyle = _getCaptionStile();
 
-    String _displayStringForOption(Map<dynamic, dynamic> option) =>
+    String displayStringForOption(Map<dynamic, dynamic> option) =>
         option['value'];
 
     Widget children; // rinominerei il widget Autocomplete
@@ -144,11 +144,12 @@ class _KenSpotLightState extends State<KenSpotLight> {
                   .contains(textEditingValue.text.toLowerCase());
             });
           },
-          displayStringForOption: _displayStringForOption,
+          displayStringForOption: displayStringForOption,
           fieldViewBuilder: (BuildContext context,
               TextEditingController textEditingController,
               FocusNode focusNode,
               VoidCallback onFieldSubmitted) {
+            // ignore: unnecessary_null_comparison
             if (currel != null) {
               textEditingController.text = currel['value'];
             }
@@ -170,12 +171,11 @@ class _KenSpotLightState extends State<KenSpotLight> {
                         focusNode: focusNode,
                         onFieldSubmitted: (String value) {
                           onFieldSubmitted();
-                          KenMessageBus.instance.fireEvent(
-                            SpotlightOnSubmitEvent(
-                              widgetId: widget.id!,
-                              value: value,
-                            )
-                          );
+                          KenMessageBus.instance
+                              .fireEvent(SpotlightOnSubmitEvent(
+                            widgetId: widget.id!,
+                            value: value,
+                          ));
                         },
                         inputFormatters: widget.inputFormatters,
                         autofocus: widget.autoFocus!,
@@ -233,7 +233,7 @@ class _KenSpotLightState extends State<KenSpotLight> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(6),
                   child: GestureDetector(
                     child: Icon(
                       Icons.close,

@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
-import '../services/ken_utilities.dart';
 import 'ken_line.dart';
 import 'ken_timepicker_button.dart';
 
@@ -14,47 +13,48 @@ class KenTimePickerData {
 }
 
 class KenTimePicker extends StatelessWidget {
-  String? id;
-  String? type;
-  Color? backColor;
-  double? fontSize;
-  Color? fontColor;
-  String? label;
-  double? width;
-  double? height;
-  EdgeInsetsGeometry? padding;
-  bool? showborder;
-  String? valueField;
-  String? displayField;
-  Color? borderColor;
-  double? borderWidth;
-  double? borderRadius;
-  bool? fontBold;
-  bool? captionFontBold;
-  double? captionFontSize;
-  Color? captionFontColor;
-  Color? captionBackColor;
-  bool? underline;
-  double? innerSpace;
-  Alignment? align;
-  String? title;
-  double? elevation;
-  List<String> minutesList;
-  KenTimePickerData? data;
-  Color? dashColor;
+  final String? id;
+  final String? type;
+  final Color? backColor;
+  final double? fontSize;
+  final Color? fontColor;
+  final String? label;
+  final double? width;
+  final double? height;
+  final EdgeInsetsGeometry? padding;
+  final bool? showborder;
+  final String? valueField;
+  final String? displayField;
+  final Color? borderColor;
+  final double? borderWidth;
+  final double? borderRadius;
+  final bool? fontBold;
+  final bool? captionFontBold;
+  final double? captionFontSize;
+  final Color? captionFontColor;
+  final Color? captionBackColor;
+  final bool? underline;
+  final double? innerSpace;
+  final Alignment? align;
+  final String? title;
+  final double? elevation;
+  final List<String> minutesList;
+  final KenTimePickerData? data;
+  final Color? dashColor;
 
   // They have to be mapped with all the dynamisms
   // Function clientValidator;
   // Function clientOnSave;
 
-  TextInputType? keyboard;
-  double? parentWidth;
-  double? parentHeight;
+  final TextInputType? keyboard;
+  final double? parentWidth;
+  final double? parentHeight;
 
-  KenTimePicker(
+  const KenTimePicker(
     this.data, {
-    id = '',
-    type = 'tpk',
+    super.key,
+    this.id = '',
+    this.type = 'tpk',
     this.borderColor = KenTimepickerDefaults.defaultBorderColor,
     this.borderRadius = KenTimepickerDefaults.defaultBorderRadius,
     this.borderWidth = KenTimepickerDefaults.defaultBorderWidth,
@@ -83,32 +83,13 @@ class KenTimePicker extends StatelessWidget {
     this.keyboard,
     this.parentWidth,
     this.parentHeight,
+    this.valueField,
+    this.displayField,
+    this.title,
   });
 
   @override
   Widget build(BuildContext context) {
-    double? timePickerHeight = height;
-    double? timePickerWidth = width;
-    if (parentHeight != null && parentWidth != null) {
-      if (timePickerHeight == 0) {
-        timePickerHeight = parentHeight;
-      }
-      if (timePickerWidth == 0) {
-        timePickerWidth = parentWidth;
-      }
-    } else {
-      if (timePickerHeight == 0) {
-        timePickerHeight = KenUtilities.getDeviceInfo().safeHeight;
-      }
-      if (timePickerWidth == 0) {
-        timePickerWidth = KenUtilities.getDeviceInfo().safeWidth;
-      }
-    }
-
-    if (!showborder!) {
-      borderColor = borderColor;
-    }
-
     ButtonStyle buttonStyle = _getButtonStyle();
     TextStyle textStyle = _getTextStile();
     TextStyle captionStyle = _getCaptionStile();
@@ -148,15 +129,15 @@ class KenTimePicker extends StatelessWidget {
       captionFontColor: captionFontColor,
       captionBackColor: captionBackColor,
       label: label,
-      width: timePickerWidth,
-      height: timePickerHeight,
+      width: width,
+      height: height,
       padding: padding,
       showborder: showborder,
       minutesList: minutesList,
       dashColor: dashColor,
     );
 
-    var line = underline! ? KenLine() : Container();
+    var line = underline! ? const KenLine() : Container();
 
     Widget children;
 

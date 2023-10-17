@@ -3,21 +3,22 @@ import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
 
 class KenProgressBar extends StatelessWidget {
-  Color? color;
-  Color? linearTrackColor;
-  String? title;
-  String? id;
-  String? type;
-  String? valueField;
-  double? progressBarMinimun;
-  double? progressBarMaximun;
-  double? height;
-  EdgeInsetsGeometry? padding;
-  double? borderRadius;
+  final Color? color;
+  final Color? linearTrackColor;
+  final String? title;
+  final String? id;
+  final String? type;
+  final String? valueField;
+  final double? progressBarMinimun;
+  final double? progressBarMaximun;
+  final double? height;
+  final EdgeInsetsGeometry? padding;
+  final double? borderRadius;
 
-  double? data;
+  final double? data;
 
-  KenProgressBar({
+  const KenProgressBar({
+    super.key,
     this.color = KenProgressBarDefaults.defaultColor,
     this.linearTrackColor = KenProgressBarDefaults.defaultLinearTrackColor,
     this.id = '',

@@ -43,7 +43,8 @@ class KenCalendarWidget extends StatefulWidget {
   final bool? showPeriodButtons;
   //final String? globallyUniqueId;
 
-  KenCalendarWidget({
+  const KenCalendarWidget({
+    super.key,
     this.titleFontSize,
     this.eventFontSize,
     this.dayFontSize,
@@ -73,10 +74,10 @@ class KenCalendarWidget extends StatefulWidget {
   });
 
   @override
-  _KenCalendarWidgetState createState() => _KenCalendarWidgetState();
+  KenCalendarWidgetState createState() => KenCalendarWidgetState();
 }
 
-class _KenCalendarWidgetState extends State<KenCalendarWidget>
+class KenCalendarWidgetState extends State<KenCalendarWidget>
     with TickerProviderStateMixin {
   Map<DateTime?, List<KenCalendarEventModel>>? _events;
   DateTime? _firstWork;
@@ -293,8 +294,9 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
                     _isLoading = true;
                   });
                   KenMessageBus.instance
-                  .event<CalendarUpdateEventsAndDataEvent>(widget.id!)
-                  .take(1).listen((event) {
+                      .event<CalendarUpdateEventsAndDataEvent>(widget.id!)
+                      .take(1)
+                      .listen((event) {
                     _data = event.infos.data;
                     _events = event.infos.events;
                     setState(() {
@@ -310,8 +312,8 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
                 },
               ),
               if (_isLoading)
-                Padding(
-                  padding: const EdgeInsets.only(top: 180.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 180.0),
                   child: KenProgressIndicator(size: 60),
                 )
             ]),
@@ -320,7 +322,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
                   left: 20.0, right: 20.0, top: 10, bottom: 10),
               child: SizedBox(
                 height: separatorHeight,
-                child: KenLine(),
+                child: const KenLine(),
               ),
             ),
             if (_selectedEvents != null)
@@ -480,7 +482,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
   Future<void> _eventClicked(DateTime selectedDay, DateTime? focusedDay,
       {KenCalendarEventModel? event}) async {
     // TODO Tony
-    dynamic data;
+    //dynamic data;
     String? title;
     String? initTime;
     String? endTime;
@@ -494,20 +496,21 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
           ? DateFormat("HHmmss").format(event!.endTime!)
           : null;
 
-      if (event == null) {
-        data = _data!.firstWhereOrNull(
-            (element) => element[widget.dataColumnName!] == dayString);
-      } else {
-        final sel = _data!.firstWhereOrNull((element) {
+      if (event != null) {
+        //   data = _data!.firstWhereOrNull(
+        //       (element) => element[widget.dataColumnName!] == dayString);
+        // } else {
+        // final sel =
+        _data!.firstWhereOrNull((element) {
           return element[widget.dataColumnName!] == dayString &&
               element[widget.titleColumnName!] == title &&
               element[widget.initTimeColumnName!] == initTime &&
               element[widget.endTimeColumnName!] == endTime;
         });
 
-        if (sel != null) {
-          data = sel['datarow'] != null ? sel['datarow'] : sel;
-        }
+        // if (sel != null) {
+        //   data = sel['datarow'] != null ? sel['datarow'] : sel;
+        // }
         KenMessageBus.instance.fireEvent(
           CalendarOnClickEvent(widgetId: widget.id!, event: event),
         );
@@ -549,7 +552,7 @@ class _KenCalendarWidgetState extends State<KenCalendarWidget>
         ? DateFormat("HH:mm").format(event.endTime!)
         : null;
 
-    var period = initTimeStr != null ? initTimeStr : null;
+    var period = initTimeStr;
 
     if (period != null && endTimeStr != null) {
       period += " - $endTimeStr";

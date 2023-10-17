@@ -18,7 +18,7 @@ class KenDrawerItem extends StatelessWidget {
   final double? iconSize;
 
   static Map<int, String> widgetUniqueIds = {};
-  Uuid uuid = const Uuid();
+  final Uuid uuid = const Uuid();
 
   String get globallyUniqueId {
     if (!widgetUniqueIds.containsKey(hashCode)) {
@@ -27,7 +27,7 @@ class KenDrawerItem extends StatelessWidget {
     return widgetUniqueIds[hashCode]!;
   }
 
-  KenDrawerItem(this.scaffoldKey, this.formKey, this.text, this.route,
+  const KenDrawerItem(this.scaffoldKey, this.formKey, this.text, this.route,
       this.iconData, this.action, this.align, this.showItemDivider,
       {super.key,
       this.fontSize,

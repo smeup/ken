@@ -12,7 +12,7 @@ Future<void> main() async {
         child: MaterialApp(
             home: Scaffold(
           appBar: AppBar(),
-          body: SingleChildScrollView(
+          body: const SingleChildScrollView(
             child: Column(
               children: [
                 KenLine(

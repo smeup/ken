@@ -5,8 +5,8 @@ class KenCarouselItem extends StatelessWidget {
   final String? text;
   final Color? fontColor; // Add fontColor parameter
 
-  KenCarouselItem(this.imageFileName, this.text,
-      {this.fontColor}); // Update the constructor
+  const KenCarouselItem(this.imageFileName, this.text,
+      {super.key, this.fontColor}); // Update the constructor
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class KenCarouselItem extends StatelessWidget {
             "$imageFileName",
             fit: BoxFit.scaleDown,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Expanded(

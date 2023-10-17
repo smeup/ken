@@ -5,30 +5,31 @@ import '../services/ken_defaults.dart';
 import 'ken_drawer_item.dart';
 
 class KenDrawer extends StatefulWidget {
-  GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> formKey;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<FormState> formKey;
 
-  double? titleFontSize;
-  Color? titleFontColor;
-  bool? titleFontBold;
-  double? elementFontSize;
-  Color? elementFontColor;
-  bool? elementFontBold;
-  Color? appBarBackColor;
-  bool? showItemDivider;
-  double? imageWidth;
-  double? imageHeight;
-  String? imageUrl;
-  String? title;
-  String? id;
-  String? type;
-  Color? iconColor;
-  double? iconSize;
-  Color? drawerBackColor;
-  List<KenDrawerDataElement>? data;
+  final double? titleFontSize;
+  final Color? titleFontColor;
+  final bool? titleFontBold;
+  final double? elementFontSize;
+  final Color? elementFontColor;
+  final bool? elementFontBold;
+  final Color? appBarBackColor;
+  final bool? showItemDivider;
+  final double? imageWidth;
+  final double? imageHeight;
+  final String? imageUrl;
+  final String? title;
+  final String? id;
+  final String? type;
+  final Color? iconColor;
+  final double? iconSize;
+  final Color? drawerBackColor;
+  final List<KenDrawerDataElement>? data;
 
-  KenDrawer(this.scaffoldKey, this.formKey,
-      {this.id = '',
+  const KenDrawer(this.scaffoldKey, this.formKey,
+      {super.key,
+      this.id = '',
       this.type = 'DRW',
       this.appBarBackColor = KenDrawerDefaults.defaultAppBarBackColor,
       this.titleFontSize = KenDrawerDefaults.defaultTitleFontSize,
@@ -48,10 +49,10 @@ class KenDrawer extends StatefulWidget {
       this.showItemDivider = KenDrawerDefaults.defaultShowItemDivider});
 
   @override
-  _KenDrawerState createState() => _KenDrawerState();
+  KenDrawerState createState() => KenDrawerState();
 }
 
-class _KenDrawerState extends State<KenDrawer> {
+class KenDrawerState extends State<KenDrawer> {
   List<KenDrawerDataElement>? _data;
 
   @override

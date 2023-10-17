@@ -2,21 +2,22 @@ import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
 
 class KenLine extends StatelessWidget {
-  Color? color;
-  double? thickness;
-  String? title;
-  String? id;
-  String? type;
+  final Color? color;
+  final double? thickness;
+  final String? title;
+  final String? id;
+  final String? type;
 
-  dynamic data;
+  final dynamic data;
 
-  KenLine(
+  const KenLine(
       {super.key,
       this.title,
       this.id = '',
       this.type = 'LIN',
       this.color = KenLineDefaults.defaultColor,
-      this.thickness = KenLineDefaults.defaultThickness});
+      this.thickness = KenLineDefaults.defaultThickness,
+      this.data});
 
   @override
   Widget build(BuildContext context) {

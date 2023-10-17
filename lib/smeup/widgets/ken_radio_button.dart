@@ -6,16 +6,17 @@ import 'package:ken/smeup/services/message_bus/ken_message_bus.dart';
 import '../services/ken_defaults.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 
+// ignore: must_be_immutable
 class KenRadioButton extends StatefulWidget {
-  Color? radioButtonColor;
-  Color? backColor;
-  Color? fontColor;
-  double? fontSize;
-  bool? fontBold;
-  bool? captionFontBold;
-  double? captionFontSize;
-  Color? captionFontColor;
-  Color? captionBackColor;
+  final Color? radioButtonColor;
+  final Color? backColor;
+  final Color? fontColor;
+  final double? fontSize;
+  final bool? fontBold;
+  final bool? captionFontBold;
+  final double? captionFontSize;
+  final Color? captionFontColor;
+  final Color? captionBackColor;
 
   final IconData? icon;
   final EdgeInsetsGeometry? padding;
@@ -29,33 +30,34 @@ class KenRadioButton extends StatefulWidget {
   final String id;
   final String? type;
   final String? title;
-  List<KenRadioButton>? others;
+  late List<KenRadioButton>? others;
   late Function changeState;
 
-  KenRadioButton(
-      {super.key,
-      this.id = '',
-      this.type = 'rad',
-      this.title = '',
-      this.radioButtonColor = KenRadioButtonsDefaults.defaultRadioButtonColor,
-      this.fontSize = KenRadioButtonsDefaults.defaultFontSize,
-      this.fontColor = KenRadioButtonsDefaults.defaultFontColor,
-      this.backColor = KenRadioButtonsDefaults.defaultBackColor,
-      this.fontBold = KenRadioButtonsDefaults.defaultFontBold,
-      this.captionFontSize = KenRadioButtonsDefaults.defaultCaptionFontSize,
-      this.captionFontColor = KenRadioButtonsDefaults.defaultFontColor,
-      this.captionBackColor = KenRadioButtonsDefaults.defaultCaptionBackColor,
-      this.captionFontBold = KenRadioButtonsDefaults.defaultCaptionFontBold,
-      this.data,
-      this.width = KenRadioButtonsDefaults.defaultWidth,
-      this.height = KenRadioButtonsDefaults.defaultHeight,
-      this.align = KenRadioButtonsDefaults.defaultAlign,
-      this.padding = KenRadioButtonsDefaults.defaultPadding,
-      this.valueField = KenRadioButtonsDefaults.defaultValueField,
-      this.displayedField = KenRadioButtonsDefaults.defaultDisplayedField,
-      this.selectedValue,
-      this.icon,
-    });
+  KenRadioButton({
+    super.key,
+    this.id = '',
+    this.type = 'rad',
+    this.title = '',
+    this.radioButtonColor = KenRadioButtonsDefaults.defaultRadioButtonColor,
+    this.fontSize = KenRadioButtonsDefaults.defaultFontSize,
+    this.fontColor = KenRadioButtonsDefaults.defaultFontColor,
+    this.backColor = KenRadioButtonsDefaults.defaultBackColor,
+    this.fontBold = KenRadioButtonsDefaults.defaultFontBold,
+    this.captionFontSize = KenRadioButtonsDefaults.defaultCaptionFontSize,
+    this.captionFontColor = KenRadioButtonsDefaults.defaultFontColor,
+    this.captionBackColor = KenRadioButtonsDefaults.defaultCaptionBackColor,
+    this.captionFontBold = KenRadioButtonsDefaults.defaultCaptionFontBold,
+    this.data,
+    this.width = KenRadioButtonsDefaults.defaultWidth,
+    this.height = KenRadioButtonsDefaults.defaultHeight,
+    this.align = KenRadioButtonsDefaults.defaultAlign,
+    this.padding = KenRadioButtonsDefaults.defaultPadding,
+    this.valueField = KenRadioButtonsDefaults.defaultValueField,
+    this.displayedField = KenRadioButtonsDefaults.defaultDisplayedField,
+    this.selectedValue,
+    this.icon,
+    this.others,
+  });
 
   @override
   State<KenRadioButton> createState() => _KenRadioButtonState();
@@ -115,12 +117,12 @@ class _KenRadioButtonState extends State<KenRadioButton> {
     );
   }
 
-  RadioThemeData _getRadioTheme() {
-    RadioThemeData themeData = RadioThemeData(
-        fillColor: MaterialStateProperty.all<Color?>(widget.radioButtonColor));
+  // RadioThemeData _getRadioTheme() {
+  //   RadioThemeData themeData = RadioThemeData(
+  //       fillColor: MaterialStateProperty.all<Color?>(widget.radioButtonColor));
 
-    return themeData;
-  }
+  //   return themeData;
+  // }
 
   TextStyle _getTextStile() {
     TextStyle style = TextStyle(

@@ -5,44 +5,43 @@ import 'package:flutter/services.dart';
 import '../services/ken_defaults.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
-import 'ken_button.dart';
-import 'ken_buttons.dart';
 
 class KenTextField extends StatefulWidget {
   // graphic properties
-  Color? backColor;
-  double? fontSize;
-  Color? fontColor;
-  bool? fontBold;
-  bool? captionFontBold;
-  double? captionFontSize;
-  Color? captionFontColor;
-  Color? captionBackColor;
-  Color? borderColor;
-  double? borderWidth;
-  double? borderRadius;
+  final Color? backColor;
+  final double? fontSize;
+  final Color? fontColor;
+  final bool? fontBold;
+  final bool? captionFontBold;
+  final double? captionFontSize;
+  final Color? captionFontColor;
+  final Color? captionBackColor;
+  final Color? borderColor;
+  final double? borderWidth;
+  final double? borderRadius;
 
-  bool? underline;
-  String? label;
-  double? width;
-  double? height;
-  EdgeInsetsGeometry? padding;
-  bool? showBorder;
-  String? data;
-  bool? autoFocus;
-  String id;
-  String? type;
-  String? valueField;
-  bool showSubmit;
-  String? submitLabel;
-  Widget? submitButton;
+  final bool? underline;
+  final String? label;
+  final double? width;
+  final double? height;
+  final EdgeInsetsGeometry? padding;
+  final bool? showBorder;
+  final String? data;
+  final bool? autoFocus;
+  final String id;
+  final String? type;
+  final String? valueField;
+  final bool showSubmit;
+  final String? submitLabel;
+  final Widget? submitButton;
 
-  TextInputType? keyboard;
-  Function? clientValidator;
+  final TextInputType? keyboard;
+  final Function? clientValidator;
 
-  List<TextInputFormatter>? inputFormatters;
+  final List<TextInputFormatter>? inputFormatters;
 
-  KenTextField({
+  const KenTextField({
+    super.key,
     required this.id,
     this.type = 'FLD',
     this.backColor = KenTextFieldDefaults.defaultBackColor,
@@ -74,10 +73,10 @@ class KenTextField extends StatefulWidget {
   });
 
   @override
-  _KenTextFieldState createState() => _KenTextFieldState();
+  KenTextFieldState createState() => KenTextFieldState();
 }
 
-class _KenTextFieldState extends State<KenTextField> {
+class KenTextFieldState extends State<KenTextField> {
   dynamic _data;
 
   @override
@@ -126,8 +125,8 @@ class _KenTextFieldState extends State<KenTextField> {
             onChanged: (value) {
               KenMessageBus.instance.fireEvent(
                 TextFieldOnChangeEvent(
-                  widgetId: widget.id!,
-                  value: value ?? '',
+                  widgetId: widget.id,
+                  value: value,
                 ),
               );
             },
@@ -153,7 +152,7 @@ class _KenTextFieldState extends State<KenTextField> {
             onSaved: (value) {
               KenMessageBus.instance.fireEvent(
                 TextFieldOnSavedEvent(
-                  widgetId: widget.id!,
+                  widgetId: widget.id,
                   value: value ?? '',
                 ),
               );

@@ -5,13 +5,12 @@ import 'package:flutter/widgets.dart';
 import '../../models/widgets/ken_calendar_event_model.dart';
 import '../../models/widgets/ken_input_panel_value.dart';
 import '../../widgets/ken_calendar_widget.dart';
-import '../../widgets/ken_datepicker.dart';
 import '../../widgets/ken_timepicker.dart';
 
 abstract class KenMessageBusEvent {
   String widgetId;
 
-  KenMessageBusEvent({ required this.widgetId });
+  KenMessageBusEvent({required this.widgetId});
 }
 
 class TextFieldOnSavedEvent extends KenMessageBusEvent {
@@ -182,7 +181,6 @@ class KenBoxOnDismissedEvent extends KenMessageBusEvent {
 }
 
 class ImageListOnItemTapEvent extends KenBoxOnItemTapEvent {
-
   ImageListOnItemTapEvent({
     required super.widgetId,
     required super.index,

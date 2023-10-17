@@ -10,7 +10,7 @@ class KenLocalizationService {
         context, KenLocalizationService);
   }
 
-  static Map<String, Map<String, String>> _localizedValues = {
+  static final Map<String, Map<String, String>> _localizedValues = {
     'en': {
       'confirm': 'CONFIRM',
       'cancel': 'CANCEL',

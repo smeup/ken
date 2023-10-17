@@ -5,94 +5,94 @@ import 'package:flutter/services.dart';
 import '../services/ken_defaults.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
-import 'ken_button.dart';
 import 'ken_buttons.dart';
 
 class KenTextAutocomplete extends StatefulWidget {
   // graphic properties
-  Color? backColor;
-  double? fontSize;
-  Color? fontColor;
-  bool? fontBold;
-  bool? captionFontBold;
-  double? captionFontSize;
-  Color? captionFontColor;
-  Color? captionBackColor;
-  Color? borderColor;
-  double? borderWidth;
-  double? borderRadius;
-  Color? iconColor;
-  double? iconSize;
+  final Color? backColor;
+  final double? fontSize;
+  final Color? fontColor;
+  final bool? fontBold;
+  final bool? captionFontBold;
+  final double? captionFontSize;
+  final Color? captionFontColor;
+  final Color? captionBackColor;
+  final Color? borderColor;
+  final double? borderWidth;
+  final double? borderRadius;
+  final Color? iconColor;
+  final double? iconSize;
 
-  String? label;
-  double? width;
-  double? height;
-  EdgeInsetsGeometry? padding;
-  bool? showborder;
-  List<Map<dynamic, dynamic>>? data;
-  bool? underline;
-  bool? autoFocus;
-  String? title;
-  String? defaultValue;
-  String? valueField;
-  String? id;
-  String? type;
-  bool? showSubmit;
-  String? submitLabel;
-  KenButtons? smeupButtons;
+  final String? label;
+  final double? width;
+  final double? height;
+  final EdgeInsetsGeometry? padding;
+  final bool? showborder;
+  final List<Map<dynamic, dynamic>>? data;
+  final bool? underline;
+  final bool? autoFocus;
+  final String? title;
+  final String? defaultValue;
+  final String? valueField;
+  final String? id;
+  final String? type;
+  final bool? showSubmit;
+  final String? submitLabel;
+  final KenButtons? smeupButtons;
 
   // other properties
-  Function? clientValidator;
+  final Function? clientValidator;
 
-  Widget? submitButton;
+  final Widget? submitButton;
 
-  TextInputType? keyboard;
-  List<TextInputFormatter>? inputFormatters;
+  final TextInputType? keyboard;
+  final List<TextInputFormatter>? inputFormatters;
 
-  String? code;
+  final String? code;
 
-  KenTextAutocomplete(
-      {this.id = '',
-      this.type = 'FLD',
-      this.backColor = KenTextAutocompleteDefaults.defaultBackColor,
-      this.fontSize = KenTextAutocompleteDefaults.defaultFontSize,
-      this.fontBold = KenTextAutocompleteDefaults.defaultFontBold,
-      this.fontColor = KenTextAutocompleteDefaults.defaultFontColor,
-      this.captionBackColor =
-          KenTextAutocompleteDefaults.defaultCaptionBackColor,
-      this.captionFontBold = KenTextAutocompleteDefaults.defaultFontBold,
-      this.captionFontColor =
-          KenTextAutocompleteDefaults.defaultCaptionFontColor,
-      this.captionFontSize = KenTextAutocompleteDefaults.defaultCaptionFontSize,
-      this.borderColor = KenTextAutocompleteDefaults.defaultBorderColor,
-      this.iconColor = KenTextAutocompleteDefaults.defaultIconColor,
-      this.borderRadius = KenTextAutocompleteDefaults.defaultBorderRadius,
-      this.borderWidth = KenTextAutocompleteDefaults.defaultBorderWidth,
-      this.label = KenTextAutocompleteDefaults.defaultLabel,
-      this.submitLabel = KenTextAutocompleteDefaults.defaultSubmitLabel,
-      this.width = KenTextAutocompleteDefaults.defaultWidth,
-      this.height = KenTextAutocompleteDefaults.defaultHeight,
-      this.padding = KenTextAutocompleteDefaults.defaultPadding,
-      this.showborder = KenTextAutocompleteDefaults.defaultShowBorder,
-      this.data,
-      this.iconSize = KenTextAutocompleteDefaults.defaultIconSize,
-      this.underline = KenTextAutocompleteDefaults.defaultUnderline,
-      this.autoFocus = KenTextAutocompleteDefaults.defaultAutoFocus,
-      this.showSubmit = KenTextAutocompleteDefaults.defaultShowSubmit,
-      this.clientValidator,
-      this.keyboard,
-      this.inputFormatters,
-      this.defaultValue,
-      this.valueField,
-      this.submitButton,
-      this.code,
-    });
+  const KenTextAutocomplete({
+    super.key,
+    this.id = '',
+    this.type = 'FLD',
+    this.backColor = KenTextAutocompleteDefaults.defaultBackColor,
+    this.fontSize = KenTextAutocompleteDefaults.defaultFontSize,
+    this.fontBold = KenTextAutocompleteDefaults.defaultFontBold,
+    this.fontColor = KenTextAutocompleteDefaults.defaultFontColor,
+    this.captionBackColor = KenTextAutocompleteDefaults.defaultCaptionBackColor,
+    this.captionFontBold = KenTextAutocompleteDefaults.defaultFontBold,
+    this.captionFontColor = KenTextAutocompleteDefaults.defaultCaptionFontColor,
+    this.captionFontSize = KenTextAutocompleteDefaults.defaultCaptionFontSize,
+    this.borderColor = KenTextAutocompleteDefaults.defaultBorderColor,
+    this.iconColor = KenTextAutocompleteDefaults.defaultIconColor,
+    this.borderRadius = KenTextAutocompleteDefaults.defaultBorderRadius,
+    this.borderWidth = KenTextAutocompleteDefaults.defaultBorderWidth,
+    this.label = KenTextAutocompleteDefaults.defaultLabel,
+    this.submitLabel = KenTextAutocompleteDefaults.defaultSubmitLabel,
+    this.width = KenTextAutocompleteDefaults.defaultWidth,
+    this.height = KenTextAutocompleteDefaults.defaultHeight,
+    this.padding = KenTextAutocompleteDefaults.defaultPadding,
+    this.showborder = KenTextAutocompleteDefaults.defaultShowBorder,
+    this.data,
+    this.iconSize = KenTextAutocompleteDefaults.defaultIconSize,
+    this.underline = KenTextAutocompleteDefaults.defaultUnderline,
+    this.autoFocus = KenTextAutocompleteDefaults.defaultAutoFocus,
+    this.showSubmit = KenTextAutocompleteDefaults.defaultShowSubmit,
+    this.clientValidator,
+    this.keyboard,
+    this.inputFormatters,
+    this.defaultValue,
+    this.valueField,
+    this.submitButton,
+    this.code,
+    this.title,
+    this.smeupButtons,
+  });
 
   @override
-  _KenTextAutocompleteState createState() => _KenTextAutocompleteState();
+  KenTextAutocompleteState createState() => KenTextAutocompleteState();
 }
 
-class _KenTextAutocompleteState extends State<KenTextAutocomplete> {
+class KenTextAutocompleteState extends State<KenTextAutocomplete> {
   dynamic _data;
 
   List<Map<dynamic, dynamic>>? _options;
@@ -148,7 +148,6 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> {
               TextEditingController textEditingController,
               FocusNode focusNode,
               VoidCallback onFieldSubmitted) {
-
             if ((widget.code?.isNotEmpty ?? false) && _data != null) {
               var currel = _data.firstWhere(
                 (element) => element['code'].toString() == widget.code,
@@ -233,7 +232,7 @@ class _KenTextAutocompleteState extends State<KenTextAutocomplete> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(6),
                   child: GestureDetector(
                     child: Icon(
                       Icons.close,

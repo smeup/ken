@@ -17,8 +17,8 @@ Future<void> main() async {
           body: SingleChildScrollView(
             child: Container(
               padding: const EdgeInsets.all(20),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 60.0),
+              child: const Padding(
+                padding: EdgeInsets.only(top: 60.0),
                 child: Center(
                     child: Column(
                   children: [

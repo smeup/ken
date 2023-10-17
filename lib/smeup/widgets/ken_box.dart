@@ -249,7 +249,7 @@ class KenBoxState extends State<KenBox> {
                         return Container();
                       } else {
                         if (snapshot.hasError) {
-                          return KenNotAvailable();
+                          return const KenNotAvailable();
                         } else {
                           return snapshot.data!;
                         }
@@ -262,7 +262,7 @@ class KenBoxState extends State<KenBox> {
     // KenLogService.writeDebugMessage('Error SmeupBox widget not created',
     //     logType: KenLogType.error);
 
-    return KenNotAvailable();
+    return const KenNotAvailable();
   }
 
   Future<Widget> _getLayoutDefaultData(dynamic data, cols) async {
@@ -326,7 +326,7 @@ class KenBoxState extends State<KenBox> {
                   return Container();
                 } else {
                   if (snapshot.hasError) {
-                    return KenNotAvailable();
+                    return const KenNotAvailable();
                   } else {
                     return snapshot.data!;
                   }
@@ -342,7 +342,7 @@ class KenBoxState extends State<KenBox> {
     // KenLogService.writeDebugMessage('Error SmeupBox widget not created',
     //     logType: KenLogType.error);
 
-    return KenNotAvailable();
+    return const KenNotAvailable();
   }
 
   Future<Widget> _getLayout4Async(dynamic data, cols) async {
@@ -419,7 +419,7 @@ class KenBoxState extends State<KenBox> {
                           return Container();
                         } else {
                           if (snapshot.hasError) {
-                            return KenNotAvailable();
+                            return const KenNotAvailable();
                           } else {
                             return snapshot.data!;
                           }
@@ -433,7 +433,7 @@ class KenBoxState extends State<KenBox> {
     // KenLogService.writeDebugMessage('Error SmeupBox widget not created',
     //     logType: KenLogType.error);
 
-    return KenNotAvailable();
+    return const KenNotAvailable();
   }
 
   Future<Widget> _getLayoutButtonAsync(dynamic data, cols) async {
@@ -515,7 +515,7 @@ class KenBoxState extends State<KenBox> {
                           return Container();
                         } else {
                           if (snapshot.hasError) {
-                            return KenNotAvailable();
+                            return const KenNotAvailable();
                           } else {
                             return snapshot.data!;
                           }
@@ -529,7 +529,7 @@ class KenBoxState extends State<KenBox> {
     // KenLogService.writeDebugMessage('Error SmeupBox widget not created',
     //     logType: KenLogType.error);
 
-    return KenNotAvailable();
+    return const KenNotAvailable();
   }
 
   Future<Widget> _getImage(dynamic data) async {
@@ -542,16 +542,16 @@ class KenBoxState extends State<KenBox> {
     return widgetImage;
   }
 
-  Future<Widget> _getImageAndDataInRow(dynamic data, cols) async {
-    //Widget? widgetImg = KenNotAvailable();
-    Widget? widgetImg = await _getImage(data);
+  // Future<Widget> _getImageAndDataInRow(dynamic data, cols) async {
+  //   //Widget? widgetImg = KenNotAvailable();
+  //   Widget? widgetImg = await _getImage(data);
 
-    var listOfRows = await _getBoxTexts(data, cols);
+  //   var listOfRows = await _getBoxTexts(data, cols);
 
-    return Row(
-      children: [widgetImg, Expanded(child: Column(children: listOfRows))],
-    );
-  }
+  //   return Row(
+  //     children: [widgetImg, Expanded(child: Column(children: listOfRows))],
+  //   );
+  // }
 
   Future<Widget> _getImageAndDataInColumn(dynamic data, cols) async {
     Widget widgetImg = await _getImage(data);

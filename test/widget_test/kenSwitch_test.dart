@@ -16,7 +16,7 @@ Future<void> main() async {
           body: SingleChildScrollView(
             child: Container(
               padding: const EdgeInsets.all(20),
-              child: Center(
+              child: const Center(
                   child: Column(
                 children: [
                   KenSwitch(

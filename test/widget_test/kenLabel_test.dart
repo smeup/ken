@@ -15,13 +15,13 @@ Future<void> main() async {
             body: SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 10),
+                child: const Padding(
+                  padding: EdgeInsets.only(top: 10),
                   child: Center(
                       child: Column(
                     children: [
                       KenLabel(
-                        const ['Information'],
+                        ['Information'],
                         id: 'lab2',
                         fontBold: false,
                         align: Alignment.centerRight,

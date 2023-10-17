@@ -20,7 +20,7 @@ Future<void> main() async {
                 child: Center(
                     child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                       height: 500,
                       child: KenListBox(
                         WidgetTestService.scaffoldKey,

@@ -171,7 +171,7 @@ class KenListBoxState extends State<KenListBox> {
 
     cells = _getCells();
     if (cells == null) {
-      return KenNotAvailable();
+      return const KenNotAvailable();
     }
 
     Widget children;
@@ -186,7 +186,7 @@ class KenListBoxState extends State<KenListBox> {
         children = _getWheelList(cells!);
         break;
       default:
-        return KenNotAvailable();
+        return const KenNotAvailable();
     }
 
     _runAutomaticScroll();

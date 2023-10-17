@@ -14,20 +14,20 @@ class KenTimePickerButton extends StatefulWidget {
   final GlobalKey<ScaffoldState>? scaffoldKey;
   final GlobalKey<FormState>? formKey;
 
-  Color? borderColor;
-  double? borderWidth;
-  double? borderRadius;
-  bool? fontBold;
-  double? fontSize;
-  Color? fontColor;
-  Color? backColor;
-  double? elevation;
-  bool? captionFontBold;
-  double? captionFontSize;
-  Color? captionFontColor;
-  Color? captionBackColor;
-  bool? underline;
-  Color? dashColor;
+  final Color? borderColor;
+  final double? borderWidth;
+  final double? borderRadius;
+  final bool? fontBold;
+  final double? fontSize;
+  final Color? fontColor;
+  final Color? backColor;
+  final double? elevation;
+  final bool? captionFontBold;
+  final double? captionFontSize;
+  final Color? captionFontColor;
+  final Color? captionBackColor;
+  final bool? underline;
+  final Color? dashColor;
 
   final String? id;
 
@@ -42,7 +42,7 @@ class KenTimePickerButton extends StatefulWidget {
   final ButtonStyle buttonStyle;
   final TextStyle textStyle;
 
-  KenTimePickerButton(
+  const KenTimePickerButton(
     this.data,
     this.buttonStyle,
     this.textStyle, {
@@ -71,7 +71,7 @@ class KenTimePickerButton extends StatefulWidget {
     this.showborder = KenTimepickerDefaults.defaultShowBorder,
     this.minutesList = KenTimepickerDefaults.defaultMinutesList,
     this.dashColor,
-  }) {}
+  });
 
   @override
   KenTimePickerButtonState createState() => KenTimePickerButtonState();

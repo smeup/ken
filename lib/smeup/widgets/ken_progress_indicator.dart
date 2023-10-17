@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
 
 class KenProgressIndicator extends StatelessWidget {
-  Color? color;
-  Color? circularTrackColor;
-  String? title;
-  String? id;
-  String? type;
-  double? size;
+  final Color? color;
+  final Color? circularTrackColor;
+  final String? title;
+  final String? id;
+  final String? type;
+  final double? size;
 
-  KenProgressIndicator(
-      {this.id = '',
+  const KenProgressIndicator(
+      {super.key,
+      this.id = '',
       this.type = 'FLD',
       this.color = KenProgressIndicatorDefaults.defaultColor,
       this.circularTrackColor =

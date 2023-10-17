@@ -13,6 +13,7 @@ import 'package:table_calendar/table_calendar.dart';
 // final Map<DateTime, List?>? _holidays =
 //     KenThemeConfigurationService.getHolidays();
 
+// ignore: must_be_immutable
 class KenCalendar extends StatefulWidget {
   // graphic properties
   final double? dayFontSize;
@@ -44,10 +45,11 @@ class KenCalendar extends StatefulWidget {
 
   final Function? setDataLoad;
 
-  Map<DateTime?, List<KenCalendarEventModel>>? events;
+  final Map<DateTime?, List<KenCalendarEventModel>>? events;
 
   KenCalendar(
-      {super.key, this.id = '',
+      {super.key,
+      this.id = '',
       this.type = 'CAL',
       this.eventFontSize = KenCalendarDefaults.defaultEventFontSize,
       this.titleFontSize = KenCalendarDefaults.defaultTitleFontSize,
@@ -189,34 +191,37 @@ class KenCalendarState extends State<KenCalendar> {
     final monthButtonId = '${widget.id}_monthButton';
     final twoWeeksButtonId = '${widget.id}_2weeksButton';
     final weekButtonId = '${widget.id}_weekButton';
-    KenMessageBus.instance.event<ButtonOnPressedEvent>(monthButtonId)
-    .takeWhile((element) => context.mounted)
-    .listen(
+    KenMessageBus.instance
+        .event<ButtonOnPressedEvent>(monthButtonId)
+        .takeWhile((element) => context.mounted)
+        .listen(
       (event) {
         setState(() {
           _calendarFormat = CalendarFormat.month;
         });
       },
     );
-    KenMessageBus.instance.event<ButtonOnPressedEvent>(twoWeeksButtonId)
-    .takeWhile((element) => context.mounted)
-    .listen(
+    KenMessageBus.instance
+        .event<ButtonOnPressedEvent>(twoWeeksButtonId)
+        .takeWhile((element) => context.mounted)
+        .listen(
       (event) {
         setState(() {
           _calendarFormat = CalendarFormat.twoWeeks;
         });
       },
     );
-    KenMessageBus.instance.event<ButtonOnPressedEvent>(weekButtonId)
-    .takeWhile((element) => context.mounted)
-    .listen(
+    KenMessageBus.instance
+        .event<ButtonOnPressedEvent>(weekButtonId)
+        .takeWhile((element) => context.mounted)
+        .listen(
       (event) {
         setState(() {
           _calendarFormat = CalendarFormat.week;
         });
       },
     );
-    return Container(
+    return SizedBox(
       width: calWidth,
       child: Row(
         mainAxisSize: MainAxisSize.min,
