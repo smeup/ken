@@ -29,7 +29,8 @@ class KenInputPanel extends StatelessWidget {
   bool? isConfirmedEnabled = false;
 
   KenInputPanel(
-      {this.id = '',
+      {super.key,
+      this.id = '',
       this.type = 'INP',
       this.title = '',
       this.padding = KenInputPanelDefaults.defaultPadding,

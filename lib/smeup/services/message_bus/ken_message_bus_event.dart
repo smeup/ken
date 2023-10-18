@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/widgets.dart';
 
 import '../../models/widgets/ken_calendar_event_model.dart';

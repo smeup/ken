@@ -288,18 +288,18 @@ class KenListBoxState extends State<KenListBox> {
   List<Widget> _getCells() {
     final cells = List<Widget>.empty(growable: true);
 
-    List? _rows = _data['rows'];
+    List? rows = _data['rows'];
 
     if (widget.defaultSort!.isNotEmpty) {
       //Manage defaultSort setup parameter
-      _rows!.sort(
+      rows!.sort(
           (a, b) => (a[widget.defaultSort]).compareTo(b[widget.defaultSort]));
-      _data['rows'] = _rows;
+      _data['rows'] = rows;
     }
 
     _data['rows'].asMap().forEach((i, dataElement) {
       // var _backColor = widget.backColor;
-      var _backColor =
+      var backColor =
           (dataElement["disabled"] != null && dataElement["disabled"] as bool)
               ? Colors.grey[300]
               : widget.backColor;
@@ -356,8 +356,8 @@ class KenListBoxState extends State<KenListBox> {
       }
 
       CardTheme cardTheme = getCardStyle();
-      TextStyle textStyle = getTextStile(_backColor);
-      TextStyle captionStyle = _getCaptionStile(_backColor);
+      TextStyle textStyle = getTextStile(backColor);
+      TextStyle captionStyle = _getCaptionStile(backColor);
 
       final cell = KenBox(
         widget.scaffoldKey,
@@ -374,7 +374,7 @@ class KenListBoxState extends State<KenListBox> {
         height: widget.height,
         width: widget.width,
         fontColor: widget.fontColor,
-        backColor: _backColor,
+        backColor: backColor,
         showSelection: widget.showSelection,
         dismissEnabled: widget.dismissEnabled,
         cardTheme: cardTheme,

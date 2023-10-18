@@ -481,7 +481,6 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
 
   Future<void> _eventClicked(DateTime selectedDay, DateTime? focusedDay,
       {KenCalendarEventModel? event}) async {
-    // TODO Tony
     //dynamic data;
     String? title;
     String? initTime;

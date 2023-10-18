@@ -113,7 +113,7 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
     TextStyle textStyle = _getTextStile();
     TextStyle captionStyle = _getCaptionStile();
 
-    String _displayStringForOption(Map<dynamic, dynamic> option) =>
+    String displayStringForOption(Map<dynamic, dynamic> option) =>
         option['value'];
 
     Widget children; // rinominerei il widget Autocomplete
@@ -143,7 +143,7 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
                   .contains(textEditingValue.text.toLowerCase());
             });
           },
-          displayStringForOption: _displayStringForOption,
+          displayStringForOption: displayStringForOption,
           fieldViewBuilder: (BuildContext context,
               TextEditingController textEditingController,
               FocusNode focusNode,
