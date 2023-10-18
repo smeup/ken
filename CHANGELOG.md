@@ -64,6 +64,6 @@
 - bug fix
 - style improvements
 
-## [1.0.0+15] - 18/10/2023
+## [1.0.0] - 18/10/2023
 
 - complete refactoring and decoupling from shiro
