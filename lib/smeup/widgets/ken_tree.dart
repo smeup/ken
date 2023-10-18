@@ -25,6 +25,7 @@ class KenTree extends StatefulWidget {
   final double? parentVerticalSpacing;
   final double? parentHeight;
   final bool? expanded;
+  final FontWeight? defaultParentFontweight;
 
   const KenTree({
     super.key,
@@ -47,6 +48,7 @@ class KenTree extends StatefulWidget {
     this.parentVerticalSpacing = KenTreeDefaults.defaultParentVerticalSpacing,
     this.parentHeight = KenTreeDefaults.defaultParentHeight,
     this.expanded = KenTreeDefaults.defaultExpanded,
+    this.defaultParentFontweight = KenTreeDefaults.defaultParentFontweight,
   });
 
   @override
@@ -140,24 +142,26 @@ class _KenTreeState extends State<KenTree> {
           type: _expanderType,
           modifier: _expanderModifier,
           position: _expanderPosition,
-          // color: Colors.grey.shade800,
           size: 20,
-          color: Colors.blue),
-      labelStyle: const TextStyle(
-        fontSize: 16,
-        letterSpacing: 0.3,
-      ),
+          color: widget.parentFontColor),
+      labelStyle: TextStyle(
+          fontSize: widget.labelFontSize,
+          letterSpacing: 0.3,
+          decorationColor: const Color.fromARGB(255, 54, 244, 114),
+          color: widget.parentFontColor),
       parentLabelStyle: TextStyle(
-        fontSize: 16,
+        fontSize: widget.parentFontSize,
         letterSpacing: 0.1,
-        fontWeight: FontWeight.w800,
-        color: Colors.blue.shade700,
+        fontWeight: widget.defaultParentFontweight,
+        color: widget.parentFontColor,
       ),
-      iconTheme: IconThemeData(
+      iconTheme: const IconThemeData(
         size: 18,
-        color: Colors.grey.shade800,
+        color: Colors.blue, // low level icon
+        fill: 1,
+        opacity: 1,
       ),
-      colorScheme: Theme.of(context).colorScheme,
+      // colorScheme: Theme.of(context).colorScheme,
     );
   }
 
@@ -166,22 +170,30 @@ class _KenTreeState extends State<KenTree> {
     debugPrint(msg);
     Node node = _treeViewController.getNode(key)!;
 
-    List<Node> updated;
-    if (key == 'docs') {
-      updated = _treeViewController.updateNode(
-          key,
-          node.copyWith(
-            expanded: expanded,
-            icon: expanded ? Icons.folder_open : Icons.folder,
-          ));
-    } else {
-      updated = _treeViewController.updateNode(
-          key, node.copyWith(expanded: expanded));
+    if (node != null) {
+      List<Node> updated;
+      if (key == 'docs') {
+        updated = _treeViewController.updateNode(
+            key,
+            node.copyWith(
+              iconColor: Colors.purpleAccent,
+              selectedIconColor: Colors.yellow,
+              expanded: expanded,
+              icon: expanded ? Icons.folder_open : Icons.folder,
+            ));
+      } else {
+        updated = _treeViewController.updateNode(
+            key,
+            node.copyWith(
+                expanded: expanded,
+                iconColor: Colors.green,
+                selectedIconColor: Colors.brown));
+      }
+      setState(() {
+        if (key == 'docs') docsOpen = expanded;
+        _treeViewController = _treeViewController.copyWith(children: updated);
+      });
     }
-    setState(() {
-      if (key == 'docs') docsOpen = expanded;
-      _treeViewController = _treeViewController.copyWith(children: updated);
-    });
   }
 }
 
