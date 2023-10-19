@@ -161,7 +161,7 @@ class KenTextFieldState extends State<KenTextField> {
     );
 
     if (widget.showSubmit) {
-      final Widget column;
+      Widget column;
       if (widget.submitButton != null) {
         column = Column(
           //mainAxisSize: MainAxisSize.min,
@@ -175,7 +175,16 @@ class KenTextFieldState extends State<KenTextField> {
           ],
         );
       } else {
-        column = Container();
+        column = Column(
+          //mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            textField,
+            const SizedBox(
+              height: 5,
+            ),
+          ],
+        );
       }
 
       return column;
