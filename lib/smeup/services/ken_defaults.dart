@@ -350,22 +350,22 @@ class KenSpotlightDefaults {
 }
 
 class KenTreeDefaults {
-  static const double defaultWidth = 100;
-  static const double defaultHeight = 200;
-  static const double defaultLabelFontSize = 16;
+  static const double defaultWidth = 300;
+  static const double defaultHeight = 400;
+  static const double defaultLabelFontSize = 14;
   static const Color defaultLabelBackColor = Colors.white;
   static const Color defaultLabelFontColor = kPrimary;
   static const bool defaultLabelFontbold = false;
   static const double defaultLabelVerticalSpacing = 2;
-  static const double defaultLabelHeight = 10;
-  static const double defaultParentFontSize = 20;
+  static const double defaultLabelHeight = 14;
+  static const double defaultParentFontSize = 14;
   static const Color defaultParentBackColor = Colors.white;
   static const Color defaultParentFontColor = kPrimary;
   static const bool defaultParentFontbold = true;
-  static const double defaultParentVerticalSpacing = 2;
-  static const double defaultParentHeight = 10;
+  static const double defaultParentVerticalSpacing = 0;
+  static const double defaultParentHeight = 14;
   static const bool defaultExpanded = false;
-  static const FontWeight defaultParentFontweight = FontWeight.w800;
+  static const FontWeight defaultParentFontweight = FontWeight.w400;
 }
 
 class KenTimepickerDefaults {
