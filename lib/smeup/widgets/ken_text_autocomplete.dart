@@ -95,8 +95,6 @@ class KenTextAutocomplete extends StatefulWidget {
 class KenTextAutocompleteState extends State<KenTextAutocomplete> {
   dynamic _data;
 
-  List<Map<dynamic, dynamic>>? _options;
-
   @override
   void initState() {
     _data = widget.data;
@@ -136,7 +134,7 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
               return [];
             }
 
-            return _options!.where((Map<dynamic, dynamic> option) {
+            return _data!.where((Map<dynamic, dynamic> option) {
               return option['value']
                   .toString()
                   .toLowerCase()
