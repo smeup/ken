@@ -68,7 +68,7 @@ Future<void> main() async {
                         backColor: Colors.white,
                         showSelection: false,
                         selectedRow: 1,
-                        id: 'listbox1',
+                        key: const Key('listbox1'),
                       ),
                     )
                   ],

@@ -82,9 +82,7 @@ class KenChartState extends State<KenChart> {
 //         children = _getPieChartComponent(_data!);
 //         break;
 //       default:
-//         KenLogService.writeDebugMessage(
-//             'Error SmeupChart charttype not available',
-//             logType: KenLogType.error);
+//         debugPrint('Error SmeupChart charttype not available');
 //         children = KenNotAvailable();
 //     }
 

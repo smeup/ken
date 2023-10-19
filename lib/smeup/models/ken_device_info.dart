@@ -5,7 +5,7 @@ class KenDeviceInfo {
   double physicalHeight;
   double safeWidth;
   double safeHeight;
-  WindowPadding padding;
+  ViewPadding padding;
   KenDeviceInfo(this.padding, this.physicalHeight, this.physicalWidth,
       this.safeHeight, this.safeWidth);
 }

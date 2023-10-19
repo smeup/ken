@@ -438,7 +438,7 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
           '${date.day}',
           style: dayTextStyle.copyWith(
             fontSize: widget.dayFontSize,
-            backgroundColor: const Color(0xF206899B40),
+            backgroundColor: const Color(0xF206899B),
             color: textColor,
           ),
         ),
@@ -462,7 +462,6 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
   }
 
   Future<void> _onDaySelected(DateTime selectedDay, DateTime focusedDay) async {
-    //KenLogService.writeDebugMessage('running _onDaySelected');
     if (_isLoading) return;
     _selectedEvents!.value = _getEventsForDay(selectedDay);
     widget.setDataLoad!(widget.id, true);
@@ -472,11 +471,11 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
         selectedDay: selectedDay,
       ),
     );
-    if (_selectedEvents!.value.length >= 0) {
-      setState(() {
-        _selectedDay = selectedDay;
-      });
-    }
+    //if (_selectedEvents!.value.length >= 0) {
+    setState(() {
+      _selectedDay = selectedDay;
+    });
+    //}
   }
 
   Future<void> _eventClicked(DateTime selectedDay, DateTime? focusedDay,
@@ -515,8 +514,7 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
         );
       }
     } catch (e) {
-      // KenLogService.writeDebugMessage('Error on calendar _eventClicked: $e',
-      //     logType: KenLogType.error);
+      debugPrint('Error on calendar _eventClicked: $e');
     } finally {
       widget.setDataLoad!(widget.id, true);
       setState(() {

@@ -37,8 +37,7 @@ Future<void> main() async {
       try {
         await tester.pumpAndSettle(const Duration(seconds: 2));
       } catch (e) {
-        // KenLogService.writeDebugMessage(e.toString(),
-        //     logType: KenLogType.error);
+        debugPrint('Error KenSwitch: $e');
       }
 
       runTests();

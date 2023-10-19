@@ -9,10 +9,7 @@ Future<void> main() async {
 
     Widget testWidget = MediaQuery(
         data: const MediaQueryData(),
-        child: MaterialApp(
-            home:
-                // TODO
-                Container() //KenDrawer()
+        child: MaterialApp(home: Container() //KenDrawer()
             ));
 
     await tester.pumpWidget(testWidget).then((value) async {

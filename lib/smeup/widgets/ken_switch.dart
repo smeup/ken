@@ -87,10 +87,6 @@ class KenSwitch extends StatelessWidget {
             trackColor: trackColor,
             data: data,
             id: id,
-            // onClientChange: (changedValue) {
-            // // TODO in uno statelesswidget non ha valore, può servire?
-            //   data = changedValue;
-            // },
           ),
         ],
       ),

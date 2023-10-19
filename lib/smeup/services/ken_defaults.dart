@@ -4,7 +4,6 @@ import '../widgets/ken_chart.dart';
 import '../widgets/ken_list_box.dart';
 import 'ken_widget_orientation.dart';
 
-// TODO verificare se creare un repo a parte con il design system
 //      da utilizzare eventualmente sia su ken che su shiro
 class KenLabelDefaults {
   // supported by json_theme

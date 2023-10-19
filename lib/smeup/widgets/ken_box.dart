@@ -96,11 +96,8 @@ class KenBoxState extends State<KenBox> {
           return Container();
         } else {
           if (snapshot.hasError) {
-            // TODO writeDebugMessage
-            // KenLogService.writeDebugMessage(
-            //     'Error SmeupBox: ${snapshot.error} ${snapshot.stackTrace}. StackTrace: ${snapshot.stackTrace}',
-            //     logType: KenLogType.error);
-            // notifyError(context, widget.id, snapshot.error);
+            debugPrint(
+                'Error SmeupBox: ${snapshot.error} ${snapshot.stackTrace}. StackTrace: ${snapshot.stackTrace}');
             return Container();
           } else {
             return snapshot.data!;
@@ -132,10 +129,7 @@ class KenBoxState extends State<KenBox> {
         box = await _getLayoutImageList(widget.data);
         break;
       default:
-        // TODO writeDebugMessage
-        // KenLogService.writeDebugMessage(
-        //     'No layout received. Used default layout',
-        //     logType: KenLogType.warning);
+        debugPrint('No layout received. Used default layout');
 
         box = await _getLayoutDefault(widget.data);
         break;
@@ -258,9 +252,7 @@ class KenBoxState extends State<KenBox> {
       );
     }
 
-    // TODO writeDebugMessage
-    // KenLogService.writeDebugMessage('Error SmeupBox widget not created',
-    //     logType: KenLogType.error);
+    debugPrint('Error SmeupBox widget not created');
 
     return const KenNotAvailable();
   }
@@ -338,9 +330,7 @@ class KenBoxState extends State<KenBox> {
       );
     }
 
-    // TODO writeDebugMessage
-    // KenLogService.writeDebugMessage('Error SmeupBox widget not created',
-    //     logType: KenLogType.error);
+    debugPrint('Error KenBox widget not created');
 
     return const KenNotAvailable();
   }
@@ -429,9 +419,7 @@ class KenBoxState extends State<KenBox> {
       );
     }
 
-    // TODO writeDebugMessage
-    // KenLogService.writeDebugMessage('Error SmeupBox widget not created',
-    //     logType: KenLogType.error);
+    debugPrint('Error SmeupBox widget not created');
 
     return const KenNotAvailable();
   }
@@ -525,9 +513,7 @@ class KenBoxState extends State<KenBox> {
       );
     }
 
-    // TODO writeDebugMessage
-    // KenLogService.writeDebugMessage('Error SmeupBox widget not created',
-    //     logType: KenLogType.error);
+    debugPrint('Error SmeupBox widget not created');
 
     return const KenNotAvailable();
   }

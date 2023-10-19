@@ -170,10 +170,8 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
 
       return container;
     } else {
-      // KenLogService.writeDebugMessage(
-      //     'Error SmeupRadioButtons no children \'radio button\' created',
-      //     logType: KenLogType.error);
-      // return KenWidgetBuilderResponse(_model, KenNotAvailable());
+      debugPrint(
+          'Error SmeupRadioButtons no children \'radio button\' created');
       return const KenNotAvailable();
     }
   }

@@ -156,8 +156,7 @@ class KenDashboard extends StatelessWidget {
           newValue = data!.toStringAsFixed(precision!);
       }
     } catch (e) {
-      // KenLogService.writeDebugMessage('Error in dashboard _getValue: $e ',
-      //     logType: KenLogType.error);
+      debugPrint('Error in dashboard _getValue: $e ');
     }
     return newValue;
   }

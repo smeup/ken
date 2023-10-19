@@ -35,11 +35,10 @@ class WidgetTestService {
             await rootBundle.loadString('assets/jsons/themes/$themeFile');
         dynamic themeJson = json.decode(themeStr);
         _theme = ThemeDecoder.decodeThemeData(themeJson, validate: false);
-        //KenLogService.writeDebugMessage('Loaded $themeFile theme file');
+        //debugPrint('Loaded $themeFile theme file');
       }
     } catch (e) {
-      // KenLogService.writeDebugMessage('Error in getAppStructure: $e',
-      //     logType: KenLogType.error);
+      debugPrint('Error in getAppStructure: $e');
     } finally {
       if (_theme == null) {
         String themeStr =

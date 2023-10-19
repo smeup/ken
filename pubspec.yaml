@@ -55,6 +55,8 @@ dependency_overrides:
   collection: ^1.17.2
 
 flutter:
+  uses-material-design: true
+  
   assets:
     - assets/images/
     - assets/jsons/
