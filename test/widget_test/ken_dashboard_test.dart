@@ -32,7 +32,7 @@ Future<void> main() async {
                       iconColor: Colors.red,
                       width: 400,
                       height: 600,
-                      id: 'dashboard1',
+                      key: const Key('dashboard1'),
                     )
                   ],
                 )),
@@ -73,6 +73,6 @@ runTests() {
   //var finderTextContent = find.textContaining('Dashboard ');
   //expect(finderTextContent, findsWidgets);
 
-  var finderValueContent = find.text('15');
+  var finderValueContent = find.text('15.86');
   expect(finderValueContent, findsWidgets);
 }

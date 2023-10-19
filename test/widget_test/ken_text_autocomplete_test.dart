@@ -24,7 +24,7 @@ Future<void> main() async {
                   KenTextAutocomplete(
                     label: 'description',
                     //padding: EdgeInsets.only(left: 10, right: 10),
-                    id: 'autocomplete1',
+                    key: Key('autocomplete1'),
                     valueField: "value",
                     data: [
                       {

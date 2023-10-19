@@ -30,7 +30,7 @@ Future<void> main() async {
                   child: Column(
                     children: [
                       KenCalendar(
-                          id: 'calendar1',
+                          key: const Key('calendar1'),
                           width: 600,
                           height: 400,
                           initialFirstWork:

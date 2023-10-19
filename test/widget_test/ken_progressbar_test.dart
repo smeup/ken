@@ -21,7 +21,7 @@ Future<void> main() async {
                     child: Column(
                   children: [
                     KenProgressBar(
-                      id: 'pgb1',
+                      key: Key('pgb1'),
                       data: 6,
                       height: 40,
                       progressBarMinimun: 0,

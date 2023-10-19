@@ -22,7 +22,7 @@ Future<void> main() async {
                     children: [
                       KenLabel(
                         ['Information'],
-                        id: 'lab2',
+                        key: Key('lab2'),
                         fontBold: false,
                         align: Alignment.centerRight,
                         iconCode: "0xf51f",

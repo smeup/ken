@@ -22,7 +22,7 @@ Future<void> main() async {
                   KenSwitch(
                     text: 'Turn me on/off',
                     data: true,
-                    id: 'switch1',
+                    key: Key('switch1'),
                     width: 400,
                     height: 50,
                     captionFontSize: 20,

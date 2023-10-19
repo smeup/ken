@@ -20,7 +20,7 @@ Future<void> main() async {
                 children: [
                   KenTextField(
                     label: 'description',
-                    id: 'text1',
+                    key: Key('text1'),
                     data: 'some text',
                     showSubmit: true,
                     submitLabel: 'tap me',

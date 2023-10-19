@@ -23,7 +23,7 @@ Future<void> main() async {
                 children: [
                   KenGauge(
                       WidgetTestService.scaffoldKey, WidgetTestService.formKey,
-                      id: 'gau1',
+                      key: const Key('gau1'),
                       value: 120,
                       maxValue: 150,
                       minValue: 50,

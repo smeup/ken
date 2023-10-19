@@ -42,7 +42,7 @@ class KenTextField extends StatefulWidget {
 
   const KenTextField({
     super.key,
-    required this.id,
+    this.id = '',
     this.type = 'FLD',
     this.backColor = KenTextFieldDefaults.defaultBackColor,
     this.fontSize = KenTextFieldDefaults.defaultFontSize,

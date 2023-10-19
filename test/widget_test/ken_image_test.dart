@@ -24,7 +24,7 @@ Future<void> main() async {
                           WidgetTestService.scaffoldKey,
                           WidgetTestService.formKey,
                           '../../assets/images/IMG1.png',
-                          id: 'img1',
+                          key: const Key('img1'),
                           width: 300,
                           height: 300,
                           isRemote: false),

@@ -37,7 +37,7 @@ Future<void> main() async {
                       {"code": "2", "value": "Don't know"},
                       {"code": "3", "value": "Maybe"}
                     ],
-                    id: 'radio_buttons_1',
+                    key: Key('radio_buttons_1'),
                     // clientOnPressed: (String value) {
                     //   KenUtilities.invokeScaffoldMessenger(context,
                     //       "You have changed the radiobutton to: $value");

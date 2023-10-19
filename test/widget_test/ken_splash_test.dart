@@ -15,7 +15,7 @@ Future<void> main() async {
           body: KenSplash(
             WidgetTestService.scaffoldKey,
             WidgetTestService.formKey,
-            id: 'splash1',
+            key: const Key('splash1'),
             color: Colors.blueAccent,
           ),
         )));

@@ -16,7 +16,7 @@ Future<void> main() async {
             child: Column(
               children: [
                 KenLine(
-                  id: 'lin1',
+                  key: Key('lin1'),
                 ),
               ],
             ),
