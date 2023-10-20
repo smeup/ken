@@ -162,7 +162,7 @@ class _KenTreeState extends State<KenTree> {
         fill: 1,
         opacity: 1,
       ),
-      colorScheme: ColorScheme.light(
+      colorScheme: const ColorScheme.light(
           primary: kBack100, onPrimary: kInactivePrimary, outline: kPrimary),
     );
   }
