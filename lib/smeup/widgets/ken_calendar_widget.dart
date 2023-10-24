@@ -106,7 +106,6 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
     _focusDay = widget.focusDay;
     _selectedDay = widget.selectedDay;
 
-    _calendarFormat = widget.calendarFormat;
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
@@ -144,6 +143,8 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
     //     calendarWidth = KenUtilities.getDeviceInfo().safeWidth;
     //   }
     // }
+
+    _calendarFormat = widget.calendarFormat;
 
     double separatorHeight = 8.0;
     final titleTextStyle = KenConfigurationService.getTheme()! // months builder

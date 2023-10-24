@@ -105,7 +105,9 @@ class KenCalendarState extends State<KenCalendar> {
   DateTime? _selectedDay;
   CalendarFormat? _calendarFormat;
   ValueNotifier<List<KenCalendarEventModel>>? _selectedEvents;
-
+  String _monthButtonId = '';
+  String _twoWeeksButtonId = '';
+  String _weekButtonId = '';
   Map<DateTime?, List<KenCalendarEventModel>>? _events;
 
   @override
@@ -120,12 +122,45 @@ class KenCalendarState extends State<KenCalendar> {
     _selectedDay = widget.initialDate ?? DateTime.now();
     _calendarFormat =
         widget.showAsWeek! ? CalendarFormat.week : CalendarFormat.month;
+    _monthButtonId = '${widget.id}_monthButton';
+    _twoWeeksButtonId = '${widget.id}_2weeksButton';
+    _weekButtonId = '${widget.id}_weekButton';
+
+    KenMessageBus.instance
+        .event<ButtonOnPressedEvent>(_monthButtonId)
+        .takeWhile((element) => context.mounted)
+        .listen(
+      (event) {
+        setState(() {
+          _calendarFormat = CalendarFormat.month;
+        });
+      },
+    );
+    KenMessageBus.instance
+        .event<ButtonOnPressedEvent>(_twoWeeksButtonId)
+        .takeWhile((element) => context.mounted)
+        .listen(
+      (event) {
+        setState(() {
+          _calendarFormat = CalendarFormat.twoWeeks;
+        });
+      },
+    );
+    KenMessageBus.instance
+        .event<ButtonOnPressedEvent>(_weekButtonId)
+        .takeWhile((element) => context.mounted)
+        .listen(
+      (event) {
+        setState(() {
+          _calendarFormat = CalendarFormat.week;
+        });
+      },
+    );
   }
 
   @override
   void dispose() {
     _selectedEvents?.dispose();
-    _events = null;
     super.dispose();
   }
 
@@ -188,39 +223,7 @@ class KenCalendarState extends State<KenCalendar> {
 
   Widget _buildButtons(double? calHeight, double calWidth) {
     double buttonWidth = (calWidth - 100 - widget.padding!.horizontal) / 3;
-    final monthButtonId = '${widget.id}_monthButton';
-    final twoWeeksButtonId = '${widget.id}_2weeksButton';
-    final weekButtonId = '${widget.id}_weekButton';
-    KenMessageBus.instance
-        .event<ButtonOnPressedEvent>(monthButtonId)
-        .takeWhile((element) => context.mounted)
-        .listen(
-      (event) {
-        setState(() {
-          _calendarFormat = CalendarFormat.month;
-        });
-      },
-    );
-    KenMessageBus.instance
-        .event<ButtonOnPressedEvent>(twoWeeksButtonId)
-        .takeWhile((element) => context.mounted)
-        .listen(
-      (event) {
-        setState(() {
-          _calendarFormat = CalendarFormat.twoWeeks;
-        });
-      },
-    );
-    KenMessageBus.instance
-        .event<ButtonOnPressedEvent>(weekButtonId)
-        .takeWhile((element) => context.mounted)
-        .listen(
-      (event) {
-        setState(() {
-          _calendarFormat = CalendarFormat.week;
-        });
-      },
-    );
+
     return SizedBox(
       width: calWidth,
       child: Row(
@@ -228,22 +231,25 @@ class KenCalendarState extends State<KenCalendar> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           KenButton(
-            id: monthButtonId,
+            id: _monthButtonId,
             data: KenLocalizationService.of(context)!.getLocalString('month'),
             width: buttonWidth,
             align: Alignment.center,
+            key: Key(_monthButtonId),
           ),
           KenButton(
-            id: twoWeeksButtonId,
+            id: _twoWeeksButtonId,
             data: KenLocalizationService.of(context)!.getLocalString('2weeks'),
             width: buttonWidth,
             align: Alignment.center,
+            key: Key(_twoWeeksButtonId),
           ),
           KenButton(
-            id: weekButtonId,
+            id: _weekButtonId,
             data: KenLocalizationService.of(context)!.getLocalString('week'),
             width: buttonWidth,
             align: Alignment.center,
+            key: Key(_weekButtonId),
           ),
         ],
       ),

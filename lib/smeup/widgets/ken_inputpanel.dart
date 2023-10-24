@@ -250,6 +250,7 @@ class KenInputPanel extends StatelessWidget {
             Expanded(
               child: KenButton(
                 id: buttonId,
+                key: Key(buttonId),
                 data: "Conferma",
               ),
             ),
