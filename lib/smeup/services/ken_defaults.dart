@@ -47,6 +47,7 @@ class KenButtonsDefaults {
 
 class KenCarouselDefaults {
   static const double defaultHeight = 300;
+  static const Color defaultFontColor = kPrimary;
 }
 
 class KenDashboardDefaults {

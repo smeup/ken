@@ -24,7 +24,7 @@ class KenCarousel extends StatelessWidget {
       this.height = KenCarouselDefaults.defaultHeight,
       this.autoPlay = false,
       this.title = '',
-      this.fontColor,
+      this.fontColor = KenCarouselDefaults.defaultFontColor,
       super.key});
 
   @override
