@@ -215,7 +215,12 @@ class TimePickerOnChangeEvent extends KenMessageBusEvent {
 }
 
 class DashboardOnTapEvent extends KenMessageBusEvent {
-  DashboardOnTapEvent({required super.widgetId});
+  String value;
+
+  DashboardOnTapEvent({
+    required super.widgetId,
+    required this.value,
+  });
 }
 
 class SwitchOnChangeEvent extends KenMessageBusEvent {

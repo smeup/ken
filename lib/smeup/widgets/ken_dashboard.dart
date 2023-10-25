@@ -82,7 +82,7 @@ class KenDashboard extends StatelessWidget {
     final dashboard = GestureDetector(
       onTap: () {
         KenMessageBus.instance.fireEvent(
-          DashboardOnTapEvent(widgetId: id!),
+          DashboardOnTapEvent(widgetId: id!, value: _getValue(data)),
         );
       },
       child: Container(
