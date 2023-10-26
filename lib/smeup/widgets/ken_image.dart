@@ -14,6 +14,7 @@ class KenImage extends StatefulWidget {
   final String? id;
   final String? type;
   final bool? isRemote;
+  final bool? expand;
 
   const KenImage(this.scaffoldKey, this.formKey, this.data,
       {super.key,
@@ -23,7 +24,8 @@ class KenImage extends StatefulWidget {
       this.height = KenImageDefaults.defaultHeight,
       this.padding = KenImageDefaults.defaultPadding,
       this.isRemote = KenImageDefaults.defaultIsRemote,
-      this.title = ''});
+      this.title = '',
+      this.expand = false});
 
   @override
   KenImageState createState() => KenImageState();
@@ -46,25 +48,33 @@ class KenImageState extends State<KenImage> {
   @override
   Widget build(BuildContext context) {
     Widget children;
-
     Image image;
-    if (widget.isRemote!) {
-      image = Image.network(
-        _data,
+
+    if (widget.expand!) {
+      if (widget.isRemote!) {
+        image = Image.network(_data, fit: BoxFit.fill);
+      } else {
+        image = Image.asset(_data, fit: BoxFit.fill);
+      }
+      children = Container(
         height: widget.height,
         width: widget.width,
+        padding: widget.padding,
+        child: image,
       );
     } else {
-      image = Image.asset(
-        _data,
+      if (widget.isRemote!) {
+        image = Image.network(_data);
+      } else {
+        image = Image.asset(_data);
+      }
+      children = Container(
         height: widget.height,
         width: widget.width,
+        padding: widget.padding,
+        child: image,
       );
     }
-    children = Container(
-      padding: widget.padding,
-      child: image,
-    );
 
     return children;
   }

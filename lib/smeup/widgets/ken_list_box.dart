@@ -42,7 +42,7 @@ class KenListBox extends StatefulWidget {
   final bool? showSelection;
   final int? selectedRow;
   final double? listHeight;
-  final String? localSelectedRow;
+  final String? storageSelectedRow;
   final double? realBoxHeight;
 
   final double? availableSpace;
@@ -80,7 +80,7 @@ class KenListBox extends StatefulWidget {
       this.listHeight = KenListBoxDefaults.defaultListHeight,
       this.showSelection = KenListBoxDefaults.defaultShowSelection,
       this.selectedRow = KenListBoxDefaults.defaultSelectedRow,
-      this.localSelectedRow,
+      this.storageSelectedRow,
       this.realBoxHeight = KenListBoxDefaults.defaultRealBoxHeight,
       this.dismissEnabled = false,
       this.defaultSort = KenListBoxDefaults.defaultDefaultSort,
@@ -117,10 +117,10 @@ class KenListBoxState extends State<KenListBox> {
     _availableSpace =
         widget.availableSpace ?? KenUtilities.getDeviceInfo().safeHeight;
 
-    String? localSelectedRow = widget.localSelectedRow;
+    String? storageSelectedRow = widget.storageSelectedRow;
 
-    if (localSelectedRow != null && localSelectedRow.isNotEmpty) {
-      _selectedRow = int.tryParse(localSelectedRow) ?? widget.selectedRow;
+    if (storageSelectedRow != null && storageSelectedRow.isNotEmpty) {
+      _selectedRow = int.tryParse(storageSelectedRow) ?? widget.selectedRow;
     }
     //_executeBouncing = true;// così in originale
 

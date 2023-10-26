@@ -490,6 +490,7 @@ class KenBoxState extends State<KenBox> {
                 padding: const EdgeInsets.all(1.0),
                 child: SizedBox(
                   height: widget.height,
+                  width: widget.width,
                   child: FutureBuilder<Widget>(
                       future: _getImageAndDataInColumn(data, cols),
                       builder: (BuildContext context,

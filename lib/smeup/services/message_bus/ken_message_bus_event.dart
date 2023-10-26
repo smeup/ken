@@ -178,15 +178,6 @@ class KenBoxOnDismissedEvent extends KenMessageBusEvent {
   });
 }
 
-class ImageListOnItemTapEvent extends KenBoxOnItemTapEvent {
-  ImageListOnItemTapEvent({
-    required super.widgetId,
-    required super.index,
-    required super.data,
-    required super.showSelection,
-  });
-}
-
 class SliderOnChangeRealtimeEvent extends KenMessageBusEvent {
   double value;
 
