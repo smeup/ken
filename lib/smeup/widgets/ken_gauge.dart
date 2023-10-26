@@ -72,12 +72,13 @@ class KenGaugeState extends State<KenGauge> {
     double vWar = _warning ?? 0;
     double vAle = _alert ?? 0;
     double vVal = _value ?? 0;
+    final String mytext = widget.title ?? '';
 
     final gauge = Center(
       child: SfRadialGauge(
-          title: const GaugeTitle(
-              text: 'Speedometer',
-              textStyle: TextStyle(
+          title: GaugeTitle(
+              text: mytext,
+              textStyle: const TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                   color: Color.fromRGBO(6, 137, 155, 1))),
