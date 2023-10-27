@@ -233,6 +233,7 @@ class KenBoxState extends State<KenBox> {
           _manageTap(widget.index, data);
         },
         child: Card(
+            key: Key('${(widget.key as ValueKey).value}_card'),
             color: widget.backColor,
             child: Padding(
                 padding: const EdgeInsets.all(14.0),
@@ -487,6 +488,7 @@ class KenBoxState extends State<KenBox> {
           _manageTap(widget.index, data);
         },
         child: Card(
+            key: Key('${(widget.key as ValueKey).value}_card'),
             color: widget.cardTheme!.color,
             shape: (widget.cardTheme!.shape as RoundedRectangleBorder)
                 .copyWith(side: BorderSide(color: widget.cardTheme!.color!)),
