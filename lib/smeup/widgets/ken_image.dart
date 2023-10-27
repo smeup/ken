@@ -52,13 +52,15 @@ class KenImageState extends State<KenImage> {
 
     if (widget.expand!) {
       if (widget.isRemote!) {
-        image = Image.network(_data, fit: BoxFit.fill);
+        image = Image.network(_data,
+            height: widget.height, width: widget.width, fit: BoxFit.fill);
       } else {
-        image = Image.asset(_data, fit: BoxFit.fill);
+        image = Image.asset(_data,
+            height: widget.height, width: widget.width, fit: BoxFit.fill);
       }
       children = Container(
-        height: widget.height,
-        width: widget.width,
+        // height: widget.height,
+        // width: widget.width,
         padding: widget.padding,
         child: image,
       );

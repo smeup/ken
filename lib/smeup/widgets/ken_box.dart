@@ -228,6 +228,7 @@ class KenBoxState extends State<KenBox> {
 
     if (data.length > 0) {
       return GestureDetector(
+        key: Key('${(widget.key as ValueKey).value}_gesture_detector'),
         onTap: () {
           _manageTap(widget.index, data);
         },
@@ -304,6 +305,7 @@ class KenBoxState extends State<KenBox> {
 
     if (data.length > 0) {
       return GestureDetector(
+        key: Key('${(widget.key as ValueKey).value}_gesture_detector'),
         onTap: () {
           _manageTap(widget.index, data);
         },
@@ -385,6 +387,7 @@ class KenBoxState extends State<KenBox> {
 
     if (data.length > 0) {
       return GestureDetector(
+        key: Key('${(widget.key as ValueKey).value}_gesture_detector'),
         onTap: () {
           _manageTap(widget.index, data);
         },
@@ -479,6 +482,7 @@ class KenBoxState extends State<KenBox> {
 
     if (data.length > 0) {
       return GestureDetector(
+        key: Key('${(widget.key as ValueKey).value}_gesture_detector'),
         onTap: () {
           _manageTap(widget.index, data);
         },
@@ -546,7 +550,7 @@ class KenBoxState extends State<KenBox> {
     var listOfRows = await _getBoxTexts(data, cols);
 
     return Column(
-      children: [widgetImg, Expanded(child: Column(children: listOfRows))],
+      children: [widgetImg, Column(children: listOfRows)],
     );
   }
 
@@ -609,15 +613,15 @@ class KenBoxState extends State<KenBox> {
     for (var col in cols) {
       if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
         String rowData = await _getBoxText(data, col);
-        final colWidget = Column(
-          children: [
-            Expanded(
-              child: Align(
+        final colWidget = SizedBox(
+          child: Column(
+            children: [
+              Align(
                 alignment: Alignment.center,
                 child: Text(rowData, style: widget.textStyle),
               ),
-            ),
-          ],
+            ],
+          ),
         );
 
         listOfRows.add(colWidget);

@@ -54,13 +54,16 @@ class KenLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     assert(data != null, 'Data must not be null');
-    List<Align> alignes = data!
+    List<Widget> alignes = data!
         .map(
-          (text) => Align(
-            alignment: align!,
-            child: Text(
-              text ?? '',
-              style: _getTextStile(),
+          (text) => Expanded(
+            flex: 1,
+            child: Align(
+              alignment: align!,
+              child: Text(
+                text ?? '',
+                style: _getTextStile(),
+              ),
             ),
           ),
         )
@@ -88,7 +91,7 @@ class KenLabel extends StatelessWidget {
         padding: padding,
         //color: widget.backColor,
         height: labelHeight,
-        width: width,
+        width: labelWidth,
         child: col,
       );
     } else {

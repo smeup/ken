@@ -204,7 +204,7 @@ class KenListBoxState extends State<KenListBox> {
 
   Widget _getSimpleList(List<Widget> cells) {
     var list = ListView.builder(
-      key: ObjectKey("_list_${widget.id}"),
+      key: Key('${(widget.key as ValueKey).value}_list'),
       controller: _scrollController,
       scrollDirection: widget.orientation!,
       physics: _executeBouncing
@@ -227,7 +227,7 @@ class KenListBoxState extends State<KenListBox> {
 
   Widget _getOrientedList(List<Widget> cells) {
     final list = ListView.builder(
-      key: ObjectKey("_list_${widget.id}"),
+      key: Key('${(widget.key as ValueKey).value}_list'),
       controller: _scrollController,
       scrollDirection: widget.orientation!,
       physics: _executeBouncing
@@ -364,6 +364,7 @@ class KenListBoxState extends State<KenListBox> {
         widget.formKey,
         i,
         widget,
+        key: Key('${(widget.key as ValueKey).value}_$i'),
         selectedRow: _selectedRow,
         onRefresh: widget.onRefresh,
         showLoader: widget.showLoader,
