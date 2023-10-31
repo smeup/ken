@@ -236,7 +236,7 @@ class KenInputPanel extends StatelessWidget {
       (event) {
         KenMessageBus.instance.fireEvent(
           InputPanelSubmittedEvent(
-            widgetId: widget.id!,
+            messageBusId: widget.id!,
             value: widget.data,
           ),
         );

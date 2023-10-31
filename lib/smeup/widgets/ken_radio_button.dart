@@ -93,7 +93,8 @@ class _KenRadioButtonState extends State<KenRadioButton> {
               groupValue: _selectedValue,
               onChanged: (dynamic value) {
                 KenMessageBus.instance.fireEvent(
-                  RadioButtonOnPressedEvent(widgetId: widget.id, value: value),
+                  RadioButtonOnPressedEvent(
+                      messageBusId: widget.id, value: value),
                 );
                 _selectedValue = value;
                 setState(() {});

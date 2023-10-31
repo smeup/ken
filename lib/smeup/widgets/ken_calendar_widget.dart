@@ -306,7 +306,7 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
                   });
                   KenMessageBus.instance.fireEvent(
                     CalendarOnMonthChangedEvent(
-                      widgetId: widget.id!,
+                      messageBusId: widget.id!,
                       focusedDay: focusedDay,
                     ),
                   );
@@ -468,7 +468,7 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
     widget.setDataLoad!(widget.id, true);
     KenMessageBus.instance.fireEvent(
       CalendarOnDaySelectedEvent(
-        widgetId: widget.id!,
+        messageBusId: widget.id!,
         selectedDay: selectedDay,
       ),
     );
@@ -511,7 +511,7 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
         //   data = sel['datarow'] != null ? sel['datarow'] : sel;
         // }
         KenMessageBus.instance.fireEvent(
-          CalendarOnClickEvent(widgetId: widget.id!, event: event),
+          CalendarOnClickEvent(messageBusId: widget.id!, event: event),
         );
       }
     } catch (e) {

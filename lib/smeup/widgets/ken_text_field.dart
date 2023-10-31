@@ -125,7 +125,7 @@ class KenTextFieldState extends State<KenTextField> {
             onChanged: (value) {
               KenMessageBus.instance.fireEvent(
                 TextFieldOnChangeEvent(
-                  widgetId: widget.id,
+                  messageBusId: widget.id,
                   value: value,
                 ),
               );
@@ -152,7 +152,7 @@ class KenTextFieldState extends State<KenTextField> {
             onSaved: (value) {
               KenMessageBus.instance.fireEvent(
                 TextFieldOnSavedEvent(
-                  widgetId: widget.id,
+                  messageBusId: widget.id,
                   value: value ?? '',
                 ),
               );

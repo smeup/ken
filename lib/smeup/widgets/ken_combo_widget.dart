@@ -82,7 +82,7 @@ class KenComboWidgetState extends State<KenComboWidget> {
             setState(() {
               _selectedValue = newValue;
               KenMessageBus.instance.fireEvent(
-                ComboOnChangeEvent(widgetId: widget.id!, value: newValue),
+                ComboOnChangeEvent(messageBusId: widget.id!, value: newValue),
               );
             });
           },

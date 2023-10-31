@@ -67,7 +67,7 @@ class KenSliderWidgetState extends State<KenSliderWidget> {
           _label = value.round().toString();
           KenMessageBus.instance.fireEvent(
             SliderOnChangeRealtimeEvent(
-              widgetId: widget.id,
+              messageBusId: widget.id,
               value: value,
             ),
           );
@@ -77,7 +77,7 @@ class KenSliderWidgetState extends State<KenSliderWidget> {
         onChangeEnd: (value) {
           KenMessageBus.instance.fireEvent(
             SliderOnChangedEvent(
-              widgetId: widget.id,
+              messageBusId: widget.id,
               value: value,
             ),
           );

@@ -173,7 +173,7 @@ class KenSpotLightState extends State<KenSpotLight> {
                           onFieldSubmitted();
                           KenMessageBus.instance
                               .fireEvent(SpotlightOnSubmitEvent(
-                            widgetId: widget.id!,
+                            messageBusId: widget.id!,
                             value: value,
                           ));
                         },
@@ -195,7 +195,7 @@ class KenSpotLightState extends State<KenSpotLight> {
                         onChanged: (value) {
                           KenMessageBus.instance.fireEvent(
                             SpotlightOnChangeEvent(
-                              widgetId: widget.id!,
+                              messageBusId: widget.id!,
                               value: value,
                             ),
                           );
@@ -225,7 +225,7 @@ class KenSpotLightState extends State<KenSpotLight> {
                         onSaved: (String? value) {
                           KenMessageBus.instance.fireEvent(
                             SpotlightOnSavedEvent(
-                              widgetId: widget.id!,
+                              messageBusId: widget.id!,
                               value: value,
                             ),
                           );
@@ -244,7 +244,7 @@ class KenSpotLightState extends State<KenSpotLight> {
                       setState(() {
                         KenMessageBus.instance.fireEvent(
                           SpotlightOnTapSetStateEvent(
-                            widgetId: widget.id!,
+                            messageBusId: widget.id!,
                             value: code,
                           ),
                         );
@@ -285,7 +285,7 @@ class KenSpotLightState extends State<KenSpotLight> {
 
                           KenMessageBus.instance.fireEvent(
                             SpotlightOnTapSelectedEvent(
-                              widgetId: widget.id!,
+                              messageBusId: widget.id!,
                               value: option,
                             ),
                           );

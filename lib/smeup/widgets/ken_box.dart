@@ -173,7 +173,7 @@ class KenBoxState extends State<KenBox> {
             },
             onDismissed: (direction) {
               KenMessageBus.instance.fireEvent(KenBoxOnDismissedEvent(
-                widgetId: widget.id!,
+                messageBusId: widget.id!,
                 direction: direction,
               ));
             },
@@ -200,7 +200,7 @@ class KenBoxState extends State<KenBox> {
           onChange: (Size size) {
             KenMessageBus.instance.fireEvent(
               KenBoxOnSizeChangeEvent(
-                widgetId: widget.id!,
+                messageBusId: widget.id!,
                 size: size,
               ),
             );
@@ -653,7 +653,7 @@ class KenBoxState extends State<KenBox> {
   void _manageTap(index, data) {
     KenMessageBus.instance.fireEvent(
       KenBoxOnItemTapEvent(
-        widgetId: widget.id!,
+        messageBusId: widget.id!,
         index: index,
         data: data,
         showSelection: widget.kenListBox.showSelection ?? false,

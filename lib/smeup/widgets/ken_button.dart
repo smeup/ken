@@ -133,7 +133,7 @@ class KenButton extends StatelessWidget {
 
   void handleTap() {
     KenMessageBus.instance.fireEvent(
-      ButtonOnPressedEvent(widgetId: id),
+      ButtonOnPressedEvent(messageBusId: id),
     );
   }
 

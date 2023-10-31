@@ -6,16 +6,16 @@ import '../../widgets/ken_calendar_widget.dart';
 import '../../widgets/ken_timepicker.dart';
 
 abstract class KenMessageBusEvent {
-  String widgetId;
+  String messageBusId;
 
-  KenMessageBusEvent({required this.widgetId});
+  KenMessageBusEvent({required this.messageBusId});
 }
 
 class TextFieldOnSavedEvent extends KenMessageBusEvent {
   String value;
 
   TextFieldOnSavedEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -24,7 +24,7 @@ class TextFieldOnChangeEvent extends KenMessageBusEvent {
   String value;
 
   TextFieldOnChangeEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -33,7 +33,7 @@ class TextAutocompleteOnTapSelectedEvent extends KenMessageBusEvent {
   dynamic value;
 
   TextAutocompleteOnTapSelectedEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -42,7 +42,7 @@ class TextAutocompleteOnTapSetStateEvent extends KenMessageBusEvent {
   String value;
 
   TextAutocompleteOnTapSetStateEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -51,7 +51,7 @@ class TextAutocompleteOnChange extends KenMessageBusEvent {
   String value;
 
   TextAutocompleteOnChange({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -60,26 +60,26 @@ class TextAutocompleteOnSaved extends KenMessageBusEvent {
   String value;
 
   TextAutocompleteOnSaved({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
 
 class ButtonOnPressedEvent extends KenMessageBusEvent {
-  ButtonOnPressedEvent({required super.widgetId});
+  ButtonOnPressedEvent({required super.messageBusId});
 }
 
 class InputPanelSubmittedEvent extends KenMessageBusEvent {
   List<SmeupInputPanelField>? value;
 
-  InputPanelSubmittedEvent({required super.widgetId, this.value});
+  InputPanelSubmittedEvent({required super.messageBusId, this.value});
 }
 
 class SpotlightOnTapSelectedEvent extends KenMessageBusEvent {
   dynamic value;
 
   SpotlightOnTapSelectedEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -88,7 +88,7 @@ class SpotlightOnSubmitEvent extends KenMessageBusEvent {
   String value;
 
   SpotlightOnSubmitEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -97,7 +97,7 @@ class SpotlightOnTapSetStateEvent extends KenMessageBusEvent {
   String value;
 
   SpotlightOnTapSetStateEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -106,7 +106,7 @@ class SpotlightOnSavedEvent extends KenMessageBusEvent {
   String? value;
 
   SpotlightOnSavedEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -115,7 +115,7 @@ class SpotlightOnChangeEvent extends KenMessageBusEvent {
   String? value;
 
   SpotlightOnChangeEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -124,7 +124,7 @@ class ComboOnChangeEvent extends KenMessageBusEvent {
   String? value;
 
   ComboOnChangeEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -133,7 +133,7 @@ class RadioButtonOnPressedEvent extends KenMessageBusEvent {
   dynamic value;
 
   RadioButtonOnPressedEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -142,7 +142,7 @@ class RadioButtonSelDataEvent extends KenMessageBusEvent {
   dynamic value;
 
   RadioButtonSelDataEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -153,7 +153,7 @@ class KenBoxOnItemTapEvent extends KenMessageBusEvent {
   bool showSelection;
 
   KenBoxOnItemTapEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.data,
     required this.index,
     required this.showSelection,
@@ -164,7 +164,7 @@ class KenBoxOnSizeChangeEvent extends KenMessageBusEvent {
   Size size;
 
   KenBoxOnSizeChangeEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.size,
   });
 }
@@ -173,7 +173,7 @@ class KenBoxOnDismissedEvent extends KenMessageBusEvent {
   DismissDirection direction;
 
   KenBoxOnDismissedEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.direction,
   });
 }
@@ -182,7 +182,7 @@ class SliderOnChangeRealtimeEvent extends KenMessageBusEvent {
   double value;
 
   SliderOnChangeRealtimeEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -191,7 +191,7 @@ class SliderOnChangedEvent extends KenMessageBusEvent {
   double value;
 
   SliderOnChangedEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -200,7 +200,7 @@ class TimePickerOnChangeEvent extends KenMessageBusEvent {
   KenTimePickerData data;
 
   TimePickerOnChangeEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.data,
   });
 }
@@ -209,7 +209,7 @@ class DashboardOnTapEvent extends KenMessageBusEvent {
   String value;
 
   DashboardOnTapEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -218,7 +218,7 @@ class SwitchOnChangeEvent extends KenMessageBusEvent {
   bool value;
 
   SwitchOnChangeEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.value,
   });
 }
@@ -227,7 +227,7 @@ class CalendarOnDaySelectedEvent extends KenMessageBusEvent {
   DateTime selectedDay;
 
   CalendarOnDaySelectedEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.selectedDay,
   });
 }
@@ -236,7 +236,7 @@ class CalendarOnMonthChangedEvent extends KenMessageBusEvent {
   DateTime focusedDay;
 
   CalendarOnMonthChangedEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.focusedDay,
   });
 }
@@ -245,7 +245,7 @@ class CalendarOnClickEvent extends KenMessageBusEvent {
   KenCalendarEventModel event;
 
   CalendarOnClickEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.event,
   });
 }
@@ -254,7 +254,7 @@ class CalendarUpdateEventsAndDataEvent extends KenMessageBusEvent {
   KenCalendarEventsAndData infos;
 
   CalendarUpdateEventsAndDataEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.infos,
   });
 }
@@ -263,7 +263,7 @@ class TreeNodeOnTapEvent extends KenMessageBusEvent {
   dynamic data;
 
   TreeNodeOnTapEvent({
-    required super.widgetId,
+    required super.messageBusId,
     required this.data,
   });
 }

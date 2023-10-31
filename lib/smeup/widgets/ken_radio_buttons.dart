@@ -95,7 +95,7 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
           .event<RadioButtonOnPressedEvent>(buttonId)
           .takeWhile((element) => context.mounted)
           .listen((event) {
-        event.widgetId = widget.id!;
+        event.messageBusId = widget.id!;
         KenMessageBus.instance.fireEvent(event);
       });
       final button = KenRadioButton(
@@ -163,7 +163,7 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
 
       KenMessageBus.instance.fireEvent(
         RadioButtonSelDataEvent(
-          widgetId: widget.id!,
+          messageBusId: widget.id!,
           value: _data,
         ),
       );

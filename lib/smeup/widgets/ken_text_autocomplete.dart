@@ -192,7 +192,7 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
                       onChanged: (value) {
                         KenMessageBus.instance.fireEvent(
                           TextAutocompleteOnChange(
-                            widgetId: widget.id!,
+                            messageBusId: widget.id!,
                             value: value,
                           ),
                         );
@@ -221,7 +221,7 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
                       onSaved: (value) {
                         KenMessageBus.instance.fireEvent(
                           TextAutocompleteOnSaved(
-                            widgetId: widget.id!,
+                            messageBusId: widget.id!,
                             value: value ?? '',
                           ),
                         );
@@ -241,7 +241,7 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
                       setState(() {
                         KenMessageBus.instance.fireEvent(
                           TextAutocompleteOnTapSetStateEvent(
-                            widgetId: widget.id!,
+                            messageBusId: widget.id!,
                             value: widget.code!,
                           ),
                         );
@@ -281,7 +281,7 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
                           onSelected(option);
                           KenMessageBus.instance.fireEvent(
                             TextAutocompleteOnTapSelectedEvent(
-                              widgetId: widget.id!,
+                              messageBusId: widget.id!,
                               value: option,
                             ),
                           );

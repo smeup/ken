@@ -37,7 +37,7 @@ class KenSwitchWidgetState extends State<KenSwitchWidget> {
         setState(() {
           _data = changedValue;
           KenMessageBus.instance.fireEvent(SwitchOnChangeEvent(
-            widgetId: widget.id!,
+            messageBusId: widget.id!,
             value: changedValue,
           ));
         });

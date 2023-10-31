@@ -116,7 +116,7 @@ class KenTimePickerButtonState extends State<KenTimePickerButton> {
                     _currentValue = date;
                     KenMessageBus.instance.fireEvent(
                       TimePickerOnChangeEvent(
-                        widgetId: widget.id!,
+                        messageBusId: widget.id!,
                         data: KenTimePickerData(
                           time: _currentValue,
                           formattedTime: _currentDisplay,

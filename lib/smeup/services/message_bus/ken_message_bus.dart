@@ -20,14 +20,16 @@ class KenMessageBus {
     _subject.add(event);
   }
 
-  Stream<T> event<T>(String widgetId) {
-    return events<T>([widgetId]);
+  Stream<T> event<T>(String messageBusId) {
+    return events<T>([messageBusId]);
   }
 
-  Stream<T> events<T>(List<String> widgetIds) {
+  Stream<T> events<T>(List<String> messageBusIds) {
     return _subject.stream
-      .where(
-        (KenMessageBusEvent event) => widgetIds.contains(event.widgetId),
-      ).whereType<T>();
+        .where(
+          (KenMessageBusEvent event) =>
+              messageBusIds.contains(event.messageBusId),
+        )
+        .whereType<T>();
   }
 }

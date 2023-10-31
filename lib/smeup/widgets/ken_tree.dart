@@ -124,7 +124,7 @@ class _KenTreeState extends State<KenTree> {
                 _treeViewController.copyWith(selectedKey: key);
             KenMessageBus.instance.fireEvent(
               TreeNodeOnTapEvent(
-                widgetId: widget.id!,
+                messageBusId: widget.id!,
                 data: _treeViewController.getNode(_selectedNode)!.data,
               ),
             );
