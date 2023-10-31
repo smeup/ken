@@ -520,6 +520,7 @@ class KenTextFieldDefaults {
   static const Color defaultBorderColor = kPrimary;
   static const double defaultBorderWidth = 2;
   static const double defaultBorderRadius = 8;
+  static const bool defaultReadOnly = false;
 
   // unsupported by json_theme
   static const String defaultLabel = '';

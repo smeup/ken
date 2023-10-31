@@ -47,6 +47,7 @@ class KenTextPassword extends StatefulWidget {
   final bool? showRules;
   final bool? showRulesIcon;
   final bool? checkRules;
+  final bool? readOnly;
 
   final Function? clientValidator;
 
@@ -87,6 +88,7 @@ class KenTextPassword extends StatefulWidget {
     this.checkRules = KenTextFieldPasswordDefaults.defaultCheckRules,
     this.clientValidator, // ?
     this.inputFormatters, // ?
+    this.readOnly = KenTextFieldDefaults.defaultReadOnly,
   });
 
   @override
@@ -144,33 +146,35 @@ class KenTextPasswordState extends State<KenTextPassword> {
                 child: Consumer<KenTextPasswordVisibilityNotifier>(
                   builder: (context, fieldmodel, child) {
                     return KenTextField(
-                        id: widget.id,
-                        label: widget.label,
-                        autoFocus: widget.autoFocus,
-                        backColor: widget.backColor,
-                        fontSize: widget.fontSize,
-                        fontBold: widget.fontBold,
-                        fontColor: widget.fontColor,
-                        captionBackColor: widget.captionBackColor,
-                        captionFontBold: widget.captionFontBold,
-                        captionFontColor: widget.captionFontColor,
-                        captionFontSize: widget.captionFontSize,
-                        borderColor: widget.borderColor,
-                        borderRadius: widget.borderRadius,
-                        borderWidth: widget.borderWidth,
-                        submitLabel: widget.submitLabel,
-                        height: widget.height,
-                        inputFormatters: widget.inputFormatters,
-                        padding: widget.padding,
-                        showSubmit: widget.showSubmit ?? false,
-                        showBorder: false,
-                        width: widget.width,
-                        underline: false,
-                        data: _data,
-                        clientValidator: widget.clientValidator,
-                        keyboard: fieldmodel.passwordVisible
-                            ? TextInputType.text
-                            : TextInputType.visiblePassword);
+                      id: widget.id,
+                      label: widget.label,
+                      autoFocus: widget.autoFocus,
+                      backColor: widget.backColor,
+                      fontSize: widget.fontSize,
+                      fontBold: widget.fontBold,
+                      fontColor: widget.fontColor,
+                      captionBackColor: widget.captionBackColor,
+                      captionFontBold: widget.captionFontBold,
+                      captionFontColor: widget.captionFontColor,
+                      captionFontSize: widget.captionFontSize,
+                      borderColor: widget.borderColor,
+                      borderRadius: widget.borderRadius,
+                      borderWidth: widget.borderWidth,
+                      submitLabel: widget.submitLabel,
+                      height: widget.height,
+                      inputFormatters: widget.inputFormatters,
+                      padding: widget.padding,
+                      showSubmit: widget.showSubmit ?? false,
+                      showBorder: false,
+                      width: widget.width,
+                      underline: false,
+                      data: _data,
+                      clientValidator: widget.clientValidator,
+                      keyboard: fieldmodel.passwordVisible
+                          ? TextInputType.text
+                          : TextInputType.visiblePassword,
+                      readOnly: widget.readOnly,
+                    );
                   },
                 ),
               ),

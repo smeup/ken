@@ -37,6 +37,7 @@ class KenTextField extends StatefulWidget {
 
   final TextInputType? keyboard;
   final Function? clientValidator;
+  final bool? readOnly;
 
   final List<TextInputFormatter>? inputFormatters;
 
@@ -70,6 +71,7 @@ class KenTextField extends StatefulWidget {
     this.clientValidator, // ?
     this.inputFormatters, // ?
     this.submitButton,
+    this.readOnly = KenTextFieldDefaults.defaultReadOnly,
   });
 
   @override
@@ -120,6 +122,7 @@ class KenTextFieldState extends State<KenTextField> {
             enableSuggestions: true,
             validator: widget.clientValidator as String? Function(String?)?,
             keyboardType: widget.keyboard,
+            readOnly: widget.readOnly ?? KenTextFieldDefaults.defaultReadOnly,
             obscureText:
                 widget.keyboard == TextInputType.visiblePassword ? true : false,
             onChanged: (value) {
