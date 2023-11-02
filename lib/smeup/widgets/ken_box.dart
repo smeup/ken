@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../services/ken_configuration_service.dart';
 import '../services/ken_localization_service.dart';
 
+import '../services/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_not_available.dart';
@@ -653,7 +654,8 @@ class KenBoxState extends State<KenBox> {
   void _manageTap(index, data) {
     KenMessageBus.instance.fireEvent(
       KenBoxOnItemTapEvent(
-        messageBusId: widget.id!,
+        messageBusId:
+            KenUtilities.getMessageBusId(widget.id!, widget.scaffoldKey),
         index: index,
         data: data,
         showSelection: widget.kenListBox.showSelection ?? false,

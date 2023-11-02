@@ -2,6 +2,8 @@
 
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 import '../models/ken_device_info.dart';
 
 class KenUtilities {
@@ -35,5 +37,11 @@ class KenUtilities {
         padding, physicalHeight, physicalWidth, safeHeight, safeWidth);
 
     return smeupDeviceInfo;
+  }
+
+  static String getMessageBusId(
+      String? shiroId, GlobalKey<ScaffoldState> scaffoldKey) {
+    String newId = '${scaffoldKey.hashCode}_shiroId';
+    return newId;
   }
 }
