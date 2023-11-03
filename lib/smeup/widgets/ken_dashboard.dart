@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/ken_defaults.dart';
+import '../services/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 
@@ -82,7 +83,9 @@ class KenDashboard extends StatelessWidget {
     final dashboard = GestureDetector(
       onTap: () {
         KenMessageBus.instance.fireEvent(
-          DashboardOnTapEvent(messageBusId: id!, value: _getValue(data)),
+          DashboardOnTapEvent(
+              messageBusId: KenUtilities.getMessageBusId(id!, scaffoldKey),
+              value: _getValue(data)),
         );
       },
       child: Container(

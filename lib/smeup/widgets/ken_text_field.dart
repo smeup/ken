@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../services/ken_defaults.dart';
+import '../services/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 
@@ -41,6 +42,9 @@ class KenTextField extends StatefulWidget {
 
   final List<TextInputFormatter>? inputFormatters;
 
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<FormState>? formKey;
+
   const KenTextField({
     super.key,
     this.id = '',
@@ -72,6 +76,8 @@ class KenTextField extends StatefulWidget {
     this.inputFormatters, // ?
     this.submitButton,
     this.readOnly = KenTextFieldDefaults.defaultReadOnly,
+    this.scaffoldKey,
+    this.formKey,
   });
 
   @override
@@ -128,7 +134,8 @@ class KenTextFieldState extends State<KenTextField> {
             onChanged: (value) {
               KenMessageBus.instance.fireEvent(
                 TextFieldOnChangeEvent(
-                  messageBusId: widget.id,
+                  messageBusId: KenUtilities.getMessageBusId(
+                      widget.id, widget.scaffoldKey),
                   value: value,
                 ),
               );
@@ -155,7 +162,8 @@ class KenTextFieldState extends State<KenTextField> {
             onSaved: (value) {
               KenMessageBus.instance.fireEvent(
                 TextFieldOnSavedEvent(
-                  messageBusId: widget.id,
+                  messageBusId: KenUtilities.getMessageBusId(
+                      widget.id, widget.scaffoldKey),
                   value: value ?? '',
                 ),
               );

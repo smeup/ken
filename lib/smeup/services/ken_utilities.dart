@@ -40,8 +40,9 @@ class KenUtilities {
   }
 
   static String getMessageBusId(
-      String? shiroId, GlobalKey<ScaffoldState> scaffoldKey) {
-    String newId = '${scaffoldKey.hashCode}_shiroId';
-    return newId;
+      String? shiroId, GlobalKey<ScaffoldState>? scaffoldKey) {
+    String? newId =
+        scaffoldKey != null ? '${scaffoldKey.hashCode}_$shiroId' : shiroId;
+    return newId ?? '';
   }
 }

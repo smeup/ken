@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../services/ken_defaults.dart';
+import '../services/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_buttons.dart';
@@ -173,7 +174,8 @@ class KenSpotLightState extends State<KenSpotLight> {
                           onFieldSubmitted();
                           KenMessageBus.instance
                               .fireEvent(SpotlightOnSubmitEvent(
-                            messageBusId: widget.id!,
+                            messageBusId: KenUtilities.getMessageBusId(
+                                widget.id!, widget.scaffoldKey),
                             value: value,
                           ));
                         },
@@ -195,7 +197,8 @@ class KenSpotLightState extends State<KenSpotLight> {
                         onChanged: (value) {
                           KenMessageBus.instance.fireEvent(
                             SpotlightOnChangeEvent(
-                              messageBusId: widget.id!,
+                              messageBusId: KenUtilities.getMessageBusId(
+                                  widget.id!, widget.scaffoldKey),
                               value: value,
                             ),
                           );
@@ -225,7 +228,8 @@ class KenSpotLightState extends State<KenSpotLight> {
                         onSaved: (String? value) {
                           KenMessageBus.instance.fireEvent(
                             SpotlightOnSavedEvent(
-                              messageBusId: widget.id!,
+                              messageBusId: KenUtilities.getMessageBusId(
+                                  widget.id!, widget.scaffoldKey),
                               value: value,
                             ),
                           );
@@ -244,7 +248,8 @@ class KenSpotLightState extends State<KenSpotLight> {
                       setState(() {
                         KenMessageBus.instance.fireEvent(
                           SpotlightOnTapSetStateEvent(
-                            messageBusId: widget.id!,
+                            messageBusId: KenUtilities.getMessageBusId(
+                                widget.id!, widget.scaffoldKey),
                             value: code,
                           ),
                         );
@@ -285,7 +290,8 @@ class KenSpotLightState extends State<KenSpotLight> {
 
                           KenMessageBus.instance.fireEvent(
                             SpotlightOnTapSelectedEvent(
-                              messageBusId: widget.id!,
+                              messageBusId: KenUtilities.getMessageBusId(
+                                  widget.id!, widget.scaffoldKey),
                               value: option,
                             ),
                           );

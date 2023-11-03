@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import '../models/notifiers/ken_text_password_rule_notifier.dart';
 import '../models/notifiers/ken_text_password_visibility_notifier.dart';
 import '../services/ken_defaults.dart';
+import '../services/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_text_field.dart';
@@ -53,6 +54,9 @@ class KenTextPassword extends StatefulWidget {
 
   final List<TextInputFormatter>? inputFormatters;
 
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<FormState>? formKey;
+
   const KenTextPassword({
     super.key,
     required this.id,
@@ -89,6 +93,8 @@ class KenTextPassword extends StatefulWidget {
     this.clientValidator, // ?
     this.inputFormatters, // ?
     this.readOnly = KenTextFieldDefaults.defaultReadOnly,
+    this.scaffoldKey,
+    this.formKey,
   });
 
   @override
@@ -123,8 +129,10 @@ class KenTextPasswordState extends State<KenTextPassword> {
     final dividerStyle = _getDividerStyle();
     final captionStyle = _getCaptionStile();
 
-    changeSubscription =
-        KenMessageBus.instance.event<TextFieldOnChangeEvent>(widget.id).listen(
+    changeSubscription = KenMessageBus.instance
+        .event<TextFieldOnChangeEvent>(
+            KenUtilities.getMessageBusId(widget.id, widget.scaffoldKey))
+        .listen(
       (event) {
         passwordModel.checkProgress(event.value);
         _data = event.value;
@@ -174,6 +182,8 @@ class KenTextPasswordState extends State<KenTextPassword> {
                           ? TextInputType.text
                           : TextInputType.visiblePassword,
                       readOnly: widget.readOnly,
+                      scaffoldKey: widget.scaffoldKey,
+                      formKey: widget.formKey,
                     );
                   },
                 ),

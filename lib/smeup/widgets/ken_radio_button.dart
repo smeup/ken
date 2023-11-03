@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import '../services/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 
 import '../services/ken_defaults.dart';
@@ -32,6 +33,8 @@ class KenRadioButton extends StatefulWidget {
   final String? title;
   late List<KenRadioButton>? others;
   late Function changeState;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<FormState>? formKey;
 
   KenRadioButton({
     super.key,
@@ -57,6 +60,8 @@ class KenRadioButton extends StatefulWidget {
     this.selectedValue,
     this.icon,
     this.others,
+    this.scaffoldKey,
+    this.formKey,
   });
 
   @override
@@ -92,10 +97,6 @@ class _KenRadioButtonState extends State<KenRadioButton> {
               value: widget.data!['code'],
               groupValue: _selectedValue,
               onChanged: (dynamic value) {
-                KenMessageBus.instance.fireEvent(
-                  RadioButtonOnPressedEvent(
-                      messageBusId: widget.id, value: value),
-                );
                 _selectedValue = value;
                 setState(() {});
                 if (widget.others != null) {
@@ -103,6 +104,12 @@ class _KenRadioButtonState extends State<KenRadioButton> {
                     element.changeState(value);
                   }
                 }
+                KenMessageBus.instance.fireEvent(
+                  RadioButtonOnPressedEvent(
+                      messageBusId: KenUtilities.getMessageBusId(
+                          widget.id, widget.scaffoldKey),
+                      value: value),
+                );
               },
               activeColor: widget.fontColor,
             ),

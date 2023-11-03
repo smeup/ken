@@ -174,7 +174,8 @@ class KenBoxState extends State<KenBox> {
             },
             onDismissed: (direction) {
               KenMessageBus.instance.fireEvent(KenBoxOnDismissedEvent(
-                messageBusId: widget.id!,
+                messageBusId: KenUtilities.getMessageBusId(
+                    widget.id!, widget.scaffoldKey),
                 direction: direction,
               ));
             },
@@ -201,7 +202,8 @@ class KenBoxState extends State<KenBox> {
           onChange: (Size size) {
             KenMessageBus.instance.fireEvent(
               KenBoxOnSizeChangeEvent(
-                messageBusId: widget.id!,
+                messageBusId: KenUtilities.getMessageBusId(
+                    widget.id!, widget.scaffoldKey),
                 size: size,
               ),
             );

@@ -5,6 +5,7 @@ import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
 import 'package:intl/intl.dart';
 
 import '../services/ken_defaults.dart';
+import '../services/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_timepicker.dart';
@@ -116,7 +117,8 @@ class KenTimePickerButtonState extends State<KenTimePickerButton> {
                     _currentValue = date;
                     KenMessageBus.instance.fireEvent(
                       TimePickerOnChangeEvent(
-                        messageBusId: widget.id!,
+                        messageBusId: KenUtilities.getMessageBusId(
+                            widget.id!, widget.scaffoldKey),
                         data: KenTimePickerData(
                           time: _currentValue,
                           formattedTime: _currentDisplay,

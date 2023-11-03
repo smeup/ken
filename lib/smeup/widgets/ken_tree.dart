@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 
+import '../services/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 
@@ -26,6 +27,8 @@ class KenTree extends StatefulWidget {
   final double? parentHeight;
   final bool? expanded;
   final FontWeight? defaultParentFontweight;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<FormState>? formKey;
 
   const KenTree({
     super.key,
@@ -49,6 +52,8 @@ class KenTree extends StatefulWidget {
     this.parentHeight = KenTreeDefaults.defaultParentHeight,
     this.expanded = KenTreeDefaults.defaultExpanded,
     this.defaultParentFontweight = KenTreeDefaults.defaultParentFontweight,
+    this.scaffoldKey,
+    this.formKey,
   });
 
   @override
@@ -124,7 +129,8 @@ class _KenTreeState extends State<KenTree> {
                 _treeViewController.copyWith(selectedKey: key);
             KenMessageBus.instance.fireEvent(
               TreeNodeOnTapEvent(
-                messageBusId: widget.id!,
+                messageBusId: KenUtilities.getMessageBusId(
+                    widget.id!, widget.scaffoldKey),
                 data: _treeViewController.getNode(_selectedNode)!.data,
               ),
             );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/ken_configuration_service.dart';
+import '../services/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 
@@ -10,8 +11,18 @@ class KenSwitchWidget extends StatefulWidget {
   final bool? data;
   final String? id;
 
-  const KenSwitchWidget(
-      {super.key, this.data, this.id, this.thumbColor, this.trackColor});
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<FormState>? formKey;
+
+  const KenSwitchWidget({
+    super.key,
+    this.data,
+    this.id,
+    this.thumbColor,
+    this.trackColor,
+    this.scaffoldKey,
+    this.formKey,
+  });
 
   @override
   KenSwitchWidgetState createState() => KenSwitchWidgetState();
@@ -37,7 +48,8 @@ class KenSwitchWidgetState extends State<KenSwitchWidget> {
         setState(() {
           _data = changedValue;
           KenMessageBus.instance.fireEvent(SwitchOnChangeEvent(
-            messageBusId: widget.id!,
+            messageBusId:
+                KenUtilities.getMessageBusId(widget.id!, widget.scaffoldKey),
             value: changedValue,
           ));
         });

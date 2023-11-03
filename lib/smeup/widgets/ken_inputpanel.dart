@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/widgets/ken_combo_item_model.dart';
 import '../models/widgets/ken_input_panel_value.dart';
 import '../services/ken_defaults.dart';
+import '../services/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_button.dart';
@@ -27,19 +28,24 @@ class KenInputPanel extends StatelessWidget {
   final double confirmButtonRowHeight = 110;
   final bool? autoAdaptHeight = true;
   bool? isConfirmedEnabled = false;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<FormState>? formKey;
 
-  KenInputPanel(
-      {super.key,
-      this.id = '',
-      this.type = 'INP',
-      this.title = '',
-      this.padding = KenInputPanelDefaults.defaultPadding,
-      this.fontSize = KenInputPanelDefaults.defaultFontSize,
-      this.width = KenInputPanelDefaults.defaultWidth,
-      this.height = KenInputPanelDefaults.defaultHeight,
-      this.data,
-      this.backgroundColor,
-      this.isConfirmedEnabled});
+  KenInputPanel({
+    super.key,
+    this.id = '',
+    this.type = 'INP',
+    this.title = '',
+    this.padding = KenInputPanelDefaults.defaultPadding,
+    this.fontSize = KenInputPanelDefaults.defaultFontSize,
+    this.width = KenInputPanelDefaults.defaultWidth,
+    this.height = KenInputPanelDefaults.defaultHeight,
+    this.data,
+    this.backgroundColor,
+    this.isConfirmedEnabled,
+    this.scaffoldKey,
+    this.formKey,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -139,6 +145,8 @@ class KenInputPanel extends StatelessWidget {
             // clientOnChange: (value) {
             //   field.value.code = field.value.description = value;
             // },
+            scaffoldKey: scaffoldKey,
+            formKey: formKey,
           ),
         )
       ],
@@ -166,6 +174,8 @@ class KenInputPanel extends StatelessWidget {
           {"code": "3", "value": '> 11 people'},
         ],
         selectedValue: field.value.code,
+        scaffoldKey: scaffoldKey,
+        formKey: formKey,
       )
     ]);
   }
@@ -193,6 +203,8 @@ class KenInputPanel extends StatelessWidget {
           items: field.items!
               .map((e) => KenComboItemModel(e.code, e.description))
               .toList(),
+          scaffoldKey: scaffoldKey,
+          formKey: formKey,
         ),
       ],
     );
@@ -225,6 +237,8 @@ class KenInputPanel extends StatelessWidget {
           data: field.items!
               .map((e) => {"code": e.code, "value": e.description})
               .toList(),
+          scaffoldKey: scaffoldKey,
+          formKey: formKey,
         ),
       ],
     );
@@ -236,7 +250,7 @@ class KenInputPanel extends StatelessWidget {
       (event) {
         KenMessageBus.instance.fireEvent(
           InputPanelSubmittedEvent(
-            messageBusId: widget.id!,
+            messageBusId: KenUtilities.getMessageBusId(widget.id!, scaffoldKey),
             value: widget.data,
           ),
         );
@@ -252,6 +266,8 @@ class KenInputPanel extends StatelessWidget {
                 id: buttonId,
                 key: Key(buttonId),
                 data: "Conferma",
+                scaffoldKey: widget.scaffoldKey,
+                formKey: widget.formKey,
               ),
             ),
           ],

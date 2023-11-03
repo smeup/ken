@@ -47,34 +47,40 @@ class KenCalendar extends StatefulWidget {
 
   final Map<DateTime?, List<KenCalendarEventModel>>? events;
 
-  KenCalendar(
-      {super.key,
-      this.id = '',
-      this.type = 'CAL',
-      this.eventFontSize = KenCalendarDefaults.defaultEventFontSize,
-      this.titleFontSize = KenCalendarDefaults.defaultTitleFontSize,
-      this.dayFontSize = KenCalendarDefaults.defaultDayFontSize,
-      this.markerFontSize = KenCalendarDefaults.defaultMarkerFontSize,
-      this.initialFirstWork,
-      this.initialLastWork,
-      this.initialDate,
-      this.titleColumnName = KenCalendarDefaults.defaultTitleColumnName,
-      this.dataColumnName = KenCalendarDefaults.defaultDataColumnName,
-      this.initTimeColumnName = KenCalendarDefaults.defaultInitTimeColumnName,
-      this.endTimeColumnName = KenCalendarDefaults.defaultEndTimeColumnName,
-      this.styleColumnName = KenCalendarDefaults.defaultStyleColumnName,
-      title = '',
-      this.showPeriodButtons = KenCalendarDefaults.defaultShowPeriodButtons,
-      this.height = KenCalendarDefaults.defaultHeight,
-      this.width = KenCalendarDefaults.defaultWidth,
-      this.showAsWeek = KenCalendarDefaults.defaultShowAsWeek,
-      this.showNavigation = KenCalendarDefaults.defaultShowNavigation,
-      this.padding = KenCalendarDefaults.defaultPadding,
-      this.events,
-      this.data,
-      this.parentWidth,
-      this.parentHeight,
-      this.setDataLoad}) {
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<FormState>? formKey;
+
+  KenCalendar({
+    super.key,
+    this.id = '',
+    this.type = 'CAL',
+    this.eventFontSize = KenCalendarDefaults.defaultEventFontSize,
+    this.titleFontSize = KenCalendarDefaults.defaultTitleFontSize,
+    this.dayFontSize = KenCalendarDefaults.defaultDayFontSize,
+    this.markerFontSize = KenCalendarDefaults.defaultMarkerFontSize,
+    this.initialFirstWork,
+    this.initialLastWork,
+    this.initialDate,
+    this.titleColumnName = KenCalendarDefaults.defaultTitleColumnName,
+    this.dataColumnName = KenCalendarDefaults.defaultDataColumnName,
+    this.initTimeColumnName = KenCalendarDefaults.defaultInitTimeColumnName,
+    this.endTimeColumnName = KenCalendarDefaults.defaultEndTimeColumnName,
+    this.styleColumnName = KenCalendarDefaults.defaultStyleColumnName,
+    title = '',
+    this.showPeriodButtons = KenCalendarDefaults.defaultShowPeriodButtons,
+    this.height = KenCalendarDefaults.defaultHeight,
+    this.width = KenCalendarDefaults.defaultWidth,
+    this.showAsWeek = KenCalendarDefaults.defaultShowAsWeek,
+    this.showNavigation = KenCalendarDefaults.defaultShowNavigation,
+    this.padding = KenCalendarDefaults.defaultPadding,
+    this.events,
+    this.data,
+    this.parentWidth,
+    this.parentHeight,
+    this.setDataLoad,
+    this.scaffoldKey,
+    this.formKey,
+  }) {
     initialDate ??= DateTime.now();
 
     initialFirstWork ??= getInitialFirstWork(initialDate!);
@@ -127,7 +133,8 @@ class KenCalendarState extends State<KenCalendar> {
     _weekButtonId = '${widget.id}_weekButton';
 
     KenMessageBus.instance
-        .event<ButtonOnPressedEvent>(_monthButtonId)
+        .event<ButtonOnPressedEvent>(
+            KenUtilities.getMessageBusId(_monthButtonId, widget.scaffoldKey!))
         .takeWhile((element) => context.mounted)
         .listen(
       (event) {
@@ -137,7 +144,8 @@ class KenCalendarState extends State<KenCalendar> {
       },
     );
     KenMessageBus.instance
-        .event<ButtonOnPressedEvent>(_twoWeeksButtonId)
+        .event<ButtonOnPressedEvent>(KenUtilities.getMessageBusId(
+            _twoWeeksButtonId, widget.scaffoldKey!))
         .takeWhile((element) => context.mounted)
         .listen(
       (event) {
@@ -147,7 +155,8 @@ class KenCalendarState extends State<KenCalendar> {
       },
     );
     KenMessageBus.instance
-        .event<ButtonOnPressedEvent>(_weekButtonId)
+        .event<ButtonOnPressedEvent>(
+            KenUtilities.getMessageBusId(_weekButtonId, widget.scaffoldKey!))
         .takeWhile((element) => context.mounted)
         .listen(
       (event) {
@@ -212,6 +221,8 @@ class KenCalendarState extends State<KenCalendar> {
             styleColumnName: widget.styleColumnName,
             titleColumnName: widget.titleColumnName,
             showPeriodButtons: widget.showPeriodButtons,
+            scaffoldKey: widget.scaffoldKey,
+            formKey: widget.formKey,
             //globallyUniqueId: widget.globallyUniqueId,
           ),
         ],
@@ -236,6 +247,8 @@ class KenCalendarState extends State<KenCalendar> {
             width: buttonWidth,
             align: Alignment.center,
             key: Key(_monthButtonId),
+            scaffoldKey: widget.scaffoldKey,
+            formKey: widget.formKey,
           ),
           KenButton(
             id: _twoWeeksButtonId,
@@ -243,6 +256,8 @@ class KenCalendarState extends State<KenCalendar> {
             width: buttonWidth,
             align: Alignment.center,
             key: Key(_twoWeeksButtonId),
+            scaffoldKey: widget.scaffoldKey,
+            formKey: widget.formKey,
           ),
           KenButton(
             id: _weekButtonId,
@@ -250,6 +265,8 @@ class KenCalendarState extends State<KenCalendar> {
             width: buttonWidth,
             align: Alignment.center,
             key: Key(_weekButtonId),
+            scaffoldKey: widget.scaffoldKey,
+            formKey: widget.formKey,
           ),
         ],
       ),

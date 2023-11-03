@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as datepicker;
 import 'package:intl/intl.dart';
+import '../services/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_timepicker.dart';
@@ -35,6 +36,9 @@ class KenDatePickerButton extends StatefulWidget {
   final ButtonStyle buttonStyle;
   final TextStyle textStyle;
 
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<FormState>? formKey;
+
   const KenDatePickerButton(
     this.id,
     this.buttonStyle,
@@ -62,6 +66,8 @@ class KenDatePickerButton extends StatefulWidget {
     this.padding,
     this.showborder,
     this.dashColor,
+    this.scaffoldKey,
+    this.formKey,
   });
 
   @override
@@ -105,7 +111,8 @@ class KenDatePickerButtonState extends State<KenDatePickerButton> {
                   _currentValue = date;
                   KenMessageBus.instance.fireEvent(
                     TimePickerOnChangeEvent(
-                      messageBusId: widget.id!,
+                      messageBusId: KenUtilities.getMessageBusId(
+                          widget.id!, widget.scaffoldKey),
                       data: KenTimePickerData(
                         time: _currentValue,
                         formattedTime: _currentDisplay,

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
+import '../services/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_not_available.dart';
@@ -30,6 +31,8 @@ class KenRadioButtons extends StatefulWidget {
   final String? id;
   final String? type;
   final String? title;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<FormState>? formKey;
 
   const KenRadioButtons({
     super.key,
@@ -54,6 +57,8 @@ class KenRadioButtons extends StatefulWidget {
     this.displayedField = KenRadioButtonsDefaults.defaultDisplayedField,
     this.selectedValue,
     this.columns = KenRadioButtonsDefaults.defaultColumns,
+    this.scaffoldKey,
+    this.formKey,
   });
 
   @override
@@ -91,13 +96,14 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
     _data.forEach((radioButtonData) {
       buttonIndex += 1;
       final buttonId = '${widget.id}_${buttonIndex.toString()}';
-      KenMessageBus.instance
-          .event<RadioButtonOnPressedEvent>(buttonId)
-          .takeWhile((element) => context.mounted)
-          .listen((event) {
-        event.messageBusId = widget.id!;
-        KenMessageBus.instance.fireEvent(event);
-      });
+      // KenMessageBus.instance
+      //     .event<RadioButtonOnPressedEvent>(buttonId)
+      //     .takeWhile((element) => context.mounted)
+      //     .listen((event) {
+      //   event.messageBusId =
+      //       KenUtilities.getMessageBusId(widget.id!, widget.scaffoldKey);
+      //   KenMessageBus.instance.fireEvent(event);
+      // });
       final button = KenRadioButton(
         id: buttonId,
         type: widget.type,
@@ -115,6 +121,8 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
         radioButtonColor: widget.radioButtonColor,
         selectedValue: widget.selectedValue,
         icon: null, // così anche in originale
+        scaffoldKey: widget.scaffoldKey,
+        formKey: widget.formKey,
       );
       buttons.add(button);
     });
@@ -163,7 +171,8 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
 
       KenMessageBus.instance.fireEvent(
         RadioButtonSelDataEvent(
-          messageBusId: widget.id!,
+          messageBusId:
+              KenUtilities.getMessageBusId(widget.id!, widget.scaffoldKey),
           value: _data,
         ),
       );

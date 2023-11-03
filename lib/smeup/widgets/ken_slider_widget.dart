@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../services/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 
@@ -67,7 +68,8 @@ class KenSliderWidgetState extends State<KenSliderWidget> {
           _label = value.round().toString();
           KenMessageBus.instance.fireEvent(
             SliderOnChangeRealtimeEvent(
-              messageBusId: widget.id,
+              messageBusId:
+                  KenUtilities.getMessageBusId(widget.id, widget.scaffoldKey),
               value: value,
             ),
           );
@@ -77,7 +79,8 @@ class KenSliderWidgetState extends State<KenSliderWidget> {
         onChangeEnd: (value) {
           KenMessageBus.instance.fireEvent(
             SliderOnChangedEvent(
-              messageBusId: widget.id,
+              messageBusId:
+                  KenUtilities.getMessageBusId(widget.id, widget.scaffoldKey),
               value: value,
             ),
           );

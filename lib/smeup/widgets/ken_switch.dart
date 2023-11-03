@@ -25,6 +25,9 @@ class KenSwitch extends StatelessWidget {
   final double? parentWidth;
   final double? parentHeight;
 
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<FormState>? formKey;
+
   const KenSwitch({
     super.key,
     this.id = '',
@@ -43,6 +46,8 @@ class KenSwitch extends StatelessWidget {
     this.padding = KenSwitchDefaults.defaultPadding,
     this.parentHeight,
     this.parentWidth,
+    this.scaffoldKey,
+    this.formKey,
   });
 
   @override
@@ -87,6 +92,8 @@ class KenSwitch extends StatelessWidget {
             trackColor: trackColor,
             data: data,
             id: id,
+            scaffoldKey: scaffoldKey,
+            formKey: formKey,
           ),
         ],
       ),

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/widgets/ken_combo_item_model.dart';
+import '../services/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 
@@ -19,26 +20,31 @@ class KenComboWidget extends StatefulWidget {
   final double? iconSize;
   final Color? iconColor;
   final Color? dropdownColor;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<FormState>? formKey;
 
   final String? selectedValue;
   final List<KenComboItemModel>? data;
 
-  const KenComboWidget(
-      {super.key,
-      this.id,
-      this.fontColor,
-      this.fontSize,
-      this.fontBold,
-      this.backColor,
-      this.captionFontBold,
-      this.captionFontSize,
-      this.captionFontColor,
-      this.captionBackColor,
-      this.iconSize,
-      this.iconColor,
-      this.selectedValue,
-      this.data,
-      this.dropdownColor});
+  const KenComboWidget({
+    super.key,
+    this.id,
+    this.fontColor,
+    this.fontSize,
+    this.fontBold,
+    this.backColor,
+    this.captionFontBold,
+    this.captionFontSize,
+    this.captionFontColor,
+    this.captionBackColor,
+    this.iconSize,
+    this.iconColor,
+    this.selectedValue,
+    this.data,
+    this.dropdownColor,
+    this.scaffoldKey,
+    this.formKey,
+  });
 
   @override
   KenComboWidgetState createState() => KenComboWidgetState();
@@ -82,7 +88,10 @@ class KenComboWidgetState extends State<KenComboWidget> {
             setState(() {
               _selectedValue = newValue;
               KenMessageBus.instance.fireEvent(
-                ComboOnChangeEvent(messageBusId: widget.id!, value: newValue),
+                ComboOnChangeEvent(
+                    messageBusId: KenUtilities.getMessageBusId(
+                        widget.id!, widget.scaffoldKey),
+                    value: newValue),
               );
             });
           },
