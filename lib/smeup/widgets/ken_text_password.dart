@@ -240,7 +240,12 @@ class KenTextPasswordState extends State<KenTextPassword> {
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: KenTextPasswordIndicators(
-                    widget.showRulesIcon, captionStyle, iconTheme),
+                  widget.showRulesIcon,
+                  captionStyle,
+                  iconTheme,
+                  key: Key(
+                      '${(widget.key as ValueKey).value}_password_indicators'),
+                ),
               )
           ],
         )

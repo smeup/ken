@@ -43,14 +43,19 @@ class KenTextPasswordIndicatorsState extends State<KenTextPasswordIndicators> {
         ),
       ));
 
+      int ind = 0;
       for (var rule in passwordModel.rules) {
+        ind++;
         final ruleWidget = KenTextPasswordRule(
-            rule['description'],
-            _getRuleColor(rule['isValid'] ?? false),
-            _getRuleIcon(rule['isValid'] ?? false),
-            widget.showRulesIcon,
-            widget.captionStyle,
-            widget.iconTheme);
+          rule['description'],
+          _getRuleColor(rule['isValid'] ?? false),
+          _getRuleIcon(rule['isValid'] ?? false),
+          widget.showRulesIcon,
+          widget.captionStyle,
+          widget.iconTheme,
+          key: Key(
+              '${(widget.key as ValueKey).value}_password_indicators_rule_$ind'),
+        );
         list.add(ruleWidget);
       }
     }
