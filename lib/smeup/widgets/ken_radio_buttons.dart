@@ -96,6 +96,8 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
     _data.forEach((radioButtonData) {
       buttonIndex += 1;
       final buttonId = '${widget.id}_${buttonIndex.toString()}';
+      final keyId =
+          '${(widget.key as ValueKey).value}_${buttonIndex.toString()}';
       // KenMessageBus.instance
       //     .event<RadioButtonOnPressedEvent>(buttonId)
       //     .takeWhile((element) => context.mounted)
@@ -123,6 +125,7 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
         icon: null, // così anche in originale
         scaffoldKey: widget.scaffoldKey,
         formKey: widget.formKey,
+        key: Key('${keyId}_radio_button'),
       );
       buttons.add(button);
     });

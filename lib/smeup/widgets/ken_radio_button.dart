@@ -94,6 +94,7 @@ class _KenRadioButtonState extends State<KenRadioButton> {
           Transform.scale(
             scale: 1.2,
             child: Radio(
+              key: Key('${(widget.key as ValueKey).value}_radio'),
               value: widget.data!['code'],
               groupValue: _selectedValue,
               onChanged: (dynamic value) {
