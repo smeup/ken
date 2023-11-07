@@ -49,6 +49,14 @@ class KenSliderState extends State<KenSlider> {
   @override
   void initState() {
     value = widget.value;
+
+    KenMessageBus.instance
+        .event<SliderOnChangedEvent>(widget.id!)
+        .takeWhile((element) => context.mounted)
+        .listen((event) {
+      value = event.value;
+    });
+
     super.initState();
   }
 
@@ -59,12 +67,6 @@ class KenSliderState extends State<KenSlider> {
 
   @override
   Widget build(BuildContext context) {
-    KenMessageBus.instance
-        .event<SliderOnChangedEvent>(widget.id!)
-        .takeWhile((element) => context.mounted)
-        .listen((event) {
-      value = event.value;
-    });
     final children = Center(
       child: Container(
         padding: const EdgeInsets.only(left: 10, right: 10),
