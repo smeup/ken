@@ -51,7 +51,7 @@ class KenTextAutocomplete extends StatefulWidget {
   final TextInputType? keyboard;
   final List<TextInputFormatter>? inputFormatters;
 
-  final String? code;
+  final String code;
 
   const KenTextAutocomplete({
     super.key,
@@ -86,7 +86,7 @@ class KenTextAutocomplete extends StatefulWidget {
     this.defaultValue,
     this.valueField,
     this.submitButton,
-    this.code,
+    this.code = '',
     this.title,
     this.smeupButtons,
     this.scaffoldKey,
@@ -151,7 +151,13 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
               TextEditingController textEditingController,
               FocusNode focusNode,
               VoidCallback onFieldSubmitted) {
-            if ((widget.code?.isNotEmpty ?? false) && _data != null) {
+            KenMessageBus.instance.fireEvent(
+              TextAutocompleteOnFieldViewBuilder(
+                  messageBusId: KenUtilities.getMessageBusId(
+                      widget.id!, widget.scaffoldKey)),
+            );
+
+            if ((widget.code.isNotEmpty) && _data != null) {
               var currel = _data.firstWhere(
                 (element) => element['code'].toString() == widget.code,
                 //orElse: () => null as Map<String, String?>
@@ -239,6 +245,7 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
                 Container(
                   padding: const EdgeInsets.all(6),
                   child: GestureDetector(
+                    key: Key('${(widget.key as ValueKey).value}_icon_close'),
                     child: Icon(
                       Icons.close,
                       color: widget.iconColor,
@@ -250,7 +257,7 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
                           TextAutocompleteOnTapSetStateEvent(
                             messageBusId: KenUtilities.getMessageBusId(
                                 widget.id!, widget.scaffoldKey),
-                            value: widget.code!,
+                            value: widget.code,
                           ),
                         );
                       });
@@ -285,6 +292,8 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
                       final Map<dynamic, dynamic> option =
                           options.elementAt(index);
                       return GestureDetector(
+                        key: Key(
+                            '${(widget.key as ValueKey).value}_${index}_gesture_detector'),
                         onTap: () {
                           onSelected(option);
                           KenMessageBus.instance.fireEvent(
