@@ -141,6 +141,7 @@ class KenInputPanel extends StatelessWidget {
           height: 30,
           child: KenTextField(
             id: field.id!,
+            key: Key('ken_${field.id}'),
             data: field.value.code,
             // clientOnChange: (value) {
             //   field.value.code = field.value.description = value;
@@ -165,6 +166,7 @@ class KenInputPanel extends StatelessWidget {
       _getLabel(field.label),
       KenRadioButtons(
         id: field.id,
+        key: Key('ken_${field.id}'),
         // title: field.label,
         backColor: Colors.transparent,
         data: const [
@@ -195,6 +197,7 @@ class KenInputPanel extends StatelessWidget {
         _getLabel(field.label),
         KenCombo(
           id: field.id,
+          key: Key('ken_${field.id}'),
           width: 0,
           underline: false,
           innerSpace: 0,
@@ -229,6 +232,7 @@ class KenInputPanel extends StatelessWidget {
       children: <Widget>[
         _getLabel(field.label),
         KenTextAutocomplete(
+          key: Key('ken_${field.id}'),
           id: field.id,
           valueField: "value",
           defaultValue: field.id,
