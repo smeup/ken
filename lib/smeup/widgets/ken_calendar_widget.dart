@@ -160,7 +160,7 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
             color: Colors.black,
             backgroundColor: Colors.transparent,
             fontWeight: FontWeight.bold);
-    // final iconTheme = KenConfigurationService.getTheme()!.iconTheme;
+    // final iconTheme = KenConfigurationManager.getTheme()!.iconTheme;
     final daysHeaderTextStyle = KenConfigurationManager.getTheme()!
         .textTheme
         .bodyText1!

@@ -36,7 +36,7 @@ class KenConfigurationManager {
     KenConfigurationManager.jsonsPath = jsonsPath;
     KenConfigurationManager.imagesPath = imagesPath;
 
-    //if (KenConfigurationService.isLogEnabled) await KenLogService.setLogFile();
+    //if (KenConfigurationManager.isLogEnabled) await KenLogService.setLogFile();
   }
 
   static ThemeData? getTheme() {

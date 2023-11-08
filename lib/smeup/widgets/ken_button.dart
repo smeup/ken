@@ -74,9 +74,9 @@ class KenButton extends StatelessWidget {
   }) {
     // Gestione del button link è preferibile con una icona e testo sottolineato
     // if (isLink) {
-    //   borderColor = KenConfigurationService.getTheme()!.scaffoldBackgroundColor;
+    //   borderColor = KenConfigurationManager.getTheme()!.scaffoldBackgroundColor;
     //   fontColor = backColor;
-    //   backColor = KenConfigurationService.getTheme()!.scaffoldBackgroundColor;
+    //   backColor = KenConfigurationManager.getTheme()!.scaffoldBackgroundColor;
     // }
   }
 
