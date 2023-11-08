@@ -33,23 +33,6 @@ Future<void> main() async {
       //runTests();
     });
   });
-
-  // testWidgets('Test dynamic contructor ', (WidgetTester tester) async {
-  //   await WidgetTestService.initTests();
-
-  //   final testWidget =
-  //       await WidgetTestService.getDynamicScreen('test_progress_indicator');
-
-  //   await tester.pumpWidget(testWidget).then((value) async {
-  //     try {
-  //       await tester.pumpAndSettle();
-  //     } catch (e) {
-  //       print(e);
-  //     }
-
-  //     runTests();
-  //   });
-  // });
 }
 
 runTests() {

@@ -57,19 +57,6 @@ Future<void> main() async {
       runTests();
     });
   });
-
-  // TODOA test failure
-  // testWidgets('Test dynamic contructor ', (WidgetTester tester) async {
-  //   await WidgetTestService.initTests();
-
-  //   final testWidget =
-  //       await WidgetTestService.getDynamicScreen('test_radio_button');
-
-  //   await tester.pumpWidget(testWidget).then((value) async {
-  //     await tester.pumpAndSettle();
-  //     runTests();
-  //   });
-  // });
 }
 
 runTests() {

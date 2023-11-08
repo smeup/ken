@@ -85,18 +85,6 @@ Future<void> main() async {
       runTests(tester);
     });
   });
-
-  // testWidgets('Test dynamic contructor ', (WidgetTester tester) async {
-  //   await WidgetTestService.initTests();
-
-  //   final testWidget =
-  //       await WidgetTestService.getDynamicScreen('test_textAutocomplete');
-
-  //   await tester.pumpWidget(testWidget).then((value) async {
-  //     await tester.pumpAndSettle();
-  //     runTests(tester);
-  //   });
-  // });
 }
 
 Future<void> runTests(WidgetTester tester) async {

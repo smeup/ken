@@ -69,26 +69,6 @@ Future<void> main() async {
       runTests();
     });
   });
-
-  // testWidgets('Test dynamic contructor ', (WidgetTester tester) async {
-  //   sleep(const Duration(seconds: 2));
-
-  //   await WidgetTestService.initTests();
-
-  //   final dynamicScreen =
-  //       await WidgetTestService.getDynamicScreen('test_carousel');
-
-  //   final screen = MultiProvider(providers: [
-  //     ChangeNotifierProvider.value(
-  //       value: SmeupCarouselIndicatorNotifier(),
-  //     ),
-  //   ], child: dynamicScreen);
-
-  //   await tester.pumpWidget(screen).then((value) async {
-  //     await tester.pumpAndSettle();
-  //     runTests();
-  //   });
-  // });
 }
 
 runTests() {

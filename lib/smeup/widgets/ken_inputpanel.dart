@@ -164,6 +164,7 @@ class KenInputPanel extends StatelessWidget {
         );
     return Column(children: <Widget>[
       _getLabel(field.label),
+      // TODO: fixed data ???
       KenRadioButtons(
         id: field.id,
         key: Key('ken_${field.id}'),

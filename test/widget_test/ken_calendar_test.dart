@@ -94,19 +94,6 @@ Future<void> main() async {
       runTests(tester);
     });
   });
-
-  // TODOA test failure
-  // testWidgets('Test dynamic contructor ', (WidgetTester tester) async {
-  //   await WidgetTestService.initTests();
-
-  //   final testWidget =
-  //       await WidgetTestService.getDynamicScreen('test_calendar');
-
-  //   await tester.pumpWidget(testWidget).then((value) async {
-  //     await tester.pumpAndSettle();
-  //     runTests(tester);
-  //   });
-  // });
 }
 
 runTests(WidgetTester tester) async {

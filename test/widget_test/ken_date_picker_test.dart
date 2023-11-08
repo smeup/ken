@@ -44,18 +44,6 @@ Future<void> main() async {
       runTests();
     });
   });
-
-  // testWidgets('Test dynamic contructor ', (WidgetTester tester) async {
-  //   await WidgetTestService.initTests();
-
-  //   final testWidget =
-  //       await WidgetTestService.getDynamicScreen(datePickerDynamicScreen);
-
-  //   await tester.pumpWidget(testWidget).then((value) async {
-  //     await tester.pumpAndSettle();
-  //     runTests();
-  //   });
-  // });
 }
 
 runTests() {

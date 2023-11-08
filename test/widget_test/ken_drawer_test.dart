@@ -18,18 +18,6 @@ Future<void> main() async {
       //runTests(tester);
     });
   });
-
-  // TODOA test failure
-  // testWidgets('Test dynamic contructor ', (WidgetTester tester) async {
-  //   await WidgetTestService.initTests();
-
-  //   final testWidget = await WidgetTestService.getDynamicScreen('test_drawer');
-
-  //   await tester.pumpWidget(testWidget).then((value) async {
-  //     await tester.pumpAndSettle();
-  //     runTests(tester);
-  //   });
-  // }, skip: true);
 }
 
 runTests(WidgetTester tester) async {
