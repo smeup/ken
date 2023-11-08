@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/ken_defaults.dart';
-import '../services/ken_utilities.dart';
+import '../helpers/ken_utilities.dart';
 import 'ken_switch_widget.dart';
 
 class KenSwitch extends StatelessWidget {

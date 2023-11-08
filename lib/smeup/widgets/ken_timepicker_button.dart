@@ -5,7 +5,7 @@ import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
 import 'package:intl/intl.dart';
 
 import '../services/ken_defaults.dart';
-import '../services/ken_utilities.dart';
+import '../helpers/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_timepicker.dart';

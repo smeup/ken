@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../models/widgets/ken_calendar_event_model.dart';
-import '../services/ken_configuration_service.dart';
+import '../managers/ken_configuration_manager.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../services/ken_utilities.dart';
+import '../helpers/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_line.dart';
@@ -153,7 +153,7 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
     _calendarFormat = widget.calendarFormat;
 
     double separatorHeight = 8.0;
-    final titleTextStyle = KenConfigurationService.getTheme()! // months builder
+    final titleTextStyle = KenConfigurationManager.getTheme()! // months builder
         .appBarTheme
         .titleTextStyle!
         .copyWith(
@@ -161,23 +161,23 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
             backgroundColor: Colors.transparent,
             fontWeight: FontWeight.bold);
     // final iconTheme = KenConfigurationService.getTheme()!.iconTheme;
-    final daysHeaderTextStyle = KenConfigurationService.getTheme()!
+    final daysHeaderTextStyle = KenConfigurationManager.getTheme()!
         .textTheme
         .bodyText1!
         .copyWith(
             color: Colors.black,
             backgroundColor: Colors.transparent,
             fontWeight: FontWeight.bold);
-    final dayTextStyle = KenConfigurationService.getTheme()!
+    final dayTextStyle = KenConfigurationManager.getTheme()!
         .textTheme
         .bodyText2!
         .copyWith(
             color: Colors.black,
             backgroundColor: const Color.fromARGB(
                 255, 166, 202, 207)); // background of the calendar
-    final markerStyle = KenConfigurationService.getTheme()!.textTheme.headline4;
+    final markerStyle = KenConfigurationManager.getTheme()!.textTheme.headline4;
 
-    final pc = KenConfigurationService.getTheme()!.primaryColor;
+    final pc = KenConfigurationManager.getTheme()!.primaryColor;
 
     return SingleChildScrollView(
       child: Container(
@@ -538,7 +538,7 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
   }
 
   Column _getListTileWidget(KenCalendarEventModel event) {
-    final title = KenConfigurationService.getTheme()!
+    final title = KenConfigurationManager.getTheme()!
         .textTheme
         .headline3!
         .copyWith(
@@ -547,7 +547,7 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
             fontSize: widget.eventFontSize,
             fontWeight: FontWeight.bold);
 
-    final description = KenConfigurationService.getTheme()!
+    final description = KenConfigurationManager.getTheme()!
         .textTheme
         .headline4!
         .copyWith(

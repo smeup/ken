@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../models/widgets/ken_calendar_event_model.dart';
-import '../services/ken_configuration_service.dart';
+import '../managers/ken_configuration_manager.dart';
 import '../services/ken_defaults.dart';
-import '../services/ken_localization_service.dart';
-import '../services/ken_utilities.dart';
+import '../managers/ken_localization_manager.dart';
+import '../helpers/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_button.dart';
@@ -209,7 +209,7 @@ class KenCalendarState extends State<KenCalendar> {
             lastWork: _lastWork,
             selectedDay: _selectedDay,
             padding: widget.padding,
-            holidays: KenConfigurationService.holidays,
+            holidays: KenConfigurationManager.holidays,
             showNavigation: widget.showNavigation,
             calendarFormat: _calendarFormat,
             data: _data,
@@ -243,7 +243,7 @@ class KenCalendarState extends State<KenCalendar> {
         children: <Widget>[
           KenButton(
             id: _monthButtonId,
-            data: KenLocalizationService.of(context)!.getLocalString('month'),
+            data: KenLocalizationManager.of(context)!.getLocalString('month'),
             width: buttonWidth,
             align: Alignment.center,
             key: Key(_monthButtonId),
@@ -252,7 +252,7 @@ class KenCalendarState extends State<KenCalendar> {
           ),
           KenButton(
             id: _twoWeeksButtonId,
-            data: KenLocalizationService.of(context)!.getLocalString('2weeks'),
+            data: KenLocalizationManager.of(context)!.getLocalString('2weeks'),
             width: buttonWidth,
             align: Alignment.center,
             key: Key(_twoWeeksButtonId),
@@ -261,7 +261,7 @@ class KenCalendarState extends State<KenCalendar> {
           ),
           KenButton(
             id: _weekButtonId,
-            data: KenLocalizationService.of(context)!.getLocalString('week'),
+            data: KenLocalizationManager.of(context)!.getLocalString('week'),
             width: buttonWidth,
             align: Alignment.center,
             key: Key(_weekButtonId),

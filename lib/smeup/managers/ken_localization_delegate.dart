@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'ken_localization_service.dart';
+import 'ken_localization_manager.dart';
 
 class KenLocalizationDelegate
-    extends LocalizationsDelegate<KenLocalizationService> {
+    extends LocalizationsDelegate<KenLocalizationManager> {
   const KenLocalizationDelegate();
 
   @override
@@ -12,11 +12,11 @@ class KenLocalizationDelegate
       ['en', 'it', 'fr'].contains(locale.languageCode);
 
   @override
-  Future<KenLocalizationService> load(Locale locale) {
+  Future<KenLocalizationManager> load(Locale locale) {
     // Returning a SynchronousFuture here because an async "load" operation
     // isn't needed to produce an instance of DemoLocalizations.
-    return SynchronousFuture<KenLocalizationService>(
-        KenLocalizationService(locale));
+    return SynchronousFuture<KenLocalizationManager>(
+        KenLocalizationManager(locale));
   }
 
   @override

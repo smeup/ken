@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../services/ken_configuration_service.dart';
-import '../services/ken_utilities.dart';
+import '../managers/ken_configuration_manager.dart';
+import '../helpers/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 
@@ -58,7 +58,7 @@ class KenSwitchWidgetState extends State<KenSwitchWidget> {
   }
 
   SwitchThemeData _getSwitchStile(bool data) {
-    SwitchThemeData style = KenConfigurationService.getTheme()!
+    SwitchThemeData style = KenConfigurationManager.getTheme()!
         .switchTheme
         .copyWith(
             thumbColor: MaterialStateProperty.all<Color?>(

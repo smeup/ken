@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import '../services/ken_utilities.dart';
+import '../helpers/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 
 import '../services/ken_defaults.dart';

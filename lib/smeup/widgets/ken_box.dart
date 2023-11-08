@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:clickable_list_wheel_view/measure_size.dart';
 import 'package:flutter/material.dart';
 
-import '../services/ken_configuration_service.dart';
-import '../services/ken_localization_service.dart';
+import '../managers/ken_configuration_manager.dart';
+import '../managers/ken_localization_manager.dart';
 
-import '../services/ken_utilities.dart';
+import '../helpers/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_not_available.dart';
@@ -149,21 +149,21 @@ class KenBoxState extends State<KenBox> {
                 context: context,
                 builder: (BuildContext context) {
                   return Theme(
-                    data: KenConfigurationService.getTheme()!,
+                    data: KenConfigurationManager.getTheme()!,
                     child: AlertDialog(
-                      title: Text(KenLocalizationService.of(context)!
+                      title: Text(KenLocalizationManager.of(context)!
                           .getLocalString('confirm')),
-                      content: Text(KenLocalizationService.of(context)!
+                      content: Text(KenLocalizationManager.of(context)!
                           .getLocalString(('areYouSureDelete'))),
                       actions: <Widget>[
                         ElevatedButton(
                           onPressed: () => Navigator.of(context).pop(true),
-                          child: Text(KenLocalizationService.of(context)!
+                          child: Text(KenLocalizationManager.of(context)!
                               .getLocalString('delete')),
                         ),
                         ElevatedButton(
                           onPressed: () => Navigator.of(context).pop(false),
-                          child: Text(KenLocalizationService.of(context)!
+                          child: Text(KenLocalizationManager.of(context)!
                               .getLocalString('cancel')),
                         ),
                       ],

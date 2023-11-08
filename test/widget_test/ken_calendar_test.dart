@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ken/smeup/services/ken_localization_delegate.dart';
+import 'package:ken/smeup/managers/ken_localization_delegate.dart';
 import 'package:ken/smeup/widgets/ken_calendar.dart';
 
 import 'widget_test_service.dart';

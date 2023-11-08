@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import '../models/notifiers/ken_text_password_rule_notifier.dart';
 import '../models/notifiers/ken_text_password_visibility_notifier.dart';
 import '../services/ken_defaults.dart';
-import '../services/ken_utilities.dart';
+import '../helpers/ken_utilities.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_text_field.dart';

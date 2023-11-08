@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import '../models/widgets/ken_combo_item_model.dart';
 import '../services/ken_defaults.dart';
-import '../services/ken_utilities.dart';
+import '../helpers/ken_utilities.dart';
 import 'ken_combo_widget.dart';
 import 'ken_line.dart';
 

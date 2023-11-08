@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../services/ken_configuration_service.dart';
+import '../managers/ken_configuration_manager.dart';
 import '../services/ken_defaults.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -40,7 +40,7 @@ class KenQRCodeReader extends StatelessWidget {
           gapless: false,
           version: 9,
           foregroundColor:
-              KenConfigurationService.getTheme()!.textTheme.bodyText2!.color,
+              KenConfigurationManager.getTheme()!.textTheme.bodyText2!.color,
         ),
       ),
     );

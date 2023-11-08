@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class KenConfigurationService {
+class KenConfigurationManager {
   static const double staticButtonRoundness = 0.0;
 
   static ThemeData? _theme;
@@ -25,21 +25,21 @@ class KenConfigurationService {
       String? imagesPath,
       ThemeData? theme,
       bool defaultAutoAdaptHeight = true}) async {
-    KenConfigurationService.holidays = holidays;
-    KenConfigurationService._theme = theme;
-    KenConfigurationService.isLogEnabled = isLogEnabled;
-    KenConfigurationService.defaultAutoAdaptHeight = defaultAutoAdaptHeight;
-    KenConfigurationService.appBarImage = appBarImage;
+    KenConfigurationManager.holidays = holidays;
+    KenConfigurationManager._theme = theme;
+    KenConfigurationManager.isLogEnabled = isLogEnabled;
+    KenConfigurationManager.defaultAutoAdaptHeight = defaultAutoAdaptHeight;
+    KenConfigurationManager.appBarImage = appBarImage;
 
-    KenConfigurationService.appDictionary = localizationService;
+    KenConfigurationManager.appDictionary = localizationService;
 
-    KenConfigurationService.jsonsPath = jsonsPath;
-    KenConfigurationService.imagesPath = imagesPath;
+    KenConfigurationManager.jsonsPath = jsonsPath;
+    KenConfigurationManager.imagesPath = imagesPath;
 
     //if (KenConfigurationService.isLogEnabled) await KenLogService.setLogFile();
   }
 
   static ThemeData? getTheme() {
-    return KenConfigurationService._theme;
+    return KenConfigurationManager._theme;
   }
 }

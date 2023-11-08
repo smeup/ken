@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class KenLocalizationService {
-  KenLocalizationService(this.locale);
+class KenLocalizationManager {
+  KenLocalizationManager(this.locale);
 
   final Locale locale;
 
-  static KenLocalizationService? of(BuildContext context) {
-    return Localizations.of<KenLocalizationService>(
-        context, KenLocalizationService);
+  static KenLocalizationManager? of(BuildContext context) {
+    return Localizations.of<KenLocalizationManager>(
+        context, KenLocalizationManager);
   }
 
   static final Map<String, Map<String, String>> _localizedValues = {

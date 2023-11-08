@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ken/smeup/services/ken_configuration_service.dart';
+import 'package:ken/smeup/managers/ken_configuration_manager.dart';
 import 'package:json_theme/json_theme.dart';
 
 class WidgetTestService {
@@ -19,11 +19,11 @@ class WidgetTestService {
 
     await setTheme('');
 
-    await KenConfigurationService.init(null,
+    await KenConfigurationManager.init(null,
         jsonsPath: 'assets/jsons', theme: _theme);
 
     expect(
-      KenConfigurationService.jsonsPath,
+      KenConfigurationManager.jsonsPath,
       'assets/jsons',
     );
   }
