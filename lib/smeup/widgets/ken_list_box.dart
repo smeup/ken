@@ -10,7 +10,6 @@ enum KenListType { simple, oriented, wheel }
 class KenListBox extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final GlobalKey<FormState>? formKey;
-  final dynamic parentForm;
 
   final Color? backColor;
   final Color? borderColor;
@@ -91,7 +90,6 @@ class KenListBox extends StatefulWidget {
       this.onGetBoxText,
       this.onGetButtons,
       this.onGetButtonsColumns,
-      this.parentForm,
       this.title,
       this.showLoader});
 
@@ -106,7 +104,6 @@ class KenListBoxState extends State<KenListBox> {
   int? _selectedRow = -1;
   final bool _executeBouncing = false;
   Orientation? _orientation;
-  Orientation? _oldOrientation;
   double? _availableSpace;
 
   @override
@@ -190,14 +187,6 @@ class KenListBoxState extends State<KenListBox> {
     }
 
     _runAutomaticScroll();
-
-    if (_oldOrientation != null &&
-        _oldOrientation != _orientation &&
-        widget.parentForm != null &&
-        widget.parentForm.currentFormReload != null) {
-      widget.parentForm.currentFormReload();
-    }
-    _oldOrientation = _orientation;
 
     return children;
   }
