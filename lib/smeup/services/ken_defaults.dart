@@ -527,7 +527,8 @@ class KenTextFieldDefaults {
   static const String defaultSubmitLabel = '';
   static const double defaultWidth = 100;
   static const double defaultHeight = double.maxFinite;
-  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(8);
+  static const EdgeInsetsGeometry defaultPadding =
+      EdgeInsets.only(left: 8, right: 8);
   static const bool defaultShowBorder = false;
   static const bool defaultAutoFocus = false;
   static const String defaultValueField = 'value';
@@ -558,7 +559,8 @@ class KenTextFieldPasswordDefaults {
   static const String defaultSubmitLabel = '';
   static const double defaultWidth = 100;
   static const double defaultHeight = 100;
-  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
+  static const EdgeInsetsGeometry defaultPadding =
+      EdgeInsets.only(left: 8, right: 8);
   static const bool defaultShowBorder = false;
   static const bool defaultAutoFocus = false;
   static const String defaultValueField = 'value';
