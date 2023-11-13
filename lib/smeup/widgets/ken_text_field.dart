@@ -103,71 +103,69 @@ class KenTextFieldState extends State<KenTextField> {
 
     Widget textField;
 
-    textField = Padding(
-      padding: widget.padding!,
-      child: Container(
-          alignment: Alignment.centerLeft,
-          decoration: widget.showBorder!
-              ? BoxDecoration(
-                  borderRadius: BorderRadius.circular(widget.borderRadius!),
-                  border: Border.all(
-                      color: widget.borderColor!, width: widget.borderWidth!))
-              : null,
-          child: TextFormField(
-            style: textStyle,
-            inputFormatters: widget.inputFormatters,
-            autofocus: widget.autoFocus!,
-            maxLines: 1,
-            initialValue: _data,
-            key: Key('${widget.id}_text'),
-            autocorrect: false,
-            textCapitalization: TextCapitalization.none,
-            textInputAction: TextInputAction.next,
-            enableSuggestions: true,
-            validator: widget.clientValidator as String? Function(String?)?,
-            keyboardType: widget.keyboard,
-            readOnly: widget.readOnly ?? KenTextFieldDefaults.defaultReadOnly,
-            obscureText:
-                widget.keyboard == TextInputType.visiblePassword ? true : false,
-            onChanged: (value) {
-              KenMessageBus.instance.fireEvent(
-                TextFieldOnChangeEvent(
-                  messageBusId: KenUtilities.getMessageBusId(
-                      widget.id, widget.scaffoldKey),
-                  value: value,
-                ),
-              );
-            },
-            decoration: InputDecoration(
-              labelStyle: captionStyle,
-              labelText: widget.label,
-              // errorBorder: UnderlineInputBorder(
-              //   borderSide: BorderSide(color: Colors.transparent),
-              // ),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                    color: widget.underline!
-                        ? widget.borderColor!
-                        : Colors.transparent),
+    textField = Container(
+        padding: widget.padding!,
+        alignment: Alignment.centerLeft,
+        decoration: widget.showBorder!
+            ? BoxDecoration(
+                borderRadius: BorderRadius.circular(widget.borderRadius!),
+                border: Border.all(
+                    color: widget.borderColor!, width: widget.borderWidth!))
+            : null,
+        child: TextFormField(
+          style: textStyle,
+          inputFormatters: widget.inputFormatters,
+          autofocus: widget.autoFocus!,
+          maxLines: 1,
+          initialValue: _data,
+          key: Key('${widget.id}_text'),
+          autocorrect: false,
+          textCapitalization: TextCapitalization.none,
+          textInputAction: TextInputAction.next,
+          enableSuggestions: true,
+          validator: widget.clientValidator as String? Function(String?)?,
+          keyboardType: widget.keyboard,
+          readOnly: widget.readOnly ?? KenTextFieldDefaults.defaultReadOnly,
+          obscureText:
+              widget.keyboard == TextInputType.visiblePassword ? true : false,
+          onChanged: (value) {
+            KenMessageBus.instance.fireEvent(
+              TextFieldOnChangeEvent(
+                messageBusId:
+                    KenUtilities.getMessageBusId(widget.id, widget.scaffoldKey),
+                value: value,
               ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                    color: widget.underline!
-                        ? widget.borderColor!
-                        : Colors.transparent),
-              ),
+            );
+          },
+          decoration: InputDecoration(
+            labelStyle: captionStyle,
+            labelText: widget.label,
+            // errorBorder: UnderlineInputBorder(
+            //   borderSide: BorderSide(color: Colors.transparent),
+            // ),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: widget.underline!
+                      ? widget.borderColor!
+                      : Colors.transparent),
             ),
-            onSaved: (value) {
-              KenMessageBus.instance.fireEvent(
-                TextFieldOnSavedEvent(
-                  messageBusId: KenUtilities.getMessageBusId(
-                      widget.id, widget.scaffoldKey),
-                  value: value ?? '',
-                ),
-              );
-            },
-          )),
-    );
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: widget.underline!
+                      ? widget.borderColor!
+                      : Colors.transparent),
+            ),
+          ),
+          onSaved: (value) {
+            KenMessageBus.instance.fireEvent(
+              TextFieldOnSavedEvent(
+                messageBusId:
+                    KenUtilities.getMessageBusId(widget.id, widget.scaffoldKey),
+                value: value ?? '',
+              ),
+            );
+          },
+        ));
 
     if (widget.showSubmit) {
       Widget column;
