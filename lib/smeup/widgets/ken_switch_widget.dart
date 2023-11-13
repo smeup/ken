@@ -12,7 +12,6 @@ class KenSwitchWidget extends StatefulWidget {
   final String? id;
 
   final GlobalKey<ScaffoldState>? scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   const KenSwitchWidget({
     super.key,
@@ -21,7 +20,6 @@ class KenSwitchWidget extends StatefulWidget {
     this.thumbColor,
     this.trackColor,
     this.scaffoldKey,
-    this.formKey,
   });
 
   @override

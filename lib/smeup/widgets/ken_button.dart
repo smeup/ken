@@ -38,7 +38,6 @@ class KenButton extends StatelessWidget {
   final double? parentWidth;
   final double? parentHeight;
   final GlobalKey<ScaffoldState>? scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   KenButton({
     super.key,
@@ -70,7 +69,6 @@ class KenButton extends StatelessWidget {
     this.parentWidth,
     this.parentHeight,
     this.scaffoldKey,
-    this.formKey,
   }) {
     // Gestione del button link è preferibile con una icona e testo sottolineato
     // if (isLink) {

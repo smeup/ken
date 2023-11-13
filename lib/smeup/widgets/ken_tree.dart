@@ -28,7 +28,6 @@ class KenTree extends StatefulWidget {
   final bool? expanded;
   final FontWeight? defaultParentFontweight;
   final GlobalKey<ScaffoldState>? scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   const KenTree({
     super.key,
@@ -53,7 +52,6 @@ class KenTree extends StatefulWidget {
     this.expanded = KenTreeDefaults.defaultExpanded,
     this.defaultParentFontweight = KenTreeDefaults.defaultParentFontweight,
     this.scaffoldKey,
-    this.formKey,
   });
 
   @override

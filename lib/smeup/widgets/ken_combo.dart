@@ -41,7 +41,6 @@ class KenCombo extends StatelessWidget {
   final double? parentHeight;
   final double? parentWidth;
   final GlobalKey<ScaffoldState>? scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   const KenCombo({
     super.key,
@@ -77,7 +76,6 @@ class KenCombo extends StatelessWidget {
     this.parentWidth,
     this.parentHeight,
     this.scaffoldKey,
-    this.formKey,
   });
 
   @override
@@ -134,7 +132,6 @@ class KenCombo extends StatelessWidget {
             captionBackColor: captionBackColor,
             selectedValue: selectedValue,
             scaffoldKey: scaffoldKey,
-            formKey: formKey,
           )),
     );
 

@@ -14,7 +14,6 @@ import 'ken_list_box.dart';
 
 class KenBox extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState>? formKey;
   final Function? onRefresh;
   final Color? backColor;
   final Color? fontColor;
@@ -41,7 +40,7 @@ class KenBox extends StatefulWidget {
   final Function? onGetButtons;
   final Function? onGetButtonsColumns;
 
-  KenBox(this.scaffoldKey, this.formKey, this.index, this.kenListBox,
+  KenBox(this.scaffoldKey, this.index, this.kenListBox,
       {super.key,
       this.id,
       this.selectedRow,
@@ -92,7 +91,7 @@ class KenBoxState extends State<KenBox> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           //??? va gestito in shiro
           // return widget.showLoader!
-          //     ? SmeupWait(widget.scaffoldKey, widget.formKey)
+          //     ? SmeupWait(widget.scaffoldKey)
           //     : Container();
           return Container();
         } else {
@@ -411,7 +410,7 @@ class KenBoxState extends State<KenBox> {
                             ConnectionState.waiting) {
                           //??? va gestito in shiro
                           // return widget.showLoader!
-                          //     ? SmeupWait(widget.scaffoldKey, widget.formKey)
+                          //     ? SmeupWait(widget.scaffoldKey)
                           //     : Container();
                           return Container();
                         } else {
@@ -508,7 +507,7 @@ class KenBoxState extends State<KenBox> {
                             ConnectionState.waiting) {
                           //??? va gestito in shiro
                           // return widget.showLoader!
-                          //     ? SmeupWait(widget.scaffoldKey, widget.formKey)
+                          //     ? SmeupWait(widget.scaffoldKey)
                           //     : Container();
                           return Container();
                         } else {

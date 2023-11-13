@@ -45,7 +45,6 @@ class KenCalendarWidget extends StatefulWidget {
   final bool? showPeriodButtons;
   //final String? globallyUniqueId;
   final GlobalKey<ScaffoldState>? scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   const KenCalendarWidget({
     super.key,
@@ -75,7 +74,6 @@ class KenCalendarWidget extends StatefulWidget {
     this.showPeriodButtons,
     this.padding,
     this.scaffoldKey,
-    this.formKey,
     //this.globallyUniqueId,
   });
 

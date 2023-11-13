@@ -32,7 +32,6 @@ class KenRadioButtons extends StatefulWidget {
   final String? type;
   final String? title;
   final GlobalKey<ScaffoldState>? scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   const KenRadioButtons({
     super.key,
@@ -58,7 +57,6 @@ class KenRadioButtons extends StatefulWidget {
     this.selectedValue,
     this.columns = KenRadioButtonsDefaults.defaultColumns,
     this.scaffoldKey,
-    this.formKey,
   });
 
   @override
@@ -124,7 +122,6 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
         selectedValue: widget.selectedValue,
         icon: null, // così anche in originale
         scaffoldKey: widget.scaffoldKey,
-        formKey: widget.formKey,
         key: Key('${keyId}_radio_button'),
       );
       buttons.add(button);

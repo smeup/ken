@@ -55,7 +55,6 @@ class KenTextPassword extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
 
   final GlobalKey<ScaffoldState>? scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   const KenTextPassword({
     super.key,
@@ -94,7 +93,6 @@ class KenTextPassword extends StatefulWidget {
     this.inputFormatters, // ?
     this.readOnly = KenTextFieldDefaults.defaultReadOnly,
     this.scaffoldKey,
-    this.formKey,
   });
 
   @override
@@ -183,7 +181,6 @@ class KenTextPasswordState extends State<KenTextPassword> {
                           : TextInputType.visiblePassword,
                       readOnly: widget.readOnly,
                       scaffoldKey: widget.scaffoldKey,
-                      formKey: widget.formKey,
                     );
                   },
                 ),

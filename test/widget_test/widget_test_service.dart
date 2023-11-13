@@ -10,7 +10,7 @@ class WidgetTestService {
   static bool isInitialized = false;
   static ThemeData? _theme;
   static GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  static GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  static Key sectionKey = GlobalKey<FormState>();
 
   static initTests() async {
     if (isInitialized) return;

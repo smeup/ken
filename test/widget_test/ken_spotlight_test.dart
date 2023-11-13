@@ -22,7 +22,6 @@ Future<void> main() async {
                 children: [
                   KenSpotLight(
                     WidgetTestService.scaffoldKey,
-                    WidgetTestService.formKey,
                     label: 'description',
                     //padding: EdgeInsets.only(left: 10, right: 10),
                     key: const Key('autocomplete1'),

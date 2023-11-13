@@ -8,7 +8,6 @@ import 'ken_buttons.dart';
 
 class KenSpotLight extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   // graphic properties
   final Color? backColor;
@@ -50,7 +49,7 @@ class KenSpotLight extends StatefulWidget {
   final TextInputType? keyboard;
   final List<TextInputFormatter>? inputFormatters;
 
-  const KenSpotLight(this.scaffoldKey, this.formKey,
+  const KenSpotLight(this.scaffoldKey,
       {super.key,
       this.id = '',
       this.type = 'SPL',

@@ -6,7 +6,6 @@ enum ChartType { pie, bar }
 
 class KenChart extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   final String? id;
   final String? type;
@@ -19,7 +18,7 @@ class KenChart extends StatefulWidget {
 
   final KenChartDatasource? data;
 
-  const KenChart(this.scaffoldKey, this.formKey,
+  const KenChart(this.scaffoldKey,
       {super.key,
       this.id = '',
       this.type = 'CHA',

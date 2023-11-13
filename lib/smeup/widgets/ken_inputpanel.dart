@@ -29,7 +29,6 @@ class KenInputPanel extends StatelessWidget {
   final bool? autoAdaptHeight = true;
   bool? isConfirmedEnabled = false;
   final GlobalKey<ScaffoldState>? scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   KenInputPanel({
     super.key,
@@ -44,7 +43,6 @@ class KenInputPanel extends StatelessWidget {
     this.backgroundColor,
     this.isConfirmedEnabled,
     this.scaffoldKey,
-    this.formKey,
   });
 
   @override
@@ -147,7 +145,6 @@ class KenInputPanel extends StatelessWidget {
             //   field.value.code = field.value.description = value;
             // },
             scaffoldKey: scaffoldKey,
-            formKey: formKey,
           ),
         )
       ],
@@ -178,7 +175,6 @@ class KenInputPanel extends StatelessWidget {
         ],
         selectedValue: field.value.code,
         scaffoldKey: scaffoldKey,
-        formKey: formKey,
       )
     ]);
   }
@@ -208,7 +204,6 @@ class KenInputPanel extends StatelessWidget {
               .map((e) => KenComboItemModel(e.code, e.description))
               .toList(),
           scaffoldKey: scaffoldKey,
-          formKey: formKey,
         ),
       ],
     );
@@ -243,7 +238,6 @@ class KenInputPanel extends StatelessWidget {
               .map((e) => {"code": e.code, "value": e.description})
               .toList(),
           scaffoldKey: scaffoldKey,
-          formKey: formKey,
         ),
       ],
     );
@@ -272,7 +266,6 @@ class KenInputPanel extends StatelessWidget {
                 key: Key(buttonId),
                 data: "Conferma",
                 scaffoldKey: widget.scaffoldKey,
-                formKey: widget.formKey,
               ),
             ),
           ],

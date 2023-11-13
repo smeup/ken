@@ -9,7 +9,6 @@ import '../services/message_bus/ken_message_bus_event.dart';
 
 class KenDashboard extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   final double? fontSize;
   final Color? fontColor;
@@ -42,7 +41,6 @@ class KenDashboard extends StatelessWidget {
 
   const KenDashboard(
     this.scaffoldKey,
-    this.formKey,
     this.data, {
     super.key,
     this.id = '',

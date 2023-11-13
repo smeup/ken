@@ -22,7 +22,6 @@ Future<void> main() async {
                   children: [
                     KenDashboard(
                       WidgetTestService.scaffoldKey,
-                      WidgetTestService.formKey,
                       15.86,
                       text: 'Temperature',
                       fontSize: 60.0,

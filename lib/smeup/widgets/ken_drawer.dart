@@ -6,7 +6,6 @@ import 'ken_drawer_item.dart';
 
 class KenDrawer extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState> formKey;
 
   final double? titleFontSize;
   final Color? titleFontColor;
@@ -27,7 +26,7 @@ class KenDrawer extends StatefulWidget {
   final Color? drawerBackColor;
   final List<KenDrawerDataElement>? data;
 
-  const KenDrawer(this.scaffoldKey, this.formKey,
+  const KenDrawer(this.scaffoldKey,
       {super.key,
       this.id = '',
       this.type = 'DRW',
@@ -105,8 +104,8 @@ class KenDrawerState extends State<KenDrawer> {
 
     for (KenDrawerDataElement e in _data!) {
       if (e.group.isEmpty) {
-        list.add(KenDrawerItem(widget.scaffoldKey, widget.formKey, e.text,
-            e.route, e.itemIconData, e.action, e.align, false,
+        list.add(KenDrawerItem(widget.scaffoldKey, e.text, e.route,
+            e.itemIconData, e.action, e.align, false,
             fontSize: e.fontSize));
       } else {
         List<Widget>? listInGroup;
@@ -130,17 +129,10 @@ class KenDrawerState extends State<KenDrawer> {
         listInGroup = groups[e.group];
         listInGroup!.add(Padding(
           padding: const EdgeInsets.only(left: 60.0),
-          child: KenDrawerItem(
-              widget.scaffoldKey,
-              widget.formKey,
-              e.text,
-              e.route,
-              e.itemIconData,
-              e.action,
-              e.align,
-              widget.showItemDivider,
+          child: KenDrawerItem(widget.scaffoldKey, e.text, e.route,
+              e.itemIconData, e.action, e.align, widget.showItemDivider,
               fontSize: e.fontSize),
-          // SmeupDrawerItem(widget.scaffoldKey, widget.formKey, e.text,
+          // SmeupDrawerItem(widget.scaffoldKey, widget.sectionKey, e.text,
           //     e.route, e.iconCode, e.action, e.align, widget.showItemDivider,
           //     fontSize: e.fontSize),
         ));

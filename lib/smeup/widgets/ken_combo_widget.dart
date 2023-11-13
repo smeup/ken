@@ -21,7 +21,6 @@ class KenComboWidget extends StatefulWidget {
   final Color? iconColor;
   final Color? dropdownColor;
   final GlobalKey<ScaffoldState>? scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   final String? selectedValue;
   final List<KenComboItemModel>? data;
@@ -43,7 +42,6 @@ class KenComboWidget extends StatefulWidget {
     this.data,
     this.dropdownColor,
     this.scaffoldKey,
-    this.formKey,
   });
 
   @override

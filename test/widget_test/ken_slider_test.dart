@@ -21,7 +21,6 @@ Future<void> main() async {
                           children: [
                             KenSlider(
                               WidgetTestService.scaffoldKey,
-                              WidgetTestService.formKey,
                               id: 'sld1',
                               value: 20,
                             )

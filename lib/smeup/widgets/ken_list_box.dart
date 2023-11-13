@@ -9,7 +9,6 @@ enum KenListType { simple, oriented, wheel }
 
 class KenListBox extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   final Color? backColor;
   final Color? borderColor;
@@ -53,7 +52,7 @@ class KenListBox extends StatefulWidget {
   final Function? onGetButtons;
   final Function? onGetButtonsColumns;
 
-  const KenListBox(this.scaffoldKey, this.formKey, this.data,
+  const KenListBox(this.scaffoldKey, this.data,
       {super.key,
       this.id = '',
       this.type = 'BOX',
@@ -350,7 +349,6 @@ class KenListBoxState extends State<KenListBox> {
 
       final cell = KenBox(
         widget.scaffoldKey,
-        widget.formKey,
         i,
         widget,
         key: Key('${(widget.key as ValueKey).value}_$i'),

@@ -41,7 +41,6 @@ class KenTextAutocomplete extends StatefulWidget {
   final String? submitLabel;
   final KenButtons? smeupButtons;
   final GlobalKey<ScaffoldState>? scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   // other properties
   final Function? clientValidator;
@@ -90,7 +89,6 @@ class KenTextAutocomplete extends StatefulWidget {
     this.title,
     this.smeupButtons,
     this.scaffoldKey,
-    this.formKey,
   });
 
   @override

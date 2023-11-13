@@ -43,7 +43,6 @@ class KenTextField extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
 
   final GlobalKey<ScaffoldState>? scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   const KenTextField({
     super.key,
@@ -77,7 +76,6 @@ class KenTextField extends StatefulWidget {
     this.submitButton,
     this.readOnly = KenTextFieldDefaults.defaultReadOnly,
     this.scaffoldKey,
-    this.formKey,
   });
 
   @override

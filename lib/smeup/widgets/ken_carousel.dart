@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 
 class KenCarousel extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   final List<Map>? data;
   final String? id;
@@ -18,7 +17,7 @@ class KenCarousel extends StatelessWidget {
   final String? title;
   final Color? fontColor; // Add fontColor parameter
 
-  const KenCarousel(this.scaffoldKey, this.formKey, this.data,
+  const KenCarousel(this.scaffoldKey, this.data,
       {this.id = '',
       this.type = 'CAU',
       this.height = KenCarouselDefaults.defaultHeight,

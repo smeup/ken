@@ -48,7 +48,6 @@ class KenCalendar extends StatefulWidget {
   final Map<DateTime?, List<KenCalendarEventModel>>? events;
 
   final GlobalKey<ScaffoldState>? scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   KenCalendar({
     super.key,
@@ -79,7 +78,6 @@ class KenCalendar extends StatefulWidget {
     this.parentHeight,
     this.setDataLoad,
     this.scaffoldKey,
-    this.formKey,
   }) {
     initialDate ??= DateTime.now();
 
@@ -222,7 +220,6 @@ class KenCalendarState extends State<KenCalendar> {
             titleColumnName: widget.titleColumnName,
             showPeriodButtons: widget.showPeriodButtons,
             scaffoldKey: widget.scaffoldKey,
-            formKey: widget.formKey,
             //globallyUniqueId: widget.globallyUniqueId,
           ),
         ],
@@ -248,7 +245,6 @@ class KenCalendarState extends State<KenCalendar> {
             align: Alignment.center,
             key: Key(_monthButtonId),
             scaffoldKey: widget.scaffoldKey,
-            formKey: widget.formKey,
           ),
           KenButton(
             id: _twoWeeksButtonId,
@@ -257,7 +253,6 @@ class KenCalendarState extends State<KenCalendar> {
             align: Alignment.center,
             key: Key(_twoWeeksButtonId),
             scaffoldKey: widget.scaffoldKey,
-            formKey: widget.formKey,
           ),
           KenButton(
             id: _weekButtonId,
@@ -266,7 +261,6 @@ class KenCalendarState extends State<KenCalendar> {
             align: Alignment.center,
             key: Key(_weekButtonId),
             scaffoldKey: widget.scaffoldKey,
-            formKey: widget.formKey,
           ),
         ],
       ),

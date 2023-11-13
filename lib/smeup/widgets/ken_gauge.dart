@@ -5,7 +5,6 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class KenGauge extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   final String? id;
   final String? type;
@@ -23,7 +22,7 @@ class KenGauge extends StatefulWidget {
   final double? warning;
   final double? alert;
 
-  const KenGauge(this.scaffoldKey, this.formKey,
+  const KenGauge(this.scaffoldKey,
       {super.key,
       this.value = KenGaugeDefaults.defaultValue,
       this.maxValue = KenGaugeDefaults.defaultMaxValue,

@@ -6,7 +6,6 @@ import 'ken_slider_widget.dart';
 
 class KenSlider extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   final Color? activeTrackColor;
   final Color? thumbColor;
@@ -22,8 +21,7 @@ class KenSlider extends StatefulWidget {
   final String? label;
 
   const KenSlider(
-    this.scaffoldKey,
-    this.formKey, {
+    this.scaffoldKey, {
     super.key,
     this.activeTrackColor = KenSliderDefaults.defaultActiveTrackColor,
     this.thumbColor = KenSliderDefaults.defaultThumbColor,
@@ -72,7 +70,6 @@ class KenSliderState extends State<KenSlider> {
         padding: const EdgeInsets.only(left: 10, right: 10),
         child: KenSliderWidget(
           widget.scaffoldKey,
-          widget.formKey,
           id: widget.id!,
           activeTrackColor: widget.activeTrackColor,
           thumbColor: widget.thumbColor,

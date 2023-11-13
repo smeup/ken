@@ -20,9 +20,7 @@ Future<void> main() async {
                   child: Center(
                       child: Column(
                     children: [
-                      KenImage(
-                          WidgetTestService.scaffoldKey,
-                          WidgetTestService.formKey,
+                      KenImage(WidgetTestService.scaffoldKey,
                           '../../assets/images/IMG1.png',
                           key: const Key('img1'),
                           width: 300,

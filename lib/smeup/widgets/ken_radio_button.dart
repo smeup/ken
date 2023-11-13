@@ -34,7 +34,6 @@ class KenRadioButton extends StatefulWidget {
   late List<KenRadioButton>? others;
   late Function changeState;
   final GlobalKey<ScaffoldState>? scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   KenRadioButton({
     super.key,
@@ -61,7 +60,6 @@ class KenRadioButton extends StatefulWidget {
     this.icon,
     this.others,
     this.scaffoldKey,
-    this.formKey,
   });
 
   @override

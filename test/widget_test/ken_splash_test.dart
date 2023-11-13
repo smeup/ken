@@ -14,7 +14,6 @@ Future<void> main() async {
           appBar: AppBar(),
           body: KenSplash(
             WidgetTestService.scaffoldKey,
-            WidgetTestService.formKey,
             key: const Key('splash1'),
             color: Colors.blueAccent,
           ),

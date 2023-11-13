@@ -15,10 +15,8 @@ class KenSliderWidget extends StatefulWidget {
   final double? sldMin;
   final double? sldMax;
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<FormState>? formKey;
   const KenSliderWidget(
-    this.scaffoldKey,
-    this.formKey, {
+    this.scaffoldKey, {
     super.key,
     this.activeTrackColor,
     this.thumbColor,

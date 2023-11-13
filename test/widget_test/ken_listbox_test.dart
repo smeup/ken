@@ -24,7 +24,6 @@ Future<void> main() async {
                       height: 500,
                       child: KenListBox(
                         WidgetTestService.scaffoldKey,
-                        WidgetTestService.formKey,
                         const {
                           "rows": [
                             {

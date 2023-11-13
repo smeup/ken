@@ -3,7 +3,6 @@ import '../services/ken_defaults.dart';
 
 class KenImage extends StatefulWidget {
   final GlobalKey<ScaffoldState>? scaffoldKey;
-  final GlobalKey<FormState>? formKey;
 
   // graphic properties
   final double? width;
@@ -16,7 +15,7 @@ class KenImage extends StatefulWidget {
   final bool? isRemote;
   final bool? expand;
 
-  const KenImage(this.scaffoldKey, this.formKey, this.data,
+  const KenImage(this.scaffoldKey, this.data,
       {super.key,
       this.id = '',
       this.type = 'IMG',
