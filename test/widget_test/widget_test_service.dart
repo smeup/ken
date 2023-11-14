@@ -9,7 +9,7 @@ import 'package:json_theme/json_theme.dart';
 class WidgetTestService {
   static bool isInitialized = false;
   static ThemeData? _theme;
-  static GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  static GlobalKey<ScaffoldState> formKey = GlobalKey<ScaffoldState>();
   static Key sectionKey = GlobalKey<FormState>();
 
   static initTests() async {

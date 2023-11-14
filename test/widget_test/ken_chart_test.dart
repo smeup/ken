@@ -63,7 +63,7 @@ KenChart _getBarChart(double deviceHeight, double deviceWidth) {
   final col4 = KenChartColumn('col4', 'Fruit', ColumnType.series, 0);
   columns.addAll([col1, col2, col3, col4]);
   return KenChart(
-    WidgetTestService.scaffoldKey,
+    WidgetTestService.formKey,
     id: 'chart1',
     data: KenChartDatasource(rows, columns),
     chartType: ChartType.bar,
@@ -88,7 +88,7 @@ KenChart _getPieChart(double deviceHeight, double deviceWidth) {
   columns.addAll([col1, col2]);
 
   return KenChart(
-    WidgetTestService.scaffoldKey,
+    WidgetTestService.formKey,
     data: KenChartDatasource(rows, columns),
     chartType: ChartType.pie,
     height: deviceHeight / 2,

@@ -47,7 +47,7 @@ class KenCalendar extends StatefulWidget {
 
   final Map<DateTime?, List<KenCalendarEventModel>>? events;
 
-  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<ScaffoldState>? formKey;
 
   KenCalendar({
     super.key,
@@ -77,7 +77,7 @@ class KenCalendar extends StatefulWidget {
     this.parentWidth,
     this.parentHeight,
     this.setDataLoad,
-    this.scaffoldKey,
+    this.formKey,
   }) {
     initialDate ??= DateTime.now();
 
@@ -132,7 +132,7 @@ class KenCalendarState extends State<KenCalendar> {
 
     KenMessageBus.instance
         .event<ButtonOnPressedEvent>(
-            KenUtilities.getMessageBusId(_monthButtonId, widget.scaffoldKey!))
+            KenUtilities.getMessageBusId(_monthButtonId, widget.formKey!))
         .takeWhile((element) => context.mounted)
         .listen(
       (event) {
@@ -142,8 +142,8 @@ class KenCalendarState extends State<KenCalendar> {
       },
     );
     KenMessageBus.instance
-        .event<ButtonOnPressedEvent>(KenUtilities.getMessageBusId(
-            _twoWeeksButtonId, widget.scaffoldKey!))
+        .event<ButtonOnPressedEvent>(
+            KenUtilities.getMessageBusId(_twoWeeksButtonId, widget.formKey!))
         .takeWhile((element) => context.mounted)
         .listen(
       (event) {
@@ -154,7 +154,7 @@ class KenCalendarState extends State<KenCalendar> {
     );
     KenMessageBus.instance
         .event<ButtonOnPressedEvent>(
-            KenUtilities.getMessageBusId(_weekButtonId, widget.scaffoldKey!))
+            KenUtilities.getMessageBusId(_weekButtonId, widget.formKey!))
         .takeWhile((element) => context.mounted)
         .listen(
       (event) {
@@ -219,7 +219,7 @@ class KenCalendarState extends State<KenCalendar> {
             styleColumnName: widget.styleColumnName,
             titleColumnName: widget.titleColumnName,
             showPeriodButtons: widget.showPeriodButtons,
-            scaffoldKey: widget.scaffoldKey,
+            formKey: widget.formKey,
             //globallyUniqueId: widget.globallyUniqueId,
           ),
         ],
@@ -244,7 +244,7 @@ class KenCalendarState extends State<KenCalendar> {
             width: buttonWidth,
             align: Alignment.center,
             key: Key(_monthButtonId),
-            scaffoldKey: widget.scaffoldKey,
+            formKey: widget.formKey,
           ),
           KenButton(
             id: _twoWeeksButtonId,
@@ -252,7 +252,7 @@ class KenCalendarState extends State<KenCalendar> {
             width: buttonWidth,
             align: Alignment.center,
             key: Key(_twoWeeksButtonId),
-            scaffoldKey: widget.scaffoldKey,
+            formKey: widget.formKey,
           ),
           KenButton(
             id: _weekButtonId,
@@ -260,7 +260,7 @@ class KenCalendarState extends State<KenCalendar> {
             width: buttonWidth,
             align: Alignment.center,
             key: Key(_weekButtonId),
-            scaffoldKey: widget.scaffoldKey,
+            formKey: widget.formKey,
           ),
         ],
       ),

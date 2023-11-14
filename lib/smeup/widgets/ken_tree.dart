@@ -27,7 +27,7 @@ class KenTree extends StatefulWidget {
   final double? parentHeight;
   final bool? expanded;
   final FontWeight? defaultParentFontweight;
-  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<ScaffoldState>? formKey;
 
   const KenTree({
     super.key,
@@ -51,7 +51,7 @@ class KenTree extends StatefulWidget {
     this.parentHeight = KenTreeDefaults.defaultParentHeight,
     this.expanded = KenTreeDefaults.defaultExpanded,
     this.defaultParentFontweight = KenTreeDefaults.defaultParentFontweight,
-    this.scaffoldKey,
+    this.formKey,
   });
 
   @override
@@ -127,8 +127,8 @@ class _KenTreeState extends State<KenTree> {
                 _treeViewController.copyWith(selectedKey: key);
             KenMessageBus.instance.fireEvent(
               TreeNodeOnTapEvent(
-                messageBusId: KenUtilities.getMessageBusId(
-                    widget.id!, widget.scaffoldKey),
+                messageBusId:
+                    KenUtilities.getMessageBusId(widget.id!, widget.formKey),
                 data: _treeViewController.getNode(_selectedNode)!.data,
               ),
             );

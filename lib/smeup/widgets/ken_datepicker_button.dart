@@ -36,7 +36,7 @@ class KenDatePickerButton extends StatefulWidget {
   final ButtonStyle buttonStyle;
   final TextStyle textStyle;
 
-  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<ScaffoldState>? formKey;
 
   const KenDatePickerButton(
     this.id,
@@ -65,7 +65,7 @@ class KenDatePickerButton extends StatefulWidget {
     this.padding,
     this.showborder,
     this.dashColor,
-    this.scaffoldKey,
+    this.formKey,
   });
 
   @override
@@ -110,7 +110,7 @@ class KenDatePickerButtonState extends State<KenDatePickerButton> {
                   KenMessageBus.instance.fireEvent(
                     TimePickerOnChangeEvent(
                       messageBusId: KenUtilities.getMessageBusId(
-                          widget.id!, widget.scaffoldKey),
+                          widget.id!, widget.formKey),
                       data: KenTimePickerData(
                         time: _currentValue,
                         formattedTime: _currentDisplay,

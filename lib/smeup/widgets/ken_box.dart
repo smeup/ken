@@ -13,7 +13,7 @@ import 'ken_not_available.dart';
 import 'ken_list_box.dart';
 
 class KenBox extends StatefulWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<ScaffoldState> formKey;
   final Function? onRefresh;
   final Color? backColor;
   final Color? fontColor;
@@ -40,7 +40,7 @@ class KenBox extends StatefulWidget {
   final Function? onGetButtons;
   final Function? onGetButtonsColumns;
 
-  KenBox(this.scaffoldKey, this.index, this.kenListBox,
+  KenBox(this.formKey, this.index, this.kenListBox,
       {super.key,
       this.id,
       this.selectedRow,
@@ -91,7 +91,7 @@ class KenBoxState extends State<KenBox> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           //??? va gestito in shiro
           // return widget.showLoader!
-          //     ? SmeupWait(widget.scaffoldKey)
+          //     ? SmeupWait(widget.formKey)
           //     : Container();
           return Container();
         } else {
@@ -137,7 +137,7 @@ class KenBoxState extends State<KenBox> {
 
     Widget res = widget.dismissEnabled!
         ? Dismissible(
-            key: Key('${widget.scaffoldKey.toString()}_${widget.id}'),
+            key: Key('${widget.formKey.toString()}_${widget.id}'),
             direction: DismissDirection.endToStart,
             confirmDismiss: (DismissDirection direction) async {
               if (widget.onConfirmDismiss != null) {
@@ -173,8 +173,8 @@ class KenBoxState extends State<KenBox> {
             },
             onDismissed: (direction) {
               KenMessageBus.instance.fireEvent(KenBoxOnDismissedEvent(
-                messageBusId: KenUtilities.getMessageBusId(
-                    widget.id!, widget.scaffoldKey),
+                messageBusId:
+                    KenUtilities.getMessageBusId(widget.id!, widget.formKey),
                 direction: direction,
               ));
             },
@@ -201,8 +201,8 @@ class KenBoxState extends State<KenBox> {
           onChange: (Size size) {
             KenMessageBus.instance.fireEvent(
               KenBoxOnSizeChangeEvent(
-                messageBusId: KenUtilities.getMessageBusId(
-                    widget.id!, widget.scaffoldKey),
+                messageBusId:
+                    KenUtilities.getMessageBusId(widget.id!, widget.formKey),
                 size: size,
               ),
             );
@@ -410,7 +410,7 @@ class KenBoxState extends State<KenBox> {
                             ConnectionState.waiting) {
                           //??? va gestito in shiro
                           // return widget.showLoader!
-                          //     ? SmeupWait(widget.scaffoldKey)
+                          //     ? SmeupWait(widget.formKey)
                           //     : Container();
                           return Container();
                         } else {
@@ -507,7 +507,7 @@ class KenBoxState extends State<KenBox> {
                             ConnectionState.waiting) {
                           //??? va gestito in shiro
                           // return widget.showLoader!
-                          //     ? SmeupWait(widget.scaffoldKey)
+                          //     ? SmeupWait(widget.formKey)
                           //     : Container();
                           return Container();
                         } else {
@@ -655,8 +655,7 @@ class KenBoxState extends State<KenBox> {
   void _manageTap(index, data) {
     KenMessageBus.instance.fireEvent(
       KenBoxOnItemTapEvent(
-        messageBusId:
-            KenUtilities.getMessageBusId(widget.id!, widget.scaffoldKey),
+        messageBusId: KenUtilities.getMessageBusId(widget.id!, widget.formKey),
         index: index,
         data: data,
         showSelection: widget.kenListBox.showSelection ?? false,

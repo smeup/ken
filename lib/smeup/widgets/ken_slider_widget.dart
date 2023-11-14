@@ -14,9 +14,9 @@ class KenSliderWidget extends StatefulWidget {
   final double? value;
   final double? sldMin;
   final double? sldMax;
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<ScaffoldState> formKey;
   const KenSliderWidget(
-    this.scaffoldKey, {
+    this.formKey, {
     super.key,
     this.activeTrackColor,
     this.thumbColor,
@@ -67,7 +67,7 @@ class KenSliderWidgetState extends State<KenSliderWidget> {
           KenMessageBus.instance.fireEvent(
             SliderOnChangeRealtimeEvent(
               messageBusId:
-                  KenUtilities.getMessageBusId(widget.id, widget.scaffoldKey),
+                  KenUtilities.getMessageBusId(widget.id, widget.formKey),
               value: value,
             ),
           );
@@ -78,7 +78,7 @@ class KenSliderWidgetState extends State<KenSliderWidget> {
           KenMessageBus.instance.fireEvent(
             SliderOnChangedEvent(
               messageBusId:
-                  KenUtilities.getMessageBusId(widget.id, widget.scaffoldKey),
+                  KenUtilities.getMessageBusId(widget.id, widget.formKey),
               value: value,
             ),
           );

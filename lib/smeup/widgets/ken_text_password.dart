@@ -54,7 +54,7 @@ class KenTextPassword extends StatefulWidget {
 
   final List<TextInputFormatter>? inputFormatters;
 
-  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<ScaffoldState>? formKey;
 
   const KenTextPassword({
     super.key,
@@ -92,7 +92,7 @@ class KenTextPassword extends StatefulWidget {
     this.clientValidator, // ?
     this.inputFormatters, // ?
     this.readOnly = KenTextFieldDefaults.defaultReadOnly,
-    this.scaffoldKey,
+    this.formKey,
   });
 
   @override
@@ -129,7 +129,7 @@ class KenTextPasswordState extends State<KenTextPassword> {
 
     changeSubscription = KenMessageBus.instance
         .event<TextFieldOnChangeEvent>(
-            KenUtilities.getMessageBusId(widget.id, widget.scaffoldKey))
+            KenUtilities.getMessageBusId(widget.id, widget.formKey))
         .listen(
       (event) {
         passwordModel.checkProgress(event.value);
@@ -180,7 +180,7 @@ class KenTextPasswordState extends State<KenTextPassword> {
                           ? TextInputType.text
                           : TextInputType.visiblePassword,
                       readOnly: widget.readOnly,
-                      scaffoldKey: widget.scaffoldKey,
+                      formKey: widget.formKey,
                     );
                   },
                 ),

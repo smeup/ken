@@ -8,7 +8,7 @@ import 'ken_not_available.dart';
 enum KenListType { simple, oriented, wheel }
 
 class KenListBox extends StatefulWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<ScaffoldState> formKey;
 
   final Color? backColor;
   final Color? borderColor;
@@ -52,7 +52,7 @@ class KenListBox extends StatefulWidget {
   final Function? onGetButtons;
   final Function? onGetButtonsColumns;
 
-  const KenListBox(this.scaffoldKey, this.data,
+  const KenListBox(this.formKey, this.data,
       {super.key,
       this.id = '',
       this.type = 'BOX',
@@ -348,7 +348,7 @@ class KenListBoxState extends State<KenListBox> {
       TextStyle captionStyle = _getCaptionStile(backColor);
 
       final cell = KenBox(
-        widget.scaffoldKey,
+        widget.formKey,
         i,
         widget,
         key: Key('${(widget.key as ValueKey).value}_$i'),

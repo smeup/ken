@@ -8,7 +8,7 @@ import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 
 class KenDashboard extends StatelessWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<ScaffoldState> formKey;
 
   final double? fontSize;
   final Color? fontColor;
@@ -40,7 +40,7 @@ class KenDashboard extends StatelessWidget {
   final IconData? iconData;
 
   const KenDashboard(
-    this.scaffoldKey,
+    this.formKey,
     this.data, {
     super.key,
     this.id = '',
@@ -82,7 +82,7 @@ class KenDashboard extends StatelessWidget {
       onTap: () {
         KenMessageBus.instance.fireEvent(
           DashboardOnTapEvent(
-              messageBusId: KenUtilities.getMessageBusId(id!, scaffoldKey),
+              messageBusId: KenUtilities.getMessageBusId(id!, formKey),
               value: _getValue(data)),
         );
       },

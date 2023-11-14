@@ -41,7 +41,7 @@ class KenDatePicker extends StatefulWidget {
   final double? elevation;
   final Color? dashColor;
 
-  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<ScaffoldState>? formKey;
 
   //Functions
   final Function? clientValidator;
@@ -76,7 +76,7 @@ class KenDatePicker extends StatefulWidget {
     this.showborder = KenDatepickerDefaults.defaultShowBorder,
     this.dashColor = KenDatepickerDefaults.defaultDashColor,
     this.clientValidator,
-    this.scaffoldKey,
+    this.formKey,
   }) {
     if (data != null && data!.value != null && data!.text == null) {
       data!.text = DateFormat("dd/MM/yyyy").format(data!.value!);
@@ -148,7 +148,7 @@ class KenDatePickerState extends State<KenDatePicker> {
       captionFontColor: widget.captionFontColor,
       captionBackColor: widget.captionBackColor,
       dashColor: widget.dashColor,
-      scaffoldKey: widget.scaffoldKey,
+      formKey: widget.formKey,
     );
 
     var line = widget.underline! ? const KenLine() : Container();

@@ -44,7 +44,7 @@ class KenCalendarWidget extends StatefulWidget {
   final Function? setDataLoad;
   final bool? showPeriodButtons;
   //final String? globallyUniqueId;
-  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<ScaffoldState>? formKey;
 
   const KenCalendarWidget({
     super.key,
@@ -73,7 +73,7 @@ class KenCalendarWidget extends StatefulWidget {
     this.setDataLoad,
     this.showPeriodButtons,
     this.padding,
-    this.scaffoldKey,
+    this.formKey,
     //this.globallyUniqueId,
   });
 
@@ -301,7 +301,7 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
                   KenMessageBus.instance
                       .event<CalendarUpdateEventsAndDataEvent>(
                           KenUtilities.getMessageBusId(
-                              widget.id!, widget.scaffoldKey))
+                              widget.id!, widget.formKey))
                       .take(1)
                       .listen((event) {
                     _data = event.infos.data;
@@ -313,7 +313,7 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
                   KenMessageBus.instance.fireEvent(
                     CalendarOnMonthChangedEvent(
                       messageBusId: KenUtilities.getMessageBusId(
-                          widget.id!, widget.scaffoldKey),
+                          widget.id!, widget.formKey),
                       focusedDay: focusedDay,
                     ),
                   );
@@ -475,8 +475,7 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
     widget.setDataLoad!(widget.id, true);
     KenMessageBus.instance.fireEvent(
       CalendarOnDaySelectedEvent(
-        messageBusId:
-            KenUtilities.getMessageBusId(widget.id!, widget.scaffoldKey),
+        messageBusId: KenUtilities.getMessageBusId(widget.id!, widget.formKey),
         selectedDay: selectedDay,
       ),
     );
@@ -521,7 +520,7 @@ class KenCalendarWidgetState extends State<KenCalendarWidget>
         KenMessageBus.instance.fireEvent(
           CalendarOnClickEvent(
               messageBusId:
-                  KenUtilities.getMessageBusId(widget.id!, widget.scaffoldKey),
+                  KenUtilities.getMessageBusId(widget.id!, widget.formKey),
               event: event),
         );
       }

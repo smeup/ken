@@ -27,7 +27,7 @@ Future<void> main() async {
                   child: Column(
                 children: [
                   KenCarousel(
-                      WidgetTestService.scaffoldKey,
+                      WidgetTestService.formKey,
                       const [
                         {
                           "imageFile": "packages/ken/assets/images/IMG1.png",

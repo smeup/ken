@@ -33,7 +33,7 @@ class KenRadioButton extends StatefulWidget {
   final String? title;
   late List<KenRadioButton>? others;
   late Function changeState;
-  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<ScaffoldState>? formKey;
 
   KenRadioButton({
     super.key,
@@ -59,7 +59,7 @@ class KenRadioButton extends StatefulWidget {
     this.selectedValue,
     this.icon,
     this.others,
-    this.scaffoldKey,
+    this.formKey,
   });
 
   @override
@@ -106,7 +106,7 @@ class _KenRadioButtonState extends State<KenRadioButton> {
                 KenMessageBus.instance.fireEvent(
                   RadioButtonOnPressedEvent(
                       messageBusId: KenUtilities.getMessageBusId(
-                          widget.id, widget.scaffoldKey),
+                          widget.id, widget.formKey),
                       value: value),
                 );
               },

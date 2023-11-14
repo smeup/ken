@@ -21,7 +21,7 @@ Future<void> main() async {
               child: Center(
                   child: Column(
                 children: [
-                  KenGauge(WidgetTestService.scaffoldKey,
+                  KenGauge(WidgetTestService.formKey,
                       key: const Key('gau1'),
                       value: 120,
                       maxValue: 150,

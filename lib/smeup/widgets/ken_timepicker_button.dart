@@ -12,7 +12,7 @@ import 'ken_timepicker.dart';
 import 'ken_timepicker_customization.dart';
 
 class KenTimePickerButton extends StatefulWidget {
-  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<ScaffoldState>? formKey;
 
   final Color? borderColor;
   final double? borderWidth;
@@ -47,7 +47,7 @@ class KenTimePickerButton extends StatefulWidget {
     this.buttonStyle,
     this.textStyle, {
     super.key,
-    this.scaffoldKey,
+    this.formKey,
     this.id = '',
     this.backColor = KenTimepickerDefaults.defaultBackColor,
     this.fontSize = KenTimepickerDefaults.defaultFontSize,
@@ -116,7 +116,7 @@ class KenTimePickerButtonState extends State<KenTimePickerButton> {
                     KenMessageBus.instance.fireEvent(
                       TimePickerOnChangeEvent(
                         messageBusId: KenUtilities.getMessageBusId(
-                            widget.id!, widget.scaffoldKey),
+                            widget.id!, widget.formKey),
                         data: KenTimePickerData(
                           time: _currentValue,
                           formattedTime: _currentDisplay,

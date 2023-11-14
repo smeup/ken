@@ -11,7 +11,7 @@ class KenDrawerItem extends StatelessWidget {
   final bool? fontBold;
   final Alignment align;
   final bool? showItemDivider;
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<ScaffoldState> formKey;
   final IconData? iconData;
   final Color? iconColor;
   final double? iconSize;
@@ -26,7 +26,7 @@ class KenDrawerItem extends StatelessWidget {
     return widgetUniqueIds[hashCode]!;
   }
 
-  const KenDrawerItem(this.scaffoldKey, this.text, this.route, this.iconData,
+  const KenDrawerItem(this.formKey, this.text, this.route, this.iconData,
       this.action, this.align, this.showItemDivider,
       {super.key,
       this.fontSize,

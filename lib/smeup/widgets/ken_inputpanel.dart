@@ -28,7 +28,7 @@ class KenInputPanel extends StatelessWidget {
   final double confirmButtonRowHeight = 110;
   final bool? autoAdaptHeight = true;
   bool? isConfirmedEnabled = false;
-  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<ScaffoldState>? formKey;
 
   KenInputPanel({
     super.key,
@@ -42,7 +42,7 @@ class KenInputPanel extends StatelessWidget {
     this.data,
     this.backgroundColor,
     this.isConfirmedEnabled,
-    this.scaffoldKey,
+    this.formKey,
   });
 
   @override
@@ -144,7 +144,7 @@ class KenInputPanel extends StatelessWidget {
             // clientOnChange: (value) {
             //   field.value.code = field.value.description = value;
             // },
-            scaffoldKey: scaffoldKey,
+            formKey: formKey,
           ),
         )
       ],
@@ -174,7 +174,7 @@ class KenInputPanel extends StatelessWidget {
           {"code": "3", "value": '> 11 people'},
         ],
         selectedValue: field.value.code,
-        scaffoldKey: scaffoldKey,
+        formKey: formKey,
       )
     ]);
   }
@@ -203,7 +203,7 @@ class KenInputPanel extends StatelessWidget {
           items: field.items!
               .map((e) => KenComboItemModel(e.code, e.description))
               .toList(),
-          scaffoldKey: scaffoldKey,
+          formKey: formKey,
         ),
       ],
     );
@@ -237,7 +237,7 @@ class KenInputPanel extends StatelessWidget {
           data: field.items!
               .map((e) => {"code": e.code, "value": e.description})
               .toList(),
-          scaffoldKey: scaffoldKey,
+          formKey: formKey,
         ),
       ],
     );
@@ -249,7 +249,7 @@ class KenInputPanel extends StatelessWidget {
       (event) {
         KenMessageBus.instance.fireEvent(
           InputPanelSubmittedEvent(
-            messageBusId: KenUtilities.getMessageBusId(widget.id!, scaffoldKey),
+            messageBusId: KenUtilities.getMessageBusId(widget.id!, formKey),
             value: widget.data,
           ),
         );
@@ -265,7 +265,7 @@ class KenInputPanel extends StatelessWidget {
                 id: buttonId,
                 key: Key(buttonId),
                 data: "Conferma",
-                scaffoldKey: widget.scaffoldKey,
+                formKey: widget.formKey,
               ),
             ),
           ],

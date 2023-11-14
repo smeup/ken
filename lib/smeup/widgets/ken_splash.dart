@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
 
 class KenSplash extends StatefulWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<ScaffoldState> formKey;
 
   final Color? color;
   final String? id;
   final String? type;
   final String? title;
 
-  const KenSplash(this.scaffoldKey,
+  const KenSplash(this.formKey,
       {super.key,
       this.color = KenSplashDefaults.defaultColor,
       this.id = '',

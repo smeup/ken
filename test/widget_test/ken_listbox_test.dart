@@ -23,7 +23,7 @@ Future<void> main() async {
                     SizedBox(
                       height: 500,
                       child: KenListBox(
-                        WidgetTestService.scaffoldKey,
+                        WidgetTestService.formKey,
                         const {
                           "rows": [
                             {

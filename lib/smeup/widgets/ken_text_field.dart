@@ -42,7 +42,7 @@ class KenTextField extends StatefulWidget {
 
   final List<TextInputFormatter>? inputFormatters;
 
-  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<ScaffoldState>? formKey;
 
   const KenTextField({
     super.key,
@@ -75,7 +75,7 @@ class KenTextField extends StatefulWidget {
     this.inputFormatters, // ?
     this.submitButton,
     this.readOnly = KenTextFieldDefaults.defaultReadOnly,
-    this.scaffoldKey,
+    this.formKey,
   });
 
   @override
@@ -132,7 +132,7 @@ class KenTextFieldState extends State<KenTextField> {
             KenMessageBus.instance.fireEvent(
               TextFieldOnChangeEvent(
                 messageBusId:
-                    KenUtilities.getMessageBusId(widget.id, widget.scaffoldKey),
+                    KenUtilities.getMessageBusId(widget.id, widget.formKey),
                 value: value,
               ),
             );
@@ -160,7 +160,7 @@ class KenTextFieldState extends State<KenTextField> {
             KenMessageBus.instance.fireEvent(
               TextFieldOnSavedEvent(
                 messageBusId:
-                    KenUtilities.getMessageBusId(widget.id, widget.scaffoldKey),
+                    KenUtilities.getMessageBusId(widget.id, widget.formKey),
                 value: value ?? '',
               ),
             );

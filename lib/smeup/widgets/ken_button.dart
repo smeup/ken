@@ -37,7 +37,7 @@ class KenButton extends StatelessWidget {
   final IconData? iconData;
   final double? parentWidth;
   final double? parentHeight;
-  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<ScaffoldState>? formKey;
 
   KenButton({
     super.key,
@@ -68,7 +68,7 @@ class KenButton extends StatelessWidget {
     this.innerSpace = KenButtonsDefaults.defaultInnerSpace,
     this.parentWidth,
     this.parentHeight,
-    this.scaffoldKey,
+    this.formKey,
   }) {
     // Gestione del button link è preferibile con una icona e testo sottolineato
     // if (isLink) {
@@ -136,7 +136,7 @@ class KenButton extends StatelessWidget {
   void handleTap() {
     KenMessageBus.instance.fireEvent(
       ButtonOnPressedEvent(
-          messageBusId: KenUtilities.getMessageBusId(id, scaffoldKey!)),
+          messageBusId: KenUtilities.getMessageBusId(id, formKey!)),
     );
   }
 

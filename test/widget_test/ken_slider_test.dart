@@ -20,7 +20,7 @@ Future<void> main() async {
                         child: Column(
                           children: [
                             KenSlider(
-                              WidgetTestService.scaffoldKey,
+                              WidgetTestService.formKey,
                               id: 'sld1',
                               value: 20,
                             )

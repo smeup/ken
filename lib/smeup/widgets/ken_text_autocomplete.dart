@@ -40,7 +40,7 @@ class KenTextAutocomplete extends StatefulWidget {
   final bool? showSubmit;
   final String? submitLabel;
   final KenButtons? smeupButtons;
-  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<ScaffoldState>? formKey;
 
   // other properties
   final Function? clientValidator;
@@ -88,7 +88,7 @@ class KenTextAutocomplete extends StatefulWidget {
     this.code = '',
     this.title,
     this.smeupButtons,
-    this.scaffoldKey,
+    this.formKey,
   });
 
   @override
@@ -151,8 +151,8 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
               VoidCallback onFieldSubmitted) {
             KenMessageBus.instance.fireEvent(
               TextAutocompleteOnFieldViewBuilder(
-                  messageBusId: KenUtilities.getMessageBusId(
-                      widget.id!, widget.scaffoldKey)),
+                  messageBusId:
+                      KenUtilities.getMessageBusId(widget.id!, widget.formKey)),
             );
 
             if ((widget.code.isNotEmpty) && _data != null) {
@@ -202,7 +202,7 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
                         KenMessageBus.instance.fireEvent(
                           TextAutocompleteOnChange(
                             messageBusId: KenUtilities.getMessageBusId(
-                                widget.id!, widget.scaffoldKey),
+                                widget.id!, widget.formKey),
                             value: value,
                           ),
                         );
@@ -232,7 +232,7 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
                         KenMessageBus.instance.fireEvent(
                           TextAutocompleteOnSaved(
                             messageBusId: KenUtilities.getMessageBusId(
-                                widget.id!, widget.scaffoldKey),
+                                widget.id!, widget.formKey),
                             value: value ?? '',
                           ),
                         );
@@ -254,7 +254,7 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
                         KenMessageBus.instance.fireEvent(
                           TextAutocompleteOnTapSetStateEvent(
                             messageBusId: KenUtilities.getMessageBusId(
-                                widget.id!, widget.scaffoldKey),
+                                widget.id!, widget.formKey),
                             value: widget.code,
                           ),
                         );
@@ -297,7 +297,7 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
                           KenMessageBus.instance.fireEvent(
                             TextAutocompleteOnTapSelectedEvent(
                               messageBusId: KenUtilities.getMessageBusId(
-                                  widget.id!, widget.scaffoldKey),
+                                  widget.id!, widget.formKey),
                               value: option,
                             ),
                           );

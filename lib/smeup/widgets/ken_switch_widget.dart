@@ -11,7 +11,7 @@ class KenSwitchWidget extends StatefulWidget {
   final bool? data;
   final String? id;
 
-  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<ScaffoldState>? formKey;
 
   const KenSwitchWidget({
     super.key,
@@ -19,7 +19,7 @@ class KenSwitchWidget extends StatefulWidget {
     this.id,
     this.thumbColor,
     this.trackColor,
-    this.scaffoldKey,
+    this.formKey,
   });
 
   @override
@@ -47,7 +47,7 @@ class KenSwitchWidgetState extends State<KenSwitchWidget> {
           _data = changedValue;
           KenMessageBus.instance.fireEvent(SwitchOnChangeEvent(
             messageBusId:
-                KenUtilities.getMessageBusId(widget.id!, widget.scaffoldKey),
+                KenUtilities.getMessageBusId(widget.id!, widget.formKey),
             value: changedValue,
           ));
         });

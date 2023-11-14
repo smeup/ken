@@ -31,7 +31,7 @@ class KenRadioButtons extends StatefulWidget {
   final String? id;
   final String? type;
   final String? title;
-  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final GlobalKey<ScaffoldState>? formKey;
 
   const KenRadioButtons({
     super.key,
@@ -56,7 +56,7 @@ class KenRadioButtons extends StatefulWidget {
     this.displayedField = KenRadioButtonsDefaults.defaultDisplayedField,
     this.selectedValue,
     this.columns = KenRadioButtonsDefaults.defaultColumns,
-    this.scaffoldKey,
+    this.formKey,
   });
 
   @override
@@ -101,7 +101,7 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
       //     .takeWhile((element) => context.mounted)
       //     .listen((event) {
       //   event.messageBusId =
-      //       KenUtilities.getMessageBusId(widget.id!, widget.scaffoldKey);
+      //       KenUtilities.getMessageBusId(widget.id!, widget.formKey);
       //   KenMessageBus.instance.fireEvent(event);
       // });
       final button = KenRadioButton(
@@ -121,7 +121,7 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
         radioButtonColor: widget.radioButtonColor,
         selectedValue: widget.selectedValue,
         icon: null, // così anche in originale
-        scaffoldKey: widget.scaffoldKey,
+        formKey: widget.formKey,
         key: Key('${keyId}_radio_button'),
       );
       buttons.add(button);
@@ -172,7 +172,7 @@ class KenRadioButtonsState extends State<KenRadioButtons> {
       KenMessageBus.instance.fireEvent(
         RadioButtonSelDataEvent(
           messageBusId:
-              KenUtilities.getMessageBusId(widget.id!, widget.scaffoldKey),
+              KenUtilities.getMessageBusId(widget.id!, widget.formKey),
           value: _data,
         ),
       );
