@@ -65,10 +65,6 @@ class TextAutocompleteOnSaved extends KenMessageBusEvent {
   });
 }
 
-class TextAutocompleteOnFieldViewBuilder extends KenMessageBusEvent {
-  TextAutocompleteOnFieldViewBuilder({required super.messageBusId});
-}
-
 class ButtonOnPressedEvent extends KenMessageBusEvent {
   ButtonOnPressedEvent({required super.messageBusId});
 }
@@ -161,15 +157,6 @@ class KenBoxOnItemTapEvent extends KenMessageBusEvent {
     required this.data,
     required this.index,
     required this.showSelection,
-  });
-}
-
-class KenBoxOnSizeChangeEvent extends KenMessageBusEvent {
-  Size size;
-
-  KenBoxOnSizeChangeEvent({
-    required super.messageBusId,
-    required this.size,
   });
 }
 

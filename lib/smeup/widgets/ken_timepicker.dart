@@ -50,6 +50,8 @@ class KenTimePicker extends StatelessWidget {
   final double? parentWidth;
   final double? parentHeight;
 
+  final GlobalKey<ScaffoldState>? formKey;
+
   const KenTimePicker(
     this.data, {
     super.key,
@@ -86,6 +88,7 @@ class KenTimePicker extends StatelessWidget {
     this.valueField,
     this.displayField,
     this.title,
+    this.formKey,
   });
 
   @override
@@ -135,6 +138,7 @@ class KenTimePicker extends StatelessWidget {
       showborder: showborder,
       minutesList: minutesList,
       dashColor: dashColor,
+      formKey: formKey,
     );
 
     var line = underline! ? const KenLine() : Container();

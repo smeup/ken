@@ -149,12 +149,6 @@ class KenTextAutocompleteState extends State<KenTextAutocomplete> {
               TextEditingController textEditingController,
               FocusNode focusNode,
               VoidCallback onFieldSubmitted) {
-            KenMessageBus.instance.fireEvent(
-              TextAutocompleteOnFieldViewBuilder(
-                  messageBusId:
-                      KenUtilities.getMessageBusId(widget.id!, widget.formKey)),
-            );
-
             if ((widget.code.isNotEmpty) && _data != null) {
               var currel = _data.firstWhere(
                 (element) => element['code'].toString() == widget.code,

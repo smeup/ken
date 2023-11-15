@@ -197,17 +197,8 @@ class KenBoxState extends State<KenBox> {
 
     Widget container;
     if (widget.index == 0) {
-      container = MeasureSize(
-          onChange: (Size size) {
-            KenMessageBus.instance.fireEvent(
-              KenBoxOnSizeChangeEvent(
-                messageBusId:
-                    KenUtilities.getMessageBusId(widget.id!, widget.formKey),
-                size: size,
-              ),
-            );
-          },
-          child: _getContainer(res));
+      container =
+          MeasureSize(onChange: (Size size) {}, child: _getContainer(res));
     } else {
       container = _getContainer(res);
     }
