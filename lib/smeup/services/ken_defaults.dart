@@ -270,16 +270,16 @@ class KenComboDefaults {
 class KenDrawerDefaults {
   // supported by json_theme
   static const double defaultTitleFontSize = 18;
-  static const Color defaultTitleFontColor = kPrimary;
+  static const Color defaultTitleFontColor = KonPrimary;
   static const bool defaultTitleFontBold = false;
   static const double defaultElementFontSize = 16;
-  static const Color defaultElementFontColor = kPrimary;
+  static const Color defaultElementFontColor = KonPrimary;
   static const bool defaultElementFontBold = false;
   static const Color defaultAppBarBackColor = kPrimary;
   static const double defaultImageWidth = 80;
   static const double defaultImageHeight = 120;
   static const bool defaultShowItemDivider = true;
-  static const Color defaultIconColor = kPrimary;
+  static const Color defaultIconColor = KonPrimary;
   static const double defaultIconSize = 16;
   static const Color defaultDrawerBackColor = kSecondary100;
 }
@@ -355,13 +355,13 @@ class KenTreeDefaults {
   static const double defaultWidth = 300;
   static const double defaultHeight = 400;
   static const double defaultLabelFontSize = 14;
-  static const Color defaultLabelBackColor = Colors.white;
+  static const Color defaultLabelBackColor = KonPrimary;
   static const Color defaultLabelFontColor = kPrimary;
   static const bool defaultLabelFontbold = false;
   static const double defaultLabelVerticalSpacing = 2;
   static const double defaultLabelHeight = 14;
   static const double defaultParentFontSize = 14;
-  static const Color defaultParentBackColor = Colors.white;
+  static const Color defaultParentBackColor = KonPrimary;
   static const Color defaultParentFontColor = kPrimary;
   static const bool defaultParentFontbold = true;
   static const double defaultParentVerticalSpacing = 0;
@@ -592,6 +592,7 @@ const Color kBack200 = Color(0xff15171C);
 const Color kIconColor = Color(0x1C006876);
 const Color kPrimary = Color(0xff06899b);
 const Color kInactivePrimary = Color(0xff53b9cc);
+const Color KonPrimary = Colors.white;
 
 /// VARIANT
 const Color kRed = Color(0xFFC14B49);

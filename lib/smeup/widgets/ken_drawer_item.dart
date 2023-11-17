@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
+import '../services/ken_defaults.dart';
+
 class KenDrawerItem extends StatelessWidget {
   final String? text;
   final String? route;
@@ -31,8 +33,8 @@ class KenDrawerItem extends StatelessWidget {
       {super.key,
       this.fontSize,
       this.fontBold,
-      this.fontColor,
-      this.iconColor,
+      this.fontColor = KenDrawerDefaults.defaultElementFontColor,
+      this.iconColor = KenDrawerDefaults.defaultTitleFontColor,
       this.iconSize});
 
   @override
