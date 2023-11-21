@@ -89,7 +89,7 @@ class KenDrawerState extends State<KenDrawer> {
     }
 
     var header = AppBar(
-        backgroundColor: widget.appBarBackColor,
+        backgroundColor: widget.drawerBackColor,
         //elevation: 0,
         automaticallyImplyLeading: false,
         title: Row(
@@ -113,25 +113,20 @@ class KenDrawerState extends State<KenDrawer> {
           groups[e.group] = List<Widget>.empty(growable: true);
           listInGroup = groups[e.group];
           list.add(Padding(
-            padding: const EdgeInsets.only(right: 10.0, left: 0.0),
-            child: Container(
-              decoration: const BoxDecoration(
-                  border:
-                      Border(top: BorderSide(color: kOnPrimary, width: .5))),
-              child: ExpandablePanel(
-                header: _getCollpsed(e),
-                theme: ExpandableThemeData(
-                    headerAlignment: ExpandablePanelHeaderAlignment.center,
-                    iconColor: widget.iconColor,
-                    tapBodyToCollapse: true),
-                expanded: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: listInGroup!,
-                ),
-                collapsed: Container(),
-                // tapHeaderToExpand: true,
-                // hasIcon: true,
+            padding: const EdgeInsets.only(right: 0.0, left: 0.0),
+            child: ExpandablePanel(
+              header: _getCollpsed(e),
+              theme: ExpandableThemeData(
+                  headerAlignment: ExpandablePanelHeaderAlignment.center,
+                  iconColor: widget.iconColor,
+                  tapBodyToCollapse: true),
+              expanded: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: listInGroup!,
               ),
+              collapsed: Container(),
+              // tapHeaderToExpand: true,
+              // hasIcon: true,
             ),
           ));
         }
@@ -159,8 +154,10 @@ class KenDrawerState extends State<KenDrawer> {
   }
 
   TextStyle _getTitleStile() {
-    TextStyle style =
-        TextStyle(color: widget.titleFontColor, fontSize: widget.titleFontSize);
+    TextStyle style = TextStyle(
+        color: widget.titleFontColor,
+        fontSize: widget.titleFontSize,
+        backgroundColor: Colors.transparent);
 
     if (widget.titleFontBold!) {
       style = style.copyWith(
