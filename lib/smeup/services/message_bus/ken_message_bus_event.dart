@@ -160,17 +160,6 @@ class KenBoxOnItemTapEvent extends KenMessageBusEvent {
   });
 }
 
-class KenBoxOnListLoaded extends KenMessageBusEvent {
-  dynamic data;
-  double? height;
-
-  KenBoxOnListLoaded({
-    required super.messageBusId,
-    required this.data,
-    required this.height,
-  });
-}
-
 class KenBoxOnDismissedEvent extends KenMessageBusEvent {
   DismissDirection direction;
 
