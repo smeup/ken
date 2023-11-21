@@ -80,7 +80,7 @@ class KenDrawerState extends State<KenDrawer> {
     }
     if (showTitle) {
       headers.add(const SizedBox(
-        width: 10,
+        width: 0,
       ));
       headers.add(Text(
         widget.title!,
@@ -89,7 +89,7 @@ class KenDrawerState extends State<KenDrawer> {
     }
 
     var header = AppBar(
-        backgroundColor: widget.appBarBackColor,
+        backgroundColor: widget.drawerBackColor,
         //elevation: 0,
         automaticallyImplyLeading: false,
         title: Row(
@@ -112,23 +112,27 @@ class KenDrawerState extends State<KenDrawer> {
         if (groups[e.group] == null) {
           groups[e.group] = List<Widget>.empty(growable: true);
           listInGroup = groups[e.group];
-          list.add(ExpandablePanel(
-            header: _getCollpsed(e),
-            theme: ExpandableThemeData(
-                headerAlignment: ExpandablePanelHeaderAlignment.center,
-                iconColor: widget.iconColor,
-                tapBodyToCollapse: true),
-            expanded: Column(
-              children: listInGroup!,
+          list.add(Padding(
+            padding: const EdgeInsets.only(right: 0.0, left: 0.0),
+            child: ExpandablePanel(
+              header: _getCollpsed(e),
+              theme: ExpandableThemeData(
+                  headerAlignment: ExpandablePanelHeaderAlignment.center,
+                  iconColor: widget.iconColor,
+                  tapBodyToCollapse: true),
+              expanded: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: listInGroup!,
+              ),
+              collapsed: Container(),
+              // tapHeaderToExpand: true,
+              // hasIcon: true,
             ),
-            collapsed: Container(),
-            // tapHeaderToExpand: true,
-            // hasIcon: true,
           ));
         }
         listInGroup = groups[e.group];
         listInGroup!.add(Padding(
-          padding: const EdgeInsets.only(left: 60.0),
+          padding: const EdgeInsets.only(right: 20.0),
           child: KenDrawerItem(widget.formKey, e.text, e.route, e.itemIconData,
               e.action, e.align, widget.showItemDivider,
               fontSize: e.fontSize),
@@ -150,8 +154,10 @@ class KenDrawerState extends State<KenDrawer> {
   }
 
   TextStyle _getTitleStile() {
-    TextStyle style =
-        TextStyle(color: widget.titleFontColor, fontSize: widget.titleFontSize);
+    TextStyle style = TextStyle(
+        color: widget.titleFontColor,
+        fontSize: widget.titleFontSize,
+        backgroundColor: Colors.transparent);
 
     if (widget.titleFontBold!) {
       style = style.copyWith(
@@ -167,20 +173,27 @@ class KenDrawerState extends State<KenDrawer> {
   }
 
   Widget _getCollpsed(e) {
-    return ListTile(
-      leading: e.groupIcon != null
-          ? Icon(
-              e.groupIconData,
-              color: widget.iconColor,
-              size: widget.iconSize,
-            )
-          : null,
-      title: Text(e.group, style: _getElementTextStile()),
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+      child: ListTile(
+        dense: true,
+        titleAlignment: ListTileTitleAlignment.center,
+        leading: e.groupIconData != null
+            ? Icon(
+                e.group,
+                color: widget.iconColor,
+                size: widget.iconSize,
+              )
+            : null,
+        title: Text(e.group, style: _getElementTextStile()),
+      ),
     );
   }
 
   TextStyle _getElementTextStile() {
-    TextStyle style = const TextStyle(backgroundColor: Colors.transparent);
+    TextStyle style = const TextStyle(
+      backgroundColor: Colors.transparent,
+    );
 
     if (widget.elementFontSize != null) {
       style = style.copyWith(

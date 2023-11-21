@@ -275,13 +275,13 @@ class KenDrawerDefaults {
   static const double defaultElementFontSize = 16;
   static const Color defaultElementFontColor = kOnPrimary;
   static const bool defaultElementFontBold = false;
-  static const Color defaultAppBarBackColor = kPrimary;
+  static const Color defaultAppBarBackColor = kBack100;
   static const double defaultImageWidth = 80;
   static const double defaultImageHeight = 120;
-  static const bool defaultShowItemDivider = true;
+  static const bool defaultShowItemDivider = false;
   static const Color defaultIconColor = kOnPrimary;
   static const double defaultIconSize = 16;
-  static const Color defaultDrawerBackColor = kSecondary100;
+  static const Color defaultDrawerBackColor = kBack200;
 }
 
 class KenGaugeDefaults {

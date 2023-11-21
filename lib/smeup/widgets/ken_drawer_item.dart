@@ -39,8 +39,13 @@ class KenDrawerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final title = Align(
-        alignment: align, child: Text(text!, style: _getElementTextStile()));
+    final title = Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: Align(
+          // i want to pass aligna as left
+          alignment: Alignment.centerLeft,
+          child: Text(text!, style: _getElementTextStile())),
+    );
 
     function() {
       if (action != null) {
@@ -52,10 +57,16 @@ class KenDrawerItem extends StatelessWidget {
       children: [
         if (showItemDivider!)
           Divider(
+            height: 1.0,
             color: fontColor,
           ),
         if (iconData != null)
           ListTile(
+            minVerticalPadding: 0,
+            selected: true,
+            selectedColor: kBack100,
+            visualDensity: VisualDensity.compact,
+            dense: true,
             leading: Icon(
               iconData,
               color: iconColor,
@@ -66,7 +77,12 @@ class KenDrawerItem extends StatelessWidget {
           )
         else
           ListTile(
+            minVerticalPadding: 0,
+            selected: true,
+            selectedColor: kBack100,
+            visualDensity: VisualDensity.compact,
             title: title,
+            dense: true,
             onTap: function,
           ),
       ],
