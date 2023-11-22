@@ -185,9 +185,14 @@ class KenListBoxState extends State<KenListBox> {
         return const KenNotAvailable();
     }
 
-    _runAutomaticScroll();
+    //_runAutomaticScroll();
 
-    return children;
+    return SingleChildScrollView(
+        child: Column(
+      children: [
+        children,
+      ],
+    ));
   }
 
   Widget _getSimpleList(List<Widget> cells) {
@@ -218,9 +223,8 @@ class KenListBoxState extends State<KenListBox> {
       key: Key('${(widget.key as ValueKey).value}_list'),
       controller: _scrollController,
       scrollDirection: widget.orientation!,
-      physics: _executeBouncing
-          ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
-          : null,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: cells.length,
       itemBuilder: (context, index) {
         return cells[index];

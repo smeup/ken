@@ -160,6 +160,15 @@ class KenBoxOnItemTapEvent extends KenMessageBusEvent {
   });
 }
 
+class KenBoxOnSizeChanged extends KenMessageBusEvent {
+  double? height;
+
+  KenBoxOnSizeChanged({
+    required super.messageBusId,
+    required this.height,
+  });
+}
+
 class KenBoxOnDismissedEvent extends KenMessageBusEvent {
   DismissDirection direction;
 

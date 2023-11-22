@@ -254,6 +254,7 @@ class KenBoxState extends State<KenBox> {
 
   Future<Widget> _getLayoutDefaultData(dynamic data, cols) async {
     var listOfRows = List<Widget>.empty(growable: true);
+    int visibleCols = 0;
     for (var col in cols) {
       if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
         String rowData = await _getBoxText(data, col);
@@ -283,8 +284,19 @@ class KenBoxState extends State<KenBox> {
               ),
             ]);
 
+        visibleCols++;
         listOfRows.add(colWidget);
       }
+    }
+
+    if (widget.index == 0 && visibleCols > 0) {
+      KenMessageBus.instance.fireEvent(
+        KenBoxOnSizeChanged(
+          messageBusId:
+              KenUtilities.getMessageBusId(widget.id!, widget.formKey),
+          height: (visibleCols * 14) + 46,
+        ),
+      );
     }
 
     return Row(
