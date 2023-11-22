@@ -19,7 +19,14 @@ class KenBox extends StatefulWidget {
   final Function? onRefresh;
   final Color? backColor;
   final Color? fontColor;
-  final List<String> _excludedColumns = ['J4BTN', 'J4IMG'];
+  final List<String> _excludedColumns = [
+    'J4BTN',
+    'J4IMG',
+    'J1',
+    'VO',
+    'J4',
+    'VOCOD_VER',
+  ];
   final List<dynamic>? columns;
   final dynamic data;
   final bool? showLoader;
@@ -315,6 +322,7 @@ class KenBoxState extends State<KenBox> {
   }
 
   // LAYOUT 1
+  // XPPPPPPX
 
   Future<Widget> _getLayout1(dynamic data) async {
     final cols = await _getColumns(data);
@@ -413,129 +421,166 @@ class KenBoxState extends State<KenBox> {
     var listOfRows = List<Widget>.empty(growable: true);
     int visibleCols = 0;
 
-    if (data["tipo"] == "NR") {
-      final colWidget = Padding(
-        padding: const EdgeInsets.only(top: 10.0, bottom: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 15.0),
-              child: Text(
-                data["COMCOD"],
-                style: const TextStyle(
-                    color: Colors.white,
-                    backgroundColor: Colors.transparent,
-                    fontSize: 38,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15.0),
-              child: Row(children: [
-                Text(
-                  'Classe : ',
-                  style: TextStyle(
-                      backgroundColor: Colors.transparent,
-                      color: kSecondary100),
-                ),
-                Text(
-                  data["COMA01"],
-                  style: const TextStyle(
-                      color: kSecondary100,
-                      backgroundColor: Colors.transparent,
-                      fontSize: 20),
-                )
-              ]),
-            ),
-            const SizedBox(height: 8),
-            Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 15),
-              child: Divider(
-                color: kSecondary100,
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 7.0),
-              child: Row(
-                  children:
-                      List<Widget>.from(data["COMA12"].split(';').map((letter) {
-                return _getIcon(
-                    letter); // Ottieni l'icona per ogni lettera nella stringa
-              })).toList()),
-            ),
-          ],
-        ),
-      );
-      visibleCols++;
-      listOfRows.add(colWidget);
-    } else {
-      for (var col in cols) {
-        if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
-          String rowData = await _getBoxText(data, col);
+    for (var col in cols) {
+      if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
+        String rowData = await _getBoxText(data, col);
 
-          final colWidget = Row(
+        if (col['canonicalForm'].toString().contains("JL")) {
+          final colWidget2 = Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (col['text'].isNotEmpty)
                   Expanded(
-                    flex: 1,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(col['text'], style: widget.captionStyle),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Center(
+                        child:
+                            Text(rowData, style: TextStyle(color: Colors.red)),
+                      ),
                     ),
                   ),
-                Expanded(
-                  flex: 2,
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(rowData, style: widget.textStyle), // Right side
-                  ),
-                ),
               ]);
+          listOfRows.add(colWidget2);
+        } else if (col['canonicalForm'].toString().contains("JL")) {
+          /// aggiungere logica di box default
+        } else if (data["tipo"] == "NR") {
+          for (var col in cols) {
+            if (col['IO'] != 'H' &&
+                !widget._excludedColumns.contains(col['ogg'])) {
+              String rowData = await _getBoxText(data, col);
 
-          visibleCols++;
-          listOfRows.add(colWidget);
+              final colWidget = Padding(
+                padding: const EdgeInsets.only(top: 10.0, bottom: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15.0),
+                      child: Text(
+                        '${data.values.elementAt(6)}',
+                        style: const TextStyle(
+                            color: Colors.white,
+                            backgroundColor: Colors.transparent,
+                            fontSize: 38,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15.0),
+                      child: Row(children: [
+                        Text(
+                          'Classe : ',
+                          style: TextStyle(
+                              backgroundColor: Colors.transparent,
+                              color: kSecondary100),
+                        ),
+                        Text(
+                          '${data.values.elementAt(8)}',
+                          style: const TextStyle(
+                              color: kSecondary100,
+                              backgroundColor: Colors.transparent,
+                              fontSize: 20),
+                        )
+                      ]),
+                    ),
+                    const SizedBox(height: 8),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15.0, right: 15),
+                      child: Divider(
+                        color: kSecondary100,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 7.0),
+                      child: Row(
+                          children: List<Widget>.from(
+                              '${data.values.elementAt(13)}'
+                                  .split(';')
+                                  .map((letter) {
+                        return _getIcon(
+                            letter); // Ottieni l'icona per ogni lettera nella stringa
+                      })).toList()),
+                    ),
+                  ],
+                ),
+              );
+              visibleCols++;
+              listOfRows.add(colWidget);
+            }
+          }
+        } else {
+          for (var col in cols) {
+            if (col['IO'] != 'H' &&
+                !widget._excludedColumns.contains(col['ogg'])) {
+              String rowData = await _getBoxText(data, col);
+
+              final colWidget = Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (col['text'].isNotEmpty)
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(col['text'], style: widget.captionStyle),
+                          ],
+                        ),
+                      ),
+                    Expanded(
+                      flex: 2,
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(rowData,
+                            style: widget.textStyle), // Right side
+                      ),
+                    ),
+                  ]);
+
+              visibleCols++;
+              listOfRows.add(colWidget);
+            }
+          }
         }
-      }
-    }
 
-    if (data["tipo"] == "NR") {
-      if (widget.index == 0 && visibleCols > 0) {
-        double rowHeight =
-            Platform.isIOS ? 16 : 14; // ogni riga è testo + padding ( 10
-        KenMessageBus.instance.fireEvent(
-          KenBoxOnSizeChanged(
-            messageBusId:
-                KenUtilities.getMessageBusId(widget.id!, widget.formKey),
-            height: (visibleCols * 196),
-          ),
-        );
-      }
-    } else {
-      if (widget.index == 0 && visibleCols > 0) {
-        double rowHeight =
-            Platform.isIOS ? 16 : 14; // ogni riga è testo + padding ( 10
-        KenMessageBus.instance.fireEvent(
-          KenBoxOnSizeChanged(
-            messageBusId:
-                KenUtilities.getMessageBusId(widget.id!, widget.formKey),
-            height: (visibleCols * rowHeight) + 46,
-          ),
+        if (data["tipo"] == "NR") {
+          if (widget.index == 0 && visibleCols > 0) {
+            double rowHeight =
+                Platform.isIOS ? 16 : 14; // ogni riga è testo + padding ( 10
+            KenMessageBus.instance.fireEvent(
+              KenBoxOnSizeChanged(
+                messageBusId:
+                    KenUtilities.getMessageBusId(widget.id!, widget.formKey),
+                height: (visibleCols * 196),
+              ),
+            );
+          }
+        } else {
+          if (widget.index == 0 && visibleCols > 0) {
+            double rowHeight =
+                Platform.isIOS ? 16 : 14; // ogni riga è testo + padding ( 10
+            KenMessageBus.instance.fireEvent(
+              KenBoxOnSizeChanged(
+                messageBusId:
+                    KenUtilities.getMessageBusId(widget.id!, widget.formKey),
+                height: (visibleCols * rowHeight) + 46,
+              ),
+            );
+          }
+        }
+        return Row(
+          children: [Expanded(child: Column(children: listOfRows))],
         );
       }
     }
-    return Row(
-      children: [Expanded(child: Column(children: listOfRows))],
-    );
+    return Container();
   }
 
   // LAYOUT 4
@@ -593,6 +638,23 @@ class KenBoxState extends State<KenBox> {
           );
 
           listOfRows.add(imageWidget);
+        } else if (col['canonicalForm'].toString().contains("JL")) {
+          final colWidget2 = Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (col['text'].isNotEmpty)
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Center(
+                        child:
+                            Text(rowData, style: TextStyle(color: Colors.red)),
+                      ),
+                    ),
+                  ),
+              ]);
+          listOfRows.add(colWidget2);
         } else if (col['text'].isNotEmpty) {
           // Handle other columns (role and description)
           final colWidget = Row(
