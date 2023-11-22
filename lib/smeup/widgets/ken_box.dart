@@ -291,7 +291,7 @@ class KenBoxState extends State<KenBox> {
     }
 
     if (widget.index == 0 && visibleCols > 0) {
-      double rowHeight = Platform.isIOS ? 15 : 14;
+      double rowHeight = Platform.isIOS ? 16 : 14;
       KenMessageBus.instance.fireEvent(
         KenBoxOnSizeChanged(
           messageBusId:
