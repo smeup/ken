@@ -8,6 +8,7 @@ import '../managers/ken_configuration_manager.dart';
 import '../managers/ken_localization_manager.dart';
 
 import '../helpers/ken_utilities.dart';
+import '../services/ken_defaults.dart';
 import '../services/message_bus/ken_message_bus.dart';
 import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_not_available.dart';
@@ -120,6 +121,9 @@ class KenBoxState extends State<KenBox> {
     }
 
     switch (widget.layout ?? '') {
+      case '1':
+        box = await _getLayout1(widget.data);
+        break;
       // layouts Smeup
       case '4':
         box = await _getLayout4(widget.data);
@@ -130,10 +134,13 @@ class KenBoxState extends State<KenBox> {
         box = await _getLayoutImageList(widget.data);
         break;
       default:
-        debugPrint('No layout received. Used default layout');
-
-        box = await _getLayoutDefault(widget.data);
+        box = await _getLayout1(widget.data);
         break;
+      // Coomentato il default
+      // default:
+      // debugPrint('No layout received. Used default layout');
+      // box = await _getLayoutDefault(widget.data);
+      // break;
     }
 
     Widget res = widget.dismissEnabled!
@@ -291,7 +298,8 @@ class KenBoxState extends State<KenBox> {
     }
 
     if (widget.index == 0 && visibleCols > 0) {
-      double rowHeight = Platform.isIOS ? 16 : 14;
+      double rowHeight =
+          Platform.isIOS ? 16 : 14; // ogni riga è testo + padding ( 10
       KenMessageBus.instance.fireEvent(
         KenBoxOnSizeChanged(
           messageBusId:
@@ -301,6 +309,230 @@ class KenBoxState extends State<KenBox> {
       );
     }
 
+    return Row(
+      children: [Expanded(child: Column(children: listOfRows))],
+    );
+  }
+
+  // LAYOUT 1
+
+  Future<Widget> _getLayout1(dynamic data) async {
+    final cols = await _getColumns(data);
+
+    if (data.length > 0) {
+      return GestureDetector(
+        key: Key('${(widget.key as ValueKey).value}_gesture_detector'),
+        onTap: () {
+          _manageTap(widget.index, data);
+        },
+        child: Card(
+            key: Key('${(widget.key as ValueKey).value}_card'),
+            color: widget.backColor,
+            child: Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: FutureBuilder<Widget>(
+                    future: _getLayoutDefault1(data, cols),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Container();
+                      } else {
+                        if (snapshot.hasError) {
+                          return const KenNotAvailable();
+                        } else {
+                          return snapshot.data!;
+                        }
+                      }
+                    }))),
+      );
+    }
+
+    debugPrint('Error SmeupBox widget not created');
+
+    return const KenNotAvailable();
+  }
+
+  Widget _getIcon(String letter) {
+    if (letter == '') letter = 'None';
+    Map<String, IconData> iconMap = {
+      'C': Icons.desktop_mac, // client
+      'P': Icons.phone, // phone
+      'T': Icons.tablet, // tablet
+      'W': Icons.web_asset, // web
+      'None': Icons.error
+    };
+
+    if (iconMap.containsKey(letter)) {
+      return Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(
+                60, 224, 224, 224), // Set the gray background color
+            borderRadius: BorderRadius.circular(
+                4.0), // Set border radius for rectangular shape
+            border: Border.all(
+              color: Colors.white, // Set the color of the border
+              width: 1.0, // Set the width of the border
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+                child: Text(
+                  letter,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    backgroundColor: Colors.transparent,
+                  ),
+                ),
+              ),
+              SizedBox(width: 8.0),
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Icon(
+                  iconMap[letter],
+                  size: 14,
+                  color: Colors.white, // Icon color
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    } else {
+      return SizedBox(); // If the letter is not found, return an empty SizedBox
+    }
+  }
+
+  Future<Widget> _getLayoutDefault1(dynamic data, cols) async {
+    var listOfRows = List<Widget>.empty(growable: true);
+    int visibleCols = 0;
+
+    if (data["tipo"] == "NR") {
+      final colWidget = Padding(
+        padding: const EdgeInsets.only(top: 10.0, bottom: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0),
+              child: Text(
+                data["COMCOD"],
+                style: const TextStyle(
+                    color: Colors.white,
+                    backgroundColor: Colors.transparent,
+                    fontSize: 38,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0),
+              child: Row(children: [
+                Text(
+                  'Classe : ',
+                  style: TextStyle(
+                      backgroundColor: Colors.transparent,
+                      color: kSecondary100),
+                ),
+                Text(
+                  data["COMA01"],
+                  style: const TextStyle(
+                      color: kSecondary100,
+                      backgroundColor: Colors.transparent,
+                      fontSize: 20),
+                )
+              ]),
+            ),
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0, right: 15),
+              child: Divider(
+                color: kSecondary100,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 7.0),
+              child: Row(
+                  children:
+                      List<Widget>.from(data["COMA12"].split(';').map((letter) {
+                return _getIcon(
+                    letter); // Ottieni l'icona per ogni lettera nella stringa
+              })).toList()),
+            ),
+          ],
+        ),
+      );
+      visibleCols++;
+      listOfRows.add(colWidget);
+    } else {
+      for (var col in cols) {
+        if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
+          String rowData = await _getBoxText(data, col);
+
+          final colWidget = Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (col['text'].isNotEmpty)
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(col['text'], style: widget.captionStyle),
+                      ],
+                    ),
+                  ),
+                Expanded(
+                  flex: 2,
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(rowData, style: widget.textStyle), // Right side
+                  ),
+                ),
+              ]);
+
+          visibleCols++;
+          listOfRows.add(colWidget);
+        }
+      }
+    }
+
+    if (data["tipo"] == "NR") {
+      if (widget.index == 0 && visibleCols > 0) {
+        double rowHeight =
+            Platform.isIOS ? 16 : 14; // ogni riga è testo + padding ( 10
+        KenMessageBus.instance.fireEvent(
+          KenBoxOnSizeChanged(
+            messageBusId:
+                KenUtilities.getMessageBusId(widget.id!, widget.formKey),
+            height: (visibleCols * 196),
+          ),
+        );
+      }
+    } else {
+      if (widget.index == 0 && visibleCols > 0) {
+        double rowHeight =
+            Platform.isIOS ? 16 : 14; // ogni riga è testo + padding ( 10
+        KenMessageBus.instance.fireEvent(
+          KenBoxOnSizeChanged(
+            messageBusId:
+                KenUtilities.getMessageBusId(widget.id!, widget.formKey),
+            height: (visibleCols * rowHeight) + 46,
+          ),
+        );
+      }
+    }
     return Row(
       children: [Expanded(child: Column(children: listOfRows))],
     );
