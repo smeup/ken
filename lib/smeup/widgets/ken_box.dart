@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:clickable_list_wheel_view/measure_size.dart';
 import 'package:flutter/material.dart';
@@ -290,11 +291,12 @@ class KenBoxState extends State<KenBox> {
     }
 
     if (widget.index == 0 && visibleCols > 0) {
+      double rowHeight = Platform.isIOS ? 15 : 14;
       KenMessageBus.instance.fireEvent(
         KenBoxOnSizeChanged(
           messageBusId:
               KenUtilities.getMessageBusId(widget.id!, widget.formKey),
-          height: (visibleCols * 14) + 46,
+          height: (visibleCols * rowHeight) + 46,
         ),
       );
     }
