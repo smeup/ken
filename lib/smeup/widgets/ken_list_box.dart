@@ -1,5 +1,6 @@
 import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/material.dart';
+import '../managers/ken_configuration_manager.dart';
 import '../services/ken_defaults.dart';
 import '../helpers/ken_utilities.dart';
 import 'ken_box.dart';
@@ -200,9 +201,7 @@ class KenListBoxState extends State<KenListBox> {
       key: Key('${(widget.key as ValueKey).value}_list'),
       controller: _scrollController,
       scrollDirection: widget.orientation!,
-      physics: _executeBouncing
-          ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
-          : null,
+      physics: getPhysics(),
       itemCount: cells.length,
       itemBuilder: (context, index) {
         return cells[index];
@@ -224,7 +223,7 @@ class KenListBoxState extends State<KenListBox> {
       controller: _scrollController,
       scrollDirection: widget.orientation!,
       shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
+      physics: getPhysics(),
       itemCount: cells.length,
       itemBuilder: (context, index) {
         return cells[index];
@@ -240,6 +239,16 @@ class KenListBoxState extends State<KenListBox> {
     return container;
   }
 
+  ScrollPhysics? getPhysics() {
+    if (KenConfigurationManager.defaultAutoAdaptHeight!) {
+      return const NeverScrollableScrollPhysics();
+    } else {
+      return _executeBouncing
+          ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+          : null;
+    }
+  }
+
   Widget _getWheelList(List<Widget> cells) {
     ClickableListWheelScrollView list;
 
@@ -252,10 +261,7 @@ class KenListBoxState extends State<KenListBox> {
         itemHeight: widget.height!,
         itemCount: cells.length,
         child: ListWheelScrollView.useDelegate(
-          physics: _executeBouncing
-              ? const BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics())
-              : null,
+          physics: getPhysics(),
           controller: _scrollController,
           itemExtent: widget.height!,
           onSelectedItemChanged: (index) {
