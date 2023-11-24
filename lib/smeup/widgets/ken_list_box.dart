@@ -153,8 +153,12 @@ class KenListBoxState extends State<KenListBox> {
         return const KenNotAvailable();
     }
 
-    return SingleChildScrollView(
-      child: children,
+    //_runAutomaticScroll();
+
+    return ListView(
+      children: [
+        children,
+      ],
     );
   }
 
@@ -192,7 +196,9 @@ class KenListBoxState extends State<KenListBox> {
       },
     );
 
-    return list;
+    final container = list;
+
+    return container;
   }
 
   ScrollPhysics? getPhysics() {
@@ -230,11 +236,7 @@ class KenListBoxState extends State<KenListBox> {
         ));
     // );
 
-    final container = Container(
-        padding: widget.padding,
-        color: Colors.transparent,
-        height: widget.listHeight,
-        child: list);
+    final container = list;
 
     return container;
   }
