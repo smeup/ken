@@ -323,6 +323,7 @@ class KenBoxState extends State<KenBox> {
 
   // LAYOUT 1
   // XPPPPPPX
+  /// A scopo dimostrativo c'è un controllo su una colonna, ma poi mi aspetto che il nome del layout mi arrivi da un'altra parte
 
   Future<Widget> _getLayout1(dynamic data) async {
     final cols = await _getColumns(data);
@@ -368,77 +369,96 @@ class KenBoxState extends State<KenBox> {
       if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
         String rowData = await _getBoxText(data, col);
 
-        if (col['canonicalForm'].toString().contains("V2") &&
-            !(col['canonicalForm'].toString().contains("JL"))) {
-          count++;
-          final colWidget = Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Row(
+        if (data["tipo"] == "NR") {
+          if (col['canonicalForm'].toString().contains("V2") &&
+              !(col['canonicalForm'].toString().contains("JL"))) {
+            count++;
+            final colWidget = Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (count == 1)
+                      Expanded(
+                        flex: 2,
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(rowData,
+                              style: const TextStyle(
+                                  color: kSecondary100,
+                                  fontSize: 37,
+                                  fontWeight: FontWeight.w600,
+                                  backgroundColor:
+                                      Colors.transparent)), // Right side
+                        ),
+                      ),
+                    if (count != 1)
+                      Expanded(
+                        flex: 1,
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Text('${col['text']} $rowData',
+                              style: widget.captionStyle), // Right side
+                        ),
+                      ),
+                  ]),
+            );
+
+            visibleCols++;
+            listOfRows.add(colWidget);
+          }
+
+          if (col['canonicalForm'].toString().contains("JL")) {
+            final colWidget = Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // if (col['text'].isNotEmpty)
-                  //   Expanded(
-                  //     flex: 1,
-                  //     child: Column(
-                  //       mainAxisSize: MainAxisSize.max,
-                  //       mainAxisAlignment: MainAxisAlignment.start,
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         Text(col['text'], style: widget.captionStyle),
-                  //       ],
-                  //     ),
-                  //   ),
-                  if (count == 1)
-                    Expanded(
-                      flex: 2,
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(rowData,
-                            style: const TextStyle(
-                                color: kSecondary100,
-                                fontSize: 37,
-                                fontWeight: FontWeight.w600,
-                                backgroundColor:
-                                    Colors.transparent)), // Right side
-                      ),
-                    ),
-                  if (count != 1)
-                    Expanded(
-                      flex: 1,
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text('${col['text']} $rowData',
-                            style: widget.captionStyle), // Right side
-                      ),
-                    ),
-                ]),
-          );
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Divider(
+                    color: kSecondary100,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children:
+                          List<Widget>.from(rowData.split(';').map((letter) {
+                        return _getIcon(
+                            letter); // Ottieni l'icona per ogni lettera nella stringa
+                      })).toList()),
+                ]);
 
-          visibleCols++;
-          listOfRows.add(colWidget);
-        }
-        if (col['canonicalForm'].toString().contains("JL")) {
-          final colWidget = Column(
+            visibleCols++;
+            listOfRows.add(colWidget);
+          }
+        } else {
+          final colWidget = Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 10,
+                if (col['text'].isNotEmpty)
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(col['text'], style: widget.captionStyle),
+                      ],
+                    ),
+                  ),
+                Expanded(
+                  flex: 2,
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(rowData, style: widget.textStyle), // Right side
+                  ),
                 ),
-                Divider(
-                  color: kSecondary100,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children:
-                        List<Widget>.from(rowData.split(';').map((letter) {
-                      return _getIcon(
-                          letter); // Ottieni l'icona per ogni lettera nella stringa
-                    })).toList()),
               ]);
 
           visibleCols++;
@@ -446,6 +466,7 @@ class KenBoxState extends State<KenBox> {
         }
       }
     }
+
     if (data["tipo"] == "NR") {
       if (widget.index == 0 && visibleCols > 0) {
         double rowHeight =
