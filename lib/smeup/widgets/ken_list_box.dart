@@ -2,7 +2,6 @@ import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/material.dart';
 import '../managers/ken_configuration_manager.dart';
 import '../services/ken_defaults.dart';
-import '../helpers/ken_utilities.dart';
 import 'ken_box.dart';
 import 'ken_not_available.dart';
 
@@ -103,16 +102,12 @@ class KenListBoxState extends State<KenListBox> {
   ScrollController? _scrollController;
   int? _selectedRow = -1;
   final bool _executeBouncing = false;
-  Orientation? _orientation;
-  double? _availableSpace;
 
   @override
   void initState() {
     _data = widget.data;
     _selectedRow = widget.selectedRow;
     _scrollController = ScrollController();
-    _availableSpace =
-        widget.availableSpace ?? KenUtilities.getDeviceInfo().safeHeight;
 
     String? storageSelectedRow = widget.storageSelectedRow;
 
@@ -122,32 +117,6 @@ class KenListBoxState extends State<KenListBox> {
     //_executeBouncing = true;// così in originale
 
     super.initState();
-  }
-
-  void _runAutomaticScroll() {
-    Future.delayed(const Duration(milliseconds: 80), () async {
-      double? realBoxHeight = widget.realBoxHeight;
-
-      if (widget.listType == KenListType.oriented &&
-          _selectedRow != -1 &&
-          realBoxHeight != null) {
-        if (_orientation != null) {
-          int colsNumber = _orientation == Orientation.landscape
-              ? widget.landscapeColumns!
-              : widget.portraitColumns!;
-
-          double scrollPosition =
-              ((_selectedRow! + 1) * realBoxHeight / colsNumber);
-          if (scrollPosition > _availableSpace!) {
-            if (_scrollController!.positions.isNotEmpty) {
-              _scrollController!.animateTo(scrollPosition,
-                  duration: const Duration(milliseconds: 80),
-                  curve: Curves.bounceInOut);
-            }
-          }
-        }
-      }
-    });
   }
 
   @override
@@ -164,8 +133,6 @@ class KenListBoxState extends State<KenListBox> {
 
   @override
   Widget build(BuildContext context) {
-    _orientation = MediaQuery.of(context).orientation;
-
     cells = _getCells();
     if (cells == null) {
       return const KenNotAvailable();
@@ -186,14 +153,9 @@ class KenListBoxState extends State<KenListBox> {
         return const KenNotAvailable();
     }
 
-    //_runAutomaticScroll();
-
     return SingleChildScrollView(
-        child: Column(
-      children: [
-        children,
-      ],
-    ));
+      child: children,
+    );
   }
 
   Widget _getSimpleList(List<Widget> cells) {
@@ -230,13 +192,7 @@ class KenListBoxState extends State<KenListBox> {
       },
     );
 
-    final container = Container(
-        padding: widget.padding,
-        color: Colors.transparent,
-        height: widget.listHeight,
-        child: list);
-
-    return container;
+    return list;
   }
 
   ScrollPhysics? getPhysics() {
