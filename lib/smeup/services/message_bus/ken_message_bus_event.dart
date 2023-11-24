@@ -258,3 +258,9 @@ class TreeNodeOnTapEvent extends KenMessageBusEvent {
     required this.data,
   });
 }
+
+class KenBoxOnListLoaded extends KenMessageBusEvent {
+  KenBoxOnListLoaded({
+    required super.messageBusId,
+  });
+}
