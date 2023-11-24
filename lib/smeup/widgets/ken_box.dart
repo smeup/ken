@@ -324,6 +324,9 @@ class KenBoxState extends State<KenBox> {
   // LAYOUT 1
   // XPPPPPPX
   /// A scopo dimostrativo c'è un controllo su una colonna, ma poi mi aspetto che il nome del layout mi arrivi da un'altra parte
+  /////////////////////////////////
+  ///   RIMUOVERE CONDIZIONE    ///
+  /////////////////////////////////
 
   Future<Widget> _getLayout1(dynamic data) async {
     final cols = await _getColumns(data);
@@ -364,6 +367,9 @@ class KenBoxState extends State<KenBox> {
   Future<Widget> _getLayoutDefault1(dynamic data, cols) async {
     var listOfRows = List<Widget>.empty(growable: true);
     int visibleCols = 0;
+    int visibleBigCols = 0;
+    int visibleList = 0;
+    int defaultVisibleCols = 0;
     var count = 0;
     for (var col in cols) {
       if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
@@ -405,7 +411,8 @@ class KenBoxState extends State<KenBox> {
                   ]),
             );
 
-            visibleCols++;
+            visibleBigCols = 1;
+            visibleCols = count - 1;
             listOfRows.add(colWidget);
           }
 
@@ -432,7 +439,7 @@ class KenBoxState extends State<KenBox> {
                       })).toList()),
                 ]);
 
-            visibleCols++;
+            visibleList++;
             listOfRows.add(colWidget);
           }
         } else {
@@ -461,22 +468,31 @@ class KenBoxState extends State<KenBox> {
                 ),
               ]);
 
-          visibleCols++;
+          defaultVisibleCols++;
           listOfRows.add(colWidget);
         }
       }
     }
 
     if (data["tipo"] == "NR") {
-      if (widget.index == 0 && visibleCols > 0) {
-        double rowHeight =
-            Platform.isIOS ? 16 : 14; // ogni riga è testo + padding ( 10
+      if (widget.index == 0 &&
+          (visibleCols + visibleBigCols + visibleList) > 0) {
+        double rowHeight = 14;
+        int cardHeight = 8;
+        double bigTitle = Platform.isIOS ? 44 : 43;
+        double visibleListHeight = Platform.isIOS ? 63 : 62;
+        final sumHeight = ((visibleCols * rowHeight) +
+            (defaultVisibleCols * rowHeight) +
+            (visibleBigCols * bigTitle) +
+            (visibleList * visibleListHeight) +
+            28 +
+            10 +
+            cardHeight);
         KenMessageBus.instance.fireEvent(
           KenBoxOnSizeChanged(
-            messageBusId:
-                KenUtilities.getMessageBusId(widget.id!, widget.formKey),
-            height: (visibleCols * 196),
-          ),
+              messageBusId:
+                  KenUtilities.getMessageBusId(widget.id!, widget.formKey),
+              height: sumHeight),
         );
       }
     } else {
@@ -485,10 +501,9 @@ class KenBoxState extends State<KenBox> {
             Platform.isIOS ? 16 : 14; // ogni riga è testo + padding ( 10
         KenMessageBus.instance.fireEvent(
           KenBoxOnSizeChanged(
-            messageBusId:
-                KenUtilities.getMessageBusId(widget.id!, widget.formKey),
-            height: (visibleCols * rowHeight) + 46,
-          ),
+              messageBusId:
+                  KenUtilities.getMessageBusId(widget.id!, widget.formKey),
+              height: (visibleCols * rowHeight)),
         );
       }
     }
