@@ -147,6 +147,12 @@ class RadioButtonSelDataEvent extends KenMessageBusEvent {
   });
 }
 
+class KenBoxOnListLoaded extends KenMessageBusEvent {
+  KenBoxOnListLoaded({
+    required super.messageBusId,
+  });
+}
+
 class KenBoxOnItemTapEvent extends KenMessageBusEvent {
   int index;
   dynamic data;
@@ -259,8 +265,8 @@ class TreeNodeOnTapEvent extends KenMessageBusEvent {
   });
 }
 
-class KenBoxOnListLoaded extends KenMessageBusEvent {
-  KenBoxOnListLoaded({
+class KenScreenOnResume extends KenMessageBusEvent {
+  KenScreenOnResume({
     required super.messageBusId,
   });
 }
