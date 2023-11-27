@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import '../../models/widgets/ken_calendar_event_model.dart';
 import '../../models/widgets/ken_input_panel_value.dart';
+import '../../widgets/ken_box.dart';
 import '../../widgets/ken_calendar_widget.dart';
 import '../../widgets/ken_timepicker.dart';
 
@@ -173,6 +174,20 @@ class KenBoxOnDismissedEvent extends KenMessageBusEvent {
     required super.messageBusId,
     required this.direction,
   });
+}
+
+class KenBoxGetLayout extends KenMessageBusEvent {
+  KenBox kenbox;
+  Function manageTap;
+  KenBoxGetLayout(
+      {required super.messageBusId,
+      required this.kenbox,
+      required this.manageTap});
+}
+
+class KenBoxsendLayout extends KenMessageBusEvent {
+  Widget? layout;
+  KenBoxsendLayout({required super.messageBusId, required this.layout});
 }
 
 class SliderOnChangeRealtimeEvent extends KenMessageBusEvent {

@@ -180,7 +180,7 @@ class KenDrawerState extends State<KenDrawer> {
         titleAlignment: ListTileTitleAlignment.center,
         leading: e.groupIconData != null
             ? Icon(
-                e.group,
+                e.groupIconData,
                 color: widget.iconColor,
                 size: widget.iconSize,
               )

@@ -33,7 +33,7 @@ class KenButtonsDefaults {
   static const bool defaultFontBold = false;
   static const double defaultIconSize = 16;
   static const Color defaultIconColor = Colors.white;
-  static const double defaultWidth = 180;
+  static const double defaultWidth = 100;
   static const double defaultHeight = 50;
   static const MainAxisAlignment defaultPosition = MainAxisAlignment.center;
   static const Alignment defaultAlign = Alignment.centerRight;
@@ -63,7 +63,7 @@ class KenDashboardDefaults {
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
   static const double defaultWidth = 300;
   static const double defaultHeight = 120;
-  static const String defaultValueColName = 'value';
+  static const String defaultValueColName = 'VAL';
   static const String defaultIconColName = 'icon';
   static const String defaultTextColName = 'description';
   static const String defaultUmColName = 'um';

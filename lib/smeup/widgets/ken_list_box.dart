@@ -165,10 +165,8 @@ class KenListBoxState extends State<KenListBox> {
 
     //_runAutomaticScroll();
 
-    return ListView(
-      children: [
-        children,
-      ],
+    return SingleChildScrollView(
+      child: children,
     );
   }
 
@@ -264,6 +262,8 @@ class KenListBoxState extends State<KenListBox> {
     }
 
     _data['rows'].asMap().forEach((i, dataElement) {
+      final infoElement =
+          _data['cellsinfo'] != null ? _data['cellsinfo'][i] : null;
       // var _backColor = widget.backColor;
       var backColor =
           (dataElement["disabled"] != null && dataElement["disabled"] as bool)
@@ -336,6 +336,7 @@ class KenListBoxState extends State<KenListBox> {
         id: widget.id,
         layout: widget.layout,
         columns: _data['columns'],
+        cellsInfo: infoElement,
         data: dataElement,
         height: widget.height,
         width: widget.width,

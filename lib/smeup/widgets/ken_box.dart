@@ -28,6 +28,7 @@ class KenBox extends StatefulWidget {
   ];
   final List<dynamic>? columns;
   final dynamic data;
+  final dynamic cellsInfo;
   final bool? showLoader;
   final String? id;
   final String? layout;
@@ -54,6 +55,7 @@ class KenBox extends StatefulWidget {
       this.selectedRow,
       this.columns,
       this.data,
+      this.cellsInfo,
       this.onRefresh,
       this.showLoader,
       this.layout,
@@ -128,20 +130,20 @@ class KenBoxState extends State<KenBox> {
 
     switch (widget.layout ?? '') {
       case '1':
-        box = await _getLayout1(widget.data);
+        box = await _getLayout1();
         break;
       // layouts Smeup
       case '4':
-        box = await _getLayout4(widget.data);
+        box = await _getLayout4();
         break;
       case 'button':
-        box = await _getLayoutButtons(widget.data);
+        box = await _getLayoutButtons();
       case 'imageList':
-        box = await _getLayoutImageList(widget.data);
+        box = await _getLayoutImageList();
         break;
       default:
         // TODO da ripristinare
-        box = await _getLayout1(widget.data);
+        box = await _getLayout1();
         break;
       // Coomentato il default
       // default:
@@ -231,14 +233,14 @@ class KenBoxState extends State<KenBox> {
 
   // LAYOUT DEFAULT
   // TODO da ripristinare
-  Future<Widget> _getLayoutDefault(dynamic data) async {
-    final cols = await _getColumns(data);
+  Future<Widget> _getLayoutDefault() async {
+    final cols = await _getColumns(widget.data);
 
-    if (data.length > 0) {
+    if (widget.data.length > 0) {
       return GestureDetector(
         key: Key('${(widget.key as ValueKey).value}_gesture_detector'),
         onTap: () {
-          _manageTap(widget.index, data);
+          _manageTap(widget.index, widget.data);
         },
         child: Card(
             key: Key('${(widget.key as ValueKey).value}_card'),
@@ -246,7 +248,7 @@ class KenBoxState extends State<KenBox> {
             child: Padding(
                 padding: const EdgeInsets.all(14.0),
                 child: FutureBuilder<Widget>(
-                    future: _getLayoutDefaultData(data, cols),
+                    future: _getLayoutDefaultData(cols),
                     builder:
                         (BuildContext context, AsyncSnapshot<Widget> snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
@@ -267,11 +269,11 @@ class KenBoxState extends State<KenBox> {
     return const KenNotAvailable();
   }
 
-  Future<Widget> _getLayoutDefaultData(dynamic data, cols) async {
+  Future<Widget> _getLayoutDefaultData(cols) async {
     var listOfRows = List<Widget>.empty(growable: true);
     for (var col in cols) {
       if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
-        String rowData = await _getBoxText(data, col);
+        String rowData = await _getBoxText(col);
 
         final colWidget = Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -314,14 +316,14 @@ class KenBoxState extends State<KenBox> {
   ///   RIMUOVERE CONDIZIONE    ///
   /////////////////////////////////
 
-  Future<Widget> _getLayout1(dynamic data) async {
-    final cols = await _getColumns(data);
+  Future<Widget> _getLayout1() async {
+    final cols = await _getColumns(widget.data);
 
-    if (data.length > 0) {
+    if (widget.data.length > 0) {
       return GestureDetector(
         key: Key('${(widget.key as ValueKey).value}_gesture_detector'),
         onTap: () {
-          _manageTap(widget.index, data);
+          _manageTap(widget.index, widget.data);
         },
         child: Card(
             key: Key('${(widget.key as ValueKey).value}_card'),
@@ -329,7 +331,7 @@ class KenBoxState extends State<KenBox> {
             child: Padding(
                 padding: const EdgeInsets.all(14.0),
                 child: FutureBuilder<Widget>(
-                    future: _getLayoutDefault1(data, cols),
+                    future: _getLayoutDefault1(cols),
                     builder:
                         (BuildContext context, AsyncSnapshot<Widget> snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
@@ -350,14 +352,15 @@ class KenBoxState extends State<KenBox> {
     return const KenNotAvailable();
   }
 
-  Future<Widget> _getLayoutDefault1(dynamic data, cols) async {
+  Future<Widget> _getLayoutDefault1(cols) async {
     var listOfRows = List<Widget>.empty(growable: true);
     var count = 0;
     for (var col in cols) {
       if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
-        String rowData = await _getBoxText(data, col);
+        String rowData = await _getBoxText(col);
 
-        if (data["tipo"] == "NR") {
+        if (widget.data["smeupObject"] != null &&
+            widget.data["smeupObject"]["tipo"] == "NR") {
           if (col['canonicalForm'].toString().contains("V2") &&
               !(col['canonicalForm'].toString().contains("JL"))) {
             count++;
@@ -459,21 +462,21 @@ class KenBoxState extends State<KenBox> {
 
   // LAYOUT 4
 
-  Future<Widget> _getLayout4(dynamic data) async {
-    final cols = await _getColumns(data);
+  Future<Widget> _getLayout4() async {
+    final cols = await _getColumns(widget.data);
 
-    if (data.length > 0) {
+    if (widget.data.length > 0) {
       return GestureDetector(
         key: Key('${(widget.key as ValueKey).value}_gesture_detector'),
         onTap: () {
-          _manageTap(widget.index, data);
+          _manageTap(widget.index, widget.data);
         },
         child: Card(
           color: widget.backColor,
           child: Padding(
             padding: const EdgeInsets.all(14.0),
             child: FutureBuilder<Widget>(
-              future: _getLayout4Async(data, cols),
+              future: _getLayout4Async(cols),
               builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Container();
@@ -496,12 +499,12 @@ class KenBoxState extends State<KenBox> {
     return const KenNotAvailable();
   }
 
-  Future<Widget> _getLayout4Async(dynamic data, cols) async {
+  Future<Widget> _getLayout4Async(cols) async {
     var listOfRows = List<Widget>.empty(growable: true);
 
     for (var col in cols) {
       if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
-        String rowData = await _getBoxText(data, col);
+        String rowData = await _getBoxText(col);
 
         if (col['code'] == 'image') {
           // Handle the image column
@@ -558,14 +561,14 @@ class KenBoxState extends State<KenBox> {
 
   // LAYOUT WITH BUTTONS
 
-  Future<Widget> _getLayoutButtons(dynamic data) async {
-    final cols = await _getColumns(data);
+  Future<Widget> _getLayoutButtons() async {
+    final cols = await _getColumns(widget.data);
 
-    if (data.length > 0) {
+    if (widget.data.length > 0) {
       return GestureDetector(
         key: Key('${(widget.key as ValueKey).value}_gesture_detector'),
         onTap: () {
-          _manageTap(widget.index, data);
+          _manageTap(widget.index, widget.data);
         },
         child: Card(
             color: widget.cardTheme!.color,
@@ -576,7 +579,7 @@ class KenBoxState extends State<KenBox> {
                   padding: const EdgeInsets.all(12),
                   height: widget.height,
                   child: FutureBuilder<Widget>(
-                      future: _getLayoutButtonAsync(data, cols),
+                      future: _getLayoutButtonAsync(cols),
                       builder: (BuildContext context,
                           AsyncSnapshot<Widget> snapshot) {
                         if (snapshot.connectionState ==
@@ -603,11 +606,11 @@ class KenBoxState extends State<KenBox> {
     return const KenNotAvailable();
   }
 
-  Future<Widget> _getLayoutButtonAsync(dynamic data, cols) async {
+  Future<Widget> _getLayoutButtonAsync(cols) async {
     var widgets = List<Widget>.empty(growable: true);
     for (var col in cols) {
       if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
-        String rowData = await _getBoxText(data, col);
+        String rowData = await _getBoxText(col);
 
         final textWidget = Container(
           padding: const EdgeInsets.all(1),
@@ -634,7 +637,7 @@ class KenBoxState extends State<KenBox> {
       }
     }
 
-    var buttonWidgets = await _getButtons(data);
+    var buttonWidgets = await _getButtons();
 
     widgets.add(Padding(
       padding: const EdgeInsets.only(top: 5),
@@ -653,14 +656,14 @@ class KenBoxState extends State<KenBox> {
 
   // OTHER
 
-  Future<Widget> _getLayoutImageList(dynamic data) async {
-    final cols = await _getColumns(data);
+  Future<Widget> _getLayoutImageList() async {
+    final cols = await _getColumns(widget.data);
 
-    if (data.length > 0) {
+    if (widget.data.length > 0) {
       return GestureDetector(
         key: Key('${(widget.key as ValueKey).value}_gesture_detector'),
         onTap: () {
-          _manageTap(widget.index, data);
+          _manageTap(widget.index, widget.data);
         },
         child: Card(
             key: Key('${(widget.key as ValueKey).value}_card'),
@@ -673,7 +676,7 @@ class KenBoxState extends State<KenBox> {
                   height: widget.height,
                   width: widget.width,
                   child: FutureBuilder<Widget>(
-                      future: _getImageAndDataInColumn(data, cols),
+                      future: _getImageAndDataInColumn(cols),
                       builder: (BuildContext context,
                           AsyncSnapshot<Widget> snapshot) {
                         if (snapshot.connectionState ==
@@ -721,10 +724,10 @@ class KenBoxState extends State<KenBox> {
   //   );
   // }
 
-  Future<Widget> _getImageAndDataInColumn(dynamic data, cols) async {
-    Widget widgetImg = await _getImage(data);
+  Future<Widget> _getImageAndDataInColumn(cols) async {
+    Widget widgetImg = await _getImage(widget.data);
 
-    var listOfRows = await _getBoxTexts(data, cols);
+    var listOfRows = await _getBoxTexts(cols);
 
     return Column(
       children: [widgetImg, Column(children: listOfRows)],
@@ -784,12 +787,12 @@ class KenBoxState extends State<KenBox> {
   //   );
   // }
 
-  Future<List<Widget>> _getBoxTexts(dynamic data, cols) async {
+  Future<List<Widget>> _getBoxTexts(cols) async {
     var listOfRows = List<Widget>.empty(growable: true);
 
     for (var col in cols) {
       if (col['IO'] != 'H' && !widget._excludedColumns.contains(col['ogg'])) {
-        String rowData = await _getBoxText(data, col);
+        String rowData = await _getBoxText(col);
         final colWidget = SizedBox(
           child: Column(
             children: [
@@ -807,19 +810,19 @@ class KenBoxState extends State<KenBox> {
     return listOfRows;
   }
 
-  Future<List<Widget>> _getButtons(dynamic data) async {
+  Future<List<Widget>> _getButtons() async {
     var widgetBtns = List<Widget>.empty(growable: true);
 
     List<dynamic>? buttonCols;
 
-    var columns = await _getColumns(data);
+    var columns = await _getColumns(widget.data);
 
     if (widget.onGetButtonsColumns != null) {
       buttonCols = widget.onGetButtonsColumns!(columns);
     }
 
     if (widget.onGetButtons != null) {
-      widgetBtns = widget.onGetButtons!(data, buttonCols);
+      widgetBtns = widget.onGetButtons!(buttonCols);
     }
 
     return widgetBtns;
@@ -848,13 +851,14 @@ class KenBoxState extends State<KenBox> {
     return _columns;
   }
 
-  Future<String> _getBoxText(Map data, Map col) async {
+  Future<String> _getBoxText(Map col) async {
     String dataText = "";
 
     if (widget.onGetBoxText != null) {
-      dataText = await widget.onGetBoxText!(data, widget, col);
+      dataText = await widget.onGetBoxText!(
+          widget.data, widget, col, widget.cellsInfo);
     } else {
-      dataText = data[col['code']].toString();
+      dataText = widget.data[col['code']].toString();
     }
 
     return dataText;
