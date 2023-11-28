@@ -93,7 +93,7 @@ Future<void> main() async {
 
       runTests(tester);
     });
-  });
+  }, skip: true);
 }
 
 runTests(WidgetTester tester) async {

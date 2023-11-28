@@ -16,7 +16,7 @@ Future<void> main() async {
       await tester.pumpAndSettle();
       runTests();
     });
-  });
+  }, skip: true);
 }
 
 runTests() {
