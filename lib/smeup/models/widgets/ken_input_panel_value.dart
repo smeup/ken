@@ -1,6 +1,6 @@
 import 'package:xml/xml.dart';
 
-enum KenInputPanelSupportedComp { Cmb, Rad, Itx, Bcd, Acp }
+enum ShiroInputPanelSupportedComp { cmb, rad, itx, bcd, acp }
 
 class SmeupInputPanelValue {
   String? code;
@@ -9,7 +9,8 @@ class SmeupInputPanelValue {
   SmeupInputPanelValue({this.code = "", this.description = ""});
 
   @override
-  bool operator ==(o) => o is SmeupInputPanelValue && code == o.code;
+  bool operator ==(other) =>
+      other is SmeupInputPanelValue && code == other.code;
 
   @override
   int get hashCode {
@@ -28,7 +29,7 @@ class SmeupInputPanelField {
   static const String defaultCodeField = 'codice';
   static const String defaultDescriptionField = 'testo';
 
-  KenInputPanelSupportedComp? component;
+  ShiroInputPanelSupportedComp? component;
   String? id;
   String? label;
   bool? visible;
@@ -41,13 +42,14 @@ class SmeupInputPanelField {
   String? object;
   bool isFirestore;
   String? validation;
+  String? searchObject;
 
   SmeupInputPanelField(
       {this.label = "",
       required String this.id,
       required this.value,
       this.items,
-      this.component = KenInputPanelSupportedComp.Itx,
+      this.component = ShiroInputPanelSupportedComp.itx,
       this.fun,
       this.object,
       this.visible = true,
@@ -55,7 +57,8 @@ class SmeupInputPanelField {
       this.codeField,
       this.descriptionField,
       this.isFirestore = false,
-      this.validation})
+      this.validation,
+      this.searchObject})
       : assert(position >= 0) {
     _setDefaults();
   }
@@ -86,7 +89,7 @@ class SmeupInputPanelField {
     visible = true;
     this.position = position;
     if (fieldFromLayout.getAttribute("Cmp") != null) {
-      for (var comp in KenInputPanelSupportedComp.values) {
+      for (var comp in ShiroInputPanelSupportedComp.values) {
         String name = comp.toString().split('.').last;
         if (name == fieldFromLayout.getAttribute("Cmp")) {
           component = comp;

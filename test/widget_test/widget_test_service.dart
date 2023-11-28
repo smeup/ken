@@ -3,15 +3,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/smeup/services/ken_configuration_service.dart';
-import '../../lib/smeup/services/ken_log_service.dart';
+import 'package:ken/smeup/managers/ken_configuration_manager.dart';
 import 'package:json_theme/json_theme.dart';
 
 class WidgetTestService {
   static bool isInitialized = false;
   static ThemeData? _theme;
-  static GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  static GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  static GlobalKey<ScaffoldState> formKey = GlobalKey<ScaffoldState>();
+  static Key sectionKey = GlobalKey<FormState>();
 
   static initTests() async {
     if (isInitialized) return;
@@ -20,11 +19,11 @@ class WidgetTestService {
 
     await setTheme('');
 
-    await KenConfigurationService.init(null,
+    await KenConfigurationManager.init(null,
         jsonsPath: 'assets/jsons', theme: _theme);
 
     expect(
-      KenConfigurationService.jsonsPath,
+      KenConfigurationManager.jsonsPath,
       'assets/jsons',
     );
   }
@@ -36,11 +35,10 @@ class WidgetTestService {
             await rootBundle.loadString('assets/jsons/themes/$themeFile');
         dynamic themeJson = json.decode(themeStr);
         _theme = ThemeDecoder.decodeThemeData(themeJson, validate: false);
-        KenLogService.writeDebugMessage('Loaded $themeFile theme file');
+        //debugPrint('Loaded $themeFile theme file');
       }
     } catch (e) {
-      KenLogService.writeDebugMessage('Error in getAppStructure: $e',
-          logType: KenLogType.error);
+      debugPrint('Error in getAppStructure: $e');
     } finally {
       if (_theme == null) {
         String themeStr =

@@ -1,6 +1,4 @@
-import '../../services/ken_utilities.dart';
-
-enum ColumnType { Axes, Series }
+enum ColumnType { axes, series }
 
 class KenChartColumn {
   String? name;
@@ -14,15 +12,26 @@ class KenChartColumn {
     type = _getColumnType(jsonMap['fill']);
     name = jsonMap['code'];
     title = jsonMap['text'];
-    size = KenUtilities.getInt(jsonMap['lun']);
+    size = _getInt(jsonMap['lun']);
+  }
+
+  int? _getInt(dynamic value) {
+    if (value is int) {
+      return value;
+    } else if (value is double) {
+      return value.toInt();
+    } else if (value is String) {
+      return int.tryParse(value);
+    }
+    return value;
   }
 
   _getColumnType(String? fill) {
     switch (fill) {
       case 'ASSE':
-        return ColumnType.Axes;
+        return ColumnType.axes;
       case 'SERIE':
-        return ColumnType.Series;
+        return ColumnType.series;
       default:
         return null;
     }

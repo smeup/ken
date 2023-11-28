@@ -1,6 +1,6 @@
 name: ken
 description: super-rich dynamic components for Flutter applications
-version: 0.0.4+14
+version: 1.0.0+15
 homepage: "https://github.com/smeup/ken"
 repository: "https://github.com/smeup/ken"
 issue_tracker: "https://github.com/smeup/ken/issues"
@@ -31,15 +31,16 @@ dependencies:
   json_theme: ^5.0.2+4
   firebase_core: ^2.12.0
   firebase_auth: ^4.6.0
-  cloud_firestore: ^4.8.2
+  cloud_firestore: ^4.11.0
   collection: ^1.17.1
   flutter_js: ^0.7.0
   connectivity_plus: ^4.0.1
   syncfusion_flutter_gauges: ^21.2.4
   flutter_datetime_picker_plus: ^2.0.1
+  flutter_treeview: ^1.0.7+1
   rxdart: ^0.27.7
   uuid: ^3.0.7
-  graphic: ^2.2.0
+
 #    git: https://github.com/madicd/flutter_js.git  this is not the original package but a forked repository
 
 dev_dependencies:
@@ -54,6 +55,8 @@ dependency_overrides:
   collection: ^1.17.2
 
 flutter:
+  uses-material-design: true
+  
   assets:
     - assets/images/
     - assets/jsons/
