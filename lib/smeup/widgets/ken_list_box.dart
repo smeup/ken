@@ -217,19 +217,23 @@ class KenListBoxState extends State<KenListBox> {
       },
     );
 
-    final container = list;
+    final container = Container(
+        padding: widget.padding,
+        color: Colors.transparent,
+        height: widget.listHeight,
+        child: list);
 
     return container;
   }
 
   ScrollPhysics? getPhysics() {
-    if (KenConfigurationManager.defaultAutoAdaptHeight!) {
-      return const NeverScrollableScrollPhysics();
-    } else {
-      return _executeBouncing
-          ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
-          : null;
-    }
+    // if (KenConfigurationManager.defaultAutoAdaptHeight!) {
+    //   return const NeverScrollableScrollPhysics();
+    // } else {
+    return _executeBouncing
+        ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+        : null;
+    //}
   }
 
   Widget _getWheelList(List<Widget> cells) {
