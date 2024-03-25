@@ -70,6 +70,10 @@ class ButtonOnPressedEvent extends KenMessageBusEvent {
   ButtonOnPressedEvent({required super.messageBusId});
 }
 
+class ListboxOnRefreshListEvent extends KenMessageBusEvent {
+  ListboxOnRefreshListEvent({required super.messageBusId});
+}
+
 class InputPanelSubmittedEvent extends KenMessageBusEvent {
   List<SmeupInputPanelField>? value;
 

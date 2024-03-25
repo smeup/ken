@@ -141,6 +141,9 @@ class KenBoxState extends State<KenBox> {
       case 'imageList':
         box = await _getLayoutImageList();
         break;
+      case 'fileList':
+        box = await _getLayoutFileList();
+        break;
       default:
         // TODO da ripristinare
         box = await _getLayout1();
@@ -657,6 +660,53 @@ class KenBoxState extends State<KenBox> {
   // OTHER
 
   Future<Widget> _getLayoutImageList() async {
+    final cols = await _getColumns(widget.data);
+
+    if (widget.data.length > 0) {
+      return GestureDetector(
+        key: Key('${(widget.key as ValueKey).value}_gesture_detector'),
+        onTap: () {
+          _manageTap(widget.index, widget.data);
+        },
+        child: Card(
+            key: Key('${(widget.key as ValueKey).value}_card'),
+            color: widget.cardTheme!.color,
+            shape: (widget.cardTheme!.shape as RoundedRectangleBorder)
+                .copyWith(side: BorderSide(color: widget.cardTheme!.color!)),
+            child: Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: SizedBox(
+                  height: widget.height,
+                  width: widget.width,
+                  child: FutureBuilder<Widget>(
+                      future: _getImageAndDataInColumn(cols),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<Widget> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          //??? va gestito in shiro
+                          // return widget.showLoader!
+                          //     ? SmeupWait(widget.formKey)
+                          //     : Container();
+                          return Container();
+                        } else {
+                          if (snapshot.hasError) {
+                            return const KenNotAvailable();
+                          } else {
+                            return snapshot.data!;
+                          }
+                        }
+                      }),
+                ))),
+      );
+    }
+
+    debugPrint('Error SmeupBox widget not created');
+
+    return const KenNotAvailable();
+  }
+
+  Future<Widget> _getLayoutFileList() async {
     final cols = await _getColumns(widget.data);
 
     if (widget.data.length > 0) {

@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../services/ken_defaults.dart';
+
+enum ImageType { file, network, asset, memory }
 
 class KenImage extends StatefulWidget {
   final GlobalKey<ScaffoldState>? formKey;
@@ -12,7 +16,7 @@ class KenImage extends StatefulWidget {
   final String? title;
   final String? id;
   final String? type;
-  final bool? isRemote;
+  final ImageType? imageType;
   final bool? expand;
 
   const KenImage(this.formKey, this.data,
@@ -22,7 +26,7 @@ class KenImage extends StatefulWidget {
       this.width = KenImageDefaults.defaultWidth,
       this.height = KenImageDefaults.defaultHeight,
       this.padding = KenImageDefaults.defaultPadding,
-      this.isRemote = KenImageDefaults.defaultIsRemote,
+      this.imageType = KenImageDefaults.defaultImageType,
       this.title = '',
       this.expand = false});
 
@@ -47,16 +51,27 @@ class KenImageState extends State<KenImage> {
   @override
   Widget build(BuildContext context) {
     Widget children;
-    Image image;
+    Widget? image;
 
     if (widget.expand!) {
-      if (widget.isRemote!) {
-        image = Image.network(_data,
-            height: widget.height, width: widget.width, fit: BoxFit.fill);
-      } else {
-        image = Image.asset(_data,
-            height: widget.height, width: widget.width, fit: BoxFit.fill);
+      switch (widget.imageType) {
+        case ImageType.network:
+          image = Image.network(_data,
+              height: widget.height, width: widget.width, fit: BoxFit.fill);
+          break;
+        case ImageType.file:
+          image = Image.file(File(_data),
+              height: widget.height, width: widget.width, fit: BoxFit.fill);
+          break;
+        case ImageType.asset:
+          image = Image.asset(_data,
+              height: widget.height, width: widget.width, fit: BoxFit.fill);
+          break;
+        case ImageType.memory:
+          throw ('ImageType.Memory not implemented');
+        default:
       }
+
       children = Container(
         // height: widget.height,
         // width: widget.width,
@@ -64,11 +79,21 @@ class KenImageState extends State<KenImage> {
         child: image,
       );
     } else {
-      if (widget.isRemote!) {
-        image = Image.network(_data);
-      } else {
-        image = Image.asset(_data);
+      switch (widget.imageType) {
+        case ImageType.network:
+          image = Image.network(_data);
+          break;
+        case ImageType.file:
+          image = image = Image.file(_data);
+          break;
+        case ImageType.asset:
+          image = Image.asset(_data);
+          break;
+        case ImageType.memory:
+          throw ('ImageType.Memory not implemented');
+        default:
       }
+
       children = Container(
         height: widget.height,
         width: widget.width,

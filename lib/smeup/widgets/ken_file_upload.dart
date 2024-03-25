@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import '../helpers/ken_utilities.dart';
 import '../services/ken_defaults.dart';
@@ -100,20 +103,45 @@ class KenFileUploadState extends State<KenFileUpload> {
   String _chooseButtonId = '';
   String _uploadButtonId = '';
   String _cancelButtonId = '';
+  String _listId = '';
+  late KenListBox _list;
 
   @override
   void initState() {
     _data = widget.data;
 
     _chooseButtonId = '${widget.id}_chooseButton';
+
+    _listId = '${widget.id}_list';
     KenMessageBus.instance
         .event<ButtonOnPressedEvent>(
             KenUtilities.getMessageBusId(_chooseButtonId, widget.formKey))
         .takeWhile((element) => context.mounted)
         .listen(
       (event) {
-        setState(() {
-          var a = '';
+        FilePicker.platform
+            .pickFiles(allowMultiple: true)
+            .then((FilePickerResult? result) {
+          if (result != null) {
+            List<File> files = result.paths.map((path) => File(path!)).toList();
+
+            for (var file in files) {
+              (_data["rows"] as List).add({
+                "code": file.path,
+                "description": "1st Image",
+                "info": "boh1",
+                "imageType": "file"
+              });
+            }
+
+            KenMessageBus.instance.fireEvent(
+              ListboxOnRefreshListEvent(
+                  messageBusId:
+                      KenUtilities.getMessageBusId(_listId, widget.formKey)),
+            );
+          } else {
+            // User canceled the picker
+          }
         });
       },
     );
@@ -138,9 +166,14 @@ class KenFileUploadState extends State<KenFileUpload> {
         .takeWhile((element) => context.mounted)
         .listen(
       (event) {
-        setState(() {
-          var a = '';
-        });
+        var rows = _data["rows"] as List;
+        rows.clear();
+
+        KenMessageBus.instance.fireEvent(
+          ListboxOnRefreshListEvent(
+              messageBusId:
+                  KenUtilities.getMessageBusId(_listId, widget.formKey)),
+        );
       },
     );
 
@@ -161,8 +194,7 @@ class KenFileUploadState extends State<KenFileUpload> {
 
   @override
   Widget build(BuildContext context) {
-    KenListBox list;
-    list = _getList();
+    _list = _getList();
 
     var children = Column(children: [
       Row(
@@ -188,7 +220,7 @@ class KenFileUploadState extends State<KenFileUpload> {
           ),
         ],
       ),
-      list
+      _list
     ]);
 
     return SingleChildScrollView(
@@ -214,10 +246,10 @@ class KenFileUploadState extends State<KenFileUpload> {
       fontColor: widget.fontColor,
       fontSize: widget.fontSize,
       height: widget.height,
-      id: widget.id,
+      id: _listId,
       key: Key(widget.id!),
       landscapeColumns: widget.landscapeColumns,
-      layout: 'imageList',
+      layout: widget.layout,
       listHeight: widget.listHeight,
       listType: KenListType.oriented,
       storageSelectedRow: null,

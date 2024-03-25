@@ -1,7 +1,10 @@
 import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/material.dart';
+import '../helpers/ken_utilities.dart';
 import '../managers/ken_configuration_manager.dart';
 import '../services/ken_defaults.dart';
+import '../services/message_bus/ken_message_bus.dart';
+import '../services/message_bus/ken_message_bus_event.dart';
 import 'ken_box.dart';
 import 'ken_not_available.dart';
 
@@ -125,6 +128,16 @@ class KenListBoxState extends State<KenListBox> {
     //     );
     //   }
     // });
+
+    KenMessageBus.instance
+        .event<ListboxOnRefreshListEvent>(
+            KenUtilities.getMessageBusId(widget.id, widget.formKey))
+        .takeWhile((element) => context.mounted)
+        .listen(
+      (event) {
+        setState(() {});
+      },
+    );
 
     super.initState();
   }

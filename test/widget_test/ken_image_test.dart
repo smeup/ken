@@ -25,7 +25,7 @@ Future<void> main() async {
                           key: const Key('img1'),
                           width: 300,
                           height: 300,
-                          isRemote: false),
+                          imageType: ImageType.asset),
                     ],
                   )),
                 ),

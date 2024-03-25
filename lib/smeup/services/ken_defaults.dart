@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/ken_chart.dart';
+import '../widgets/ken_image.dart';
 import '../widgets/ken_list_box.dart';
 import 'ken_widget_orientation.dart';
 
@@ -98,8 +99,8 @@ class KenImageDefaults {
   static const double defaultWidth = 300;
   static const double defaultHeight = 300;
   static const EdgeInsetsGeometry defaultPadding = EdgeInsets.all(0);
-  static const bool defaultIsRemote = false;
   static const bool defaultExpand = true;
+  static const ImageType defaultImageType = ImageType.asset;
 }
 
 class KenDatepickerDefaults {
