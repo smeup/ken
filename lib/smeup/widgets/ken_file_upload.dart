@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:path/path.dart' as p;
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -128,8 +129,7 @@ class KenFileUploadState extends State<KenFileUpload> {
             for (var file in files) {
               (_data["rows"] as List).add({
                 "code": file.path,
-                "description": "1st Image",
-                "info": "boh1",
+                "description": p.basename(file.path),
                 "imageType": "file"
               });
             }
@@ -139,8 +139,6 @@ class KenFileUploadState extends State<KenFileUpload> {
                   messageBusId:
                       KenUtilities.getMessageBusId(_listId, widget.formKey)),
             );
-          } else {
-            // User canceled the picker
           }
         });
       },
@@ -153,9 +151,12 @@ class KenFileUploadState extends State<KenFileUpload> {
         .takeWhile((element) => context.mounted)
         .listen(
       (event) {
-        setState(() {
-          var a = '';
-        });
+        KenMessageBus.instance.fireEvent(
+          FileUploadExecuteUploadEvent(
+              messageBusId:
+                  KenUtilities.getMessageBusId(widget.id, widget.formKey),
+              files: _data["rows"] as List),
+        );
       },
     );
 
@@ -269,4 +270,13 @@ class KenFileUploadState extends State<KenFileUpload> {
       onGetBoxImage: widget.onGetBoxImage,
     );
   }
+
+  // String imageToBase64(String? imagePath) {
+  //   final extension = p.extension(
+  //       imagePath!.substring(imagePath.lastIndexOf("/")).replaceAll("/", ""));
+  //   final bytes = File(imagePath).readAsBytesSync();
+  //   String base64 =
+  //       "data:image/${extension.replaceAll(".", "")};base64,${base64Encode(bytes)}";
+  //   return base64;
+  // }
 }

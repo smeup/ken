@@ -74,6 +74,12 @@ class ListboxOnRefreshListEvent extends KenMessageBusEvent {
   ListboxOnRefreshListEvent({required super.messageBusId});
 }
 
+class FileUploadExecuteUploadEvent extends KenMessageBusEvent {
+  dynamic files;
+  FileUploadExecuteUploadEvent(
+      {required super.messageBusId, required this.files});
+}
+
 class InputPanelSubmittedEvent extends KenMessageBusEvent {
   List<SmeupInputPanelField>? value;
 
